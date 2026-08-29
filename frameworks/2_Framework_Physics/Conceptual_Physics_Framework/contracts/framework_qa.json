@@ -1,0 +1,72 @@
+{
+  "framework": "Conceptual_Physics_Framework",
+  "framework_version": "v6.8",
+  "checks": {
+    "assessment_plan_units": 8,
+    "course_map_units": 8,
+    "course_map_sections": 40,
+    "section_index_records": 40,
+    "mastery_map_units": 8,
+    "dashboard_units": 8,
+    "dashboard_sections": 40,
+    "extracted_cp_folders": 100,
+    "extracted_cp_images": 361,
+    "hewitt_question_family_count": 7,
+    "bank_profile_present": true,
+    "notes_profile_present": true,
+    "downstream_profiles_present": true,
+    "teacher_dashboard_snapshot_present": true,
+    "i_can_index_records": 120,
+    "i_can_first_contract_present": true,
+    "finalizer_physics_notes_items_per_section": 8,
+    "student_figure_answer_neutrality_contract_present": true,
+    "bank_exact_duplicate_hardening": true,
+    "secure_exact_independence_hardening": true,
+    "i_can_equal_quota_warning": true,
+    "finalizer_requires_figure_answer_neutrality_metadata": true,
+    "finalizer_hard_fails_secure_exact_duplicates": true,
+    "question_design_map_contract_present": true,
+    "finalizer_requires_question_design_map": true,
+    "finalizer_requires_item_question_design_linkage": true,
+    "exit_destination_secure_qa": true,
+    "inline_svg_answer_neutrality_metadata_required": true,
+    "semantic_family_id_slot_token_guard": true
+  },
+  "expected": {
+    "units": 8,
+    "sections": 40,
+    "assessment_plans": 8,
+    "dashboard_units": 8,
+    "dashboard_sections": 40,
+    "extracted_cp_folders": 100,
+    "extracted_cp_images": 361,
+    "i_can_index_records": 120
+  },
+  "result": "PASS",
+  "known_nonblocking_findings": [
+    "Teacher dashboard contains stale Algebra wording in comments and two external Algebra top-resource links; recorded in teacher_dashboard_inventory.json.",
+    "Raw supplemental PDFs are intentionally not duplicated in the Framework; packaged source intelligence + full extracted Conceptual Physics library are normal-build sources."
+  ],
+  "bank_test_transition_gate": {
+    "target": "Roughly 75% desired Physics Bank behavior on real Unit Bank tests before shifting effort to Physics-specific downstream PM upgrades.",
+    "v6_3_focus": [
+      "I-can-first evidence planning",
+      "semantic clone prevention",
+      "physical plausibility",
+      "actual representation evidence",
+      "answer-neutral figures",
+      "literal machine handoff",
+      "source provenance"
+    ],
+    "next_step": "After one more Unit 1 Bank test, prefer fixing remaining math-shaped behavior in Physics-specific PMs rather than endlessly expanding the Framework.",
+    "v6_6_focus": [
+      "plan-first question-design map",
+      "formula/quantitative priority where supported",
+      "dependency-based multistep variety",
+      "destination-varied Exit Tickets",
+      "semantic family IDs",
+      "inline-SVG QA",
+      "destination-based Exit security"
+    ]
+  }
+}

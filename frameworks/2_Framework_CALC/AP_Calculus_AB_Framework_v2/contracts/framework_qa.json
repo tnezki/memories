@@ -1,0 +1,72 @@
+{
+  "result": "PASS",
+  "framework": "AP_Calculus_AB_Framework_v2",
+  "assessment_plans": 8,
+  "units": 8,
+  "sections": 40,
+  "ap_topic_source_documents": 68,
+  "ced_topics_indexed": 81,
+  "section_reference_packets": 40,
+  "question_enrichment_sections": 40,
+  "math_note_sections": 40,
+  "future_hook_sections": 40,
+  "approved_course_figures": 40,
+  "calculus_textbook_section_page_maps": 40,
+  "direct_ap_topic_source_gaps": [
+    "5.12",
+    "6.10",
+    "6.14"
+  ],
+  "fallback_source_support": {
+    "5.12": {
+      "topic": "5.12",
+      "support_mode": "fallback",
+      "direct_source_ids": [],
+      "fallback_source_ids": [
+        "APTOP-U5-12",
+        "APTOP-U5-13"
+      ],
+      "fallback_note": "No directly labeled 5.12 AP Topics packet is present in the supplied corpus. Use Unit 5 packets covering 5.8 and 5.9–5.11 for authentic graph-analysis/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 5.12 mathematics."
+    },
+    "6.10": {
+      "topic": "6.10",
+      "support_mode": "fallback",
+      "direct_source_ids": [],
+      "fallback_source_ids": [
+        "APTOP-U6-10"
+      ],
+      "fallback_note": "No directly labeled 6.10 AP Topics packet is present in the supplied corpus. Use the supplied 6.8–6.9 packet for nearby integration-strategy/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 6.10 mathematics."
+    },
+    "6.14": {
+      "topic": "6.14",
+      "support_mode": "fallback",
+      "direct_source_ids": [],
+      "fallback_source_ids": [
+        "APTOP-U6-08",
+        "APTOP-U6-09",
+        "APTOP-U6-10"
+      ],
+      "fallback_note": "No directly labeled 6.14 AP Topics packet is present in the supplied corpus. Use nearby Unit 6 integration packets (6.7 and 6.8–6.9) for authentic strategy/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 6.14 mathematics."
+    }
+  },
+  "checks": {
+    "all_8_assessment_plans_present": true,
+    "all_40_sections_present": true,
+    "all_sections_have_reference_packet": true,
+    "all_sections_have_enrichment": true,
+    "all_sections_have_textbook_pointer": true,
+    "all_explicit_ap_topics_have_ced_titles": true,
+    "all_explicit_ap_topics_have_direct_source_support": false,
+    "all_explicit_ap_topics_have_direct_or_fallback_support": true,
+    "graph_tool_exact_copy": true,
+    "no_raw_ap_topic_pdfs_packaged": true,
+    "no_mac_junk": true,
+    "map_first_repetition_contract_present": true
+  },
+  "notes": [
+    "Unit 3.5 is an intentional Unit 2–3 synthesis section rather than a single AP Topic ID; its source packet draws from the teacher/Assessment Plan synthesis and adjacent Unit 2/3 source references.",
+    "Direct labeled AP Topics source packets are absent for 5.12, 6.10, and 6.14 in the supplied AP Topics corpus. The Framework records that limitation explicitly and supplies adjacent-topic AP task/scoring references as fallback while the Assessment Plan + CED + calculus textbook control the actual mathematics.",
+    "Raw textbooks/AP Topic PDFs are intentionally omitted; the Framework stores curated source packets, representative AP task excerpts, scoring signals, source hashes, and page pointers to stay compact and machine-first."
+  ],
+  "framework_version": "v2.4"
+}

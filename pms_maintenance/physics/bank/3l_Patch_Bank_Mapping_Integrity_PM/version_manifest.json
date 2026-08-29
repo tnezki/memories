@@ -1,0 +1,22 @@
+{
+  "artifact": "3l_Patch_Bank_Mapping_Integrity_PM.zip",
+  "version": "1.1",
+  "workflow_key": "patch_bank_mapping_integrity",
+  "label": "PATCH M \u00b7 Mapping Integrity",
+  "status_model": [
+    "NEEDS AUDIT",
+    "KEEP",
+    "CLEAN",
+    "REBUILD"
+  ],
+  "reason_fields": [
+    "audit_primary_issue",
+    "audit_issue_codes",
+    "audit_why",
+    "audit_patch_route"
+  ],
+  "current_bank_required": true,
+  "material_change_resets_status_to": "NEEDS AUDIT",
+  "delivery": "REPO_PATCH",
+  "canonical_question_structure_authority": "_question_structure.zip"
+}

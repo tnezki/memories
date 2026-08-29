@@ -1,0 +1,74 @@
+{
+  "contract_name": "Algebra 1 Practice Sets Visual Contract",
+  "contract_version": "v2",
+  "framework_version": "v6.41",
+  "source": "universal practice_set.css bundled in Base Practice PM Starter; Framework copy is a byte-identical mirror",
+  "deployment_css": "css/practice_set.css",
+  "authoring_reference": "reference_library/deployment/shared_css/practice_set.css",
+  "html_links": [
+    "../../css/base.css",
+    "../../css/practice_set.css"
+  ],
+  "layout": {
+    "page": "8.5in x 11in; 0.45in print margin",
+    "single_column": true,
+    "h1": "short Framework-defined resource title; navy text, 15pt, transparent background, 2px navy horizontal rule underneath",
+    "problem_cards": "no borders; break-inside/page-break-inside avoid",
+    "visible_question_number": "inline as first character/text via qnum",
+    "visible_dok_headers": false,
+    "visible_meta_labels": false,
+    "visible_metadata": "question number only; hidden data-bank-id allowed"
+  },
+  "required_classes": [
+    "container",
+    "dok-section",
+    "problem",
+    "problem-body",
+    "qnum",
+    "workspace",
+    "ps-figure",
+    "ps-diagram",
+    "values",
+    "compact-table",
+    "half-col",
+    "cyu-grid",
+    "cyu-workspace-page"
+  ],
+  "workspace": {
+    "default": "ws-25",
+    "utilities": "ws-10 through ws-960 in 10px steps plus ws-25",
+    "normal_build_rule": "Ship every ordinary Practice problem with ws-25 initially; teacher may manually bump individual problems later. Standard Algebra CYU uses no per-question workspace."
+  },
+  "figures": {
+    "ps_figure_max_width": "3.5in",
+    "ps_diagram_max_width": "4.6in",
+    "size_helpers": [
+      "wu-img-250",
+      "wu-img-300",
+      "wu-img-350",
+      "wu-img-400",
+      "wu-img-450",
+      "wu-img-500",
+      "wu-img-550",
+      "wu-img-600"
+    ],
+    "rule": "Use ps-figure/ps-diagram wrappers so deployed CSS sizing and keep-together rules fire. Copy finalized Bank figure bytes; do not generate Practice visuals. Do not emit visible decorative figcaptions/titles."
+  },
+  "tables": {
+    "base_class": "values",
+    "two_column_classes": [
+      "values",
+      "compact-table"
+    ],
+    "two_column_col_class": "half-col",
+    "two_column_layout": "centered compact table, min-width 2.35in, 50/50 columns, max-width 100%",
+    "rule": "Use compact-table + half-col for ordinary two-column data tables; preserve canonical cell content."
+  },
+  "css_change_rule": "practice_set.css is the UNIVERSAL Practice stylesheet across courses. The Base Practice Starter copy is canonical; each course Framework carries a byte-identical mirror. Ordinary Practice builds link to deployed shared CSS and do not package or redesign it.",
+  "cyu": {
+    "layout": "six questions in 3 rows x 2 columns",
+    "grid_class": "cyu-grid",
+    "per_question_workspace": "none",
+    "after_grid_workspace": "one blank full-page cyu-workspace-page"
+  }
+}

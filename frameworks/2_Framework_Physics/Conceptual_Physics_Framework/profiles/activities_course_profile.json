@@ -1,0 +1,35 @@
+{
+  "name": "Conceptual Physics Activities Course Profile",
+  "course": "Conceptual Physics",
+  "profile_version": "v1.1",
+  "framework_version": "v6.8",
+  "extends": "current Base Activities PM",
+  "role": "Transform finalized Bank Practice routes into participation structures without changing canonical Physics content.",
+  "routing": {
+    "set_1": "Practice Set 2",
+    "set_2": "Practice Set 3",
+    "directions_shell": "u{U}_{S}_act1.html",
+    "set_1_companions": [
+      "u{U}_{S}_set1_questions_solutions.html",
+      "u{U}_{S}_set1_stations.html",
+      "u{U}_{S}_set1_find_someone_who.html"
+    ],
+    "set_2_companions": [
+      "u{U}_{S}_set2_questions_solutions.html",
+      "u{U}_{S}_set2_stations.html",
+      "u{U}_{S}_set2_find_someone_who.html"
+    ]
+  },
+  "mc_labels": "Visible multiple-choice labels are uppercase A, B, C, D; preserve canonical wording/order.",
+  "visuals": "Copy canonical Bank figures; normal Activities do not invoke/package graph tool.",
+  "paths": "contracts/course_file_structure.json",
+  "universal_shell_contract": {
+    "authority": "Base Activities PM canonical_html references; teacher-approved Algebra implementation is structural gold standard",
+    "hub": "exact 15-page canonical hub including Moves Guide, Desmos direction page, Stations, Find Someone Who, and Tarsia link page",
+    "questions_solutions": "24 routed items => 48 alternating question/solution pages",
+    "stations": "canonical duplex prompt/blank then exactly two solution pages per station",
+    "find_someone_who": "canonical 3 student problems/page + signature/workspace; 4 teacher-key problems/page",
+    "course_specific_dom_fork": "prohibited"
+  },
+  "tarsia_link": "Link to Practice-owned deployed Tarsia file; do not duplicate export in Activities."
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Conceptual Physics Practice Sets Course Profile",
+  "course": "Conceptual Physics",
+  "course_family": "science",
+  "profile_version": "v1.1",
+  "framework_version": "v6.8",
+  "extends": "current Base Practice PM",
+  "role": "Render canonical finalized Bank routes; do not author replacement questions.",
+  "canonical_source": "finalized Unit Bank",
+  "destinations": {
+    "practice_set_1": 24,
+    "practice_set_2": 24,
+    "practice_set_3": 24,
+    "extra_practice": 24,
+    "cyu": 6,
+    "tarsia_pairs": 18,
+    "blooket_questions": 20
+  },
+  "response_mode": "Practice/CYU open response by default; Blooket selected response exception. Preserve any canonical representation required by the item.",
+  "representation_rule": "Copy canonical Bank figure bytes exactly; do not replace diagrams/graphs/tables with prose and do not invoke the graph tool downstream.",
+  "paths": "contracts/course_file_structure.json",
+  "package": "section folders directly at ZIP root for extraction into practice_sets/",
+  "workspace_policy": {
+    "practice_set_1": "ws-50",
+    "practice_set_2": "ws-50",
+    "practice_set_3": "ws-50",
+    "extra_practice": "ws-50",
+    "cyu": "canonical_3x2_plus_separate_blank_workspace_page_no_per_question_workspace"
+  },
+  "game_exports": {
+    "required_for_physics": true,
+    "resolution_order": [
+      "copy dedicated finalized-Bank export when present",
+      "otherwise derive downstream under this explicit Physics authorization"
+    ],
+    "derived_game_exports": true,
+    "source_scope": "nonsecure canonical Practice-family items from the same section only; never Exit or Summative",
+    "tarsia": {
+      "pairs_per_section": 18,
+      "format": "concise prompt + short unambiguous answer",
+      "traceability": "derived_from_bank_id required"
+    },
+    "blooket": {
+      "questions_per_section": 20,
+      "choices_per_question": 4,
+      "correct_answers": 1,
+      "distractors": "plausible item-specific Physics misconceptions/errors",
+      "answer_positions": "varied/balanced",
+      "traceability": "derived_from_bank_id required"
+    },
+    "bank_mutation": "prohibited"
+  }
+}

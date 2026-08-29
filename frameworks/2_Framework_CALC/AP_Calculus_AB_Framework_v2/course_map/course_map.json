@@ -1,0 +1,1921 @@
+{
+  "course": "AP Calculus AB",
+  "framework_version": "v2.4",
+  "unit_count": 8,
+  "section_count": 40,
+  "units": [
+    {
+      "unit": 1,
+      "course_title": "Limits and Continuity",
+      "ced_title": "Limits and Continuity",
+      "ced_exam_weighting_ab": "10–15%",
+      "teacher_pacing": "15-16 days",
+      "essential_standard": "Limits describe local and end behavior through graphical, numerical, and algebraic representations, and continuity connects those limits to function values and theorem-based conclusions.",
+      "mastery_goals": [
+        {
+          "id": "U1-MG01",
+          "text": "Determine and interpret one-sided, two-sided, and overall limits from graphical and numerical information, distinguishing limiting behavior from the function value."
+        },
+        {
+          "id": "U1-MG02",
+          "text": "Evaluate limits analytically by selecting and carrying out valid methods such as substitution, limit laws, factoring, conjugates, trigonometric limit reasoning, or squeeze reasoning when supported."
+        },
+        {
+          "id": "U1-MG03",
+          "text": "Analyze continuity at points and on intervals, including piecewise boundaries, by coordinating limits, function values, and discontinuity classifications."
+        },
+        {
+          "id": "U1-MG04",
+          "text": "Interpret infinite limits and end behavior and apply the Intermediate Value Theorem only when its hypotheses support the conclusion."
+        }
+      ],
+      "sections": [
+        {
+          "section": "1.1",
+          "unit": 1,
+          "title": "What Is a Limit?",
+          "ap_topics_text": "1.1, 1.2",
+          "learning_target": "Relate average versus instantaneous change to the idea of a limit and read and interpret limit notation.",
+          "i_can": [
+            "I can relate average versus instantaneous change to the idea of a limit and read and interpret limit notation.",
+            "I can estimate a limit from a graph or table.",
+            "I can connect shrinking secant intervals to instantaneous change."
+          ],
+          "vocabulary_notation": [
+            "limit",
+            "average rate of change",
+            "instantaneous rate of change",
+            "limit notation"
+          ],
+          "representations": [
+            "graphs approaching a point",
+            "tables of values",
+            "average-rate secant behavior",
+            "symbolic limit notation"
+          ],
+          "misconceptions": [
+            "Treating the function value at a point as automatically equal to the limit.",
+            "Reading a limit as a value reached rather than a value approached.",
+            "Confusing average rate of change with instantaneous rate of change."
+          ],
+          "modeling_applications": [
+            "Estimate a limit from a graph or table.",
+            "Connect shrinking secant intervals to instantaneous change."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "1.1, 1.2",
+          "day1": "Day 1 - Warm-Up, prior knowledge on functions and rates of change, guided notes on average versus instantaneous change, limit notation reading, examples, You Trys, practice.",
+          "day2": "Day 2 - Investigation using graphs and tables, Create Representations activity, cooperative practice estimating limits, exit check.",
+          "day3": "Day 3 - Optional AP-style representation practice, notation fluency, short quiz, or reteaching."
+        },
+        {
+          "section": "1.2",
+          "unit": 1,
+          "title": "Limits from Graphs and Tables",
+          "ap_topics_text": "1.3, 1.4, 1.9",
+          "learning_target": "Determine one-sided and two-sided limits from graphs and tables, including when a limit does not exist.",
+          "i_can": [
+            "I can determine one-sided and two-sided limits from graphs and tables, including when a limit does not exist.",
+            "I can compare graphical and numerical estimates of the same limit.",
+            "I can use calculator-supported tables as a check on graphical reasoning."
+          ],
+          "vocabulary_notation": [
+            "left-hand limit",
+            "right-hand limit",
+            "two-sided limit",
+            "DNE"
+          ],
+          "representations": [
+            "graphs with one-sided behavior",
+            "tables approaching from both sides",
+            "paired graphical and numerical representations"
+          ],
+          "misconceptions": [
+            "Declaring DNE because the function is undefined at the point.",
+            "Ignoring disagreement between left- and right-hand limits.",
+            "Reading a table from only one side of the input."
+          ],
+          "modeling_applications": [
+            "Compare graphical and numerical estimates of the same limit.",
+            "Use calculator-supported tables as a check on graphical reasoning."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "1.3, 1.4, 1.9",
+          "day1": "Day 1 - Warm-Up, guided notes on one-sided limits, two-sided limits, and DNE from graphs and tables, examples, You Trys, practice.",
+          "day2": "Day 2 - Graph/table stations, calculator check, multiple-representation matching, cooperative practice, exit ticket.",
+          "day3": "Day 3 - Optional mixed graphical/numerical limit practice and AP Classroom topic questions."
+        },
+        {
+          "section": "1.3",
+          "unit": 1,
+          "title": "Algebraic Limits",
+          "ap_topics_text": "1.5, 1.6, 1.7, 1.8",
+          "learning_target": "Evaluate limits algebraically using direct substitution, limit laws, factoring, conjugates, and appropriate trigonometric or squeeze reasoning.",
+          "i_can": [
+            "I can evaluate limits algebraically using direct substitution, limit laws, factoring, conjugates, and appropriate trigonometric or squeeze reasoning.",
+            "I can select an algebraic method for a limit form.",
+            "I can compare two valid algebraic approaches to the same limit."
+          ],
+          "vocabulary_notation": [
+            "direct substitution",
+            "limit laws",
+            "factoring",
+            "conjugate",
+            "Squeeze Theorem"
+          ],
+          "representations": [
+            "symbolic expressions",
+            "factored forms",
+            "rationalized forms",
+            "trigonometric limit forms"
+          ],
+          "misconceptions": [
+            "Stopping at an indeterminate form instead of simplifying.",
+            "Applying limit laws before checking whether their conditions support the operation.",
+            "Using factoring or conjugates without preserving equivalent expressions near the limit point."
+          ],
+          "modeling_applications": [
+            "Select an algebraic method for a limit form.",
+            "Compare two valid algebraic approaches to the same limit."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Critique of reasoning: Locate the mathematical step or assumption that makes a proposed argument valid or invalid and explain the correction."
+          ],
+          "framework_ap_topics_text": "1.5, 1.6, 1.7, 1.8",
+          "day1": "Day 1 - Warm-Up, direct substitution and limit laws, guided notes, examples, You Trys, practice.",
+          "day2": "Day 2 - Factoring, conjugates, trigonometric limit forms, Squeeze Theorem preview, Work Backward procedure sort, cooperative practice.",
+          "day3": "Day 3 - Optional mixed algebraic limit quiz, error analysis, or AP Classroom practice."
+        },
+        {
+          "section": "1.4",
+          "unit": 1,
+          "title": "Continuity and Discontinuity",
+          "ap_topics_text": "1.10, 1.11, 1.12, 1.13",
+          "learning_target": "Analyze continuity at a point and on intervals, and classify discontinuities using limits, function values, and piecewise definitions.",
+          "i_can": [
+            "I can analyze continuity at a point and on intervals, and classify discontinuities using limits, function values, and piecewise definitions.",
+            "I can determine parameter values that make a piecewise function continuous.",
+            "I can justify a discontinuity classification from multiple representations."
+          ],
+          "vocabulary_notation": [
+            "continuity",
+            "discontinuity",
+            "piecewise function",
+            "removable discontinuity",
+            "jump discontinuity"
+          ],
+          "representations": [
+            "piecewise formulas",
+            "graphs with discontinuities",
+            "continuity condition statements",
+            "interval notation"
+          ],
+          "misconceptions": [
+            "Checking only whether a function value exists rather than all continuity conditions.",
+            "Confusing a removable discontinuity with a jump or infinite discontinuity.",
+            "Forgetting to compare one-sided behavior at a piecewise boundary."
+          ],
+          "modeling_applications": [
+            "Determine parameter values that make a piecewise function continuous.",
+            "Justify a discontinuity classification from multiple representations."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "1.10, 1.11, 1.12, 1.13",
+          "day1": "Day 1 - Warm-Up, guided notes on continuity at a point, continuity on intervals, and types of discontinuities, examples, You Trys.",
+          "day2": "Day 2 - Piecewise function investigation, Discussion Groups activity, justification writing, cooperative practice.",
+          "day3": "Day 3 - Optional discontinuity classification practice and short FRQ-style writing task."
+        },
+        {
+          "section": "1.5",
+          "unit": 1,
+          "title": "Asymptotes and IVT",
+          "ap_topics_text": "1.14, 1.15, 1.16",
+          "learning_target": "Interpret infinite limits and limits at infinity to identify asymptotic behavior, and apply the Intermediate Value Theorem when its hypotheses are satisfied.",
+          "i_can": [
+            "I can interpret infinite limits and limits at infinity to identify asymptotic behavior, and apply the Intermediate Value Theorem when its hypotheses are satisfied.",
+            "I can use asymptotic behavior to describe a function model.",
+            "I can determine whether IVT guarantees a value and justify the conclusion."
+          ],
+          "vocabulary_notation": [
+            "infinite limit",
+            "vertical asymptote",
+            "limit at infinity",
+            "horizontal asymptote",
+            "Intermediate Value Theorem"
+          ],
+          "representations": [
+            "graphs with asymptotes",
+            "end-behavior notation",
+            "theorem hypothesis/conclusion statements",
+            "interval representations"
+          ],
+          "misconceptions": [
+            "Treating a vertical asymptote as a function value.",
+            "Assuming a horizontal asymptote cannot be crossed.",
+            "Using IVT without verifying continuity on the required interval."
+          ],
+          "modeling_applications": [
+            "Use asymptotic behavior to describe a function model.",
+            "Determine whether IVT guarantees a value and justify the conclusion."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "1.14, 1.15, 1.16",
+          "day1": "Day 1 - Warm-Up, infinite limits, vertical asymptotes, limits at infinity, horizontal asymptotes, examples and practice.",
+          "day2": "Day 2 - IVT investigation, Think Aloud activity, theorem hypothesis practice, AP-style justification writing.",
+          "day3": "Day 3 - Optional Unit 1 review, Personal Progress Check, reteaching, or assessment."
+        }
+      ]
+    },
+    {
+      "unit": 2,
+      "course_title": "Derivative Basics",
+      "ced_title": "Differentiation: Definition and Fundamental Properties",
+      "ced_exam_weighting_ab": "10–15%",
+      "teacher_pacing": "10-11 days",
+      "essential_standard": "The derivative is a limit that measures instantaneous change and tangent slope, and derivative rules provide efficient ways to compute that change while preserving meaning, notation, and differentiability conditions.",
+      "mastery_goals": [
+        {
+          "id": "U2-MG01",
+          "text": "Interpret the derivative as a limit, instantaneous rate of change, and tangent slope across equations, graphs, and tables."
+        },
+        {
+          "id": "U2-MG02",
+          "text": "Determine and justify differentiability or nondifferentiability, including its relationship to continuity and local graphical behavior."
+        },
+        {
+          "id": "U2-MG03",
+          "text": "Compute derivatives accurately using the power, constant, sum, difference, constant-multiple, product, quotient, and named core-function rules developed in the unit."
+        },
+        {
+          "id": "U2-MG04",
+          "text": "Select derivative notation and methods appropriately and use derivative values in tangent-line and rate-of-change situations."
+        }
+      ],
+      "sections": [
+        {
+          "section": "2.1",
+          "unit": 2,
+          "title": "Average to Instant Rate",
+          "ap_topics_text": "2.1",
+          "learning_target": "Connect average rate of change and secant slopes to instantaneous rate of change and tangent slope estimates.",
+          "i_can": [
+            "I can connect average rate of change and secant slopes to instantaneous rate of change and tangent slope estimates.",
+            "I can estimate tangent slope from shrinking intervals.",
+            "I can interpret average and instantaneous rates in a shared context."
+          ],
+          "vocabulary_notation": [
+            "average rate of change",
+            "instantaneous rate of change",
+            "secant line",
+            "tangent line",
+            "difference quotient"
+          ],
+          "representations": [
+            "secant and tangent line graphs",
+            "difference quotient expressions",
+            "tables of shrinking intervals"
+          ],
+          "misconceptions": [
+            "Using a single secant slope as the exact instantaneous rate.",
+            "Confusing change in output with average rate of change.",
+            "Losing the interval width in a difference quotient."
+          ],
+          "modeling_applications": [
+            "Estimate tangent slope from shrinking intervals.",
+            "Interpret average and instantaneous rates in a shared context."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Notation / communication: Communicate the reasoning with precise AP Calculus notation and complete mathematical statements."
+          ],
+          "framework_ap_topics_text": "2.1",
+          "day1": "Day 1 - Warm-Up on slope and secant lines, guided notes on difference quotients, examples, You Trys, practice.",
+          "day2": "Day 2 - Investigation with shrinking intervals and tangent slope estimates, cooperative whiteboarding, exit check.",
+          "day3": "Day 3 - Optional AP table-based rate of change practice."
+        },
+        {
+          "section": "2.2",
+          "unit": 2,
+          "title": "Derivative Definition and Notation",
+          "ap_topics_text": "2.2, 2.3",
+          "learning_target": "Interpret the derivative as a limit, use derivative notation, and connect the derivative at a point to tangent-line meaning across equations, graphs, tables, and calculator estimates.",
+          "i_can": [
+            "I can interpret the derivative as a limit, use derivative notation, and connect the derivative at a point to tangent-line meaning across equations, graphs, tables, and calculator estimates.",
+            "I can estimate a derivative from a table.",
+            "I can connect a derivative value to a tangent line in a graph or context."
+          ],
+          "vocabulary_notation": [
+            "derivative",
+            "derivative at a point",
+            "difference quotient",
+            "tangent line",
+            "$f' (a)$"
+          ],
+          "representations": [
+            "limit definition of the derivative",
+            "tangent line graphs",
+            "tables of values",
+            "derivative notation"
+          ],
+          "misconceptions": [
+            "Treating derivative notation as multiplication.",
+            "Substituting into a derivative definition without identifying the changing increment.",
+            "Confusing the derivative function with the derivative at one point."
+          ],
+          "modeling_applications": [
+            "Estimate a derivative from a table.",
+            "Connect a derivative value to a tangent line in a graph or context."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "2.2, 2.3",
+          "day1": "Day 1 - Guided notes on derivative as a limit, derivative notation, tangent line meaning, examples, You Trys.",
+          "day2": "Day 2 - Graph and Switch activity with derivative at a point, tangent lines, tables, and calculator estimates.",
+          "day3": "Day 3 - Optional notation fluency and short derivative definition quiz."
+        },
+        {
+          "section": "2.3",
+          "unit": 2,
+          "title": "Differentiability",
+          "ap_topics_text": "2.4",
+          "learning_target": "Determine where a function is differentiable and connect differentiability to continuity, corners, cusps, vertical tangents, and discontinuities.",
+          "i_can": [
+            "I can determine where a function is differentiable and connect differentiability to continuity, corners, cusps, vertical tangents, and discontinuities.",
+            "I can classify points of nondifferentiability from graphs.",
+            "I can justify why a function can be continuous but not differentiable at a point."
+          ],
+          "vocabulary_notation": [
+            "differentiability",
+            "continuity",
+            "corner",
+            "cusp",
+            "vertical tangent"
+          ],
+          "representations": [
+            "graphs with nondifferentiable points",
+            "local tangent behavior",
+            "continuity/differentiability implication statements"
+          ],
+          "misconceptions": [
+            "Assuming continuity guarantees differentiability.",
+            "Treating a vertical tangent as an ordinary finite derivative.",
+            "Missing nondifferentiability at corners or cusps on an otherwise continuous graph."
+          ],
+          "modeling_applications": [
+            "Classify points of nondifferentiability from graphs.",
+            "Justify why a function can be continuous but not differentiable at a point."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "2.4",
+          "day1": "Day 1 - Guided notes on differentiability and continuity, corners, cusps, vertical tangents, and discontinuities.",
+          "day2": "Day 2 - Match Mine graph activity, justification practice, cooperative sorting task.",
+          "day3": "Day 3 - Optional FRQ-style explanation practice."
+        },
+        {
+          "section": "2.4",
+          "unit": 2,
+          "title": "Power and Basic Rules",
+          "ap_topics_text": "2.5, 2.6, 2.7",
+          "learning_target": "Differentiate functions using the power, constant, sum, difference, constant-multiple, and selected basic trigonometric, exponential, and logarithmic rules.",
+          "i_can": [
+            "I can differentiate functions using the power, constant, sum, difference, constant-multiple, and selected basic trigonometric, exponential, and logarithmic rules.",
+            "I can differentiate a mixed basic-rule expression.",
+            "I can use a derivative to determine a tangent-line slope."
+          ],
+          "vocabulary_notation": [
+            "power rule",
+            "constant rule",
+            "sum rule",
+            "difference rule",
+            "constant multiple rule"
+          ],
+          "representations": [
+            "symbolic functions",
+            "derivative notation",
+            "$f$ and $f'$ pairs"
+          ],
+          "misconceptions": [
+            "Applying the power rule to a constant incorrectly.",
+            "Dropping coefficients or signs in sum/difference expressions.",
+            "Mixing basic derivative rules for trigonometric, exponential, or logarithmic functions."
+          ],
+          "modeling_applications": [
+            "Differentiate a mixed basic-rule expression.",
+            "Use a derivative to determine a tangent-line slope."
+          ],
+          "recurring_practices": [
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Critique of reasoning: Locate the mathematical step or assumption that makes a proposed argument valid or invalid and explain the correction."
+          ],
+          "framework_ap_topics_text": "2.5, 2.6, 2.7",
+          "day1": "Day 1 - Warm-Up, power rule, constant rule, sum, difference, constant multiple, selected trig/exp/log basic derivatives.",
+          "day2": "Day 2 - Error Analysis activity, derivative rule practice, AP-style no-calculator fluency.",
+          "day3": "Day 3 - Optional rule organizer, quiz, or reteaching."
+        },
+        {
+          "section": "2.5",
+          "unit": 2,
+          "title": "Product, Quotient, and Core Functions",
+          "ap_topics_text": "2.8, 2.9, 2.10",
+          "learning_target": "Differentiate products and quotients, select among core derivative rules, and apply derivatives to tangent-line situations.",
+          "i_can": [
+            "I can differentiate products and quotients, select among core derivative rules, and apply derivatives to tangent-line situations.",
+            "I can differentiate mixed products and quotients.",
+            "I can apply a derivative rule result to a tangent-line problem."
+          ],
+          "vocabulary_notation": [
+            "product rule",
+            "quotient rule",
+            "tangent line",
+            "derivative rule selection"
+          ],
+          "representations": [
+            "products and quotients of functions",
+            "tangent line equations",
+            "symbolic derivative work"
+          ],
+          "misconceptions": [
+            "Using the product rule as the product of derivatives.",
+            "Omitting the denominator square in the quotient rule.",
+            "Applying a complicated rule when algebraic simplification would make the derivative clearer."
+          ],
+          "modeling_applications": [
+            "Differentiate mixed products and quotients.",
+            "Apply a derivative rule result to a tangent-line problem."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "2.8, 2.9, 2.10",
+          "day1": "Day 1 - Guided notes on product and quotient rules, examples, You Trys, practice.",
+          "day2": "Day 2 - Round Table activity, mixed derivative rules, tangent line applications, exit check.",
+          "day3": "Day 3 - Optional procedure selection and AP Classroom topic questions."
+        }
+      ]
+    },
+    {
+      "unit": 3,
+      "course_title": "Chain, Implicit, and Inverse",
+      "ced_title": "Differentiation: Composite, Implicit, and Inverse Functions",
+      "ced_exam_weighting_ab": "5–10%",
+      "teacher_pacing": "8-9 days",
+      "essential_standard": "Efficient differentiation depends on recognizing function structure and selecting among chain, product, quotient, implicit, inverse, and higher-order methods while maintaining precise notation and interpretation.",
+      "mastery_goals": [
+        {
+          "id": "U3-MG01",
+          "text": "Differentiate composite and mixed-structure functions by recognizing nesting and combining chain, product, quotient, and core derivative rules efficiently."
+        },
+        {
+          "id": "U3-MG02",
+          "text": "Differentiate implicit relations, solve for $dy/dx$, and use the derivative to analyze tangent behavior on implicit curves."
+        },
+        {
+          "id": "U3-MG03",
+          "text": "Determine derivatives of inverse functions from equations, tables, and graphs and apply inverse trigonometric derivative rules developed in the unit."
+        },
+        {
+          "id": "U3-MG04",
+          "text": "Select, communicate, and verify a derivative strategy in mixed settings, including higher-order derivative notation and cumulative Unit 2-3 procedure selection."
+        }
+      ],
+      "sections": [
+        {
+          "section": "3.1",
+          "unit": 3,
+          "title": "Chain Rule",
+          "ap_topics_text": "3.1",
+          "learning_target": "Differentiate composite functions by identifying outer and inner structure and applying the chain rule with accurate notation.",
+          "i_can": [
+            "I can differentiate composite functions by identifying outer and inner structure and applying the chain rule with accurate notation.",
+            "I can differentiate nested functions.",
+            "I can trace outer/inner structure before differentiating."
+          ],
+          "vocabulary_notation": [
+            "chain rule",
+            "composition",
+            "inner function",
+            "outer function"
+          ],
+          "representations": [
+            "nested symbolic functions",
+            "function composition notation",
+            "derivative chains"
+          ],
+          "misconceptions": [
+            "Differentiating only the outer function.",
+            "Multiplying by the inner function instead of its derivative.",
+            "Losing nested structure when several chain-rule layers are present."
+          ],
+          "modeling_applications": [
+            "Differentiate nested functions.",
+            "Trace outer/inner structure before differentiating."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "3.1",
+          "day1": "Day 1 - Warm-Up, guided notes on outer/inner structure, chain rule notation, examples, You Trys.",
+          "day2": "Day 2 - Scavenger Hunt or Work Backward activity focused on common chain rule errors, cooperative practice.",
+          "day3": "Day 3 - Optional mixed chain rule fluency and short quiz."
+        },
+        {
+          "section": "3.2",
+          "unit": 3,
+          "title": "Mixed Derivative Rules",
+          "ap_topics_text": "3.5, 3.6",
+          "learning_target": "Select and combine product, quotient, chain, and core derivative rules in mixed expressions and use higher-order derivative notation.",
+          "i_can": [
+            "I can select and combine product, quotient, chain, and core derivative rules in mixed expressions and use higher-order derivative notation.",
+            "I can compare efficient derivative strategies.",
+            "I can differentiate mixed expressions with nested products or quotients."
+          ],
+          "vocabulary_notation": [
+            "higher-order derivative",
+            "rule selection",
+            "composition",
+            "product rule",
+            "quotient rule"
+          ],
+          "representations": [
+            "mixed symbolic functions",
+            "higher-order derivative notation",
+            "procedure-selection trees"
+          ],
+          "misconceptions": [
+            "Using the correct rules in the wrong nesting order.",
+            "Treating every mixed expression as a product or quotient without checking composition.",
+            "Confusing first- and higher-order derivative notation."
+          ],
+          "modeling_applications": [
+            "Compare efficient derivative strategies.",
+            "Differentiate mixed expressions with nested products or quotients."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "3.5, 3.6",
+          "day1": "Day 1 - Products, quotients, and compositions mixed together; higher-order derivative notation preview.",
+          "day2": "Day 2 - Procedure selection task, error analysis, AP-style no-calculator practice.",
+          "day3": "Day 3 - Optional Unit 2-3 cumulative practice."
+        },
+        {
+          "section": "3.3",
+          "unit": 3,
+          "title": "Implicit Differentiation",
+          "ap_topics_text": "3.2",
+          "learning_target": "Differentiate implicit relations, solve for $dy/dx$, and use the result in tangent-line situations.",
+          "i_can": [
+            "I can differentiate implicit relations, solve for $dy/dx$, and use the result in tangent-line situations.",
+            "I can find tangent slopes on implicit curves.",
+            "I can compare explicit and implicit derivative approaches when both are possible."
+          ],
+          "vocabulary_notation": [
+            "implicit relation",
+            "implicit differentiation",
+            "$dy/dx$",
+            "tangent line"
+          ],
+          "representations": [
+            "implicit equations",
+            "symbolic derivative equations",
+            "tangent lines on implicit curves"
+          ],
+          "misconceptions": [
+            "Forgetting the $dy/dx$ factor when differentiating terms containing $y$.",
+            "Solving for $y$ first when implicit differentiation is the intended efficient method.",
+            "Substituting point values before differentiation in a way that loses general structure."
+          ],
+          "modeling_applications": [
+            "Find tangent slopes on implicit curves.",
+            "Compare explicit and implicit derivative approaches when both are possible."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Interpretation: State what the result means in relation to the mathematical objects and representation being used."
+          ],
+          "framework_ap_topics_text": "3.2",
+          "day1": "Day 1 - Guided notes on differentiating implicit relations, solving for dy/dx, examples, You Trys.",
+          "day2": "Day 2 - Round Table activity with tangent lines and implicit derivative practice.",
+          "day3": "Day 3 - Optional FRQ-style implicit differentiation practice."
+        },
+        {
+          "section": "3.4",
+          "unit": 3,
+          "title": "Inverse Derivatives",
+          "ap_topics_text": "3.3, 3.4",
+          "learning_target": "Determine derivatives of inverse functions from equations, tables, and graphs, and apply inverse trigonometric derivative rules.",
+          "i_can": [
+            "I can determine derivatives of inverse functions from equations, tables, and graphs, and apply inverse trigonometric derivative rules.",
+            "I can determine inverse derivatives from a table.",
+            "I can differentiate inverse trigonometric compositions."
+          ],
+          "vocabulary_notation": [
+            "inverse function",
+            "inverse derivative",
+            "inverse trigonometric function"
+          ],
+          "representations": [
+            "inverse-function equations",
+            "tables with function/inverse data",
+            "paired graphs",
+            "symbolic inverse-trig expressions"
+          ],
+          "misconceptions": [
+            "Confusing $f^{-1}$ with $1/f$.",
+            "Using an inverse derivative formula without matching corresponding input/output values.",
+            "Dropping the chain-rule factor in inverse trigonometric derivatives."
+          ],
+          "modeling_applications": [
+            "Determine inverse derivatives from a table.",
+            "Differentiate inverse trigonometric compositions."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "3.3, 3.4",
+          "day1": "Day 1 - Derivatives of inverse functions from equations, tables, and graphs.",
+          "day2": "Day 2 - Inverse trigonometric derivatives, Quiz-Quiz-Trade, mixed practice.",
+          "day3": "Day 3 - Optional AP Classroom topic questions and quiz."
+        },
+        {
+          "section": "3.5",
+          "unit": 3,
+          "title": "Derivative Strategy and Review",
+          "ap_topics_text": "Unit 2-3 synthesis",
+          "learning_target": "Synthesize derivative rules, higher-order notation, procedure selection, and early motion connections to solve mixed derivative problems efficiently and accurately.",
+          "i_can": [
+            "I can synthesize derivative rules, higher-order notation, procedure selection, and early motion connections to solve mixed derivative problems efficiently and accurately.",
+            "I can build a derivative strategy for unfamiliar mixed expressions.",
+            "I can connect first and second derivatives to previewed motion meaning."
+          ],
+          "vocabulary_notation": [
+            "higher-order derivative",
+            "procedure selection",
+            "derivative strategy",
+            "motion connection"
+          ],
+          "representations": [
+            "mixed symbolic derivatives",
+            "higher-order notation",
+            "tables/graphs/equations",
+            "motion-rate interpretations"
+          ],
+          "misconceptions": [
+            "Selecting a rule from surface appearance rather than structure.",
+            "Losing notation precision in higher-order derivatives.",
+            "Computing a derivative correctly but failing to interpret what it means in a rate context."
+          ],
+          "modeling_applications": [
+            "Build a derivative strategy for unfamiliar mixed expressions.",
+            "Connect first and second derivatives to previewed motion meaning."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "Unit 2-3 synthesis",
+          "day1": "Day 1 - Higher-order derivatives, notation, mixed procedure selection, and motion connection preview.",
+          "day2": "Day 2 - Unit review, cooperative mixed practice, short assessment or Personal Progress Check.",
+          "day3": "Day 3 - Optional reteaching and AP FRQ writing."
+        }
+      ]
+    },
+    {
+      "unit": 4,
+      "course_title": "Derivatives in Context",
+      "ced_title": "Contextual Applications of Differentiation",
+      "ced_exam_weighting_ab": "10–15%",
+      "teacher_pacing": "8-9 days",
+      "essential_standard": "Derivatives communicate rates in context: they describe motion, connect changing quantities, support local approximation, and justify limit procedures when conditions and units are interpreted correctly.",
+      "mastery_goals": [
+        {
+          "id": "U4-MG01",
+          "text": "Interpret first and second derivatives as contextual rates with appropriate units and connect position, velocity, acceleration, and speed through signs and representations."
+        },
+        {
+          "id": "U4-MG02",
+          "text": "Build and solve related-rates models by defining changing quantities, relating them with an equation, differentiating with respect to time, using information at the instant of interest, and interpreting the result."
+        },
+        {
+          "id": "U4-MG03",
+          "text": "Use local linearity and tangent-line linearization to approximate values and reason about over- or underestimates when supported by the local behavior."
+        },
+        {
+          "id": "U4-MG04",
+          "text": "Apply L'Hospital's Rule only to supported indeterminate forms and communicate the required conditions and resulting limit reasoning precisely."
+        }
+      ],
+      "sections": [
+        {
+          "section": "4.1",
+          "unit": 4,
+          "title": "Meaning of Derivatives",
+          "ap_topics_text": "4.1, 4.3",
+          "learning_target": "Interpret $f$, $f'$, and $f''$ in context using appropriate units, rates, and verbal meaning.",
+          "i_can": [
+            "I can interpret $f$, $f'$, and $f''$ in context using appropriate units, rates, and verbal meaning.",
+            "I can write context-specific interpretations of derivatives.",
+            "I can compare meanings of $f$, $f'$, and $f''$ in one situation."
+          ],
+          "vocabulary_notation": [
+            "rate of change",
+            "units",
+            "first derivative",
+            "second derivative"
+          ],
+          "representations": [
+            "contextual verbal descriptions",
+            "function/derivative notation",
+            "tables and graphs with units"
+          ],
+          "misconceptions": [
+            "Giving a derivative value without rate units.",
+            "Describing $f'$ as the original quantity rather than its rate of change.",
+            "Treating the second derivative as simply another velocity-like quantity without context."
+          ],
+          "modeling_applications": [
+            "Write context-specific interpretations of derivatives.",
+            "Compare meanings of $f$, $f'$, and $f''$ in one situation."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Justification: Support a conclusion with the relevant property, condition, representation, or calculation rather than an unsupported claim."
+          ],
+          "framework_ap_topics_text": "4.1, 4.3",
+          "day1": "Day 1 - Reading Apprenticeship annotation on units, rates, and context; guided notes with examples.",
+          "day2": "Day 2 - Quickwrite contexts, interpreting f, f prime, and f double-prime in words, cooperative practice.",
+          "day3": "Day 3 - Optional contextual AP Classroom practice outside the canonical Bank; Universal Bank items remain constructed/open response."
+        },
+        {
+          "section": "4.2",
+          "unit": 4,
+          "title": "Motion",
+          "ap_topics_text": "4.2",
+          "learning_target": "Analyze position, velocity, acceleration, speed, and sign relationships from equations, graphs, and calculator-supported representations.",
+          "i_can": [
+            "I can analyze position, velocity, acceleration, speed, and sign relationships from equations, graphs, and calculator-supported representations.",
+            "I can analyze motion from derivative signs.",
+            "I can connect position, velocity, and acceleration graphs."
+          ],
+          "vocabulary_notation": [
+            "position",
+            "velocity",
+            "acceleration",
+            "speed",
+            "direction"
+          ],
+          "representations": [
+            "position/velocity/acceleration graphs",
+            "motion equations",
+            "sign charts",
+            "tables"
+          ],
+          "misconceptions": [
+            "Confusing velocity with speed.",
+            "Using acceleration sign alone to decide whether an object speeds up.",
+            "Ignoring sign changes when interpreting direction or total motion behavior."
+          ],
+          "modeling_applications": [
+            "Analyze motion from derivative signs.",
+            "Connect position, velocity, and acceleration graphs."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "4.2",
+          "day1": "Day 1 - Position, velocity, acceleration, speed, sign interpretation, examples, You Trys.",
+          "day2": "Day 2 - Create Representations activity with motion graphs, sign reasoning, and calculator support.",
+          "day3": "Day 3 - Optional motion FRQ practice."
+        },
+        {
+          "section": "4.3",
+          "unit": 4,
+          "title": "Related Rates Intro",
+          "ap_topics_text": "4.4",
+          "learning_target": "Translate a changing-quantity context into related variables, rates, an equation, and the specific instant needed for related-rates reasoning.",
+          "i_can": [
+            "I can translate a changing-quantity context into related variables, rates, an equation, and the specific instant needed for related-rates reasoning.",
+            "I can set up a related-rates model without completing the solve.",
+            "I can annotate a context to separate quantities, rates, and constants."
+          ],
+          "vocabulary_notation": [
+            "related rates",
+            "rate variable",
+            "instant of interest",
+            "constraint equation"
+          ],
+          "representations": [
+            "labeled diagrams",
+            "variable/rate tables",
+            "constraint equations",
+            "verbal contexts"
+          ],
+          "misconceptions": [
+            "Substituting numerical values before differentiating.",
+            "Using the wrong variable relationship for the geometry or context.",
+            "Failing to distinguish a quantity from its rate of change."
+          ],
+          "modeling_applications": [
+            "Set up a related-rates model without completing the solve.",
+            "Annotate a context to separate quantities, rates, and constants."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "4.4",
+          "day1": "Day 1 - Marking the Text strategy: quantities, rates, equations, and the instant of interest.",
+          "day2": "Day 2 - Related rates setup investigation and guided practice.",
+          "day3": "Day 3 - Optional setup-only station practice."
+        },
+        {
+          "section": "4.4",
+          "unit": 4,
+          "title": "Related Rates Problems",
+          "ap_topics_text": "4.5",
+          "learning_target": "Solve related-rates problems by building a diagram and equation, differentiating with respect to time, substituting specific information, and interpreting the resulting rate.",
+          "i_can": [
+            "I can solve related-rates problems by building a diagram and equation, differentiating with respect to time, substituting specific information, and interpreting the resulting rate.",
+            "I can solve geometric or physical related-rate contexts.",
+            "I can compare two possible equations for the same related-rate situation."
+          ],
+          "vocabulary_notation": [
+            "implicit time differentiation",
+            "related rate",
+            "constraint",
+            "units"
+          ],
+          "representations": [
+            "diagrams",
+            "time-dependent equations",
+            "rate equations",
+            "contextual interpretations"
+          ],
+          "misconceptions": [
+            "Substituting before differentiating and losing a changing variable.",
+            "Omitting $d/dt$ factors for changing quantities.",
+            "Reporting a signed rate without interpreting direction or units."
+          ],
+          "modeling_applications": [
+            "Solve geometric or physical related-rate contexts.",
+            "Compare two possible equations for the same related-rate situation."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "4.5",
+          "day1": "Day 1 - Full related rates examples with diagrams, equations, differentiation, substitution, and interpretation.",
+          "day2": "Day 2 - Round Table activity: picture, equation, derivative, specific information, interpretation.",
+          "day3": "Day 3 - Optional quiz or FRQ-style practice."
+        },
+        {
+          "section": "4.5",
+          "unit": 4,
+          "title": "Linearization and L'Hospital's Rule",
+          "ap_topics_text": "4.6, 4.7",
+          "learning_target": "Use local linearity for tangent-line approximation and apply L'Hospital's Rule only to appropriate indeterminate forms with required conditions.",
+          "i_can": [
+            "I can use local linearity for tangent-line approximation and apply L'Hospital's Rule only to appropriate indeterminate forms with required conditions.",
+            "I can estimate function values with a tangent model and discuss over/under behavior.",
+            "I can decide whether L'Hospital's Rule is applicable before using it."
+          ],
+          "vocabulary_notation": [
+            "linearization",
+            "local linearity",
+            "tangent-line approximation",
+            "indeterminate form",
+            "L'Hospital's Rule"
+          ],
+          "representations": [
+            "tangent line models",
+            "function and derivative values",
+            "limit forms",
+            "symbolic limits"
+          ],
+          "misconceptions": [
+            "Using linearization far from the center without considering local accuracy.",
+            "Applying L'Hospital's Rule to a form that is not an appropriate indeterminate form.",
+            "Differentiating numerator and denominator when the rule conditions are not established."
+          ],
+          "modeling_applications": [
+            "Estimate function values with a tangent model and discuss over/under behavior.",
+            "Decide whether L'Hospital's Rule is applicable before using it."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "4.6, 4.7",
+          "day1": "Day 1 - Local linearity, tangent line approximation, over/underestimate discussion.",
+          "day2": "Day 2 - L'Hospital's Rule with required conditions, AP notation, and indeterminate forms.",
+          "day3": "Day 3 - Optional Unit 4 review, Personal Progress Check, or assessment."
+        }
+      ]
+    },
+    {
+      "unit": 5,
+      "course_title": "Graph Analysis",
+      "ced_title": "Analytical Applications of Differentiation",
+      "ced_exam_weighting_ab": "15–20%",
+      "teacher_pacing": "12-13 days",
+      "essential_standard": "Derivative signs, theorem conditions, and relationships among $f$, $f'$, and $f''$ allow students to analyze graph behavior and justify extrema, concavity, and optimization conclusions.",
+      "mastery_goals": [
+        {
+          "id": "U5-MG01",
+          "text": "Apply existence and value theorems and analyze critical points and extrema while explicitly checking relevant hypotheses and conclusions."
+        },
+        {
+          "id": "U5-MG02",
+          "text": "Use signs of $f'$ and $f''$ to determine intervals of increase/decrease, concavity, local extrema, inflection behavior, and related derivative-test conclusions."
+        },
+        {
+          "id": "U5-MG03",
+          "text": "Connect the behavior and representations of $f$, $f'$, and $f''$ using graphical, numerical, and analytical evidence."
+        },
+        {
+          "id": "U5-MG04",
+          "text": "Model and solve optimization situations by defining quantities, using constraints, constructing an objective function, identifying candidates, and justifying an optimum."
+        }
+      ],
+      "sections": [
+        {
+          "section": "5.1",
+          "unit": 5,
+          "title": "MVT, EVT, and Critical Points",
+          "ap_topics_text": "5.1, 5.2",
+          "learning_target": "Apply the Mean Value Theorem and Extreme Value Theorem with appropriate hypotheses and conclusions, and identify critical points and local or global extrema.",
+          "i_can": [
+            "I can apply the Mean Value Theorem and Extreme Value Theorem with appropriate hypotheses and conclusions, and identify critical points and local or global extrema.",
+            "I can verify theorem hypotheses on an interval.",
+            "I can use critical points and endpoints to analyze extrema."
+          ],
+          "vocabulary_notation": [
+            "Mean Value Theorem",
+            "Extreme Value Theorem",
+            "critical point",
+            "local extremum",
+            "global extremum"
+          ],
+          "representations": [
+            "function graphs",
+            "theorem hypothesis/conclusion statements",
+            "derivative equations",
+            "intervals"
+          ],
+          "misconceptions": [
+            "Using a theorem without checking continuity or differentiability conditions.",
+            "Treating every critical point as an extremum.",
+            "Confusing local and absolute extrema."
+          ],
+          "modeling_applications": [
+            "Verify theorem hypotheses on an interval.",
+            "Use critical points and endpoints to analyze extrema."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Interpretation: State what the result means in relation to the mathematical objects and representation being used.",
+            "Notation / communication: Communicate the reasoning with precise AP Calculus notation and complete mathematical statements."
+          ],
+          "framework_ap_topics_text": "5.1, 5.2",
+          "day1": "Day 1 - Existence theorems, hypotheses, conclusions, and theorem language.",
+          "day2": "Day 2 - Critical points, local/global extrema, theorem justification, cooperative practice.",
+          "day3": "Day 3 - Optional written theorem justification practice."
+        },
+        {
+          "section": "5.2",
+          "unit": 5,
+          "title": "Increasing, Decreasing, and First Derivative Test",
+          "ap_topics_text": "5.3, 5.4",
+          "learning_target": "Use the sign of the first derivative to determine intervals of increase/decrease and classify local extrema with the first derivative test.",
+          "i_can": [
+            "I can use the sign of the first derivative to determine intervals of increase/decrease and classify local extrema with the first derivative test.",
+            "I can build and interpret a first-derivative sign chart.",
+            "I can justify local extrema from derivative sign changes."
+          ],
+          "vocabulary_notation": [
+            "increasing",
+            "decreasing",
+            "first derivative test",
+            "sign chart"
+          ],
+          "representations": [
+            "sign charts for $f'$",
+            "graphs of $f$ and $f'$",
+            "interval notation"
+          ],
+          "misconceptions": [
+            "Using the sign of $f$ instead of $f'$ to decide increase/decrease.",
+            "Calling a critical point an extremum without checking a sign change.",
+            "Using closed endpoints incorrectly in open-interval monotonicity statements."
+          ],
+          "modeling_applications": [
+            "Build and interpret a first-derivative sign chart.",
+            "Justify local extrema from derivative sign changes."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Critique of reasoning: Locate the mathematical step or assumption that makes a proposed argument valid or invalid and explain the correction."
+          ],
+          "framework_ap_topics_text": "5.3, 5.4",
+          "day1": "Day 1 - Sign charts, intervals of increase/decrease, and first derivative test.",
+          "day2": "Day 2 - Critique Reasoning activity and AP-style written justification.",
+          "day3": "Day 3 - Optional quiz or targeted reteaching."
+        },
+        {
+          "section": "5.3",
+          "unit": 5,
+          "title": "Concavity and Second Derivative Test",
+          "ap_topics_text": "5.6, 5.7",
+          "learning_target": "Use second-derivative information to determine concavity, identify inflection points, and apply the second derivative test when appropriate.",
+          "i_can": [
+            "I can use second-derivative information to determine concavity, identify inflection points, and apply the second derivative test when appropriate.",
+            "I can analyze concavity from $f''$.",
+            "I can classify extrema using a qualified second derivative test."
+          ],
+          "vocabulary_notation": [
+            "concavity",
+            "inflection point",
+            "second derivative test"
+          ],
+          "representations": [
+            "sign charts for $f''$",
+            "graphs of $f$, $f'$, and $f''$",
+            "interval notation"
+          ],
+          "misconceptions": [
+            "Assuming $f''=0$ automatically gives an inflection point.",
+            "Confusing concave up with increasing.",
+            "Using the second derivative test when its conditions do not determine a result."
+          ],
+          "modeling_applications": [
+            "Analyze concavity from $f''$.",
+            "Classify extrema using a qualified second derivative test."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "5.6, 5.7",
+          "day1": "Day 1 - Concavity, inflection points, second derivative test, examples, You Trys.",
+          "day2": "Day 2 - Think-Pair-Share with graphs of f prime and f double-prime, justification practice.",
+          "day3": "Day 3 - Optional mixed first/second derivative test practice."
+        },
+        {
+          "section": "5.4",
+          "unit": 5,
+          "title": "Connecting f, f prime, and f double-prime",
+          "ap_topics_text": "5.8, 5.9, 5.12",
+          "learning_target": "Connect the behavior of $f$, $f'$, and $f''$ across graphical, numerical, analytical, and implicit representations.",
+          "i_can": [
+            "I can connect the behavior of $f$, $f'$, and $f''$ across graphical, numerical, analytical, and implicit representations.",
+            "I can match derivative-related graphs.",
+            "I can predict missing behavior in one representation from another."
+          ],
+          "vocabulary_notation": [
+            "derivative graph",
+            "second derivative",
+            "critical point",
+            "inflection point"
+          ],
+          "representations": [
+            "matched graphs of $f$, $f'$, $f''$",
+            "tables",
+            "analytical expressions",
+            "implicit relationships"
+          ],
+          "misconceptions": [
+            "Matching graphs by shape alone without using sign and zero relationships.",
+            "Confusing extrema of $f$ with extrema of $f'$.",
+            "Inferring concavity from the value of $f$ instead of change in $f'$."
+          ],
+          "modeling_applications": [
+            "Match derivative-related graphs.",
+            "Predict missing behavior in one representation from another."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "5.8, 5.9, 5.12",
+          "day1": "Day 1 - Graph matching, derivative behavior, implicit relation behavior, and multiple representations.",
+          "day2": "Day 2 - Predict and Confirm activity, graphical/numerical/analytical mixed practice.",
+          "day3": "Day 3 - Optional AP Classroom progress check items."
+        },
+        {
+          "section": "5.5",
+          "unit": 5,
+          "title": "Optimization",
+          "ap_topics_text": "5.10, 5.11",
+          "learning_target": "Model optimization situations with quantities, constraints, and objective functions, then use calculus-based reasoning to identify and justify optimal values.",
+          "i_can": [
+            "I can model optimization situations with quantities, constraints, and objective functions, then use calculus-based reasoning to identify and justify optimal values.",
+            "I can construct an objective function from a context.",
+            "I can justify a maximum or minimum with calculus and domain reasoning."
+          ],
+          "vocabulary_notation": [
+            "optimization",
+            "constraint",
+            "objective function",
+            "domain",
+            "absolute extremum"
+          ],
+          "representations": [
+            "context diagrams",
+            "constraint equations",
+            "objective functions",
+            "derivative sign or critical-point analysis"
+          ],
+          "misconceptions": [
+            "Optimizing the constraint instead of the objective.",
+            "Ignoring the feasible domain or endpoints.",
+            "Finding a critical value without showing why it gives the required optimum."
+          ],
+          "modeling_applications": [
+            "Construct an objective function from a context.",
+            "Justify a maximum or minimum with calculus and domain reasoning."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "5.10, 5.11",
+          "day1": "Day 1 - Intro to optimization, modeling quantities, constraints, and objective functions.",
+          "day2": "Day 2 - Solving optimization problems with calculus-based justification.",
+          "day3": "Day 3 - Optional FRQ-style optimization assessment."
+        }
+      ]
+    },
+    {
+      "unit": 6,
+      "course_title": "Integration and Accumulation",
+      "ced_title": "Integration and Accumulation of Change",
+      "ced_exam_weighting_ab": "15–20%",
+      "teacher_pacing": "14-15 days",
+      "essential_standard": "Definite integrals measure accumulation and signed change, Riemann sums approximate that accumulation, and the Fundamental Theorem connects accumulation, derivatives, and antiderivatives through strategic integration methods.",
+      "mastery_goals": [
+        {
+          "id": "U6-MG01",
+          "text": "Interpret definite integrals as signed accumulation and approximate accumulation from graphs, tables, and partitions using geometric reasoning and Riemann sums."
+        },
+        {
+          "id": "U6-MG02",
+          "text": "Analyze accumulation functions and use the Fundamental Theorem of Calculus to connect a variable-limit integral with its derivative and behavior."
+        },
+        {
+          "id": "U6-MG03",
+          "text": "Find antiderivatives and evaluate definite integrals using the Fundamental Theorem of Calculus, including correct constant-of-integration notation for indefinite integrals."
+        },
+        {
+          "id": "U6-MG04",
+          "text": "Select and carry out an integration strategy, including $u$-substitution as chain-rule reversal and the additional algebraic strategies named in the framework when appropriate."
+        }
+      ],
+      "sections": [
+        {
+          "section": "6.1",
+          "unit": 6,
+          "title": "Accumulation and Area",
+          "ap_topics_text": "6.1, 6.6",
+          "learning_target": "Interpret accumulation of change from rate graphs using signed area, units, and properties of definite integrals.",
+          "i_can": [
+            "I can interpret accumulation of change from rate graphs using signed area, units, and properties of definite integrals.",
+            "I can estimate accumulation from geometric regions.",
+            "I can interpret signed area as net change in a context."
+          ],
+          "vocabulary_notation": [
+            "accumulation",
+            "signed area",
+            "definite integral",
+            "net change"
+          ],
+          "representations": [
+            "rate graphs",
+            "geometric regions",
+            "definite integral notation",
+            "units"
+          ],
+          "misconceptions": [
+            "Treating all geometric area as positive when the integral is signed.",
+            "Confusing accumulated change with final value when an initial value is needed.",
+            "Dropping units when integrating a rate."
+          ],
+          "modeling_applications": [
+            "Estimate accumulation from geometric regions.",
+            "Interpret signed area as net change in a context."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "6.1, 6.6",
+          "day1": "Day 1 - Rate graphs, signed area, units, and accumulation of change.",
+          "day2": "Day 2 - Geometry-based accumulation investigation, properties of definite integrals, cooperative practice.",
+          "day3": "Day 3 - Optional AP-style units and interpretation practice."
+        },
+        {
+          "section": "6.2",
+          "unit": 6,
+          "title": "Riemann Sums",
+          "ap_topics_text": "6.2, 6.3",
+          "learning_target": "Approximate definite integrals with left, right, midpoint, and trapezoid sums on uniform or nonuniform partitions and interpret over/under estimates.",
+          "i_can": [
+            "I can approximate definite integrals with left, right, midpoint, and trapezoid sums on uniform or nonuniform partitions and interpret over/under estimates.",
+            "I can approximate accumulation from a table.",
+            "I can compare approximation methods using graph behavior."
+          ],
+          "vocabulary_notation": [
+            "Riemann sum",
+            "left sum",
+            "right sum",
+            "midpoint sum",
+            "trapezoid sum",
+            "partition"
+          ],
+          "representations": [
+            "tables",
+            "graphs",
+            "rectangles/trapezoids",
+            "summation notation"
+          ],
+          "misconceptions": [
+            "Using the wrong sample point for a named sum.",
+            "Assuming every partition has equal width.",
+            "Comparing over/under estimates without considering monotonicity or concavity."
+          ],
+          "modeling_applications": [
+            "Approximate accumulation from a table.",
+            "Compare approximation methods using graph behavior."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Interpretation: State what the result means in relation to the mathematical objects and representation being used."
+          ],
+          "framework_ap_topics_text": "6.2, 6.3",
+          "day1": "Day 1 - Left, right, midpoint, and trapezoid sums with uniform and nonuniform partitions.",
+          "day2": "Day 2 - Tables, graphs, over/under estimates, summation notation, Quickwrite comparison task.",
+          "day3": "Day 3 - Optional symbolic Riemann sum to integral practice."
+        },
+        {
+          "section": "6.3",
+          "unit": 6,
+          "title": "FTC Part 1 and Accumulation Functions",
+          "ap_topics_text": "6.4, 6.5",
+          "learning_target": "Connect definite integrals and accumulation functions through the Fundamental Theorem of Calculus, including derivatives of integrals and behavior of accumulation functions.",
+          "i_can": [
+            "I can connect definite integrals and accumulation functions through the Fundamental Theorem of Calculus, including derivatives of integrals and behavior of accumulation functions.",
+            "I can analyze an accumulation function from an integrand graph.",
+            "I can differentiate an integral-defined function."
+          ],
+          "vocabulary_notation": [
+            "Fundamental Theorem of Calculus",
+            "accumulation function",
+            "definite integral"
+          ],
+          "representations": [
+            "accumulation-function graphs",
+            "integral-defined functions",
+            "rate graphs",
+            "derivative relationships"
+          ],
+          "misconceptions": [
+            "Ignoring a variable upper limit when differentiating an accumulation function.",
+            "Confusing the accumulation function value with the integrand value.",
+            "Missing how the sign of the integrand controls increase/decrease of the accumulation function."
+          ],
+          "modeling_applications": [
+            "Analyze an accumulation function from an integrand graph.",
+            "Differentiate an integral-defined function."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "6.4, 6.5",
+          "day1": "Day 1 - Definite integral notation and accumulation functions.",
+          "day2": "Day 2 - Derivative of an integral, behavior of accumulation functions, representation connections.",
+          "day3": "Day 3 - Optional AP Classroom topic questions."
+        },
+        {
+          "section": "6.4",
+          "unit": 6,
+          "title": "FTC Part 2 and Antiderivatives",
+          "ap_topics_text": "6.7, 6.8",
+          "learning_target": "Find antiderivatives and evaluate definite integrals using the Fundamental Theorem of Calculus, with correct constants and notation for indefinite integrals.",
+          "i_can": [
+            "I can find antiderivatives and evaluate definite integrals using the Fundamental Theorem of Calculus, with correct constants and notation for indefinite integrals.",
+            "I can evaluate definite integrals from antiderivatives.",
+            "I can connect derivative rules to antiderivative families."
+          ],
+          "vocabulary_notation": [
+            "antiderivative",
+            "indefinite integral",
+            "constant of integration",
+            "definite integral",
+            "Fundamental Theorem of Calculus"
+          ],
+          "representations": [
+            "symbolic antiderivatives",
+            "definite integral evaluation",
+            "families of functions"
+          ],
+          "misconceptions": [
+            "Omitting the constant of integration in an indefinite integral.",
+            "Adding a constant of integration to a definite integral result.",
+            "Reversing upper and lower bounds without changing the sign."
+          ],
+          "modeling_applications": [
+            "Evaluate definite integrals from antiderivatives.",
+            "Connect derivative rules to antiderivative families."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "6.7, 6.8",
+          "day1": "Day 1 - Antiderivatives and evaluating definite integrals using the Fundamental Theorem of Calculus.",
+          "day2": "Day 2 - Indefinite integrals, constants of integration, notation, and mixed practice.",
+          "day3": "Day 3 - Optional no-calculator integration quiz."
+        },
+        {
+          "section": "6.5",
+          "unit": 6,
+          "title": "u-Substitution and Strategy",
+          "ap_topics_text": "6.9, 6.10, 6.14",
+          "learning_target": "Use $u$-substitution as chain-rule reversal and select among substitution, algebraic rewriting, long division, or completing the square when appropriate.",
+          "i_can": [
+            "I can use $u$-substitution as chain-rule reversal and select among substitution, algebraic rewriting, long division, or completing the square when appropriate.",
+            "I can select an integration strategy from integrand structure.",
+            "I can compare substitution and algebraic-preparation approaches."
+          ],
+          "vocabulary_notation": [
+            "$u$-substitution",
+            "change of variable",
+            "chain rule reversal",
+            "integration strategy"
+          ],
+          "representations": [
+            "nested integrands",
+            "substitution notation",
+            "rewritten rational or quadratic forms"
+          ],
+          "misconceptions": [
+            "Choosing $u$ without accounting for $du$.",
+            "Changing variables but leaving mixed $x$ and $u$ terms.",
+            "Using substitution when algebraic rewriting is the more direct structure."
+          ],
+          "modeling_applications": [
+            "Select an integration strategy from integrand structure.",
+            "Compare substitution and algebraic-preparation approaches."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Communicate the reasoning with precise AP Calculus notation and complete mathematical statements."
+          ],
+          "framework_ap_topics_text": "6.9, 6.10, 6.14",
+          "day1": "Day 1 - u-substitution as chain rule reversal, examples, You Trys, practice.",
+          "day2": "Day 2 - Look For a Pattern activity, long division/completing the square when appropriate, mixed strategy practice.",
+          "day3": "Day 3 - Optional Unit 6 review, Personal Progress Check, or assessment."
+        }
+      ]
+    },
+    {
+      "unit": 7,
+      "course_title": "Differential Equations",
+      "ced_title": "Differential Equations",
+      "ced_exam_weighting_ab": "5–10%",
+      "teacher_pacing": "7-8 days",
+      "essential_standard": "Differential equations model how quantities change; slope fields visualize local behavior, separation of variables produces solution families, and initial conditions or exponential structures determine contextual particular solutions.",
+      "mastery_goals": [
+        {
+          "id": "U7-MG01",
+          "text": "Translate verbal relationships into differential equations and verify whether a proposed function satisfies a differential equation."
+        },
+        {
+          "id": "U7-MG02",
+          "text": "Interpret and sketch slope fields and use them to reason about local solution behavior and the relationship between a differential equation and its solution curves."
+        },
+        {
+          "id": "U7-MG03",
+          "text": "Solve separable differential equations and use initial conditions to determine particular solutions with consistent notation and constants of integration."
+        },
+        {
+          "id": "U7-MG04",
+          "text": "Model and interpret exponential growth and decay using differential equations and connect parameters and solution behavior to context."
+        }
+      ],
+      "sections": [
+        {
+          "section": "7.1",
+          "unit": 7,
+          "title": "Modeling Differential Equations",
+          "ap_topics_text": "7.1, 7.2",
+          "learning_target": "Translate verbal rate relationships into differential equations and verify whether proposed functions satisfy a differential equation.",
+          "i_can": [
+            "I can translate verbal rate relationships into differential equations and verify whether proposed functions satisfy a differential equation.",
+            "I can model a verbal growth or change statement with a differential equation.",
+            "I can verify a proposed solution by substitution."
+          ],
+          "vocabulary_notation": [
+            "differential equation",
+            "solution",
+            "rate relationship",
+            "verification"
+          ],
+          "representations": [
+            "verbal statements",
+            "differential equations",
+            "candidate solution functions"
+          ],
+          "misconceptions": [
+            "Writing an algebraic equation instead of a rate equation.",
+            "Checking a candidate function value without checking its derivative relationship.",
+            "Ignoring variable dependence in a contextual differential equation."
+          ],
+          "modeling_applications": [
+            "Model a verbal growth or change statement with a differential equation.",
+            "Verify a proposed solution by substitution."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships.",
+            "Notation / communication: Communicate the reasoning with precise AP Calculus notation and complete mathematical statements."
+          ],
+          "framework_ap_topics_text": "7.1, 7.2",
+          "day1": "Day 1 - Interpreting verbal statements as differential equations and verifying solutions.",
+          "day2": "Day 2 - Matching equations, contexts, and solution behavior; cooperative practice.",
+          "day3": "Day 3 - Optional AP Classroom topic questions."
+        },
+        {
+          "section": "7.2",
+          "unit": 7,
+          "title": "Slope Fields",
+          "ap_topics_text": "7.3, 7.4",
+          "learning_target": "Sketch and interpret slope fields, connect local slope behavior to differential equations, and reason about solution curves graphically.",
+          "i_can": [
+            "I can sketch and interpret slope fields, connect local slope behavior to differential equations, and reason about solution curves graphically.",
+            "I can sketch a solution curve through an initial point.",
+            "I can match a slope field to a differential equation."
+          ],
+          "vocabulary_notation": [
+            "slope field",
+            "solution curve",
+            "differential equation"
+          ],
+          "representations": [
+            "slope fields",
+            "solution curves",
+            "differential equations",
+            "graphical direction patterns"
+          ],
+          "misconceptions": [
+            "Treating slope-field segments as a single connected solution curve.",
+            "Using the point coordinates rather than the differential equation to determine local slope.",
+            "Drawing a solution curve that crosses the field inconsistently."
+          ],
+          "modeling_applications": [
+            "Sketch a solution curve through an initial point.",
+            "Match a slope field to a differential equation."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships.",
+            "Interpretation: State what the result means in relation to the mathematical objects and representation being used."
+          ],
+          "framework_ap_topics_text": "7.3, 7.4",
+          "day1": "Day 1 - Sketching slope fields and interpreting graphical representations.",
+          "day2": "Day 2 - Match Mine activity and reasoning from slope fields.",
+          "day3": "Day 3 - Optional slope field quiz or FRQ practice."
+        },
+        {
+          "section": "7.3",
+          "unit": 7,
+          "title": "Separation of Variables",
+          "ap_topics_text": "7.6",
+          "learning_target": "Solve separable differential equations by separating variables, integrating both sides, and managing constants of integration across multiple notations.",
+          "i_can": [
+            "I can solve separable differential equations by separating variables, integrating both sides, and managing constants of integration across multiple notations.",
+            "I can solve a standard separable equation.",
+            "I can compare equivalent solution forms."
+          ],
+          "vocabulary_notation": [
+            "separable differential equation",
+            "separation of variables",
+            "constant of integration"
+          ],
+          "representations": [
+            "differential notation",
+            "separated equations",
+            "implicit/explicit solution forms"
+          ],
+          "misconceptions": [
+            "Separating factors incorrectly across differentials.",
+            "Forgetting a constant of integration.",
+            "Dividing by an expression that can be zero without considering lost solutions."
+          ],
+          "modeling_applications": [
+            "Solve a standard separable equation.",
+            "Compare equivalent solution forms."
+          ],
+          "recurring_practices": [
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships.",
+            "Critique of reasoning: Locate the mathematical step or assumption that makes a proposed argument valid or invalid and explain the correction."
+          ],
+          "framework_ap_topics_text": "7.6",
+          "day1": "Day 1 - Separating variables, integrating both sides, constants of integration.",
+          "day2": "Day 2 - Numbered Heads Together practice with multiple notations.",
+          "day3": "Day 3 - Optional error analysis and reteaching."
+        },
+        {
+          "section": "7.4",
+          "unit": 7,
+          "title": "Particular Solutions",
+          "ap_topics_text": "7.7",
+          "learning_target": "Use initial conditions to determine constants and produce particular solutions to separable differential equations.",
+          "i_can": [
+            "I can use initial conditions to determine constants and produce particular solutions to separable differential equations.",
+            "I can determine a particular solution from an initial condition.",
+            "I can connect an initial point to one member of a solution family."
+          ],
+          "vocabulary_notation": [
+            "initial condition",
+            "particular solution",
+            "general solution",
+            "constant of integration"
+          ],
+          "representations": [
+            "general solution families",
+            "initial-condition points",
+            "particular solution graphs/equations"
+          ],
+          "misconceptions": [
+            "Substituting the initial condition before obtaining a valid general relationship.",
+            "Solving for the constant incorrectly from the initial condition.",
+            "Leaving a general solution when a particular solution is requested."
+          ],
+          "modeling_applications": [
+            "Determine a particular solution from an initial condition.",
+            "Connect an initial point to one member of a solution family."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships.",
+            "Interpretation: State what the result means in relation to the mathematical objects and representation being used."
+          ],
+          "framework_ap_topics_text": "7.7",
+          "day1": "Day 1 - Initial conditions and particular solutions.",
+          "day2": "Day 2 - Collaborative Poster activity with separation, integration, finding C, and final solution.",
+          "day3": "Day 3 - Optional FRQ-style differential equations practice."
+        },
+        {
+          "section": "7.5",
+          "unit": 7,
+          "title": "Exponential Models",
+          "ap_topics_text": "7.8",
+          "learning_target": "Model and interpret exponential growth and decay from differential equations in contextual situations.",
+          "i_can": [
+            "I can model and interpret exponential growth and decay from differential equations in contextual situations.",
+            "I can build a growth or decay model from a rate relationship.",
+            "I can interpret model parameters and solution behavior in context."
+          ],
+          "vocabulary_notation": [
+            "exponential growth",
+            "exponential decay",
+            "growth constant",
+            "decay constant"
+          ],
+          "representations": [
+            "differential equations",
+            "exponential solution models",
+            "context tables/graphs"
+          ],
+          "misconceptions": [
+            "Using the wrong sign for a growth or decay constant.",
+            "Interpreting the constant without regard to units or context.",
+            "Treating exponential behavior as linear change."
+          ],
+          "modeling_applications": [
+            "Build a growth or decay model from a rate relationship.",
+            "Interpret model parameters and solution behavior in context."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships.",
+            "Notation / communication: Communicate the reasoning with precise AP Calculus notation and complete mathematical statements."
+          ],
+          "framework_ap_topics_text": "7.8",
+          "day1": "Day 1 - Exponential growth and decay models from differential equations.",
+          "day2": "Day 2 - Contextual modeling, interpretation, and AP-style practice.",
+          "day3": "Day 3 - Optional Unit 7 review, Personal Progress Check, or assessment."
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "course_title": "Integration Applications",
+      "ced_title": "Applications of Integration",
+      "ced_exam_weighting_ab": "10–15%",
+      "teacher_pacing": "13-14 days",
+      "essential_standard": "Definite integrals solve applied accumulation problems by averaging quantities, tracking motion, measuring area between curves, and modeling volumes through cross sections or rotation with careful setup and interpretation.",
+      "mastery_goals": [
+        {
+          "id": "U8-MG01",
+          "text": "Interpret average value and net change and use integrals to connect velocity, displacement, total distance, speed, and position in contextual motion."
+        },
+        {
+          "id": "U8-MG02",
+          "text": "Set up and interpret area-between-curves integrals with respect to $x$ or $y$, including regions with multiple intersections."
+        },
+        {
+          "id": "U8-MG03",
+          "text": "Model volumes with known cross sections by connecting a base region, cross-sectional area function, and definite integral."
+        },
+        {
+          "id": "U8-MG04",
+          "text": "Select and justify disc or washer setups for solids of revolution, including orientation and axis-of-rotation decisions, and evaluate the resulting integral when appropriate."
+        }
+      ],
+      "sections": [
+        {
+          "section": "8.1",
+          "unit": 8,
+          "title": "Average Value and Net Change",
+          "ap_topics_text": "8.1, 8.3",
+          "learning_target": "Use definite integrals to determine average value and net change, and distinguish average value from average rate of change in contextual situations.",
+          "i_can": [
+            "I can use definite integrals to determine average value and net change, and distinguish average value from average rate of change in contextual situations.",
+            "I can compute and interpret average value.",
+            "I can use a rate function to determine net change."
+          ],
+          "vocabulary_notation": [
+            "average value",
+            "average rate of change",
+            "net change",
+            "definite integral"
+          ],
+          "representations": [
+            "function/rate graphs",
+            "tables",
+            "definite integral formulas",
+            "contextual interpretations"
+          ],
+          "misconceptions": [
+            "Using the average rate of change formula for average value.",
+            "Confusing net change with total accumulated amount.",
+            "Ignoring interval length in average value."
+          ],
+          "modeling_applications": [
+            "Compute and interpret average value.",
+            "Use a rate function to determine net change."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "8.1, 8.3",
+          "day1": "Day 1 - Average value versus average rate of change, net change from rate functions.",
+          "day2": "Day 2 - Scavenger Hunt with tables/functions and contextual interpretation.",
+          "day3": "Day 3 - Optional AP Classroom topic questions."
+        },
+        {
+          "section": "8.2",
+          "unit": 8,
+          "title": "Motion with Integrals",
+          "ap_topics_text": "8.2",
+          "learning_target": "Use integrals to determine displacement, total distance, and position from velocity, while distinguishing velocity from speed and accounting for direction changes.",
+          "i_can": [
+            "I can use integrals to determine displacement, total distance, and position from velocity, while distinguishing velocity from speed and accounting for direction changes.",
+            "I can compute displacement and total distance from a velocity model.",
+            "I can recover position from velocity and an initial condition."
+          ],
+          "vocabulary_notation": [
+            "displacement",
+            "total distance",
+            "velocity",
+            "speed",
+            "position"
+          ],
+          "representations": [
+            "velocity graphs",
+            "integrals of velocity",
+            "motion tables",
+            "sign-change intervals"
+          ],
+          "misconceptions": [
+            "Using signed displacement as total distance.",
+            "Failing to split an integral where velocity changes sign for total distance.",
+            "Forgetting an initial position when finding position from accumulated velocity."
+          ],
+          "modeling_applications": [
+            "Compute displacement and total distance from a velocity model.",
+            "Recover position from velocity and an initial condition."
+          ],
+          "recurring_practices": [
+            "Justification / conditions: Identify the mathematical condition or evidence that supports the conclusion rather than naming a rule or theorem without support.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "8.2",
+          "day1": "Day 1 - Displacement, total distance, velocity, speed, and position from integrals.",
+          "day2": "Day 2 - Calculator and non-calculator motion practice, cooperative problem solving.",
+          "day3": "Day 3 - Optional motion FRQ practice."
+        },
+        {
+          "section": "8.3",
+          "unit": 8,
+          "title": "Area Between Curves",
+          "ap_topics_text": "8.4, 8.5, 8.6",
+          "learning_target": "Set up and evaluate area between curves with respect to $x$ or $y$, including multiple intersections and orientation decisions.",
+          "i_can": [
+            "I can set up and evaluate area between curves with respect to $x$ or $y$, including multiple intersections and orientation decisions.",
+            "I can set up area with respect to $x$ or $y$.",
+            "I can compare alternative slice orientations for the same region."
+          ],
+          "vocabulary_notation": [
+            "area between curves",
+            "upper/lower function",
+            "right/left function",
+            "intersection"
+          ],
+          "representations": [
+            "graphs of bounding curves",
+            "vertical slices",
+            "horizontal slices",
+            "definite integrals"
+          ],
+          "misconceptions": [
+            "Subtracting in the wrong order and getting negative geometric area.",
+            "Using $dx$ when a $dy$ setup is structurally more appropriate without rewriting functions.",
+            "Missing a necessary split at an intersection where the bounding order changes."
+          ],
+          "modeling_applications": [
+            "Set up area with respect to $x$ or $y$.",
+            "Compare alternative slice orientations for the same region."
+          ],
+          "recurring_practices": [
+            "Representation connection: Use the section’s graphical/numerical/symbolic representations to support the same mathematical conclusion and explain any apparent mismatch.",
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors."
+          ],
+          "framework_ap_topics_text": "8.4, 8.5, 8.6",
+          "day1": "Day 1 - Area between curves with respect to x, setup and interpretation.",
+          "day2": "Day 2 - Area with respect to y and multiple intersections, Round Table setup practice.",
+          "day3": "Day 3 - Optional mixed area practice and quiz."
+        },
+        {
+          "section": "8.4",
+          "unit": 8,
+          "title": "Volumes with Cross Sections",
+          "ap_topics_text": "8.7, 8.8",
+          "learning_target": "Model volumes with known cross-sectional shapes by converting a base region into an area function and integrating over the appropriate interval.",
+          "i_can": [
+            "I can model volumes with known cross-sectional shapes by converting a base region into an area function and integrating over the appropriate interval.",
+            "I can build a cross-sectional area function from a base region.",
+            "I can set up volumes for square, rectangular, triangular, or semicircular cross sections."
+          ],
+          "vocabulary_notation": [
+            "cross section",
+            "base region",
+            "area function",
+            "volume"
+          ],
+          "representations": [
+            "base-region graphs",
+            "cross-sectional diagrams",
+            "area formulas",
+            "volume integrals"
+          ],
+          "misconceptions": [
+            "Integrating a length instead of cross-sectional area.",
+            "Using the wrong dimension as the side/base/diameter of a cross section.",
+            "Forgetting that the area formula may square a distance between curves."
+          ],
+          "modeling_applications": [
+            "Build a cross-sectional area function from a base region.",
+            "Set up volumes for square, rectangular, triangular, or semicircular cross sections."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous.",
+            "Modeling: Translate between the stated situation and a mathematical model/diagram, preserving the meaning of variables, dimensions, and relationships."
+          ],
+          "framework_ap_topics_text": "8.7, 8.8",
+          "day1": "Day 1 - Cross sections with squares, rectangles, triangles, and semicircles.",
+          "day2": "Day 2 - Setup from base region to area function to definite integral, cooperative practice.",
+          "day3": "Day 3 - Optional AP-style cross-section FRQ."
+        },
+        {
+          "section": "8.5",
+          "unit": 8,
+          "title": "Volumes by Rotation",
+          "ap_topics_text": "8.9, 8.10, 8.11, 8.12",
+          "learning_target": "Set up disc and washer volume integrals about coordinate or shifted axes, making correct radius and orientation decisions.",
+          "i_can": [
+            "I can set up disc and washer volume integrals about coordinate or shifted axes, making correct radius and orientation decisions.",
+            "I can set up disc or washer integrals about varied axes.",
+            "I can compare radius expressions for coordinate versus shifted axes."
+          ],
+          "vocabulary_notation": [
+            "disc method",
+            "washer method",
+            "outer radius",
+            "inner radius",
+            "axis of rotation"
+          ],
+          "representations": [
+            "regions with rotation axes",
+            "disc/washer slices",
+            "radius expressions",
+            "volume integrals"
+          ],
+          "misconceptions": [
+            "Using a function value as a radius without measuring distance to the axis of rotation.",
+            "Reversing inner and outer radii.",
+            "Choosing a slice orientation that does not generate discs or washers for the stated axis."
+          ],
+          "modeling_applications": [
+            "Set up disc or washer integrals about varied axes.",
+            "Compare radius expressions for coordinate versus shifted axes."
+          ],
+          "recurring_practices": [
+            "Interpretation: Connect the computed or inferred quantity to the variables/context and include units or sign meaning when the source situation provides them.",
+            "Calculator reasoning: Use calculator-generated values/graphs as evidence or a check, then state what the output shows mathematically instead of treating the display as proof.",
+            "Analytical strategy: Select and communicate a method from the structure of the expression/problem, then check for common procedural errors.",
+            "Notation / communication: Use the section’s limit, derivative, or integral notation precisely enough that the object, point/interval, and operation are unambiguous."
+          ],
+          "framework_ap_topics_text": "8.9, 8.10, 8.11, 8.12",
+          "day1": "Day 1 - Disc method around coordinate axes and other axes.",
+          "day2": "Day 2 - Washer method and orientation decisions.",
+          "day3": "Day 3 should be treated as optional and used strategically for FRQ writing, mixed AP practice, Personal Progress Checks, reteaching, quizzes, or interrupted weeks."
+        }
+      ]
+    }
+  ]
+}

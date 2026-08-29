@@ -1,0 +1,506 @@
+{
+  "framework": "AP_Calculus_AB_Framework_v2",
+  "file_count": 85,
+  "total_bytes_excluding_manifest": 3407211,
+  "qa": {
+    "result": "PASS",
+    "framework": "AP_Calculus_AB_Framework_v2",
+    "assessment_plans": 8,
+    "units": 8,
+    "sections": 40,
+    "ap_topic_source_documents": 68,
+    "ced_topics_indexed": 81,
+    "section_reference_packets": 40,
+    "question_enrichment_sections": 40,
+    "math_note_sections": 40,
+    "future_hook_sections": 40,
+    "approved_course_figures": 40,
+    "calculus_textbook_section_page_maps": 40,
+    "direct_ap_topic_source_gaps": [
+      "5.12",
+      "6.10",
+      "6.14"
+    ],
+    "fallback_source_support": {
+      "5.12": {
+        "topic": "5.12",
+        "support_mode": "fallback",
+        "direct_source_ids": [],
+        "fallback_source_ids": [
+          "APTOP-U5-12",
+          "APTOP-U5-13"
+        ],
+        "fallback_note": "No directly labeled 5.12 AP Topics packet is present in the supplied corpus. Use Unit 5 packets covering 5.8 and 5.9–5.11 for authentic graph-analysis/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 5.12 mathematics."
+      },
+      "6.10": {
+        "topic": "6.10",
+        "support_mode": "fallback",
+        "direct_source_ids": [],
+        "fallback_source_ids": [
+          "APTOP-U6-10"
+        ],
+        "fallback_note": "No directly labeled 6.10 AP Topics packet is present in the supplied corpus. Use the supplied 6.8–6.9 packet for nearby integration-strategy/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 6.10 mathematics."
+      },
+      "6.14": {
+        "topic": "6.14",
+        "support_mode": "fallback",
+        "direct_source_ids": [],
+        "fallback_source_ids": [
+          "APTOP-U6-08",
+          "APTOP-U6-09",
+          "APTOP-U6-10"
+        ],
+        "fallback_note": "No directly labeled 6.14 AP Topics packet is present in the supplied corpus. Use nearby Unit 6 integration packets (6.7 and 6.8–6.9) for authentic strategy/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 6.14 mathematics."
+      }
+    },
+    "checks": {
+      "all_8_assessment_plans_present": true,
+      "all_40_sections_present": true,
+      "all_sections_have_reference_packet": true,
+      "all_sections_have_enrichment": true,
+      "all_sections_have_textbook_pointer": true,
+      "all_explicit_ap_topics_have_ced_titles": true,
+      "all_explicit_ap_topics_have_direct_source_support": false,
+      "all_explicit_ap_topics_have_direct_or_fallback_support": true,
+      "graph_tool_exact_copy": true,
+      "no_raw_ap_topic_pdfs_packaged": true,
+      "no_mac_junk": true
+    },
+    "notes": [
+      "Unit 3.5 is an intentional Unit 2–3 synthesis section rather than a single AP Topic ID; its source packet draws from the teacher/Assessment Plan synthesis and adjacent Unit 2/3 source references.",
+      "Direct labeled AP Topics source packets are absent for 5.12, 6.10, and 6.14 in the supplied AP Topics corpus. The Framework records that limitation explicitly and supplies adjacent-topic AP task/scoring references as fallback while the Assessment Plan + CED + calculus textbook control the actual mathematics.",
+      "Raw textbooks/AP Topic PDFs are intentionally omitted; the Framework stores curated source packets, representative AP task excerpts, scoring signals, source hashes, and page pointers to stay compact and machine-first."
+    ],
+    "universal_bank_v18_3_compatible": true,
+    "final_bank_finalizer": "tools/~finalize_bank.py",
+    "standalone_mathjax": "tools/~fix_mathjax_v10.py"
+  },
+  "files": [
+    {
+      "path": "AP_Calculus_AB_Framework_PM_v2.txt",
+      "size": 9538,
+      "sha256": "4f947df78066da1abdc224cf2ae61201c1cecb4be5eebf42e9c85b241a1907e6"
+    },
+    {
+      "path": "README.md",
+      "size": 2500,
+      "sha256": "dc1e37e3b32e584bf2207178ef62fb93539ddbb8223dd8db1b8002aceaffddf4"
+    },
+    {
+      "path": "assessment_plans/assessment_plan_index.json",
+      "size": 1618,
+      "sha256": "d4cc444805c1801da1564c3b0f6b3d7e2e01b8c3ad14fce6a9011ca3211054fe"
+    },
+    {
+      "path": "assessment_plans/unit1_assessment_plan/unit1_assessment_plan.html",
+      "size": 38753,
+      "sha256": "47469f59fe3b95f2935998f5d7748e3bc26de087d19169df3863fd3e02729493"
+    },
+    {
+      "path": "assessment_plans/unit2_assessment_plan/unit2_assessment_plan.html",
+      "size": 39177,
+      "sha256": "dd7d424243c341bd542175b523001ad99d2827777d1c584f53e7238f864add77"
+    },
+    {
+      "path": "assessment_plans/unit3_assessment_plan/unit3_assessment_plan.html",
+      "size": 38085,
+      "sha256": "1a32a0c1d2ca74555c46bbbbdf411f1b9c8197d62005d8b71b5a446f3f5cb4ac"
+    },
+    {
+      "path": "assessment_plans/unit4_assessment_plan/unit4_assessment_plan.html",
+      "size": 38278,
+      "sha256": "d3a0e11efa36a1bb34f4d5f42c40bcb591f6e969661b9997f567d053ffcdb4c9"
+    },
+    {
+      "path": "assessment_plans/unit5_assessment_plan/unit5_assessment_plan.html",
+      "size": 37454,
+      "sha256": "14c9b360b8b65d5ecb5432dd7f9fea22eb8ba7b33e515b596074d15f747279d3"
+    },
+    {
+      "path": "assessment_plans/unit6_assessment_plan/unit6_assessment_plan.html",
+      "size": 38081,
+      "sha256": "3a47e2eefa79a7c34ee773287f47b775d6d7968947506864cc7b70881e8d21a7"
+    },
+    {
+      "path": "assessment_plans/unit7_assessment_plan/unit7_assessment_plan.html",
+      "size": 36662,
+      "sha256": "7205968d63444d027a4340455cdbf05a1f03ae8913da68a5a118ec88ba5591e1"
+    },
+    {
+      "path": "assessment_plans/unit8_assessment_plan/unit8_assessment_plan.html",
+      "size": 38101,
+      "sha256": "5d98746e36fc1dc0e511e561e4d3cec3a09d92051381d73886b74bbe30f8adec"
+    },
+    {
+      "path": "contracts/authority.json",
+      "size": 3179,
+      "sha256": "557421cc5f865aa1a650e58b22dc98d6f5af58e7abfb3dad01f2f433f8f911a8"
+    },
+    {
+      "path": "contracts/bank_handoff_contract.json",
+      "size": 770,
+      "sha256": "d35ba4307c026ecde1444c4e88350b42038bf885728bf789f6dea8982321bfff"
+    },
+    {
+      "path": "contracts/bank_quality_contract.json",
+      "size": 2427,
+      "sha256": "e049d40e8b495b4b0f855c95a6d6fa8a573d9f0a0fb3a9e53aec6a23b802a934"
+    },
+    {
+      "path": "contracts/course_file_structure.json",
+      "size": 4495,
+      "sha256": "36caab554edefe6f80d9a26dc62b7527264ca69ed43364347d7b21eeb426635a"
+    },
+    {
+      "path": "contracts/course_file_structure_qa.json",
+      "size": 195,
+      "sha256": "afcbd9082d289d4dbc078b34695e7383d57da1718e56255202405165f5adcf71"
+    },
+    {
+      "path": "contracts/framework_qa.json",
+      "size": 3331,
+      "sha256": "e5c9773a1503fcdb9fcb4d3b1fe74b89ad4ad40eee9e539d3ae0fdfeacaa1288"
+    },
+    {
+      "path": "contracts/live_course_upgrade_contract.json",
+      "size": 442,
+      "sha256": "75b8c15fa4b29d56520aab556e33880086882b5e603a9750cf9ae66bed85430d"
+    },
+    {
+      "path": "contracts/map_first_repetition_contract.json",
+      "size": 2939,
+      "sha256": "6b51a98e836e91dfdac435b06ce85a7dd574d1fec379398fc5b47191a50d1a9d"
+    },
+    {
+      "path": "contracts/universal_bank_compatibility.json",
+      "size": 1494,
+      "sha256": "ce6d9af0c55379d92de9d52517d63b90f63898ce0a30f98ab186139a4b664d81"
+    },
+    {
+      "path": "course_map/course_map.json",
+      "size": 110765,
+      "sha256": "ed4c3e56532dfa4b76b0b8897b0167d1cee591892a51c4bff624d2e0ce2ada92"
+    },
+    {
+      "path": "profiles/ap_authoring_quality.json",
+      "size": 798,
+      "sha256": "642ac8ca7c93904d7ee6e10e7388cfd2343e23d5a6e877d944703afce55e8997"
+    },
+    {
+      "path": "profiles/assessment_evidence_philosophy.json",
+      "size": 745,
+      "sha256": "d945188e5566787c5c0ba6597aef0a07a1913bef0ecb38e60d6ccf1432c40fac"
+    },
+    {
+      "path": "profiles/language_reading_tone.json",
+      "size": 2123,
+      "sha256": "9fc62c2246a3669b143c3e7e16fe77258c3b516abe2c11da375c7d5e749da4d4"
+    },
+    {
+      "path": "reference_library/ap_topics/ap_frq_scoring_profile.json",
+      "size": 1624,
+      "sha256": "d0ecce146cc62d4d65830ea6bdd6044a97234a4953cc85d0f4c5b81c914e8a40"
+    },
+    {
+      "path": "reference_library/ap_topics/ap_topic_source_catalog.json",
+      "size": 494773,
+      "sha256": "82ce4ce74d3461eb6f9a9db8a1db65f65c06ecd93a2d30958aa8939a3b62535d"
+    },
+    {
+      "path": "reference_library/ced/ced_course_reference.json",
+      "size": 10299,
+      "sha256": "fe219e41275fa706600e955abe4385780c296f0b34ec07c09c209081e242b570"
+    },
+    {
+      "path": "reference_library/deployment/framework_deployment_reference.json",
+      "size": 241,
+      "sha256": "4e1c0828be0755f9cf3866d1d41d269f931b2214f8b5914d38e6880577637b7d"
+    },
+    {
+      "path": "reference_library/deployment/shared_css/bank.css",
+      "size": 2117,
+      "sha256": "aceecc28f16950935f649ba4a8ace9a66f417f7655ef6d60050d76c0b8941dd7"
+    },
+    {
+      "path": "reference_library/deployment/shared_css/summative.css",
+      "size": 3417,
+      "sha256": "24e56f6a89d727efe17a2ab7847485aa9c2838b25072b7657b04ec57bfd9b901"
+    },
+    {
+      "path": "reference_library/future_resource_hooks/section_future_resource_hooks.json",
+      "size": 23631,
+      "sha256": "96bfb7c97133cf1eef9f656e67822eace729299805efd11d72290d5b85186a5f"
+    },
+    {
+      "path": "reference_library/math_notes/math_note_ideas.json",
+      "size": 34160,
+      "sha256": "ae6fe0bcdd08984b82ca59a552f5f5ab9a10d8999f3adb6cc9e61819d5fbb919"
+    },
+    {
+      "path": "reference_library/question_structures/section_enrichment.json",
+      "size": 171786,
+      "sha256": "832d19ac544d5bae7748efa7ff5c1fcb7a1b725202d6fb626a7fc967a944163c"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u1s1_secant_tangent.png",
+      "size": 33537,
+      "sha256": "9075133d0dfc181681a2d15d871d8216a3929721de9fcda4ef200360da6edaa0"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u1s2_one_sided_limits.png",
+      "size": 21950,
+      "sha256": "bd882fff0cf29541228558a634826d5f4e97d443c24895278623b14bf4a6c4b5"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u1s3_removable_hole.png",
+      "size": 24232,
+      "sha256": "14bc94431b3d17655d92616cac6f125e03788c4c844c21b054ef6edc02d865c1"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u1s4_piecewise_continuity.png",
+      "size": 22572,
+      "sha256": "63c6ba24b1a841c01df46bb25898db9280940916cf4ebd50865d859c09825651"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u1s5_asymptotic_behavior.png",
+      "size": 24792,
+      "sha256": "101913c5b98279b8340add6e316220fdb1a6ffa0289c656bb1e98e206d6fd806"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u2s1_average_instant_rate.png",
+      "size": 36184,
+      "sha256": "3e5f5b4ab22124faa56555feb4e0587d9c95286ca90a5a38e93edaf5f5832913"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u2s2_derivative_tangent.png",
+      "size": 36176,
+      "sha256": "74d6327ae0dbaa431a247a53a5041e1fbc146aca22d2770760f55afda8ccfbe9"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u2s3_nondifferentiable_corner.png",
+      "size": 19804,
+      "sha256": "f3dd6c9f8c575a40f2c0b8029705a59fa0e4012cd03aa33b2c59357c46c82f9c"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u2s4_power_rule_shape.png",
+      "size": 22705,
+      "sha256": "0ed4acfab4b1d62149f88fc352a3ea6af0893d8353d290c3be0b094a01862982"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u2s5_product_quotient_context.png",
+      "size": 28615,
+      "sha256": "9f243cf7db353741001240e673a311aae40870a9088158d0713a898a64729ba8"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u3s1_chain_composition.png",
+      "size": 24518,
+      "sha256": "961c481c64d48292c105177612daca1c987712e3958c29c886e5367bf9a103e4"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u3s2_mixed_rules.png",
+      "size": 25440,
+      "sha256": "14258d0f704ee2b1bfe3edb2052454d22e3ad92837bb04c3b9974d2a7e7e93da"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u3s3_implicit_circle_branches.png",
+      "size": 27809,
+      "sha256": "3099a5322fe0be1d16d88e3d2aa488795a744046d3dabb4793b92e8c87b40a28"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u3s4_inverse_reflection.png",
+      "size": 36362,
+      "sha256": "0283b2ae95fa2c548fc3351ecaa6e07667b887c3286f55428d2ffc80c685b635"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u3s5_strategy_review.png",
+      "size": 33044,
+      "sha256": "ef0e9e8a4ca844eca5297a5b93459ebd3ac570c601d8b9c14c1a2134f4edf730"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u4s1_context_rate.png",
+      "size": 21984,
+      "sha256": "a07775e97bd27c260167c778c9957386aa71c0eaa04d62051d45bf3ffb059bd6"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u4s2_motion_pair.png",
+      "size": 33028,
+      "sha256": "823e0e5c2e3cbf479be23596b58bfd7dcfc2bfdc8d4e1e30948383f9c1f544da"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u4s3_related_rates_intro.png",
+      "size": 23002,
+      "sha256": "fa5558cd025623cab715f9670af7138205386bae0299683cab31f0bdaa1bb359"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u4s4_related_rates_problem.png",
+      "size": 24518,
+      "sha256": "7c89f22aff3c19df1bdf50728081e3294b26a5efb565208e7e1baf2aa05437a5"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u4s5_linearization.png",
+      "size": 23668,
+      "sha256": "444fa611a935f6465904003db57ef64f2e439a65b782b01de4d1cb546a17a310"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u5s1_mvt_secant.png",
+      "size": 31405,
+      "sha256": "2b11601cbfdc912990b959e31732a52a64a7566fd60723a9b7625d7af9b1e3ea"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u5s2_extrema.png",
+      "size": 24786,
+      "sha256": "a27f3d4df845aae4e534c8b14329db1750814ab92ff44fb6275cb299726e7361"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u5s3_concavity.png",
+      "size": 25528,
+      "sha256": "94f34df25b53b273db49fa0386e2f359705c1e5ac1a6c7879f4d62ee342deaf7"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u5s4_f_fp_fpp.png",
+      "size": 27074,
+      "sha256": "0699326f857ae7968bddf3a0cbc16e79bd3308059fffa40fdfc05cbb7e46a679"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u5s5_optimization.png",
+      "size": 24860,
+      "sha256": "07029e7898392c15b986a03a1000ee0d49569a1cd463f1d487d379d75bd94ea9"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u6s1_accumulation_rate.png",
+      "size": 27222,
+      "sha256": "b77efbe36c71b9f647ff46a12c9e66b9cf893e5cdb560f0d7416cb2584d0e5b6"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u6s2_riemann_source_graph.png",
+      "size": 25710,
+      "sha256": "9121ff69c95a0ae65ec1011129cf3a9bb95159b98b97dd68794f3a06154101ec"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u6s3_ftc_accumulation.png",
+      "size": 33485,
+      "sha256": "c28715cb89f8432a9b93f111a2dfcde33c79ba55643719076b29c42a96fb9437"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u6s4_antiderivative_pair.png",
+      "size": 30523,
+      "sha256": "9959d139a92d3a80dfde21586486b33a66ed057331a3652458aa48d76765a178"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u6s5_substitution_pattern.png",
+      "size": 26673,
+      "sha256": "8f3e313c887624851432c57bd7bc75dcc5b3f84f9440144721df186c4ec01f20"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u7s1_solution_family.png",
+      "size": 33050,
+      "sha256": "4f04930b02950eaaf14c87c1f88e367430888b6804b7703981edb467b815154d"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u7s2_slopefield_solution_curves.png",
+      "size": 27935,
+      "sha256": "d2a23cd5e4732845f9c740161d7f834aa23237a1e533d1f08f65e4bf8cd5b86f"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u7s3_separation.png",
+      "size": 22746,
+      "sha256": "42c01b5196c9facf0777a6f90d80d1fa76163cd6cfe69c73a7129e50b0affe74"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u7s4_particular_solution.png",
+      "size": 22359,
+      "sha256": "9280848b0905069ce7196f2ee2acd1f165398a4b24f995c95c7359b08c772502"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u7s5_exponential_model.png",
+      "size": 25691,
+      "sha256": "f33224619f9bb93cc2862830ba61f12eeb7f2f7c9c07a839ab1059f0629c5555"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u8s1_average_value.png",
+      "size": 25890,
+      "sha256": "3b2e46f53e0c6d51ca82497030151535b23904ab6cc350241eaebe2763f77259"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u8s2_motion_integral.png",
+      "size": 27874,
+      "sha256": "f27c8b8ea8333032c9719b0459971156c4b9d378d4e58a0aae005a5aeb5a3c57"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u8s3_area_between_curves.png",
+      "size": 28905,
+      "sha256": "596f9a033415a1fbc23fec5687e72e37781f1e56b5eb7ed5bd802b739984d485"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u8s4_cross_section_base.png",
+      "size": 28190,
+      "sha256": "9b7939310632d51f24c67f8c54f5b0471779a1ce1f6319ff04942b3980797cc1"
+    },
+    {
+      "path": "reference_library/reusable_figures/approved_course_figures/u8s5_rotation_region.png",
+      "size": 32772,
+      "sha256": "5975e2f9d39898536c866cf30e61cdf2e7ff863566468f8f9d7f5acbe609a6f3"
+    },
+    {
+      "path": "reference_library/reusable_figures/figure_catalog.json",
+      "size": 21693,
+      "sha256": "9c0700d82607643b6912038af56cf17f6c3be379752aec436b89c055d476f1e9"
+    },
+    {
+      "path": "reference_library/reusable_figures/visual_pointers/calculus_textbook_visual_pointer_catalog.json",
+      "size": 35103,
+      "sha256": "27d7c65646de38ef2d1d1f97a19d6f166fa1f2f7eafadcdd8ca7133fbfe710ea"
+    },
+    {
+      "path": "reference_library/reusable_tables/table_catalog.json",
+      "size": 5116,
+      "sha256": "5de86b0ede42a3a6fdccaa5fc4a79d57f3a3c66317213f40ed4838107fc6d05a"
+    },
+    {
+      "path": "reference_library/source_excerpts/section_reference_packets.json",
+      "size": 637199,
+      "sha256": "39342332e12fb9250b3d81a5f8af4a7e85d7f7867cf06d5708224665fb87ca84"
+    },
+    {
+      "path": "sources/indexes/ap_topics_source_manifest.json",
+      "size": 21422,
+      "sha256": "fc8c823306b4cfe8f23f04f26d81cb67695e8b81a532fa70cbb80f7c9938e058"
+    },
+    {
+      "path": "sources/indexes/calculus_textbook_page_map.json",
+      "size": 184639,
+      "sha256": "793104a5d1714dd73bc507e203e0a4dea71892e8623f57a462dcf6eaa4808e45"
+    },
+    {
+      "path": "sources/indexes/source_manifest.json",
+      "size": 2611,
+      "sha256": "aacdf12e430fae859a60a901144e727f670f49ee39d35aeab3dd522bf0170084"
+    },
+    {
+      "path": "tools/format_audit_manifest.json",
+      "size": 1236,
+      "sha256": "a4b705da61b293457d19b29954b8cbaec03c5b0fd210bbab247eef09c3bd3868"
+    },
+    {
+      "path": "tools/graph_tool_manifest.json",
+      "size": 246,
+      "sha256": "97952d68d0ee8b260b4eadefc9856b5a9343ed802096311b4174297cbb6c6931"
+    },
+    {
+      "path": "tools/~finalize_bank.py",
+      "size": 71739,
+      "sha256": "d9d6212ee661e4c5fa1cfae774e58900cfdbbf3ae74155cf6590d24bca143d55"
+    },
+    {
+      "path": "tools/~fix_mathjax_v10.py",
+      "size": 46161,
+      "sha256": "9609329cb62959c7fbd3e6587614c6c05ed85c3fd90d44dae77efe871305fe17"
+    },
+    {
+      "path": "tools/~graph_tool_v12.py",
+      "size": 90709,
+      "sha256": "eaf5ab36936697f9f49c255c0f2dfcb64c94858c1e4769dfd2431e042e4453b5"
+    }
+  ],
+  "version": "v2.4"
+}

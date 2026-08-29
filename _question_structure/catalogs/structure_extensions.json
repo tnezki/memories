@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "structures": [
+    {
+      "structure_id": "FORMULA-DIRECT-RELATIONSHIP-01",
+      "category": "Quantitative / Formula",
+      "purpose": "Use a physical/mathematical relationship to solve for one requested quantity from natural givens.",
+      "wording_profiles": [
+        "standard",
+        "inverted",
+        "context_rich"
+      ],
+      "variation_axes": [
+        "unknown_quantity",
+        "values_units",
+        "context_evidence"
+      ],
+      "avoid": "Naked variable-assignment prompts as the default in Physics."
+    },
+    {
+      "structure_id": "FORMULA-INVERSE-VARIABLE-01",
+      "category": "Quantitative / Formula",
+      "purpose": "Use the same relationship in a less-practiced solve direction.",
+      "wording_profiles": [
+        "standard",
+        "inverted",
+        "context_rich"
+      ],
+      "variation_axes": [
+        "unknown_quantity",
+        "values_units",
+        "context_evidence"
+      ]
+    },
+    {
+      "structure_id": "FORMULA-MULTISTEP-DEPENDENT-01",
+      "category": "Quantitative / Multi-step",
+      "purpose": "Find or infer an intermediate quantity and use it in a later dependent calculation with one natural final task.",
+      "wording_profiles": [
+        "standard",
+        "inverted",
+        "context_rich"
+      ],
+      "variation_axes": [
+        "dependency_path",
+        "unknown_quantity",
+        "givens_evidence_set",
+        "values_units",
+        "context_evidence"
+      ]
+    },
+    {
+      "structure_id": "VOCAB-TERM-TO-DEFINITION-01",
+      "category": "Vocabulary",
+      "purpose": "Given a term, provide/select its definition.",
+      "wording_profiles": [
+        "natural_direct"
+      ]
+    },
+    {
+      "structure_id": "VOCAB-DEFINITION-TO-TERM-01",
+      "category": "Vocabulary",
+      "purpose": "Given a definition, identify the term.",
+      "wording_profiles": [
+        "natural_direct"
+      ]
+    },
+    {
+      "structure_id": "VOCAB-CONCEPT-TO-TERM-01",
+      "category": "Vocabulary",
+      "purpose": "Given an example/concept description, identify the term.",
+      "wording_profiles": [
+        "natural_direct"
+      ]
+    },
+    {
+      "structure_id": "VOCAB-TERM-TO-CONCEPT-01",
+      "category": "Vocabulary",
+      "purpose": "Given a term, identify/explain an example or conceptual meaning.",
+      "wording_profiles": [
+        "natural_direct"
+      ]
+    },
+    {
+      "structure_id": "VOCAB-MATCHING-SET-01",
+      "category": "Vocabulary / Matching",
+      "purpose": "Match several terms and definitions/concepts when grouping improves efficiency and contrast.",
+      "wording_profiles": [
+        "natural_direct"
+      ]
+    },
+    {
+      "structure_id": "REPRESENTATION-READ-THEN-CALCULATE-01",
+      "category": "Representation + Quantitative",
+      "purpose": "Extract evidence from a graph/table/diagram and use it in a calculation.",
+      "wording_profiles": [
+        "standard",
+        "inverted",
+        "context_rich"
+      ],
+      "variation_axes": [
+        "representation_type",
+        "representation_values",
+        "unknown_quantity"
+      ]
+    },
+    {
+      "structure_id": "REPRESENTATION-CONSTRUCT-OR-CRITIQUE-01",
+      "category": "Representation",
+      "purpose": "Construct, complete, or critique an actual evidence-bearing representation.",
+      "wording_profiles": [
+        "natural_direct"
+      ],
+      "variation_axes": [
+        "representation_type",
+        "misconception_target",
+        "context_evidence"
+      ]
+    }
+  ]
+}

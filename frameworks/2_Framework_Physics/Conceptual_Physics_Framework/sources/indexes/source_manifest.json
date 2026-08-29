@@ -1,0 +1,76 @@
+{
+  "framework_version": "v6.1",
+  "normal_build_policy": "The Framework now packages the full teacher-supplied extracted Conceptual Physics section library (including captured images/manifests) plus curated reference intelligence. Normal Bank/Notes builds should not request the original large PDFs/ZIPs when this Framework is supplied.",
+  "sources": [
+    {
+      "id": "assessment_plans",
+      "name": "Physics Unit Assessment Plans 1-8",
+      "role": "HIGHEST curricular authority after current user instruction; learning targets, mastery goals, evidence, representations, misconceptions, summative scope",
+      "packaged": "original HTML copies",
+      "direct_copy_policy": "authoritative course content; preserve wording"
+    },
+    {
+      "id": "physics_framework_docx",
+      "name": "Conceptual Physics Curriculum Framework",
+      "role": "course sequence and instructional-design source: 8 units x 5 sections, conceptual-first, investigations, Reading Apprenticeship, collaboration/CER",
+      "packaged": "distilled course_map.json only",
+      "direct_copy_policy": "use as course organization/reference"
+    },
+    {
+      "id": "course_aligned_physics_textbook",
+      "name": "physics_textbook course-aligned HTML/figures",
+      "role": "strongest section-aligned positive reference for natural Conceptual Physics exposition, checkpoints, visual roles, and already-created course figures",
+      "packaged": "structured section packets + all approved course figures + selected source-reference images + full visual pointer catalog",
+      "direct_copy_policy": "approved course-generated figures may be reused when answer-neutral; source-reference images are for inspection/adaptation unless clearly course-generated"
+    },
+    {
+      "id": "conceptual_physics_curriculum",
+      "name": "Conceptual Physics curriculum selections",
+      "role": "PRIMARY conceptual voice, phenomenon/question-structure benchmark, and visual-story source for Physics Notes; captured figures are first-class instructional evidence/anchors, not decoration",
+      "packaged": "full extracted course-relevant section/review HTML + raw extraction notes + image manifests + captured images under sources/conceptual_physics_extracted/, plus section source map and question-family profile",
+      "direct_copy_policy": "reference/adapt; do not reproduce protected wording/artwork by default"
+    },
+    {
+      "id": "ck12_interactive_physics",
+      "name": "CK-12 Interactive Physics for High School",
+      "role": "supplementary high-school explanations, interactive/problem structures, alternate representations",
+      "packaged": "page pointers/previews only",
+      "direct_copy_policy": "use as reference; verify license notice before direct artwork reuse"
+    },
+    {
+      "id": "openstax_high_school_physics",
+      "name": "OpenStax High School Physics",
+      "role": "supplementary open high-school precision, examples, data/graph/problem structures",
+      "packaged": "page pointers/previews only",
+      "direct_copy_policy": "use as reference; verify local license notice for direct reuse"
+    },
+    {
+      "id": "holt_problem_workbook",
+      "name": "Holt Physics Problem Workbook",
+      "role": "formula/problem-family benchmark for concise givens, substitutions, units, and multi-step quantitative practice",
+      "packaged": "page pointers/previews only",
+      "direct_copy_policy": "structure/style reference only; do not copy protected problem wording"
+    },
+    {
+      "id": "halliday_resnick_fundamentals",
+      "name": "Fundamentals of Physics (Halliday/Resnick/Walker)",
+      "role": "advanced precision/extension reference and independent technical cross-check",
+      "packaged": "page pointers/previews only",
+      "direct_copy_policy": "do not let college-level rigor/tone override course level; reference only"
+    },
+    {
+      "id": "graph_tool",
+      "name": "graph_tool_v12",
+      "role": "authoritative graph styling/behavior and supported visual types",
+      "packaged": "full unchanged tool",
+      "direct_copy_policy": "copy in full as generate_graphs.py and append generation blocks only"
+    },
+    {
+      "id": "complete_physics_textbook",
+      "name": "Teacher-supplied Complete Physics Textbook",
+      "role": "secondary course-aligned high-school exposition, formulas, examples, and 8-module/40-section cross-check",
+      "packaged": "inventory metadata only in supplemental_source_inventory.json; do not request raw PDF for normal builds",
+      "direct_copy_policy": "reference structure/precision; Assessment Plan and Framework scope remain authoritative"
+    }
+  ]
+}

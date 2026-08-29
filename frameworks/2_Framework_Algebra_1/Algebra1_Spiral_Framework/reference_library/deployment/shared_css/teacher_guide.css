@@ -1,0 +1,46 @@
+:root { --ink:#18242d; --muted:#5a6872; --accent:#1f5f8b; --accent-soft:#e6f1f8; --line:#cbd5dc; --paper:#fff; --warn:#8b4f16; --warn-soft:#fff1dc; --good:#2e6b45; --good-soft:#e6f4eb; }
+* { box-sizing:border-box; }
+body { margin:0; background:#eef2f5; color:var(--ink); font-family:Arial, Helvetica, sans-serif; line-height:1.45; }
+.guide { max-width:920px; margin:32px auto; background:var(--paper); padding:44px 52px 64px; box-shadow:0 8px 28px rgba(20,40,55,.12); }
+.kicker { text-transform:uppercase; letter-spacing:.06em; font-weight:800; color:var(--accent); font-size:13px; }
+h1 { font-size:34px; line-height:1.1; margin:6px 0 6px; }
+.subtitle { color:var(--muted); font-size:17px; margin-bottom:28px; }
+h2 { margin-top:32px; border-bottom:3px solid var(--accent); padding-bottom:6px; font-size:23px; }
+h3 { margin:22px 0 8px; font-size:18px; }
+p, li, td, th { font-size:15px; }
+.quick-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:18px 0 26px; }
+.quick { background:var(--accent-soft); border-radius:12px; padding:12px 14px; }
+.quick strong { display:block; color:var(--accent); margin-bottom:4px; }
+.callout { border-left:5px solid var(--accent); background:var(--accent-soft); padding:14px 16px; border-radius:8px; margin:18px 0; }
+.warn { border-left-color:var(--warn); background:var(--warn-soft); }
+.good { border-left-color:var(--good); background:var(--good-soft); }
+table { width:100%; border-collapse:collapse; margin:12px 0 22px; }
+th, td { border:1px solid var(--line); padding:10px 11px; vertical-align:top; }
+th { background:#edf3f7; text-align:left; }
+code { background:#f2f4f5; padding:1px 4px; border-radius:4px; }
+@page { size:letter; margin:.55in; }
+@media print { body { background:white; } .guide { max-width:none; margin:0; padding:0; box-shadow:none; } h2 { break-after:avoid; } table, .callout { break-inside:avoid; } }
+
+
+/* Detailed teacher-facing slide/task walkthroughs. Existing overview styling remains unchanged. */
+.teacher-detail-page { margin:42px 0 0; padding-top:8px; break-before:page; page-break-before:always; }
+.slide-replica { min-height:4.05in; border:2px solid var(--line); border-radius:18px; background:#fff; padding:.28in .34in; display:flex; flex-direction:column; justify-content:center; margin-bottom:.22in; }
+.slide-replica .replica-kicker { color:var(--accent); font-weight:800; letter-spacing:.05em; text-transform:uppercase; font-size:11px; margin-bottom:7px; }
+.slide-replica h2 { border:0; margin:0 0 12px; padding:0; font-size:27px; }
+.slide-replica h3 { margin:0 0 5px; font-size:18px; }
+.slide-replica p, .slide-replica li { font-size:15px; }
+.slide-replica .replica-prompt { background:var(--accent-soft); border-left:5px solid var(--accent); padding:10px 12px; border-radius:8px; margin:10px 0; font-weight:700; }
+.slide-replica .replica-challenge { background:var(--warn-soft); border-left:5px solid var(--warn); padding:10px 12px; border-radius:8px; margin:10px 0; }
+.slide-replica .replica-two-col { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.slide-replica .replica-box { border:1px solid var(--line); border-radius:9px; padding:9px 11px; }
+.slide-replica .replica-ref { border:1.5px solid var(--accent); border-radius:9px; padding:8px 10px; margin:0 0 10px; }
+.teacher-notes { border-top:3px solid var(--accent); padding-top:10px; }
+.teacher-notes h3 { margin:12px 0 5px; }
+.teacher-notes p, .teacher-notes li { font-size:14px; }
+.teacher-task-replica { border:1.5px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0 10px; background:#fff; }
+.teacher-task-replica h3 { margin-top:0; color:var(--accent); }
+.teacher-task-replica table { margin:8px 0 12px; }
+.teacher-task-replica img { display:block; max-width:4.5in; max-height:3.0in; object-fit:contain; margin:10px auto; }
+.answer-block { background:var(--good-soft); border-left:5px solid var(--good); border-radius:8px; padding:11px 13px; margin:10px 0; }
+.rationale-block { background:var(--accent-soft); border-left:5px solid var(--accent); border-radius:8px; padding:11px 13px; margin:10px 0 18px; }
+@media print { .teacher-detail-page { margin:0; padding-top:0; } .slide-replica { min-height:3.65in; } .teacher-task-replica, .answer-block, .rationale-block { break-inside:avoid; } }

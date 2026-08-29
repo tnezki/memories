@@ -1,0 +1,41 @@
+BUILD REVIEW PORTABLE MEMORY v1.0
+=================================
+
+STATUS
+------
+CURRENT REVIEW-ONLY BUILD WRAPPER
+
+PURPOSE
+-------
+Build ONLY the current Unit Review + Review Practice from the current Philosophy, current Course Framework, and finalized current Unit Bank.
+
+OWNERSHIP — HARD
+----------------
+This wrapper does not implement Review rendering. The embedded `family_pm/Base_Recurring_Assessment_PM` is the SINGLE Review/Review Practice renderer owner. Read it completely and obey it exactly.
+
+Current Framework + ORIGINAL current Unit Assessment Plan own the current Unit Mastery Goals/exact supporting I-cans and Algebra-specific content requirements. The finalized Bank supplies appropriate non-secure content/figures.
+
+Do not route from the internal Retrieval stage merely because the resource is called Review. Do not expose historical/source Unit identity.
+
+INPUTS
+------
+1. current Curriculum Philosophy
+2. this Build Review PM
+3. current Course Framework
+4. finalized current Unit Bank
+
+OUTPUT
+------
+Primary replacement-ready ZIP: `unit{U}_review.zip`, preserving the Framework course resource branch for Review/Review Practice. Shared course-root CSS remains linked, not duplicated.
+
+Also offer an INSPECTION-ONLY preview ZIP: `unit{U}_review_PREVIEW.zip` containing:
+  reviews/review{U}/...
+  css/review.css
+  css/review_practice.css
+The preview ZIP exists only so the Review can be opened/styled outside the course tree. Do not deploy its duplicate CSS over newer course CSS unless explicitly requested.
+
+QUALITY GATE
+------------
+Run the embedded recurring checker(s), including `~qa_review_shell_contract.py`, before packaging and again on extracted packaged bytes. Require zero errors.
+
+No other resource family may be built or modified.

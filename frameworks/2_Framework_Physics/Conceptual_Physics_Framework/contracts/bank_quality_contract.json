@@ -1,0 +1,145 @@
+{
+  "contract_name": "Conceptual Physics Bank Quality Guardrails",
+  "contract_version": "v5.7",
+  "framework_version": "v6.8",
+  "rules": {
+    "distractors": {
+      "hard_rule": "Author distractors with each question family from item-specific misconceptions. Every wrong choice must be plausible for that exact stem; conceptually equivalent correct choices are prohibited.",
+      "repeated_wrong_choice_review_threshold_distinct_families": 8,
+      "examples_to_reject": [
+        "balanced + net force 0 N when both answer the stem",
+        "unrelated observation/inference/balanced filler on symbol or calculation items"
+      ],
+      "repeated_wrong_choice_threshold_distinct_families": 8,
+      "repeated_wrong_choice_threshold_is_hard_failure": "Hard for substantive repeated textual choices; short numeric/unit choices are surfaced for review because legitimate recurrence is possible."
+    },
+    "security": {
+      "hard_rule": "Formative-secure/secure items must be semantically independent from prior instructional items.",
+      "compare": [
+        "target",
+        "representation",
+        "givens/data/diagram",
+        "reasoning action",
+        "response type",
+        "misconception target"
+      ],
+      "task_architecture_required_for": [
+        "Exit Ticket",
+        "Extended Reasoning",
+        "Performance Task",
+        "Summative"
+      ]
+    },
+    "representations": {
+      "no_quota": true,
+      "hard_review": "Representation-heavy sections require actual student-facing visual/table use or an explicit rationale after Framework visual/table inspection.",
+      "unused_packaged_figure_rule": "Normally reference each packaged figure in at least one canonical item or remove it.",
+      "hard_rule": "When the I-can/evidence job explicitly requires interpreting, constructing, critiquing, comparing, or using a diagram, graph, table, vector, force model, ray, field, or circuit, the student must receive that ACTUAL representation. A prose description of a diagram is not equivalent evidence.",
+      "answer_neutrality_not_avoidance": "NEVER SHOW THE ANSWER IN THE STUDENT IMAGE does NOT mean avoid images. Build/crop/redraw an answer-neutral representation when the evidence job requires one."
+    },
+    "counts": {
+      "owned_by": "profiles/bank_course_profile.json after universal Base inventory mechanics are resolved",
+      "rule": "Use the Physics-resolved inventory in profiles/bank_course_profile.json. Counts are destination containers, not I-can allocation targets. Physics Notes = 4 Example/YTI pairs = 8 canonical Notes items per section."
+    },
+    "teacher_keys": {
+      "routine_visible_keys_required": false,
+      "machine_answers_required_for": [
+        "selected response",
+        "Tarsia",
+        "Notes EX/YTI",
+        "Exit Ticket",
+        "Extended Reasoning",
+        "Performance Task",
+        "Summative"
+      ],
+      "routine_solution_html_may_be_blank": true,
+      "bank_html_default": "Omit visible Teacher Key blocks for routine instructional items; keep required canonical answer/evidence data in machine files.",
+      "notes_solution_html_required_only_when_rationale_needed": true
+    },
+    "progressive_authoring": {
+      "hard_rule": "Verify correctness/alignment while authoring, but do not launch late anti-clone or generator-diversification passes. Repair actual flagged defects only.",
+      "section_order": [
+        "WTC + Notes gate",
+        "Practice by family",
+        "Practice semantic gate",
+        "CYU/Warm-Ups/Tarsia/Blooket",
+        "Exit Ticket semantic-security gate",
+        "section machine-data commit"
+      ],
+      "late_patch_rule": "Repair flagged family/section and revalidate; do not apply a unit-wide semantic text patch without family-level revalidation."
+    },
+    "duplicates": {
+      "hard_rule": "Exact literal student-prompt duplication across canonical items is prohibited by default. Reuse the learning FAMILY, not the finished question. A non-secure instructional exact repeat is allowed only when the item records a specific intentional_exact_repeat_reason explaining the pedagogical need; secure/Summative exact repeats are never exempt.",
+      "practice_rule": "Practice may repeat a conceptual/procedural family, but change meaningful evidence features such as values, context, representation, givens/unknown, misconception, or reasoning action. Copy-pasting the same finished prompt to fill inventory is a defect.",
+      "numeric_shell_review": "Number-only or unit-only rewrites of the same prompt skeleton are surfaced for review when they cluster heavily; useful family repetition remains allowed.",
+      "secure_rule": "No exact secure prompt may appear twice within a form, across V1-V6, or in exposed instructional inventory. Secure forms require new evidence stimuli, not cloned instructional shells.",
+      "semantic_clone_rule": "Meaningful variation must change the evidence, not merely nouns, numbers, units, or choice order. A repeated prompt architecture with object/number substitutions is a semantic clone even when literal text is unique.",
+      "secure_semantic_clone_rule": "Secure/Summative items may share an I-can or broad family, but number swaps, object swaps, sentence-order changes, or reordered answer choices alone do not establish independence. Repeated secure semantic shells are hard failures.",
+      "instructional_semantic_clone_rule": "A small amount of family repetition is useful; heavy repetition of the same number/object-normalized shell is a defect. Do not manufacture variation by inserting irrelevant measurements."
+    },
+    "practice_prompt_hygiene": {
+      "hard_rule": "Repeated families appear as ordinary clean questions. No second-pass/another-version generator labels and no one generic explanation/checking/reasonableness suffix across most/all Practice items."
+    },
+    "map_first_repetition": {
+      "required_before_multi_item_authoring": true,
+      "contract": "contracts/map_first_repetition_contract.json",
+      "no_quota": true,
+      "hard_rule": "Use the full-scope map before authoring to distinguish purposeful Physics repetition from template-driven cloning. This does not replace the existing ban on late anti-clone/diversification passes."
+    },
+    "i_can_first": {
+      "contract": "contracts/i_can_first_bank_contract.json",
+      "hard_rule": "The exact I-can is the atomic evidence address. Section inventory compliance cannot compensate for an I-can coverage gap.",
+      "coverage_validation": "Finalizer must hard-fail missing Notes pair, Practice-set coverage, CYU, combined Warm-Up coverage, parallel Exit coverage, or per-form Summative coverage for any exact I-can.",
+      "distribution": "Do not automatically split a 24-question practice container 8/8/8 across three I-cans. Determine each I-can's evidence need first, then reconcile to 24. Equal counts are allowed only when the evidence plan genuinely supports them; mechanical symmetry is a review flag."
+    },
+    "figure_answer_neutrality": {
+      "contract": "contracts/student_figure_answer_neutrality_contract.json",
+      "hard_rule": "NEVER SHOW THE ANSWER IN THE STUDENT IMAGE.",
+      "qa": "Every Physics figure reference must carry explicit answer-neutrality verification metadata; answer-sensitive tasks also certify answer_bearing_elements_removed=true."
+    },
+    "physical_plausibility": {
+      "hard_rule": "Every Physics context must be physically coherent and grammatically natural before release. Do not combine mutually exclusive states (for example moving at steady speed and at rest) or Mad-Lib nouns that do not fit the motion/setup.",
+      "irrelevant_data_rule": "Every numerical value, unit, observation, and contextual detail must affect the model, inference, comparison, or calculation. Do not add an unused mass/time/distance merely to make a cloned prompt look different.",
+      "high_confidence_contradictions": "High-confidence physical contradictions are hard failures; grammar/context oddities are surfaced for review."
+    },
+    "machine_handoff": {
+      "contract": "contracts/bank_handoff_contract.json",
+      "hard_rule": "Canonical Bank JSON must satisfy the literal downstream schema. Do not substitute aliases such as security for security_level or omit per-item DOK/evidence-point metadata.",
+      "finalizer_rule": "The finalizer validates required literal fields on every canonical item and the structured figures/tables contract."
+    },
+    "source_provenance": {
+      "hard_rule": "source_basis records what actually informed the individual item. Do not stamp the same framework/PM/question-family boilerplate onto the entire Bank.",
+      "review_rule": "A single identical source_basis dominating the unit is a provenance-quality warning unless it is a concise truthful default such as Assessment Plan only; source_metadata should identify specific source packets/pages/figures when actually consulted."
+    },
+    "audit_status": {
+      "hard_rule": "Every canonical item carries audit_status with one exact value: NEEDS AUDIT, KEEP, CLEAN, or REBUILD. A fresh Bank initializes every item to NEEDS AUDIT. Audit status is review metadata and never appears inside student-prompt content.",
+      "display_labels": {
+        "NEEDS AUDIT": "🔴 NEEDS AUDIT",
+        "KEEP": "🟢 KEEP",
+        "CLEAN": "🟡 CLEAN",
+        "REBUILD": "🔴 REBUILD"
+      },
+      "meaning": {
+        "NEEDS AUDIT": "Initial build state; question has not yet received a content-audit disposition.",
+        "KEEP": "Fundamentally good question.",
+        "CLEAN": "Keep the core; clean wording/scaffolding.",
+        "REBUILD": "Hard content, representation, or context problem."
+      },
+      "reset_rule": "If student content, choices, answer/key, evidence job, or representation is materially changed later, reset the item to NEEDS AUDIT until the revision is audited again."
+    },
+    "wtc_frq": {
+      "hard_rule": "Every WTC must be a true connected multi-part FRQ built around one shared stimulus, normally 3-5 labeled parts. WTC is for FRQ decomposition/navigation practice and is not a current-Unit coverage device.",
+      "cross_unit": "Content may come from any Physics Unit. Preserve the exact source content i_can_id/i_can statement, set coverage_role=wtc_frq_practice, and exclude WTC from current-Unit I-can coverage calculations.",
+      "unfamiliar_content": "If the physics is not yet taught, parts must remain accessible as unpacking, representation, relationship selection, qualitative prediction, or planning rather than requiring mastery of the untaught procedure.",
+      "representation": "When the FRQ depends on a graph/table/diagram/model/data set, provide the actual representation.",
+      "anti_copy": "Use released/workbook FRQs only as structural exemplars. Do not copy their text, data, figures, or solution sequence."
+    }
+  },
+  "question_design_map": {
+    "contract": "contracts/question_design_map_contract.json",
+    "hard_rule": "Pre-authoring question design map required. Every canonical item links to a planned slot. Variety is selected by I-can fit, not global quotas.",
+    "semantic_family_rule": "question_family_id must describe the evidence family and may not use version/question-number tokens to manufacture uniqueness.",
+    "exit_security_rule": "Exit Ticket destination is formative-secure for Physics semantic clone QA regardless of security_level string.",
+    "inline_svg_rule": "Inline SVG must carry structured answer-neutrality QA metadata through figures[]."
+  }
+}

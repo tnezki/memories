@@ -1,0 +1,340 @@
+PHYSICS / COURSE-AWARE BANK BUILD STAGE 3D - SUMMATIVE BANK v2.0
+================================================================
+STATUS: CURRENT STAGED BANK AUTHORING PM
+ROLE: Add the complete secure Summative Bank layer to an accepted Stage 3C Exit checkpoint.
+NORMAL OUTPUT: unitN_bank_3d.zip
+DEPLOYMENT STATUS: BUILD CHECKPOINT ONLY - NOT A FINAL OR DEPLOYABLE BANK
+
+GENERIC RUN COMMAND
+-------------------
+Carefully read PM and Run.
+
+When the teacher says Run, complete this entire Stage 3D workflow and return the real ZIP in the same response.
+Do not stop at samples, plans, previews, or requests to continue.
+
+ARCHITECTURE
+------------
+2.5 Build Bank Map -> 2.6 Audit + Fix Bank Map -> 3A Build Bank Seeds -> 3B Instructional Variants -> 3C Exit Tickets -> 3D Summative Bank -> 3E Final Bank Audit + Materialize
+
+FIRST TASK - HARD GATE
+----------------------
+Before reading this PM, the Framework, the audited map, the Stage 3C checkpoint, the question-structure package, or any source material:
+READ THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+
+After validating the Stage 3C handoff and audited map, and immediately before authoring the first Summative question, REREAD THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+
+AUTHORITY ORDER
+---------------
+Current explicit teacher instruction overrides portable defaults. After that:
+1. Current Curriculum Philosophy PM.
+2. This Stage 3D PM.
+3. Current course Framework and original Unit Assessment Plan.
+4. Current audited Bank Map.
+5. Accepted Stage 3C checkpoint, which contains the complete exposed instructional layer and Exit inventory.
+6. Current dedicated _question_structure.zip.
+7. Current visual/source Toolkit when nonconflicting.
+
+REQUIRED INPUTS
+---------------
+1. This Stage 3D PM package.
+2. Current course Framework ZIP.
+3. Current audited Unit Bank Map ZIP: unitN_bank_map_audited.zip.
+4. Current Stage 3C checkpoint ZIP: unitN_bank_3c.zip.
+5. Current Curriculum Philosophy and _question_structure.zip, normally bundled automatically by Control Panel.
+
+Repository convention:
+  <course>/banks/unitN_bank_map_audited.zip
+  <course>/banks/unitN_bank_3c.zip
+
+HANDOFF HARD GATE
+-----------------
+Before authoring anything, verify:
+- requested Unit is unambiguous;
+- audited map opens and map_audit.final_status = PASS;
+- Stage 3C ZIP opens to exactly one unitN/ folder;
+- unitN/STAGE_3C_HANDOFF.json exists;
+- Stage 3C handoff status = PASS and deployable = false;
+- handoff Unit/course match the request;
+- Stage 3C authored_count matches the actual canonical item count;
+- every Stage 3C authored_slot_id exists exactly once;
+- Stage 3C audited_map_sha256 exactly matches the supplied audited-map ZIP SHA-256;
+- Stage 3C contains all mapped non-Summative items and NO authored Summative items;
+- Stage 3C pending inventory consists only of the mapped Summative slots.
+
+If a hard gate fails, STOP. Do not silently rebuild an earlier stage or substitute another map.
+
+STAGE 3D AUTHORING SCOPE - SUMMATIVE ONLY
+-----------------------------------------
+Author every audited-map slot belonging to the Summative Bank and NOTHING ELSE.
+
+For the current Physics architecture this is normally:
+- Version 1: 20 items
+- Version 2: 20 items
+- Version 3: 20 items
+- Version 4: 20 items
+- Version 5: 20 items
+- Version 6: 20 items
+= 120 new Stage 3D items
+
+Together with the normal 675 Stage 3C items, the Stage 3D checkpoint normally contains the complete 795-item Bank. The AUDITED MAP owns actual counts and response-mode allocations.
+
+Do NOT repair or rewrite WTC, EX/YTI, Practice, CYU, Warm-Ups, or Exit Tickets in Stage 3D.
+
+WHY THIS STAGE EXISTS
+---------------------
+Summative questions are the most secure evidence in the Bank. They are authored last so the builder can inspect all exposed instruction and all Exit tasks before writing them. This reduces accidental reuse while keeping the assessment tightly aligned to the approved evidence blueprint.
+
+SUMMATIVE BLUEPRINT FIRST
+-------------------------
+The audited Bank Map must already define the Summative evidence blueprint before prose.
+
+Before authoring, reconcile every V1 and V5 slot against:
+- exact I-can;
+- evidence job;
+- response mode;
+- question structure;
+- representation requirement;
+- approximate difficulty;
+- security/freshness requirement;
+- parallel or alternate relationship.
+
+If the map is materially incomplete or contradictory, FAIL CLOSED rather than inventing a new assessment blueprint.
+
+V1 CONTRACT - MASTER SECURE FORM
+--------------------------------
+V1 is the master secure assessment form.
+
+For every V1 slot:
+- author a real secure question that performs the mapped evidence job;
+- preserve the mapped response mode;
+- keep wording concise unless context carries real Physics evidence;
+- create the mapped graph, diagram, table, model, or other representation when required;
+- independently solve and verify the final item;
+- selected-response distractors must be item-specific and physically plausible, not drawn from a generic distractor bag.
+
+V2-V4 CONTRACT - DELIBERATE PARALLEL FORMS
+-------------------------------------------
+V2, V3, and V4 are close same-day security parallels of V1.
+
+For each corresponding slot, preserve:
+- I-can;
+- evidence job;
+- response mode;
+- structural family;
+- approximate difficulty;
+- representation demand.
+
+Change legitimate evidence details as appropriate:
+- numerical values/data;
+- givens/unknown;
+- physical situation;
+- representation values/layout;
+- misconception/evidence set;
+- item-specific distractors;
+- wording when useful.
+
+These forms SHOULD be similar. Do not force novelty merely to avoid resemblance.
+They must not be literally identical finished evidence when the map calls for a parallel variation.
+
+V5 CONTRACT - ALTERNATE SECURE FORM
+-----------------------------------
+V5 is the alternate assessment family.
+
+It must satisfy the same Unit-level evidence requirements and overall difficulty while using meaningfully different evidence families, contexts, or representations where the audited map calls for them.
+
+V5 is not a reordered copy of V1.
+
+V6 CONTRACT - PARALLEL OF V5
+----------------------------
+V6 is the deliberate parallel form of V5.
+
+For each slot, preserve the V5 evidence job, response mode, structural family, approximate difficulty, and representation demand while changing legitimate evidence details as appropriate.
+
+SECURITY / FRESHNESS
+--------------------
+Inspect the entire Stage 3C Bank before authoring Summative questions.
+
+A Summative item MAY assess the same I-can, formula, representation type, or reasoning students encountered during instruction or Exit Tickets. It must NOT simply reproduce an exposed instructional question, Exit question, distinctive data set, or distinctive figure.
+
+Security does not require artificial novelty. It requires fresh evidence.
+
+GLOBAL WRITING RULES
+--------------------
+SHORT BY DEFAULT.
+Context-rich is a tool, not the default style. Remove setup that does not change the Physics or evidence demand.
+
+VISUALS ARE CHEAP, NOT A QUOTA.
+If a graph, FBD, vector diagram, motion diagram, table, or model improves or carries the evidence, create a purpose-built one. Parallel forms normally receive their own corresponding data/visual instance when the evidence depends on it. Do not reuse an old instructional or Exit visual merely to save production work.
+
+Exact visual uniqueness is NOT itself a requirement. Judge correctness, usefulness, and security.
+
+PHYSICS BEFORE ALGEBRA SHELLS.
+Quantitative questions use concise physical situations. The situation supplies the measurements and students use, choose, rearrange, interpret, or combine the physical relationship. Do not write naked variable-assignment prompts.
+
+NO UPSTREAM REPAIRS IN THIS STAGE.
+If an earlier item appears flawed, record it in STAGE_3D_REPORT.txt under UPSTREAM REVIEW NOTES. Preserve it unchanged. Stage 3E will audit the complete Bank independently.
+
+SELECTED-RESPONSE CHOICE ORDER
+------------------------------
+Do NOT distort canonical Bank authoring to force A/B/C/D answer-position balance.
+
+Stage 3D owns:
+- correct question content;
+- correct choice content;
+- exactly one defensible correct answer when selected response is used;
+- item-specific distractors;
+- correct answer/solution metadata.
+
+The downstream Summative artifact builder / Practice-to-Summative workflow will run the approved deterministic choice-scramble Python tool as its LAST assembly step, then update answer keys and verify the final form. Answer-letter distribution is therefore NOT a Stage 3D quality target.
+
+AUTHORING ORDER
+---------------
+1. Read Philosophy completely.
+2. Read this PM and current authorities.
+3. Validate audited map and Stage 3C hard gates.
+4. Inventory all exposed instruction and Exit tasks for security awareness.
+5. Extract exactly the pending Summative slot IDs.
+6. Reconcile V1 and V5 blueprints plus all parallel relationships before prose.
+7. Reread Philosophy completely.
+8. Author V1 slot by slot.
+9. Independently solve/check every V1 item.
+10. Author V2-V4 as deliberate parallels of corresponding V1 slots.
+11. Independently solve/check every V2-V4 item.
+12. Author V5 as the alternate secure form.
+13. Independently solve/check every V5 item.
+14. Author V6 as the deliberate parallel of V5.
+15. Independently solve/check every V6 item.
+16. Generate/verify every required new representation.
+17. Derive post-authoring metadata from finished questions where required.
+18. Preserve all Stage 3A/3B/3C canonical items and figures unchanged.
+19. Initialize audit handoff fields on every new Summative item.
+20. Rebuild combined checkpoint views/data from the single canonical item set.
+21. Run Stage 3D structural/security QA once after authoring is complete.
+22. Write Stage 3D handoff/report.
+23. Package unitN_bank_3d.zip.
+
+MULTIDIMENSION AUDIT HANDOFF
+----------------------------
+Every NEW Stage 3D Summative item must carry these independent audit fields:
+- map_alignment
+- structure
+- wording
+- representation
+- parallel_variety_fidelity
+- physics_answer
+- security
+
+Applicable dimensions initialize to NEEDS AUDIT; genuinely nonapplicable dimensions initialize to N/A. Overall audit_status initializes to NEEDS AUDIT.
+
+Stage 3D builder QA does not self-certify the independent Stage 3E audit.
+
+STAGE 3D CHECKPOINT DATA CONTRACT
+---------------------------------
+ZIP top level must be exactly:
+  unitN/
+
+Required contents include:
+- unitN_bank_data.json containing the complete authored Bank;
+- unitN.html;
+- unitN_review.html;
+- unitN_resources.html;
+- unitN_question_design_map.json;
+- unitN_mapping.csv;
+- unitN_i_can_map.csv;
+- unitN_evidence_map.csv;
+- unitN_summative_source_map.csv;
+- unitN_downstream_manifest.json;
+- figures/ containing every referenced figure;
+- generate_graphs.py with current approved generation calls;
+- ~finalize_bank.py from the current Framework/finalizer authority;
+- retained STAGE_3A_HANDOFF.json, STAGE_3B_HANDOFF.json, and STAGE_3C_HANDOFF.json;
+- STAGE_3D_HANDOFF.json;
+- STAGE_3D_REPORT.txt;
+- NOT_DEPLOYABLE_STAGE_3D.txt.
+
+Teacher views must clearly display an internal banner:
+  BUILD STAGE 3D - COMPLETE QUESTION INVENTORY - NOT DEPLOYABLE UNTIL 3E
+
+STAGE_3D_HANDOFF.json REQUIRED FIELDS
+-------------------------------------
+At minimum:
+{
+  "schema": "curriculum-bank-build-stage/3d-2.0",
+  "course": "...",
+  "unit": N,
+  "stage": "3D",
+  "status": "PASS",
+  "deployable": false,
+  "audited_map_filename": "unitN_bank_map_audited.zip",
+  "audited_map_sha256": "...",
+  "source_stage_filename": "unitN_bank_3c.zip",
+  "source_stage_sha256": "...",
+  "preserved_3c_count": 0,
+  "new_summative_count": 0,
+  "authored_count": 0,
+  "authored_slot_ids": [],
+  "pending_count": 0,
+  "pending_slot_ids": [],
+  "version_counts": {},
+  "response_mode_counts": {},
+  "upstream_review_notes_count": 0,
+  "figure_count": 0,
+  "next_stage": "3E Final Bank Audit + Materialize"
+}
+
+Compute real SHA-256 fingerprints for the supplied audited map and Stage 3C checkpoint. Stage 3E must verify them before audit/materialization.
+
+STAGE 3D QA - HARD GATES
+------------------------
+Before packaging, verify:
+- every expected Summative slot is authored exactly once;
+- all Stage 3C items remain unchanged;
+- authored_count equals the audited-map total inventory;
+- pending_count = 0 and pending_slot_ids is empty;
+- V1 and V5 satisfy their mapped evidence blueprints;
+- V2-V4 are legitimate parallels of V1;
+- V5 is an actual alternate family where the map requires it;
+- V6 is a legitimate parallel of V5;
+- no Summative task simply reproduces exposed instructional or Exit evidence;
+- planned variation axes are visibly realized where required;
+- every selected-response item has exactly one defensible correct answer and item-specific distractors;
+- wording is concise and natural;
+- every quantitative item is independently solved and physically coherent;
+- every answer/solution matches the final prompt;
+- every referenced representation exists and is correct;
+- combined teacher views/data derive from the same canonical objects;
+- all new audit dimensions are initialized, not self-certified;
+- Stage 3D handoff status = PASS and deployable = false.
+
+Do not run an anti-clone rewrite pass. Intentional V1-V4 and V5-V6 parallelism is not a defect.
+
+DELIVERY CONTRACT
+-----------------
+Return ONE ZIP named:
+  unitN_bank_3d.zip
+
+This ZIP is the final BUILD CHECKPOINT for Stage 3E. It is NOT the deployed replacement Bank.
+
+Teacher repository action:
+  Save the ZIP itself, still zipped, at:
+    <course>/banks/unitN_bank_3d.zip
+
+Do not unzip it. Do not replace <course>/banks/unitN/ with this checkpoint.
+
+RETENTION RULE
+--------------
+Keep map, audited map, 3A, 3B, 3C, and 3D ZIPs through Stage 3E.
+Stage 3E will preserve the important planning/audit provenance inside the permanent materialized unitN/ folder and will remind the teacher when the temporary ZIPs may be manually deleted.
+
+FINAL CHAT SUMMARY
+------------------
+Report concisely:
+- preserved Stage 3C count;
+- new Summative count;
+- V1-V6 counts and response-mode counts;
+- complete authored count and pending count;
+- figure count;
+- upstream review-note count, if any;
+- QA PASS/FAIL;
+- exact ZIP filename/save location;
+- NEXT BUILD: 3E Final Bank Audit + Materialize.

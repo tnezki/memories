@@ -1,0 +1,359 @@
+PHYSICS / COURSE-AWARE BANK BUILD STAGE 3A - SEEDS v2.0
+======================================================
+STATUS: CURRENT STAGED BANK AUTHORING PM
+ROLE: Author only the high-value instructional seed layer from an already audited Bank Map.
+NORMAL OUTPUT: unitN_bank_3a_seeds.zip
+DEPLOYMENT STATUS: BUILD CHECKPOINT ONLY - NOT A DEPLOYABLE OR COMPLETE BANK
+
+GENERIC RUN COMMAND
+-------------------
+Carefully read PM and Run.
+
+When the teacher says Run, complete this entire Stage 3A workflow and return the real ZIP in the same response.
+Do not stop at samples, plans, previews, or requests to continue.
+
+ARCHITECTURE
+------------
+2.5 Build Bank Map -> 2.6 Audit + Fix Bank Map -> 3A Build Bank Seeds -> 3B Instructional Variants -> 3C Build Exit Tickets -> 3D Build Summative Bank -> 3E Final Bank Audit + Materialize
+
+Stage 3A exists to keep weak seeds from being multiplied into hundreds of parallel questions. It authors the
+small, high-value layer first, makes the visuals and solutions real, and creates a stable checkpoint that later
+stages must preserve exactly unless an explicit later audit/repair authorizes a change.
+
+FIRST TASK - HARD GATE
+----------------------
+Before reading this PM, the Framework, the audited map, the question-structure package, or any source material:
+READ THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+
+Do not merely confirm that Philosophy exists. Read it. Its purpose rules control what Practice is for, how
+assessment differs from instruction, when repetition is useful, how representations should serve learning, and
+how teacher choice is protected.
+
+After the audited map is validated and immediately before writing the first canonical question, REREAD THE
+CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+
+AUTHORITY ORDER
+---------------
+Current explicit teacher instruction overrides portable defaults. After that:
+1. Current Curriculum Philosophy PM - universal WHY and resource purpose.
+2. This Stage 3A PM - staged build mechanics and delivery contract.
+3. Current course Framework - exact course rules, I-cans, Assessment Plan, representations, tools, CSS, response modes.
+4. Current ORIGINAL Unit Assessment Plan inside the Framework - learning/evidence authority.
+5. Current audited Bank Map - approved per-slot authoring plan.
+6. Current dedicated _question_structure.zip - question architecture and legitimate variation rules.
+7. Current visual/source Toolkit - source/visual enrichment when nonconflicting.
+
+Do not use old Banks, remembered rules, or previous chats to redesign the current audited map.
+
+REQUIRED INPUTS
+---------------
+1. This Stage 3A PM package.
+2. Current course Framework ZIP.
+3. Current audited Unit Bank Map ZIP named unitN_bank_map_audited.zip.
+4. Current Curriculum Philosophy and _question_structure.zip, normally bundled automatically by Control Panel.
+
+Repository convention:
+  <course>/banks/unitN_bank_map.zip
+  <course>/banks/unitN_bank_map_audited.zip
+
+The audited map is the only map Stage 3A may execute.
+
+AUDITED-MAP HARD GATE
+---------------------
+Before authoring anything, verify:
+- requested Unit is unambiguous;
+- unitN_bank_map_audited.zip opens;
+- unitN_bank_map.json exists;
+- map_audit.final_status = PASS;
+- map inventory and relationship fields are present;
+- there are no unresolved map failures;
+- exact I-can IDs/text resolve against the current Framework / Assessment Plan.
+
+If any gate fails, STOP. Do not repair the map inside Stage 3A.
+
+STAGE 3A AUTHORING SCOPE - ONLY THESE DESTINATIONS
+--------------------------------------------------
+Author every audited-map slot belonging to:
+A. WTC
+B. Notes Example
+C. Notes You Try It
+D. Practice Set 1
+
+Author NOTHING else.
+
+Do NOT author:
+- Practice Set 2
+- Practice Set 3
+- Extra Practice
+- CYU
+- Warm-Ups
+- Exit Tickets
+- Summative forms
+- downstream Activities or deployed course resources
+
+Do not create fake placeholders to make later inventory appear complete. Later slots remain PENDING in the stage
+handoff manifest and are not canonical questions yet.
+
+For the current five-section Physics architecture this is normally:
+- 5 WTC
+- 20 Examples
+- 20 YTIs
+- 120 Practice Set 1 questions
+= 165 authored items
+
+However, the AUDITED MAP owns the actual count. Do not force 165 if a current audited map explicitly differs.
+
+WHY THESE ITEMS COME FIRST
+--------------------------
+- WTC establishes the Unit's FRQ-navigation routine.
+- Examples establish instructional anchors.
+- YTIs establish deliberate Example parallels.
+- Practice Set 1 establishes the 24 seed families per section that later Practice forms parallelize.
+
+Stage 3B must not multiply a weak Practice family. Stage 3C must not author Exit evidence before the full exposed
+instructional layer exists. Stage 3D must not author Summative evidence until the Exit inventory also exists.
+
+GLOBAL QUESTION-WRITING RULES
+-----------------------------
+SHORT BY DEFAULT.
+A question gets extra context only when context improves the Physics. Context-rich is an available structure, not
+the default voice. Remove sentences that do not change the physical reasoning or evidence job.
+
+VISUALS ARE EFFECTIVELY FREE.
+If a graph, FBD, vector diagram, motion diagram, table, model, or other representation materially improves the
+question or is required by the audited map, CREATE A PURPOSE-BUILT ONE. Do not reuse an existing visual across
+separate canonical questions merely to save work. A connected multipart WTC may intentionally share one stimulus.
+A later parallel question normally receives its own corresponding fresh visual/data.
+
+PHYSICS BEFORE ALGEBRA SHELLS.
+Quantitative questions begin with a concise physical situation that naturally supplies the measurements. A formula
+may be given when appropriate. Students may use, choose, rearrange, invert, interpret, or combine a relationship.
+Do not write naked variable-assignment prompts such as "d=18 m, t=3 s; find v."
+
+QUESTION STRUCTURE MUST SERVE THE MAP.
+Do not add Student A/B wrappers, generic justify prompts, decorative contexts, or extra representations merely to
+look rigorous or varied. Direct questions are allowed. Intentional parallelism is allowed. The audited map owns the
+planned structure and evidence job.
+
+INTERNAL LABELS NEVER REACH STUDENTS.
+Do not expose terms such as seed, parallel, family, architecture, evidence job, map slot, wording profile, or audit.
+
+DOK/BLOOM AFTER AUTHORING.
+Do not generate question prose backward from a desired metadata label.
+
+STAGE 3A DESTINATION CONTRACTS
+------------------------------
+A. WTC
+- Author the mapped one-per-section WTC slots.
+- WTC is FRQ-style decomposition/navigation practice.
+- Content may come from outside the current section or current Unit when the audited map/Framework permits it.
+- Use one coherent shared situation/stimulus with 3-5 genuinely connected parts.
+- Parts may interpret, plan/model, calculate/analyze, justify, critique, or translate representations.
+- If the WTC refers to a graph/table/diagram/model, provide the actual representation.
+- WTC does not satisfy current-Unit I-can coverage floors merely by existing.
+
+B. EXAMPLE / YOU TRY IT
+- Author every mapped Example and YTI pair.
+- Example is the instructional seed.
+- YTI is a deliberate parallel/application of that Example, not an unrelated novelty question.
+- When an I-can naturally supports quantitative Physics, strong quantitative applications take precedence over
+  generic vocabulary/conceptual filler.
+- Keep both concise.
+- If a visual improves the evidence, generate a purpose-built visual for each canonical item rather than sharing one
+  only to save production time.
+
+C. PRACTICE SET 1
+- Practice Set 1 is the seed Practice form.
+- Execute the audited map's 24 planned slots per section when that is the current map architecture.
+- For the current Physics architecture, the expected default composition is:
+    Q1-Q10  = vocabulary families
+    Q11-Q20 = conceptual / representation families
+    Q21-Q24 = Physics math
+- The audited map, not this reminder, owns the exact term/I-can/structure assigned to each slot.
+
+Vocabulary seed rules:
+- Use the mapped important terms.
+- Normally 1-2 questions per important term until the ten vocabulary slots are filled.
+- Keep wording compact.
+- Stage 3B will invert/transform these families across later Practice forms using approved vocabulary directions.
+
+Conceptual seed rules:
+- Use concise predict, compare, classify, misconception, cause/effect, evidence/model, graph/diagram interpretation,
+  or brief explanation structures as mapped.
+- A representation is part of the question when it materially carries the evidence; do not describe an unseen graph
+  or diagram in prose.
+- Do not turn every conceptual question into an explanation paragraph.
+
+Physics-math seed rules:
+- Q21 normally serves a contextual direct quantitative job.
+- Q22 normally serves an inverse/rearranged relationship job.
+- Q23 normally serves another useful quantitative application or representation/data-to-calculation job.
+- Q24 normally serves a genuinely DEPENDENT multi-step job: an earlier result is required to obtain the final result.
+- When the section naturally supports quantitative Physics, use its important physical relationships.
+- When it does not, preserve Physics-math practice using an accessible physical situation and an appropriate supplied
+  relationship as needed. Do not substitute naked algebra drills.
+
+PRACTICE PURPOSE
+----------------
+Practice is a rich instructional menu and a source pool for downstream Activities. The 24 seed questions per section
+are not 24 separate assessment evidence jobs, and the eventual 96 Practice questions per section are not a 96-question
+student assignment. Repetition and parallel families are legitimate when they serve learning.
+
+AUTHORING ORDER
+---------------
+1. Read Philosophy completely.
+2. Read this PM and all current authorities.
+3. Validate the audited map hard gate.
+4. Extract the exact Stage 3A slot IDs from the audited map.
+5. Reconcile the expected Stage 3A inventory before prose.
+6. Reread Philosophy completely.
+7. Author WTC items from their mapped plans.
+8. Author Examples, then their YTIs, pair by pair.
+9. Author Practice Set 1 seed questions, family by family.
+10. For every item, independently solve/check the final instantiated question and final answer/solution.
+11. Generate all required purpose-built representations and verify they match the finished prompt/solution.
+12. Derive post-authoring metadata such as DOK/Bloom from the finished item where the current schema requires it.
+13. Initialize multidimensional audit handoff fields.
+14. Render the Stage 3A teacher views from the same canonical item objects.
+15. Write the Stage 3A handoff manifest and report.
+16. Run Stage 3A QA.
+17. Package and deliver unitN_bank_3a_seeds.zip.
+
+FINAL-AUDIT HANDOFF
+-------------------
+Every authored canonical item must carry the current audit dimensions:
+- map_alignment
+- structure
+- wording
+- representation
+- parallel_variety_fidelity
+- physics_answer
+- security
+
+Builder QA does NOT self-certify the later independent 3E audit. These fields are only handoff state for final review.
+Applicable dimensions initialize to NEEDS AUDIT; genuinely nonapplicable dimensions initialize to N/A.
+Overall audit_status initializes to NEEDS AUDIT.
+
+For Stage 3A, security is normally N/A because secure Exit/Summative evidence is not authored yet. If a current map
+explicitly marks a special item as security-sensitive, follow the map.
+
+STAGE CHECKPOINT DATA CONTRACT
+------------------------------
+The ZIP MUST contain exactly one top-level folder named unitN/ so later build stages can carry the working folder
+forward without schema conversion. This is a BUILD CHECKPOINT, not a deployed Bank.
+
+Required checkpoint contents:
+- unitN/unitN_bank_data.json
+  Partial canonical Bank data containing ONLY the Stage 3A authored items plus stage metadata. Do not insert fake later items.
+- unitN/unitN.html
+  Teacher-readable Stage 3A teaching-order view of authored items only. Display a clear internal banner:
+  "BUILD STAGE 3A - SEEDS ONLY - NOT DEPLOYABLE"
+- unitN/unitN_review.html
+  Review view grouped by exact I-can / family for authored items only, with the same stage banner.
+- unitN/unitN_resources.html
+  Stage resource view containing only authored WTC and EX/YTI resources plus Practice Set 1 where the current Bank
+  resource-view contract includes it; clearly mark later resources PENDING rather than fabricating them.
+- unitN/unitN_question_design_map.json
+  Carry forward the approved audited design-map information needed by later stages and link authored items to their slots.
+- unitN/unitN_mapping.csv
+  Rows for authored canonical items only; do not claim complete Unit mapping yet.
+- unitN/figures/
+  All Stage 3A figures actually referenced by authored questions. No orphan figures.
+- unitN/generate_graphs.py
+  Current Framework graph/figure tool plus only approved Stage 3A generation calls.
+- unitN/STAGE_3A_HANDOFF.json
+- unitN/STAGE_3A_REPORT.txt
+- unitN/NOT_DEPLOYABLE_STAGE_3A.txt
+
+If the current Bank schema requires additional support files merely for the Stage 3A HTML/data to function, include
+those support files and list them in the handoff manifest. Do not claim the final production inventory is complete.
+
+STAGE_3A_HANDOFF.json REQUIRED FIELDS
+-------------------------------------
+At minimum:
+{
+  "schema": "curriculum-bank-build-stage/3a-2.0",
+  "course": "...",
+  "unit": N,
+  "stage": "3A",
+  "status": "PASS",
+  "deployable": false,
+  "audited_map_filename": "unitN_bank_map_audited.zip",
+  "audited_map_sha256": "...",
+  "authored_count": 0,
+  "authored_slot_ids": [],
+  "pending_count": 0,
+  "pending_slot_ids": [],
+  "destination_counts": {},
+  "figure_count": 0,
+  "next_stage": "3B Build Instructional Variants"
+}
+
+Compute a real SHA-256 for the consumed audited map ZIP. Later stages must compare that fingerprint and fail closed if
+someone supplies a different map with the Stage 3A checkpoint.
+
+STAGE 3A QA - HARD GATES
+------------------------
+Before packaging, verify all of the following:
+- every expected Stage 3A map slot is authored exactly once;
+- no out-of-scope destination has been authored;
+- no fake placeholder items exist;
+- every item keeps the exact mapped I-can and evidence job;
+- finished structure matches the mapped structure or the run fails closed on a real authority contradiction;
+- wording is concise and natural; no template/Mad-Lib debris or internal authoring labels;
+- all quantitative items are independently solved and physically coherent;
+- all answers/solutions match the final instantiated prompt;
+- every referenced visual exists and is correct;
+- no referenced visual is missing;
+- separate canonical questions did not reuse one visual merely to save production work;
+- WTC shared-stimulus reuse is intentional and local to the connected multipart task;
+- Practice Set 1 seed-family inventory matches the audited map;
+- YTIs are legitimate parallels/applications of their Examples;
+- no later Practice/CYU/Warm-Up/Exit/Summative items were accidentally authored;
+- authored_count + pending_count equals the audited map's total canonical inventory;
+- all Stage 3A HTML/data are rendered from the same canonical item objects;
+- stage banner and NOT_DEPLOYABLE marker exist;
+- Stage 3A handoff status is PASS.
+
+Do NOT run a late anti-clone/anti-parallel rewrite pass. Similarity is not itself a defect.
+
+DELIVERY CONTRACT
+-----------------
+Return ONE ZIP named:
+  unitN_bank_3a_seeds.zip
+
+The ZIP top level must be:
+  unitN/
+
+This ZIP is a checkpoint for the next Build stage. It is NOT a replacement for <course>/banks/unitN/ and must never
+be described as a complete or deployable Bank.
+
+Teacher repository action after download:
+  Save the ZIP itself, still zipped, at:
+    <course>/banks/unitN_bank_3a_seeds.zip
+
+Do not unzip/copy it over the deployed unitN folder.
+
+The later 3B PM will consume this exact ZIP plus the same audited map, verify the map SHA-256 and Stage 3A PASS handoff,
+then carry every Stage 3A item/asset forward unchanged while adding the next authorized instructional destinations.
+
+RETENTION RULE
+--------------
+During the staged build, keep every checkpoint ZIP still zipped in <course>/banks/:
+- unitN_bank_map.zip
+- unitN_bank_map_audited.zip
+- unitN_bank_3a_seeds.zip
+- later Stage 3B / 3C / 3D checkpoint ZIPs
+
+Do not unzip or deploy Stage 3A-3D checkpoints. Stage 3E will copy the important map, map-audit, design, mapping, and final-audit provenance into the permanent materialized unitN/ folder. AFTER Stage 3E succeeds and the materialized unitN/ folder is verified, the teacher may manually delete all temporary Unit build ZIPs. Stage 3E must remind the teacher of this cleanup step in its final chat message.
+
+FINAL CHAT SUMMARY
+------------------
+Report concisely:
+- Stage 3A authored count and destination counts;
+- pending count;
+- visual count;
+- QA PASS/FAIL;
+- exact ZIP filename;
+- exact save location <course>/banks/unitN_bank_3a_seeds.zip;
+- NEXT BUILD: 3B Build Instructional Variants.

@@ -1,0 +1,31 @@
+{
+  "contract": "Physics Summative Render Contract v1.1",
+  "framework_version": "v6.8",
+  "forms": "Resolve from current finalized Bank + recurring assessment course profile; current profile V1-V6.",
+  "student_tail": {
+    "page_1": "section.page.answersheet, questions 1-16, two-column sheetgrid, exactly 16 materialized .bubble-row nodes, separate .bubble-choice + .bubble elements",
+    "page_2": "section.fr-sheet-page containing table.fr-sheet-table in 2x2 order 17,18 / 19,20",
+    "forbidden_new_build_markup": [
+      "frgrid",
+      "frbox"
+    ],
+    "renderer_gate": "Fail if final HTML contains join(bubble_rows), {{ bubble_rows }}, or any unresolved row-generation/template expression."
+  },
+  "representations": {
+    "preserve_current_bank_markup": [
+      "svg",
+      "img",
+      "table",
+      "diagram markup"
+    ],
+    "copy_local_assets": true,
+    "stale_template_visuals_authoritative": false,
+    "representation_metadata_authorizes_new_art": false
+  },
+  "delivery": {
+    "final_artifact": "zip",
+    "html_path": "assessments_zxrtjp/unit{U}_summative/unit{U}_summative_assessment.html",
+    "loose_html_is_final": false,
+    "verify_zip_before_delivery": true
+  }
+}

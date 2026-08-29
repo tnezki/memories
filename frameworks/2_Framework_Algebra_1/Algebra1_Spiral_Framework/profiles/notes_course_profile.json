@@ -1,0 +1,95 @@
+{
+  "course": "Algebra 1",
+  "framework_version": "v6.41",
+  "profile_version": "1.2",
+  "role": "Course-specific Notes layer applied on top of Base Notes PM v4.3.",
+  "architecture": "Bundled Curriculum Philosophy -> Base Notes PM -> Algebra Framework Notes profile -> finalized Unit Bank -> complete Unit Notes",
+  "instructional_spine": {
+    "source": "ORIGINAL embedded Unit Assessment Plan",
+    "rule": "Exact Learning Target and I-can statements define visible instructional clusters; do not replace them with a generic textbook sequence.",
+    "primary_stage": "Intro/current instruction",
+    "review_mastery": "May support the current idea or canonical Bank anchor but must not hijack the Notes."
+  },
+  "bank_canonical": {
+    "rule": "Finalized Unit Bank owns WTC and Notes Example/YTI prompt wording, values, figures, and answers.",
+    "pair_count": "Trust every canonical pair actually present; current Algebra Banks normally contain six pairs per section.",
+    "visible_numbering": "Display Example/YTI numbers in rendered teaching order 1,2,3,...; preserve canonical Bank IDs only in metadata/data-source-id.",
+    "no_second_bank": true
+  },
+  "reading": {
+    "benchmark": "Conceptual Physics: mature, concrete, direct, explanatory, conceptual textbook voice.",
+    "density": "A normal substantial I-can reading is usually 3-4 developed paragraphs; a little more is better when it adds real explanatory value.",
+    "paragraph_quality": "Each paragraph advances meaning, relationship, representation, reasoning, or why a method works. Avoid thin blurbs and dry procedure lists.",
+    "vocabulary_first_use": "Bold a target vocabulary/notation term at its first meaningful introduction or definition in instructional prose; do not bold every recurrence.",
+    "close_reading": "Use the Framework close-reading callout before I Can 1 and expect students to annotate prose and figures together."
+  },
+  "stop_and_discuss": {
+    "after_substantial_reading": "REQUIRED immediately after every substantial reading.",
+    "main_questions": "2-3 total: 1-2 direct/text/vocabulary/representation questions plus remaining conceptual/inferential question(s).",
+    "later_checkpoint": "Later in the same I-can cluster, use an additional S&D only when useful; normally one focused conceptual question.",
+    "not_after_every_yti": true,
+    "quality": "Questions must arise from the actual reading/representations; do not reuse stock comprehension shells."
+  },
+  "math_notes": {
+    "abundance": "Useful abundance is desirable. Include more high-value Math Notes rather than underbuilding; teacher may skip.",
+    "benchmark": "CPM Methods and Meanings role: substantive reference blocks with definitions/meaning, structure, representation connections, and worked/reference examples.",
+    "artifact_rule": "Show actual equations/tables/graphs/models, not meta-language telling students to look at them.",
+    "four_forms": "When the I-can naturally connects representations, actively look for a coherent Graph + Equation + Table + Context reference, often a 2x2 grid around one relationship.",
+    "sources": [
+      "reference_library/math_notes/CPM_Math_Notes_Design_Principles.md",
+      "reference_library/math_notes/math_note_ideas.json"
+    ]
+  },
+  "reading_apprenticeship": {
+    "vocab_sort": "Vocabulary preview uses Know for sure / Recognize / Don't know yet.",
+    "skim": "Let's Get Started includes What I noticed / What I predict / What I wonder before close reading.",
+    "wtc": "Use a visually separate DO NOT SOLVE IT YET annotation callout before the canonical WTC.",
+    "annotation": "Read in short chunks; annotate prose and figures together, highlight first-use bold vocabulary, label features, connect sentence to image, jot questions/connections.",
+    "opening_sequence": "REQUIRED Algebra order: Learning Target/I-can overview -> Vocabulary / Key Notation Preview with sort table -> What's to Come -> Let's Get Started skim (Notice/Predict/Wonder) -> close-reading directions -> I Can 1.",
+    "vocab_sort_required": "Use when the section has target vocabulary/notation; current Algebra sections should not replace it with a passive preview sentence.",
+    "skim_required": true,
+    "close_reading_callout_required_before_i_can_1": true
+  },
+  "representations": {
+    "system": [
+      "Graph",
+      "Equation",
+      "Table",
+      "Context"
+    ],
+    "rule": "Use applicable forms substantively; no decorative quota. Translate among forms when the I-can supports it.",
+    "show_actual_artifact": true
+  },
+  "student_teacher": {
+    "notability_first": true,
+    "workspace": "Current Algebra default workspace is 2.0in; use the visual contract for approved typography, 2.52in graph sizing, compact-table sizing, and keep-together behavior.",
+    "teacher_copy": "Create from final student HTML; keep student content unchanged; add red/bold support only inside existing workspaces.",
+    "main_sd_teacher": "Give direct answers, acceptable conceptual inference(s), evidence/features to listen for, and misconception/follow-up only when useful.",
+    "later_sd_teacher": "Give intended conceptual insight and one misconception/follow-up when useful.",
+    "math_notes_teacher": "Do not insert red teacher text inside Math Notes unless a current contract explicitly provides a teacher-support workspace.",
+    "wtc_teacher": "Facilitate noticing; do not solve the WTC in preview workspace.",
+    "closing": "No Summary workspace in current Algebra layout; Common Mistakes is followed by a blank miscellaneous workspace/page."
+  },
+  "visual": {
+    "contract": "contracts/notes_visual_contract.json",
+    "html_structure_reference": "reference_library/notes_layout/Algebra_Notes_HTML_Structure_Reference.md",
+    "css_reference": "reference_library/notes_layout/Algebra_Notes_Layout_Reference_v2.css",
+    "production_stylesheets": [
+      "../../css/base.css",
+      "../../css/notes.css"
+    ],
+    "rule": "Reference CSS records the approved Unit 1 format baseline to preserve/merge in course-level notes.css; it is not a third production stylesheet. Use the current visual contract numeric values, not remembered older pilot values.",
+    "typography": "Approved Algebra baseline: 9pt normal prose/list/table text; 13pt Example/YTI + I-can headings; 18pt major Learning/Vocabulary/Summary/Mistakes headings; title card 7.5/21/10.5/9pt hierarchy; Math Notes label/title 8.5/10.5pt; What's to Come and Let's Get Started remain 20pt section headings."
+  },
+  "paths": {
+    "contract": "contracts/course_file_structure.json",
+    "student_template": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",
+    "teacher_template": "notes/u{U}_{S}_notes/u{U}_{S}_notes_teacher.html"
+  },
+  "canonical_task_rendering": {
+    "content_rule": "Do not change canonical Bank mathematics/prompts while applying Notes presentation wrappers.",
+    "graph_rule": "All graph figures use class notes-graph so the current 2.52in max-width/max-height rules apply. Omit visible figcaptions/decorative graph titles; keep necessary axis labels/units/ticks/legends.",
+    "table_rule": "Simple two-column task data tables use class compact-table plus a 2-column half-col colgroup so the table is compact, centered, and 50/50 instead of full width.",
+    "qa": "Fail layout QA if a graph is emitted as a bare figure or an eligible simple two-column task table is emitted as a bare full-width table."
+  }
+}

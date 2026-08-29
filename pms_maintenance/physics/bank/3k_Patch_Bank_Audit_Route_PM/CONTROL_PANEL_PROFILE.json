@@ -1,0 +1,22 @@
+{
+  "workflow_key": "patch_bank_audit_route",
+  "label": "PATCH 00 · Audit + Route",
+  "group": "Bank Patches — Start / Re-audit",
+  "input": "bank",
+  "state": "ready",
+  "needs_bank": true,
+  "extra": [
+    "pms_build/3_Build_Bank_PM.zip",
+    "_question_structure.zip"
+  ],
+  "output": "Audited complete Unit Bank replacement + readable in-chat report",
+  "start": [
+    "banks"
+  ],
+  "default_category": "Bank",
+  "default_scope": "unit",
+  "course_restriction": "Physics",
+  "current_bank_required": true,
+  "patch_workflow": true,
+  "delivery_preference": "complete_materialized_unit_bank"
+}

@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "rule": "Patterns are menus, not quotas. The I-can/evidence job decides which modes fit.",
+  "destinations": {
+    "WTC": {
+      "primary_job": "FRQ decomposition/navigation practice around one shared stimulus",
+      "preferred_profiles": [
+        "frq_multipart"
+      ],
+      "design_requirements": [
+        "connected parts",
+        "shared stimulus",
+        "real representation when evidence-bearing",
+        "vary decomposition moves across unit"
+      ],
+      "avoid": [
+        "disconnected preview list",
+        "current-section coverage patch",
+        "copying released/source FRQ wording/data/figure/solution sequence"
+      ]
+    },
+    "EXAMPLE_YTI": {
+      "primary_job": "model then apply the exact target",
+      "pair_rule": "Example and YTI are related but not identical; YTI changes meaningful evidence while preserving the modeled idea.",
+      "quantitative_priority": "When the I-can naturally supports mathematical/formula application, a strong quantitative/formula pair takes priority over generic conceptual or vocabulary filler.",
+      "possible_modes": [
+        "contextual quantitative",
+        "representation_to_calculation",
+        "reverse_or_inverse",
+        "conceptual_interpretation",
+        "vocabulary_when_targeted"
+      ]
+    },
+    "PRACTICE": {
+      "primary_job": "build fluency and flexible evidence across a target-appropriate menu",
+      "possible_modes": [
+        "direct_formula",
+        "inverse_formula",
+        "dependent_multistep",
+        "matching",
+        "vocabulary_short_answer",
+        "conceptual_short_answer",
+        "diagram_or_fbd",
+        "graph",
+        "data_table",
+        "misconception_diagnosis",
+        "context_transfer",
+        "representation_translation"
+      ],
+      "hard_rule": "Do not force a universal percentage mix. Plan the mix from the exact I-can before authoring.",
+      "parallel_rule": "Purposeful parallel families are expected; vary the evidence path when useful, not just nouns/numbers."
+    },
+    "WARM_UP": {
+      "primary_job": "predictable retrieval/bridging",
+      "hard_rule": "Controlled repetition is useful; preserve established recurring patterns unless the Framework explicitly changes them."
+    },
+    "EXIT_TICKET": {
+      "primary_job": "short evidence, not extra Practice",
+      "hard_rule": "Plan four evidence opportunities that are meaningfully varied within a ticket and across versions when the target supports it. Do not default to four same-shell questions.",
+      "possible_modes": [
+        "vocabulary_or_recognition",
+        "direct_or_inverse_quantitative",
+        "representation",
+        "short_explanation",
+        "misconception_diagnosis",
+        "dependent_multistep",
+        "novel_transfer"
+      ],
+      "security": "Course Framework determines secure/formative-secure behavior; metadata labels may not bypass destination security rules."
+    },
+    "SUMMATIVE": {
+      "primary_job": "secure independent evidence of mapped learning",
+      "family_rule": "Family IDs are semantic and stable across forms. Do not include version/question-number tokens merely to manufacture uniqueness.",
+      "parallel_rule": "Same-day forms may share families with independent stimuli; alternate forms require meaningfully different stimuli/structures."
+    }
+  }
+}

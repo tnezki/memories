@@ -1,0 +1,36 @@
+Extraction notes for cp_section_24_6
+
+Section converted: Chapter 24, Section 24.6 - Electromagnets.
+Source PDF used: /mnt/data/~CP_Curriculum_Sections(3).pdf
+Source pages used: textbook pages 459-460.
+Captured image archive used: /mnt/data/~all_images(3).zip
+
+Framework check:
+- Unit 8.2 Electricity and Magnetism used textbook section 24.5 and was completed in the previous build.
+- Unit 8.3 Electromagnets and Magnetic Forces uses textbook sections 24.6 and 24.7, so this build continues with Section 24.6.
+- Next framework section is Section 24.7 Magnetic Forces.
+
+Extraction decisions:
+- Section 24.6 begins at the Electromagnets heading on textbook page 459.
+- Section 24.6 body text stops before the Section 24.7 Magnetic Forces heading on textbook page 460.
+- Figure 24.10 was included because the figure and caption appear on the page where Section 24.6 begins, even though the previous section also references Figure 24.10c.
+- Figure 24.11 was omitted because no matching captured image was found in the supplied archive.
+- Figure 24.12 was included with the Superconducting Electromagnets subsection.
+- Obvious PDF running headers/page numbers and line-break artifacts were removed.
+
+Figures included:
+- Figure 24.10 - Iron filings reveal fields about a current-carrying wire, loop, and coil.
+- Figure 24.12 - A permanent magnet levitates above a superconductor.
+
+Figures omitted:
+- Figure 24.11 - No matching captured image supplied.
+
+Capture check:
+- Figures 24.13-24.19 are captured or adjacent in the archive and belong to Section 24.7, not Section 24.6.
+
+QA pass summary:
+- ZIP structure checked: one top-level cp_section_24_6/ folder only.
+- CSS checked: no css/ folder or styles.css in ZIP; index.html links to ../css/styles.css.
+- Content checked against source pages and stopped before Section 24.7.
+- Image paths checked: all included images use images/[filename].
+- Manifest, README, and source files included.

@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "evidence_primary_axes": [
+    {
+      "id": "unknown_quantity",
+      "description": "Change which quantity is solved for / direction of relationship."
+    },
+    {
+      "id": "dependency_path",
+      "description": "Change the sequence of dependent reasoning in a multi-step task."
+    },
+    {
+      "id": "givens_evidence_set",
+      "description": "Change the supplied evidence in a way that changes reasoning, not merely decoration."
+    },
+    {
+      "id": "representation_type",
+      "description": "Change graph/table/diagram/equation/verbal representation when the target supports translation or comparison."
+    },
+    {
+      "id": "representation_values",
+      "description": "Change meaningful values/geometry/shape while preserving the family."
+    },
+    {
+      "id": "misconception_target",
+      "description": "Change the misconception/error students must diagnose."
+    },
+    {
+      "id": "response_mode",
+      "description": "Change from selected/short/constructed/matching/diagram when destination and target permit."
+    },
+    {
+      "id": "context_evidence",
+      "description": "Change context only when it naturally changes or carries the evidence."
+    },
+    {
+      "id": "values_units",
+      "description": "Change values/compatible units for procedural fluency."
+    }
+  ],
+  "surface_secondary_axes": [
+    {
+      "id": "wording_profile",
+      "description": "Standard/Inverted/Context-rich. Secondary only; does not establish semantic independence by itself."
+    },
+    {
+      "id": "names_objects",
+      "description": "Names/objects may vary for naturalness but are weak evidence variation alone."
+    },
+    {
+      "id": "choice_order",
+      "description": "Choice order may vary but is not new evidence."
+    }
+  ],
+  "forbidden_as_only_secure_variation": [
+    "wording_profile",
+    "names_objects",
+    "values_units",
+    "choice_order",
+    "version_or_question_number"
+  ]
+}

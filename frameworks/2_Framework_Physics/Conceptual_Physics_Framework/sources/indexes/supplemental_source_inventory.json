@@ -1,0 +1,38 @@
+{
+  "framework_version": "v6.1",
+  "normal_build_rule": "Do not request these raw PDFs in ordinary Framework-integrated builds. Use packaged indexes/section packets/Hewitt extracted library first; raw source can be re-supplied only for source-audit/enrichment work that exceeds the packaged intelligence.",
+  "sources": [
+    {
+      "id": "complete_physics_textbook",
+      "uploaded_filename": "Complete Physics Textbook.pdf",
+      "role": "secondary course-aligned high-school exposition/formula/example reference; useful when Framework packet needs another explanation pattern",
+      "packaged": "not raw PDF; current Framework source packets/indexes remain normal-build source layer",
+      "sha256": "ca94808fc28dbc3efa5c2dfe6398975da7c24f14947a53d11c6a4055e7614848",
+      "bytes": 27540570
+    },
+    {
+      "id": "openstax_high_school_physics",
+      "uploaded_filename": "Physics_-_WEB.pdf",
+      "role": "supplementary openly licensed high-school explanation, worked-example, conceptual-check, lab/performance-task, and representation benchmark",
+      "packaged": "page-pointer/source intelligence; raw PDF not duplicated",
+      "sha256": "a3f75487411ef13d0270c65fc801ceff2b28e6b339afed9b407fe477f7e8453e",
+      "bytes": 57463331
+    },
+    {
+      "id": "holt_problem_workbook",
+      "uploaded_filename": "26978901-Holt-Physics-Problem-Workbook-with-Answers.pdf",
+      "role": "quantitative problem-archetype benchmark with worked sample -> additional practice structure",
+      "packaged": "existing page pointers/formula archetypes; raw PDF not duplicated",
+      "sha256": "7b9a2b475d12efefca18948e25e713e48460cd5965174ef0705f2c0c2850eed4",
+      "bytes": 2299332
+    },
+    {
+      "id": "halliday_resnick_fundamentals",
+      "uploaded_filename": "39e1817b05cf155433309dbb2f3289fe.pdf",
+      "role": "advanced precision/extension cross-check only; must not raise course abstraction/difficulty by default",
+      "packaged": "existing page pointers; raw PDF not duplicated",
+      "sha256": "1976f320ae9961d1fb3b43ccc34e6fd93c654292f9c0c4436da5aeaea364d83f",
+      "bytes": 53690656
+    }
+  ]
+}

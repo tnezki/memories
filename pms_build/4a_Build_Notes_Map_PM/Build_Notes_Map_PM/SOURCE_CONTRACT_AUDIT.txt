@@ -1,0 +1,38 @@
+4A NOTES MAP SOURCE CONTRACT — v1.3
+============================
+
+REQUIRED CURRENT AUTHORITIES
+- Curriculum Philosophy
+- Physics Framework
+- Complete/materialized Unit Bank
+- Physics Notes Image Toolkit
+
+PINNED RETRIEVAL — HARD
+- Use only request-pinned repository snapshots.
+- Retrieve _Curriculum_Philosophy_PM.zip, frameworks/Framework_Physics.zip, this PM, the Unit Bank, and the Physics Notes Image Toolkit from their canonical pinned paths.
+- ZIP/binary authorities must be transferred as binary bytes, not passed through a UTF-8/text reader.
+- For Framework_Physics.zip, extract only the 4A entries listed in PM Section 0; do not ingest the full Framework payload.
+- Normal retrieval is silent. Do not web-search, provenance-hunt, or substitute lower-authority deployed artifacts.
+- If a prescribed pinned path fails, fail closed with exact repo/commit/path rather than exploring alternate authority routes.
+
+FAIL CLOSED IF
+- the Unit Bank is missing/incomplete;
+- exact section/I-can structure cannot be resolved from the Framework/Bank;
+- canonical EX/YTI or WTC anchors referenced by the Bank cannot be resolved;
+- the Physics Notes Image Toolkit catalog cannot be opened;
+- selected image IDs/paths cannot be verified against the toolkit;
+- any Stop & Discuss source_image_ids value is not a valid current-toolkit PHYS-XXXXXXXXXXXX ID;
+- any Stop & Discuss expected_reasoning_evidence_to_listen_for value is an image ID or is not teacher-facing reasoning/evidence text;
+- Stop & Discuss source-image and expected-reasoning fields are swapped or overloaded.
+
+DO NOT REQUIRE
+- the retired Question Structure and Visual Toolkit;
+- _question_structure.zip;
+- final Notes HTML/CSS source files;
+- manually supplied images when the toolkit already contains the needed source image.
+
+v1.2 FINGERPRINT CONTRACT
+- source Bank provenance is content-stable, never raw ZIP bytes.
+- primary: STAGE_3E_HANDOFF.json canonical_authored_content_sha256 -> stage3e-canonical:<hash>.
+- fallback: deterministic extracted-content manifest -> content-manifest:<hash>.
+- raw sha256:<zip-bytes> handoffs are forbidden.

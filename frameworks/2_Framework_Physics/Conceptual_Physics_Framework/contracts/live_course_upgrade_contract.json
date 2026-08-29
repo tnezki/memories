@@ -1,0 +1,13 @@
+{
+  "contract_name": "Physics Live Course Upgrade Contract",
+  "framework_version": "v6.8",
+  "rules": [
+    "Treat teacher-live repo files as user-owned state; preserve content unless the current task explicitly changes it.",
+    "Use contracts/course_file_structure.json to place new/changed files.",
+    "Never return a whole Physics repository for a routine repair/upgrade.",
+    "Exactly one changed/new repo file -> return that single file.",
+    "Two or more changed/new repo files -> return one ZIP containing only changed/new files with repository-relative folder structure.",
+    "Framework/source diagnostic files are not placed in the live repo unless the resource contract explicitly requires them.",
+    "Teacher dashboard is an integration target; if a path/resource addition requires a dashboard change, include the changed dashboard in the repo patch."
+  ]
+}

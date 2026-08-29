@@ -1,0 +1,91 @@
+{
+  "contract_name": "AP Calculus AB Course File Structure",
+  "contract_version": "v1",
+  "framework_version": "v2.4",
+  "source": "Shared deployed course structure established by the supplied Algebra and Physics Frameworks and current universal task PMs; exact AP Calculus dashboard parity should be rechecked if a current AP Calculus teacher-dashboard HTML is later supplied.",
+  "authority_rule": [
+    "current explicit user instruction",
+    "this Framework course_file_structure.json contract",
+    "current AP Calculus teacher dashboard when supplied",
+    "task-specific PM fallback only when Framework has no applicable path"
+  ],
+  "course_root": {
+    "description": "AP Calculus repository/course root.",
+    "link_rule": "Use relative internal course links; do not bake domain/repository names into resource paths."
+  },
+  "resource_roots": {
+    "css": "css/",
+    "notes": "notes/",
+    "practice_sets": "practice_sets/",
+    "demo": "demo/",
+    "investigations": "investigations/",
+    "activities": "activities/",
+    "performance_task": "performance_task/",
+    "quick_check": "quick_check/",
+    "ideas": "ideas/",
+    "progress": "progress/",
+    "warmups": "warmups/",
+    "reviews": "reviews/",
+    "exit": "exit/",
+    "banks": "banks/",
+    "assessments": "assessments_zxrtjp/"
+  },
+  "unit_resource_templates": {
+    "progress": "progress/unit_{U}_progress/unit_{U}_progress.html",
+    "warmups": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
+    "review": "reviews/review{U}/review_{U}.html",
+    "exit_tickets": "exit/exit{U}/exit_{U}.html",
+    "assessment_plan": "assessments_zxrtjp/unit{U}_assessment_plan/unit{U}_assessment_plan.html",
+    "bank": "banks/unit{U}/unit{U}.html",
+    "summative": "assessments_zxrtjp/unit{U}_summative/unit{U}_summative_assessment.html"
+  },
+  "section_resource_templates": {
+    "notes_student": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",
+    "notes_teacher": "notes/u{U}_{S}_notes/u{U}_{S}_notes_teacher.html",
+    "practice_set_1": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}.html",
+    "practice_set_2": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_2.html",
+    "practice_set_3": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_3.html",
+    "extra_practice": "practice_sets/practice_sets_{U}_{S}/extra_practice_{U}_{S}.html",
+    "cyu": "practice_sets/practice_sets_{U}_{S}/cyu_{U}_{S}.html",
+    "tarsia": "practice_sets/practice_sets_{U}_{S}/tarsia_{U}_{S}_practice_3.txt",
+    "blooket": "practice_sets/practice_sets_{U}_{S}/blooket_{U}_{S}_practice_3.csv",
+    "practice_generate_graphs": "practice_sets/practice_sets_{U}_{S}/generate_graphs_{U}_{S}.py",
+    "practice_figures": "practice_sets/practice_sets_{U}_{S}/figures/",
+    "demo_student": "demo/u{U}_{S}_demo/u{U}_{S}_demo.html",
+    "demo_teacher": "demo/u{U}_{S}_demo/u{U}_{S}_demo_teacher_guide.html",
+    "investigation_student": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation.html",
+    "investigation_teacher": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation_teacher_guide.html",
+    "activity_shell": "activities/u{U}_{S}_act1/u{U}_{S}_act1.html",
+    "performance_task_student": "performance_task/u{U}_{S}_performance_task/u{U}_{S}_performance_task.html",
+    "performance_task_teacher": "performance_task/u{U}_{S}_performance_task/u{U}_{S}_performance_task_teacher_guide.html",
+    "quick_check": "quick_check/u{U}_{S}_quick_check/u{U}_{S}_quick_check.html",
+    "future_resource_1": "ideas/unit{U}_section_{S}_idea1/unit{U}_section_{S}_idea1.html",
+    "future_resource_2": "ideas/unit{U}_section_{S}_idea2/unit{U}_section_{S}_idea2.html"
+  },
+  "known_shared_css": {
+    "notes": [
+      "css/base.css",
+      "css/notes.css"
+    ],
+    "bank": [
+      "css/base.css",
+      "css/bank.css"
+    ]
+  },
+  "path_resolution_rules": [
+    "Resolve dependencies from final deployed location, not staging ZIP.",
+    "Do not flag shared course-root CSS as broken merely because an isolated resource ZIP omits it.",
+    "Do not invent wrapper directories that change path depth.",
+    "Use singular performance_task/, plural investigations/, section-level quick_check/."
+  ],
+  "live_course_paths": {
+    "preserve_on_bank_upgrade": [
+      "investigations/",
+      "performance_task/",
+      "quick_check/",
+      "ideas/",
+      "teacher-revised activities when marked teacher_live"
+    ],
+    "rule": "Bank/course refreshes preserve teacher_live content unless explicitly replaced."
+  }
+}

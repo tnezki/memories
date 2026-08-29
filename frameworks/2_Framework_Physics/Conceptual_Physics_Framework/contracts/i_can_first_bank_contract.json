@@ -1,0 +1,115 @@
+{
+  "contract_name": "Conceptual Physics I-Can-First Bank Architecture",
+  "contract_version": "v1.4",
+  "framework_version": "v6.8",
+  "purpose": "Force Unit Banks to be designed around exact Assessment Plan I-can statements rather than filling section quotas first and attaching I-can labels afterward.",
+  "authority_model": {
+    "atomic_design_unit": "Exact I-can statement from the original Unit Assessment Plan.",
+    "grouping": "Learning Targets group related I-cans; Mastery Goals organize/report accumulated evidence across I-cans.",
+    "inventory_role": "Section/destination counts are containers and reconciliation totals only. They do not determine how many questions an I-can deserves."
+  },
+  "pre_authoring_i_can_evidence_plan": {
+    "required": true,
+    "one_record_per_i_can": true,
+    "required_fields": [
+      "i_can_id",
+      "exact_i_can",
+      "learning_target",
+      "mastery_goal_id(s)",
+      "evidence_job",
+      "natural_dok_range",
+      "likely_misconceptions",
+      "preferred_question_families",
+      "preferred_representations",
+      "notes_anchor_plan",
+      "practice_weighting_rationale",
+      "secure_assessment_plan",
+      "source_basis",
+      "content_modes",
+      "formula_relationships_or_na",
+      "vocabulary_terms_or_na",
+      "best_fit_structures",
+      "avoid_structures",
+      "tool_opportunities",
+      "parallel_variation_axes"
+    ],
+    "rule": "Complete and inspect the full I-can evidence plan before authoring multi-item inventories. Repair zero-coverage, unsupported overconcentration, or template clustering at this stage.",
+    "question_design_map": "After the exact I-can evidence plan, instantiate unitN_question_design_map.json using contracts/question_design_map_contract.json before prompt authoring."
+  },
+  "item_mapping": {
+    "primary_i_can_required": true,
+    "primary_field": "i_can_id",
+    "optional_supporting_field": "supporting_i_can_ids",
+    "rule": "Every canonical item has exactly one primary I-can for routing/coverage. Synthesis items may list additional supporting I-cans, but supporting tags do not replace direct primary evidence coverage.",
+    "wtc_exception": "WTC still carries one exact content i_can_id/i_can statement, but it may resolve outside the current Unit. Mark coverage_role=wtc_frq_practice. Do not count WTC toward current-Unit I-can coverage."
+  },
+  "coverage_floors": {
+    "notes": "Each I-can receives at least one complete canonical Example/YTI pair in its section. With the normal 3 I-cans and maximum 4 pairs, the extra pair is assigned intentionally to the I-can needing additional modeling, representation, or transfer support.",
+    "practice_sets": "Each of Practice Set 1, Practice Set 2, Practice Set 3, and Extra Practice includes at least one primary-mapped item for every I-can in the section. Beyond that floor, weighting may be unequal when the evidence job justifies it.",
+    "cyu": "Each I-can appears at least once across the section CYU inventory.",
+    "warm_ups": "Each I-can appears at least once across Warm-Up 1/2/3 combined; retrieval weighting may vary intentionally.",
+    "exit_tickets": "Exit Tickets A, B, and C are parallel section evidence forms. Each form directly samples every exact I-can in the section at least once; the remaining item(s) may emphasize a high-leverage or synthesis job.",
+    "summative": "Every Summative form V1-V6 directly samples every exact Unit I-can at least once as a primary I-can. Remaining items are intentionally weighted toward high-leverage, compound, representational, or Mastery-Goal evidence.",
+    "wtc": "WTC is coverage-exempt for the current Unit. It is a multi-part FRQ-decomposition routine and may map its content i_can_id to any exact course I-can, including another Unit. That source/content I-can is provenance/metadata only and does not satisfy any current-Unit destination floor.",
+    "tarsia_blooket": "Use only where suitable. Record supported I-cans; these exports do not substitute for the canonical coverage floors above."
+  },
+  "distribution_rule": {
+    "equal_counts_not_required": true,
+    "zero_coverage_forbidden": true,
+    "overconcentration_rule": "Large differences among I-can totals are allowed only when the evidence plan explains why the learning/evidence job needs more independent representations, misconceptions, calculations, or transfer opportunities.",
+    "anti_quota": "Do not derive I-can counts by arithmetic symmetry (for example 24 questions / 3 I-cans = 8/8/8). Plan the evidence needs of each I-can first; only then reconcile totals. Equal counts are acceptable only when independently justified by the evidence plan.",
+    "anti_template_across_sections": "Do not reuse one fixed P1/P2/P3/Extra allocation pattern across unrelated sections. If the same four-container I-can split signature repeats across three or more sections, the finalizer treats it as quota-template behavior unless the evidence plans independently justify it."
+  },
+  "required_machine_handoff": {
+    "file": "unit{U}_i_can_map.csv",
+    "rule": "This is a required first-class Bank artifact, not an optional summary.",
+    "minimum_columns": [
+      "section",
+      "title",
+      "learning_target",
+      "i_can_id",
+      "i_can",
+      "mastery_goal_id",
+      "evidence_job",
+      "natural_dok_range",
+      "likely_misconceptions",
+      "preferred_question_families",
+      "representations",
+      "notes_anchor_plan",
+      "practice_weighting_rationale",
+      "secure_assessment_plan",
+      "source_basis"
+    ]
+  },
+  "qa": {
+    "hard_failures": [
+      "Any exact I-can from the requested Unit is missing from unit{U}_i_can_map.csv.",
+      "Any canonical item lacks a primary i_can_id.",
+      "Any I-can lacks a complete Notes Example/YTI pair.",
+      "Any Practice Set 1/2/3/Extra omits an I-can from its section.",
+      "CYU or combined Warm-Ups omit an I-can from the section.",
+      "Any Exit Ticket form A/B/C omits an I-can from the section.",
+      "Any Summative form V1-V6 omits an exact Unit I-can.",
+      "The same full four-container Practice allocation signature is reused across three or more sections as a fixed template without evidence-specific justification.",
+      "A representation-explicit I-can is assessed only through prose descriptions and lacks actual student-facing representation evidence.",
+      "A Summative form directly samples a representation-explicit I-can without the actual representation needed by that evidence job.",
+      "Any WTC is used to satisfy a current-Unit I-can coverage floor or is treated as current-Unit evidence merely because it appears inside that Unit Bank."
+    ],
+    "review_flags": [
+      "Strong I-can count imbalance with no evidence-plan rationale.",
+      "Every Practice destination in a section uses the same equal I-can split (for example 8/8/8) without clearly distinct evidence-plan reasons; this suggests quota-first allocation at the I-can level.",
+      "One representation/question shell dominates an I-can despite source-supported alternatives.",
+      "A higher-DOK label is created by an explanation suffix rather than the I-can evidence job.",
+      "A repeated section-allocation pattern suggests one generic weighting template was applied after the I-can plan.",
+      "An I-can map names a representation as preferred/required but the canonical items avoid it after the answer-neutrality rule.",
+      "A WTC uses cross-Unit/unfamiliar content but requires execution of an untaught procedure instead of accessible FRQ breakdown/representation/planning work."
+    ]
+  },
+  "retrieval_index": "curriculum/i_can_index.json",
+  "representation_fidelity": {
+    "hard_rule": "If an exact I-can explicitly names or requires a representation (diagram, graph, table, vector/arrow model, force model, ray, field, circuit, sketch/draw, or equivalent), direct evidence must use an actual student-facing representation rather than prose describing one.",
+    "instructional_floor": "At least one direct instructional item for that I-can must use the required representation, and representation-dependent Notes/Practice/Exit evidence should recur naturally where appropriate.",
+    "summative_floor": "Every Summative form V1-V6 must include actual representation evidence for a representation-explicit I-can when that I-can is directly sampled on the form.",
+    "answer_neutrality": "Required representations remain subject to the student figure answer-neutrality contract; remove answer-bearing labels rather than removing the representation."
+  }
+}

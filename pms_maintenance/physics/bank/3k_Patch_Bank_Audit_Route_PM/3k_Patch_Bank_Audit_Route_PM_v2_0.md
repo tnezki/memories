@@ -1,0 +1,472 @@
+# PATCH 00 · Audit + Route — v2.0
+
+## Purpose
+Audit the **current complete/materialized Physics Unit Bank** against the current Philosophy, Framework, Build Bank PM, exact maps, and question-structure authority. Classify real defects, record **why**, route each defect to the narrowest owning patch, and recommend the single next patch from the current Bank state.
+
+This audit is **parallel-aware**. It audits bad members of an intentional family; it does **not** treat purposeful repetition, comparable forms, or declared parallels as defects merely because they are similar.
+
+---
+
+# 1. FIRST TASK — READ PHILOSOPHY
+
+**Before reading this PM, the Framework, the Bank, the audit metadata, or any question, read the current Curriculum Philosophy completely.**
+
+This is a hard execution gate. Do not skim it and do not substitute remembered Philosophy from another run.
+
+After the exact learning/evidence/parallel maps are understood, **reread the current Philosophy immediately before final classification**. The audit must remain anchored in the purposes of instruction, Practice, evidence, assessment, repetition, and representations.
+
+The key audit consequence is:
+
+> Repetition and parallel forms are often intentional curriculum architecture. Audit whether the repetition serves the mapped learning/evidence purpose and whether each finished member is valid. Do not run an anti-clone audit.
+
+---
+
+# 2. AUTHORITY ORDER
+
+Read and obey current supplied authorities in this order:
+
+1. current Curriculum Philosophy — universal purpose and learning/evidence beliefs;
+2. this Audit + Route PM — audit scope, statuses, issue taxonomy, routing;
+3. current Physics Framework — course-specific rules, exact Assessment Plan/I-cans, representation system, secure-form behavior, tool contracts;
+4. current Build Bank PM — canonical schema, map-first/seed-parallel architecture, rendering, package/finalizer contract;
+5. current `_question_structure.zip` — question structure, parallel-family, wording, multi-step, representation, and variation rules;
+6. current complete/materialized Unit Bank — the actual artifact being audited;
+7. optional visual/source/tool support packaged with the request.
+
+If authorities conflict, use the current authority that owns the narrower layer. Fail closed rather than inventing a rule.
+
+---
+
+# 3. CURRENT-BANK RULE — HARD
+
+The request must contain the **most current complete/materialized Unit Bank** after all previously accepted replacement/patch work has been installed.
+
+Do not audit:
+- a Bank from an earlier chat;
+- a stale request copy when a newer deployed Bank exists;
+- a sparse patch by itself;
+- a reconstructed subset presented as a complete Bank.
+
+Before auditing, inventory the supplied Unit Bank and confirm the canonical/required files, subfolders, figures/assets, finalizer, maps, and views expected by the current Build Bank PM/Framework.
+
+---
+
+# 4. AUDIT STATUS MODEL
+
+Allowed values are exactly:
+
+- `NEEDS AUDIT` — not yet classified for the current bytes;
+- `KEEP` — fundamentally good; no material repair required;
+- `CLEAN` — core question/evidence is good; only surface cleanup is needed;
+- `REBUILD` — substantive content/evidence/representation/security/parallel-member/mapping problem needs a targeted patch.
+
+Canonical audit fields:
+
+- `audit_status`
+- `audit_primary_issue`
+- `audit_issue_codes`
+- `audit_why`
+- `audit_patch_route`
+
+For `KEEP`, clear issue/why/route fields unless the schema requires explicit empty values.
+
+For every `CLEAN` or `REBUILD`, `audit_why` is mandatory and must identify the **actual defect in teacher-readable language**, not generic wording such as “question quality.”
+
+---
+
+# 5. PURPOSE-FIRST AUDIT — DO NOT AUDIT ALL DESTINATIONS THE SAME WAY
+
+## WTC
+Purpose: FRQ decomposition/navigation practice with one coherent shared stimulus and connected parts.
+
+Audit:
+- actual multipart FRQ morphology;
+- shared stimulus is truly supplied;
+- connected parts form a coherent progression;
+- decomposition/navigation job is visible;
+- any graph/diagram/table/model actually exists and matches the prompt;
+- one shared representation within the multipart WTC is expected and is **not** asset-reuse failure.
+
+Do not demand that WTC content be limited to the current section/unit when current authorities permit cross-unit content.
+
+## Example / YTI
+Purpose: model then apply.
+
+Audit the pair, not just isolated questions:
+- Example is a strong instructional seed;
+- YTI is a valid deliberate parallel/application;
+- formula-capable I-cans use strong quantitative anchors when appropriate;
+- parallelism is recognizable and useful rather than artificially novel;
+- YTI is not a broken noun/number swap or a different skill masquerading as a parallel.
+
+## Practice
+Purpose: create learning and provide a rich teacher/downstream source menu. The four 24-question inventories are **not** a 96-question assignment and are **not required to be 96 unrelated evidence jobs**.
+
+Expected architecture when the current Build Bank PM uses the seed-parallel model:
+- Practice Set 1 = seed form/families;
+- Practice Set 2 = intentional parallels of PS1;
+- Practice Set 3 = intentional parallels of PS1;
+- Extra Practice = intentional parallels/adaptations of PS1.
+
+Similarity across these forms is expected.
+
+Audit a Practice family by asking:
+1. Is the PS1 seed itself good and aligned?
+2. Does each declared parallel preserve the intended I-can/evidence job and usable difficulty?
+3. Did the variant change only dimensions allowed by that question structure?
+4. Is the finished wording/physics natural and coherent?
+5. Is the answer independently correct?
+6. If a representation is required or strongly called for by the map/Framework, is the actual purpose-built representation present and correct?
+7. Does the finished question match its declared `question_design`/parallel relationship?
+
+**Do not classify a Practice item as REBUILD merely because:**
+- it is a close numeric parallel of its seed for procedural fluency;
+- its normalized skeleton resembles another intentional family member;
+- the same high-value family recurs on purpose;
+- a Warm-Up/CYU later adapts that family;
+- wording is similar across parallel forms.
+
+Classify Practice as defective when a family member is actually bad: misaligned, incorrectly solved, incoherent, broken variation, wrong difficulty/evidence, bad representation, mismatched metadata, or repetition exists only because the map/design claims different jobs but the finished questions collapse to the same unplanned experience.
+
+## CYU
+Purpose: concise check of current learning, often adapted from high-value instructional families.
+
+Purposeful similarity to Practice is allowed. Audit whether the adaptation is correct, concise, aligned, and usable.
+
+## Warm-Up
+Purpose: predictable retrieval/bridge routine.
+
+Controlled repetition is a feature. Do not penalize similarity itself.
+
+## Exit Tickets
+Purpose: collect quick independent evidence. **Evidence map first.**
+
+Audit in this order:
+1. Does the four-slot Exit evidence map exist and map exact I-cans/evidence jobs before question prose?
+2. Does Exit A faithfully instantiate that map?
+3. Are Exit B/C intentional parallel/equivalent forms by slot/family?
+4. Do B/C preserve evidence target, representation demand, reasoning load, and usable difficulty?
+5. Does each form satisfy the current Physics Framework secure-stimulus rule?
+6. Are the four questions within each ticket varied because the evidence map calls for it, rather than because of a canned quota?
+
+Do **not** fail B/C because they are tightly parallel to A. Parallel delivery is expected. Fail when a supposedly secure variant simply exposes/reuses an instructional finished stimulus in violation of the Framework, changes the skill/difficulty, or is an incoherent cosmetic swap.
+
+## Summative
+Purpose: mapped independent evidence. **Blueprint first.**
+
+Audit in this order:
+1. Does the full V1 evidence blueprint exist before question prose?
+2. Does V1 faithfully instantiate that blueprint?
+3. Are V2–V4 deliberate same-day parallels of V1 with comparable targets/families/difficulty and current-Framework security behavior?
+4. Do V5/V6 follow the **current Physics Framework's** makeup/alternate architecture? Do not impose remembered older V5/V6 rules.
+5. Is SR/CR response mode honest for the actual stem?
+6. Are selected-response distractors item-specific and plausible?
+7. Are secure representations/stimuli correct and current?
+
+Do **not** fail V2–V4 merely for being similar to V1. Comparable parallel forms are intended.
+
+---
+
+# 6. DECLARED PARALLEL-FAMILY AUDIT
+
+Use the Bank's actual design map and per-item `question_design` fields first. Look for current schema fields such as semantic family ID, seed/parallel role, seed item reference, parallel group ID, intended variation axes, representation mode, response mode, and evidence job. Do not require a guessed field name if the current schema uses an equivalent field.
+
+For each declared seed/parallel family:
+
+### Invariants that should normally stay comparable
+- exact I-can/evidence target;
+- semantic family;
+- response mode when form equivalence requires it;
+- approximate reasoning load/difficulty;
+- representation demand when part of the evidence;
+- dependency architecture when that defines the family.
+
+### Legitimate variation may include
+- numbers/values/units when fluency is the point;
+- givens/unknown direction;
+- dependency path when the structure allows it;
+- context;
+- graph/table/diagram values;
+- vector orientation;
+- misconception/error target;
+- distractors;
+- Standard/Inverted/Context-rich sentence architecture as secondary variation.
+
+### A bad parallel member is one that
+- changes the I-can/evidence job unintentionally;
+- becomes materially easier/harder than intended;
+- has an incorrect answer/solution;
+- produces awkward or physically incoherent language;
+- uses a variation dimension that the structure should not vary;
+- fails to vary a dimension that secure evidence requires;
+- claims a graph/diagram/model but does not provide it;
+- carries metadata/design labels that do not match the finished task.
+
+**Similarity alone is never an issue code.**
+
+---
+
+# 7. REPRESENTATION / GRAPH / DIAGRAM AUDIT
+
+The current Philosophy and Build Bank PM treat representations as instructional content, and the current Build Bank PM adopts a **fresh-visual default** because generating supported graphs/diagrams is effectively free.
+
+Audit every representation-bearing or representation-capable family for:
+
+- actual presence when the task requires students to interpret/critique/compare/read it;
+- scientific/mathematical correctness;
+- prompt/key agreement;
+- answer neutrality where required;
+- correct labels, arrows, scales, data, axes, units, and geometry;
+- honest representation metadata;
+- purpose-built parallel variants where separate canonical items should have different graph/data/diagram values;
+- no convenience reuse of one graph/image/diagram across separate canonical questions when a fresh item-specific visual is appropriate and easy to generate;
+- no penalty for reusing one shared stimulus **within a single multipart item**;
+- no penalty when downstream resources display the finalized representation of the same canonical Bank item.
+
+### Representation opportunity test
+For each I-can/family, consult the Framework representation plan and question-design map.
+
+- If a graph/diagram/table/model is **required to perform the evidence job**, missing it is `REBUILD`.
+- If the Framework/map says a representation is a best-fit evidence mode and the Bank systematically substitutes prose/symbolic questions instead, classify the underbuilt affected items/family as `REBUILD`.
+- If a visual would merely be decorative or a nice optional enhancement, do **not** fail the item. Keep it and do not manufacture a representation quota.
+
+Route a representation failure to the destination-specific patch when that patch owns the full item/family; otherwise route to Representations.
+
+---
+
+# 8. MAPPING / ANSWER / LANGUAGE / METADATA AUDIT
+
+For every audited item, verify as applicable:
+
+- exact `i_can_id` and exact I-can statement;
+- section/destination/form routing;
+- semantic fit to the claimed I-can, not just mechanical text equality;
+- answer/key/solution correctness;
+- natural high-school Physics language;
+- no authoring scaffolds/iteration labels leaking to students;
+- coherent context/object/location;
+- correct units/MathJax/notation;
+- honest response mode;
+- honest semantic family, DOK/Bloom, representation, security, and design-map metadata.
+
+DOK/Bloom are judged from the **finished task**, not from the planned slot.
+
+---
+
+# 9. ISSUE TAXONOMY + ROUTING
+
+Every `CLEAN`/`REBUILD` item gets one primary issue, all material issue codes, concise `audit_why`, and one owning route.
+
+Stable routes:
+- `patch_bank_mapping_integrity`
+- `patch_bank_clean`
+- `patch_bank_wtc_frq`
+- `patch_bank_ex_yti`
+- `patch_bank_practice_families`
+- `patch_bank_exit_tickets`
+- `patch_bank_summative_secure`
+- `patch_bank_summative_distractors`
+- `patch_bank_representations`
+- `patch_bank_core_questions`
+- `patch_bank_math_notation`
+- `patch_bank_cross_resource_freshness`
+- `patch_bank_metadata`
+
+Preferred issue codes are listed in `AUDIT_ISSUE_CATALOG.json`. Use them consistently; do not invent “clone” codes for valid declared parallels.
+
+### Ownership
+- wrong/ambiguous mapping -> Mapping Integrity;
+- WTC morphology/decomposition/shared stimulus -> WTC FRQ;
+- Example/YTI pair failure -> EX/YTI;
+- bad Practice seed/parallel family member or family-plan mismatch -> Practice Families;
+- Exit evidence-map/secure-parallel problem -> Exit Tickets;
+- Summative blueprint/secure-form/response-mode problem -> Summative Secure;
+- sound Summative item with distractor-only problem -> Summative Distractors;
+- isolated visual problem not better owned by a destination patch -> Representations;
+- incorrect Physics/key/evidence/context/structure not better owned elsewhere -> Core Questions;
+- pure notation/unit formatting -> Math / Notation;
+- cross-resource exposure/freshness issue -> Cross-Resource Freshness;
+- finished question is good but metadata/design map is dishonest -> Metadata;
+- wording/grammar/scaffold/minor context only -> CLEAN.
+
+If mapping itself is unreliable, Mapping Integrity is the blocking route.
+
+---
+
+# 10. CLASSIFICATION STANDARD
+
+## KEEP
+Use when the finished item/family member is fundamentally good for its intended purpose:
+- aligned;
+- physically correct;
+- answer/key correct;
+- natural enough;
+- representation correct when needed;
+- legitimate parallel behavior where applicable;
+- no material repair needed.
+
+A KEEP item may be similar to another item.
+
+## CLEAN
+Use only when the core evidence opportunity, answer, and representation can remain unchanged and the issue is surface-level:
+- grammar;
+- awkward wording;
+- authoring scaffold leakage;
+- minor context naturalness;
+- small non-substantive formatting.
+
+## REBUILD
+Use when substantive change is required:
+- wrong/misaligned evidence;
+- wrong answer/key;
+- bad/missing required representation;
+- broken parallel member;
+- evidence-map/blueprint mismatch;
+- security violation;
+- physically incoherent context that cannot be fixed without changing evidence;
+- dishonest response mode;
+- serious family/design mismatch.
+
+Do not use REBUILD merely because a prompt is a close intentional parallel.
+
+---
+
+# 11. AUDIT SCOPE / STATUS LIFECYCLE
+
+Default run: audit all canonical items in the selected Unit whose `audit_status == NEEDS AUDIT`.
+
+Existing KEEP/CLEAN/REBUILD remain read-only unless:
+- the request explicitly asks to re-audit them; or
+- final verification is required by current Bank audit state.
+
+This PM changes **audit/routing metadata only**. It does not rewrite student prompts, answers, choices, representations, or solutions.
+
+A content patch that materially changes an item must reset that changed item to `NEEDS AUDIT` and clear obsolete audit reason/route fields. A content patch never certifies its own changed question as KEEP.
+
+---
+
+# 12. BANK-LEVEL AUDIT SUMMARY
+
+Maintain/recompute root-level `audit_summary` in canonical Bank data. Include at minimum:
+
+- `status_counts`
+- `issue_counts`
+- `route_counts`
+- `recommended_next_patch`
+  - `workflow_key`
+  - `label`
+  - `target_count`
+  - `why`
+- `metadata_reconcile_required`
+- `final_audit_required`
+
+Also include, when the schema allows:
+- `largest_failure_category`
+- `largest_failure_count`
+- `parallel_family_summary`
+- `representation_issue_counts`
+
+## Recommendation algorithm
+The teacher does not memorize a sequence.
+
+1. If unresolved mapping defects exist, recommend Mapping Integrity first.
+2. Otherwise aggregate unresolved `REBUILD` items by owning patch route and recommend the route with the **largest affected-item count**.
+3. Use severity/security only as a tie-breaker; do not impose a fixed destination sequence.
+4. When no REBUILD remains, recommend CLEAN if CLEAN items remain.
+5. When no classified CLEAN/REBUILD remains but `NEEDS AUDIT` items remain, recommend Audit + Route.
+6. When all evidence-bearing items are KEEP and metadata reconciliation is required, recommend Metadata.
+7. After metadata reconciliation, recommend Audit + Route for final verification when required.
+8. When nothing remains, report `BANK PATCH CYCLE COMPLETE`.
+
+The audit report must explicitly state:
+- which failure category affected the most questions;
+- why those items failed;
+- which patch owns that failure;
+- the exact next patch.
+
+---
+
+# 13. FINALIZER + HUMAN SEMANTIC QA
+
+Run the current Physics Bank finalizer after metadata/view updates.
+
+The finalizer is necessary but not sufficient. Also perform the purpose-first semantic audit described in this PM.
+
+Do not treat deterministic duplicate/skeleton similarity as a curriculum defect unless the actual mapped family behavior is broken.
+
+---
+
+# 14. DELIVERY — COMPLETE CURRENT BANK BY DEFAULT
+
+Follow the request manifest's explicit delivery contract.
+
+For the current Control Panel workflow, the preferred result is a **complete materialized `unitN/` replacement folder inside one ZIP** so the teacher can unzip it and replace the deployed `banks/unitN/` folder directly.
+
+When returning a complete replacement:
+- begin from the **entire supplied current Unit Bank folder**;
+- preserve every input file/subfolder byte-for-byte unless this audit legitimately changes it;
+- do not reconstruct the Bank from a short production-file checklist;
+- preserve `figures/`, `exports/`, `~finalize_bank.py`, generation scripts, maps, manifests, views, and any other current Bank files present in the supplied artifact;
+- change only canonical audit metadata and the teacher views/derived files that must reflect the new audit status;
+- verify that the returned replacement is at least as materially complete as the input Bank.
+
+If the request explicitly asks for a sparse REPO_PATCH instead, honor that request and clearly label it as an overlay, never as a complete replacement.
+
+---
+
+# 15. CHAT REPORT
+
+Return a readable report in chat. Include:
+
+- audited item count;
+- KEEP / CLEAN / REBUILD / remaining NEEDS AUDIT counts;
+- top failure categories by count;
+- top owning routes by count;
+- a short parallel-family quality summary;
+- representation/graph/diagram findings;
+- mapping blockers, if any;
+- finalizer result;
+- delivery description.
+
+End with exactly:
+
+`NEXT PATCH: <exact patch label or BANK PATCH CYCLE COMPLETE>`
+
+`WHY: <current-Bank reason and affected count>`
+
+`CURRENT BANK RULE: Replace/install this returned current Bank before creating the next patch request.`
+
+---
+
+# 16. COMMON AUDIT FAILURES TO AVOID
+
+1. Not reading the current Philosophy as the literal first task.
+2. Treating intentional Practice parallels as semantic-clone defects.
+3. Treating V2–V4 similarity to V1 as a Summative defect when they are intended same-day parallels.
+4. Treating Exit B/C similarity to A as a defect when the evidence map calls for equivalent forms.
+5. Auditing 96 Practice questions as though students are expected to complete 96 unrelated tasks.
+6. Rewarding surface variety that breaks comparability or changes the skill.
+7. Missing a bad parallel member because its metadata claims it is different.
+8. Missing a required graph/diagram because prose describes the unseen representation.
+9. Penalizing one shared WTC stimulus reused across its connected parts.
+10. Penalizing downstream reuse of the same canonical Bank item's finalized representation.
+11. Failing to flag convenience reuse of one graph/image/diagram across separate canonical items when fresh purpose-built visuals are expected and effectively free to produce.
+12. Using DOK/Bloom metadata as proof of rigor instead of inspecting the finished task.
+13. Rewriting content during Audit + Route.
+14. Returning a partial folder while labeling it a complete replacement.
+
+---
+
+# Completion standard
+
+A successful Audit + Route run:
+- reads current Philosophy first and rereads it before final classification;
+- audits actual current bytes;
+- respects mapped destination purposes and intentional seed/parallel architecture;
+- classifies defects rather than similarity;
+- records specific WHY + stable issue codes + narrow owning route;
+- identifies missing/mismatched/underbuilt representations and missed graph/diagram opportunities only when they materially matter;
+- recomputes Bank routing;
+- runs finalizer plus semantic QA;
+- returns the requested complete/current delivery safely;
+- tells the teacher exactly what to run next.

@@ -1,0 +1,228 @@
+{
+  "schema_version": "question-design-map-v1",
+  "course": "Conceptual Physics",
+  "unit": 2,
+  "artifact_design": {
+    "artifact_type": "Unit Bank",
+    "design_principles": [
+      "I-can-first",
+      "question-design-before-prose",
+      "variety-by-fit-not-quota",
+      "representations-as-evidence"
+    ],
+    "destination_notes": {
+      "Practice": "mix follows I-can fit",
+      "Exit Ticket": "varied within and across forms"
+    }
+  },
+  "sections": [
+    {
+      "section_id": "U2-S1",
+      "title": "Example section",
+      "i_can_designs": [
+        {
+          "i_can_id": "U2-S1-IC1",
+          "i_can": "I can determine distance, rate, or time from a constant-rate relationship.",
+          "evidence_job": "Use d=rt flexibly in several solve directions and transfer a rate to a new situation.",
+          "content_modes": [
+            "quantitative_formula"
+          ],
+          "formula_relationships": [
+            "d=r*t"
+          ],
+          "vocabulary_terms": [
+            "distance",
+            "rate",
+            "time"
+          ],
+          "best_fit_structures": [
+            "FORMULA-DIRECT-RELATIONSHIP-01",
+            "FORMULA-INVERSE-VARIABLE-01",
+            "FORMULA-MULTISTEP-DEPENDENT-01"
+          ],
+          "avoid_structures": [
+            "generic CER wrapper"
+          ],
+          "representations": [
+            "equation_relationship",
+            "data_table"
+          ],
+          "tool_opportunities": [],
+          "parallel_variation_axes": [
+            "unknown_quantity",
+            "dependency_path",
+            "values_units",
+            "context_evidence"
+          ]
+        },
+        {
+          "i_can_id": "U2-S1-IC2",
+          "i_can": "I can interpret a motion graph to describe how an object moves.",
+          "evidence_job": "Read graph features and translate them into motion statements.",
+          "content_modes": [
+            "graph_data",
+            "conceptual"
+          ],
+          "formula_relationships": [],
+          "vocabulary_terms": [
+            "slope",
+            "velocity"
+          ],
+          "best_fit_structures": [
+            "REPRESENTATION-READ-THEN-CALCULATE-01"
+          ],
+          "avoid_structures": [
+            "text-only description of an imaginary graph"
+          ],
+          "representations": [
+            "graph"
+          ],
+          "tool_opportunities": [
+            "course graph tool"
+          ],
+          "parallel_variation_axes": [
+            "representation_values",
+            "reasoning_action",
+            "response_mode"
+          ]
+        }
+      ],
+      "destination_designs": [
+        {
+          "destination": "Notes EX/YTI",
+          "purpose": "model then apply",
+          "planned_mix_rationale": "IC1 is formula-capable, so quantitative anchors are prioritized.",
+          "planned_slots": [
+            {
+              "slot_id": "U2-S1-EX1",
+              "primary_i_can_id": "U2-S1-IC1",
+              "supporting_i_can_ids": [],
+              "structure_id": "FORMULA-DIRECT-RELATIONSHIP-01",
+              "wording_profile": "standard",
+              "response_mode": "numeric_short_answer",
+              "representation_mode": "equation_relationship",
+              "tool": "",
+              "parallel_family": "constant-rate-direct",
+              "variation_axes": [
+                "unknown_quantity",
+                "values_units"
+              ],
+              "dependency_chain": [],
+              "security_role": "instructional",
+              "notes": ""
+            },
+            {
+              "slot_id": "U2-S1-YTI1",
+              "primary_i_can_id": "U2-S1-IC1",
+              "supporting_i_can_ids": [],
+              "structure_id": "FORMULA-INVERSE-VARIABLE-01",
+              "wording_profile": "inverted",
+              "response_mode": "numeric_short_answer",
+              "representation_mode": "equation_relationship",
+              "tool": "",
+              "parallel_family": "constant-rate-direct",
+              "variation_axes": [
+                "unknown_quantity",
+                "wording_profile",
+                "values_units"
+              ],
+              "dependency_chain": [],
+              "security_role": "instructional",
+              "notes": "Related to EX1 but changes solve direction."
+            }
+          ]
+        },
+        {
+          "destination": "Practice Set 1",
+          "purpose": "build flexible fluency",
+          "planned_mix_rationale": "Mix direct/inverse/dependent formula work with graph evidence because the two I-cans need different modes.",
+          "planned_slots": [
+            {
+              "slot_id": "U2-S1-P1-01",
+              "primary_i_can_id": "U2-S1-IC1",
+              "supporting_i_can_ids": [],
+              "structure_id": "FORMULA-MULTISTEP-DEPENDENT-01",
+              "wording_profile": "context_rich",
+              "response_mode": "numeric_short_answer",
+              "representation_mode": "none_direct",
+              "tool": "",
+              "parallel_family": "constant-rate-transfer",
+              "variation_axes": [
+                "dependency_path",
+                "unknown_quantity",
+                "context_evidence"
+              ],
+              "dependency_chain": [
+                "infer_rate",
+                "reuse_rate_new_distance_find_time"
+              ],
+              "security_role": "instructional",
+              "notes": ""
+            },
+            {
+              "slot_id": "U2-S1-P1-02",
+              "primary_i_can_id": "U2-S1-IC2",
+              "supporting_i_can_ids": [],
+              "structure_id": "REPRESENTATION-READ-THEN-CALCULATE-01",
+              "wording_profile": "natural_direct",
+              "response_mode": "short_constructed",
+              "representation_mode": "graph",
+              "tool": "course graph tool",
+              "parallel_family": "motion-graph-interpretation",
+              "variation_axes": [
+                "representation_values",
+                "reasoning_action"
+              ],
+              "dependency_chain": [],
+              "security_role": "instructional",
+              "notes": ""
+            }
+          ]
+        },
+        {
+          "destination": "Exit Ticket A",
+          "purpose": "short independent evidence",
+          "planned_mix_rationale": "Use different evidence modes instead of four same-shell questions.",
+          "planned_slots": [
+            {
+              "slot_id": "U2-S1-ETA-01",
+              "primary_i_can_id": "U2-S1-IC1",
+              "supporting_i_can_ids": [],
+              "structure_id": "FORMULA-INVERSE-VARIABLE-01",
+              "wording_profile": "standard",
+              "response_mode": "numeric_short_answer",
+              "representation_mode": "none_direct",
+              "tool": "",
+              "parallel_family": "constant-rate-inverse",
+              "variation_axes": [
+                "unknown_quantity",
+                "givens_evidence_set"
+              ],
+              "dependency_chain": [],
+              "security_role": "formative_secure",
+              "notes": ""
+            },
+            {
+              "slot_id": "U2-S1-ETA-02",
+              "primary_i_can_id": "U2-S1-IC2",
+              "supporting_i_can_ids": [],
+              "structure_id": "REPRESENTATION-READ-THEN-CALCULATE-01",
+              "wording_profile": "natural_direct",
+              "response_mode": "short_constructed",
+              "representation_mode": "graph",
+              "tool": "course graph tool",
+              "parallel_family": "motion-graph-interpretation",
+              "variation_axes": [
+                "representation_values",
+                "reasoning_action"
+              ],
+              "dependency_chain": [],
+              "security_role": "formative_secure",
+              "notes": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

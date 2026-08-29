@@ -1,0 +1,142 @@
+{
+  "name": "Algebra 1 Recurring + Assessment Resource Profile",
+  "course": "Algebra 1",
+  "profile_version": "v1.3",
+  "extends": "current Base Recurring + Assessment Resources PM",
+  "role": "Course-specific renderer/routing layer. It does not replace the Assessment Plan or canonical Bank content.",
+  "source_ownership": {
+    "warmups": "Finalized Unit Bank canonical Warm-Up routes; counts/routing owned by profiles/bank_course_profile.json.",
+    "exit_tickets": "Finalized Unit Bank canonical Exit Ticket A/B/C routes; counts/routing owned by profiles/bank_course_profile.json.",
+    "progress_tracker": "Original requested Unit Assessment Plan + profiles/assessment_evidence_philosophy.json. Bank is not the learning-goal authority.",
+    "review": "Original Unit Assessment Plan current Unit Mastery Goals + exact supporting I-cans; finalized Bank may supply non-secure Mastery-aligned questions/figures, but the Retrieval stage does not define the Unit Review artifact.",
+    "summative": "Finalized Unit Bank secure Summative routes + profiles/bank_course_profile.json Summative behavior."
+  },
+  "warmups": {
+    "usage_mode": "notability_first",
+    "css_load": [
+      "../../css/base.css",
+      "../../css/warmup.css"
+    ],
+    "path_template": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
+    "visible_title_pattern": "Section {U}.{S} \u2014 Day {D}",
+    "layout": "Current Algebra Bank inventory resolves to four questions per warm-up. Render two physical/import pages with questions 1\u20132 on the header page and 3\u20134 on the continuation page.",
+    "notability_geometry": {
+      "header_page_card_height": "4.10in",
+      "continuation_page_card_height": "4.30in",
+      "rule": "Do not force a full-page container height; preserve tested Notability import behavior."
+    },
+    "figures": "Copy canonical Bank figure bytes; no graph tool in the Warm-Up output.",
+    "header_html": "Exact: <header class=\"warmup-header\"><h1>Section {U}.{S} \u2014 Day {D}</h1></header>",
+    "header_prohibitions": [
+      "No course/unit kicker",
+      "No subtitle/topic line",
+      "No Name/Date line",
+      "No warmup-meta block"
+    ],
+    "workspace_rule": "No visible workspace element. The blank remainder of each fixed-height problem card is the Notability writing area. Prefer no workspace div; if legacy markup is retained, only workspace wu-ws-000 is allowed.",
+    "workspace_prohibitions": [
+      "No bare class=\"workspace\"",
+      "No visible WORK label",
+      "No lined workspace box",
+      "No nonzero wu-ws-* utility in the normal Algebra Warm-Up build"
+    ]
+  },
+  "exit_tickets": {
+    "usage_mode": "projector_only",
+    "css_load": [
+      "../../css/exit.css"
+    ],
+    "path_template": "exit/exit{U}/exit_{U}.html",
+    "menu": "First viewport is a full-screen index organized by section with Ticket A/B/C links.",
+    "ticket_layout": "Current Algebra Bank inventory resolves to four questions per ticket. Each ticket is one full viewport with a 2x2 grid and no student workspace.",
+    "versions": "A/B/C per section come from Bank destinations; do not author a fourth version in the renderer.",
+    "figures_tables": "Keep compact enough for all four questions to fit; prompt before representation."
+  },
+  "progress_tracker": {
+    "usage_mode": "print_first",
+    "css_load": [
+      "../../css/progress_tracker.css"
+    ],
+    "path_template": "progress/unit_{U}_progress/unit_{U}_progress.html",
+    "page_count": 2,
+    "organization": "Mastery Goal -> supporting exact I-can statements -> portfolio evidence -> current evidence status -> next move.",
+    "progress_language_source": "profiles/assessment_evidence_philosophy.json / original Assessment Plan",
+    "current_labels": [
+      "Not Yet",
+      "Approaching",
+      "Meeting",
+      "Exceeding"
+    ],
+    "prohibitions": [
+      "No DOK ladder organization",
+      "No rung ladder organization",
+      "Do not revive Getting There / Got It! / Teach It! labels"
+    ]
+  },
+  "review": {
+    "main_usage_mode": "screen_study_guide",
+    "practice_usage_mode": "print_or_notability_open_response",
+    "main_css": "../../css/review.css",
+    "practice_css": "../../css/review_practice.css",
+    "main_path_template": "reviews/review{U}/review_{U}.html",
+    "practice_path_template": "reviews/review{U}/review_{U}_practice.html",
+    "target_rule": "The deployed Unit Review is a mastery-preparation resource for the CURRENT Unit. Route it from the current Unit Mastery Goals and exact supporting I-cans. Never route the Unit Review from the Retrieval stage merely because the resource is called Review. Historical source-unit identity remains internal to the Assessment Plan/source map and is not student-facing.",
+    "main_structure": [
+      "top jump navigation",
+      "unit at a glance",
+      "vocabulary",
+      "rules/structures",
+      "section-first review panels",
+      "learning target + I-can checklist",
+      "concise summary",
+      "common traps",
+      "useful representation/figure",
+      "DOK perspective when meaningful",
+      "final check"
+    ],
+    "navigation": [
+      "Practice Problems link in the top navigation",
+      "floating \u2191 Top control"
+    ],
+    "practice_question_rule": "Use four open-response questions per current Unit Mastery Goal. Prefer non-secure Bank questions already aligned to that same Mastery Goal/supporting I-can. If too few appropriate non-secure questions exist, author fresh parallel review questions directly from the Mastery Goal/supporting I-cans. Do not copy secure Summative items or official Exit Tickets.",
+    "secure_exclusions": [
+      "Summative",
+      "official Exit Tickets"
+    ],
+    "visible_title_pattern": "Unit {U} Review",
+    "visible_intro_pattern": "Review the skills and understandings from your Unit {U} Mastery Goals.",
+    "organization": "One review focus per current Unit Mastery Goal, with its exact supporting I-cans, concise synthesis, useful representations, common traps, DOK perspective when meaningful, and final check.",
+    "student_facing_source_identity": "Do not print prior/source Unit numbers or titles. The Review, Review Practice, Progress Tracker, and Summative belong to the current Unit and use current Unit Mastery Goal IDs.",
+    "content_owner": "Current Algebra Framework + ORIGINAL current Unit Assessment Plan",
+    "shell_owner": "Current Base Recurring + Assessment PM canonical Review renderer",
+    "historical_source_visibility": "internal_only",
+    "shell_override_rule": "Do not reconstruct or restyle the Review from this profile; use the Base Recurring canonical shell exactly."
+  },
+  "summative": {
+    "usage_mode": "secure_print",
+    "family": "math_constructed_response",
+    "css_load": [
+      "../../css/base.css",
+      "../../css/summative_math.css"
+    ],
+    "path_template": "assessments_zxrtjp/unit{U}_summative/unit{U}_summative_assessment.html",
+    "forms_source": "profiles/bank_course_profile.json#summative",
+    "layout": "One-column constructed-response exam pages. Use compact/standard/large/xlarge problem-card sizing by real workspace demand; blank area inside each card is student workspace.",
+    "student_metadata": "Hide DOK/section/Bank/internal labels; hidden traceability may remain.",
+    "form_behavior": "Resolve active form IDs from profiles/bank_course_profile.json#summative and the finalized secure Bank. The current Algebra profile resolves to V1-V6: V1-V4 same-day parallel and V5-V6 makeup/alternate. Do not invent extra forms, and treat any V7/V8 found only in an older rendered/template artifact as stale layout residue.",
+    "time": "Use Bank profile time target (currently max about 45 minutes).",
+    "figures_tables": "Prompt first; compact centered tables; canonical figures directly below prompt.",
+    "stale_template_guard": "Rendered/reference HTML is visual evidence only. It cannot override current Bank/Framework form membership. Version labels/selectors/keys must be generated from the resolved active form IDs."
+  },
+  "packaging": {
+    "mode": "course_root_relative_drop_in",
+    "shared_css": "Do not duplicate shared root CSS inside ordinary Unit resource ZIPs.",
+    "junk_prohibited": [
+      "__MACOSX",
+      ".DS_Store",
+      "debug PDFs",
+      "preview screenshots",
+      "scratch files"
+    ]
+  }
+}

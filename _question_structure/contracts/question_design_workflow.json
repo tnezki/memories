@@ -1,0 +1,36 @@
+{
+  "package": "_question_structure",
+  "version": "1.0",
+  "authority": "question-design planning and structure",
+  "required_sequence": [
+    "resolve_exact_target_and_evidence_job",
+    "classify_content_modes",
+    "map_best_fit_question_structures",
+    "map_representations_and_tools",
+    "map_formula_relationships_and_reverse_paths_when_applicable",
+    "map_parallel_variation_axes",
+    "build_json_design_skeleton",
+    "author_question_text",
+    "independently_solve_and_verify_final_item",
+    "assign_dok_bloom_and_final_metadata"
+  ],
+  "scope_levels": [
+    "artifact",
+    "section",
+    "i_can",
+    "family",
+    "item"
+  ],
+  "hard_rules": {
+    "variety_is_not_a_quota": true,
+    "question_text_after_design_plan": true,
+    "dok_bloom_after_authoring": true,
+    "multi_step_requires_dependency": true,
+    "family_id_is_semantic_not_slot_id": true,
+    "secure_independence_not_proven_by_noun_number_order_swap": true,
+    "representations_selected_from_evidence_job": true,
+    "context_must_be_natural_and_relevant": true,
+    "unit_conversion_only_when_targeted_or_natural": true,
+    "direct_formula_questions_allowed_and_preferred_when_target_requires_them": true
+  }
+}

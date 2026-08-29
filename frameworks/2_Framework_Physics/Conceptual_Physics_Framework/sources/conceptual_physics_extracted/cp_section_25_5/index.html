@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conceptual Physics - Section 25.5: Transformers</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <p class="kicker">Conceptual Physics</p>
+  <h1>Chapter 25: Electromagnetic Induction</h1>
+  <h2>Section 25.5: Transformers</h2>
+</header>
+<main class="wrapper">
+  <article class="main-body">
+    <h3>Transformers</h3>
+
+    <p>Electric energy can certainly be carried along wires, and now we’ll see how it can be carried across empty space. Energy can be transferred from one device to another with the simple arrangement shown in Figure 25.11. Note that one coil is connected to a battery and the other is connected to a galvanometer. It is customary to refer to the coil connected to the power source as the primary (input) and to the other as the secondary (output). As soon as the switch is closed in the primary and current passes through its coil, a current occurs in the secondary also—even though there is no material connection between the two coils. Only a brief surge of current occurs in the secondary, however. Then, when the primary switch is opened, a surge of current again registers in the secondary, but in the opposite direction.</p>
+
+    <figure class="figure">
+      <img src="images/u8_4_from_ch_25_11_primary_secondary_induced_voltage_switch.png" alt="Figure 25.11: Primary and secondary coils showing voltage induced in the secondary when the primary switch changes.">
+      <figcaption><span class="figure-label">Figure 25.11</span> Whenever the primary switch is opened or closed, voltage is induced in the secondary circuit.</figcaption>
+    </figure>
+
+    <p>This is the explanation: A magnetic field builds up around the primary when the current begins to flow through the coil. This means that the magnetic field is growing (that is, <em>changing</em>) about the primary. But, since the coils are near each other, this changing field extends into the secondary coil, thereby inducing a voltage in the secondary. This induced voltage is only temporary because when the current and the magnetic field of the primary reach a steady state—that is, when the magnetic field is no longer changing—no further voltage is induced in the secondary. But, when the switch is turned off, the current in the primary drops to zero. The magnetic field about the coil collapses, thereby inducing a voltage in the secondary coil, which senses the change. We see that voltage is induced whenever a magnetic field is <em>changing</em> through the coil, regardless of the reason.</p>
+
+    <aside class="checkpoint">
+      <h3>Check Point</h3>
+      <p>When the switch of the primary in Figure 25.11 is opened or closed, the galvanometer in the secondary registers a current. But when the switch remains closed, no current is registered on the galvanometer of the secondary. Why?</p>
+    </aside>
+
+    <aside class="check-answer">
+      <h3>Check Your Answer</h3>
+      <p>When the switch remains in the closed position, there is a steady current in the primary and a steady magnetic field about the coil. This field extends to the secondary, but unless there is a <em>change</em> in the field, electromagnetic induction does not occur.</p>
+    </aside>
+
+    <p>If you place an iron core inside the primary and secondary coils of the arrangement of Figure 25.11, the magnetic field within the primary is intensified by the alignment of magnetic domains. The field is also concentrated in the core and extends into the secondary, which intercepts more of the field change. The galvanometer will show greater surges of current when the switch of the primary is opened or closed. Instead of opening and closing a switch to produce the change of magnetic field, suppose that alternating current is used to power the primary. Then the frequency of periodic changes in the magnetic field is equal to the frequency of the alternating current. Now we have a transformer (Figure 25.12). A more efficient arrangement is shown in Figure 25.13.</p>
+
+    <figure class="figure">
+      <img src="images/u8_4_from_ch_25_12_simple_transformer_ac_input.png" alt="Figure 25.12: A simple transformer with primary and secondary coils and ac input.">
+      <figcaption><span class="figure-label">Figure 25.12</span> A simple transformer.</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="images/u8_4_from_ch_25_13_practical_transformer_iron_core_primary_secondary.png" alt="Figure 25.13: Primary and secondary coils wrapped around an iron core that guides alternating magnetic lines.">
+      <figcaption><span class="figure-label">Figure 25.13</span> A practical and more efficient transformer. Both primary and secondary coils are wrapped on the inner part of the iron core (yellow), which guides alternating magnetic lines (green) produced by ac in the primary. The alternating field induces ac voltage in the secondary. Thus power at one voltage from the primary is transferred to the secondary at a different voltage.</figcaption>
+    </figure>
+
+    <p>If the primary and secondary have equal numbers of wire loops (usually called turns), then the input and output alternating voltages will be equal. But if the secondary coil has more turns than the primary, the alternating voltage produced in the secondary coil will be greater than that produced in the primary. In this case, the voltage is said to be <em>stepped up</em>. If the secondary has twice as many turns as the primary, the voltage in the secondary will be double that of the primary.</p>
+
+    <p>We can see this with the arrangements in Figure 25.14. First consider the simple case of a single primary loop connected to a 1-volt alternating source, and a single secondary loop connected to the ac voltmeter (a). The secondary intercepts the changing magnetic field of the primary, and a voltage of 1 V is induced in the secondary. If another loop is wrapped around the core so that the transformer has two secondaries (b), it intercepts the same magnetic field change. We see that 1 V is induced in it also. There is no need to keep both secondaries separate. We could join them (c) and still have a total induced voltage of 1 V + 1 V, or 2 V. This is equivalent to saying that a voltage of 2 V will be induced in a single secondary that has twice the number of loops as the primary. If the secondary is wound with three times as many loops, then three times as much voltage will be induced. Stepped-up voltage may light a neon sign or send power over a long distance.</p>
+
+    <figure class="figure">
+      <img src="images/u8_4_from_ch_25_14_transformer_voltage_turns_ratio_examples.png" alt="Figure 25.14: Transformer examples showing voltage induced in one-turn and two-turn secondaries.">
+      <figcaption><span class="figure-label">Figure 25.14</span> (a) The voltage of 1 V induced in the secondary equals the voltage of the primary. (b) A voltage of 1 V is also induced in the added secondary because it intercepts the same magnetic field change from the primary. (c) The voltages of 1 V each induced in the two one-turn secondaries are equivalent to a voltage of 2 V induced in a single two-turn secondary.</figcaption>
+    </figure>
+
+    <p>If the secondary has fewer turns than the primary, the alternating voltage produced in the secondary will be lower than that produced in the primary. The voltage is said to be <em>stepped down</em>. This stepped-down voltage may safely operate a toy electric train. If the secondary has half as many turns as the primary, then only half as much voltage is induced in the secondary. So electric energy can be fed into the primary at a given alternating voltage and taken from the secondary at a higher or lower alternating voltage, depending on the relative number of turns in the primary and secondary coil windings. The relationship between primary and secondary voltages with respect to the relative number of turns is given by</p>
+
+    <p>Primary voltage / Number of primary turns = secondary voltage / number of secondary turns</p>
+
+    <p>It might seem that we get something for nothing with a transformer that steps up the voltage. Not so, for energy conservation always regulates what can happen. When voltage is stepped up, the current in the secondary is lower than in the primary. The transformer actually transfers energy from one coil to the other. Make no mistake about this point: A transformer can in no way step up energy—a conservation of energy no-no. A transformer steps voltage up or down without a change in energy. The rate at which energy is transferred is called <em>power</em>. The power used in the secondary is supplied by the primary. The primary gives no more than the secondary uses, in accord with the law of conservation of energy. If we ignore the slight power losses due to heating of the coils and the core, then</p>
+
+    <p>Power into primary = power out of secondary</p>
+
+    <p>Electric power is equal to the product of voltage and current, so we can say</p>
+
+    <p>(Voltage × current)<sub>primary</sub> = (voltage × current)<sub>secondary</sub></p>
+
+    <p>We see that if the secondary has more voltage than the primary, it will have less current than the primary. The ease with which voltages can be stepped up or down with a transformer is the principal reason that most electric power is ac rather than dc.</p>
+
+    <aside class="checkpoint">
+      <h3>Check Point</h3>
+      <ol>
+        <li>If 100 V of ac is put across a 100-turn transformer primary, what will be the voltage output if the secondary has 200 turns?</li>
+        <li>Assuming the answer to the preceding question is 200 V and the secondary is connected to a flood lamp with a resistance of 50 Ω, what will be the ac current in the secondary circuit?</li>
+        <li>What is the power in the secondary coil?</li>
+      </ol>
+    </aside>
+  </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "contract_name": "Conceptual Physics Student Figure Answer-Neutrality Contract",
+  "contract_version": "v1.1",
+  "framework_version": "v6.8",
+  "scope": "Every student-facing figure, diagram, graph, table-image, annotated photo, model, ray/vector/circuit/field sketch, and caption used by Banks or downstream Physics resources.",
+  "hard_rule": "NEVER SHOW THE ANSWER IN THE STUDENT IMAGE.",
+  "interpretation": "If the student is supposed to identify, infer, rank, label, calculate, predict, critique, construct, compare, or determine a feature, the student-facing visual may not already name, mark, highlight, draw, state, or numerically reveal that feature.",
+  "answer_bearing_examples_to_remove_or_hide": [
+    "force names on arrows when students must identify forces",
+    "arrow direction or completed vector when students must determine direction/vector",
+    "numerical magnitude/value when students must calculate or infer it",
+    "rank numbers/order labels when students must rank cases",
+    "circled/highlighted error or corrected feature when students must critique a model",
+    "completed ray path/image location when students must construct or predict it",
+    "completed graph trend/point/line when students must predict, plot, or infer it",
+    "current direction/path/component label when students must determine circuit behavior",
+    "caption/title/legend text that states the conclusion or response",
+    "teacher-answer annotations accidentally copied into the student figure"
+  ],
+  "source_figure_rule": "Hewitt/source captures and Framework reusable figures are REFERENCES, not automatically student-safe assets. Inspect the actual image against the exact prompt. Crop, edit, redraw, generate an answer-neutral student variant, or choose a different figure whenever the original contains answer-bearing information.",
+  "student_teacher_split": "A teacher key may use a separate annotated/labeled answer figure. That teacher figure must use a different file/reference and must never be referenced by the student item.",
+  "figure_metadata_required_in_bank": {
+    "container": "Each entry in canonical item.figures must be an object, not a bare filename string.",
+    "required_fields": [
+      "file",
+      "student_evidence_role",
+      "answer_neutrality_verified"
+    ],
+    "answer_neutrality_verified": "Must be boolean true only after inspecting the actual student image against the exact student prompt.",
+    "sensitive_task_extra_field": "For identify/infer/rank/label/calculate/predict/critique/construct/determine tasks, include answer_bearing_elements_removed=true."
+  },
+  "qa": {
+    "hard_failures": [
+      "A student image or its title/caption/legend directly supplies the requested response.",
+      "A canonical Physics Bank figure reference lacks explicit answer-neutrality verification metadata.",
+      "An answer-sensitive figure task lacks answer_bearing_elements_removed=true.",
+      "A teacher-answer figure is referenced by a student-facing item.",
+      "A representation-required evidence job is converted to text-only solely to avoid answer leakage."
+    ],
+    "manual_visual_gate": "Mechanical QA cannot reliably read pixels. Before release, visually inspect every student-facing figure used by an answer-sensitive item. Metadata is a signed assertion of that inspection, not a substitute for it."
+  },
+  "representation_preservation_rule": "Answer-neutrality is NOT permission to remove a representation required by the I-can. If students must read/create/critique a diagram, graph, vector, force model, ray, field, circuit, or table, provide an answer-neutral version of that representation. Text-only substitution is not equivalent evidence.",
+  "inline_svg_rule": "Inline SVG is a student figure. Record it in the canonical figures[] metadata with render_mode=inline_svg, student_evidence_role, answer_neutrality_verified=true, and answer_bearing_elements_removed=true when the task is answer-sensitive. A missing file field is allowed only for a true inline SVG metadata record."
+}

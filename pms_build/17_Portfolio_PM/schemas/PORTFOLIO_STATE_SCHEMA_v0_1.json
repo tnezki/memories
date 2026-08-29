@@ -1,0 +1,18 @@
+{
+  "schema": "portfolio-state-schema/0.1",
+  "required_top_level": ["schema", "course", "rubric_versions", "students"],
+  "student_minimum": ["student_key", "identifier_quality", "units"],
+  "evidence_minimum": [
+    "evidence_event_id",
+    "source_type",
+    "source_label",
+    "unit",
+    "i_can_ids",
+    "mastery_goal_ids",
+    "item_evidence_strength",
+    "observation",
+    "confidence"
+  ],
+  "status_labels": ["Not Yet", "Approaching", "Meeting", "Exceeding"],
+  "merge_rule": "Preserve all prior students/evidence. Append new evidence. Historical correction requires explicit audit entry."
+}

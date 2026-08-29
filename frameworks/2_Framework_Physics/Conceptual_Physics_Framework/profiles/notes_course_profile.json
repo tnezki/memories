@@ -1,0 +1,60 @@
+{
+  "name": "Conceptual Physics Notes Course Profile",
+  "course": "Conceptual Physics",
+  "course_family": "science",
+  "profile_version": "v2.0",
+  "framework_version": "v6.8",
+  "extends": "current Base Notes PM",
+  "role": "Course-specific Notes layer. Follows the universal/Algebra Notes architecture but uses substantially more source-grounded reading, more visual narrative, and more content-specific discussion checkpoints.",
+  "bank_canonical": {
+    "rule": "Finalized Unit Bank owns canonical WTC / Notes Example / Notes YTI wording, values, figures, and solutions.",
+    "pair_rule": "Use the Physics Bank profile: no more than four canonical Example/YTI pairs per section; Base Notes consumes every canonical pair actually present."
+  },
+  "architecture": [
+    "Section title + exact Learning Target / I-can statements",
+    "Vocabulary preview (terms only)",
+    "substantial reading/visual cycles organized by exact I-can/progression",
+    "content-specific Stop and Discuss immediately after each substantial reading segment",
+    "interleaved canonical Example / You Try It anchors",
+    "Vocabulary with definitions immediately before Summary",
+    "bulleted Summary",
+    "Common Mistakes",
+    "Framework-defined final miscellaneous workspace when required"
+  ],
+  "reading": {
+    "benchmark": "Conceptual Physics/Hewitt extracted source library first; OpenStax/course-aligned text second",
+    "rule": "Physics Notes are textbook-like instructional reading, not thin blurbs between problems. Use slightly more reading than Algebra when the concept needs it; bold target vocabulary at first meaningful introduction.",
+    "paragraphs": "multiple short developed paragraphs; avoid walls of text and one-sentence stacking"
+  },
+  "visual_storytelling": {
+    "hard_rule": "Inspect the relevant Hewitt captured-image set BEFORE drafting the section narrative. Build portions of the explanation around the strongest images so the images help tell the conceptual story.",
+    "source_map": "reference_library/source_excerpts/hewitt_section_source_map.json",
+    "library": "sources/conceptual_physics_extracted/",
+    "roles": [
+      "phenomenon opener",
+      "prediction stimulus",
+      "conceptual explanation anchor",
+      "comparison/ranking stimulus",
+      "misconception exposure",
+      "evidence for discussion",
+      "bridge to equation/model"
+    ],
+    "not_decoration": "A figure should earn space by advancing the idea, evidence, prediction, comparison, or explanation."
+  },
+  "stop_and_discuss": {
+    "rule": "More frequent than Algebra is appropriate. Every substantial reading gets an immediate content-specific S&D; additional short checkpoints may follow strong visuals/prediction moments. Do not automatically place S&D after every YTI.",
+    "hewitt_source": "Think and Discuss / Think and Explain / Think and Rank structures are preferred inspiration."
+  },
+  "reading_apprenticeship": {
+    "rule": "Keep annotation, notice/wonder, evidence, model-reading, and representation interpretation opportunities purposeful; student workspaces may be generous for Notability."
+  },
+  "student_teacher": {
+    "student": "clean Notability-first page with generous fixed workspace where required",
+    "teacher": "same instructional sequence with direct answers/acceptable reasoning/evidence-to-listen-for in red/bold support; teacher workspaces expand naturally and never overlap"
+  },
+  "paths": {
+    "student": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",
+    "teacher": "notes/u{U}_{S}_notes/u{U}_{S}_notes_teacher.html"
+  },
+  "visual_contract": "contracts/notes_visual_contract.json"
+}

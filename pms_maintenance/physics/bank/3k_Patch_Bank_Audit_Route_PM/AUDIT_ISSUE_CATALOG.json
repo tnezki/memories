@@ -1,0 +1,115 @@
+{
+  "version": "2.0",
+  "principle": "Similarity is not a defect. Codes describe actual failures of purpose, evidence, mapping, representation, correctness, security, language, or declared parallel-family behavior.",
+  "routes": {
+    "patch_bank_mapping_integrity": [
+      "mapping_wrong_i_can",
+      "mapping_semantic_mismatch",
+      "mapping_cross_view_mismatch",
+      "mapping_coverage_conflict"
+    ],
+    "patch_bank_clean": [
+      "wording_grammar",
+      "scaffold_leakage",
+      "minor_context_naturalness",
+      "minor_formatting"
+    ],
+    "patch_bank_wtc_frq": [
+      "wtc_not_frq",
+      "wtc_parts_not_connected",
+      "wtc_missing_shared_stimulus",
+      "wtc_not_decomposition",
+      "wtc_stimulus_task_mismatch"
+    ],
+    "patch_bank_ex_yti": [
+      "ex_yti_bad_seed",
+      "ex_yti_parallel_misaligned",
+      "ex_yti_parallel_difficulty_mismatch",
+      "ex_yti_formula_opportunity_missed",
+      "ex_yti_representation_opportunity_missed"
+    ],
+    "patch_bank_practice_families": [
+      "practice_bad_seed",
+      "practice_parallel_misaligned",
+      "practice_parallel_difficulty_mismatch",
+      "practice_invalid_variation",
+      "practice_unmapped_repetition",
+      "practice_design_purpose_mismatch",
+      "practice_family_member_answer_error",
+      "practice_family_representation_gap"
+    ],
+    "patch_bank_exit_tickets": [
+      "exit_evidence_map_missing",
+      "exit_evidence_map_mismatch",
+      "exit_parallel_misaligned",
+      "exit_parallel_difficulty_mismatch",
+      "exit_secure_stimulus_exposed",
+      "exit_secure_stimulus_not_fresh",
+      "exit_canned_variety_quota"
+    ],
+    "patch_bank_summative_secure": [
+      "summative_blueprint_missing",
+      "summative_blueprint_mismatch",
+      "summative_parallel_misaligned",
+      "summative_parallel_difficulty_mismatch",
+      "summative_secure_stimulus_exposed",
+      "summative_secure_stimulus_not_fresh",
+      "summative_response_mode_mismatch",
+      "summative_alternate_form_rule_violation"
+    ],
+    "patch_bank_summative_distractors": [
+      "distractor_generic_reuse",
+      "distractor_implausible",
+      "distractor_not_item_specific",
+      "distractor_accidentally_correct"
+    ],
+    "patch_bank_representations": [
+      "representation_missing",
+      "representation_mismatch",
+      "representation_rejected",
+      "representation_answer_bearing",
+      "representation_metadata_mismatch",
+      "representation_required_opportunity_missed",
+      "graph_required_opportunity_missed",
+      "diagram_required_opportunity_missed",
+      "representation_convenience_reuse"
+    ],
+    "patch_bank_core_questions": [
+      "physics_incorrect",
+      "answer_key_incorrect",
+      "solution_incorrect",
+      "context_incoherent",
+      "evidence_missing",
+      "question_structure_mismatch",
+      "response_request_incoherent"
+    ],
+    "patch_bank_math_notation": [
+      "math_notation",
+      "unit_notation",
+      "mathjax_rendering"
+    ],
+    "patch_bank_cross_resource_freshness": [
+      "cross_resource_secure_exposure",
+      "cross_resource_stale_binding"
+    ],
+    "patch_bank_metadata": [
+      "family_metadata_mismatch",
+      "parallel_metadata_mismatch",
+      "dok_bloom_mismatch",
+      "design_map_mismatch",
+      "security_metadata_mismatch",
+      "representation_metadata_only_mismatch"
+    ]
+  },
+  "never_failure_by_itself": [
+    "intentional_parallel_similarity",
+    "practice_numeric_parallel",
+    "practice_repeated_high_value_family",
+    "warmup_controlled_repetition",
+    "cyu_adaptation_of_practice",
+    "exit_b_c_parallel_to_a",
+    "summative_v2_v4_parallel_to_v1",
+    "single_wtc_shared_stimulus",
+    "downstream_reuse_of_same_canonical_item_visual"
+  ]
+}

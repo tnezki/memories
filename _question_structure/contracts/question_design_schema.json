@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Unit Question Design Map",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "course",
+    "unit",
+    "artifact_design",
+    "sections"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "question-design-map-v1"
+    },
+    "course": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit": {},
+    "artifact_design": {
+      "type": "object",
+      "required": [
+        "artifact_type",
+        "design_principles"
+      ],
+      "properties": {
+        "artifact_type": {
+          "type": "string"
+        },
+        "design_principles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destination_notes": {
+          "type": "object"
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": [
+        "section_id",
+        "i_can_designs",
+        "destination_designs"
+      ],
+      "properties": {
+        "section_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "i_can_designs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/i_can_design"
+          }
+        },
+        "destination_designs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/destination_design"
+          }
+        }
+      }
+    },
+    "i_can_design": {
+      "type": "object",
+      "required": [
+        "i_can_id",
+        "i_can",
+        "evidence_job",
+        "content_modes",
+        "best_fit_structures",
+        "representations",
+        "parallel_variation_axes"
+      ],
+      "properties": {
+        "i_can_id": {
+          "type": "string"
+        },
+        "i_can": {
+          "type": "string"
+        },
+        "evidence_job": {
+          "type": "string"
+        },
+        "content_modes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "formula_relationships": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vocabulary_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "best_fit_structures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avoid_structures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tool_opportunities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parallel_variation_axes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "destination_design": {
+      "type": "object",
+      "required": [
+        "destination",
+        "purpose",
+        "planned_slots"
+      ],
+      "properties": {
+        "destination": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "planned_mix_rationale": {
+          "type": "string"
+        },
+        "planned_slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/item_plan"
+          }
+        }
+      }
+    },
+    "item_plan": {
+      "type": "object",
+      "required": [
+        "slot_id",
+        "primary_i_can_id",
+        "structure_id",
+        "wording_profile",
+        "response_mode",
+        "representation_mode",
+        "parallel_family",
+        "variation_axes"
+      ],
+      "properties": {
+        "slot_id": {
+          "type": "string"
+        },
+        "primary_i_can_id": {
+          "type": "string"
+        },
+        "supporting_i_can_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "structure_id": {
+          "type": "string"
+        },
+        "wording_profile": {
+          "enum": [
+            "standard",
+            "inverted",
+            "context_rich",
+            "natural_direct",
+            "frq_multipart"
+          ]
+        },
+        "response_mode": {
+          "type": "string"
+        },
+        "representation_mode": {
+          "type": "string"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "parallel_family": {
+          "type": "string"
+        },
+        "variation_axes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependency_chain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "security_role": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

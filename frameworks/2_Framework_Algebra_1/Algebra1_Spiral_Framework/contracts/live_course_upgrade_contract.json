@@ -1,0 +1,28 @@
+{
+  "principle": "The live course evolves after teaching and weekly preview/reflection.",
+  "origins": [
+    "bank_derived",
+    "framework_generated",
+    "teacher_live"
+  ],
+  "teacher_live_examples": [
+    "investigations",
+    "performance tasks",
+    "quick checks",
+    "teacher-created or teacher-revised activities"
+  ],
+  "upgrade_rule": "A later course rebuild from newer Banks MUST preserve teacher_live resources unless the user explicitly asks to replace/remove them.",
+  "bank_reflection_rule": "Teacher-live resources do not need to be backported into Banks merely to survive a course upgrade.",
+  "merge_strategy": "Regenerate bank_derived resources; refresh framework_generated resources when appropriate; preserve teacher_live paths/content and reconnect them to navigation if needed.",
+  "canonical_live_paths": [
+    "investigations/",
+    "performance_task___5134zrt/",
+    "quick_check____htq5855/",
+    "activities/ when teacher-revised/marked teacher_live"
+  ],
+  "file_structure_reference": "contracts/course_file_structure.json",
+  "legacy_unlinked_paths": [
+    "ideas/ (preserve teacher-live content if present; no longer linked by current dashboard)"
+  ],
+  "activities_rule": "Framework-generated Activities may be rebuilt when requested, but teacher-created/revised or explicitly teacher_live Activities must survive later course/Bank upgrades unless the teacher explicitly replaces them."
+}

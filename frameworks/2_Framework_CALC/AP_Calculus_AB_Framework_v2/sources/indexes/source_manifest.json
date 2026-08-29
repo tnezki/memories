@@ -1,0 +1,60 @@
+{
+  "framework": "AP_Calculus_AB_Framework_v1",
+  "raw_sources_not_embedded": true,
+  "sources": [
+    {
+      "id": "assessment_plans",
+      "role": "highest unit/course assessment authority",
+      "source_sha256": "d15287aea51e3e3c15be01be7cf70fe3dcb375d8a2a8c5ec7a5f1c83a545180c",
+      "embedded_derivative": "assessment_plans/"
+    },
+    {
+      "id": "teacher_framework",
+      "role": "40-section organization, pacing, classroom flow",
+      "source_sha256": "e0b409e267ec998db4615a184538db5113a946e44f75fc551fbb417f519f83f5",
+      "embedded_derivative": "course_map/course_map.json + future hooks"
+    },
+    {
+      "id": "ced",
+      "role": "official AP terminology, mathematical practices, conditions, calculator/exam framing",
+      "source_sha256": "a2e826e0f9cfe302c4596e983d6703eba4141ade755340d1146d2347e7aec221",
+      "embedded_derivative": "reference_library/ced/ced_course_reference.json"
+    },
+    {
+      "id": "ap_topics",
+      "role": "primary authentic AP-style questions, FRQ structures, scoring expectations",
+      "source_sha256": "bcc460503f1dd4a926459b01e1e6e48938ba85cd1723cc1956a5484281ffaac8",
+      "embedded_derivative": "reference_library/ap_topics/"
+    },
+    {
+      "id": "calculus_textbook",
+      "role": "explanation depth, examples, applications, problem/visual archetypes",
+      "source_sha256": "e1366eb76ba24e6cdbed0975ecd797f1850232c795d8a3b74ab84cfcb047d2d0",
+      "embedded_derivative": "sources/indexes/calculus_textbook_page_map.json + section reference packets"
+    },
+    {
+      "id": "physics_textbook",
+      "role": "student-facing language/tone benchmark only",
+      "source_sha256": "532a3f96f57f273bad331bcebb124eeb9317db9914781aa58ac6d438a747d196",
+      "embedded_derivative": "profiles/language_reading_tone.json"
+    },
+    {
+      "id": "graph_tool",
+      "role": "authoritative graph styling/behavior",
+      "source_sha256": "eaf5ab36936697f9f49c255c0f2dfcb64c94858c1e4769dfd2431e042e4453b5",
+      "embedded_derivative": "tools/~graph_tool_v12.py"
+    },
+    {
+      "id": "algebra_framework",
+      "role": "mature machine-first architecture/path/live-course reference",
+      "source_sha256": "7d2afabf29d5d1d42e7a8e7d2494f92e322d0e564dd72adf85d011f1eaa8ffc9",
+      "embedded_derivative": "contracts/* architecture principles"
+    },
+    {
+      "id": "physics_framework",
+      "role": "mature AP/Science-integrated architecture/QA reference",
+      "source_sha256": "5749de5e1c622fc522d2a712729aa107c2ff4df68d63fd54301af9b7161144ae",
+      "embedded_derivative": "contracts/* and tools/* architecture principles"
+    }
+  ]
+}

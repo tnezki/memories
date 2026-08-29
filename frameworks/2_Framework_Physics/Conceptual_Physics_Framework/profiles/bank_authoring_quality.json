@@ -1,0 +1,102 @@
+{
+  "name": "Conceptual Physics Bank Authoring Quality Profile",
+  "framework_version": "v6.8",
+  "purpose": "Prevent technically valid but generic/template-driven Physics Banks while preserving useful repetition and source-grounded conceptual richness.",
+  "authority_note": "Original Assessment Plan owns learning/evidence. bank_course_profile owns Physics response mix/counts/representation/source behavior. Base Bank PM owns universal mechanics.",
+  "source_grounding": {
+    "primary": "reference_library/source_excerpts/section_reference_packets.json + hewitt_section_source_map.json + curriculum/section_index.json",
+    "rule": "source_basis names only sources actually consulted; framework/Assessment Plan-only is acceptable for straightforward items. Do not cite a source family mechanically on every item.",
+    "provenance_rule": "Record only sources actually consulted for that item. Do not mechanically list the Bank profile, framework, or Hewitt family profile on every item as if they were item-level source evidence."
+  },
+  "natural_language": {
+    "rule": "Prompts sound like high-school Physics: concrete, precise, compact, and physically meaningful. Context earns its place by affecting the model/quantity/decision.",
+    "avoid": [
+      "Mad-Lib noun swaps",
+      "generic “explain your reasoning” tails on most items",
+      "formula-hunting prompts with no physical model",
+      "college-level abstraction imported from advanced references",
+      "adding an irrelevant mass/time/distance only to create superficial variation",
+      "contradictory state descriptions such as moving at steady speed while at rest",
+      "mechanical a/an or noun substitutions that produce unnatural Physics contexts"
+    ],
+    "hard_rule": "Physics prompts must describe one physically coherent situation in natural high-school language. Reject contradictory states, impossible object/setup combinations created by noun substitution, and obvious article/grammar errors."
+  },
+  "representations": {
+    "rule": "Use actual diagrams/graphs/data/tables/models when they carry the evidence job. In representation-heavy sections, a text-only bank requires explicit rationale after source visual inspection.",
+    "hewitt_visual_story_index": "sources/indexes/conceptual_physics_extracted_index.json",
+    "section_map": "reference_library/source_excerpts/hewitt_section_source_map.json",
+    "answer_neutrality_contract": "contracts/student_figure_answer_neutrality_contract.json",
+    "hard_rule": "NEVER SHOW THE ANSWER IN THE STUDENT IMAGE. Inspect the actual visual against the exact prompt before use; source/reusable figures are not automatically student-safe.",
+    "representation_required_rule": "If the exact I-can/evidence job requires a representation, use the actual representation in the canonical item and secure form. Prose that merely says “a diagram shows...” does not satisfy a diagram-reading I-can.",
+    "anti_avoidance": "Do not respond to answer-neutrality by deleting figures. Create an answer-neutral student figure and keep the representation evidence.",
+    "inline_svg_rule": "Inline SVG is a real student representation and must carry the same explicit answer-neutrality QA metadata as file-backed figures through a structured figures[] metadata record (render_mode=inline_svg permitted with no file)."
+  },
+  "distractors": {
+    "rule": "Each wrong choice comes from a plausible misconception/error for that exact item. Equivalent correct choices are prohibited."
+  },
+  "security": {
+    "rule": "Secure formative/Summative items are semantically independent of exposed instructional items across givens, figure/data, reasoning action, response type, and misconception target.",
+    "hard_rule": "No secure item may exactly duplicate any instructional or other secure prompt. Within V1-V6, each item is independently authored; number swaps/order changes alone do not establish semantic independence.",
+    "semantic_clone_rule": "Same stem architecture with only changed object, number, unit, or answer-choice order is not a new secure item. Same-day forms may share the concept but need genuinely different stimuli/representations/reasoning structures; V5/V6 must be more distinct.",
+    "exit_destination_rule": "Physics Exit Tickets are formative-secure by destination. A weaker security_level string cannot bypass semantic-independence QA."
+  },
+  "quantitative": {
+    "rule": "Use natural values/units and source-supported problem archetypes; vary what is given/asked and representation. Large/awkward values only when a real context or learning goal justifies them.",
+    "priority_rule": "If an I-can naturally requires formula/quantitative application, plan meaningful quantitative evidence before generic conceptual/vocabulary filler.",
+    "reverse_rule": "Vary the unknown/given direction when the relationship supports it; do not train one fixed solve direction.",
+    "multistep_rule": "Multi-step requires a dependent intermediate result. Keep compatible units unless conversion is the target."
+  },
+  "practice_repetition": {
+    "rule": "Purposefully repeat families, not finished questions. Exact literal copies are prohibited by default; change meaningful evidence features. A non-secure exact repeat requires an explicit intentional_exact_repeat_reason. Secure exact repeats are forbidden.",
+    "plan_stage": "Use the full I-can map to design variation before authoring rather than filling counts with cloned prompts.",
+    "numeric_shells": "Heavy number-only/unit-only variants of one shell are review-worthy; vary representation, givens/unknown, context, misconception, or reasoning action when the I-can supports it.",
+    "semantic_clone_rule": "After normalizing numbers, units, and generic object nouns, large clusters of one prompt shell indicate generator cloning. Redesign the family mix rather than cosmetically rewriting after generation."
+  },
+  "final_package_integrity": [
+    "Every exact Unit I-can appears in unit{U}_i_can_map.csv and satisfies the I-can-first destination coverage floors",
+    "All canonical IDs are present in HTML/data/mapping routes",
+    "Every referenced figure exists; true orphan figures removed",
+    "NEVER show the answer in a student image; every figure is visually checked against the exact prompt and carries required answer-neutrality metadata",
+    "No visible PM/Bank/source metadata in student prompts",
+    "MathJax repaired using current Framework tool before ZIP",
+    "Canonical Bank JSON satisfies contracts/bank_handoff_contract.json literal per-item schema, including item-level dok/evidence_point_id/security_level/tables/figures/supporting_i_can_ids",
+    "Representation-explicit I-cans contain actual representation evidence; answer-neutrality never becomes image avoidance",
+    "No high-confidence physical contradictions or systematic Mad-Lib grammar defects remain",
+    "No fixed Practice allocation signature is reused across sections as a generic I-can weighting template",
+    "Every canonical item has valid audit_status; fresh builds initialize all items to NEEDS AUDIT and teacher Bank cards display status plus exact I-can text",
+    "unit{U}_question_design_map.json exists and every canonical item links to one planned slot through question_design",
+    "question_family_id values are semantic; Summative version/question numbers are not used to manufacture unique families",
+    "Physics Exit Ticket destination receives formative-secure semantic-independence QA regardless of security_level label",
+    "Inline SVG representations carry structured answer-neutrality QA metadata just like file-backed figures"
+  ],
+  "i_can_first_authoring": {
+    "contract": "contracts/i_can_first_bank_contract.json",
+    "hard_rule": "Author and audit by exact I-can mini-bank before section totals. A healthy section is not enough if an individual I-can has weak or missing evidence.",
+    "evidence_plan_required_before_items": true,
+    "unequal_counts": "Allowed when justified by evidence complexity, representations, misconceptions, or transfer demand; unexplained overconcentration is a review flag."
+  },
+  "audit_status_workflow": {
+    "initial_state": "NEEDS AUDIT",
+    "allowed_values": [
+      "NEEDS AUDIT",
+      "KEEP",
+      "CLEAN",
+      "REBUILD"
+    ],
+    "labels": {
+      "NEEDS AUDIT": "🔴 NEEDS AUDIT",
+      "KEEP": "🟢 KEEP",
+      "CLEAN": "🟡 CLEAN",
+      "REBUILD": "🔴 REBUILD"
+    },
+    "hard_rule": "Builder QA does not auto-promote audit status. Every fresh canonical item remains NEEDS AUDIT until a later content audit dispositions it.",
+    "reset_after_material_edit": "Return the revised item to NEEDS AUDIT."
+  },
+  "question_design_map": {
+    "contract": "contracts/question_design_map_contract.json",
+    "hard_rule": "The exact-I-can question-design map and unitN_question_design_map.json exist before final prompt authoring. Questions are authored from planned slots, not generated first and classified later.",
+    "variety_rule": "Map purposeful variety from the I-can. Standard/Inverted/Context-rich are wording profiles, not quotas. Vocabulary directions, quantitative/reverse directions, multi-step chains, representations, and response modes are selected only when they fit.",
+    "family_rule": "question_family_id is semantic and stable across destinations/forms; do not append V1/Q12/Exit-B style slot tokens to manufacture uniqueness.",
+    "derived_metadata": "DOK/Bloom are assigned after authoring/verification."
+  }
+}

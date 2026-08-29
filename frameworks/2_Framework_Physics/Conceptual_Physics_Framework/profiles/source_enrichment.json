@@ -1,0 +1,22 @@
+{
+  "name": "Conceptual Physics Source Enrichment Profile",
+  "framework_version": "v6.8",
+  "principle": "Framework sources improve wording, representations, phenomena, visual storytelling, problem families, and precision; they never expand course scope beyond the Assessment Plan.",
+  "primary_library": [
+    "reference_library/source_excerpts/section_reference_packets.json",
+    "reference_library/source_excerpts/hewitt_section_source_map.json",
+    "sources/conceptual_physics_extracted/",
+    "reference_library/question_structures/hewitt_question_family_profile.json",
+    "reference_library/question_structures/section_enrichment.json",
+    "reference_library/reusable_figures/figure_catalog.json",
+    "reference_library/formula_problem_structures/formula_archetypes.json"
+  ],
+  "source_use": {
+    "hewitt": "primary conceptual voice + visual-story + question-family benchmark",
+    "course_aligned_packets": "ready section-specific anchors/figures/checkpoints",
+    "holt": "quantitative archetypes",
+    "openstax": "secondary high-school explanation/examples/representations",
+    "halliday": "precision/extension only"
+  },
+  "ordinary_build_rule": "Do not request raw textbooks/ZIPs when this Framework is supplied; use packaged source intelligence first."
+}

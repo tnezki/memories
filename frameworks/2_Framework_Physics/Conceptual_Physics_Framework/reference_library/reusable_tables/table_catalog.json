@@ -1,0 +1,245 @@
+[
+  {
+    "id": "measurement_evidence",
+    "best_for": [
+      "1.1"
+    ],
+    "columns": [
+      "trial/observation",
+      "measured quantity",
+      "value/unit",
+      "inference/claim"
+    ],
+    "use": "separate direct evidence from interpretation"
+  },
+  {
+    "id": "force_components",
+    "best_for": [
+      "1.3",
+      "1.4",
+      "1.5",
+      "3.1",
+      "3.2"
+    ],
+    "columns": [
+      "force",
+      "object exerting force",
+      "direction",
+      "magnitude",
+      "included in system?"
+    ],
+    "use": "force-model audit/net-force reasoning"
+  },
+  {
+    "id": "motion_time",
+    "best_for": [
+      "2.2",
+      "2.3",
+      "2.4"
+    ],
+    "columns": [
+      "time",
+      "position/distance",
+      "velocity",
+      "change in velocity"
+    ],
+    "use": "build patterns before formulas"
+  },
+  {
+    "id": "reference_frames",
+    "best_for": [
+      "2.1",
+      "2.5"
+    ],
+    "columns": [
+      "observer/reference frame",
+      "object velocity relative to frame",
+      "direction",
+      "resultant/description"
+    ],
+    "use": "compare viewpoint-dependent motion"
+  },
+  {
+    "id": "newton2_comparison",
+    "best_for": [
+      "3.1"
+    ],
+    "columns": [
+      "net force",
+      "mass",
+      "predicted acceleration",
+      "calculated acceleration"
+    ],
+    "use": "proportional reasoning"
+  },
+  {
+    "id": "falling_force_balance",
+    "best_for": [
+      "3.3"
+    ],
+    "columns": [
+      "moment/time",
+      "weight",
+      "air resistance",
+      "net force",
+      "motion change"
+    ],
+    "use": "free fall -> terminal speed progression"
+  },
+  {
+    "id": "momentum_before_after",
+    "best_for": [
+      "4.1",
+      "4.2"
+    ],
+    "columns": [
+      "object",
+      "mass",
+      "velocity before",
+      "momentum before",
+      "velocity after",
+      "momentum after"
+    ],
+    "use": "system/conservation reasoning"
+  },
+  {
+    "id": "energy_accounting",
+    "best_for": [
+      "4.3",
+      "4.4",
+      "4.5"
+    ],
+    "columns": [
+      "state/location",
+      "kinetic",
+      "potential",
+      "transferred/dissipated",
+      "total accounted"
+    ],
+    "use": "energy bar/accounting support"
+  },
+  {
+    "id": "wave_properties",
+    "best_for": [
+      "5.1",
+      "5.3"
+    ],
+    "columns": [
+      "wave/source",
+      "amplitude",
+      "wavelength",
+      "frequency",
+      "period",
+      "speed"
+    ],
+    "use": "compare wave variables"
+  },
+  {
+    "id": "interference_cases",
+    "best_for": [
+      "5.2",
+      "5.5"
+    ],
+    "columns": [
+      "wave 1",
+      "wave 2",
+      "phase/frequency relation",
+      "result",
+      "observable effect"
+    ],
+    "use": "superposition/beats"
+  },
+  {
+    "id": "optics_media",
+    "best_for": [
+      "6.1",
+      "6.3"
+    ],
+    "columns": [
+      "medium/material",
+      "speed/index",
+      "incident angle",
+      "refracted behavior",
+      "evidence"
+    ],
+    "use": "refraction/material comparison"
+  },
+  {
+    "id": "lens_mirror_cases",
+    "best_for": [
+      "6.2",
+      "6.4",
+      "6.5"
+    ],
+    "columns": [
+      "device",
+      "object position",
+      "ray behavior",
+      "image type",
+      "orientation/size/location"
+    ],
+    "use": "image formation comparison"
+  },
+  {
+    "id": "circuit_component_data",
+    "best_for": [
+      "7.2",
+      "7.3",
+      "7.4"
+    ],
+    "columns": [
+      "component/trial",
+      "voltage",
+      "current",
+      "resistance",
+      "power",
+      "energy/time"
+    ],
+    "use": "Ohm/power/data interpretation"
+  },
+  {
+    "id": "circuit_topology",
+    "best_for": [
+      "7.5"
+    ],
+    "columns": [
+      "circuit",
+      "paths",
+      "equivalent resistance",
+      "current behavior",
+      "voltage behavior",
+      "failure/brightness prediction"
+    ],
+    "use": "series/parallel/mixed comparison"
+  },
+  {
+    "id": "electromagnet_variables",
+    "best_for": [
+      "8.2",
+      "8.3"
+    ],
+    "columns": [
+      "current",
+      "turns",
+      "core",
+      "field/strength indicator",
+      "force/observation"
+    ],
+    "use": "evidence-based electromagnet design"
+  },
+  {
+    "id": "electromagnetic_system",
+    "best_for": [
+      "8.4",
+      "8.5"
+    ],
+    "columns": [
+      "component/stage",
+      "input",
+      "field/current change",
+      "energy transformation",
+      "output"
+    ],
+    "use": "generator/transformer/speaker system tracing"
+  }
+]

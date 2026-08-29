@@ -1,0 +1,77 @@
+{
+  "contract_name": "Physics Course File Structure",
+  "contract_version": "v1.1",
+  "framework_version": "v6.8",
+  "source": "reference_library/deployment/teacher_dashboard_reference.html supplied 2026-08-25",
+  "source_sha256": "acbe27baaf4a8726d7367c26ce5162ef296830aa0734954b1a515ffbcbd66f75",
+  "authority_rule": [
+    "current explicit user instruction",
+    "this Framework course_file_structure.json",
+    "teacher_dashboard_reference.html for observed live-path evidence",
+    "task-specific PM fallback only when Framework has no applicable path"
+  ],
+  "course_root": {
+    "description": "Physics repository root; teacher dashboard lives at the same level as index.html.",
+    "link_rule": "Internal course links are relative from the Physics course root: no leading slash, domain, or repo name.",
+    "stable_naming_rule": "Repository and memory artifact filenames stay stable/unversioned. Internal framework_version metadata may change for diagnosis; filename version hunting never establishes authority."
+  },
+  "resource_roots": {
+    "css": "css/",
+    "notes": "notes/",
+    "practice_sets": "practice_sets/",
+    "demo": "demo/",
+    "investigations": "investigations/",
+    "activities": "activities/",
+    "performance_task": "performance_task___5134zrt/",
+    "quick_check": "quick_check____htq5855/",
+    "progress": "progress/",
+    "warmups": "warmups/",
+    "reviews": "reviews/",
+    "exit": "exit/",
+    "banks": "banks/",
+    "assessments": "assessments_zxrtjp/"
+  },
+  "unit_resource_templates": {
+    "progress": "progress/unit_{U}_progress/unit_{U}_progress.html",
+    "warmups": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
+    "review": "reviews/review{U}/review_{U}.html",
+    "exit_tickets": "exit/exit{U}/exit_{U}.html",
+    "assessment_plan": "assessments_zxrtjp/unit{U}_assessment_plan/unit{U}_assessment_plan.html",
+    "bank": "banks/unit{U}/unit{U}.html",
+    "summative": "assessments_zxrtjp/unit{U}_summative/unit{U}_summative_assessment.html",
+    "bank_review_internal": "banks/unit{U}/unit{U}_review.html",
+    "review_practice": "reviews/review{U}/review_{U}_practice.html",
+    "bank_resource_internal": "banks/unit{U}/unit{U}_resources.html"
+  },
+  "section_resource_templates": {
+    "notes_student": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",
+    "notes_teacher": "notes/u{U}_{S}_notes/u{U}_{S}_notes_teacher.html",
+    "practice_set_1": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}.html",
+    "practice_set_2": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_2.html",
+    "practice_set_3": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_3.html",
+    "extra_practice": "practice_sets/practice_sets_{U}_{S}/extra_practice_{U}_{S}.html",
+    "cyu": "practice_sets/practice_sets_{U}_{S}/cyu_{U}_{S}.html",
+    "tarsia": "practice_sets/practice_sets_{U}_{S}/tarsia_{U}_{S}_practice_3.txt",
+    "blooket": "practice_sets/practice_sets_{U}_{S}/blooket_{U}_{S}_practice_3.csv",
+    "demo_student": "demo/u{U}_{S}_demo/u{U}_{S}_demo.html",
+    "demo_teacher": "demo/u{U}_{S}_demo/u{U}_{S}_demo_teacher_guide.html",
+    "investigation_student": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation.html",
+    "investigation_teacher": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation_teacher_guide.html",
+    "activity_hub": "activities/u{U}_{S}_act1/u{U}_{S}_act1.html",
+    "performance_task_student": "performance_task___5134zrt/u{U}_{S}_performance_task/u{U}_{S}_performance_task.html",
+    "performance_task_teacher": "performance_task___5134zrt/u{U}_{S}_performance_task/u{U}_{S}_performance_task_teacher_guide.html",
+    "quick_check": "quick_check____htq5855/u{U}_{S}_quick_check/u{U}_{S}_quick_check.html",
+    "activity_set1_questions_solutions": "activities/u{U}_{S}_act1/u{U}_{S}_set1_questions_solutions.html",
+    "activity_set1_stations": "activities/u{U}_{S}_act1/u{U}_{S}_set1_stations.html",
+    "activity_set1_find_someone_who": "activities/u{U}_{S}_act1/u{U}_{S}_set1_find_someone_who.html",
+    "activity_set2_questions_solutions": "activities/u{U}_{S}_act1/u{U}_{S}_set2_questions_solutions.html",
+    "activity_set2_stations": "activities/u{U}_{S}_act1/u{U}_{S}_set2_stations.html",
+    "activity_set2_find_someone_who": "activities/u{U}_{S}_act1/u{U}_{S}_set2_find_someone_who.html"
+  },
+  "dashboard_snapshot": "reference_library/deployment/teacher_dashboard_reference.html",
+  "dashboard_integration_rule": "The dashboard is a live integration target. Framework path changes must be checked against its observed links; external stale links are cleanup findings, not path authority.",
+  "delivery_contract": {
+    "repo_patch_rule": "When a build/repair changes live Physics repository files, return only new/changed repo files with repository-relative paths. If exactly one file changed, return that file directly. If two or more files changed, return one ZIP containing only those changed/new files.",
+    "framework_artifact_rule": "Framework_Physics.zip remains the stable memory artifact; do not include an entire course repo in a routine repo patch."
+  }
+}

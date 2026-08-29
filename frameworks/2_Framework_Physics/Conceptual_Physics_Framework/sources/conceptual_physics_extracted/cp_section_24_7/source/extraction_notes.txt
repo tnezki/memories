@@ -1,0 +1,43 @@
+Extraction notes for cp_section_24_7
+
+Section converted: Chapter 24, Section 24.7 - Magnetic Forces.
+Source PDF used: /mnt/data/~CP_Curriculum_Sections(3).pdf
+Source pages used: textbook pages 460-462.
+Captured image archive used: /mnt/data/~all_images(3).zip
+
+Framework check:
+- Unit 8.3 Electromagnets and Magnetic Forces uses textbook sections 24.6 and 24.7.
+- Section 24.6 was completed in the previous build, so this build continues with Section 24.7.
+- Next framework section is Unit 8.4 Generators and Alternating Current, textbook section 25.3.
+
+Extraction decisions:
+- Section 24.7 begins at the Magnetic Forces heading on textbook page 460.
+- Section 24.7 body text continues through On Moving Charged Particles, On Current-Carrying Wires, Electric Meters, and Electric Motors.
+- Section 24.7 stops before the Section 24.8 Earth’s Magnetic Field heading on textbook page 462.
+- Figure 24.20 appears on the same page as the end of Section 24.7 but belongs to Section 24.8, so it was not included.
+- The right-hand-rule image in the capture archive appears to be supplemental/problem-solving material and is not a numbered figure in the Section 24.7 body, so it was not included.
+- Obvious PDF running headers/page numbers and line-break artifacts were removed.
+
+Figures included:
+- Figure 24.13 - A beam of electrons is deflected by a magnetic field.
+- Figure 24.14 - The magnetic field of Earth deflects many charged particles that make up cosmic radiation.
+- Figure 24.15 - A current-carrying wire experiences a force in a magnetic field.
+- Figure 24.16 - A very simple galvanometer.
+- Figure 24.17 - A common galvanometer design.
+- Figure 24.18 - Both the ammeter and the voltmeter are basically galvanometers.
+- Figure 24.19 - A simplified electric motor.
+
+Figures omitted:
+- None for Section 24.7.
+
+Capture check:
+- Figure 24.20 is captured but belongs to Section 24.8, not Section 24.7.
+- Figures 25.6, 25.7, and 25.8 are captured and belong to the next framework section, 25.3.
+- Figure 25.9 is captured but belongs to Section 25.4, not Section 25.3.
+
+QA pass summary:
+- ZIP structure checked: one top-level cp_section_24_7/ folder only.
+- CSS checked: no css/ folder or styles.css in ZIP; index.html links to ../css/styles.css.
+- Content checked against source pages and stopped before Section 24.8.
+- Image paths checked: all included images use images/[filename].
+- Manifest, README, and source files included.

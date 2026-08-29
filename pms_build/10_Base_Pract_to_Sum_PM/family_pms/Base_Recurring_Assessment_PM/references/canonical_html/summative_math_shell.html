@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{COURSE}} — Unit {{UNIT}} Summative Assessment</title>
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/summative_math.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], processEscapes: true } };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<main class="assessment">
+
+<!-- Repeat this FORM shell once per ACTIVE secure form. Item count comes ONLY from current Framework + Bank. -->
+<section class="exam-page" data-form="{{FORM_ID}}" data-page="1">
+  <header class="exam-header">
+    <div class="exam-title-row"><div class="exam-title">{{COURSE}} — Unit {{UNIT}} Summative Assessment</div><div class="exam-form">FORM {{FORM_ID}}</div></div>
+    <div class="student-row"><div>Name: <span class="write-line"></span></div><div>Date: <span class="write-line"></span></div></div>
+    <p class="exam-directions">{{DIRECTIONS}}</p>
+  </header>
+  {{PAGE_1_QUESTIONS_HTML}}
+</section>
+
+<!-- Repeat continuation page as needed. -->
+<section class="exam-page" data-form="{{FORM_ID}}" data-page="{{PAGE_NUMBER}}">
+  <header class="continuation-header"><span>{{COURSE}} — Unit {{UNIT}} · Form {{FORM_ID}}</span><span class="continuation-name">Name: <span class="mini-line"></span></span></header>
+  {{PAGE_N_QUESTIONS_HTML}}
+  {{END_MARK_IF_FINAL_PAGE}}
+</section>
+
+</main>
+</body>
+</html>
+
+<!-- QUESTION MAD-LIB BLOCK:
+<article class="assessment-question q-{{SIZE}}" data-bank-id="{{BANK_ID}}" data-mastery-goal="{{MG_ID}}">
+  <div class="question-head"><span class="question-number">{{QUESTION_NUMBER}}</span></div>
+  <div class="question-prompt">{{CANONICAL_PROMPT_AND_REPRESENTATION_HTML}}</div>
+</article>
+
+SIZE must be intentionally selected from compact|standard|large|xlarge using expected student work footprint.
+Never default unresolved items to standard.
+-->

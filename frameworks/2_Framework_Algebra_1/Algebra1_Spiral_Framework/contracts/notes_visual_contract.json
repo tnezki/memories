@@ -1,0 +1,186 @@
+{
+  "contract_name": "Algebra 1 Notes Visual Contract",
+  "framework_version": "v6.41",
+  "status": "CURRENT ALGEBRA NOTES VISUAL CONTRACT; v6.16 locks the approved Unit 1 format baseline after the typography/scale pilot",
+  "deployment_css": [
+    "css/base.css",
+    "css/notes.css"
+  ],
+  "html_link_order": [
+    "../../css/base.css",
+    "../../css/notes.css"
+  ],
+  "css_external": true,
+  "reference_css": "reference_library/notes_layout/Algebra_Notes_Layout_Reference_v2.css",
+  "html_structure_reference": "reference_library/notes_layout/Algebra_Notes_HTML_Structure_Reference.md",
+  "reference_css_rule": "The reference CSS is an additive record of approved pilot rules intended to be merged/preserved in the deployed course notes.css. It is NOT a third production stylesheet and is NOT a complete replacement for the existing notes.css by itself.",
+  "ordinary_build_rule": "Use the approved HTML structure/classes. Do not redesign the visual system or add another stylesheet during an ordinary content build.",
+  "teacher_inline_exception": "Teacher-only red/bold support may appear in corresponding teacher workspaces; teacher HTML may include the approved natural-flow override so fixed student workspace heights do not constrain teacher content.",
+  "layout_defaults": {
+    "default_workspace_height": "2.00in",
+    "graph_max_width": "2.52in",
+    "graph_max_height": "2.52in",
+    "i_can_heading_font_size": "13pt",
+    "final_misc_workspace_height": "9.0in",
+    "compact_two_column_table_min_width": "2.35in",
+    "compact_two_column_table_columns": "50/50",
+    "summary_workspace": false
+  },
+  "keep_together": [
+    "Vocabulary / Key Notation Preview heading + term list + sort directions + sort table when it fits",
+    "What's to Come heading + separate DO NOT SOLVE IT YET directions + canonical WTC + workspace when it fits",
+    "Let's Get Started heading + skim directions + Notice/Predict/Wonder table when it fits",
+    "close-reading callout + I-can heading + opening reading when it fits",
+    "Stop and Discuss prompt + workspace",
+    "Example/YTI title + question/representation + configured workspace",
+    "Math Notes reference block",
+    "Common Mistakes block"
+  ],
+  "fixed_student_language": {
+    "vocab_sort": "Sort the vocabulary. Write each vocabulary word in the column that best matches what you know right now. You may move a word later.",
+    "vocab_columns": [
+      "Know for sure",
+      "Recognize",
+      "Don't know yet"
+    ],
+    "wtc_title": "What's to Come",
+    "wtc_callout_title": "DO NOT SOLVE IT YET.",
+    "wtc_callout_body": "Circle anything familiar, underline symbols, labels, conditions, data, or features that seem important, and write short notes about what you think may matter later.",
+    "skim_title": "Let's Get Started",
+    "skim_directions": "Skim the section. Record what catches your attention before you read closely.",
+    "skim_rows": [
+      "What I noticed",
+      "What I predict",
+      "What I wonder"
+    ],
+    "close_reading_title": "READ IN SHORT CHUNKS.",
+    "close_reading_body": "Annotate the words and visuals together. Underline evidence, circle or highlight bold vocabulary, label arrows, measurements, or important features, connect sentences to figures, and jot short questions or connections in the margins."
+  },
+  "allowed_classes": {
+    "base_floor": [
+      "container",
+      "notes-title",
+      "title-kicker",
+      "title-main",
+      "title-sub",
+      "title-quote",
+      "title-note",
+      "objectives",
+      "vocab-box",
+      "vocab-list",
+      "vocab-note",
+      "h-target",
+      "h-vocab",
+      "h-preview",
+      "h-intro",
+      "h-summary",
+      "h-mistakes",
+      "h-example",
+      "h-yti",
+      "annotation-box",
+      "reading-box",
+      "strategy-box",
+      "stop-discuss",
+      "claim-card",
+      "boxed",
+      "key-point",
+      "mistake-box",
+      "values",
+      "vocab-sort",
+      "vocab-sort-space",
+      "preview-notes-table",
+      "roomy-table",
+      "observation-inference-table",
+      "mistake-table",
+      "math-notes",
+      "math-notes-header",
+      "math-notes-label",
+      "math-notes-title",
+      "math-notes-body",
+      "rep-grid",
+      "rep-card",
+      "sketch-cols",
+      "sketch-cell",
+      "sketch-cell-label",
+      "notes-figure",
+      "notes-ws",
+      "ws-ruled",
+      "ws-label",
+      "workspace-220",
+      "summary-list"
+    ],
+    "algebra_extensions": [
+      "vocab-preview-section",
+      "vocab-sort-task",
+      "vocab-sort-directions",
+      "vocab-sort-table",
+      "notes-wtc",
+      "wtc-instructions",
+      "wtc-do-not-solve",
+      "skim-section-task",
+      "lets-get-started-heading",
+      "skim-section-directions",
+      "skim-section-table",
+      "notes-ican-start",
+      "notes-ican-heading",
+      "close-reading-instructions",
+      "close-reading-title",
+      "notes-discuss-task",
+      "notes-task",
+      "notes-task-content",
+      "notes-task-workspace",
+      "notes-graph",
+      "compact-table",
+      "half-col",
+      "notes-keep-together",
+      "notes-mistakes-block",
+      "notes-misc-workspace"
+    ]
+  },
+  "source": "Approved from Algebra Unit 1 Section 1.1 Notes format/content pilot through v11, 2026-08-21.",
+  "canonical_representation_rendering": {
+    "graphs": {
+      "required_figure_class": "notes-graph",
+      "rule": "Every graph used in WTC, Example, YTI, or Math Notes must render inside <figure class=\"notes-graph\">; bare graph figures are prohibited.",
+      "visible_caption_rule": "Do not add <figcaption> or a decorative graph title. Preserve only mathematically necessary axis labels, units, tick labels, legends, point/function labels, or other data required by the task.",
+      "new_notes_graph_title": "Default graph-tool title to blank unless the title itself is required student data.",
+      "size": "2.52in max width and 2.52in max height via the current CSS variables."
+    },
+    "simple_two_column_task_tables": {
+      "required_table_class": "compact-table",
+      "required_col_structure": "<colgroup><col class=\"half-col\"><col class=\"half-col\"></colgroup>",
+      "rule": "For simple two-column data tables such as x/y tables, use intrinsic/minimum useful table width, centered, with equal 50/50 columns. Do not stretch to full content width.",
+      "exception": "Use a wider/noncompact table only when the data, headings, or instructional purpose genuinely require it."
+    }
+  },
+  "typography_scale": {
+    "normal_prose_list_table_caption": "9pt",
+    "major_learning_vocab_summary_mistakes_headers": "18pt",
+    "example_yti_headers": "13pt",
+    "i_can_heading": "13pt",
+    "title_kicker": "7.5pt",
+    "title_main": "21pt",
+    "title_sub": "10.5pt",
+    "title_quote": "9pt",
+    "math_notes_label": "8.5pt",
+    "math_notes_title": "10.5pt",
+    "stop_discuss_body": "9pt",
+    "stop_discuss_label": "9.5pt",
+    "wtc_and_lets_get_started_section_headers": "20pt",
+    "rule": "This exact hierarchy is the approved Algebra Unit 1 baseline. Do not resurrect older +2pt values unless the teacher explicitly changes the design."
+  },
+  "teacher_copy_layout": {
+    "student": "fixed Notability writing-space heights unchanged",
+    "teacher": "natural flow: height:auto!important; min-height:0!important; overflow:visible!important",
+    "hard_failure": "teacher content overlaps the next block",
+    "student_css_rule": "do not change deployed notes.css for teacher-only overflow"
+  },
+  "final_byte_sanitation": {
+    "prohibited_visible_literals": [
+      "\\n",
+      "\\r",
+      "\\t"
+    ],
+    "rule": "Remove visible escaped-whitespace leakage and fail if suspicious literals remain."
+  }
+}

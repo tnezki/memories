@@ -1,0 +1,204 @@
+{
+  "tables": [
+    {
+      "id": "limit_two_sided",
+      "name": "Two-sided limit approach table",
+      "columns": [
+        "x values from left",
+        "f(x)",
+        "x values from right",
+        "f(x)"
+      ],
+      "use": [
+        "1.1",
+        "1.2"
+      ],
+      "notes": "Use uneven spacing when useful; do not make the target value obvious by exact equality."
+    },
+    {
+      "id": "function_derivative_values",
+      "name": "Function/derivative value table",
+      "columns": [
+        "x",
+        "f(x)",
+        "f′(x)"
+      ],
+      "use": [
+        "2.2",
+        "2.3",
+        "3.4",
+        "5.4"
+      ],
+      "notes": "Useful for tangent, inverse-derivative, and representation-connection tasks."
+    },
+    {
+      "id": "motion_values",
+      "name": "Motion table",
+      "columns": [
+        "time",
+        "position and/or velocity",
+        "optional acceleration"
+      ],
+      "use": [
+        "4.2",
+        "8.2"
+      ],
+      "notes": "Include units in headers; choose intervals that support sign/direction reasoning."
+    },
+    {
+      "id": "rate_context",
+      "name": "Contextual rate table",
+      "columns": [
+        "time",
+        "rate"
+      ],
+      "use": [
+        "4.1",
+        "6.1",
+        "8.1"
+      ],
+      "notes": "Use nonuniform time intervals when trapezoidal/accumulation reasoning is intended."
+    },
+    {
+      "id": "related_rates_snapshot",
+      "name": "Related-rates instant table",
+      "columns": [
+        "quantity",
+        "value at instant",
+        "rate at instant",
+        "units"
+      ],
+      "use": [
+        "4.3",
+        "4.4"
+      ],
+      "notes": "Separate what is known at the instant from what is constant for all time."
+    },
+    {
+      "id": "sign_chart",
+      "name": "Derivative sign chart",
+      "columns": [
+        "interval",
+        "sign of f′",
+        "behavior of f",
+        "optional sign of f″"
+      ],
+      "use": [
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4"
+      ],
+      "notes": "Do not label extrema/concavity when students are supposed to infer them."
+    },
+    {
+      "id": "riemann_nonuniform",
+      "name": "Nonuniform partition table",
+      "columns": [
+        "x",
+        "f(x)"
+      ],
+      "use": [
+        "6.2"
+      ],
+      "notes": "Explicitly support left/right/trapezoid choices with unequal Δx."
+    },
+    {
+      "id": "accumulation_values",
+      "name": "Accumulation-function evidence table",
+      "columns": [
+        "x",
+        "f(x) or rate",
+        "optional accumulated value"
+      ],
+      "use": [
+        "6.1",
+        "6.3"
+      ],
+      "notes": "Useful for connecting area, sign, and accumulation behavior."
+    },
+    {
+      "id": "antiderivative_values",
+      "name": "Derivative/antiderivative relation table",
+      "columns": [
+        "x",
+        "f(x)",
+        "F(x) optional"
+      ],
+      "use": [
+        "6.4"
+      ],
+      "notes": "Can ask for change in F without requiring an explicit antiderivative formula."
+    },
+    {
+      "id": "slope_field_sample",
+      "name": "Slope-field sample grid",
+      "columns": [
+        "x",
+        "y",
+        "dy/dx"
+      ],
+      "use": [
+        "7.1",
+        "7.2"
+      ],
+      "notes": "Data structure for building a slope field; downstream visual should be a real field, not this raw table, unless the table itself is the task."
+    },
+    {
+      "id": "separable_initial_condition",
+      "name": "Differential-equation initial-condition record",
+      "columns": [
+        "equation",
+        "initial point",
+        "requested quantity"
+      ],
+      "use": [
+        "7.3",
+        "7.4",
+        "7.5"
+      ],
+      "notes": "Keep the initial condition clearly separate from the general differential equation."
+    },
+    {
+      "id": "area_intersections",
+      "name": "Area-between-curves intersection table",
+      "columns": [
+        "boundary/intersection",
+        "x or y coordinate",
+        "function relationship"
+      ],
+      "use": [
+        "8.3"
+      ],
+      "notes": "Use only when numerical intersections are part of the supplied information or calculator work."
+    },
+    {
+      "id": "cross_section_dimensions",
+      "name": "Cross-section dimension table",
+      "columns": [
+        "slice location",
+        "base dimension",
+        "cross-section shape/area relation"
+      ],
+      "use": [
+        "8.4"
+      ],
+      "notes": "Students should still construct the area function unless the Assessment Plan/task purpose says otherwise."
+    },
+    {
+      "id": "washer_radii",
+      "name": "Disc/washer radius organizer",
+      "columns": [
+        "slice variable",
+        "outer radius",
+        "inner radius",
+        "axis of rotation"
+      ],
+      "use": [
+        "8.5"
+      ],
+      "notes": "Measure each radius as a distance to the axis; avoid answer-revealing labels in student figures."
+    }
+  ],
+  "rule": "Render actual HTML tables/data displays in student materials when tabular structure matters; never expose raw Python/JSON arrays as the student representation."
+}

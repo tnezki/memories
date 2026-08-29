@@ -1,0 +1,193 @@
+{
+  "name": "Conceptual Physics Course Bank Profile",
+  "course": "Conceptual Physics",
+  "course_family": "science",
+  "profile_version": "v2.4",
+  "framework_version": "v6.8",
+  "extends": "current Base Bank PM",
+  "role": "Course-specific layer after universal Philosophy and `_question_structure.zip`. Owns Physics I-can-first architecture, response mix, source/visual behavior, course-resolved counts, representation system, conceptual-before-computational sequencing, and Summative profile; does not redefine universal build/package mechanics.",
+  "instructional_spine": {
+    "hard_rule": "Exact Assessment Plan I-can statements are the atomic center of Bank design and downstream routing. Learning Targets group the I-cans; Mastery Goals organize/report accumulated evidence. Never build section quotas first and attach I-can labels afterward.",
+    "i_can_index": "curriculum/i_can_index.json",
+    "i_can_first_contract": "contracts/i_can_first_bank_contract.json",
+    "planning_sequence": [
+      "Read exact Unit Assessment Plan.",
+      "Resolve exact I-can IDs/text from curriculum/i_can_index.json.",
+      "Build one evidence specification / mini-bank plan per I-can.",
+      "Using the dedicated `_question_structure.zip`, map content modes, formula/reverse paths, vocabulary directions, best-fit structures, representations/tools, and legitimate parallel variation for each I-can.",
+      "Build unitN_question_design_map.json before any final student prompt is authored.",
+      "Route the planned I-can mini-banks into Notes/Practice/CYU/Warm-Ups/Exit/Summative and reconcile destination totals.",
+      "Author questions from the plan, independently solve/verify them, then derive DOK/Bloom/final family metadata."
+    ],
+    "disciplinary_practices": "Use the Assessment Plan recurring-practice map as a menu for evidence design, not a quota."
+  },
+  "inventory": {
+    "mode": "physics_resolved_base_inventory",
+    "wtc_per_section": 1,
+    "example_yti_pairs_per_section": 4,
+    "practice_set_1": 24,
+    "practice_set_2": 24,
+    "practice_set_3": 24,
+    "extra_practice": 24,
+    "cyu": 6,
+    "warm_up_1": 4,
+    "warm_up_2": 4,
+    "warm_up_3": 4,
+    "exit_ticket_a": 4,
+    "exit_ticket_b": 4,
+    "exit_ticket_c": 4,
+    "tarsia_pairs_when_used": 18,
+    "blooket_questions_when_used": 20,
+    "notes_pair_rule": "No more than four canonical Example/YTI pairs per section; use fewer only when the Assessment Plan/source genuinely does not support four meaningful anchors.",
+    "granularity": "Counts are separate canonical questions/tasks; do not bundle unrelated jobs to satisfy counts.",
+    "allocation_rule": "Inventory totals are destination containers only. NEVER compute I-can quotas by evenly dividing the container (for example 24/3=8). Build intentional I-can mini-banks first, then reconcile to the destination total.",
+    "notes_i_can_floor": "Every exact section I-can receives at least one complete Example/YTI pair before any fourth/enrichment pair is allocated.",
+    "wtc_rule": "Every WTC is one true connected multi-part FRQ-decomposition routine; normally 3-5 labeled parts. WTC content may be cross-Unit and is excluded from current-Unit I-can coverage."
+  },
+  "abundance_philosophy": {
+    "rule": "Physics Practice may intentionally repeat a high-value conceptual or quantitative family with changed values, diagrams, contexts, or representations. Useful repetition is not a defect.",
+    "teacher_choice": "Teacher may skip items; keep a rich usable Bank rather than a minimum packet.",
+    "anti_template_rule": "Do not let one CER shell, one justify suffix, one graph type, or one Student A/Student B scaffold spread across unrelated targets."
+  },
+  "response_mode": {
+    "canonical_instructional": "constructed/open response is the default; selected response is allowed only when the destination/purpose benefits from it and the current Base/Framework destination permits it",
+    "blooket": "selected response",
+    "unit_summative": "20 questions/form: 16 selected response + 4 constructed response",
+    "distractors": "item-specific misconceptions only; no generic Physics vocabulary distractor bag"
+  },
+  "representations": {
+    "system": [
+      "Phenomenon/photo/real-world situation",
+      "Diagram/model/vector/ray/circuit/field representation",
+      "Graph",
+      "Data table/measurement set",
+      "Equation/relationship",
+      "Verbal explanation/context"
+    ],
+    "rule": "Representations are evidence, not decoration. Inspect the Hewitt/source visual library before defaulting to text-only in representation-heavy sections.",
+    "answer_neutrality": "NEVER SHOW THE ANSWER IN THE STUDENT IMAGE. If students must identify/infer/rank/label/calculate/predict/critique/construct/determine something, remove that answer-bearing label/arrow/value/rank/highlight/path/conclusion from the student visual. Source and reusable figures are conditional references, not automatically student-safe.",
+    "answer_neutrality_contract": "contracts/student_figure_answer_neutrality_contract.json"
+  },
+  "conceptual_before_computational": {
+    "rule": "Establish the physical model/relationship qualitatively before formula substitution whenever the concept supports it. Quantitative work should end with physical interpretation when that is part of the mapped job.",
+    "formula_reference": "reference_library/formula_problem_structures/formula_archetypes.json"
+  },
+  "question_structure": {
+    "hewitt_profile": "reference_library/question_structures/hewitt_question_family_profile.json",
+    "generic_toolkit": "current `_question_structure.zip` = universal authoritative design/variation structures; Framework Hewitt/section libraries = Physics-specific enrichment only",
+    "rule": "Use `_question_structure.zip` first for universal structure choices. Then use Physics/Hewitt libraries as course-specific menus. Do not force every family into every section and do not let Framework libraries become a competing universal taxonomy."
+  },
+  "source_hierarchy": [
+    "Original Unit Assessment Plan = scope/evidence authority",
+    "Extracted Conceptual Physics/Hewitt = primary conceptual voice + captured visual-story source + question-family benchmark",
+    "Course-aligned Physics section packets/approved figures = strongest ready-to-use course reference",
+    "Holt = quantitative archetypes",
+    "OpenStax High School Physics = secondary explanation/examples/representations",
+    "Halliday/Resnick = correctness/extension cross-check only"
+  ],
+  "summative": {
+    "versions": 6,
+    "v1_v4": "same-day parallel forms",
+    "v5_v6": "genuine makeup/alternate forms, not reordered/numeric-only copies",
+    "items_per_form": 20,
+    "selected_response": 16,
+    "constructed_response": 4,
+    "time_max_minutes_approx": 45,
+    "profile_ref": "profiles/recurring_assessment_course_profile.json",
+    "i_can_coverage": "Every form V1-V6 directly samples every exact Unit I-can at least once; remaining items are intentionally weighted toward high-leverage/compound Mastery-Goal evidence.",
+    "security_hard_rule": "No exact prompt duplication within a form, across V1-V6, or against exposed instructional items. Parallel forms may assess the same I-can/family but must use genuinely independent evidence stimuli; V5/V6 require especially distinct contexts/representations/structures."
+  },
+  "review_view": {
+    "rule": "Generate unitN_review.html from the same canonical items, grouped first by exact I-can then question_family_id. The I-can grouping is the primary side-by-side human comparison view.",
+    "card_metadata": "Every card displays destination, exact i_can_id, colored audit_status, and the exact I-can statement."
+  },
+  "resource_sequence_view": {
+    "file": "unitN_resources.html",
+    "rule": "Generate from the same canonical items as unitN.html. Use the normal stacked bank-item cards; do not use side-by-side review grids.",
+    "top_nav": [
+      "WTC",
+      "EX/YTI",
+      "Warm-Ups",
+      "Exit Tickets",
+      "Summative Assessments"
+    ],
+    "anchors": [
+      "wtc",
+      "ex-yti",
+      "warmups",
+      "exit-tickets",
+      "summative-assessments"
+    ],
+    "ordering": {
+      "WTC": "all Unit WTC items in section order",
+      "EX/YTI": "section order; each Example immediately followed by its paired YTI; then next pair",
+      "Warm-Ups": "section order, Warm-Up 1 through 3, preserving item order",
+      "Exit Tickets": "section order, Exit A through C, preserving item order",
+      "Summative Assessments": "V1 through V6, preserving question order"
+    },
+    "excluded_from_this_view": [
+      "Practice",
+      "Extra Practice",
+      "CYU",
+      "Tarsia",
+      "Blooket"
+    ],
+    "note": "This is a teacher audit/resource-sequence view, not a new source of canonical questions."
+  },
+  "audit_status": {
+    "initial": "NEEDS AUDIT",
+    "allowed": [
+      "NEEDS AUDIT",
+      "KEEP",
+      "CLEAN",
+      "REBUILD"
+    ],
+    "display": "Destination · I-can ID · colored status — exact I-can statement",
+    "fresh_build_rule": "All canonical items start NEEDS AUDIT even if mechanical/semantic builder QA passes."
+  },
+  "wtc_frq": {
+    "hard_rule": "Every WTC is one coherent free-response-style shared stimulus with connected labeled parts, normally 3-5. It is authored to practice how students unpack and navigate a long question, not to prove current-section mastery.",
+    "content_scope": "May draw from any Unit in the current Physics course. Current-section/current-Unit alignment is optional.",
+    "coverage_role": "wtc_frq_practice",
+    "coverage_rule": "WTC never satisfies the current Unit I-can coverage floors. Its i_can_id/i_can text is a content provenance address and may resolve to another Unit in curriculum/i_can_index.json.",
+    "unfamiliar_content_rule": "When content has not yet been taught, parts must remain accessible as unpacking, representation, qualitative prediction, relationship selection, or solution-planning practice rather than requiring successful execution of an untaught procedure.",
+    "canonical_fields": {
+      "wtc_frq": true,
+      "wtc_shared_stimulus": true,
+      "wtc_part_count": "integer 3-5",
+      "wtc_frq_focus": "non-empty list of FRQ breakdown moves",
+      "coverage_role": "wtc_frq_practice"
+    },
+    "focus_menu": [
+      "identify givens/unknowns",
+      "interpret/annotate representation",
+      "construct representation",
+      "identify relationship/strategy",
+      "trace dependency among parts",
+      "qualitative prediction",
+      "experimental/data-analysis planning",
+      "short familiar calculation",
+      "justify/interpret result"
+    ],
+    "source_reference_rule": "External/released/workbook FRQs may inform morphology only. Do not copy their wording, data, figures, or solution sequence into a Bank WTC."
+  },
+  "question_design_map": {
+    "contract": "contracts/question_design_map_contract.json",
+    "universal_authority": "bundled `_question_structure.zip` supplied by the Base Bank PM",
+    "required_output": "unitN_question_design_map.json",
+    "hard_rule": "No multi-item Physics Bank authoring begins from blank prompt generation. Map I-can evidence/question variety and representations first, instantiate item slots in JSON, then author from those slots.",
+    "no_quota": "Question type/wording/representation variety is selected by I-can fit; there are no universal percentages.",
+    "dok_bloom": "DOK/Bloom are never preplanned quotas; assign after the finished item exists."
+  },
+  "destination_authoring_preferences": {
+    "example_yti": "When an I-can naturally supports mathematical/formula application, prefer strong contextual quantitative/formula Example/YTI anchors over generic conceptual or vocabulary filler. Preserve conceptual/model meaning; equations are relationships, not answer machines.",
+    "practice": "Plan a target-appropriate mix that may include matching, vocabulary in multiple directions, direct/inverse formula use, dependent multi-step, graphs/data, diagrams/FBDs/vectors, short conceptual response, misconception diagnosis, and transfer. No universal percentages.",
+    "warmups": "Keep the established retrieval/bridging pattern unless the Assessment Plan requires a specific change.",
+    "exit_tickets": "Within each four-question ticket and across A/B/C, vary evidence modes when the I-can supports it. Do not make four same-shell questions. Treat Exit Ticket as formative-secure for semantic-independence QA.",
+    "wtc": "Keep the normal Bank card/metadata/answer/alignment display. WTC content is FRQ morphology/decomposition practice and may be cross-Unit."
+  },
+  "authoring_context_rule": {
+    "hard_rule": "Do not write naked plug-and-chug prompts that only assign variables and request a solve. Begin with a concrete physical situation/phenomenon that naturally supplies measurements; then students may choose/use/rearrange/interpret the relationship.",
+    "equation_role": "Equations are relationships describing the phenomenon, not answer machines."
+  }
+}

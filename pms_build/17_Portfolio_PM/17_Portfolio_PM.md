@@ -1,0 +1,371 @@
+# 17 — Portfolio PM
+
+Version: 0.1 PILOT  
+Status: READY FOR CAUTIOUS EXIT-TICKET PILOT  
+Purpose: Analyze newly uploaded student evidence, map it to the authoritative course learning architecture, update a persistent course-level portfolio state, and recommend Progress Tracker evidence/status updates while preserving teacher professional judgment.
+
+## 1. Core contract
+
+Instruction creates opportunities to learn; assessment gathers evidence; the portfolio organizes that evidence over time; and the grade will eventually communicate the best current professional judgment of what the student understands.
+
+This PM is **not a points grader** and is **not yet a grade-export system**.
+
+For v0.1:
+- assess new evidence;
+- map evidence to exact I-can statements / Mastery Goals;
+- preserve longitudinal evidence for all students;
+- recommend Progress Tracker updates;
+- produce student-facing feedback reports when the evidence is clear enough;
+- create a teacher-review queue for ambiguity;
+- DO NOT calculate an overall course grade;
+- DO NOT create a PowerSchool grade upload;
+- DO NOT send or prepare family email;
+- DO NOT silently change any prior student evidence or status.
+
+Those later functions should become additional Portfolio actions, not separate grading systems.
+
+## 2. Authority order
+
+Use these authorities in this order:
+
+1. Current explicit teacher instruction.
+2. Current Curriculum Philosophy PM — evidence/grading philosophy and teacher-judgment guardrails.
+3. This Portfolio PM — portfolio mechanics, evidence rubric, state structure, merge rules, and pilot constraints.
+4. Current Course Framework — course-specific architecture and exact current Assessment Plan/I-can/Mastery Goal meaning.
+5. Current complete Unit Bank — canonical assessment item wording, answer/solution intent, Bank IDs, evidence routing, I-can mappings, Mastery Goal mappings, representations, and metadata.
+6. Current deployed Progress Tracker and Exit Ticket resources when packaged — human-facing evidence/status structure and deployed artifact context.
+7. Prior Portfolio State ZIP when supplied — historical evidence record. It may preserve history but cannot override newer Philosophy/Framework meaning.
+8. The teacher-uploaded Portfolio PDF/scans — the new student evidence being analyzed in this run.
+
+If authorities conflict, do not improvise a reconciliation. Follow the hierarchy and record the conflict in the teacher-review queue.
+
+## 3. Normal input set
+
+### Bundled automatically by the Curriculum Control Panel
+Required:
+- current Curriculum Philosophy PM;
+- this `17_Portfolio_PM.zip`;
+- current course Framework;
+- current complete/materialized Unit Bank for the selected unit.
+
+Packaged when available:
+- deployed Unit Progress Tracker;
+- deployed Unit Exit Ticket family;
+- prior complete Portfolio State ZIP selected by the teacher.
+
+### Uploaded by the teacher at run time — NOT bundled by the panel
+The teacher uploads the request ZIP and the student Portfolio PDF/scans in the same conversation/run.
+
+The Portfolio PDF should normally contain:
+1. blank/clean copies of the student-facing assessment pages first, in the exact order students saw them;
+2. scanned student work after the blank pages, preserving the same page/question order as closely as practical.
+
+The clean pages are the primary prompt/order reference. Use them before interpreting handwriting.
+
+Do not require the teacher to re-upload blank assessment sources separately when the PDF already contains them.
+
+## 4. Student-work privacy / persistence
+
+The returned Portfolio State ZIP is the persistent evidence state. The scans are **not** copied into it.
+
+Store only the minimum evidence provenance needed to understand the judgment, such as:
+- evidence event/date if available;
+- assessment/source name;
+- clean-page number;
+- student-work page number;
+- question/item identifier;
+- Bank ID when confidently matched;
+- mapped I-can / Mastery Goal;
+- evidence observation and status.
+
+Do not invent student IDs. If a stable ID is visible, preserve it. If only a name is available, use a stable normalized student key and record `identifier_quality = name_only`. If student identity is ambiguous, do not merge records; add the case to teacher review.
+
+Never place the Portfolio State ZIP, student names, student IDs, reports, or grade data into a public course repository unless the teacher explicitly requests a private deployment mechanism.
+
+## 5. Read order for each run
+
+1. Read the Portfolio PM completely.
+2. Read the current Curriculum Philosophy PM, especially Exit Tickets / Evidence and Assessment / Grading / Portfolio.
+3. Read the current Framework authority contract and the complete original Assessment Plan for the selected unit.
+4. Resolve exact I-can statements, Mastery Goals, learning progression, and evidence architecture.
+5. Inspect the complete Unit Bank, especially Exit Ticket destinations, Bank IDs, answers/solutions, evidence maps, and item metadata.
+6. Inspect the deployed Progress Tracker and Exit Ticket resources if supplied.
+7. Read the prior Portfolio State ZIP if supplied; validate its schema/version and preserve every unaffected student/evidence record.
+8. Inspect the clean assessment pages at the beginning of the teacher-uploaded PDF. Establish page order and prompt/question boundaries before looking at student responses.
+9. Match clean prompts to canonical Bank items when possible. Use exact wording, values, figures, order, and metadata. Never force a weak match.
+10. Segment the scanned student work by student and by prompt/page.
+11. Evaluate each usable evidence point using the rubric in `rubrics/ALGEBRA_EVIDENCE_RUBRIC_v0_1.json`.
+12. Update the body-of-evidence judgment conservatively.
+13. Produce the complete updated Portfolio State ZIP and teacher review summary.
+
+## 6. Prompt-to-evidence mapping
+
+For each student response, establish this chain before judging proficiency:
+
+`clean prompt -> canonical Bank item (when confidently matched) -> exact I-can -> Mastery Goal / evidence role -> expected evidence -> student evidence`
+
+The first pages of the uploaded PDF are especially important because they show:
+- the exact blank prompt;
+- page/question order;
+- figures/tables/graphs;
+- workspace and multi-part structure.
+
+Do not infer an I-can from the student's handwriting when the clean prompt or Bank mapping provides a stronger source.
+
+If the prompt cannot be confidently matched to a Bank item:
+- use the Framework/Assessment Plan to map it only when the target is still clear;
+- set `bank_match_confidence` appropriately;
+- if the target remains ambiguous, mark the evidence `UNUSABLE_FOR_STATUS` and route it to teacher review rather than guessing.
+
+## 7. Evidence rubric — individual response
+
+Evaluate only dimensions that the prompt was actually designed to elicit. Do not penalize a direct computation item for lacking an essay-style justification that was never requested.
+
+Possible dimensions:
+1. **Mathematical accuracy** — calculations, algebra, graphing, notation, values, units, and final mathematical claims.
+2. **Conceptual understanding** — whether the work demonstrates the underlying mathematical idea rather than only an isolated procedure.
+3. **Reasoning / justification** — logical connection of steps, explanation, defense, critique, or evidence when required by the task.
+4. **Representation / communication** — correct and meaningful use/connection of graphs, tables, equations, words, diagrams, intervals, number lines, and notation when relevant.
+5. **Independence / transfer** — evidence of independent performance and, when the task allows, flexible application in a changed context or representation.
+
+### Item evidence strength
+Use exactly one:
+- `UNUSABLE` — blank, illegible, identity/prompt mismatch, non-response, or insufficiently clear to support a judgment.
+- `LIMITED` — major errors or misconception; little valid evidence of the target.
+- `PARTIAL` — meaningful correct thinking is present, but incomplete, inconsistent, or undermined by an important gap.
+- `CONVINCING` — the response substantially demonstrates the intended target independently; minor slips may remain if they do not undermine the demonstrated understanding.
+- `STRONG_TRANSFER` — convincing evidence plus meaningful transfer, connection, critique, modeling, strategic representation use, or successful work in a genuinely less-routine context.
+
+Do not convert these labels to points and average them.
+
+## 8. Error / misconception classification
+
+When useful, classify the primary issue as one or more of:
+- `execution_slip`
+- `procedural_gap`
+- `conceptual_misconception`
+- `representation_error`
+- `reasoning_gap`
+- `interpretation_context_error`
+- `communication_notation_issue`
+- `no_usable_evidence`
+
+An execution slip is not automatically evidence of a conceptual misconception.
+
+Track recurring misconceptions longitudinally with statuses such as:
+- observed
+- repeated
+- improving
+- resolved
+
+Do not mark a misconception resolved from one ambiguous response.
+
+## 9. Portfolio status — body of evidence
+
+Use the Progress Tracker language exactly:
+- `Not Yet`
+- `Approaching`
+- `Meeting`
+- `Exceeding`
+
+These are descriptions of the **quality and sufficiency of the accumulated body of evidence**, not numerical bands and not DOK tiers.
+
+### Not Yet
+The body of evidence does not yet support the target. This may mean evidence is absent, unusable, substantially incorrect, highly contradictory, or dominated by unresolved misconception.
+
+`Not Yet` means insufficient evidence **yet**, not permanent failure.
+
+### Approaching
+Meaningful evidence is present, but proficiency is not yet secure. Evidence may be incomplete, inconsistent, overly routine, dependent on cues, or contradicted by unresolved misconception.
+
+### Meeting
+The body of evidence convincingly supports independent performance of the target. The pattern should be sufficiently accurate, consistent, recent, and aligned with the expected reasoning/representations for that target.
+
+### Exceeding
+The student already meets the target and additionally demonstrates meaningful transfer, connection, critique, modeling, generalization, or strategic representation use. Do not award Exceeding merely for completing more work, receiving a harder-looking problem, or writing more words.
+
+## 10. Body-of-evidence signals
+
+For every status recommendation, consider:
+- quality;
+- consistency;
+- independence;
+- reasoning;
+- representation use;
+- recency;
+- breadth across valid evidence opportunities;
+- complexity/transfer where appropriate;
+- contradictory evidence;
+- growth over time.
+
+Do not use:
+- simple averaging;
+- "latest score wins";
+- one weak event as the sole proficiency rule;
+- one routine correct response as automatic proof of Meeting.
+
+## 11. Cautious Exit Ticket pilot policy
+
+This v0.1 pilot is intentionally conservative because the first testing cycle uses three Exit Tickets during the first three instructional days.
+
+Exit Tickets are quick evidence pulses. Therefore:
+
+1. **No overall unit/course grade** is produced in this pilot.
+2. **No PowerSchool CSV** is produced in this pilot.
+3. **No family email** is produced in this pilot.
+4. A single Exit Ticket should normally move an I-can/Mastery Goal no higher than `Approaching` unless prior portfolio evidence already supports a stronger status.
+5. `Meeting` from Exit Ticket evidence alone should normally require at least **two independent CONVINCING evidence points** for the same target across separate opportunities, with no unresolved contradictory evidence that materially weakens the claim.
+6. Three different Exit Tickets that assess three different targets do **not** combine into Meeting for any one target merely because all three were completed.
+7. `Exceeding` should **not be newly established from Exit Tickets alone** during this pilot. Preserve a prior Exceeding status if the new evidence does not undermine it, but flag meaningful contradictory evidence.
+8. One weak Exit Ticket does not automatically lower an established Meeting/Exceeding status. Flag the contradiction and recommend another evidence check.
+9. Low-confidence handwriting or mapping never changes a status automatically.
+10. The PM may recommend a tracker status change, but teacher professional judgment remains final.
+
+This pilot policy is a default guardrail, not a permanent grading formula. After real-work testing, revise it based on teacher judgment and observed usefulness.
+
+## 12. Progress Tracker connection
+
+The Portfolio PM must not create a competing learning taxonomy.
+
+Map evidence through the current Framework/Assessment Plan and report tracker-facing recommendations at the existing Mastery Goal / I-can structure.
+
+For each affected Mastery Goal, provide:
+- current recommended status;
+- previous status when known;
+- evidence sources supporting the recommendation;
+- short "What This Shows" language suitable for the Progress Tracker evidence table;
+- misconception/concern when applicable;
+- recommended next move.
+
+Do **not** rewrite or deploy the live Progress Tracker in v0.1. Produce machine-readable tracker update recommendations inside the Portfolio State ZIP so the mechanism can be tested first.
+
+## 13. Confidence and teacher review
+
+Every important mapping/judgment gets a confidence value:
+- `high`
+- `medium`
+- `low`
+
+Teacher review is REQUIRED when any of these are true:
+- student identity is ambiguous;
+- handwriting is not readable enough for a defensible judgment;
+- clean-page to scanned-page ordering is uncertain;
+- canonical Bank match is uncertain and affects the I-can mapping;
+- Framework and Bank mappings conflict;
+- student response could reasonably support two materially different interpretations;
+- a low-confidence observation would change a portfolio status;
+- prior portfolio state appears corrupted or incompatible.
+
+When uncertain, preserve the prior status and ask for review. Do not manufacture certainty.
+
+## 14. Complete Portfolio State ZIP — output contract
+
+Every successful run returns a **complete updated Portfolio State ZIP**, never a sparse patch.
+
+Required structure:
+
+```
+portfolio_state/
+  PORTFOLIO_STATE.json
+  evidence_ledger.csv
+  rubrics/
+    ALGEBRA_EVIDENCE_RUBRIC_v0_1.json
+  students/
+    <student_key>/
+      summary.json
+      unit_<N>/
+        evidence.json
+        progress_tracker_recommendations.json
+        reports/
+          <evidence_event_id>.md
+  review/
+    TEACHER_REVIEW_QUEUE.csv
+  audit/
+    RUN_MANIFEST.json
+    MAPPING_AUDIT.csv
+```
+
+The ZIP must preserve **all existing students and all prior evidence** from the supplied prior state. Update only students/evidence touched by the new uploaded work.
+
+Do not include scanned student PDFs/images in the persistent state ZIP.
+
+## 15. PORTFOLIO_STATE.json minimum fields
+
+At minimum include:
+- schema/version;
+- course;
+- created_at / updated_at when determinable;
+- rubric version(s);
+- students keyed by stable student key;
+- student display name / stable ID when available;
+- per-unit Mastery Goal status;
+- exact supporting I-cans;
+- evidence event IDs;
+- misconception history;
+- teacher-review flags;
+- provenance of each current status recommendation.
+
+Historical evidence records are append-only except for explicit teacher-approved correction. If a prior record is corrected, preserve an audit entry describing the change.
+
+## 16. Student report style for v0.1
+
+For each affected student, create a concise report focused on:
+- what the evidence currently shows;
+- strengths;
+- one or two important misconceptions/gaps when present;
+- exact learning goal(s) affected;
+- recommended next move.
+
+Do not show internal Bank IDs, PM language, rubric implementation details, confidence codes, or machine schema fields in student-facing prose.
+
+Avoid grade-like percentages in the pilot.
+
+## 17. Teacher summary
+
+Also provide a teacher-facing summary with:
+- number of students processed;
+- number of evidence items mapped confidently;
+- number of items sent to review;
+- proposed Progress Tracker status changes;
+- common misconceptions/patterns across the class;
+- students needing immediate follow-up;
+- any mapping/data-quality problems.
+
+Do not treat class trends as individual proof.
+
+## 18. Future Portfolio actions — architecture reservation
+
+Keep the state structure compatible with later Portfolio actions such as:
+- Assess New Evidence
+- Generate Reports
+- Audit Evidence
+- Export PowerSchool Grades
+- Prepare Student/Family Emails
+- Reconcile Teacher Overrides
+- Progress Tracker Sync
+
+Do not implement PowerSchool/email behavior in v0.1. Reserve clean fields/locations so those features can be added without replacing the evidence system.
+
+## 19. Fail-closed conditions
+
+Stop rather than guess if:
+- current Philosophy, Portfolio PM, Framework, or required Unit Bank is missing;
+- selected Unit Bank is sparse/incomplete;
+- no teacher-uploaded student work is present;
+- student boundaries cannot be determined safely;
+- the blank clean assessment pages are absent AND the prompt cannot otherwise be identified confidently;
+- the prior state cannot be parsed safely and merging would risk losing student records.
+
+If a subset of students is safely processable and others are not, process the safe subset, preserve all prior state, and put unresolved students/items in teacher review.
+
+## 20. Completion definition
+
+A run is complete only when:
+- new work has been mapped to exact learning targets where defensible;
+- item evidence has been evaluated using only applicable rubric dimensions;
+- body-of-evidence status recommendations have been updated conservatively;
+- all prior state has been preserved;
+- Progress Tracker recommendations have been generated;
+- ambiguous cases are in the teacher-review queue;
+- the complete Portfolio State ZIP has been produced;
+- no overall grade, PowerSchool export, or family email has been invented during the v0.1 pilot.

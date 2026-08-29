@@ -1,0 +1,283 @@
+{
+  "profile_name": "Algebra 1 Demos + Investigations Course Profile",
+  "profile_version": "v1.4",
+  "framework_version": "v6.41",
+  "course": "Algebra 1",
+  "authority": "Base Demos + Investigations PM owns universal plan-first + rendering mechanics; this profile owns Algebra-specific build scope, type libraries, source routing, graph-tool expectations, timing, representations, paths, CSS, and plan QA.",
+  "normal_inputs": [
+    "current 8_Base_Demos_Investigations_PM.zip",
+    "current 2_Framework_Algebra_1.zip"
+  ],
+  "bank_policy": {
+    "required": false,
+    "role_if_supplied": "secondary consistency/reference only; may reuse current vocabulary or approved representation bytes when genuinely useful; never convert Bank routes into Investigation question sets by default"
+  },
+  "build_scope": {
+    "default_when_teacher_requests_all_units": "Units 1-8",
+    "active_units": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "sections_per_unit": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "demo_per_active_section": 1,
+    "investigation_per_active_section": 1,
+    "course_total_demos": 40,
+    "course_total_investigations": 40
+  },
+  "demo": {
+    "usage_mode": "projector/screen-first",
+    "typical_minutes": "5-8",
+    "purpose": "curiosity/intellectual-tension hook and bridge into instruction; not a mini-lecture",
+    "css": "css/demo.css",
+    "carry_forward_rule": "When a later slide depends on earlier evidence, explicitly tell students to copy/record it before advancing. Later slides normally use the student-recorded evidence and do not re-display the earlier table/graph/data. Repeat prior evidence only by explicit teacher choice or genuine accessibility/safety need.",
+    "final_slide": "2-4 discussion questions with suggested/acceptable responses in the teacher guide, plus a concise bridge into instruction.",
+    "flow_rule": "The plan chooses the hook choreography section by section. No universal Observe/Record -> Use Notes -> Reveal middle sequence. Preserve only the dependency/student-record rule when later evidence depends on an earlier slide, and the required final discussion."
+  },
+  "investigation": {
+    "usage_mode": "print/Notability-friendly student handout with clean screen preview",
+    "typical_minutes": "about 20-30, section-responsive",
+    "purpose": "optional discovery/modeling/representation experience that creates learning through substantive student action",
+    "css": "css/investigation.css",
+    "student_visual_rule": "clean hierarchy, minimal decorative boxes; cards/borders only when functionally part of the task; prompt before representation; no descriptive captions",
+    "flow_rule": "No universal Task 1 / Task 2 structure and no fixed phase count. The plan-assigned Investigation type controls the classroom sequence. Preserve a useful synthesis/debrief, but let movement, data collection, making/building, gallery/sort, graph/model, or other experience types determine the student pages."
+  },
+  "teacher_guide": {
+    "css": "css/teacher_guide.css",
+    "shared_for": "both Demos and Investigations",
+    "default_sections": [
+      "Why This Fits",
+      "Quick View",
+      "Materials",
+      "Before Class",
+      "Suggested Flow",
+      "Answer/Evidence Guide",
+      "Watch For",
+      "Strong Synthesis"
+    ],
+    "demo_detail": "After the overview, one page per slide: slide replica on top half; detailed slide-specific teacher notes below, including expected responses/what to notice.",
+    "investigation_detail": "After the overview, mirror substantive student task phases with answer/solution and rationale/what-to-listen-for; open-ended tasks include validity criteria. Keep Strong Synthesis in the overview and also finish with a student-style synthesis replica plus suggested/acceptable responses, rationale, and teacher press questions.",
+    "table_style": "compact polished tables; clear header hierarchy; restrained row rules; center numeric data when appropriate"
+  },
+  "representations": {
+    "system": [
+      "Graph",
+      "Equation",
+      "Table",
+      "Context"
+    ],
+    "rule": "Use applicable forms substantively; Investigations should often ask students to connect/build/compare representations rather than merely view them.",
+    "figure_caption_rule": "Universal locked no-caption rule applies."
+  },
+  "source_route": [
+    "original Unit Assessment Plan exact learning target/I-cans",
+    "curriculum/section_index.json and course maps",
+    "reference_library/question_structures/section_enrichment.json",
+    "reference_library/future_resource_hooks/section_future_resource_hooks.json",
+    "reference_library/source_excerpts/section_source_excerpts.json when useful",
+    "reference_library/reusable_tables/table_catalog.json",
+    "reference_library/reusable_figures/figure_catalog.json and appropriate approved/reference visuals",
+    "GRAPH_TOOL_CAPABILITY_INVENTORY.md + tools/~graph_tool_v12.py when a new supported authoring visual is needed"
+  ],
+  "legacy_policy": "Old Demos/Investigations may supply a useful activity idea or teacher-live improvement, but current Framework/Assessment Plan outranks stale content/layout. Do not preserve a legacy title or task merely because it exists.",
+  "package": {
+    "mode": "one course-root drop-in ZIP for all requested Units",
+    "roots": [
+      "css/",
+      "demo/",
+      "investigations/"
+    ],
+    "css_once_at_root": true,
+    "loose_html_final_delivery_forbidden": true,
+    "plan_artifacts": [
+      "~demos_investigations_build_plan.json",
+      "~demos_investigations_build_plan.html"
+    ]
+  },
+  "paths": {
+    "source": "contracts/course_file_structure.json",
+    "demo_student": "demo/u{U}_{S}_demo/u{U}_{S}_demo.html",
+    "demo_teacher": "demo/u{U}_{S}_demo/u{U}_{S}_demo_teacher_guide.html",
+    "investigation_student": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation.html",
+    "investigation_teacher": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation_teacher_guide.html"
+  },
+  "demo_mode_library": [
+    {
+      "mode": "physical_object_or_manipulative_reveal",
+      "best_for": "a visible structure, surprising result, or concrete model that can launch a mathematical question"
+    },
+    {
+      "mode": "graph_or_data_reveal",
+      "best_for": "prediction from partial information, then reveal/compare an authoritative graph or data display"
+    },
+    {
+      "mode": "quick_class_vote_or_prediction",
+      "best_for": "surfacing competing intuitions before evidence is shown"
+    },
+    {
+      "mode": "human_movement_or_position_model",
+      "best_for": "rate/change, number-line position, graph-as-motion, ordering, or embodied comparison"
+    },
+    {
+      "mode": "competing_claims_or_models",
+      "best_for": "students choose, defend, and revise among plausible equations/graphs/representations"
+    },
+    {
+      "mode": "mini_class_data_collection",
+      "best_for": "a fast measurement/count/survey that creates authentic data for the section idea"
+    },
+    {
+      "mode": "error_or_contradiction_reveal",
+      "best_for": "a tempting wrong claim/model that creates useful tension"
+    },
+    {
+      "mode": "build_then_reveal",
+      "best_for": "students first make/sketch/arrange something, then compare to a mathematical representation"
+    },
+    {
+      "mode": "four_view_mystery",
+      "best_for": "connecting Graph / Equation / Table / Context without turning every section into the same card-sort routine"
+    }
+  ],
+  "investigation_mode_library": [
+    {
+      "mode": "four_view_connection",
+      "student_action": "match, construct missing views, translate, and defend connections among Graph / Equation / Table / Context"
+    },
+    {
+      "mode": "collect_data_build_model",
+      "student_action": "measure/count/time/record data, organize a table, graph/model it, and interpret parameters"
+    },
+    {
+      "mode": "human_movement_model",
+      "student_action": "physically position/move/order to model a number line, graph, rate, inequality, or comparison, then formalize the mathematics"
+    },
+    {
+      "mode": "make_build_manipulative",
+      "student_action": "construct or arrange an area model, algebra-tile model, card system, paper model, or other representation and connect it to symbols"
+    },
+    {
+      "mode": "graph_compare_transform",
+      "student_action": "use authoritative graphs/comparison grids as evidence; predict, sort, compare, reverse-engineer, or explain transformations/relationships"
+    },
+    {
+      "mode": "data_analysis_model_fit",
+      "student_action": "analyze class/generated data with scatter plots, bar charts, histograms, or trend/model reasoning"
+    },
+    {
+      "mode": "modeling_from_context",
+      "student_action": "start from a meaningful situation and decide which table/equation/graph/model is defensible rather than being told the representation"
+    },
+    {
+      "mode": "error_claim_critique",
+      "student_action": "evaluate competing student work/models/claims, locate the contradiction, and repair the reasoning"
+    },
+    {
+      "mode": "gallery_walk_sort_classify",
+      "student_action": "move among posted representations/examples, classify or pair them, then justify patterns and disagreements"
+    },
+    {
+      "mode": "create_trade_reverse_engineer",
+      "student_action": "create an example/representation satisfying constraints, trade it, and have another group reconstruct or identify missing forms"
+    },
+    {
+      "mode": "technology_or_simulation",
+      "student_action": "use an approved graphing/simulation/tool interaction when it creates a learning experience unavailable or clumsy on paper"
+    }
+  ],
+  "graph_tool_authoring": {
+    "authoritative_tool": "tools/~graph_tool_v12.py",
+    "capability_inventory": "GRAPH_TOOL_CAPABILITY_INVENTORY.md",
+    "consider_before_manual_figure": true,
+    "rule": "Use the authoritative tool whenever a supported graph/model/data display cleanly serves the Demo or Investigation. This is an authoring workflow, so Demos/Investigations are allowed to generate new visuals. Do not use graphs decoratively or when students should construct the graph themselves.",
+    "high_value_algebra_capabilities": [
+      "standard coordinate graphs and intersections",
+      "context/modeling graphs with units",
+      "blank and completed number lines",
+      "2x1, 2x2, 3x1, and 4x1 graph comparison grids",
+      "piecewise graphs",
+      "inequality/system graphs",
+      "rectangle/area models",
+      "diamond/sum-product structures when pedagogically relevant",
+      "bar charts, histograms, and scatter plots",
+      "fraction/tape models and algebra tiles when useful"
+    ],
+    "representation_heavy_default": "For a representation-heavy target, prefer actual high-quality graph/model output from the tool unless the investigation intentionally asks students to create that representation from scratch.",
+    "plan_gate": "Every planned section must make an explicit graph decision before rendering. The decision may be generated evidence/reveal, student construction, or no graph with reason.",
+    "algebra_opportunity_scan": [
+      "function families and representation comparison",
+      "linear graphing/rate/comparison/modeling",
+      "systems and inequalities",
+      "transformations across families",
+      "quadratic zeros/features/modeling",
+      "exponential growth/decay/modeling",
+      "data/model selection and scatter/model-fit work"
+    ],
+    "sanity_check": "For an all-40-section Algebra plan, zero or near-zero planned tool-generated graph/model uses is a PLAN FAILURE unless the plan clearly shows that students themselves construct those representations in the graph-heavy sections. Re-plan before HTML; do not wait for final output to discover that graphs disappeared."
+  },
+  "prototype_guard": "U1.1 and any approved prototype define visual quality/teacher-guide structure, not the required task mechanics. Do not clone its card/match/four-view sequence across sections unless that sequence independently fits the section.",
+  "plan_first_gate": {
+    "required_before_any_section_html": true,
+    "teacher_approval_pause_required": false,
+    "plan_json": "~demos_investigations_build_plan.json",
+    "plan_html": "~demos_investigations_build_plan.html",
+    "package_both_plan_artifacts": true,
+    "purpose": "Choose the actual classroom experience for all 40 sections before rendering so the builder cannot discover the course one generic worksheet at a time.",
+    "investigation_fields_per_section": [
+      "section_id and title",
+      "exact learning job",
+      "investigation_type",
+      "primary student actions",
+      "physical/social structure",
+      "student artifact/output",
+      "representations actually used/built/compared",
+      "graph_decision: tool_generated_student_evidence | tool_generated_teacher_reveal | student_constructed_representation | no_graph_figure_needed",
+      "graph_tool function/capability when applicable",
+      "materials/movement/measurement/data needs",
+      "3-6 step experience sequence",
+      "why this experience fits the section"
+    ],
+    "demo_fields_per_section": [
+      "demo_hook_type",
+      "what students do/record",
+      "evidence/reveal/representation",
+      "final discussion purpose"
+    ],
+    "qa_before_rendering": [
+      "Every active section has a complete Investigation type and experience sequence.",
+      "A type label is not enough: the student action, materials, artifact, and sequence must make that type real.",
+      "Scan for repeated sequence signatures caused by template convenience; re-plan suspicious clusters before HTML.",
+      "Representation-heavy sections cannot default to text-only without a section-specific reason.",
+      "Movement/making/data/gallery/model types must have corresponding real steps/materials/artifacts.",
+      "Graph decisions are explicit for every section."
+    ],
+    "render_fidelity": [
+      "HTML is downstream of the plan: do not silently change Investigation type during rendering.",
+      "Do not reduce movement, data collection, making/building, gallery/sort, graph/model, or create/trade plans to generic Task 1 + Task 2 worksheets.",
+      "If graph_decision says tool_generated_student_evidence, an actual generated graph/model/data visual must appear in student-facing assets.",
+      "If graph_decision says tool_generated_teacher_reveal, the actual reveal must appear in the Demo/teacher workflow and teacher guide.",
+      "If graph_decision says student_constructed_representation, provide appropriate blank graph/data/scaffold and expected solution guidance in the teacher guide.",
+      "The final output should be auditable against the packaged plan artifacts."
+    ],
+    "philosophy_alignment": "The map is an authoring design hypothesis for optional resources, not a fixed calendar or mandate. Teacher may skip, alter, combine, reorder, or replace resources. Do not create artificial variety quotas; choose experiences by purpose."
+  },
+  "workflow_order": [
+    "PHASE 1: read Philosophy + Framework/Assessment Plans and create complete ~demos_investigations_build_plan.json + .html for all requested sections",
+    "PHASE 1 QA: audit the plan for section-fit, real type/action differences, representations, graph decisions, materials, and sequence fidelity",
+    "PHASE 2: generate any tool-created figures/data/models required by the plan",
+    "PHASE 3: render Demo/Investigation student HTML + teacher guides from the plan; do not silently change types",
+    "PHASE 4: audit final output against the plan and package one real ZIP"
+  ],
+  "investigation_type_rule": "Choose from the Algebra mode library when it fits. A custom type is allowed when the exact section learning job calls for a different experience; name it clearly and justify it in the plan. The library is a menu, not a quota."
+}

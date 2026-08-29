@@ -1,0 +1,35 @@
+Extraction notes for cp_section_22_5
+
+Section converted: Chapter 22, Section 22.5 - Conductors and Insulators.
+Source PDF used: /mnt/data/~CP_Curriculum_Sections(3).pdf
+Source pages used: PDF pages 186-187, corresponding to textbook pages 412-413.
+Captured image archive used: /mnt/data/~all_images(3).zip
+
+Framework check:
+- Unit 7.1 is Electric Charge and Forces and uses textbook sections 22.1-22.6.
+- Previous extracted section was 22.4 Coulomb's Law; therefore the continuation section is 22.5 Conductors and Insulators.
+
+Extraction decisions:
+- Section begins at the 22.5 heading on textbook page 412 and stops before the 22.6 Charging heading on textbook page 413.
+- The FYI/margin note about the memristor was included as fyi content in the main flow.
+- Subheads Semiconductors and Superconductors were preserved.
+- Obvious PDF extraction artifacts and line-break hyphenation were cleaned without changing wording.
+- Figure 22.4 and Figure 22.5 captions were preserved in source_raw_text.txt, but the images were omitted from index.html because no matching captured images were supplied.
+
+Figures included:
+- None.
+
+Figures omitted:
+- Figure 22.4: no matching captured image was found in /mnt/data/~all_images(3).zip.
+- Figure 22.5: no matching captured image was found in /mnt/data/~all_images(3).zip.
+
+Capture check:
+- The supplied archive includes captured Figures 22.7 and 22.8, but those belong to later Section 22.6 Charging and were not included here.
+- I did not find a matching captured image for Figure 22.6, which belongs to the next section, 22.6 Charging; capture may be needed for the next extraction.
+
+QA pass summary:
+- ZIP structure checked: one top-level cp_section_22_5/ folder only.
+- CSS checked: no css/ folder or styles.css in ZIP; index.html links to ../css/styles.css.
+- Content checked against source pages and stopped before Section 22.6.
+- Image paths checked: no img tags are used in this section because supplied captures were missing for the section figures.
+- Manifest, README, and source files included.

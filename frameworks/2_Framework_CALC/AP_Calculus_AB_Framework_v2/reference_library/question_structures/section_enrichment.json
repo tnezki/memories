@@ -1,0 +1,3894 @@
+{
+  "1.1": {
+    "section": "1.1",
+    "title": "What Is a Limit?",
+    "learning_target": "Relate average versus instantaneous change to the idea of a limit and read and interpret limit notation.",
+    "ap_topics": [
+      "1.1",
+      "1.2"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from graphs approaching a point; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between graphs approaching a point and tables of values; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “What Is a Limit?” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Treating the function value at a point as automatically equal to the limit.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Relate average versus instantaneous change to the idea of a limit and read and interpret limit notation. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Estimate a limit from a graph or table.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "graphs approaching a point",
+      "tables of values",
+      "average-rate secant behavior",
+      "symbolic limit notation"
+    ],
+    "misconception_distractor_seeds": [
+      "Treating the function value at a point as automatically equal to the limit.",
+      "Reading a limit as a value reached rather than a value approached.",
+      "Confusing average rate of change with instantaneous rate of change."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U1-01"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "1.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "1.2": {
+    "section": "1.2",
+    "title": "Limits from Graphs and Tables",
+    "learning_target": "Determine one-sided and two-sided limits from graphs and tables, including when a limit does not exist.",
+    "ap_topics": [
+      "1.3",
+      "1.4",
+      "1.9"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from graphs with one-sided behavior; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between graphs with one-sided behavior and tables approaching from both sides; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Limits from Graphs and Tables” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Declaring DNE because the function is undefined at the point.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Determine one-sided and two-sided limits from graphs and tables, including when a limit does not exist. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Compare graphical and numerical estimates of the same limit.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "graphs with one-sided behavior",
+      "tables approaching from both sides",
+      "paired graphical and numerical representations"
+    ],
+    "misconception_distractor_seeds": [
+      "Declaring DNE because the function is undefined at the point.",
+      "Ignoring disagreement between left- and right-hand limits.",
+      "Reading a table from only one side of the input."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U1-01",
+      "APTOP-U1-07"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "1.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.9",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "1.3": {
+    "section": "1.3",
+    "title": "Algebraic Limits",
+    "learning_target": "Evaluate limits algebraically using direct substitution, limit laws, factoring, conjugates, and appropriate trigonometric or squeeze reasoning.",
+    "ap_topics": [
+      "1.5",
+      "1.6",
+      "1.7",
+      "1.8"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from symbolic expressions; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between symbolic expressions and factored forms; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Algebraic Limits” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Stopping at an indeterminate form instead of simplifying.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Evaluate limits algebraically using direct substitution, limit laws, factoring, conjugates, and appropriate trigonometric or squeeze reasoning. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Select an algebraic method for a limit form.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "symbolic expressions",
+      "factored forms",
+      "rationalized forms",
+      "trigonometric limit forms"
+    ],
+    "misconception_distractor_seeds": [
+      "Stopping at an indeterminate form instead of simplifying.",
+      "Applying limit laws before checking whether their conditions support the operation.",
+      "Using factoring or conjugates without preserving equivalent expressions near the limit point."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U1-06"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "1.5",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.7",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.8",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "1.4": {
+    "section": "1.4",
+    "title": "Continuity and Discontinuity",
+    "learning_target": "Analyze continuity at a point and on intervals, and classify discontinuities using limits, function values, and piecewise definitions.",
+    "ap_topics": [
+      "1.10",
+      "1.11",
+      "1.12",
+      "1.13"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from piecewise formulas; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between piecewise formulas and graphs with discontinuities; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Continuity and Discontinuity” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Checking only whether a function value exists rather than all continuity conditions.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Analyze continuity at a point and on intervals, and classify discontinuities using limits, function values, and piecewise definitions. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Determine parameter values that make a piecewise function continuous.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "conditions_then_conclusion",
+        "architecture": "State enough information for students to decide whether a named theorem/definition applies. Require explicit condition/hypothesis checking before the conclusion.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "piecewise formulas",
+      "graphs with discontinuities",
+      "continuity condition statements",
+      "interval notation"
+    ],
+    "misconception_distractor_seeds": [
+      "Checking only whether a function value exists rather than all continuity conditions.",
+      "Confusing a removable discontinuity with a jump or infinite discontinuity.",
+      "Forgetting to compare one-sided behavior at a piecewise boundary."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U1-07",
+      "APTOP-U1-02"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "1.10",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.11",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.12",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-02",
+          "APTOP-U1-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.13",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-02"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "1.5": {
+    "section": "1.5",
+    "title": "Asymptotes and IVT",
+    "learning_target": "Interpret infinite limits and limits at infinity to identify asymptotic behavior, and apply the Intermediate Value Theorem when its hypotheses are satisfied.",
+    "ap_topics": [
+      "1.14",
+      "1.15",
+      "1.16"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from graphs with asymptotes; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between graphs with asymptotes and end-behavior notation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Asymptotes and IVT” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Treating a vertical asymptote as a function value.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Interpret infinite limits and limits at infinity to identify asymptotic behavior, and apply the Intermediate Value Theorem when its hypotheses are satisfied. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Use asymptotic behavior to describe a function model.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "conditions_then_conclusion",
+        "architecture": "State enough information for students to decide whether a named theorem/definition applies. Require explicit condition/hypothesis checking before the conclusion.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "graphs with asymptotes",
+      "end-behavior notation",
+      "theorem hypothesis/conclusion statements",
+      "interval representations"
+    ],
+    "misconception_distractor_seeds": [
+      "Treating a vertical asymptote as a function value.",
+      "Assuming a horizontal asymptote cannot be crossed.",
+      "Using IVT without verifying continuity on the required interval."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U1-03",
+      "APTOP-U1-04",
+      "APTOP-U1-05"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "1.14",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-03"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.15",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "1.16",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U1-05"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "2.1": {
+    "section": "2.1",
+    "title": "Average to Instant Rate",
+    "learning_target": "Connect average rate of change and secant slopes to instantaneous rate of change and tangent slope estimates.",
+    "ap_topics": [
+      "2.1"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from secant and tangent line graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between secant and tangent line graphs and difference quotient expressions; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Average to Instant Rate” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using a single secant slope as the exact instantaneous rate.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Connect average rate of change and secant slopes to instantaneous rate of change and tangent slope estimates. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Estimate tangent slope from shrinking intervals.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "secant and tangent line graphs",
+      "difference quotient expressions",
+      "tables of shrinking intervals"
+    ],
+    "misconception_distractor_seeds": [
+      "Using a single secant slope as the exact instantaneous rate.",
+      "Confusing change in output with average rate of change.",
+      "Losing the interval width in a difference quotient."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U2-01"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "2.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "2.2": {
+    "section": "2.2",
+    "title": "Derivative Definition and Notation",
+    "learning_target": "Interpret the derivative as a limit, use derivative notation, and connect the derivative at a point to tangent-line meaning across equations, graphs, tables, and calculator estimates.",
+    "ap_topics": [
+      "2.2",
+      "2.3"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from limit definition of the derivative; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between limit definition of the derivative and tangent line graphs; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Derivative Definition and Notation” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Treating derivative notation as multiplication.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Interpret the derivative as a limit, use derivative notation, and connect the derivative at a point to tangent-line meaning across equations, graphs, tables, and calculator estimates. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Estimate a derivative from a table.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "limit definition of the derivative",
+      "tangent line graphs",
+      "tables of values",
+      "derivative notation"
+    ],
+    "misconception_distractor_seeds": [
+      "Treating derivative notation as multiplication.",
+      "Substituting into a derivative definition without identifying the changing increment.",
+      "Confusing the derivative function with the derivative at one point."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U2-02",
+      "APTOP-U2-03",
+      "APTOP-U2-04",
+      "APTOP-U2-05"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "2.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-02",
+          "APTOP-U2-03",
+          "APTOP-U2-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "2.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-05"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "2.3": {
+    "section": "2.3",
+    "title": "Differentiability",
+    "learning_target": "Determine where a function is differentiable and connect differentiability to continuity, corners, cusps, vertical tangents, and discontinuities.",
+    "ap_topics": [
+      "2.4"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from graphs with nondifferentiable points; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between graphs with nondifferentiable points and local tangent behavior; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Differentiability” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Assuming continuity guarantees differentiability.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Determine where a function is differentiable and connect differentiability to continuity, corners, cusps, vertical tangents, and discontinuities. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Classify points of nondifferentiability from graphs.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "conditions_then_conclusion",
+        "architecture": "State enough information for students to decide whether a named theorem/definition applies. Require explicit condition/hypothesis checking before the conclusion.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "graphs with nondifferentiable points",
+      "local tangent behavior",
+      "continuity/differentiability implication statements"
+    ],
+    "misconception_distractor_seeds": [
+      "Assuming continuity guarantees differentiability.",
+      "Treating a vertical tangent as an ordinary finite derivative.",
+      "Missing nondifferentiability at corners or cusps on an otherwise continuous graph."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U2-06"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "2.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "2.4": {
+    "section": "2.4",
+    "title": "Power and Basic Rules",
+    "learning_target": "Differentiate functions using the power, constant, sum, difference, constant-multiple, and selected basic trigonometric, exponential, and logarithmic rules.",
+    "ap_topics": [
+      "2.5",
+      "2.6",
+      "2.7"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from symbolic functions; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between symbolic functions and derivative notation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Power and Basic Rules” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Applying the power rule to a constant incorrectly.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Differentiate functions using the power, constant, sum, difference, constant-multiple, and selected basic trigonometric, exponential, and logarithmic rules. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Differentiate a mixed basic-rule expression.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "symbolic functions",
+      "derivative notation",
+      "$f$ and $f'$ pairs"
+    ],
+    "misconception_distractor_seeds": [
+      "Applying the power rule to a constant incorrectly.",
+      "Dropping coefficients or signs in sum/difference expressions.",
+      "Mixing basic derivative rules for trigonometric, exponential, or logarithmic functions."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U2-06",
+      "APTOP-U2-07"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "2.5",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "2.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "2.7",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "2.5": {
+    "section": "2.5",
+    "title": "Product, Quotient, and Core Functions",
+    "learning_target": "Differentiate products and quotients, select among core derivative rules, and apply derivatives to tangent-line situations.",
+    "ap_topics": [
+      "2.8",
+      "2.9",
+      "2.10"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from products and quotients of functions; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between products and quotients of functions and tangent line equations; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Product, Quotient, and Core Functions” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using the product rule as the product of derivatives.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Differentiate products and quotients, select among core derivative rules, and apply derivatives to tangent-line situations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Differentiate mixed products and quotients.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "products and quotients of functions",
+      "tangent line equations",
+      "symbolic derivative work"
+    ],
+    "misconception_distractor_seeds": [
+      "Using the product rule as the product of derivatives.",
+      "Omitting the denominator square in the quotient rule.",
+      "Applying a complicated rule when algebraic simplification would make the derivative clearer."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U2-08",
+      "APTOP-U2-09"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "2.8",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-08"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "2.9",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-09"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "2.10",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U2-09"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "3.1": {
+    "section": "3.1",
+    "title": "Chain Rule",
+    "learning_target": "Differentiate composite functions by identifying outer and inner structure and applying the chain rule with accurate notation.",
+    "ap_topics": [
+      "3.1"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from nested symbolic functions; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between nested symbolic functions and function composition notation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Chain Rule” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Differentiating only the outer function.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Differentiate composite functions by identifying outer and inner structure and applying the chain rule with accurate notation. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Differentiate nested functions.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "nested symbolic functions",
+      "function composition notation",
+      "derivative chains"
+    ],
+    "misconception_distractor_seeds": [
+      "Differentiating only the outer function.",
+      "Multiplying by the inner function instead of its derivative.",
+      "Losing nested structure when several chain-rule layers are present."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U3-01",
+      "APTOP-U3-02"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "3.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U3-01",
+          "APTOP-U3-02"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "3.2": {
+    "section": "3.2",
+    "title": "Mixed Derivative Rules",
+    "learning_target": "Select and combine product, quotient, chain, and core derivative rules in mixed expressions and use higher-order derivative notation.",
+    "ap_topics": [
+      "3.5",
+      "3.6"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from mixed symbolic functions; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between mixed symbolic functions and higher-order derivative notation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Mixed Derivative Rules” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using the correct rules in the wrong nesting order.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Select and combine product, quotient, chain, and core derivative rules in mixed expressions and use higher-order derivative notation. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Compare efficient derivative strategies.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "mixed symbolic functions",
+      "higher-order derivative notation",
+      "procedure-selection trees"
+    ],
+    "misconception_distractor_seeds": [
+      "Using the correct rules in the wrong nesting order.",
+      "Treating every mixed expression as a product or quotient without checking composition.",
+      "Confusing first- and higher-order derivative notation."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U3-04",
+      "APTOP-U3-05"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "3.5",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U3-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "3.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U3-05"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "3.3": {
+    "section": "3.3",
+    "title": "Implicit Differentiation",
+    "learning_target": "Differentiate implicit relations, solve for $dy/dx$, and use the result in tangent-line situations.",
+    "ap_topics": [
+      "3.2"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from implicit equations; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between implicit equations and symbolic derivative equations; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Implicit Differentiation” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Forgetting the $dy/dx$ factor when differentiating terms containing $y$.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Differentiate implicit relations, solve for $dy/dx$, and use the result in tangent-line situations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Find tangent slopes on implicit curves.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "implicit equations",
+      "symbolic derivative equations",
+      "tangent lines on implicit curves"
+    ],
+    "misconception_distractor_seeds": [
+      "Forgetting the $dy/dx$ factor when differentiating terms containing $y$.",
+      "Solving for $y$ first when implicit differentiation is the intended efficient method.",
+      "Substituting point values before differentiation in a way that loses general structure."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U3-03"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "3.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U3-03"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "3.4": {
+    "section": "3.4",
+    "title": "Inverse Derivatives",
+    "learning_target": "Determine derivatives of inverse functions from equations, tables, and graphs, and apply inverse trigonometric derivative rules.",
+    "ap_topics": [
+      "3.3",
+      "3.4"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from inverse-function equations; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between inverse-function equations and tables with function/inverse data; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Inverse Derivatives” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Confusing $f^{-1}$ with $1/f$.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Determine derivatives of inverse functions from equations, tables, and graphs, and apply inverse trigonometric derivative rules. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Determine inverse derivatives from a table.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "inverse-function equations",
+      "tables with function/inverse data",
+      "paired graphs",
+      "symbolic inverse-trig expressions"
+    ],
+    "misconception_distractor_seeds": [
+      "Confusing $f^{-1}$ with $1/f$.",
+      "Using an inverse derivative formula without matching corresponding input/output values.",
+      "Dropping the chain-rule factor in inverse trigonometric derivatives."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U3-04"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "3.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U3-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "3.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U3-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "3.5": {
+    "section": "3.5",
+    "title": "Derivative Strategy and Review",
+    "learning_target": "Synthesize derivative rules, higher-order notation, procedure selection, and early motion connections to solve mixed derivative problems efficiently and accurately.",
+    "ap_topics": [],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from mixed symbolic derivatives; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between mixed symbolic derivatives and higher-order notation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Derivative Strategy and Review” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Selecting a rule from surface appearance rather than structure.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Synthesize derivative rules, higher-order notation, procedure selection, and early motion connections to solve mixed derivative problems efficiently and accurately. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Build a derivative strategy for unfamiliar mixed expressions.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "mixed symbolic derivatives",
+      "higher-order notation",
+      "tables/graphs/equations",
+      "motion-rate interpretations"
+    ],
+    "misconception_distractor_seeds": [
+      "Selecting a rule from surface appearance rather than structure.",
+      "Losing notation precision in higher-order derivatives.",
+      "Computing a derivative correctly but failing to interpret what it means in a rate context."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U2-08",
+      "APTOP-U2-09",
+      "APTOP-U3-04",
+      "APTOP-U3-05"
+    ],
+    "ap_topic_source_support": [],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "4.1": {
+    "section": "4.1",
+    "title": "Meaning of Derivatives",
+    "learning_target": "Interpret $f$, $f'$, and $f''$ in context using appropriate units, rates, and verbal meaning.",
+    "ap_topics": [
+      "4.1",
+      "4.3"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from contextual verbal descriptions; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between contextual verbal descriptions and function/derivative notation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Meaning of Derivatives” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Giving a derivative value without rate units.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Interpret $f$, $f'$, and $f''$ in context using appropriate units, rates, and verbal meaning. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Write context-specific interpretations of derivatives.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "contextual verbal descriptions",
+      "function/derivative notation",
+      "tables and graphs with units"
+    ],
+    "misconception_distractor_seeds": [
+      "Giving a derivative value without rate units.",
+      "Describing $f'$ as the original quantity rather than its rate of change.",
+      "Treating the second derivative as simply another velocity-like quantity without context."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U4-01",
+      "APTOP-U4-04"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "4.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U4-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "4.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U4-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "4.2": {
+    "section": "4.2",
+    "title": "Motion",
+    "learning_target": "Analyze position, velocity, acceleration, speed, and sign relationships from equations, graphs, and calculator-supported representations.",
+    "ap_topics": [
+      "4.2"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from position/velocity/acceleration graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between position/velocity/acceleration graphs and motion equations; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Motion” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Confusing velocity with speed.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Analyze position, velocity, acceleration, speed, and sign relationships from equations, graphs, and calculator-supported representations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Analyze motion from derivative signs.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "position/velocity/acceleration graphs",
+      "motion equations",
+      "sign charts",
+      "tables"
+    ],
+    "misconception_distractor_seeds": [
+      "Confusing velocity with speed.",
+      "Using acceleration sign alone to decide whether an object speeds up.",
+      "Ignoring sign changes when interpreting direction or total motion behavior."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U4-02",
+      "APTOP-U4-03"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "4.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U4-02",
+          "APTOP-U4-03"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "4.3": {
+    "section": "4.3",
+    "title": "Related Rates Intro",
+    "learning_target": "Translate a changing-quantity context into related variables, rates, an equation, and the specific instant needed for related-rates reasoning.",
+    "ap_topics": [
+      "4.4"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from labeled diagrams; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between labeled diagrams and variable/rate tables; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Related Rates Intro” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Substituting numerical values before differentiating.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Translate a changing-quantity context into related variables, rates, an equation, and the specific instant needed for related-rates reasoning. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Set up a related-rates model without completing the solve.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "labeled diagrams",
+      "variable/rate tables",
+      "constraint equations",
+      "verbal contexts"
+    ],
+    "misconception_distractor_seeds": [
+      "Substituting numerical values before differentiating.",
+      "Using the wrong variable relationship for the geometry or context.",
+      "Failing to distinguish a quantity from its rate of change."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U4-04"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "4.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U4-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "4.4": {
+    "section": "4.4",
+    "title": "Related Rates Problems",
+    "learning_target": "Solve related-rates problems by building a diagram and equation, differentiating with respect to time, substituting specific information, and interpreting the resulting rate.",
+    "ap_topics": [
+      "4.5"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from diagrams; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between diagrams and time-dependent equations; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Related Rates Problems” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Substituting before differentiating and losing a changing variable.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Solve related-rates problems by building a diagram and equation, differentiating with respect to time, substituting specific information, and interpreting the resulting rate. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Solve geometric or physical related-rate contexts.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "diagrams",
+      "time-dependent equations",
+      "rate equations",
+      "contextual interpretations"
+    ],
+    "misconception_distractor_seeds": [
+      "Substituting before differentiating and losing a changing variable.",
+      "Omitting $d/dt$ factors for changing quantities.",
+      "Reporting a signed rate without interpreting direction or units."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U4-05"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "4.5",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U4-05"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "4.5": {
+    "section": "4.5",
+    "title": "Linearization and L'Hospital's Rule",
+    "learning_target": "Use local linearity for tangent-line approximation and apply L'Hospital's Rule only to appropriate indeterminate forms with required conditions.",
+    "ap_topics": [
+      "4.6",
+      "4.7"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from tangent line models; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between tangent line models and function and derivative values; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Linearization and L'Hospital's Rule” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using linearization far from the center without considering local accuracy.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Use local linearity for tangent-line approximation and apply L'Hospital's Rule only to appropriate indeterminate forms with required conditions. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Estimate function values with a tangent model and discuss over/under behavior.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "conditions_then_conclusion",
+        "architecture": "State enough information for students to decide whether a named theorem/definition applies. Require explicit condition/hypothesis checking before the conclusion.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "tangent line models",
+      "function and derivative values",
+      "limit forms",
+      "symbolic limits"
+    ],
+    "misconception_distractor_seeds": [
+      "Using linearization far from the center without considering local accuracy.",
+      "Applying L'Hospital's Rule to a form that is not an appropriate indeterminate form.",
+      "Differentiating numerator and denominator when the rule conditions are not established."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U4-06",
+      "APTOP-U4-07"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "4.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U4-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "4.7",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U4-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "5.1": {
+    "section": "5.1",
+    "title": "MVT, EVT, and Critical Points",
+    "learning_target": "Apply the Mean Value Theorem and Extreme Value Theorem with appropriate hypotheses and conclusions, and identify critical points and local or global extrema.",
+    "ap_topics": [
+      "5.1",
+      "5.2"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from function graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between function graphs and theorem hypothesis/conclusion statements; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “MVT, EVT, and Critical Points” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using a theorem without checking continuity or differentiability conditions.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Apply the Mean Value Theorem and Extreme Value Theorem with appropriate hypotheses and conclusions, and identify critical points and local or global extrema. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Verify theorem hypotheses on an interval.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "conditions_then_conclusion",
+        "architecture": "State enough information for students to decide whether a named theorem/definition applies. Require explicit condition/hypothesis checking before the conclusion.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "function graphs",
+      "theorem hypothesis/conclusion statements",
+      "derivative equations",
+      "intervals"
+    ],
+    "misconception_distractor_seeds": [
+      "Using a theorem without checking continuity or differentiability conditions.",
+      "Treating every critical point as an extremum.",
+      "Confusing local and absolute extrema."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U5-01",
+      "APTOP-U5-02"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "5.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "5.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-02"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "5.2": {
+    "section": "5.2",
+    "title": "Increasing, Decreasing, and First Derivative Test",
+    "learning_target": "Use the sign of the first derivative to determine intervals of increase/decrease and classify local extrema with the first derivative test.",
+    "ap_topics": [
+      "5.3",
+      "5.4"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from sign charts for $f'$; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between sign charts for $f'$ and graphs of $f$ and $f'$; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Increasing, Decreasing, and First Derivative Test” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using the sign of $f$ instead of $f'$ to decide increase/decrease.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Use the sign of the first derivative to determine intervals of increase/decrease and classify local extrema with the first derivative test. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Build and interpret a first-derivative sign chart.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "sign charts for $f'$",
+      "graphs of $f$ and $f'$",
+      "interval notation"
+    ],
+    "misconception_distractor_seeds": [
+      "Using the sign of $f$ instead of $f'$ to decide increase/decrease.",
+      "Calling a critical point an extremum without checking a sign change.",
+      "Using closed endpoints incorrectly in open-interval monotonicity statements."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U5-03",
+      "APTOP-U5-04",
+      "APTOP-U5-05"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "5.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-03"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "5.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-04",
+          "APTOP-U5-05"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "5.3": {
+    "section": "5.3",
+    "title": "Concavity and Second Derivative Test",
+    "learning_target": "Use second-derivative information to determine concavity, identify inflection points, and apply the second derivative test when appropriate.",
+    "ap_topics": [
+      "5.6",
+      "5.7"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from sign charts for $f''$; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between sign charts for $f''$ and graphs of $f$, $f'$, and $f''$; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Concavity and Second Derivative Test” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Assuming $f''=0$ automatically gives an inflection point.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Use second-derivative information to determine concavity, identify inflection points, and apply the second derivative test when appropriate. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Analyze concavity from $f''$.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "sign charts for $f''$",
+      "graphs of $f$, $f'$, and $f''$",
+      "interval notation"
+    ],
+    "misconception_distractor_seeds": [
+      "Assuming $f''=0$ automatically gives an inflection point.",
+      "Confusing concave up with increasing.",
+      "Using the second derivative test when its conditions do not determine a result."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U5-08",
+      "APTOP-U5-09",
+      "APTOP-U5-10",
+      "APTOP-U5-11"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "5.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-08",
+          "APTOP-U5-09",
+          "APTOP-U5-10"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "5.7",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-11"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "5.4": {
+    "section": "5.4",
+    "title": "Connecting f, f prime, and f double-prime",
+    "learning_target": "Connect the behavior of $f$, $f'$, and $f''$ across graphical, numerical, analytical, and implicit representations.",
+    "ap_topics": [
+      "5.8",
+      "5.9",
+      "5.12"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from matched graphs of $f$, $f'$, $f''$; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between matched graphs of $f$, $f'$, $f''$ and tables; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Connecting f, f prime, and f double-prime” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Matching graphs by shape alone without using sign and zero relationships.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Connect the behavior of $f$, $f'$, and $f''$ across graphical, numerical, analytical, and implicit representations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Match derivative-related graphs.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "matched graphs of $f$, $f'$, $f''$",
+      "tables",
+      "analytical expressions",
+      "implicit relationships"
+    ],
+    "misconception_distractor_seeds": [
+      "Matching graphs by shape alone without using sign and zero relationships.",
+      "Confusing extrema of $f$ with extrema of $f'$.",
+      "Inferring concavity from the value of $f$ instead of change in $f'$."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U5-12",
+      "APTOP-U5-13"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "5.8",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-12"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "5.9",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-13"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "5.12",
+        "support_mode": "fallback",
+        "direct_source_ids": [],
+        "fallback_source_ids": [
+          "APTOP-U5-12",
+          "APTOP-U5-13"
+        ],
+        "fallback_note": "No directly labeled 5.12 AP Topics packet is present in the supplied corpus. Use Unit 5 packets covering 5.8 and 5.9–5.11 for authentic graph-analysis/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 5.12 mathematics."
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "5.5": {
+    "section": "5.5",
+    "title": "Optimization",
+    "learning_target": "Model optimization situations with quantities, constraints, and objective functions, then use calculus-based reasoning to identify and justify optimal values.",
+    "ap_topics": [
+      "5.10",
+      "5.11"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from context diagrams; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between context diagrams and constraint equations; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Optimization” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Optimizing the constraint instead of the objective.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Model optimization situations with quantities, constraints, and objective functions, then use calculus-based reasoning to identify and justify optimal values. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Construct an objective function from a context.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "context diagrams",
+      "constraint equations",
+      "objective functions",
+      "derivative sign or critical-point analysis"
+    ],
+    "misconception_distractor_seeds": [
+      "Optimizing the constraint instead of the objective.",
+      "Ignoring the feasible domain or endpoints.",
+      "Finding a critical value without showing why it gives the required optimum."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U5-13"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "5.10",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-13"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "5.11",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U5-13"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "6.1": {
+    "section": "6.1",
+    "title": "Accumulation and Area",
+    "learning_target": "Interpret accumulation of change from rate graphs using signed area, units, and properties of definite integrals.",
+    "ap_topics": [
+      "6.1",
+      "6.6"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from rate graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between rate graphs and geometric regions; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Accumulation and Area” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Treating all geometric area as positive when the integral is signed.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Interpret accumulation of change from rate graphs using signed area, units, and properties of definite integrals. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Estimate accumulation from geometric regions.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "rate graphs",
+      "geometric regions",
+      "definite integral notation",
+      "units"
+    ],
+    "misconception_distractor_seeds": [
+      "Treating all geometric area as positive when the integral is signed.",
+      "Confusing accumulated change with final value when an initial value is needed.",
+      "Dropping units when integrating a rate."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U6-01",
+      "APTOP-U6-07"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "6.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "6.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "6.2": {
+    "section": "6.2",
+    "title": "Riemann Sums",
+    "learning_target": "Approximate definite integrals with left, right, midpoint, and trapezoid sums on uniform or nonuniform partitions and interpret over/under estimates.",
+    "ap_topics": [
+      "6.2",
+      "6.3"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from tables; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between tables and graphs; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Riemann Sums” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using the wrong sample point for a named sum.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Approximate definite integrals with left, right, midpoint, and trapezoid sums on uniform or nonuniform partitions and interpret over/under estimates. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Approximate accumulation from a table.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "tables",
+      "graphs",
+      "rectangles/trapezoids",
+      "summation notation"
+    ],
+    "misconception_distractor_seeds": [
+      "Using the wrong sample point for a named sum.",
+      "Assuming every partition has equal width.",
+      "Comparing over/under estimates without considering monotonicity or concavity."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U6-02",
+      "APTOP-U6-03",
+      "APTOP-U6-04"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "6.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-02",
+          "APTOP-U6-03"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "6.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "6.3": {
+    "section": "6.3",
+    "title": "FTC Part 1 and Accumulation Functions",
+    "learning_target": "Connect definite integrals and accumulation functions through the Fundamental Theorem of Calculus, including derivatives of integrals and behavior of accumulation functions.",
+    "ap_topics": [
+      "6.4",
+      "6.5"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from accumulation-function graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between accumulation-function graphs and integral-defined functions; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “FTC Part 1 and Accumulation Functions” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Ignoring a variable upper limit when differentiating an accumulation function.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Connect definite integrals and accumulation functions through the Fundamental Theorem of Calculus, including derivatives of integrals and behavior of accumulation functions. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Analyze an accumulation function from an integrand graph.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "conditions_then_conclusion",
+        "architecture": "State enough information for students to decide whether a named theorem/definition applies. Require explicit condition/hypothesis checking before the conclusion.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "accumulation-function graphs",
+      "integral-defined functions",
+      "rate graphs",
+      "derivative relationships"
+    ],
+    "misconception_distractor_seeds": [
+      "Ignoring a variable upper limit when differentiating an accumulation function.",
+      "Confusing the accumulation function value with the integrand value.",
+      "Missing how the sign of the integrand controls increase/decrease of the accumulation function."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U6-05",
+      "APTOP-U6-06"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "6.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-05"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "6.5",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "6.4": {
+    "section": "6.4",
+    "title": "FTC Part 2 and Antiderivatives",
+    "learning_target": "Find antiderivatives and evaluate definite integrals using the Fundamental Theorem of Calculus, with correct constants and notation for indefinite integrals.",
+    "ap_topics": [
+      "6.7",
+      "6.8"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from symbolic antiderivatives; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between symbolic antiderivatives and definite integral evaluation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “FTC Part 2 and Antiderivatives” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Omitting the constant of integration in an indefinite integral.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Find antiderivatives and evaluate definite integrals using the Fundamental Theorem of Calculus, with correct constants and notation for indefinite integrals. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Evaluate definite integrals from antiderivatives.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "conditions_then_conclusion",
+        "architecture": "State enough information for students to decide whether a named theorem/definition applies. Require explicit condition/hypothesis checking before the conclusion.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "symbolic antiderivatives",
+      "definite integral evaluation",
+      "families of functions"
+    ],
+    "misconception_distractor_seeds": [
+      "Omitting the constant of integration in an indefinite integral.",
+      "Adding a constant of integration to a definite integral result.",
+      "Reversing upper and lower bounds without changing the sign."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U6-08",
+      "APTOP-U6-09",
+      "APTOP-U6-10"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "6.7",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-08",
+          "APTOP-U6-09"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "6.8",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-10"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "6.5": {
+    "section": "6.5",
+    "title": "u-Substitution and Strategy",
+    "learning_target": "Use $u$-substitution as chain-rule reversal and select among substitution, algebraic rewriting, long division, or completing the square when appropriate.",
+    "ap_topics": [
+      "6.9",
+      "6.10",
+      "6.14"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from nested integrands; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between nested integrands and substitution notation; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “u-Substitution and Strategy” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Choosing $u$ without accounting for $du$.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Use $u$-substitution as chain-rule reversal and select among substitution, algebraic rewriting, long division, or completing the square when appropriate. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Select an integration strategy from integrand structure.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "nested integrands",
+      "substitution notation",
+      "rewritten rational or quadratic forms"
+    ],
+    "misconception_distractor_seeds": [
+      "Choosing $u$ without accounting for $du$.",
+      "Changing variables but leaving mixed $x$ and $u$ terms.",
+      "Using substitution when algebraic rewriting is the more direct structure."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U6-10",
+      "APTOP-U6-08",
+      "APTOP-U6-09"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "6.9",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U6-10"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "6.10",
+        "support_mode": "fallback",
+        "direct_source_ids": [],
+        "fallback_source_ids": [
+          "APTOP-U6-10"
+        ],
+        "fallback_note": "No directly labeled 6.10 AP Topics packet is present in the supplied corpus. Use the supplied 6.8–6.9 packet for nearby integration-strategy/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 6.10 mathematics."
+      },
+      {
+        "topic": "6.14",
+        "support_mode": "fallback",
+        "direct_source_ids": [],
+        "fallback_source_ids": [
+          "APTOP-U6-08",
+          "APTOP-U6-09",
+          "APTOP-U6-10"
+        ],
+        "fallback_note": "No directly labeled 6.14 AP Topics packet is present in the supplied corpus. Use nearby Unit 6 integration packets (6.7 and 6.8–6.9) for authentic strategy/task/scoring structures, while the Assessment Plan + CED + calculus textbook control the actual 6.14 mathematics."
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "7.1": {
+    "section": "7.1",
+    "title": "Modeling Differential Equations",
+    "learning_target": "Translate verbal rate relationships into differential equations and verify whether proposed functions satisfy a differential equation.",
+    "ap_topics": [
+      "7.1",
+      "7.2"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from verbal statements; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between verbal statements and differential equations; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Modeling Differential Equations” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Writing an algebraic equation instead of a rate equation.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Translate verbal rate relationships into differential equations and verify whether proposed functions satisfy a differential equation. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Model a verbal growth or change statement with a differential equation.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "verbal statements",
+      "differential equations",
+      "candidate solution functions"
+    ],
+    "misconception_distractor_seeds": [
+      "Writing an algebraic equation instead of a rate equation.",
+      "Checking a candidate function value without checking its derivative relationship.",
+      "Ignoring variable dependence in a contextual differential equation."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U7-01"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "7.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U7-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "7.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U7-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "7.2": {
+    "section": "7.2",
+    "title": "Slope Fields",
+    "learning_target": "Sketch and interpret slope fields, connect local slope behavior to differential equations, and reason about solution curves graphically.",
+    "ap_topics": [
+      "7.3",
+      "7.4"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from slope fields; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between slope fields and solution curves; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Slope Fields” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Treating slope-field segments as a single connected solution curve.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Sketch and interpret slope fields, connect local slope behavior to differential equations, and reason about solution curves graphically. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Sketch a solution curve through an initial point.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "slope fields",
+      "solution curves",
+      "differential equations",
+      "graphical direction patterns"
+    ],
+    "misconception_distractor_seeds": [
+      "Treating slope-field segments as a single connected solution curve.",
+      "Using the point coordinates rather than the differential equation to determine local slope.",
+      "Drawing a solution curve that crosses the field inconsistently."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U7-01",
+      "APTOP-U7-02"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "7.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U7-01"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "7.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U7-02"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "7.3": {
+    "section": "7.3",
+    "title": "Separation of Variables",
+    "learning_target": "Solve separable differential equations by separating variables, integrating both sides, and managing constants of integration across multiple notations.",
+    "ap_topics": [
+      "7.6"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from differential notation; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between differential notation and separated equations; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Separation of Variables” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Separating factors incorrectly across differentials.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Solve separable differential equations by separating variables, integrating both sides, and managing constants of integration across multiple notations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Solve a standard separable equation.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "differential notation",
+      "separated equations",
+      "implicit/explicit solution forms"
+    ],
+    "misconception_distractor_seeds": [
+      "Separating factors incorrectly across differentials.",
+      "Forgetting a constant of integration.",
+      "Dividing by an expression that can be zero without considering lost solutions."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U7-02"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "7.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U7-02"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "7.4": {
+    "section": "7.4",
+    "title": "Particular Solutions",
+    "learning_target": "Use initial conditions to determine constants and produce particular solutions to separable differential equations.",
+    "ap_topics": [
+      "7.7"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from general solution families; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between general solution families and initial-condition points; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Particular Solutions” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Substituting the initial condition before obtaining a valid general relationship.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Use initial conditions to determine constants and produce particular solutions to separable differential equations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Determine a particular solution from an initial condition.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "general solution families",
+      "initial-condition points",
+      "particular solution graphs/equations"
+    ],
+    "misconception_distractor_seeds": [
+      "Substituting the initial condition before obtaining a valid general relationship.",
+      "Solving for the constant incorrectly from the initial condition.",
+      "Leaving a general solution when a particular solution is requested."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U7-03",
+      "APTOP-U7-04"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "7.7",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U7-03",
+          "APTOP-U7-04"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "7.5": {
+    "section": "7.5",
+    "title": "Exponential Models",
+    "learning_target": "Model and interpret exponential growth and decay from differential equations in contextual situations.",
+    "ap_topics": [
+      "7.8"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from differential equations; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between differential equations and exponential solution models; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Exponential Models” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using the wrong sign for a growth or decay constant.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Model and interpret exponential growth and decay from differential equations in contextual situations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Build a growth or decay model from a rate relationship.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "differential equations",
+      "exponential solution models",
+      "context tables/graphs"
+    ],
+    "misconception_distractor_seeds": [
+      "Using the wrong sign for a growth or decay constant.",
+      "Interpreting the constant without regard to units or context.",
+      "Treating exponential behavior as linear change."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U7-05",
+      "APTOP-U7-06"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "7.8",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U7-05",
+          "APTOP-U7-06"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "8.1": {
+    "section": "8.1",
+    "title": "Average Value and Net Change",
+    "learning_target": "Use definite integrals to determine average value and net change, and distinguish average value from average rate of change in contextual situations.",
+    "ap_topics": [
+      "8.1",
+      "8.3"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from function/rate graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between function/rate graphs and tables; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Average Value and Net Change” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using the average rate of change formula for average value.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Use definite integrals to determine average value and net change, and distinguish average value from average rate of change in contextual situations. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Compute and interpret average value.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "function/rate graphs",
+      "tables",
+      "definite integral formulas",
+      "contextual interpretations"
+    ],
+    "misconception_distractor_seeds": [
+      "Using the average rate of change formula for average value.",
+      "Confusing net change with total accumulated amount.",
+      "Ignoring interval length in average value."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U8-01",
+      "APTOP-U8-03",
+      "APTOP-U8-06",
+      "APTOP-U8-07"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "8.1",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-01",
+          "APTOP-U8-03"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "8.3",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-06",
+          "APTOP-U8-07"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "8.2": {
+    "section": "8.2",
+    "title": "Motion with Integrals",
+    "learning_target": "Use integrals to determine displacement, total distance, and position from velocity, while distinguishing velocity from speed and accounting for direction changes.",
+    "ap_topics": [
+      "8.2"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from velocity graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between velocity graphs and integrals of velocity; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Motion with Integrals” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using signed displacement as total distance.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Use integrals to determine displacement, total distance, and position from velocity, while distinguishing velocity from speed and accounting for direction changes. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Compute displacement and total distance from a velocity model.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "velocity graphs",
+      "integrals of velocity",
+      "motion tables",
+      "sign-change intervals"
+    ],
+    "misconception_distractor_seeds": [
+      "Using signed displacement as total distance.",
+      "Failing to split an integral where velocity changes sign for total distance.",
+      "Forgetting an initial position when finding position from accumulated velocity."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U8-04",
+      "APTOP-U8-05"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "8.2",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-04",
+          "APTOP-U8-05"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "8.3": {
+    "section": "8.3",
+    "title": "Area Between Curves",
+    "learning_target": "Set up and evaluate area between curves with respect to $x$ or $y$, including multiple intersections and orientation decisions.",
+    "ap_topics": [
+      "8.4",
+      "8.5",
+      "8.6"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from graphs of bounding curves; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between graphs of bounding curves and vertical slices; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Area Between Curves” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Subtracting in the wrong order and getting negative geometric area.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Set up and evaluate area between curves with respect to $x$ or $y$, including multiple intersections and orientation decisions. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Set up area with respect to $x$ or $y$.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "graphs of bounding curves",
+      "vertical slices",
+      "horizontal slices",
+      "definite integrals"
+    ],
+    "misconception_distractor_seeds": [
+      "Subtracting in the wrong order and getting negative geometric area.",
+      "Using $dx$ when a $dy$ setup is structurally more appropriate without rewriting functions.",
+      "Missing a necessary split at an intersection where the bounding order changes."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U8-08",
+      "APTOP-U8-09",
+      "APTOP-U8-10"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "8.4",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-08",
+          "APTOP-U8-09"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "8.5",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-10"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "8.6",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-10"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "8.4": {
+    "section": "8.4",
+    "title": "Volumes with Cross Sections",
+    "learning_target": "Model volumes with known cross-sectional shapes by converting a base region into an area function and integrating over the appropriate interval.",
+    "ap_topics": [
+      "8.7",
+      "8.8"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from base-region graphs; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between base-region graphs and cross-sectional diagrams; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Volumes with Cross Sections” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Integrating a length instead of cross-sectional area.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Model volumes with known cross-sectional shapes by converting a base region into an area function and integrating over the appropriate interval. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Build a cross-sectional area function from a base region.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "base-region graphs",
+      "cross-sectional diagrams",
+      "area formulas",
+      "volume integrals"
+    ],
+    "misconception_distractor_seeds": [
+      "Integrating a length instead of cross-sectional area.",
+      "Using the wrong dimension as the side/base/diameter of a cross section.",
+      "Forgetting that the area formula may square a distance between curves."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U8-10",
+      "APTOP-U8-11"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "8.7",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-10"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "8.8",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-11"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  },
+  "8.5": {
+    "section": "8.5",
+    "title": "Volumes by Rotation",
+    "learning_target": "Set up disc and washer volume integrals about coordinate or shifted axes, making correct radius and orientation decisions.",
+    "ap_topics": [
+      "8.9",
+      "8.10",
+      "8.11",
+      "8.12"
+    ],
+    "question_archetypes": [
+      {
+        "name": "representation_read",
+        "architecture": "Start from regions with rotation axes; require the student to extract the needed mathematical information before calculating.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "representation_translate",
+        "architecture": "Translate between regions with rotation axes and disc/washer slices; ask what must stay mathematically consistent.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "method_selection",
+        "architecture": "Present a problem aligned to “Volumes by Rotation” where the main demand is selecting a valid method/definition/theorem from the structure, then carrying it out.",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "misconception_diagnosis",
+        "architecture": "Build a realistic error around: Using a function value as a radius without measuring distance to the axis of rotation.. Ask for the precise faulty step/assumption and a correction, not a generic 'explain your reasoning.'",
+        "response_modes": [
+          "constructed response"
+        ]
+      },
+      {
+        "name": "ap_style_multipart",
+        "architecture": "Use an AP-style two- or three-part task around the learning target: Set up disc and washer volume integrals about coordinate or shifted axes, making correct radius and orientation decisions. Sequence compute/identify → justify/interpret → connect a representation when natural.",
+        "response_modes": [
+          "multi-part constructed response"
+        ]
+      },
+      {
+        "name": "context_model",
+        "architecture": "Use a concrete context from the section opportunity: Set up disc or washer integrals about varied axes.. Preserve variable meaning and units; interpretation is part of the mathematics.",
+        "response_modes": [
+          "constructed response"
+        ]
+      }
+    ],
+    "representation_menu": [
+      "regions with rotation axes",
+      "disc/washer slices",
+      "radius expressions",
+      "volume integrals"
+    ],
+    "misconception_distractor_seeds": [
+      "Using a function value as a radius without measuring distance to the axis of rotation.",
+      "Reversing inner and outer radii.",
+      "Choosing a slice orientation that does not generate discs or washers for the stated axis."
+    ],
+    "ap_task_source_ids": [
+      "APTOP-U8-11",
+      "APTOP-U8-02"
+    ],
+    "ap_topic_source_support": [
+      {
+        "topic": "8.9",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-11"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "8.10",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-11"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "8.11",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-02"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      },
+      {
+        "topic": "8.12",
+        "support_mode": "direct",
+        "direct_source_ids": [
+          "APTOP-U8-02"
+        ],
+        "fallback_source_ids": [],
+        "fallback_note": ""
+      }
+    ],
+    "quality_notes": [
+      "Use AP Topic tasks as structural/scoring references; author new analogous content rather than cloning source wording.",
+      "Mix graphical, numerical, analytical, and verbal representations when the Assessment Plan supports them.",
+      "Do not add a generic justification tail to routine items; justification must target a specific theorem, condition, representation, or conclusion.",
+      "For contextual work, preserve units and the meaning of variables in both prompt and answer.",
+      "Calculator output is evidence/result, not self-justifying work; where relevant require mathematical setup and interpretation."
+    ],
+    "universal_bank_response_note": "For canonical Universal Bank authoring, use constructed/open response. Any selected-response examples in AP source packets are source-format/misconception references only; Blooket is the selected-response exception."
+  }
+}

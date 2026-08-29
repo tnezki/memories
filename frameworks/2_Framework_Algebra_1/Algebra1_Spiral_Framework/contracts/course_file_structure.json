@@ -1,0 +1,209 @@
+{
+  "contract_name": "Algebra 1 Course File Structure",
+  "contract_version": "v5",
+  "framework_version": "v6.41",
+  "source": "teacher_dashboard_reference.html supplied 2026-08-21",
+  "source_sha256": "10dc729f33155ac3d73196ec0d8436134cb0ec7e72d0b51984599e0d9757031f",
+  "authority_rule": [
+    "current explicit user instruction",
+    "this Framework course_file_structure.json contract",
+    "reference_library/deployment/teacher_dashboard_reference.html",
+    "task-specific PM fallback only when Framework has no applicable path"
+  ],
+  "course_root": {
+    "description": "Algebra repository root; teacher dashboard lives at the same level as index.html.",
+    "link_rule": "All internal course links are relative from course root: no leading slash, domain, or repo name.",
+    "portable_hosts": [
+      "local http server from algebra folder",
+      "GitHub Pages",
+      "other host/folder rename"
+    ]
+  },
+  "resource_roots": {
+    "css": "css/",
+    "notes": "notes/",
+    "practice_sets": "practice_sets/",
+    "demo": "demo/",
+    "investigations": "investigations/",
+    "activities": "activities/",
+    "performance_task": "performance_task___5134zrt/",
+    "quick_check": "quick_check____htq5855/",
+    "progress": "progress/",
+    "warmups": "warmups/",
+    "reviews": "reviews/",
+    "exit": "exit/",
+    "banks": "banks/",
+    "assessments": "assessments_zxrtjp/"
+  },
+  "unit_resource_templates": {
+    "progress": "progress/unit_{U}_progress/unit_{U}_progress.html",
+    "warmups": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
+    "review": "reviews/review{U}/review_{U}.html",
+    "exit_tickets": "exit/exit{U}/exit_{U}.html",
+    "assessment_plan": "assessments_zxrtjp/unit{U}_assessment_plan/unit{U}_assessment_plan.html",
+    "bank": "banks/unit{U}/unit{U}.html",
+    "summative": "assessments_zxrtjp/unit{U}_summative/unit{U}_summative_assessment.html",
+    "bank_review_internal": "banks/unit{U}/unit{U}_review.html",
+    "review_practice": "reviews/review{U}/review_{U}_practice.html"
+  },
+  "section_resource_templates": {
+    "notes_student": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",
+    "notes_teacher": "notes/u{U}_{S}_notes/u{U}_{S}_notes_teacher.html",
+    "practice_set_1": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}.html",
+    "practice_set_2": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_2.html",
+    "practice_set_3": "practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_3.html",
+    "extra_practice": "practice_sets/practice_sets_{U}_{S}/extra_practice_{U}_{S}.html",
+    "cyu": "practice_sets/practice_sets_{U}_{S}/cyu_{U}_{S}.html",
+    "tarsia": "practice_sets/practice_sets_{U}_{S}/tarsia_{U}_{S}_practice_3.txt",
+    "blooket": "practice_sets/practice_sets_{U}_{S}/blooket_{U}_{S}_practice_3.csv",
+    "practice_figures": "practice_sets/practice_sets_{U}_{S}/figures/",
+    "demo_student": "demo/u{U}_{S}_demo/u{U}_{S}_demo.html",
+    "demo_teacher": "demo/u{U}_{S}_demo/u{U}_{S}_demo_teacher_guide.html",
+    "investigation_student": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation.html",
+    "investigation_teacher": "investigations/u{U}_{S}_investigation/u{U}_{S}_investigation_teacher_guide.html",
+    "activity_1": "activities/u{U}_{S}_act1/u{U}_{S}_act1.html",
+    "performance_task_student": "performance_task___5134zrt/u{U}_{S}_performance_task/u{U}_{S}_performance_task.html",
+    "performance_task_teacher": "performance_task___5134zrt/u{U}_{S}_performance_task/u{U}_{S}_performance_task_teacher_guide.html",
+    "quick_check": "quick_check____htq5855/u{U}_{S}_quick_check/u{U}_{S}_quick_check.html",
+    "activity_1_figures": "activities/u{U}_{S}_act1/figures/",
+    "activity_set1_projection": "activities/u{U}_{S}_act1/u{U}_{S}_set1_questions_solutions.html",
+    "activity_set2_projection": "activities/u{U}_{S}_act1/u{U}_{S}_set2_questions_solutions.html",
+    "activity_set1_stations": "activities/u{U}_{S}_act1/u{U}_{S}_set1_stations.html",
+    "activity_set2_stations": "activities/u{U}_{S}_act1/u{U}_{S}_set2_stations.html",
+    "activity_set1_find_someone_who": "activities/u{U}_{S}_act1/u{U}_{S}_set1_find_someone_who.html",
+    "activity_set2_find_someone_who": "activities/u{U}_{S}_act1/u{U}_{S}_set2_find_someone_who.html"
+  },
+  "known_shared_css": {
+    "notes": [
+      "css/base.css",
+      "css/notes.css"
+    ],
+    "bank": [
+      "css/base.css",
+      "css/bank.css"
+    ],
+    "practice_sets": [
+      "css/base.css",
+      "css/practice_set.css"
+    ],
+    "activities": [
+      "css/base.css",
+      "css/activities.css (hub + projection decks)",
+      "css/activity_stations.css (Stations files)",
+      "css/activity_find_someone_who.css (Find Someone Who files)"
+    ],
+    "warmups": [
+      "css/base.css",
+      "css/warmup.css"
+    ],
+    "exit_tickets": [
+      "css/exit.css"
+    ],
+    "progress_tracker": [
+      "css/progress_tracker.css"
+    ],
+    "review": [
+      "css/review.css",
+      "css/review_practice.css"
+    ],
+    "summative": [
+      "css/base.css",
+      "css/summative_math.css"
+    ],
+    "demos": [
+      "css/demo.css"
+    ],
+    "investigations": [
+      "css/investigation.css"
+    ],
+    "demos_investigations_teacher": [
+      "css/teacher_guide.css"
+    ],
+    "performance_tasks": [
+      "css/performance_task.css"
+    ],
+    "quick_checks": [
+      "css/quick_check.css"
+    ]
+  },
+  "path_resolution_rules": [
+    "Resolve resource-relative CSS/image/script links from the final deployed resource location, not from a staging ZIP root.",
+    "Do not report an intentional course-root dependency as broken merely because the isolated ZIP does not contain the shared root folder.",
+    "Do not invent a wrapper directory that changes the dashboard path depth.",
+    "Bank ZIP internal root for Unit U is exactly unit{U}/ so extraction into banks/ produces banks/unit{U}/unit{U}.html.",
+    "Use the exact current dashboard roots; notably performance_task___5134zrt/ and quick_check____htq5855/ are intentionally obscured.",
+    "The older performance_task/, quick_check/, and ideas/ dashboard routes are retired; preserve teacher-live legacy content if it exists, but do not generate new links to those obsolete roots.",
+    "Tarsia/Blooket _practice_3 naming is a dashboard/file-structure convention and does not imply derivation from Practice Set 3.",
+    "The Bank review view lives beside the normal Bank at banks/unit{U}/unit{U}_review.html and is linked only from the Bank; do not add a dashboard button/column for it.",
+    "Practice packages copy canonical Bank figures and do not package graph tools or Practice graph-generator scripts.",
+    "Activity hub internal activity-name links are same-document anchors inside u{U}_{S}_act1.html; they are not separate direction files.",
+    "Recurring/assessment Unit ZIPs are course-root-relative drop-in trees and do not duplicate shared root CSS unless explicitly requested.",
+    "Performance Tasks + Quick Checks all-course ZIPs contain exactly the two obscured resource roots. Their CSS remains a shared course-root dependency at css/performance_task.css and css/quick_check.css; section HTML links ../../css/... and the isolated resource ZIP must not duplicate those stylesheets.",
+    "Quick Check section folders contain exactly ONE HTML file at u{U}_{S}_quick_check.html; that single file contains all six complete printable versions. Separate _v2 through _v6 HTML files are prohibited.",
+    "For Algebra Performance Task/Quick Check returned ZIPs, any .css file found inside performance_task___5134zrt/ or quick_check____htq5855/ is a packaging failure; CSS lives only at course-root css/."
+  ],
+  "live_course_paths": {
+    "preserve_on_bank_upgrade": [
+      "investigations/",
+      "performance_task___5134zrt/",
+      "quick_check____htq5855/",
+      "activities/ when teacher-revised/marked teacher_live",
+      "legacy ideas/ content if present, even though it is no longer linked from the current dashboard"
+    ],
+    "rule": "A bank/course refresh must not overwrite teacher-live content at these paths unless explicitly requested."
+  },
+  "dashboard_snapshot": "reference_library/deployment/teacher_dashboard_reference.html",
+  "notes": "Current dashboard removed Future Resource/ideas links and obscured Performance Task and Quick Check roots. External top-resource and Discourse & Reflection URLs remain navigation configuration, not canonical curriculum-content authority.",
+  "shared_css_authoring_reference": {
+    "bank_css_reference": "reference_library/deployment/shared_css/bank.css",
+    "bank_css_deployment_path": "css/bank.css",
+    "rule": "Use the embedded bank.css as the exact authoring/DOM compatibility reference. Do not package a CSS copy inside a Bank ZIP; production HTML links to the shared root css/bank.css.",
+    "base_css": "Required shared dependency at css/base.css; not replaced by this Framework update.",
+    "notes_css_deployment_path": "css/notes.css",
+    "notes_css_rule": "Current notes.css is stable and external. Base Notes PM + contracts/notes_visual_contract.json preserve the allowed class/link contract; ordinary Notes builds must not package or redesign CSS.",
+    "practice_set_css_reference": "reference_library/deployment/shared_css/practice_set.css",
+    "practice_set_css_deployment_path": "css/practice_set.css",
+    "practice_set_css_rule": "Universal practice_set.css is shared across all courses. This Framework stores a byte-identical reference mirror of the Base Practice Starter canonical CSS; ordinary Practice builds link to deployed css/practice_set.css and do not package or redesign it.",
+    "activities_css_references": {
+      "projector_team_reveal": "reference_library/deployment/shared_css/activities.css",
+      "stations": "reference_library/deployment/shared_css/activities/activity_stations.css",
+      "find_someone_who": "reference_library/deployment/shared_css/activities/activity_find_someone_who.css",
+      "legacy_projector_reference_only": "reference_library/deployment/shared_css/activities/activity_projector.css"
+    },
+    "activities_css_rule": "Activities link shared css/base.css plus exactly one Framework-selected Activity stylesheet. New projector uses css/activities.css; stations uses css/activity_stations.css; Find Someone Who uses css/activity_find_someone_who.css. Do not package CSS inside Unit Activities ZIPs.",
+    "warmup_css_reference": "reference_library/deployment/shared_css/warmup.css",
+    "warmup_css_deployment_path": "css/warmup.css",
+    "warmup_css_rule": "Notability-first Warm-Up reference. Load after base.css; preserve tested fixed card geometry.",
+    "exit_css_reference": "reference_library/deployment/shared_css/exit.css",
+    "exit_css_deployment_path": "css/exit.css",
+    "exit_css_rule": "Projector-only Exit Ticket reference; one full-screen 2x2 ticket per viewport.",
+    "progress_tracker_css_reference": "reference_library/deployment/shared_css/progress_tracker.css",
+    "progress_tracker_css_deployment_path": "css/progress_tracker.css",
+    "review_css_reference": "reference_library/deployment/shared_css/review.css",
+    "review_practice_css_reference": "reference_library/deployment/shared_css/review_practice.css",
+    "review_css_deployment_paths": [
+      "css/review.css",
+      "css/review_practice.css"
+    ],
+    "summative_math_css_reference": "reference_library/deployment/shared_css/summative_math.css",
+    "summative_math_css_deployment_path": "css/summative_math.css",
+    "summative_math_css_rule": "Algebra uses the constructed-response math Summative family. Do not use the Physics bubble-sheet stylesheet in Algebra.",
+    "performance_task_css_reference": "reference_library/deployment/shared_css/performance_task.css",
+    "performance_task_css_deployment_path": "css/performance_task.css",
+    "performance_task_css_rule": "Approved Algebra Performance Task shell. Deploy once at course-root css/performance_task.css; all Performance Task student/teacher HTML links ../../css/performance_task.css. Do not package a duplicate inside performance_task___5134zrt/.",
+    "quick_check_css_reference": "reference_library/deployment/shared_css/quick_check.css",
+    "quick_check_css_deployment_path": "css/quick_check.css",
+    "quick_check_css_rule": "Universal print-first Quick Check shell. Deploy once at course-root css/quick_check.css; Quick Check section HTML links ../../css/quick_check.css. Do not package a duplicate inside quick_check____htq5855/."
+  },
+  "student_resource_paths": {},
+  "activity_companion_paths": {
+    "hub": "activities/u{U}_{S}_act1/u{U}_{S}_act1.html",
+    "set1_projection": "activities/u{U}_{S}_act1/u{U}_{S}_set1_questions_solutions.html",
+    "set2_projection": "activities/u{U}_{S}_act1/u{U}_{S}_set2_questions_solutions.html",
+    "set1_stations": "activities/u{U}_{S}_act1/u{U}_{S}_set1_stations.html",
+    "set2_stations": "activities/u{U}_{S}_act1/u{U}_{S}_set2_stations.html",
+    "set1_find_someone_who": "activities/u{U}_{S}_act1/u{U}_{S}_set1_find_someone_who.html",
+    "set2_find_someone_who": "activities/u{U}_{S}_act1/u{U}_{S}_set2_find_someone_who.html",
+    "figures": "activities/u{U}_{S}_act1/figures/"
+  }
+}

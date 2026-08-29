@@ -1,0 +1,112 @@
+{
+  "name": "Conceptual Physics Recurring + Assessment Resource Profile",
+  "course": "Conceptual Physics",
+  "profile_version": "v1.2",
+  "framework_version": "v6.8",
+  "extends": "current Base Recurring + Assessment Resources PM",
+  "role": "Course-specific renderer/profile layer. Learning/evidence remains owned by the current Unit Assessment Plan; canonical secure content remains owned by the finalized Bank.",
+  "summative": {
+    "usage_mode": "secure_print",
+    "family": "science_selected_plus_constructed",
+    "css_load": [
+      "../../css/summative_physics.css"
+    ],
+    "path_template": "assessments_zxrtjp/unit{U}_summative/unit{U}_summative_assessment.html",
+    "forms_source": "finalized secure Bank active Summative form IDs, validated against contracts/base_bank_compatibility.json",
+    "current_form_profile": {
+      "active_forms": [
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "test_day": [
+        "V1",
+        "V2",
+        "V3",
+        "V4"
+      ],
+      "makeup_alternate": [
+        "V5",
+        "V6"
+      ]
+    },
+    "items_per_form": 20,
+    "selected_response_per_form": 16,
+    "constructed_response_per_form": 4,
+    "time_max_minutes_approx": 45,
+    "answer_sheet": "Dedicated selected-response bubble sheet for questions 1–16; renderer must materialize 16 real .bubble-row nodes; version choices come from active form IDs only.",
+    "constructed_response_sheet": "Separate large-response area for questions 17–20.",
+    "bubble_markup_contract": "Keep answer letters normal-sized and render the mark target as a separate .bubble element inside .bubble-choice; do not enlarge A/B/C/D/E by scaling one text-glyph container.",
+    "student_metadata": "Do not show DOK/section/internal Bank labels; hidden data attributes may remain for traceability.",
+    "stale_template_guard": "Rendered/reference HTML is visual evidence only. It cannot override current Bank/Framework form membership. Remove/ignore legacy V7/V8 sections, keys, selectors, navigation, and version bubbles when the active Bank contains V1–V6.",
+    "figure_caption_rule": "No descriptive captions beneath student-facing graphs/figures. Put explanatory wording before the representation; preserve only necessary labels inside it.",
+    "approved_final_two_pages": {
+      "status": "LOCKED for new builds",
+      "page_order": [
+        "selected_response_answer_sheet",
+        "constructed_response_work_sheet"
+      ],
+      "selected_response_answer_sheet": {
+        "container_class": "page answersheet",
+        "questions": "1-16",
+        "layout": "two-column sheetgrid",
+        "bubble_markup": "bubble-choice + separate bubble element",
+        "version_selector": "active V1-V6 only for current profile; generate from resolved active forms"
+      },
+      "constructed_response_work_sheet": {
+        "container_class": "fr-sheet-page",
+        "table_class": "fr-sheet-table",
+        "layout": "2x2 table",
+        "cell_order": [
+          "17",
+          "18",
+          "19",
+          "20"
+        ]
+      },
+      "legacy_frgrid": "CSS backward compatibility only; PROHIBITED in new Summative builds."
+    },
+    "representation_preservation": {
+      "rule": "Preserve actual current secure Bank student-prompt representation markup and required local assets exactly; do not silently delete them.",
+      "no_stale_visual_invention": "Do not import SVG/images from an older rendered Summative if they are absent from the current secure Bank item.",
+      "metadata_is_not_markup": "A representation metadata label such as model/data does not authorize fabricated artwork."
+    },
+    "delivery_contract": {
+      "primary_artifact": "ZIP_REQUIRED",
+      "loose_html": "preview/QA only; never the final user download for a requested Unit Summative build",
+      "zip_tree_template": "assessments_zxrtjp/unit{U}_summative/unit{U}_summative_assessment.html",
+      "include_local_assets": "Include every local figure/file referenced by the rendered Summative HTML.",
+      "shared_css": "Link ../../css/summative_physics.css; do not duplicate course-root CSS unless explicitly requested.",
+      "pre_delivery_check": "List/read ZIP contents and verify archive integrity."
+    },
+    "answer_sheet_renderer_gate": "Final HTML must contain exactly 16 numbered .bubble-row nodes (1-16) inside .page.answersheet .sheetgrid; unresolved join(bubble_rows)/template expressions are prohibited."
+  },
+  "warmups": {
+    "usage_mode": "projector/print per universal shell",
+    "shell": "standard universal Base Recurring Warm-Up shell",
+    "v6_7_change": "none"
+  },
+  "exit_tickets": {
+    "shell": "standard universal Base Recurring Exit shell; shared exit.css unchanged",
+    "print_mechanism": "printExitTicket(ticketId) activates only matching .exit-print[data-source-ticket] with .print-active, then clears afterprint",
+    "versions_per_ticket": 4,
+    "pages_per_version": 2,
+    "selected_ticket_print_pages_total": 8,
+    "prohibited": "document.body.dataset.printTarget or course-specific print-target CSS workaround"
+  },
+  "progress_tracker": {
+    "usage_mode": "physical_print",
+    "pages": 2,
+    "shell": "references/canonical_html/progress_tracker_madlib_shell.html",
+    "four_goal_distribution": "2 goal cards on page 1 + 2 goal cards on page 2",
+    "content": "all exact supporting I-cans from ORIGINAL Unit Assessment Plan; no omission for fit",
+    "css": "../../css/progress_tracker.css unchanged; use canonical compact DOM/classes rather than a custom oversized shell"
+  },
+  "review": {
+    "shell": "standard universal current Review/Review Practice renderer",
+    "v6_7_change": "none"
+  }
+}

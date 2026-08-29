@@ -1,0 +1,27 @@
+{
+  "workflow_key": "patch_bank_summative_distractors",
+  "label": "PATCH D · Summative Distractors",
+  "group": "When Recommended",
+  "input": "bank",
+  "state": "ready",
+  "needs_bank": true,
+  "extra": [
+    "pms_build/3_Build_Bank_PM.zip",
+    "_question_structure.zip"
+  ],
+  "output": "Summative-distractor-only REPO_PATCH",
+  "start": [
+    "banks"
+  ],
+  "default_category": "Bank",
+  "default_scope": "unit",
+  "course_restriction": "Physics",
+  "current_bank_required": true,
+  "patch_workflow": true,
+  "patch_target_workflow": "bank",
+  "patch_target_label": "Build Bank",
+  "patch_course": "Physics",
+  "patch_phase": "When Recommended",
+  "patch_order": 80,
+  "current_artifact_required": true
+}

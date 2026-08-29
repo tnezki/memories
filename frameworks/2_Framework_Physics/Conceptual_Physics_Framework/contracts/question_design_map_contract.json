@@ -1,0 +1,79 @@
+{
+  "contract_name": "Conceptual Physics Question Design Map Contract",
+  "contract_version": "v1.0",
+  "framework_version": "v6.8",
+  "purpose": "Require plan-first question ecosystem design before prompt generation so I-can evidence, quantitative/formula work, vocabulary, representations, multi-step dependencies, and parallel variety are intentional rather than template-filled.",
+  "authority": "Dedicated `_question_structure.zip` owns the universal taxonomy/schema; this contract supplies Physics-specific fit rules.",
+  "required_artifact": "unitN_question_design_map.json",
+  "planning_order": [
+    "exact_i_can",
+    "evidence_job",
+    "content_modes",
+    "formula_and_reverse_paths",
+    "vocabulary_directions",
+    "representations_and_tools",
+    "best_fit_structures",
+    "parallel_variation_axes",
+    "destination_item_slots",
+    "author_question",
+    "solve_verify",
+    "derive_dok_bloom_final_metadata"
+  ],
+  "content_modes": [
+    "quantitative_formula",
+    "conceptual",
+    "vocabulary",
+    "diagram_model",
+    "graph_data",
+    "experimental",
+    "mixed"
+  ],
+  "physics_rules": {
+    "quantitative_priority": "When an I-can naturally expects mathematical/formula application, plan enough real quantitative/formula evidence that students practice using the relationship; do not let generic conceptual/vocabulary items crowd it out.",
+    "formula_context": "Physics formula questions begin from a coherent physical situation/phenomenon that naturally supplies measurements; naked variable-assignment prompts are not the default.",
+    "formula_directionality": "Vary which quantity is unknown and which givens are supplied when the relationship permits it. Do not default to one solve direction.",
+    "multistep_dependency": "Multi-step means an intermediate result is required for the final task. Prefer one natural final question when the intermediate is only a means to the final result; do not force artificial (a)/(b).",
+    "units": "Keep units internally compatible unless conversion is explicitly part of the learning target.",
+    "representation_map": "For each I-can, explicitly consider actual graph/table/FBD/vector/model/diagram use and the Framework grapher tool. Mark N/A with a target-based reason rather than using token visuals.",
+    "variety_no_quota": "The I-can determines the mix. Not every I-can needs matching, vocabulary, graph, diagram, multi-step, or all wording profiles.",
+    "family_semantics": "question_family_id names the semantic evidence family and must not use form/version/question-number tokens to manufacture uniqueness."
+  },
+  "destination_rules": {
+    "WTC": "Preserve the normal Bank-card presentation. Author one FRQ-like shared stimulus with connected parts for decomposition/navigation practice. External workbook/released FRQs are morphology references only.",
+    "Example_YTI": "When formula-capable, strong contextual quantitative Example/YTI pairs take priority over generic conceptual/vocabulary filler. Example models; YTI applies with meaningful changed evidence.",
+    "Practice": "Plan an I-can-specific mix from formula/direct/inverse/multistep/vocabulary/matching/graph/diagram/short-answer/misconception/transfer as appropriate. Parallel families are expected; variety is intentional, not maximal.",
+    "Warm_Up": "Preserve the established retrieval pattern; controlled repetition is desirable.",
+    "Exit_Ticket": "Plan variety within each four-question ticket and across A/B/C. Exit destination is formative-secure for Physics semantic-independence QA regardless of a weaker metadata label.",
+    "Summative": "Plan form-level evidence before prompts. Family IDs stay semantic across V1-V6. V1-V4 may be same-day parallel with independent stimuli; V5/V6 require genuinely different makeup/alternate evidence."
+  },
+  "wording_profiles": [
+    "standard",
+    "inverted",
+    "context_rich",
+    "natural_direct",
+    "frq_multipart"
+  ],
+  "vocabulary_directions": [
+    "term_to_definition",
+    "definition_to_term",
+    "concept_to_term",
+    "term_to_concept"
+  ],
+  "item_question_design_required_fields": [
+    "slot_id",
+    "structure_id",
+    "wording_profile",
+    "response_mode",
+    "representation_mode",
+    "parallel_family",
+    "variation_axes"
+  ],
+  "derived_after_authoring": [
+    "dok",
+    "bloom",
+    "final_question_family_id",
+    "final_task_architecture",
+    "final_variation",
+    "audit_status"
+  ]
+}

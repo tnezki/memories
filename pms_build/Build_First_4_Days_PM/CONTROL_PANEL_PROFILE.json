@@ -1,0 +1,74 @@
+{
+  "id": "build_first_4_days",
+  "label": "Build First 4 Days",
+  "category": "build",
+  "scope": "course",
+  "input": "structured_plan",
+  "requires_current_framework": true,
+  "output": "course_root_patch",
+  "default_deployment_root": "misc/first_4_days/",
+  "state": "ready",
+  "version": "1.5",
+  "plan_title": "First 4 Days opening plan",
+  "plan_filename": "FIRST_4_DAYS_OPENING_PLAN.json",
+  "assets_label": "Optional source files / assets",
+  "assets_help": "Attach agenda/welcome pages, images, existing source documents, or other assets only when they help the build. The structured plan above is the primary required input.",
+  "plan_fields": [
+    {
+      "key": "resource_plan",
+      "label": "Resources / counts to build",
+      "type": "textarea",
+      "required": true,
+      "placeholder": "Example: 4 Warm-Ups; short Notes; Practice + Extra Practice; 1 Activity; 1 Investigation; 3 Exit Tickets; overview; survey."
+    },
+    {
+      "key": "warmup_topics",
+      "label": "Warm-Up topics / skills",
+      "type": "textarea",
+      "required": true,
+      "placeholder": "List by day. Example: Day 1 \u2014 multiplying fractions + diamond; Day 2 \u2014 one-step equations; ..."
+    },
+    {
+      "key": "notes_learning_targets",
+      "label": "Notes learning targets / I-can statements",
+      "type": "textarea",
+      "required": true,
+      "placeholder": "Paste or type the opening learning targets/I-cans. Add any special Notes or WTC direction here."
+    },
+    {
+      "key": "practice_plan",
+      "label": "Practice / Extra Practice focus",
+      "type": "textarea",
+      "required": false,
+      "placeholder": "Skills/I-cans, approximate question count, special workspace/representation needs, or leave blank if not requested."
+    },
+    {
+      "key": "activity_plan",
+      "label": "Activity idea / participation goal",
+      "type": "textarea",
+      "required": false,
+      "placeholder": "What students should practice/do and any activity structure you already have in mind."
+    },
+    {
+      "key": "investigation_plan",
+      "label": "Investigation / Demo idea",
+      "type": "textarea",
+      "required": false,
+      "placeholder": "Core idea, materials, what students build/measure/observe, and representations or predictions you want."
+    },
+    {
+      "key": "exit_portfolio_plan",
+      "label": "Exit Tickets / portfolio baseline",
+      "type": "textarea",
+      "required": false,
+      "placeholder": "How many exits, what evidence you want, and what should enter the portfolio baseline."
+    },
+    {
+      "key": "other_opening_details",
+      "label": "Other opening details",
+      "type": "textarea",
+      "required": false,
+      "placeholder": "Day-by-day agenda, naming, overview/survey/welcome details, special assets, constraints, etc."
+    }
+  ]
+}

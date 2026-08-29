@@ -1,0 +1,130 @@
+{
+  "name": "Algebra 1 Bank Authoring Quality Profile",
+  "purpose": "Prevent technically valid but generator-like Algebra Banks while preserving useful abundance. Apply after the Base Philosophy/Bank PM and profiles/bank_course_profile.json.",
+  "authority_note": "Derivative Algebra quality profile. The ORIGINAL Assessment Plan remains authoritative for exact I-cans/learning/evidence. profiles/bank_course_profile.json controls current Algebra response mode, routing, counts, abundance, representations, and Summative behavior.",
+  "source_grounding": {
+    "rule": "Retrieve sources by actual Current Learning/Retrieval/Mastery skill and question family, not only by section title.",
+    "forbid_blanket_section_provenance": true,
+    "source_basis_rule": "source_basis names only sources actually consulted for that family/item; Assessment Plan/Framework-only is acceptable for straightforward fluency.",
+    "stage_map": "curriculum/spiral_stage_map.json",
+    "retrieval_map": "sources/indexes/compact_stage_reference_map.json"
+  },
+  "natural_language": {
+    "plain_math_is_better_than_fake_context": true,
+    "generic_pseudocontexts_to_review": [
+      "a quantity starts",
+      "a plan begins",
+      "a space holds",
+      "a service",
+      "units per item",
+      "units for each"
+    ],
+    "rule": "If a context has no meaningful quantity or decision, remove the story and ask the mathematics directly. If context is used, name real quantities and natural units.",
+    "grammar_checks": [
+      "article agreement",
+      "subject-verb agreement",
+      "singular/plural agreement",
+      "for each + singular noun",
+      "natural unit wording"
+    ],
+    "template_audit": "Review repeated GENERIC/NARRATIVE pseudocontext stems when they make wording feel generated. Do not normalize/count concise procedural Practice skeletons as a defect.",
+    "procedural_exception": "Concise stems such as Solve, Simplify, Evaluate, Graph, Compute, Complete the table, or repeated numeric variants may repeat freely when repeated procedure is the legitimate practice goal. No post-build diversification pass."
+  },
+  "inventory_depth": {
+    "rule": "The current Algebra course profile resolves the Base template to 139 canonical section items. Do not minimize below it or compress several independent questions into one canonical card.",
+    "practice_rule": "Each main Practice form currently uses 24 separate questions. Intentionally allocate 3-5 closely related variants to high-value families when that repetition supports fluency; do not maximize distinct shells.",
+    "warmup_rule": "Three sets x 4 separate questions: WU1 = Diamond + 3 prerequisite/prior; WU2 normally 2 Intro + 1 Review + 1 Mastery; WU3 normally 1 Intro + 1 Review + 2 Mastery.",
+    "exit_ticket_rule": "Three tickets x 4 separate questions: A Intro evidence, B Review evidence, C Mastery/portfolio evidence.",
+    "granularity_rule": "Counts mean separate numbered student questions/tasks. Do not reduce counts by bundling unrelated tasks with and/then/also."
+  },
+  "spiral_practice": {
+    "rule": "The Assessment Plan defines WHICH content is Current Learning/Retrieval/Mastery. The Bank chooses a destination-appropriate mix; no universal 25/25/50 formula.",
+    "section_practice_default": "The Assessment Plan and current section learning determine the mix. Current Learning work may strongly dominate a section Practice form when that is what students need; Retrieval/Mastery remain purposeful retrieval, not percentage quotas.",
+    "hard_note": "No default Current Learning/Retrieval/Mastery percentages. Preserve exact mapped skills, the Algebra course-profile abundance rule, and enough useful work for the 24-question Practice form."
+  },
+  "representations": {
+    "rule": "Use the Assessment Plan representation list to build a real section representation map. For applicable Algebra sections, Graph and Table must be instantiated, not merely mentioned: at least one substantive graph anchor + one table anchor across the six Example/YTI pairs, and at least one substantive graph-use + one table-use item in each 24-question Practice form. Mark N/A only with a target-based reason. Representation-heavy targets should exceed this floor.",
+    "no_equal_percentage_quota": true,
+    "real_use_definition": "A representation counts only when the student actually reads/builds/uses/compares/translates/interprets it. Metadata labels or prose descriptions of unseen graphs/tables do not count.",
+    "representation_heavy_review": "A representation-heavy section with almost no actual visual/table stimuli is a build defect even if the HTML is technically valid."
+  },
+  "teacher_solutions": {
+    "rule": "Give one complete teacher answer/solution. Do not print an Answer paragraph followed by an identical Solution paragraph.",
+    "duplicate_normalized_answer_solution": "review/fail and collapse to one complete response",
+    "open_response_exemplar_rule": "When a student must invent an error, modification, counterexample, or supporting facts, the teacher key must include at least one concrete item-specific exemplar. Generic “Accept a plausible/valid...” text alone is insufficient."
+  },
+  "positive_source_enrichment": {
+    "profile": "profiles/source_enrichment.json",
+    "curated_library": "profiles/curated_reference_library.json",
+    "section_packet": "reference_library/question_structures/section_enrichment.json",
+    "source_excerpts": "reference_library/source_excerpts/section_source_excerpts.json",
+    "figure_catalog": "reference_library/reusable_figures/figure_catalog.json",
+    "table_catalog": "reference_library/reusable_tables/table_catalog.json",
+    "hard_rule": "Use the Framework as a positive authoring model library, not merely a content-boundary checker. Natural wording and representation richness should be informed by relevant curated material when available. Do not mistake purposeful procedural repetition for a variety defect."
+  },
+  "quality_regression_rule": "A Framework-built Algebra Bank should be rich, natural, visually meaningful, sufficiently deep, and comfortable with purposeful repetition. Exact duplicate prompts or repeated procedural families are not deterministic defects and must not trigger automatic diversification.",
+  "practice_form_variety": {
+    "rule": "Do not assign one reasoning/error/modification theme to an entire form. Repeated direct/procedural families and numeric variants are allowed and may dominate. Giving 3-5 clean versions of one high-value family is often appropriate Algebra practice.",
+    "prohibited_form_signatures": [
+      "PS2 becomes the justify-with-two-facts form",
+      "PS3 becomes the error-analysis/misread form",
+      "Extra Practice becomes the modify-one-condition form"
+    ],
+    "review_trigger": "Review artificial add-on patterns, fake-context variation, bad mapping, or broken representations. Repeated procedural skeleton frequency and exact prompt duplication alone are not finalizer review triggers."
+  },
+  "final_package_integrity": {
+    "finalizer": "tools/~finalize_bank.py",
+    "self_contained": true,
+    "rule": "Produced Banks copy exactly two Python tools: Framework graph tool as generate_graphs.py and self-contained Algebra finalizer v7 as ~finalize_bank.py. Finalizer embeds MathJax v10 repair logic, validates teaching/review HTML plus resolved Algebra inventory, reports focused mechanical warnings, and creates the final ZIP.",
+    "coefficient_leading_math_examples": [
+      "$4x+4=30$",
+      "$12n-5=31$",
+      "$2t^2-3$"
+    ],
+    "currency_note": "Do not escape the opening dollar of valid MathJax merely because nearby prose contains dollars/cost/total/budget.",
+    "mathjax_base": "authoritative ~fix_mathjax_v10.py logic embedded self-contained; no third production script"
+  },
+  "response_mode": {
+    "course": "Algebra 1",
+    "canonical_selected_response_allowed": false,
+    "summative_selected_response_allowed": false,
+    "exception": "Blooket export only",
+    "source": "profiles/bank_course_profile.json"
+  },
+  "shared_style_references": [
+    "reference_library/deployment/shared_css/bank.css",
+    "reference_library/deployment/shared_css/summative_math.css"
+  ],
+  "natural_parameters": {
+    "rule": "Choose pedagogically natural values rather than arbitrary random inflation. Early Algebra direct/table/graph tasks normally use small integers or simple fractions and graph-friendly ranges; large values need a real context/source reason.",
+    "early_algebra_examples": "Slopes usually small integers/simple fractions; intercepts often roughly -12..12; plotted points/tables should fit intended axes. Early exponential/geometric tables normally use small starts and modest factors so outputs remain readable/hand-computable; avoid unexplained large growth unless large-growth interpretation is the target.",
+    "difficulty_rule": "Difficulty should come from intended mathematics/reasoning, not accidental arithmetic ugliness."
+  },
+  "student_facing_labels": {
+    "forbidden_prompt_prefixes": [
+      "Example anchor:",
+      "YTI anchor:",
+      "Evidence task:",
+      "Architecture:"
+    ],
+    "rule": "Internal authoring/routing labels and Toolkit structure IDs stay in metadata/alignment, never student_text/student_html."
+  },
+  "summative_form_security": {
+    "v1_v4": "Same-day forms may use the same question families/numeric structures, but authoring should scramble family order between versions while keeping connected shared-stimulus/multipart blocks intact.",
+    "v5_v6": "Makeup/alternate forms preserve evidence/rigor/time but must not be only numeric or order-only copies of V1-V4.",
+    "audit": "Same order across V1-V4 and shell-level copying into V5/V6 are targeted review flags. Legitimate V1-V4 parallelism is allowed."
+  },
+  "practice_prompt_hygiene": {
+    "rule": "Repeated problem families appear as ordinary clean questions. Never expose second pass/another version labels. Do not append one generic explanation/checking/reasonableness suffix to most/all Practice questions; add those demands only when item-specific."
+  },
+  "review_view": {
+    "file": "unitN_review.html",
+    "grouping": "exact i_can/learning_target then question_family_id",
+    "rule": "Internal comparison view generated from the same canonical items; no duplicate canonical database. Persistent rating/export behavior is deferred."
+  },
+  "map_first_repetition_reflection": {
+    "required_before_multi_item_authoring": true,
+    "map_contract": "contracts/map_first_repetition_contract.json",
+    "rule": "Use the full-scope map to distinguish purposeful Algebra repetition from template-driven cloning before authoring. Do not use anti-repetition quotas; do not replace the existing prohibition on late anti-clone rewriting."
+  }
+}
