@@ -3,7 +3,7 @@
 ## Purpose
 This package is a **Physics-only Hewitt/source-textbook image inventory for Notes planning**.
 It does not own question structures, graph generation, assessment rules, or Notes prose.
-`_question_structure.zip` remains a separate universal authority.
+`_question_structure/` remains a separate universal authority.
 
 ## Inventory
 - Catalog entries: **439**
