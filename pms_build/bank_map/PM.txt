@@ -10,8 +10,23 @@ Read the current Curriculum Philosophy and Runtime Contract.
 Resolve required authorities through the pinned manifests.
 Fetch declared resources directly.
 
-Do not use generic web/repository search to locate known curriculum authorities. Do not substitute lightweight views,
-old uploads, similarly named files, prior Bank copies, or alternate representations for a declared canonical source.
+
+TOOL ROUTING GATE — HARD
+------------------------
+For this Bank job:
+- `web_search_allowed = false`;
+- `web_fetch_allowed = false`;
+- `external_research_allowed = false`;
+- repository search is forbidden for any authority/resource whose repo/path is already declared.
+
+Do NOT invoke a browser/web-search tool or public-web fetch for source discovery, source verification, freshness checking,
+examples, question writing, supplementation, or replacement curriculum content. Resolve exact paths through manifests and
+fetch them directly from the pinned GitHub/course snapshot. User-supplied current attachments may also be read when the
+request explicitly makes them inputs.
+
+If a required source cannot be obtained through the declared direct route, STOP and report the exact missing repo/path or
+manifest entry. Do not search around the failure. Outside research requires an explicit teacher request in the current job;
+Framework/profile wording alone does not authorize it.
 
 GENERIC RUN COMMAND
 -------------------
@@ -34,7 +49,6 @@ AUTHORITY ORDER
 5. Current Framework/course manifest-declared Bank profile and required course runtime files.
 6. Current `_question_structure/` authority.
 7. This PM for mapping procedure.
-8. Optional external/source research only when explicitly required by the current Framework/profile/PM.
 
 COURSE-AWARE RULE — HARD
 ------------------------
@@ -235,6 +249,8 @@ This example illustrates course-aware enforcement; it is not a universal math ru
 FINAL QA — HARD
 ---------------
 Fail the map if any of these are true:
+- a browser/web-search or public-web fetch was invoked during this Bank job;
+- repository search was used to locate a source with an already-declared path;
 - required course profile or Unit Assessment Plan is unresolved;
 - a count/inventory contradicts the current course profile;
 - an exact I-can is missing from required coverage;

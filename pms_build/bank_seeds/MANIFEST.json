@@ -8,5 +8,14 @@
   "canonical_storage": "expanded",
   "authority_resolution": "via SYSTEM_MANIFEST.json and current Course Framework manifest",
   "bank_architecture": "bank-v2 modular section files",
-  "requires_audited_map": false
+  "requires_audited_map": false,
+  "tool_policy": {
+    "web_search_allowed": false,
+    "web_fetch_allowed": false,
+    "external_research_allowed": false,
+    "repository_search_for_declared_sources_allowed": false,
+    "canonical_source_access": "direct_pinned_github_fetch",
+    "missing_source_behavior": "fail_closed",
+    "teacher_override": "outside research only when explicitly requested in the current job"
+  }
 }

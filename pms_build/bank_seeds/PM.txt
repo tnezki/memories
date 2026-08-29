@@ -10,8 +10,23 @@ Read the current Curriculum Philosophy and Runtime Contract.
 Resolve required authorities through the pinned manifests.
 Fetch declared resources directly.
 
-Do not use generic web/repository search to locate known curriculum authorities. Do not substitute old Banks, prior chat
-copies, retained ZIPs, similarly named files, or alternate representations for declared canonical sources.
+
+TOOL ROUTING GATE — HARD
+------------------------
+For this Bank job:
+- `web_search_allowed = false`;
+- `web_fetch_allowed = false`;
+- `external_research_allowed = false`;
+- repository search is forbidden for any authority/resource whose repo/path is already declared.
+
+Do NOT invoke a browser/web-search tool or public-web fetch for source discovery, source verification, freshness checking,
+examples, question writing, supplementation, or replacement curriculum content. Resolve exact paths through manifests and
+fetch them directly from the pinned GitHub/course snapshot. User-supplied current attachments may also be read when the
+request explicitly makes them inputs.
+
+If a required source cannot be obtained through the declared direct route, STOP and report the exact missing repo/path or
+manifest entry. Do not search around the failure. Outside research requires an explicit teacher request in the current job;
+Framework/profile wording alone does not authorize it.
 
 GENERIC RUN COMMAND
 -------------------
@@ -67,7 +82,6 @@ AUTHORITY ORDER
 6. Accepted Unit Bank-v2 map (`banks/unitN_bank_map/`).
 7. Current `_question_structure/` authority.
 8. This PM for authoring and storage procedure.
-9. Optional external/source research only when the current Framework/profile/map explicitly requires it.
 
 PINNING / DIRECT FETCH — HARD
 -----------------------------
@@ -298,6 +312,8 @@ AUTHORING ORDER
 3A QA — HARD GATES
 ------------------
 Before returning PASS, verify:
+- no browser/web-search or public-web fetch was invoked during this Bank job;
+- no repository search was used to locate a source with an already-declared path;
 - every expected 3A map record is authored exactly once;
 - no Practice/Exit/Summative family was authored;
 - all item IDs and exact I-can text match the map;

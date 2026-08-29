@@ -12,5 +12,14 @@
   "requires_completed_phases": [
     "3A_instructional_core",
     "3B_practice_families"
-  ]
+  ],
+  "tool_policy": {
+    "web_search_allowed": false,
+    "web_fetch_allowed": false,
+    "external_research_allowed": false,
+    "repository_search_for_declared_sources_allowed": false,
+    "canonical_source_access": "direct_pinned_github_fetch",
+    "missing_source_behavior": "fail_closed",
+    "teacher_override": "outside research only when explicitly requested in the current job"
+  }
 }

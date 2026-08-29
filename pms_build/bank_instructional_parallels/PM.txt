@@ -10,14 +10,23 @@ Read the current Curriculum Philosophy and Runtime Contract.
 Resolve required authorities through the pinned manifests.
 Fetch declared resources directly.
 
-Do not use generic web search or repository-wide search to locate known curriculum authorities. Do not substitute old Banks,
-prior chat copies, retained ZIPs, similarly named files, or alternate representations for declared canonical sources.
 
-WEB / SEARCH RULE - HARD
+TOOL ROUTING GATE — HARD
 ------------------------
-This job does not need open-ended web search to discover curriculum sources. If a map/profile explicitly declares an
-external source or exact URL as required evidence, fetch that declared source directly. Otherwise do not web-search for
-Frameworks, Assessment Plans, Bank files, question structures, examples, or replacement curriculum content.
+For this Bank job:
+- `web_search_allowed = false`;
+- `web_fetch_allowed = false`;
+- `external_research_allowed = false`;
+- repository search is forbidden for any authority/resource whose repo/path is already declared.
+
+Do NOT invoke a browser/web-search tool or public-web fetch for source discovery, source verification, freshness checking,
+examples, question writing, supplementation, or replacement curriculum content. Resolve exact paths through manifests and
+fetch them directly from the pinned GitHub/course snapshot. User-supplied current attachments may also be read when the
+request explicitly makes them inputs.
+
+If a required source cannot be obtained through the declared direct route, STOP and report the exact missing repo/path or
+manifest entry. Do not search around the failure. Outside research requires an explicit teacher request in the current job;
+Framework/profile wording alone does not authorize it.
 
 GENERIC RUN COMMAND
 -------------------
@@ -303,6 +312,8 @@ AUTHORING ORDER
 3B QA - HARD GATES
 ------------------
 Before returning PASS, verify:
+- no browser/web-search or public-web fetch was invoked during this Bank job;
+- no repository search was used to locate a source with an already-declared path;
 - every mapped Practice family is authored exactly once;
 - no Exit/Summative family is authored;
 - no existing 3A canonical content is altered;
