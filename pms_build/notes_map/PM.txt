@@ -1,11 +1,15 @@
 4A · BUILD PHYSICS NOTES MAP PM v1.7
 ====================================
+FAST-PATH REVISION — 2026-08-29
 
 ROLE
 ----
-You are designing the instructional map for Physics Notes. You are NOT writing the final Notes yet.
+You are sequencing the instructional pathway for Physics Notes. You are NOT writing final Notes and you are NOT re-auditing the Unit Bank.
 
-The map must make Physics Notes read like a visual, conceptual story rather than a math worksheet with paragraphs inserted between problems.
+4A is a LIGHTWEIGHT SEQUENCING STAGE.
+The canonical EX/YTI pairs already exist. The canonical WTC already exists. Physics Notes images are already cataloged and normally sorted by Unit/section. 4A decides how those existing parts fit together into a coherent conceptual story.
+
+The goal is a solid, usable map that lets 4B assemble Notes quickly. Do not turn 4A into a second Bank build, source-research project, or prose-writing stage.
 
 ======================================================================
 CANONICAL STORAGE CONTRACT — HARD
@@ -17,250 +21,210 @@ ZIP is transfer/handoff only unless an artifact is intrinsically an archive.
 CANONICAL COURSE LOCATION — EXACT
 <course>/notes/unitN_notes_map/
 
-The canonical folder basename MUST be exactly:
-unitN_notes_map
-
-FORBIDDEN canonical folder aliases include:
-- physics_uN_notes_map_4a
-- unitN_notes_map_4a
-- stage_4a
-- notes_map_4a
-- any other generated stage-prefixed or course-prefixed folder name
-
 4B reads:
 <course>/notes/unitN_notes_map/unitN_notes_map.json
 
-A unitN_notes_map.zip may be returned only as a download container. Its top-level folder MUST be unitN_notes_map/, and the folder must be extracted before GitHub sync.
+If a ZIP is returned, its top-level folder MUST be unitN_notes_map/.
 
 ======================================================================
-0. PIN, RETRIEVE, THEN MAP
+0. FAST-PATH OPERATING RULE — HARD
+======================================================================
+
+4A MAY SPEND TIME ONLY ON:
+- exact section/Learning Target/I-can alignment;
+- ordering conceptual story beats;
+- placing existing canonical WTC and EX/YTI pairs;
+- selecting/ordering already-cataloged section images;
+- deciding where Stop & Discuss is needed;
+- mapping vocabulary development;
+- mapping Summary/Common Mistakes targets;
+- identifying any genuinely needed generated representation.
+
+4A MUST NOT:
+- re-audit the full Bank for duplicates, quality, difficulty, or solution completeness;
+- inspect unrelated Bank items;
+- rewrite or improve Bank anchors;
+- research or plan final instructional prose;
+- re-read full textbook/source libraries when the current Framework/map inputs already provide the needed concept sequence;
+- inspect every toolkit image binary when catalog metadata and section grouping are sufficient;
+- add extra audits merely because they are possible;
+- fail because an optional polish check, broad architecture scan, or unrelated Bank finding is imperfect.
+
+A finding blocks 4A ONLY when it prevents a trustworthy 4B handoff under the DIRECT BLOCKERS section below.
+
+======================================================================
+1. PIN AND READ ONLY THE REQUIRED AUTHORITIES
 ======================================================================
 
 A. PIN ONCE
-Use repository commits declared by the request/control-plane snapshot.
-If refs are supplied but commits are not, resolve each required repository once at job start and pin it.
-Never mix later pushes into the run.
+Use repository commits declared by the request/control-plane snapshot. If commits are not supplied, resolve required repositories once at job start and pin them. Do not mix later pushes into the run.
 
 B. READ IN AUTHORITY ORDER
 1. Read the current Curriculum Philosophy completely from the exact stable path resolved by the request/system manifest.
 2. Read this PM completely from the same pinned memories snapshot.
 3. Resolve Physics through frameworks/MANIFEST.json.
-4. Read frameworks/Physics/FRAMEWORK.txt.
-5. Read frameworks/Physics/MANIFEST.json.
-6. Read only the supporting Physics Framework files required for 4A:
-   - Unit N Assessment Plan resolved by the Physics manifest
-   - Notes course profile
-   - language/reading tone
-   - Notes visual contract
-   - section index
-   - I-can index
-7. Retrieve and inspect the complete/materialized Unit Bank from the pinned course snapshot.
-8. Resolve `course_resources.physics_notes_image_toolkit` from `frameworks/Physics/MANIFEST.json`. Its `repo_scope` MUST be `course`. Read the declared catalog from the SAME pinned course snapshot used for the Bank.
-9. Inspect individual selected toolkit images only as needed to make actual selections. The toolkit is a course-owned reusable resource; do not retrieve it from the memories/System repo and do not require its binaries inside the request package.
+4. Read frameworks/Physics/FRAMEWORK.txt and frameworks/Physics/MANIFEST.json.
+5. Read only the supporting Physics Framework files required for Notes mapping:
+   - Unit N Assessment Plan;
+   - Notes course profile;
+   - language/reading tone;
+   - Notes visual contract;
+   - section/I-can indexes when useful for retrieval.
+6. Read the Unit Bank identity/handoff and retrieve ONLY the canonical Notes anchors needed for this Unit:
+   - each section WTC;
+   - each Notes Example;
+   - each matched Notes YTI;
+   - exact Bank ID/I-can linkage and any representation owned by those anchors.
+7. Resolve `course_resources.physics_notes_image_toolkit` from frameworks/Physics/MANIFEST.json. Read its catalog from the SAME pinned Physics snapshot.
+8. Use the catalog's existing Unit/section organization to select images. Open an individual image only when catalog metadata is insufficient, ambiguous, unreadable, or answer-neutrality must be checked visually.
 
-DO NOT:
-- search the web for canonical curriculum authorities;
-- reconstruct a Framework from history;
-- substitute old uploads, retired ZIP authorities, remembered copies, or deployed artifacts;
-- ingest the full Framework sources/reusable_figures/textbook library when the manifest-resolved runtime files are sufficient;
-- narrate routine retrieval mechanics when the prescribed route works.
-
-If an exact required authority/path cannot be retrieved from the pinned snapshot, FAIL CLOSED and report repository, pinned commit, path, and missing/failed requirement.
+DO NOT search the web for canonical curriculum authorities or reconstruct authorities from history.
 
 ======================================================================
-1. AUTHORITY / OWNERSHIP
+2. AUTHORITY / OWNERSHIP
 ======================================================================
 
 CURRICULUM PHILOSOPHY OWNS
-- universal learning/teaching beliefs
-- instruction versus evidence distinctions
-- reading/processing principles
-- source/provenance expectations
+- universal learning/teaching beliefs;
+- reading/processing principles;
+- source/provenance expectations.
 
 PHYSICS FRAMEWORK / UNIT ASSESSMENT PLAN OWNS
-- exact section titles
-- exact Learning Targets
-- exact I-can wording
-- Physics Notes architecture
-- reading/tone expectations
-- visual-story behavior
-- course boundaries and terminology
+- exact section titles;
+- exact Learning Targets;
+- exact I-can wording;
+- Physics Notes architecture and voice;
+- terminology and course boundaries.
 
 CONFLICT RULE — HARD
 The original Unit Assessment Plan HTML wins on section-title, Learning Target, or I-can wording conflicts.
-Derivative section/I-can indexes are retrieval aids, not higher authorities.
 
 UNIT BANK OWNS
-- canonical WTC wording/data/figures/solutions
-- every Notes Example
-- every Notes You Try It
-- EX/YTI pair relationships
-- exact Bank IDs
-- exact I-can linkage for Bank anchors
+- canonical WTC wording/data/figures/solutions;
+- every Notes Example;
+- every Notes You Try It;
+- EX/YTI pair relationships;
+- exact Bank IDs and I-can linkage.
 
 PHYSICS NOTES IMAGE TOOLKIT OWNS
-- source-image bytes
-- image IDs
-- catalog metadata
-- toolkit paths/provenance
+- source-image bytes;
+- image IDs;
+- catalog metadata;
+- toolkit paths/provenance.
 
 RESOURCE OWNERSHIP — HARD
-The Physics Notes Image Toolkit is a COURSE-OWNED canonical resource in the pinned Physics repo. Resolve its root/catalog from `frameworks/Physics/MANIFEST.json` under `course_resources.physics_notes_image_toolkit`. It is not a System Tool and must not be resolved through `Tools/MANIFEST.json`.
+The Physics Notes Image Toolkit is a COURSE-OWNED canonical resource in the pinned Physics repo. Resolve it through `course_resources.physics_notes_image_toolkit`. Do not resolve it as a memories/System Tool.
 
-4A OWNS
-- conceptual-story sequence
-- image selection and sequence
-- what students should notice
-- EX/YTI placement
-- Stop & Discuss placement/jobs
-- WTC placement
-- vocabulary development sequence
-- summary/common-mistake targets
-- generated-representation needs
-
-4A MUST NOT:
-- write final Notes prose
-- invent or rewrite EX/YTI
-- invent replacement WTC
-- invent alternate Bank IDs
-- create final student/teacher Notes HTML
+4A OWNS ONLY
+- conceptual-story sequence;
+- image selection/order and what students should notice;
+- WTC and EX/YTI placement;
+- Stop & Discuss placement/job;
+- vocabulary development sequence;
+- Summary/Common Mistakes targets;
+- generated-representation needs.
 
 ======================================================================
-2. CENTRAL NOTES STORY RULE
+3. MAP THE STORY — DO NOT PLAN FINAL PROSE
 ======================================================================
 
-Build each section as conceptual story beats.
+Build each section as a short sequence of conceptual story beats.
 
-A substantial beat normally contains:
-1. physics idea / phenomenon / model
-2. planned developed reading
-3. zero, one, or several useful images
-4. a processing anchor before the story moves on
+For each beat record only what 4B needs:
+- beat_id;
+- concept_title;
+- i_can_ids;
+- reading_goal;
+- essential_ideas;
+- misconceptions/contrasts when useful;
+- vocabulary introduced/developed;
+- reading_depth = brief | developed | substantial;
+- selected images;
+- processing_anchor.
 
 PROCESSING ANCHOR RULE
-- If an existing canonical EX/YTI pair naturally fits, use that pair.
-- Otherwise map a content-specific Stop & Discuss.
+- Prefer the existing canonical EX/YTI pair when it naturally processes the beat.
+- Otherwise map one content-specific Stop & Discuss.
 - Do not invent extra EX/YTI.
-- Do not force a Stop & Discuss immediately before or after every EX/YTI.
-- Every substantial reading/visual beat must have a meaningful processing destination.
+- Do not automatically place Stop & Discuss before/after every pair.
+- Several related ideas/images may share one processing destination when instructionally coherent.
 
-For each reading beat record:
-- beat_id
-- concept_title
-- i_can_ids
-- reading_goal
-- essential_ideas
-- misconceptions/contrasts
-- vocabulary
-- reading_depth = brief | developed | substantial
-- images
-- processing_anchor
-
-Physics reading plans should support:
-- multiple short developed paragraphs where needed
-- concrete before abstract explanation
-- phenomenon/model-centered reasoning
-- no wall of text
-- no one-sentence stacking
-- vocabulary developed in context
+MAP, DO NOT WRITE:
+- reading_goal and essential_ideas are planning notes, not final paragraphs;
+- Stop & Discuss uses a concise prompt skeleton/job, not polished teacher script;
+- vocabulary definitions are targets, not final glossary prose;
+- Summary is bullet targets only;
+- Common Mistakes are misconception targets only.
 
 ======================================================================
-3. IMAGE-FIRST SEQUENCING
+4. EXAMPLE / YTI + WTC PLACEMENT
 ======================================================================
 
-Inspect the toolkit catalog before sequencing the story.
+Resolve every canonical Notes EX/YTI pair actually present in the Unit Bank and each section WTC.
 
-Favor useful images for phenomena, conceptual models, comparisons/rankings, evidence, invisible relationships, misconceptions, historical/contextual understanding, graphs/data/experiments, and bridges to equations/models.
+For each EX/YTI pair record:
+- example_bank_id;
+- yti_bank_id;
+- i_can_id;
+- story beat it follows;
+- why that placement is natural;
+- concept consolidated/applied.
 
-Do not impose a fixed image count.
-Use every strong image that materially advances the story.
+HARD
+- every canonical Notes EX/YTI pair exactly once;
+- Example immediately paired with its YTI;
+- no split pair;
+- no rewritten pair;
+- no substitute pair.
 
-Omit an image only when it is irrelevant, substantially redundant, unreadable/poor quality, answer-bearing in conflict with the intended task, or better suited elsewhere.
+For each WTC record:
+- exact bank_id;
+- placement;
+- purpose in flow.
 
-FOR EVERY SELECTED IMAGE RECORD:
-- image_id
-- toolkit_path
-- source/provenance when available
-- story_role
-- exact concept/I-can connection
-- what_students_should_notice
-- why_here
-- processing destination
-
-Every image_id and toolkit_path must be verified against the toolkit catalog and asset tree in the pinned COURSE snapshot. Store `toolkit_path` relative to the declared toolkit root (normally `images/...`), not as a memories-repo path.
-
-======================================================================
-4. EXAMPLE / YTI PLACEMENT
-======================================================================
-
-Resolve every canonical Notes Example/YTI pair actually present in the Bank.
-
-Bank IDs MUST use the Bank's exact IDs, e.g.:
-- U1-S1-EX-1
-- U1-S1-YTI-1
-
-Do not invent shorthand or alternate ID schemes.
-
-For each pair record:
-- example_bank_id
-- yti_bank_id
-- i_can_id
-- Bank evidence/question structure when available
-- story beat it follows
-- why the placement is natural
-- concept consolidated/applied
-
-HARD REQUIREMENTS
-- every canonical Notes EX/YTI pair exactly once
-- Example immediately paired with its YTI
-- no split pair
-- no rewritten pair
-- no substitute pair
-- quantitative pairs remain quantitative
+Do not rewrite WTC content.
 
 ======================================================================
-5. STOP & DISCUSS MAP
+5. IMAGE SEQUENCING
 ======================================================================
 
-Use Stop & Discuss only when a reading/image beat needs processing and no canonical EX/YTI naturally fills that role.
+Use the section-sorted toolkit catalog first. Select images that materially advance the mapped concept story.
+
+For every selected image record:
+- image_id;
+- toolkit_path relative to toolkit root;
+- source/provenance when available;
+- story_role;
+- exact concept/I-can connection;
+- what_students_should_notice;
+- why_here;
+- processing destination.
+
+Do not impose a fixed image count. Do not perform a full toolkit audit. Verify selected image IDs/paths only.
+
+======================================================================
+6. STOP & DISCUSS
+======================================================================
+
+Use Stop & Discuss only where the preceding reading/image beat needs processing and no canonical EX/YTI naturally fills that role.
 
 For each Stop & Discuss record:
-- after_story_beat_id
-- i_can_ids
-- discussion_job
-- prompt_skeleton
-- source_image_ids
-- expected_reasoning_evidence_to_listen_for
+- after_story_beat_id;
+- i_can_ids;
+- discussion_job;
+- prompt_skeleton;
+- source_image_ids;
+- expected_reasoning_evidence_to_listen_for.
 
 FIELD OWNERSHIP — HARD
 source_image_ids:
-- MUST be an array
-- each non-empty value MUST match ^PHYS-[A-F0-9]{12}$
-- each ID MUST exist in the pinned toolkit
-- contains IMAGE IDs ONLY
+- array of image IDs only;
+- each non-empty value matches ^PHYS-[A-F0-9]{12}$;
+- each ID exists in the selected/current toolkit catalog.
 
 expected_reasoning_evidence_to_listen_for:
-- MUST be an array
-- contains TEACHER-FACING REASONING/EVIDENCE TEXT ONLY
-- MUST NOT contain Physics image IDs
-
-Do not overload or swap these fields.
-
-======================================================================
-6. WTC PLACEMENT
-======================================================================
-
-Resolve the canonical section WTC from the Bank.
-Use the Bank's exact WTC ID, e.g. U1-S1-WTC-1.
-WTC remains FRQ-style decomposition/navigation practice and may use Physics outside the immediate section.
-
-Record:
-- bank_id
-- placement
-- purpose in Notes flow
-- surrounding teacher framing for 4B
-
-Do not rewrite WTC content.
+- teacher-facing reasoning/evidence text only;
+- no image IDs.
 
 ======================================================================
 7. VOCABULARY / SUMMARY / COMMON MISTAKES
@@ -269,35 +233,34 @@ Do not rewrite WTC content.
 For each section map:
 
 VOCABULARY PREVIEW
-- exact required terms
-- terms only
+- exact required terms only.
 
 VOCABULARY DEVELOPMENT
-- first meaningful story beat
-- image/phenomenon connection when useful
+- first meaningful story beat for each term;
+- image/phenomenon connection when useful.
 
 VOCABULARY WITH DEFINITIONS
-- definition targets immediately before Summary
+- definition targets immediately before Summary.
 
 SUMMARY
-- bullet-level concepts to synthesize
+- bullet-level concepts to synthesize.
 
 COMMON MISTAKES
-- section-specific misconceptions/errors Notes should explicitly address
+- section-specific misconceptions/errors Notes should address.
 
 ======================================================================
 8. GENERATED REPRESENTATIONS
 ======================================================================
 
-When the story requires a non-toolkit graph/FBD/vector diagram/motion diagram/table/model, map it for 4B.
+Only map a new graph/FBD/vector diagram/motion diagram/table/model when the conceptual story genuinely requires one that is not already supplied by the Bank/toolkit.
 
 Record:
-- representation_type
-- purpose
-- i_can_id
-- what must be shown
-- answer-neutrality constraints
-- student-facing or teacher-only
+- representation_type;
+- purpose;
+- i_can_id;
+- what must be shown;
+- answer-neutrality constraints;
+- student-facing or teacher-only.
 
 Do NOT generate the final asset in 4A.
 
@@ -305,275 +268,184 @@ Do NOT generate the final asset in 4A.
 9. CONTENT-STABLE BANK FINGERPRINT — HARD
 ======================================================================
 
-4A MUST identify the source Bank by curriculum/content identity, NEVER by raw ZIP bytes.
+4A identifies the source Bank by curriculum/content identity, never raw ZIP bytes.
 
 PRIMARY METHOD — stage3e-canonical-v1
 1. Read banks/unitN/STAGE_3E_HANDOFF.json from the pinned course commit.
 2. Read canonical_authored_content_sha256.
-3. Validate exactly 64 hexadecimal characters.
-4. Record EXACTLY:
+3. Validate 64 hexadecimal characters.
+4. Record exactly:
+   source_bank_fingerprint_method = "stage3e-canonical-v1"
+   source_bank_fingerprint = "stage3e-canonical:<lowercase-64-hex>"
 
-source_bank_fingerprint_method = "stage3e-canonical-v1"
-source_bank_fingerprint = "stage3e-canonical:<lowercase-64-hex>"
+Do NOT recompute or re-audit the entire Bank when this canonical Stage 3E identity is present.
 
 FALLBACK METHOD — content-manifest-v1
-Use only when Stage 3E canonical hash is unavailable and the current authority permits proceeding.
-
-Ignore __MACOSX/, .DS_Store, ._*, __pycache__/, and *.pyc.
-Normalize paths to POSIX slashes.
-SHA-256 every regular file.
-Sort by normalized path.
-Feed UTF-8(path) + NUL + lowercase_file_sha256 + LF into SHA-256.
-
-Record:
-source_bank_fingerprint_method = "content-manifest-v1"
-source_bank_fingerprint = "content-manifest:<lowercase-64-hex>"
+Use only when Stage 3E canonical identity is unavailable and the current authority permits proceeding.
 
 FORBIDDEN
-- sha256:<raw-zip-hash>
-- omitting either fingerprint field
-- placing the fingerprint only inside nested authority metadata
-- using one fingerprint in the map and another in the handoff
+- sha256:<raw-zip-hash>;
+- omitting either fingerprint field;
+- different fingerprints in map vs handoff.
 
 ======================================================================
 10. MAP JSON — HARD TOP-LEVEL CONTRACT
 ======================================================================
 
-The canonical file is:
-unitN_notes_map.json
+Canonical file: unitN_notes_map.json
 
-Its TOP LEVEL MUST contain all of these fields:
+Top level MUST contain:
+- schema = physics-notes-map/1.0;
+- course = Physics;
+- unit = N;
+- source_bank_fingerprint_method;
+- source_bank_fingerprint;
+- image_toolkit object with repo_scope=course, pinned repo/commit, root, catalog_path, toolkit_fingerprint;
+- sections;
+- qa.
 
-{
-  "schema": "physics-notes-map/1.0",
-  "course": "Physics",
-  "unit": N,
-  "source_bank_fingerprint_method": "stage3e-canonical-v1 | content-manifest-v1",
-  "source_bank_fingerprint": "stage3e-canonical:<sha256> | content-manifest:<sha256>",
-  "image_toolkit": {
-    "name": "Physics_Notes_Image_Toolkit",
-    "repo_scope": "course",
-    "repo": "<pinned course repo>",
-    "commit": "<pinned course commit>",
-    "root": "resources/Physics_Notes_Image_Toolkit",
-    "catalog_path": "resources/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json",
-    "toolkit_fingerprint": "..."
-  },
-  "sections": [...],
-  "qa": {...}
-}
-
-The schema string MUST remain:
-physics-notes-map/1.0
-
-Do NOT invent a new schema such as physics-notes-map/4A.1 unless this PM is formally revised to require it.
-Nested authority metadata may be added, but it does NOT replace required top-level fields.
+Do not invent a new schema.
 
 ======================================================================
 11. TEACHER-READABLE MAP
 ======================================================================
 
-Produce unitN_notes_map.html.
-
-For each section show exact Learning Target/I-cans, story beat order, planned reading goal, image previews when practical, image ID/source, what students should notice, next processing anchor, mapped EX/YTI Bank IDs, vocabulary, and summary/common-mistake targets.
+Produce unitN_notes_map.html as a readable view of the JSON plan.
+Show exact LT/I-cans, story order, mapped anchors, selected images, S&D jobs, vocabulary, Summary/Common Mistakes targets, and generated-representation needs.
 
 This is a planning/review document, not final student Notes.
 
 ======================================================================
-12. QA — FAIL CLOSED
+12. DIRECT BLOCKERS — THE ONLY REASONS TO FAIL CLOSED
 ======================================================================
 
-Before packaging verify:
+FAIL CLOSED only when one of these is true:
 
-AUTHORITY
-- pinned Philosophy used
-- stable Physics Framework gateway used
-- current Unit Assessment Plan used
-- exact section titles/LTs/I-cans match current authority
-- current materialized Bank used
-- current expanded toolkit used
+A. REQUIRED AUTHORITY MISSING
+- current Assessment Plan/Framework/PM cannot be retrieved from the pinned snapshot.
 
-BANK
-- source Bank fingerprint computed and stored at map top level
-- every canonical EX/YTI pair placed exactly once
-- every section WTC resolved
-- no Bank wording rewritten
-- no substitute IDs invented
+B. EXACT TARGET MISMATCH
+- section title, Learning Target, or I-can cannot be reconciled to the current Assessment Plan.
+
+C. MAPPED BANK DEPENDENCY MISSING
+- a required WTC/Example/YTI Bank ID needed for the Notes map does not exist or its pair relationship is broken.
+
+D. SELECTED IMAGE DEPENDENCY MISSING
+- a selected image_id/toolkit_path cannot be verified in the declared current toolkit catalog/course path.
+
+E. OUTPUT/HANDOFF CONTRACT BROKEN
+- required JSON cannot parse;
+- required filenames/schemas/fingerprints do not match;
+- rendered map HTML contains unresolved template/code placeholders.
+
+Everything else is either:
+- repair locally during mapping, or
+- record as a NON-BLOCKING WARNING for later QA/polish.
+
+DO NOT fail 4A for:
+- unrelated Bank audit findings;
+- optional stylistic improvements;
+- source-library completeness;
+- image choices that are merely debatable rather than invalid;
+- lack of perfection in wording of planning notes;
+- broad architecture checks unrelated to the four-file handoff.
+
+======================================================================
+13. TARGETED QA — FAST
+======================================================================
+
+Before packaging verify only:
+
+ALIGNMENT
+- exact sections/LTs/I-cans match current Assessment Plan.
+
+ANCHORS
+- each required WTC exists and is placed;
+- each canonical Notes EX/YTI pair exists, is placed exactly once, and remains immediate.
 
 IMAGES
-- every image ID exists
-- every toolkit path exists
-- every selected image has an instructional purpose
-- every substantial visual/reading beat has processing
+- each selected image ID/path exists;
+- each has a clear instructional role and answer-neutral use.
 
-STOP & DISCUSS
-- source_image_ids arrays valid
-- expected_reasoning arrays valid
-- no field swapping/overloading
+MAP COMPLETENESS
+- every I-can has a mapped instructional pathway;
+- vocabulary, Summary, Common Mistakes present;
+- mapped S&D fields are valid;
+- generated-representation needs recorded when necessary.
 
-VOCABULARY / STORY
-- every I-can developed
-- required vocabulary planned
-- summary/common-mistake targets present
-- reading depth appropriate for Conceptual Physics
+OUTPUT
+- map JSON parses;
+- handoff JSON parses;
+- four exact files present;
+- rendered HTML contains no unresolved {esc(...)} / {{...}} / <%...% / builder-variable tokens.
 
-JSON / HTML
-- unitN_notes_map.json parses
-- unitN_notes_map.html opens
-- no final student/teacher Notes emitted
+Do not run broad Bank QA or unrelated repository QA as part of 4A.
 
 ======================================================================
-13. EXACT OUTPUT PACKAGE — NON-NEGOTIABLE
+14. EXACT OUTPUT PACKAGE — NON-NEGOTIABLE
 ======================================================================
 
 THE OUTPUT FOLDER MUST BE EXACTLY:
 unitN_notes_map/
 
-THE OUTPUT FOLDER MUST CONTAIN EXACTLY THESE FOUR REQUIRED FILES:
+It MUST contain exactly:
 1. unitN_notes_map.json
 2. unitN_notes_map.html
 3. NOTES_MAP_REPORT.txt
 4. NOTES_MAP_HANDOFF.json
 
-Do NOT rename these files.
-Do NOT add stage prefixes.
-Do NOT add course prefixes.
-Do NOT substitute NOTES_MAP_4A_REPORT.txt, STAGE_4A_HANDOFF.json, or any alternate report/handoff filename.
-
-If a ZIP is returned, its top-level folder MUST be unitN_notes_map/.
-
-======================================================================
-14. NOTES_MAP_HANDOFF.json — EXACT CONTRACT
-======================================================================
-
-The canonical handoff filename is:
-NOTES_MAP_HANDOFF.json
-
-Its schema MUST be:
+NOTES_MAP_HANDOFF.json schema MUST be:
 physics-notes-map-handoff/1.1
 
 It MUST include at minimum:
+- course = Physics;
+- unit;
+- status = PASS;
+- qa_status = PASS;
+- map_json_filename = unitN_notes_map.json;
+- map_html_filename = unitN_notes_map.html;
+- validation_report_filename = NOTES_MAP_REPORT.txt;
+- source_bank_fingerprint_method;
+- source_bank_fingerprint;
+- image_toolkit_fingerprint;
+- section_count;
+- ex_yti_pairs_placed;
+- images_selected;
+- stop_discuss_count;
+- stop_discuss_schema_validation = PASS;
+- generated_representation_need_count;
+- output_filenames listing exactly the four required files.
 
-{
-  "schema": "physics-notes-map-handoff/1.1",
-  "course": "Physics",
-  "unit": N,
-  "status": "PASS",
-  "qa_status": "PASS",
-  "map_json_filename": "unitN_notes_map.json",
-  "map_html_filename": "unitN_notes_map.html",
-  "validation_report_filename": "NOTES_MAP_REPORT.txt",
-  "source_bank_fingerprint_method": "...",
-  "source_bank_fingerprint": "...",
-  "image_toolkit_fingerprint": "...",
-  "section_count": <int>,
-  "ex_yti_pairs_placed": <int>,
-  "images_selected": <int>,
-  "stop_discuss_count": <int>,
-  "stop_discuss_schema_validation": "PASS",
-  "generated_representation_need_count": <int>,
-  "output_filenames": [
-    "unitN_notes_map.json",
-    "unitN_notes_map.html",
-    "NOTES_MAP_REPORT.txt",
-    "NOTES_MAP_HANDOFF.json"
-  ]
-}
-
-HARD CONSISTENCY
-- source_bank_fingerprint_method MUST exactly match unitN_notes_map.json
-- source_bank_fingerprint MUST exactly match unitN_notes_map.json
-- validation_report_filename MUST equal NOTES_MAP_REPORT.txt
-- map_json_filename MUST equal unitN_notes_map.json
-- map_html_filename MUST equal unitN_notes_map.html
-- both status and qa_status MUST equal PASS
-
-Do NOT invent physics-notes-map-handoff/4A.1, STAGE_4A_HANDOFF.json, or NOTES_MAP_4A_REPORT.txt.
+Map and handoff fingerprints MUST match exactly.
 
 ======================================================================
-15. FINAL OUTPUT CONTRACT CHECK — MUST RUN BEFORE PASS
+15. FINAL OUTPUT CONTRACT CHECK
 ======================================================================
 
-Before emitting PASS, perform this literal final check:
+Before PASS:
+1. folder basename == unitN_notes_map;
+2. exact four-file set present;
+3. map/handoff JSON parse;
+4. schema strings exact;
+5. map/handoff fingerprint fields exist and match;
+6. handoff status/qa_status/stop_discuss_schema_validation == PASS;
+7. exact filenames recorded;
+8. final HTML has no unresolved template/code tokens.
 
-A. FOLDER
-actual folder basename == "unitN_notes_map"
-
-B. REQUIRED FILE SET
-required files present:
-- unitN_notes_map.json
-- unitN_notes_map.html
-- NOTES_MAP_REPORT.txt
-- NOTES_MAP_HANDOFF.json
-
-C. JSON PARSE
-- parse unitN_notes_map.json
-- parse NOTES_MAP_HANDOFF.json
-
-D. MAP FINGERPRINT
-unitN_notes_map.json contains TOP-LEVEL:
-- source_bank_fingerprint_method
-- source_bank_fingerprint
-
-E. HANDOFF FINGERPRINT
-NOTES_MAP_HANDOFF.json contains:
-- source_bank_fingerprint_method
-- source_bank_fingerprint
-
-F. CROSS-FILE MATCH
-map source_bank_fingerprint_method == handoff source_bank_fingerprint_method
-map source_bank_fingerprint == handoff source_bank_fingerprint
-
-G. PASS FIELDS
-handoff status == "PASS"
-handoff qa_status == "PASS"
-handoff stop_discuss_schema_validation == "PASS"
-
-H. EXACT FILENAMES
-handoff validation_report_filename == "NOTES_MAP_REPORT.txt"
-handoff map_json_filename == "unitN_notes_map.json"
-handoff map_html_filename == "unitN_notes_map.html"
-
-I. OUTPUT FILENAMES ARRAY
-Must list exactly:
-- unitN_notes_map.json
-- unitN_notes_map.html
-- NOTES_MAP_REPORT.txt
-- NOTES_MAP_HANDOFF.json
-
-J. RENDERED HTML SANITY — HARD
-Open/read the final unitN_notes_map.html AS RENDERED OUTPUT, not as a source template.
-The final HTML MUST NOT contain unresolved template/code placeholders, including:
-- {esc(...)}
-- {{...}}
-- <%...%>
-- literal builder-variable expressions such as b["processing_anchor"] or equivalent
-Every visible Processing label and other dynamic field must contain the resolved human-readable value.
-Search the final HTML text for unresolved template delimiters/tokens before PASS.
-If any unresolved template/code token is present, QA FAILS even when the JSON and handoff are otherwise correct.
-
-If ANY item A-J fails:
-- DO NOT emit PASS
-- repair the artifact
-- rerun this complete final output contract check
-- only then package/return it
-
-Correct curriculum content with wrong folder names, wrong filenames, missing fingerprint fields, wrong schema strings, or mismatched handoff metadata is NOT PASS.
+If one of these fails, repair it and recheck. Do not trigger a new broad audit cycle.
 
 ======================================================================
 16. CHAT HANDOFF
 ======================================================================
 
-End with a concise summary:
-- sections mapped
-- EX/YTI pairs placed
-- images selected
-- Stop & Discuss locations
-- Stop & Discuss validation PASS
-- generated representation needs
-- Bank fingerprint method/value
-- final output contract PASS
-- QA PASS
+End with a concise summary of:
+- sections mapped;
+- EX/YTI pairs placed;
+- images selected;
+- S&D count;
+- generated representation needs;
+- Bank fingerprint;
+- output contract PASS.
 
 Then say exactly:
 
@@ -581,33 +453,7 @@ SAVE NEXT:
 Save the expanded `unitN_notes_map/` folder at `<course>/notes/unitN_notes_map/`. It is a planning artifact, not deployed Notes. 4B Build Notes consumes its JSON directly from this folder.
 
 ======================================================================
-V1.7 RENDERED HTML SANITY FIX
+FAST-PATH REVISION NOTE
 ======================================================================
 
-v1.7 preserves the v1.6 course-owned image-resource architecture and all prior
-4A→4B contracts. It adds a hard rendered-output sanity check: the final
-unitN_notes_map.html may not contain unresolved template/code placeholders or
-builder-variable expressions. JSON/handoff correctness does not excuse a broken
-teacher-readable HTML artifact.
-
-======================================================================
-V1.6 COURSE-OWNED IMAGE RESOURCE FIX
-======================================================================
-
-v1.6 preserves the v1.5 strict 4A→4B handoff contract and moves Physics Notes image-resource resolution to the pinned Physics course repository. The Physics Framework manifest now declares the toolkit as a course resource; 4A selects/validates images there and records course-repo provenance. The toolkit is no longer a memories/System Tool.
-
-V1.5 STRICT 4A→4B HANDOFF FIX
-----------------------------------------------------------------------
-
-v1.5 preserves the v1.4 expanded-authority retrieval and instructional mapping behavior while making the 4A→4B boundary fail-closed.
-
-This revision specifically prevents:
-- alternate output folder names
-- stage-prefixed report/handoff filenames
-- alternate map/handoff schema strings
-- missing top-level Bank fingerprint fields
-- missing status or qa_status
-- stale validation_report_filename values
-- map/handoff fingerprint mismatches
-
-The final output contract must pass literally before 4A may report PASS.
+This revision keeps the existing v1.7 storage/schema/provenance contracts but changes execution behavior: 4A is sequencing, not content production or Bank re-audit. Only direct handoff blockers may stop the run. Broad quality/polish checks move to later targeted QA.
