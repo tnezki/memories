@@ -8,16 +8,21 @@
   "input": "canonical_bank_after_3b",
   "question_structure": true,
   "state": "ready",
-  "output": "<course>_uN_bank_3c_assessment_families.zip",
+  "output": "unitN.zip",
   "step": "3c",
   "pm_path": "pms_build/bank_exit_tickets/PM.txt",
   "canonical_storage": "expanded",
-  "delivery_note": "ZIP is handoff only; extract/merge repo-relative banks/unitN/ files into the course repository.",
+  "delivery_note": "Complete current unitN snapshot. Unzip in staging, drag unitN into <course>/banks/, choose Replace.",
   "requires_audited_map": false,
   "requires_completed_phases": [
     "3A_instructional_core",
     "3B_practice_families"
   ],
+  "handoff_packaging": {
+    "mode": "complete_unit_snapshot",
+    "zip_top_level": "unitN/",
+    "replace_target": "<course>/banks/unitN/"
+  },
   "tool_policy": {
     "web_search_allowed": false,
     "web_fetch_allowed": false,
