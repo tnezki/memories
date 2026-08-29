@@ -1,315 +1,374 @@
-PHYSICS / COURSE-AWARE BANK BUILD STAGE 3C - EXIT TICKETS v2.0
-=================================================================
-STATUS: CURRENT STAGED BANK AUTHORING PM
-ROLE: Add the complete secure Exit Ticket layer to an accepted Stage 3B instructional checkpoint.
+BUILD BANK ASSESSMENT FAMILIES - PORTABLE MEMORY v1.0 - STEP 3C BANK-V2
+======================================================================
 
+STATUS: CURRENT BANK-V2 PILOT PM
+ROLE: Author the complete secure Exit and Summative family layer and finish the canonical modular Bank-v2 build.
 
-CANONICAL STORAGE CONTRACT — HARD
----------------------------------
-GitHub stores readable authorities and multi-file curriculum artifacts EXPANDED. ZIP is a transfer/handoff format only, unless the artifact is intrinsically a binary/archive resource. If this PM returns a ZIP for convenience, extract it into the PM-declared canonical folder before syncing GitHub. Downstream jobs read the expanded canonical folder/files, never a retained handoff ZIP.
-NORMAL OUTPUT: unitN_bank_3c.zip
-DEPLOYMENT STATUS: BUILD CHECKPOINT ONLY - NOT A FINAL OR DEPLOYABLE BANK
+STARTUP - HARD
+--------------
+Read the current Curriculum Philosophy and Runtime Contract.
+Resolve required authorities through the pinned manifests.
+Fetch declared resources directly.
+
+Do not use generic web search or repository-wide search to locate known curriculum authorities. Do not substitute old Banks,
+prior chat copies, retained ZIPs, similarly named files, or alternate representations for declared canonical sources.
+
+WEB / SEARCH RULE - HARD
+------------------------
+This job does not need open-ended web search to discover curriculum sources. If a map/profile explicitly declares an
+external source or exact URL as required evidence, fetch that declared source directly. Otherwise do not web-search for
+Frameworks, Assessment Plans, Bank files, question structures, examples, secure questions, or replacement curriculum content.
 
 GENERIC RUN COMMAND
 -------------------
 Carefully read PM and Run.
 
-When the teacher says Run, complete this entire Stage 3C workflow and return the real ZIP in the same response.
-Do not stop at samples, plans, previews, or requests to continue.
+"Run" means complete this entire Unit phase, author every mapped Exit and Summative family, validate security and family
+contracts, update the real modular Bank, mark the Bank ready only if all phases pass, package only new/changed repo-relative
+files, reopen the package, and return it in the same response.
 
-ARCHITECTURE
-------------
-2.5 Build Bank Map -> 2.6 Audit + Fix Bank Map -> 3A Build Bank Seeds -> 3B Instructional Variants -> 3C Exit Tickets -> 3D Summative Bank -> 3E Final Bank Audit + Materialize
+PURPOSE
+-------
+Step 3C authors the canonical secure family seeds declared by:
+  `exit_map.json`
+  `summative_map.json`
 
-FIRST TASK - HARD GATE
-----------------------
-Before reading this PM, the Framework, the audited map, the Stage 3B checkpoint, the question-structure package, or any source material:
-READ THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+It does NOT materialize finished Exit A/B/C forms or Summative V1-V6 forms. Those are downstream controlled secure instances
+of the canonical families and blueprints stored here.
 
-After validating the Stage 3B handoff and audited map, and immediately before authoring the first Exit Ticket question, REREAD THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+Bank-v2 sequence:
+  2.5 Bank Map
+    -> 3A Instructional Core
+    -> 3B Practice Families
+    -> 3C Assessment Families
+    -> complete canonical modular Bank
+
+Step 2.6 is NOT required.
+There is no Stage 3D or Stage 3E in Bank-v2.
+
+SCOPE
+-----
+Build one Unit at a time.
+
+Author ONLY every `family_seed` record declared in:
+- `banks/unitN_bank_map/exit_map.json`;
+- `banks/unitN_bank_map/summative_map.json`.
+
+Preserve all existing 3A/3B canonical files unchanged except:
+- `banks/unitN/BANK_MANIFEST.json`;
+- `banks/unitN/ITEM_INDEX.json`;
+which 3C must update to finish routing/state.
+
+Do NOT author or modify exposed instructional exact content or Practice family seeds.
+Do NOT generate final Exit Ticket or Summative documents in this phase.
+
+The course Bank profile owns counts/blueprints. Do not hard-code Physics inventory into another course.
+For the current Physics Unit 1 pilot, the accepted map declares:
+- Exit: 8 secure families per section x 5 sections = 40 families;
+- Summative: 40 secure families per Unit = Blueprint A 20 + Blueprint B 20;
+- total new 3C families = 80.
 
 AUTHORITY ORDER
 ---------------
-Current explicit teacher instruction overrides portable defaults. After that:
-1. Current Curriculum Philosophy PM.
-2. This Stage 3C PM.
-3. Current course Framework and original Unit Assessment Plan.
-4. Current audited Bank Map.
-5. Accepted Stage 3B checkpoint for all exposed instructional content already authored.
-6. Current dedicated _question_structure/.
-7. Current visual/source Toolkit when nonconflicting.
+1. Current explicit teacher instruction for this job.
+2. Current Curriculum Philosophy.
+3. Current System Runtime Contract.
+4. Current course Framework + ORIGINAL Unit Assessment Plan.
+5. Current Framework/course manifest-declared Bank profile and required course runtime files.
+6. Accepted Unit Bank-v2 map (`banks/unitN_bank_map/`).
+7. Current `_question_structure/` authority.
+8. Existing canonical Bank front door and authored 3A/3B files.
+9. This PM for secure authoring and storage procedure.
 
-REQUIRED INPUTS
----------------
-1. This Stage 3C PM package.
-2. Current course Framework ZIP.
-3. Current audited Unit Bank Map ZIP: unitN_bank_map_audited.zip.
-4. Current Stage 3B checkpoint ZIP: unitN_bank_3b_instructional.zip.
-5. Current Curriculum Philosophy and _question_structure/, normally bundled automatically by Control Panel.
+PINNING / DIRECT FETCH - HARD
+-----------------------------
+At job start, pin the memories repository commit and course repository commit once. Do not mix later commits into the run.
 
-Repository convention:
-  <course>/banks/unitN_bank_map_audited.zip
-  <course>/banks/unitN_bank_3b_instructional.zip
+Read the Bank front door first:
+  `banks/unitN/BANK_MANIFEST.json`
+  `banks/unitN/ITEM_INDEX.json`
 
-HANDOFF HARD GATE
------------------
-Before authoring anything, verify:
-- requested Unit is unambiguous;
-- audited map opens and map_audit.final_status = PASS;
-- Stage 3B ZIP opens to exactly one unitN/ folder;
-- unitN/STAGE_3B_HANDOFF.json exists;
-- Stage 3B handoff status = PASS and deployable = false;
-- handoff Unit/course match the request;
-- handoff authored_count matches the actual Stage 3B canonical item count;
-- every Stage 3B authored_slot_id exists exactly once;
-- Stage 3B audited_map_sha256 exactly matches the supplied audited-map ZIP SHA-256;
-- Stage 3B contains the complete exposed instructional layer and NO Exit/Summative questions.
+Resolve the same accepted Bank Map through:
+  `banks/unitN_bank_map/MAP_MANIFEST.json`
 
-If a hard gate fails, STOP. Do not silently rebuild Stage 3B or substitute another map.
+Fetch only the two map slices needed for 3C:
+  `exit_map.json`
+  `summative_map.json`
 
-STAGE 3C AUTHORING SCOPE - EXIT TICKETS ONLY
---------------------------------------------
-Author every audited-map slot belonging to Exit Tickets and NOTHING ELSE.
+Use ITEM_INDEX to fetch the smallest existing 3A/3B canonical section files needed for security comparison. Do not rebuild a
+giant Bank aggregate and do not repository-search for exposed prompts.
 
-For the current five-section Physics architecture this is normally:
-- Exit Ticket A: 4 questions x 5 sections = 20
-- Exit Ticket B: 4 questions x 5 sections = 20
-- Exit Ticket C: 4 questions x 5 sections = 20
-= 60 new Stage 3C items
-
-Together with the normal 615 Stage 3B items, the Stage 3C checkpoint normally contains 675 authored canonical items and exactly 120 pending Summative slots. The AUDITED MAP owns actual counts.
-
-Do NOT author any Summative item in Stage 3C.
-
-WHY THIS STAGE EXISTS
----------------------
-Exit Tickets are formative evidence, not extra Practice. They are authored only after the entire exposed instructional layer exists, so the builder can avoid simply recycling Example/YTI, Practice, CYU, or Warm-Up tasks while still collecting the mapped evidence efficiently.
-
-Stage 3D will later see BOTH the complete exposed instructional layer and the complete Exit inventory before authoring secure Summative questions.
-
-SECURITY / FRESHNESS PRINCIPLE
-------------------------------
-Inspect all Stage 3A/3B instructional questions before authoring Exit Tickets.
-
-A secure Exit question MAY target the same I-can, question structure, formula, representation type, or kind of reasoning students practiced. It must NOT simply reproduce an exposed instructional question or distinctive stimulus/data set.
-
-Security does not require forced novelty. Comparable parallel Exit forms are desirable.
-
-GLOBAL WRITING RULES
---------------------
-SHORT BY DEFAULT.
-Four Exit questions should feel like an Exit Ticket, not a mini-test. Extra context is allowed only when it improves the Physics or carries evidence.
-
-VISUALS ARE CHEAP, NOT A QUOTA.
-If a graph, FBD, vector diagram, motion diagram, table, or model materially improves or carries the evidence, make a purpose-built one. B/C parallel forms normally receive their own corresponding values/data/visual instance when the evidence depends on it. Do not ration visuals merely to save work.
-
-Exact visual uniqueness is NOT itself a requirement. Judge correctness, usefulness, and security.
-
-PHYSICS BEFORE ALGEBRA SHELLS.
-Quantitative Exit questions use concise physical situations. The situation supplies the measurements and students use, choose, rearrange, interpret, or combine the relationship. Do not write naked variable-assignment prompts.
-
-NO UPSTREAM REPAIRS IN THIS STAGE.
-Preserve every Stage 3A/3B canonical question object and figure unchanged. If an upstream defect is noticed, record it in STAGE_3C_REPORT.txt under UPSTREAM PATCH NOTES. Do not repair instructional content here.
-
-EXIT EVIDENCE MAP FIRST
+3A + 3B / MAP HARD GATE
 -----------------------
-The audited Bank Map must already define the four Exit evidence jobs for each section before prose.
+Before authoring, verify:
+- requested course and Unit are unambiguous;
+- Bank status is BUILDING and `ready_for_downstream = false`;
+- completed phases contain `3A_instructional_core` and `3B_practice_families`;
+- next/pending phase permits `3C_assessment_families`;
+- Bank manifest points to the same accepted Bank Map identity/fingerprint used by 3A/3B;
+- Exit and Summative slice paths/fingerprints/counts agree with MAP_MANIFEST;
+- every consumed record uses `record_mode = family_seed` and the correct destination;
+- all family IDs are unique within the whole Bank index;
+- exact I-can IDs/text resolve against the pinned Framework / ORIGINAL Assessment Plan;
+- every question structure resolves through current `_question_structure/` or a declared course extension;
+- Exit deterministic selection rules are feasible;
+- Summative blueprint assignments, family counts, response-class counts, and I-can coverage are internally feasible.
 
-For each section, reconcile BEFORE authoring:
-- exact I-can for A1-A4;
-- exact evidence job;
-- response demand;
-- planned structure;
-- representation requirement;
-- security/freshness expectation;
-- B/C parallel relationship.
+If a required authority/family/blueprint is materially missing or contradictory, STOP. Do not rebuild the Bank Map inside 3C.
 
-If the map is materially incomplete or contradictory, FAIL CLOSED rather than inventing a replacement assessment plan.
+MAP CONTRACT NORMALIZATION - HARD
+---------------------------------
+Materialize a fully explicit canonical family contract. Do not copy unresolved semantic lock tokens forward.
 
-FORM A CONTRACT - FOUR UNIQUE SECURE SEEDS
-------------------------------------------
-For each section:
-- A1, A2, A3, and A4 are FOUR separate secure seed questions.
-- Each one must do its own mapped evidence job.
-- They may share an I-can when the map calls for it, but they are not four phrasings of one prompt.
-- Each must be independently solved/verified.
+Known pilot aliases may be normalized only when unambiguous:
+- `question_structure` -> `question_structure_id`;
+- `approximate_difficulty` -> `difficulty_intent`;
+- `representation_job` -> explicit representation contract from `representation_mode`, `representation_need`, and any
+  `representation_variation_rule`;
+- `intended_reasoning` -> explicit field derived narrowly from mapped evidence job + question structure;
+- `blueprint_assignment` -> explicit Summative blueprint field/tag from the accepted map;
+- `response_class` -> explicit mapped selection tag / response-class field.
 
-A useful default evidence shape may include core understanding, conceptual reasoning, quantitative/application, and stronger transfer/representation evidence, but the audited map owns the actual four jobs. Do not force a generic quota over the map.
+Every token in locked/allowed/required/forbidden rules must resolve to an explicit canonical property or transformation rule.
+Unknown/unresolvable tokens are a hard stop. Record alias normalization in `provenance/3c_build.json`; do not mutate the map.
 
-FORMS B/C CONTRACT - DELIBERATE PARALLELS
-------------------------------------------
-For each corresponding slot:
-- B1 parallels A1; C1 parallels A1;
-- B2 parallels A2; C2 parallels A2;
-- and so on.
+SECURITY AWARENESS - HARD
+-------------------------
+Before authoring secure seed prose, inspect the relevant exposed instructional content through ITEM_INDEX:
+- 3A exact items for the same I-can/evidence neighborhood;
+- 3B Practice canonical seeds for the same I-can/evidence neighborhood.
 
-A legitimate parallel preserves:
-- mapped I-can;
+A secure family may target the same I-can, structure, formula, representation type, and reasoning architecture students have
+practiced. It must not reuse an exposed finished prompt, distinctive data set, distinctive diagram, or distinctive stimulus.
+
+Security does NOT mean forced novelty. It means fresh evidence while preserving the intended evidence job and difficulty.
+
+COURSE-AWARE AUTHORING - HARD
+-----------------------------
+This PM is universal. The current course Framework/profile owns disciplinary behavior.
+
+For Physics:
+- quantitative assessment prompts begin with concrete physical situations, not naked variable assignments;
+- equations are relationships describing phenomena;
+- use physically plausible measurements/units;
+- representations must actually carry the evidence when mapped;
+- keep wording concise and assessment-appropriate.
+
+For other courses, use their declared course patterns instead of importing Physics behavior.
+
+CANONICAL SECURE FAMILY CONTRACT
+--------------------------------
+Each Exit/Summative map record becomes ONE fully authored secure canonical family record containing:
+
+IDENTITY / ROUTING
+- `family_id` exactly equal to mapped ID;
+- `record_mode = family_seed`;
+- `destination` = exit or summative;
+- section when mapped;
+- family type;
+- exact primary/supporting I-can IDs/text;
+- selection tags;
+- explicit blueprint assignment/position for Summative when mapped.
+
+EVIDENCE DESIGN
 - evidence job;
-- response demand;
-- approximate difficulty;
-- structural family.
+- explicit intended reasoning;
+- question structure ID;
+- response mode / response class;
+- representation mode/need;
+- difficulty intent;
+- security level;
+- wording profile when mapped.
 
-It changes legitimate evidence details as appropriate:
-- values/data;
-- givens/unknown;
-- physical situation;
-- representation values/layout;
-- misconception/evidence set;
-- wording when useful.
+FULLY AUTHORED SECURE CANONICAL SEED
+- `canonical_seed.student_text`;
+- `canonical_seed.student_html`;
+- `canonical_seed.choices` when applicable;
+- `canonical_seed.answer`;
+- `canonical_seed.solution_text`;
+- `canonical_seed.solution_html`;
+- `canonical_seed.figure_refs` for actual secure seed figures;
+- actual embedded table/data/model content when part of the item.
 
-Parallel does NOT mean changing only a noun when the map calls for a deeper variation. Parallel also does NOT mean forcing a completely different question just to look novel.
+TRANSFORMATION / SECURITY CONTRACT
+- locked elements as explicit key/value locks;
+- allowed variations as explicit permitted axes/rules;
+- required variations as explicit changes required for each secure sibling;
+- forbidden variations as explicit prohibited changes;
+- representation variation rule when mapped;
+- explicit security contract preserving freshness requirements;
+- source map record ID and useful source basis.
 
-Do not force Standard / Inverted / Context-rich wording by form letter. Context-rich remains optional.
+Do NOT add audit workflow/status fields.
+Do not expose family IDs, blueprint labels, security metadata, or map language to students.
 
-REPRESENTATIONS
----------------
-When the mapped evidence requires a representation, the representation must actually exist.
+SEED QUALITY - HARD
+-------------------
+Every secure family seed is a complete, valid assessment question with answer and full solution, not a prose template.
+The seed demonstrates the exact evidence architecture that downstream secure instances must preserve.
 
-Do not write prose such as "use the diagram" or "from the graph" when no actual representation is present.
+Independently solve/check each seed after final wording, choices, data, and representations are fixed.
+For selected response, exactly one listed answer must be defensible unless the declared structure explicitly requires otherwise.
 
-For parallel forms, generate corresponding purpose-built data/graphs/diagrams when appropriate. Because graph/figure production is effectively free, do not reuse an old instructional graph merely to avoid generating a new secure one.
+EXIT FAMILY CONTRACT
+--------------------
+Author the full mapped Exit family pool, not only the current four-family feasibility witness.
+
+For the Physics pilot:
+- 8 canonical secure families per section;
+- downstream ticket size = 4;
+- A/B/C use the same deterministically selected four family IDs for a given build key;
+- each A/B/C form uses a fresh secure instance of those families;
+- exposed prompt reuse is forbidden;
+- surface-only variation is forbidden;
+- hard evidence/composition/security constraints are applied before deterministic tie-break.
+
+3C stores the 8-family pool plus the accepted selection rules/metadata needed downstream. It does NOT author A/B/C forms.
+
+SUMMATIVE FAMILY / BLUEPRINT CONTRACT
+-------------------------------------
+Author every mapped Summative family exactly once.
+
+For the current Physics pilot:
+- Blueprint A = 20 mapped family IDs used for V1-V4 secure instances;
+- Blueprint B = 20 mapped family IDs used for V5-V6 secure instances;
+- each blueprint owns its mapped response-class composition and I-can coverage;
+- Blueprint B is materially alternate where the map requires it;
+- answer-position scrambling happens downstream only after content is fixed and independently verified.
+
+Do not invent a third blueprint, reshuffle mapped family membership, or materialize V1-V6 forms in the Bank.
+
+SECURE VARIATION QUALITY - HARD
+-------------------------------
+A valid secure sibling preserves all locked evidence architecture while making the required fresh semantic change.
+
+Invalid secure variation includes, when forbidden by the family/map:
+- exposed finished prompt reuse;
+- other secure form/blueprint finished-prompt reuse;
+- names/objects only;
+- wording profile only;
+- choice order only;
+- version/question number only;
+- values/units only when a deeper fresh stimulus is required.
+
+Valid variation may change mapped axes such as context/evidence, givens/evidence set, misconception target, representation
+values/type, values/units, unknown quantity, orientation/geometry, dependency path, or wording profile when permitted.
+
+REPRESENTATIONS / FIGURES
+-------------------------
+If a secure seed requires a graph, diagram, FBD, vector, table, model, or other representation, the actual student-safe
+representation must exist and must not reveal the answer.
+
+Purpose-built Bank figures belong under:
+  `banks/unitN/figures/`
+
+Use stable filenames tied to family IDs. Every figure reference must resolve. No orphan new figures.
+Do not reuse an exposed instructional figure/data set merely to save work when security requires fresh evidence.
+
+MODULAR CANONICAL STORAGE - HARD
+--------------------------------
+Do NOT create a giant Bank JSON and do NOT duplicate 3A/3B item bodies.
+
+3C creates/updates only:
+  `banks/unitN/BANK_MANIFEST.json`
+  `banks/unitN/ITEM_INDEX.json`
+  `banks/unitN/exit/section_<section-id>.json`
+  `banks/unitN/summative/blueprint_a.json`
+  `banks/unitN/summative/blueprint_b.json`
+  `banks/unitN/figures/...` only for new secure seed figures actually needed
+  `banks/unitN/provenance/3c_build.json`
+  `banks/unitN/provenance/3c_report.txt`
+
+Each Exit section file contains only that section's 8 canonical Exit families in deterministic family order.
+Each Summative blueprint file contains only its mapped 20 canonical families in blueprint position order.
+
+ITEM_INDEX UPDATE
+-----------------
+Append compact routes for all 3C families:
+- family ID;
+- record mode;
+- destination;
+- section or blueprint as applicable;
+- exact canonical file path.
+
+Do not add prompt/solution bodies to ITEM_INDEX.
+Preserve every existing 3A/3B route exactly.
+
+BANK_MANIFEST FINALIZATION
+--------------------------
+Only after every 3C hard gate passes:
+- completed phases = 3A + 3B + `3C_assessment_families`;
+- pending phases = empty;
+- next phase = null / none;
+- add Exit and Summative canonical artifact paths;
+- update all destination/family/exact-content counts and total;
+- preserve accepted Bank-map/profile identity;
+- set Bank version to complete/current Bank-v2 form;
+- set `status = COMPLETE`;
+- set `ready_for_downstream = true`.
+
+If any 3C QA gate fails, do NOT mark the Bank complete/ready.
 
 AUTHORING ORDER
 ---------------
-1. Read Philosophy completely.
-2. Read this PM and current authorities.
-3. Validate audited map and Stage 3B hard gates.
-4. Inventory the complete exposed instructional layer for security awareness.
-5. Extract exactly the pending Exit Ticket slot IDs.
-6. Reconcile all Exit evidence jobs and A/B/C relationships before prose.
-7. Reread Philosophy completely.
-8. Author Form A secure seeds section by section.
-9. Independently solve/check every Form A question.
-10. Author Forms B/C as deliberate parallels of the corresponding A slots.
-11. Independently solve/check every B/C question.
-12. Generate/verify every required new representation.
-13. Derive post-authoring metadata from the finished questions where required.
-14. Preserve all Stage 3A/3B canonical items and figures unchanged.
-15. Initialize audit handoff fields on every new Exit item.
-16. Rebuild the combined checkpoint views/data from the single canonical item set.
-17. Run Stage 3C structural/security QA once after authoring is complete.
-18. Write Stage 3C handoff/report.
-19. Package unitN_bank_3c.zip.
+1. Read Philosophy + Runtime Contract.
+2. Pin memories/course commits.
+3. Resolve Framework, ORIGINAL Assessment Plan, Bank profile, and `_question_structure/` directly.
+4. Read BANK_MANIFEST + ITEM_INDEX and verify 3A/3B state.
+5. Read accepted MAP_MANIFEST, then only Exit + Summative map slices.
+6. Reconcile Exit pools/selection constraints and Summative blueprints/coverage/response classes.
+7. Resolve map contract aliases explicitly.
+8. Use ITEM_INDEX to inspect relevant exposed 3A/3B content for security awareness.
+9. Author all Exit secure canonical family seeds section by section.
+10. Independently solve/check every Exit seed.
+11. Author all Summative Blueprint A families in mapped order.
+12. Author all Summative Blueprint B families in mapped order.
+13. Independently solve/check every Summative seed.
+14. Validate every transformation/security contract and required fresh-variation rule.
+15. Generate/verify every required secure representation.
+16. Write modular Exit/Summative files.
+17. Append 3C routes to ITEM_INDEX and finalize BANK_MANIFEST only if all QA passes.
+18. Write compact 3C provenance/report.
+19. Run complete Bank-v2 QA.
+20. Package only new/changed repo-relative `banks/unitN/` files and verify the package.
 
-MULTIDIMENSION AUDIT HANDOFF
-----------------------------
-Every NEW Stage 3C Exit item must carry these independent audit fields:
-- map_alignment
-- structure
-- wording
-- representation
-- parallel_variety_fidelity
-- physics_answer
-- security
-
-Applicable dimensions initialize to NEEDS AUDIT; genuinely nonapplicable dimensions initialize to N/A. Overall audit_status initializes to NEEDS AUDIT.
-
-Stage 3C builder QA does not self-certify later independent question audit.
-
-STAGE 3C CHECKPOINT DATA CONTRACT
----------------------------------
-ZIP top level must be exactly:
-  unitN/
-
-Required contents include:
-- unitN_bank_data.json with all Stage 3A + Stage 3B + Stage 3C canonical items only;
-- unitN.html;
-- unitN_review.html;
-- unitN_resources.html;
-- unitN_question_design_map.json;
-- unitN_mapping.csv for authored items only;
-- figures/ containing every referenced Stage 3A/3B/3C figure;
-- generate_graphs.py with current approved generation calls;
-- retained STAGE_3A_HANDOFF.json and STAGE_3B_HANDOFF.json for provenance;
-- STAGE_3C_HANDOFF.json;
-- STAGE_3C_REPORT.txt;
-- NOT_DEPLOYABLE_STAGE_3C.txt.
-
-Teacher views must clearly display an internal banner:
-  BUILD STAGE 3C - EXIT TICKETS ADDED - NOT DEPLOYABLE
-
-Summative slots must remain pending/unwritten.
-
-STAGE_3C_HANDOFF.json REQUIRED FIELDS
--------------------------------------
-At minimum:
-{
-  "schema": "curriculum-bank-build-stage/3c-2.0",
-  "course": "...",
-  "unit": N,
-  "stage": "3C",
-  "status": "PASS",
-  "deployable": false,
-  "audited_map_filename": "unitN_bank_map_audited.zip",
-  "audited_map_sha256": "...",
-  "source_stage_filename": "unitN_bank_3b_instructional.zip",
-  "source_stage_sha256": "...",
-  "preserved_3b_count": 0,
-  "new_exit_count": 0,
-  "authored_count": 0,
-  "authored_slot_ids": [],
-  "pending_count": 0,
-  "pending_slot_ids": [],
-  "destination_counts": {},
-  "upstream_patch_notes_count": 0,
-  "figure_count": 0,
-  "next_stage": "3D Build Summative Bank"
-}
-
-Compute real SHA-256 fingerprints for the supplied audited map and Stage 3B checkpoint. Stage 3D must verify them before authoring Summative questions.
-
-STAGE 3C QA - HARD GATES
-------------------------
-Before packaging, verify:
-- every expected Exit slot is authored exactly once;
-- NO Summative slot is authored;
-- all Stage 3A/3B authored items remain unchanged;
-- every Form A section has four unique secure seed questions;
-- every B/C slot is a legitimate parallel of its corresponding A slot;
-- all new items retain their exact mapped I-can/evidence/response jobs;
-- no Exit task simply reproduces an exposed instructional prompt/stimulus/data set;
-- planned variation axes are visibly realized where the map calls for them;
-- wording is concise and natural;
-- every quantitative item is independently solved and physically coherent;
-- every answer/solution matches the final prompt;
-- every referenced representation exists and is correct;
-- visual correctness/security/usefulness passes; exact file-content uniqueness is NOT required;
-- authored_count + pending_count equals audited-map total inventory;
-- pending inventory consists of Summative slots only;
-- combined teacher views/data derive from the same canonical objects;
-- all new audit dimensions are initialized, not self-certified;
-- Stage 3C handoff status = PASS and deployable = false.
-
-Do not run an anti-clone rewrite pass. Intentional parallelism across A/B/C is not a defect.
+3C / COMPLETE BANK QA - HARD GATES
+----------------------------------
+Before returning PASS/ready:
+- every mapped Exit family is authored exactly once;
+- every mapped Summative family is authored exactly once;
+- no 3A/3B canonical content is altered;
+- Exit pool counts, selection constraints, and I-can/evidence coverage match the accepted map;
+- Summative Blueprint A/B family IDs, order, response classes, and coverage match the accepted map;
+- every secure seed is complete and independently solved;
+- no secure seed simply reproduces an exposed instructional finished prompt/stimulus/data/figure;
+- every required semantic freshness rule can actually be satisfied by the explicit allowed-variation contract;
+- surface-only changes cannot satisfy required secure variation;
+- every lock/allowed/required/forbidden token resolves explicitly; no unknown lock token survives;
+- representation-bearing seeds include/respect their actual representations;
+- Physics quantitative seeds use concrete physically plausible situations rather than naked variable assignments;
+- every answer/solution matches the final prompt/choices/data;
+- all new figure refs resolve, figures are student-safe, and no orphan new figures exist;
+- no placeholders or audit-status fields exist;
+- every ITEM_INDEX route resolves to the correct small canonical file and all prior routes remain unchanged;
+- BANK_MANIFEST counts equal actual canonical inventory;
+- completed phases contain exactly the required Bank-v2 authoring phases and pending phases are empty;
+- `status = COMPLETE` and `ready_for_downstream = true` only after all gates pass;
+- output package contains only new/changed repo-relative Bank files and no copy of the Bank Map.
 
 DELIVERY CONTRACT
 -----------------
-Return ONE ZIP named:
-  unitN_bank_3c.zip
+Return one ZIP named:
+  `<course>_uN_bank_3c_assessment_families.zip`
 
-This ZIP is a checkpoint for Stage 3D Build Summative Bank. It is NOT a deployed replacement Bank.
+The ZIP preserves course-repository-relative paths beginning with:
+  `banks/unitN/`
 
 Teacher repository action:
-  Save the ZIP itself, still zipped, at:
-    <course>/banks/unitN_bank_3c.zip
+Extract/merge the ZIP into the ROOT of the current course repository. Replace only supplied files. Do not replace the whole
+`banks/` folder and do not retain the handoff ZIP as canonical source after extraction/sync.
 
-Do not unzip it. Do not replace <course>/banks/unitN/ with this checkpoint.
-
-RETENTION RULE
---------------
-Keep every current Unit checkpoint ZIP still zipped in <course>/banks/ through Stage 3E: map, audited map, 3A, 3B, 3C, and later 3D.
-
-Stage 3E will preserve the important map, map-audit, design, mapping, and final-audit provenance inside the permanent materialized unitN/ folder. AFTER Stage 3E succeeds and that folder is verified, the teacher may manually delete all temporary Unit build ZIPs. Stage 3E and the Control Panel should remind the teacher.
-
-FINAL CHAT SUMMARY
-------------------
-Report concisely:
-- preserved Stage 3B count;
-- new Exit count and A/B/C destination counts;
-- combined authored count and pending Summative count;
-- visual count;
-- upstream patch-note count, if any;
-- QA PASS/FAIL;
-- exact ZIP filename/save location;
-- NEXT BUILD: 3D Build Summative Bank.
+FINAL RESULT
+------------
+After successful 3C, `banks/unitN/` is the canonical complete Bank-v2 source. Downstream Notes, Practice, Exit, Summative,
+Activities, and repair workflows fetch only the smallest declared Bank files needed through BANK_MANIFEST + ITEM_INDEX.

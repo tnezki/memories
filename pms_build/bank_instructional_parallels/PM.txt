@@ -1,294 +1,340 @@
-PHYSICS / COURSE-AWARE BANK BUILD STAGE 3B - INSTRUCTIONAL VARIANTS v2.0
-============================================================================
-STATUS: CURRENT STAGED BANK AUTHORING PM
-ROLE: Expand an accepted Stage 3A seed checkpoint into the full exposed instructional layer.
+BUILD BANK PRACTICE FAMILIES - PORTABLE MEMORY v1.0 - STEP 3B BANK-V2
+====================================================================
 
+STATUS: CURRENT BANK-V2 PILOT PM
+ROLE: Author the complete canonical Practice family layer directly into an accepted modular Bank-v2 build.
 
-CANONICAL STORAGE CONTRACT — HARD
----------------------------------
-GitHub stores readable authorities and multi-file curriculum artifacts EXPANDED. ZIP is a transfer/handoff format only, unless the artifact is intrinsically a binary/archive resource. If this PM returns a ZIP for convenience, extract it into the PM-declared canonical folder before syncing GitHub. Downstream jobs read the expanded canonical folder/files, never a retained handoff ZIP.
-NORMAL OUTPUT: unitN_bank_3b_instructional.zip
-DEPLOYMENT STATUS: BUILD CHECKPOINT ONLY - NOT A FINAL OR DEPLOYABLE BANK
+STARTUP - HARD
+--------------
+Read the current Curriculum Philosophy and Runtime Contract.
+Resolve required authorities through the pinned manifests.
+Fetch declared resources directly.
+
+Do not use generic web search or repository-wide search to locate known curriculum authorities. Do not substitute old Banks,
+prior chat copies, retained ZIPs, similarly named files, or alternate representations for declared canonical sources.
+
+WEB / SEARCH RULE - HARD
+------------------------
+This job does not need open-ended web search to discover curriculum sources. If a map/profile explicitly declares an
+external source or exact URL as required evidence, fetch that declared source directly. Otherwise do not web-search for
+Frameworks, Assessment Plans, Bank files, question structures, examples, or replacement curriculum content.
 
 GENERIC RUN COMMAND
 -------------------
 Carefully read PM and Run.
 
-When the teacher says Run, complete this entire Stage 3B workflow and return the real ZIP in the same response.
-Do not stop at samples, plans, previews, or requests to continue.
+"Run" means complete this entire Unit phase, author every mapped Practice family, validate the family contracts and seed
+content, update the real modular Bank files, package only new/changed repo-relative files, reopen the package, and return it
+in the same response.
 
-ARCHITECTURE
-------------
-2.5 Build Bank Map -> 2.6 Audit + Fix Bank Map -> 3A Build Bank Seeds -> 3B Instructional Variants -> 3C Build Exit Tickets -> 3D Build Summative Bank -> 3E Final Bank Audit + Materialize
+PURPOSE
+-------
+Step 3B authors the canonical nonsecure Practice family seeds declared by `practice_map.json`.
 
-FIRST TASK - HARD GATE
-----------------------
-Before reading this PM, the Framework, the audited map, the Stage 3A checkpoint, the question-structure package, or any source material:
-READ THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+It does NOT author Practice Set 1, 2, 3, or Extra Practice as finished worksheets. Those downstream artifacts are
+deterministic selections and controlled instances of these canonical families.
 
-After the Stage 3A handoff and audited map are validated and immediately before authoring the first new Stage 3B question, REREAD THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+Bank-v2 sequence:
+  2.5 Bank Map
+    -> 3A Instructional Core
+    -> 3B Practice Families
+    -> 3C Assessment Families
+    -> complete canonical modular Bank
+
+Step 2.6 is NOT required.
+There is no Stage 3D or Stage 3E in Bank-v2.
+
+SCOPE
+-----
+Build one Unit at a time.
+
+Author ONLY every `family_seed` record declared in:
+  `banks/unitN_bank_map/practice_map.json`
+
+Preserve all existing 3A files unchanged except the two routing/front-door files that 3B must update:
+  `banks/unitN/BANK_MANIFEST.json`
+  `banks/unitN/ITEM_INDEX.json`
+
+Do NOT author or modify:
+- Notes/WTC/Example/YTI exact content;
+- CYU exact content;
+- Warm-Up exact content;
+- Exit families;
+- Summative families;
+- downstream Practice worksheets or answer keys;
+- downstream Notes, Activities, Exit Tickets, or Summatives.
+
+The course Bank profile owns counts and composition. Do not hard-code Physics inventory into another course.
+For the current Physics Unit 1 pilot, the accepted map contains 30 Practice families per section x 5 sections = 150 families.
 
 AUTHORITY ORDER
 ---------------
-Current explicit teacher instruction overrides portable defaults. After that:
-1. Current Curriculum Philosophy PM.
-2. This Stage 3B PM.
-3. Current course Framework and original Unit Assessment Plan.
-4. Current audited Bank Map.
-5. Accepted Stage 3A checkpoint for canonical seed content already authored.
-6. Current dedicated _question_structure/.
-7. Current visual/source Toolkit when nonconflicting.
+1. Current explicit teacher instruction for this job.
+2. Current Curriculum Philosophy.
+3. Current System Runtime Contract.
+4. Current course Framework + ORIGINAL Unit Assessment Plan.
+5. Current Framework/course manifest-declared Bank profile and required course runtime files.
+6. Accepted Unit Bank-v2 map (`banks/unitN_bank_map/`).
+7. Current `_question_structure/` authority.
+8. Existing canonical 3A Bank front door (`banks/unitN/BANK_MANIFEST.json` + `ITEM_INDEX.json`).
+9. This PM for authoring and storage procedure.
 
-REQUIRED INPUTS
----------------
-1. This Stage 3B PM package.
-2. Current course Framework ZIP.
-3. Current audited Unit Bank Map ZIP: unitN_bank_map_audited.zip.
-4. Current Stage 3A checkpoint ZIP: unitN_bank_3a_seeds.zip.
-5. Current Curriculum Philosophy and _question_structure/, normally bundled automatically by Control Panel.
+PINNING / DIRECT FETCH - HARD
+-----------------------------
+At job start, pin the memories repository commit and course repository commit once. Do not mix later commits into the run.
 
-Repository convention:
-  <course>/banks/unitN_bank_map_audited.zip
-  <course>/banks/unitN_bank_3a_seeds.zip
+Read the current Bank front door first:
+  `banks/unitN/BANK_MANIFEST.json`
 
-HANDOFF HARD GATE
+Then resolve the same accepted Bank Map through:
+  `banks/unitN_bank_map/MAP_MANIFEST.json`
+
+Fetch only the Practice slice required by this phase:
+  `practice_map.json`
+
+Do not load Exit or Summative map slices merely because they exist.
+Fetch existing 3A section files only when needed for exposed-content awareness or to verify Bank routing; do not aggregate the
+whole Bank into one giant object.
+
+3A / MAP HARD GATE
+------------------
+Before authoring, verify:
+- requested course and Unit are unambiguous;
+- `banks/unitN/BANK_MANIFEST.json` exists;
+- Bank status is BUILDING and `ready_for_downstream = false`;
+- completed phases contain `3A_instructional_core`;
+- next/pending phase permits `3B_practice_families`;
+- Bank manifest points to the same accepted `banks/unitN_bank_map/MAP_MANIFEST.json` identity/fingerprint;
+- Practice slice path/fingerprint/count agrees with the map manifest;
+- every consumed record uses `record_mode = family_seed` and `destination = practice`;
+- all family IDs are unique;
+- exact I-can IDs/text resolve against the pinned Framework / ORIGINAL Assessment Plan;
+- every question structure resolves through current `_question_structure/` or a declared course extension;
+- inventory, family-mix ranges, and deterministic-selection constraints are internally feasible.
+
+If a required authority or family record is materially missing/contradictory, STOP. Do not rebuild the Bank Map inside 3B.
+
+MAP CONTRACT NORMALIZATION - HARD
+---------------------------------
+The current pilot map may use semantic lock names that are aliases of explicit map fields. 3B must materialize a fully
+explicit canonical family contract rather than copying unresolved lock tokens forward.
+
+Known pilot aliases may be normalized only when their source is unambiguous:
+- `question_structure` -> `question_structure_id`;
+- `approximate_difficulty` -> `difficulty_intent`;
+- `representation_job` -> the explicit representation contract formed from `representation_mode`, `representation_need`,
+  and any `representation_variation_rule`;
+- `intended_reasoning` -> materialize an explicit `intended_reasoning` field derived narrowly from the mapped evidence job
+  plus question structure. It must not change the evidence job or add a new instructional target.
+
+Every token named by `locked_elements`, `allowed_variations`, `required_variations`, and `forbidden_variations` must resolve
+to an explicit canonical contract property or a declared transformation rule. Unknown/unresolvable tokens are a hard stop.
+Record any alias normalization in `provenance/3b_build.json`; do not mutate the Bank Map itself.
+
+COURSE-AWARE AUTHORING - HARD
+-----------------------------
+This PM is universal. The current course Framework/profile owns disciplinary behavior and favored family patterns.
+
+For Physics:
+- begin quantitative work with a concrete physical situation, not naked variable assignments;
+- treat equations as relationships describing phenomena;
+- preserve conceptual/model reasoning rather than empty algebra shells;
+- use real graphs, FBDs, vectors, tables, motion diagrams, models, or data when they carry evidence;
+- keep wording concise by default;
+- use physically plausible data and units.
+
+For Algebra, Calculus, or another course, use that course's declared family patterns instead. Course-specific structures
+such as Diamond Problems belong to the course Framework/profile, not to this universal PM.
+
+CANONICAL PRACTICE FAMILY CONTRACT
+----------------------------------
+Each map family becomes ONE canonical family record. At minimum preserve/materialize:
+
+IDENTITY / ROUTING
+- `family_id` exactly equal to map `family_id` / `record_id`;
+- `record_mode = family_seed`;
+- `destination = practice`;
+- `section`;
+- `family_type`;
+- `primary_i_can_id` + exact `primary_i_can`;
+- `supporting_i_can_ids` when mapped;
+- `selection_tags` and any mapped deterministic-selection metadata needed downstream.
+
+EVIDENCE DESIGN
+- `evidence_job`;
+- `intended_reasoning` - explicit, concise, and faithful to the mapped evidence job;
+- `question_structure_id`;
+- `response_mode`;
+- `representation_mode`;
+- `representation_need`;
+- `difficulty_intent`;
+- `security_level`;
+- `wording_profile` when mapped.
+
+FULLY AUTHORED CANONICAL SEED
+- `canonical_seed.student_text`;
+- `canonical_seed.student_html`;
+- `canonical_seed.choices` when applicable;
+- `canonical_seed.answer`;
+- `canonical_seed.solution_text`;
+- `canonical_seed.solution_html`;
+- `canonical_seed.figure_refs` for actual purpose-built figures used by the seed;
+- actual embedded table/data/model content when that representation is part of the item rather than an external figure.
+
+TRANSFORMATION CONTRACT
+- `locked_elements` as explicit key/value locks, not unresolved labels;
+- `allowed_variations` as explicit permitted axes/rules;
+- `required_variations` as explicit change requirements for a sibling instance;
+- `forbidden_variations` as explicit prohibited changes;
+- `representation_variation_rule` when mapped;
+- `source_map_record_id`;
+- `source_basis` when mapped/useful.
+
+Do NOT add `audit_status`, `NEEDS AUDIT`, `KEEP`, `CLEAN`, or `REBUILD` fields.
+Do not expose family IDs, map language, or transformation metadata in student-facing prompt text.
+
+SEED QUALITY - HARD
+-------------------
+A family seed is not a vague template and not "write another question like this."
+It is one complete, classroom-usable canonical question with a correct answer and full solution that demonstrates exactly
+what the family means.
+
+Each seed must:
+- perform the mapped evidence job;
+- match the mapped response and question structure;
+- represent the intended approximate difficulty;
+- include the actual representation when evidence depends on one;
+- be independently solved/checked after final wording/data are fixed;
+- be sufficiently complete that a downstream builder can instantiate valid siblings using only the family contract.
+
+FAMILY VARIATION QUALITY - HARD
+-------------------------------
+Allowed variation is controlled, not random.
+
+A valid sibling must preserve every locked property and satisfy every required variation. It may change only allowed axes.
+A variant is invalid when it merely swaps names/objects, changes wording profile only, scrambles choice order only, or changes
+numbers when the family contract requires a deeper evidence/stimulus/representation change.
+
+Do not over-constrain legitimate variety. Different course families may validly vary vocabulary direction, situation,
+evidence set, misconception target, values/units, unknown, representation values/type, dependency path, or wording profile
+when the map permits them.
+
+PRACTICE POOL / DOWNSTREAM SELECTION
+------------------------------------
+Author the complete mapped family pool, not just the current feasibility witness or one selected set.
+
+For the Physics pilot this means all 30 families per section.
+The map's deterministic selection rules remain metadata/authority for downstream Practice builders:
+- hard coverage/composition constraints first;
+- deterministic tie-break second;
+- no uncontrolled randomness;
+- same pinned Bank identity + same declared set key -> same selected family IDs/order.
+
+3B does NOT materialize the four Practice sets.
+
+REPRESENTATIONS / FIGURES
+-------------------------
+If a canonical seed requires a graph, diagram, FBD, vector, table, model, or other representation, the actual student-safe
+representation must exist.
+
+Purpose-built Bank figures belong under:
+  `banks/unitN/figures/`
+
+Use stable filenames tied to family IDs. Every figure reference must resolve. No orphan generated figures.
+Respect any manifest-declared `reference_in_place` rule for shared toolkit assets.
+
+MODULAR CANONICAL STORAGE - HARD
+--------------------------------
+Do NOT create a giant Bank JSON and do NOT duplicate 3A item bodies.
+
+3B creates/updates only:
+  `banks/unitN/BANK_MANIFEST.json`
+  `banks/unitN/ITEM_INDEX.json`
+  `banks/unitN/practice/section_<section-id>.json`
+  `banks/unitN/figures/...` only for new Practice seed figures actually needed
+  `banks/unitN/provenance/3b_build.json`
+  `banks/unitN/provenance/3b_report.txt`
+
+Each Practice section file contains only that section's canonical family records in deterministic family order.
+Example: `banks/unit1/practice/section_1_1.json`.
+
+ITEM_INDEX UPDATE
 -----------------
-Before authoring anything, verify:
-- requested Unit is unambiguous;
-- audited map opens and map_audit.final_status = PASS;
-- Stage 3A ZIP opens to exactly one unitN/ folder;
-- unitN/STAGE_3A_HANDOFF.json exists;
-- Stage 3A handoff status = PASS and deployable = false;
-- handoff Unit/course match the request;
-- handoff authored_count matches the actual Stage 3A canonical item count;
-- every Stage 3A authored_slot_id exists exactly once;
-- Stage 3A audited_map_sha256 exactly matches the supplied audited-map ZIP SHA-256;
-- Stage 3A contains only the authorized seed layer plus support/provenance files.
+Append one compact route for every new Practice family:
+- `item_id` / family ID;
+- `record_mode = family_seed`;
+- `destination = practice`;
+- `section`;
+- exact canonical file path.
 
-If a hard gate fails, STOP. Do not silently rebuild Stage 3A or substitute another map.
+Do not add prompt/solution bodies to ITEM_INDEX.json.
+Preserve every existing 3A route exactly.
 
-STAGE 3B AUTHORING SCOPE - ONLY THESE NEW DESTINATIONS
-------------------------------------------------------
-Author every audited-map slot belonging to:
-A. Practice Set 2
-B. Practice Set 3
-C. Extra Practice
-D. CYU
-E. Warm-Ups
-
-Preserve all Stage 3A canonical questions and Stage 3A figures unchanged.
-Do NOT author Exit Tickets or Summative forms yet.
-
-For the current five-section Physics architecture this is normally:
-- 120 Practice Set 2
-- 120 Practice Set 3
-- 120 Extra Practice
-- 30 CYU
-- 60 Warm-Ups
-= 450 new Stage 3B items
-
-Together with the normal 165 Stage 3A items, the Stage 3B checkpoint normally contains 615 authored canonical items and 180 pending assessment slots: 60 Exit Ticket items and 120 Summative items. The AUDITED MAP owns actual counts.
-
-WHY THIS STAGE EXISTS
----------------------
-Stage 3B expands only already-authored instructional seeds while Exit and Summative evidence remain unwritten. This lets Stage 3C see the complete exposed instructional layer before creating Exit Tickets, and lets Stage 3D see both the exposed instruction and the completed Exit inventory before creating Summative evidence.
-
-GLOBAL WRITING RULES
+BANK_MANIFEST UPDATE
 --------------------
-SHORT BY DEFAULT.
-Extra context is allowed only when it improves the Physics or carries evidence. Do not manufacture a new lead-in sentence merely to make a parallel look different.
-
-PARALLEL IS INTENTIONAL.
-A declared parallel should preserve the mapped skill, evidence job, approximate difficulty, and structural family while changing only legitimate variation axes. Similarity is expected. A noun swap alone is not enough when the map calls for a deeper variation, but novelty is not the goal.
-
-VISUALS ARE CHEAP, NOT A QUOTA.
-When a graph, FBD, vector diagram, motion diagram, table, or model materially improves the question, make a purpose-built visual/data instance. Do not ration visuals merely to save work. Exact visual uniqueness is NOT a pass/fail metric: the same correct visual may legitimately serve more than one question. Judge correctness and usefulness, not a uniqueness count.
-
-PHYSICS BEFORE ALGEBRA SHELLS.
-Quantitative prompts use concise physical situations. A formula may be provided when appropriate. Do not write naked variable-assignment prompts.
-
-NO UPSTREAM REPAIRS IN THIS STAGE.
-Stage 3B preserves Stage 3A canonical item objects and figures. If a Stage 3A seed appears to have an answer-key or wording defect but its prompt/map relationship is still usable, record it in STAGE_3B_REPORT.txt under UPSTREAM PATCH NOTES and continue. Do not copy a suspected incorrect answer into a new variant: independently solve every new Stage 3B item. Fail closed only if an upstream seed is too ambiguous or broken to parallel safely.
-
-PRACTICE SET 2 / 3 / EXTRA CONTRACT
------------------------------------
-The audited map owns each slot. Use Practice Set 1 as the canonical seed family.
-
-Vocabulary families:
-- Practice Set 1 may intentionally contain a MIX of approved vocabulary structures.
-- For each vocabulary seed, later Practice forms should intentionally rotate into other approved vocabulary directions when available, such as term->definition, definition->term, concept/example->term, and term->concept/example.
-- Do not require one single vocabulary direction for all questions in a set.
-- Avoid repeating the PS1 direction for a family when another mapped/approved direction is available, unless the audited map explicitly calls for the repetition.
-- Matching may be used only where the map/Framework allows it as a presentation mode.
-
-Conceptual / representation families:
-- Preserve the seed evidence job and approximate difficulty.
-- Legitimate variation may change situation, givens, evidence set, misconception, prediction target, representation data, or requested inference.
-- Keep prompts compact. Do not force explanation/justification wrappers onto every question.
-
-Physics-math families:
-- Preserve the mapped direct / inverse / representation-data / dependent-multistep family job.
-- Vary values, givens, unknown, situation, data, representation, or dependency appropriately.
-- Do NOT force wording profiles by Practice-set number. In particular, Extra Practice is not automatically context-rich.
-- Context-rich is a tool only when it improves the Physics.
-
-PRACTICE COMPOSITION
---------------------
-The familiar 10 vocabulary + 10 conceptual + 4 Physics-math pattern is a strong DEFAULT, not an inflexible quota. The audited map owns the actual section composition. Do not fail or rewrite a valid mapped section merely because it resolves to a small purposeful deviation such as 11/9/4.
-
-CYU CONTRACT
-------------
-- Author the mapped six CYU items per section when that is the current architecture.
-- CYU is a short check of what students should now be able to do.
-- Adapt/select strong mapped Practice families rather than inventing six unrelated structures.
-- Use concise calculate, identify, interpret, compare, graph/diagram, or brief-explanation jobs as mapped.
-- CYU may intentionally resemble Practice because its purpose is to check recently learned work.
-
-WARM-UP CONTRACT
-----------------
-Use the established four-slot Physics Warm-Up pattern for each mapped Warm-Up:
-- Q1: current/recent Physics retrieval;
-- Q2: older/spiraled Physics retrieval;
-- Q3: concise conceptual, vocabulary, or application retrieval;
-- Q4: recurring Physics math/formula work in a short physical situation.
-
-Warm-Up repetition is legitimate. Do not force artificial novelty or representation quotas. The Q4 math slot follows the Physics-before-algebra-shell rule: the physical situation supplies the measurements and the student uses/rearranges/interprets the relationship as needed.
+After successful 3B:
+- keep `status = BUILDING`;
+- keep `ready_for_downstream = false`;
+- completed phases = 3A + `3B_practice_families`;
+- pending phases = only remaining declared Bank-v2 authoring phase(s), normally `3C_assessment_families`;
+- next phase = `3C_assessment_families`;
+- add canonical Practice section paths;
+- update counts by destination and total without duplicating item bodies;
+- preserve the original accepted Bank-map/profile identity.
 
 AUTHORING ORDER
 ---------------
-1. Read Philosophy completely.
-2. Read this PM and current authorities.
-3. Validate audited map and Stage 3A hard gates.
-4. Extract exactly the Stage 3B pending slot IDs.
-5. Reconcile Stage 3B expected inventory before prose.
-6. Reread Philosophy completely.
-7. Author Practice Set 2 family-by-family from PS1.
-8. Author Practice Set 3 family-by-family from PS1.
-9. Author Extra Practice family-by-family from PS1.
-10. Author CYU from the mapped Practice-family relationships.
-11. Author Warm-Ups from their fixed mapped retrieval jobs.
-12. Independently solve/check every NEW Stage 3B item and final answer/solution.
-13. Generate/verify any new purpose-built representations.
-14. Derive post-authoring metadata from finished items where required.
-15. Preserve all Stage 3A canonical items/figures unchanged.
-16. Initialize audit handoff fields on every new item.
-17. Regenerate Stage 3B teacher views from the combined canonical objects.
-18. Write Stage 3B handoff/report and run QA.
-19. Package unitN_bank_3b_instructional.zip.
+1. Read Philosophy + Runtime Contract.
+2. Pin memories/course commits.
+3. Resolve Framework, ORIGINAL Assessment Plan, Bank profile, and `_question_structure/` directly.
+4. Read `banks/unitN/BANK_MANIFEST.json` and verify 3A state.
+5. Read accepted `MAP_MANIFEST.json`, then `practice_map.json` only.
+6. Reconcile family count, mix, I-can coverage, selection feasibility, and map contract aliases.
+7. Author all canonical Practice seeds section by section and family by family.
+8. Independently solve/check every seed after final prompt/data are fixed.
+9. Materialize explicit transformation contracts and validate every lock/variation rule.
+10. Generate/verify required representations.
+11. Write section-sized Practice files.
+12. Append Practice routes to ITEM_INDEX; update BANK_MANIFEST.
+13. Write compact 3B provenance/report.
+14. Run final 3B QA.
+15. Package only new/changed repo-relative `banks/unitN/` files and verify the package.
 
-FINAL-AUDIT HANDOFF
--------------------
-Every NEW Stage 3B canonical item must carry:
-- map_alignment
-- structure
-- wording
-- representation
-- parallel_variety_fidelity
-- physics_answer
-- security
-
-Applicable dimensions initialize to NEEDS AUDIT; genuinely nonapplicable dimensions initialize to N/A. Overall audit_status initializes to NEEDS AUDIT. Security is normally N/A for exposed instructional resources. Builder QA does not self-certify the later independent 3E audit.
-
-STAGE 3B CHECKPOINT DATA CONTRACT
----------------------------------
-ZIP top level must be exactly:
-  unitN/
-
-Required contents include:
-- unitN_bank_data.json with all Stage 3A + Stage 3B canonical items only;
-- unitN.html;
-- unitN_review.html;
-- unitN_resources.html;
-- unitN_question_design_map.json;
-- unitN_mapping.csv for authored items only;
-- figures/ containing all referenced Stage 3A and Stage 3B figures;
-- generate_graphs.py with current approved generation calls;
-- original STAGE_3A_HANDOFF.json retained for provenance;
-- STAGE_3B_HANDOFF.json;
-- STAGE_3B_REPORT.txt;
-- NOT_DEPLOYABLE_STAGE_3B.txt.
-
-Teacher views must clearly display an internal banner:
-  BUILD STAGE 3B - INSTRUCTIONAL LAYER - NOT DEPLOYABLE
-
-STAGE_3B_HANDOFF.json REQUIRED FIELDS
--------------------------------------
-At minimum:
-{
-  "schema": "curriculum-bank-build-stage/3b-2.0",
-  "course": "...",
-  "unit": N,
-  "stage": "3B",
-  "status": "PASS",
-  "deployable": false,
-  "audited_map_filename": "unitN_bank_map_audited.zip",
-  "audited_map_sha256": "...",
-  "source_stage_filename": "unitN_bank_3a_seeds.zip",
-  "source_stage_sha256": "...",
-  "preserved_3a_count": 0,
-  "new_authored_count": 0,
-  "authored_count": 0,
-  "authored_slot_ids": [],
-  "pending_count": 0,
-  "pending_slot_ids": [],
-  "destination_counts": {},
-  "upstream_patch_notes_count": 0,
-  "figure_count": 0,
-  "next_stage": "3C Build Exit Tickets"
-}
-
-Compute real SHA-256 fingerprints for the supplied audited map and Stage 3A checkpoint. Stage 3C must verify them before authoring Exit Tickets.
-
-STAGE 3B QA - HARD GATES
-------------------------
-Before packaging, verify:
-- every expected Stage 3B slot is authored exactly once;
-- no Exit/Summative slot is authored;
-- Stage 3A authored items remain semantically/content-wise unchanged;
-- every new item retains the exact mapped I-can/evidence job;
-- each declared parallel is a legitimate parallel of its mapped seed/family;
-- planned variation axes are visibly realized where the map calls for them;
-- no forced context-rich/standard/inverted profile is applied merely because of Practice-set number;
-- wording is concise and natural;
-- every new quantitative item is independently solved and physically coherent;
-- every new answer/solution matches the final instantiated prompt;
-- every referenced visual exists and is correct;
-- visual correctness/usefulness passes; exact file-content uniqueness is NOT required;
-- CYU follows mapped adaptation relationships;
-- Warm-Ups follow the four fixed retrieval jobs;
-- authored_count + pending_count equals audited-map total inventory;
-- combined teacher views/data derive from the same canonical objects;
-- Stage 3B handoff status is PASS.
-
-Do not run an anti-clone rewrite pass. Intentional parallelism and purposeful retrieval repetition are not defects.
+3B QA - HARD GATES
+------------------
+Before returning PASS, verify:
+- every mapped Practice family is authored exactly once;
+- no Exit/Summative family is authored;
+- no existing 3A canonical content is altered;
+- pool counts/mixes match the accepted map/profile;
+- every family retains exact mapped I-can, evidence job, structure, response mode, security, and difficulty intent;
+- every canonical seed is complete, classroom-usable, and independently solved;
+- every representation-bearing seed includes/resolves its actual evidence-bearing representation;
+- every lock/allowed/required/forbidden rule resolves to an explicit canonical contract property;
+- known alias normalization is documented and no unknown lock token survives;
+- required variation cannot be satisfied by prohibited surface-only changes;
+- quantitative Physics seeds use concrete physically plausible situations rather than naked variable assignment;
+- all figure references resolve and no orphan new figures exist;
+- no placeholders or audit-status fields exist;
+- every new ITEM_INDEX route resolves to the correct Practice section file;
+- existing 3A routes remain unchanged;
+- BANK_MANIFEST counts equal actual authored records;
+- BANK_MANIFEST remains BUILDING/not-ready and points next to 3C;
+- output package contains only new/changed repo-relative Bank files and no copy of the Bank Map.
 
 DELIVERY CONTRACT
 -----------------
-Return ONE ZIP named:
-  unitN_bank_3b_instructional.zip
+Return one ZIP named:
+  `<course>_uN_bank_3b_practice_families.zip`
 
-This ZIP is a checkpoint for Stage 3C Build Exit Tickets. It is NOT a deployed replacement Bank.
+The ZIP preserves course-repository-relative paths beginning with:
+  `banks/unitN/`
 
 Teacher repository action:
-  Save the ZIP itself, still zipped, at:
-    <course>/banks/unitN_bank_3b_instructional.zip
+Extract/merge the ZIP into the ROOT of the current course repository. Replace only supplied files. Do not replace the whole
+`banks/` folder and do not retain the handoff ZIP as canonical source after extraction/sync.
 
-Do not replace <course>/banks/unitN/ with this checkpoint.
-
-RETENTION RULE
---------------
-Keep every current Unit checkpoint ZIP still zipped in <course>/banks/ through Stage 3E: map, audited map, 3A, 3B, and later 3C/3D checkpoints. Do not unzip or deploy Stage 3B.
-
-Stage 3E will preserve the important map, map-audit, design, mapping, and final-audit provenance inside the permanent materialized unitN/ folder. AFTER Stage 3E succeeds and that folder is verified, the teacher may manually delete all temporary Unit build ZIPs. Stage 3E must remind the teacher.
-
-FINAL CHAT SUMMARY
-------------------
-Report concisely:
-- preserved Stage 3A count;
-- new Stage 3B count and destination counts;
-- combined authored count and pending count;
-- visual count;
-- upstream patch-note count, if any;
-- QA PASS/FAIL;
-- exact ZIP filename/save location;
-- NEXT BUILD: 3C Build Exit Tickets.
+NEXT PHASE
+----------
+3C reads the same modular Bank front door, verifies 3A + 3B completion, then authors only secure Exit and Summative family
+seeds from `exit_map.json` and `summative_map.json`.
