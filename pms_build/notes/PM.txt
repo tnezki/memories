@@ -1,4 +1,4 @@
-4B · BUILD PHYSICS NOTES PM v1.3
+4B · BUILD PHYSICS NOTES PM v1.4
 ================================
 4B NOTES-MAP INPUT — HARD
 -------------------------
@@ -26,7 +26,7 @@ Before inspecting or writing any Notes:
 3. Resolve Physics through `frameworks/MANIFEST.json`; read `frameworks/Physics/FRAMEWORK.txt` and only the supporting files named by `frameworks/Physics/MANIFEST.json` that 4B requires to resolve Notes architecture, source-use rules, visual contract, CSS classes, file paths, MathJax/finalizer tools, teacher-guide behavior, and exact Learning Target/I-can requirements.
 4. Inspect the current complete/materialized Unit Bank.
 5. Inspect and validate unitN_notes_map/ from 4A.
-6. Inspect the Physics Notes Image Toolkit catalog and every source image selected by the map.
+6. Resolve `course_resources.physics_notes_image_toolkit` from `frameworks/Physics/MANIFEST.json`. Inspect its catalog and the selected source images from the SAME pinned Physics course snapshot used for the Bank/Notes Map. The toolkit is course-owned; do not resolve it from memories/Tools and do not require toolkit binaries to be materialized into the build workspace.
 
 Do not begin from memory or from an older Notes build.
 Do not use the retired combined Question Structure + Visual Toolkit.
@@ -69,15 +69,19 @@ UNIT BANK OWNS
 PHYSICS NOTES IMAGE TOOLKIT OWNS
 - source-image bytes;
 - image IDs;
-- provenance/catalog metadata.
+- provenance/catalog metadata;
+- canonical course-repo asset paths.
+
+RESOURCE OWNERSHIP — HARD
+The Physics Notes Image Toolkit is a COURSE-OWNED canonical resource resolved from `frameworks/Physics/MANIFEST.json` under `course_resources.physics_notes_image_toolkit`. It is not a System Tool. Toolkit images remain in that canonical course resource and are referenced in place by deployed Notes HTML.
 
 4B OWNS
 - final explanatory prose;
 - final concise Stop & Discuss wording from the mapped discussion job;
-- rendering/copying selected images;
-- generation of mapped non-Hewitt representations;
+- rendering references to selected toolkit images at canonical course-relative paths;
+- generation/materialization of mapped non-Hewitt representations;
 - student/teacher HTML;
-- portable asset paths;
+- repository-relative asset paths;
 - final QA/package.
 
 If the 4A map conflicts materially with the current Bank/Framework, fail closed. Do not silently remap the Unit during 4B.
@@ -95,7 +99,7 @@ Before authoring:
 - independently compute the current Bank fingerprint using that SAME method and compare the value exactly;
 - NEVER compare raw unitN_bank.zip bytes as the Bank identity;
 - if the map carries a legacy raw-ZIP fingerprint such as sha256:<...>, fail closed with a concise instruction to rerun 4A once under the current fingerprint contract; do not ignore the mismatch;
-- verify the image-toolkit fingerprint matches the packaged toolkit when provided;
+- verify the image-toolkit fingerprint and declared root/catalog match the current pinned COURSE toolkit when provided;
 - verify every section in the Framework/Bank is represented;
 - verify every mapped EX/YTI Bank ID exists;
 - verify each mapped EX/YTI pair is used exactly once;
@@ -255,23 +259,34 @@ BAD S&D BEHAVIOR
 When a mapped visual drives the discussion, keep the visual visible/near the prompt.
 
 ======================================================================
-8. HEWITT / SOURCE IMAGES
+8. HEWITT / SOURCE IMAGES — REFERENCE IN PLACE
 ======================================================================
 
-Use the Physics Notes Image Toolkit only as an image source/inventory.
+Use the Physics Notes Image Toolkit only as the canonical course-owned image source/inventory.
+
+TOOLKIT ROOT — HARD
+Resolve the toolkit from `frameworks/Physics/MANIFEST.json` -> `course_resources.physics_notes_image_toolkit`. For the current Physics repository the canonical root is:
+  resources/Physics_Notes_Image_Toolkit/
 
 For every selected map image:
-- resolve image_id and toolkit_path;
-- copy the source image into the appropriate section's portable figures/ directory;
-- use a stable, collision-safe filename containing the image_id when practical;
-- preserve source-image bytes whenever no editing is instructionally required;
-- record provenance in build metadata, not student-facing captions;
-- use meaningful alt text that describes the visible content without solving the task.
+- resolve `image_id` and map `toolkit_path` against the pinned course toolkit catalog;
+- verify the asset exists in the SAME pinned Physics course commit;
+- keep the source image at its canonical toolkit location;
+- DO NOT copy the toolkit image into the Notes section `figures/` folder;
+- emit an HTML `src` that resolves from the deployed Notes section folder to the canonical course resource;
+- with the current deployed layout `notes/uN_S_notes/uN_S_notes.html`, the normal source form is:
+    ../../resources/Physics_Notes_Image_Toolkit/<toolkit_path>
+- use meaningful alt text that describes visible content without solving the task;
+- record image ID, canonical course-repo path, HTML src, toolkit fingerprint, and story/I-can provenance in `IMAGE_USE_MANIFEST.json`.
 
-Do not add visible source labels/citations/captions beneath student-facing figures unless the current Framework explicitly requires them.
-Do not show internal toolkit IDs to students.
+IMPORTANT
+- A connector/build runtime does NOT need to materialize toolkit image bytes locally merely to write the Notes HTML.
+- Inability to copy a toolkit binary into the build sandbox is NOT a failure condition because copying is not part of this contract.
+- Fail closed only when the selected image cannot be verified at the declared canonical course path/fingerprint, or when the emitted relative path would not resolve after installation in the course repo.
+- Do not add visible source labels/citations/captions beneath student-facing figures unless the current Framework explicitly requires them.
+- Do not show internal toolkit IDs to students.
 
-If a selected image is used twice in one Unit, it may be copied where portability requires. This is not a defect.
+The returned Notes ZIP is an installation handoff for the Physics repo, not a standalone website bundle. Toolkit image links become live when the returned Notes folders are placed at their canonical `notes/` locations in the course repository.
 
 ======================================================================
 9. GENERATED PHYSICS REPRESENTATIONS
@@ -372,7 +387,7 @@ Teacher content must expand naturally and never overlap the next student block.
 Do not put teacher-only answers/support in student HTML.
 
 ======================================================================
-13. HTML / CSS / PORTABILITY
+13. HTML / CSS / REPOSITORY-RELATIVE ASSETS
 ======================================================================
 
 Use the current Physics Framework's deployed file/HTML contract.
@@ -396,7 +411,7 @@ Representations:
 - use Framework-approved figure/table/graph wrappers/classes;
 - preserve mathematically/physically necessary labels inside the representation;
 - no descriptive captions under student-facing representations unless required by Framework;
-- ensure all relative figure paths resolve.
+- ensure all relative asset paths resolve at the canonical course installation location; toolkit images may intentionally resolve outside the Notes ZIP to `../../resources/Physics_Notes_Image_Toolkit/...`.
 
 MathJax:
 - preserve current Framework MathJax configuration/order;
@@ -424,8 +439,10 @@ Do not overwrite or flatten provenance from another Unit.
 IMAGE_USE_MANIFEST.json records at minimum:
 - section;
 - image_id;
-- original toolkit_path;
-- copied output path;
+- toolkit_path (relative to toolkit root);
+- canonical_course_resource_path;
+- html_src;
+- toolkit_fingerprint;
 - story_role;
 - concept/I-can connection;
 - source/provenance fields available from the toolkit catalog.
@@ -455,7 +472,7 @@ PASS 1 — AUTHORITY / HANDOFF
 - 4A Notes Map handoff PASS.
 - map Bank fingerprint matches by the declared content-stable method; raw ZIP fingerprints are forbidden.
 - map toolkit fingerprint matches when supplied.
-- current Physics Notes Image Toolkit used.
+- current course-owned Physics Notes Image Toolkit resolved from the pinned Physics repo/Framework manifest.
 
 PASS 2 — MAP EXECUTION
 - every mapped section built.
@@ -490,7 +507,7 @@ PASS 4 — PHYSICS NOTES QUALITY
 
 PASS 5 — REPRESENTATIONS
 - every referenced image exists.
-- every selected toolkit image copied successfully.
+- every selected toolkit image verified at its canonical course-resource path and every emitted HTML `src` resolves correctly after canonical installation.
 - generated graphs/diagrams are physically correct.
 - no answer-bearing representation accidentally reveals a student answer.
 - alt text is useful and answer-neutral.
@@ -505,10 +522,10 @@ PASS 6 — HTML / LAYOUT
 
 PASS 7 — PACKAGE
 - student and teacher Notes for every section.
-- only referenced section figures included.
+- section `figures/` contains only artifact-owned/generated/local figures actually required; canonical toolkit images are not duplicated into the Notes package.
 - unit-specific provenance folder `_notes_provenance/unitN/` included; provenance from other Units is not flattened or overwritten.
 - no __MACOSX, .DS_Store, AppleDouble, __pycache__, or *.pyc.
-- ZIP opens and internal relative paths resolve.
+- ZIP opens; internal local paths resolve; canonical toolkit links are validated against their expected repository installation path even though the toolkit itself is outside the ZIP.
 
 If any hard QA pass fails, repair before delivery.
 
@@ -524,7 +541,7 @@ ZIP root:
   uN_1_notes/
     uN_1_notes.html
     uN_1_notes_teacher.html
-    figures/              only when referenced
+    figures/              only for artifact-owned/generated local figures when referenced
     generate_graphs.py    only when the current Framework requires it for deployed Notes
   uN_2_notes/
   ...
@@ -538,7 +555,8 @@ ZIP root:
 
 Do NOT wrap everything in notes/ or unitN_notes/.
 Do NOT include the full Physics Notes Image Toolkit.
-Do NOT include unused source images.
+Do NOT include toolkit source images; Notes reference the canonical course-owned toolkit in place.
+Do NOT include unused artifact-owned/generated images.
 Do NOT include the canonical unitN_notes_map/ itself; preserve its useful JSON/handoff contents in `_notes_provenance/unitN/`.
 
 NOTES_BUILD_HANDOFF.json must include at minimum:
@@ -573,5 +591,11 @@ After you verify the finished Unit Notes, you may manually keep <course>/notes/u
 Do not tell the teacher to delete the map before verifying the finished Notes.
 
 ======================================================================
-END — 4B BUILD PHYSICS NOTES PM v1.2
+V1.4 COURSE-OWNED IMAGE REFERENCE FIX
+======================================================================
+
+v1.4 preserves the v1.3 Notes architecture, Bank/map contracts, CSS/vocabulary behavior, provenance, and QA while changing Physics Notes toolkit handling from copy/package to canonical course-relative reference. The toolkit now lives in the Physics repo and is resolved through the Physics Framework manifest. 4B must not fail merely because a connector cannot hand binary toolkit files into the build sandbox.
+
+======================================================================
+END — 4B BUILD PHYSICS NOTES PM v1.4
 ======================================================================

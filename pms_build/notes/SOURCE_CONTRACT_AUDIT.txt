@@ -5,7 +5,7 @@ Required current authorities/inputs:
 2. Physics Framework — exact course Notes architecture, CSS/layout, terminology, tool paths.
 3. Complete/materialized Unit Bank — canonical WTC and EX/YTI content/solutions/figures.
 4. unitN_notes_map/ — 4A story/image/processing sequence.
-5. Tools/Physics_Notes_Image_Toolkit/ — source-image inventory and bytes.
+5. Physics Framework-declared course resource `resources/Physics_Notes_Image_Toolkit/` in the pinned Physics repo — source-image inventory/bytes/canonical asset paths.
 
 Do not use the retired combined Question Structure + Visual Toolkit.
 _question_structure/ is not required for this Notes build; 4B is not authoring canonical Bank questions.
@@ -23,3 +23,10 @@ v1.3 PRESENTATION / VOCAB / CSS / PROVENANCE CONTRACT
 - PASS — Vocabulary Preview is active: exact terms-only list + three-column sort (Know for sure / Recognize / Don't know yet).
 - PASS — `vocab-sort-table` is on TABLE, `vocab-sort-space` on the blank TR, and directions are inside `vocab-sort-task`.
 - PASS — current universal `base.css` + `notes.css` are bundled as reference snapshots and production HTML links ../../css/base.css then ../../css/notes.css.
+
+
+v1.4 COURSE RESOURCE CONTRACT
+- Resolve the toolkit from `frameworks/Physics/MANIFEST.json`; do not resolve it from `Tools/MANIFEST.json`.
+- Validate selected image IDs/paths against the pinned Physics course resource.
+- Deployed Notes HTML references toolkit assets in place (normally `../../resources/Physics_Notes_Image_Toolkit/<toolkit_path>`).
+- Do not fail because the build sandbox cannot locally copy toolkit binaries; copying them is not required.

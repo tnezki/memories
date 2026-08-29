@@ -174,7 +174,6 @@ function githubHtml(course,pmPath,extra=[]){const c=COURSES[course];const rows=[
 ];return `<strong>This job will resolve from GitHub</strong><ul class="source-list">${rows.map(x=>`<li><b>${esc(x[0])}</b><span class="mono">${esc(x[1])}</span></li>`).join("")}</ul><div class="mini" style="margin-top:7px">The system manifest resolves Philosophy, Framework, Question Structure, shared PMs, and tools. The selected PM resolves only the additional files it actually needs.</div>`}
 function buildExtras(p,course,unit){const k=p?.key||"",c=COURSES[course],base=[];
  if(["notes_map_4a","notes_build_4b","practice","activities","exit","warmup","progress","review","summative","practice_to_summative"].includes(k))base.push(["Unit source",`${c.repo} — Unit ${unit}, resolved by PM`]);
- if(k==="notes_map_4a"&&course==="Physics")base.push(["Physics image catalog",`${SYSTEM_REPO}/Tools/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json`]);
  if(k==="notes_build_4b")base.push(["Notes Map",`${c.repo}/notes/unit${unit}_notes_map/unit${unit}_notes_map.json`]);
  return base}
 function afterHtml(mode,course,unit){const c=COURSES[course];return `<strong>After approval</strong><ul class="cleanup-list"><li>Put the returned replacement file(s) in the matching <span class="mono">${esc(c.folder)}/</span> location. If a multi-file folder arrives as a ZIP, extract it before sync.</li><li>Sync with GitHub Desktop and confirm the repo is clean/current.</li><li>After the GitHub sync is confirmed, delete the saved request ZIP and extra downloaded handoff copy.</li></ul>`}

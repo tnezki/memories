@@ -1,4 +1,4 @@
-4A · BUILD PHYSICS NOTES MAP PM v1.5
+4A · BUILD PHYSICS NOTES MAP PM v1.6
 ====================================
 
 ROLE
@@ -55,8 +55,8 @@ B. READ IN AUTHORITY ORDER
    - section index
    - I-can index
 7. Retrieve and inspect the complete/materialized Unit Bank from the pinned course snapshot.
-8. Read Tools/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json from the pinned memories snapshot.
-9. Retrieve individual selected toolkit images only as needed to make actual selections.
+8. Resolve `course_resources.physics_notes_image_toolkit` from `frameworks/Physics/MANIFEST.json`. Its `repo_scope` MUST be `course`. Read the declared catalog from the SAME pinned course snapshot used for the Bank.
+9. Inspect individual selected toolkit images only as needed to make actual selections. The toolkit is a course-owned reusable resource; do not retrieve it from the memories/System repo and do not require its binaries inside the request package.
 
 DO NOT:
 - search the web for canonical curriculum authorities;
@@ -103,6 +103,9 @@ PHYSICS NOTES IMAGE TOOLKIT OWNS
 - image IDs
 - catalog metadata
 - toolkit paths/provenance
+
+RESOURCE OWNERSHIP — HARD
+The Physics Notes Image Toolkit is a COURSE-OWNED canonical resource in the pinned Physics repo. Resolve its root/catalog from `frameworks/Physics/MANIFEST.json` under `course_resources.physics_notes_image_toolkit`. It is not a System Tool and must not be resolved through `Tools/MANIFEST.json`.
 
 4A OWNS
 - conceptual-story sequence
@@ -184,7 +187,7 @@ FOR EVERY SELECTED IMAGE RECORD:
 - why_here
 - processing destination
 
-Every image_id and toolkit_path must be verified against the pinned expanded toolkit.
+Every image_id and toolkit_path must be verified against the toolkit catalog and asset tree in the pinned COURSE snapshot. Store `toolkit_path` relative to the declared toolkit root (normally `images/...`), not as a memories-repo path.
 
 ======================================================================
 4. EXAMPLE / YTI PLACEMENT
@@ -349,6 +352,11 @@ Its TOP LEVEL MUST contain all of these fields:
   "source_bank_fingerprint": "stage3e-canonical:<sha256> | content-manifest:<sha256>",
   "image_toolkit": {
     "name": "Physics_Notes_Image_Toolkit",
+    "repo_scope": "course",
+    "repo": "<pinned course repo>",
+    "commit": "<pinned course commit>",
+    "root": "resources/Physics_Notes_Image_Toolkit",
+    "catalog_path": "resources/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json",
     "toolkit_fingerprint": "..."
   },
   "sections": [...],
@@ -562,8 +570,13 @@ SAVE NEXT:
 Save the expanded `unitN_notes_map/` folder at `<course>/notes/unitN_notes_map/`. It is a planning artifact, not deployed Notes. 4B Build Notes consumes its JSON directly from this folder.
 
 ======================================================================
-V1.5 STRICT 4A→4B HANDOFF FIX
+V1.6 COURSE-OWNED IMAGE RESOURCE FIX
 ======================================================================
+
+v1.6 preserves the v1.5 strict 4A→4B handoff contract and moves Physics Notes image-resource resolution to the pinned Physics course repository. The Physics Framework manifest now declares the toolkit as a course resource; 4A selects/validates images there and records course-repo provenance. The toolkit is no longer a memories/System Tool.
+
+V1.5 STRICT 4A→4B HANDOFF FIX
+----------------------------------------------------------------------
 
 v1.5 preserves the v1.4 expanded-authority retrieval and instructional mapping behavior while making the 4A→4B boundary fail-closed.
 

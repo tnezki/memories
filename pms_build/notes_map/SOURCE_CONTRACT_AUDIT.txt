@@ -1,4 +1,4 @@
-4A NOTES MAP SOURCE CONTRACT — v1.4
+4A NOTES MAP SOURCE CONTRACT — v1.6
 ============================
 
 REQUIRED CURRENT AUTHORITIES
@@ -9,10 +9,10 @@ REQUIRED CURRENT AUTHORITIES
 
 PINNED RETRIEVAL — HARD
 - Use only request-pinned repository snapshots.
-- Read the exact Curriculum Philosophy text file named by the request, this PM directory, frameworks/2_Framework_Physics/, the Unit Bank, and Tools/Physics_Notes_Image_Toolkit/ from their canonical pinned paths.
-- Expanded text/directory authorities are read directly from the repository tree; binary leaf assets and ZIP deliverables use binary-safe transfer only when needed.
+- Read the exact Curriculum Philosophy text file named by the request and this PM from the pinned memories snapshot; resolve the Physics Framework through its stable gateway/manifest; read the Unit Bank and the Framework-declared Physics Notes Image Toolkit from the pinned Physics course snapshot.
+- Expanded text/directory authorities are read directly from their pinned repository trees. 4A may inspect selected toolkit images through the repository interface; no request-package copy of the toolkit is required.
 - For the Physics Framework, resolve through `frameworks/MANIFEST.json`; read `frameworks/Physics/FRAMEWORK.txt` and only the supporting files listed by `frameworks/Physics/MANIFEST.json` that PM Section 0 requires.
-- Open Tools/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json before retrieving any image binaries.
+- Open the Framework-declared course catalog `resources/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json` before inspecting selected image assets.
 - Normal retrieval is silent. Do not web-search, provenance-hunt, or substitute lower-authority deployed artifacts.
 - If a prescribed pinned path fails, fail closed with exact repo/commit/path rather than exploring alternate authority routes.
 
@@ -30,7 +30,8 @@ DO NOT REQUIRE
 - the retired Question Structure and Visual Toolkit;
 - _question_structure/;
 - final Notes HTML/CSS source files;
-- manually supplied images when the toolkit already contains the needed source image.
+- manually supplied images when the course-owned toolkit already contains the needed source image;
+- a memories/Tools copy of the Physics Notes Image Toolkit.
 
 v1.2 FINGERPRINT CONTRACT
 - source Bank provenance is content-stable, never raw ZIP bytes.

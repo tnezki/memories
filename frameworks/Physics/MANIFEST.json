@@ -12,5 +12,16 @@
     "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/contracts/notes_visual_contract.json",
     "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/section_index.json",
     "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/i_can_index.json"
-  ]
+  ],
+  "course_resources": {
+    "physics_notes_image_toolkit": {
+      "repo_scope": "course",
+      "root": "resources/Physics_Notes_Image_Toolkit",
+      "catalog": "resources/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json",
+      "version_manifest": "resources/Physics_Notes_Image_Toolkit/version_manifest.json",
+      "asset_path_rule": "resources/Physics_Notes_Image_Toolkit/<toolkit_path>",
+      "delivery": "reference_in_place",
+      "note": "Course-owned Physics Notes visuals. 4A selects from this resource; 4B references selected assets at their canonical course-repo paths instead of copying toolkit binaries into Notes."
+    }
+  }
 }

@@ -1,4 +1,4 @@
-4A BUILD NOTES MAP v1.4
+4A BUILD NOTES MAP v1.6
 ======================
 
 PURPOSE
@@ -11,7 +11,7 @@ READ THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY FROM THE PINNED SNAPSHOT, THEN
 RETRIEVAL PERFORMANCE RULE
 - Read the Curriculum Philosophy directly from the exact pinned text file named by the request/control plane.
 - Resolve Physics through `frameworks/MANIFEST.json`; read the stable `frameworks/Physics/FRAMEWORK.txt` front door and only the supporting files listed by `frameworks/Physics/MANIFEST.json` that 4A requires.
-- Read Tools/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json first and retrieve only selected image binaries as needed.
+- Resolve the Physics Notes Image Toolkit from `frameworks/Physics/MANIFEST.json` as a COURSE resource; read `resources/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json` from the pinned Physics repo and inspect only selected images as needed.
 - No web search, repository archaeology, or fallback to old/deployed copies when the canonical pinned path exists.
 - Routine retrieval mechanics stay silent. If the prescribed route fails, fail closed with the exact repo + commit + path.
 
@@ -20,7 +20,7 @@ REQUIRED INPUTS
 2. Current Curriculum Philosophy
 3. Current Physics Framework
 4. Current complete/materialized Unit Bank
-5. Tools/Physics_Notes_Image_Toolkit/
+5. Physics course resource: `resources/Physics_Notes_Image_Toolkit/` (resolved by the Physics Framework manifest)
 
 IMPORTANT AUTHORITY SPLIT
 - The Unit Bank owns canonical WTC / Example / YTI wording, values, figures, and solutions.
@@ -32,10 +32,10 @@ IMPORTANT AUTHORITY SPLIT
 OUTPUT
 unitN_notes_map/
 
-SAVE THE ZIP, STILL ZIPPED, AT
-<course>/notes/unitN_notes_map/
+CANONICAL STORAGE
+Save/extract the expanded folder at `<course>/notes/unitN_notes_map/`. A ZIP may be returned only as the download/handoff container.
 
-DO NOT deploy this ZIP as Notes. It is a planning checkpoint for 4B.
+DO NOT deploy the Notes Map as Notes. It is a planning checkpoint for 4B.
 
 HARD STOP & DISCUSS VALIDATION
 Before PASS, every Stop & Discuss anchor must keep source_image_ids as verified PHYS-XXXXXXXXXXXX toolkit IDs and expected_reasoning_evidence_to_listen_for as teacher-facing reasoning text. Swapped/overloaded fields fail closed.
