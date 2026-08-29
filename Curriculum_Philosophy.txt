@@ -1,4 +1,4 @@
-CURRICULUM PHILOSOPHY PORTABLE MEMORY v3.14
+CURRICULUM PHILOSOPHY PORTABLE MEMORY v3.15
 ============================================
 STATUS: PROPOSED UNIVERSAL TEACHING / LEARNING PHILOSOPHY
 PURPOSE: Preserve the universal educational beliefs and authority boundaries that should shape every course without relying on prior chats, stale copies, or course-specific habits.
@@ -352,6 +352,27 @@ The teacher should not have to repeatedly upload canonical dependencies merely t
 Exact repository paths, filenames, Control Panel UI, packaging implementation, authentication, and synchronization mechanics are operational concerns and belong below Philosophy.
 
 ================================================================
+17A. CHATGPT SKILLS / EXECUTION ROUTING — HARD
+================================================================
+
+Skills are reusable execution procedures available to ChatGPT. They are runtime helpers, not curriculum authorities.
+
+At the start of each teacher request, before normal execution:
+1. Check the available/prefetched Skill names and descriptions when the request plausibly matches a Skill.
+2. If a Skill clearly matches, invoke/read that Skill FIRST and follow its procedure before doing the work directly or calling unrelated tools.
+3. Prefer the most specific matching Skill over a broader/general Skill.
+4. If no Skill matches, do not search, list, explore, or probe for Skills; proceed with normal execution.
+5. If the teacher explicitly says not to use Skills, do not invoke one.
+6. A request to explain how Skills work, or to create/update a Skill, is itself a Skill-routed request and must use the current Skill-creation procedure first.
+7. Skills may govern execution mechanics, scripts, artifact handling, and reusable workflow conventions, but they may not silently replace or contradict current teacher instruction, this Philosophy, the current Course Framework, or other canonical curriculum authority.
+8. When a Skill requires a specific tool/runtime or code-execution path, follow that Skill's execution contract exactly. If the required capability is unavailable, report the limitation rather than silently substituting a different hidden workflow.
+
+TEACHER-CONTROLLED DEPLOYMENT RULE:
+Skill/tool availability does not authorize direct writes to canonical curriculum repositories. Unless the teacher explicitly requests a repository write for the current job, return the smallest coherent changed file or ZIP with repository-relative structure so the teacher can review and sync it.
+
+This routing procedure is persistent. The teacher should not have to restate it in each chat.
+
+================================================================
 18. BUILD, AUDIT, REPAIR, AND CONTROLLED IMPROVEMENT
 ================================================================
 
@@ -419,14 +440,18 @@ This creates a long-term lifecycle:
 28. A GENERATED OUTPUT IS A CANDIDATE UNTIL THE TEACHER APPROVES AND SYNCS IT TO CANONICAL GITHUB.
 29. PMs OWN PROCEDURE; THEY SHOULD NOT CARRY COMPETING HIGHER-LEVEL AUTHORITIES.
 30. A NORMAL JOB SHOULD RESOLVE CANONICAL DEPENDENCIES FROM GITHUB RATHER THAN REQUIRE REPEATED MANUAL UPLOADS.
-31. DIRECT TEACHER INSTRUCTION MAY CREATE A DELIBERATE LOCAL EXCEPTION WITHOUT AUTOMATICALLY CHANGING THE SYSTEM.
-32. EACH JOB DECLARES ITS REPLACEMENT SCOPE; NOTHING OUTSIDE THAT SCOPE SHOULD CHANGE.
-33. RETURN THE SMALLEST COHERENT DEPLOYABLE RESULT THAT SATISFIES THE DECLARED SCOPE.
-34. SMALL TARGETED AUDIT/REPAIR JOBS ARE PREFERRED OVER GIANT UNIVERSAL AUDIT SYSTEMS.
-35. SYSTEMIC IMPROVEMENTS ARE FLAGGED AND PROMOTED DELIBERATELY TO THE SMALLEST CORRECT OWNING LAYER.
-36. TEACHER PROFESSIONAL JUDGMENT REMAINS FINAL.
+31. MATCHING CHATGPT SKILLS ARE INVOKED BEFORE NORMAL EXECUTION; DO NOT HUNT FOR SKILLS WHEN NONE MATCH.
+32. REPOSITORY DEPLOYMENT IS TEACHER-CONTROLLED UNLESS THE TEACHER EXPLICITLY REQUESTS A WRITE FOR THE CURRENT JOB.
+33. DIRECT TEACHER INSTRUCTION MAY CREATE A DELIBERATE LOCAL EXCEPTION WITHOUT AUTOMATICALLY CHANGING THE SYSTEM.
+34. EACH JOB DECLARES ITS REPLACEMENT SCOPE; NOTHING OUTSIDE THAT SCOPE SHOULD CHANGE.
+35. RETURN THE SMALLEST COHERENT DEPLOYABLE RESULT THAT SATISFIES THE DECLARED SCOPE.
+36. SMALL TARGETED AUDIT/REPAIR JOBS ARE PREFERRED OVER GIANT UNIVERSAL AUDIT SYSTEMS.
+37. SYSTEMIC IMPROVEMENTS ARE FLAGGED AND PROMOTED DELIBERATELY TO THE SMALLEST CORRECT OWNING LAYER.
+38. TEACHER PROFESSIONAL JUDGMENT REMAINS FINAL.
 
-END — CURRICULUM PHILOSOPHY PORTABLE MEMORY v3.14
+END — CURRICULUM PHILOSOPHY PORTABLE MEMORY v3.15
+
+V3.15 NOTE (2026-08-29): Added the universal ChatGPT Skill-routing contract: inspect available Skill metadata when a request plausibly matches, invoke the most specific matching Skill before normal execution, do not hunt for Skills when none match, honor explicit no-Skill requests, route Skill creation/explanation through the current Skill-creation procedure, follow Skill-specific tool/runtime contracts, and keep Skills subordinate to canonical curriculum authority. Also made the established teacher-controlled repository deployment workflow explicit so tool availability does not trigger unrequested direct GitHub writes.
 
 V3.14 NOTE (2026-08-28): Added the universal pinned retrieval contract: use exact pinned paths, match text/binary transfer mode to the authority, retrieve binary archives once and selectively extract required entries, prohibit exploratory authority hunting when the normal route exists, fail closed on prescribed-route failure, and keep retrieval mechanics silent unless teacher action is required.
 

@@ -1,525 +1,467 @@
-4B · BUILD PHYSICS NOTES PM v1.5
-================================
-TEXTBOOK-CHUNK / NOTABILITY FLOW — 2026-08-29
+BUILD NOTES — STEP 4B / BANK-V2
+=================================
 
-ROLE
-----
-Build complete student + teacher Physics Notes for one Unit from the approved 4A map.
+STATUS: CURRENT
+ROLE: Build the complete student + teacher Notes package for one Unit from the accepted current 4A Notes map and the finalized Bank-v2 Notes records.
 
 4B is ADAPT / ASSEMBLE / RENDER.
-It is NOT a second mapping stage, NOT a Bank audit, and NOT a fresh Physics-writing project.
+It is NOT a second mapping stage.
+It is NOT a Bank audit.
+It is NOT permission to redesign the established Notes HTML/CSS format.
 
-The finished student Notes are designed first for Notability / print-to-PDF use. The teacher copy is HTML-view-first and may use natural vertical flow; extra teacher-only space is acceptable.
-
-CURRENT PM ENTRYPOINT
----------------------
-pms_build/notes.txt
-
-======================================================================
-CANONICAL MAP INPUT — HARD
-======================================================================
-
-Primary:
-<course>/notes/uN_notes_map/uN_notes_map.json
-
-Legacy accepted:
-<course>/notes/unitN_notes_map/unitN_notes_map.json
-<course>/notes/uN_notes_map/unitN_notes_map.json
-
-The map JSON is the SINGLE mapping authority.
-
-Required current flow revision:
-notes_flow_revision = "textbook-chunks-v2"
-
-If an older map lacks this revision, do not silently reinterpret it. Report that 4A must be rerun with the current Notes Map PM.
-
-`NOTES_MAP_HANDOFF.json` is derived metadata. Missing/malformed handoff does not block a valid current map; regenerate it for provenance and continue.
+The current Course Framework/profile owns course-specific Notes behavior.
+The established course Notes shell/CSS owns presentation.
+This PM owns procedure.
 
 ======================================================================
-0. FAST-PATH OPERATING RULE — HARD
+STARTUP — HARD
 ======================================================================
 
-4B MUST NOT:
-- re-plan the textbook flow mapped by 4A;
-- re-audit the complete Bank;
-- retrieve Bank items one-by-one when Unit Bank JSON can be loaded once;
-- re-search the image toolkit for a new visual sequence;
-- re-read unrelated textbook sections;
-- preserve source material marked DROP;
-- turn source reading into short generic summaries merely for compactness;
-- redesign CSS/layout for ordinary production;
-- invent forced page breaks to repair normal pagination;
-- fail because of unrelated warnings or optional polish.
+Read the current Curriculum Philosophy and Runtime Contract first.
+Resolve and pin the required repositories once at job start.
+Resolve declared authorities directly through manifests.
+
+Canonical PM:
+  pms_build/notes.txt
+
+Canonical 4A input:
+  <course>/notes/uN_notes_map/uN_notes_map.json
+
+Required map:
+  schema = physics-notes-map/2.0
+  notes_flow_revision = bank-v2-textbook-chunks-v1
+
+Do not accept/reinterpret an older Stage 3E-era Notes map.
+If the current canonical map is older/incompatible, FAIL CLOSED and report that 4A must be rerun.
 
 ======================================================================
-1. READ ONLY WHAT 4B NEEDS
+NO-WEB / DIRECT-FETCH POLICY — HARD
 ======================================================================
 
-Before writing:
-1. current Curriculum Philosophy completely;
-2. this PM completely;
-3. `frameworks/MANIFEST.json` and `frameworks/Physics/MANIFEST.json`;
-4. `frameworks/Physics/FRAMEWORK.txt` plus only Notes rendering support needed for the target Unit:
-   - original Unit Assessment Plan;
-   - Notes course profile;
-   - language/reading tone;
-   - Notes visual contract;
-   - course CSS/runtime rules;
-5. approved current map JSON;
-6. map-declared textbook section files at the pinned textbook commit;
-7. current Unit Bank structured data ONCE, indexed by exact Bank ID;
-8. current Physics Notes Image Toolkit catalog ONCE; validate mapped images only;
-9. canonical Notes CSS from the SAME pinned Physics course snapshot:
-   - css/base.css
-   - css/notes.css;
-10. established Notes HTML shell/classes supported by those files.
+Normal 4B is a declared-source curriculum build.
 
-Do not begin from an old generated Notes build when current map/textbook sources are available.
+Do NOT use:
+- public web search;
+- public-web fetch as a substitute for declared GitHub resources;
+- repository-wide search for known paths;
+- File Library search;
+- upload search;
+- prior Bank ZIP discovery;
+- old generated Notes as source authority.
+
+Fetch exact declared resources at their pinned paths/commits.
+
+If a required declared source fails:
+FAIL CLOSED with exact repository, pinned commit, path/resource, and failed requirement.
+Do not search around it.
 
 ======================================================================
-2. AUTHORITY / OWNERSHIP
+1. AUTHORITIES / OWNERSHIP
 ======================================================================
 
-PHYSICS FRAMEWORK / ORIGINAL ASSESSMENT PLAN OWNS
-- exact title / LT / I-cans;
-- course terminology and boundaries;
-- Notes architecture/tone;
-- CSS/presentation contracts.
+Precedence:
+1. Current explicit teacher instruction.
+2. Current Curriculum Philosophy.
+3. Current Course Framework, including its exact embedded Unit Assessment Plan and Notes profile/contracts.
+4. Accepted current 4A Notes map for the Unit's mapped instructional flow.
+5. Finalized current Bank-v2 Notes records for exact WTC / Example / YTI content.
+6. This PM for assembly/render/package procedure.
+7. Declared tools + established course Notes HTML/CSS shell for mechanics.
 
-PHYSICS TEXTBOOK OWNS
-- explanatory order;
-- source paragraph logic and useful wording;
-- source phenomena/examples/images retained by 4A.
+The Framework owns:
+- exact section title / LT / I-cans;
+- course terminology/boundaries;
+- Notes reading/tone/representation behavior;
+- student/teacher behavior;
+- visual/usage contracts;
+- source roles and course-specific exceptions.
 
-4A MAP OWNS
-- KEEP / CONDENSE / DROP;
-- reading-chunk boundaries;
-- source-text fidelity;
-- WTC / Physics Note / EX-YTI / S&D placement;
+The accepted 4A map owns:
+- source KEEP/CONDENSE/DROP decisions;
+- reading chunk boundaries/fidelity;
+- mapped source/image locations;
+- WTC / EX-YTI / discussion / reference-note placement;
 - post-reading EX/YTI queue;
-- retained images;
-- Summary / What I Figured Out / Common Mistakes targets;
-- generated representation needs.
+- close targets;
+- generated-representation needs.
 
-UNIT BANK OWNS
-- exact WTC student content + solution;
-- exact canonical Notes Examples/YTIs;
-- pair identity;
-- Bank-owned representations and teacher solutions.
+The finalized Bank-v2 Notes files own:
+- exact canonical WTC student content + solution;
+- exact canonical Example/YTI student content + solutions;
+- exact pair identity;
+- Bank-owned representations.
 
-IMAGE TOOLKIT OWNS
-- canonical source-image bytes / paths / IDs.
-
-4B OWNS
-- final trimming/light adaptation of mapped textbook chunks;
+4B owns:
+- final source trimming/adaptation allowed by the map;
 - transition headings;
-- final Physics Note wording;
-- final S&D wording;
+- final course-appropriate reference-note wording;
+- final Stop & Discuss wording;
 - vocabulary definitions;
-- Summary / What I Figured Out / Common Mistakes wording;
-- student/teacher HTML;
-- targeted final QA/package.
+- Summary / reflection / Common Mistakes wording;
+- student HTML;
+- teacher HTML;
+- generated local representations explicitly mapped by 4A;
+- targeted QA/package.
 
 ======================================================================
-3. DIRECT-BLOCKER PREFLIGHT — FAST
+2. FAST INPUT GATE — 4A MAP
 ======================================================================
 
-A. MAP
-- parses;
-- schema = `physics-notes-map/1.0`;
-- notes_flow_revision = `textbook-chunks-v2`;
-- course/unit correct;
+Read:
+  notes/uN_notes_map/uN_notes_map.json
+
+Require:
+- correct schema/revision;
+- correct course/unit;
 - qa.status = PASS;
-- Bank fingerprint fields present;
-- textbook/image toolkit declarations present.
+- pinned source identities present;
+- Bank manifest identity present;
+- one declared Bank Notes source file per mapped section;
+- exact blob SHA recorded for every consumed Bank Notes file;
+- mapped instructional source/spine commit/path present;
+- mapped toolkit identity/path declarations present when used.
 
-B. BANK IDENTITY
-For stage3e-canonical-v1 compare current `canonical_authored_content_sha256` directly to the map fingerprint.
-For permitted fallback content-manifest-v1 use `Tools/stable_bank_fingerprint.py`.
-Legacy raw-ZIP `sha256:<...>` is invalid.
+`NOTES_MAP_HANDOFF.json`, readable HTML, and report are derived.
+Their absence/malformation does not invalidate a correct canonical map JSON; regenerate derived provenance as needed.
 
-C. EXACT TARGETS
-- map title/LT/I-cans match current original Assessment Plan.
-
-D. MAPPED DEPENDENCIES
-- all mapped WTC/EX/YTI IDs exist;
-- all mapped images exist;
-- all mapped textbook files exist;
-- required Notes CSS/shell dependencies exist.
-
-If these pass, START BUILDING.
+Do not use a legacy map fallback path in normal Bank-v2 production.
 
 ======================================================================
-4. DIRECT BLOCKERS — ONLY REASONS TO FAIL CLOSED
+3. BANK-V2 IDENTITY / CONTENT GATE
 ======================================================================
 
-FAIL CLOSED only when:
-1. required current authority / map cannot be retrieved;
-2. current map is not `textbook-chunks-v2`;
-3. exact title/LT/I-can mismatch cannot be reconciled;
-4. mapped textbook source file is missing;
-5. mapped WTC/EX/YTI item is missing or pair identity broken;
-6. mapped image cannot be resolved;
-7. Bank fingerprint is a real content mismatch;
-8. required CSS/shell dependency is missing/broken enough to prevent rendering;
-9. final HTML cannot be made valid without violating a hard course contract.
+At the current pinned course commit read:
+  banks/unitN/BANK_MANIFEST.json
 
-Do not fail for missing derived handoff, optional polish, unrelated Bank/toolkit issues, or broad architecture warnings.
+Require:
+- schema compatible with `canonical-bank-manifest/2.0`;
+- correct course/unit;
+- status = COMPLETE;
+- ready_for_downstream = true;
+- canonical Notes routes present.
 
-======================================================================
-5. 30–40 MINUTE LESSON CONTRACT
-======================================================================
+For each map-declared Bank Notes source:
+1. resolve the current canonical section route from BANK_MANIFEST;
+2. fetch that exact Notes section file;
+3. compare its blob SHA to the map-recorded blob SHA.
 
-Each section is a classroom lesson, not a miniature chapter and not a thin outline.
+If the current course commit changed since 4A but every consumed Notes file blob SHA is unchanged, the map remains valid for Bank Notes content.
 
-Typical budget:
-- Vocabulary Preview + WTC + Let's Get Started: 5–7 min;
-- retained textbook reading/images: 10–15 min;
-- canonical EX/YTI: 10–16 min;
-- S&D / Physics Note processing: 2–5 min;
-- Vocabulary + Summary + What I Figured Out + Common Mistakes: 3–5 min.
+If any consumed canonical Notes file changed:
+FAIL CLOSED and report the changed section/path.
+Rerun 4A so instructional routing is reconciled intentionally.
 
-When the source is long:
-- cut repetition/details/tangents first;
-- keep conceptual sequence;
-- keep the strongest source phenomena and figures;
-- prefer selective omission/light editing over replacing good source exposition with new summary prose.
+Do NOT:
+- read STAGE_3E_HANDOFF.json;
+- compute Stage 3E fingerprints;
+- run `stable_bank_fingerprint.py`;
+- search for an old Bank ZIP;
+- scan unrelated Bank destinations.
+
+Load each consumed canonical Notes section file ONCE and index its records by item_id.
 
 ======================================================================
-6. SOURCE-TEXT FIDELITY — HARD
+4. TARGET / SOURCE-SPINE GATE
 ======================================================================
 
-Physics Notes should still feel recognizably based on the Physics textbook.
+Verify map title/LT/I-cans against the current pinned Course Framework.
 
-For text_fidelity = CLOSE:
-- preserve source paragraph logic and as much useful original wording as practical;
-- trim mainly by omission;
-- make only the edits needed for classroom clarity, current terminology, or length.
+Resolve the map-declared instructional source/spine at the exact commit recorded by 4A.
+For current Physics, this is the pinned `tnezki/textbooks` Physics section source.
 
-For LIGHT_CONDENSE:
-- preserve the source explanation and sequence;
-- remove repeated examples/details;
-- keep enough source language that the result reads like a shortened textbook passage, not a newly authored abstract.
+Read only mapped source files/spans needed by 4B.
+Do not reread unrelated textbook sections or source trees.
 
-For STRONG_CONDENSE:
-- reduce to the essential idea while preserving the source's conceptual role;
-- use only when 4A explicitly mapped it.
+Apply mapped source fidelity:
+- CLOSE -> preserve source paragraph logic and useful wording; trim mainly by omission;
+- LIGHT_CONDENSE -> preserve explanation/sequence while removing repetition/detail;
+- STRONG_CONDENSE -> preserve only the essential conceptual job and only when explicitly mapped.
 
-Do not expand CONDENSE material beyond the map.
-Do not replace KEEP/CLOSE material with generic one-paragraph summaries.
-
-Use source material consistent with the permissions and source-use expectations of the curriculum system. The preferred editorial operation is CUT, not unnecessary rewrite.
+Do not replace retained source exposition with generic short summaries merely for compactness.
 
 ======================================================================
-7. SECTION ASSEMBLY ORDER
+5. FORMAT IS LOCKED — DO NOT REDESIGN
 ======================================================================
 
-For each section:
-1. section title card;
-2. exact Learning Target;
-3. exact I-cans;
-4. Vocabulary Preview + three-column prior-knowledge sort;
-5. exact canonical What's to Come;
-6. Let's Get Started skim: ONE notice + ONE wonder;
-7. close-reading directions;
-8. walk mapped reading chunks in textbook order:
-   - transition heading;
-   - retained/adapted textbook reading;
-   - mapped source figure(s) in natural location;
-   - exactly the mapped ONE processing event after the chunk;
-9. after final reading chunk, render any `post_reading_ex_yti_queue` pairs in order;
-10. Vocabulary with concise definitions;
-11. bulleted Summary;
-12. What I Figured Out;
-13. Common Mistakes;
-14. only genuinely useful final general workspace;
-15. finalize STUDENT HTML;
-16. derive TEACHER HTML from the finalized student structure and add teacher-only support;
-17. quick section QA.
+Ordinary 4B production MUST use the current established course Notes HTML/CSS shell.
+
+For current Physics, read from the SAME pinned course snapshot:
+  css/base.css
+  css/notes.css
+
+Production HTML links exactly, in order:
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/notes.css">
+
+Do NOT:
+- invent a new Notes stylesheet;
+- copy CSS into the PM/output;
+- introduce a third ordinary production stylesheet;
+- redesign typography, colors, spacing, title cards, Notes boxes, task cards, tables, or page architecture;
+- invent a new class vocabulary where the established shell already supports the job;
+- use an old generated Notes file as a competing format authority.
+
+Use the established classes/hooks supported by the pinned Notes CSS, including the current equivalents of:
+- `.vocab-preview-section`;
+- `.notes-wtc`;
+- `.skim-section-task`;
+- `.notes-ican-start`;
+- `.math-notes` for the established compact reference-note shell when course-appropriate;
+- `.notes-discuss-task`;
+- `.notes-task`;
+- `.notes-task-content`;
+- `.notes-task-workspace`;
+- established figure wrappers;
+- `.notes-mistakes-block`;
+- established summary/reflection/workspace classes.
+
+A course-specific label such as `Physics Note` may use the established reference-note shell.
+Do not create a new stylesheet merely to rename the label.
+
+======================================================================
+6. STUDENT NOTES — NOTABILITY-FIRST
+======================================================================
+
+Use the current Framework/profile/visual contract.
+
+Student Notes:
+- preserve exact target/section sequence;
+- remain clean and answer-free;
+- use generous existing writing-space contracts;
+- preserve answer-neutral student representations;
+- use established keep-together containers;
+- allow natural page flow;
+- do not clip/shrink content merely to hit a page count.
 
 Do not add a Notes Exit Ticket / Exit Check.
 
-======================================================================
-8. NOTABILITY / PAGINATION CONTRACT — HARD
-======================================================================
+Do not use forced page breaks for ordinary layout repair.
+A forced break is allowed only where the current Framework/visual contract intentionally defines a separate page/workspace.
 
-STUDENT NOTES ARE NOTABILITY-FIRST.
-
-Use the existing CSS-supported keep-together containers so atomic instructional units do not split awkwardly across pages. Prefer the established contracts already supported by `css/notes.css`, including:
-- `.vocab-preview-section` for the complete Vocabulary Preview/sort;
-- `.notes-wtc` for the complete WTC unit;
-- `.skim-section-task` for Let's Get Started;
-- `.notes-ican-start` for a compact close-reading chunk when it fits the intended block size;
-- `.math-notes` shell for a mapped Physics Note unless a current Physics-specific shell is already supported;
-- `.notes-discuss-task` for Stop & Discuss;
-- `.notes-task` / `.notes-task-content` / `.notes-task-workspace` for each Example or YTI task;
-- `.figure-block` / established figure wrappers so figure + caption stay together;
-- `.notes-mistakes-block` / mistake table contracts for Common Mistakes.
-
-CHUNK SIZE RULE
-Do not place an enormous multi-page reading inside one avoid-break wrapper. 4A mapped compact reading chunks for this reason. Keep heading + a reasonable reading block + its associated figure together when practical.
-
-FORCED PAGE BREAKS
-Do NOT use `.page-break`, `break-before: page`, or `page-break-before: always` in ordinary Notes flow.
-
-A forced page break is allowed only for a genuinely special purpose, such as:
-- a deliberately separate full-page Notability workspace explicitly required by the map/Framework;
-- another course contract that explicitly requires a new page.
-
-Never force a page break merely because a heading, answer block, or teacher note looks crowded. Let keep-together containers move intact blocks naturally.
+Do not place enormous multi-page reading inside one avoid-break wrapper.
 
 ======================================================================
-9. LET'S GET STARTED / WHAT I FIGURED OUT
+7. SECTION ASSEMBLY — MAP-DRIVEN
 ======================================================================
 
-LET'S GET STARTED
-Use the existing skim shell, but the student job is intentionally small:
-- skim the section headings/figures;
-- record ONE thing you notice;
-- record ONE thing you wonder.
+For each section:
+1. render the established section/title treatment;
+2. exact Learning Target;
+3. exact I-cans;
+4. map/Framework-defined opening sequence;
+5. canonical WTC at its mapped location;
+6. mapped source reading chunks in order;
+7. mapped source/toolkit/Bank representations at their mapped concept locations;
+8. mapped Stop & Discuss/reference-note events;
+9. mapped canonical Example/YTI pairs;
+10. post-reading EX/YTI queue in order;
+11. mapped close: vocabulary definitions, Summary, reflection when required, Common Mistakes, and Framework-defined final workspace;
+12. finalize STUDENT HTML;
+13. derive TEACHER HTML from the finalized student structure;
+14. run targeted section QA.
 
-Do not add a prediction row unless current Framework explicitly requires it.
-
-WHAT I FIGURED OUT
-Near the end, after Summary, give students a small reflection box that asks them to state what they figured out and, when useful, connect back to their opening notice/wonder.
-
-This is the completion half of the opening skim—not an Exit Ticket.
-
-======================================================================
-10. WTC / EX-YTI — CANONICAL AND FIXED
-======================================================================
-
-WTC
-- exact canonical Bank student content unchanged;
-- generous student workspace;
-- no answer leakage in student copy.
-
-EX/YTI
-- exact canonical student task content;
-- Example immediately paired with its YTI;
-- preserve Bank IDs in metadata/data-source-id;
-- preserve canonical representations unchanged;
-- matching Bank solution in teacher copy;
-- no invent/rewrite/swap/split/improve.
-
-Do not add S&D at the same boundary as an EX/YTI pair.
+Do not re-plan the section in 4B.
+If the map itself is pedagogically wrong but structurally valid, report that as a 4A-map defect rather than silently remapping.
 
 ======================================================================
-11. PHYSICS NOTE
+8. CANONICAL BANK CONTENT — EXACT
 ======================================================================
 
-Render only Physics Notes mapped by 4A.
+For every mapped WTC / Example / YTI:
+- find the exact item_id in the mapped Bank Notes section file;
+- preserve canonical student task content;
+- preserve pair_id/pair_number;
+- preserve canonical Bank representation content;
+- preserve source ID in hidden provenance/data attributes when useful;
+- use the matching canonical Bank solution in teacher support;
+- do not rewrite/swap/split/improve the canonical task during ordinary production.
 
-Use the established Notes sidebar shell (currently `.math-notes` is the supported compact keep-together shell) but label it visibly `Physics Note` and give it a short concept-specific title.
-
-A Physics Note should be concise and explanatory. It may include a relationship/equation/representation, but it is not a second worked-example bank.
-
-If a Physics-specific class is already supported by the pinned CSS, prefer it. Do not create a third stylesheet merely for the label.
-
-======================================================================
-12. STOP & DISCUSS
-======================================================================
-
-Render only S&D mapped by 4A.
-
-Each S&D:
-- 2–4 focused questions;
-- at least one vocabulary-use question;
-- at least one conceptual question answerable from the immediately preceding reading/figure;
-- may include one compare/predict/evidence question;
-- generous but not excessive response space.
-
-Do not create generic stock discussion prompts.
-Do not put S&D immediately after an EX/YTI without a new reading chunk between them.
+If a real Bank defect is discovered:
+report the upstream Bank defect.
+Do not create a silent corrected second canonical version inside Notes unless the teacher explicitly authorizes a local artifact exception.
 
 ======================================================================
-13. TEACHER COPY — HTML VIEW FIRST
+9. STOP & DISCUSS / REFERENCE NOTES
 ======================================================================
 
-The teacher copy preserves the exact student order/content but is optimized for on-screen teacher use, not student Notability pagination.
+Render only the processing jobs mapped by 4A and required by the current course profile.
 
-TEACHER COPY MUST:
-- keep all student content visible;
-- collapse/remove fixed-height student writing-space requirements so content flows naturally;
-- allow extra vertical teacher-only information; space is not a problem;
-- keep answers clearly teacher-only;
-- show answers in RED;
-- present Answers / Acceptable Reasoning as easy-to-scan BULLETS whenever there is more than one idea/part;
-- present Teacher Moves as a bulleted list;
-- present Student Discourse Moves as a bulleted list;
-- avoid dense teacher paragraphs when bullets communicate the same information more clearly.
+Stop & Discuss:
+- write final prompts from the mapped discussion job/source basis;
+- keep prompts content-specific;
+- preserve the intended vocabulary/conceptual/representation work;
+- provide appropriate existing response space;
+- do not paste generic discussion prompts.
 
-Teacher support should be provided for the major interactive anchors:
-- WTC;
-- each EX/YTI pair;
-- each S&D;
-- mapped Physics Note when facilitation guidance is useful.
+Reference note:
+- use the established Notes reference-note shell;
+- write concise concept-specific explanation;
+- may include a relationship/equation/model/representation when mapped;
+- is not a second worked-example Bank.
 
-Preferred teacher-support sequence:
-1. Answer / acceptable reasoning — red bullets;
-2. Teacher Moves — bullets;
-3. Student Discourse Moves — bullets;
-4. Likely misconception / listen-for — bullets when needed.
-
-For canonical Bank tasks, use the Bank solution exactly for the mathematical/physics answer; formatting it into bullets is allowed without changing meaning.
-
-Teacher support must not alter the student task.
+Framework/profile behavior overrides any old PM habit.
 
 ======================================================================
-14. STUDENT / TEACHER BEHAVIOR
+10. SOURCE IMAGES — REFERENCE IN PLACE
 ======================================================================
 
-STUDENT
-- prompts/content only;
-- no solutions/answer overlays;
-- answer-neutral diagrams;
-- generous writing space;
-- clean Notability pagination.
+For the current Physics Notes Image Toolkit, resolve through:
+  frameworks/Physics/MANIFEST.json
+    -> course_resources.physics_notes_image_toolkit
 
-TEACHER
-- same structure/order;
-- exact Bank solutions;
-- S&D reasoning/evidence guidance;
-- concise facilitation / likely misconception support;
-- red answers + bulleted teacher/student discourse moves;
-- natural HTML flow.
+For every mapped toolkit image:
+- validate image_id/toolkit_path against the pinned catalog;
+- validate the canonical asset exists at the pinned course commit;
+- leave the asset in the canonical toolkit location;
+- do NOT copy it into the Notes section;
+- keep it with the concept/source location mapped by 4A.
 
-======================================================================
-15. SOURCE IMAGES — REFERENCE IN PLACE
-======================================================================
+Normal deployed section src:
+  ../../resources/Physics_Notes_Image_Toolkit/<toolkit_path>
 
-Resolve through the Physics Framework `course_resources.physics_notes_image_toolkit` entry.
-
-Canonical root:
-resources/Physics_Notes_Image_Toolkit/
-
-For every mapped source image:
-- verify image_id/toolkit_path against pinned catalog;
-- verify asset exists at pinned Physics snapshot;
-- leave it at canonical toolkit location;
-- reference it in place;
-- do not copy it into Notes `figures/`.
-
-Normal deployed src:
-../../resources/Physics_Notes_Image_Toolkit/<toolkit_path>
-
-Keep the image with the same reading idea/source location mapped by 4A.
-
-Local `figures/` is only for explicitly mapped generated representations.
+Do not package the toolkit into the Notes ZIP.
 
 ======================================================================
-16. GENERATED REPRESENTATIONS
+11. BANK REPRESENTATIONS / GENERATED REPRESENTATIONS
 ======================================================================
 
-Create only representations explicitly mapped by 4A.
+Bank-owned representations:
+- preserve canonical content/bytes;
+- do not silently regenerate;
+- resolve through the canonical Bank route/figure reference using the current course repository and established Notes shell/path behavior.
 
-Before generating, confirm the need is not already satisfied by:
-- retained textbook image;
-- canonical Bank representation;
-- mapped toolkit asset.
+Generated Notes-specific representations:
+- create ONLY when explicitly mapped by 4A;
+- verify the need is not already met by source/toolkit/Bank content;
+- keep student versions answer-neutral;
+- store only genuinely generated local section assets under that section's `figures/` when required.
 
-Student-facing generated representations remain answer-neutral.
-
-======================================================================
-17. HTML / CSS / PATHS
-======================================================================
-
-Normal filenames:
-- u[U]_[S]_notes.html
-- u[U]_[S]_notes_teacher.html
-
-Read canonical CSS from the pinned Physics course repo:
-- css/base.css
-- css/notes.css
-
-Production HTML links exactly, in order:
-<link rel="stylesheet" href="../../css/base.css">
-<link rel="stylesheet" href="../../css/notes.css">
-
-Do not require/recreate duplicate CSS snapshots under `memories/pms_build/`.
-Do not add a third production stylesheet for ordinary Notes content.
-
-Teacher-only natural-flow overrides may be embedded in the teacher HTML when required to collapse student workspace heights and allow screen-first flow; do not change the student CSS contract to achieve teacher behavior.
+Do not include unused generated assets.
 
 ======================================================================
-18. TOOLS — CANONICAL / DECLARED ONLY
+12. TEACHER COPY — SAME LESSON, NATURAL FLOW
 ======================================================================
 
-Memories-owned helpers:
-- `Tools/stable_bank_fingerprint.py` — only for fallback content-manifest-v1;
-- `Tools/fix_notes_layout_contract.py` — run against completed staging before final QA.
+Derive the teacher copy from the finalized student structure.
 
-Do not invent PM-local Tools paths.
-Do not treat absence of a PM-local Tools folder as a blocker.
-Do not hunt for undeclared MathJax/final-byte finalizers.
+Teacher copy:
+- preserves all student content/order;
+- exposes canonical Bank answers/solutions;
+- adds mapped discussion reasoning/evidence support;
+- adds concise facilitation/discourse support where the current course Framework/profile requires it;
+- uses RED for teacher answers/support where that is the established course behavior;
+- uses bullets for multi-part answers/reasoning and teacher/student moves when appropriate;
+- releases fixed student workspace heights so teacher content expands naturally;
+- never overlaps later content.
+
+Teacher-only natural-flow CSS overrides may be embedded when required by the current established contract.
+Do not modify student `notes.css` merely to solve teacher-only expansion.
 
 ======================================================================
-19. TARGETED QA — OUTPUT ONLY
+13. TOOLS — DECLARED ONLY
 ======================================================================
 
-PER SECTION
-- exact title/LT/I-cans;
-- current `textbook-chunks-v2` map used;
-- Vocabulary Preview -> WTC -> Let's Get Started opening order;
-- Let's Get Started = one notice + one wonder;
-- source reading remains developed and recognizably textbook-based;
-- mapped figures remain with their concept;
-- exactly mapped processing rhythm respected;
-- no S&D + EX/YTI at same boundary;
-- S&D has 2–4 questions with vocab + conceptual prompt;
-- all mapped/queued EX/YTI pairs present exactly once and immediate;
-- no student answers leaked;
-- teacher answers red;
-- teacher Answer / Teacher Moves / Student Discourse Moves use readable bullets;
-- Vocabulary -> Summary -> What I Figured Out -> Common Mistakes close present;
-- student HTML uses established keep-together containers;
-- no ordinary-flow forced page breaks;
-- teacher copy uses natural-flow workspace behavior;
-- mapped image paths valid;
-- local generated assets resolve;
-- lesson plausibly 30–40 minutes.
+Resolve tools through:
+  Tools/MANIFEST.json
 
-FINAL UNIT
-- all student/teacher files present;
-- stylesheet order correct;
-- toolkit images not duplicated;
+For the current system, `fix_notes_layout_contract` is declared at:
+  Tools/fix_notes_layout_contract.py
+
+Run the declared Notes layout finalizer/check against completed staging when required by its current contract.
+
+Do not:
+- invent PM-local tool paths;
+- hunt for undeclared finalizers;
+- run the retired stable Bank fingerprint tool for Bank-v2 Notes.
+
+Deterministic tools may repair/check mechanical layout/bytes.
+They must not silently rewrite curriculum meaning.
+
+======================================================================
+14. TARGETED QA
+======================================================================
+
+PER SECTION verify:
+- exact current title/LT/I-cans;
+- accepted 4A schema/revision;
+- correct Bank Notes section blob identity;
+- every mapped WTC present exactly once;
+- every mapped Example/YTI pair present exactly once, intact, and immediate;
+- source reading follows mapped fidelity/order;
+- mapped processing jobs rendered;
+- mapped figures remain with the intended concept;
+- toolkit paths reference canonical assets in place;
+- no student answers leak;
+- student Notes remain Notability-first;
+- teacher copy expands naturally with no overlap;
+- established Notes CSS/shell/classes used;
+- no invented Notes visual system;
 - no unresolved template/code tokens;
-- no broken paths;
-- `Tools/fix_notes_layout_contract.py` run;
-- ZIP/provenance correct;
-- no `__MACOSX`, `.DS_Store`, AppleDouble, `__pycache__`, `*.pyc`.
+- local generated asset paths resolve.
+
+FINAL UNIT verify:
+- every expected student/teacher section file exists;
+- stylesheet order exact;
+- no copied toolkit assets;
+- no old Stage 3E/fingerprint provenance;
+- declared Notes finalizer/check completed when applicable;
+- no broken local paths;
+- no `__MACOSX`, `.DS_Store`, AppleDouble, `__pycache__`, or `*.pyc`;
+- package structure exact.
 
 Do not run broad Bank QA, full toolkit QA, or unrelated architecture audits.
 
 ======================================================================
-20. NOTES MAP PROVENANCE
+15. PROVENANCE
 ======================================================================
 
 At ZIP root include:
-_notes_provenance/
-  unitN/
-    uN_notes_map.json
-    NOTES_MAP_HANDOFF.json
-    NOTES_BUILD_HANDOFF.json
-    NOTES_BUILD_REPORT.txt
-    IMAGE_USE_MANIFEST.json
+  _notes_provenance/
+    unitN/
+      uN_notes_map.json
+      NOTES_MAP_HANDOFF.json
+      NOTES_BUILD_HANDOFF.json
+      NOTES_BUILD_REPORT.txt
+      IMAGE_USE_MANIFEST.json
 
-`IMAGE_USE_MANIFEST.json` records at minimum:
+`IMAGE_USE_MANIFEST.json` records only actually used mapped source/toolkit images, including:
 - section;
 - image_id;
 - toolkit_path;
-- canonical_course_resource_path;
-- html_src;
-- toolkit_fingerprint;
-- source_textbook_file/source image path;
-- story_role / concept-I-can connection.
+- canonical course resource path;
+- deployed html_src;
+- source-spine file/image provenance;
+- story role / I-can connection.
+
+`NOTES_BUILD_HANDOFF.json` schema:
+  physics-notes-build-handoff/2.0
+
+Include:
+- course/unit/status;
+- notes_flow_revision;
+- current pinned memories/course commits;
+- map source identities;
+- Bank manifest path/blob SHA;
+- consumed Bank Notes file paths/blob SHAs;
+- instructional-spine repo/commit;
+- section count;
+- WTC count;
+- Example/YTI pair count;
+- source-image count;
+- reference-note count;
+- Stop & Discuss count;
+- generated-representation count;
+- student HTML filenames;
+- teacher HTML filenames.
+
+Do not include retired Stage 3E fingerprint fields.
 
 ======================================================================
-21. OUTPUT CONTRACT
+16. OUTPUT CONTRACT — PRESERVE ESTABLISHED NOTES DELIVERY
 ======================================================================
 
 Return ONE ZIP:
-unitN_notes.zip
+  unitN_notes.zip
 
 ZIP root:
   uN_1_notes/
@@ -536,49 +478,52 @@ ZIP root:
       NOTES_BUILD_REPORT.txt
       IMAGE_USE_MANIFEST.json
 
-Do NOT wrap in `notes/` or `unitN_notes/`.
-Do NOT include the full Physics Notes Image Toolkit.
-Do NOT include toolkit source images.
-Do NOT include unused generated images.
+Do NOT:
+- wrap the package in an outer `notes/` folder;
+- include the full Physics Notes Image Toolkit;
+- include copied toolkit source images;
+- include unused generated images;
+- include PM files or staging files.
 
-NOTES_BUILD_HANDOFF.json minimum:
-{
-  "schema": "physics-notes-build-handoff/1.2",
-  "course": "Physics",
-  "unit": N,
-  "status": "PASS",
-  "notes_flow_revision": "textbook-chunks-v2",
-  "source_bank_fingerprint_method": "...",
-  "source_bank_fingerprint": "...",
-  "notes_map_fingerprint": "...",
-  "image_toolkit_fingerprint": "...",
-  "textbook_repo": "<resolved course_resources.physics_textbook.repo>",
-  "textbook_commit": "<map-pinned textbook commit>",
-  "lesson_target_minutes": {"min": 30, "max": 40},
-  "section_count": 0,
-  "ex_yti_pairs_used": 0,
-  "wtc_items_used": 0,
-  "physics_note_count": 0,
-  "stop_discuss_count": 0,
-  "source_images_used": 0,
-  "generated_representation_count": 0,
-  "student_html_files": [],
-  "teacher_html_files": []
-}
+Teacher deployment:
+download -> unzip into the course `notes/` location using the existing folder replacement workflow -> sync.
 
 ======================================================================
-22. CHAT HANDOFF
+17. DIRECT BLOCKERS
 ======================================================================
 
-End with a concise build summary and exact installation guidance.
+FAIL CLOSED only when a correct build is prevented by:
+- required pinned authority/map/source cannot be fetched directly;
+- accepted 4A map is not current Bank-v2 schema/revision;
+- current Bank is not COMPLETE / ready_for_downstream;
+- a consumed Bank Notes section changed from the map-recorded blob identity;
+- exact current title/LT/I-can mismatch cannot be reconciled;
+- mapped source file/span is missing;
+- mapped WTC/Example/YTI ID is missing or pair identity is broken;
+- mapped required image/representation cannot resolve;
+- required course CSS/shell dependency is unavailable;
+- final HTML cannot satisfy the hard established shell/content contract.
 
-Then say:
-
-NOTES MAP CLEANUP:
-After you verify the finished Unit Notes, you may manually keep `<course>/notes/uN_notes_map/`. The useful map/provenance has been preserved inside `unitN_notes.zip` under `_notes_provenance/unitN/`.
+Do not fail for:
+- missing derived handoff/report that can be regenerated;
+- optional polish;
+- unrelated Bank/toolkit warnings;
+- broad architecture findings outside this job's replacement scope.
 
 ======================================================================
-REVISION NOTE
+FINAL CHAT SUMMARY
 ======================================================================
 
-v1.5 corrects the first textbook-spine pilot and is designed around the rough Notes-flow critique approved on 2026-08-29: more retained textbook exposition, reading-chunk rhythm, Physics Notes, stronger S&D, Notability-first keep-together behavior, very limited forced page breaks, one-notice/one-wonder opening, What I Figured Out close, and red/bulleted teacher support with Teacher Moves + Student Discourse Moves.
+Report:
+- course/unit;
+- pinned source commits;
+- accepted map schema/revision;
+- Bank Notes section identities validated;
+- sections built;
+- WTC / EX-YTI counts;
+- source images referenced in place;
+- generated representations;
+- targeted QA PASS/FAIL;
+- output filename.
+
+Do not ask the teacher to re-upload canonical GitHub dependencies.
