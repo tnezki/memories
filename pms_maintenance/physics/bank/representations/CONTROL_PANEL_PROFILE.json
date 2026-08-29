@@ -1,0 +1,32 @@
+{
+  "workflow_key": "patch_bank_representations",
+  "label": "PATCH R \u00b7 Representations",
+  "group": "When Recommended",
+  "input": "bank",
+  "state": "ready",
+  "needs_bank": true,
+  "extra": [
+    "_question_structure/"
+  ],
+  "output": "Representation-only REPO_PATCH",
+  "start": [
+    "banks"
+  ],
+  "default_category": "Bank",
+  "default_scope": "unit",
+  "course_restriction": "Physics",
+  "current_bank_required": true,
+  "patch_workflow": true,
+  "patch_target_workflow": "bank",
+  "patch_target_label": "Build Bank",
+  "patch_course": "Physics",
+  "patch_phase": "When Recommended",
+  "patch_order": 90,
+  "current_artifact_required": true,
+  "optional_extra": [
+    "_question_structure/",
+    "Tools/~graph_tool_v12.py"
+  ],
+  "pm_path": "pms_maintenance/physics/bank/representations/PM.txt",
+  "canonical_storage": "expanded"
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Selected-Response Choice Scrambler | memories</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Selected-Response Choice Scrambler" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://tnezki.github.io/memories/pms_build/10_Base_Pract_to_Sum_PM/SELECTED_RESPONSE_SCRAMBLER.html" />
+<meta property="og:url" content="https://tnezki.github.io/memories/pms_build/10_Base_Pract_to_Sum_PM/SELECTED_RESPONSE_SCRAMBLER.html" />
+<meta property="og:site_name" content="memories" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Selected-Response Choice Scrambler" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Selected-Response Choice Scrambler","url":"https://tnezki.github.io/memories/pms_build/10_Base_Pract_to_Sum_PM/SELECTED_RESPONSE_SCRAMBLER.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/memories/assets/css/style.css?v=7b3632e5e7dad51a85d802ca9e3b247cd51b5e1f">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/memories/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://tnezki.github.io/memories/">memories</a></h1>
+      
+
+      <h1 id="selected-response-choice-scrambler">Selected-Response Choice Scrambler</h1>
+
+<p><code class="language-plaintext highlighter-rouge">Tools/scramble_selected_response.py</code> is the build-time answer-position tool used by the Summative renderer.</p>
+
+<h2 id="ownership">Ownership</h2>
+<ul>
+  <li>Canonical Bank owns prompt, choice content, correct content, I-can/evidence metadata, and representations.</li>
+  <li>Summative renderer owns final displayed choice order.</li>
+  <li>The scrambler runs on a <strong>temporary staging copy</strong> only. Never rewrite the deployed Bank.</li>
+</ul>
+
+<h2 id="detection-contract">Detection contract</h2>
+<p>A Summative selected-response item is recognized from the current canonical Bank schema when it has a Summative destination/security signal, a non-empty choices array, and <code class="language-plaintext highlighter-rouge">question_design.response_mode = selected_response</code>. Legacy <code class="language-plaintext highlighter-rouge">item_type</code> values remain supported; <code class="language-plaintext highlighter-rouge">item_type</code> is not required. Under <code class="language-plaintext highlighter-rouge">--strict-16x4</code>, Summative choice records that are not recognized cause a hard failure rather than PASS_NOOP.</p>
+
+<h2 id="current-physics-contract">Current Physics contract</h2>
+<p>For each active Physics form with 16 selected-response questions and four choices, run with <code class="language-plaintext highlighter-rouge">--strict-16x4</code>. The output must be exactly 4 A / 4 B / 4 C / 4 D, while preserving every choice’s content exactly.</p>
+
+<h2 id="example">Example</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 Tools/scramble_selected_response.py staged_unit_bank_data.json <span class="nt">--in-place</span> <span class="se">\</span>
+  <span class="nt">--seed</span> <span class="s2">"Physics|unit1|practice-to-summative-v1"</span> <span class="se">\</span>
+  <span class="nt">--report</span> summative_choice_scramble_report.json <span class="nt">--strict-16x4</span>
+</code></pre></div></div>
+
+<p>The scramble is deterministic for the same seed/source. After this step, no later build step may reorder choices.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

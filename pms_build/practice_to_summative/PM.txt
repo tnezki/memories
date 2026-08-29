@@ -1,0 +1,624 @@
+BASE PRACTICE-TO-SUMMATIVE BUILD - PORTABLE MEMORY v3.6
+========================================================
+
+PURPOSE
+
+
+CANONICAL STORAGE CONTRACT — HARD
+---------------------------------
+GitHub stores readable authorities and multi-file curriculum artifacts EXPANDED. ZIP is a transfer/handoff format only, unless the artifact is intrinsically a binary/archive resource. If this PM returns a ZIP for convenience, extract it into the PM-declared canonical folder before syncing GitHub. Downstream jobs read the expanded canonical folder/files, never a retained handoff ZIP.
+-------
+Build every stable Bank-driven downstream resource from Practice Sets through the
+Summative Assessment for ONE finalized Unit Bank in one fast, controlled run.
+
+This package is SELF-CONTAINED. It embeds the current Practice, Activities, and
+Recurring/Assessment family PMs. The teacher should not need to separately track,
+upload, or choose among PM 5, PM 6, and PM 7 for ordinary Unit production.
+
+GENERIC RUN COMMAND
+-------------------
+The teacher may use exactly:
+
+  Carefully read PM and Run.
+
+Infer the course and Unit from the CURRENT Framework + finalized Unit Bank.
+Do not let stale prompt wording from another chat override this PM.
+
+EXPECTED INPUTS - EXACTLY THREE AUTHORITIES
+-------------------------------------------
+1. This 10_Base_Pract_to_Sum_PM ZIP.
+2. The CURRENT self-contained Course Framework ZIP.
+3. The FINALIZED CURRENT Unit Bank ZIP.
+
+NO COURSE-SITE ZIP IS REQUIRED FOR THIS BUILD.
+NO Course Bank Sync PM is required for this build.
+NO prior rendered course-site artifact is required for this build.
+
+ANTI-CONFUSION GATE - HARD
+--------------------------
+This PM is NOT the Course Bank Sync PM. It builds fresh Practice-through-Summative
+resources from the current Framework + finalized Unit Bank.
+
+If execution logic concludes that an existing course-site ZIP is required as a
+destination baseline, that logic belongs to the separate Course Bank Sync PM and
+MUST NOT be applied here. Do not request the course-site ZIP. Re-read this PM and
+continue with the three expected inputs above.
+
+If a Course Bank Sync PM is also present in the chat/files by accident, ignore it
+for this run unless the teacher explicitly asks to perform course-site synchronization.
+The executable identity for this run must resolve to:
+
+  BASE PRACTICE-TO-SUMMATIVE BUILD - PORTABLE MEMORY v3.6
+
+If that identity cannot be established, fail closed by reporting that the wrong PM
+was selected; do NOT reinterpret this as a Course Bank Sync run.
+
+DEFAULT OUTPUT SCOPE
+--------------------
+Build ALL Framework-routed resources below:
+
+PRACTICE
+- Practice Set 1
+- Practice Set 2
+- Practice Set 3
+- Extra Practice
+- CYU / Check Your Understanding
+- Tarsia export
+- Blooket export
+
+ACTIVITIES
+- Activity Options hub(s)
+- Questions/Solutions companions
+- Stations companions
+- Find Someone Who companions
+- any other companion explicitly required by the current Framework + canonical Activities PM
+
+RECURRING + ASSESSMENT
+- Warm-Ups
+- Exit Tickets
+- Progress Tracker
+- Unit Review / Study Guide
+- Review Practice
+- Summative Assessment, including every active secure form
+
+OUT OF SCOPE
+------------
+Do NOT build Notes, Demos, Investigations, Performance Tasks, or Quick Checks.
+
+AUTHORITY
+---------
+Current teacher instruction
+  > current Framework + finalized current Unit Bank
+  > applicable canonical family PM
+  > this orchestration PM
+  > older rendered artifacts.
+
+The Bank owns canonical Bank question content.
+The Framework owns course-specific behavior, paths, counts, profiles, and timing.
+The canonical family PM owns its rendering mechanics and approved shell.
+This PM owns orchestration, family isolation, cross-family checking, and delivery.
+
+PHILOSOPHY-FIRST RULE — HARD
+----------------------------
+Read the CURRENT root Curriculum Philosophy completely before executing this PM. If the Control Panel packages `Curriculum_Philosophy.txt`, that root authority wins. The No PM carries a fallback Philosophy copy; use only Curriculum_Philosophy.txt from the pinned memories commit.
+
+SHARED CSS ARCHITECTURE — HARD
+------------------------------
+The course-root `css/` shelf is shared across courses. Do not create a Physics-only fork of this Practice-to-Summative PM merely because Physics selects a different Summative stylesheet/profile.
+
+- Universal/shared resources use the same course-root CSS contracts across Algebra, Calculus, and Physics when their profile calls for them.
+- `base.css` is the shared foundation for profiles that depend on it. This PM carries `shared_css/base.css` only as a build/reference authority; ordinary Unit output links to the deployed course-root CSS instead of duplicating it.
+- `practice_set.css` is universal Practice/CYU styling and loads after `base.css`.
+- The Framework selects the Summative family: `summative_math.css` depends on `base.css`; `summative_physics.css` is standalone and must NOT be forced to load `base.css`.
+- Other resource styles follow the current Framework + family renderer path contract.
+- Do not rewrite shared CSS during a Unit build.
+
+CORE PRINCIPLE
+--------------
+THIS IS A RENDERING PASS, NOT A SECOND AUTHORING PASS.
+
+REVIEW AUTHORING EXCEPTION: any limited fresh Review Practice authoring is owned exclusively by the canonical shared Recurring Assessment Review renderer. This orchestration PM does not independently decide Review routing, question sourcing, or shell behavior.
+
+Do not rewrite strong Bank questions downstream.
+Do not redesign approved shells.
+Do not improvise class names.
+Do not change CSS.
+
+
+REGRESSION-PROTECTION / APPROVED-SHELL RULE — HARD
+--------------------------------------------------
+The teacher-approved Algebra downstream artifacts are the proven implementation of the UNIVERSAL shell mechanics.
+This does NOT make Algebra content authoritative for Physics. It means that when the same Base family owns a shell,
+Physics must populate that same approved DOM / JavaScript / pagination / print behavior unless the CURRENT Physics
+Framework explicitly selects a genuinely different course profile (for example the Physics Summative family).
+
+Therefore:
+- do not create a Physics-only Practice/Activities/Exit/Progress shell when the universal shell already exists;
+- do not alter working shared CSS merely to compensate for malformed Physics HTML;
+- use the embedded canonical HTML references literally and substitute only Framework/Bank-owned dynamic content;
+- if generated Physics HTML does not fit the reference shell, fix the renderer/HTML, not the universal CSS;
+- Review and Warm-Ups remain unchanged in this v3.6 refinement.
+
+CURRENT PHYSICS DOWNSTREAM REFINEMENTS — HARD
+---------------------------------------------
+When the CURRENT Physics Framework selects these rules:
+1. Practice Set 1 / 2 / 3 / Extra Practice use the Framework-selected `ws-50` student workspace class. This workspace
+   change applies ONLY to those four ordinary Practice layouts. CYU keeps its canonical 3x2 grid + separate blank
+   workspace page and must not inherit the doubled per-question workspace.
+2. Tarsia and Blooket are required Physics Practice-family outputs. Prefer dedicated canonical Bank exports when
+   present. If they are absent, derive them downstream ONLY when the Framework explicitly authorizes the
+   `derived_game_exports` policy; never use Exit/Summative content and never change the canonical Bank.
+3. Activities use the universal teacher-approved Activity hub / Questions-Solutions / Stations / Find Someone Who
+   shells exactly. Physics content, representations, I-cans, and labels populate those shells; Physics does not get a
+   separate DOM or companion naming scheme.
+4. Exit Tickets use the universal class-based Print / Collect mechanism. `exit.css` is not rewritten.
+5. Progress Tracker is a physical print artifact and must use the canonical two-page tracker shell. Do not invent an
+   oversized one-page screen-style tracker.
+6. Physics Summative keeps its approved Physics layout. Only the answer-sheet renderer must explicitly materialize
+   the 16 numbered A/B/C/D bubble rows; unresolved template/source expressions are a hard failure.
+
+ACTIVITY TEACHER-MOVES GUIDE PARITY — HARD
+------------------------------------------
+The canonical Activities PM owns the Activity hub's single `Teacher & Student Moves
+Guide` after the Activity index.
+
+This orchestrator must preserve that guide exactly and must NOT:
+- add per-activity discourse blocks;
+- add discourse material to Practice, Warm-Ups, Exit Tickets, Progress Tracker, Review,
+  Review Practice, or Summative;
+- alter student Activity companions because of the guide.
+
+All other Practice-to-Summative behavior remains governed by the existing family contracts.
+
+SELECTED-RESPONSE CHOICE SCRAMBLE — FINAL CONTENT MUTATION / HARD
+------------------------------------------------------------------
+For any active Summative profile that contains selected-response items, run the bundled deterministic tool on a TEMPORARY staging copy of the finalized Bank data after all question/distractor content is final and immediately before Summative rendering/final-byte QA/ZIP:
+
+  python3 Tools/scramble_selected_response.py <STAGED_UNIT_BANK_DATA.json> --in-place --seed "<course>|unit<U>|practice-to-summative-v1" --report <STAGING>/summative_choice_scramble_report.json [--strict-16x4]
+
+Rules:
+- NEVER run the tool against the deployed/canonical Bank. Use a staging copy only.
+- The tool may reorder choices and update the displayed correct letter; it may not rewrite choice content, prompt content, evidence, figures, or I-can metadata.
+- For current Physics 16-selected-response / 4-choice forms, use `--strict-16x4`; every form must finish exactly 4 A / 4 B / 4 C / 4 D.
+- The deterministic seed must include current course + Unit so reruns of the same finalized source are reproducible.
+- The renderer must consume the scrambled staging data, never the unsorted source data.
+- No later build step may reorder selected-response choices. MathJax/final-byte repair, shell QA, rendering, and packaging may follow, but choice order is locked after this tool runs.
+- `summative_choice_scramble_report.json` is build-time QA evidence; it is not a required student-facing deployed file.
+- If the tool reports malformed/ambiguous correct-answer metadata, mixed choice counts in a form, or distribution failure, FAIL CLOSED.
+- Current canonical detection does NOT require `item_type`: a Summative item with non-empty `choices` and `question_design.response_mode = selected_response` is selected response. Legacy `item_type` remains accepted.
+- Under `--strict-16x4`, if Summative records with choices exist but none (or only some) are recognized as selected response, FAIL CLOSED. `PASS_NOOP` is forbidden for that mismatch condition.
+- If a course Summative truly has no selected-response items, the tool may return PASS_NOOP.
+
+FINAL SHELL-FIDELITY GATE — HARD
+--------------------------------
+Before packaging the combined build:
+- run the canonical Activity shell checker;
+- run the canonical Recurring Assessment shell checker;
+- fail if Activity HTML contains visible tokens before the HTML document;
+- fail if Stations / Find Someone Who stylesheet hrefs differ from their canonical references;
+- fail if Exit Ticket index/ticket/table/figure markup differs from the canonical Exit shell
+  class contract.
+
+Do not report a successful combined build merely because questions/counts/IDs are correct while
+the deployed stylesheet contract is broken.
+
+FINAL ACTIVITY NORMALIZER — HARD
+--------------------------------
+After the Activity family finishes and after any later combined-mode file rewrites, run the
+canonical Activity normalizer on the FINAL Activity staging tree:
+
+  python3 Tools/normalize_activity_shells.py <FINAL_ACTIVITY_ROOT>
+
+The combined build must fail if that command does not return PASS.
+
+
+PROGRESS TRACKER DOM NORMALIZATION — HARD
+-----------------------------------------
+The Progress Tracker CSS expects each supporting I-can row to contain TWO direct children:
+
+  <div class="ican" data-ican-id="...">
+    <span class="check" aria-hidden="true"></span>
+    <span class="ican-text">I can ...</span>
+  </div>
+
+Do NOT render `□ I can ...` as one raw text node inside `.ican`. The first CSS grid column is
+the checkbox column; raw text there collapses into a narrow vertical strip.
+
+The status-row contract is:
+
+  <span class="status-choice">Not Yet</span>
+  <span class="status-choice">Approaching</span>
+  <span class="status-choice">Meeting</span>
+  <span class="status-choice">Exceeding</span>
+
+Do NOT insert a checkbox glyph in those spans because `progress_tracker.css` supplies the
+checkbox with `.status-choice::before`.
+
+After the Progress Tracker HTML is written, run the embedded deterministic normalizer on the
+FINAL staging tree and fail if it does not return PASS.
+
+REVIEW FAMILY DELEGATION — HARD
+-------------------------------
+Unit Review and Review Practice are FULLY delegated to the embedded current Base Recurring + Assessment PM.
+
+This orchestration PM must NOT independently restate, reinterpret, or override:
+- Review content routing;
+- visible current-Unit identity;
+- historical/source-unit hiding;
+- focus-heading logic;
+- Review Practice sourcing/limited authoring;
+- Review/Review Practice HTML structure;
+- navigation / DOK / Final Check / Top control;
+- CSS classes or relative CSS paths;
+- Review package mechanics.
+
+The canonical shared Recurring Assessment PM is the single Review renderer owner. The current Framework supplies course-specific content requirements only.
+
+
+ACTIVITY GOLD-STANDARD PARITY — HARD
+------------------------------------
+The canonical Activities PM exclusively owns Activity shell behavior.
+
+For Activities in this combined build:
+- preserve the teacher-approved Activity hub page order;
+- preserve the Teacher & Student Moves Guide as page 2 immediately after Activity Options;
+- preserve the teacher-approved DUPLEX Stations print shell: prompt/blank pairs first, then exactly two solution pages per station;
+- preserve no-workspace station prompt cards because students use a separate record sheet;
+- do not alter Find Someone Who.
+
+The outer Practice-to-Summative PM must not reinterpret, simplify, or restyle those Activity
+shells. Run the canonical Activity normalizer/checker after the final combined-mode writes.
+
+FAMILY ISOLATION - HARD
+-----------------------
+The combined run must behave as THREE standalone family builds executed in sequence.
+
+1. Complete Practice using ONLY the Practice family contract.
+2. Finalize/package Practice before starting Activities.
+3. Complete Activities using ONLY the Activities family contract.
+4. Finalize/package Activities before starting Recurring/Assessment.
+5. Complete Recurring/Assessment using ONLY that family contract.
+6. Then perform bundle-level checks and convenience packaging.
+
+Do not carry a renderer shortcut, class assumption, layout decision, or stale shell
+from one family into another merely because everything is being built in one chat.
+
+PARITY STANDARD:
+Given the same Framework and Bank, the DECOMPRESSED FILE SET AND FILE BYTES for a
+child resource produced through this PM should match what its canonical family PM
+would produce when run by itself. ZIP timestamps/compression metadata do not count.
+
+If combined-mode logic would cause a different child artifact, the family PM wins.
+
+APPROVED-SHELL RULE - HARD
+--------------------------
+For shell-based resources, clone the embedded canonical DOM/class structure and
+replace only dynamic values. Do not reconstruct the HTML from memory.
+
+Dynamic values may include:
+- course / Unit / section title
+- exact Bank questions and hidden IDs
+- exact Mastery Goals / I-can statements
+- figures/tables
+- links
+- active Summative form IDs
+- Framework-owned usage/profile values.
+
+PRACTICE FAST PATH
+------------------
+Render Practice/CYU exactly from canonical Bank routes.
+
+TARSIA and BLOOKET are already canonical Bank exports. Do not spend substantial
+build time re-authoring, re-diversifying, or performing a new semantic audit of them.
+
+For this downstream build, verify only that:
+- expected canonical export exists;
+- filename/path is correct;
+- required row/pair count resolves;
+- file opens/parses;
+- copy is byte-identical to the finalized Bank export.
+
+If those checks pass, COPY AND MOVE ON.
+Question-quality work for Tarsia/Blooket belongs upstream in the Bank Upgrade passes.
+
+PROGRESS TRACKER = MAD-LIB SHELL - HARD
+---------------------------------------
+The Progress Tracker should be one of the most deterministic resources in this run.
+
+Use `references/canonical_html/progress_tracker_madlib_shell.html` inside the embedded
+Recurring/Assessment PM as the layout contract.
+
+Treat it literally as a Mad-Lib:
+KEEP the wrapper hierarchy, classes, status boxes, evidence table structure,
+identity lines, next-move area, reflection structure, page/header behavior, and CSS.
+
+SUBSTITUTE ONLY authoritative dynamic content:
+- course name
+- Unit number and Unit title
+- Essential Standard / Framework-owned summary language
+- exact Mastery Goal IDs/text
+- exact supporting I-can statements
+- current Framework evidence/status wording when it intentionally differs.
+
+EXACT I-CAN EXTRACTION — HARD:
+- Do NOT infer or manufacture I-cans from representations, recurring practices,
+  misconceptions, vocabulary, evidence examples, DOK notes, or teacher guidance.
+- Use only statements explicitly designated as supporting I-can statements in the
+  ORIGINAL embedded Assessment Plan / current Framework structure.
+- Structured fields named `i_can`, `i_cans`, `supporting_i_can`, or equivalent explicit
+  I-can fields are authoritative. A prose section is authoritative only when it is
+  explicitly headed/labeled I-can / I can / Supporting I-can Statements.
+- Every rendered `.ican` row must contain ONE exact source statement and, after any
+  decorative checkbox is removed, must begin with `I can`.
+- Every rendered I-can must be verifiably present verbatim in the authoritative
+  Assessment Plan/Framework source. Do not paraphrase it.
+- If exact supporting I-cans cannot be isolated confidently, STOP instead of filling
+  the card with nearby framework content.
+
+Do not inherit old Unit numbers, old goal text, or old section labels from a reference.
+Do not redesign the tracker because one Unit has longer text.
+If the Framework requires a different page count, repeat/reflow the APPROVED goal-card
+and tracker-page blocks rather than inventing a different visual system.
+
+If a CURRENT teacher-approved Progress Tracker artifact is explicitly supplied as a
+layout reference, it may replace the embedded shell as DOM/layout authority; its
+content does not override the current Framework/Assessment Plan.
+
+
+SUMMATIVE LAYOUT - WORKSPACE-FIRST, NOT DEFAULT-FIRST
+------------------------------------------------------
+The secure Bank owns the questions. The renderer owns usable printed workspace.
+
+For math-style Summatives using `summative_math.css`:
+- every question gets exactly one of:
+    q-compact / q-standard / q-large / q-xlarge
+- NEVER assign `q-standard` merely because no decision was made;
+- size is a WORKSPACE decision, not a DOK/difficulty label.
+
+Use this decision process for EACH instantiated question:
+
+Q-COMPACT
+- short direct calculation / identification / brief response;
+- no substantial graph/table construction;
+- expected student work fits comfortably in a small card.
+
+Q-STANDARD
+- moderate computation or short explanation;
+- a few written steps;
+- small representation/table that still leaves reasonable work space.
+
+Q-LARGE
+- multi-step solution, modeling, interpretation, critique, justification;
+- student-generated graph/table work;
+- content-bearing figure plus meaningful written reasoning;
+- response clearly needs more room than standard.
+
+Q-XLARGE
+- genuinely extended response or unusually large representation/work area;
+- use only when page composition can support it and the response really needs it.
+
+FORM-LEVEL LAYOUT PASS - REQUIRED:
+1. Classify each question by expected response footprint.
+2. Lay out the form using the current Framework's exact item count.
+3. Give each page enough writing space without shrinking text/figures.
+4. Rebalance page breaks and size classes when necessary.
+5. Do not change question content merely to make the page fit.
+6. Render/open enough pages to verify actual print usability.
+
+DETERMINISTIC FIRST-PASS SIZING — REQUIRED:
+- Start from the expected student response, not from `q-standard`.
+- Short direct algebra/evaluation items remain `q-compact` even when they ask for one
+  brief check, property, or sentence of support. Examples: evaluate a rule and say why
+  it is a function; solve one short equation and give one check; rewrite an expression
+  and name the property; decide equivalence with one substitution/structure check.
+- Moderate contextual equations, multi-step computation, or short analytical responses
+  normally start `q-standard`.
+- Use `q-large` when the RESPONSE FOOTPRINT is clearly larger: a content-bearing graph/table
+  that must be analyzed and explained; writing an equation from a representation with
+  evidence; creating a representation plus context/explanation; evaluating a claim with
+  evidence; or a contextual solution that also requires substantial verification.
+- `q-xlarge` is reserved for genuinely extended multi-part reasoning or unusually large
+  student-generated representation + written justification. It should be rare.
+- Reasoning verbs by themselves do NOT automatically force `q-large`; estimate the actual
+  amount of handwriting the student needs.
+- After the first pass, page composition may increase a class when needed. If an obvious
+  compact item is intentionally enlarged, add a hidden `data-workspace-override` reason so
+  the choice is auditable rather than accidental.
+
+For an 8-item math form, a tested 3 + 3 + 2 page sequence is acceptable when it
+fits the current Framework/profile. Do not force an obsolete 10-question template.
+The exact form item count always comes from the current secure Bank + Framework.
+
+SUMMATIVE DOM GATES:
+- image figures: `<figure class="figure-block">` + `<img class="question-graph">`
+- ordinary data tables: `data-table` or the Framework-approved styled equivalent
+- prompt precedes representation
+- no descriptive student-facing figcaption
+- no visible DOK / Bank ID / Mastery Goal labels
+- active forms only; no stale version selectors
+- preserve exact secure Bank membership and figures.
+
+REVIEW
+------
+The student-facing Unit Review is a CURRENT-UNIT MASTERY resource, not the internal Retrieval stage.
+
+VISIBLE IDENTITY — HARD:
+- Title: `Unit {CURRENT_UNIT} Review`.
+- Intro: `Review the skills and understandings from your Unit {CURRENT_UNIT} Mastery Goals.`
+- Do not print a historical/source Unit number or title.
+- Organize the study guide and companion Review Practice by current Unit Mastery Goals and exact supporting I-cans.
+- Review Practice uses four open-response questions per Mastery Goal; author fresh parallel questions when the non-secure Bank does not contain enough appropriate Mastery-aligned items.
+- Secure Summative and official Exit Ticket items remain excluded.
+
+MATHJAX / FINAL BYTES — HARD FAIL GATE
+--------------------------------------
+This PM carries `the MathJax/final-byte fixer declared by the current Framework manifest` as the MINIMUM safe final-byte repair.
+If the current Framework provides a newer authoritative fixer, use the newer one.
+Never fall back below the bundled v11 behavior.
+
+Run the selected fixer against EVERY final unzipped HTML staging root AFTER all
+rendering/content assembly and BEFORE ZIP packaging. Then rerun ALL family and
+bundle-level checks on the REPAIRED bytes.
+
+SYSTEM ROW-BREAK SAFETY — HARD:
+- Correct multi-row TeX such as `\\x`, `\\y`, or `\\z` must survive as row breaks.
+- A single invalid `\x`, `\y`, or `\z` before algebraic row content is a FAILURE, not a warning.
+- The final checker must scan raw final HTML bytes for this corruption even when MathJax
+  configuration itself appears valid.
+- A report may say `MathJax PASS` only after this raw-byte scan returns zero failures.
+
+After child ZIP creation, extract each child ZIP to a fresh verification directory and
+run the same final-byte scan once more on the packaged bytes. Packaging-time verification
+must pass before delivery.
+
+BUILD ORDER
+-----------
+1. Read this PM.
+2. Resolve Unit/course from Framework + Bank.
+3. Verify Bank/Framework route/count compatibility.
+4. Read each canonical family PM required by the selected outputs before rendering.
+5. Run Practice as an isolated family build.
+6. Run Activities as an isolated family build.
+7. Run Recurring/Assessment as an isolated family build.
+8. Run each canonical family checker and require zero errors on rendered staging bytes.
+9. Run bundle checker(s).
+10. Run the selected MathJax/final-byte fixer on EVERY final staging root.
+11. Rerun ALL family + bundle checkers on the repaired bytes; require zero errors.
+12. Package each canonical child ZIP.
+13. Extract every child ZIP into a fresh verification root and rerun the final-byte
+    corruption scan + shell/path checks on the PACKAGED bytes. Require zero errors.
+14. Package one convenience all-in-one ZIP using the DROP-IN COURSE-PARENT structure below.
+15. Verify every ZIP opens and passes integrity testing.
+
+DELIVERY - HARD
+---------------
+Return BOTH forms of delivery in the SAME response.
+
+A. INDIVIDUAL DOWNLOADS
+Provide each canonical child ZIP as its OWN downloadable file:
+- unit[U]_practice_sets.zip
+- unit[U]_activities.zip
+- unit[U]_warmups.zip
+- unit[U]_exit_tickets.zip
+- unit[U]_progress_tracker.zip
+- unit[U]_review.zip
+- unit[U]_summative_assessment.zip
+
+Use the Framework/family canonical filename when it intentionally differs.
+Do not force the teacher to open the master bundle merely to obtain one resource.
+
+B. ALL-IN-ONE DOWNLOAD
+Also provide:
+- unit[U]_practice_to_summative.zip
+
+DROP-IN COURSE-PARENT STRUCTURE - HARD
+The master ZIP is for fast Finder drag/drop into the deployed course root. It must contain
+one root folder named `unit[U]_practice_to_summative/`, and directly inside that root use
+the SAME course-parent folders the deployed course uses:
+
+- practice_sets/
+- activities/
+- warmups/
+- exit/
+- progress/
+- reviews/
+- assessments_zxrtjp/
+
+Place each generated Unit resource at its canonical relative path under the appropriate
+course-parent folder. Example shape:
+
+unit4_practice_to_summative/
+  practice_sets/...
+  activities/...
+  warmups/...
+  exit/...
+  progress/...
+  reviews/...
+  assessments_zxrtjp/...
+  BUILD_REPORT.txt
+
+Do NOT put child ZIP files inside the master ZIP.
+Do NOT add extra category wrappers such as `Practice/`, `Activity/`, or `Summative/`.
+Do NOT include PM, Framework, Bank source packages, __MACOSX, .DS_Store, AppleDouble
+`._*`, __pycache__, or .pyc junk.
+
+The seven individual child ZIPs are still delivered separately for cases where the teacher
+wants only one resource family.
+
+BUILD_REPORT
+------------
+Keep it concise. State:
+- course + Unit
+- child resources built
+- counts
+- active Summative forms/items
+- shell checker status
+- MathJax/final-byte status
+- ZIP integrity
+- Exit four-version/anchor/parallel/variation audit status;
+- any actual upstream conflict;
+- any systemic PM bottleneck reported through PM_IMPROVEMENT_REPORT.txt.
+
+Do not turn the report into a long ceremonial audit.
+
+BUNDLE-LEVEL ACCEPTANCE GATES
+-----------------------------
+[ ] all Framework-required sections/routes present
+[ ] no downstream question re-authoring
+[ ] no secure-item leakage into nonsecure resources
+[ ] family shell contracts preserved
+[ ] Progress Tracker `.ican` rows are exact source I-cans only; every row begins `I can`
+[ ] no stale Unit labels from reference templates
+[ ] Practice figures/tables/workspaces use approved classes
+[ ] Activity participation mechanics preserved
+[ ] Tarsia/Blooket canonical export copy checks pass
+[ ] Exit Ticket approved index/ticket shell preserved
+[ ] Review family passed the canonical shared Recurring Assessment checker: current Unit identity, current Unit Mastery Goals, canonical shell/CSS, and no historical/source Unit leakage
+[ ] Summative workspace classes chosen intentionally per question
+[ ] Summative item count/page flow comes from current Framework/Bank
+[ ] Summative figures/tables use approved classes
+[ ] all local figure refs resolve
+[ ] selected MathJax fixer ran on every final staging root
+[ ] raw-byte malformed `\x`/`\y`/`\z` row-break scan = 0 before and after packaging
+[ ] no Mac/temp/source junk in child ZIPs
+[ ] all child ZIP integrity checks pass
+[ ] master ZIP uses course-parent folders directly (practice_sets/ activities/ warmups/ exit/ progress/ reviews/ assessments_zxrtjp/) + concise report
+
+
+PM IMPROVEMENT / BOTTLENECK CONTRACT
+------------------------------------
+This full-family run is also a regression test of the canonical PM stack. If execution encounters a repeatable
+workflow bottleneck, contradictory active rules, ambiguous family ownership, or a shell/packaging weakness, do
+not silently work around it. Distinguish an artifact-specific exception from a systemic PM defect.
+
+For a systemic issue, return a concise `PM_IMPROVEMENT_REPORT.txt` separately from deployment artifacts. Identify
+the owning layer and exact proposed change. If this outer PM or one of its canonical family PMs owns the defect,
+a clearly labeled non-authoritative `*_PROPOSED.zip` candidate PM may also be returned for teacher review.
+
+The teacher may ACCEPT ALL, ACCEPT PART, or REJECT. Do not overwrite the canonical PM automatically. After an
+approved PM revision, rerun the exact Unit/case that exposed the problem, audit against the current Framework +
+finalized Bank, and regression-check all protected resource families, paths, CSS/shells, security boundaries, and
+packaging before accepting the PM revision. Artifact-specific oddities should remain local and should not grow the PM.
+
+CONFLICT RULE
+-------------
+If this orchestrator and an canonical family PM disagree about an artifact's content,
+HTML, CSS, path, security, or family-specific packaging, the canonical family PM wins.
+
+If an canonical family PM and the current Framework intentionally disagree, the
+current Framework wins for course-specific behavior. Reconcile explicitly; do not
+silently blend old and new rules.
+
+Do not modify the finalized Bank during this build. Report upstream Bank defects for
+later Bank Upgrade work.
+
+END - BASE PRACTICE-TO-SUMMATIVE BUILD PM v3.6
+
+V2.4 NOTE (2026-08-23): Corrected Unit Review routing. Review/Review Practice now follow the current Unit Mastery Goals/supporting I-cans, not the Retrieval stage; historical source-unit labels are hidden from student-facing resources; legacy Intro/Review Bank metadata remains compatible.
+
+V3.0 NOTE (2026-08-24): Removed duplicate Review routing/presentation logic from the orchestrator. Review + Review Practice are now fully delegated to the canonical shared Recurring Assessment renderer; stale REVIEW TARGET acceptance language was removed.
+
+
+V3.3 NOTE (2026-08-25): Synchronized Exit Tickets to the approved projector + four-version print/collect architecture and added systemic PM-improvement proposal/approval/rerun auditing.
+
+V3.5 NOTE (2026-08-28): Selected-response detection now follows the canonical Bank schema (`question_design.response_mode = selected_response` + Summative destination + choices) with legacy `item_type` fallback. Strict Physics mode fails closed instead of allowing a false PASS_NOOP when Summative choice records are present but unrecognized.

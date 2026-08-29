@@ -1,0 +1,28 @@
+{
+  "workflow_key": "patch_bank_metadata",
+  "label": "PATCH Z \u00b7 Metadata Reconcile",
+  "group": "Finish",
+  "input": "bank",
+  "state": "ready",
+  "needs_bank": true,
+  "extra": [
+    "_question_structure/"
+  ],
+  "output": "Metadata-only REPO_PATCH",
+  "start": [
+    "banks"
+  ],
+  "default_category": "Bank",
+  "default_scope": "unit",
+  "course_restriction": "Physics",
+  "current_bank_required": true,
+  "patch_workflow": true,
+  "patch_target_workflow": "bank",
+  "patch_target_label": "Build Bank",
+  "patch_course": "Physics",
+  "patch_phase": "Finish",
+  "patch_order": 999,
+  "current_artifact_required": true,
+  "pm_path": "pms_maintenance/physics/bank/metadata/PM.txt",
+  "canonical_storage": "expanded"
+}

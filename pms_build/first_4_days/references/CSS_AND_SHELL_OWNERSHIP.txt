@@ -1,0 +1,20 @@
+REFERENCE-ONLY CONTENT
+
+Bundled copies of the current family CSS and canonical HTML references exist to prevent renderer reconstruction from memory. This includes base, Notes, Warm-Up, Practice, Activity, Investigation/teacher-guide, and Exit references used by the First 4 Days workflow.
+They are NOT a second live deployed CSS tree.
+
+At build time:
+- read the current course Framework and current live CSS/path contracts;
+- use the Framework/current family if newer;
+- deploy First 4 Days HTML using the live course-root CSS paths;
+- only deploy first_4_days.css for special opening-only artifacts that need classes not owned by a normal resource family;
+- use bundled plane.png only as a reference/canonical byte source when the current course supplies the same approved printable or explicit current instruction authorizes it.
+
+The universal PM does not freeze a course Framework. The current Framework should be packaged by the controller/request with each run so Algebra, Physics, and Calculus remain course-specific. A frozen Framework copy inside this universal PM would create exactly the stale-authority problem this architecture is meant to prevent.
+
+Activity subfamily routing recovered from the known-good deployed Unit:
+- Activity hub + question/solution sets -> css/activities.css
+- Stations -> css/activities/activity_stations.css
+- Find Someone Who -> css/activities/activity_find_someone_who.css
+- Optional projector-family reference -> css/activities/activity_projector.css
+These bundled copies are reference-only.

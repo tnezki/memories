@@ -1,0 +1,410 @@
+PHYSICS / COURSE-AWARE BANK BUILD STAGE 3E - FINAL AUDIT + MATERIALIZE v1.0
+============================================================================
+STATUS: CURRENT FINAL BANK BUILD PM
+ROLE: Independently audit the complete Stage 3D Bank, create the teacher review page, preserve provenance, and materialize the deployable unitN/ Bank.
+
+
+CANONICAL STORAGE CONTRACT — HARD
+---------------------------------
+GitHub stores readable authorities and multi-file curriculum artifacts EXPANDED. ZIP is a transfer/handoff format only, unless the artifact is intrinsically a binary/archive resource. If this PM returns a ZIP for convenience, extract it into the PM-declared canonical folder before syncing GitHub. Downstream jobs read the expanded canonical folder/files, never a retained handoff ZIP.
+NORMAL OUTPUT: unitN.zip
+DEPLOYMENT STATUS: FINAL MATERIALIZED BANK OUTPUT
+
+GENERIC RUN COMMAND
+-------------------
+Carefully read PM and Run.
+
+When the teacher says Run, complete this entire Stage 3E workflow and return the real ZIP in the same response.
+Do not stop at samples, plans, previews, or requests to continue.
+
+ARCHITECTURE
+------------
+2.5 Build Bank Map -> 2.6 Audit + Fix Bank Map -> 3A Build Bank Seeds -> 3B Instructional Variants -> 3C Exit Tickets -> 3D Summative Bank -> 3E Final Bank Audit + Materialize
+
+FIRST TASK - HARD GATE
+----------------------
+Before reading this PM, the Framework, the audited map, the Stage 3D checkpoint, the question-structure package, or any source material:
+READ THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+
+After validating the Stage 3D handoff and audited map, and immediately before independently auditing finished questions, REREAD THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY.
+
+AUTHORITY ORDER
+---------------
+Current explicit teacher instruction overrides portable defaults. After that:
+1. Current Curriculum Philosophy PM.
+2. This Stage 3E PM.
+3. Current course Framework and original Unit Assessment Plan.
+4. Current audited Bank Map.
+5. Accepted Stage 3D checkpoint containing the complete authored Bank.
+6. Current dedicated _question_structure/.
+7. Current visual/source Toolkit when nonconflicting.
+8. Packaged bank review base CSS for the teacher audit page.
+
+REQUIRED INPUTS
+---------------
+1. This Stage 3E PM package.
+2. Current course Framework ZIP.
+3. Current audited Unit Bank Map ZIP: unitN_bank_map_audited.zip.
+4. Current Stage 3D checkpoint ZIP: unitN_bank_3d.zip.
+5. Current Curriculum Philosophy and _question_structure/, normally bundled automatically by Control Panel.
+
+Repository convention:
+  <course>/banks/unitN_bank_map_audited.zip
+  <course>/banks/unitN_bank_3d.zip
+
+HANDOFF HARD GATE
+-----------------
+Before auditing or materializing anything, verify:
+- requested Unit is unambiguous;
+- audited map opens and map_audit.final_status = PASS;
+- Stage 3D ZIP opens to exactly one unitN/ folder;
+- unitN/STAGE_3D_HANDOFF.json exists;
+- Stage 3D handoff status = PASS and deployable = false;
+- handoff Unit/course match the request;
+- Stage 3D authored_count matches the actual canonical item count;
+- every Stage 3D authored_slot_id exists exactly once;
+- Stage 3D audited_map_sha256 exactly matches the supplied audited-map ZIP SHA-256;
+- pending_count = 0 and pending_slot_ids is empty;
+- every audited-map slot exists exactly once in the completed Bank.
+
+If a hard gate fails, STOP. Do not silently rebuild or repair an earlier stage.
+
+STAGE 3E DOES NOT AUTHOR OR REPAIR QUESTIONS
+--------------------------------------------
+Stage 3E is independent audit + materialization.
+
+Do NOT rewrite question prose, answers, solutions, choices, figures, or mapped relationships merely because the audit finds a quality issue.
+Do NOT run a selected-finding repair workflow.
+Do NOT add Fix Now / Later / Accept controls.
+
+Stage 3E may perform purely mechanical packaging/rendering work such as:
+- rebuilding HTML views from canonical Bank data;
+- adding the Audit Review navigation link;
+- copying provenance records into the final Bank folder;
+- creating the audit review CSS/page;
+- regenerating mappings/manifests from unchanged canonical objects;
+- running the current finalizer and integrity checks.
+
+Question-content problems are recorded clearly for later artifact-level inspection and repair.
+
+WHY THIS STAGE EXISTS
+---------------------
+The Bank build should end with one permanent source-of-truth folder, not a pile of checkpoints.
+Stage 3E gives the complete 795-item Bank an independent fresh-eyes audit, creates a readable teacher inspection page, preserves the design/audit provenance inside unitN/, and then returns the complete deployable Bank folder.
+
+After Stage 3E, normal downstream artifact builders use the materialized unitN/ Bank. Later, the teacher may audit a much smaller artifact slice such as Unit 1 Exit Tickets, Section 1.3 Practice Set 2, or Unit 3 Summative Assessments and repair only the questions that matter there.
+
+INDEPENDENT QUESTION AUDIT
+--------------------------
+Audit every canonical question against the finished prompt, answer/solution, representation, audited map, and resource purpose.
+
+For each item, evaluate the applicable dimensions independently:
+1. MAP ALIGNMENT
+   Does the finished question actually perform the mapped I-can/evidence job/response demand?
+
+2. STRUCTURE
+   Does the finished question actually use the planned question structure? For multi-step, is the dependency real rather than decorative Part A/Part B?
+
+3. WORDING
+   Is the prompt short, natural, grammatical, and free from unnecessary setup or template/Mad-Lib scaffolding? Context-rich is not the default.
+
+4. REPRESENTATION
+   If a graph, FBD, vector diagram, motion diagram, table, model, or other representation is required or materially carries the mapped evidence, does it actually exist and work correctly?
+
+5. PARALLEL / VARIETY FIDELITY
+   When a question is a declared parallel, does it preserve the intended skill/difficulty while visibly realizing the mapped variation? Intentional similarity is GOOD. Literal sameness is only a problem when the map required a meaningful change.
+
+6. PHYSICS / ANSWER
+   Is the Physics correct? Is the question solvable as written? Does the answer/solution actually answer the final prompt? Are units, signs, directions, and reasoning coherent?
+
+7. SECURITY
+   For Exit and Summative items, is the evidence appropriately fresh from exposed instructional tasks and secure peers while still matching the mapped evidence job?
+
+Applicable dimensions receive PASS or FAIL. Genuinely nonapplicable dimensions receive N/A.
+Overall audit_status is derived:
+- any applicable FAIL -> FAIL;
+- all applicable PASS -> PASS.
+
+Do not use KEEP / CLEAN / REBUILD.
+
+AUDIT PHILOSOPHY
+----------------
+Audit defects, not resemblance.
+
+Do NOT fail a question merely because:
+- Practice forms are intentionally parallel;
+- YTI resembles its Example;
+- Exit B/C resemble A;
+- Summative V2-V4 resemble V1;
+- Summative V6 resembles V5;
+- the same useful representation style appears more than once;
+- a short direct question is not context-rich.
+
+Do flag actual defects such as:
+- wrong evidence job;
+- broken or missing representation;
+- mapped variation not realized;
+- wordy or unnatural scaffolding;
+- incorrect answer/solution;
+- fake multi-step structure;
+- secure task copied from exposed instruction or a supposedly distinct secure form;
+- selected-response distractors that are not defensible.
+
+SUMMATIVE ANSWER-LETTER DISTRIBUTION
+------------------------------------
+Do NOT fail canonical Summative Bank items merely because correct-answer letters are skewed.
+The downstream Summative artifact builder / Practice-to-Summative workflow owns deterministic answer-choice scrambling as its LAST assembly step.
+
+If the Bank stores a form-level answer-position distribution, report skew only as an informational downstream assembly note, not as a question-content FAIL.
+
+TEACHER AUDIT REVIEW PAGE
+-------------------------
+Create:
+  unitN_audit_review.html
+
+This page is FOR INSPECTION ONLY. It has no Fix Now / Later / Accept controls.
+
+Default organization must be:
+  Dimension -> Resource -> Severity -> finding cards
+
+Within each dimension:
+- group by resource/destination;
+- within resource, sort High severity before Medium, then Low;
+- stable order after severity should follow section and canonical item order.
+
+A simple text search box is allowed. Do not add a large multi-dropdown filter bar.
+
+Show only findings by default, not all 795 questions.
+At the top show compact counts:
+- canonical items audited;
+- items with all applicable checks PASS;
+- items with one or more findings;
+- findings by dimension;
+- findings by severity;
+- findings by resource.
+
+EVERY ITEM-LEVEL FINDING CARD MUST MAKE THE QUESTION OBVIOUS
+------------------------------------------------------------
+Use generous whitespace.
+
+Required order:
+1. Finding title + severity.
+2. Small metadata: item ID, section, resource, I-can.
+3. BLANK SPACE.
+4. Clearly labeled block: QUESTION BEING REVIEWED.
+5. Exact student prompt in larger readable type.
+6. Choices, if any.
+7. Actual figure/table/diagram, if any, at readable size.
+8. Expandable answer + solution/evidence details.
+9. BLANK SPACE.
+10. Clearly labeled block: AUDIT FINDING.
+11. Failed dimension(s), concise why, concrete evidence, and suggested repair direction.
+
+The question block must be visually separated from the finding explanation so the teacher never has to guess which text is the student question.
+
+REVIEW PAGE STYLE
+-----------------
+Use the packaged 5_bank_review_base.css as the starting visual language. It is the teacher-approved Bank inspection style.
+
+Create a self-contained audit stylesheet inside the final Bank:
+  unitN_audit_review.css
+
+Start from the supplied Bank CSS and append only the audit-specific styles needed for:
+- audit summary counts;
+- Dimension / Resource / Severity headings;
+- clear question-review blocks;
+- severity badges;
+- finding cards;
+- whitespace and readability.
+
+Do not overwrite the course repository css/bank.css automatically.
+The normal Bank pages should continue to use the current course CSS contract. The audit review page may link its local unitN_audit_review.css so it remains readable even when opened directly from the materialized unitN/ folder.
+
+FINDINGS DATA
+-------------
+Create:
+  unitN_audit_findings.json
+
+Each finding should include at minimum:
+- finding_id;
+- item_id or form/group identifier;
+- section;
+- resource;
+- i_can_id when applicable;
+- dimension;
+- severity: HIGH / MEDIUM / LOW;
+- why;
+- evidence;
+- suggested_repair;
+- related_item_ids when applicable.
+
+Also create:
+  unitN_bank_audit.json
+
+This is the complete machine-readable final audit summary, including:
+- total item count;
+- per-dimension PASS/FAIL/N/A counts;
+- items with findings;
+- finding counts by resource/severity;
+- integrity hard-gate results;
+- informational downstream notes such as Summative answer-letter scrambling.
+
+MATERIALIZATION RELEASE RULE
+----------------------------
+Separate TECHNICAL INTEGRITY from QUESTION REVIEW FINDINGS.
+
+Stage 3E must FAIL CLOSED and return no deployable Bank if any technical integrity hard gate fails, including:
+- missing/duplicate mapped slots;
+- broken canonical IDs;
+- missing required core data files;
+- broken mapping references;
+- missing referenced figure files;
+- invalid JSON/CSV required for downstream builders;
+- views built from a different item inventory;
+- current finalizer structural hard failure.
+
+Question-quality findings DO NOT by themselves block materialization. They are preserved in the review page/data for later artifact-level inspection and repair.
+
+Final materialization status should therefore be one of:
+- MATERIALIZED_PASS: technical integrity passes and no question findings remain;
+- MATERIALIZED_WITH_FINDINGS: technical integrity passes and one or more question review findings remain.
+
+Both statuses are deployable Bank states. The review page makes the remaining findings visible to the teacher.
+
+PROVENANCE TO PRESERVE INSIDE FINAL unitN/
+------------------------------------------
+The final Bank must preserve the useful build history so the temporary checkpoint ZIPs are no longer needed later.
+
+At minimum, include inside unitN/:
+- unitN_bank_map.json extracted from the audited map package;
+- unitN_bank_map_audit.json containing the map-audit result/summary;
+- unitN_bank_audit.json;
+- unitN_audit_findings.json;
+- unitN_audit_review.html;
+- unitN_audit_review.css;
+- unitN_question_design_map.json;
+- STAGE_3A_HANDOFF.json;
+- STAGE_3B_HANDOFF.json;
+- STAGE_3C_HANDOFF.json;
+- STAGE_3D_HANDOFF.json;
+- STAGE_3E_HANDOFF.json;
+- STAGE_3E_REPORT.txt.
+
+Preserve other useful Stage reports/provenance when present and harmless. Do not preserve NOT_DEPLOYABLE marker files in the final materialized Bank.
+
+FINAL MATERIALIZED BANK CONTRACT
+--------------------------------
+Return ONE ZIP named:
+  unitN.zip
+
+ZIP top level must be exactly:
+  unitN/
+
+The unitN/ folder must be a complete materialized Bank suitable for replacing the current deployed <course>/banks/unitN/ folder.
+
+Required core contents include:
+- unitN_bank_data.json;
+- unitN.html;
+- unitN_resources.html;
+- unitN_review.html;
+- unitN_audit_review.html;
+- unitN_audit_review.css;
+- unitN_question_design_map.json;
+- unitN_mapping.csv;
+- unitN_i_can_map.csv;
+- unitN_evidence_map.csv;
+- unitN_summative_source_map.csv;
+- unitN_downstream_manifest.json;
+- figures/ containing every referenced figure;
+- generate_graphs.py;
+- ~finalize_bank.py;
+- preserved map/audit/provenance files listed above.
+
+Teacher-facing Bank pages must include a top navigation link to Audit Review alongside the normal Bank views.
+
+Do not return a sparse patch. Do not return only changed files. The ZIP must contain the complete unitN/ folder.
+
+STAGE_3E_HANDOFF.json REQUIRED FIELDS
+-------------------------------------
+At minimum:
+{
+  "schema": "curriculum-bank-build-stage/3e-1.0",
+  "course": "...",
+  "unit": N,
+  "stage": "3E",
+  "status": "PASS",
+  "deployable": true,
+  "materialization_status": "MATERIALIZED_PASS or MATERIALIZED_WITH_FINDINGS",
+  "audited_map_filename": "unitN_bank_map_audited.zip",
+  "audited_map_sha256": "...",
+  "source_stage_filename": "unitN_bank_3d.zip",
+  "source_stage_sha256": "...",
+  "canonical_item_count": 0,
+  "items_all_pass": 0,
+  "items_with_findings": 0,
+  "finding_count": 0,
+  "findings_by_dimension": {},
+  "findings_by_resource": {},
+  "findings_by_severity": {},
+  "technical_integrity_pass": true,
+  "figure_count": 0,
+  "output_filename": "unitN.zip"
+}
+
+FINAL QA ORDER
+--------------
+1. Read Philosophy completely.
+2. Read this PM and all current authorities.
+3. Validate audited map and Stage 3D hard gates.
+4. Confirm one complete canonical item inventory exists.
+5. Reread Philosophy completely.
+6. Independently audit every canonical question across the seven dimensions.
+7. Audit group/form relationships where needed for parallel/security checks.
+8. Run technical integrity and mapping checks.
+9. Run current Framework finalizer / structural QA.
+10. Write findings JSON and full audit JSON.
+11. Build the teacher Audit Review page and local audit CSS.
+12. Copy map/map-audit/stage provenance into unitN/.
+13. Remove all NOT_DEPLOYABLE stage markers from final output.
+14. Rebuild final Bank views/manifests from the unchanged canonical inventory plus audit metadata.
+15. Verify every referenced figure exists.
+16. Verify top navigation includes Audit Review.
+17. Write Stage 3E handoff/report.
+18. Package complete unitN/ as unitN.zip.
+19. Reopen the ZIP and verify the required complete-folder contract.
+
+DELIVERY / TEACHER ACTION
+-------------------------
+Return ONE ZIP named:
+  unitN.zip
+
+Teacher action:
+1. Save/download unitN.zip.
+2. Unzip it.
+3. Replace the deployed <course>/banks/unitN/ folder with the complete unitN/ folder from the ZIP.
+4. Open unitN/unitN.html and unitN/unitN_audit_review.html to verify the materialized Bank.
+
+CHECKPOINT CLEANUP REMINDER
+---------------------------
+After the teacher verifies the materialized unitN/ folder, remind them they may manually delete the temporary Unit build ZIPs from <course>/banks/:
+- unitN_bank_map.zip
+- unitN_bank_map_audited.zip
+- unitN_bank_3a_seeds.zip
+- unitN_bank_3b_instructional.zip
+- unitN_bank_3c.zip
+- unitN_bank_3d.zip
+
+Do NOT attempt automatic deletion. The permanent map/audit/provenance records needed later are now stored inside unitN/.
+
+FINAL CHAT SUMMARY
+------------------
+Report concisely:
+- canonical item count;
+- technical integrity PASS/FAIL;
+- materialization status;
+- items all-pass / items with findings;
+- finding counts by dimension/severity/resource;
+- figure count;
+- exact output filename and replacement instruction;
+- explicit reminder that after verifying unitN/, the teacher may manually delete all temporary Unit map/stage ZIPs listed above;
+- NEXT: build downstream Unit artifacts from the materialized Bank.
