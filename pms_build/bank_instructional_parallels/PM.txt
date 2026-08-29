@@ -1,15 +1,14 @@
-BUILD BANK PRACTICE FAMILIES - PORTABLE MEMORY v1.0 - STEP 3B BANK-V2
-====================================================================
+BUILD BANK PRACTICE FAMILIES — PORTABLE MEMORY v1.1 — STEP 3B BANK-V2
+============================================================================
 
 STATUS: CURRENT BANK-V2 PILOT PM
-ROLE: Author the complete canonical Practice family layer directly into an accepted modular Bank-v2 build.
+ROLE: Author the complete canonical Practice family layer into the existing modular Bank-v2 build and return a complete current Unit Bank snapshot.
 
-STARTUP - HARD
+STARTUP — HARD
 --------------
 Read the current Curriculum Philosophy and Runtime Contract.
 Resolve required authorities through the pinned manifests.
 Fetch declared resources directly.
-
 
 TOOL ROUTING GATE — HARD
 ------------------------
@@ -20,28 +19,34 @@ For this Bank job:
 - repository search is forbidden for any authority/resource whose repo/path is already declared.
 
 Do NOT invoke a browser/web-search tool or public-web fetch for source discovery, source verification, freshness checking,
-examples, question writing, supplementation, or replacement curriculum content. Resolve exact paths through manifests and
-fetch them directly from the pinned GitHub/course snapshot. User-supplied current attachments may also be read when the
-request explicitly makes them inputs.
+examples, question writing, supplementation, or replacement curriculum content.
 
-If a required source cannot be obtained through the declared direct route, STOP and report the exact missing repo/path or
-manifest entry. Do not search around the failure. Outside research requires an explicit teacher request in the current job;
-Framework/profile wording alone does not authorize it.
+Use direct pinned GitHub/course fetches only for declared curriculum authorities and canonical Bank resources.
+If a required declared source cannot be fetched directly, FAIL CLOSED and report the exact missing repo/path/resource.
+Do not search around the failure.
+
+Outside research is permitted only when the teacher explicitly requests outside research in the current job.
 
 GENERIC RUN COMMAND
 -------------------
 Carefully read PM and Run.
 
-"Run" means complete this entire Unit phase, author every mapped Practice family, validate the family contracts and seed
-content, update the real modular Bank files, package only new/changed repo-relative files, reopen the package, and return it
-in the same response.
+“Run” means:
+1. complete the entire Unit 3B phase;
+2. author every mapped Practice family;
+3. validate family contracts, seed content, answers, solutions, representations, and routing;
+4. update the real modular Bank;
+5. assemble a COMPLETE CURRENT COPY of `unitN/`, including preserved 3A content plus new 3B content;
+6. package exactly that complete `unitN/` folder in one ZIP;
+7. reopen/verify the ZIP;
+8. return it in the same response.
 
 PURPOSE
 -------
 Step 3B authors the canonical nonsecure Practice family seeds declared by `practice_map.json`.
 
-It does NOT author Practice Set 1, 2, 3, or Extra Practice as finished worksheets. Those downstream artifacts are
-deterministic selections and controlled instances of these canonical families.
+It does NOT author Practice Set 1, Practice Set 2, Practice Set 3, or Extra Practice as finished worksheets.
+Those downstream artifacts are deterministic selections and controlled instances of these canonical families.
 
 Bank-v2 sequence:
   2.5 Bank Map
@@ -60,9 +65,10 @@ Build one Unit at a time.
 Author ONLY every `family_seed` record declared in:
   `banks/unitN_bank_map/practice_map.json`
 
-Preserve all existing 3A files unchanged except the two routing/front-door files that 3B must update:
-  `banks/unitN/BANK_MANIFEST.json`
-  `banks/unitN/ITEM_INDEX.json`
+Preserve all existing 3A canonical files unchanged except:
+- `banks/unitN/BANK_MANIFEST.json`
+- `banks/unitN/ITEM_INDEX.json`
+which 3B must update.
 
 Do NOT author or modify:
 - Notes/WTC/Example/YTI exact content;
@@ -73,7 +79,7 @@ Do NOT author or modify:
 - downstream Practice worksheets or answer keys;
 - downstream Notes, Activities, Exit Tickets, or Summatives.
 
-The course Bank profile owns counts and composition. Do not hard-code Physics inventory into another course.
+The course Bank profile owns counts and composition.
 For the current Physics Unit 1 pilot, the accepted map contains 30 Practice families per section x 5 sections = 150 families.
 
 AUTHORITY ORDER
@@ -81,159 +87,159 @@ AUTHORITY ORDER
 1. Current explicit teacher instruction for this job.
 2. Current Curriculum Philosophy.
 3. Current System Runtime Contract.
-4. Current course Framework + ORIGINAL Unit Assessment Plan.
-5. Current Framework/course manifest-declared Bank profile and required course runtime files.
+4. Current course Framework, including the authoritative Unit Assessment Plan.
+5. Current Framework/course-manifest Bank profile and required course runtime files.
 6. Accepted Unit Bank-v2 map (`banks/unitN_bank_map/`).
-7. Current `_question_structure/` authority.
+7. Current Question Structure authority.
 8. Existing canonical 3A Bank front door (`banks/unitN/BANK_MANIFEST.json` + `ITEM_INDEX.json`).
-9. This PM for authoring and storage procedure.
+9. This PM for authoring, QA, storage, and packaging procedure.
 
-PINNING / DIRECT FETCH - HARD
+PINNING / DIRECT FETCH — HARD
 -----------------------------
-At job start, pin the memories repository commit and course repository commit once. Do not mix later commits into the run.
+At job start, pin the memories repository commit and course repository commit once.
+Do not mix later commits into the run.
 
 Read the current Bank front door first:
   `banks/unitN/BANK_MANIFEST.json`
+  `banks/unitN/ITEM_INDEX.json`
 
-Then resolve the same accepted Bank Map through:
+Resolve the accepted Bank Map through:
   `banks/unitN_bank_map/MAP_MANIFEST.json`
 
 Fetch only the Practice slice required by this phase:
   `practice_map.json`
 
-Do not load Exit or Summative map slices merely because they exist.
-Fetch existing 3A section files only when needed for exposed-content awareness or to verify Bank routing; do not aggregate the
-whole Bank into one giant object.
+Do not load Exit or Summative slices merely because they exist.
+Fetch existing 3A section files only when needed to verify preservation/routing.
+Do not aggregate the whole Bank into one giant content object.
 
 3A / MAP HARD GATE
 ------------------
 Before authoring, verify:
 - requested course and Unit are unambiguous;
 - `banks/unitN/BANK_MANIFEST.json` exists;
-- Bank status is BUILDING and `ready_for_downstream = false`;
+- Bank status is BUILDING;
+- `ready_for_downstream = false`;
 - completed phases contain `3A_instructional_core`;
 - next/pending phase permits `3B_practice_families`;
-- Bank manifest points to the same accepted `banks/unitN_bank_map/MAP_MANIFEST.json` identity/fingerprint;
-- Practice slice path/fingerprint/count agrees with the map manifest;
+- Bank manifest points to the same accepted `banks/unitN_bank_map/MAP_MANIFEST.json`;
+- Practice slice fingerprint/count agrees with MAP_MANIFEST;
 - every consumed record uses `record_mode = family_seed` and `destination = practice`;
 - all family IDs are unique;
-- exact I-can IDs/text resolve against the pinned Framework / ORIGINAL Assessment Plan;
-- every question structure resolves through current `_question_structure/` or a declared course extension;
-- inventory, family-mix ranges, and deterministic-selection constraints are internally feasible.
+- exact I-can IDs/text resolve against the pinned Framework/Assessment Plan;
+- every question structure resolves through the current Question Structure authority or declared course extension;
+- inventory, family-mix ranges, and deterministic-selection constraints are feasible.
 
-If a required authority or family record is materially missing/contradictory, STOP. Do not rebuild the Bank Map inside 3B.
+If a required authority or family record is materially missing/contradictory, STOP.
+Do not rebuild the Bank Map inside 3B.
 
-MAP CONTRACT NORMALIZATION - HARD
+MAP CONTRACT NORMALIZATION — HARD
 ---------------------------------
-The current pilot map may use semantic lock names that are aliases of explicit map fields. 3B must materialize a fully
-explicit canonical family contract rather than copying unresolved lock tokens forward.
+The current pilot map may use semantic lock names that alias explicit map fields.
+3B must materialize a fully explicit canonical family contract.
 
-Known pilot aliases may be normalized only when their source is unambiguous:
+Known pilot aliases may be normalized only when unambiguous:
 - `question_structure` -> `question_structure_id`;
 - `approximate_difficulty` -> `difficulty_intent`;
-- `representation_job` -> the explicit representation contract formed from `representation_mode`, `representation_need`,
-  and any `representation_variation_rule`;
-- `intended_reasoning` -> materialize an explicit `intended_reasoning` field derived narrowly from the mapped evidence job
-  plus question structure. It must not change the evidence job or add a new instructional target.
+- `representation_job` -> explicit representation contract from representation mode/need/variation rule;
+- `intended_reasoning` -> explicit field derived narrowly from mapped evidence job + question structure.
 
-Every token named by `locked_elements`, `allowed_variations`, `required_variations`, and `forbidden_variations` must resolve
-to an explicit canonical contract property or a declared transformation rule. Unknown/unresolvable tokens are a hard stop.
-Record any alias normalization in `provenance/3b_build.json`; do not mutate the Bank Map itself.
+Every token named by locked/allowed/required/forbidden variation rules must resolve to an explicit canonical property or transformation rule.
+Unknown/unresolvable tokens are a hard stop.
+Record alias normalization in `provenance/3b_build.json`; do not mutate the Bank Map.
 
-COURSE-AWARE AUTHORING - HARD
+COURSE-AWARE AUTHORING — HARD
 -----------------------------
-This PM is universal. The current course Framework/profile owns disciplinary behavior and favored family patterns.
+This PM is universal. The current course Framework/profile owns disciplinary behavior.
 
 For Physics:
-- begin quantitative work with a concrete physical situation, not naked variable assignments;
-- treat equations as relationships describing phenomena;
+- quantitative work begins with a concrete physical situation, not naked variable assignments;
+- equations are relationships describing phenomena;
 - preserve conceptual/model reasoning rather than empty algebra shells;
 - use real graphs, FBDs, vectors, tables, motion diagrams, models, or data when they carry evidence;
-- keep wording concise by default;
-- use physically plausible data and units.
+- wording is concise by default;
+- data and units must be physically plausible.
 
-For Algebra, Calculus, or another course, use that course's declared family patterns instead. Course-specific structures
-such as Diamond Problems belong to the course Framework/profile, not to this universal PM.
+For other courses, use their declared course-specific family patterns.
 
 CANONICAL PRACTICE FAMILY CONTRACT
 ----------------------------------
-Each map family becomes ONE canonical family record. At minimum preserve/materialize:
+Each map family becomes ONE canonical family record containing:
 
 IDENTITY / ROUTING
-- `family_id` exactly equal to map `family_id` / `record_id`;
-- `record_mode = family_seed`;
-- `destination = practice`;
-- `section`;
-- `family_type`;
-- `primary_i_can_id` + exact `primary_i_can`;
-- `supporting_i_can_ids` when mapped;
-- `selection_tags` and any mapped deterministic-selection metadata needed downstream.
+- family_id exactly equal to map family_id/record_id;
+- record_mode = family_seed;
+- destination = practice;
+- section;
+- family_type;
+- primary_i_can_id + exact primary_i_can;
+- supporting_i_can_ids when mapped;
+- selection_tags and mapped deterministic-selection metadata.
 
 EVIDENCE DESIGN
-- `evidence_job`;
-- `intended_reasoning` - explicit, concise, and faithful to the mapped evidence job;
-- `question_structure_id`;
-- `response_mode`;
-- `representation_mode`;
-- `representation_need`;
-- `difficulty_intent`;
-- `security_level`;
-- `wording_profile` when mapped.
+- evidence_job;
+- explicit intended_reasoning;
+- question_structure_id;
+- response_mode;
+- representation_mode;
+- representation_need;
+- difficulty_intent;
+- security_level;
+- wording_profile when mapped.
 
 FULLY AUTHORED CANONICAL SEED
-- `canonical_seed.student_text`;
-- `canonical_seed.student_html`;
-- `canonical_seed.choices` when applicable;
-- `canonical_seed.answer`;
-- `canonical_seed.solution_text`;
-- `canonical_seed.solution_html`;
-- `canonical_seed.figure_refs` for actual purpose-built figures used by the seed;
-- actual embedded table/data/model content when that representation is part of the item rather than an external figure.
+- canonical_seed.student_text;
+- canonical_seed.student_html;
+- canonical_seed.choices when applicable;
+- canonical_seed.answer;
+- canonical_seed.solution_text;
+- canonical_seed.solution_html;
+- canonical_seed.figure_refs;
+- actual embedded table/data/model content when part of the item.
 
 TRANSFORMATION CONTRACT
-- `locked_elements` as explicit key/value locks, not unresolved labels;
-- `allowed_variations` as explicit permitted axes/rules;
-- `required_variations` as explicit change requirements for a sibling instance;
-- `forbidden_variations` as explicit prohibited changes;
-- `representation_variation_rule` when mapped;
-- `source_map_record_id`;
-- `source_basis` when mapped/useful.
+- locked_elements as explicit locks;
+- allowed_variations as explicit permitted axes/rules;
+- required_variations as explicit change requirements;
+- forbidden_variations as explicit prohibited changes;
+- representation_variation_rule when mapped;
+- source_map_record_id;
+- source_basis when useful.
 
-Do NOT add `audit_status`, `NEEDS AUDIT`, `KEEP`, `CLEAN`, or `REBUILD` fields.
-Do not expose family IDs, map language, or transformation metadata in student-facing prompt text.
+Do NOT add audit_status / NEEDS AUDIT / KEEP / CLEAN / REBUILD fields.
+Do not expose family IDs, map language, or transformation metadata in student-facing content.
 
-SEED QUALITY - HARD
+SEED QUALITY — HARD
 -------------------
-A family seed is not a vague template and not "write another question like this."
-It is one complete, classroom-usable canonical question with a correct answer and full solution that demonstrates exactly
-what the family means.
+A family seed is not a vague template and not “write another question like this.”
+It is one complete, classroom-usable canonical question with correct answer and full solution.
 
 Each seed must:
 - perform the mapped evidence job;
-- match the mapped response and question structure;
-- represent the intended approximate difficulty;
+- match the mapped response mode and question structure;
+- preserve the intended approximate difficulty;
 - include the actual representation when evidence depends on one;
 - be independently solved/checked after final wording/data are fixed;
-- be sufficiently complete that a downstream builder can instantiate valid siblings using only the family contract.
+- be complete enough for downstream controlled sibling generation.
 
-FAMILY VARIATION QUALITY - HARD
+FAMILY VARIATION QUALITY — HARD
 -------------------------------
 Allowed variation is controlled, not random.
 
-A valid sibling must preserve every locked property and satisfy every required variation. It may change only allowed axes.
-A variant is invalid when it merely swaps names/objects, changes wording profile only, scrambles choice order only, or changes
-numbers when the family contract requires a deeper evidence/stimulus/representation change.
+A valid sibling:
+- preserves every locked property;
+- satisfies every required variation;
+- changes only allowed axes.
 
-Do not over-constrain legitimate variety. Different course families may validly vary vocabulary direction, situation,
-evidence set, misconception target, values/units, unknown, representation values/type, dependency path, or wording profile
-when the map permits them.
+A variant is invalid when it relies only on prohibited surface changes such as names/objects, wording profile, choice order, or number changes when the family requires deeper semantic/stimulus variation.
 
 PRACTICE POOL / DOWNSTREAM SELECTION
 ------------------------------------
-Author the complete mapped family pool, not just the current feasibility witness or one selected set.
+Author the complete mapped family pool, not only one selected set or feasibility witness.
 
-For the Physics pilot this means all 30 families per section.
-The map's deterministic selection rules remain metadata/authority for downstream Practice builders:
+For the Physics pilot: all 30 families per section.
+
+The map owns downstream deterministic selection:
 - hard coverage/composition constraints first;
 - deterministic tie-break second;
 - no uncontrolled randomness;
@@ -243,40 +249,42 @@ The map's deterministic selection rules remain metadata/authority for downstream
 
 REPRESENTATIONS / FIGURES
 -------------------------
-If a canonical seed requires a graph, diagram, FBD, vector, table, model, or other representation, the actual student-safe
-representation must exist.
+If a canonical seed requires a graph, diagram, FBD, vector, table, model, or other representation, the actual student-safe representation must exist.
 
 Purpose-built Bank figures belong under:
   `banks/unitN/figures/`
 
-Use stable filenames tied to family IDs. Every figure reference must resolve. No orphan generated figures.
-Respect any manifest-declared `reference_in_place` rule for shared toolkit assets.
+Use stable filenames tied to family IDs.
+Every figure reference must resolve.
+No orphan generated figures.
+Respect any declared `reference_in_place` rule for shared toolkit assets.
 
-MODULAR CANONICAL STORAGE - HARD
+MODULAR CANONICAL STORAGE — HARD
 --------------------------------
-Do NOT create a giant Bank JSON and do NOT duplicate 3A item bodies.
+Do NOT create a giant Bank JSON.
 
-3B creates/updates only:
+3B creates/updates:
   `banks/unitN/BANK_MANIFEST.json`
   `banks/unitN/ITEM_INDEX.json`
   `banks/unitN/practice/section_<section-id>.json`
-  `banks/unitN/figures/...` only for new Practice seed figures actually needed
+  `banks/unitN/figures/...` only when actually needed
   `banks/unitN/provenance/3b_build.json`
   `banks/unitN/provenance/3b_report.txt`
 
+Existing 3A files remain canonical and unchanged.
+
 Each Practice section file contains only that section's canonical family records in deterministic family order.
-Example: `banks/unit1/practice/section_1_1.json`.
 
 ITEM_INDEX UPDATE
 -----------------
 Append one compact route for every new Practice family:
-- `item_id` / family ID;
-- `record_mode = family_seed`;
-- `destination = practice`;
-- `section`;
+- family ID;
+- record_mode = family_seed;
+- destination = practice;
+- section;
 - exact canonical file path.
 
-Do not add prompt/solution bodies to ITEM_INDEX.json.
+Do not add prompt/solution bodies to ITEM_INDEX.
 Preserve every existing 3A route exactly.
 
 BANK_MANIFEST UPDATE
@@ -285,67 +293,101 @@ After successful 3B:
 - keep `status = BUILDING`;
 - keep `ready_for_downstream = false`;
 - completed phases = 3A + `3B_practice_families`;
-- pending phases = only remaining declared Bank-v2 authoring phase(s), normally `3C_assessment_families`;
+- pending phases = remaining Bank-v2 authoring phase(s), normally `3C_assessment_families`;
 - next phase = `3C_assessment_families`;
 - add canonical Practice section paths;
-- update counts by destination and total without duplicating item bodies;
-- preserve the original accepted Bank-map/profile identity.
+- update destination/total counts;
+- preserve accepted Bank-map/profile identity.
 
 AUTHORING ORDER
 ---------------
 1. Read Philosophy + Runtime Contract.
 2. Pin memories/course commits.
-3. Resolve Framework, ORIGINAL Assessment Plan, Bank profile, and `_question_structure/` directly.
-4. Read `banks/unitN/BANK_MANIFEST.json` and verify 3A state.
-5. Read accepted `MAP_MANIFEST.json`, then `practice_map.json` only.
-6. Reconcile family count, mix, I-can coverage, selection feasibility, and map contract aliases.
-7. Author all canonical Practice seeds section by section and family by family.
+3. Resolve Framework/Assessment Plan, Bank profile, and Question Structure directly.
+4. Read BANK_MANIFEST + ITEM_INDEX and verify 3A state.
+5. Read MAP_MANIFEST, then `practice_map.json` only.
+6. Reconcile family count, mix, I-can coverage, selection feasibility, and aliases.
+7. Author all Practice seeds section by section and family by family.
 8. Independently solve/check every seed after final prompt/data are fixed.
 9. Materialize explicit transformation contracts and validate every lock/variation rule.
 10. Generate/verify required representations.
 11. Write section-sized Practice files.
 12. Append Practice routes to ITEM_INDEX; update BANK_MANIFEST.
-13. Write compact 3B provenance/report.
+13. Write 3B provenance/report.
 14. Run final 3B QA.
-15. Package only new/changed repo-relative `banks/unitN/` files and verify the package.
+15. Assemble the COMPLETE CURRENT `unitN/` folder containing preserved 3A content plus new/updated 3B content.
+16. Package exactly that complete `unitN/` folder and verify the ZIP.
 
-3B QA - HARD GATES
+3B QA — HARD GATES
 ------------------
 Before returning PASS, verify:
-- no browser/web-search or public-web fetch was invoked during this Bank job;
+- no browser/web-search or public-web fetch was invoked;
 - no repository search was used to locate a source with an already-declared path;
 - every mapped Practice family is authored exactly once;
 - no Exit/Summative family is authored;
-- no existing 3A canonical content is altered;
+- all existing 3A canonical files/content are preserved;
 - pool counts/mixes match the accepted map/profile;
 - every family retains exact mapped I-can, evidence job, structure, response mode, security, and difficulty intent;
 - every canonical seed is complete, classroom-usable, and independently solved;
-- every representation-bearing seed includes/resolves its actual evidence-bearing representation;
-- every lock/allowed/required/forbidden rule resolves to an explicit canonical contract property;
-- known alias normalization is documented and no unknown lock token survives;
+- every representation-bearing seed resolves its actual evidence-bearing representation;
+- every lock/allowed/required/forbidden rule resolves explicitly;
+- alias normalization is documented and no unknown lock token survives;
 - required variation cannot be satisfied by prohibited surface-only changes;
-- quantitative Physics seeds use concrete physically plausible situations rather than naked variable assignment;
+- quantitative Physics seeds use concrete physically plausible situations;
 - all figure references resolve and no orphan new figures exist;
 - no placeholders or audit-status fields exist;
 - every new ITEM_INDEX route resolves to the correct Practice section file;
-- existing 3A routes remain unchanged;
+- all existing 3A routes remain unchanged;
 - BANK_MANIFEST counts equal actual authored records;
 - BANK_MANIFEST remains BUILDING/not-ready and points next to 3C;
-- output package contains only new/changed repo-relative Bank files and no copy of the Bank Map.
+- the output snapshot contains the complete current Unit Bank after 3B;
+- the ZIP top level is exactly one folder named `unitN/`;
+- reopening the ZIP shows the expected complete `unitN/` tree.
 
-DELIVERY CONTRACT
------------------
-Return one ZIP named:
-  `<course>_uN_bank_3b_practice_families.zip`
+FULL-SNAPSHOT DELIVERY CONTRACT — HARD
+--------------------------------------
+Return ONE ZIP named:
+  `unitN.zip`
 
-The ZIP preserves course-repository-relative paths beginning with:
-  `banks/unitN/`
+The ZIP top level must be exactly:
+  `unitN/`
 
-Teacher repository action:
-Extract/merge the ZIP into the ROOT of the current course repository. Replace only supplied files. Do not replace the whole
-`banks/` folder and do not retain the handoff ZIP as canonical source after extraction/sync.
+The ZIP must contain the COMPLETE CURRENT canonical Unit Bank after 3B, not only newly changed files.
+
+It should include at least:
+  unitN/
+    BANK_MANIFEST.json
+    ITEM_INDEX.json
+    notes/
+    cyu/
+    warmups/
+    practice/
+    provenance/
+    figures/          only if canonical figures exist
+
+Preserve every current 3A file in the snapshot.
+Add the new 3B files.
+Use the updated BANK_MANIFEST and ITEM_INDEX.
+
+Do NOT include:
+- `banks/` as an extra wrapper folder;
+- `unitN_bank_map/`;
+- PM files;
+- staging files;
+- the handoff ZIP inside itself.
+
+TEACHER REPOSITORY ACTION
+-------------------------
+1. Download `unitN.zip` to the staging folder.
+2. Unzip it.
+3. Find the single `unitN/` folder.
+4. Drag `unitN/` into the course repository's `banks/` folder.
+5. When Finder asks, choose Replace.
+6. Sync the course repository.
+
+The ZIP is a transfer artifact only.
+Canonical GitHub storage remains the expanded `banks/unitN/` folder.
 
 NEXT PHASE
 ----------
-3C reads the same modular Bank front door, verifies 3A + 3B completion, then authors only secure Exit and Summative family
-seeds from `exit_map.json` and `summative_map.json`.
+3C reads the same modular Bank front door, verifies 3A + 3B completion, then authors only secure Exit and Summative family seeds.
