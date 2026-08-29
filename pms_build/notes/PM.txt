@@ -70,10 +70,11 @@ Before writing:
 6. Resolve `course_resources.physics_textbook` from `frameworks/Physics/MANIFEST.json`. Verify the map-declared textbook repo matches that resource declaration, then read only the map-declared section files at the map's pinned textbook commit.
 7. Load the current Unit Bank structured data ONCE and build an exact Bank-ID lookup.
 8. Resolve `course_resources.physics_notes_image_toolkit` and load its catalog ONCE; validate only mapped images.
-9. Read current Notes CSS references:
-   - `pms_build/notes/references/css/base.css`
-   - `pms_build/notes/references/css/notes.css`
-10. Use the established/current Notes HTML shell/template.
+9. Read the canonical Notes CSS directly from the SAME pinned Physics course snapshot:
+   - `css/base.css`
+   - `css/notes.css`
+   These course files are the production CSS authority; do not require duplicate CSS snapshots under `pms_build/notes/references/`.
+10. Use the established/current Notes HTML shell/template and the classes supported by those pinned course CSS files.
 
 Do not begin from an old Notes build when the current map/textbook sources are available.
 
@@ -417,9 +418,11 @@ Normal filenames:
 - u[U]_[S]_notes.html
 - u[U]_[S]_notes_teacher.html
 
-Read current CSS reference snapshot:
-- pms_build/notes/references/css/base.css
-- pms_build/notes/references/css/notes.css
+Read the canonical CSS from the pinned Physics course repo:
+- css/base.css
+- css/notes.css
+
+Do not require or recreate duplicate CSS reference snapshots inside `memories/pms_build/notes/`.
 
 Production HTML links exactly, in order:
 <link rel="stylesheet" href="../../css/base.css">
