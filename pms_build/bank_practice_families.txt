@@ -4,57 +4,38 @@ BUILD BANK PRACTICE FAMILIES — STEP 3B / BANK-V2
 STATUS: CURRENT
 ROLE: Author the complete canonical Practice family layer into the existing modular Unit Bank.
 
-STARTUP — HARD
---------------
-Read the current Curriculum Philosophy and Runtime Contract.
-Resolve required authorities through the pinned manifests.
-Fetch declared resources directly.
-
-NO-WEB TOOL POLICY — HARD
--------------------------
-No web search, public-web fetch, File Library search, prior-stage ZIP discovery, or repository search for declared authorities.
-Outside research is allowed only when explicitly requested by the teacher in the current job.
-Missing declared source -> FAIL CLOSED with exact repo/path/resource.
-
-INPUT / GATE
-------------
-Read:
+STARTUP / INPUT
+---------------
+Read current Philosophy, Runtime, Question Structure, Framework/Assessment Plan, Bank-v2 profile, Tools manifest, and:
   banks/unitN/BANK_MANIFEST.json
   banks/unitN/ITEM_INDEX.json
   banks/unitN_bank_map/MAP_MANIFEST.json
+  banks/unitN_bank_map/unitN_question_design_map.json
   banks/unitN_bank_map/practice_map.json
 
-Require:
-- Bank status BUILDING
-- 3A_instructional_core completed
-- ready_for_downstream = false
-- same accepted Bank Map identity
-- next/pending phase permits 3B_practice_families
-- Practice map counts/fingerprint resolve
-- every consumed record is family_seed + destination practice
-
-Do not search for or load a prior 3A ZIP.
+Require 3A complete, Bank BUILDING, same accepted map/design identity, and 3B permitted.
+No prior ZIP discovery.
 
 PURPOSE
 -------
-Author every mapped canonical Practice family seed.
+Author every mapped Practice family seed.
 Do NOT materialize Practice Set 1/2/3/Extra as canonical Bank inventory.
-Those are downstream deterministic selections/controlled variants.
 
 FAMILY CONTRACT
 ---------------
 Each family contains:
-- family_id exactly equal to mapped ID
+- family_id exactly equal mapped ID
 - record_mode = family_seed
 - destination = practice
 - section
 - family_type
-- primary/supporting I-can IDs/text
+- exact primary/supporting I-cans
 - evidence_job
 - intended_reasoning
 - question_structure_id
 - response_mode
 - representation_mode / representation_need
+- question_design object with design_slot_id + tool/render route
 - difficulty_intent
 - security_level
 - selection_tags
@@ -64,92 +45,96 @@ Each family contains:
   - answer
   - solution_text / solution_html
   - figure_refs
-- explicit locked_elements
-- explicit allowed_variations
-- explicit required_variations
-- explicit forbidden_variations
-- representation_variation_rule when applicable
+- explicit locked/allowed/required/forbidden variation rules
+- representation variation rule
 - source_map_record_id / source_basis
 
-Normalize only unambiguous map aliases.
-Every lock/variation token must resolve to an explicit canonical property/rule.
-
-SEED QUALITY
-------------
 A seed is a complete classroom-usable question, not a template.
-Independently solve/check every seed after final wording/data/choices are fixed.
 
-A downstream sibling must:
-- preserve locked I-can/evidence/structure/reasoning/difficulty;
-- satisfy required variation;
-- vary only allowed axes;
-- preserve required representation behavior.
+QUESTION STRUCTURE / RENDER EXECUTION — HARD
+--------------------------------------------
+Every canonical seed must execute its mapped structure, response mode, representation, and tool route.
 
-Surface-only noun/name changes do not count when deeper variation is required.
+Selected response:
+- complete visible choices;
+- keyed correct answer;
+- plausible task-specific distractors.
 
-COURSE-AWARE AUTHORING
-----------------------
-Use current course Framework/profile.
-For Physics, quantitative work begins with a concrete physical situation; use physically plausible values/units and real evidence-bearing representations.
+Small data table:
+- semantic HTML table;
+- `<table class="values">`;
+- no pipe-delimited pseudo-table.
+
+Graph:
+- resolve/use `graph_tool` when supported;
+- inspect actual render.
+
+Diagram/FBD/vector:
+- approved source/deterministic route only;
+- no crude or physically wrong improvised visual;
+- missing approved route -> fail that item.
+
+Representation-required seeds must visibly contain the representation in student_html.
+
+PHYSICS QUALITY
+---------------
+- concrete physical situations for quantitative work;
+- relevant data only;
+- physically plausible states/units;
+- equations as relationships;
+- real representation use, not decorative metadata;
+- meaningful semantic variation where required;
+- no noun-swap pseudo-variety.
+
+FAMILY FIDELITY
+---------------
+A downstream sibling preserves:
+- exact I-can/evidence job;
+- question structure;
+- intended reasoning;
+- comparable difficulty;
+- required representation behavior;
+- locked elements.
+
+It satisfies required variation using only allowed axes.
+Surface-only name/object changes do not count when deeper variation is required.
 
 STORAGE
 -------
-3B creates/updates:
+Create/update:
   banks/unitN/BANK_MANIFEST.json
   banks/unitN/ITEM_INDEX.json
   banks/unitN/practice/section_<section-id>.json
-  banks/unitN/figures/...                only if needed
+  banks/unitN/figures/... only when needed
   banks/unitN/provenance/3b_build.json
   banks/unitN/provenance/3b_report.txt
 
-Preserve all 3A canonical files/content unchanged.
-
-After successful 3B:
-- status remains BUILDING
-- ready_for_downstream remains false
-- completed = 3A + 3B
-- pending = 3C
-- next_phase = 3C_assessment_families
+Preserve all 3A canonical content unchanged.
 
 QA — HARD
 ---------
 Verify:
-- no prohibited web/search/prior-ZIP behavior;
 - every mapped Practice family authored exactly once;
-- no Exit/Summative family authored;
-- all 3A files/routes preserved;
+- each design_slot resolves;
 - pool counts/mixes match map/profile;
-- every seed is complete and independently solved;
-- all locks/allowed/required/forbidden rules resolve;
-- required variation cannot be satisfied by prohibited surface-only changes;
-- representation-bearing seeds contain actual evidence-bearing representations;
-- Physics quantitative seeds use natural physical situations;
+- seed executes mapped structure/response/representation/tool;
+- selected-response choices complete/visible;
+- small tables semantic/compact;
+- graph_tool used when supported;
+- required diagrams/visuals valid and readable;
+- every seed independently solved against final representation;
+- locks/variation rules resolvable;
+- required variation cannot be satisfied by prohibited surface-only change;
 - all figure refs resolve;
-- no placeholders/audit-status fields;
-- ITEM_INDEX/BANK_MANIFEST are correct.
+- ITEM_INDEX/BANK_MANIFEST correct.
 
-FULL-SNAPSHOT DELIVERY — HARD
------------------------------
+Render-level failure = Bank failure.
+
+FULL-SNAPSHOT DELIVERY
+----------------------
 Return ONE ZIP:
-  `unitN.zip`
+  unitN.zip
 
-ZIP top level:
-  `unitN/`
-
-It must contain the COMPLETE CURRENT Unit Bank after 3B:
-  unitN/
-    BANK_MANIFEST.json
-    ITEM_INDEX.json
-    notes/
-    cyu/
-    warmups/
-    practice/
-    provenance/
-    figures/   only if used
-
-Preserve all 3A files.
-Do not return changed-files-only.
-Do not include `banks/`, `unitN_bank_map/`, PM files, or prior ZIPs.
-
-Teacher action:
-download to staging -> unzip -> drag `unitN/` into course `banks/` -> choose Replace -> sync.
+Complete current Unit Bank after 3B.
+Preserve 3A files.
+Do not include banks/, unitN_bank_map/, PM files, or prior ZIPs.

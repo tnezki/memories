@@ -1,9 +1,10 @@
 {
   "schema": "course-bank-v2-profile/1.0",
+  "profile_version": "v1.1",
   "name": "Conceptual Physics Bank v2 Course Profile",
   "course": "Physics",
   "status": "CURRENT",
-  "role": "Physics-specific Bank-v2 inventory, canonical record modes, family-pool rules, deterministic selection constraints, and disciplinary authoring behavior for Steps 2.5, 3A, 3B, and 3C plus downstream Bank-aware builds. Universal procedure remains PM-owned; universal question structures remain owned by _question_structure/.",
+  "role": "Current Framework-declared Physics Bank-v2 contract for Steps 2A, 3A, 3B, and 3C plus downstream Bank-aware builds. Universal procedure remains PM-owned; universal question structures remain owned by _question_structure/. This profile supersedes legacy Bank-profile behavior retained in older Framework summary text.",
   "compatibility_note": "Bank-v2 is the current Physics Bank architecture. The legacy bank_course_profile.json is deprecated and must not be used for Bank-v2 mapping, authoring, or canonical Bank reads. Prior stage ZIPs are transport artifacts only, never canonical inputs.",
   "canonical_source_routing": {
     "map_front_door": "banks/unitN_bank_map/MAP_MANIFEST.json",
@@ -17,23 +18,28 @@
   "instructional_spine": {
     "hard_rule": "Exact Unit Assessment Plan I-can statements are the atomic planning and routing addresses. Build evidence/family plans from I-cans first; never fill destination counts and attach I-can labels afterward.",
     "question_structure_authority": "current _question_structure/",
-    "course_behavior_authority": "current Physics Framework + this profile"
+    "question_design_schema": "_question_structure/contracts/question_design_schema.json",
+    "tools_registry": "Tools/MANIFEST.json",
+    "course_behavior_authority": "current Physics Framework + this profile",
+    "execution_rule": "question_structure_id, response_mode, representation_mode, evidence_job, and tool route are executable requirements. Metadata agreement without rendered compliance is a FAIL."
   },
   "record_modes": {
-    "exact_content": "Bank authoring stores one exact canonical prompt/answer/solution. Downstream artifacts reproduce that item exactly.",
+    "exact_content": "Bank authoring stores one exact canonical prompt/answer/solution. Downstream artifacts reproduce that item exactly unless a later artifact is explicitly allowed to adapt Bank source material.",
     "family_seed": "Bank authoring stores one complete canonical seed prompt/answer/solution plus an explicit transformation contract. Downstream artifacts may create only validated controlled variants."
   },
   "inventory": {
     "wtc": {
       "record_mode": "exact_content",
       "per_section": 1,
-      "rule": "One coherent multipart FRQ-decomposition routine, normally 3-5 connected parts. May use cross-Unit Physics and does not satisfy current-Unit I-can coverage."
+      "rule": "One difficult coherent multipart FRQ-decomposition routine, normally 3-5 connected labeled parts, built around one shared stimulus/representation. May use prior, current, or future Physics content and does not satisfy current-Unit I-can coverage.",
+      "rigor_hard_gate": "Every WTC must include an actual evidence-bearing representation or rich shared stimulus, at least one interpretation/extraction move, at least one dependency or use of an earlier conclusion, and at least one planning/model-choice/justification move. It is not a loose preview list.",
+      "untaught_content_rule": "When WTC content has not yet been taught, students may be asked to unpack, annotate, interpret, plan, select a relationship, or predict at a structurally accessible level rather than demonstrate mastery of an untaught procedure."
     },
     "example_yti": {
       "record_mode": "exact_content",
       "pairs_per_section": 4,
       "records_per_section": 8,
-      "rule": "Every exact section I-can receives at least one complete Example/YTI pair before any enrichment pair is allocated. Example models; YTI gives a comparable application."
+      "rule": "Every exact section I-can receives at least one complete Example/YTI pair before any enrichment pair is allocated. Example models; YTI gives a comparable application. When a target supports quantitative/model work, do not crowd it out with generic vocabulary filler."
     },
     "practice": {
       "record_mode": "family_seed",
@@ -67,7 +73,7 @@
     "cyu": {
       "record_mode": "exact_content",
       "per_section": 6,
-      "pilot_rule": "Keep six exact canonical CYU items per section. They may intentionally resemble strong Practice families but are authored as exact canonical items and copied downstream."
+      "rule": "Keep six exact canonical CYU items per section. They are concise checks, but they must still execute the mapped question structure and representation. Selected-response CYU must visibly render complete answer choices."
     },
     "warmups": {
       "record_mode": "exact_content",
@@ -119,7 +125,7 @@
             "V3",
             "V4"
           ],
-          "rule": "Map exact family IDs at Step 2.5. V1-V4 are controlled parallel secure instances of this same evidence blueprint."
+          "rule": "Map exact family IDs at Step 2A. V1-V4 are controlled parallel secure instances of this same evidence blueprint."
         },
         "B": {
           "family_count": 20,
@@ -127,7 +133,7 @@
             "V5",
             "V6"
           ],
-          "rule": "Map exact family IDs at Step 2.5. V5-V6 are controlled secure instances of a materially alternate/makeup blueprint."
+          "rule": "Map exact family IDs at Step 2A. V5-V6 are controlled secure instances of a materially alternate/makeup blueprint."
         }
       },
       "blueprint_overlap_rule": "Blueprint A and B may overlap on high-leverage I-cans/families when justified, but Blueprint B must be materially alternate overall in evidence families, contexts, representations, and/or dependency paths. Do not force disjointness if it weakens coverage.",
@@ -140,6 +146,29 @@
       "blooket_questions_when_used": 20,
       "rule": "Treat these as downstream derivatives/selections from nonsecure Practice family content when the course workflow calls for them; do not inflate the canonical Bank-v2 family inventory merely to store game permutations."
     }
+  },
+  "rendering_and_tool_contract": {
+    "selected_response": {
+      "default_choice_count": 4,
+      "hard_rule": "A selected-response record must store and visibly render complete choices in student_html. Missing choices, placeholder choices, duplicate choices, or an unkeyed answer are FAIL."
+    },
+    "small_data_tables": {
+      "html_rule": "Render real semantic HTML tables. For small value/data tables use the existing Base CSS compact class `values` (`<table class=\"values\">`). Do not use pipe-delimited text and do not stretch a tiny table across the page."
+    },
+    "graphs": {
+      "tool_key": "graph_tool",
+      "tool_path_resolved_from": "Tools/MANIFEST.json",
+      "hard_rule": "When the mapped graph is supported by the registered graph tool, use that tool and its styling unchanged. An improvised substitute graph is FAIL.",
+      "qa": "Inspect the actual rendered graph for scale, labels, units, plotted relationship/data, readability, and answer-neutrality."
+    },
+    "diagrams_vectors_fbd": {
+      "source_priority": [
+        "approved Framework/course/source figure",
+        "approved deterministic diagram route"
+      ],
+      "hard_rule": "Do not replace a required diagram/FBD/vector/model with prose. Do not PASS crude, low-resolution, distorted, mislabeled, answer-leaking, or physically incorrect new visuals. If no approved route can produce the required representation, fail closed on that item and report the missing diagram route."
+    },
+    "representation_presence": "If representation_mode requires a graph/table/diagram/vector/model/image, student_html must contain the usable representation. Metadata-only compliance is FAIL."
   },
   "practice_family_contract": {
     "required_fields": [
@@ -199,6 +228,17 @@
     "source_neutrality": "Use only current manifest-/Framework-declared curriculum sources for normal Bank authoring. Do not search File Library, uploads, prior stage ZIPs, old copies, or generic web sources to locate or supplement known Bank authorities. Outside research requires an explicit teacher request in the current job."
   },
   "qa": {
+    "hard_failures": [
+      "mapped question structure not executed by the final prompt",
+      "selected_response without complete visible choices",
+      "required representation absent from student_html",
+      "pipe-delimited/plain-text pseudo-table used as final data table",
+      "supported graph improvised instead of using registered graph_tool",
+      "graph/diagram/table visually unreadable or physically incorrect",
+      "WTC is a loose set of independent preview questions rather than a coherent connected FRQ routine",
+      "answer/solution mismatch",
+      "physical situation implausible or contradictory"
+    ],
     "family_fidelity_dimensions": [
       "same primary I-can",
       "same evidence job",

@@ -2,34 +2,51 @@
   "name": "Conceptual Physics Notes Course Profile",
   "course": "Conceptual Physics",
   "course_family": "science",
-  "profile_version": "v2.0",
+  "profile_version": "v2.1",
   "framework_version": "v6.8",
   "extends": "current Base Notes PM",
-  "role": "Course-specific Notes layer. Follows the universal/Algebra Notes architecture but uses substantially more source-grounded reading, more visual narrative, and more content-specific discussion checkpoints.",
+  "role": "Current Physics-specific Notes contract. It preserves the established Notes HTML/CSS shell while using substantially more source-grounded reading and meaningful visual narrative. This profile supersedes older embedded Framework summary language that required Stop and Discuss after every substantial reading segment.",
   "bank_canonical": {
     "rule": "Finalized Unit Bank owns canonical WTC / Notes Example / Notes YTI wording, values, figures, and solutions.",
-    "pair_rule": "Use the Physics Bank profile: no more than four canonical Example/YTI pairs per section; Base Notes consumes every canonical pair actually present."
+    "pair_rule": "Use the Physics Bank-v2 profile: no more than four canonical Example/YTI pairs per section; Notes consumes every canonical pair actually present.",
+    "display_numbering_rule": "Bank IDs/pair IDs remain hidden provenance. Visible Example/You Try It numbering is assigned from final display order within the section and runs 1, 2, 3... even when Bank pair_number differs."
+  },
+  "source_spine": {
+    "rule": "The Framework-declared Physics textbook is the instructional spine. Notes keep selected textbook explanation in its source order. The normal editorial operation is KEEP, CUT, or LIGHTLY PARAPHRASE/CONDENSE; do not invent a replacement close-reading passage when usable source text exists.",
+    "close_reading_rule": "Close reading means students read the retained/adapted textbook material. A single close-reading directions box appears once after the skim and before the first retained reading chunk."
   },
   "architecture": [
     "Section title + exact Learning Target / I-can statements",
     "Vocabulary preview (terms only)",
-    "substantial reading/visual cycles organized by exact I-can/progression",
-    "content-specific Stop and Discuss immediately after each substantial reading segment",
-    "interleaved canonical Example / You Try It anchors",
+    "canonical What's to Come",
+    "Let's Get Started skim: headings/figures + 1-2 notices and 1-2 wonders",
+    "one Close Reading directions block",
+    "substantial retained/adapted textbook reading and visual flow",
+    "interleaved processing with at most one primary student-processing event per reading boundary",
+    "canonical Example / You Try It anchors, with any leftover intact pairs after the final reading",
     "Vocabulary with definitions immediately before Summary",
     "bulleted Summary",
+    "What I Figured Out",
     "Common Mistakes",
     "Framework-defined final miscellaneous workspace when required"
   ],
+  "opening": {
+    "skim_prompt": "Skim before close reading. Look at the headings and figures. Find 1–2 things you notice and 1–2 things you wonder about.",
+    "prediction_rule": "Do not add a prediction prompt unless the current Framework explicitly requires it.",
+    "close_reading_directions_count": 1
+  },
   "reading": {
-    "benchmark": "Conceptual Physics/Hewitt extracted source library first; OpenStax/course-aligned text second",
-    "rule": "Physics Notes are textbook-like instructional reading, not thin blurbs between problems. Use slightly more reading than Algebra when the concept needs it; bold target vocabulary at first meaningful introduction.",
+    "benchmark": "Framework-declared Physics textbook / approved source spine, supported by Conceptual Physics/Hewitt visual/reference resources",
+    "rule": "Physics Notes are textbook-like instructional reading, not thin blurbs between problems. Preserve useful source explanation and conceptual order; cut by omission first and paraphrase only as needed for classroom clarity/length.",
     "paragraphs": "multiple short developed paragraphs; avoid walls of text and one-sentence stacking"
   },
+  "processing_rhythm": {
+    "hard_rule": "At a reading boundary, use at most ONE primary student-processing event: Stop and Discuss OR one canonical Example/YTI pair OR none. Do not stack Stop and Discuss and Example/YTI after the same reading chunk.",
+    "instructional_insertions": "Physics Notes, diagrams, graphs, models, and other explanatory reference blocks may be embedded with the reading when they teach the idea; they are not a second required student-processing event.",
+    "leftover_pair_rule": "If canonical Example/YTI pairs remain after all natural reading insertion points are used, place the remaining intact pairs after the final reading chunk in display order."
+  },
   "visual_storytelling": {
-    "hard_rule": "Inspect the relevant Hewitt captured-image set BEFORE drafting the section narrative. Build portions of the explanation around the strongest images so the images help tell the conceptual story.",
-    "source_map": "reference_library/source_excerpts/hewitt_section_source_map.json",
-    "library": "sources/conceptual_physics_extracted/",
+    "hard_rule": "Use strong existing source/toolkit/Bank representations when they advance the conceptual story. Purpose-author a new Notes-specific representation only when the current map requires a need not already satisfied canonically.",
     "roles": [
       "phenomenon opener",
       "prediction stimulus",
@@ -42,15 +59,28 @@
     "not_decoration": "A figure should earn space by advancing the idea, evidence, prediction, comparison, or explanation."
   },
   "stop_and_discuss": {
-    "rule": "More frequent than Algebra is appropriate. Every substantial reading gets an immediate content-specific S&D; additional short checkpoints may follow strong visuals/prediction moments. Do not automatically place S&D after every YTI.",
-    "hewitt_source": "Think and Discuss / Think and Explain / Think and Rank structures are preferred inspiration."
+    "rule": "Use Stop and Discuss when the preceding reading/representation benefits from verbal conceptual processing and that boundary is not already occupied by a canonical Example/YTI pair. Prompts are specific to the immediately preceding source content; no stock comprehension prompts.",
+    "hewitt_source": "Think and Discuss / Think and Explain / Think and Rank structures are preferred inspiration when they fit."
   },
   "reading_apprenticeship": {
     "rule": "Keep annotation, notice/wonder, evidence, model-reading, and representation interpretation opportunities purposeful; student workspaces may be generous for Notability."
   },
   "student_teacher": {
-    "student": "clean Notability-first page with generous fixed workspace where required",
-    "teacher": "same instructional sequence with direct answers/acceptable reasoning/evidence-to-listen-for in red/bold support; teacher workspaces expand naturally and never overlap"
+    "student": "clean Notability-first page with generous fixed workspace where required; use established keep-together wrappers and natural pagination",
+    "teacher": "same instructional sequence, online-view-first, fixed student workspace heights released, answers/acceptable reasoning formatted as readable lists, teacher/student discourse moves as lists, and no overlap. Vertical space is not a concern."
+  },
+  "teacher_support": {
+    "multipart_solution_rule": "Never render a multipart canonical solution as one long red paragraph. Break it into labeled/bulleted parts matching the student task.",
+    "preferred_order": [
+      "Answer / Acceptable Reasoning",
+      "Teacher Moves",
+      "Student Moves",
+      "Listen For / Likely Misconception when useful"
+    ]
+  },
+  "pagination": {
+    "rule": "Use the established Notes/base CSS wrappers. Keep atomic instructional units together when practical. Do not wrap a giant multi-page reading in one avoid-break container.",
+    "forced_break_rule": "Do not use forced page breaks for ordinary crowding/layout repair. Use them only for a genuinely intentional separate page/workspace required by the current Framework/shell."
   },
   "paths": {
     "student": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",

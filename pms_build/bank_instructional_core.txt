@@ -6,117 +6,144 @@ ROLE: Author all canonical exact-content instructional Bank records from the acc
 
 STARTUP — HARD
 --------------
-Read the current Curriculum Philosophy and Runtime Contract.
-Resolve required authorities through the pinned manifests.
-Fetch declared resources directly.
-
-NO-WEB TOOL POLICY — HARD
--------------------------
-No web search, public-web fetch, File Library search, prior-stage ZIP discovery, or repository search for declared authorities.
-Outside research is allowed only when explicitly requested by the teacher in the current job.
-Missing declared source -> FAIL CLOSED with exact repo/path/resource.
+Read current Philosophy, Runtime Contract, Question Structure, current Framework/Assessment Plan, current Bank-v2 profile, accepted Unit Bank Map, and Tools manifest.
+Resolve/pin once. Fetch declared paths directly.
+No web/File-Library/prior-ZIP discovery.
 
 INPUT
 -----
-Read the accepted expanded map:
+Read:
   banks/unitN_bank_map/MAP_MANIFEST.json
+  banks/unitN_bank_map/unitN_question_design_map.json
+  banks/unitN_bank_map/notes_map.json
+  banks/unitN_bank_map/cyu_map.json
+  banks/unitN_bank_map/warmup_map.json
 
-Then fetch only:
-  notes_map.json
-  cyu_map.json
-  warmup_map.json
-
-Do not search for or load prior Bank ZIPs.
-Do not consume Practice/Exit/Summative map slices in 3A.
+Do not consume Practice/Exit/Summative slices in 3A.
 
 PURPOSE
 -------
-Author only `exact_content`:
+Author only exact_content:
 - WTC
-- Example / You Try It
+- Notes Example / YTI
 - CYU
 - Warm-Ups
 
-Do NOT author:
-- Practice families
-- Exit families
-- Summative families
-- downstream worksheets/forms
+QUESTION STRUCTURE IS EXECUTABLE — HARD
+---------------------------------------
+For every item:
+1. resolve its design_slot_id;
+2. preserve exact mapped I-can/evidence job;
+3. execute the mapped question_structure_id;
+4. execute the mapped response_mode;
+5. execute the mapped representation_mode;
+6. use the mapped registered tool/source/render route;
+7. author final prompt + actual representation;
+8. independently solve/check the final instantiated task;
+9. verify the rendered student_html, not metadata alone.
 
-AUTHORITIES
------------
-1. Teacher instruction
-2. Philosophy
-3. Runtime Contract
-4. Framework + Unit Assessment Plan
-5. Course Bank profile
-6. Accepted Unit Bank Map
-7. Question Structure authority
-8. This PM
+If the finished task does not execute the mapped structure/response/representation, repair the item before PASS.
 
 EXACT ITEM CONTRACT
 -------------------
-Each authored item preserves the map identity and includes:
-- item_id exactly equal to map record_id
+Each authored item includes:
+- item_id = map record_id
 - record_mode = exact_content
-- destination
-- section
-- primary_i_can_id + exact primary_i_can
+- destination / section
+- exact primary_i_can_id + primary_i_can
 - supporting_i_can_ids when mapped
 - evidence_job
 - question_structure_id
 - response_mode
 - representation_mode
 - security_level
-- role/routing fields such as notes_role, pair_id, pair_number, warmup_number, slot
+- role/routing fields
+- question_design object with design_slot_id + tool/render route
 - student_text
 - student_html
 - choices when applicable
 - answer
 - solution_text
 - solution_html
-- figure_refs
+- figure_refs / representation refs when applicable
 - source_map_record_id
-- source_basis when useful
+- source_basis
 
-No audit-status fields.
 No placeholders.
-No internal map/family labels in student-facing prose.
+No internal generator labels in student-facing prose.
 
-COURSE-AWARE AUTHORING
-----------------------
-Use the current course Framework/profile.
+SELECTED RESPONSE — HARD
+------------------------
+If `response_mode = selected_response`:
+- store complete choices;
+- visibly render complete choices in student_html;
+- use the course/default choice count unless the map explicitly says otherwise;
+- key the correct answer;
+- distractors come from plausible task-specific errors/misconceptions;
+- missing/placeholder/duplicate choices = FAIL.
 
-Physics examples:
-- concrete physical situations rather than naked variable assignments;
-- equations as relationships describing phenomena;
-- real FBD/vector/graph/table/model evidence when required;
-- concise wording.
+TABLES — HARD
+-------------
+If the representation is a small table/data set:
+- student_html contains a real semantic table;
+- use `<table class="values">` for the existing compact centered Base-CSS data-table treatment;
+- include readable headers/units;
+- never render final data as pipe-delimited text or space-aligned rows.
 
-Do not import Physics-specific behavior into another course.
+GRAPHS — HARD
+-------------
+Resolve `graph_tool` through Tools/MANIFEST.json.
+For supported graph types, use the authoritative graph tool without restyling.
+Inspect the actual rendered output for:
+- scale;
+- axes;
+- units;
+- labels;
+- plotted relationship/data;
+- readability;
+- answer-neutrality.
 
-NOTES CONTRACT
---------------
-WTC:
-- one coherent mapped stimulus/situation;
-- connected parts when mapped;
-- actual evidence-bearing representation.
+An improvised substitute graph where graph_tool supports the job = FAIL.
 
-Example / YTI:
-- preserve pair_id/pair_number;
-- Example models the mapped reasoning;
-- YTI is a comparable application;
-- change meaningful evidence/context/data/representation, not only nouns.
+DIAGRAMS / FBD / VECTORS — HARD
+--------------------------------
+Use an approved Framework/course/source visual or approved deterministic diagram route.
+Do not replace a required visual with prose.
+Do not PASS crude, distorted, low-resolution, mislabeled, answer-leaking, or physically wrong diagrams.
+If no approved route can produce the required diagram, FAIL CLOSED on that item and report the missing route.
 
-CYU CONTRACT
-------------
-Author every mapped CYU as a focused exact canonical check.
+WTC — HARD
+----------
+WTC is difficult FRQ-navigation practice, not a loose preview list.
+Each WTC:
+- one shared coherent Physics stimulus/representation;
+- normally 3–5 connected labeled parts;
+- actual evidence-bearing representation/shared stimulus;
+- representation interpretation/extraction;
+- dependency/use of an earlier conclusion;
+- planning/model-choice/justification;
+- may use prior/current/future Physics;
+- coverage_role = wtc_frq_practice;
+- does not satisfy current Unit coverage floors.
 
-WARM-UP CONTRACT
-----------------
-Author every mapped Warm-Up exactly as mapped.
-Course profile owns slot pattern.
-For Physics Q4, use a concrete physical situation and supplied/appropriate relationship; do not default to naked variables.
+If content is untaught, keep the navigation/unpacking work structurally accessible without making the WTC trivial.
+
+EXAMPLE / YTI
+-------------
+Preserve pair_id/pair_number.
+Example models the mapped reasoning; YTI applies a comparable learning job with meaningfully changed evidence/context/data/representation.
+Do not generate generic vocabulary filler when the I-can/map calls for quantitative/model evidence.
+
+CYU
+---
+Focused exact canonical checks.
+A compact item still must execute its mapped structure and representation.
+Selected-response CYU must display choices.
+
+WARM-UPS
+--------
+Author exactly as mapped.
+Physics Q4 uses a concrete physical situation and appropriate relationship; no naked variable-assignment default.
 
 STORAGE
 -------
@@ -129,7 +156,7 @@ Canonical Bank root:
   notes/section_<section-id>.json
   cyu/section_<section-id>.json
   warmups/section_<section-id>.json
-  figures/                         only when actually needed
+  figures/ only when actually used
   provenance/3a_build.json
   provenance/3a_report.txt
 
@@ -137,64 +164,38 @@ BANK_MANIFEST after 3A:
 - status = BUILDING
 - ready_for_downstream = false
 - completed includes 3A_instructional_core
-- pending includes 3B_practice_families and 3C_assessment_families
+- pending = 3B + 3C
 - next_phase = 3B_practice_families
-- routes/counts/fingerprints are correct
-
-ITEM_INDEX
-----------
-Compact routing only:
-- ID
-- record_mode
-- destination
-- section
-- exact canonical file path
-
-Do not duplicate prompt/solution bodies in ITEM_INDEX.
+- records accepted Bank Map/question-design identity
 
 QA — HARD
 ---------
 Verify:
-- no prohibited search/web/prior-ZIP behavior occurred;
-- every expected 3A map record authored exactly once;
-- no Practice/Exit/Summative family authored;
-- all IDs/I-cans match map;
-- every question performs mapped evidence job/structure;
-- WTC and EX/YTI pair relationships are complete;
-- CYU/Warm-Up counts match map/profile;
-- answers/solutions independently checked;
-- figures exist and match;
-- no placeholders/audit-status fields;
-- every ITEM_INDEX route resolves;
-- BANK_MANIFEST counts/state are correct.
+- every expected 3A record authored exactly once;
+- every design_slot_id resolves;
+- final prompt performs mapped evidence job/structure;
+- selected-response choices complete and visible;
+- semantic tables are real HTML tables and small tables use class `values`;
+- graph_tool used when mapped/supported;
+- required representations visibly present;
+- WTC connected-FRQ rigor gate passes;
+- Example/YTI pairs complete;
+- CYU/Warm-Up counts correct;
+- answers/solutions independently checked against final content/visuals;
+- all figure refs resolve;
+- no placeholders;
+- ITEM_INDEX routes resolve;
+- BANK_MANIFEST state correct.
 
-FULL-SNAPSHOT DELIVERY — HARD
------------------------------
+Do not PASS because JSON parses. Render-level compliance is required.
+
+FULL-SNAPSHOT DELIVERY
+----------------------
 Return ONE ZIP:
-  `unitN.zip`
+  unitN.zip
 
 ZIP top level:
-  `unitN/`
-
-It must contain the COMPLETE CURRENT Unit Bank after 3A:
   unitN/
-    BANK_MANIFEST.json
-    ITEM_INDEX.json
-    notes/
-    cyu/
-    warmups/
-    provenance/
-    figures/   only if used
 
-Do not return a changed-files-only package.
-Do not include `banks/` as an outer wrapper.
-Do not include `unitN_bank_map/`.
-
-Teacher action:
-1. download to staging;
-2. unzip;
-3. drag `unitN/` into the course repository `banks/` folder;
-4. choose Replace;
-5. sync.
-
-The ZIP is transport only; canonical storage is the expanded `banks/unitN/` tree.
+Complete current Unit Bank after 3A only.
+Do not include banks/ outer wrapper, unitN_bank_map/, PM files, or prior ZIPs.

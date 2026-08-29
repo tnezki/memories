@@ -21,7 +21,7 @@
     "canonical_storage": "expanded_course_repo",
     "handoff_zip_rule": "unitN.zip is transport/output only. After extraction and sync, downstream jobs read the expanded banks/unitN/ tree. Prior stage ZIPs are never canonical inputs and must not be searched for in File Library, uploads, or old staging locations."
   },
-  "bank_v2_note": "The Bank-v2 course profile is current for Steps 2.5, 3A, 3B, and 3C and for downstream Bank-aware routing. Canonical Bank content is the expanded course-repository banks/unitN/ tree addressed through BANK_MANIFEST.json and ITEM_INDEX.json. Do not use or search for prior stage ZIPs as inputs.",
+  "bank_v2_note": "The Bank-v2 course profile is current for Steps 2A, 3A, 3B, and 3C and for downstream Bank-aware routing. Canonical Bank content is the expanded course-repository banks/unitN/ tree addressed through BANK_MANIFEST.json and ITEM_INDEX.json. Do not use or search for prior stage ZIPs as inputs. This manifest-declared Bank-v2 route supersedes legacy Bank-profile wording retained inside older Framework summary sections.",
   "deprecated_resources": {
     "legacy_bank_profile": {
       "path": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_course_profile.json",

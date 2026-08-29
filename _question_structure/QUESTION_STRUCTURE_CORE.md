@@ -1,4 +1,4 @@
-# Question Structure Core — v1.0
+# Question Structure Core — v1.1
 
 ## 1. Plan before prose
 The question ecosystem is designed before individual prompts are written.
@@ -14,6 +14,8 @@ Required sequence:
 8. Author the actual question from that plan.
 9. Independently solve/check the final instantiated question and representation.
 10. Assign DOK/Bloom and final metadata from what the student actually must do.
+
+The map is executable design. A builder may not attach a structure/representation/response-mode label and then author a materially different task.
 
 ## 2. Wording profiles
 These are sentence architectures, never quotas.
@@ -107,12 +109,14 @@ Before authoring, decide whether the target is best evidenced through:
 - image/phenomenon
 - multiple representations with a real translation job
 
-Use the course graph/diagram tool when it supports the evidence cleanly. Do not force a graph or diagram merely to increase variety. Conversely, do not describe an imaginary representation in prose when the evidence job is interpretation/critique of that representation.
+Use the current canonical course-authoring tool when it supports the evidence cleanly. Do not force a graph or diagram merely to increase variety. Conversely, do not describe an imaginary representation in prose when the evidence job is interpretation/critique of that representation.
+
+A representation label is not evidence. The finished student task must actually render the representation in a readable form and require the student to use it.
 
 ## 8. Destination-specific design
 Destination changes the job.
 
-- **WTC:** coherent FRQ morphology; shared stimulus; connected parts; decomposition/navigation practice.
+- **WTC:** coherent FRQ morphology; one shared stimulus; connected parts; decomposition/navigation practice. WTC may use prior, current, or future course content and does not satisfy current-section/Unit coverage floors.
 - **Example/YTI:** model then apply; when the I-can naturally supports formula use, a strong quantitative pair has priority over generic vocabulary/conceptual filler.
 - **Practice:** intentionally mixed menu based on I-can fit; may include formula, inverse, matching, vocabulary, diagrams, graphs, short answer, multi-step, conceptual/application. Repetition is allowed when purposeful.
 - **Warm-Up:** predictable retrieval/bridging; controlled repetition is useful.
@@ -131,8 +135,47 @@ Reject or repair:
 - DOK/Bloom used as generation targets
 - version/question numbers embedded into family IDs to hide parallelism
 - contexts or extra measurements that do not affect the model/inference/calculation
+- a `selected_response` item with no visible answer choices
+- a data-table item rendered as pipe-delimited/plain-text rows instead of a semantic HTML table
+- a graph item rendered with an improvised graph when a registered canonical graph tool supports the job
+- a representation-required item whose `student_html` contains no usable representation
 
-## 10. Derived metadata rule
+## 10. Executable completion contract — HARD
+The planned `question_structure_id`, `response_mode`, `representation_mode`, evidence job, and tool route are acceptance criteria for the final authored question.
+
+### Selected response
+If `response_mode = selected_response`:
+- render actual visible choices in `student_html`;
+- store the choices in the canonical record;
+- provide one correct keyed answer unless the mapped structure explicitly defines multi-select;
+- build distractors from plausible errors/misconceptions appropriate to the exact task;
+- do not PASS a selected-response record whose choices are missing, placeholder, duplicated, or disconnected from the prompt.
+
+### Tables
+When a table/data set is the representation:
+- use a semantic HTML `<table>` in `student_html`;
+- use the established course/base compact data-table class when the data set is small;
+- preserve headers, units, row/column relationships, and readable alignment;
+- never use pipes, repeated spaces, or line-broken pseudo-tables as the final student representation.
+
+### Graphs
+When a graph is planned:
+- resolve the current registered graph tool through `Tools/MANIFEST.json`;
+- use the canonical graph tool whenever its supported graph type fits the evidence job;
+- do not manually restyle or improvise a substitute graph;
+- verify axes, units, labels, scale, plotted data/function, and answer-neutrality from the actual rendered graph.
+
+### Diagrams / FBDs / vectors / models
+When a diagram is planned:
+- prefer a current approved course/Framework/source figure when it fits;
+- otherwise use an approved deterministic diagram route declared by the course/tooling;
+- do not PASS a crude, low-resolution, mislabeled, distorted, answer-leaking, or physically incorrect visual;
+- if no approved route can produce the required representation, fail closed on that item rather than replacing the representation with prose.
+
+### Render-level QA
+Final QA inspects the authored prompt, `student_html`, choices, table/figure/graph payload, answer, and solution together. Metadata agreement alone cannot earn PASS.
+
+## 11. Derived metadata rule
 The design plan may predeclare intended structure/response/representation. It may **not** predeclare final DOK/Bloom as a quota. After authoring and independent solution verification, assign:
 - DOK
 - Bloom
