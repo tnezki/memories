@@ -1,0 +1,273 @@
+BUILD BANK ASSESSMENT FAMILIES — STEP 3C / BANK-V2
+====================================================
+
+STATUS: CURRENT
+ROLE: Author secure Exit + Summative family layers, finalize the canonical Unit Bank, generate the teacher-readable Bank HTML, and return one complete Unit snapshot.
+
+STARTUP — HARD
+--------------
+Read the current Curriculum Philosophy and Runtime Contract.
+Resolve required authorities through the pinned manifests.
+Fetch declared resources directly.
+
+NO-WEB TOOL POLICY — HARD
+-------------------------
+No web search, public-web fetch, File Library search, upload search, prior-stage ZIP discovery, or repository search for declared authorities.
+Outside research is allowed only when explicitly requested by the teacher in the current job.
+Missing declared source -> FAIL CLOSED with exact repo/path/resource.
+
+INPUT / GATE
+------------
+Read:
+  banks/unitN/BANK_MANIFEST.json
+  banks/unitN/ITEM_INDEX.json
+  banks/unitN_bank_map/MAP_MANIFEST.json
+  banks/unitN_bank_map/exit_map.json
+  banks/unitN_bank_map/summative_map.json
+
+Require:
+- Bank status BUILDING
+- 3A_instructional_core + 3B_practice_families completed
+- ready_for_downstream = false
+- same accepted Bank Map identity
+- next/pending phase permits 3C_assessment_families
+- Exit/Summative map fingerprints/counts resolve
+- every consumed record is family_seed with correct destination
+
+Do not search for or load prior Bank ZIPs.
+
+SECURITY AWARENESS
+------------------
+Use ITEM_INDEX to inspect only the relevant exposed 3A/3B canonical files needed for comparison.
+
+A secure family may test the same I-can/structure/formula/representation/reasoning architecture as instruction.
+It must not reuse an exposed finished prompt, distinctive data set, distinctive diagram, or distinctive stimulus.
+
+Security means fresh evidence, not forced novelty.
+
+EXIT CONTRACT
+-------------
+Author every mapped Exit family seed.
+Course profile owns pool size and downstream form behavior.
+
+For the current Physics architecture:
+- 8 secure families per section;
+- downstream ticket = 4 deterministically selected families;
+- A/B/C preserve the same selected family blueprint but use fresh secure instances;
+- exposed-prompt reuse and surface-only variation are forbidden.
+
+3C stores the secure family pool, not finished A/B/C tickets.
+
+SUMMATIVE CONTRACT
+------------------
+Author every mapped Summative family seed.
+
+For the current Physics architecture:
+- Blueprint A = 20 mapped families used for V1–V4;
+- Blueprint B = 20 mapped families used for V5–V6;
+- mapped response-class composition/I-can coverage are preserved;
+- Blueprint B is materially alternate where the map requires it.
+
+3C stores family blueprints, not finished V1–V6 forms.
+
+CANONICAL SECURE FAMILY RECORD
+------------------------------
+Include:
+- family_id
+- record_mode = family_seed
+- destination
+- section when mapped
+- family_type
+- exact I-can IDs/text
+- evidence_job
+- intended_reasoning
+- question_structure_id
+- response_mode / response_class
+- representation_mode / representation_need
+- difficulty_intent
+- security_level
+- selection/blueprint metadata
+- fully authored canonical_seed:
+  - student_text / student_html
+  - choices when applicable
+  - answer
+  - solution_text / solution_html
+  - figure_refs
+- explicit locked/allowed/required/forbidden transformation rules
+- representation variation rule
+- security/freshness rule
+- source_map_record_id / source_basis
+
+Every secure seed is a complete valid assessment question and is independently solved/checked.
+
+COURSE-AWARE AUTHORING
+----------------------
+Use current course Framework/profile.
+For Physics:
+- use concrete physical situations rather than naked variable assignments;
+- values/units must be plausible;
+- representations must carry actual evidence.
+
+STORAGE
+-------
+3C creates/updates:
+  banks/unitN/BANK_MANIFEST.json
+  banks/unitN/ITEM_INDEX.json
+  banks/unitN/exit/section_<section-id>.json
+  banks/unitN/summative/blueprint_a.json
+  banks/unitN/summative/blueprint_b.json
+  banks/unitN/figures/...                  only if needed
+  banks/unitN/provenance/3c_build.json
+  banks/unitN/provenance/3c_report.txt
+  banks/unitN/unitN.html                   DERIVED TEACHER VIEW
+
+Preserve all 3A/3B canonical files/content.
+
+FINAL BANK STATE
+----------------
+Only after all canonical QA passes:
+- status = COMPLETE
+- ready_for_downstream = true
+- completed = 3A + 3B + 3C
+- pending = []
+- next_phase = null
+- counts/routes are correct
+- optional `derived_views.teacher_bank_html = "banks/unitN/unitN.html"` may register the teacher view
+
+The HTML is never canonical curriculum authority.
+
+TEACHER BANK HTML — REQUIRED
+----------------------------
+Generate:
+  banks/unitN/unitN.html
+
+This is a rendered teacher view of the completed canonical Bank.
+
+TEMPLATE / CSS — HARD
+---------------------
+Do NOT invent a new CSS system, new Bank stylesheet, or alternate class vocabulary.
+
+Use the established Bank HTML template pattern already used by the course-family Bank pages:
+  <link href="../../css/base.css" rel="stylesheet"/>
+  <link href="../../css/bank.css" rel="stylesheet"/>
+
+Use the established Bank class names/patterns:
+- nav
+- bank-section
+- resource-group
+- bank-item
+- meta
+- student-prompt
+- answer
+- evidence-map
+
+Use semantic HTML (`section`, `article`, `details`, `summary`, `figure`, tables, lists) consistent with the existing Bank template.
+Do not add inline CSS except when absolutely required by an already-declared template behavior.
+Do not create new CSS files.
+
+HTML CONTENT
+------------
+Include:
+- `<Course> — Unit N Bank`
+- Unit title + Framework/Bank version/status when available
+- nav links to every instructional section
+- Secure Summative nav link
+- each section title
+- exact Learning Target
+- exact I-can statements/IDs
+- resource groups:
+  - WTC
+  - Notes Example
+  - Notes YTI
+  - Check Your Understanding
+  - Warm-Ups
+  - Practice Families
+  - Exit Families
+- Unit-wide Summative Blueprint A and Blueprint B
+
+Each bank-item card shows:
+- readable prompt/content
+- compact metadata, at minimum:
+  - item/family ID
+  - destination/role
+  - section/blueprint
+  - primary I-can ID
+  - question structure
+  - representation mode when present
+  - response mode
+  - family type/difficulty when present
+- `<details class="answer"><summary>Answer / solution</summary>...`
+- optional `<details class="evidence-map">` for concise alignment/evidence metadata
+
+Do not make raw JSON links the primary inspection experience.
+
+LOCAL-SAFE DERIVED VIEW — HARD
+------------------------------
+`unitN.html` must work when opened directly from Finder with `file://`.
+
+Therefore:
+- render canonical question content into the HTML at build time;
+- do NOT use fetch(), XMLHttpRequest, runtime JSON loading, iframes, or public URLs for Bank bodies;
+- course CSS may be referenced by the established local relative paths above;
+- figures/assets must use local relative paths contained in the course repo/snapshot.
+
+HTML FIDELITY QA
+----------------
+Verify:
+- every canonical Notes/CYU/Warm-Up/Practice/Exit record appears exactly once in the correct section/group;
+- every Summative family appears exactly once in the correct blueprint;
+- exact prompts/I-cans/answers/solutions match canonical Bank records;
+- local figure paths resolve;
+- existing Bank CSS/classes are used;
+- no invented Bank CSS/class system;
+- no runtime network/data dependency.
+
+CANONICAL QA — HARD
+-------------------
+Verify:
+- no prohibited search/web/prior-ZIP behavior;
+- every mapped Exit/Summative family authored exactly once;
+- all 3A/3B content/routes preserved;
+- secure freshness rules satisfied;
+- every seed complete and independently solved;
+- all lock/variation rules explicit/resolvable;
+- representations correct;
+- answers/solutions match final prompts;
+- all figure refs resolve;
+- no placeholders/audit-status fields;
+- ITEM_INDEX/BANK_MANIFEST counts/routes/state correct.
+
+FULL-SNAPSHOT DELIVERY — HARD
+-----------------------------
+Return ONE ZIP:
+  `unitN.zip`
+
+ZIP top level:
+  `unitN/`
+
+It must contain the COMPLETE CURRENT final Bank:
+  unitN/
+    unitN.html
+    BANK_MANIFEST.json
+    ITEM_INDEX.json
+    notes/
+    cyu/
+    warmups/
+    practice/
+    exit/
+    summative/
+    provenance/
+    figures/   only if used
+
+Do not include:
+- `banks/` as an outer wrapper;
+- `unitN_bank_map/`;
+- PM files;
+- staging files;
+- prior ZIPs.
+
+Teacher action:
+download to staging -> unzip -> drag `unitN/` into course `banks/` -> choose Replace -> sync.
+
+The ZIP is transport only.
+Canonical storage remains expanded `banks/unitN/`.

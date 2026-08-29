@@ -1,0 +1,200 @@
+BUILD BANK INSTRUCTIONAL CORE — STEP 3A / BANK-V2
+===================================================
+
+STATUS: CURRENT
+ROLE: Author all canonical exact-content instructional Bank records from the accepted Unit Bank Map.
+
+STARTUP — HARD
+--------------
+Read the current Curriculum Philosophy and Runtime Contract.
+Resolve required authorities through the pinned manifests.
+Fetch declared resources directly.
+
+NO-WEB TOOL POLICY — HARD
+-------------------------
+No web search, public-web fetch, File Library search, prior-stage ZIP discovery, or repository search for declared authorities.
+Outside research is allowed only when explicitly requested by the teacher in the current job.
+Missing declared source -> FAIL CLOSED with exact repo/path/resource.
+
+INPUT
+-----
+Read the accepted expanded map:
+  banks/unitN_bank_map/MAP_MANIFEST.json
+
+Then fetch only:
+  notes_map.json
+  cyu_map.json
+  warmup_map.json
+
+Do not search for or load prior Bank ZIPs.
+Do not consume Practice/Exit/Summative map slices in 3A.
+
+PURPOSE
+-------
+Author only `exact_content`:
+- WTC
+- Example / You Try It
+- CYU
+- Warm-Ups
+
+Do NOT author:
+- Practice families
+- Exit families
+- Summative families
+- downstream worksheets/forms
+
+AUTHORITIES
+-----------
+1. Teacher instruction
+2. Philosophy
+3. Runtime Contract
+4. Framework + Unit Assessment Plan
+5. Course Bank profile
+6. Accepted Unit Bank Map
+7. Question Structure authority
+8. This PM
+
+EXACT ITEM CONTRACT
+-------------------
+Each authored item preserves the map identity and includes:
+- item_id exactly equal to map record_id
+- record_mode = exact_content
+- destination
+- section
+- primary_i_can_id + exact primary_i_can
+- supporting_i_can_ids when mapped
+- evidence_job
+- question_structure_id
+- response_mode
+- representation_mode
+- security_level
+- role/routing fields such as notes_role, pair_id, pair_number, warmup_number, slot
+- student_text
+- student_html
+- choices when applicable
+- answer
+- solution_text
+- solution_html
+- figure_refs
+- source_map_record_id
+- source_basis when useful
+
+No audit-status fields.
+No placeholders.
+No internal map/family labels in student-facing prose.
+
+COURSE-AWARE AUTHORING
+----------------------
+Use the current course Framework/profile.
+
+Physics examples:
+- concrete physical situations rather than naked variable assignments;
+- equations as relationships describing phenomena;
+- real FBD/vector/graph/table/model evidence when required;
+- concise wording.
+
+Do not import Physics-specific behavior into another course.
+
+NOTES CONTRACT
+--------------
+WTC:
+- one coherent mapped stimulus/situation;
+- connected parts when mapped;
+- actual evidence-bearing representation.
+
+Example / YTI:
+- preserve pair_id/pair_number;
+- Example models the mapped reasoning;
+- YTI is a comparable application;
+- change meaningful evidence/context/data/representation, not only nouns.
+
+CYU CONTRACT
+------------
+Author every mapped CYU as a focused exact canonical check.
+
+WARM-UP CONTRACT
+----------------
+Author every mapped Warm-Up exactly as mapped.
+Course profile owns slot pattern.
+For Physics Q4, use a concrete physical situation and supplied/appropriate relationship; do not default to naked variables.
+
+STORAGE
+-------
+Canonical Bank root:
+  banks/unitN/
+
+3A creates:
+  BANK_MANIFEST.json
+  ITEM_INDEX.json
+  notes/section_<section-id>.json
+  cyu/section_<section-id>.json
+  warmups/section_<section-id>.json
+  figures/                         only when actually needed
+  provenance/3a_build.json
+  provenance/3a_report.txt
+
+BANK_MANIFEST after 3A:
+- status = BUILDING
+- ready_for_downstream = false
+- completed includes 3A_instructional_core
+- pending includes 3B_practice_families and 3C_assessment_families
+- next_phase = 3B_practice_families
+- routes/counts/fingerprints are correct
+
+ITEM_INDEX
+----------
+Compact routing only:
+- ID
+- record_mode
+- destination
+- section
+- exact canonical file path
+
+Do not duplicate prompt/solution bodies in ITEM_INDEX.
+
+QA — HARD
+---------
+Verify:
+- no prohibited search/web/prior-ZIP behavior occurred;
+- every expected 3A map record authored exactly once;
+- no Practice/Exit/Summative family authored;
+- all IDs/I-cans match map;
+- every question performs mapped evidence job/structure;
+- WTC and EX/YTI pair relationships are complete;
+- CYU/Warm-Up counts match map/profile;
+- answers/solutions independently checked;
+- figures exist and match;
+- no placeholders/audit-status fields;
+- every ITEM_INDEX route resolves;
+- BANK_MANIFEST counts/state are correct.
+
+FULL-SNAPSHOT DELIVERY — HARD
+-----------------------------
+Return ONE ZIP:
+  `unitN.zip`
+
+ZIP top level:
+  `unitN/`
+
+It must contain the COMPLETE CURRENT Unit Bank after 3A:
+  unitN/
+    BANK_MANIFEST.json
+    ITEM_INDEX.json
+    notes/
+    cyu/
+    warmups/
+    provenance/
+    figures/   only if used
+
+Do not return a changed-files-only package.
+Do not include `banks/` as an outer wrapper.
+Do not include `unitN_bank_map/`.
+
+Teacher action:
+1. download to staging;
+2. unzip;
+3. drag `unitN/` into the course repository `banks/` folder;
+4. choose Replace;
+5. sync.
+
+The ZIP is transport only; canonical storage is the expanded `banks/unitN/` tree.

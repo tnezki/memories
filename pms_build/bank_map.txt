@@ -1,0 +1,203 @@
+BUILD BANK MAP — STEP 2B / BANK-V2
+========================================
+
+STATUS: CURRENT
+ROLE: Build one complete Unit Bank design map before Bank question prose is authored.
+
+STARTUP — HARD
+--------------
+Read the current Curriculum Philosophy and Runtime Contract.
+Resolve required authorities through the pinned manifests.
+Fetch declared resources directly.
+
+NO-WEB TOOL POLICY — HARD
+-------------------------
+For this Bank job:
+- web search is forbidden;
+- public-web fetch is forbidden;
+- external research is forbidden unless the teacher explicitly requests it in the current job;
+- repository/File Library search is forbidden for any authority whose repository/path is already declared.
+
+If a declared authority cannot be fetched directly, FAIL CLOSED and report the exact missing repo/path/resource.
+Do not search around the failure.
+
+PURPOSE
+-------
+Separate:
+1. DESIGN MAP — what exact items/families must exist;
+2. CANONICAL BANK CONTENT — authored later in 3A/3B/3C;
+3. DOWNSTREAM INSTANCES — deterministic selections or controlled family variants.
+
+This job authors NO final student prompts, choices, answers, or solutions.
+
+AUTHORITY ORDER
+---------------
+1. Current explicit teacher instruction.
+2. Curriculum Philosophy.
+3. Runtime Contract.
+4. Current course Framework + authoritative Unit Assessment Plan.
+5. Current Framework/course manifest-declared Bank profile/runtime files.
+6. Current Question Structure authority.
+7. This PM for mapping procedure.
+
+COURSE-AWARE RULE
+-----------------
+This PM is universal.
+The course Framework/profile owns:
+- destination counts;
+- exact-content vs family-seed modes;
+- course-specific question/family patterns;
+- representation expectations;
+- recurring Warm-Up behavior;
+- security behavior;
+- deterministic downstream selection rules.
+
+Do not import Physics patterns into Algebra or Algebra patterns into Physics.
+
+RECORD MODES
+------------
+`exact_content`
+- later Bank phase authors one finished canonical prompt/answer/solution;
+- downstream jobs copy it exactly.
+
+`family_seed`
+- later Bank phase authors one complete canonical seed prompt/answer/solution;
+- family record also carries explicit locked/allowed/required/forbidden transformation rules;
+- downstream jobs may instantiate only validated controlled variants.
+
+OUTPUT
+------
+Return one ZIP:
+  `unitN_bank_map.zip`
+
+ZIP top level:
+  `unitN_bank_map/`
+
+Required files:
+  MAP_MANIFEST.json
+  notes_map.json
+  practice_map.json
+  cyu_map.json
+  warmup_map.json
+  exit_map.json
+  summative_map.json
+  MAP_REPORT.txt
+
+If the course profile declares another canonical Bank destination, add its map slice and register it in MAP_MANIFEST.
+
+COMMON MAP RECORD
+-----------------
+Include as applicable:
+- record_id
+- record_mode
+- destination
+- section or Unit scope
+- primary_i_can_id + exact primary_i_can
+- supporting_i_can_ids
+- evidence_job
+- question_structure_id
+- response_mode
+- representation_mode / representation_need
+- wording_profile / length intent
+- security_level
+- source_basis
+- concise authoring_notes
+
+Map records MUST NOT contain finished prompts, final answer choices, final answers/solutions, DOK, or Bloom.
+
+FAMILY MAP RECORD — HARD
+------------------------
+Every family_seed additionally includes:
+- family_id
+- family_type
+- difficulty_intent
+- intended_reasoning
+- locked_elements
+- allowed_variations
+- required_variations when needed
+- forbidden_variations
+- representation_variation_rule when applicable
+- selection_tags
+
+Every locked token must resolve to an explicit field/property.
+Use canonical names consistently:
+- question_structure_id
+- difficulty_intent
+- intended_reasoning
+- representation_mode / representation_need
+
+Do not emit semantic lock names that do not resolve to explicit properties.
+
+DETERMINISTIC SELECTION
+-----------------------
+When a pool is larger than a downstream set/form:
+- satisfy I-can/evidence/composition/security/representation constraints first;
+- deterministic tie-break second;
+- no uncontrolled randomness.
+
+Stable key recipe:
+  course|unit|section-or-unit|destination|form-or-set|bank_fingerprint
+
+Same pinned Bank identity + same declared key must yield the same family IDs/order before any final choice-position scramble.
+
+MAP BUILD ORDER
+---------------
+1. Pin memories/course commits once.
+2. Resolve Framework, Assessment Plan, Bank profile, Question Structure directly.
+3. Build exact Unit I-can map.
+4. Resolve destination inventory and record modes from the course profile.
+5. Map secure evidence architecture where required.
+6. Map exact instructional anchors.
+7. Map family pools with explicit transformation contracts.
+8. Map deterministic selection/blueprint constraints.
+9. Reconcile representation needs.
+10. Build MAP_MANIFEST + destination slices.
+11. Run the integrated structural audit below.
+12. Repair mechanical/structural defects inside this same 2B run.
+13. Re-run QA.
+14. Write MAP_REPORT, package, reopen, verify.
+
+INTEGRATED MAP AUDIT — 2C IS RETIRED
+------------------------------------
+There is no separate Bank Map Audit step.
+
+Before PASS:
+- validate every declared slice path;
+- validate all IDs are unique;
+- validate exact I-can text/IDs against the pinned authority;
+- validate record_mode/destination;
+- validate counts against the current course profile;
+- validate every question_structure_id resolves;
+- validate every family has explicit intended_reasoning, difficulty_intent, and resolvable locks;
+- validate allowed/required/forbidden axes are family-specific enough to prevent drift;
+- validate deterministic selection can satisfy all hard constraints;
+- validate secure families forbid exposed finished-prompt reuse;
+- validate representations are evidence-bearing when required;
+- validate no finished prompt/answer prose leaked into the map.
+
+Repair obvious mechanical/structural defects here.
+Do not create a second teacher-audit artifact or audit-status fields.
+
+FINAL QA — HARD
+---------------
+FAIL if:
+- web/File Library/prior-ZIP search was used;
+- a declared source was searched for instead of directly fetched;
+- required course profile/Assessment Plan is unresolved;
+- inventory contradicts the current course profile;
+- required I-can coverage is missing;
+- a family has unresolved locks or vague “make another like this” variation;
+- deterministic selection is infeasible;
+- duplicate IDs/broken routes exist;
+- finished question prose appears in map records.
+
+FINAL CHAT SUMMARY
+------------------
+Report:
+- course/unit;
+- profile identity;
+- exact-content count;
+- family-seed counts by destination;
+- deterministic selection/blueprint feasibility;
+- QA PASS/FAIL;
+- output filename.
