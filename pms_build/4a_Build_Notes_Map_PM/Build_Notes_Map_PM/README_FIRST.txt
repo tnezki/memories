@@ -1,4 +1,4 @@
-4A BUILD NOTES MAP v1.3
+4A BUILD NOTES MAP v1.4
 ======================
 
 PURPOSE
@@ -9,8 +9,9 @@ FIRST TASK
 READ THE CURRENT CURRICULUM PHILOSOPHY COMPLETELY FROM THE PINNED SNAPSHOT, THEN FOLLOW THE DETERMINISTIC RETRIEVAL BLOCK IN THE PM.
 
 RETRIEVAL PERFORMANCE RULE
-- Framework_Physics.zip is a binary authority. Retrieve the exact pinned ZIP once; never treat it as text.
-- Extract only the 4A Framework entries listed in PM Section 0. Do not ingest the full Framework source/image payload.
+- Read the Curriculum Philosophy directly from the exact pinned text file named by the request/control plane.
+- Read only the 4A Framework files listed in PM Section 0 directly from frameworks/2_Framework_Physics/. Do not reconstruct or prefer the retired Framework_Physics.zip.
+- Read Tools/Physics_Notes_Image_Toolkit_v1_0/IMAGE_CATALOG.json first and retrieve only selected image binaries as needed.
 - No web search, repository archaeology, or fallback to old/deployed copies when the canonical pinned path exists.
 - Routine retrieval mechanics stay silent. If the prescribed route fails, fail closed with the exact repo + commit + path.
 
@@ -19,14 +20,14 @@ REQUIRED INPUTS
 2. Current Curriculum Philosophy
 3. Current Physics Framework
 4. Current complete/materialized Unit Bank
-5. Tools/Physics_Notes_Image_Toolkit.zip
+5. Tools/Physics_Notes_Image_Toolkit_v1_0/
 
 IMPORTANT AUTHORITY SPLIT
 - The Unit Bank owns canonical WTC / Example / YTI wording, values, figures, and solutions.
 - The Physics Notes Image Toolkit owns the image inventory and provenance.
 - 4A owns Notes sequencing/planning only.
 - 4B will own final Notes prose/rendering/package mechanics.
-- _question_structure.zip is NOT required for 4A; 4A does not author new Bank questions.
+- _question_structure/ is NOT required for 4A; 4A does not author new Bank questions.
 
 OUTPUT
 unitN_notes_map.zip

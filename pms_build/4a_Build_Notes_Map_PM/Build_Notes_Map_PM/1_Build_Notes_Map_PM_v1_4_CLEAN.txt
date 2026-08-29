@@ -1,4 +1,4 @@
-4A · BUILD PHYSICS NOTES MAP PM v1.3
+4A · BUILD PHYSICS NOTES MAP PM v1.4
 ====================================
 
 ROLE
@@ -16,32 +16,32 @@ A. PIN ONCE
 Use the repository commits declared by the request/control-plane snapshot. If the request supplies repository refs but not resolved commits, resolve each required repository once at job start and pin it. Never mix later pushes into the run.
 
 B. READ IN AUTHORITY ORDER
-1. Read the current Curriculum Philosophy completely from the pinned memories snapshot.
+1. Read the current Curriculum Philosophy completely from the exact text file named by the request/control-plane snapshot.
 2. Read this PM completely from the same pinned memories snapshot.
-3. Retrieve frameworks/Framework_Physics.zip from that exact pinned memories commit AS BINARY BYTES. Never ask a text reader to decode the Framework ZIP.
+3. Read the required Physics Framework files directly from the pinned expanded Framework tree at frameworks/2_Framework_Physics/. Do not reconstruct or retrieve the retired Framework_Physics.zip.
 
-C. SELECTIVE FRAMEWORK EXTRACTION — DO NOT INGEST THE 50+ MB FRAMEWORK BLINDLY
-After the exact Framework ZIP is available locally, inspect/extract only the small entries 4A requires:
-- 2_Framework_Physics/Conceptual_Physics_Framework/Conceptual_Physics_Framework_PM.txt
-- 2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html
-- 2_Framework_Physics/Conceptual_Physics_Framework/profiles/notes_course_profile.json
-- 2_Framework_Physics/Conceptual_Physics_Framework/profiles/language_reading_tone.json
-- 2_Framework_Physics/Conceptual_Physics_Framework/contracts/notes_visual_contract.json
-- 2_Framework_Physics/Conceptual_Physics_Framework/curriculum/section_index.json
-- 2_Framework_Physics/Conceptual_Physics_Framework/curriculum/i_can_index.json
+C. SELECTIVE FRAMEWORK READ — DO NOT INGEST THE EXPANDED FRAMEWORK BLINDLY
+Read only the small Framework files 4A requires:
+- frameworks/2_Framework_Physics/Conceptual_Physics_Framework/Conceptual_Physics_Framework_PM.txt
+- frameworks/2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html
+- frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/notes_course_profile.json
+- frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/language_reading_tone.json
+- frameworks/2_Framework_Physics/Conceptual_Physics_Framework/contracts/notes_visual_contract.json
+- frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/section_index.json
+- frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/i_can_index.json
 
-Read those entries deeply enough to resolve the exact Unit/section Notes architecture, Learning Targets/I-cans, vocabulary/content progression, reading/tone rules, visual-story rules, WTC behavior, and Bank ownership.
+Read those files deeply enough to resolve the exact Unit/section Notes architecture, Learning Targets/I-cans, vocabulary/content progression, reading/tone rules, visual-story rules, WTC behavior, and Bank ownership.
 
-Do NOT load the Framework's full sources/, reusable_figures/, extracted textbook library, teacher dashboard, or unrelated course contracts for 4A. The separate Physics Notes Image Toolkit is the image-selection authority for this job.
+Do NOT load the Framework's full sources/, reusable_figures/, extracted textbook library, teacher dashboard, or unrelated course contracts for 4A. The separate expanded Physics Notes Image Toolkit is the image-selection authority for this job.
 
 D. LOAD THE TWO WORKING SOURCES
 4. Retrieve and inspect the complete/materialized Unit Bank from the pinned course snapshot. Use the Bank's canonical content fingerprint contract in Section 11.
-5. Retrieve the current Physics Notes Image Toolkit from the pinned authority snapshot. Open IMAGE_CATALOG.json first; inspect image files/previews only as needed to make actual selections. Do not push hundreds of image binaries into working context merely because they exist.
+5. Read the current Physics Notes Image Toolkit from Tools/Physics_Notes_Image_Toolkit_v1_0/ in the pinned memories snapshot. Open Tools/Physics_Notes_Image_Toolkit_v1_0/IMAGE_CATALOG.json first; retrieve individual image files/previews only as needed to make actual selections. Do not push hundreds of image binaries into working context merely because they exist.
 
 NO EXPLORATORY RETRIEVAL — HARD
 - Do not search the web for canonical curriculum authorities.
 - Do not trace repository history/provenance to reconstruct a Framework that already exists at the pinned path.
-- Do not substitute old uploads, remembered copies, deployed artifacts, or similarly named expanded files for the pinned Framework ZIP.
+- Do not substitute old uploads, remembered copies, deployed artifacts, or retired ZIP packages for the pinned expanded Framework tree.
 - Do not narrate routine retrieval mechanics. Proceed silently when the prescribed route works.
 - If an exact required authority/path cannot be retrieved from the pinned snapshot, FAIL CLOSED and report the repository, commit, path, and missing/failed requirement. Do not spend the run trying alternate authority routes.
 
@@ -431,7 +431,7 @@ Before packaging, verify:
 
 AUTHORITY
 - Philosophy read first from the pinned snapshot.
-- Exact pinned Framework ZIP retrieved as binary; required 4A entries selectively extracted; no text-decoding or provenance-hunting workaround used.
+- Exact pinned expanded Physics Framework tree used; only the required 4A files were read; no retired Framework ZIP or provenance-hunting workaround used.
 - Current materialized Bank used from the pinned course snapshot.
 - source Bank fingerprint computed by the content-stable contract in Section 11; raw ZIP hashing is forbidden.
 - Current Physics Notes Image Toolkit used.
@@ -535,6 +535,6 @@ Save unitN_notes_map.zip, still zipped, at <course>/notes/unitN_notes_map.zip. D
 
 
 ======================================================================
-V1.3 RETRIEVAL / PERFORMANCE FIX
+V1.4 EXPANDED-AUTHORITY RETRIEVAL FIX
 ======================================================================
-4A now follows the universal pinned-retrieval contract. The Physics Framework is retrieved once as the exact binary ZIP and only the small 4A authority entries are extracted. Web searching, repository archaeology, deployed-artifact fallback, and routine retrieval narration are prohibited. This change is procedural only; the Notes Map curriculum/data contracts from v1.2 are preserved.
+4A now follows the universal pinned-retrieval contract against the expanded memories repository. The Curriculum Philosophy is read directly as text; the Physics Framework is read selectively from frameworks/2_Framework_Physics/; and the Physics Notes Image Toolkit is read from Tools/Physics_Notes_Image_Toolkit_v1_0/ with IMAGE_CATALOG.json first and only selected image binaries retrieved as needed. Retired authority ZIPs are not reconstructed or preferred. Web searching, repository archaeology, deployed-artifact fallback, and routine retrieval narration remain prohibited. This change is procedural only; the Notes Map curriculum/data contracts from v1.2-v1.3 are preserved.

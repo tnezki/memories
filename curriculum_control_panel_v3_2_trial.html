@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Curriculum Control Panel v3.2 — Trial</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--ink:#18202a;--muted:#667085;--line:#d8dee7;--accent:#285a86;--accent2:#edf4fa;--good:#157347;--warn:#a15c00;--bad:#b42318;--shadow:0 10px 28px rgba(18,34,50,.07)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,#193b5a,#2b628f);color:#fff;padding:25px 30px 22px}header h1{margin:0;font-size:28px;letter-spacing:-.025em}header p{margin:6px 0 0;opacity:.9;max-width:980px}
+main{max-width:1220px;margin:20px auto 48px;padding:0 18px}.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px}@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);padding:18px}.card h2,.card h3{margin-top:0}.small{font-size:13px;color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
+button{appearance:none;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:750;cursor:pointer;background:var(--accent);color:#fff}button.secondary{background:#edf2f6;color:#263b4d;border:1px solid var(--line)}button.ghost{background:#fff;color:var(--accent);border:1px solid #afc2d2}button:disabled{opacity:.45;cursor:not-allowed}
+.tabs{display:flex;gap:8px;margin-bottom:20px}.tab{background:#edf1f5;color:#304154;padding:11px 18px}.tab.active{background:var(--accent);color:#fff}.section{display:none}.section.active{display:block}
+label{display:block;font-size:13px;font-weight:800;margin:13px 0 6px}select,input[type=text],textarea,input[type=file]{width:100%;font:inherit}select,input[type=text],textarea{border:1px solid #cbd4df;border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink)}textarea{min-height:82px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:680px){.row{grid-template-columns:1fr}}
+.status{border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13px;background:#f7f8f9;border:1px solid var(--line)}.status.good{background:#eefbf4;border-color:#b8e4ca;color:#125f3e}.status.warn{background:#fff8e8;border-color:#efdaa6;color:#7c4900}.status.bad{background:#fff1f0;border-color:#f4c1bd;color:#912018}
+.needed,.githubbox,.outputbox,.afterbox{border:1px solid #d5dee8;border-radius:12px;padding:13px;background:#fbfcfd;margin-top:12px}.githubbox{background:#f6f9fc}.outputbox{background:#fff}.afterbox{background:#f0faf4;border-color:#b8e4ca}.needed strong,.githubbox strong,.outputbox>strong,.afterbox strong{display:block;margin-bottom:5px}
+.note{border-left:4px solid #79a4c6;padding:10px 12px;background:#f5f9fc;border-radius:5px;margin:12px 0;font-size:13px}.drop{border:1.5px dashed #acb8c6;border-radius:12px;padding:14px;background:#fafbfc}.divider{height:1px;background:#e6eaf0;margin:18px 0}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.hidden{display:none!important}
+.checkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}@media(max-width:680px){.checkgrid{grid-template-columns:1fr}}.checkgrid label{display:flex;gap:8px;align-items:flex-start;margin:0;padding:9px 10px;border:1px solid #dde3ea;border-radius:10px;background:#fff;font-weight:650}.checkgrid input{margin-top:3px;flex:0 0 auto}
+.delivery{display:grid;gap:7px;margin-top:9px}.delivery label{display:flex;align-items:flex-start;gap:8px;margin:0;padding:8px 10px;border:1px solid #dde3ea;border-radius:10px;background:#fff;font-weight:650}.delivery input{margin-top:3px}
+.source-list{list-style:none;margin:8px 0 0;padding:0}.source-list li{padding:7px 0;border-top:1px solid #e8edf2}.source-list li:first-child{border-top:0}.source-list b{display:block;font-size:12px;color:#475569}.source-list .mono{font-size:12px;color:#263b4d}
+.pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#eaf2f8;color:#234f78;font-size:10px;font-weight:850;margin-left:6px}.pill.good{background:#eaf7ef;color:#14663f}.pill.warn{background:#fff3d6;color:#825100}
+.cleanup-list{margin:7px 0 0 18px;padding:0}.cleanup-list li{margin:5px 0}.mini{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Curriculum Control Panel <span style="font-size:14px;opacity:.76">v3.2 TRIAL</span></h1>
+  <p>Choose the job and outputs. The request stays small; the run pins canonical GitHub snapshots and reads the expanded authority trees directly, retrieving binary assets only when needed.</p>
+</header>
+<main><div class="layout">
+<aside class="card">
+  <h2>Project</h2>
+  <p class="small">Choose the folder containing <b>memories/</b> and the course folders.</p>
+  <button id="connectRoot">Connect Project Root</button>
+  <div id="rootStatus" class="status warn">Not connected.</div>
+  <div id="requestStatus" class="status warn">Requests save to <span class="mono">Downloads/_github_transfers/requests/</span>. Permission is requested only when needed.</div>
+  <div class="divider"></div>
+  <h3>Canonical GitHub</h3>
+  <div class="small">System authority</div><div class="mono">tnezki/memories</div>
+  <div class="small" style="margin-top:9px">Selected course</div><div id="courseRepoSide" class="mono">tnezki/physics</div>
+  <div class="status good" style="margin-top:14px">GitHub is the source of truth. The job pins current commits, uses exact paths, reads expanded authority folders directly, and retrieves binary assets only when required.</div>
+</aside>
+
+<section class="card">
+  <div class="tabs"><button class="tab active" data-tab="build">Build</button><button class="tab" data-tab="patches">Patches</button><button class="tab" data-tab="general">General</button></div>
+
+  <div id="build" class="section active">
+    <h2>Build request</h2>
+    <div class="row"><div><label>Course</label><select id="buildCourse"></select></div><div><label>Unit</label><select id="buildUnit"></select></div></div>
+    <label>Job</label><select id="buildJob"></select>
+    <div id="buildGithub" class="githubbox"></div>
+    <div id="buildOutputs" class="outputbox"></div>
+    <label>Additional files <span class="small">(optional — always available)</span></label><div class="drop"><input id="buildAdditional" type="file" multiple><div class="small" style="margin-top:5px">Only attach run-specific material that is not already in canonical GitHub.</div></div>
+    <label>Optional note</label><textarea id="buildNote" placeholder="Only add a note when this run needs a special instruction."></textarea>
+    <div id="buildAfter" class="afterbox"></div>
+    <div class="actions"><button id="saveBuild">Save Request ZIP</button></div>
+  </div>
+
+  <div id="patches" class="section">
+    <h2>Patch request</h2>
+    <div class="row"><div><label>Course</label><select id="patchCourse"></select></div><div><label>Unit</label><select id="patchUnit"></select></div></div>
+    <label>Patch PM</label><select id="patchJob"></select>
+    <div id="patchGithub" class="githubbox"></div>
+    <div id="patchOutputs" class="outputbox"></div>
+    <label>Additional files <span class="small">(optional)</span></label><div class="drop"><input id="patchAdditional" type="file" multiple><div class="small" style="margin-top:5px">Screenshots or run-specific evidence only; the current artifact is resolved from the canonical course repo.</div></div>
+    <label>Patch instruction <span class="small">(optional)</span></label><textarea id="patchNote" placeholder="Usually leave blank when the Patch PM already defines the repair."></textarea>
+    <div id="patchAfter" class="afterbox"></div>
+    <div class="actions"><button id="savePatch">Save Request ZIP</button></div>
+  </div>
+
+  <div id="general" class="section">
+    <h2>General request</h2>
+    <label>General PM</label><select id="generalJob"></select>
+    <div id="generalGithub" class="githubbox"></div>
+    <div id="generalOutputs" class="outputbox"></div>
+    <label>Primary source files</label><div class="drop"><input id="generalPrimary" type="file" multiple></div>
+    <label>Additional files <span class="small">(optional)</span></label><div class="drop"><input id="generalAdditional" type="file" multiple></div>
+    <label>Run instruction <span class="small">(optional)</span></label><textarea id="generalNote"></textarea>
+    <div id="generalAfter" class="afterbox"></div>
+    <div class="actions"><button id="saveGeneral">Save Request ZIP</button></div>
+  </div>
+</section>
+</div></main>
+<script>
+const SYSTEM_REPO="tnezki/memories";
+const COURSES={
+  "Algebra 1":{folder:"algebra",repo:"tnezki/algebra",framework:"frameworks/2_Framework_Algebra_1",slug:"algebra_1",units:8},
+  "AP Calculus AB":{folder:"calculus",repo:"tnezki/calculus",framework:"frameworks/2_Framework_CALC",slug:"ap_calculus_ab",units:8},
+  "Physics":{folder:"physics",repo:"tnezki/physics",framework:"frameworks/2_Framework_Physics",slug:"physics",units:8}
+};
+let PHILOSOPHY="_Curriculum_Philosophy_Portable_Memory_v3_14.txt"; const QUESTION_STRUCTURE="_question_structure";
+const REQUEST_DB="curriculum-control-panel", REQUEST_STORE="handles", REQUEST_KEY="request-output-folder", ROOT_KEY="project-root";
+const $=id=>document.getElementById(id); const esc=s=>String(s??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let rootHandle=null,requestHandle=null,buildRows=[],patchRows=[],generalRows=[];
+
+const BUILD_FALLBACK=[
+ ["1_Build_Assessment_Plan_PM","Build Assessment Plan","assessment_plan"],
+ ["2_Build_Framework_PM","Build Framework","framework"],
+ ["2b_Build_Bank_Map_PM","Build Bank Map","bank_map"],
+ ["2c_Audit_Fix_Bank_Map_PM","Audit + Fix Bank Map","bank_map_audit"],
+ ["3a_Build_Bank_Seeds_PM","Build Bank Seeds","bank_stage_3a"],
+ ["3b_Build_Bank_Instructional_Parallels_PM","Build Bank Instructional Variants","bank_stage_3b"],
+ ["3c_Build_Bank_Exit_Tickets_PM","Build Bank Exit Tickets","bank_stage_3c"],
+ ["3d_Build_Bank_Summative_PM","Build Bank Summative","bank_stage_3d"],
+ ["3e_Final_Bank_Audit_Materialize_PM","Final Bank Audit + Materialize","bank_stage_3e"],
+ ["4a_Build_Notes_Map_PM","Build Notes Map","notes_map_4a"],
+ ["4b_Build_Notes_PM","Build Notes","notes_build_4b"],
+ ["5_Build_Practice_PM","Build Practice","practice"],
+ ["6_Build_Activities_PM","Build Activities","activities"],
+ ["7_Build_Exit_PM","Build Exit Tickets","exit"],
+ ["8_Build_WarmUp_PM","Build Warm-Ups","warmup"],
+ ["9_Build_Progress_PM","Build Progress Tracker","progress"],
+ ["10_Build_Review_PM","Build Review","review"],
+ ["11_Build_Summative_PM","Build Summative","summative"],
+ ["12_Build_Pract_to_Sum_PM","Practice → Summative","practice_to_summative"],
+ ["13_Build_Demos_Investigations_PM","Build Demos + Investigations","demos_investigations"],
+ ["14_Build_Performance_Tasks_Quick_Checks_PM","Build Performance Tasks + Quick Checks","performance_quick_checks"],
+ ["15_Build_Discourse_Reflect_PM","Build Discourse + Reflection","discourse_reflect"],
+ ["16_Build_First_4_Days_PM","Build First 4 Days","first_4_days"],
+ ["16_Build_Unit_Plan_PM","Build Unit Plan","unit_plan"],
+ ["17_Portfolio_PM","Assess New Evidence","portfolio"]
+].map((x,i)=>({name:x[0],path:"pms_build/"+x[0],label:x[1],key:x[2],order:i+1}));
+const GENERAL_FALLBACK=[
+ ["Create_2_Page_WS_PM","Create 2-Page Worksheet"],["Create_Desmos_Activity_PM","Create Desmos Activity"],["Extract_Content_PM","Extract Content"],["Letter_of_Recommedation_PM","Letter of Recommendation"]
+].map(x=>({name:x[0],path:"pms_general/"+x[0],label:x[1],key:x[0].toLowerCase()}));
+
+function setStatus(id,text,kind="warn"){const el=$(id);el.textContent=text;el.className="status "+kind}
+function openDb(){return new Promise((res,rej)=>{const r=indexedDB.open(REQUEST_DB,1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains(REQUEST_STORE))r.result.createObjectStore(REQUEST_STORE)};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function dbPut(k,v){try{const db=await openDb();await new Promise((res,rej)=>{const tx=db.transaction(REQUEST_STORE,"readwrite");tx.objectStore(REQUEST_STORE).put(v,k);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});db.close()}catch(e){console.warn(e)}}
+async function dbGet(k){try{const db=await openDb();const v=await new Promise((res,rej)=>{const tx=db.transaction(REQUEST_STORE,"readonly"),r=tx.objectStore(REQUEST_STORE).get(k);r.onsuccess=()=>res(r.result||null);r.onerror=()=>rej(r.error)});db.close();return v}catch{return null}}
+async function getDir(parent,name,create=false){try{return await parent.getDirectoryHandle(name,{create})}catch{return null}}
+
+async function connectRoot(){if(!window.showDirectoryPicker){alert("Use current Chrome/Edge for folder access.");return}try{const h=await showDirectoryPicker({mode:"readwrite"}),m=await getDir(h,"memories");if(!m){setStatus("rootStatus","Selected folder does not contain memories/.","bad");return}rootHandle=h;await dbPut(ROOT_KEY,h);setStatus("rootStatus","Project root connected.","good");await restoreRequest()}catch(e){if(e.name!=="AbortError")setStatus("rootStatus","Could not connect: "+e.message,"bad")}}
+async function restoreRoot(){const h=await dbGet(ROOT_KEY);if(!h)return;try{const p=await h.queryPermission({mode:"readwrite"});if(p==="granted"&&await getDir(h,"memories")){rootHandle=h;setStatus("rootStatus","Project root restored.","good")}else setStatus("rootStatus","Saved project root available. Click Connect Project Root to restore permission.","warn")}catch{}}
+async function restoreRequest(){const h=await dbGet(REQUEST_KEY);if(!h)return;try{const p=await h.queryPermission({mode:"readwrite"});if(p==="granted"){requestHandle=h;setStatus("requestStatus","Ready: Downloads/_github_transfers/requests/","good")}else setStatus("requestStatus","Saved requests folder will request permission when you save.","warn")}catch{}}
+async function ensureRequestFolder(){if(requestHandle){try{let p=await requestHandle.queryPermission({mode:"readwrite"});if(p!=="granted")p=await requestHandle.requestPermission({mode:"readwrite"});if(p==="granted")return true}catch{}requestHandle=null}
+ let h=await dbGet(REQUEST_KEY);if(h){try{let p=await h.queryPermission({mode:"readwrite"});if(p!=="granted")p=await h.requestPermission({mode:"readwrite"});if(p==="granted"){if(h.name==="_github_transfers")h=await h.getDirectoryHandle("requests",{create:true});requestHandle=h;await dbPut(REQUEST_KEY,h);setStatus("requestStatus","Ready: Downloads/_github_transfers/requests/","good");return true}}catch{}}
+ if(!window.showDirectoryPicker){alert("Use current Chrome/Edge for direct request saving.");return false}
+ try{let pick=await showDirectoryPicker({mode:"readwrite",startIn:"downloads"});if(pick.name==="_github_transfers")pick=await pick.getDirectoryHandle("requests",{create:true});else if(pick.name!=="requests"){const ok=confirm("Choose either Downloads/_github_transfers or its requests folder. Use the selected folder anyway?");if(!ok)return false}requestHandle=pick;await dbPut(REQUEST_KEY,pick);setStatus("requestStatus",`Ready: ${pick.name}/`,"good");return true}catch{return false}}
+
+function jobNumberFromFilename(name){const m=String(name||"").match(/^(\d+[a-z]?)/i);return m?m[1]:""}
+function labelFromFilename(name){return name.replace(/\.zip$/i,"").replace(/_PM$/i,"").replace(/^\d+[a-z]?_?/i,"").replaceAll("_"," ").replace(/\b\w/g,m=>m.toUpperCase())}
+function numberedLabel(p){const n=jobNumberFromFilename(p?.name||"");return n?`${n} — ${p.label}`:(p?.label||"")}
+async function githubDir(path=""){const suffix=path?`/${path}`:"";const r=await fetch(`https://api.github.com/repos/${SYSTEM_REPO}/contents${suffix}?ref=main`,{headers:{Accept:"application/vnd.github+json"}});if(!r.ok)throw Error("GitHub directory read failed: "+r.status);return await r.json()}
+function versionParts(name){const m=String(name||"").match(/_v(\d+)_(\d+)\.txt$/i);return m?[Number(m[1]),Number(m[2])]:[0,0]}
+async function discoverPhilosophy(){try{const files=(await githubDir()).filter(x=>x.type==="file"&&/^_Curriculum_Philosophy_Portable_Memory_v\d+_\d+\.txt$/i.test(x.name));files.sort((a,b)=>{const av=versionParts(a.name),bv=versionParts(b.name);return bv[0]-av[0]||bv[1]-av[1]});if(files[0])PHILOSOPHY=files[0].path}catch(e){console.warn(e)}}
+async function discoverPmDirs(root,maxDepth=4){const found=[];async function walk(path,depth){for(const x of await githubDir(path)){if(x.type!=="dir")continue;if(/_PM$/i.test(x.name)){found.push(x);continue}if(depth<maxDepth)await walk(x.path,depth+1)}}await walk(root,0);return found}
+async function discoverMenus(){
+ await discoverPhilosophy();
+ try{const dirs=(await githubDir("pms_build")).filter(x=>x.type==="dir"&&/_PM$/i.test(x.name)&&!/^(?:\d+[a-z]?_)?Base_/i.test(x.name));const byName=new Map(BUILD_FALLBACK.map(x=>[x.name,x]));buildRows=dirs.map((x,i)=>byName.get(x.name)||({name:x.name,path:x.path,label:labelFromFilename(x.name),key:x.name.toLowerCase(),order:100+i})).filter(x=>x.name!=="4_Build_Notes_PM").sort((a,b)=>a.order-b.order||a.name.localeCompare(b.name,undefined,{numeric:true}));}catch(e){console.warn(e);buildRows=[...BUILD_FALLBACK]}
+ try{const dirs=await discoverPmDirs("pms_maintenance",4);patchRows=dirs.map((x,i)=>({name:x.name,path:x.path,label:labelFromFilename(x.name),key:x.name.toLowerCase(),order:i})).sort((a,b)=>a.label.localeCompare(b.label));}catch(e){console.warn(e);patchRows=[]}
+ try{const dirs=(await githubDir("pms_general")).filter(x=>x.type==="dir"&&/_PM$/i.test(x.name));const byName=new Map(GENERAL_FALLBACK.map(x=>[x.name,x]));generalRows=dirs.map(x=>byName.get(x.name)||({name:x.name,path:x.path,label:labelFromFilename(x.name),key:x.name.toLowerCase()})).sort((a,b)=>a.label.localeCompare(b.label));}catch(e){console.warn(e);generalRows=[...GENERAL_FALLBACK]}
+ renderBuildMenu();renderPatchMenu();renderGeneralMenu();
+}
+function initCourses(){for(const id of ["buildCourse","patchCourse"]){$(id).innerHTML=Object.keys(COURSES).map(c=>`<option>${esc(c)}</option>`).join("");$(id).value="Physics"}fillUnits("buildUnit","Physics");fillUnits("patchUnit","Physics");updateCourseSide()}
+function fillUnits(id,course){$(id).innerHTML=Array.from({length:COURSES[course].units},(_,i)=>`<option value="${i+1}">Unit ${i+1}</option>`).join("")}
+function updateCourseSide(){const course=document.querySelector(".section.active select[id$='Course']")?.value||$("buildCourse").value;$("courseRepoSide").textContent=COURSES[course]?.repo||""}
+function renderBuildMenu(){const old=$("buildJob").value;$("buildJob").innerHTML=buildRows.map(p=>`<option value="${esc(p.path)}">${esc(numberedLabel(p))}</option>`).join("");const prefer=buildRows.find(x=>x.key==="notes_map_4a")||buildRows[0];if(buildRows.some(x=>x.path===old))$("buildJob").value=old;else if(prefer)$("buildJob").value=prefer.path;refreshBuild()}
+function renderPatchMenu(){const old=$("patchJob").value;$("patchJob").innerHTML=patchRows.length?patchRows.map(p=>`<option value="${esc(p.path)}">${esc(p.label)}</option>`).join(""):'<option value="">No Patch PMs found</option>';if(patchRows.some(x=>x.path===old))$("patchJob").value=old;refreshPatch()}
+function renderGeneralMenu(){const old=$("generalJob").value;$("generalJob").innerHTML=generalRows.map(p=>`<option value="${esc(p.path)}">${esc(p.label)}</option>`).join("");if(generalRows.some(x=>x.path===old))$("generalJob").value=old;refreshGeneral()}
+function buildSelected(){return buildRows.find(x=>x.path===$("buildJob").value)}function patchSelected(){return patchRows.find(x=>x.path===$("patchJob").value)}function generalSelected(){return generalRows.find(x=>x.path===$("generalJob").value)}
+
+function outputSpec(p,unit){const k=p?.key||"";if(k==="practice_to_summative")return ["Practice Sets","Activities","Warm-Ups","Exit Tickets","Progress Tracker","Review","Summative"].map((x,i)=>({id:["practice","activities","warmups","exit","progress","review","summative"][i],label:x,kind:"folder_zip"}));
+ if(k==="demos_investigations")return [{id:"demos",label:"Demos",kind:"folder_zip"},{id:"investigations",label:"Investigations",kind:"folder_zip"}];
+ if(k==="performance_quick_checks")return [{id:"performance_tasks",label:"Performance Tasks",kind:"folder_zip"},{id:"quick_checks",label:"Quick Checks",kind:"folder_zip"}];
+ if(k==="discourse_reflect")return [{id:"discourse",label:"Discourse",kind:"folder_zip"},{id:"reflection",label:"Reflection",kind:"folder_zip"}];
+ const map={assessment_plan:"Assessment Plan",framework:"Framework",bank_map:"Bank Map",bank_map_audit:"Audited Bank Map",bank_stage_3a:"Bank Stage 3A",bank_stage_3b:"Bank Stage 3B",bank_stage_3c:"Bank Stage 3C",bank_stage_3d:"Bank Stage 3D",bank_stage_3e:"Materialized Unit Bank",notes_map_4a:"Notes Map",notes_build_4b:"Notes",practice:"Practice Sets",activities:"Activities",exit:"Exit Tickets",warmup:"Warm-Ups",progress:"Progress Tracker",review:"Review",summative:"Summative",first_4_days:"First 4 Days",unit_plan:"Unit Plan",portfolio:"Portfolio Evidence Update"};return [{id:k||"output",label:map[k]||p?.label||"Requested output",kind:"zip_or_file"}]}
+function patchOutputSpec(p){return [{id:"replacement",label:(p?.label?"Complete replacement — "+p.label:"Complete updated replacement"),kind:"replacement"}]}
+function generalOutputSpec(p){return [{id:"general_output",label:p?.label||"Requested output",kind:"file_or_files"}]}
+function outputHtml(spec,prefix){return `<strong>Output</strong><div class="small">Choose exactly what you want returned.</div><div class="checkgrid">${spec.map((x,i)=>`<label><input type="checkbox" data-output="${esc(prefix)}" value="${esc(x.id)}" data-label="${esc(x.label)}" data-kind="${esc(x.kind)}" checked><span>${esc(x.label)}</span></label>`).join("")}</div><label style="margin-top:13px">Delivery</label><div class="delivery"><label><input type="radio" name="${prefix}Delivery" value="auto" checked><span><b>Auto — recommended</b><br><span class="mini">ZIP replaces ZIP → individual ZIP. Folder → ZIP that folder. Multiple selected outputs → individual outputs.</span></span></label><label><input type="radio" name="${prefix}Delivery" value="individual"><span><b>Individual selected outputs</b><br><span class="mini">Return each selected output separately.</span></span></label><label><input type="radio" name="${prefix}Delivery" value="bundle"><span><b>Bundle selected outputs</b><br><span class="mini">Return one ZIP containing everything selected above.</span></span></label></div>`}
+function selectedOutputs(prefix){return [...document.querySelectorAll(`[data-output="${prefix}"]:checked`)].map(x=>({id:x.value,label:x.dataset.label,kind:x.dataset.kind}))}
+function delivery(prefix){return document.querySelector(`input[name="${prefix}Delivery"]:checked`)?.value||"auto"}
+function fileMode(path){const p=String(path||"");if(/\.zip$/i.test(p))return "binary_zip";if(/\.[a-z0-9]+$/i.test(p))return "utf8_text";return "directory_tree"}
+function authorityRefs(mode,course,job){const c=course?COURSES[course]:null;if(mode==="GENERAL")return [{role:"pm",repo:SYSTEM_REPO,path:job?.path||null,file_mode:fileMode(job?.path),required:true}].filter(x=>x.path);const refs=[
+ {role:"philosophy",repo:SYSTEM_REPO,path:PHILOSOPHY,file_mode:fileMode(PHILOSOPHY),required:true},
+ {role:"framework",repo:SYSTEM_REPO,path:c?.framework,file_mode:fileMode(c?.framework),required:true},
+ {role:"pm",repo:SYSTEM_REPO,path:job?.path||null,file_mode:fileMode(job?.path),required:true}
+];
+ if(["bank_map","bank_map_audit","bank_stage_3a","bank_stage_3b","bank_stage_3c","bank_stage_3d","bank_stage_3e"].includes(job?.key))refs.splice(2,0,{role:"question_structure",repo:SYSTEM_REPO,path:QUESTION_STRUCTURE,file_mode:fileMode(QUESTION_STRUCTURE),required:true});
+ return refs.filter(x=>x.path)
+}
+function modePill(path){const m=fileMode(path);return m==="binary_zip"?'<span class="pill">ZIP · binary</span>':m==="directory_tree"?'<span class="pill good">folder · readable</span>':'<span class="pill">text</span>'}
+function githubHtml(course,pmPath,extra=[]){const c=COURSES[course];const rows=[
+ ["System repo",`${SYSTEM_REPO} — pin current commit at execution`,""],["Philosophy",`${SYSTEM_REPO}/${PHILOSOPHY}`,PHILOSOPHY],["Framework",`${SYSTEM_REPO}/${c.framework}`,c.framework],["PM",`${SYSTEM_REPO}/${pmPath}`,pmPath],["Course repo",`${c.repo} — pin current commit at execution`,""],...extra.map(x=>[x[0],x[1],x[2]||""])
+ ];return `<strong>This job will resolve from GitHub</strong><ul class="source-list">${rows.map(x=>`<li><b>${esc(x[0])}${x[2]?modePill(x[2]):""}</b><span class="mono">${esc(x[1])}</span></li>`).join("")}</ul>`}
+function buildExtras(p,course,unit){const k=p?.key||"",c=COURSES[course],base=[];if(["bank_map","bank_map_audit","bank_stage_3a","bank_stage_3b","bank_stage_3c","bank_stage_3d","bank_stage_3e"].includes(k))base.push(["Question Structure",`${SYSTEM_REPO}/${QUESTION_STRUCTURE}`]);
+ if(["notes_map_4a","notes_build_4b","practice","activities","exit","warmup","progress","review","summative","practice_to_summative"].includes(k))base.push(["Unit Bank / map / deployed assets",`${c.repo} — Unit ${unit}, resolved as required by the PM`]);
+ if(k==="notes_map_4a"&&course==="Physics")base.push(["Physics Notes Image Toolkit",`${SYSTEM_REPO}/Tools/Physics_Notes_Image_Toolkit_v1_0`]);
+ if(k==="notes_build_4b")base.push(["Notes Map",`${c.repo}/notes/unit${unit}_notes_map.zip (current canonical if present)`]);
+ if(k==="notes_build_4b"&&course==="Physics")base.push(["Physics Notes Image Toolkit",`${SYSTEM_REPO}/Tools/Physics_Notes_Image_Toolkit_v1_0`]);
+ if(["notes_build_4b","practice","activities","exit","warmup","progress","review","summative","practice_to_summative"].includes(k))base.push(["CSS / tools / templates",`${c.repo} + ${SYSTEM_REPO} — only what the PM/Framework requires`]);return base}
+function afterHtml(mode,course,unit){const c=COURSES[course];return `<strong>After approval</strong><ul class="cleanup-list"><li>Put the returned replacement file(s) in the matching <span class="mono">${esc(c.folder)}/</span> location and choose <b>Replace</b> when appropriate.</li><li>Sync with GitHub Desktop and confirm the repo is clean/current.</li><li>After the GitHub sync is confirmed, you can delete the saved request ZIP and the extra downloaded replacement copy.</li></ul>`}
+function refreshBuild(){const p=buildSelected(),course=$("buildCourse").value,unit=Number($("buildUnit").value);updateCourseSide();$("buildGithub").innerHTML=githubHtml(course,p?.path||"",buildExtras(p,course,unit));$("buildOutputs").innerHTML=outputHtml(outputSpec(p,unit),"build");$("buildAfter").innerHTML=afterHtml("build",course,unit)}
+function refreshPatch(){const p=patchSelected(),course=$("patchCourse").value,unit=Number($("patchUnit").value);updateCourseSide();$("patchGithub").innerHTML=githubHtml(course,p?.path||"",[["Current artifact",`${COURSES[course].repo} — current deployed artifact resolved by the selected Patch PM`]]);$("patchOutputs").innerHTML=outputHtml(patchOutputSpec(p),"patch");$("patchAfter").innerHTML=afterHtml("patch",course,unit)}
+function refreshGeneral(){const p=generalSelected();$("generalGithub").innerHTML=`<strong>This job will resolve from GitHub</strong><ul class="source-list"><li><b>General PM</b><span class="mono">${esc(SYSTEM_REPO+"/"+(p?.path||""))}</span></li></ul>`;$("generalOutputs").innerHTML=outputHtml(generalOutputSpec(p),"general");$("generalAfter").innerHTML=`<strong>After approval</strong><ul class="cleanup-list"><li>Keep the final file(s) you need.</li><li>After you confirm the result, you can delete the saved request ZIP and temporary downloaded copies.</li></ul>`}
+
+function manifestBase(mode,course,unit,job,outputs,deliver,note,attachments){const c=course?COURSES[course]:null;return {schema:"curriculum-control-request/3.2",mode,course:course||null,unit:unit||null,workflow:job?.key||null,workflow_label:numberedLabel(job)||job?.label||null,system_repo:SYSTEM_REPO,course_repo:c?.repo||null,git_snapshot_rule:"At job start, resolve current commits for system_repo and course_repo once; pin both commits for the entire job.",retrieval_contract:{routine_retrieval_is_silent:true,exact_pinned_paths_only:true,zip_mode:"binary",directory_mode:"repository_tree",text_mode:"utf-8",no_web_search_for_canonical_authorities:true,no_repo_history_or_provenance_hunting:true,no_old_chat_upload_fallback:true,fail_closed_on_retrieval_failure:true},authorities:authorityRefs(mode,course,job),selected_outputs:outputs,delivery:deliver,additional_files:attachments,note:note||""}}
+function requestText(m){let s="CURRICULUM CONTROL PANEL v3.2 REQUEST\n\n";s+=`MODE: ${m.mode}\n`;if(m.course)s+=`COURSE: ${m.course}\n`;if(m.unit)s+=`UNIT: ${m.unit}\n`;s+=`JOB: ${m.workflow_label||m.workflow||"General"}\nSYSTEM REPO: ${m.system_repo}\n`;if(m.course_repo)s+=`COURSE REPO: ${m.course_repo}\n`;for(const a of m.authorities||[])s+=`${a.role.toUpperCase()}: ${a.repo}/${a.path} [${a.file_mode}]\n`;s+=`OUTPUTS: ${m.selected_outputs.map(x=>x.label).join("; ")}\nDELIVERY: ${m.delivery}\n`;if(m.note)s+=`NOTE: ${m.note}\n`;s+="\nEXECUTION\nUse canonical GitHub, not old chat uploads. Resolve the current commit of each named repo once at job start and pin those snapshots for the whole job. Retrieve each listed authority from its exact repo + pinned commit + path. Directory authorities are repository trees: read only the specific files the governing PM requires. Text authorities use UTF-8. Binary leaf assets or ZIP deliverables must use a binary-safe retrieval method. Read Philosophy first, then Framework, then the selected PM. Do not search the web, inspect repository history, hunt provenance, or invent alternate retrieval routes for routine canonical authorities. Do not narrate routine retrieval mechanics. If a listed authority cannot be retrieved exactly from the pinned snapshot, fail closed and report the missing authority. After the authority layer is loaded, resolve Banks, maps, CSS, tools, templates, dashboards, and deployed artifacts only as the Framework/PM requires.\n\nOUTPUT CONTRACT\nReturn only the selected outputs. If delivery is AUTO: when a ZIP replaces a ZIP, return that individual replacement ZIP; when the deliverable is a folder, ZIP that folder; when several outputs are selected, return them individually unless the PM requires one inseparable package. Do not wrap individual replacement ZIPs inside another ZIP just for convenience.\n";return s}
+
+const crcTable=(()=>{let t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();function crc32(u){let c=0xffffffff;for(const b of u)c=crcTable[(c^b)&255]^(c>>>8);return(c^0xffffffff)>>>0}function u16(n){return new Uint8Array([n&255,(n>>>8)&255])}function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255])}function concat(ps){let n=ps.reduce((a,p)=>a+p.length,0),o=new Uint8Array(n),x=0;for(const p of ps){o.set(p,x);x+=p.length}return o}
+async function makeZip(entries){const enc=new TextEncoder(),ls=[],cs=[];let off=0;for(const e of entries){const name=enc.encode(e.name),data=e.data instanceof Uint8Array?e.data:new Uint8Array(e.data),crc=crc32(data),l=concat([u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data]);ls.push(l);cs.push(concat([u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off),name]));off+=l.length}const c=concat(cs),end=concat([u32(0x06054b50),u16(0),u16(0),u16(entries.length),u16(entries.length),u32(c.length),u32(off),u16(0)]);return new Blob([...ls,c,end],{type:"application/zip"})}
+async function addFiles(entries,files,prefix){for(const f of files)entries.push({name:prefix+f.name,data:new Uint8Array(await f.arrayBuffer())})}
+async function writeRequest(blob,name){if(!(await ensureRequestFolder()))return;const h=await requestHandle.getFileHandle(name,{create:true}),w=await h.createWritable();await w.write(blob);await w.close();setStatus("requestStatus",`Saved: ${requestHandle.name}/${name}`,"good")}
+function safeSlug(s){return String(s||"request").toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"")}
+async function saveBuild(){const p=buildSelected(),course=$("buildCourse").value,unit=Number($("buildUnit").value),outs=selectedOutputs("build");if(!p||!outs.length){alert("Choose at least one output.");return}const files=[...$("buildAdditional").files],m=manifestBase("BUILD",course,unit,p,outs,delivery("build"),$("buildNote").value.trim(),files.map(f=>f.name)),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_REQUEST.zip`)}
+async function savePatch(){const p=patchSelected(),course=$("patchCourse").value,unit=Number($("patchUnit").value),outs=selectedOutputs("patch");if(!p||!outs.length){alert("Choose a Patch PM and output.");return}const files=[...$("patchAdditional").files],m=manifestBase("PATCH",course,unit,p,outs,delivery("patch"),$("patchNote").value.trim(),files.map(f=>f.name)),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m)+"\nPATCH RULE\nApply the repair to the current artifact resolved from the pinned course repo. Preserve all out-of-scope content.\n")},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_REQUEST.zip`)}
+async function saveGeneral(){const p=generalSelected(),primary=[...$("generalPrimary").files],extra=[...$("generalAdditional").files],outs=selectedOutputs("general");if(!p||!primary.length||!outs.length){alert("Choose the General PM, at least one primary source file, and an output.");return}const files=[...primary,...extra],m=manifestBase("GENERAL",null,null,p,outs,delivery("general"),$("generalNote").value.trim(),files.map(f=>f.name));m.system_repo=SYSTEM_REPO;m.course_repo=null;const enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,primary,"inputs/primary/");await addFiles(entries,extra,"inputs/additional/");await writeRequest(await makeZip(entries),`general_${safeSlug(p.key)}_REQUEST.zip`)}
+
+function tab(name){document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));document.querySelectorAll(".section").forEach(x=>x.classList.toggle("active",x.id===name));updateCourseSide()}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+$("connectRoot").onclick=connectRoot;$("saveBuild").onclick=saveBuild;$("savePatch").onclick=savePatch;$("saveGeneral").onclick=saveGeneral;
+$("buildCourse").onchange=()=>{fillUnits("buildUnit",$("buildCourse").value);refreshBuild()};$("buildUnit").onchange=refreshBuild;$("buildJob").onchange=refreshBuild;
+$("patchCourse").onchange=()=>{fillUnits("patchUnit",$("patchCourse").value);refreshPatch()};$("patchUnit").onchange=refreshPatch;$("patchJob").onchange=refreshPatch;$("generalJob").onchange=refreshGeneral;
+
+(async function init(){initCourses();await restoreRoot();await restoreRequest();await discoverMenus();})();
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-4A NOTES MAP SOURCE CONTRACT — v1.3
+4A NOTES MAP SOURCE CONTRACT — v1.4
 ============================
 
 REQUIRED CURRENT AUTHORITIES
@@ -9,9 +9,10 @@ REQUIRED CURRENT AUTHORITIES
 
 PINNED RETRIEVAL — HARD
 - Use only request-pinned repository snapshots.
-- Retrieve _Curriculum_Philosophy_PM.zip, frameworks/Framework_Physics.zip, this PM, the Unit Bank, and the Physics Notes Image Toolkit from their canonical pinned paths.
-- ZIP/binary authorities must be transferred as binary bytes, not passed through a UTF-8/text reader.
-- For Framework_Physics.zip, extract only the 4A entries listed in PM Section 0; do not ingest the full Framework payload.
+- Read the exact Curriculum Philosophy text file named by the request, this PM directory, frameworks/2_Framework_Physics/, the Unit Bank, and Tools/Physics_Notes_Image_Toolkit_v1_0/ from their canonical pinned paths.
+- Expanded text/directory authorities are read directly from the repository tree; binary leaf assets and ZIP deliverables use binary-safe transfer only when needed.
+- For the Physics Framework, read only the 4A files listed in PM Section 0; do not ingest the full Framework payload and do not reconstruct the retired Framework_Physics.zip.
+- Open Tools/Physics_Notes_Image_Toolkit_v1_0/IMAGE_CATALOG.json before retrieving any image binaries.
 - Normal retrieval is silent. Do not web-search, provenance-hunt, or substitute lower-authority deployed artifacts.
 - If a prescribed pinned path fails, fail closed with exact repo/commit/path rather than exploring alternate authority routes.
 
@@ -27,7 +28,7 @@ FAIL CLOSED IF
 
 DO NOT REQUIRE
 - the retired Question Structure and Visual Toolkit;
-- _question_structure.zip;
+- _question_structure/;
 - final Notes HTML/CSS source files;
 - manually supplied images when the toolkit already contains the needed source image.
 
