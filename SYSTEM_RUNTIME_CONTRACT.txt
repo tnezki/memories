@@ -4,7 +4,8 @@ CURRICULUM SYSTEM RUNTIME CONTRACT
 1. Canonical GitHub stores readable authorities and long-lived readable artifacts expanded. ZIP is a handoff/transport format only unless the resource is intrinsically an archive/binary bundle. A staged build checkpoint may remain a ZIP only when the PM explicitly treats the archive boundary/integrity as part of that temporary checkpoint contract.
 2. Resolve and pin the memories commit and selected course commit once at job start. Never mix later commits into the run.
 3. Resolve authorities through SYSTEM_MANIFEST.json and the relevant registry/manifest. Do not guess versioned filenames.
-4. Read only the files the selected PM requires. Heavy source/resource trees are on-demand resources, not default authority payloads.
-5. Fail closed if a required manifest, entrypoint, or canonical course artifact is missing at the pinned commit. Do not fall back to old uploads/chat copies.
-6. One output file is returned directly. Multi-file folders may be zipped for handoff, but the ZIP is extracted before canonical GitHub sync.
-7. PMs own procedure; manifests own stable discovery; Git history owns version history.
+4. DECLARED AUTHORITY DIRECT-FETCH RULE — HARD: when a required curriculum authority or resource is declared by the system manifest, Framework manifest, course manifest, artifact manifest, or request snapshot, fetch that exact declared resource at the pinned commit. Do not use generic web search, repository-wide search, similarly named files, lightweight/alternate views, archived copies, ZIPs, prior uploads, or chat copies to discover or substitute a canonical curriculum source. Search is allowed only for genuinely external research when the current PM explicitly calls for it.
+5. Read only the files the selected PM requires. Heavy source/resource trees are on-demand resources, not default authority payloads. When a manifest declares a purpose-specific canonical file, use that file directly instead of opening a broader aggregate and searching inside it.
+6. Fail closed if a required manifest, entrypoint, or canonical course artifact is missing at the pinned commit. Do not fall back to old uploads/chat copies or alternate representations.
+7. One output file is returned directly. Multi-file folders may be zipped for handoff, but the ZIP is extracted before canonical GitHub sync.
+8. PMs own procedure; manifests own stable discovery; Framework/course profiles own course-specific behavior; Git history owns version history.

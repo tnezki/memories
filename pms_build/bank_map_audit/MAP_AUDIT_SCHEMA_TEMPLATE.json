@@ -1,32 +1,37 @@
 {
-  "schema_version": "physics-bank-map-audit-v1",
-  "course": "Physics",
-  "unit": null,
-  "audit_pm": "Audit + Fix Bank Map v1.0",
-  "source_map_schema": "physics-bank-map-v1",
-  "fresh_eyes": true,
-  "checks": {
-    "authority_alignment": "PASS|FAIL",
-    "resource_purpose": "PASS|FAIL",
-    "evidence_job": "PASS|FAIL",
-    "structure_plan": "PASS|FAIL",
-    "wording_length_plan": "PASS|FAIL",
-    "representation_plan": "PASS|FAIL|N/A",
-    "parallel_variant_plan": "PASS|FAIL|N/A",
-    "security_plan": "PASS|FAIL|N/A",
-    "physics_math_plan": "PASS|FAIL|N/A",
-    "inventory_links": "PASS|FAIL"
-  },
-  "before": {
-    "pass_slots": 0,
-    "fail_slots": 0,
-    "issues_by_code": {}
+  "schema": "curriculum-bank-map-audit/2.0",
+  "course": "COURSE",
+  "unit": 1,
+  "source_map_identity": "...",
+  "course_bank_profile": "...",
+  "first_pass": {
+    "records_audited": 0,
+    "issues": []
   },
   "repairs": [],
-  "after": {
-    "pass_slots": 0,
-    "fail_slots": 0,
-    "issues_by_code": {},
-    "final_status": "PASS|BLOCKED"
-  }
+  "final_counts": {
+    "exact_content": {},
+    "family_seed": {}
+  },
+  "selection_feasibility": [
+    {
+      "destination": "practice",
+      "section": "1.1",
+      "pool_size": 0,
+      "form_size": 0,
+      "constraints_satisfiable": true,
+      "deterministic_key_present": true,
+      "status": "PASS"
+    }
+  ],
+  "hard_gates": {
+    "authority_alignment": "PASS",
+    "manifest_routing": "PASS",
+    "course_profile_inventory": "PASS",
+    "i_can_coverage": "PASS",
+    "selection_feasibility": "PASS",
+    "security_architecture": "PASS",
+    "prose_leak": "PASS"
+  },
+  "final_status": "PASS"
 }

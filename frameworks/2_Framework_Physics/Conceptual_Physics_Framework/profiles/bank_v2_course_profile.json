@@ -1,0 +1,207 @@
+{
+  "schema": "course-bank-v2-profile/1.0",
+  "name": "Conceptual Physics Bank v2 Pilot Profile",
+  "course": "Physics",
+  "status": "CURRENT_FOR_BANK_V2_MAP_PILOT",
+  "role": "Physics-specific Bank-v2 inventory, canonical record modes, family-pool rules, deterministic selection constraints, and disciplinary authoring behavior for Steps 2.5/2.6. Universal procedure remains PM-owned; universal question structures remain owned by _question_structure/.",
+  "compatibility_note": "The legacy bank_course_profile.json remains in place temporarily for the currently deployed Stage 3A-3E pipeline. This v2 profile is the manifest-declared authority for the Bank-v2 2.5/2.6 pilot. After the new map is approved, Stage 3A-3E will be upgraded and the duplicate legacy inventory will be retired.",
+  "instructional_spine": {
+    "hard_rule": "Exact Unit Assessment Plan I-can statements are the atomic planning and routing addresses. Build evidence/family plans from I-cans first; never fill destination counts and attach I-can labels afterward.",
+    "question_structure_authority": "current _question_structure/",
+    "course_behavior_authority": "current Physics Framework + this profile"
+  },
+  "record_modes": {
+    "exact_content": "Later Bank stages author one exact canonical prompt/answer/solution. Downstream artifacts reproduce that item exactly.",
+    "family_seed": "Later Bank stages author one complete canonical seed prompt/answer/solution plus an explicit transformation contract. Downstream artifacts may create only validated controlled variants."
+  },
+  "inventory": {
+    "wtc": {
+      "record_mode": "exact_content",
+      "per_section": 1,
+      "rule": "One coherent multipart FRQ-decomposition routine, normally 3-5 connected parts. May use cross-Unit Physics and does not satisfy current-Unit I-can coverage."
+    },
+    "example_yti": {
+      "record_mode": "exact_content",
+      "pairs_per_section": 4,
+      "records_per_section": 8,
+      "rule": "Every exact section I-can receives at least one complete Example/YTI pair before any enrichment pair is allocated. Example models; YTI gives a comparable application."
+    },
+    "practice": {
+      "record_mode": "family_seed",
+      "family_pool_per_section": 30,
+      "downstream_set_size": 24,
+      "downstream_sets": [
+        "Practice Set 1",
+        "Practice Set 2",
+        "Practice Set 3",
+        "Extra Practice"
+      ],
+      "family_mix_ranges": {
+        "vocabulary_representation": {
+          "min": 8,
+          "max": 10
+        },
+        "conceptual_application": {
+          "min": 12,
+          "max": 15
+        },
+        "quantitative_modeling": {
+          "min": 5,
+          "max": 8
+        }
+      },
+      "mix_rule": "The three category counts must sum to exactly 30. Choose the section-specific mix from the actual I-cans/evidence needs; do not force one identical split across all sections.",
+      "selection_rule": "Each downstream Practice set selects 24 of the 30 families using hard I-can/evidence/composition constraints first, then stable deterministic tie-breaking. No uncontrolled randomness.",
+      "rotation_rule": "Different set keys should rotate omissions when constraints allow so the 30-family pool provides real breadth. Rotation preference may never override I-can coverage, family-type constraints, or question quality.",
+      "seed_rule": "Each family is later authored as one complete canonical seed question with answer/solution and transformation metadata. Downstream variants may not be generated from metadata alone."
+    },
+    "cyu": {
+      "record_mode": "exact_content",
+      "per_section": 6,
+      "pilot_rule": "Keep six exact canonical CYU items per section for the Bank-v2 pilot. They may intentionally resemble strong Practice families but are authored as exact canonical items and copied downstream."
+    },
+    "warmups": {
+      "record_mode": "exact_content",
+      "warmups_per_section": 3,
+      "questions_per_warmup": 4,
+      "records_per_section": 12,
+      "slot_pattern": {
+        "Q1": "current/recent Physics retrieval",
+        "Q2": "older/spiraled Physics retrieval",
+        "Q3": "concise conceptual/vocabulary/application retrieval",
+        "Q4": "recurring Physics math/formula skill"
+      },
+      "q4_hard_rule": "Use a short concrete physical situation that naturally supplies measurements. Supply an appropriate relationship/formula when useful. Students use, rearrange/invert, interpret, or combine the relationship. Do not use naked variable assignments as the normal student experience.",
+      "repetition_rule": "Controlled retrieval repetition is allowed and often desirable."
+    },
+    "exit": {
+      "record_mode": "family_seed",
+      "family_pool_per_section": 8,
+      "ticket_size": 4,
+      "forms": [
+        "A",
+        "B",
+        "C"
+      ],
+      "selection_rule": "For a declared Exit build key, deterministically select four families that collectively give the strongest feasible section evidence. The selected family IDs define the evidence blueprint for A/B/C; the three forms are controlled secure instances of that same blueprint.",
+      "suggested_family_balance": "When supported by the section I-cans, include core understanding, conceptual reasoning, quantitative/application, and transfer/representation evidence. This is a best-fit shape, not a rigid universal quota.",
+      "security_rule": "A/B/C preserve family I-can, evidence job, structure, response demand, and approximate difficulty while requiring genuinely fresh secure stimulus/context/data/representation as appropriate. Exposed instructional finished prompts may not be reused."
+    },
+    "summative": {
+      "record_mode": "family_seed",
+      "family_pool_per_unit": 40,
+      "form_size": 20,
+      "selected_response_per_form": 16,
+      "constructed_response_per_form": 4,
+      "forms": [
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "blueprints": {
+        "A": {
+          "family_count": 20,
+          "forms": [
+            "V1",
+            "V2",
+            "V3",
+            "V4"
+          ],
+          "rule": "Map exact family IDs at Step 2.5. V1-V4 are controlled parallel secure instances of this same evidence blueprint."
+        },
+        "B": {
+          "family_count": 20,
+          "forms": [
+            "V5",
+            "V6"
+          ],
+          "rule": "Map exact family IDs at Step 2.5. V5-V6 are controlled secure instances of a materially alternate/makeup blueprint."
+        }
+      },
+      "blueprint_overlap_rule": "Blueprint A and B may overlap on high-leverage I-cans/families when justified, but Blueprint B must be materially alternate overall in evidence families, contexts, representations, and/or dependency paths. Do not force disjointness if it weakens coverage.",
+      "coverage_rule": "Every Summative form must be able to directly sample every exact Unit I-can at least once; remaining slots are intentionally weighted toward high-leverage/compound mastery evidence.",
+      "security_rule": "No exposed instructional finished prompt reuse. Same-family secure variants must preserve tested evidence and approximate difficulty while changing the allowed secure-instance axes.",
+      "answer_position_rule": "Deterministic selected-response answer-position scrambling remains a downstream final assembly step after content is fixed."
+    },
+    "games": {
+      "tarsia_pairs_when_used": 18,
+      "blooket_questions_when_used": 20,
+      "rule": "Treat these as downstream derivatives/selections from nonsecure Practice family content when the course workflow calls for them; do not inflate the canonical Bank-v2 family inventory merely to store game permutations."
+    }
+  },
+  "practice_family_contract": {
+    "required_fields": [
+      "family_id",
+      "primary_i_can_id",
+      "evidence_job",
+      "family_type",
+      "question_structure_id",
+      "response_mode",
+      "representation_mode",
+      "difficulty_intent",
+      "locked_elements",
+      "allowed_variations",
+      "required_variations",
+      "forbidden_variations",
+      "selection_tags"
+    ],
+    "locked_minimum": [
+      "primary_i_can",
+      "evidence_job",
+      "question_structure",
+      "intended_reasoning",
+      "approximate_difficulty"
+    ],
+    "allowed_variation_examples": [
+      "values/units",
+      "unknown/solve direction",
+      "evidence set",
+      "vocabulary direction",
+      "misconception/error target",
+      "representation values/type/orientation",
+      "physical context/phenomenon",
+      "dependency path",
+      "wording profile"
+    ],
+    "anti_drift_rule": "A variant fails if it changes the I-can, evidence job, structure, intended reasoning, approximate difficulty, or required representation behavior. A noun/name swap alone is not meaningful variation when the family requires richer change."
+  },
+  "deterministic_selection": {
+    "hard_rule": "Constrained first, deterministic tie-break second. Never ask the model to choose randomly.",
+    "selection_key_recipe": "course|unit|section-or-unit|destination|form-or-set|bank_fingerprint",
+    "reproducibility": "Same pinned Bank identity and same build key must yield the same family IDs and same ordering before any final answer-choice scramble.",
+    "tie_break": "Stable hash/pseudo-random ordering of eligible family IDs after hard constraints are satisfied.",
+    "hard_constraints_precede_tie_break": [
+      "required I-can/evidence coverage",
+      "family-type composition/range",
+      "response-mode requirements",
+      "security requirements",
+      "representation requirements"
+    ]
+  },
+  "physics_authoring_rules": {
+    "short_by_default": "Extra context only when it improves the Physics, evidence, or authenticity of the situation.",
+    "physical_math": "Do not author naked plug-and-chug prompts that only assign variables. Begin with a concrete physical situation/phenomenon that naturally supplies measurements; equations are relationships describing that phenomenon.",
+    "conceptual_before_computational": "Establish the physical model/relationship qualitatively before formula substitution when the concept supports it.",
+    "representations": "Graphs, diagrams, FBDs, vectors, motion diagrams, tables, models, and other representations are evidence when they carry the task, not decoration.",
+    "multi_step": "Multi-step means an intermediate result is actually required for the final result.",
+    "source_neutrality": "Source/reference libraries may inform authoring but may not silently expand Unit scope beyond the current Assessment Plan."
+  },
+  "qa": {
+    "family_fidelity_dimensions": [
+      "same primary I-can",
+      "same evidence job",
+      "same question structure",
+      "same intended reasoning",
+      "comparable difficulty",
+      "required representation behavior preserved",
+      "declared variation visibly realized",
+      "forbidden drift absent",
+      "answer/solution correct",
+      "physical situation plausible and natural"
+    ],
+    "regeneration_rule": "If a generated downstream variant fails family fidelity, regenerate/repair that item within the declared family contract; do not silently substitute a different family or weaken the evidence job."
+  }
+}

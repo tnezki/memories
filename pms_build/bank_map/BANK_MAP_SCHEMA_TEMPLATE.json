@@ -1,44 +1,48 @@
 {
-  "schema_version": "physics-bank-map-v1",
-  "course": "Physics",
-  "unit": null,
-  "section_count": null,
-  "authority": {
-    "philosophy": "",
-    "framework": "",
-    "assessment_plan": "",
-    "question_structure": "",
-    "pm": "Build Bank Map v1.0"
+  "schema": "curriculum-bank-map/2.0",
+  "course": "COURSE",
+  "unit": 1,
+  "destination": "practice",
+  "course_bank_profile": "manifest-declared profile identity",
+  "selection_contract": {
+    "pool_size": 0,
+    "form_size": 0,
+    "selection_key_recipe": "course|unit|section|destination|form",
+    "constraints": [],
+    "tie_break": "stable hash ordering after constraints"
   },
-  "global_rules": {
-    "default_length": "short",
-    "context_rich_is_optional": true,
-    "visual_production_cost_assumption": "effectively_zero",
-    "fresh_visuals_for_parallel_evidence": true,
-    "parallel_similarity_is_intentional": true,
-    "math_requires_physical_situation": true,
-    "dok_bloom_after_authoring": true
-  },
-  "i_can_map": [],
-  "inventory": {},
-  "assessment_evidence_maps": {
-    "exit": [],
-    "summative_v1": [],
-    "summative_v5": []
-  },
-  "sections": [],
-  "summative": {
-    "v1": [],
-    "v2": [],
-    "v3": [],
-    "v4": [],
-    "v5": [],
-    "v6": []
-  },
-  "validation": {
-    "expected_total": null,
-    "actual_total": null,
-    "passed": false,
-    "warnings": []
-  }
+  "records": [
+    {
+      "record_id": "U1-S1-PF01",
+      "record_mode": "family_seed",
+      "family_id": "U1-S1-PF01",
+      "destination": "Practice",
+      "section": "1.1",
+      "primary_i_can_id": "...",
+      "primary_i_can": "exact text",
+      "supporting_i_can_ids": [],
+      "evidence_job": "specific student evidence/learning action",
+      "family_type": "course-owned family type",
+      "question_structure_id": "current question-structure ID",
+      "response_mode": "constructed",
+      "representation_mode": "none/table/graph/diagram/model/etc",
+      "wording_profile": "short",
+      "security_level": "instructional",
+      "difficulty_intent": "core",
+      "locked_elements": [
+        "primary_i_can",
+        "evidence_job",
+        "question_structure",
+        "intended_reasoning",
+        "approximate_difficulty"
+      ],
+      "allowed_variations": [],
+      "required_variations": [],
+      "forbidden_variations": [],
+      "representation_variation_rule": "N/A or explicit rule",
+      "selection_tags": [],
+      "source_basis": [],
+      "authoring_notes": "design guidance only; no finished student prompt"
+    }
+  ]
 }
