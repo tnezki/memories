@@ -1,11 +1,11 @@
 {
   "schema": "course-bank-v2-profile/1.0",
-  "profile_version": "v1.2",
+  "profile_version": "v1.3",
   "name": "Conceptual Physics Bank v2 Course Profile",
   "course": "Physics",
   "status": "CURRENT",
   "role": "Current Framework-declared Physics Bank-v2 contract for Steps 2A, 3A, 3B, and 3C plus downstream Bank-aware builds. Universal procedure remains PM-owned; universal question structures remain owned by _question_structure/. This profile supersedes legacy Bank-profile behavior retained in older Framework summary text.",
-  "compatibility_note": "Bank-v2 is the current Physics Bank architecture. The legacy bank_course_profile.json is deprecated and must not be used for Bank-v2 mapping, authoring, or canonical Bank reads. Prior stage ZIPs are transport artifacts only, never canonical inputs.",
+  "compatibility_note": "Bank-v2 is the current Physics Bank architecture. The legacy bank_course_profile.json is deprecated and must not be used for Bank-v2 mapping, authoring, or canonical Bank reads. Prior stage ZIPs are transport artifacts only, never canonical inputs. v1.3 is a WTC-contract clarification only: it aligns WTC with the Philosophy as FRQ decomposition/navigation practice rather than a content-difficulty requirement and strengthens move-metadata verification. Existing v1.2 Unit Bank Maps and completed 3A exact-content are compatible for continuation into 3B/3C when the accepted map fingerprint is unchanged, because Practice/Exit/Summative contracts are unchanged. Future 2A/3A runs must use v1.3.",
   "canonical_source_routing": {
     "map_front_door": "banks/unitN_bank_map/MAP_MANIFEST.json",
     "bank_front_door": "banks/unitN/BANK_MANIFEST.json",
@@ -31,9 +31,22 @@
     "wtc": {
       "record_mode": "exact_content",
       "per_section": 1,
-      "rule": "One difficult coherent multipart FRQ-decomposition routine, normally 3-5 connected labeled parts, built around one shared stimulus/representation. May use prior, current, or future Physics content and does not satisfy current-Unit I-can coverage.",
-      "rigor_hard_gate": "Every WTC must include an actual evidence-bearing representation or rich shared stimulus, at least one interpretation/extraction move, at least one dependency or use of an earlier conclusion, and at least one planning/model-choice/justification move. It is not a loose preview list.",
-      "untaught_content_rule": "When WTC content has not yet been taught, students may be asked to unpack, annotate, interpret, plan, select a relationship, or predict at a structurally accessible level rather than demonstrate mastery of an untaught procedure."
+      "rule": "One coherent multipart FRQ-decomposition routine, normally 3-5 connected labeled parts, built around one shared stimulus/representation. Its primary job is to teach students how to unpack and navigate a long problem, not to maximize content difficulty. It may use prior, current, or future Physics content and does not satisfy current-Unit I-can coverage.",
+      "rigor_hard_gate": "Structural/navigation rigor, not content difficulty: every WTC must use one coherent shared stimulus/representation, have connected labeled parts, require students to actually read/use the shared information, and include at least one real dependency or explicit carry-forward between parts. The routine must practice meaningful FRQ decomposition/navigation moves, but planning/model-choice/justification is a move option, not a universal per-WTC requirement. A loose list of independent mini-questions is a FAIL.",
+      "untaught_content_rule": "When WTC content has not yet been taught, students may be asked to unpack, annotate, interpret, identify givens/asks, select a relationship, plan, predict, or explain at a structurally accessible level rather than demonstrate mastery of an untaught procedure.",
+      "difficulty_rule": "The page/problem may look long, dense, or intimidating enough to practice entering a big multi-part FRQ, while the underlying Physics may be straightforward. Straightforward or already-learned content is often desirable because it isolates the decomposition/navigation skill. Do not fail a WTC merely because the Physics is easy.",
+      "decomposition_move_menu": [
+        "identify_givens_and_asks",
+        "read_or_annotate_representation",
+        "identify_dependency_or_carry_forward",
+        "select_relationship_model_or_plan",
+        "make_prediction",
+        "critique_or_revise",
+        "justify_or_explain",
+        "communicate_reasoning"
+      ],
+      "move_selection_rule": "Choose the move mix that fits the shared stimulus. Not every WTC must use every move. At minimum the final routine must visibly execute shared-stimulus use plus a real dependency/carry-forward; additional decomposition/navigation moves are selected intentionally.",
+      "metadata_truth_rule": "After authoring, WTC move/focus metadata must be derived from the actual student-facing parts. Do not claim planning, model choice, justification, critique, annotation, or any other move unless the final prompt visibly requires that move."
     },
     "example_yti": {
       "record_mode": "exact_content",
@@ -242,6 +255,8 @@
       "supported graph improvised instead of using registered graph_tool",
       "graph/diagram/table visually unreadable or physically incorrect",
       "WTC is a loose set of independent preview questions rather than a coherent connected FRQ routine",
+      "WTC metadata claims a decomposition/navigation move that the final student-facing parts do not actually require",
+      "WTC final parts do not execute the mapped decomposition/navigation moves even though metadata claims compliance",
       "answer/solution mismatch",
       "physical situation implausible or contradictory"
     ],
@@ -257,6 +272,18 @@
       "answer/solution correct",
       "physical situation plausible and natural"
     ],
-    "regeneration_rule": "If a generated downstream variant fails family fidelity, regenerate/repair that item within the declared family contract; do not silently substitute a different family or weaken the evidence job."
+    "regeneration_rule": "If a generated downstream variant fails family fidelity, regenerate/repair that item within the declared family contract; do not silently substitute a different family or weaken the evidence job.",
+    "wtc_audit_rule": "Audit WTC against its actual student-facing parts. Shared-stimulus use, connectedness/dependency, and mapped decomposition moves must be visible in the prompt. Difficulty/DOK is not an acceptance target. WTC focus/variation metadata is descriptive output derived after authoring and cannot be used as proof that the move occurred."
+  },
+  "revision_compatibility": {
+    "from_profile_version": "v1.2",
+    "to_profile_version": "v1.3",
+    "scope_of_change": "WTC purpose/acceptance semantics and WTC metadata verification only",
+    "unchanged_stage_contracts": [
+      "3B_practice_families",
+      "3C_assessment_families"
+    ],
+    "continuation_rule": "An accepted v1.2 map plus completed v1.2 3A may continue into 3B and 3C without rerunning completed stages, provided the accepted map fingerprint/design identity is unchanged and the entered stage consumes only unchanged Practice/Exit/Summative contracts. Record both the accepted-map profile identity and the current profile identity in provenance.",
+    "future_rule": "Any new or rerun 2A/3A must use v1.3. Any later profile revision that changes a slice consumed by the next stage is not automatically compatible and must fail closed unless explicitly declared compatible."
   }
 }

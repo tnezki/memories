@@ -150,20 +150,27 @@ Every `family_seed` additionally includes:
 Every lock token resolves to an explicit field/property.
 Do not use vague “make another like this” variation.
 
-WTC — RIGOR HARD GATE
----------------------
+WTC — DECOMPOSITION / NAVIGATION HARD GATE
+--------------------------------------------
 Map one WTC per section, but WTC content is NOT locked to that section or even the current Unit.
+
+PRIMARY PURPOSE:
+WTC teaches students how to unpack and navigate a long multi-part FRQ. Content difficulty is not the goal. A WTC may use straightforward prior/current/future Physics so students can focus on identifying givens/asks, reading the shared representation, tracking dependencies, selecting a relationship/plan when useful, and communicating reasoning.
 
 Each WTC map record must specify:
 - coverage_role = wtc_frq_practice;
-- one shared stimulus/representation;
+- one shared coherent stimulus/representation;
 - normally 3–5 connected labeled parts;
-- at least one representation interpretation/extraction move;
-- at least one dependency or explicit use of an earlier conclusion;
-- at least one planning/model-choice/justification move;
+- at least one part that actually reads/uses the shared stimulus/representation;
+- at least one real dependency / carry-forward in which a later part uses information, a conclusion, or a decision from an earlier part;
+- an explicit `decomposition_move_plan` chosen from the course-profile WTC move menu;
 - content provenance I-can when useful for teacher metadata;
 - accessibility plan if the Physics content has not yet been taught.
 
+The move menu is NOT a universal checklist. Planning/model-choice/justification is not mandatory in every WTC. Map only moves the planned student-facing parts will actually require.
+The problem may look long or intimidating while the underlying Physics remains straightforward; do not raise content difficulty merely to make WTC feel rigorous.
+
+If a legacy `required_frq_moves` field is emitted, it must contain only moves truly required by that WTC; do not auto-fill a fixed universal trio.
 WTC does not satisfy current Unit I-can coverage floors.
 Do not map WTC as four independent mini-questions.
 
@@ -259,7 +266,9 @@ Before PASS:
 - graph records use `graph_tool` when supported;
 - small-table records require semantic compact HTML tables;
 - diagram/FBD/vector records do not rely on prose substitution;
-- WTC records satisfy the connected-FRQ rigor gate;
+- WTC records satisfy the connected shared-stimulus/dependency decomposition gate;
+- each WTC decomposition_move_plan matches the actual planned parts and does not claim a universal move merely because it appears in a template;
+- WTC is not rejected solely because the underlying Physics is straightforward;
 - family locks/variation axes explicit;
 - deterministic selection feasible;
 - secure families forbid exposed finished-prompt reuse;
@@ -268,6 +277,7 @@ Before PASS:
 FAIL if the map only labels structure/representation without an executable route.
 FAIL if family/category allocation forces a task type that does not fit the I-can/evidence job.
 FAIL if evidence_job, student_action, response_mode, and representation_mode disagree.
+FAIL if WTC move metadata/planning claims a move that its planned parts do not actually require.
 
 FINAL CHAT SUMMARY
 ------------------

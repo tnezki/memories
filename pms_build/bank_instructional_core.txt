@@ -112,21 +112,30 @@ Do not replace a required visual with prose.
 Do not PASS crude, distorted, low-resolution, mislabeled, answer-leaking, or physically wrong diagrams.
 If no approved route can produce the required diagram, FAIL CLOSED on that item and report the missing route.
 
-WTC — HARD
-----------
-WTC is difficult FRQ-navigation practice, not a loose preview list.
-Each WTC:
-- one shared coherent Physics stimulus/representation;
-- normally 3–5 connected labeled parts;
-- actual evidence-bearing representation/shared stimulus;
-- representation interpretation/extraction;
-- dependency/use of an earlier conclusion;
-- planning/model-choice/justification;
-- may use prior/current/future Physics;
-- coverage_role = wtc_frq_practice;
-- does not satisfy current Unit coverage floors.
+WTC — DECOMPOSITION / NAVIGATION HARD CONTRACT
+-------------------------------------------------
+WTC is FRQ-decomposition/navigation practice, not a content-difficulty contest and not a loose preview list.
 
-If content is untaught, keep the navigation/unpacking work structurally accessible without making the WTC trivial.
+Each WTC must:
+- use one shared coherent Physics stimulus/representation;
+- normally contain 3–5 connected labeled parts;
+- require students to actually read/use the shared stimulus/representation;
+- contain at least one real dependency/carry-forward between parts;
+- execute the mapped `decomposition_move_plan` / mapped WTC moves that are actually assigned to this routine;
+- may use prior/current/future Physics;
+- keep coverage_role = wtc_frq_practice;
+- not satisfy current Unit coverage floors.
+
+The underlying Physics may be straightforward, familiar, or from another Unit. That is often desirable because the primary learning job is entering, annotating, decomposing, and navigating a large multi-part problem. Do not inflate difficulty merely to make the WTC look rigorous. Planning/model-choice/justification is NOT mandatory in every WTC unless it is mapped for that routine.
+
+WTC METADATA TRUTH — HARD:
+After the final student-facing parts are authored, derive `wtc_frq_focus`, `variation.realized`, DOK/Bloom, and similar descriptive metadata from what the student actually does.
+- If metadata says `select relationship/model/plan`, an actual part must require that action.
+- If metadata says `justify`, an actual part must require justification.
+- If metadata says `critique/revise`, an actual part must require critique/revision.
+- A metadata label is never proof that the move happened.
+
+If content is untaught, keep the navigation/unpacking work structurally accessible. Straightforward content is not itself a defect.
 
 EXAMPLE / YTI
 -------------
@@ -178,7 +187,11 @@ Verify:
 - semantic tables are real HTML tables and small tables use class `values`;
 - graph_tool used when mapped/supported;
 - required representations visibly present;
-- WTC connected-FRQ rigor gate passes;
+- WTC shared-stimulus/connected-dependency decomposition gate passes;
+- each mapped WTC move is visibly executed by an actual student-facing part;
+- WTC move/focus metadata matches the final prompt and never self-certifies a move absent from the text;
+- WTC is not failed solely because the underlying Physics is straightforward;
+- DOK/Bloom are derived from the final task rather than used as rigor quotas;
 - Example/YTI pairs complete;
 - CYU/Warm-Up counts correct;
 - answers/solutions independently checked against final content/visuals;
