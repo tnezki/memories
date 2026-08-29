@@ -2,15 +2,16 @@
   "schema": "curriculum-control-panel-profile/3.0",
   "workflow_key": "bank_stage_3a",
   "key": "bank_stage_3a",
-  "label": "Build Bank Seeds",
+  "label": "Build Bank Instructional Core",
   "display_order": 3.1,
   "scope": "unit",
-  "input": "audited_bank_map",
+  "input": "bank_map",
   "question_structure": true,
   "state": "ready",
-  "output": "unitN_bank_3a_seeds.zip",
+  "output": "<course>_uN_bank_3a_instructional_core.zip",
   "step": "3a",
   "pm_path": "pms_build/bank_seeds/PM.txt",
   "canonical_storage": "expanded",
-  "delivery_note": "ZIP may be used for handoff; canonical GitHub storage is expanded."
+  "delivery_note": "ZIP is handoff only; extract/merge repo-relative banks/unitN/ files into the course repository.",
+  "requires_audited_map": false
 }
