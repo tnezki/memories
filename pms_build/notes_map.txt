@@ -1,0 +1,622 @@
+4A · BUILD PHYSICS NOTES MAP PM v1.8
+====================================
+TEXTBOOK-CHUNK / NOTABILITY FLOW — 2026-08-29
+
+ROLE
+----
+Build the Physics Notes map for one Unit by trimming the existing Physics textbook into a classroom-length lesson and routing the exact course-owned Notes components through that retained textbook flow.
+
+4A is a CUT + ROUTE mapper.
+It is NOT a second textbook authoring stage, NOT a Bank audit, and NOT an image-discovery project.
+
+The Physics textbook owns the explanatory spine. The Unit Bank owns the canonical WTC and Notes EX/YTI pairs. The Physics Notes Image Toolkit owns canonical source-image bytes. 4A decides:
+- what textbook material stays;
+- how much it is trimmed;
+- where natural reading chunks begin/end;
+- which ONE processing event follows each reading chunk;
+- where overflow EX/YTI pairs go after the reading when there are more canonical pairs than natural insertion points.
+
+The target is a coherent 30–40 minute Notes lesson that still sounds and reads like the Physics textbook rather than a newly written summary.
+
+CURRENT PM ENTRYPOINT
+---------------------
+pms_build/notes_map.txt
+
+======================================================================
+CANONICAL STORAGE CONTRACT — HARD
+======================================================================
+
+GitHub stores readable authorities and curriculum artifacts EXPANDED.
+ZIP is transfer/handoff only unless an artifact is intrinsically an archive.
+
+CANONICAL COURSE LOCATION — EXACT
+<course>/notes/uN_notes_map/
+
+Canonical files:
+- uN_notes_map.json
+- uN_notes_map.html
+- NOTES_MAP_REPORT.txt
+- NOTES_MAP_HANDOFF.json
+
+Legacy compatibility:
+4B may read older `unitN_notes_map/` / `unitN_notes_map.json` names, but all new 4A output uses `uN_notes_map/` and `uN_notes_map.json`.
+
+======================================================================
+0. OPERATING MODEL — HARD
+======================================================================
+
+For each course section:
+1. resolve the exact section title / Learning Target / I-cans;
+2. open the matching Physics textbook section;
+3. preserve the textbook's conceptual order;
+4. divide the useful source into a small number of coherent reading chunks;
+5. mark source material KEEP / CONDENSE / DROP;
+6. preserve useful textbook figures at their natural source locations;
+7. insert the canonical WTC early;
+8. after each retained reading chunk, map at most ONE processing event:
+   - PHYSICS NOTE, or
+   - canonical EX/YTI pair, or
+   - STOP & DISCUSS, or
+   - NONE;
+9. if canonical EX/YTI pairs remain after all natural concept boundaries are used, queue those remaining intact pairs AFTER the final reading chunk;
+10. map Vocabulary Preview, Vocabulary definitions target, Summary, What I Figured Out, and Common Mistakes;
+11. stop.
+
+HARD RHYTHM RULE
+----------------
+Do NOT place a Stop & Discuss and an EX/YTI pair at the same reading boundary.
+Do NOT stack a Stop & Discuss immediately on top of an EX/YTI pair merely because both exist.
+Reading should breathe:
+
+READING CHUNK -> ONE PROCESSING EVENT -> NEXT READING CHUNK
+
+The only intentional exception is the post-reading EX/YTI queue when the Bank contains more required pairs than the textbook has natural insertion points.
+
+4A MUST NOT:
+- invent a new conceptual sequence when the textbook already provides one;
+- write final Notes prose;
+- rewrite the textbook into short generic summaries;
+- write final vocabulary definitions;
+- create new worked examples when canonical Bank EX/YTI already exist;
+- copy Bank prompts/solutions into the map;
+- re-audit the full Bank;
+- search all toolkit images for a different story when the textbook already embeds appropriate images;
+- run broad repository audits unrelated to this map;
+- fail because of optional polish.
+
+======================================================================
+1. PIN ONCE / READ ONLY REQUIRED AUTHORITIES
+======================================================================
+
+Use commits declared by the request/control-plane snapshot. If a required repo commit is not supplied, resolve it once at job start and pin it for the run. Never mix later pushes into the same build.
+
+Read in this order:
+1. current Curriculum Philosophy completely;
+2. this PM completely;
+3. `frameworks/MANIFEST.json` and `frameworks/Physics/MANIFEST.json`;
+4. `frameworks/Physics/FRAMEWORK.txt`;
+5. only supporting Physics Framework files needed for the target Unit:
+   - original Unit N Assessment Plan;
+   - Notes course profile;
+   - language/reading tone;
+   - Notes visual contract;
+   - section_index.json / i_can_index.json when useful;
+6. Unit Bank identity/handoff and Unit Bank structured data ONCE;
+7. `course_resources.physics_textbook` from the Physics Framework manifest; pin its repo commit once and read only target section files;
+8. `course_resources.physics_notes_image_toolkit`; load `IMAGE_CATALOG.json` ONCE.
+
+Do not search the web for canonical curriculum authorities.
+
+======================================================================
+2. AUTHORITY / OWNERSHIP
+======================================================================
+
+CURRICULUM PHILOSOPHY OWNS
+- universal instructional beliefs and provenance expectations.
+
+PHYSICS FRAMEWORK / ORIGINAL UNIT ASSESSMENT PLAN OWNS
+- exact section titles;
+- exact Learning Targets;
+- exact I-can wording;
+- required vocabulary / misconceptions / course boundaries;
+- Notes architecture and tone.
+
+CONFLICT RULE — HARD
+For section title, Learning Target, or I-can wording, the original Unit Assessment Plan HTML wins.
+
+PHYSICS TEXTBOOK OWNS
+- default conceptual teaching order;
+- source explanatory flow and paragraph logic;
+- natural subsection transitions;
+- source phenomena/examples;
+- which textbook figures occur with which ideas.
+
+UNIT BANK OWNS
+- canonical WTC wording/data/figures/solutions;
+- canonical Notes Examples;
+- canonical Notes YTIs;
+- EX/YTI pair identity;
+- exact Bank IDs and I-can linkage.
+
+PHYSICS NOTES IMAGE TOOLKIT OWNS
+- canonical source-image bytes;
+- image IDs;
+- toolkit paths and provenance.
+
+4A OWNS ONLY
+- KEEP / CONDENSE / DROP decisions;
+- reading-chunk boundaries;
+- source-text fidelity level;
+- insertion points for WTC / Physics Note / EX-YTI / S&D;
+- lesson-time trimming;
+- selection of any extra course-authored figure only when the textbook lacks a needed representation;
+- Summary / What I Figured Out / Common Mistakes targets;
+- generated-representation needs.
+
+======================================================================
+3. BULK LOOKUP RULE — HARD
+======================================================================
+
+BANK
+- load the Unit Bank JSON once;
+- build an in-memory lookup by exact Bank ID;
+- filter/select only Notes WTC/EX/YTI anchors for the target Unit.
+
+IMAGES
+- load `IMAGE_CATALOG.json` once;
+- build an in-memory lookup by image_id, toolkit_path, basename, and source_catalog_path.
+
+TEXTBOOK
+- read each target section HTML once;
+- extract ordered headings, explanatory paragraph groups, figures, checkpoints/sidebars, and source image paths.
+
+Do not retrieve mapped objects one-by-one through repeated GitHub calls.
+
+======================================================================
+4. TEXTBOOK CHUNK MAPPING — PRIMARY METHOD
+======================================================================
+
+Use the actual textbook HTML as the instructional spine.
+
+Create 3–6 coherent reading chunks when the source allows it. A chunk should normally contain enough explanation to teach one connected idea and should be short enough that 4B can keep its heading/reading/figure together sensibly for Notability.
+
+For every source block assign:
+
+KEEP
+- directly useful for the current LT/I-cans;
+- preserve its idea, order, and recognizable explanatory language;
+- 4B should trim by omission/light editing before rewriting.
+
+CONDENSE
+- useful but too long or repetitive;
+- preserve the source's conceptual progression and as much useful original wording/structure as practical;
+- cut repetition, side anecdotes, extended history, and duplicated examples first.
+
+DROP
+- outside the current target;
+- redundant with Bank practice;
+- long tangents not necessary for the lesson;
+- answer/media-link clutter;
+- material that would push the section beyond the time target.
+
+SOURCE-TEXT FIDELITY
+For each retained chunk record one of:
+- CLOSE: keep source wording/paragraph logic as much as practical; trim mostly by omission;
+- LIGHT_CONDENSE: preserve recognizable source explanation but remove repeated/detail-heavy sentences;
+- STRONG_CONDENSE: preserve only the essential source idea when time demands it.
+
+Default toward CLOSE or LIGHT_CONDENSE. STRONG_CONDENSE should be uncommon.
+
+Each retained reading chunk should record:
+- flow_id;
+- source_heading;
+- source_block / source span description;
+- action = KEEP|CONDENSE;
+- text_fidelity;
+- transition_heading_target;
+- purpose;
+- i_can_ids;
+- retained_images;
+- processing_after = physics_note|ex_yti|stop_discuss|none.
+
+Do not write final prose in 4A.
+
+======================================================================
+5. LESSON-TIME BUDGET — HARD DESIGN TARGET
+======================================================================
+
+Each finished section should normally fit a 30–40 minute class period.
+
+Design roughly toward:
+- Vocabulary Preview + WTC + Let's Get Started: 5–7 min;
+- textbook-derived reading/images: 10–15 min total;
+- canonical EX/YTI pairs: 10–16 min total;
+- S&D / Physics Note processing: 2–5 min total;
+- Vocabulary + Summary + What I Figured Out + Common Mistakes: 3–5 min.
+
+This is a design budget, not a stopwatch.
+
+When the source textbook is long, CUT BY OMISSION FIRST. Do not automatically replace strong source exposition with short newly authored summaries.
+
+Prefer:
+- several developed reading chunks;
+- source figures in their natural locations;
+- one processing event per natural boundary;
+- no more than one S&D in a normal section unless a second is clearly necessary.
+
+======================================================================
+6. OPENING / CLOSING MAP
+======================================================================
+
+OPENING ORDER
+1. exact section title / LT / I-cans;
+2. Vocabulary Preview + prior-knowledge sort;
+3. canonical WTC;
+4. Let's Get Started skim activity immediately before close reading.
+
+LET'S GET STARTED target:
+- skim headings/figures;
+- record ONE thing noticed;
+- record ONE thing wondered.
+
+Do not use a large three-prompt prediction task unless a current Framework explicitly requires it.
+
+CLOSING ORDER
+1. Vocabulary definitions;
+2. bulleted Summary;
+3. What I Figured Out;
+4. Common Mistakes;
+5. any final general Notability workspace only when genuinely useful.
+
+WHAT I FIGURED OUT
+Map this as a brief student reflection connected to the opening notice/wonder and the Summary. It is part of the normal close, not an optional add-on.
+
+======================================================================
+7. WTC + EX/YTI INSERTION
+======================================================================
+
+WTC
+- one canonical WTC per section when the Bank provides it;
+- place early after title/LT/I-cans + Vocabulary Preview;
+- map by exact Bank ID only;
+- do not copy/rewrite WTC content into the map.
+
+EX/YTI
+For each canonical pair record:
+- example_bank_id;
+- yti_bank_id;
+- i_can_id;
+- insertion_after flow_id OR `post_reading_queue`;
+- concept being processed.
+
+HARD
+- every canonical Notes EX/YTI pair exactly once;
+- Example immediately paired with its YTI;
+- no split pair;
+- no rewritten pair;
+- no substitute pair;
+- no invented additional EX/YTI.
+
+PLACEMENT RULE
+Use a pair after a reading chunk when it naturally processes that exact concept. Never force a pair into the middle of a source explanation just to distribute tasks evenly.
+
+If no clean reading boundary remains, place the untouched pair in `post_reading_ex_yti_queue` after the final reading chunk.
+
+======================================================================
+8. PHYSICS NOTE
+======================================================================
+
+A Physics Note is a compact instructional sidebar, not another question bank.
+
+Map one only when it improves understanding of the immediately surrounding textbook idea by doing one of these jobs:
+- make a relationship explicit;
+- name/interpret an equation or representation;
+- show a compact modeling convention;
+- connect a figure to the physical meaning;
+- clarify a vocabulary distinction students need before continuing.
+
+For each Physics Note record:
+- after_flow_id;
+- title_target;
+- note_job;
+- i_can_ids;
+- source_basis;
+- representation/image IDs if any.
+
+Do not write final prose in 4A.
+Do not map a Physics Note merely to fill space.
+
+======================================================================
+9. STOP & DISCUSS
+======================================================================
+
+Map S&D only when the preceding reading chunk needs verbal/conceptual processing not already handled by a mapped EX/YTI pair.
+
+Each S&D MUST map 2–4 questions and include:
+- at least one vocabulary-use question tied to the preceding reading;
+- at least one conceptual question answerable from the preceding text/figure;
+- optional compare/predict/evidence question when useful.
+
+Record:
+- after_flow_id;
+- i_can_ids;
+- discussion_job;
+- 2–4 prompt_skeletons;
+- source_image_ids;
+- expected_reasoning_evidence_to_listen_for as bullets.
+
+`source_image_ids` contains image IDs only; non-empty values must match:
+^PHYS-[A-F0-9]{12}$
+
+HARD
+- S&D and EX/YTI may not occupy the same reading boundary;
+- do not put an S&D immediately after a canonical EX/YTI unless a new reading chunk intervenes;
+- do not write a polished teacher script in 4A.
+
+======================================================================
+10. IMAGE RESOLUTION — TEXTBOOK PLACEMENT WINS
+======================================================================
+
+PRIMARY PLACEMENT TRUTH
+The actual textbook section HTML determines where a textbook image belongs instructionally.
+
+For each retained textbook `<img>`:
+1. record source path/basename;
+2. resolve it against the pinned Physics Notes Image Toolkit catalog using source_catalog_path, basename, provenance, alt_text, and metadata;
+3. record canonical image_id and toolkit_path;
+4. keep it attached to the same reading chunk unless that chunk is dropped.
+
+Metadata disagreement is a warning, not a reason to move the image. Actual textbook placement wins.
+
+Only select a non-textbook toolkit figure when the current I-can requires a representation the textbook/Bank does not already provide.
+
+Do not perform a full toolkit audit.
+
+======================================================================
+11. VOCABULARY / SUMMARY / COMMON MISTAKES
+======================================================================
+
+VOCABULARY PREVIEW
+- exact required terms from current course authority.
+
+VOCABULARY DEVELOPMENT
+- optional first-flow-location for important terms.
+
+Do not write final definitions in 4A.
+
+SUMMARY TARGETS
+- short bullet concepts students should leave knowing.
+
+WHAT I FIGURED OUT TARGET
+- one short reflection job connecting the opening notice/wonder to the lesson's central ideas.
+
+COMMON MISTAKES TARGETS
+- section-specific misconceptions/errors the Notes should explicitly repair.
+
+======================================================================
+12. GENERATED REPRESENTATIONS
+======================================================================
+
+Only map a generated graph/FBD/vector diagram/motion diagram/table/model when neither textbook nor canonical Bank/toolkit already supplies what the lesson requires.
+
+Record:
+- representation_type;
+- purpose;
+- i_can_id;
+- what must be shown;
+- answer-neutrality constraints;
+- student-facing or teacher-only.
+
+Do not generate the final asset in 4A.
+
+======================================================================
+13. CONTENT-STABLE BANK FINGERPRINT — HARD
+======================================================================
+
+PRIMARY METHOD — stage3e-canonical-v1
+1. Read `banks/unitN/STAGE_3E_HANDOFF.json` from the pinned course commit.
+2. Read `canonical_authored_content_sha256`.
+3. Validate 64 hexadecimal characters.
+4. Record exactly:
+   source_bank_fingerprint_method = "stage3e-canonical-v1"
+   source_bank_fingerprint = "stage3e-canonical:<lowercase-64-hex>"
+
+Do not recompute/re-audit the whole Bank when Stage 3E identity exists.
+
+FALLBACK METHOD — content-manifest-v1
+If Stage 3E identity is unavailable and current authority permits proceeding, use:
+`Tools/stable_bank_fingerprint.py`
+
+FORBIDDEN
+- legacy raw-ZIP form `sha256:<...>`;
+- omitting either fingerprint field.
+
+======================================================================
+14. MAP JSON — LITERAL CONTRACT
+======================================================================
+
+Canonical file:
+uN_notes_map.json
+
+Schema remains:
+physics-notes-map/1.0
+
+NEW REQUIRED FLOW REVISION FIELD
+"notes_flow_revision": "textbook-chunks-v2"
+
+Minimum top-level shape:
+{
+  "schema": "physics-notes-map/1.0",
+  "notes_flow_revision": "textbook-chunks-v2",
+  "course": "Physics",
+  "unit": N,
+  "source_bank_fingerprint_method": "...",
+  "source_bank_fingerprint": "...",
+  "textbook_source": {
+    "repo": "<resolved course_resources.physics_textbook.repo>",
+    "commit": "<pinned textbook commit>",
+    "root": "<resolved Unit root>"
+  },
+  "image_toolkit": {
+    "name": "Physics Notes Image Toolkit",
+    "repo_scope": "course",
+    "repo": "tnezki/physics",
+    "commit": "<pinned course commit>",
+    "root": "resources/Physics_Notes_Image_Toolkit",
+    "catalog_path": "resources/Physics_Notes_Image_Toolkit/IMAGE_CATALOG.json",
+    "toolkit_fingerprint": "<current catalog/version fingerprint>"
+  },
+  "lesson_target_minutes": {"min": 30, "max": 40},
+  "sections": [],
+  "qa": {"status": "PASS"}
+}
+
+Each section MUST include at minimum:
+- section_id;
+- title;
+- learning_target;
+- i_cans;
+- vocabulary_terms;
+- textbook_file;
+- textbook_sections/source headings when available;
+- ordered_flow;
+- post_reading_ex_yti_queue (may be empty);
+- summary_targets;
+- what_i_figured_out_target;
+- common_mistakes_targets;
+- generated_representation_needs.
+
+Allowed ordered-flow entries:
+- wtc;
+- textbook_block / reading chunk with action, text_fidelity, transition target, retained images, processing_after;
+- physics_note;
+- ex_yti;
+- stop_discuss;
+- generated_representation.
+
+The JSON is the SINGLE SOURCE OF TRUTH for 4B.
+
+======================================================================
+15. READABLE MAP + DERIVED HANDOFF
+======================================================================
+
+Produce `uN_notes_map.html` as a mechanically derived teacher-readable view of the JSON.
+Produce `NOTES_MAP_REPORT.txt` as concise validation/provenance notes only.
+Produce `NOTES_MAP_HANDOFF.json` as DERIVED METADATA only.
+
+Handoff schema remains:
+physics-notes-map-handoff/1.1
+
+Minimum handoff fields:
+{
+  "schema": "physics-notes-map-handoff/1.1",
+  "course": "Physics",
+  "unit": N,
+  "status": "PASS",
+  "qa_status": "PASS",
+  "map_json_filename": "uN_notes_map.json",
+  "map_html_filename": "uN_notes_map.html",
+  "validation_report_filename": "NOTES_MAP_REPORT.txt",
+  "source_bank_fingerprint_method": "...",
+  "source_bank_fingerprint": "...",
+  "image_toolkit_fingerprint": "...",
+  "notes_flow_revision": "textbook-chunks-v2",
+  "section_count": 0,
+  "ex_yti_pairs_placed": 0,
+  "images_selected": 0,
+  "physics_note_count": 0,
+  "stop_discuss_count": 0,
+  "generated_representation_need_count": 0,
+  "output_filenames": [
+    "uN_notes_map.json",
+    "uN_notes_map.html",
+    "NOTES_MAP_REPORT.txt",
+    "NOTES_MAP_HANDOFF.json"
+  ]
+}
+
+Map and handoff fingerprints/revision MUST match exactly.
+
+======================================================================
+16. DIRECT BLOCKERS — ONLY REASONS TO FAIL CLOSED
+======================================================================
+
+FAIL CLOSED only when:
+- current Assessment Plan / Framework / PM cannot be retrieved from the pinned snapshot;
+- required target textbook section cannot be retrieved;
+- exact section title / LT / I-can cannot be reconciled;
+- required WTC/EX/YTI ID is missing or canonical pair identity is broken;
+- retained image cannot resolve to a real canonical asset and no valid alternative exists;
+- canonical map JSON cannot parse or lacks required routing/provenance fields.
+
+Missing/malformed derived handoff, HTML view, or report is a LOCAL OUTPUT DEFECT. Regenerate it from the valid map; do not remap.
+
+Do NOT fail for:
+- unrelated Bank issues;
+- unused toolkit metadata defects;
+- metadata disagreements resolved by actual textbook placement;
+- optional stylistic polish;
+- broad architecture warnings unrelated to the map.
+
+======================================================================
+17. TARGETED QA — FAST
+======================================================================
+
+Verify only:
+- exact current section titles / LTs / I-cans;
+- `notes_flow_revision = textbook-chunks-v2`;
+- every required WTC placed;
+- every canonical Notes EX/YTI pair placed exactly once and immediate;
+- no reading boundary contains both EX/YTI and S&D;
+- S&D has 2–4 questions including vocab + conceptual processing;
+- textbook conceptual order preserved;
+- retained chunks default to CLOSE/LIGHT_CONDENSE rather than generic rewrite;
+- every retained textbook image resolves to a real toolkit asset;
+- section plan plausibly fits 30–40 minutes;
+- map JSON parses and `qa.status = PASS`;
+- derived HTML contains no unresolved template/code tokens;
+- map/handoff fingerprint + revision fields match.
+
+Do not run broad Bank QA, full toolkit QA, or unrelated architecture audits.
+
+======================================================================
+18. EXACT OUTPUT PACKAGE
+======================================================================
+
+Output folder exactly:
+uN_notes_map/
+
+Exactly four files:
+1. uN_notes_map.json
+2. uN_notes_map.html
+3. NOTES_MAP_REPORT.txt
+4. NOTES_MAP_HANDOFF.json
+
+Do not add stage/course prefixes or alternate handoff/report filenames.
+
+======================================================================
+19. CHAT HANDOFF
+======================================================================
+
+End with a concise summary of:
+- sections mapped;
+- reading chunks kept/condensed/dropped;
+- source-text fidelity mix;
+- EX/YTI pairs placed / queued post-reading;
+- images retained;
+- Physics Note count;
+- S&D count;
+- generated representation needs;
+- Bank fingerprint;
+- output contract PASS.
+
+Then say exactly:
+
+SAVE NEXT:
+Save the expanded `uN_notes_map/` folder at `<course>/notes/uN_notes_map/`. It is a planning artifact, not deployed Notes. 4B Build Notes consumes its JSON directly from this folder.
+
+======================================================================
+REVISION NOTE
+======================================================================
+
+v1.8 keeps the existing map/handoff schema strings while adding `notes_flow_revision = textbook-chunks-v2`. It corrects the first textbook-spine pilot by preserving substantially more textbook exposition, mapping natural reading chunks, enforcing one processing event per chunk boundary, strengthening Stop & Discuss, adding Physics Note routing, and making What I Figured Out part of the normal close.
