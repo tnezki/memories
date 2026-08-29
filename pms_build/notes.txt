@@ -16,9 +16,10 @@ REQUIRED MAP
 Require:
   schema = physics-notes-map/2.0
   notes_flow_revision = bank-v2-textbook-chunks-v2
+  bank_notes_route_template = exact BANK_MANIFEST.paths.notes value recorded by current 4A
 
+Missing Bank route identity or older revision -> FAIL CLOSED and rerun 4A.
 Do not reinterpret an older Notes map.
-Older revision -> FAIL CLOSED and rerun 4A.
 
 STARTUP / AUTHORITY
 -------------------
@@ -33,13 +34,21 @@ Read current:
   banks/unitN/BANK_MANIFEST.json
 
 Require COMPLETE + ready_for_downstream.
-For every map-declared Notes section:
-- resolve canonical route;
-- fetch exact file;
-- compare current blob identity to map-recorded blob identity.
 
-Changed consumed Notes file -> rerun 4A.
+Resolve the current canonical Notes route ONLY from:
+  BANK_MANIFEST.paths.notes
+
+HARD IDENTITY CHECK:
+- current `BANK_MANIFEST.paths.notes` must exist;
+- it must exactly match the 4A map's recorded `bank_notes_route_template`;
+- do NOT require or infer `canonical_artifacts.notes`;
+- each map-declared `bank_notes_path` must be a concrete section path produced by expanding that route template with the exact mapped section ID;
+- fetch that exact file only;
+- compare its current blob identity to the 4A map-recorded `bank_notes_blob_identity`.
+
+Changed route template, changed consumed Notes file, missing path, or route mismatch -> rerun 4A.
 Do not whole-Bank fingerprint or scan unrelated destinations.
+Do not search the repository for substitute Notes files.
 
 FORMAT IS LOCKED
 ----------------
@@ -231,7 +240,10 @@ TARGETED QA
 Per section verify:
 - exact targets;
 - accepted v2 map/revision;
-- correct Bank Notes blob identities;
+- current BANK_MANIFEST.paths.notes exactly matches map-recorded bank_notes_route_template;
+- map-declared bank_notes_path is the correct concrete expansion of that route for the section;
+- correct Bank Notes blob identity;
+- no dependency on `canonical_artifacts.notes`;
 - WTC once;
 - skim wording correct;
 - Close Reading directions exactly once;

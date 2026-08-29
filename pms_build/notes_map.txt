@@ -25,11 +25,26 @@ Read:
   banks/unitN/ITEM_INDEX.json
 
 Require COMPLETE + ready_for_downstream.
-Read ONLY `canonical_artifacts.notes` section files.
+
+Resolve the canonical Notes section route ONLY from:
+  BANK_MANIFEST.paths.notes
+
+Current Bank-v2 route shape:
+  notes/section_<section-id>.json
+
+HARD ROUTING RULES:
+- `paths.notes` is the final Bank -> Notes handoff contract.
+- Do NOT require or infer `canonical_artifacts.notes`; the finalized Bank-v2 manifest does not use that field as the Notes routing authority.
+- Expand the declared `paths.notes` pattern only with the exact current Framework section IDs for the Unit.
+- Every resolved Notes section file must exist.
+- Use ITEM_INDEX only to confirm that the WTC / EXAMPLE / YTI Bank anchors routed through those files resolve to the same concrete Notes section paths.
+- Read ONLY those resolved Notes section files for Bank-owned Notes anchors.
+- Missing, ambiguous, or non-resolving `paths.notes` -> FAIL CLOSED. Do not search the repository for substitutes.
 
 Record:
 - Bank manifest path/blob identity;
-- exact Notes section paths/blob identities;
+- Bank `paths.notes` route template exactly as declared;
+- exact resolved Notes section paths/blob identities;
 - accepted Notes-map slice hash when present.
 
 No Stage-3E fingerprinting.
@@ -189,10 +204,15 @@ Schema:
 Required flow revision:
   bank-v2-textbook-chunks-v2
 
+Top-level Bank handoff identity includes:
+- bank_manifest_path + blob identity
+- bank_notes_route_template = exact current BANK_MANIFEST.paths.notes value
+
 Each section includes:
 - exact section identity/LT/I-cans
 - vocabulary_terms
-- bank_notes_path + blob identity
+- bank_notes_path = concrete path resolved from bank_notes_route_template
+- bank_notes_blob_identity
 - source_file
 - opening contract
 - ordered_flow
@@ -223,6 +243,11 @@ TARGETED QA
 -----------
 Verify:
 - exact targets;
+- Bank is COMPLETE + ready_for_downstream;
+- current BANK_MANIFEST.paths.notes exists and is recorded exactly as bank_notes_route_template;
+- every Framework section resolves through that route to one existing Bank Notes section file;
+- ITEM_INDEX anchor routes agree with the resolved Notes section paths;
+- no dependency on `canonical_artifacts.notes`;
 - current Bank-v2 Notes files;
 - source text is retained/condensed from declared spine, not replaced by invented generic prose;
 - skim asks only 1–2 notices + 1–2 wonders;
