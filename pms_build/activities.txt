@@ -1,0 +1,540 @@
+6 · BUILD ACTIVITIES PM v3.0
+============================
+SINGLE-FILE / CENTRAL-MANIFEST ARCHITECTURE — 2026-08-29
+
+ROLE
+----
+Build the complete Activities package for one Unit from the current course Framework and finalized Unit Bank.
+
+Activities change HOW students participate in worthwhile course content. They do not create a second question bank.
+
+This file is the complete universal Activities procedure. It has no PM-local MANIFEST, CONTROL_PANEL_PROFILE, README, RUN_PROMPT, SOURCE_CONTRACT_AUDIT, CSS copy, or canonical-html reference folder.
+
+======================================================================
+0. CANONICAL STORAGE / DISCOVERY — HARD
+======================================================================
+
+Canonical PM location:
+  pms_build/activities.txt
+
+`pms_build/MANIFEST.json` owns discovery and points the Activities job directly to this file.
+
+Resolve authorities through the pinned run snapshot:
+1. `SYSTEM_MANIFEST.json` -> current Curriculum Philosophy, Framework registry, tools, runtime contract.
+2. Current course Framework manifest -> Framework entrypoint/resource root, Assessment Plan, course profiles/contracts, CSS/tool rules.
+3. Finalized Unit Bank in the pinned course repo -> canonical Activity question content, representations, answers/solutions, and routing.
+
+Do not require an Activities Starter ZIP.
+Do not require a bundled copy of Curriculum Philosophy.
+Do not require PM-local reference HTML or CSS.
+Do not infer current authority from an older downloaded PM package.
+
+If the request supplies repo commits, use those commits. If a required commit is not supplied, resolve it once at job start and pin it for the run. Never mix later pushes into the same build.
+
+======================================================================
+1. AUTHORITY / PRECEDENCE
+======================================================================
+
+1. Explicit current teacher instruction.
+2. Current Curriculum Philosophy for universal instructional/evidence principles.
+3. This PM for universal Activities workflow, participation structures, shell contracts, packaging, and QA.
+4. Current course Framework + original Unit Assessment Plan for exact course behavior, section/I-can meaning, source routing, file names, CSS, and course-specific exceptions.
+5. Finalized Unit Bank for canonical student content, values, representations, figures, answers, and solutions.
+6. Existing deployed artifact only when the Framework explicitly marks it `teacher_live`; preserve teacher-live improvements unless the teacher asks to replace them.
+
+If a derivative index conflicts with the original Unit Assessment Plan HTML, use the original Assessment Plan HTML for target meaning.
+
+======================================================================
+2. FAST-PATH OPERATING RULE
+======================================================================
+
+For a normal Unit build:
+1. Read current Philosophy.
+2. Read this PM completely.
+3. Resolve the current course Framework and only the Framework files needed for Activities.
+4. Read the target Unit Assessment Plan.
+5. Load the finalized Unit Bank structured data once.
+6. Build section + I-can compatibility and reusable Activity Question Set routes.
+7. Render each section hub and required companions.
+8. Run targeted semantic/DOM/path/final-byte QA.
+9. Package one Unit ZIP.
+
+Do not run broad unrelated repository audits before building.
+Do not retrieve Bank items one-by-one when the Unit Bank can be loaded once.
+Do not redesign the Activity family during an ordinary build.
+
+DIRECT BLOCKERS ONLY
+Fail closed only when a correct build is prevented by one of these:
+- required current Framework / Assessment Plan / finalized Bank cannot be resolved;
+- exact Unit/section scope is genuinely ambiguous;
+- a Framework-required Bank route/item/solution is missing;
+- a required canonical Bank figure/representation is missing;
+- a required deployed course CSS path is unavailable;
+- a Framework-declared required finalizer/tool is unavailable;
+- final HTML cannot satisfy the hard shell/content contracts below.
+
+Do not fail for optional polish or unrelated warnings.
+
+======================================================================
+3. CORE ACTIVITIES MODEL
+======================================================================
+
+The normal section deliverable is an ACTIVITY OPTIONS HUB plus reusable companion resources.
+
+One dashboard Activity link means one hub entry for the section, not one chosen participation structure.
+
+The Activity builder MAY:
+- route Framework-required canonical Bank items into reusable Activity Question Sets;
+- preserve/reorder those items only as the Framework permits;
+- reuse the SAME set across multiple approved participation structures;
+- add participation directions, roles, timing, movement, checking, and teacher-use language;
+- format canonical Bank solutions for projection or teacher-key pages.
+
+The Activity builder MUST NOT:
+- casually rewrite Bank mathematics/physics, values, answer choices, tables, figures, or answers;
+- invent an activity-themed replacement question bank;
+- invent fake novelty/new game names when the approved library already fits;
+- use secure Summative content as ordinary Activity practice;
+- use official Exit Ticket / portfolio evidence as routine Activity content;
+- automatically append an Activity Check / Quick Check / Exit Ticket;
+- duplicate Practice-owned Tarsia content when linking to the deployed Practice Tarsia route is sufficient.
+
+Activities are optional learning routes. Required core instruction and required evidence remain outside the Activity.
+
+======================================================================
+4. REUSABLE QUESTION SETS
+======================================================================
+
+The Framework owns exact source routes and set sizes.
+
+Build each reusable set ONCE, then reuse that identical set across every wrapper that points to it.
+
+DEFAULT FULL-ROUTE RULE
+If the Framework identifies an existing classroom-sized canonical route, use ALL canonical items in that route unless the Framework explicitly authorizes thinning.
+
+Do not shorten because of an old page habit or legacy Activity count.
+
+Preserve:
+- route intent/current-retrieval-spiral balance;
+- purposeful repetition;
+- course-appropriate representation mix;
+- honest I-can opportunities;
+- canonical order unless the Framework defines another useful order;
+- canonical question wording, values, tables, figures, and solutions.
+
+Presentation-only wrappers such as projected problem number, station number, signature line, or record-space label may change without changing canonical content.
+
+If verification exposes an upstream Bank error, report it. Do not silently create a corrected second version inside Activities.
+
+======================================================================
+5. ACTIVITY HUB — LOCKED UNIVERSAL SHELL
+======================================================================
+
+The hub HTML uses the current course Activity CSS and a direct `.wrap` containing exactly 15 direct `.page` sections unless the current Framework explicitly declares a different Activity family.
+
+Exact standard page IDs/order:
+1. `activity-options`
+2. `teacher-student-moves`
+3. `dir-whiteboard-indy`
+4. `dir-whiteboard-partners`
+5. `dir-rally-coach`
+6. `dir-speed-dating-math`
+7. `dir-showdown`
+8. `dir-think-trade-agree`
+9. `dir-round-table`
+10. `dir-mathematical-hot-seat`
+11. `dir-rally-coach-ii`
+12. `dir-desmos-activity`
+13. `dir-stations`
+14. `dir-find-someone-who`
+15. `dir-tarsia-puzzle-activity`
+
+Preserve these hub hooks/classes:
+- `.wrap`
+- `.page`
+- `.dir-header`
+- `.act-eyebrow`
+- `.act-title`
+- `.act-subtitle`
+- `.act-meta`
+- `.dir-text`
+- `.dir-row`
+- `.dir-label`
+
+PAGE 1 — ACTIVITY OPTIONS
+- clear index/menu;
+- every activity NAME is a same-document anchor to its direction page;
+- Set 1 / Set 2 links open the reusable questions+solutions decks;
+- Stations and Find Someone Who links open their printable companions;
+- Desmos link/code is included only when actually supplied;
+- Tarsia links to the existing Practice-owned route when available.
+
+PAGE 2 — TEACHER & STUDENT MOVES GUIDE
+This is ONE compact teacher-facing guide after the index.
+
+Part A — I-can moves
+For every represented I-can:
+- exact/faithful I-can;
+- 2–4 content-specific Teacher Moves;
+- 2–4 content-specific Student Moves.
+
+Part B — participation-structure moves
+Include concise facilitation guidance only for structures with distinctive needs.
+
+Do NOT repeat discourse/moves blocks under every later activity.
+Do NOT add discourse blocks to student worksheets, Stations cards, or solution companions.
+
+======================================================================
+6. APPROVED PARTICIPATION-STRUCTURE LIBRARY
+======================================================================
+
+Use these approved universal structures unless the current Framework intentionally hides one or explicitly adds another.
+
+WHITEBOARD INDY
+Structure: Individual -> independent practice.
+Setup: each student has a whiteboard and marker.
+Directions: notes welcome; try something; write large/clearly; use partner then teacher as resources without copying; fix and discuss mistakes.
+Goal: individual accountability + low-stakes entry.
+
+WHITEBOARD PARTNERS
+Structure: fast partner practice.
+Setup: partners share one whiteboard/marker.
+Directions: both engaged; alternate writer; write clearly/large; collaborate; fix/discuss errors.
+Goal: engagement + quick feedback.
+
+RALLY COACH
+Structure: partner explanation + alternating roles.
+Setup: partners; each has whiteboard/marker.
+Directions: Partner A explains while Partner B writes; switch; check; rotate partners as directed.
+Goal: verbal reasoning + procedural accuracy.
+
+SPEED DATING MATH
+Structure: paired practice -> timed rotation -> strategy sharing.
+Directions: both solve; compare strategies; rotate after teacher-set interval; carry prior work and explain strategy to new partner.
+Goal: multiple strategies/representations + collaboration.
+
+SHOWDOWN
+Structure: individual -> simultaneous reveal -> group comparison -> consensus.
+Setup: groups of 4; each has whiteboard; captain may rotate.
+Goal: accountability + justification.
+
+THINK, TRADE, AGREE
+Structure: individual -> exchange boards -> compare/justify -> consensus/revision.
+Goal: accountability + justification.
+
+ROUND TABLE
+Structure: one step per student.
+Setup: group of 4; one shared whiteboard/marker.
+Directions: each student completes one step then passes; continue until complete; compare when solution shown.
+Goal: sequential reasoning + shared responsibility.
+
+MATHEMATICAL HOT SEAT
+Structure: verbal description only -> blind solving -> role rotation.
+Setup: one student faces away from projected problem; teammates describe with words only; Hot Seat student solves; compare; rotate.
+Goal: precise mathematical/scientific language + reasoning.
+
+RALLY COACH II
+Structure: one teammate states steps while other three write; rotate starter.
+Goal: verbal reasoning + procedural accuracy.
+
+STATIONS
+Structure: timed rotations.
+Students travel with a separate record sheet. Station prompt cards do not contain student workspace.
+Goal: repetition + varied problem exposure.
+
+FIND SOMEONE WHO
+Structure: movement + peer interaction.
+Students attempt independently first, then compare with partners and collaboratively complete/reconcile one problem before moving to someone new.
+Goal: exposure to multiple explanations.
+
+DESMOS ACTIVITY
+Teacher-selected/code route only. Never fabricate a link/code.
+
+TARSIA PUZZLE
+Link to existing Practice-owned Tarsia/generator route when the course owns it there. Do not duplicate the export in Activities.
+
+======================================================================
+7. QUESTIONS + SOLUTIONS PROJECTION SHELL — HARD
+======================================================================
+
+Stylesheets from a deployed section Activity folder:
+  ../../css/base.css
+  ../../css/activities.css
+
+HTML body structure:
+- one direct `.wrap`;
+- direct `.page` sections in strict alternating order;
+- question page class: `.page.question-page`;
+- matching solution page class: `.page.solution-page`.
+
+For N routed questions, render exactly 2N direct pages:
+Q1, Solution 1, Q2, Solution 2, ... QN, Solution N.
+
+Required hooks:
+- `.prob-head`
+- `.prob-num`
+- `.prob-q`
+- `.work` on question pages
+- `.solution` on solution pages.
+
+Question page skeleton:
+  section.page.question-page
+    div.prob-head
+    div.prob-num
+    div.prob-q   <- canonical prompt FIRST, then any supporting representation
+    div.work
+
+Solution page skeleton:
+  section.page.solution-page
+    div.prob-head
+    div.prob-num
+    div.prob-q   <- canonical prompt + representation repeated as needed
+    div.solution <- canonical/verified solution
+
+Never combine prompt and solution onto one page.
+
+Representation wrappers:
+- image/graph in projection deck: `.graph-block`;
+- ordinary small data table: course-approved compact table classes (normally `.values.compact-table`).
+
+Prompt text comes before a table/graph/diagram/figure in DOM order.
+No descriptive student-facing `figcaption`.
+
+======================================================================
+8. STATIONS — LOCKED DUPLEX PRINT SHELL
+======================================================================
+
+Stylesheets:
+  ../../css/base.css
+  ../../css/activities/activity_stations.css
+
+Use a direct `.wrap` with all prompt/blank pairs BEFORE any solution pages.
+
+CLASSROOM MODEL
+- station pages are prompt cards, not worksheets;
+- students carry a separate record sheet;
+- no workspace, answer lines, textareas, or giant blank response areas inside `.station-problem`.
+
+DUPLEX ORDER
+For each station:
+  Station N prompt page
+  BLANK page
+After the final prompt/blank pair:
+  Station 1 Solution page 1
+  Station 1 Solution page 2
+  Station 2 Solution page 1
+  Station 2 Solution page 2
+  ...
+
+PROMPT PAGE CONTRACT
+- `.page.station-question-page`;
+- direct station content uses `.header`, `.copy-note`, `.station-grid`, `.page-footer`;
+- normally exactly 4 `.station-problem` prompts unless Framework explicitly changes count;
+- every prompt page is immediately followed by `.page.station-blank-page.duplex-blank`;
+- blank page contains no visible text/header/footer/problem/answer content;
+- image-bearing figures use `.figure`;
+- preserve every required table/image/SVG stimulus.
+
+SOLUTION BLOCK CONTRACT
+Each station owns EXACTLY two solution pages:
+- page 1: `.page.station-answer-page.station-solution-page-1`;
+- page 2: `.page.station-answer-page.station-solution-page-2`;
+- if page 2 is not needed for content, it is a true blank `.solution-blank-page.duplex-blank`;
+- never create a 1-page or 3+-page solution block;
+- every solution retains the prompt/representation needed to understand the answer.
+
+FIT
+If a station cannot fit readably within the exact two-page solution block, report that station rather than clipping/hiding overflow or silently adding a third page.
+
+======================================================================
+9. FIND SOMEONE WHO — LOCKED WORKSHEET / KEY SHELL
+======================================================================
+
+Stylesheets:
+  ../../css/base.css
+  ../../css/activities/activity_find_someone_who.css
+
+Student page class:
+  `.page.worksheet.student-worksheet-page`
+
+Each student problem:
+  `.problem.student-problem`
+with exactly one each of:
+- `.problem-number`
+- `.signature-line`
+- canonical prompt/representation
+- `.workspace-label`
+- `.workspace`.
+
+Preserve `.worksheet-title`, `.section-label`, and `.page-footer`.
+
+Default pagination unless Framework explicitly overrides:
+- 3 student problems per worksheet page;
+- 4 teacher-key problems per page.
+
+Therefore a 24-item route normally renders:
+- 8 student worksheet pages;
+- 6 teacher-key pages.
+
+Teacher key page class:
+  `.page.worksheet.teacher-key-page`
+
+Teacher problems use `.problem.answer-problem`, preserve the canonical prompt/representation, and add the verified answer/solution.
+
+Do not compress student worksheets to teacher-key pagination.
+Do not remove signature/workspace mechanics.
+
+======================================================================
+10. REPRESENTATIONS / FIGURES / TABLES
+======================================================================
+
+Canonical Bank representations remain canonical content.
+
+- copy required finalized Bank figure bytes exactly into the Activity artifact's local `figures/` only when the deployed Activity requires a local copy;
+- preserve necessary labels, units, ticks, legends, data, and table values/headings;
+- do not silently regenerate a missing canonical Bank figure downstream;
+- do not package graph-generator tools in the normal Activity ZIP;
+- map the OUTER wrapper to the companion shell while preserving the canonical figure bytes/src/content;
+- no descriptive caption/title/source/representation label beneath student-facing visuals;
+- prompt before representation.
+
+======================================================================
+11. HTML / CSS / FINAL-BYTE CONTRACT
+======================================================================
+
+CSS is course-owned and remains external. Do not copy CSS into the Activity deliverable or into this PM.
+
+Every Activity HTML file:
+- begins with `<!DOCTYPE html>` or `<html` after optional whitespace;
+- contains no visible `html`, markdown fence label, or other token before the document element;
+- uses the exact companion stylesheet paths above;
+- does not load overlapping current/legacy Activity stylesheets;
+- places MathJax configuration before the MathJax CDN when MathJax is used;
+- contains no unresolved template/code tokens.
+
+FINAL DOM/PATH CHECK — REQUIRED
+Before packaging, parse/audit every produced HTML file and verify:
+- document prefix valid;
+- stylesheet hrefs exact for companion type;
+- required wrappers/classes/page order exact;
+- hub IDs exact;
+- Q/S pages strictly alternate;
+- Stations prompt/blank region and exact 2-page solution blocks pass;
+- Find Someone Who page classes/signature/workspace/pagination pass;
+- all local figure paths resolve;
+- no student answers leak onto student pages.
+
+If the current Framework manifest explicitly declares a canonical final-byte/MathJax finalizer, run that declared tool before this final DOM/path check. Do not invent a tool path when none is declared.
+
+No separate Activities-owned normalizer or canonical-html reference package is required by this PM.
+
+======================================================================
+12. TEACHER-LIVE PRESERVATION
+======================================================================
+
+If the current Framework marks an existing deployed Activity hub/companion `teacher_live`, preserve it unless the teacher explicitly requests replacement.
+
+Do not let an automated Unit rebuild casually overwrite a teacher-live improvement.
+
+======================================================================
+13. OUTPUT CONTRACT
+======================================================================
+
+Build one requested Unit at a time.
+
+Default ZIP:
+  unit[U]_activities.zip
+
+ZIP root contains section Activity folders DIRECTLY so extraction into the course `activities/` root creates live paths.
+
+Generic shape; current Framework owns exact filenames:
+  u1_1_act1/
+    u1_1_act1.html
+    u1_1_set1_questions_solutions.html
+    u1_1_set2_questions_solutions.html
+    u1_1_set1_stations.html
+    u1_1_set2_stations.html
+    u1_1_set1_find_someone_who.html
+    u1_1_set2_find_someone_who.html
+    figures/ only when referenced
+  u1_2_act1/
+    ...
+
+Do NOT package:
+- this PM;
+- Framework source;
+- Bank source data;
+- shared CSS;
+- tools;
+- old Activity packages;
+- temporary files;
+- `__MACOSX`, `.DS_Store`, AppleDouble, `__pycache__`, `*.pyc`.
+
+======================================================================
+14. TARGETED QA — REQUIRED BEFORE DELIVERY
+======================================================================
+
+SOURCE / AUTHORITY
+- current Philosophy/PM/Framework/Assessment Plan/finalized Bank resolved from pinned authorities;
+- Unit and section list correct.
+
+HUB / SET ARCHITECTURE
+- one dashboard hub per section;
+- hub means Activity Options, not one chosen structure;
+- reusable question sets built before wrappers;
+- approved structures only;
+- Framework routes/counts/composition honored;
+- no secure Summative or official evidence content.
+
+CONTENT FIDELITY
+- canonical wording/math/values unchanged;
+- canonical tables/figures preserved;
+- answers/solutions from Bank and verified where practical;
+- same reusable set reused consistently across wrappers;
+- no hidden second question bank;
+- no visible internal Bank/I-can/DOK/generator metadata to students.
+
+USABILITY
+- every first-page activity name links to its directions page;
+- all links resolve;
+- projection options link to reusable decks;
+- Stations/FSW links point to correct printable files;
+- Desmos/Tarsia links truthful;
+- no automatic Activity Check.
+
+HTML / PRINT
+- exact CSS paths;
+- required DOM hooks/classes;
+- Q/S alternation;
+- prompt before supporting representation;
+- Stations duplex contract;
+- FSW workspace/signature/pagination contract;
+- MathJax ordering;
+- no unresolved tokens or broken local assets.
+
+FILES / PACKAGE
+- exact live section names;
+- all required companions present;
+- ZIP extraction depth correct;
+- no unused/generated junk.
+
+======================================================================
+15. FINAL OPERATING PRINCIPLES
+======================================================================
+
+1. Activities change participation, not canonical content.
+2. One dashboard Activity link may open a hub of many approved options.
+3. Build Framework-required reusable question sets first and do not arbitrarily thin full routes.
+4. The finalized Bank owns canonical student content and solutions.
+5. Use the approved structure library; do not invent fake novelty.
+6. Optional Activities do not carry required core instruction or evidence.
+7. Do not automatically add an Activity Check.
+8. Tarsia may be linked without duplicating Practice-owned content.
+9. Preserve canonical representations.
+10. Preserve teacher-live improvements.
+11. Activity names link to projectable directions in the same hub.
+12. Prompt first, then supporting representation.
+13. Build means the complete Unit hub + companion package, not a sample.
+14. This PM is intentionally single-file; do not recreate a PM-local helper/reference package around it.
+
+END — 6 · BUILD ACTIVITIES PM v3.0
