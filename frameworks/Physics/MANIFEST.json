@@ -22,6 +22,17 @@
       "asset_path_rule": "resources/Physics_Notes_Image_Toolkit/<toolkit_path>",
       "delivery": "reference_in_place",
       "note": "Course-owned Physics Notes visuals. 4A selects from this resource; 4B references selected assets at their canonical course-repo paths instead of copying toolkit binaries into Notes."
+    },
+    "physics_textbook": {
+      "repo_scope": "external",
+      "repo": "tnezki/textbooks",
+      "root": "physics",
+      "index": "physics/index.html",
+      "unit_root_pattern": "physics/units/unitN",
+      "section_pattern": "physics/units/unitN/section_N_S.html",
+      "delivery": "reference_in_place",
+      "role": "notes_instructional_spine",
+      "note": "Canonical Physics textbook source used as the instructional spine for Stage 4A Notes mapping and Stage 4B Notes adaptation. Resolve the repository commit once per run and keep it pinned for that run."
     }
   }
 }

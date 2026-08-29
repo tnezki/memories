@@ -88,8 +88,7 @@ Read in this order:
    - Notes visual contract;
    - section_index.json and i_can_index.json when useful.
 6. Read the Unit Bank identity/handoff and load the current Unit Bank structured data ONCE.
-7. Resolve and pin the Physics textbook repo `tnezki/textbooks`; for each course section read only:
-   `physics/units/unitN/section_N_S.html`
+7. Resolve `course_resources.physics_textbook` from `frameworks/Physics/MANIFEST.json`. Resolve its declared repo commit once (unless already supplied by the request) and pin it for the run. For each course section read only the file matching its declared `section_pattern`.
 8. Resolve `course_resources.physics_notes_image_toolkit` from the Physics Framework manifest and load `IMAGE_CATALOG.json` ONCE.
 
 DO NOT search the web for canonical curriculum authorities.
@@ -369,9 +368,9 @@ Minimum top-level shape:
   "source_bank_fingerprint_method": "...",
   "source_bank_fingerprint": "...",
   "textbook_source": {
-    "repo": "tnezki/textbooks",
-    "commit": "<pinned commit>",
-    "root": "physics/units/unitN"
+    "repo": "<resolved course_resources.physics_textbook.repo>",
+    "commit": "<pinned textbook commit>",
+    "root": "<resolved Unit root from course_resources.physics_textbook>"
   },
   "image_toolkit": {
     "name": "Physics Notes Image Toolkit",

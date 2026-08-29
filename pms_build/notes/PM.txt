@@ -67,7 +67,7 @@ Before writing:
    - Notes visual contract;
    - course CSS/runtime rules.
 5. Parse the approved map JSON from the current `uN_notes_map/` location or accepted legacy path.
-6. Read the map-declared pinned textbook section files only.
+6. Resolve `course_resources.physics_textbook` from `frameworks/Physics/MANIFEST.json`. Verify the map-declared textbook repo matches that resource declaration, then read only the map-declared section files at the map's pinned textbook commit.
 7. Load the current Unit Bank structured data ONCE and build an exact Bank-ID lookup.
 8. Resolve `course_resources.physics_notes_image_toolkit` and load its catalog ONCE; validate only mapped images.
 9. Read current Notes CSS references:
@@ -544,8 +544,8 @@ NOTES_BUILD_HANDOFF.json minimum:
   "source_bank_fingerprint": "...",
   "notes_map_fingerprint": "...",
   "image_toolkit_fingerprint": "...",
-  "textbook_repo": "tnezki/textbooks",
-  "textbook_commit": "...",
+  "textbook_repo": "<resolved course_resources.physics_textbook.repo>",
+  "textbook_commit": "<map-pinned textbook commit>",
   "lesson_target_minutes": {"min": 30, "max": 40},
   "section_count": 0,
   "ex_yti_pairs_used": 0,
