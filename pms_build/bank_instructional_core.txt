@@ -21,6 +21,35 @@ Read:
 
 Do not consume Practice/Exit/Summative slices in 3A.
 
+DETERMINISTIC CONTRACT PASS — HARD
+----------------------------------
+Resolve `qa_bank_3a_contract` through `Tools/MANIFEST.json`.
+
+After all 3A files are written, run the registered validator against the expanded course repository:
+
+  python3 <system_repo_root>/Tools/qa_bank_3a_contract.py <course_repo_root> --unit N --json-report <course_repo_root>/banks/unitN/provenance/3a_contract_qa.json
+
+A nonzero exit blocks 3A PASS. Repair the reported mechanical contract failures and rerun the SAME validator. Do not change or expand validator criteria during the run.
+
+THIS PASS HAS A FROZEN SCOPE:
+- record/count/index/manifest reconciliation;
+- exact map-field preservation;
+- selected-response storage/render/key contracts;
+- semantic HTML table presence/class/payload contracts;
+- canonical asset path/reference existence;
+- student-constructed response-surface presence;
+- required representation render markers;
+- Example/YTI pair completeness;
+- WTC multipart/count/coverage/shared-stimulus structural fields.
+
+THIS PASS DOES NOT JUDGE:
+- Physics correctness;
+- whether the prose semantically performs a claimed evidence/reasoning move;
+- WTC difficulty;
+- instructional quality, novelty, wording preference, or aesthetics.
+
+Those are separate review passes. A deterministic PASS must never be described as semantic/content certification.
+
 PURPOSE
 -------
 Author only exact_content:
@@ -167,6 +196,7 @@ Canonical Bank root:
   warmups/section_<section-id>.json
   figures/ only when actually used
   provenance/3a_build.json
+  provenance/3a_contract_qa.json
   provenance/3a_report.txt
 
 BANK_MANIFEST after 3A:
@@ -179,7 +209,9 @@ BANK_MANIFEST after 3A:
 
 QA — HARD
 ---------
-Verify:
+First require `qa_bank_3a_contract` PASS and preserve its JSON report in `provenance/3a_contract_qa.json`. The mechanical pass has the frozen scope above; do not silently add new criteria to it.
+
+The remaining authoring review is separate from the deterministic pass. Verify:
 - every expected 3A record authored exactly once;
 - every design_slot_id resolves;
 - final prompt performs mapped evidence job/structure;
