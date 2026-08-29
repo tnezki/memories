@@ -7,14 +7,28 @@
   "note": "FRAMEWORK.txt is the stable authority front door. resource_root preserves the current large supporting tree without mass-moving assets.",
   "assessment_plan_pattern": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html",
   "bank_profiles": {
-    "legacy_bank": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_course_profile.json",
+    "bank_v2": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_v2_course_profile.json",
     "bank_v2_map": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_v2_course_profile.json"
   },
   "bank_v2_runtime_files": [
     "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_v2_course_profile.json",
     "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/i_can_index.json"
   ],
-  "bank_v2_note": "For Steps 2.5/2.6 Bank-v2 pilot work, bank_v2_map is the manifest-declared course profile. legacy_bank remains only for the currently deployed Stage 3A-3E pipeline until those stages are upgraded after map approval.",
+  "bank_v2_runtime": {
+    "map_front_door_pattern": "banks/unitN_bank_map/MAP_MANIFEST.json",
+    "bank_front_door_pattern": "banks/unitN/BANK_MANIFEST.json",
+    "item_index_pattern": "banks/unitN/ITEM_INDEX.json",
+    "canonical_storage": "expanded_course_repo",
+    "handoff_zip_rule": "unitN.zip is transport/output only. After extraction and sync, downstream jobs read the expanded banks/unitN/ tree. Prior stage ZIPs are never canonical inputs and must not be searched for in File Library, uploads, or old staging locations."
+  },
+  "bank_v2_note": "The Bank-v2 course profile is current for Steps 2.5, 3A, 3B, and 3C and for downstream Bank-aware routing. Canonical Bank content is the expanded course-repository banks/unitN/ tree addressed through BANK_MANIFEST.json and ITEM_INDEX.json. Do not use or search for prior stage ZIPs as inputs.",
+  "deprecated_resources": {
+    "legacy_bank_profile": {
+      "path": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_course_profile.json",
+      "status": "DEPRECATED_DO_NOT_USE_FOR_BANK_V2",
+      "note": "Retained temporarily only until downstream cleanup is complete. It is not a canonical source for Bank-v2 mapping, authoring, or canonical Bank reads."
+    }
+  },
   "notes_runtime_files": [
     "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/notes_course_profile.json",
     "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/language_reading_tone.json",

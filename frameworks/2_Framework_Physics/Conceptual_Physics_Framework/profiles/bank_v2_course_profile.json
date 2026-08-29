@@ -1,18 +1,27 @@
 {
   "schema": "course-bank-v2-profile/1.0",
-  "name": "Conceptual Physics Bank v2 Pilot Profile",
+  "name": "Conceptual Physics Bank v2 Course Profile",
   "course": "Physics",
-  "status": "CURRENT_FOR_BANK_V2_MAP_PILOT",
-  "role": "Physics-specific Bank-v2 inventory, canonical record modes, family-pool rules, deterministic selection constraints, and disciplinary authoring behavior for Steps 2.5/2.6. Universal procedure remains PM-owned; universal question structures remain owned by _question_structure/.",
-  "compatibility_note": "The legacy bank_course_profile.json remains in place temporarily for the currently deployed Stage 3A-3E pipeline. This v2 profile is the manifest-declared authority for the Bank-v2 2.5/2.6 pilot. After the new map is approved, Stage 3A-3E will be upgraded and the duplicate legacy inventory will be retired.",
+  "status": "CURRENT",
+  "role": "Physics-specific Bank-v2 inventory, canonical record modes, family-pool rules, deterministic selection constraints, and disciplinary authoring behavior for Steps 2.5, 3A, 3B, and 3C plus downstream Bank-aware builds. Universal procedure remains PM-owned; universal question structures remain owned by _question_structure/.",
+  "compatibility_note": "Bank-v2 is the current Physics Bank architecture. The legacy bank_course_profile.json is deprecated and must not be used for Bank-v2 mapping, authoring, or canonical Bank reads. Prior stage ZIPs are transport artifacts only, never canonical inputs.",
+  "canonical_source_routing": {
+    "map_front_door": "banks/unitN_bank_map/MAP_MANIFEST.json",
+    "bank_front_door": "banks/unitN/BANK_MANIFEST.json",
+    "item_index": "banks/unitN/ITEM_INDEX.json",
+    "canonical_bank_storage": "expanded course-repository banks/unitN/",
+    "prior_stage_zip_rule": "Do not search File Library, uploads, chat attachments, staging folders, or repository history for prior Bank stage ZIPs. unitN.zip is handoff/output only and is discarded as an authority after extraction and sync.",
+    "declared_source_rule": "Resolve declared curriculum authorities directly through pinned manifests and exact repository paths. Do not use generic web search, repository-wide search, File Library search, or prior ZIP discovery to locate or substitute known authorities.",
+    "external_research_rule": "Outside research is not part of normal Bank-v2 authoring and is permitted only when the teacher explicitly requests it in the current job."
+  },
   "instructional_spine": {
     "hard_rule": "Exact Unit Assessment Plan I-can statements are the atomic planning and routing addresses. Build evidence/family plans from I-cans first; never fill destination counts and attach I-can labels afterward.",
     "question_structure_authority": "current _question_structure/",
     "course_behavior_authority": "current Physics Framework + this profile"
   },
   "record_modes": {
-    "exact_content": "Later Bank stages author one exact canonical prompt/answer/solution. Downstream artifacts reproduce that item exactly.",
-    "family_seed": "Later Bank stages author one complete canonical seed prompt/answer/solution plus an explicit transformation contract. Downstream artifacts may create only validated controlled variants."
+    "exact_content": "Bank authoring stores one exact canonical prompt/answer/solution. Downstream artifacts reproduce that item exactly.",
+    "family_seed": "Bank authoring stores one complete canonical seed prompt/answer/solution plus an explicit transformation contract. Downstream artifacts may create only validated controlled variants."
   },
   "inventory": {
     "wtc": {
@@ -53,12 +62,12 @@
       "mix_rule": "The three category counts must sum to exactly 30. Choose the section-specific mix from the actual I-cans/evidence needs; do not force one identical split across all sections.",
       "selection_rule": "Each downstream Practice set selects 24 of the 30 families using hard I-can/evidence/composition constraints first, then stable deterministic tie-breaking. No uncontrolled randomness.",
       "rotation_rule": "Different set keys should rotate omissions when constraints allow so the 30-family pool provides real breadth. Rotation preference may never override I-can coverage, family-type constraints, or question quality.",
-      "seed_rule": "Each family is later authored as one complete canonical seed question with answer/solution and transformation metadata. Downstream variants may not be generated from metadata alone."
+      "seed_rule": "Each family is authored as one complete canonical seed question with answer/solution and transformation metadata. Downstream variants may not be generated from metadata alone."
     },
     "cyu": {
       "record_mode": "exact_content",
       "per_section": 6,
-      "pilot_rule": "Keep six exact canonical CYU items per section for the Bank-v2 pilot. They may intentionally resemble strong Practice families but are authored as exact canonical items and copied downstream."
+      "pilot_rule": "Keep six exact canonical CYU items per section. They may intentionally resemble strong Practice families but are authored as exact canonical items and copied downstream."
     },
     "warmups": {
       "record_mode": "exact_content",
@@ -187,7 +196,7 @@
     "conceptual_before_computational": "Establish the physical model/relationship qualitatively before formula substitution when the concept supports it.",
     "representations": "Graphs, diagrams, FBDs, vectors, motion diagrams, tables, models, and other representations are evidence when they carry the task, not decoration.",
     "multi_step": "Multi-step means an intermediate result is actually required for the final result.",
-    "source_neutrality": "Source/reference libraries may inform authoring but may not silently expand Unit scope beyond the current Assessment Plan."
+    "source_neutrality": "Use only current manifest-/Framework-declared curriculum sources for normal Bank authoring. Do not search File Library, uploads, prior stage ZIPs, old copies, or generic web sources to locate or supplement known Bank authorities. Outside research requires an explicit teacher request in the current job."
   },
   "qa": {
     "family_fidelity_dimensions": [
