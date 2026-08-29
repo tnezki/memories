@@ -102,6 +102,7 @@ Every map record includes, as applicable:
 - primary_i_can_id + exact primary_i_can
 - supporting_i_can_ids
 - evidence_job
+- student_action
 - question_structure_id
 - response_mode
 - representation_mode
@@ -126,8 +127,11 @@ For graph representations supported by the registered graph tool:
 - do not map an improvised graph route.
 
 For diagram/FBD/vector/model representations:
-- route to an approved source figure or approved deterministic diagram route;
-- if no valid route exists, report the missing route during map QA instead of pretending prose is equivalent.
+- a generic route label such as `framework_approved_diagram_route` is NOT executable and must not PASS;
+- for an existing canonical asset, record an explicit `representation_route` with route_type=`canonical_asset`, repository, pinned commit, exact canonical path, and asset_id when available;
+- for a deterministic generator, record route_type=`registered_tool`, a `tool` key that resolves through `Tools/MANIFEST.json`, and the parameter / answer-neutrality contract needed by downstream authoring;
+- for a student-constructed diagram/FBD/vector, map an explicit blank response-surface contract; do not require a completed answer diagram;
+- if no exact asset or registered tool exists, redesign the slot to an evidence-equivalent non-diagram task only when the target permits it; otherwise FAIL the slot and report the missing route.
 
 FAMILY MAP RECORD — HARD
 ------------------------
@@ -174,6 +178,40 @@ The map must distinguish:
 
 If representation_mode says students must use a representation, 3A/3B/3C must be able to render it visibly.
 
+PRACTICE MIX — FIT BEFORE CATEGORY
+----------------------------------
+The section pool size remains the current course-profile count, but family-type composition is NOT a universal quota.
+
+For each section:
+1. map the exact I-cans/evidence jobs first;
+2. decide which content/question modes genuinely fit those jobs;
+3. allocate the full Practice pool from that fit;
+4. allow any family category to be zero when the section does not naturally support it.
+
+Do NOT create:
+- a quantitative/modeling family for a vocabulary/conceptual I-can merely to fill a quantitative bucket;
+- a vocabulary family for a model/relationship target merely to fill a vocabulary bucket;
+- a diagram/graph/table merely to satisfy representation variety.
+
+Quantitative/modeling is justified only when the target genuinely calls for relationship use, calculation, quantitative comparison, model interpretation, or similar mathematical reasoning.
+
+EVIDENCE / RESPONSE / REPRESENTATION ALIGNMENT — HARD
+-----------------------------------------------------
+Every destination record must state the actual `student_action` and pass this alignment check:
+
+  exact I-can -> evidence_job -> student_action -> question_structure_id
+  -> response_mode -> representation_mode -> tool/render route
+
+All links must describe the SAME evidence job.
+
+Examples:
+- evidence_job = "draw/construct a force diagram" -> constructed_response + student_constructed_fbd + blank response surface;
+- evidence_job = "identify which supplied force diagram is correct" -> selected_response + supplied diagram choices/representation;
+- evidence_job = "critique a supplied diagram" -> constructed_response or selected_response only if the chosen response actually captures critique evidence.
+
+Do NOT map a selected-response item as evidence that the student drew/constructed/built a representation.
+If response mode changes the student action, rewrite the evidence job honestly or choose a different response mode.
+
 DETERMINISTIC SELECTION
 -----------------------
 For destinations with pools:
@@ -211,8 +249,13 @@ Before PASS:
 - every record resolves to one design slot;
 - every question_structure_id resolves;
 - response_mode is compatible with the structure;
+- every record's evidence_job, student_action, response_mode, and representation_mode collect the same intended evidence;
+- construct/draw/build evidence is not mapped as selected_response unless the evidence job is explicitly selection/critique instead of construction;
+- Practice family type/content mode is justified by the actual I-can/evidence job, not a category quota;
 - selected_response records have a planned choice/distractor contract;
 - representation-required records have a real render/tool/source route;
+- every non-student-constructed diagram/FBD/vector route resolves to an exact pinned canonical asset OR a registered deterministic tool;
+- generic diagram route aliases/placeholders are forbidden;
 - graph records use `graph_tool` when supported;
 - small-table records require semantic compact HTML tables;
 - diagram/FBD/vector records do not rely on prose substitution;
@@ -223,6 +266,8 @@ Before PASS:
 - no finished prompt/answer prose leaked into the map.
 
 FAIL if the map only labels structure/representation without an executable route.
+FAIL if family/category allocation forces a task type that does not fit the I-can/evidence job.
+FAIL if evidence_job, student_action, response_mode, and representation_mode disagree.
 
 FINAL CHAT SUMMARY
 ------------------

@@ -1,6 +1,6 @@
 {
   "schema": "course-bank-v2-profile/1.0",
-  "profile_version": "v1.1",
+  "profile_version": "v1.2",
   "name": "Conceptual Physics Bank v2 Course Profile",
   "course": "Physics",
   "status": "CURRENT",
@@ -51,24 +51,16 @@
         "Practice Set 3",
         "Extra Practice"
       ],
-      "family_mix_ranges": {
-        "vocabulary_representation": {
-          "min": 8,
-          "max": 10
-        },
-        "conceptual_application": {
-          "min": 12,
-          "max": 15
-        },
-        "quantitative_modeling": {
-          "min": 5,
-          "max": 8
-        }
-      },
-      "mix_rule": "The three category counts must sum to exactly 30. Choose the section-specific mix from the actual I-cans/evidence needs; do not force one identical split across all sections.",
-      "selection_rule": "Each downstream Practice set selects 24 of the 30 families using hard I-can/evidence/composition constraints first, then stable deterministic tie-breaking. No uncontrolled randomness.",
+      "mix_rule": "The 30-family section pool is I-can/evidence-responsive. Decide the family mix only AFTER mapping the exact section I-cans and evidence jobs. No family type has a universal minimum or maximum. A category may be zero when the section does not naturally support it. Do not force quantitative/modeling, vocabulary, representation, or any other category merely to satisfy a mix target.",
+      "selection_rule": "Each downstream Practice set selects 24 of the 30 families using hard I-can/evidence/representation constraints first, then stable deterministic tie-breaking. Preserve any intentionally mapped section-specific composition, but do not impose a universal category quota. No uncontrolled randomness.",
       "rotation_rule": "Different set keys should rotate omissions when constraints allow so the 30-family pool provides real breadth. Rotation preference may never override I-can coverage, family-type constraints, or question quality.",
-      "seed_rule": "Each family is authored as one complete canonical seed question with answer/solution and transformation metadata. Downstream variants may not be generated from metadata alone."
+      "seed_rule": "Each family is authored as one complete canonical seed question with answer/solution and transformation metadata. Downstream variants may not be generated from metadata alone.",
+      "family_types": [
+        "vocabulary_representation",
+        "conceptual_application",
+        "quantitative_modeling"
+      ],
+      "quantitative_modeling_gate": "Use quantitative/modeling families only when the exact I-can/evidence job genuinely calls for mathematical relationship use, calculation, model interpretation, comparison, or quantitative reasoning. Do not manufacture an equation/quantitative task for a vocabulary/conceptual target just to fill a category."
     },
     "cyu": {
       "record_mode": "exact_content",
@@ -166,9 +158,19 @@
         "approved Framework/course/source figure",
         "approved deterministic diagram route"
       ],
-      "hard_rule": "Do not replace a required diagram/FBD/vector/model with prose. Do not PASS crude, low-resolution, distorted, mislabeled, answer-leaking, or physically incorrect new visuals. If no approved route can produce the required representation, fail closed on that item and report the missing diagram route."
+      "hard_rule": "Do not replace a required diagram/FBD/vector/model with prose. Do not PASS a generic placeholder route. A non-student-constructed diagram must resolve either to an exact canonical asset at a pinned path or to a registered deterministic diagram tool. If neither exists, redesign that slot to an evidence-equivalent non-diagram task only when the I-can permits it; otherwise fail closed and report the missing route.",
+      "route_contract": {
+        "canonical_asset": "Record an exact repository, pinned commit, canonical asset path, and asset_id when available. A generic phrase such as framework_approved_diagram_route is NOT an executable route.",
+        "registered_tool": "Record a tool_key that resolves through Tools/MANIFEST.json plus the parameter/answer-neutrality contract needed to generate the representation. If the tool is not registered, it is not a canonical production route.",
+        "student_constructed": "A student-constructed diagram may use an explicit blank HTML/CSS response surface without a completed diagram generator, provided the prompt itself supplies a sufficient physical situation and no answer is leaked."
+      }
     },
-    "representation_presence": "If representation_mode requires a graph/table/diagram/vector/model/image, student_html must contain the usable representation. Metadata-only compliance is FAIL."
+    "representation_presence": "If representation_mode requires a graph/table/diagram/vector/model/image, student_html must contain the usable representation. Metadata-only compliance is FAIL.",
+    "evidence_response_representation_alignment": {
+      "hard_rule": "The evidence_job states what the student must actually do. response_mode and representation_mode must allow the student to produce or select evidence of that action. A map record fails when its metadata describes one student action but its response/representation can only collect a different action.",
+      "construction_rule": "If the I-can/evidence_job says draw, construct, build, create, or produce a representation, the default route is constructed_response with an explicit student response surface and the corresponding student_constructed representation mode. selected_response is allowed only when the evidence job is intentionally rewritten as identify/select/critique/compare a supplied representation rather than construct one.",
+      "selected_response_rule": "A selected-response item may ask students to identify, choose, classify, compare, interpret, or critique. Do not label a selected-response item as evidence that the student constructed/drew/built something."
+    }
   },
   "practice_family_contract": {
     "required_fields": [
@@ -213,7 +215,7 @@
     "tie_break": "Stable hash/pseudo-random ordering of eligible family IDs after hard constraints are satisfied.",
     "hard_constraints_precede_tie_break": [
       "required I-can/evidence coverage",
-      "family-type composition/range",
+      "mapped section-specific family composition only when intentionally required by the evidence architecture",
       "response-mode requirements",
       "security requirements",
       "representation requirements"
@@ -229,6 +231,10 @@
   },
   "qa": {
     "hard_failures": [
+      "family/content mode forced only to satisfy a category quota rather than fit the I-can/evidence job",
+      "evidence_job cannot actually be demonstrated through the mapped response_mode/representation_mode",
+      "construct/draw/build evidence mapped as selected_response without changing the evidence job to selection/critique",
+      "generic diagram/FBD/vector placeholder route without an exact canonical asset or registered deterministic tool",
       "mapped question structure not executed by the final prompt",
       "selected_response without complete visible choices",
       "required representation absent from student_html",

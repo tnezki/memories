@@ -1,4 +1,4 @@
-# Question Structure Core — v1.1
+# Question Structure Core — v1.2
 
 ## 1. Plan before prose
 The question ecosystem is designed before individual prompts are written.
@@ -113,12 +113,30 @@ Use the current canonical course-authoring tool when it supports the evidence cl
 
 A representation label is not evidence. The finished student task must actually render the representation in a readable form and require the student to use it.
 
+## 7A. Evidence–response–representation alignment
+The evidence job must describe what the student actually demonstrates, and the response/representation must be capable of collecting that evidence.
+
+Use this chain:
+
+`target → evidence job → student action → structure → response mode → representation → tool/render route`
+
+Every link must agree.
+
+Examples:
+- **construct/draw/build/create a representation** → normally constructed response with a real response surface;
+- **identify/select/classify a supplied representation** → selected response may be appropriate;
+- **critique/explain a supplied representation** → use a response mode that actually captures the critique/explanation.
+
+Do not call a selected-response recognition task evidence that a student *constructed* a model. If the response mode changes the student action, change the evidence job honestly or choose a different response mode.
+
+Content-mode categories are descriptive planning tools, not quotas. Do not force quantitative, vocabulary, graph, table, or diagram work onto a target that does not naturally support that evidence merely to satisfy a desired mix.
+
 ## 8. Destination-specific design
 Destination changes the job.
 
 - **WTC:** coherent FRQ morphology; one shared stimulus; connected parts; decomposition/navigation practice. WTC may use prior, current, or future course content and does not satisfy current-section/Unit coverage floors.
 - **Example/YTI:** model then apply; when the I-can naturally supports formula use, a strong quantitative pair has priority over generic vocabulary/conceptual filler.
-- **Practice:** intentionally mixed menu based on I-can fit; may include formula, inverse, matching, vocabulary, diagrams, graphs, short answer, multi-step, conceptual/application. Repetition is allowed when purposeful.
+- **Practice:** intentionally mixed menu based on I-can fit; may include formula, inverse, matching, vocabulary, diagrams, graphs, short answer, multi-step, conceptual/application. No category has a universal minimum. A category may be absent when the target does not support it. Repetition is allowed when purposeful.
 - **Warm-Up:** predictable retrieval/bridging; controlled repetition is useful.
 - **Exit Ticket:** four evidence opportunities should be varied within a ticket and across forms when the target supports it; not four same-shell clones.
 - **Summative:** preserve evidence coverage/rigor while using genuinely independent secure stimuli; family IDs describe semantic families and may not manufacture uniqueness from version/question numbers.
@@ -139,6 +157,9 @@ Reject or repair:
 - a data-table item rendered as pipe-delimited/plain-text rows instead of a semantic HTML table
 - a graph item rendered with an improvised graph when a registered canonical graph tool supports the job
 - a representation-required item whose `student_html` contains no usable representation
+- forcing a quantitative/modeling/vocabulary/representation category onto an I-can only to satisfy an inventory mix
+- mapping “draw/construct/build” evidence as selected response while still claiming construction evidence
+- using a generic “approved diagram route” label without an exact canonical asset or registered deterministic tool
 
 ## 10. Executable completion contract — HARD
 The planned `question_structure_id`, `response_mode`, `representation_mode`, evidence job, and tool route are acceptance criteria for the final authored question.
@@ -168,9 +189,12 @@ When a graph is planned:
 ### Diagrams / FBDs / vectors / models
 When a diagram is planned:
 - prefer a current approved course/Framework/source figure when it fits;
-- otherwise use an approved deterministic diagram route declared by the course/tooling;
+- an existing-asset route is executable only when it records the exact repository, pinned commit, canonical asset path, and asset ID when available;
+- a generated route is executable only when its tool key resolves through the current tools registry and the required parameter/answer-neutrality contract is declared;
+- a generic route name such as “approved diagram route” is not enough;
+- student-constructed diagrams may use a blank response surface without a completed answer diagram when the prompt supplies a sufficient physical situation;
 - do not PASS a crude, low-resolution, mislabeled, distorted, answer-leaking, or physically incorrect visual;
-- if no approved route can produce the required representation, fail closed on that item rather than replacing the representation with prose.
+- if no exact canonical asset or registered tool can produce a required supplied diagram, choose an evidence-equivalent non-diagram structure only when the target permits it; otherwise fail closed rather than substituting prose.
 
 ### Render-level QA
 Final QA inspects the authored prompt, `student_html`, choices, table/figure/graph payload, answer, and solution together. Metadata agreement alone cannot earn PASS.
