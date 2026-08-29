@@ -16,6 +16,46 @@ Read current Philosophy, Runtime, Question Structure, Framework/Assessment Plan,
 Require 3A complete, Bank BUILDING, same accepted map/design identity, and 3B permitted.
 No prior ZIP discovery.
 
+DETERMINISTIC CONTRACT PASSES — HARD
+------------------------------------
+Resolve both `qa_bank_3a_contract` and `qa_bank_3b_contract` through `Tools/MANIFEST.json`.
+
+Before authoring any 3B Practice family, run the existing 3A validator against the expanded course repository:
+
+  python3 <system_repo_root>/Tools/qa_bank_3a_contract.py <course_repo_root> --unit N --json-report <course_repo_root>/banks/unitN/provenance/3a_contract_qa.json
+
+A nonzero 3A result blocks entry into 3B. Do not bypass or reinterpret a mechanical failure.
+
+After all 3B files are written, run:
+
+  python3 <system_repo_root>/Tools/qa_bank_3b_contract.py <course_repo_root> --unit N --json-report <course_repo_root>/banks/unitN/provenance/3b_contract_qa.json
+
+A nonzero 3B result blocks 3B PASS. Repair only the reported mechanical contract failures and rerun the SAME validator. Do not change or expand validator criteria during the run.
+
+THE 3B DETERMINISTIC PASS HAS A FROZEN SCOPE:
+- every mapped Practice family exists exactly once;
+- section counts and family-type mix match the accepted Practice map;
+- exact mapped family identity/contract fields are preserved;
+- each family has one complete canonical_seed;
+- selected-response choices are stored, visible, unique, and keyed;
+- required semantic tables use real `<table class="values">` markup;
+- canonical asset paths exist and are actually referenced/rendered;
+- student-constructed representations contain an explicit response surface;
+- equation_relationship seeds contain an actual MathJax render marker;
+- registered-tool routes retain a tool key and output reference;
+- ITEM_INDEX paths/indexes/modes reconcile with Practice files;
+- BANK_MANIFEST stage state and accepted-map fingerprint reconcile.
+
+THE 3B DETERMINISTIC PASS DOES NOT JUDGE:
+- Physics correctness;
+- whether a prompt semantically fulfills its evidence job;
+- whether a distractor is pedagogically strong beyond mechanical completeness/uniqueness;
+- whether family variation is interesting enough;
+- whether difficulty is ideal;
+- instructional quality, novelty, wording preference, or aesthetics.
+
+Those are separate review passes. A deterministic PASS must never be described as semantic/content certification.
+
 PROFILE-REVISION CONTINUATION — HARD
 ------------------------------------
 An already accepted Bank Map / completed prior stage may continue under a newer current Bank-v2 profile ONLY when the current profile explicitly declares backward compatibility for the stage being entered.
@@ -119,13 +159,16 @@ Create/update:
   banks/unitN/practice/section_<section-id>.json
   banks/unitN/figures/... only when needed
   banks/unitN/provenance/3b_build.json
+  banks/unitN/provenance/3b_contract_qa.json
   banks/unitN/provenance/3b_report.txt
 
 Preserve all 3A canonical content unchanged.
 
 QA — HARD
 ---------
-Verify:
+First require `qa_bank_3a_contract` PASS before authoring 3B. After authoring, require `qa_bank_3b_contract` PASS and preserve its JSON report in `provenance/3b_contract_qa.json`.
+
+The remaining authoring review is separate from the deterministic passes. Verify:
 - every mapped Practice family authored exactly once;
 - each design_slot resolves;
 - pool counts/mixes match map/profile;
@@ -140,6 +183,7 @@ Verify:
 - all figure refs resolve;
 - ITEM_INDEX/BANK_MANIFEST correct.
 
+Do not add new criteria to the deterministic pass while repairing it. New semantic/content concerns belong in a separately declared review pass.
 Render-level failure = Bank failure.
 
 FULL-SNAPSHOT DELIVERY
