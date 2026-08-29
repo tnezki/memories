@@ -1,4 +1,4 @@
-4A · BUILD PHYSICS NOTES MAP PM v1.6
+4A · BUILD PHYSICS NOTES MAP PM v1.7
 ====================================
 
 ROLE
@@ -541,7 +541,18 @@ Must list exactly:
 - NOTES_MAP_REPORT.txt
 - NOTES_MAP_HANDOFF.json
 
-If ANY item A-I fails:
+J. RENDERED HTML SANITY — HARD
+Open/read the final unitN_notes_map.html AS RENDERED OUTPUT, not as a source template.
+The final HTML MUST NOT contain unresolved template/code placeholders, including:
+- {esc(...)}
+- {{...}}
+- <%...%>
+- literal builder-variable expressions such as b["processing_anchor"] or equivalent
+Every visible Processing label and other dynamic field must contain the resolved human-readable value.
+Search the final HTML text for unresolved template delimiters/tokens before PASS.
+If any unresolved template/code token is present, QA FAILS even when the JSON and handoff are otherwise correct.
+
+If ANY item A-J fails:
 - DO NOT emit PASS
 - repair the artifact
 - rerun this complete final output contract check
@@ -568,6 +579,16 @@ Then say exactly:
 
 SAVE NEXT:
 Save the expanded `unitN_notes_map/` folder at `<course>/notes/unitN_notes_map/`. It is a planning artifact, not deployed Notes. 4B Build Notes consumes its JSON directly from this folder.
+
+======================================================================
+V1.7 RENDERED HTML SANITY FIX
+======================================================================
+
+v1.7 preserves the v1.6 course-owned image-resource architecture and all prior
+4A→4B contracts. It adds a hard rendered-output sanity check: the final
+unitN_notes_map.html may not contain unresolved template/code placeholders or
+builder-variable expressions. JSON/handoff correctness does not excuse a broken
+teacher-readable HTML artifact.
 
 ======================================================================
 V1.6 COURSE-OWNED IMAGE RESOURCE FIX

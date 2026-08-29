@@ -188,7 +188,7 @@ def check_pm_contracts(root: Path, findings: list):
     if p4a.exists():
         t = read_text(p4a) or ""
         required = [
-            "4A · BUILD PHYSICS NOTES MAP PM v1.6",
+            "4A · BUILD PHYSICS NOTES MAP PM v1.7",
             "Read the current Curriculum Philosophy completely",
             "course_resources.physics_notes_image_toolkit",
             "unitN_notes_map.json",
@@ -362,6 +362,14 @@ def check_sibling_physics(root: Path, findings: list):
 
         map_path = folder / f"unit{n}_notes_map.json"
         handoff_path = folder / "NOTES_MAP_HANDOFF.json"
+        html_path = folder / f"unit{n}_notes_map.html"
+
+        html_text = read_text(html_path) or ""
+        unresolved_markers = ["{esc(", "{{", "<%"]
+        for marker in unresolved_markers:
+            if marker in html_text:
+                add(findings, "ERROR", rel(root.parent, html_path),
+                    f"unresolved template/code token in 4A HTML: {marker!r}")
 
         try:
             map_data = json.loads(map_path.read_text(encoding="utf-8"))
