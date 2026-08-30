@@ -18,7 +18,7 @@ FLOW:
     -> PLACE INTO UNIVERSAL PROJECTOR + PRINT SHELL
     -> SEMANTIC / SECURITY / ANSWER / REPRESENTATION QA
     -> SHELL / MATHJAX / PRINT QA
-    -> RETURN COURSE-ROOT PATCH
+    -> PACKAGE REQUIRED EXIT ZIP
 
 ======================================================================
 0. TOOL POLICY — EXECUTABLE HARD GATE
@@ -252,7 +252,9 @@ SELECTED RESPONSE:
 
 CONSTRUCTED RESPONSE:
 - prompt must elicit the intended evidence;
-- provide a usable response surface/accessory when needed;
+- the NORMAL written-response workspace in print mode is the unruled blank remainder of the half-page question card;
+- do NOT add generic writing lines, ruled-paper SVGs, or a generic lined `response-accessory` after an open-response prompt;
+- add a response surface/accessory ONLY when the task specifically requires a structured surface such as a coordinate plane, number line, blank graph/grid, blank table, diagram/FBD/vector/model canvas, or another evidence-bearing construction surface;
 - maintain a complete answer, solution, scoring basis, or exemplar sufficient for independent validation.
 
 SMALL TABLES:
@@ -274,7 +276,8 @@ FBD / VECTOR / MODEL / DIAGRAM:
 - if no executable route exists and the I-can requires the representation, FAIL CLOSED.
 
 STUDENT-CONSTRUCTED REPRESENTATION:
-When construction itself is the evidence, provide a blank response surface/accessory rather than a completed answer figure.
+When construction itself is the evidence, provide a blank task-specific response surface/accessory rather than a completed answer figure.
+Do not treat generic handwriting lines as a task-specific representation.
 
 PROMPT ORDER:
 Prompt/instruction appears before supporting student-facing tables/graphs/figures unless the question structure genuinely requires stimulus-first reading.
@@ -315,7 +318,7 @@ HARD:
 8. UNIVERSAL EXIT DOM / CSS / JAVASCRIPT SHELL LOCK
 ======================================================================
 
-Output path:
+Canonical deployed course path:
   exit/exit{U}/exit_{U}.html
 
 Use the universal Exit HTML/JavaScript/CSS shell exactly in mechanics.
@@ -357,7 +360,8 @@ Inside that packet require EXACTLY:
 - exactly two questions in each `.print-question-grid`;
 - page headers identifying Course / Unit / Section / Ticket / Version / Page 1 of 2 or Page 2 of 2;
 - Name line / current print identity shell;
-- needed response accessories/figures.
+- task-specific response accessories/figures only when required by the evidence job;
+- NO generic lined writing SVGs or ruled response accessories; ordinary open response uses the blank remainder of the question card.
 
 One selected Ticket therefore prints:
   4 versions x 2 pages = 8 portrait pages.
@@ -385,6 +389,7 @@ PROHIBITED:
 - `data-print-target` body routing;
 - a Physics-only print mechanism;
 - showing all `.exit-print` packets during print;
+- generic handwriting-line SVGs inserted as response accessories;
 - changing shared `exit.css` to compensate for malformed artifact HTML/JS;
 - reconstructing a different Exit shell because the content differs.
 
@@ -482,6 +487,8 @@ DOM / JS
 - exactly four print versions per packet;
 - exactly two print pages per version;
 - exactly two questions per print page;
+- ordinary constructed-response print questions contain no generic lined/ruled writing SVG;
+- task-specific response surfaces appear only when required by the evidence job;
 - `printExitTicket` present;
 - `.print-active` mechanism present;
 - `afterprint` clears target;
@@ -501,7 +508,8 @@ CSS / RENDER
 - Ticket Print / Collect activates ONLY its matching packet;
 - selected Ticket prints exactly 8 portrait pages under the standard four-version contract;
 - two questions per print page;
-- no clipped text, choices, tables, figures, response surfaces, or MathJax;
+- blank remainder of each open-response question card remains usable writing space;
+- no clipped text, choices, tables, figures, task-specific response surfaces, or MathJax;
 - all local asset paths resolve.
 
 FINAL BYTES
@@ -516,17 +524,41 @@ Do not invent new QA criteria mid-run.
 Park new systemic findings for later PM revision after the test run.
 
 ======================================================================
-12. OUTPUT / PATCH BOUNDARY
+12. OUTPUT / DELIVERY — REQUIRED ZIP
 ======================================================================
 
-Primary deployed file:
+Canonical deployed course file remains:
   exit/exit{U}/exit_{U}.html
 
-If the build changes ONLY that HTML file:
-  return that single file directly.
+FINAL USER DELIVERY IS ALWAYS ONE ZIP.
+Do NOT return a loose Exit HTML file as the final download.
 
-If new/changed local Exit figures/assets are required:
-  return ONE ZIP containing ONLY the changed/new course-repository files with repository-relative paths intact.
+ZIP name:
+  exit{U}.zip
+
+ZIP ROOT — HARD:
+The archive is rooted INSIDE the course `exit/` directory, so it contains:
+
+  exit{U}/exit_{U}.html
+
+For Unit 1 this is exactly:
+
+  exit1/exit_1.html
+
+If new/changed local Exit assets are required, include them under the same Unit folder, for example:
+
+  exit{U}/exit_{U}.html
+  exit{U}/figures/...
+
+Do NOT wrap those paths in another top-level `exit/` folder inside the ZIP.
+After extraction/upload into the course repository's existing `exit/` directory, the deployed path becomes:
+  exit/exit{U}/exit_{U}.html
+
+Before delivery:
+- list the ZIP contents;
+- verify archive integrity;
+- confirm `exit{U}/exit_{U}.html` exists exactly once;
+- reopen the archived HTML and confirm it matches the QA'd staging bytes.
 
 Do NOT include:
 - this PM;

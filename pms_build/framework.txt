@@ -1,0 +1,427 @@
+BUILD FRAMEWORK — SINGLE PASS / STABLE FRONT DOOR / COURSE-SPECIFIC AUTHORITY ASSEMBLER
+================================================================================================
+
+STATUS: CURRENT
+STEP: 2
+JOB: framework
+ROLE: Create or reconcile the canonical Course Framework that downstream curriculum PMs resolve through the stable framework registry/front door.
+
+This is ONE build PM.
+There is no nested Framework PM folder, starter ZIP, local manifest, or control-panel profile.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + AUTHORITATIVE ASSESSMENT PLANS + COURSE SOURCES
+    -> RESOLVE CREATE / RECONCILE MODE
+    -> PRESERVE EXACT UNIT LEARNING AUTHORITY
+    -> BUILD COURSE-SPECIFIC CONTRACTS / INDEXES / PROFILES
+    -> STABLE FRAMEWORK FRONT DOOR + RESOURCE ROOT
+    -> CROSS-CONTRACT QA
+    -> RETURN ONE COMPLETE FRAMEWORK HANDOFF
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB framework build unless the teacher explicitly changes the task and supplies a public source that must be consulted.
+
+Resolve current canonical system/framework resources by direct path at the pinned snapshot.
+Use teacher-provided source files directly.
+If a required declared resource cannot be resolved:
+  FAIL CLOSED
+and name the exact missing path/source.
+Do not search around the failure or silently substitute an older Framework ZIP.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current explicit teacher instruction;
+2. current canonical `Curriculum_Philosophy.txt`;
+3. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+4. current `frameworks/MANIFEST.json`;
+5. authoritative Assessment Plan file(s) for the course;
+6. current registered Course Framework front door + MANIFEST + resource root when RECONCILING;
+7. teacher-provided / course-declared source material required to interpret course-specific behavior;
+8. universal `_question_structure/` only when validating Framework references to universal structure IDs/taxonomy;
+9. this PM.
+
+Authority by domain:
+- learning/evidence scope = exact Unit Assessment Plans;
+- universal curriculum principles = Philosophy;
+- universal question/evidence structures = `_question_structure/`;
+- course-specific behavior = Course Framework;
+- procedure/package mechanics = this PM;
+- renderer implementation = tools/CSS/templates.
+
+The Framework must not become a second Philosophy, PM library, or universal question-structure catalog.
+
+======================================================================
+2. BUILD MODE — CREATE OR RECONCILE
+======================================================================
+
+CREATE mode:
+- course is not registered in `frameworks/MANIFEST.json`; or
+- teacher explicitly requests a new canonical Framework.
+
+RECONCILE mode:
+- course already has a registered stable front door; and
+- teacher requests a Framework rebuild, integration of revised Assessment Plans, cleanup, or course-specific rule update.
+
+RECONCILE is the default when a registered course already exists.
+
+HARD:
+- do not mass-migrate a working resource tree merely to make it look like another course;
+- preserve current stable paths unless a path change is explicitly required;
+- remove/replace stale active rules instead of stacking a newer contradictory rule above them;
+- preserve teacher-owned source/reference assets not named for replacement.
+
+======================================================================
+3. CANONICAL FRAMEWORK ARCHITECTURE — HARD
+======================================================================
+
+The system uses a stable registry/front-door architecture.
+
+Top-level registry:
+  frameworks/MANIFEST.json
+
+Stable course front door:
+  frameworks/<COURSE_KEY>/FRAMEWORK.txt
+  frameworks/<COURSE_KEY>/MANIFEST.json
+
+The course MANIFEST resolves the expanded supporting resource root.
+Example current pattern:
+  `FRAMEWORK.txt` = readable stable authority front door
+  `MANIFEST.json` = course identity + resource_root pointer
+  resource_root = larger expanded supporting tree
+
+Git history owns version history.
+Do not version-hunt by changing the stable front-door filename.
+
+RECONCILE:
+- preserve the current registered `<COURSE_KEY>`;
+- preserve current `resource_root` unless migration is explicitly required;
+- preserve current Assessment Plan paths unless the plan build intentionally changed them.
+
+CREATE:
+- create one stable course key and record it once in `frameworks/MANIFEST.json`;
+- create the stable front door + course MANIFEST;
+- create one expanded supporting resource root with an unambiguous manifest;
+- do not create duplicate aliases unless a migration/compatibility need is explicitly documented.
+
+======================================================================
+4. ASSESSMENT PLAN IMMUTABILITY INSIDE FRAMEWORK — HARD
+======================================================================
+
+Unit Assessment Plans are the exact learning/evidence authority.
+
+When Step 1 supplies revised/new Assessment Plans:
+- import those plan bytes exactly;
+- index them;
+- build course indexes/contracts from them;
+- do NOT paraphrase them during Framework assembly.
+
+When no Assessment Plan change is requested:
+- preserve every current plan byte-for-byte.
+
+If a Framework rule conflicts with an exact current Assessment Plan:
+- the Assessment Plan controls Unit learning/evidence scope;
+- repair the conflicting Framework rule or report the conflict;
+- do not silently edit the plan to make the Framework pass.
+
+If two current plan copies conflict and authority cannot be resolved:
+  FAIL CLOSED as FRAMEWORK_ASSESSMENT_PLAN_CONFLICT.
+
+======================================================================
+5. WHAT THE FRAMEWORK OWNS
+======================================================================
+
+Keep only COURSE-SPECIFIC authority in the Framework.
+
+The Framework may own:
+- course identity and organization;
+- course map / Unit / section organization;
+- exact Assessment Plan index and lookup paths;
+- exact I-can / section / Mastery Goal indexes derived from the plans;
+- course-specific instructional voice and content priorities;
+- course-specific response-mode preferences;
+- course-specific representation systems and figure rules;
+- source hierarchy / reference intelligence;
+- source coverage gaps and fallback rules;
+- course-specific Bank inventory/profile behavior;
+- course-specific recurring-assessment behavior;
+- course-specific Notes / Practice / Activities / assessment exceptions;
+- course file/deployment path contract;
+- course-specific calculator/reference/notation/FRQ/scientific-modeling rules;
+- curated source/reference pointers;
+- compatibility contracts required by downstream universal PMs.
+
+The Framework does NOT own:
+- universal Philosophy prose;
+- universal question-structure taxonomy;
+- task PM workflows;
+- Control Panel implementation;
+- generic GitHub packaging rules;
+- renderer DOM/CSS/JavaScript mechanics;
+- finished Bank questions;
+- finished classroom artifacts.
+
+======================================================================
+6. MINIMUM COURSE MODEL / INDEXES
+======================================================================
+
+For a NEW Framework, create enough machine-readable structure that downstream PMs never need to guess course learning addresses.
+
+Minimum current model:
+- Assessment Plan index;
+- course map;
+- section index;
+- exact I-can index;
+- Mastery Goal / evidence map;
+- authority contract;
+- course file structure contract;
+- course-specific Bank profile;
+- recurring-assessment profile when the course uses recurring resources;
+- resource-root manifest;
+- source/reference index or pointers when source material is part of the Framework.
+
+Recommended new-course organization:
+  assessment_plans/
+  course_map/
+  curriculum/
+  contracts/
+  profiles/
+  reference_library/   [only when needed]
+  sources/             [only when needed]
+  manifest.json
+
+Do NOT force an existing Framework to adopt those exact folder names if its current registered layout already resolves the same authorities cleanly.
+
+======================================================================
+7. EXACT I-CAN / SECTION / MASTERY INDEXING — HARD
+======================================================================
+
+Downstream builds must be able to resolve exact learning by stable address.
+
+Build/validate:
+- section identity -> exact Unit/section title and plan source;
+- exact I-can text -> stable ID/address;
+- each I-can -> primary Mastery Goal and any intentional secondary associations;
+- Mastery Goal -> exact supporting I-cans/sections;
+- Unit -> exact Assessment Plan path.
+
+RECONCILE:
+- preserve current stable IDs whenever the underlying exact learning has not intentionally changed;
+- never renumber IDs merely because files were reordered;
+- if exact I-can wording changes intentionally, update every derived index/reference consistently.
+
+CREATE:
+- use deterministic stable ID conventions and document them in the Framework authority/profile;
+- IDs are internal evidence addresses, not student-facing decoration.
+
+No downstream PM should have to infer an I-can by fuzzy text matching when the current Framework can provide an exact address.
+
+======================================================================
+8. COURSE MAP / SOURCE INTELLIGENCE
+======================================================================
+
+The Framework must distinguish:
+- authoritative learning/evidence sources;
+- official terminology/conditions sources;
+- teacher course organization;
+- conceptual/explanation references;
+- task/assessment morphology references;
+- visual/reference libraries;
+- tone/style references.
+
+Do not let a source's existence make it curriculum authority for domains it does not own.
+
+For missing source coverage:
+- record the gap explicitly;
+- identify any approved adjacent/fallback source and what role it may play;
+- never claim a fallback is a direct source for content it does not cover.
+
+For standardized/AP courses, preserve official course terminology, theorem/definition conditions, calculator expectations, and exam conventions when those authoritative documents are supplied.
+
+======================================================================
+9. COURSE-SPECIFIC PROFILES — REPLACE, DO NOT STACK
+======================================================================
+
+Profiles/contracts should express course-specific differences from universal PM behavior.
+
+Examples:
+- Physics: conceptual-before-computational sequencing, concrete physical situations, vector/FBD/diagram/data behavior, Physics source hierarchy.
+- Algebra: course spiral/source vocabularies, algebra-specific recurring patterns, graph/table/algebra representation expectations.
+- AP Calculus AB: AP/CED terminology and conditions, graphical/numerical/analytical/verbal reasoning, calculator/no-calculator behavior, AP justification/FRQ expectations.
+
+These examples are not templates to copy across subjects.
+
+When reconciling:
+1. find the currently active rule;
+2. determine the correct owning layer;
+3. replace the stale rule in that layer;
+4. remove duplicate contradictory active instructions.
+
+Never solve a Framework conflict by appending "new rule wins" while leaving the old rule active.
+
+======================================================================
+10. QUESTION STRUCTURE BOUNDARY
+======================================================================
+
+The universal `_question_structure/` owns universal question/evidence structures.
+
+Framework may contain:
+- course-specific preferred structures;
+- source-derived course exemplars/morphology;
+- subject-specific representation/task menus;
+- constraints on when structures are mathematically/scientifically appropriate.
+
+Framework must NOT contain:
+- a copied universal structure catalog;
+- a second incompatible taxonomy;
+- universal percentage quotas for structures;
+- a large PM-like question-authoring workflow.
+
+When a Framework references a universal structure ID, validate that the ID exists in the current universal authority.
+
+======================================================================
+11. DEPLOYMENT / PATH CONTRACT
+======================================================================
+
+Every Framework must provide or resolve a course file/deployment structure when downstream artifacts need stable paths.
+
+The path contract owns:
+- course repository roots;
+- Unit/section resource templates;
+- CSS locations when course-specific;
+- teacher dashboard integration targets when applicable;
+- stable naming rules.
+
+Do not put live renderer DOM/CSS mechanics into the Framework.
+Do not infer paths from another course.
+
+RECONCILE:
+- preserve established live paths unless teacher explicitly changes them;
+- stale external links are cleanup findings, not new path authority.
+
+======================================================================
+12. FRAMEWORK FRONT DOOR — CONTENT CONTRACT
+======================================================================
+
+`FRAMEWORK.txt` is the concise readable authority front door.
+
+It should state:
+- course identity / purpose;
+- stable storage/discovery rule;
+- authority boundary;
+- how exact Assessment Plans control Unit learning/evidence;
+- major course-specific instructional/assessment behavior;
+- source hierarchy / important source-gap rules;
+- map-first / representation / security rules that are genuinely course-specific;
+- where machine-readable contracts/profiles live;
+- what the Framework intentionally does NOT own.
+
+Do not turn `FRAMEWORK.txt` into a dump of every supporting JSON file.
+Do not duplicate full Unit Assessment Plans inside the front-door prose.
+
+======================================================================
+13. RESOURCE-ROOT MANIFEST / HASH DISCIPLINE
+======================================================================
+
+If the current Framework maintains a resource-root `manifest.json` with file inventory/hashes:
+- update it after all content changes;
+- every listed path must exist;
+- every listed hash/byte count must match final bytes;
+- no changed file may retain a stale hash entry.
+
+If the current course uses a lighter manifest schema, preserve that schema in RECONCILE mode unless migration is explicitly requested.
+
+The stable course `MANIFEST.json` must resolve:
+- exact course identity;
+- stable `FRAMEWORK.txt` entrypoint;
+- exact expanded `resource_root`;
+- storage = expanded.
+
+======================================================================
+14. FROZEN QA — CROSS-CONTRACT
+======================================================================
+
+AUTHORITY
+- Philosophy read first after explicit teacher direction;
+- Assessment Plans treated as exact Unit learning/evidence authority;
+- universal Question Structure not duplicated;
+- PM / CSS / Control Panel mechanics excluded from Framework authority.
+
+ASSESSMENT PLANS
+- every expected Unit plan exists;
+- current Step 1 plan bytes preserved exactly;
+- Assessment Plan index resolves every Unit uniquely;
+- no duplicate conflicting current plan copies.
+
+CURRICULUM INDEXES
+- every section resolves to an exact plan section;
+- every exact I-can resolves uniquely;
+- every I-can's text matches the authoritative plan exactly;
+- stable IDs preserved when learning is unchanged;
+- every Mastery Goal resolves to exact supporting learning.
+
+COURSE MODEL
+- course map matches Unit/section organization;
+- profiles/contracts are course-specific rather than universal duplicates;
+- source hierarchy is explicit;
+- source gaps/fallbacks are labeled honestly;
+- path contract resolves live course locations where applicable.
+
+CONFLICTS
+- no contradictory active rules remain stacked;
+- no stale course count/profile silently overrides current Assessment Plans;
+- no course-specific rule leaks into another course.
+
+FILES / MANIFESTS
+- framework registry entry resolves;
+- course stable front door resolves;
+- course MANIFEST resolves the resource root;
+- resource-root manifest hashes/paths validate when present;
+- no unresolved template tokens;
+- no accidental versioned duplicate front door.
+
+======================================================================
+15. OUTPUT / HANDOFF
+======================================================================
+
+DEFAULT FRAMEWORK BUILD DELIVERY:
+Return ONE complete Framework ZIP for the declared course using the course's stable handoff filename when one already exists.
+
+The ZIP is a transfer/handoff artifact only.
+Canonical GitHub storage remains EXPANDED.
+
+The Framework ZIP must contain the complete coherent Framework authority needed for later independent use, including:
+- stable Framework front-door content;
+- exact current Assessment Plans;
+- machine-readable indexes/contracts/profiles;
+- required course-owned reference/source pointers/assets that are part of the Framework authority.
+
+Do NOT include:
+- unrelated course repository artifacts;
+- Banks;
+- Notes/Practice/Activities;
+- downstream assessment HTML outside the Framework's embedded Assessment Plans;
+- this PM;
+- Control Panel files.
+
+Provide a concise RECONCILIATION REPORT in the response, not as an extra canonical file:
+- CREATE or RECONCILE mode;
+- Assessment Plans preserved/changed;
+- course-specific conflicts removed;
+- contracts/indexes created or updated;
+- intentionally preserved legacy layout/path decisions;
+- QA result.
+
+If the teacher explicitly requests a repository patch instead of a complete Framework handoff, return only changed/new repository-relative files and follow the repository's normal one-file-vs-ZIP patch rule.
+
+END — BUILD FRAMEWORK

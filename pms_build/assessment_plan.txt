@@ -1,0 +1,351 @@
+BUILD ASSESSMENT PLAN — SINGLE PASS / SOURCE-FIRST / UNIT EVIDENCE AUTHORITY
+================================================================================
+
+STATUS: CURRENT
+STEP: 1
+JOB: assessment_plan
+ROLE: Create or revise the authoritative Unit Assessment Plan(s) that define what students learn and what counts as evidence before the Course Framework is assembled.
+
+This is ONE build PM.
+There is no nested Assessment Plan PM folder, starter ZIP, local manifest, or control-panel profile.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + AUTHORITATIVE COURSE SOURCES
+    -> RESOLVE COURSE / UNIT SCOPE
+    -> MAP SECTIONS + EXACT LEARNING
+    -> BUILD UNIT EVIDENCE ARCHITECTURE
+    -> INTERNAL CONSISTENCY QA
+    -> RETURN ONLY THE REQUESTED ASSESSMENT PLAN FILE(S)
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum build unless the teacher explicitly changes the task and supplies a public source that must be consulted.
+
+Resolve declared canonical resources by direct path at the pinned system snapshot.
+Use teacher-provided source files directly.
+If a required source is missing or ambiguous:
+  FAIL CLOSED
+and name the missing source or unresolved scope.
+Do not silently substitute remembered standards, an older Framework, a stale Assessment Plan, or a similarly named course.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current explicit teacher instruction;
+2. current canonical `Curriculum_Philosophy.txt`;
+3. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+4. teacher-provided / course-declared authoritative source material;
+5. current Assessment Plan for the requested Unit when this is a revision;
+6. current registered Course Framework only when one already exists and is needed for course terminology, source pointers, or path preservation;
+7. this PM.
+
+The Assessment Plan is upstream of Bank / Notes / Practice / recurring assessment builds.
+Do NOT require a Bank, Bank Map, downstream resource, CSS package, or Question Structure package to define the learning architecture.
+
+Question Structure is not an Assessment Plan authority. This PM defines evidence jobs and representation needs, not a catalog of question shells.
+
+When a recognized external governing document is supplied for the course (for example an official standards document or AP course/exam description), preserve its official terminology, conditions, and topic boundaries. Teacher course organization may group those sources locally but may not silently change their meaning.
+
+======================================================================
+2. BUILD MODE / SCOPE RESOLUTION
+======================================================================
+
+Determine mode from the current task:
+
+CREATE
+- no current Unit Assessment Plan exists for the requested scope; or
+- teacher explicitly requests a new plan.
+
+REVISE
+- a current Unit Assessment Plan exists and teacher requests correction, refinement, or replacement of part of it.
+
+SCOPE:
+- If one Unit is explicitly identified, build/revise that Unit only.
+- If multiple Units are explicitly identified, build/revise those Units only.
+- If the teacher requests a whole-course Assessment Plan build and the supplied course source defines one unambiguous complete Unit map, build all Units.
+- If course or Unit scope cannot be resolved uniquely, ask only for the missing course/scope information. Do not guess.
+
+For REVISE mode, preserve unrelated content and established course vocabulary. Make the smallest coherent change that satisfies the request.
+
+======================================================================
+3. PURPOSE — WHAT THE ASSESSMENT PLAN OWNS
+======================================================================
+
+The Unit Assessment Plan is the authoritative learning/evidence contract for that Unit.
+
+It owns:
+- exact Unit identity and title;
+- Essential Standard / Enduring Understanding when the course uses one;
+- exact section organization and source alignment;
+- exact Learning Targets;
+- exact student-facing I-can statements;
+- key vocabulary / notation;
+- key representations;
+- common misconceptions / failure points;
+- modeling / application opportunities;
+- recurring disciplinary / mathematical / scientific practices;
+- Unit themes / throughlines;
+- Mastery Goals and their supporting learning;
+- evidence expectations and evidence opportunity planning;
+- current progress/evidence-status language when the course defines it;
+- secure Summative evidence expectations;
+- course-specific calculator/reference/performance constraints when supported by source or teacher direction.
+
+It does NOT own:
+- finished Bank questions;
+- universal question-structure taxonomy;
+- PM workflow mechanics;
+- renderer implementation;
+- Control Panel behavior;
+- CSS rules;
+- downstream artifact layouts.
+
+======================================================================
+4. SOURCE-FIRST MAPPING — HARD
+======================================================================
+
+Before writing final plan prose, map the requested Unit from the authoritative sources.
+
+For every section resolve:
+- section number / title;
+- exact source topics, standards, chapters, AP topics, or teacher-defined source addresses;
+- intended learning progression;
+- concepts / procedures / reasoning that genuinely belong in the section;
+- important representations;
+- recurring practices that naturally fit;
+- known prerequisite / retrieval relationships when explicitly supported.
+
+Do not invent a section merely to create a symmetrical Unit.
+Do not force every Unit to the same section count.
+Do not force every section to the same number of I-cans.
+Do not normalize one course's vocabulary to another course's vocabulary.
+
+If the source map and teacher-provided course organization conflict materially:
+  FAIL CLOSED as ASSESSMENT_PLAN_SOURCE_CONFLICT
+and report the exact conflict before authoring.
+
+======================================================================
+5. SECTION CONTRACT — REQUIRED FOR NEW PLANS
+======================================================================
+
+Every section in a newly created plan must contain, in the course's established wording/style:
+
+1. Section identity / source alignment
+2. Learning Target
+3. I Can Statements
+4. Key Vocabulary / Notation
+5. Key Representations
+6. Common Misconceptions / Failure Points
+7. Modeling / Application Opportunities
+8. Recurring Practice Opportunities
+
+Learning Target:
+- one coherent section-level statement;
+- broad enough to group the section's I-cans;
+- narrow enough to distinguish the section from neighboring sections.
+
+I-can statements:
+- student-facing and assessable;
+- exact enough to become downstream evidence addresses;
+- no filler statements added to hit a preferred count;
+- no duplicates disguised by trivial wording changes;
+- preserve current exact wording in REVISE mode unless the requested change requires editing it.
+
+Representations:
+- name representations students must interpret, create, connect, or reason with;
+- do not list decorative visuals as evidence requirements.
+
+Misconceptions:
+- content-specific failure modes, not generic advice such as "show your work."
+
+Recurring practices:
+- include only practices naturally supported by the section;
+- practices are not quotas.
+
+======================================================================
+6. UNIT-LEVEL EVIDENCE ARCHITECTURE — HARD
+======================================================================
+
+After the section map is complete, build the Unit-level evidence architecture.
+
+REQUIRED:
+A. Unit Themes / Throughlines
+B. Recurring Practice Map
+C. Mastery Goals
+D. Mastery Goal -> supporting section/I-can mapping
+E. Evidence Opportunity Plan
+F. Summative Assessment Plan
+
+Mastery Goals:
+- synthesize meaningful clusters of exact Unit learning;
+- do not simply rename each section unless that is genuinely the best organization;
+- every exact I-can must resolve to at least one Mastery Goal;
+- designate one primary Mastery Goal when an I-can could support multiple goals so downstream portfolio/progress routing is deterministic;
+- Mastery Goal count is course/unit dependent; there is no universal fixed count.
+
+For a NEW plan that has no established Mastery Goal ID convention, use stable IDs:
+  U{unit}-MG01, U{unit}-MG02, ...
+Once assigned, preserve the IDs across revisions unless the goal itself is intentionally replaced.
+
+Evidence Opportunity Plan:
+For each Mastery Goal describe:
+- what an acceptable independent demonstration looks like;
+- important representation / interpretation / justification requirements;
+- likely weaker evidence modes that should not be mistaken for mastery;
+- where repeated evidence is useful;
+- what richer transfer evidence could look like when appropriate;
+- what the secure Summative must independently sample.
+
+Do NOT write finished questions here.
+
+======================================================================
+7. PROGRESS / LADDER / DOK DISCIPLINE
+======================================================================
+
+Preserve the course's current progress architecture when one exists.
+
+If the course uses evidence-status terms such as:
+  Not Yet / Approaching / Meeting / Exceeding
+preserve the exact current terms and meanings.
+
+If the course uses a Learning Ladder, proficiency continuum, or other explicit progression:
+- preserve it when revising;
+- create one only when teacher/source/course architecture calls for it;
+- do not create a ladder merely because another course has one.
+
+DOK / Bloom:
+- descriptive, not quota-driven;
+- do not build a fixed DOK distribution into the Assessment Plan;
+- do not equate evidence status with DOK;
+- do not require DOK 4 as proof of "Exceeding."
+
+======================================================================
+8. SUMMATIVE ASSESSMENT PLAN — HARD
+======================================================================
+
+The Assessment Plan defines the evidence architecture of the Summative, not its finished questions.
+
+Require:
+- all current Unit Mastery Goals identified as secure evidence targets unless the teacher/course explicitly says otherwise;
+- exact evidence expectations by Mastery Goal;
+- important representation / explanation / justification expectations;
+- course-specific calculator/reference conditions when authoritative;
+- assessment-time guidance only when source/course guidance supports it;
+- alternate/reassessment forms preserve the same evidence identity while using independent prompts/stimuli.
+
+Do NOT invent universal counts of selected-response, constructed-response, forms, or minutes.
+Those belong in a course Framework/profile when the course has a settled implementation contract.
+
+Secure evidence must be semantically independent from exposed instructional prompts.
+
+======================================================================
+9. COURSE VOCABULARY / LOCAL ARCHITECTURE — PRESERVE
+======================================================================
+
+Course terminology is not interchangeable by convenience.
+
+Examples of distinctions that must remain distinct when the current course uses them:
+- source-alignment labels versus classroom spiral-stage labels;
+- retrieval practice versus Unit Review;
+- current learning versus mastery evidence;
+- calculator-permitted versus calculator-required;
+- scientific explanation versus generic written justification.
+
+Never import Algebra, Physics, or AP Calculus naming merely because it appears in another current Framework.
+
+======================================================================
+10. FORMAT / PATH CONTRACT
+======================================================================
+
+REVISE MODE:
+- preserve the current canonical Assessment Plan format, path, filename, and shell unless the teacher explicitly requests a format migration;
+- do not redesign a working plan while changing content.
+
+CREATE MODE DEFAULT:
+- use semantic HTML for the canonical Unit plan unless teacher/current course contract declares another format;
+- preserve MathJax configuration when mathematical notation requires it;
+- do not invent a course CSS dependency merely to style the authority file;
+- Framework assembly may later place the plan into the course's established Assessment Plan shell/path.
+
+Default new-framework staging path when no current course convention exists:
+  assessment_plans/original/unit{U}_assessment_plan/unit{U}_assessment_plan.html
+
+If an existing course uses a different current path, preserve that path.
+
+======================================================================
+11. FROZEN QA — BEFORE DELIVERY
+======================================================================
+
+SOURCE / SCOPE
+- exact course identified;
+- exact Unit scope identified;
+- every section traces to authoritative source material;
+- no invented standards/topics/source aliases.
+
+SECTION CONTENT
+- every section has one Learning Target;
+- every section has exact assessable I-cans;
+- no duplicate I-cans masquerading as separate learning;
+- vocabulary / notation is content-correct;
+- representations are evidence-relevant;
+- misconceptions are content-specific.
+
+UNIT ARCHITECTURE
+- every exact I-can routes to at least one Mastery Goal;
+- one deterministic primary Mastery Goal exists for portfolio/progress routing when overlap exists;
+- every Mastery Goal has supporting learning and evidence expectations;
+- recurring practices are source/course grounded;
+- Summative plan independently samples current Unit mastery;
+- no finished assessment questions authored.
+
+CONSISTENCY
+- Unit / section names are consistent everywhere;
+- established IDs remain stable in REVISE mode;
+- no stale course vocabulary imported from another subject;
+- no fixed DOK/question-type quotas invented;
+- no PM / CSS / Control Panel implementation prose leaked into the plan.
+
+FINAL BYTES
+- valid readable file(s);
+- no unresolved template tokens;
+- MathJax delimiters intact where used;
+- no extra files outside requested scope.
+
+======================================================================
+12. OUTPUT
+======================================================================
+
+Return ONLY the requested Assessment Plan file(s), preserving their repository/framework-relative structure when known.
+
+If exactly one plan file changed:
+  return that file directly.
+
+If two or more plan files changed:
+  return one ZIP containing only the changed/new plan files in their correct relative paths.
+
+Provide a concise BUILD REPORT in the response, not as an extra canonical repository file, stating:
+- CREATE or REVISE mode;
+- Unit scope;
+- authoritative sources used;
+- any intentional terminology/architecture decisions;
+- QA result.
+
+Do NOT package:
+- this PM;
+- Philosophy;
+- Runtime;
+- Framework unless explicitly requested;
+- source textbooks/standards;
+- CSS;
+- tools.
+
+END — BUILD ASSESSMENT PLAN
