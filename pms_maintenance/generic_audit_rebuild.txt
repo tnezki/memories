@@ -1,0 +1,689 @@
+GENERIC AUDIT + REBUILD — MEMORYLESS / GOOD-ENOUGH CORE / CURRENT-PM DELEGATION
+=================================================================================
+
+STATUS: CURRENT
+ROLE: Audit an existing curriculum artifact in a fresh, memoryless run; repair what fails; rebuild only as much as necessary; return the artifact in its normal delivery form.
+
+THIS PM DOES NOT OWN ANY ARTIFACT'S CURRICULUM OR BUILD CONTRACT.
+
+It owns:
+- fresh contract reconstruction;
+- pass-by-pass audit;
+- defect classification;
+- repair strategy;
+- controlled rebuild when patching is insufficient;
+- final verification;
+- correct handoff packaging.
+
+The selected artifact's CURRENT registered build PM remains the procedural authority for:
+- source routing;
+- curriculum/content authority;
+- canonical output path;
+- shell/DOM requirements;
+- CSS;
+- asset rules;
+- security;
+- artifact-specific QA;
+- final delivery form.
+
+If this PM conflicts with the selected artifact's current build PM:
+
+  THE SELECTED ARTIFACT BUILD PM WINS.
+
+============================================================================
+0. MEMORYLESS OPERATING MODE — HARD
+============================================================================
+
+Treat this run as if no prior chat exists.
+
+Do NOT rely on:
+- conversation memory;
+- prior assistant claims;
+- previous uploads unless the current request explicitly identifies one as the audit target;
+- old request packages;
+- old ZIPs;
+- old generated drafts;
+- guessed artifact paths;
+- remembered CSS behavior;
+- remembered Bank/Framework facts.
+
+At job start:
+1. resolve and pin the current system repository once;
+2. resolve and pin the selected course repository once;
+3. use those SAME pins throughout the run;
+4. resolve the current PM registry from the pinned system snapshot;
+5. resolve the selected artifact's CURRENT build PM from that registry;
+6. read the selected build PM in full;
+7. resolve only the canonical authorities/resources that build PM requires;
+8. resolve the current artifact target from the request or canonical deployed path.
+
+No mixed commits.
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+
+Declared canonical sources must be fetched directly at the pinned snapshot.
+Do not search around a missing declared authority.
+FAIL CLOSED on a genuinely missing required authority.
+
+============================================================================
+1. TARGET SCOPE
+============================================================================
+
+DEFAULT CORE TARGETS:
+- Notes
+- Practice
+- Activities
+- Exit Tickets
+- Warm-Ups
+- Progress Tracker
+- Review / Review Practice
+- Summative
+
+These are the normal meaning of "core" for this PM.
+
+EXTENDED HTML TARGETS may be audited when explicitly requested and when they have a current
+registered build PM with a stable canonical output contract, for example:
+- Demos / Investigations
+- Performance Tasks / Quick Checks
+- other student/teacher-facing HTML artifacts with a registered PM
+
+DO NOT use this generic PM by default for:
+- Assessment Plan;
+- Framework;
+- Bank Map;
+- Complete Bank;
+- Portfolio state/evidence;
+- Unit Plan DOCX;
+- binary template maintenance;
+- Control Panel;
+- system registries/manifests themselves.
+
+Those jobs have materially different authority/state/binary contracts.
+
+If the user explicitly asks to audit one of those excluded classes, use its dedicated workflow
+or create a purpose-specific audit PM rather than silently forcing this generic HTML contract.
+
+============================================================================
+2. REQUEST INPUTS
+============================================================================
+
+The request should identify:
+- course;
+- Unit when applicable;
+- target artifact job/name;
+- optional explicit target path/file;
+- optional audit focus.
+
+AUDIT FOCUS values:
+- FULL_GOOD_ENOUGH   [default]
+- CONTENT_CORRECTNESS
+- ALIGNMENT_RIGOR
+- METADATA_TRACEABILITY
+- VARIETY
+- GRAPHS_IMAGES_DIAGRAMS
+- LAYOUT_PRINT
+- SECURITY
+- DELIVERY_CONTRACT
+
+If no focus is supplied:
+  use FULL_GOOD_ENOUGH.
+
+A focused run still performs the minimum safety checks required to avoid returning a broken artifact:
+- source/identity integrity;
+- correctness sanity;
+- path/reference integrity;
+- selected build PM's mandatory QA;
+- final delivery integrity.
+
+============================================================================
+3. TARGET RESOLUTION — HARD
+============================================================================
+
+TARGET PRECEDENCE:
+
+A. If the CURRENT request explicitly provides and identifies a file/folder as the artifact to audit:
+   - that provided artifact is the working target;
+   - canonical GitHub authorities still govern correctness and rebuild rules.
+
+B. Otherwise:
+   - resolve the canonical deployed artifact using the selected current build PM and any
+     canonical manifest/Bank/index path it declares;
+   - direct-fetch/read the exact canonical target at the pinned course commit.
+
+Do not choose a similarly named file by memory or repository search when the path is declared.
+
+If the selected current build PM requires upstream Bank/Framework/Assessment Plan/Practice/etc.,
+resolve those exact dependencies according to that PM.
+
+============================================================================
+4. FRESH BUILD-CONTRACT RECONSTRUCTION — PASS 0
+============================================================================
+
+Before judging the artifact, reconstruct what "correct" means NOW.
+
+Read the selected artifact's CURRENT registered build PM and extract a working contract:
+
+A. AUTHORITY
+- curriculum sources;
+- upstream artifact dependencies;
+- Bank routes;
+- Framework/Assessment Plan requirements;
+- security sources;
+- deterministic selection rules.
+
+B. OUTPUT
+- canonical deployed path(s);
+- direct-file vs ZIP handoff;
+- ZIP root if applicable;
+- expected file inventory.
+
+C. STRUCTURE
+- shell/DOM contract;
+- required sections/cards/forms/pages;
+- class vocabulary;
+- response surfaces;
+- teacher/student visibility rules.
+
+D. STYLE / REPRESENTATION
+- exact CSS files;
+- graph/image/diagram routes;
+- semantic table rules;
+- MathJax requirements;
+- asset path rules;
+- sizing/containment constraints.
+
+E. CONTENT
+- required counts;
+- exact I-can/evidence routing;
+- selection/blueprint rules;
+- answer/solution expectations;
+- family fidelity/variation rules.
+
+F. QA
+- registered validators/tools;
+- deterministic QA;
+- semantic/content checks;
+- render/layout checks explicitly required by the current build PM.
+
+G. SECURITY
+- secure vs exposed content;
+- answer-key visibility;
+- finished-prompt reuse restrictions;
+- scrambling/form rules.
+
+This reconstructed contract is the audit rubric.
+
+Do NOT invent new requirements merely because they sound desirable.
+
+============================================================================
+5. GOOD-ENOUGH PHILOSOPHY
+============================================================================
+
+The artifact does NOT need to be perfect.
+
+The artifact is GOOD ENOUGH when it is:
+
+  CORRECT
+  + ALIGNED
+  + COMPLETE
+  + USABLE
+  + VARIED ENOUGH
+  + METADATA/TRACEABILITY COMPLETE
+  + DOWNSTREAM/DELIVERY READY
+
+A later memoryless improvement pass may still make it better.
+
+Do NOT fail an artifact solely because:
+- prose could be more elegant;
+- a graph could be prettier;
+- an image could be slightly smaller/larger;
+- context variety could be even richer;
+- layout could be aesthetically refined;
+- another valid question could be more interesting.
+
+DO fail/fix when the issue affects:
+- correctness;
+- evidence validity;
+- required metadata;
+- required content/counts;
+- readability/usability;
+- broken paths/assets;
+- required representation;
+- meaningful variety floor;
+- security;
+- shell/layout contract;
+- deterministic QA;
+- downstream consumption;
+- delivery integrity.
+
+============================================================================
+6. AUDIT METHOD — SEPARATE PASSES
+============================================================================
+
+Run the audit in passes.
+
+During audit passes:
+- inspect;
+- record findings;
+- classify severity;
+- DO NOT start opportunistic rewriting before the pass is understood.
+
+Finding classes:
+
+BLOCKER
+- incorrect answer/physics/math;
+- wrong target/evidence;
+- missing required content;
+- broken canonical dependency;
+- security exposure;
+- unusable/broken representation;
+- required validator failure;
+- output contract failure.
+
+REPAIR
+- artifact remains understandable but violates the current build contract or good-enough floor;
+- incomplete metadata;
+- weak/duplicate seed beyond allowed floor;
+- layout/figure issue materially hurts use;
+- shell/CSS/path inconsistency.
+
+IMPROVEMENT
+- legitimate enhancement above the good-enough floor;
+- not required to return a correct usable artifact.
+
+Default action:
+- fix BLOCKER;
+- fix REPAIR;
+- do not churn stable content merely for IMPROVEMENT unless the requested focus explicitly asks for it.
+
+============================================================================
+7. PASS 1 — CORRECTNESS + EVIDENCE ALIGNMENT
+============================================================================
+
+Audit against canonical authorities and the selected build PM.
+
+Check, as applicable:
+- exact I-can/learning target routing;
+- evidence_job;
+- student_action;
+- question structure;
+- response mode;
+- intended reasoning;
+- physics/math correctness;
+- units/sign conventions;
+- equations/relationships;
+- answer/key correctness;
+- solution correctness;
+- prompt/visual/data consistency;
+- teacher-facing explanation accuracy.
+
+For selected response:
+- keyed answer is actually correct;
+- distractors are plausible task-specific errors/misconceptions;
+- no duplicate/equivalent choices;
+- all visible choices match stored choices.
+
+For constructed response:
+- prompt really elicits the claimed evidence;
+- response surface is appropriate;
+- solution matches the requested reasoning.
+
+Do not change the curriculum target just to make an item easier to repair.
+
+============================================================================
+8. PASS 2 — COMPLETENESS + METADATA + TRACEABILITY
+============================================================================
+
+Check, as applicable:
+- required artifact sections/pages/cards/forms exist;
+- required counts match the current PM;
+- IDs unique;
+- source routes resolve;
+- Bank IDs/family IDs preserved;
+- exact I-can metadata preserved;
+- design_slot/source_map/family provenance preserved when required;
+- section/Unit metadata correct;
+- answer/solution metadata present;
+- security metadata correct;
+- deterministic selection metadata correct;
+- no placeholder/TODO/TBD content;
+- no stale routes from older builds;
+- no hidden dependence on chat context.
+
+Metadata must tell the truth about the final student-facing task.
+
+Do not preserve metadata that claims a reasoning move, representation, difficulty, or security state
+that the actual artifact does not perform.
+
+============================================================================
+9. PASS 3 — REPRESENTATIONS: GRAPHS / IMAGES / DIAGRAMS / TABLES
+============================================================================
+
+Audit every evidence-bearing representation.
+
+GENERAL
+- accurate;
+- relevant;
+- legible;
+- referenced correctly;
+- preserves aspect ratio;
+- not clipped/distorted;
+- no answer leakage;
+- no decorative visual masquerading as evidence.
+
+GRAPH
+- correct graph type;
+- axes/scales;
+- labels/units;
+- plotted values/relationship;
+- answer-neutrality;
+- registered graph tool used when the build PM requires it;
+- visual is large enough to read but not allowed to consume the artifact unnecessarily.
+
+TABLE
+- semantic HTML when required;
+- correct headers/units/data;
+- compact class/routing when required;
+- no pipe-text pseudo-table.
+
+DIAGRAM / VECTOR / FBD / MODEL
+- physically/mathematically correct;
+- correct labels/directions;
+- readable;
+- approved canonical/deterministic route;
+- student-constructed surface remains blank/answer-neutral when required.
+
+IMAGE SIZE / GRAPH SIZE
+Use the artifact's current canonical CSS and actual content container.
+
+The goal is:
+  readable evidence without layout domination.
+
+If representation sizing is the defect:
+- prefer artifact-specific class/variable correction;
+- preserve aspect ratio;
+- preserve containment;
+- do not globally shrink response surfaces, bubble sheets, logos, icons, directions art, or unrelated graphics.
+
+A correct readable visual does not fail merely because a later visual-polish pass could improve it.
+
+============================================================================
+10. PASS 4 — VARIETY + RIGOR + QUESTION QUALITY
+============================================================================
+
+Judge against the target's actual evidence job, not an artificial quota.
+
+Check, as applicable:
+- obvious near-duplicate prompts;
+- noun-only pseudo-variety;
+- number-only clones where deeper semantic variation is required;
+- repeated identical reasoning path beyond what the source family permits;
+- balanced coverage of required I-cans/evidence;
+- appropriate difficulty intent;
+- appropriate DOK/Bloom only as descriptive metadata, not quotas;
+- context/stimulus variation;
+- representation variation where mapped;
+- selected-response distractor quality;
+- secure-form independence;
+- Practice set rotation feasibility.
+
+"VARIED ENOUGH" means enough meaningful diversity to serve the current artifact contract.
+
+Do NOT rewrite every valid item simply to maximize novelty.
+
+For secure artifacts:
+- finished exposed instructional prompts/stimuli are not reused;
+- alternate forms remain meaningfully independent while preserving evidence architecture.
+
+============================================================================
+11. PASS 5 — USABILITY + LAYOUT + PRINT/SHELL
+============================================================================
+
+Audit the actual final artifact structure against its current PM/CSS contract.
+
+Check:
+- canonical CSS links only;
+- required shell/classes;
+- readable hierarchy;
+- no content collision/overlap;
+- no clipped cards;
+- no broken columns/grids;
+- reasonable whitespace;
+- response areas usable;
+- figures contained;
+- page-break rules required by PM;
+- logical print flow;
+- MathJax loader/render behavior required by PM;
+- semantic accessibility where specified;
+- no internal metadata exposed to students;
+- teacher-only content remains teacher-only.
+
+Do NOT create PDF/browser QA unless the selected build PM explicitly requires it.
+
+Do NOT invent a second render system merely for this generic audit.
+
+============================================================================
+12. PASS 6 — SECURITY + DOWNSTREAM INTEGRITY
+============================================================================
+
+Run when relevant, and always for secure assessment artifacts.
+
+Check:
+- answer/key not student-visible;
+- secure prompts/stimuli satisfy freshness rules;
+- form/blueprint counts correct;
+- scrambling contract preserved;
+- no exposed source identifiers that compromise security;
+- canonical paths still match downstream consumers;
+- upstream/downstream IDs remain stable;
+- rebuilding did not change approved content ownership.
+
+For nonsecure artifacts:
+- verify no accidental teacher answer leakage into student-facing surfaces.
+
+============================================================================
+13. PASS 7 — DELIVERY CONTRACT + ARTIFACT-SPECIFIC QA
+============================================================================
+
+Run every mandatory validator/tool required by the CURRENT selected build PM.
+
+Do not replace the artifact-specific validator with this generic rubric.
+
+Verify:
+- expected final path(s);
+- expected file count;
+- referenced assets exist;
+- ZIP root/inventory if ZIP;
+- ZIP integrity if ZIP;
+- no staging junk;
+- no `__MACOSX`;
+- no `.DS_Store`;
+- no `._*`;
+- no `__pycache__`;
+- no `.pyc`.
+
+If the selected PM says one output file is returned directly:
+  return that file directly.
+
+If the selected PM requires a ZIP:
+  return the ZIP exactly as that PM requires.
+
+If the artifact is a multi-file deployable folder:
+  package the folder preserving course-relative structure according to the selected PM/runtime.
+
+Do NOT invent a ZIP around a direct-file contract merely because this is an audit job.
+
+============================================================================
+14. REPAIR DECISION — PATCH VS REBUILD
+============================================================================
+
+After audit passes, choose the smallest reliable correction strategy.
+
+PATCH IN PLACE when:
+- artifact identity/content is fundamentally correct;
+- defects are localized;
+- repairing will not create hidden inconsistency.
+
+CONTROLLED REBUILD when:
+- shell/DOM is structurally wrong;
+- source routing is wrong;
+- artifact was generated under obsolete build rules;
+- defects are widespread/repetitive;
+- local patching would be more fragile than rebuilding;
+- required deterministic structure cannot be restored safely in place.
+
+A controlled rebuild means:
+- execute the CURRENT selected artifact build PM from canonical sources;
+- preserve approved upstream content/Bank routing;
+- apply the audit findings while rebuilding;
+- do NOT reauthor curriculum simply because a rebuild is occurring.
+
+If existing artifact content is correct and authoritative:
+  preserve it unless the current build PM/upstream authority requires change.
+
+============================================================================
+15. REPAIR ORDER
+============================================================================
+
+Repair in this order:
+
+1. authority/source/path defects
+2. correctness/answer defects
+3. evidence/response alignment
+4. missing content/counts
+5. metadata/traceability
+6. representation correctness
+7. security
+8. variety/rigor below good-enough floor
+9. shell/layout/usability
+10. cosmetic improvements explicitly requested
+
+This order prevents polishing content that later has to be replaced.
+
+============================================================================
+16. POST-REPAIR RE-AUDIT — HARD
+============================================================================
+
+After repairs:
+
+A. rerun every pass that produced a BLOCKER or REPAIR finding;
+B. rerun any dependent pass affected by the repair;
+C. rerun mandatory artifact-specific QA;
+D. rerun delivery/package integrity.
+
+Do not recursively keep polishing forever.
+
+STOP when:
+- no BLOCKER remains;
+- no REPAIR remains;
+- current selected build PM mandatory QA passes;
+- artifact meets GOOD-ENOUGH;
+- any remaining findings are IMPROVEMENT only.
+
+============================================================================
+17. CHANGE BOUNDARY
+============================================================================
+
+Preserve:
+- curriculum authority;
+- exact I-cans;
+- approved Bank routing;
+- security architecture;
+- canonical asset ownership;
+- canonical CSS ownership;
+- current output contract.
+
+Do NOT:
+- silently edit Framework/Assessment Plan/Bank to make the artifact pass;
+- modify unrelated artifacts;
+- modify shared CSS unless the request explicitly includes shared-CSS repair;
+- weaken a validator;
+- change a canonical PM during the audit run;
+- invent new curriculum;
+- substitute web research for canonical sources.
+
+If the defect originates upstream:
+- report `UPSTREAM_DEFECT`;
+- repair the target artifact only when a faithful local correction is allowed by the current build PM;
+- otherwise fail closed and name the upstream dependency that must be fixed.
+
+============================================================================
+18. OPTIONAL FOCUSED AUDIT BEHAVIOR
+============================================================================
+
+FULL_GOOD_ENOUGH
+- run Passes 0–7.
+
+CONTENT_CORRECTNESS
+- deeply run Passes 1 and 7;
+- safety-check 2, 3, 6.
+
+ALIGNMENT_RIGOR
+- deeply run Passes 1 and 4;
+- safety-check 2, 7.
+
+METADATA_TRACEABILITY
+- deeply run Pass 2;
+- safety-check 1 and 7.
+
+VARIETY
+- deeply run Pass 4;
+- safety-check 1, 2, 6, 7.
+
+GRAPHS_IMAGES_DIAGRAMS
+- deeply run Pass 3 and representation-related Pass 5 checks;
+- safety-check 1, 2, 7.
+
+LAYOUT_PRINT
+- deeply run Pass 5;
+- safety-check 1, 3, 7.
+
+SECURITY
+- deeply run Pass 6 plus secure portions of 1 and 4;
+- always run 7.
+
+DELIVERY_CONTRACT
+- deeply run Pass 7;
+- safety-check artifact identity/source integrity.
+
+============================================================================
+19. FINAL CHAT REPORT
+============================================================================
+
+Keep the report concise.
+
+State:
+- target artifact;
+- system/course pins;
+- selected current build PM;
+- audit focus;
+- findings by:
+  - BLOCKER
+  - REPAIR
+  - IMPROVEMENT
+- whether repair was PATCH or CONTROLLED REBUILD;
+- key changes made;
+- mandatory QA result;
+- final GOOD-ENOUGH status;
+- exact returned file/ZIP.
+
+Do not dump hidden reasoning or giant QA logs.
+
+============================================================================
+20. FINAL DELIVERY — HARD
+============================================================================
+
+Return the corrected artifact in the SAME delivery form required by its CURRENT build PM.
+
+Examples:
+- one canonical HTML file -> direct HTML when the current PM requires direct-file delivery;
+- artifact folder/multiple deployable files -> ZIP preserving the required structure;
+- current PM says always ZIP -> always ZIP.
+
+The corrected artifact is the primary handoff.
+
+Do not return an audit-only artifact instead of the actual corrected deployable output.
+
+END — GENERIC AUDIT + REBUILD
