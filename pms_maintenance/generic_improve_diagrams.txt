@@ -1,0 +1,678 @@
+GENERIC IMPROVE DIAGRAMS — MEMORYLESS / TWO-PASS / NARROW MAINTENANCE
+===============================================================================
+
+STATUS: CURRENT
+JOB: generic_improve_diagrams
+ROLE: Improve diagram use in one existing curriculum target without reauthoring the
+      curriculum, changing evidence ownership, or broadening into graph/layout/variety work.
+
+THIS IS A NARROW MAINTENANCE PM.
+
+It owns:
+- finding high-value diagram opportunities;
+- adding simple answer-neutral schematic diagrams when justified;
+- repairing existing diagrams;
+- improving diagram clarity in a second pass;
+- preserving target integrity and normal delivery form.
+
+It does NOT own:
+- curriculum targets / I-cans;
+- Bank architecture;
+- question structure selection;
+- answer/key authoring except when a diagram repair requires keeping existing content consistent;
+- graph improvement;
+- vocabulary improvement;
+- variety improvement;
+- conceptual rewriting;
+- math rewriting;
+- general layout redesign;
+- shared CSS redesign;
+- system registries/manifests.
+
+If another current authority conflicts with this PM, the CURRENT target build PM and canonical
+course authorities win.
+
+===============================================================================
+0. MEMORYLESS OPERATING MODE — HARD
+===============================================================================
+
+Treat every run as fresh.
+
+Do NOT rely on:
+- prior chat;
+- prior assistant claims;
+- remembered course facts;
+- remembered CSS behavior;
+- old ZIPs/request packages;
+- guessed artifact paths;
+- prior diagrams not present in the current pinned target.
+
+At job start:
+
+1. resolve and pin the current system repository ONCE;
+2. resolve and pin the selected course repository ONCE;
+3. use those SAME pins for the whole run;
+4. read the current System Runtime Contract;
+5. read the current target build PM from the pinned build registry;
+6. read the exact target artifact/Bank from the pinned course repository or the explicit
+   current-request target;
+7. read only the current authorities/resources needed to judge diagram correctness;
+8. read current course `css/base.css` plus the target artifact-specific CSS;
+9. read `Tools/MANIFEST.json`.
+
+No public web.
+No external image search.
+No File Library discovery unless the current request explicitly supplies a file there.
+Do not search around a missing declared authority.
+Fail closed on a genuinely missing required canonical source.
+
+===============================================================================
+1. REQUEST / TARGET
+===============================================================================
+
+The request should identify:
+- course;
+- Unit when applicable;
+- target artifact or Bank;
+- optional narrow scope, such as:
+    - one record/item ID;
+    - one section;
+    - WTC only;
+    - Notes only;
+    - full target.
+
+If no narrow scope is supplied:
+  scan the full target, but change ONLY justified diagram candidates.
+
+TARGET TYPES may include:
+- canonical Unit Bank;
+- Notes;
+- Practice;
+- Activities;
+- Exit Tickets;
+- Warm-Ups;
+- Review;
+- Summative;
+- another current HTML artifact with a stable build contract.
+
+Do NOT use this PM for:
+- Framework authoring;
+- Assessment Plan authoring;
+- Bank Map redesign;
+- Control Panel;
+- system registry maintenance;
+- general CSS maintenance.
+
+===============================================================================
+2. HARD BOUNDARY — DIAGRAMS ONLY
+===============================================================================
+
+This PM improves DIAGRAMS.
+
+Examples:
+- object/location schematic;
+- reference-frame schematic;
+- motion diagram;
+- vector diagram;
+- free-body diagram;
+- force interaction sketch;
+- geometry/spatial relationship sketch;
+- apparatus/setup diagram;
+- ray/path/process schematic;
+- labeled conceptual model;
+- timeline/sequence schematic when spatial/temporal organization is the evidence support.
+
+NOT THIS PM:
+- coordinate/data graphs -> generic_improve_graphs;
+- tables -> table/content maintenance;
+- vocabulary/prose -> generic_improve_vocabulary;
+- conceptual reasoning quality -> generic_improve_conceptual;
+- quantitative/math quality -> generic_improve_math;
+- prompt/family diversity -> generic_improve_variety;
+- broad spacing/page design -> generic_improve_layout.
+
+Do not convert a graph problem into a diagram problem.
+Do not add decorative pictures.
+
+===============================================================================
+3. CURRICULUM + METADATA PRESERVATION — HARD
+===============================================================================
+
+Preserve all correct curriculum-semantic identity unless an explicit upstream authority requires
+otherwise.
+
+DO NOT change merely to make the diagram easier:
+- record_id / item_id / family_id;
+- slot_id / design_slot_id;
+- source_map_record_id;
+- primary I-can ID or exact I-can text;
+- supporting I-can IDs;
+- evidence_job;
+- intended_reasoning;
+- question_structure_id;
+- response_mode;
+- security role/level;
+- blueprint/form ownership;
+- family identity;
+- selection routing;
+- destination.
+
+Map-owned representation metadata is also preserved by default.
+
+A newly added diagram may be SUPPLEMENTAL to the mapped evidence route.
+Do not silently convert:
+  direct_text -> diagram evidence
+or
+  student_constructed -> provided answer-bearing diagram.
+
+If the diagram would materially change what evidence the student receives or produces, classify:
+
+  NEEDS_UPSTREAM_REPRESENTATION_CHANGE
+
+and do not make that semantic change in this narrow PM unless the current request explicitly
+authorizes it.
+
+MECHANICAL ARTIFACT METADATA MAY be refreshed when required for truth/integrity, for example:
+- figure/representation refs;
+- file inventory;
+- content fingerprints;
+- byte-derived hashes;
+- target-local maintenance provenance.
+
+Do not modify system registries/manifests.
+
+===============================================================================
+4. CSS + RENDER ROUTE — HARD
+===============================================================================
+
+Use the current target's existing:
+
+  base.css + artifact-specific CSS
+
+as styling authority.
+
+Do NOT:
+- create a new stylesheet;
+- edit shared CSS;
+- add global CSS overrides;
+- alter unrelated figure/graph sizing;
+- invent a second shell;
+- add a browser/PDF render system merely for this PM.
+
+Simple schematic diagrams MAY use deterministic semantic inline SVG when ALL are true:
+1. the current target shell/CSS supports inline SVG or `.diagram svg`;
+2. the schematic can be expressed cleanly without a specialized registered tool;
+3. it is answer-neutral;
+4. it prints/readably scales inside the current media contract;
+5. no current artifact PM forbids inline SVG.
+
+For inline SVG:
+- use a stable `viewBox`;
+- preserve aspect ratio;
+- use semantic `<title>` and `<desc>`;
+- use readable text labels;
+- use simple shapes/lines/arrows;
+- avoid decorative detail;
+- avoid raster screenshots of diagrams;
+- avoid external fonts;
+- avoid script;
+- do not hard-code page-sized dimensions that fight current CSS.
+
+For a diagram class already supported by a canonical asset or registered deterministic tool:
+  use that route instead.
+
+If a specialized diagram is needed but no approved route exists:
+  classify `NEEDS_DIAGRAM_TOOL`;
+  do not fake a poor substitute.
+
+GRAPHS:
+If the candidate is actually a graph, leave it unchanged and classify:
+  ROUTE_TO_GRAPH_PM
+
+===============================================================================
+5. ANSWER-NEUTRALITY — HARD
+===============================================================================
+
+A student-facing diagram must not solve the problem.
+
+Before adding or repairing a diagram, identify what the student is asked to determine.
+
+Do NOT place that answer into:
+- labels;
+- arrow direction/magnitude;
+- force names;
+- vector components;
+- motion-state labels;
+- reference-frame conclusions;
+- numerical annotations;
+- highlighted regions;
+- captions.
+
+Safe context labels are allowed when they merely restate givens already supplied in the prompt.
+
+EXAMPLE:
+If a WTC asks students to identify two useful reference frames in a moving-bus scenario,
+a diagram may show:
+- bus;
+- student;
+- backpack;
+- road;
+- roadside sign;
+- stated east direction.
+
+It must NOT label:
+- "bus frame";
+- "road/Earth frame";
+- "backpack at rest";
+- "backpack moving east relative to ground".
+
+Those are student conclusions.
+
+===============================================================================
+6. PASS 0 — RECONSTRUCT THE CURRENT DIAGRAM CONTRACT
+===============================================================================
+
+Before changing anything, inspect the current target and extract:
+
+A. TARGET AUTHORITY
+- canonical source;
+- target build PM;
+- output/delivery form;
+- current shell;
+- current CSS;
+- current representation rules.
+
+B. CONTENT AUTHORITY
+For each possible candidate:
+- exact prompt;
+- answer/solution;
+- I-can/evidence job;
+- student action;
+- current representation mode/need;
+- security role;
+- current figure refs/assets;
+- whether the student is expected to construct a representation.
+
+C. DELIVERY / INTEGRITY
+- target path(s);
+- asset folders;
+- derived teacher/student HTML;
+- fingerprints/hashes/inventories that must remain truthful;
+- mandatory target-local QA.
+
+This becomes the run contract.
+
+===============================================================================
+7. CANDIDATE CLASSIFICATION
+===============================================================================
+
+Classify every inspected diagram candidate as exactly one:
+
+KEEP
+- current representation is already correct and useful.
+
+ADD_SUPPLEMENTAL_DIAGRAM
+- no useful diagram exists;
+- a simple diagram would materially improve comprehension;
+- it does not alter the evidence job;
+- it can remain answer-neutral.
+
+REPAIR_EXISTING_DIAGRAM
+- diagram exists but is physically/mathematically wrong, misleading, unreadable, clipped,
+  distorted, broken, or answer-leaking.
+
+IMPROVE_EXISTING_DIAGRAM
+- diagram is correct/usable but can be materially clearer without reauthoring the task.
+
+STUDENT_CONSTRUCTED_KEEP
+- the student must create the representation and a provided finished diagram would undermine
+  the task. Preserve the blank response surface.
+
+ROUTE_TO_GRAPH_PM
+- the representation is fundamentally a graph.
+
+NEEDS_DIAGRAM_TOOL
+- a specialized diagram is justified but no approved/current deterministic route exists.
+
+NEEDS_UPSTREAM_REPRESENTATION_CHANGE
+- the desired diagram would change mapped evidence/response architecture rather than supplement it.
+
+NO_DIAGRAM
+- a diagram would be decorative, redundant, or add cognitive noise.
+
+===============================================================================
+8. PASS 1 — ADD / REPAIR THE HIGH-VALUE DIAGRAMS
+===============================================================================
+
+Pass 1 answers:
+
+  "Where is a diagram clearly worth having, and can I make it correct and answer-neutral now?"
+
+Prioritize candidates where a diagram materially supports:
+- relative position/reference frames;
+- motion direction;
+- object interactions;
+- force reasoning;
+- vector relationships;
+- spatial geometry;
+- apparatus/setup interpretation;
+- multistep WTC shared stimuli;
+- a prompt that verbally describes a scene students must repeatedly hold in working memory.
+
+For ADD_SUPPLEMENTAL_DIAGRAM:
+
+1. preserve prompt meaning;
+2. preserve all map-owned semantic metadata;
+3. create the smallest diagram that captures the GIVEN situation;
+4. use current CSS-supported rendering;
+5. place it next to the relevant stimulus/prompt;
+6. keep the existing response surface;
+7. do not add explanation prose merely to justify the diagram.
+
+For REPAIR_EXISTING_DIAGRAM:
+- fix correctness first;
+- fix broken refs;
+- fix clipping/distortion;
+- fix answer leakage;
+- fix labels/directions;
+- preserve task meaning.
+
+PASS 1 MUST NOT:
+- add diagrams to every item;
+- make decorative illustrations;
+- rewrite question families for visual variety;
+- improve graphs;
+- reword Example/YTI pairs;
+- change CSS;
+- change answers just because a different visual would be prettier.
+
+===============================================================================
+9. PASS 1 TEST CASE — REFERENCE-FRAME WTC PATTERN
+===============================================================================
+
+A high-value pattern is:
+
+- moving vehicle;
+- person/object inside;
+- stationary external landmark;
+- question asks about motion relative to different frames.
+
+A good supplemental schematic may show:
+
+  [roadside sign]      [bus containing student + backpack]  -> east
+
+The diagram should help students SEE the shared situation.
+
+It should not state the conclusions they are asked to produce.
+
+For a WTC:
+- keep all labeled parts;
+- keep the shared stimulus;
+- keep the response surface;
+- put the diagram with the shared stimulus so all parts can refer to it;
+- do not turn the WTC into a new problem.
+
+===============================================================================
+10. PASS 1 QA
+===============================================================================
+
+For every changed candidate verify:
+
+[ ] diagram is physically/mathematically correct
+[ ] diagram reflects only givens/context unless the prompt explicitly provides more
+[ ] no answer leakage
+[ ] no contradictory text vs diagram
+[ ] labels are readable
+[ ] arrow directions are correct
+[ ] aspect ratio preserved
+[ ] current base + artifact CSS control final size
+[ ] no new shared CSS
+[ ] no graph was accidentally handled as a diagram
+[ ] student-constructed evidence remains student-constructed
+[ ] target IDs/I-cans/evidence/security unchanged
+[ ] required figure/representation refs resolve
+[ ] existing answer/solution remains correct
+
+Do not proceed to Pass 2 until Pass 1 changes are correct.
+
+===============================================================================
+11. PASS 2 — IMPROVE THE DIAGRAMS
+===============================================================================
+
+Pass 2 answers:
+
+  "Now that the right diagrams exist, can each one become clearer without changing the task?"
+
+Reinspect:
+- every diagram added in Pass 1;
+- every existing diagram classified IMPROVE_EXISTING_DIAGRAM;
+- every repaired diagram.
+
+Improve only meaningful clarity:
+
+COMPOSITION
+- reduce empty/dead space;
+- center the evidence-bearing scene;
+- use a sensible viewBox;
+- keep spatial relationships obvious.
+
+LABELS
+- move overlapping labels;
+- increase legibility;
+- keep labels close to the object they name;
+- avoid unnecessary labels.
+
+ARROWS / VECTORS
+- readable arrowheads;
+- consistent origin/endpoints;
+- correct direction;
+- magnitude only when given/required;
+- do not imply quantitative scale unless intended.
+
+PHYSICS / MATH
+- object relationships remain accurate;
+- force/vector conventions remain valid;
+- motion-dot spacing remains conceptually correct when used;
+- geometry remains faithful.
+
+PRINT / SCREEN
+- readable under current CSS media cap;
+- no clipping;
+- no overflow;
+- no microscopic text;
+- no giant diagram dominating the page.
+
+ACCESSIBILITY / SEMANTICS
+- useful `<title>`;
+- concise `<desc>`;
+- meaningful surrounding caption only when needed;
+- no answer hidden in accessibility text.
+
+ANSWER NEUTRALITY
+- recheck after every clarity improvement.
+
+PASS 2 MUST NOT broaden into:
+- new question authoring;
+- variety repair;
+- graph repair;
+- CSS redesign;
+- adding many more diagrams merely because some were improved.
+
+If Pass 2 reveals another obvious missing diagram, record it as a finding for the next run rather
+than expanding this run unless the current request explicitly asked for full-target completion.
+
+===============================================================================
+12. BANK-SPECIFIC RULES
+===============================================================================
+
+When the target is a canonical Unit Bank:
+
+PRESERVE
+- all record identities;
+- Map linkage;
+- exact I-cans;
+- evidence jobs;
+- response modes;
+- security;
+- family/blueprint ownership;
+- ITEM_INDEX routing unless a changed asset/reference mechanically requires reconciliation.
+
+CHANGE ONLY AS NEEDED
+- student_html / solution_html;
+- existing figure/representation ref fields;
+- derived teacher Bank HTML;
+- target-local asset files;
+- byte-derived Bank fingerprint/inventory;
+- target-local maintenance provenance.
+
+For a supplemental inline SVG:
+- prefer embedding it in the canonical student HTML for the record;
+- preserve the underlying student_text unless text must mention a figure to remain coherent;
+- do not create a meaningless external asset just to have a filename.
+
+For an external canonical diagram asset:
+- place it under the current Bank's existing figure/asset route;
+- update exact refs;
+- include it in Bank fingerprint/inventory.
+
+Regenerate:
+  banks/unitN/unitN.html
+
+using the current Bank view contract so the teacher can visibly inspect every changed diagram.
+
+Do NOT rewrite historical 3b validator results as though the original validators reran.
+
+Instead, preserve honest maintenance provenance:
+- PM name;
+- system/course pins;
+- changed record IDs;
+- diagram action per record;
+- target-local QA result.
+
+Refresh byte-derived fingerprints/inventory when the target contract requires them.
+
+The final Bank must remain:
+  COMPLETE
+  ready_for_downstream = true
+
+only if all maintenance checks pass.
+
+===============================================================================
+13. ARTIFACT-SPECIFIC RULES
+===============================================================================
+
+When the target is a downstream artifact instead of the Bank:
+
+- obey its CURRENT build PM;
+- preserve its canonical shell;
+- preserve base.css + artifact CSS;
+- preserve student/teacher visibility rules;
+- preserve delivery form;
+- modify only the target files/assets required by the diagram improvement;
+- rerun only mandatory/current target QA plus this PM's diagram QA.
+
+Do not silently patch the upstream Bank when the request targets only a downstream artifact.
+
+===============================================================================
+14. CHANGE DECISION
+===============================================================================
+
+For each candidate:
+
+If current diagram is good:
+  KEEP.
+
+If diagram adds only decoration:
+  NO_DIAGRAM.
+
+If the student must create the diagram:
+  STUDENT_CONSTRUCTED_KEEP.
+
+If a simple supplemental schematic materially improves comprehension and stays answer-neutral:
+  ADD_SUPPLEMENTAL_DIAGRAM.
+
+If current diagram is broken/wrong:
+  REPAIR_EXISTING_DIAGRAM.
+
+If current diagram is correct but materially unclear:
+  IMPROVE_EXISTING_DIAGRAM.
+
+If it is a graph:
+  ROUTE_TO_GRAPH_PM.
+
+If specialized tooling is required:
+  NEEDS_DIAGRAM_TOOL.
+
+If evidence architecture must change:
+  NEEDS_UPSTREAM_REPRESENTATION_CHANGE.
+
+Do not force every candidate into a modification.
+
+===============================================================================
+15. POST-CHANGE VERIFICATION
+===============================================================================
+
+After Pass 2:
+
+1. re-read every changed prompt + answer + solution + diagram together;
+2. verify no answer leakage;
+3. verify every diagram remains correct;
+4. verify all refs/assets;
+5. verify base + artifact CSS paths remain unchanged;
+6. verify target shell remains valid;
+7. verify no unrelated artifact content changed;
+8. verify no curriculum-semantic metadata changed;
+9. refresh only required mechanical target metadata;
+10. run current target mandatory QA where executable;
+11. if a validator is unavailable solely for transport reasons, follow the CURRENT target PM's
+    transport-safe rule rather than fabricating PASS;
+12. verify final packaging integrity.
+
+STOP when diagrams are:
+  correct + useful + readable + answer-neutral + contract-safe.
+
+Do not chase aesthetic perfection.
+
+===============================================================================
+16. DELIVERY
+===============================================================================
+
+Return the corrected target in the SAME deployable form its current contract requires.
+
+For a Unit Bank:
+- return the complete current Unit Bank handoff;
+- include regenerated `unitN.html`;
+- preserve the full canonical Bank tree;
+- do not return only a loose SVG unless the current request explicitly asked for a single test asset.
+
+For a direct-file artifact:
+- return the direct file if that is its normal delivery form.
+
+For a ZIP artifact:
+- return the ZIP in its normal root/path structure.
+
+Do not create a separate audit-report artifact by default.
+Report findings concisely in chat.
+
+===============================================================================
+17. FINAL CHAT REPORT
+===============================================================================
+
+Report:
+- target;
+- system/course pins;
+- inspected candidate count;
+- PASS 1 actions:
+    KEEP / ADD / REPAIR / ROUTE / NO_DIAGRAM counts;
+- PASS 2 improvement count;
+- changed record/item IDs;
+- whether CSS changed (normally NO);
+- whether curriculum-semantic metadata changed (must normally be NO);
+- mechanical metadata refreshed, if any;
+- target QA result;
+- final delivery filename.
+
+For a test run, explicitly identify the easiest visible changed item so the teacher can open the
+final HTML and inspect it immediately.
+
+END — GENERIC IMPROVE DIAGRAMS
