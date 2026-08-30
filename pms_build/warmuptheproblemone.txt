@@ -14,7 +14,7 @@ FLOW:
     -> RESOLVE EXACT WARM-UP 1 / 2 / 3 ROUTES FOR EACH SECTION
     -> EXTRACT FOUR CANONICAL BANK ITEMS PER WARM-UP
     -> PLACE INTO UNIVERSAL TWO-PAGE WARM-UP SHELL
-    -> PRESERVE INLINE REPRESENTATIONS + REFERENCE DEPLOYED CANONICAL ASSETS
+    -> COPY REQUIRED CANONICAL FIGURES
     -> STRUCTURAL / MATHJAX / RENDER / FINAL-BYTE QA
     -> PACKAGE UNIT WARM-UP FOLDER
     -> RETURN ONE WARM-UP ZIP
@@ -236,41 +236,21 @@ Do not change shared CSS card heights to make extra markup fit.
 
 Warm-Ups preserve canonical Bank representation.
 
-Canonical representation routing — HARD:
+For canonical image/figure assets:
+- copy the exact required source bytes into:
+    warmups/unit_{U}_warmups/figures/
+- use stable relative links from the Warm-Up HTML;
+- do not redraw, reinterpret, decorate, crop, or silently replace a canonical information-bearing figure;
+- preserve answer-neutrality;
+- preserve necessary labels inside the figure;
+- do not add descriptive captions that explain the answer;
+- prompt/explanatory wording belongs before the figure.
 
-1. INLINE BANK HTML / SVG
-- If the canonical Bank `student_html` already contains an inline `<svg>...</svg>` representation or blank response surface, preserve that exact inline markup in the Warm-Up item.
-- Do not externalize inline SVG to PNG/SVG files.
-- Do not redraw, simplify, rasterize, reconstruct, or restyle it.
-
-2. EXISTING DEPLOYED COURSE ASSET
-- If the canonical Bank record references an existing stable course-relative asset such as:
-    `resources/.../figure.png`
-  keep that canonical asset in place and reference it from the deployed Warm-Up HTML.
-- From `warmups/unit_{U}_warmups/unit_{U}_warmups.html`, a course-root asset normally resolves as:
-    `../../{EXACT_CANONICAL_COURSE_RELATIVE_PATH}`
-- Preserve the exact declared asset path and alt text / accessibility text when supplied by the Bank.
-- Verify the exact declared repository path exists at the pinned course snapshot using repository path metadata.
-- Do NOT fetch, download, reconstruct, base64-decode, checksum-recover, re-encode, rename, move, duplicate, or package the binary asset merely for this Warm-Up build.
-- A historical `pinned_commit` stored in Bank asset provenance records lineage; the current pinned course snapshot controls whether the deployed path exists for this run.
-
-3. GENERATED / SPECIAL LOCAL ASSET
-- This normal Bank-routed Warm-Up renderer does not create new local figure assets.
-- If a canonical item unexpectedly requires a new local binary that does not already exist at a declared deployed course path and is not inline HTML/SVG, FAIL CLOSED as `WARMUP_ASSET_NOT_DEPLOYABLE` rather than manufacturing or reconstructing it downstream.
-
-Use the universal shell figure wrapper when an external canonical image is required:
+Use the universal shell figure wrapper when an image is required:
 
   <figure class="warmup-figure">
-    <img src="../../{EXACT_CANONICAL_COURSE_RELATIVE_PATH}" ...>
+    <img ...>
   </figure>
-
-HARD PROHIBITIONS:
-- no `figures/` subfolder created by this renderer;
-- no binary-transfer workaround;
-- no Git blob reconstruction;
-- no checksum-based byte recovery;
-- no connector/base64-to-ZIP workflow;
-- no image substitution or approximation.
 
 For canonical small data tables, use semantic HTML compatible with the shell:
 
@@ -379,7 +359,7 @@ PRINT / NOTABILITY
 
 FINAL
 - exact output path;
-- every external canonical asset reference resolves to its exact deployed course-relative path at the pinned course snapshot;
+- all local asset references resolve;
 - no unresolved template tokens;
 - no stale Unit/Section/Day labels;
 - no extra unrelated repo files;
@@ -404,9 +384,7 @@ ZIP ROOT — EXACT:
 
   unit_{U}_warmups/
     unit_{U}_warmups.html
-
-Normal Bank-routed Warm-Up delivery contains the HTML only.
-Canonical course assets under `resources/...` remain in their existing deployed course locations and are referenced by relative URL.
+    figures/...                [only when new/changed local figure assets are required]
 
 For Unit 1 this means:
 
@@ -423,8 +401,8 @@ HARD PACKAGING RULES:
 - do NOT put an outer `physics/` folder inside the ZIP;
 - do NOT put an outer `warmups/` folder inside the ZIP;
 - the first folder inside the ZIP is exactly `unit_{U}_warmups/`;
-- do NOT create or include a local `figures/` subfolder for existing canonical course assets;
-- the ZIP contains the Unit folder + final HTML only for the normal Bank-routed Warm-Up build;
+- preserve the internal `figures/` subfolder when required;
+- if no figure assets changed, the ZIP still contains the Unit folder + HTML;
 - include only new/changed files needed for this Warm-Up delivery;
 - do NOT include unchanged shared CSS.
 
@@ -443,7 +421,7 @@ FINAL ZIP QA:
 - top-level archive entry is `unit_{U}_warmups/`;
 - `unit_{U}_warmups/unit_{U}_warmups.html` exists exactly once;
 - no `physics/` or `warmups/` wrapper exists inside the archive;
-- all external canonical asset links resolve after placement in the live course path;
+- all included local figure links resolve after placement in the live course path;
 - delivered HTML bytes match the QA'd staging HTML bytes.
 
 END — BUILD WARM-UPS
