@@ -1,15 +1,113 @@
 {
   "contract_name": "Conceptual Physics Notes Visual Contract",
+  "contract_version": "v2.2",
   "framework_version": "v6.8",
   "hard_rules": [
     "NEVER SHOW THE ANSWER IN THE STUDENT IMAGE; apply the shared student-figure answer-neutrality contract to every student-facing visual.",
     "Notability/iPad-first student layout with generous response space; wasted space is acceptable.",
-    "Captured source figures may be prominent and sometimes lead the explanation.",
-    "Do not squeeze images into thumbnail decorations; preserve readable labels/relationships.",
-    "Student images must remain answer-neutral for prediction/inference tasks.",
-    "Teacher copy releases fixed workspace heights and expands naturally; no overlap.",
-    "Production HTML uses the Base-approved CSS order; do not invent a third stylesheet solely for patch rules."
+    "Use every usable instructional source image in source order; default max displayed height 4in, preserve aspect ratio, allow only readability-driven exceptions up to 6in.",
+    "Do not squeeze images into thumbnail decorations and do not replace a good source/canonical figure with a crude redraw.",
+    "Production HTML links exactly ../../css/base.css then ../../css/notes.css; do not invent a third stylesheet solely for patch rules.",
+    "When deployed Notes CSS provides a specialized class/wrapper, use that exact shell rather than a generic h2/table/section substitute.",
+    "Teacher copy is browser-only: release fixed student workspace heights, allow natural vertical expansion, do not optimize for printed page breaks, and never allow overlap.",
+    "Teacher WTC/Example/YTI support uses scannable labeled blocks: Answer / Acceptable Reasoning as bullets, Teacher Moves, Student Moves, and Listen For / Likely Misconception when useful."
   ],
-  "source_image_rule": "For course-owned Physics Notes Image Toolkit assets, reference the selected canonical asset in place from resources/Physics_Notes_Image_Toolkit/<toolkit_path> as declared by frameworks/Physics/MANIFEST.json. Do not copy toolkit images into individual Notes section folders. Generated Notes-specific representations may use local section figures/assets only when the current map/Framework explicitly requires a generated local asset.",
+  "established_shells": {
+    "title": {
+      "required": [
+        "header.notes-title",
+        ".title-kicker",
+        ".title-main",
+        ".title-sub"
+      ],
+      "forbidden_substitution": "Do not use h1.notes-title as the title card."
+    },
+    "learning_target": {
+      "required": [
+        "section.objectives",
+        "h2.h-target"
+      ],
+      "rule": "Exact I-can statements appear in the objectives list; do not create a giant separate generic I Can Statements heading."
+    },
+    "vocabulary_preview": {
+      "required": [
+        "section.vocab-preview-section",
+        "h2.h-vocab",
+        "p.vocab-list",
+        "div.vocab-sort-task",
+        "table.vocab-sort-table",
+        "tr.vocab-sort-space"
+      ],
+      "table_shape": "three columns — Know for sure / Recognize / Don't know yet — and exactly one blank writing row",
+      "rule": "Vocabulary terms are listed outside the table in vocab-list; do not place one term per table row."
+    },
+    "wtc": {
+      "required": [
+        "section.notes-wtc",
+        "h2.h-preview",
+        "div.annotation-box.wtc-instructions",
+        ".wtc-do-not-solve",
+        ".notes-ws"
+      ],
+      "rule": "Canonical Bank task remains exact; the annotation wrapper is presentation only."
+    },
+    "skim": {
+      "required": [
+        "section.skim-section-task",
+        "h2.lets-get-started-heading",
+        "p.skim-section-directions",
+        "table.skim-section-table"
+      ],
+      "table_shape": "two row-based rows only — What I noticed / What I wonder — with prompt cell left and writing cell right",
+      "forbidden": [
+        "side-by-side Notice/Wonder columns",
+        "prediction row unless Framework explicitly requires it",
+        "extra blank rows"
+      ]
+    },
+    "close_reading_directions": {
+      "required": [
+        "div.close-reading-instructions.annotation-box",
+        ".close-reading-title"
+      ],
+      "rule": "Blue annotation box exactly once; no standalone h2 Close Reading Directions."
+    },
+    "i_can_reading": {
+      "required": [
+        "section.notes-ican-start",
+        "h2.h-intro.notes-ican-heading"
+      ],
+      "rule": "Each exact I-can heads at least one major reading block while source concept order is preserved."
+    },
+    "stop_and_discuss": {
+      "required": [
+        "section.notes-discuss-task",
+        "div.stop-discuss",
+        "div.notes-ws"
+      ],
+      "rule": "The colored stop-discuss box contains the title and 2–4 ordered-list prompts only. The white notes-ws workspace is a sibling outside the colored box."
+    },
+    "formula_relationship": {
+      "required": [
+        "section.math-notes",
+        "div.math-notes-header",
+        "span.math-notes-label",
+        "span.math-notes-title",
+        "div.math-notes-body"
+      ],
+      "label": "Formula / Relationship",
+      "rule": "Use the existing Math Notes reference visual language so the relationship is visually distinct from prose and from Close Reading directions."
+    },
+    "example_yti": {
+      "required": [
+        "section.notes-task",
+        "div.notes-task-content",
+        "h3.h-example OR h3.h-yti",
+        "div.notes-ws.notes-task-workspace"
+      ],
+      "workspace_rule": "Workspace is a sibling after notes-task-content, not nested inside it."
+    }
+  },
+  "source_image_rule": "Reference course-owned Physics Notes Image Toolkit assets in place from resources/Physics_Notes_Image_Toolkit/<toolkit_path> as declared by the Framework. Do not copy toolkit images into individual Notes section folders. Generated Notes-specific representations may use local section figures only when canonically required and no source/Bank/toolkit representation satisfies the instructional need.",
   "student_figure_answer_neutrality_contract": "contracts/student_figure_answer_neutrality_contract.json"
 }

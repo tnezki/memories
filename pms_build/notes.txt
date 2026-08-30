@@ -156,24 +156,66 @@ SIZE:
 
 On-screen zoom is expected; do not make every figure huge just because a student might zoom.
 
-OPENING — HARD
---------------
+OPENING / ESTABLISHED HTML SHELL — HARD
+----------------------------------------
+Do NOT improvise generic HTML when the deployed Notes CSS already has a specialized shell.
+Use the established Algebra-compatible Notes structure and class vocabulary.
+
+TITLE / TARGET SHELL:
+
+  <header class="notes-title">
+    <div class="title-kicker">Conceptual Physics • Unit N</div>
+    <h1 class="title-main">Section Title</h1>
+    <p class="title-sub">Section N.N</p>
+    <p class="title-quote">Concise section focus line when useful</p>
+  </header>
+
+  <section class="objectives">
+    <h2 class="h-target">Learning Target</h2>
+    <p>EXACT Learning Target</p>
+    <ul>EXACT I-can statements</ul>
+  </section>
+
+Do NOT use `<h1 class="notes-title">` as a substitute for the title-card shell.
+Do NOT create a separate giant `I Can Statements` heading.
+
 Render in this order:
+1. established title card;
+2. Learning Target + exact I-cans;
+3. Vocabulary Preview;
+4. canonical Bank WTC;
+5. Let's Get Started skim;
+6. ONE blue Close Reading directions box;
+7. summarized instructional reading, compartmentalized by exact I-can focus;
+8. close.
 
-1. section title;
-2. exact Learning Target;
-3. exact I-can statements;
-4. Vocabulary Preview;
-5. canonical Bank WTC;
-6. Let's Get Started skim;
-7. ONE Close Reading directions block;
-8. summarized instructional reading.
+VOCABULARY PREVIEW — EXACT SHELL
+--------------------------------
+Vocabulary Preview is a prior-knowledge SORT, not a term-definition table.
 
-Physics skim wording:
-  "Skim before close reading. Look at the headings and figures. Find 1–2 things you notice and 1–2 things you wonder about."
+Use:
 
-Do not add a prediction row unless the current Framework explicitly requires it.
-Render the Close Reading directions block exactly once.
+  <section class="vocab-preview-section">
+    <h2 class="h-vocab">Vocabulary / Key Notation Preview</h2>
+    <p class="vocab-list">term 1 · term 2 · term 3 ...</p>
+    <div class="vocab-sort-task">
+      <p class="vocab-sort-directions">Sort the vocabulary. Write each vocabulary word in the column that best matches what you know right now. You may move a word later.</p>
+      <table class="vocab-sort-table">
+        <thead><tr><th>Know for sure</th><th>Recognize</th><th>Don't know yet</th></tr></thead>
+        <tbody><tr class="vocab-sort-space"><td></td><td></td><td></td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+HARD:
+- vocabulary terms appear in `vocab-list`, OUTSIDE the table;
+- the sort table has exactly THREE columns;
+- the sort table has exactly ONE blank writing row;
+- do not put one vocabulary term per table row;
+- do not create a two-column "term / what I know" table.
+
+When a previewed term is first meaningfully introduced/defined in the reading,
+visually emphasize that first meaningful occurrence. Do not bold every recurrence.
 
 WTC — HARD
 ----------
@@ -187,25 +229,92 @@ Preserve:
 - coverage role;
 - exact I-can identity.
 
+Use the established WTC presentation shell:
+
+  <section class="notes-wtc" ...>
+    <h2 class="h-preview">What's to Come</h2>
+    <div class="annotation-box wtc-instructions">
+      <strong class="wtc-do-not-solve">DO NOT SOLVE IT YET.</strong>
+      <p>Circle anything familiar, underline symbols, labels, conditions, data, or features that seem important, and write short notes about what you think may matter later.</p>
+    </div>
+    ... exact canonical WTC task ...
+    <div class="notes-ws"></div>
+  </section>
+
 Do not rewrite the WTC during normal Notes production.
 If the WTC is defective, report the Bank defect upstream rather than silently creating a second canonical WTC.
 
+LET'S GET STARTED / SKIM — EXACT SHELL
+--------------------------------------
+Heading must be `Let's Get Started`, using the established class.
+
+Physics skim wording is exact:
+  "Skim before close reading. Look at the headings and figures. Find 1–2 things you notice and 1–2 things you wonder about."
+
+Use a ROW-BASED table with prompt cells on the left and writing space on the right:
+
+  <section class="skim-section-task">
+    <h2 class="lets-get-started-heading">Let's Get Started</h2>
+    <p class="skim-section-directions">EXACT PHYSICS SKIM WORDING</p>
+    <table class="skim-section-table">
+      <tbody>
+        <tr><th>What I noticed</th><td></td></tr>
+        <tr><th>What I wonder</th><td></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+HARD:
+- TWO rows only for current Physics: Notice + Wonder;
+- do not add a prediction row unless Framework explicitly requires it;
+- do not render Notice/Wonder as side-by-side columns;
+- do not add extra blank rows.
+
+CLOSE READING DIRECTIONS — EXACT BLUE BOX
+-----------------------------------------
+Render exactly once, before the first instructional reading.
+It is an annotation box, NOT a large standalone section heading.
+
+Use:
+
+  <div class="close-reading-instructions annotation-box">
+    <strong class="close-reading-title">READ IN SHORT CHUNKS.</strong>
+    <p>Annotate the words and visuals together. Underline evidence, circle or highlight bold vocabulary, label arrows, measurements, or important features, connect sentences to figures, and jot short questions or connections in the margins.</p>
+  </div>
+
+The first close-reading box belongs at the top of the first `.notes-ican-start` block so it travels with the first I-can heading/reading when practical.
+Do NOT render `<h2>Close Reading Directions</h2>`.
+
+READING / EXACT I-CAN COMPARTMENTS — HARD
+-----------------------------------------
+The Philosophy requires Notes to remain compartmentalized around exact I-can learning jobs.
+The textbook remains the source spine and source order must still be preserved.
+
+For each exact I-can:
+- create at least one major reading block headed by the exact I-can text;
+- use `<section class="notes-ican-start">`;
+- use `<h2 class="h-intro notes-ican-heading">EXACT I-can text</h2>`;
+- place the summarized source reading/figures that teach that learning job beneath it.
+
+Do not invent a generic `<h2>Close Reading</h2>` and then hide the I-cans only at the top of the document.
+Do not reorder source concepts merely to force clean I-can boundaries; preserve source order and use the nearest honest I-can focus.
+
 READING / PROCESSING RHYTHM
 ---------------------------
-Move through the summarized source in conceptual/source order.
+Move through summarized source in conceptual/source order.
 
-At each natural reading boundary, use at most ONE primary student-processing event:
-- Stop & Discuss;
-- one complete canonical Example/YTI pair;
-- none.
+After every SUBSTANTIAL reading block, immediately use exactly ONE primary student-processing event before the next major application:
+- Stop & Discuss; OR
+- one complete canonical Example/YTI pair.
 
-Never place Stop & Discuss AND EX/YTI at the same boundary.
+A short transitional/support paragraph does not automatically require a processing event.
+Never place Stop & Discuss AND EX/YTI at the same reading boundary.
 
-A Physics Note, source figure, diagram, relationship box, graph, or model may coexist with the reading.
+A Physics Note, source figure, diagram, Formula / Relationship box, graph, or model may coexist with the reading.
 Those are instructional supports, not a second primary processing event.
 
-EXAMPLE / YTI PLACEMENT — HARD
-------------------------------
+EXAMPLE / YTI PLACEMENT + EXACT TASK SHELL — HARD
+--------------------------------------------------
 Use EVERY complete canonical Bank Example/YTI pair exactly once.
 
 Preserve:
@@ -223,43 +332,103 @@ Visible numbering comes from final Notes display order:
 Do NOT expose Bank pair numbers as visible numbering when display order differs.
 
 Place each intact pair where it MOST NATURALLY processes the immediately preceding concept/representation.
-
 Do not distribute pairs evenly just to make the page look balanced.
 
 If a pair has no natural reading boundary:
-- put it intact in a post-reading EX/YTI section after the final reading;
+- put it intact after the final reading;
 - continue visible numbering.
 
 Do not delete, split, merge, or rewrite a canonical pair to improve placement.
 
-STOP & DISCUSS
---------------
-Use only when verbal conceptual processing genuinely helps.
+Use the established task shell for EACH Example and EACH YTI separately:
 
-Good jobs include:
-- compare two ideas/representations;
-- explain a surprising result;
-- identify a misconception;
-- make sense of a figure/model;
-- connect a relationship to physical meaning.
+  <section class="notes-task" ...metadata...>
+    <div class="notes-task-content">
+      <h3 class="h-example">Example N: concise useful title</h3>
+      ...canonical Example prompt/representation...
+    </div>
+    <div class="notes-ws notes-task-workspace"></div>
+  </section>
 
-Avoid stock comprehension prompts.
+  <section class="notes-task" ...metadata...>
+    <div class="notes-task-content">
+      <h3 class="h-yti">You Try It N: concise useful title</h3>
+      ...canonical YTI prompt/representation...
+    </div>
+    <div class="notes-ws notes-task-workspace"></div>
+  </section>
+
+HARD:
+- use `.h-example` / `.h-yti`;
+- workspace is a SIBLING after `.notes-task-content`, not buried inside it;
+- do not create a new `.notes-pair` visual wrapper that bypasses the established task shell.
+
+STOP & DISCUSS — HARD
+---------------------
+A Stop & Discuss is one processing event containing 2–4 short prompts.
+Default = 3 prompts. Use 2 when the reading is narrow; use 4 only when all four earn their place.
+
+Every Stop & Discuss must include:
+- at least ONE vocabulary/notation question tied to a term just used in the reading; AND
+- at least ONE conceptual/representation question that requires students to explain, compare, interpret, critique, or connect something from the immediately preceding reading/figure/model.
+
+Additional prompts may target:
+- misconception repair;
+- evidence/model interpretation;
+- connection between representations;
+- prediction or explanation.
+
+No stock generic comprehension questions.
+No question may depend on material that has not yet appeared.
+
+Use the established shell EXACTLY:
+
+  <section class="notes-discuss-task">
+    <div class="stop-discuss">
+      <strong>Stop and Discuss</strong>
+      <ol>
+        <li>...</li>
+        <li>...</li>
+        <li>...</li>
+      </ol>
+    </div>
+    <div class="notes-ws"></div>
+  </section>
+
+HARD:
+- prompt box is the colored/red discussion box;
+- writing workspace is OUTSIDE that box;
+- workspace is plain white Notes space;
+- never put `.notes-ws` inside `.stop-discuss`.
 
 FORMULA / RELATIONSHIP BOXES — HARD
 -----------------------------------
-When an important physical/mathematical relationship is first introduced in the Notes, render a compact Formula / Relationship box near that introduction.
+When an important physical/mathematical relationship is first introduced, render one compact reference block near that introduction.
 
-The box should include only what helps students think:
-- the relationship in correct MathJax;
-- what the relationship says physically;
-- variable meanings;
+Use the EXISTING `.math-notes` visual language so it has its own unmistakable reference look rather than appearing as ordinary prose:
+
+  <section class="math-notes formula-relationship">
+    <div class="math-notes-header">
+      <span class="math-notes-label">Formula / Relationship</span>
+      <span class="math-notes-title">Concise relationship name</span>
+    </div>
+    <div class="math-notes-body">
+      <p class="formula-display">\( ... \)</p>
+      <p><strong>Physical meaning:</strong> ...</p>
+      ... variable meanings / units / sign convention only when useful ...
+    </div>
+  </section>
+
+The block should include only what helps students think:
+- relationship in correct MathJax;
+- physical meaning;
+- variable meanings when needed;
 - units when useful;
 - direction/sign convention when relevant.
 
-Do not turn the Notes into a detached formula sheet.
+Do not turn Notes into a detached formula sheet.
 Do not repeat the same box every time the relationship reappears.
 Do not present an equation as an answer machine.
-
 MathJax must render correctly.
 
 PHYSICS NOTES / REPRESENTATIONS
@@ -274,7 +443,6 @@ Preference order:
 
 Toolkit assets are reference-in-place.
 Do not copy toolkit binaries into section folders.
-
 Generated student-facing visuals must remain answer-neutral.
 
 TABLES / GRAPHS / BANK REPRESENTATIONS
@@ -283,8 +451,8 @@ Preserve canonical Bank representation behavior.
 
 Small data tables:
 - real semantic HTML;
-- `<table class="values">`;
-- compact/centered through existing Base CSS;
+- `<table class="values">` or established `.compact-table` shell as appropriate;
+- compact/centered through existing CSS;
 - never pipe-delimited pseudo-tables.
 
 Graphs:
@@ -295,31 +463,45 @@ Graphs:
 CLOSE — HARD
 ------------
 Render in this order:
-
-1. Vocabulary with concise definitions;
+1. Vocabulary with concise definitions/reference;
 2. bulleted Summary;
 3. What I Figured Out;
 4. Common Mistakes;
 5. final miscellaneous workspace only when the current Framework/shell requires it.
 
+Use established heading/table classes where they exist (`.h-vocab`, `.h-summary`, `.h-mistakes`, `.mistake-table`).
 Do not omit What I Figured Out.
 Do not add a Notes Exit Check.
 
-FORMAT IS LOCKED
-----------------
-Use the established course Notes shell/CSS.
-
-For current Physics:
+FORMAT IS LOCKED — COPY, DO NOT REINVENT
+-----------------------------------------
+Use the established course Notes shell/CSS:
   ../../css/base.css
   ../../css/notes.css
 
 Exactly in that order.
 
-Do NOT:
-- invent a new stylesheet;
-- add a third ordinary Notes stylesheet;
-- redesign typography/colors/cards/tables/page architecture;
-- replace established classes with a new class system.
+The deployed Physics `notes.css` already contains the intended specialized treatments for:
+- title card;
+- WTC;
+- Vocabulary Preview sort;
+- Let's Get Started skim;
+- blue Close Reading directions;
+- I-can section headings;
+- Math Notes / Formula-Relationship reference blocks;
+- Stop and Discuss;
+- Example/YTI tasks;
+- workspaces;
+- Summary/Common Mistakes;
+- pagination.
+
+Therefore:
+- COPY the established class/wrapper structure shown above;
+- do not substitute generic `<h2>`, generic `<table>`, or generic `<section>` structures and expect CSS to infer intent;
+- do not invent a new stylesheet;
+- do not add a third ordinary Notes stylesheet;
+- do not redesign typography/colors/cards/tables/page architecture;
+- do not replace established classes with a new class system.
 
 STUDENT PAGINATION — NOTABILITY-FIRST
 -------------------------------------
@@ -345,38 +527,56 @@ Forced page breaks:
 
 Let natural pagination move intact blocks.
 
-TEACHER COPY — ONLINE-FIRST
----------------------------
+TEACHER COPY — BROWSER-ONLY / HARD
+-----------------------------------
 Derive the teacher copy from the finalized student structure.
 
+The teacher Notes are STRICTLY browser-used.
+Do not spend effort fitting the teacher copy to printed pages or preserving student page breaks.
+
 Teacher copy:
-- same student content/order;
-- release fixed student workspace heights;
-- vertical space is not a concern;
-- teacher support pushes later content downward;
-- overlap is a hard failure.
+- same instructional sequence and student-facing prompts as the finalized student Notes;
+- release/remove fixed student workspace heights;
+- allow all teacher support to expand naturally downward;
+- do not insert teacher-only forced page breaks;
+- do not compress, hide, truncate, or abbreviate teacher support to save vertical space;
+- overlap is a hard failure;
+- teacher-only support must be visually distinct from student-facing content.
 
-MULTIPART TEACHER SUPPORT — HARD
---------------------------------
-Never dump a multipart canonical solution into one giant red paragraph.
+TEACHER GUIDE STRUCTURE — HARD
+------------------------------
+Every canonical WTC / Example / YTI teacher block must use a readable teacher-guide structure.
+Do not render teacher support as one long red paragraph.
 
-Use readable structure:
+Required order:
 
 Answer / Acceptable Reasoning
-- (a) ...
-- (b) ...
-- (c) ...
+- use bullets for separate reasoning ideas;
+- for multipart tasks, use one bullet per labeled part:
+  - (a) ...
+  - (b) ...
+  - (c) ...
+- calculations should show the relationship, substitution/reasoning, result, units, and interpretation when relevant;
+- constructed diagrams/models should describe the required features clearly.
 
 Teacher Moves
-- ...
+- 1–3 concise moves or prompts the teacher can use to advance thinking;
+- phrase as usable discourse prompts/actions, not generic advice.
 
 Student Moves
-- ...
+- 1–3 likely productive student actions/reasoning moves;
+- describe what students should notice, say, draw, compare, calculate, or justify.
 
 Listen For / Likely Misconception
-- ...
+- include when useful;
+- identify the specific idea, vocabulary confusion, representation error, or reasoning issue worth listening for.
 
-Use lists whenever there is more than one part/idea.
+For a very short single-answer item, Answer / Acceptable Reasoning may contain one bullet.
+Teacher Moves and Student Moves still remain separate labeled lists when instructional guidance is useful.
+
+Do not create filler discourse moves merely to satisfy a count.
+The purpose is fast browser-side teacher support that is easy to scan while teaching.
+
 Answers remain clearly teacher-only according to established course behavior.
 
 ARTIFACT SELF-CONTAINMENT — HARD
@@ -555,11 +755,18 @@ SOURCE
 - reading has been summarized to the approximate 30–40 minute target rather than copied wholesale.
 
 INSTRUCTION
-- Vocabulary Preview present;
+- title card uses the established `.notes-title` wrapper with `.title-kicker`, `.title-main`, and `.title-sub`;
+- Learning Target uses `.h-target`; exact I-cans are visible and each exact I-can heads at least one major `.notes-ican-start` reading block;
+- Vocabulary Preview uses `.vocab-list` plus a 3-column `.vocab-sort-table` with exactly one blank writing row;
 - exact skim wording;
-- one Close Reading directions block;
-- formula/relationship boxes appear at first meaningful introduction;
+- Let's Get Started uses `.lets-get-started-heading` and a 2-row Notice/Wonder row-based `.skim-section-table`;
+- one blue `.close-reading-instructions.annotation-box` exists; no giant standalone Close Reading Directions heading;
+- formula/relationship boxes use `.math-notes-header` + `.math-notes-body` at first meaningful introduction;
+- every substantial reading block is followed by exactly one primary processing event;
 - no boundary has both S&D and EX/YTI;
+- each Stop & Discuss has 2–4 prompts, including at least one vocabulary/notation prompt and at least one conceptual/representation prompt from the immediately preceding reading;
+- every Stop & Discuss uses `.notes-discuss-task` wrapper, with `.notes-ws` OUTSIDE `.stop-discuss`;
+- Example/YTI headings use `.h-example` / `.h-yti`; task workspace is sibling after `.notes-task-content`;
 - pairs are placed naturally; leftovers are intact after reading;
 - no student answer leakage;
 - What I Figured Out follows Summary.
@@ -571,10 +778,15 @@ RENDER
 - semantic compact tables preserved;
 - figures/graphs readable;
 - established CSS order;
+- specialized Notes structures use the deployed CSS class vocabulary rather than generic substitutes;
 - no invented Notes visual system;
 - no ordinary forced page breaks;
+- student Notes preserve required Notability/page-flow behavior;
+- teacher Notes are browser-only: no teacher page-fit optimization or teacher-only forced breaks;
 - no overlap in student or teacher copy;
-- teacher multipart answers use readable lists.
+- teacher WTC/Example/YTI guides use structured Answer / Teacher Moves / Student Moves / Listen For blocks;
+- multipart answers are bulleted by labeled part.
+- provenance filenames use the exact OUTPUT contract; if a change log is produced it is named `NOTES_CHANGE_LOG.txt`, not an alias.
 
 Do not invent new QA criteria halfway through a run.
 If a new systemic criterion is discovered, park it for a later PM revision.

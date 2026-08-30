@@ -2,75 +2,122 @@
   "name": "Conceptual Physics Notes Course Profile",
   "course": "Conceptual Physics",
   "course_family": "science",
-  "profile_version": "v2.1",
+  "profile_version": "v2.2",
   "framework_version": "v6.8",
   "extends": "current Base Notes PM",
-  "role": "Current Physics-specific Notes contract. It preserves the established Notes HTML/CSS shell while using substantially more source-grounded reading and meaningful visual narrative. This profile supersedes older embedded Framework summary language that required Stop and Discuss after every substantial reading segment.",
+  "role": "Current Physics-specific Notes contract. Notes are built in one pass from the finalized Bank Notes anchors plus the Framework-declared textbook/source spine. The established Algebra-compatible Notes HTML/CSS shell is reused exactly; Physics specializes source density, visual continuity, Reading Apprenticeship processing, and formula/relationship treatment.",
   "bank_canonical": {
-    "rule": "Finalized Unit Bank owns canonical WTC / Notes Example / Notes YTI wording, values, figures, and solutions.",
-    "pair_rule": "Use the Physics Bank-v2 profile: no more than four canonical Example/YTI pairs per section; Notes consumes every canonical pair actually present.",
+    "rule": "Finalized Unit Bank owns canonical WTC / Notes Example / Notes YTI wording, values, figures, solutions, IDs, pair identity, question-structure identity, and I-can identity.",
+    "pair_rule": "Use every complete canonical Example/YTI pair actually present, with no more than four canonical pairs per section under the current Physics Bank-v2 profile.",
     "display_numbering_rule": "Bank IDs/pair IDs remain hidden provenance. Visible Example/You Try It numbering is assigned from final display order within the section and runs 1, 2, 3... even when Bank pair_number differs."
   },
   "source_spine": {
-    "rule": "The Framework-declared Physics textbook is the instructional spine. Notes keep selected textbook explanation in its source order. The normal editorial operation is KEEP, CUT, or LIGHTLY PARAPHRASE/CONDENSE; do not invent a replacement close-reading passage when usable source text exists.",
-    "close_reading_rule": "Close reading means students read the retained/adapted textbook material. A single close-reading directions box appears once after the skim and before the first retained reading chunk."
+    "rule": "The Framework-declared Physics textbook/source is the instructional spine. Preserve its major conceptual order, terminology, physics meaning, and usable instructional image order. Notes may summarize/condense substantially to fit classroom time; paragraph-level fidelity is not required.",
+    "time_target": "Approximately 30–40 minutes for the complete student Notes section, including WTC, skim, reading, processing, Example/YTI work, and close.",
+    "condense_rule": "Cut repetition/tangents first, then compress prose and combine nearby explanatory paragraphs while preserving conceptual transitions. Do not delete canonical WTC or complete Example/YTI pairs merely to hit the time target.",
+    "source_modes": [
+      "textbook_direct",
+      "textbook_partial_gap",
+      "framework_synthesis"
+    ],
+    "gap_rule": "Documented source gaps remain explicit. Use only the minimum Framework-grounded bridge needed for an uncovered target; do not invent fake textbook continuation."
   },
   "architecture": [
-    "Section title + exact Learning Target / I-can statements",
-    "Vocabulary preview (terms only)",
-    "canonical What's to Come",
-    "Let's Get Started skim: headings/figures + 1-2 notices and 1-2 wonders",
-    "one Close Reading directions block",
-    "substantial retained/adapted textbook reading and visual flow",
-    "interleaved processing with at most one primary student-processing event per reading boundary",
+    "Established title card",
+    "exact Learning Target + exact I-can statements",
+    "Vocabulary / Key Notation Preview using terms outside a 3-column one-row sort table",
+    "canonical What's to Come using the established WTC shell",
+    "Let's Get Started skim using the exact Physics notice/wonder wording and two row-based writing rows",
+    "one blue Close Reading directions annotation box",
+    "substantial summarized textbook/source reading compartmentalized by exact I-can focus while preserving source order",
+    "at most one primary processing event per reading boundary, with every substantial reading block followed by one",
     "canonical Example / You Try It anchors, with any leftover intact pairs after the final reading",
-    "Vocabulary with definitions immediately before Summary",
+    "Vocabulary with definitions/reference immediately before Summary",
     "bulleted Summary",
     "What I Figured Out",
     "Common Mistakes",
     "Framework-defined final miscellaneous workspace when required"
   ],
   "opening": {
+    "vocabulary_preview_rule": "Render preview terms in a visible vocab-list outside the sort table. The sort table has exactly three columns — Know for sure, Recognize, Don't know yet — and exactly one blank writing row.",
     "skim_prompt": "Skim before close reading. Look at the headings and figures. Find 1–2 things you notice and 1–2 things you wonder about.",
+    "skim_table_rule": "Use two row-based writing rows only: What I noticed and What I wonder. Do not render Notice/Wonder as side-by-side columns.",
     "prediction_rule": "Do not add a prediction prompt unless the current Framework explicitly requires it.",
-    "close_reading_directions_count": 1
+    "close_reading_directions_count": 1,
+    "close_reading_visual_rule": "Use the deployed blue close-reading-instructions annotation box, not a standalone giant h2 section."
   },
   "reading": {
     "benchmark": "Framework-declared Physics textbook / approved source spine, supported by Conceptual Physics/Hewitt visual/reference resources",
-    "rule": "Physics Notes are textbook-like instructional reading, not thin blurbs between problems. Preserve useful source explanation and conceptual order; cut by omission first and paraphrase only as needed for classroom clarity/length.",
+    "rule": "Physics Notes are textbook-like instructional reading, not thin blurbs between problems. Summarize and condense for classroom use while preserving source concept order and correct physics.",
+    "i_can_compartment_rule": "Every exact section I-can must headline at least one major reading block using the established notes-ican-start / notes-ican-heading shell. Preserve source order rather than reorganizing concepts artificially.",
+    "vocabulary_rule": "Vocabulary develops in context. Emphasize the first meaningful introduction/definition of a previewed term; do not bold every recurrence.",
     "paragraphs": "multiple short developed paragraphs; avoid walls of text and one-sentence stacking"
   },
   "processing_rhythm": {
-    "hard_rule": "At a reading boundary, use at most ONE primary student-processing event: Stop and Discuss OR one canonical Example/YTI pair OR none. Do not stack Stop and Discuss and Example/YTI after the same reading chunk.",
-    "instructional_insertions": "Physics Notes, diagrams, graphs, models, and other explanatory reference blocks may be embedded with the reading when they teach the idea; they are not a second required student-processing event.",
+    "hard_rule": "At a reading boundary, use at most ONE primary student-processing event: Stop and Discuss OR one canonical Example/YTI pair. Every substantial reading block must be followed immediately by one primary processing event before the next major application; short transitional/support paragraphs may have none.",
+    "instructional_insertions": "Physics Notes, source figures, diagrams, graphs, models, Formula / Relationship blocks, and other explanatory references may be embedded with the reading when they teach the idea; they are not a second primary student-processing event.",
     "leftover_pair_rule": "If canonical Example/YTI pairs remain after all natural reading insertion points are used, place the remaining intact pairs after the final reading chunk in display order."
   },
+  "stop_and_discuss": {
+    "count_rule": "One Stop and Discuss block contains 2–4 short prompts; default to 3, use 2 for a narrow reading, and use 4 only when every prompt earns its place.",
+    "required_prompt_mix": [
+      "at least one vocabulary/notation question tied to a term just used in the immediately preceding reading",
+      "at least one conceptual/representation question requiring explanation, comparison, interpretation, critique, or connection from the immediately preceding reading/figure/model"
+    ],
+    "optional_jobs": [
+      "misconception repair",
+      "evidence/model interpretation",
+      "connection between representations",
+      "prediction or explanation"
+    ],
+    "shell_rule": "Use notes-discuss-task wrapper; colored stop-discuss prompt box contains the ordered list only; the notes-ws writing workspace is a sibling OUTSIDE the colored box and remains plain white space.",
+    "hewitt_source": "Think and Discuss / Think and Explain / Think and Rank structures are preferred inspiration when they fit.",
+    "no_stock_prompts": true
+  },
   "visual_storytelling": {
-    "hard_rule": "Use strong existing source/toolkit/Bank representations when they advance the conceptual story. Purpose-author a new Notes-specific representation only when the current map requires a need not already satisfied canonically.",
+    "source_image_rule": "Use every usable instructional image/figure present in the declared student-source section, in source order. Exclude only navigation/decorative chrome, answer-key-only visuals, or images that directly leak a student answer.",
+    "size_rule": "Default maximum displayed image height is 4 inches with width auto, max-width 100%, preserved aspect ratio, and centered presentation. Increase only a genuinely unreadable labeled figure as needed, normally to 5 inches and never beyond 6 inches without a clear reason.",
+    "no_crude_redraw": "Never replace a good source/canonical figure with a crude redraw.",
     "roles": [
       "phenomenon opener",
-      "prediction stimulus",
       "conceptual explanation anchor",
       "comparison/ranking stimulus",
       "misconception exposure",
       "evidence for discussion",
       "bridge to equation/model"
-    ],
-    "not_decoration": "A figure should earn space by advancing the idea, evidence, prediction, comparison, or explanation."
+    ]
   },
-  "stop_and_discuss": {
-    "rule": "Use Stop and Discuss when the preceding reading/representation benefits from verbal conceptual processing and that boundary is not already occupied by a canonical Example/YTI pair. Prompts are specific to the immediately preceding source content; no stock comprehension prompts.",
-    "hewitt_source": "Think and Discuss / Think and Explain / Think and Rank structures are preferred inspiration when they fit."
+  "formula_relationship": {
+    "rule": "When an important physical/mathematical relationship is first introduced, render a compact Formula / Relationship reference block using the established math-notes header/body visual shell.",
+    "include_when_useful": [
+      "relationship in correct MathJax",
+      "physical meaning",
+      "variable meanings",
+      "units",
+      "direction/sign convention"
+    ],
+    "do_not": [
+      "turn Notes into a detached formula sheet",
+      "repeat the same relationship box at every recurrence",
+      "present an equation as an answer machine"
+    ]
+  },
+  "task_shell": {
+    "example_heading_class": "h-example",
+    "yti_heading_class": "h-yti",
+    "workspace_rule": "For each notes-task, notes-task-content contains the heading/prompt/representation and notes-ws notes-task-workspace is a sibling immediately after notes-task-content."
   },
   "reading_apprenticeship": {
-    "rule": "Keep annotation, notice/wonder, evidence, model-reading, and representation interpretation opportunities purposeful; student workspaces may be generous for Notability."
+    "rule": "Keep annotation, vocabulary noticing, notice/wonder, evidence, model-reading, and representation interpretation opportunities purposeful; student workspaces may be generous for Notability."
   },
   "student_teacher": {
     "student": "clean Notability-first page with generous fixed workspace where required; use established keep-together wrappers and natural pagination",
-    "teacher": "same instructional sequence, online-view-first, fixed student workspace heights released, answers/acceptable reasoning formatted as readable lists, teacher/student discourse moves as lists, and no overlap. Vertical space is not a concern."
+    "teacher": "same instructional sequence, browser-only; fixed student workspace heights are released; teacher support expands naturally downward with no print/page-fit optimization; answers/acceptable reasoning are scannable bulleted lists; Teacher Moves and Student Moves are separate labeled lists; no overlap. Vertical space is not a concern."
   },
   "teacher_support": {
-    "multipart_solution_rule": "Never render a multipart canonical solution as one long red paragraph. Break it into labeled/bulleted parts matching the student task.",
+    "browser_only_rule": "Teacher Notes are used in the browser only. Do not optimize teacher guides for printed pages, student page breaks, or vertical compactness.",
+    "solution_rule": "Never render canonical teacher solutions as one long red paragraph. Use Answer / Acceptable Reasoning with bullets for distinct reasoning ideas and one bullet per labeled part for multipart tasks.",
+    "discourse_rule": "Use separate Teacher Moves and Student Moves lists. Teacher Moves are concise prompts/actions the teacher can use; Student Moves describe productive student reasoning/actions. Add Listen For / Likely Misconception when it materially helps.",
     "preferred_order": [
       "Answer / Acceptable Reasoning",
       "Teacher Moves",
@@ -79,8 +126,9 @@
     ]
   },
   "pagination": {
-    "rule": "Use the established Notes/base CSS wrappers. Keep atomic instructional units together when practical. Do not wrap a giant multi-page reading in one avoid-break container.",
-    "forced_break_rule": "Do not use forced page breaks for ordinary crowding/layout repair. Use them only for a genuinely intentional separate page/workspace required by the current Framework/shell."
+    "student_rule": "Student Notes are Notability-first. Use the established Notes/base CSS wrappers and keep atomic instructional units together when practical. Do not wrap a giant multi-page reading in one avoid-break container.",
+    "student_forced_break_rule": "Do not use forced page breaks for ordinary student-layout crowding repair. Use them only for a genuinely intentional separate student page/workspace required by the current Framework/shell.",
+    "teacher_rule": "Teacher Notes are browser-only. Do not preserve student pagination or add teacher-only forced page breaks."
   },
   "paths": {
     "student": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",
