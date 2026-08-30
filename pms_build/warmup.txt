@@ -1,0 +1,427 @@
+BUILD WARM-UPS — SINGLE PASS / BANK-ROUTED / UNIVERSAL TWO-PAGE NOTABILITY SHELL LOCK
+================================================================================================
+
+STATUS: CURRENT
+STEP: 8
+JOB: warmup
+ROLE: Build the current Unit Warm-Ups from the exact finalized Physics Bank routes and place them into the proven universal Warm-Up shell.
+
+This is ONE build PM.
+There is no nested Warm-Up PM folder, starter ZIP, local manifest, control-panel profile, or dependency on the combined recurring-assessment PM text.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + PHYSICS FRAMEWORK + FINALIZED UNIT BANK
+    -> RESOLVE EXACT WARM-UP 1 / 2 / 3 ROUTES FOR EACH SECTION
+    -> EXTRACT FOUR CANONICAL BANK ITEMS PER WARM-UP
+    -> PLACE INTO UNIVERSAL TWO-PAGE WARM-UP SHELL
+    -> COPY REQUIRED CANONICAL FIGURES
+    -> STRUCTURAL / MATHJAX / RENDER / FINAL-BYTE QA
+    -> PACKAGE UNIT WARM-UP FOLDER
+    -> RETURN ONE WARM-UP ZIP
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum build.
+
+Public GitHub access does NOT authorize generic web search or public-web fetch.
+
+Resolve declared resources through manifests/contracts and DIRECT-FETCH exact paths at the pinned snapshots.
+If a declared required file cannot be fetched:
+  FAIL CLOSED
+and name the exact repo/path.
+Do not search around the failure.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. current canonical Physics Framework front door through `frameworks/Physics/MANIFEST.json`;
+4. ORIGINAL requested Unit Assessment Plan resolved by the Framework manifest;
+5. current Physics Bank course profile / Bank contracts resolved by the Framework;
+6. current finalized expanded Unit Bank, including its declared manifest/index files;
+7. this PM;
+8. current deployed course `css/base.css` and `css/warmup.css`;
+9. current canonical `warmup_reference.html` only when needed to verify the universal DOM.
+
+Pin the system repository and Physics course repository once at job start.
+Never mix later commits into the run.
+
+Authority:
+1. current explicit teacher instruction;
+2. Philosophy;
+3. Physics Framework / ORIGINAL Assessment Plan;
+4. finalized current Unit Bank for Warm-Up questions, answers, and canonical representations;
+5. this PM;
+6. live Warm-Up CSS / canonical shell implementation.
+
+Question Structure is NOT a normal input to this renderer because this job does not author replacement Warm-Up questions.
+Do not read the old combined recurring-assessment PM as an active instruction source.
+
+======================================================================
+2. PURPOSE / SOURCE — EXTRACT, DO NOT RE-AUTHOR
+======================================================================
+
+PURPOSE:
+Build the established short retrieval / activation / bridging routine for each current Unit section.
+
+AUTHORITATIVE QUESTION SOURCE:
+  the finalized current Unit Bank canonical Warm-Up routes.
+
+For Physics, the current Bank profile resolves:
+- Warm-Up 1 = 4 canonical questions per section;
+- Warm-Up 2 = 4 canonical questions per section;
+- Warm-Up 3 = 4 canonical questions per section.
+
+For every section, render exactly those twelve canonical items as three four-question Warm-Ups.
+Preserve the Bank route order inside each Warm-Up unless the current Framework explicitly declares another order.
+
+HARD:
+- do NOT paraphrase canonical prompts;
+- do NOT silently change values, answers, choices, tables, figures, diagrams, or representations;
+- do NOT replace a repeated canonical retrieval item merely because it appears elsewhere;
+- do NOT perform anti-clone rewriting when controlled repetition is intentionally present in the Bank;
+- do NOT create a fourth Warm-Up or reduce the three-Warm-Up pattern;
+- do NOT borrow questions from Practice, Exit, Review, or Summative to fill a missing route.
+
+If a declared Warm-Up route is missing, incomplete, duplicated ambiguously, or does not contain exactly four canonical items:
+  FAIL CLOSED as WARMUP_BANK_ROUTE_INCOMPLETE
+and report Unit / Section / Warm-Up number and the observed item count.
+
+If a canonical Bank item is itself incomplete or not renderable from the declared source:
+  FAIL CLOSED
+rather than inventing replacement classroom content in this downstream renderer.
+
+======================================================================
+3. PHYSICS WARM-UP ROUTING — HARD
+======================================================================
+
+For each exact Framework section, in section order:
+
+  Warm-Up 1 -> Day 1
+  Warm-Up 2 -> Day 2
+  Warm-Up 3 -> Day 3
+
+Each Day has exactly four problems:
+  Q1, Q2, Q3, Q4 in canonical Bank route order.
+
+The Bank remains the evidence/content authority.
+The shell does not create a second curriculum sequence.
+
+Physics content rules already enforced upstream remain intact here:
+- conceptual/model meaning before naked calculation when that is the canonical task;
+- equations remain physical relationships, not answer machines;
+- canonical representations are evidence, not decoration;
+- student-facing figures must remain answer-neutral;
+- selected-response items retain all complete choices;
+- constructed-response items retain the full response demand.
+
+Do not convert response modes during rendering.
+
+======================================================================
+4. OUTPUT PATH / UNIVERSAL DOCUMENT HEAD — HARD
+======================================================================
+
+Output path:
+  warmups/unit_{U}_warmups/unit_{U}_warmups.html
+
+The document head MUST include the deployed stylesheets in this order:
+
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/warmup.css">
+
+Then configure MathJax BEFORE loading it:
+
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$','$']],
+      displayMath: [['$$','$$']],
+      processEscapes: true
+    }
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+HARD:
+- keep both deployed stylesheets;
+- `base.css` loads first;
+- `warmup.css` loads second;
+- do not embed replacement CSS;
+- do not duplicate either stylesheet;
+- do not remove MathJax because a particular Unit appears mostly conceptual;
+- preserve valid MathJax delimiters from canonical Bank content.
+
+======================================================================
+5. UNIVERSAL WARM-UP SHELL — ABSOLUTE DOM LOCK
+======================================================================
+
+The current Physics profile selects the standard universal Base Recurring Warm-Up shell.
+Use the proven two-page-per-day shell directly; do not reconstruct a richer header from optional CSS classes.
+
+Document body:
+
+<body>
+<main class="warmups-container">
+  [Section / Day page pairs in canonical order]
+</main>
+</body>
+
+For EACH Section {U}.{S}, EACH Day {D} = 1, 2, 3:
+
+FIRST PHYSICAL PAGE — questions 1 and 2:
+
+<section class="warmup-page wu-count-2" data-section="{U}.{S}" data-day="{D}">
+  <header class="warmup-header">
+    <h1>Section {U}.{S} — Day {D}</h1>
+  </header>
+
+  <article class="problem half first" data-bank-id="EXACT_CANONICAL_BANK_ID_Q1">
+    <div class="problem-title">1</div>
+    <div class="problem-body">[EXACT CANONICAL STUDENT CONTENT Q1]</div>
+  </article>
+
+  <article class="problem half" data-bank-id="EXACT_CANONICAL_BANK_ID_Q2">
+    <div class="problem-title">2</div>
+    <div class="problem-body">[EXACT CANONICAL STUDENT CONTENT Q2]</div>
+  </article>
+</section>
+
+SECOND PHYSICAL PAGE — questions 3 and 4:
+
+<section class="warmup-page wu-count-2" data-section="{U}.{S}" data-day="{D}" data-continuation="true">
+  <article class="problem half first" data-bank-id="EXACT_CANONICAL_BANK_ID_Q3">
+    <div class="problem-title">3</div>
+    <div class="problem-body">[EXACT CANONICAL STUDENT CONTENT Q3]</div>
+  </article>
+
+  <article class="problem half" data-bank-id="EXACT_CANONICAL_BANK_ID_Q4">
+    <div class="problem-title">4</div>
+    <div class="problem-body">[EXACT CANONICAL STUDENT CONTENT Q4]</div>
+  </article>
+</section>
+
+Repeat this exact page pair for Day 1, Day 2, Day 3, then move to the next Framework section.
+
+HARD PROHIBITIONS:
+- no kicker above the Section/Day title;
+- no section subtitle/topic line;
+- no Name/Date line;
+- no `warmup-meta` block;
+- no visible WORK box;
+- no lined workspace;
+- no generic `<div class="workspace">`;
+- no extra explanation cards between problems;
+- no answer key inside the student artifact.
+
+The intentionally blank remainder of each fixed-height problem card IS the student handwriting workspace.
+If legacy compatibility markup is unavoidable, only:
+  <div class="workspace wu-ws-000"></div>
+is permitted, and omission is preferred.
+
+Do not change shared CSS card heights to make extra markup fit.
+
+======================================================================
+6. REPRESENTATIONS / FIGURES / TABLES
+======================================================================
+
+Warm-Ups preserve canonical Bank representation.
+
+For canonical image/figure assets:
+- copy the exact required source bytes into:
+    warmups/unit_{U}_warmups/figures/
+- use stable relative links from the Warm-Up HTML;
+- do not redraw, reinterpret, decorate, crop, or silently replace a canonical information-bearing figure;
+- preserve answer-neutrality;
+- preserve necessary labels inside the figure;
+- do not add descriptive captions that explain the answer;
+- prompt/explanatory wording belongs before the figure.
+
+Use the universal shell figure wrapper when an image is required:
+
+  <figure class="warmup-figure">
+    <img ...>
+  </figure>
+
+For canonical small data tables, use semantic HTML compatible with the shell:
+
+  <table class="values"> ... </table>
+
+Do not stretch ordinary small tables to full card width merely to fill space.
+
+When a question requires the STUDENT to construct a representation, provide only the response surface already required by the canonical item / Framework. Do not show the completed answer representation.
+
+If an exact canonical representation cannot fit legibly inside the approved two-card physical page without changing shared CSS or deleting evidence:
+  FAIL CLOSED as WARMUP_LAYOUT_CONFLICT.
+
+======================================================================
+7. TRACEABILITY — HIDDEN, EXACT, NON-INVENTED
+======================================================================
+
+Each rendered `.problem` article retains the exact canonical Bank item ID in:
+  `data-bank-id="..."`
+
+This is legitimate because Warm-Ups render the canonical Bank item itself; they are not derived secure variants.
+
+Visible student content must NOT display:
+- Bank IDs;
+- I-can IDs;
+- DOK/Bloom;
+- internal route names;
+- structure IDs;
+- audit status;
+- authoring notes.
+
+`data-section`, `data-day`, and `data-continuation` are shell/routing attributes and may remain.
+Do not invent hidden IDs that are not present in the authoritative Bank.
+
+======================================================================
+8. MATHJAX / CONTENT-INTEGRITY QA — HARD
+======================================================================
+
+Before render QA:
+- verify MathJax configuration appears before the loader;
+- verify `inlineMath: [['$','$']]`;
+- verify `displayMath: [['$$','$$']]`;
+- verify `processEscapes: true`;
+- verify no canonical math delimiters were stripped or HTML-escaped into plain-text math;
+- verify no malformed single-backslash row/control corruption such as accidental `\x`, `\y`, or `\z` sequences where LaTeX commands were intended.
+
+Direct-fetch and run:
+  Tools/qa_recurring_shell_contracts.py
+against the expanded staging root.
+
+Require:
+  Recurring shell contract: PASS
+
+That checker is a floor, not the full Warm-Up QA. Complete the Warm-Up-specific deterministic checks below as well.
+
+======================================================================
+9. WARM-UP STRUCTURAL / RENDER QA — FROZEN
+======================================================================
+
+TOOL ROUTING
+- Philosophy read first;
+- Runtime read second;
+- Physics Framework / Assessment Plan direct-fetched;
+- finalized Unit Bank direct-fetched from declared paths;
+- no web search/fetch/external research;
+- no old combined recurring PM used as active authority.
+
+BANK / CONTENT
+- every exact Framework section present once in section order;
+- exactly three Warm-Ups per section;
+- exactly four canonical questions per Warm-Up;
+- canonical route order preserved;
+- every rendered `data-bank-id` resolves to the exact source item;
+- prompt text/student choices/table data/figure meaning unchanged;
+- no downstream re-authoring;
+- intentional canonical repetition preserved rather than deduplicated;
+- every required canonical figure/table/diagram present;
+- student figures answer-neutral.
+
+DOM
+For each Section / Day:
+- exactly two `.warmup-page.wu-count-2` sections;
+- first page has exact `.warmup-header > h1` and questions 1-2;
+- continuation page has `data-continuation="true"`, no header, and questions 3-4;
+- exactly four `.problem.half` articles total;
+- first article of each physical page has class `first`;
+- every problem has `.problem-title` and `.problem-body`;
+- no visible workspace/meta/kicker/subtitle additions.
+
+HEAD / CSS / MATHJAX
+- exactly one `../../css/base.css` link;
+- exactly one `../../css/warmup.css` link;
+- base before warmup;
+- MathJax config before loader;
+- no embedded replacement stylesheet;
+- recurring-shell QA tool PASS.
+
+PRINT / NOTABILITY
+- each Day renders as exactly two physical pages;
+- first page carries the Section/Day header;
+- continuation page does not repeat the header;
+- two large problem cards per page;
+- blank card remainder remains usable handwriting space;
+- no extra blank page from forced container height;
+- no clipped prompt, table, MathJax, or representation;
+- shared `warmup.css` unchanged.
+
+FINAL
+- exact output path;
+- all local asset references resolve;
+- no unresolved template tokens;
+- no stale Unit/Section/Day labels;
+- no extra unrelated repo files;
+- final delivered bytes re-open and match the QA'd staging bytes.
+
+Do not invent new QA criteria mid-run.
+Park new systemic findings for later PM revision.
+
+======================================================================
+10. OUTPUT / ZIP BOUNDARY — ALWAYS ZIP
+======================================================================
+
+Primary LIVE course path:
+  warmups/unit_{U}_warmups/unit_{U}_warmups.html
+
+DELIVERY IS ALWAYS ONE ZIP, even when the HTML is the only changed file.
+
+ZIP filename:
+  unit_{U}_warmups.zip
+
+ZIP ROOT — EXACT:
+
+  unit_{U}_warmups/
+    unit_{U}_warmups.html
+    figures/...                [only when new/changed local figure assets are required]
+
+For Unit 1 this means:
+
+  unit_1_warmups.zip
+    unit_1_warmups/
+      unit_1_warmups.html
+
+The ZIP is intended to be extracted/copied into the EXISTING course `warmups/` directory.
+Therefore the deployed Unit 1 path becomes:
+
+  physics/warmups/unit_1_warmups/unit_1_warmups.html
+
+HARD PACKAGING RULES:
+- do NOT put an outer `physics/` folder inside the ZIP;
+- do NOT put an outer `warmups/` folder inside the ZIP;
+- the first folder inside the ZIP is exactly `unit_{U}_warmups/`;
+- preserve the internal `figures/` subfolder when required;
+- if no figure assets changed, the ZIP still contains the Unit folder + HTML;
+- include only new/changed files needed for this Warm-Up delivery;
+- do NOT include unchanged shared CSS.
+
+Do NOT include:
+- PM;
+- Framework;
+- Assessment Plan;
+- Bank;
+- Bank Map;
+- tools;
+- QA logs;
+- staging files.
+
+FINAL ZIP QA:
+- archive opens successfully;
+- top-level archive entry is `unit_{U}_warmups/`;
+- `unit_{U}_warmups/unit_{U}_warmups.html` exists exactly once;
+- no `physics/` or `warmups/` wrapper exists inside the archive;
+- all included local figure links resolve after placement in the live course path;
+- delivered HTML bytes match the QA'd staging HTML bytes.
+
+END — BUILD WARM-UPS
