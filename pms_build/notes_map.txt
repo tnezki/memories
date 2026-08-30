@@ -26,6 +26,48 @@ Read:
 
 Require COMPLETE + ready_for_downstream.
 
+
+SYSTEM / CONTRACT IDENTITY — HARD
+---------------------------------
+At the top of NOTES_MAP_REPORT.txt record:
+- loaded PM path: `pms_build/notes_map.txt`
+- pinned memories commit
+- supported Notes-route contract schemas
+
+Supported route contracts:
+- `bank-notes-route/1.0` — current producer handshake
+- `legacy-paths-notes/1.0` — compatibility bridge for already-finalized Banks that have `paths.notes` but predate the explicit handshake
+
+If `BANK_MANIFEST.downstream_contracts.notes_route` exists:
+- require schema = `bank-notes-route/1.0`;
+- require route_field = `paths.notes`;
+- require route_template = exact `BANK_MANIFEST.paths.notes`;
+- record `bank_notes_route_contract_schema = "bank-notes-route/1.0"`.
+
+If the handshake is absent but valid `BANK_MANIFEST.paths.notes` exists:
+- do NOT reject an already-finalized legacy Bank;
+- record `bank_notes_route_contract_schema = "legacy-paths-notes/1.0"`;
+- state in the report that the producer is legacy-compatible.
+
+FAILURE CLASSIFICATION — HARD
+-----------------------------
+When failing before mapping, classify the failure:
+
+SYSTEM_CONTRACT_MISMATCH
+- Bank declares a Notes-route schema this PM does not support, or producer/consumer contract versions conflict.
+- Report the loaded PM path, pinned memories commit, Bank-declared schema, and supported schema(s).
+- Tell the teacher to sync/update the system repo and rerun.
+- Do NOT describe the Bank itself as defective unless its own declared contract is internally inconsistent.
+
+BANK_INPUT_DEFECT
+- Bank claims a supported contract but required route/path/files are missing or internally inconsistent.
+
+SOURCE_INPUT_DEFECT
+- Declared Framework/textbook/source input is missing or non-resolving.
+
+Never collapse these into a generic "missing field" message.
+
+
 Resolve the canonical Notes section route ONLY from:
   BANK_MANIFEST.paths.notes
 
@@ -198,21 +240,25 @@ MAP CONTRACT
 Canonical:
   uN_notes_map.json
 
-Schema:
-  physics-notes-map/2.0
+The following top-level field names are EXACT and required:
 
-Required flow revision:
-  bank-v2-textbook-chunks-v2
+  "schema": "physics-notes-map/2.0"
+  "notes_flow_revision": "bank-v2-textbook-chunks-v2"
+  "bank_manifest_path": "banks/unitN/BANK_MANIFEST.json"
+  "bank_manifest_blob_sha": "<Git blob SHA of the consumed Bank manifest>"
+  "bank_notes_route_contract_schema": "bank-notes-route/1.0" | "legacy-paths-notes/1.0"
+  "bank_notes_route_template": "<exact current BANK_MANIFEST.paths.notes value>"
 
-Top-level Bank handoff identity includes:
-- bank_manifest_path + blob identity
-- bank_notes_route_template = exact current BANK_MANIFEST.paths.notes value
+Do NOT emit `flow_revision` as a substitute for `notes_flow_revision`.
+Do NOT omit the Bank route/manifest identity fields or bury them only inside another object.
 
-Each section includes:
+Each section includes these exact Bank identity fields:
+- bank_notes_path = concrete path resolved from bank_notes_route_template
+- bank_notes_blob_sha = Git blob SHA of that exact consumed file
+
+Each section also includes:
 - exact section identity/LT/I-cans
 - vocabulary_terms
-- bank_notes_path = concrete path resolved from bank_notes_route_template
-- bank_notes_blob_identity
 - source_file
 - opening contract
 - ordered_flow
@@ -239,6 +285,31 @@ Derived from canonical map JSON.
 Handoff schema:
   physics-notes-map-handoff/2.0
 
+
+DETERMINISTIC 4A CONTRACT PASS — HARD
+-------------------------------------
+Resolve `qa_notes_4a_contract` through Tools/MANIFEST.json.
+
+After the canonical `uN_notes_map.json` is written, run the validator automatically:
+
+  python3 <system_repo_root>/Tools/qa_notes_4a_contract.py <course_repo_root> --unit N --map <generated_uN_notes_map.json>
+
+A nonzero exit blocks 4A PASS.
+
+This validator checks ONLY the frozen mechanical handoff contract:
+- exact top-level map schema/revision field names;
+- Bank manifest path/blob identity;
+- Notes-route contract schema/template;
+- concrete Bank Notes section paths/blob SHAs;
+- ITEM_INDEX Notes-anchor routes;
+- WTC identity;
+- exact Example/YTI pair identity and once-only routing;
+- sequential display_pair_number;
+- required section handoff fields.
+
+It does NOT judge source-cut quality, instructional quality, pacing, wording, discussion quality, or aesthetics.
+Do not expand this validator's criteria during a run.
+
 TARGETED QA
 -----------
 Verify:
@@ -260,7 +331,9 @@ Verify:
 - Physics Notes/diagrams may support reading without creating a second primary processing event;
 - source/toolkit image routes resolve;
 - What I Figured Out is mapped after Summary;
-- map parses with revision `bank-v2-textbook-chunks-v2`.
+- map uses exact top-level `notes_flow_revision = bank-v2-textbook-chunks-v2`;
+- exact Bank handoff field names required above are present;
+- deterministic 4A contract validator passes.
 
 OUTPUT
 ------

@@ -1,54 +1,309 @@
-BUILD NOTES — STEP 4B / BANK-V2
-=================================
+BUILD NOTES — SINGLE PASS / BANK-V2
+==================================
 
 STATUS: CURRENT
-ROLE: Build complete student + teacher Notes from the accepted current 4A map and finalized Bank-v2 Notes records.
+ROLE: Build the complete student + teacher Notes for one Unit directly from the current Framework, finalized Bank-v2 Notes anchors, and the Framework-declared instructional source/spine.
 
-4B is ADAPT / ASSEMBLE / RENDER.
-It is NOT a second mapping stage.
-It is NOT a Bank audit.
-It is NOT permission to redesign Notes HTML/CSS.
+This is ONE Notes build.
+There is no separate Notes Map stage.
 
-REQUIRED MAP
-------------
-  notes/uN_notes_map/uN_notes_map.json
+The job is:
+  SOURCE -> CONDENSE -> PLACE -> ASSEMBLE -> RENDER -> CHECK
 
-Require:
-  schema = physics-notes-map/2.0
-  notes_flow_revision = bank-v2-textbook-chunks-v2
-  bank_notes_route_template = exact BANK_MANIFEST.paths.notes value recorded by current 4A
+It is NOT:
+- a Bank rebuild;
+- a Bank Map audit;
+- a paragraph-by-paragraph textbook mapping exercise;
+- permission to redesign the established Notes format.
 
-Missing Bank route identity or older revision -> FAIL CLOSED and rerun 4A.
-Do not reinterpret an older Notes map.
-
-STARTUP / AUTHORITY
+AUTHORITY / STARTUP
 -------------------
-Read current Philosophy + Runtime.
-Resolve Framework/Notes profile/visual contract and declared sources directly through pinned manifests.
-Pin memories/course/textbook commits once.
+Read current Philosophy + Runtime first.
+Resolve and pin required repositories once at job start.
+Resolve Framework / Notes profile / visual contract / Tools through current manifests.
+Fetch exact declared paths directly.
+
+For current Physics, pin:
+- system repo;
+- course repo;
+- textbook repo.
+
 No web/File-Library/prior-ZIP/repository hunting for declared sources.
 
-BANK IDENTITY
--------------
-Read current:
+BANK INPUT — HARD
+-----------------
+Read:
   banks/unitN/BANK_MANIFEST.json
+  banks/unitN/ITEM_INDEX.json
 
-Require COMPLETE + ready_for_downstream.
+Require:
+- status = COMPLETE;
+- ready_for_downstream = true.
 
-Resolve the current canonical Notes route ONLY from:
+Resolve canonical Bank Notes files ONLY from:
   BANK_MANIFEST.paths.notes
 
-HARD IDENTITY CHECK:
-- current `BANK_MANIFEST.paths.notes` must exist;
-- it must exactly match the 4A map's recorded `bank_notes_route_template`;
-- do NOT require or infer `canonical_artifacts.notes`;
-- each map-declared `bank_notes_path` must be a concrete section path produced by expanding that route template with the exact mapped section ID;
-- fetch that exact file only;
-- compare its current blob identity to the 4A map-recorded `bank_notes_blob_identity`.
+Current route shape:
+  notes/section_<section-id>.json
 
-Changed route template, changed consumed Notes file, missing path, or route mismatch -> rerun 4A.
-Do not whole-Bank fingerprint or scan unrelated destinations.
-Do not search the repository for substitute Notes files.
+Expand the route with the exact current Framework section IDs.
+Every resolved Notes section file must exist.
+
+Use ITEM_INDEX only to confirm that WTC / EXAMPLE / YTI anchors point to those exact files.
+Do not discover substitute Bank files.
+Do not require `canonical_artifacts.notes`.
+
+If `BANK_MANIFEST.downstream_contracts.notes_route` exists:
+- verify its declared route agrees exactly with `paths.notes`.
+
+If the explicit handshake is absent but valid `paths.notes` exists:
+- treat the Bank as legacy-compatible;
+- continue;
+- report that compatibility fact rather than rejecting the Bank.
+
+FAILURE DIAGNOSTICS — HARD
+--------------------------
+When failing before authoring, classify the failure:
+
+SYSTEM_CONTRACT_MISMATCH
+- current PM/runtime cannot consume a declared producer contract;
+- report loaded PM path, pinned system commit, declared contract, and supported contract.
+
+BANK_INPUT_DEFECT
+- Bank is not COMPLETE/ready;
+- declared Notes route is missing, ambiguous, internally inconsistent, or points to missing files.
+
+SOURCE_INPUT_DEFECT
+- Framework-declared textbook/source path is missing or cannot be resolved.
+
+Do not collapse these into a generic "missing field" message.
+
+SOURCE-SPINE RULE — HARD
+------------------------
+For current Physics, the Framework-declared textbook/source is the instructional spine.
+
+Preserve:
+- the source's major conceptual order;
+- its terminology and physics meaning;
+- the order of its instructional figures/images.
+
+The Notes do NOT need to preserve paragraph-level textbook wording.
+
+Summarize and condense aggressively enough that the complete student Notes for the section are reasonably usable in approximately 30–40 minutes.
+
+That time target includes:
+- opening/WTC;
+- skim;
+- reading;
+- normal student processing;
+- EX/YTI work;
+- close.
+
+When the section is too long:
+1. remove repetition/tangents first;
+2. compress prose;
+3. combine nearby explanatory paragraphs;
+4. preserve essential conceptual transitions;
+5. do NOT delete canonical WTC or complete EX/YTI pairs to hit the time target.
+
+SOURCE MODES
+------------
+Classify each section before writing:
+
+1. textbook_direct
+   A usable declared source exists for the target.
+   Condense it while preserving conceptual and figure order.
+
+2. textbook_partial_gap
+   The declared source itself contains a real missing subsection/span needed by the Framework target.
+   Preserve the gap honestly.
+   Do not invent fake textbook prose.
+   Supply only the minimum Framework-grounded bridge needed for the uncovered target.
+
+3. framework_synthesis
+   The declared source explicitly identifies the section as synthesis/application rather than a corresponding textbook passage.
+   Use that declared synthesis as the source.
+   Do not pretend it is extracted textbook prose.
+
+Source/provenance notes in the source file are evidence for the build.
+They are not automatically student-facing text.
+
+TEXTBOOK IMAGE CONTRACT — HARD
+------------------------------
+Use EVERY usable instructional image/figure present in the declared student-source section, in SOURCE ORDER.
+
+Do not silently select only favorite images.
+
+Exclude only:
+- logos/navigation/UI chrome;
+- decorative media icons;
+- answer-key-only images;
+- an image that directly leaks an answer the student is supposed to produce.
+
+For every retained source image:
+- keep it near the concept where it appears in the source;
+- preserve meaningful labels/captions as needed;
+- preserve source order;
+- never crop away evidence needed to read it;
+- never replace a good source figure with a crude redraw.
+
+SIZE:
+- default maximum displayed height = 4 inches;
+- width remains automatic and never exceeds the content width;
+- preserve aspect ratio;
+- center through the established figure wrapper;
+- if labels are genuinely unreadable at 4 inches, increase only that figure as needed, normally to 5 inches and never beyond 6 inches without a clear reason.
+
+On-screen zoom is expected; do not make every figure huge just because a student might zoom.
+
+OPENING — HARD
+--------------
+Render in this order:
+
+1. section title;
+2. exact Learning Target;
+3. exact I-can statements;
+4. Vocabulary Preview;
+5. canonical Bank WTC;
+6. Let's Get Started skim;
+7. ONE Close Reading directions block;
+8. summarized instructional reading.
+
+Physics skim wording:
+  "Skim before close reading. Look at the headings and figures. Find 1–2 things you notice and 1–2 things you wonder about."
+
+Do not add a prediction row unless the current Framework explicitly requires it.
+Render the Close Reading directions block exactly once.
+
+WTC — HARD
+----------
+Use the exact canonical Bank WTC once.
+
+Preserve:
+- Bank item ID;
+- student prompt/content;
+- canonical representation;
+- answer/solution for teacher copy;
+- coverage role;
+- exact I-can identity.
+
+Do not rewrite the WTC during normal Notes production.
+If the WTC is defective, report the Bank defect upstream rather than silently creating a second canonical WTC.
+
+READING / PROCESSING RHYTHM
+---------------------------
+Move through the summarized source in conceptual/source order.
+
+At each natural reading boundary, use at most ONE primary student-processing event:
+- Stop & Discuss;
+- one complete canonical Example/YTI pair;
+- none.
+
+Never place Stop & Discuss AND EX/YTI at the same boundary.
+
+A Physics Note, source figure, diagram, relationship box, graph, or model may coexist with the reading.
+Those are instructional supports, not a second primary processing event.
+
+EXAMPLE / YTI PLACEMENT — HARD
+------------------------------
+Use EVERY complete canonical Bank Example/YTI pair exactly once.
+
+Preserve:
+- exact Bank Example item ID;
+- exact Bank YTI item ID;
+- exact pair_id;
+- exact I-can identity;
+- canonical prompt/representation/answer/solution.
+
+Visible numbering comes from final Notes display order:
+  Example 1 / You Try It 1
+  Example 2 / You Try It 2
+  ...
+
+Do NOT expose Bank pair numbers as visible numbering when display order differs.
+
+Place each intact pair where it MOST NATURALLY processes the immediately preceding concept/representation.
+
+Do not distribute pairs evenly just to make the page look balanced.
+
+If a pair has no natural reading boundary:
+- put it intact in a post-reading EX/YTI section after the final reading;
+- continue visible numbering.
+
+Do not delete, split, merge, or rewrite a canonical pair to improve placement.
+
+STOP & DISCUSS
+--------------
+Use only when verbal conceptual processing genuinely helps.
+
+Good jobs include:
+- compare two ideas/representations;
+- explain a surprising result;
+- identify a misconception;
+- make sense of a figure/model;
+- connect a relationship to physical meaning.
+
+Avoid stock comprehension prompts.
+
+FORMULA / RELATIONSHIP BOXES — HARD
+-----------------------------------
+When an important physical/mathematical relationship is first introduced in the Notes, render a compact Formula / Relationship box near that introduction.
+
+The box should include only what helps students think:
+- the relationship in correct MathJax;
+- what the relationship says physically;
+- variable meanings;
+- units when useful;
+- direction/sign convention when relevant.
+
+Do not turn the Notes into a detached formula sheet.
+Do not repeat the same box every time the relationship reappears.
+Do not present an equation as an answer machine.
+
+MathJax must render correctly.
+
+PHYSICS NOTES / REPRESENTATIONS
+-------------------------------
+Use additional explanatory support only when it materially improves understanding.
+
+Preference order:
+1. source textbook figure;
+2. canonical Bank representation;
+3. approved Physics Notes Image Toolkit asset;
+4. generated Notes-specific representation only when none of the above satisfies the need.
+
+Toolkit assets are reference-in-place.
+Do not copy toolkit binaries into section folders.
+
+Generated student-facing visuals must remain answer-neutral.
+
+TABLES / GRAPHS / BANK REPRESENTATIONS
+--------------------------------------
+Preserve canonical Bank representation behavior.
+
+Small data tables:
+- real semantic HTML;
+- `<table class="values">`;
+- compact/centered through existing Base CSS;
+- never pipe-delimited pseudo-tables.
+
+Graphs:
+- preserve canonical Bank graph output when Bank-owned;
+- use the registered graph tool for a new Notes-specific graph only when explicitly needed;
+- do not casually redraw/restyle canonical graphs.
+
+CLOSE — HARD
+------------
+Render in this order:
+
+1. Vocabulary with concise definitions;
+2. bulleted Summary;
+3. What I Figured Out;
+4. Common Mistakes;
+5. final miscellaneous workspace only when the current Framework/shell requires it.
+
+Do not omit What I Figured Out.
+Do not add a Notes Exit Check.
 
 FORMAT IS LOCKED
 ----------------
@@ -64,126 +319,23 @@ Do NOT:
 - invent a new stylesheet;
 - add a third ordinary Notes stylesheet;
 - redesign typography/colors/cards/tables/page architecture;
-- invent a new class system where the established shell already supports the job.
-
-SOURCE-SPINE / CLOSE READING — HARD
------------------------------------
-The main instructional reading comes from the map-declared retained textbook/source spans.
-
-For CLOSE:
-- preserve source paragraph logic/useful wording;
-- trim mainly by omission.
-
-For LIGHT_CONDENSE:
-- preserve source explanation/order;
-- trim repetition/detail;
-- light paraphrase allowed.
-
-For STRONG_CONDENSE:
-- preserve essential conceptual job only when 4A explicitly mapped it.
-
-Do NOT invent a replacement close-reading passage merely to connect tasks.
-The normal operation is select/cut/lightly adapt the declared source.
-
-OPENING — HARD
---------------
-Render:
-1. title / exact LT / exact I-cans;
-2. Vocabulary Preview;
-3. canonical WTC;
-4. Let's Get Started skim;
-5. ONE Close Reading directions block;
-6. first reading chunk.
-
-Skim wording:
-  "Skim before close reading. Look at the headings and figures. Find 1–2 things you notice and 1–2 things you wonder about."
-
-Do not add a prediction row unless current Framework explicitly requires it.
-Render the Close Reading directions box exactly once.
-
-READING RHYTHM — HARD
----------------------
-Walk map reading chunks in source order.
-
-At each reading boundary render at most ONE primary student-processing event:
-- Stop & Discuss
-- one canonical Example/YTI pair
-- none
-
-Never render Stop & Discuss AND Example/YTI at the same reading boundary.
-
-Mapped Physics Notes/diagrams/graphs/models may be embedded as instructional support with the reading.
-They do not count as a competing primary student-processing event.
-
-EXAMPLE / YTI DISPLAY NUMBERING
--------------------------------
-Preserve hidden Bank IDs, pair_id, pair_number, canonical prompt/solution.
-
-Visible labels use `display_pair_number` from 4A:
-- Example 1 / You Try It 1
-- Example 2 / You Try It 2
-- ...
-
-Do NOT expose Bank pair_number as the visible number when display order differs.
-
-After the final reading chunk, render any `post_reading_ex_yti_queue` pairs in order with continued display numbering.
-
-CANONICAL BANK CONTENT
-----------------------
-WTC / Example / YTI student tasks and Bank-owned representations remain exact.
-Do not rewrite/swap/split a canonical Bank task in ordinary Notes production.
-
-If a Bank defect is discovered, report it upstream; do not silently create a second canonical question in Notes.
-
-TABLES / GRAPHS / BANK REPRESENTATIONS
---------------------------------------
-Preserve canonical Bank student_html/representation behavior.
-
-Small canonical data tables:
-- semantic HTML;
-- `<table class="values">`;
-- compact/centered through existing Base CSS;
-- no pipe-delimited text.
-
-Graphs:
-- use canonical Bank graph asset/output;
-- do not redraw/restyle in Notes.
-
-Source/toolkit images:
-- reference Physics Notes Image Toolkit assets in place;
-- do not copy toolkit binaries into section folders.
-
-Generated Notes-specific visual:
-- only if explicitly mapped by 4A;
-- only when canonical/source/toolkit content does not already satisfy the need;
-- student-facing result remains answer-neutral.
-
-CLOSE — HARD
-------------
-Render exactly:
-1. Vocabulary with definitions;
-2. bulleted Summary;
-3. What I Figured Out;
-4. Common Mistakes;
-5. final miscellaneous workspace only when current Framework/shell requires it.
-
-What I Figured Out must not disappear.
-Do not add a Notes Exit Check.
+- replace established classes with a new class system.
 
 STUDENT PAGINATION — NOTABILITY-FIRST
 -------------------------------------
-Use existing CSS-supported keep-together wrappers for atomic instructional units.
+Use existing CSS-supported keep-together behavior for atomic instructional units.
 
 Keep together when practical:
 - complete WTC unit;
 - skim task;
-- compact reading heading + reasonable chunk + associated figure;
+- compact reading heading + reasonable reading chunk + associated figure;
+- Formula / Relationship box;
 - Physics Note;
 - Stop & Discuss;
 - each Example;
 - each YTI;
 - figure + caption/labels;
-- Common Mistakes block.
+- Common Mistakes.
 
 Do NOT wrap a giant multi-page reading in one avoid-break block.
 
@@ -195,20 +347,20 @@ Let natural pagination move intact blocks.
 
 TEACHER COPY — ONLINE-FIRST
 ---------------------------
-Derive from finalized student structure.
+Derive the teacher copy from the finalized student structure.
 
 Teacher copy:
 - same student content/order;
 - release fixed student workspace heights;
 - vertical space is not a concern;
-- answers/support push later content downward;
+- teacher support pushes later content downward;
 - overlap is a hard failure.
 
-MULTIPART ANSWERS — HARD
-------------------------
+MULTIPART TEACHER SUPPORT — HARD
+--------------------------------
 Never dump a multipart canonical solution into one giant red paragraph.
 
-Format teacher support as readable structure, e.g.:
+Use readable structure:
 
 Answer / Acceptable Reasoning
 - (a) ...
@@ -217,50 +369,215 @@ Answer / Acceptable Reasoning
 
 Teacher Moves
 - ...
-- ...
 
 Student Moves
-- ...
 - ...
 
 Listen For / Likely Misconception
 - ...
 
 Use lists whenever there is more than one part/idea.
-Answers remain clearly teacher-only/red according to established course behavior.
+Answers remain clearly teacher-only according to established course behavior.
+
+ARTIFACT SELF-CONTAINMENT — HARD
+--------------------------------
+Once Notes are built, ordinary downstream repair must NOT require the Bank Map.
+
+The Bank is upstream design/provenance fuel, not a permanent runtime dependency for the finished Notes.
+
+Every student-processing/task block that may later be surgically repaired must carry enough local identity for a generic repair tool to work from the finished artifact.
+
+Preserve/embed:
+- stable item/task ID;
+- section;
+- artifact type;
+- exact primary I-can ID;
+- exact current I-can text resolvable within the artifact;
+- question_structure_id when the block is a question;
+- source Bank ID when Bank-owned, for traceability only.
+
+Use established/low-impact HTML metadata such as `data-*` attributes where appropriate.
+Do not visibly repeat the full I-can sentence on every question just to satisfy metadata.
+
+The exact section I-can statements remain visible near the top of the Notes.
+
+A later surgical repair tool should be able to:
+- preserve I-can identity;
+- inspect the question itself;
+- repair wording/choices/MathJax/representation;
+- check approved question structures;
+without consulting the Bank Map.
+
+Bank/source IDs remain useful for discussion and traceability, not required generation inputs for ordinary repair.
+
+
+APPEND-ONLY TROUBLESHOOTING CHANGE LOG — HARD
+---------------------------------------------
+Every Notes build or later surgical repair may maintain:
+
+  _notes_provenance/
+    unitN/
+      NOTES_CHANGE_LOG.txt
+
+PURPOSE:
+- human/AI troubleshooting;
+- reconstruct why a specific item changed;
+- compare repeated fresh-chat repair passes;
+- preserve the original local identity/metadata that existed before a repair.
+
+THIS FILE IS NOT CURRICULUM AUTHORITY.
+
+Future build/repair PMs and generic repair tools MUST NOT use
+`NOTES_CHANGE_LOG.txt` as an authoring input, source of truth, question source,
+I-can source, Bank source, or decision authority.
+
+It may be read ONLY when the teacher explicitly asks to troubleshoot, compare,
+audit repair history, or investigate why something changed.
+
+NORMAL BUILD:
+- if no prior log exists, create it only when at least one actual repair/change
+  beyond ordinary first-time authoring needs documenting;
+- do not generate noisy entries for every unchanged block;
+- "PASS — no changes" may be appended when a deliberate repair/audit pass made
+  no changes and preserving that fact is useful.
+
+REPAIR / REBUILD:
+- preserve existing log text exactly;
+- append new entries at the end;
+- never rewrite, summarize, normalize, or delete prior entries;
+- one run gets one run header;
+- one changed item gets one compact item entry.
+
+RUN HEADER records:
+- timestamp when available;
+- artifact/course/unit/section scope;
+- repair/build mode;
+- pinned system/course/source commits when available;
+- tool/PM identity;
+- result summary:
+  - PASS — no changes
+  - or count by repair class.
+
+FOR EACH CHANGED ITEM, record ORIGINAL metadata BEFORE repair:
+- stable item/task ID;
+- section;
+- artifact type;
+- primary I-can ID;
+- exact original I-can text visible/resolvable in the artifact;
+- question_structure_id, when applicable;
+- source Bank ID, when present;
+- response mode, when applicable;
+- representation mode, when applicable;
+- original prompt/student-facing text;
+- original answer/key/solution only when it was part of the repair;
+- original figure/representation reference when relevant.
+
+Then record:
+- repair class;
+- concise reason;
+- fields changed;
+- replacement/new value or concise before -> after statement;
+- whether I-can identity changed: normally MUST be NO;
+- whether question structure changed;
+- whether representation changed;
+- whether answer/solution changed;
+- verification performed after repair.
+
+Typical repair classes:
+- MATHJAX
+- QUESTION_STRUCTURE
+- SELECTED_RESPONSE
+- REPRESENTATION
+- VARIETY
+- WORDING
+- SOLUTION
+- PHYSICS_CORRECTNESS
+- RENDER
+- METADATA
+- OTHER
+
+Do not paste entire unchanged HTML files into the log.
+Log only enough original metadata/content to identify and reconstruct the repair.
+
+Example entry:
+
+  [ITEM U1-S3-CYU-04]
+  original:
+    section: 1.3
+    artifact_type: CYU
+    primary_i_can_id: U1-S3-IC2
+    primary_i_can: I can ...
+    question_structure_id: ...
+    source_bank_id: U1-S3-CYU-04
+    response_mode: constructed_response
+    representation_mode: equation_relationship
+    prompt: ...
+  repair:
+    class: MATHJAX
+    reason: mapped equation relationship existed but student HTML did not render MathJax
+    changed: student_html
+    before: ...
+    after: ...
+    i_can_identity_changed: NO
+    answer_changed: NO
+    verification: MathJax delimiter present; prompt/answer identity preserved
+
+The log travels with the returned artifact/provenance package but is intentionally
+outside the runtime authority chain.
 
 TOOLS
 -----
-Resolve through Tools/MANIFEST.json.
-Run `fix_notes_layout_contract` as currently declared when required.
+Resolve tools through Tools/MANIFEST.json.
+
+Run `fix_notes_layout_contract` when currently declared/required.
+
 Do not hunt for undeclared finalizers.
 
-TARGETED QA
------------
-Per section verify:
-- exact targets;
-- accepted v2 map/revision;
-- current BANK_MANIFEST.paths.notes exactly matches map-recorded bank_notes_route_template;
-- map-declared bank_notes_path is the correct concrete expansion of that route for the section;
-- correct Bank Notes blob identity;
-- no dependency on `canonical_artifacts.notes`;
-- WTC once;
-- skim wording correct;
-- Close Reading directions exactly once;
-- main reading is retained/adapted declared source, not invented generic replacement prose;
-- no reading boundary contains both S&D and EX/YTI;
-- EX/YTI visible numbering sequential by display order;
-- queued pairs after reading present;
-- mapped Physics Notes/diagrams rendered appropriately;
-- semantic compact tables preserved;
+QA — FROZEN BUILD CHECK
+------------------------
+Before PASS, verify:
+
+BANK / IDENTITY
+- Bank COMPLETE + ready_for_downstream;
+- `paths.notes` resolves all Framework sections;
+- ITEM_INDEX Notes anchors agree;
+- every canonical WTC appears exactly once;
+- every complete canonical EX/YTI pair appears exactly once;
+- pair IDs and Example/YTI IDs are preserved;
+- exact I-can identity travels into the finished artifact metadata.
+
+SOURCE
+- correct Framework target/I-cans;
+- correct declared source;
+- major conceptual order preserved;
+- every usable instructional source image included exactly once and in source order;
+- source gaps/synthesis status handled honestly;
+- reading has been summarized to the approximate 30–40 minute target rather than copied wholesale.
+
+INSTRUCTION
+- Vocabulary Preview present;
+- exact skim wording;
+- one Close Reading directions block;
+- formula/relationship boxes appear at first meaningful introduction;
+- no boundary has both S&D and EX/YTI;
+- pairs are placed naturally; leftovers are intact after reading;
 - no student answer leakage;
-- What I Figured Out appears after Summary;
-- student Notability wrapping/page flow works;
+- What I Figured Out follows Summary.
+
+RENDER
+- MathJax renders;
+- source figures preserve aspect ratio and are normally <= 4in high;
+- only readability exceptions exceed 4in, with max 6in;
+- semantic compact tables preserved;
+- figures/graphs readable;
+- established CSS order;
+- no invented Notes visual system;
 - no ordinary forced page breaks;
-- teacher answers/support use lists and expand naturally;
-- no overlap;
-- established base.css -> notes.css order;
-- no invented Notes visual system.
+- no overlap in student or teacher copy;
+- teacher multipart answers use readable lists.
+
+Do not invent new QA criteria halfway through a run.
+If a new systemic criterion is discovered, park it for a later PM revision.
 
 OUTPUT
 ------
@@ -272,13 +589,46 @@ ZIP root:
     uN_1_notes.html
     uN_1_notes_teacher.html
     figures/ only when referenced generated local figures exist
+  uN_2_notes/
+    ...
   ...
   _notes_provenance/
     unitN/
-      uN_notes_map.json
-      NOTES_MAP_HANDOFF.json
       NOTES_BUILD_HANDOFF.json
       NOTES_BUILD_REPORT.txt
       IMAGE_USE_MANIFEST.json
+      NOTES_CHANGE_LOG.txt        # append-only troubleshooting history; non-authoritative
 
-Do not include toolkit binaries, PM files, or staging files.
+No Notes Map JSON is produced.
+No Notes Map is required downstream.
+
+Do not include:
+- toolkit binaries;
+- PM files;
+- staging files;
+- prior ZIPs.
+
+
+IMPORTANT:
+`NOTES_CHANGE_LOG.txt` is returned for troubleshooting only.
+Do not read it during ordinary Notes generation or later ordinary surgical repair.
+Only read it when the teacher explicitly requests repair-history troubleshooting/audit.
+
+REPORTING
+---------
+NOTES_BUILD_REPORT.txt should be concise.
+
+Record:
+- pinned system/course/textbook commits;
+- Bank manifest identity;
+- resolved Bank Notes section paths;
+- source files;
+- source mode per section;
+- image counts used per section;
+- canonical WTC count;
+- canonical EX/YTI pair count;
+- approximate pacing judgment;
+- QA PASS/FAIL;
+- only material warnings or repairs.
+
+Do not create a giant inventory of unchanged content.

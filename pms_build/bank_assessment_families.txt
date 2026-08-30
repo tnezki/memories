@@ -167,6 +167,26 @@ Only after all canonical + render-level QA passes:
 - next_phase = null
 - counts/routes correct
 
+
+DOWNSTREAM NOTES ROUTE HANDSHAKE — HARD
+---------------------------------------
+When finalizing BANK_MANIFEST.json, publish the Notes route contract explicitly:
+
+  "downstream_contracts": {
+    "notes_route": {
+      "schema": "bank-notes-route/1.0",
+      "route_field": "paths.notes",
+      "route_template": "<exact current BANK_MANIFEST.paths.notes value>",
+      "producer_stage": "3C_assessment_families"
+    }
+  }
+
+Rules:
+- `downstream_contracts.notes_route.route_template` must exactly equal `BANK_MANIFEST.paths.notes`.
+- `route_field` must be exactly `paths.notes`.
+- This is a producer/consumer handshake for downstream Notes jobs; it does not replace `paths.notes`.
+- A future incompatible route schema must use a new schema/version rather than silently changing this contract.
+
 CANONICAL QA — HARD
 -------------------
 Verify:
