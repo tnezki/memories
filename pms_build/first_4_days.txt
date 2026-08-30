@@ -1,0 +1,511 @@
+BUILD FIRST 4 DAYS — SINGLE PASS / PLAN-DRIVEN / NON-UNIT OPENING ORCHESTRATOR
+================================================================================
+
+STATUS: CURRENT
+STEP: 16
+JOB: first_4_days
+ROLE: Build a course's special opening-of-school sequence from a teacher-approved structured opening plan without inventing a Unit 0, permanent Bank, or second set of course-family authorities.
+
+This is ONE flattened build PM.
+There is no nested First 4 Days PM folder, local PM manifest, control-panel profile, README, RUN_PROMPT, bundled CSS mirror, bundled HTML reference library, or PM-local template/schema dependency.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + CURRENT COURSE FRAMEWORK + TEACHER OPENING PLAN
+    -> RESOLVE REQUESTED ARTIFACT FAMILIES + CURRENT FAMILY CONTRACTS
+    -> BUILD PRIVATE PRE-AUTHORING MICRO-MAP
+    -> QA THE MAP
+    -> AUTHOR ONLY REQUESTED OPENING ARTIFACTS
+    -> RENDER / VERIFY / REPAIR
+    -> BUILD FIRST 4 DAYS INDEX
+    -> RETURN DEPLOYABLE COURSE-ROOT PATCH
+
+======================================================================
+0. SNAPSHOT / TOOL POLICY — HARD
+======================================================================
+
+web_search_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+Pin the canonical system repository and selected course repository once at job start.
+Never mix later commits into the run.
+
+Read declared authorities through manifests/contracts/direct paths at those pinned snapshots.
+Do not substitute stale chat copies, old First 4 Days artifacts, prior course builds, or similarly named files when a required current authority is missing.
+
+A deterministic course-root or declared-folder listing is allowed only when needed to resolve a Framework-declared live resource whose exact filename is intentionally opaque. Do not browse broadly for inspiration.
+
+If a required authority cannot be resolved:
+  FAIL CLOSED
+and name the exact missing authority/path/input.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. `frameworks/MANIFEST.json` -> selected course stable Framework front door;
+4. selected course Framework + its current deployment/file-structure contracts;
+5. teacher-approved First 4 Days opening plan:
+     `inputs/FIRST_4_DAYS_OPENING_PLAN.json`
+   OR an explicitly teacher-designated authoritative opening-plan source;
+6. supplemental teacher files/assets only when the opening plan identifies them as inputs;
+7. current `pms_build/MANIFEST.json` and the current artifact-family PMs needed for requested families, used only for reusable family procedure/shell behavior that remains compatible with this non-Unit opening sequence;
+8. current deployed course CSS/shell files for requested artifact families;
+9. this PM for First 4 Days orchestration, non-Unit sourcing, private micro-map behavior, special opening artifacts, and delivery.
+
+AUTHORITY BY DOMAIN:
+- current explicit teacher instruction -> current job intent;
+- Philosophy -> universal learning/evidence/portfolio behavior;
+- teacher opening plan -> exact opening sequence, resource counts, opening targets, day/topic direction, and requested special artifacts;
+- Course Framework -> course voice, terminology, representations, tools, family specialization, live paths, and deployed course behavior;
+- current family PM + live shell/CSS -> reusable artifact mechanics where compatible;
+- this PM -> opening-sequence orchestration and non-Unit exceptions.
+
+HARD BOUNDARY:
+A normal Unit-family PM may NOT force its Unit Bank, Unit routing, Unit counts, Unit Assessment Plan, or normal section cadence onto First 4 Days.
+First 4 Days overrides those Unit-only assumptions while preserving current family shell/accessibility/print behavior when reusable.
+
+The old `pms_build/first_4_days/` reference CSS, HTML, contracts, profile, schema, and prompts are NOT active authorities after flattening.
+
+======================================================================
+2. PURPOSE / NON-UNIT BOUNDARY
+======================================================================
+
+PURPOSE:
+Build a coherent opening sequence that can establish procedures, course routines, baseline/familiar-skill work, early content, evidence habits, collaboration norms, technology routines, introductory investigations, or other teacher-approved opening goals.
+
+FIRST 4 DAYS IS NOT UNIT 0.
+Do not create:
+- a fake Unit 0 Assessment Plan;
+- a permanent Unit 0 Bank;
+- fake Mastery Goals merely to satisfy normal Unit architecture;
+- normal Unit warm-up/practice/exit inventories unless the teacher explicitly requests those counts;
+- hidden stage/source terminology that the opening plan/Framework does not use.
+
+Labels such as `0.1`, `0.2`, or Day 1-4 may be used as display/resource identifiers when approved. They do not create a curricular Unit by themselves.
+
+Build only the resources requested by the opening plan.
+No artifact exists merely because a normal Unit usually contains it.
+
+======================================================================
+3. CONTROL PANEL / TEACHER OPENING-PLAN CONTRACT — HARD
+======================================================================
+
+Preferred request input:
+  `inputs/FIRST_4_DAYS_OPENING_PLAN.json`
+
+The Control Panel should capture the fields below before packaging the request. The field contract lives here; there is no separate `CONTROL_PANEL_PROFILE.json` authority.
+
+REQUIRED BASE FIELD:
+- `resource_plan`
+  What resources to build and how many of each.
+
+CONDITIONALLY REQUIRED WHEN THAT FAMILY IS REQUESTED:
+- `warmup_topics`
+  Day-by-day warm-up topics, familiar-skill jobs, or opening routines.
+- `notes_learning_targets`
+  Exact opening Learning Target(s) and I-can statements plus special Notes/WTC direction.
+- `practice_plan`
+  Practice / Extra Practice learning jobs, approximate scope, and special response-surface/workspace needs.
+- `activity_plan`
+  Intended student work and participation goal; optional preferred activity structure.
+- `investigation_plan`
+  Core phenomenon/idea, materials, what students do/measure/observe/build, and intended representations/predictions.
+- `exit_portfolio_plan`
+  Number of Exit Tickets, intended evidence jobs, and whether/how they should seed portfolio baseline evidence.
+- `overview_plan`
+  Course systems/organizer/welcome information that should appear.
+- `survey_plan`
+  Purpose, intended questions/themes, and whether any content-performance items are included.
+
+OPTIONAL:
+- `day_sequence`
+  Day-by-day order when the teacher wants an explicit four-day schedule.
+- `special_assets`
+  Supplied source documents/images/files that the plan relies on.
+- `other_opening_details`
+  Naming, scheduling, welcome/agenda links, classroom constraints, or special instructions.
+
+INPUT GATE:
+If the requested resource plan or the learning/content direction required to build a requested family is missing and the current Framework does not explicitly supply it:
+  FAIL CLOSED as FIRST_4_DAYS_PLAN_INCOMPLETE
+and request only the missing field(s).
+
+Do not infer a generic four-day sequence from another course or from prior First 4 Days artifacts.
+
+======================================================================
+4. PRIVATE PRE-AUTHORING MICRO-MAP — HARD GATE
+======================================================================
+
+Before final student HTML, create a PRIVATE machine-readable pre-authoring map for the complete requested opening scope.
+
+This is a temporary internal source map, NOT a deployed Bank.
+Do not install it under the course `banks/` tree and do not deliver it unless the teacher explicitly requests the planning artifact.
+
+Minimum top-level fields:
+- `course`
+- `sequence_label`
+- `not_a_unit: true`
+- `source_learning_targets`
+- `source_i_cans`
+- `baseline_or_familiar_skill_jobs`
+- `artifact_plan`
+- `freshness_and_reuse_plan`
+- `portfolio_routing_plan`
+- `path_plan`
+
+For EACH requested artifact record:
+- artifact family/type;
+- purpose;
+- day/sequence position when applicable;
+- exact I-can(s) / learning job(s) served;
+- familiar/baseline skill job(s) when applicable;
+- evidence role: orientation / instruction / practice / formative / portfolio_evidence;
+- item count or structural scope;
+- representation plan;
+- student participation/use mode;
+- response modes / accessibility surfaces;
+- question/task architecture;
+- local lineage IDs for purpose-authored items;
+- source asset references;
+- shell/CSS owner;
+- output path.
+
+MAP QA BEFORE AUTHORING:
+- every requested opening I-can has an intentional route;
+- counts match the teacher plan, not normal Unit defaults;
+- every artifact has a real opening purpose;
+- Practice creates learning rather than masquerading as evidence;
+- evidence artifacts have interpretable evidence jobs;
+- representation/participation choices fit the task;
+- exact instantiated questions are not accidentally cloned across unrelated families;
+- intentional reuse is explicitly marked;
+- future-preview/WTC material does not displace current opening learning;
+- survey self-report/context is distinguished from demonstrated performance evidence.
+
+If the map is incoherent:
+  REVISE THE MAP BEFORE AUTHORING.
+
+======================================================================
+5. FAMILY ROUTING — USE CURRENT SYSTEM, DO NOT DUPLICATE IT
+======================================================================
+
+For every requested recurring artifact family:
+1. resolve its current PM from `pms_build/MANIFEST.json` when a current PM exists;
+2. resolve the current course's live shell/CSS/path contract from the Framework/course repository;
+3. reuse current family behavior only where compatible with this special non-Unit sequence;
+4. let this PM + the teacher opening plan control opening counts, non-Unit sourcing, and local authoring.
+
+DO NOT package or depend on old PM-local reference copies of:
+- `base.css`;
+- `notes.css`;
+- `practice_set.css`;
+- `warmup.css`;
+- `exit.css`;
+- Activity CSS;
+- Investigation CSS;
+- teacher-guide CSS;
+- old reference HTML shells.
+
+Current live course CSS/shells are authoritative.
+
+SPECIAL OPENING CSS:
+A small `misc/first_4_days/first_4_days.css` is allowed for genuinely special opening-only resources such as the index, overview/course organizer, survey, or custom opening wrapper.
+It must not reimplement recurring family shells.
+
+======================================================================
+6. NOTES
+======================================================================
+
+Opening Notes are still Notes.
+Use the current course Notes architecture/voice and exact teacher-approved opening Learning Target/I-cans.
+
+"Shorter" means the instructional sequence may use fewer anchors or a smaller scope; it does NOT mean stripping out the course's essential Notes architecture.
+
+For a course whose current Notes contract includes components such as vocabulary preview, substantial conceptual reading, immediate processing/Stop-and-Discuss, WTC, Example -> You Try It anchors, vocabulary definitions, summary, common mistakes, student workspace, and teacher guidance, preserve those components unless the opening plan explicitly changes the resource purpose.
+
+Example/YTI:
+- use only as many pairs as the opening learning jobs need;
+- every Example is followed by a real You Try It;
+- do not replace the YTI with discussion.
+
+WTC:
+- default location is INSIDE the Notes artifact when requested;
+- teacher WTC guidance stays with the teacher Notes version;
+- do not create a standalone `wtc/` branch unless explicitly requested;
+- WTC may preview future course ideas but is not current opening evidence.
+
+When an opening goal is learning a device/file/class routine, pair the routine with content students can reasonably engage with so technology/procedure—not unnecessarily new disciplinary complexity—is the main new difficulty.
+
+======================================================================
+7. PRACTICE / EXTRA PRACTICE
+======================================================================
+
+Practice creates learning and helps students learn the course workflow.
+
+Build the requested Practice inventory from the private map.
+If Extra Practice is requested:
+- cover the same mapped learning/familiar-skill jobs;
+- use fresh instances/examples where appropriate;
+- do not clone the entire Practice artifact and rename it.
+
+Use the current course Practice shell/CSS and response-surface conventions.
+Opening Practice may intentionally provide more handwriting/digital workspace when the teacher plan requests it.
+
+Use current canonical course tools for supported graphs/figures.
+Do not hand-draw a substitute when the course already has an authoritative graph/figure route.
+
+======================================================================
+8. ACTIVITIES
+======================================================================
+
+Choose the participation structure AFTER the learning/task map exists.
+Activity structure serves the learning job; novelty is not the goal.
+
+If the teacher requests the normal current Activity family, preserve the current course's deployable family architecture rather than returning one isolated worksheet.
+
+When the current course Activity family uses an options hub:
+- the hub may begin with activity choices;
+- it must also contain/route the projectable teacher directions required by the current family contract;
+- directions should include the actual structure, setup, student directions, goal/purpose, relevant links, and visible success/non-success expectations when those are part of the current shell;
+- student practice files remain distinct from projectable teacher directions.
+
+Question/solution, Stations, Find Someone Who, or other structures must use their current course shell/CSS contracts.
+Do not invent substitute class names when the current CSS expects canonical ones.
+
+When there is no permanent Bank for the opening sequence, purpose-author local task pools from the private map and assign stable local lineage IDs for QA.
+
+======================================================================
+9. INVESTIGATIONS / DEMOS
+======================================================================
+
+Opening investigations/demos should make students DO something meaningful: observe, measure, build, manipulate, predict, represent, test, compare, explain, or revise.
+
+Do not create a worksheet with an "Investigation" title but no investigative student action.
+
+Use the teacher-supplied idea/materials as authority when provided.
+Preserve intentional physical-material stages and representation sequences.
+
+A custom opening investigation may use purpose-built HTML/CSS when the current Framework permits custom artifacts; it does not need to imitate a recurring worksheet shell merely for consistency.
+
+Teacher guidance must make setup, facilitation, expected observations, safety/handling considerations when applicable, and discussion moves usable in class.
+
+======================================================================
+10. WARM-UPS
+======================================================================
+
+Build exactly the number of opening Warm-Ups requested by the plan.
+Do NOT force normal Unit routing such as three Warm-Ups per section or Bank retrieval/spiral assumptions.
+
+Opening Warm-Ups may use familiar/prerequisite skills while students learn the classroom opening routine.
+
+Unless explicit instruction says otherwise:
+- package all First 4 Days Warm-Ups in ONE combined HTML file;
+- use the current course Warm-Up shell/CSS where its page architecture fits the opening plan;
+- keep individual day sections inside the combined file;
+- link the combined Warm-Up file from the First 4 Days index.
+
+When locally authored opening questions are used, preserve their stable local lineage IDs in hidden provenance.
+
+CANONICAL ASSET RULE:
+If a required reusable image/figure already exists at a canonical path in the course repository, reference that live course asset with the correct relative path.
+Do NOT duplicate/download/re-encode the binary into the First 4 Days branch merely for packaging.
+Copy an asset into `misc/first_4_days/` only when it is genuinely new/specific to this opening sequence or the current course contract explicitly requires a local copy.
+
+======================================================================
+11. EXIT TICKETS / PORTFOLIO BASELINE
+======================================================================
+
+When the opening plan requests Exit Tickets, use the CURRENT approved Exit architecture from the current Exit PM/live shell, specialized for the absence of a permanent Unit Bank.
+
+Because First 4 Days may have no Bank:
+- author the local canonical evidence set from the private map;
+- give each local source item a stable lineage ID;
+- derive parallel/secure classroom variants only according to the current Exit architecture;
+- preserve evidence target, representation demand, response mode, and usable difficulty across variants.
+
+Opening Exit Tickets are evidence, not extra Practice.
+Do not copy Practice questions wholesale into Exit solely for convenience.
+
+If the teacher designates the opening Exit as portfolio baseline evidence:
+- record its exact opening I-can/evidence mapping in the private map;
+- preserve enough hidden provenance for later Portfolio analysis;
+- do not calculate an overall grade here;
+- teacher professional judgment remains final.
+
+Response surfaces/accessories are evidence-driven.
+Provide a coordinate plane, diagram canvas, table/grid, number line, etc. only when the task requires it.
+Do not add generic handwriting lines merely because the response is constructed-response.
+
+======================================================================
+12. OVERVIEW / COURSE SYSTEMS / SURVEY
+======================================================================
+
+Opening sequences may include special resources normal Units do not.
+
+OVERVIEW / COURSE ORGANIZER:
+- use exact supplied/current course-system facts;
+- do not invent grading policy, portfolio rules, procedures, technology requirements, or scheduling facts;
+- when facts are intentionally not yet fixed, create an organizer/workspace rather than fabricated policy.
+
+SURVEY:
+- keep it brief and instructionally useful;
+- useful topics may include learning habits, confidence, goals, course-tool comfort, preferred supports, prior experiences, and what helps a student learn;
+- do not require sensitive personal information;
+- clearly distinguish self-report/context questions from demonstrated content-performance items.
+
+PORTFOLIO CONNECTION:
+- confidence/preferences/self-assessment responses are contextual information for feedback, intervention planning, and comparison with demonstrated performance;
+- self-report alone does NOT directly establish or change Not Yet / Approaching / Meeting / Exceeding;
+- if a survey intentionally contains a real disciplinary performance task (explain, calculate, interpret, model, justify, etc.), that response may later be treated as evidence only when its target is explicit and defensibly mapped;
+- do not turn a beginning-of-course survey into a hidden grade.
+
+======================================================================
+13. DEPLOYMENT / INDEX CONTRACT
+======================================================================
+
+Default course-root deployment:
+  `misc/first_4_days/`
+
+Use a different root only when the current Course Framework or explicit teacher instruction declares it.
+
+Typical branch MAY include only requested families:
+
+  misc/first_4_days/
+    index.html
+    first_4_days.css             [only when special opening-only styling is needed]
+    figures/                     [only new opening-specific assets]
+    warmups/
+    notes/
+    practice/
+    activities/
+    investigation/
+    exit/
+    overview/
+    survey/
+
+Do not create empty folders merely to match this example.
+
+`index.html` is REQUIRED for a multi-resource First 4 Days branch.
+It must link every completed opening resource and may link existing external course resources such as a welcome/agenda page when their current live paths are known.
+Do not copy an existing course-wide resource into First 4 Days merely to make the branch self-contained.
+
+======================================================================
+14. ASSET / LINK DISCIPLINE
+======================================================================
+
+Prefer stable live course resources over duplicate copies.
+
+For each image/figure:
+1. if it already exists as a canonical reusable course asset, reference it by correct relative path;
+2. if it is newly generated/supplied specifically for First 4 Days, store it under the appropriate First 4 Days family/figures folder;
+3. never redraw or silently substitute an information-bearing canonical figure;
+4. never package unchanged shared CSS;
+5. verify every relative path from the final deployed location, not merely from staging.
+
+Generated First 4 Days assets must retain useful source/provenance when practical.
+
+======================================================================
+15. RENDER / CONTENT QA — HARD
+======================================================================
+
+SOURCE / PLAN
+- pinned system/course snapshots;
+- Philosophy read first;
+- Runtime read second;
+- current Framework resolved through stable front door;
+- complete teacher opening plan present;
+- no invented default opening sequence;
+- no Unit 0 Assessment Plan or permanent Bank created.
+
+MAP
+- private micro-map built before artifacts;
+- all requested learning jobs intentionally routed;
+- counts match plan;
+- evidence roles explicit;
+- local lineage IDs stable;
+- survey context vs performance evidence distinguished.
+
+FAMILY CONTRACTS
+- only requested families built;
+- current family PM/shell behavior used where compatible;
+- Unit-only Bank/count/routing assumptions not imported;
+- current live course CSS used;
+- no old PM-local reference CSS/HTML used as authority.
+
+CONTENT
+- exact approved opening LT/I-cans preserved;
+- familiar-skill work is intentional;
+- no future preview displaces current opening learning;
+- Practice and evidence artifacts serve different jobs;
+- activities/investigations require real student action;
+- survey avoids sensitive-data requirements.
+
+PATHS / ASSETS
+- all output paths resolve under current course contract;
+- every local link resolves;
+- reusable canonical course assets are referenced rather than needlessly duplicated;
+- only new opening-specific binary assets are packaged locally;
+- no stale course/Unit paths.
+
+VISUAL / PRINT
+- render every final HTML mode relevant to its use: screen/projector, print, handwriting/Notability as applicable;
+- no clipping/overflow;
+- MathJax renders where required;
+- figures/tables readable;
+- writing/response surfaces usable;
+- print page architecture matches the current family contract;
+- no accidental extra blank pages.
+
+FINAL
+- `misc/first_4_days/index.html` present when multiple resources exist;
+- delivered bytes are the same bytes that passed final QA;
+- no PM, Framework, request input, private map, QA log, or staging file included in production delivery.
+
+======================================================================
+16. FAIL-CLOSED CONDITIONS
+======================================================================
+
+FAIL rather than guess when:
+- Philosophy or Runtime is missing;
+- current Framework cannot be resolved;
+- requested opening plan is missing/incomplete;
+- exact opening LT/I-can authority is ambiguous;
+- a requested recurring family shell/path cannot be resolved;
+- a required source asset is missing;
+- conflicting teacher/Framework directions cannot be reconciled through authority order;
+- a requested artifact would require inventing course policy;
+- a canonical information-bearing figure cannot be resolved safely;
+- a deployment path cannot be determined.
+
+When only one requested family is blocked and others are independently safe, complete the safe families only if the teacher request permits partial completion; otherwise fail the run and identify the blocking family.
+
+======================================================================
+17. OUTPUT / DELIVERY
+======================================================================
+
+Production output is a COURSE-ROOT-RELATIVE patch.
+
+For a normal multi-resource First 4 Days build:
+- return ONE ZIP containing only the complete new/changed deployable files/folders required for the requested branch;
+- preserve repository-relative paths, normally beginning with `misc/first_4_days/...`;
+- include complete resource-family folders when a family is being replaced and sibling files are required for safe deployment.
+
+If exactly ONE file is the complete requested change and no sibling/local asset is needed:
+- return that single file directly and state its exact repository-relative destination.
+
+Do NOT include:
+- this PM;
+- Framework;
+- opening-plan input JSON;
+- private pre-authoring map;
+- copied shared CSS;
+- copied reusable canonical course assets already available through stable relative paths;
+- tools;
+- QA logs;
+- staging files.
+
+END — BUILD FIRST 4 DAYS
