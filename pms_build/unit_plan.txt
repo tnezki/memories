@@ -1,0 +1,414 @@
+BUILD UNIT PLAN — SINGLE PASS / FRAMEWORK-ROUTED / GOLD-STANDARD DOCX LOCK
+================================================================================
+
+STATUS: CURRENT
+STEP: 17
+JOB: unit_plan
+ROLE: Build one teacher-facing Unit Plan DOCX from the current Course Framework, exact Unit Assessment Plan, and live deployed course resource map while preserving the Gold Standard DOCX as the layout authority.
+
+This is ONE build PM.
+There is no nested Unit Plan PM folder, local PM manifest, control-panel profile, README dependency, or embedded PM-local template directory.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + COURSE FRAMEWORK + EXACT UNIT ASSESSMENT PLAN
+    -> RESOLVE LIVE COURSE PATHS / DASHBOARD LINKS
+    -> COPY GOLD-STANDARD DOCX
+    -> REPLACE ONLY UNIT-SPECIFIC CONTENT + HYPERLINK TARGETS
+    -> RENDER / VISUALLY INSPECT / REPAIR
+    -> RETURN ONE COMPLETED DOCX
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum build.
+
+Pin the canonical system repository and selected course repository once at job start.
+Never mix later commits into the run.
+
+Resolve declared authorities and course files through manifests/contracts and direct fetches at the pinned snapshots.
+A deterministic listing of the pinned COURSE ROOT is permitted only when the current Framework says the live teacher dashboard is located at course root but does not declare its exact filename. In that case require exactly one `teacher_dashboard*.html` file. If zero or more than one resolve, FAIL CLOSED as UNIT_PLAN_DASHBOARD_AMBIGUOUS.
+
+Do not search around a missing authority. Do not substitute an older upload, stale chat copy, remembered version, prior Unit Plan, or similarly named file.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. `frameworks/MANIFEST.json` -> selected course stable Framework front door;
+4. selected course `MANIFEST.json` and current Framework entrypoint;
+5. ORIGINAL exact requested Unit Assessment Plan resolved by the Framework/resource manifest;
+6. current course file-structure/deployment contract and any course-map/pacing contract required for this Unit;
+7. this PM;
+8. stable Gold Standard template:
+     `templates/unit_plan/Unit Plan Template Gold Standard.docx`;
+9. pinned live course repository resources required to resolve Unit Plan hyperlinks, including the current teacher dashboard when declared/needed.
+
+Question Structure is NOT a normal Unit Plan input.
+The Unit Plan does not author questions.
+
+The Bank is NOT a Unit Plan content authority.
+Do not read Bank, Practice, Exit, Warm-Up, Review, or Summative question content merely to fill the Unit Plan.
+
+Authority by domain:
+1. current explicit teacher instruction;
+2. Philosophy for curriculum/portfolio behavior;
+3. exact Unit Assessment Plan for learning/evidence architecture;
+4. Course Framework for course voice, section organization, pacing, source roles, and course-specific behavior;
+5. live course deployment contract/dashboard for current resource destinations;
+6. this PM for Unit Plan assembly procedure;
+7. Gold Standard DOCX for visual/layout structure only.
+
+The template is NOT curriculum authority.
+A stale label, sentence, link, unit number, DOK statement, or course-specific assumption inside the template must not override current Philosophy / Framework / Assessment Plan.
+
+======================================================================
+2. PURPOSE / BOUNDARY
+======================================================================
+
+PURPOSE:
+Create one concise teacher-facing Unit Plan that lets a teacher understand and navigate the Unit without reopening the full Framework for routine planning.
+
+The Unit Plan should communicate:
+- what students are learning and expected to master;
+- important prerequisite/retrieval connections;
+- unit vocabulary / representations / recurring practices;
+- high-value essential questions;
+- mastery/evidence architecture;
+- live unit and section resources;
+- an actionable pacing sequence.
+
+HARD BOUNDARY:
+- do not change upstream I-cans, Mastery Goals, learning targets, stage/source terminology, evidence rules, or assessment architecture;
+- do not invent a competing Unit curriculum map;
+- do not turn the Unit Plan into a Bank, Framework, or Assessment Plan duplicate;
+- synthesis for teacher readability is allowed only when it preserves the meaning and scope of the authoritative sources.
+
+======================================================================
+3. GOLD STANDARD TEMPLATE — ABSOLUTE LAYOUT LOCK
+======================================================================
+
+Start from EXACTLY:
+  `templates/unit_plan/Unit Plan Template Gold Standard.docx`
+
+Copy the template bytes to the working output and edit that copy.
+Do NOT recreate the DOCX from scratch.
+
+The Gold Standard owns:
+- page size/orientation/margins;
+- section/page-break architecture;
+- header/logo placement;
+- fonts, sizes, colors, fills, borders, line weights;
+- table count and geometry;
+- cell widths/margins/merges/alignment;
+- heading and paragraph placement;
+- resource-table organization;
+- pacing-table visual structure;
+- stable visual hierarchy.
+
+Do NOT redesign these merely because another course has different content.
+Make surgical text and hyperlink replacements inside the existing document.
+
+When source content cannot fit the Gold Standard legibly without deleting authoritative information or materially changing layout:
+  FAIL CLOSED as UNIT_PLAN_LAYOUT_CONFLICT
+and identify the exact cell/section causing the conflict.
+Do not solve it by globally shrinking fonts, altering margins, or rebuilding tables.
+
+======================================================================
+4. COURSE / UNIT RESOLUTION
+======================================================================
+
+Resolve selected course + Unit from the current request/orchestrator.
+
+From the stable Framework front door resolve:
+- official course name;
+- Unit number and exact Unit title;
+- section IDs/titles/order;
+- exact Unit Assessment Plan;
+- course pacing expectations;
+- course-specific terminology;
+- course file-structure/deployment contract;
+- any marking-period/course-calendar information explicitly declared.
+
+Require the requested Unit to exist exactly once.
+If not:
+  FAIL CLOSED as UNIT_PLAN_UNIT_RESOLUTION_FAILED.
+
+Do not normalize one course's stage/source terminology into another course's vocabulary.
+For example, preserve intentionally distinct Algebra source/spiral terminology, Physics evidence language, and AP Calculus/CED language when those are current authorities.
+
+======================================================================
+5. LIVE RESOURCE / LINK RESOLUTION
+======================================================================
+
+Use the selected course's CURRENT deployed paths, not links embedded in the Gold Standard.
+
+Resolve resource destinations in this order:
+1. current course file-structure/deployment contract;
+2. current pinned teacher dashboard for observed live destinations/labels;
+3. current explicit teacher instruction.
+
+The dashboard is link evidence, not learning/evidence authority.
+
+For every hyperlink placed in the final DOCX:
+- preserve an already-canonical absolute URL when appropriate;
+- otherwise resolve the course-relative repository path against the course's declared published base URL / deployment base;
+- use the exact opaque deployed filename when the current course uses one;
+- never fabricate an opaque filename or guess a missing path.
+
+If a required template link slot has no current live destination:
+  FAIL CLOSED as UNIT_PLAN_LINK_UNRESOLVED
+and report the exact label.
+Do not leave an old Algebra/Unit 1 destination in place.
+
+Before final output verify every Unit-specific and Section-specific hyperlink belongs to the selected course/unit.
+
+======================================================================
+6. PAGE 1–2 CONTENT CONTRACT
+======================================================================
+
+Preserve the Gold Standard cells, order, and visual hierarchy.
+Populate them from the current Framework + exact Unit Assessment Plan.
+
+A. MAIN TITLE
+Use:
+  `<Course>: Unit <N>: <Exact Unit Title>`
+Preserve the existing mixed emphasis styling.
+
+B. ESSENTIAL STANDARDS TAUGHT / LEARNING ARC
+Keep the Gold Standard's three-part structure, but use the selected course's exact current terminology when the Framework/Assessment Plan defines a course-specific vocabulary.
+
+If no course-specific replacement is defined, use the established roles:
+- Introduced / Current Learning;
+- Reviewed / Retrieval;
+- Mastery / Spiral Mastery.
+
+Each entry is a substantive synthesis of the actual Unit arc, not a list of nouns.
+Never collapse distinct stage/source vocabularies into aliases.
+
+C. ESSENTIAL STANDARDS MASTERED
+Write a concise teacher-facing synthesis of what students should independently demonstrate by Unit end.
+Ground it in the Unit Mastery Goals / exact Assessment Plan.
+Include interpretation, representation, modeling, justification, conditions, or verification only where the current course/Unit requires them.
+
+D. DATES / MARKING PERIOD
+Use only current declared pacing/calendar information.
+Do not hard-code Algebra's marking-period assumptions into another course.
+If no marking-period mapping is authoritative, leave the template's value field neutral/blank rather than inventing one, unless the teacher explicitly supplies it.
+
+E. INSTRUCTIONAL DAYS
+Use current Framework/course pacing.
+Do not force `15 Days` or three days per section when the course defines another rhythm.
+Preserve the Gold Standard table architecture and express the current Unit's instructional/flex expectation as compact text.
+
+F. VOCABULARY / NOTATION / REPRESENTATIONS
+Build a scan-friendly whole-Unit list from the exact Assessment Plan / Framework.
+Include important notation and representations when they are genuinely part of the course.
+Do not turn vocabulary into fake I-can statements.
+
+G. ESSENTIAL QUESTIONS
+Write approximately 8–10 high-value teacher-facing questions spanning the whole Unit.
+They should emphasize meaning, reasoning, representation, modeling, interpretation, evidence, comparison, conditions, or verification as appropriate.
+Do not write a list of procedural `How do I solve...?` prompts.
+
+H. COMMON FORMATIVE ASSESSMENTS
+Use current Philosophy + Assessment Plan portfolio/body-of-evidence language.
+Name current course evidence opportunities only where useful.
+Do not make DOK a quota or turn this cell into a product catalog.
+
+I. COMMON SUMMATIVE ASSESSMENT
+Use the exact current Unit summative title/link and current Assessment Plan evidence expectations.
+Do not repeat stale template claims about required DOK distributions or performance-task roles when current Philosophy/Framework differs.
+
+J. UNIT LEARNING LADDER / PROGRESSION
+Prefer the exact current Unit Learning Ladder/progression when the Assessment Plan defines one.
+If the current course uses another named progression, preserve that exact architecture.
+
+Do NOT automatically manufacture an 8-rung DOK ladder from section I-cans.
+Only synthesize/condense a ladder when the current Assessment Plan/Framework explicitly requires a Unit Plan ladder but does not supply display-ready wording; in that case preserve the authoritative progression and label semantics.
+
+K. COMPLETED DATA PROTOCOLS
+Leave blank unless current explicit teacher instruction says otherwise.
+
+======================================================================
+7. RESOURCES TABLE CONTRACT
+======================================================================
+
+Preserve the Gold Standard table geometry, category order, label style, punctuation, and line-break behavior unless current explicit teacher instruction changes it.
+
+Populate destinations from the selected course's current deployment map.
+
+Expected resource families may include, when current for the course:
+- course-wide teacher/student dashboards and planning resources;
+- Unit Progress Tracker;
+- Unit Review;
+- Unit Assessment Plan;
+- Question Bank / Bank front door;
+- Unit Summative;
+- teacher reflection;
+- section Warm-Ups;
+- Demo;
+- Notes;
+- Investigation;
+- Activities;
+- Practice / Extra Practice / CYU;
+- other current course-specific resources represented by existing Gold Standard slots;
+- teacher guides;
+- Exit Tickets / Quick Checks / Performance Tasks where currently deployed.
+
+HARD:
+- preserve the template's layout rather than adding new rows casually;
+- do not point Physics or AP Calculus plans at Algebra-only destinations;
+- do not invent a resource merely because the template has an old label;
+- when a template slot is no longer part of the current system, replace its wording with the nearest current role only when the layout supports a clear one-to-one replacement; otherwise fail/report for review rather than silently mislabeling it.
+
+For representative section links, use the first section of the selected Unit unless the template/current course contract declares another convention.
+
+======================================================================
+8. PACING GUIDE CONTRACT
+======================================================================
+
+Title:
+  `Unit N: <Exact Unit Title> – Pacing Guide`
+
+Preserve the Gold Standard pacing table geometry and visual styling.
+
+Build pacing from:
+1. current Framework Unit section order;
+2. exact Unit Assessment Plan;
+3. current course pacing/rhythm contract;
+4. live resource availability.
+
+Do NOT hard-code Algebra's three-day rhythm into Physics or AP Calculus when the current Framework declares another rhythm.
+
+For each instructional day:
+- identify the current Section/topic;
+- include only resources that are actually part of that day's current course rhythm;
+- link every displayed resource line to its live destination;
+- preserve intentional flex/reteach/assessment days from the Framework;
+- place the Unit Summative on the current authoritative assessment day/window when declared.
+
+Welcome links:
+- use the current course's declared welcome path/pattern or exact dashboard route;
+- do not assume the Algebra welcome URL pattern is universal;
+- if the template requires a Welcome line but no current course route can be resolved, fail closed rather than invent one.
+
+Progress Tracker:
+- place according to current course Framework/Philosophy usage;
+- do not assume `first day only` if the current course explicitly says otherwise.
+
+Assessment/flex guidance:
+- preserve current Philosophy/Framework behavior;
+- DOK is descriptive, not a forced distribution;
+- do not retain stale template wording that conflicts with current assessment/portfolio architecture.
+
+If the authoritative Unit pacing cannot be represented legibly in the Gold Standard pacing table without structural redesign:
+  FAIL CLOSED as UNIT_PLAN_PACING_LAYOUT_CONFLICT.
+
+======================================================================
+9. DOCX EDITING METHOD — HARD
+======================================================================
+
+Use the current DOCX skill/tooling and obey its render-inspect-iterate gate.
+
+Required method:
+1. copy the Gold Standard DOCX to the final working filename;
+2. inspect `word/document.xml`, relationships, tables, runs, and hyperlinks as needed;
+3. make targeted text replacements inside existing paragraphs/cells;
+4. update hyperlink relationship targets surgically;
+5. preserve existing table/cell XML and paragraph formatting wherever possible;
+6. preserve header/logo/media relationships unless explicitly changed;
+7. do not rebuild the document with a generic DOCX library when surgical OOXML/template editing can preserve the Gold Standard more faithfully;
+8. render the completed DOCX to page PNGs;
+9. inspect EVERY page at 100%;
+10. repair and re-render until clean.
+
+Rendered PNG/PDF files are QA artifacts only and are not part of final delivery unless explicitly requested.
+
+======================================================================
+10. VISUAL / LINK QA — FROZEN
+======================================================================
+
+SOURCE / AUTHORITY
+- pinned system + course snapshots;
+- Philosophy read first;
+- Runtime read second;
+- stable Framework front door used;
+- exact requested Unit Assessment Plan used;
+- no Bank/question-content dependency;
+- Gold Standard template fetched from exact stable template path.
+
+CONTENT
+- correct course / Unit number / Unit title;
+- exact current section order;
+- Unit learning/mastery synthesis agrees with Assessment Plan;
+- course-specific stage/source terminology preserved;
+- no invented I-cans/Mastery Goals;
+- vocabulary/representations have whole-Unit depth;
+- essential questions span the Unit;
+- current portfolio/formative/summative language;
+- no stale forced DOK distribution.
+
+LINKS
+- all course-wide links current;
+- all Unit links current and correct Unit;
+- all representative Section links current and correct Section;
+- all pacing resource lines that appear linked in the template remain linked;
+- no stale Algebra/Unit 1 destination in another course/unit;
+- no unresolved placeholder URL;
+- no fabricated opaque filename.
+
+DOCX / VISUAL
+- Gold Standard page architecture preserved;
+- same table count/geometry unless current explicit teacher instruction says otherwise;
+- header/logo unchanged;
+- no clipping/overflow;
+- no accidental font substitution;
+- no unexpected page break or blank extra page;
+- no broken hyperlink styling;
+- pacing cells readable and balanced;
+- every page rendered and visually inspected after final edit.
+
+FINAL BYTES
+- final DOCX re-opened after render/repair;
+- filename correct;
+- no QA/debug files delivered;
+- no stale template comments/placeholder text;
+- delivered bytes are the same bytes that passed final visual QA.
+
+Do not invent new QA criteria mid-run.
+Park systemic findings for later PM revision after the test run.
+
+======================================================================
+11. OUTPUT
+======================================================================
+
+Return exactly ONE completed DOCX for the selected Unit.
+
+Filename:
+  `Unit_<NN>_<Unit_Name>_Unit_Plan.docx`
+
+Sanitize `<Unit_Name>` only as required for a valid filename; preserve the exact Unit title inside the document.
+
+Do NOT ZIP a one-file Unit Plan build unless the current explicit teacher instruction requests a ZIP.
+
+Do NOT include:
+- PM;
+- Framework;
+- Assessment Plan;
+- Gold Standard template;
+- course dashboard;
+- render PNGs/PDFs;
+- tools;
+- QA reports;
+- staging files.
+
+END — BUILD UNIT PLAN
