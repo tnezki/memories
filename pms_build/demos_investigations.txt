@@ -1,0 +1,545 @@
+BUILD DEMOS + INVESTIGATIONS — SINGLE PASS / FRAMEWORK-AUTHORED / LIVE-SHELL LOCK
+=====================================================================================
+
+STATUS: CURRENT
+STEP: 13
+JOB: demos_investigations
+ROLE: Build the complete Demo + Investigation resource family for the requested Physics Unit/scope.
+
+This is ONE build PM.
+There is no starter ZIP, nested PM manifest, control-panel profile, bundled reference CSS, or legacy archive dependency.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + PHYSICS FRAMEWORK
+    -> PLAN ALL REQUESTED SECTIONS
+    -> QA PLAN
+    -> AUTHOR DEMOS + INVESTIGATIONS
+    -> BUILD TEACHER GUIDES
+    -> LIVE HTML/CSS QA
+    -> PACKAGE COURSE-ROOT PATCH
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum build.
+
+The fact that a canonical repository is public does NOT authorize generic web search or public-web fetching.
+
+Resolve declared resources through manifests and DIRECT-FETCH exact paths at the pinned snapshot.
+If an exact declared source cannot be fetched:
+  FAIL CLOSED
+and name the exact repo/path.
+Do not search around the failure.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. current canonical Physics Framework front door resolved through `frameworks/Physics/MANIFEST.json`;
+4. this PM;
+5. only purpose-specific Framework/course files this job actually requires.
+
+Pin system + Physics course repositories once at job start.
+Never mix later commits into the run.
+
+Authority:
+1. current explicit teacher instruction;
+2. Philosophy;
+3. universal Question Structure when actual question/evidence structures are authored;
+4. Physics Framework / embedded Assessment Plan;
+5. this PM;
+6. current deployed HTML/CSS/tool implementation.
+
+The Framework owns:
+- exact Unit/section architecture;
+- exact I-can / Learning Target language;
+- section evidence/scope;
+- Physics-specific representations and source hierarchy;
+- deployed course paths.
+
+This PM owns procedure.
+
+======================================================================
+2. SCOPE / INPUTS
+======================================================================
+
+Build the complete requested scope.
+For a normal Unit request: build one Demo and one Investigation, with teacher guides, for every active section in that Unit.
+If an orchestrator explicitly requests multiple Units or the whole course, plan the entire requested scope before rendering.
+
+A finalized Bank is NOT required.
+Do not read the Bank Map.
+
+If a current Bank artifact is explicitly declared as a useful secondary source by the current Framework/request,
+it may be used only for consistency/reuse of an already-approved representation or vocabulary.
+Do not turn Bank questions into a Demo/Investigation simply because they exist.
+
+Required course path contract:
+  frameworks/2_Framework_Physics/Conceptual_Physics_Framework/contracts/course_file_structure.json
+
+Current deployed section paths:
+  Demo student:
+    demo/u{U}_{S}_demo/u{U}_{S}_demo.html
+
+  Demo teacher:
+    demo/u{U}_{S}_demo/u{U}_{S}_demo_teacher_guide.html
+
+  Investigation student:
+    investigations/u{U}_{S}_investigation/u{U}_{S}_investigation.html
+
+  Investigation teacher:
+    investigations/u{U}_{S}_investigation/u{U}_{S}_investigation_teacher_guide.html
+
+======================================================================
+3. RESOURCE PURPOSE — PHILOSOPHY LOCK
+======================================================================
+
+DEMO
+- optional 5–8 minute projector/screen-first curiosity or intellectual-tension hook unless Framework says otherwise;
+- students notice, predict, compare, argue, observe, confront intuition, or ask a useful question;
+- does NOT need to teach the whole section;
+- ends with a short discussion/carry-forward moment, normally 2–4 worthwhile questions or prompts;
+- may use a physical object, phenomenon, image, graph, table, model, equation, data display, or teacher reveal;
+- must not become a mini-lecture or quiz.
+
+INVESTIGATION
+- optional student learning experience, not renamed Practice;
+- students DO something substantive: collect/organize data, test a claim, compare models, build/translate representations,
+  sort/classify, investigate a pattern, use a simulation/tool, make/revise a prediction, or conduct a short physical experiment;
+- the learning flow is custom to the section;
+- no universal task count or forced Part 1/2/3 choreography;
+- synthesis/debrief should articulate what emerged when useful;
+- must not become the only place required core instruction or secure evidence exists.
+
+CUSTOM ARTIFACT RULE:
+Demos and Investigations may be purpose-built because they are inherently custom instructional resources.
+Stable course CSS controls visual language; intellectual choreography remains section-specific.
+
+======================================================================
+4. PLAN-FIRST GATE — BEFORE HTML
+======================================================================
+
+Before writing ANY requested section HTML, create one complete in-memory/staging plan across the requested scope.
+
+For EACH section map:
+
+LEARNING JOB
+- section ID/title;
+- exact Learning Target / exact I-cans;
+- main conceptual/evidence job;
+- likely misconception(s);
+- important representations.
+
+DEMO PLAN
+- hook mode;
+- what students actually see/do/record;
+- prediction/reveal/evidence;
+- what later slide depends on earlier evidence;
+- final discussion/bridge purpose;
+- expected duration/materials.
+
+INVESTIGATION PLAN
+- investigation type / classroom experience;
+- primary student actions;
+- grouping/movement when relevant;
+- concrete student artifact/output;
+- representations read/built/used/compared;
+- graph/figure/data/tool decision;
+- materials/technology;
+- 3–6 step experience sequence in plain language;
+- one-sentence reason the experience fits the exact section learning job.
+
+GRAPH / FIGURE / DATA DECISION — choose one:
+- TOOL-GENERATED STUDENT EVIDENCE;
+- TOOL-GENERATED TEACHER REVEAL;
+- STUDENT-CONSTRUCTED REPRESENTATION;
+- NO GRAPH/FIGURE NEEDED, with brief reason.
+
+WHOLE-SCOPE PLAN QA:
+- no cloned investigation choreography caused by template convenience;
+- student action matches exact section learning job;
+- representation-heavy learning is not accidentally text-only;
+- named actions are real: COLLECT means collect, BUILD means build, MOVE means movement, COMPARE means actual comparison;
+- repetition is allowed when instructionally purposeful;
+- no novelty quota.
+
+Repair the PLAN before rendering.
+
+Plan artifacts are BUILD WORKING FILES, not normal course-repository outputs.
+Do not add plan JSON/HTML to the course root unless the teacher explicitly requests them.
+
+======================================================================
+5. SOURCE / REPRESENTATION RULES
+======================================================================
+
+Use only current Framework-declared source/reference material.
+Do not perform outside research.
+
+Source hierarchy comes from the Physics Framework.
+Do not let source material expand the Unit scope.
+
+Representations are instructional content.
+Students must actually read/build/use/compare/annotate/interpret them.
+
+If the Framework declares an authoritative graph/figure/data tool:
+- direct-fetch that exact tool;
+- use it only when its supported output serves the planned learning job;
+- do not search for alternate tools;
+- student construction remains preferable when construction itself is the evidence.
+
+STUDENT FIGURE ANSWER-NEUTRALITY:
+- never show the answer in the student image;
+- do not label, mark, draw, rank, calculate, or highlight the feature students must determine;
+- necessary axes/units/physical labels are allowed;
+- teacher guides may use annotated answer versions that student files never reference.
+
+NO DESCRIPTIVE STUDENT CAPTIONS:
+The prompt introduces the representation.
+Do not put explanatory/source captions beneath student-facing figures.
+
+======================================================================
+6. DEMO HTML/CSS — ABSOLUTE LIVE-SHELL LOCK
+======================================================================
+
+DO NOT redesign Demo.
+
+Current production stylesheet:
+  ../../css/demo.css
+
+Link ONLY that stylesheet.
+Do not add `base.css`.
+Do not embed replacement CSS.
+Do not copy PM-folder reference CSS.
+
+Use the deployed shell:
+
+<body class="demo-screen">
+  <main class="demo-deck" id="deck">
+    <section class="demo-slide active">
+      <div class="slide-card">
+        ...
+      </div>
+    </section>
+    <section class="demo-slide">
+      <div class="slide-card">
+        ...
+      </div>
+    </section>
+  </main>
+
+  <div class="controls">
+    <button id="prev">← Back</button>
+    <div class="counter" id="counter">1 / N</div>
+    <button class="primary" id="next">Next →</button>
+  </div>
+
+  [deployed slide-navigation JS]
+</body>
+
+Use existing Demo hooks only when they fit:
+- `.kicker`
+- `h1`, `h2`
+- `.prompt`
+- `.challenge`
+- `.two-col`
+- `.box`
+- `.small`
+- `.controls`
+- `.counter`
+
+One slide = one main intellectual job.
+Large projector-readable text.
+Do not invent dense worksheet cards inside slides.
+
+DEPENDENCY / STUDENT-RECORD RULE:
+If a later slide requires evidence shown earlier, explicitly tell students to record/copy what they need before advancing.
+Later slides should normally use what students recorded instead of repeating the entire earlier display.
+
+FINAL SLIDE:
+A discussion / carry-forward slide that surfaces noticing/evidence/comparison/prediction and bridges to instruction.
+
+======================================================================
+7. DEMO TEACHER GUIDE — LIVE-SHELL LOCK
+======================================================================
+
+Current production stylesheet:
+  ../../css/teacher_guide.css
+
+Link ONLY that stylesheet.
+
+Use:
+<body>
+  <main class="guide">
+    <div class="kicker">...</div>
+    <h1>...</h1>
+    <p class="subtitle">...</p>
+    ...
+  </main>
+</body>
+
+Use existing guide hooks:
+- `.guide`
+- `.kicker`
+- `.subtitle`
+- `.quick-grid`
+- `.quick`
+- `.callout`
+- `.warn`
+- `.good`
+- ordinary `h2`, `h3`, `p`, `ul`, `ol`, `table`
+
+DO NOT invent a slide-replica page system that the deployed guide CSS does not use.
+
+Required practical content:
+- Why/Purpose;
+- Time / grouping / quick view;
+- Materials;
+- Before Class / setup;
+- slide-by-slide or step-by-step Run of Show;
+- expected/acceptable observations/responses;
+- likely misconceptions / Watch For;
+- transition/bridge;
+- final discussion acceptable responses.
+
+For every substantive discussion-bearing slide, include content-specific:
+Teacher Moves — normally 2–4 concise bullets;
+Student Moves — normally 2–4 productive actions;
+Listen For / evidence or misconception when useful.
+
+Do not repeat a generic discourse script on every slide.
+
+======================================================================
+8. INVESTIGATION HTML/CSS — ABSOLUTE LIVE-SHELL LOCK
+======================================================================
+
+DO NOT redesign Investigation.
+
+Current production stylesheet:
+  ../../css/investigation.css
+
+Link ONLY that stylesheet.
+Do not add `base.css`.
+Do not embed a second CSS system.
+
+Use the deployed student shell:
+<body>
+  <main class="student-page">
+    <div class="kicker">...</div>
+    <h1>...</h1>
+    <p class="subtitle">...</p>
+    [target/question when useful]
+    [section-specific task sequence]
+  </main>
+</body>
+
+Use the EXISTING CSS hooks that match the actual task, including where appropriate:
+- `.kicker`
+- `.subtitle`
+- `.target`
+- `.question`
+- `.workspace`
+- `.workspace.blank`
+- `.check`
+- `.step`
+- `.step-num`
+- `.figure`
+- `.data-table`
+- `.cer-grid`
+
+Workspace height may use the existing sanctioned inline custom property:
+  style="--ws:NNpx"
+
+That is NOT permission for new inline visual styling.
+
+INVESTIGATION DESIGN:
+- concise actionable directions;
+- workspace only where students actually record/sketch/calculate/annotate/explain;
+- compact purpose-sized tables;
+- figures large enough to reason from;
+- custom phase count driven by the planned experience;
+- no box-within-box decoration;
+- no automatic Exit Ticket.
+
+If a graph/model is student-constructed, provide the necessary data/grid/scaffold rather than pre-solving it.
+
+======================================================================
+9. INVESTIGATION TEACHER GUIDE
+======================================================================
+
+Use ONLY:
+  ../../css/teacher_guide.css
+
+Same `.guide` shell as Demo teacher guides.
+
+Start with practical overview:
+- Why This Fits;
+- time/grouping;
+- materials;
+- setup;
+- suggested flow;
+- expected evidence/observations;
+- common problems/misconceptions;
+- strong synthesis/debrief target.
+
+Then walk through the substantive student phases in order.
+For each phase where teacher reference is useful:
+- identify the student task/representation;
+- give strong expected/acceptable response or observation;
+- explain why / what to listen for;
+- include teacher press questions when useful.
+
+For open-ended work:
+- give one strong sample;
+- give criteria for other acceptable responses.
+
+For multi-representation work:
+- explain how the representations should agree.
+
+For discussion-worthy phases include:
+- Teacher Moves;
+- Student Moves;
+- Listen For when useful.
+
+Student files never contain teacher discourse blocks.
+
+======================================================================
+10. MATHJAX
+======================================================================
+
+Use MathJax only when the artifact actually contains mathematics requiring it.
+
+When used, configure BEFORE the library:
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+All intended TeX must be inside delimiters.
+Escape literal currency dollars as `\$`.
+
+If the current Framework manifest declares a specific MathJax final-byte fixer:
+- direct-fetch that declared tool;
+- run it on unzipped staging output before ZIP;
+- rerun HTML/path QA afterward.
+If no such tool is declared, do not search for one.
+
+======================================================================
+11. OUTPUT / PACKAGING
+======================================================================
+
+For a normal Unit build return:
+  unit{U}_demos_investigations.zip
+
+ZIP root is a direct course-root patch:
+
+demo/
+  u{U}_{S}_demo/
+    u{U}_{S}_demo.html
+    u{U}_{S}_demo_teacher_guide.html
+    figures/ only if locally referenced figures are actually required
+
+investigations/
+  u{U}_{S}_investigation/
+    u{U}_{S}_investigation.html
+    u{U}_{S}_investigation_teacher_guide.html
+    figures/ only if locally referenced figures are actually required
+
+...repeat for requested sections.
+
+Do NOT include:
+- CSS already deployed in `css/`;
+- PM files;
+- plan working files;
+- old resources;
+- Bank/Bank Map;
+- tools;
+- staging;
+- empty figure folders;
+- Mac junk.
+
+======================================================================
+12. FROZEN QA
+======================================================================
+
+TOOL ROUTING
+- Philosophy read first;
+- Runtime read second;
+- Physics Framework read before authoring;
+- no web search/fetch/external research;
+- declared files direct-fetched at pinned snapshot.
+
+PLAN
+- every requested section mapped before HTML;
+- exact I-cans/learning job resolved;
+- real Demo hook;
+- real Investigation action;
+- representation/tool decision explicit;
+- no template-convenience choreography clone.
+
+DEMO
+- exact deployed path/name;
+- only `../../css/demo.css`;
+- `body.demo-screen`;
+- `main.demo-deck#deck`;
+- `.demo-slide` / `.slide-card`;
+- first slide `.active`;
+- working controls/counter/navigation;
+- projector-readable;
+- no answer leakage;
+- final discussion/bridge.
+
+DEMO GUIDE
+- exact deployed path/name;
+- only `../../css/teacher_guide.css`;
+- `.guide` shell;
+- practical setup + run of show;
+- acceptable responses/observations;
+- content-specific discourse support where useful.
+
+INVESTIGATION
+- exact deployed path/name;
+- only `../../css/investigation.css`;
+- `main.student-page`;
+- planned actions actually occur;
+- representations are substantive;
+- answer-neutral student visuals;
+- no descriptive student captions;
+- workspace is purposeful;
+- no stale old section content.
+
+INVESTIGATION GUIDE
+- exact deployed path/name;
+- only `../../css/teacher_guide.css`;
+- practical overview;
+- substantive task walkthrough;
+- expected/acceptable evidence;
+- synthesis/debrief guidance;
+- discourse moves where useful.
+
+FINAL
+- MathJax valid when used;
+- local links/figures resolve;
+- no unresolved template tokens;
+- no CSS copied into output;
+- ZIP integrity passes.
+
+Do not invent new QA criteria mid-run.
+Park new systemic findings for later PM revision.
+
+END — BUILD DEMOS + INVESTIGATIONS

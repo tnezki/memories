@@ -1,0 +1,369 @@
+BUILD PROGRESS TRACKER — SINGLE PASS / ASSESSMENT-PLAN-ROUTED / TWO-PAGE PRINT LOCK
+================================================================================================
+
+STATUS: CURRENT
+STEP: 9
+JOB: progress
+ROLE: Build the current Unit student Portfolio Progress Tracker from the exact Physics Framework / embedded Assessment Plan.
+
+This is ONE build PM.
+There is no nested Progress PM folder, starter ZIP, local manifest, or control-panel profile.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + PHYSICS FRAMEWORK
+    -> EXACT MASTERY GOALS + SUPPORTING I-CANS
+    -> PLACE INTO LIVE TWO-PAGE SHELL
+    -> NORMALIZE / QA
+    -> RETURN ONE DEPLOYABLE HTML FILE
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum build.
+
+Public GitHub access does NOT authorize generic web search or public-web fetch.
+
+Resolve declared resources through manifests/contracts and DIRECT-FETCH exact paths at the pinned snapshot.
+If a declared required file cannot be fetched:
+  FAIL CLOSED
+and name the exact repo/path.
+Do not search around the failure.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. current canonical Physics Framework front door through `frameworks/Physics/MANIFEST.json`;
+4. ORIGINAL requested Unit Assessment Plan resolved by the Framework manifest;
+5. this PM;
+6. current deployed `css/progress_tracker.css`;
+7. current canonical Progress shell only if needed for DOM verification.
+
+Pin the system + Physics course repositories once at job start.
+Never mix later commits into the run.
+
+Authority:
+1. current explicit teacher instruction;
+2. Philosophy;
+3. Physics Framework / ORIGINAL embedded Assessment Plan;
+4. this PM;
+5. live Progress HTML/CSS implementation.
+
+Question Structure is NOT required unless this job is explicitly changed to author questions.
+The Progress Tracker does not author questions.
+
+======================================================================
+2. PURPOSE / SOURCE
+======================================================================
+
+PURPOSE:
+Help students organize portfolio evidence around the current Unit Mastery Goals:
+- what the goal is;
+- which exact I-can statements support it;
+- where the current body of evidence sits;
+- which evidence they can point to;
+- what they should do next.
+
+AUTHORITATIVE CONTENT SOURCE:
+- exact current Unit Mastery Goals from the ORIGINAL Assessment Plan;
+- exact supporting I-can IDs/text from the ORIGINAL Assessment Plan / Framework;
+- current Framework evidence/status language;
+- current Unit title / Essential Standard.
+
+The Bank is NOT a required input.
+Do NOT read:
+- Bank Map;
+- Bank question files;
+- Practice;
+- Review;
+- prior Progress Tracker as content authority.
+
+The live prior Tracker may be inspected only as a shell/render exemplar.
+Never carry old Unit numbers, goals, I-cans, or wording from it.
+
+======================================================================
+3. PHYSICS TRACKER CONTRACT — HARD
+======================================================================
+
+Usage mode:
+  PHYSICAL PRINT
+
+Current Physics contract:
+- exactly TWO portrait letter pages;
+- `.tracker-page.page-one` then `.tracker-page.page-two`;
+- preserve EVERY exact supporting I-can;
+- for the standard four-Mastery-Goal Unit profile: two goal cards on page 1 and two on page 2;
+- use the compact live shell;
+- do not redesign as a screen dashboard;
+- do not delete I-cans to make the pages fit;
+- do not shrink text below the live CSS contract merely to force fit.
+
+If authoritative content cannot fit legibly in the current two-page Physics shell:
+  FAIL CLOSED as TRACKER_LAYOUT_CONFLICT
+and report the exact Unit / goal causing the conflict.
+Do not alter shared CSS during the build.
+
+Progress status describes the current evidence/body of evidence.
+It is NOT DOK and must not become a DOK ladder or proficiency rung system.
+
+======================================================================
+4. HTML / CSS — ABSOLUTE LIVE-SHELL LOCK
+======================================================================
+
+Output path:
+  progress/unit_{U}_progress/unit_{U}_progress.html
+
+Link EXACTLY:
+  ../../css/progress_tracker.css
+
+Do NOT:
+- add `base.css`;
+- add a second stylesheet;
+- embed replacement CSS;
+- invent new visual classes;
+- add JavaScript;
+- add DOK/proficiency ladder graphics.
+
+Use the current live shell:
+
+<body>
+<main>
+  <section class="tracker-page page-one">
+    <header class="page-header">
+      <div>
+        <div class="kicker">Conceptual Physics · Student Portfolio</div>
+        <h1>Unit U Progress Tracker</h1>
+        <div class="unit-name">Unit U — UNIT TITLE</div>
+      </div>
+      <div class="identity">
+        <div class="line-field"><span>Name</span><span class="line"></span></div>
+        <div class="line-field"><span>Date</span><span class="line"></span></div>
+      </div>
+    </header>
+
+    <div class="essential"><strong>Essential Standard:</strong> ...</div>
+
+    <div class="status-key">
+      <span class="status-choice">STATUS 1</span>
+      <span class="status-choice">STATUS 2</span>
+      <span class="status-choice">STATUS 3</span>
+      <span class="status-choice">STATUS 4</span>
+    </div>
+
+    <div class="owner-note">...</div>
+
+    [goal cards]
+  </section>
+
+  <section class="tracker-page page-two">
+    [same compact header with "Continued"]
+    [remaining goal cards]
+    <section class="reflection-box">...</section>
+  </section>
+</main>
+</body>
+
+Use current Framework status terms exactly.
+If the current Physics Framework retains:
+  Not Yet / Approaching / Meeting / Exceeding
+use those exact words.
+
+Do not invent alternate evidence-status labels.
+
+======================================================================
+5. GOAL CARD — EXACT DOM
+======================================================================
+
+One card per exact current Mastery Goal:
+
+<section class="goal-card" data-mastery-goal="MG_ID">
+  <div class="goal-head">
+    <div class="goal-id">MG_ID</div>
+    <div class="goal-title">
+      <span class="label">Mastery Goal:</span> EXACT_MG_TEXT
+    </div>
+  </div>
+
+  <div class="goal-grid">
+    <div>
+      <div class="section-label">Supporting I-Can Statements</div>
+      <div class="ican-list">
+        [exact I-can rows]
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Current Evidence Status</div>
+      <div class="status-row">
+        [four .status-choice spans using exact current status terms]
+      </div>
+
+      <div class="section-label">Portfolio Evidence</div>
+      <table class="evidence-table" aria-label="Portfolio evidence for MG_ID">
+        <thead>
+          <tr>
+            <th class="date">Date</th>
+            <th class="source">Evidence Source</th>
+            <th>What This Shows</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="next-move">
+        <span>My next move:</span>
+        <span class="next-line"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+======================================================================
+6. EXACT I-CAN ROW — HARD
+======================================================================
+
+Every rendered I-can row MUST be:
+
+<div class="ican" data-ican-id="EXACT_ICAN_ID">
+  <span class="check" aria-hidden="true"></span>
+  <span class="ican-text">EXACT I-CAN TEXT BEGINNING WITH "I can"</span>
+</div>
+
+HARD:
+- `.check` is EMPTY;
+- CSS draws the checkbox;
+- `.ican-text` is verbatim authoritative text;
+- `.ican-text` begins with `I can`;
+- never put `□`, `☐`, `✓`, or another checkbox glyph in the text;
+- never turn vocabulary, representations, misconceptions, teacher guidance, or evidence examples into fake I-can rows.
+
+Every I-can row must be traceable verbatim to the authoritative Unit Assessment Plan / Framework.
+
+======================================================================
+7. STATUS / EVIDENCE / REFLECTION
+======================================================================
+
+`.status-choice` contains ONLY status text.
+CSS `::before` supplies the checkbox.
+
+Do not put a checkbox glyph in the HTML.
+
+Preserve:
+- current evidence status block for every goal;
+- 3-row portfolio evidence table for every goal;
+- `My next move` line for every goal.
+
+Page 2 ends with the current Portfolio Reflection shell:
+
+- Which Mastery Goal has the strongest evidence right now? What evidence supports that judgment?
+- Which Mastery Goal needs the next evidence opportunity? What will you do next?
+
+Use:
+- `.reflection-box`
+- `.reflection-title`
+- `.reflection-columns`
+- `.reflection-prompt`
+- `.reflection-line`
+
+Do not add extra reflective prompts unless current Framework explicitly changes the shell.
+
+======================================================================
+8. NORMALIZER / QA
+======================================================================
+
+Direct-fetch and run the declared current tool:
+  Tools/normalize_progress_tracker_shell.py
+
+Run it against the expanded staging root AFTER final HTML assembly.
+
+Require:
+  Progress Tracker shell normalizer: PASS
+
+The normalizer may repair only the known shell mechanics:
+- `.check + .ican-text`;
+- checkbox-glyph cleanup in status choices.
+
+It is NOT permission to alter authoritative I-can wording.
+
+After normalization, re-open the final HTML and verify exact source text is still verbatim.
+
+======================================================================
+9. FROZEN QA
+======================================================================
+
+TOOL ROUTING
+- Philosophy read first;
+- Runtime read second;
+- Physics Framework / Unit Assessment Plan direct-fetched;
+- no web search/fetch/external research;
+- declared paths direct-fetched.
+
+CONTENT
+- exact current Unit number/title;
+- exact Essential Standard;
+- exact Mastery Goal IDs/text;
+- every exact supporting I-can included once under its correct goal;
+- no invented I-can rows;
+- current status/evidence language only;
+- no DOK ladder.
+
+DOM / CSS
+- exactly one linked stylesheet: `../../css/progress_tracker.css`;
+- exactly two direct `.tracker-page` sections;
+- page 1 = `.tracker-page.page-one`;
+- page 2 = `.tracker-page.page-two`;
+- current compact headers;
+- each goal uses `.goal-card`;
+- exact `.goal-grid`, `.ican-list`, `.evidence-table`, `.next-move`;
+- page-two `.reflection-box`;
+- no checkbox glyphs in I-can/status text.
+
+PRINT
+- Letter portrait;
+- exactly two pages;
+- no clipped content;
+- all I-cans readable;
+- no altered shared CSS.
+
+FINAL
+- normalizer PASS;
+- exact output path;
+- no unresolved template tokens;
+- no extra files.
+
+Do not invent new QA criteria mid-run.
+Park new systemic findings for later PM revision.
+
+======================================================================
+10. OUTPUT
+======================================================================
+
+This resource is ONE deployed file.
+
+Return directly:
+  progress/unit_{U}_progress/unit_{U}_progress.html
+
+Do NOT ZIP a one-file Progress Tracker build.
+
+Do not include:
+- PM;
+- Framework;
+- CSS;
+- Assessment Plan;
+- tools;
+- staging/report files.
+
+END — BUILD PROGRESS TRACKER

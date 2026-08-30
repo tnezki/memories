@@ -1,0 +1,559 @@
+BUILD REVIEW — SINGLE PASS / MASTERY-SYNTHESIS + PRACTICE-ROUTED / LIVE-SHELL LOCK
+================================================================================================
+
+STATUS: CURRENT
+STEP: 10
+JOB: review
+ROLE: Build the current Unit Review study guide + Review Practice from the exact Physics Mastery architecture.
+
+This is ONE build PM.
+There is no nested Review PM folder, starter ZIP, preview ZIP, README, run-prompt file, or embedded recurring renderer dependency.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + PHYSICS FRAMEWORK
+    -> CURRENT UNIT MASTERY GOALS + EXACT I-CANS
+    -> MAIN REVIEW SYNTHESIS
+    -> SELECT / ADAPT NONSECURE FINISHED PRACTICE
+    -> REVIEW PRACTICE
+    -> LIVE-SHELL / MATHJAX / PATH QA
+    -> PACKAGE REVIEW BRANCH
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum build.
+
+Public GitHub access does NOT authorize generic web search or public-web fetch.
+
+Resolve declared resources through manifests/contracts and DIRECT-FETCH exact paths at the pinned snapshot.
+If a declared required file cannot be fetched:
+  FAIL CLOSED
+and name the exact repo/path.
+Do not search around the failure.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. current canonical Physics Framework front door through `frameworks/Physics/MANIFEST.json`;
+4. ORIGINAL requested Unit Assessment Plan;
+5. current universal Question Structure ONLY if fresh Review Practice questions must be authored;
+6. this PM;
+7. current finished Practice handoff / Practice artifacts used as nonsecure Review Practice sources;
+8. current deployed `css/review.css` and `css/review_practice.css`;
+9. current live Review HTML only as shell exemplar.
+
+Pin system + Physics course repositories once at job start.
+Never mix later commits.
+
+Authority:
+1. current explicit teacher instruction;
+2. Philosophy;
+3. universal Question Structure when authoring;
+4. Physics Framework / ORIGINAL Assessment Plan;
+5. this PM;
+6. live Review HTML/CSS mechanics.
+
+======================================================================
+2. PURPOSE / VISIBLE IDENTITY
+======================================================================
+
+MAIN REVIEW
+- SCREEN STUDY GUIDE / SYNTHESIS;
+- prepares students for CURRENT Unit Mastery evidence;
+- organized around CURRENT Unit Mastery Goals;
+- supports study, connections, vocabulary, relationships, common traps, representations, and readiness;
+- is NOT the legacy Retrieval stage merely because the artifact is called Review.
+
+Visible title:
+  Unit {U} Review
+
+Visible intro:
+  Review the skills and understandings from your Unit {U} Mastery Goals.
+
+Do NOT display:
+- historical/source Unit numbers;
+- “Assigned during Unit ...” language;
+- internal Bank routes;
+- internal generator labels.
+
+REVIEW PRACTICE
+- open-response study/retrieval work aligned to the same CURRENT Unit Mastery Goals;
+- nonsecure;
+- not an Exit Ticket;
+- not a Summative;
+- not a second Practice Bank.
+
+======================================================================
+3. CURRENT DEPLOYED PATHS
+======================================================================
+
+Resolve through the current Physics course-file-structure contract.
+
+Current deployed branch:
+  reviews/review{U}/
+
+Main Review:
+  reviews/review{U}/review_{U}.html
+
+Review Practice:
+  reviews/review{U}/review_{U}_practice.html
+
+Local figures when actually required:
+  reviews/review{U}/figures/
+
+Do not add a preview ZIP or duplicate shared CSS.
+
+======================================================================
+4. AUTHORITATIVE CONTENT SOURCES
+======================================================================
+
+MAIN REVIEW SOURCE:
+- exact current Unit Mastery Goals;
+- exact supporting I-can IDs/text;
+- exact current Unit title / Assessment Plan scope;
+- current Physics relationships/vocabulary/representations already established by Framework and finished instructional artifacts.
+
+Main Review MAY lightly synthesize:
+- concise relationship summaries;
+- vocabulary groupings;
+- rules / physical relationships;
+- common traps;
+- useful current-unit representations;
+- DOK perspective when meaningful;
+- final readiness checks.
+
+Synthesis must not:
+- create a competing learning sequence;
+- invent new scope;
+- alter exact I-can meaning.
+
+REVIEW PRACTICE SOURCE — CURRENT DOWNSTREAM ROUTE:
+First use the finished Step 5 Practice artifact/handoff because it contains already-instantiated, nonsecure, current-unit questions.
+
+Required front door:
+  practice_sets/_practice_provenance/unit{U}/PRACTICE_BUILD_HANDOFF.json
+
+Use the exact Framework mapping from I-can -> current Mastery Goal to select suitable questions.
+
+Selection preference:
+1. finished Practice questions with a strong match to that exact I-can / Mastery Goal;
+2. broad representation/evidence usefulness for review;
+3. avoid accidental exact duplicate prompts inside the Review Practice;
+4. preserve purposeful repetition when it serves the Mastery Goal.
+
+Do NOT use:
+- secure Summative items;
+- Exit Ticket items;
+- old Retrieval-stage Review questions merely because of their label;
+- Bank Map;
+- internal generator labels.
+
+If the finished Practice handoff cannot supply enough suitable nonsecure questions for a Mastery Goal:
+- read current Question Structure;
+- author the minimum fresh parallel Review questions needed directly from the exact supporting I-can(s);
+- solve/verify them independently;
+- preserve the same learning/evidence identity.
+
+Do not fall back to unrelated legacy content.
+
+======================================================================
+5. REVIEW PRACTICE COUNT — CURRENT PHYSICS DEFAULT
+======================================================================
+
+Current Physics default:
+  FOUR open-response Review Practice questions per current Mastery Goal.
+
+If the current Framework explicitly changes that count, Framework wins.
+
+For the standard four-Mastery-Goal Unit:
+  16 total questions.
+
+Do not equalize I-can frequency mechanically.
+Across the four questions for one Mastery Goal, choose a useful mixture of its supporting I-cans/evidence jobs.
+
+Review Practice is open response.
+Do not convert the page into selected response just because a source Practice item was selected response.
+
+When adapting a selected-response source into open response:
+- preserve the exact I-can/evidence job;
+- remove answer choices;
+- ask the student to produce/justify the intended evidence directly;
+- independently verify the open-response answer;
+- record hidden source traceability.
+
+This is a downstream Review adaptation, not an upstream Practice mutation.
+
+======================================================================
+6. MAIN REVIEW HTML/CSS — ABSOLUTE LIVE-SHELL LOCK
+======================================================================
+
+Link EXACTLY:
+  ../../css/review.css
+
+Do NOT:
+- add `base.css`;
+- add a second stylesheet;
+- embed replacement CSS;
+- invent a new Review visual system.
+
+Use MathJax configuration BEFORE the library when mathematics is present:
+
+<script>
+window.MathJax={
+  tex:{
+    inlineMath:[['$','$']],
+    displayMath:[['$$','$$']],
+    processEscapes:true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+Use the current shell:
+
+<body id="top" data-unit="U">
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Conceptual Physics · Unit U</div>
+    <h1>Unit U Review</h1>
+    <p class="hero-copy">Review the skills and understandings from your Unit U Mastery Goals.</p>
+    <nav class="jump-nav" aria-label="Review navigation">
+      <a href="#glance">At a Glance</a>
+      <a href="#vocabulary">Vocabulary</a>
+      <a href="#structures">Rules &amp; Structures</a>
+      <a href="#dok">DOK Perspective</a>
+      <a href="#final-check">Final Check</a>
+      <a href="review_U_practice.html">Practice Problems</a>
+    </nav>
+  </div>
+</header>
+
+<main class="review-shell">
+  ...
+</main>
+
+<a class="floating-top" href="#top" aria-label="Return to top">↑ Top</a>
+<footer class="review-footer">Conceptual Physics · Unit U Review</footer>
+
+</body>
+
+Required visible panels:
+- `section#glance.review-panel`
+- `section#vocabulary.review-panel`
+- `section#structures.review-panel`
+- one `.review-panel.section-review[data-mastery-goal]` per exact current Mastery Goal
+- `section#dok.review-panel`
+- `section#final-check.review-panel`
+
+No raw MG-number navigation labels.
+
+======================================================================
+7. MAIN REVIEW CONTENT STRUCTURE
+======================================================================
+
+AT A GLANCE
+- current Unit title;
+- concise synthesis of how the major Physics ideas work together;
+- no stale prior-Unit content.
+
+VOCABULARY
+- current Unit vocabulary only;
+- use live Review vocabulary hooks:
+  `.vocab-grid` / `.term`
+  OR other classes already supported by current `review.css`;
+- do not add definitions here unless instructionally useful;
+- terminology must match current Framework/Notes.
+
+RULES & STRUCTURES
+- compact high-value Physics relationships/model checks;
+- use proper MathJax;
+- equations are physical relationships, not answer machines;
+- preserve sign/direction/units meaning where useful.
+
+MASTERY FOCUS — ONE PER CURRENT MG
+Each focus:
+  <section class="review-panel section-review" data-mastery-goal="EXACT_MG_ID">
+    <div class="section-label">Review Focus N</div>
+    <h2>SHORT STUDENT-READABLE HEADING</h2>
+    <p>EXACT MASTERY GOAL TEXT</p>
+    <ul class="summary-list">
+      [EXACT SUPPORTING I-CAN STATEMENTS]
+    </ul>
+    [purposeful synthesis/representation/common traps as needed]
+  </section>
+
+Heading:
+- normally 2–8 words;
+- derived from the Mastery Goal;
+- do NOT use `MG1` as visible heading;
+- do NOT paste the full MG sentence as the h2.
+
+Keep exact MG ID in `data-mastery-goal`.
+
+Exact supporting I-can text is shown verbatim.
+
+DOK PERSPECTIVE
+- describes how thinking can deepen;
+- DOK is not proficiency;
+- no ladder/rank implying students “move up” through DOK;
+- use content-specific examples from this Unit.
+
+FINAL CHECK
+- concise readiness checklist;
+- includes Practice Problems link;
+- not a new assessment.
+
+======================================================================
+8. STUDENT REPRESENTATIONS
+======================================================================
+
+Representations are review content, not decoration.
+
+Reuse current approved/nonsecure representations when useful.
+
+No descriptive student-facing figcaption.
+Prompt/explanatory text precedes the visual.
+
+When a local image is required:
+- preserve exact source bytes if reused from a finished artifact;
+- copy it into `reviews/review{U}/figures/`;
+- use a final relative path that resolves.
+
+Do not invoke the graph/diagram tool merely to make the Review more visual.
+If a new representation is genuinely needed for fresh authored Review Practice, use only a current Framework-declared tool.
+
+Never show the answer in a student image.
+
+======================================================================
+9. REVIEW PRACTICE HTML/CSS — ABSOLUTE LIVE-SHELL LOCK
+======================================================================
+
+Link EXACTLY:
+  ../../css/review_practice.css
+
+Do NOT add `base.css`.
+Do NOT use `practice_set.css`.
+Do NOT redesign.
+
+Use:
+
+<body>
+<main class="container">
+  <h1>Conceptual Physics — Unit U Review Practice</h1>
+  <h2>Practice the skills and understandings from your Unit U Mastery Goals.</h2>
+
+  <section class="dok-section" data-mastery-goal="EXACT_MG_ID">
+    <h3 class="section-label">SHORT MASTERY-FOCUS TITLE</h3>
+
+    <article class="problem" ...hidden provenance...>
+      <div class="problem-body">
+        <p><strong>N.</strong></p>
+        <p>OPEN-RESPONSE PROMPT</p>
+        [table / figure / representation when required]
+      </div>
+      <div class="workspace wu-ws-050" aria-hidden="true"></div>
+    </article>
+
+    [4 total problems for this MG under current Physics default]
+  </section>
+
+  ...
+</main>
+</body>
+
+IMPORTANT:
+Review Practice intentionally uses its OWN shell.
+Do NOT import the Practice Set rule that qnum + prompt must share the first `<p>`.
+The current Review Practice shell uses:
+  first `<p>` = number
+  next prompt markup = question.
+
+Follow `review_practice.css`.
+
+Workspace:
+  `<div class="workspace wu-ws-050" aria-hidden="true"></div>`
+
+Do not enlarge all workspaces.
+Do not add answer lines or teacher answers.
+
+======================================================================
+10. REVIEW PRACTICE HIDDEN IDENTITY
+======================================================================
+
+Every Review Practice `.problem` should carry available low-impact hidden identity:
+
+- `data-task-id`
+- `data-mastery-goal`
+- `data-primary-i-can-id`
+- `data-i-can-text`
+- `data-question-structure-id` when known/authored
+- `data-source-practice-task-id` when adapted from Practice
+- `data-source-practice-family-id` when available
+- `data-source-section`
+- `data-response-mode="constructed_response"`
+- `data-representation-mode`
+
+Do not visibly print this metadata.
+
+The local Review question gets a stable Review task ID such as:
+  U{U}-REVIEW-MG01-Q01
+
+Preserve source Practice identity only as provenance.
+
+======================================================================
+11. QUESTION QUALITY / ADAPTATION
+======================================================================
+
+Review Practice questions must read like normal student Physics questions.
+
+For quantitative Physics:
+- concrete physical situation;
+- equations as relationships;
+- units and direction/sign behavior correct;
+- no naked variable-assignment plug-and-chug.
+
+For diagrams/models:
+- student must actually use the representation if the I-can requires it;
+- constructed diagrams get usable blank space/scaffold;
+- answer-neutrality applies.
+
+For conceptual items:
+- avoid four vocabulary-definition prompts simply because they are easy to source;
+- use the actual Mastery Goal evidence jobs;
+- purposeful direct retrieval is allowed;
+- map-first intentionality beats forced maximum variety.
+
+Do not expose `[Family 07]`, generator iteration labels, or internal source names.
+
+======================================================================
+12. MATHJAX
+======================================================================
+
+Both Review files use the same proven MathJax contract when mathematics appears:
+
+<script>
+window.MathJax={
+  tex:{
+    inlineMath:[['$','$']],
+    displayMath:[['$$','$$']],
+    processEscapes:true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+All TeX syntax must be inside delimiters.
+Escape literal currency dollars as `\$`.
+
+No raw `\frac`, `^`, `_`, etc. intended as math may remain visibly unrendered.
+
+======================================================================
+13. REVIEW SHELL CHECKER
+======================================================================
+
+Direct-fetch and run:
+  Tools/qa_review_shell_contract.py
+
+Run on:
+1. final expanded staging tree;
+2. extracted handoff ZIP bytes.
+
+Require:
+  Review shell contract: PASS
+
+Do not modify the checker during the build.
+
+If the checker and live CSS/Framework genuinely conflict:
+  fail closed and report SYSTEM_CONTRACT_MISMATCH.
+
+======================================================================
+14. FROZEN QA
+======================================================================
+
+TOOL ROUTING
+- Philosophy first;
+- Runtime second;
+- Framework/Assessment Plan before Review authoring;
+- Question Structure only when fresh questions are authored;
+- no web search/fetch/external research;
+- declared paths direct-fetched.
+
+MAIN REVIEW
+- exact current Unit identity;
+- exact current Mastery Goals;
+- every exact supporting I-can;
+- no historical/source Unit leakage;
+- only `../../css/review.css`;
+- required `#glance`, `#vocabulary`, `#structures`, `#dok`, `#final-check`;
+- one `section-review[data-mastery-goal]` per current MG;
+- concise student-readable focus headings;
+- Practice Problems nav link;
+- floating Top control;
+- no visible internal metadata;
+- MathJax renders.
+
+REVIEW PRACTICE
+- only `../../css/review_practice.css`;
+- one `.dok-section[data-mastery-goal]` per current MG;
+- current Physics default 4 open-response questions per MG unless Framework changes;
+- questions aligned through exact supporting I-cans;
+- nonsecure source only;
+- no Exit/Summative content;
+- no `[Family N]` or generator labels;
+- `.problem > .problem-body`;
+- number in first `<p>`, prompt follows according to current Review shell;
+- `workspace wu-ws-050`;
+- required representations visible/usable;
+- no answer leakage;
+- hidden identity/provenance present.
+
+FINAL
+- all local figure paths resolve;
+- no descriptive student captions;
+- no raw TeX;
+- no unresolved tokens;
+- Review checker PASS before ZIP;
+- Review checker PASS after extracting ZIP;
+- no CSS duplicated in package;
+- no junk.
+
+Do not invent new QA criteria mid-run.
+Park new systemic findings for later PM revision.
+
+======================================================================
+15. OUTPUT
+======================================================================
+
+Return ONE handoff ZIP:
+  unit{U}_review.zip
+
+ZIP root:
+  reviews/
+    review{U}/
+      review_{U}.html
+      review_{U}_practice.html
+      figures/ only when actual local referenced assets are required
+
+Do NOT include:
+- CSS;
+- PM;
+- Framework;
+- Practice source files;
+- Practice provenance;
+- Bank/Bank Map;
+- checker tools;
+- preview ZIP;
+- staging/report junk.
+
+END — BUILD REVIEW

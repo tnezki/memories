@@ -1,0 +1,551 @@
+BUILD PERFORMANCE TASKS + QUICK CHECKS — SINGLE PASS / MAP-FIRST / LIVE-CSS LOCK
+======================================================================================
+
+STATUS: CURRENT
+STEP: 14
+JOB: performance_quick_checks
+ROLE: Build the complete Performance Task + Quick Check evidence-resource family for the requested Physics Unit/scope.
+
+This is ONE build PM.
+There is no starter ZIP, nested PM manifest, control-panel profile, or bundled reference CSS dependency.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + PHYSICS FRAMEWORK
+    -> MAP QUICK-CHECK EVIDENCE
+    -> MAP PERFORMANCE-TASK EVIDENCE/ACTION
+    -> WHOLE-SCOPE QA
+    -> AUTHOR
+    -> LIVE CSS / MATHJAX / ANSWER-NEUTRAL QA
+    -> PACKAGE COURSE-ROOT PATCH
+
+======================================================================
+0. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum build.
+
+Use canonical GitHub connector/direct-fetch operations at pinned commits.
+Public repository access does NOT authorize web search.
+
+Resolve exact paths from manifests/contracts.
+If a declared required file cannot be direct-fetched:
+  FAIL CLOSED
+and name the exact repo/path.
+Do not search around the failure.
+
+======================================================================
+1. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. current canonical Physics Framework front door through `frameworks/Physics/MANIFEST.json`;
+4. current universal Question Structure authority when item/evidence structures are authored;
+5. this PM;
+6. only purpose-specific Framework/course resources required by the mapped tasks.
+
+Pin system + Physics course repositories once at start.
+
+Authority:
+1. current explicit teacher instruction;
+2. Philosophy;
+3. universal Question Structure;
+4. Physics Framework / embedded Assessment Plan;
+5. this PM;
+6. current CSS/tool implementation.
+
+The Framework owns:
+- exact I-cans / evidence intent;
+- section architecture;
+- course-specific DOK/evidence role;
+- representation/source hierarchy;
+- timing/form counts when specified;
+- deployed paths.
+
+This PM owns procedure.
+
+======================================================================
+2. RESOURCE PURPOSE
+======================================================================
+
+QUICK CHECK
+- compact independent evidence;
+- deeper/bigger picture than an Exit Ticket;
+- quiz-like evidence purpose, not extra Practice;
+- enough connected evidence to judge current understanding without becoming a full Summative;
+- independent student work;
+- no discourse coaching on student or teacher delivery;
+- exact I-can/evidence mapping first.
+
+PERFORMANCE TASK
+- richer coherent evidence route;
+- one meaningful situation/problem/design/model through-line;
+- students model, create, analyze, test, critique, revise, decide, design, or defend;
+- deeper evidence may support DOK 3/4 when the actual task warrants it;
+- DOK is descriptive after design, never a decorative label;
+- shared setup/data/partner exchange is allowed when appropriate, while preserving interpretable individual evidence where required.
+
+Do not bundle unrelated quiz questions and call them a Performance Task.
+
+A finalized Bank is NOT automatically required.
+Use it only if the current Framework/request explicitly declares it necessary or useful.
+Do not read the Bank Map by default.
+
+======================================================================
+3. CURRENT DEPLOYED PATHS
+======================================================================
+
+Resolve through:
+  frameworks/2_Framework_Physics/Conceptual_Physics_Framework/contracts/course_file_structure.json
+
+Current Physics section paths:
+
+PERFORMANCE TASK STUDENT
+  performance_task___5134zrt/u{U}_{S}_performance_task/u{U}_{S}_performance_task.html
+
+PERFORMANCE TASK TEACHER
+  performance_task___5134zrt/u{U}_{S}_performance_task/u{U}_{S}_performance_task_teacher_guide.html
+
+QUICK CHECK
+  quick_check____htq5855/u{U}_{S}_quick_check/u{U}_{S}_quick_check.html
+
+If these declared directories/files are not yet deployed, that is NOT permission to search for substitutes.
+Build the declared paths from the current Framework/CSS contract.
+
+======================================================================
+4. MAP-FIRST GATE — REQUIRED BEFORE HTML
+======================================================================
+
+Map BOTH resource families across the complete requested scope before rendering any section.
+
+A normal Unit request maps every active section in that Unit first.
+Whole-course request maps whole course first.
+
+QUICK CHECK MAP — EACH SECTION
+- section ID/title;
+- exact I-can statements;
+- I-cans actually evidenced;
+- each evidence opportunity -> primary I-can;
+- exact evidence job / what makes understanding judgeable;
+- planned response mode;
+- representation/data/figure decision;
+- expected time/page/form count ONLY when current Framework specifies it;
+- why this is a deeper/bigger evidence picture than the section Exit Ticket;
+- if multiple parallel forms are required: canonical evidence blueprint + permitted variation/permutation plan.
+
+PERFORMANCE TASK MAP — EACH SECTION
+- section ID/title;
+- exact I-cans actually evidenced;
+- evidence claim(s) teacher should be able to make;
+- coherent situation/design/model;
+- PERFORMANCE ACTION — what students actually DO;
+- student action sequence;
+- individual/shared components;
+- concrete student artifact/output;
+- representations students read/build/use/compare/translate;
+- graph/figure/data/tool decision;
+- materials/technology;
+- evidence to look/listen for;
+- intended DOK AFTER task design;
+- why this action fits the mapped I-cans.
+
+WHOLE-SCOPE MAP QA
+Repair the map before HTML if:
+- explicit I-can is accidentally under-evidenced;
+- easy target gets all opportunities;
+- PT is really disconnected questions;
+- claimed DOK 4 lacks genuine extended synthesis/modeling/revision/defense;
+- representation-heavy evidence is text-only without reason;
+- same performance action repeats due template convenience;
+- action label is fake (COLLECT with no collection, BUILD with no build, CREATE/TRADE with no exchange, MODEL with no model);
+- stock rationale repeats across sections;
+- Quick Check became Exit pulse or mini-Summative.
+
+Purposeful repetition is allowed.
+No anti-repetition quota.
+
+Map artifacts are staging/build working files.
+Do not add them to the course root unless teacher explicitly requests them.
+
+======================================================================
+5. QUESTION / EVIDENCE AUTHORING
+======================================================================
+
+Work from:
+  exact I-can
+    -> evidence job
+    -> student action
+    -> approved question/evidence structure
+    -> response mode
+    -> representation
+    -> final prompt
+    -> independently verified answer/solution.
+
+PHYSICS:
+- conceptual meaning before mechanical calculation when appropriate;
+- quantitative prompts begin from concrete physical situations;
+- equations are physical relationships, not naked answer machines;
+- all values/details matter;
+- physically plausible states only;
+- selected-response distractors come from item-specific misconceptions/errors;
+- representation promises must be literal.
+
+Do not add generic “explain your reasoning” suffixes to every item.
+Do not expose internal generator/DOK/proficiency labels to students.
+
+======================================================================
+6. REPRESENTATIONS / FIGURES / DATA
+======================================================================
+
+Representations are evidence content.
+Students must read/build/use/compare/translate/annotate/interpret/evaluate them.
+
+Use current Framework-declared graph/figure/data tool when:
+- it directly supports the mapped evidence;
+- its path is explicitly declared;
+- direct-fetched from pinned snapshot.
+
+Do not search for alternate tools.
+
+When student construction IS the evidence:
+- provide blank scaffold/grid/data as appropriate;
+- do not pre-solve the representation.
+
+STUDENT FIGURE ANSWER-NEUTRALITY — HARD
+Never show the answer in a student image.
+Do not label, draw, mark, rank, calculate, or highlight what the student must determine.
+Teacher-only annotated answers may be separate.
+
+NO DESCRIPTIVE STUDENT CAPTIONS.
+Prompt introduces the representation.
+Keep only necessary scientific labels inside the visual.
+
+======================================================================
+7. PERFORMANCE TASK HTML/CSS — ABSOLUTE LIVE-CSS LOCK
+======================================================================
+
+Current production stylesheet:
+  ../../css/performance_task.css
+
+Link ONLY that stylesheet.
+Do not add `base.css`.
+Do not embed replacement CSS.
+Do not copy PM-folder reference CSS.
+
+The live CSS is the visual authority.
+
+Use the shell/classes the CSS actually supports:
+
+<body>
+  <main class="performance-task">
+    <section class="pt-page">
+      <header class="pt-header">
+        <div class="pt-kicker">...</div>
+        <div class="pt-title-row">
+          <h1>...</h1>
+          <div class="pt-section-pill">...</div>
+        </div>
+        <div class="student-row">...</div>
+      </header>
+
+      [evidence focus / directions when useful]
+      [task-specific sequence using supported hooks]
+      <div class="footer">...</div>
+    </section>
+    ...
+  </main>
+</body>
+
+Supported hooks include:
+- `.performance-task`
+- `.pt-page`
+- `.pt-header`
+- `.pt-kicker`
+- `.pt-title-row`
+- `.pt-section-pill`
+- `.student-row`
+- `.evidence-focus`
+- `.pt-directions`
+- `.task-card`
+- `.prompt`
+- `.materials` / `.material`
+- `.pt-table`
+- `.grid-wrap`
+- `.coordinate-grid`
+- `.blank-space`, `.large`, `.xl`
+- `.compact-list`
+- `.callout`
+- `.decision-box`
+- `.footer`
+- `.small`
+
+SAME CSS does NOT require same page count or same card count.
+Render the mapped action sequence.
+Do not force universal Situation / Part 1 / Part 2 / Part 3 structure.
+
+If nearly every PT in a large build has identical page/card choreography without a mapped reason, fail plan/render QA.
+
+======================================================================
+8. PERFORMANCE TASK TEACHER GUIDE — MIRRORED RED SUPPORT
+======================================================================
+
+Use the SAME:
+  ../../css/performance_task.css
+
+Start from finalized student HTML.
+Preserve:
+- same pages;
+- same wording/order;
+- same tables/figures;
+- same response spaces.
+
+Teacher support goes INSIDE the corresponding student response areas using existing CSS:
+
+  <div class="teacher-answer">...</div>
+  <div class="teacher-note">...</div>
+
+Use red teacher support for:
+- answer / sample answer;
+- acceptable alternatives;
+- rationale/evaluation criteria;
+- expected representation/model features;
+- evidence guidance.
+
+Open-ended tasks:
+- strong sample;
+- criteria for another response to count.
+
+For major discussion-worthy PT phases, teacher guide may also include:
+- Teacher Moves — normally 2–4;
+- Student Moves — normally 2–4;
+- Listen For when useful.
+
+Do not add discourse coaching where it would contaminate intended independent evidence.
+Student PT contains no teacher discourse blocks.
+
+======================================================================
+9. QUICK CHECK HTML/CSS — ABSOLUTE LIVE-CSS LOCK
+======================================================================
+
+Current production stylesheet:
+  ../../css/quick_check.css
+
+Link ONLY that stylesheet.
+Do not add `base.css`.
+Do not embed replacement CSS.
+Do not copy PM-folder reference CSS.
+
+Quick Check is print-first, collection/scanning friendly, portrait.
+
+One complete form uses:
+  <main class="quick-check qc-version">
+    <header class="qc-header">
+      <div class="qc-title-row">
+        <div>
+          <div class="qc-kicker">...</div>
+          <h1 class="qc-title">...</h1>
+        </div>
+        <div class="qc-section-pill">...</div>
+      </div>
+      <div class="student-row">...</div>
+    </header>
+
+    [evidence focus when student-facing wording is appropriate]
+    <p class="qc-directions">...</p>
+
+    <section class="qc-question">
+      <div class="qc-question-head">
+        <div class="qc-number">1</div>
+        <div class="qc-prompt">...</div>
+      </div>
+      [representation]
+      [response space]
+    </section>
+
+    <footer class="qc-footer">...</footer>
+  </main>
+
+Use existing hooks only:
+- `.quick-check`
+- `.qc-version`
+- `.qc-header`
+- `.qc-title-row`
+- `.qc-kicker`
+- `.qc-title`
+- `.qc-section-pill`
+- `.student-row`
+- `.student-field`
+- `.evidence-focus`
+- `.evidence-list`
+- `.qc-directions`
+- `.qc-question`
+- `.qc-question-head`
+- `.qc-number`
+- `.qc-prompt`
+- `.qc-two-col`
+- `.qc-figure`
+- `.qc-table`
+- `.response-space.small|medium|large|xlarge`
+- `.equation-response`
+- `.qc-choice-row`
+- `.qc-subprompt`
+- `.qc-mini-label`
+- `.qc-footer`
+
+Workspace is blank white space; do not add ruled lines.
+
+FORM COUNT:
+Use the exact form count/current parallel-form rule from the Physics Framework/Assessment Plan if specified.
+Do NOT infer “six forms” merely because the CSS supports multi-version HTML.
+If multiple forms are required inside one HTML:
+- each is a complete `.quick-check.qc-version`;
+- preserve parallel evidence coverage and approximate difficulty;
+- use only permitted variation;
+- apply planned question-order permutation;
+- renumber after permutation;
+- CSS hard page break between forms.
+
+If the current Framework does not specify multiple forms, build one canonical Quick Check rather than inventing extras.
+
+Quick Checks receive NO discourse coaching.
+
+======================================================================
+10. MATHJAX — HARD
+======================================================================
+
+When mathematics is present, use EXACTLY:
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+Configuration precedes library.
+
+All visible TeX syntax must be inside delimiters.
+Inline: `$...$`
+Display: `$$...$$`
+Escape currency: `\$`.
+
+A page that loads MathJax but visibly leaves raw `x^2`, `\frac`, `_1`, etc. has FAILED.
+
+If current Framework manifest declares a final-byte MathJax fixer:
+- direct-fetch it;
+- run against unzipped staging root;
+- rerun QA;
+- do not package tool.
+If not declared, do not search for one.
+
+======================================================================
+11. OUTPUT / PACKAGING
+======================================================================
+
+For a normal Unit request return:
+  unit{U}_performance_tasks_quick_checks.zip
+
+ZIP root is a direct course-root patch containing EXACTLY the deployed roots needed:
+
+performance_task___5134zrt/
+  u{U}_{S}_performance_task/
+    u{U}_{S}_performance_task.html
+    u{U}_{S}_performance_task_teacher_guide.html
+    figures/ only if actual local referenced figures are required
+
+quick_check____htq5855/
+  u{U}_{S}_quick_check/
+    u{U}_{S}_quick_check.html
+    figures/ only if actual local referenced figures are required
+
+...repeat for requested sections.
+
+Do NOT include:
+- CSS already deployed in course `css/`;
+- PM files;
+- maps/plans unless explicitly requested;
+- Framework;
+- Bank/Bank Map unless explicitly required as source (never package them);
+- tools;
+- staging/temp files;
+- empty figure folders;
+- Mac junk.
+
+======================================================================
+12. FROZEN QA
+======================================================================
+
+TOOL ROUTING
+- Philosophy first;
+- Runtime second;
+- Framework before map/authoring;
+- Question Structure read when item structures are authored;
+- no web search/fetch/external research;
+- declared paths direct-fetched at pinned snapshot.
+
+MAP
+- every requested section exists in both maps;
+- exact I-cans preserved;
+- QC evidence is deeper than Exit but not mini-Summative;
+- PT is coherent action/evidence, not unrelated items;
+- representation plan literal;
+- no fake DOK;
+- no template-convenience repeated action.
+
+PERFORMANCE TASK STUDENT
+- exact path/name;
+- only `../../css/performance_task.css`;
+- `.performance-task` / `.pt-page` live shell;
+- mapped action sequence implemented;
+- no universal page/card choreography imposed;
+- no student answers;
+- no visible internal metadata;
+- representations answer-neutral;
+- no descriptive captions.
+
+PERFORMANCE TASK TEACHER
+- same student structure;
+- only performance_task.css;
+- teacher answers/notes red via `.teacher-answer` / `.teacher-note`;
+- strong samples + acceptance criteria for open-ended work;
+- teacher/student discourse moves only where instructionally appropriate.
+
+QUICK CHECK
+- exact path/name;
+- only `../../css/quick_check.css`;
+- complete form(s);
+- correct exact form count from current authority;
+- independent evidence;
+- blank response spaces from supported classes;
+- question cards do not break incorrectly;
+- no answers/discourse coaching;
+- parallel forms preserve same mapped evidence if required.
+
+MATH / REPRESENTATION
+- exact MathJax boilerplate when needed;
+- no raw TeX outside delimiters;
+- no answer leakage;
+- figures/tables/data actually exist;
+- local paths resolve.
+
+FINAL
+- exact deployed roots;
+- no duplicated CSS;
+- no unresolved tokens;
+- no junk;
+- ZIP integrity passes.
+
+Do not invent new QA criteria mid-run.
+Park new systemic findings for later PM revision.
+
+END — BUILD PERFORMANCE TASKS + QUICK CHECKS
