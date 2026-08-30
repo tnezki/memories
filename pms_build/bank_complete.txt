@@ -71,10 +71,28 @@ ENTRY GATE — HARD:
 - MAP_MANIFEST.status MUST equal "PASS";
 - question_design.status MUST equal "PASS";
 - qa.status MUST equal "PASS";
-- all declared Map slices/fingerprints must reconcile.
+- all declared Map slice paths/counts/identities must reconcile with the accepted manifest.
 
 If not:
   FAIL CLOSED as BANK_MAP_NOT_ACCEPTED.
+
+ACCEPTED-MAP TRANSPORT RULE — HARD
+----------------------------------
+The accepted Map may be consumed directly through the connected repository reader at the exact
+pinned course commit.
+
+Do NOT require the accepted Map files to be copied byte-for-byte into the local runtime merely
+to prove they exist.
+
+When the exact declared path is read at the exact pinned commit and MAP_MANIFEST records the
+accepted SHA-256/fingerprint:
+- treat that direct pinned read as the canonical source;
+- preserve the recorded SHA-256/fingerprint as accepted identity metadata;
+- local re-hashing is OPTIONAL when raw bytes are actually materialized;
+- inability to materialize GitHub blobs into the local filesystem is NOT a curriculum/build blocker.
+
+Do NOT reconstruct or substitute a missing canonical Map file.
+If an exact declared Map path cannot be read from the pinned repository connection, FAIL CLOSED.
 
 ============================================================================
 1. OLD / PARTIAL UNIT BANKS MUST NOT BLOCK THIS JOB
@@ -378,15 +396,34 @@ may temporarily represent the legacy post-instructional state:
   ready_for_downstream = false
   completed includes "3A_instructional_core"
 
-Run the registered `qa_bank_3a_contract` against the FRESH staging tree.
+REGISTERED VALIDATOR — BEST EFFORT, NOT TRANSPORT GATE
 
-If it fails:
-- repair only genuine mechanical core defects;
+If the runtime can materialize the required pinned canonical inputs beside the fresh staging tree
+without reconstructing/substituting files, run the registered `qa_bank_3a_contract`.
+
+If it runs and reports FAIL:
+- repair genuine mechanical core defects;
 - rerun the same validator;
-- do not change validator criteria;
-- do not require an intermediate GitHub commit.
+- do not weaken or change validator criteria.
 
-A PASS certifies mechanical contracts only; semantic correctness is still checked by this PM.
+If the runtime CANNOT materialize the repository inputs required by that validator:
+- do NOT fail the Bank solely for that transport limitation;
+- record validator status = `NOT_RUN_TRANSPORT_LIMITATION`;
+- perform the Phase A mechanical reconciliation directly from:
+  1. the exact accepted Map records read at the pinned commit, and
+  2. the freshly authored local staging files.
+
+The direct reconciliation MUST verify the mechanical contracts the build depends on:
+- every mapped exact-content record exists exactly once;
+- mapped identity fields are preserved;
+- selected-response choices are complete/visible/keyed;
+- semantic tables/response surfaces/required render markers exist;
+- local generated representation refs resolve;
+- ITEM_INDEX routes/counts reconcile;
+- staged BANK_MANIFEST state reconciles.
+
+A registered-validator PASS is useful evidence, but transport availability is not itself part of
+the curriculum quality contract.
 
 --------------------------------
 PHASE B — PRACTICE FAMILIES
@@ -407,12 +444,31 @@ represent the legacy post-Practice state:
     "3A_instructional_core"
     "3B_practice_families"
 
-Run registered `qa_bank_3b_contract` against the SAME fresh staging tree.
+REGISTERED VALIDATOR — BEST EFFORT, NOT TRANSPORT GATE
 
-If it fails:
+If its required pinned inputs are locally materializable without substitution, run the registered
+`qa_bank_3b_contract` against the SAME fresh staging tree.
+
+If it runs and reports FAIL:
 - repair genuine mechanical core defects;
-- rerun same validator;
-- no intermediate commit/handoff.
+- rerun the same validator.
+
+If it cannot run because canonical repository inputs cannot be materialized locally:
+- record validator status = `NOT_RUN_TRANSPORT_LIMITATION`;
+- do NOT block the Bank for that reason alone;
+- perform direct Practice reconciliation against the exact accepted `practice_map.json` data
+  consumed from the pinned repository.
+
+Direct Practice reconciliation MUST verify:
+- every mapped Practice family exists exactly once;
+- section/family counts reconcile;
+- mapped identity/contract fields are preserved;
+- each canonical_seed is complete;
+- selected-response choices are visible/unique/keyed;
+- required tables/representations/render markers exist;
+- ITEM_INDEX routes reconcile.
+
+No intermediate GitHub commit or handoff is required.
 
 --------------------------------
 PHASE C — SECURE ASSESSMENT
@@ -477,7 +533,18 @@ Preserve:
 - current pinned run identity;
 - complete record counts;
 - exact canonical paths;
-- qa_status = PASS.
+- qa_status = PASS when the FINAL CANONICAL QA in this PM passes.
+
+Also record validator execution separately, for example:
+
+  "validator_execution": {
+    "qa_bank_3a_contract": "PASS | NOT_RUN_TRANSPORT_LIMITATION",
+    "qa_bank_3b_contract": "PASS | NOT_RUN_TRANSPORT_LIMITATION"
+  }
+
+Do not falsely label a validator PASS when it did not execute.
+A transport-skipped validator does not prevent final `qa_status = PASS` when the direct
+reconciliation + final canonical QA pass.
 
 Paths must include as applicable:
 - item_index;
@@ -567,17 +634,24 @@ DOWNSTREAM
 CORE BOUNDARY
 [ ] no blocking correctness/completeness/usability defect remains
 [ ] optional aesthetic/polish improvements are NOT treated as blockers
+[ ] inability to run an OPTIONAL transport-dependent legacy validator is not treated as a blocker
+    when its direct reconciliation pass has completed successfully
 
 Do not PASS because JSON merely parses.
-Do not FAIL a correct complete usable Bank merely because a later audit could make it better.
+Do not PASS by fabricating validator results.
+Do not FAIL a correct complete usable Bank merely because a later audit could make it better
+or because a legacy validator could not be executed for transport-only reasons.
 
 ============================================================================
 11. TEACHER BANK HTML
 ============================================================================
 
-Generate:
+Generate — MANDATORY:
 
   banks/unitN/unitN.html
+
+A successful 3b build MUST include this teacher-readable HTML inspection file.
+The Bank may not be marked COMPLETE without it.
 
 Use exactly:
   ../../css/base.css
@@ -628,10 +702,16 @@ Preserve concise provenance sufficient to reconstruct the run:
 - Practice count;
 - Exit count;
 - Summative count;
-- qa_bank_3a_contract result;
-- qa_bank_3b_contract result;
+- qa_bank_3a_contract execution status/result;
+- qa_bank_3b_contract execution status/result;
+- direct Phase A reconciliation result when validator was transport-skipped;
+- direct Practice reconciliation result when validator was transport-skipped;
 - final canonical QA result;
 - final Bank state.
+
+If a validator is skipped for transport reasons, say exactly:
+  `NOT_RUN_TRANSPORT_LIMITATION`
+Do not call it PASS.
 
 Legacy internal-phase provenance filenames may be retained because existing tooling already recognizes them.
 
@@ -645,9 +725,16 @@ Do not duplicate giant reasoning logs.
 13. FULL-SNAPSHOT DELIVERY
 ============================================================================
 
-Return ONE ZIP:
+Return ONE ZIP — MANDATORY ON GOOD-ENOUGH PASS:
 
   unitN.zip
+
+If the accepted Map is readable and the complete authored Bank passes this PM's direct
+reconciliation + FINAL CANONICAL QA, emit the ZIP even when a legacy registered validator was
+`NOT_RUN_TRANSPORT_LIMITATION`.
+
+Do not withhold an otherwise good-enough Bank merely because GitHub repository blobs could not be
+materialized beside a validator.
 
 ZIP root:
 
@@ -686,9 +773,11 @@ Report:
 - Exit family count;
 - Summative family count;
 - graph/table/diagram route summary;
-- deterministic mechanical validator results;
+- registered-validator execution status/results;
+- direct reconciliation result when a validator was transport-skipped;
 - final canonical QA PASS/FAIL;
 - BANK_MANIFEST status/ready_for_downstream;
+- confirmation that unitN.html is present;
 - output filename.
 
 STOP after delivery.
