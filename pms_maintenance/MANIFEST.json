@@ -2,122 +2,18 @@
   "schema": "curriculum-maintenance-pm-registry/1.0",
   "jobs": [
     {
-      "job": "course_bank_sync",
-      "label": "Course Bank Sync",
-      "path": "pms_maintenance/course_bank_sync",
-      "entrypoint": "pms_maintenance/course_bank_sync/PM.txt"
+      "job": "generic_audit_rebuild",
+      "label": "Audit + Rebuild",
+      "group": "Generic Maintenance",
+      "path": "pms_maintenance/generic_audit_rebuild.txt",
+      "entrypoint": "pms_maintenance/generic_audit_rebuild.txt"
     },
     {
-      "job": "patch_bank_audit_route",
-      "label": "PATCH 00 \u00b7 Audit + Route",
-      "group": "Bank Patches \u2014 Start / Re-audit",
-      "path": "pms_maintenance/physics/bank/audit_route",
-      "entrypoint": "pms_maintenance/physics/bank/audit_route/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_mapping_integrity",
-      "label": "PATCH M \u00b7 Mapping Integrity",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/mapping_integrity",
-      "entrypoint": "pms_maintenance/physics/bank/mapping_integrity/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_clean",
-      "label": "PATCH C \u00b7 CLEAN Questions",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/clean",
-      "entrypoint": "pms_maintenance/physics/bank/clean/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_wtc_frq",
-      "label": "PATCH W \u00b7 WTC FRQs",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/wtc_frq",
-      "entrypoint": "pms_maintenance/physics/bank/wtc_frq/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_ex_yti",
-      "label": "PATCH Y \u00b7 Example / YTI Pairs",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/ex_yti",
-      "entrypoint": "pms_maintenance/physics/bank/ex_yti/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_practice_families",
-      "label": "PATCH P \u00b7 Practice Families",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/practice_families",
-      "entrypoint": "pms_maintenance/physics/bank/practice_families/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_exit_tickets",
-      "label": "PATCH E \u00b7 Exit Tickets",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/exit_tickets",
-      "entrypoint": "pms_maintenance/physics/bank/exit_tickets/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_summative_secure",
-      "label": "PATCH S \u00b7 Summative Secure Items",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/summative_secure",
-      "entrypoint": "pms_maintenance/physics/bank/summative_secure/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_summative_distractors",
-      "label": "PATCH D \u00b7 Summative Distractors",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/summative_distractors",
-      "entrypoint": "pms_maintenance/physics/bank/summative_distractors/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_representations",
-      "label": "PATCH R \u00b7 Representations",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/representations",
-      "entrypoint": "pms_maintenance/physics/bank/representations/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_core_questions",
-      "label": "PATCH Q \u00b7 Core Questions",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/core_questions",
-      "entrypoint": "pms_maintenance/physics/bank/core_questions/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_math_notation",
-      "label": "PATCH N \u00b7 Math / Notation",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/math_notation",
-      "entrypoint": "pms_maintenance/physics/bank/math_notation/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_cross_resource_freshness",
-      "label": "PATCH F \u00b7 Cross-Resource Freshness",
-      "group": "When Recommended",
-      "path": "pms_maintenance/physics/bank/cross_resource_freshness",
-      "entrypoint": "pms_maintenance/physics/bank/cross_resource_freshness/PM.txt",
-      "course": "Physics"
-    },
-    {
-      "job": "patch_bank_metadata",
-      "label": "PATCH Z \u00b7 Metadata Reconcile",
-      "group": "Finish",
-      "path": "pms_maintenance/physics/bank/metadata",
-      "entrypoint": "pms_maintenance/physics/bank/metadata/PM.txt",
-      "course": "Physics"
+      "job": "generic_improve_diagrams",
+      "label": "Improve Diagrams",
+      "group": "Generic Maintenance",
+      "path": "pms_maintenance/generic_improve_diagrams.txt",
+      "entrypoint": "pms_maintenance/generic_improve_diagrams.txt"
     }
   ]
 }

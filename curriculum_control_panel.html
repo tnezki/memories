@@ -5,28 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Curriculum Control Panel</title>
 <style>
-:root{--bg:#f4f6f8;--card:#fff;--ink:#18202a;--muted:#667085;--line:#d8dee7;--accent:#285a86;--accent2:#edf4fa;--good:#157347;--warn:#a15c00;--bad:#b42318;--shadow:0 10px 28px rgba(18,34,50,.07)}
+:root{--bg:#f4f6f8;--card:#fff;--ink:#18202a;--muted:#667085;--line:#d8dee7;--accent:#285a86;--good:#157347;--warn:#a15c00;--bad:#b42318;--shadow:0 10px 28px rgba(18,34,50,.07)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
 header{background:linear-gradient(135deg,#193b5a,#2b628f);color:#fff;padding:25px 30px 22px}header h1{margin:0;font-size:28px;letter-spacing:-.025em}header p{margin:6px 0 0;opacity:.9;max-width:980px}
 main{max-width:1220px;margin:20px auto 48px;padding:0 18px}.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px}@media(max-width:900px){.layout{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);padding:18px}.card h2,.card h3{margin-top:0}.small{font-size:13px;color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
-button{appearance:none;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:750;cursor:pointer;background:var(--accent);color:#fff}button.secondary{background:#edf2f6;color:#263b4d;border:1px solid var(--line)}button.ghost{background:#fff;color:var(--accent);border:1px solid #afc2d2}button:disabled{opacity:.45;cursor:not-allowed}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);padding:18px}.card h2,.card h3{margin-top:0}.small{font-size:13px;color:var(--muted)}.mini{font-size:12px;color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}
+button{appearance:none;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:750;cursor:pointer;background:var(--accent);color:#fff}button:disabled{opacity:.45;cursor:not-allowed}
 .tabs{display:flex;gap:8px;margin-bottom:20px}.tab{background:#edf1f5;color:#304154;padding:11px 18px}.tab.active{background:var(--accent);color:#fff}.section{display:none}.section.active{display:block}
 label{display:block;font-size:13px;font-weight:800;margin:13px 0 6px}select,input[type=text],textarea,input[type=file]{width:100%;font:inherit}select,input[type=text],textarea{border:1px solid #cbd4df;border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink)}textarea{min-height:82px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:680px){.row{grid-template-columns:1fr}}
 .status{border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13px;background:#f7f8f9;border:1px solid var(--line)}.status.good{background:#eefbf4;border-color:#b8e4ca;color:#125f3e}.status.warn{background:#fff8e8;border-color:#efdaa6;color:#7c4900}.status.bad{background:#fff1f0;border-color:#f4c1bd;color:#912018}
-.needed,.githubbox,.outputbox,.afterbox{border:1px solid #d5dee8;border-radius:12px;padding:13px;background:#fbfcfd;margin-top:12px}.githubbox{background:#f6f9fc}.outputbox{background:#fff}.afterbox{background:#f0faf4;border-color:#b8e4ca}.needed strong,.githubbox strong,.outputbox>strong,.afterbox strong{display:block;margin-bottom:5px}
-.note{border-left:4px solid #79a4c6;padding:10px 12px;background:#f5f9fc;border-radius:5px;margin:12px 0;font-size:13px}.drop{border:1.5px dashed #acb8c6;border-radius:12px;padding:14px;background:#fafbfc}.divider{height:1px;background:#e6eaf0;margin:18px 0}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.hidden{display:none!important}
+.githubbox,.outputbox,.afterbox{border:1px solid #d5dee8;border-radius:12px;padding:13px;background:#fbfcfd;margin-top:12px}.githubbox{background:#f6f9fc}.outputbox{background:#fff}.afterbox{background:#f0faf4;border-color:#b8e4ca}.githubbox strong,.outputbox>strong,.afterbox strong{display:block;margin-bottom:5px}
+.drop{border:1.5px dashed #acb8c6;border-radius:12px;padding:14px;background:#fafbfc}.divider{height:1px;background:#e6eaf0;margin:18px 0}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
 .checkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}@media(max-width:680px){.checkgrid{grid-template-columns:1fr}}.checkgrid label{display:flex;gap:8px;align-items:flex-start;margin:0;padding:9px 10px;border:1px solid #dde3ea;border-radius:10px;background:#fff;font-weight:650}.checkgrid input{margin-top:3px;flex:0 0 auto}
 .delivery{display:grid;gap:7px;margin-top:9px}.delivery label{display:flex;align-items:flex-start;gap:8px;margin:0;padding:8px 10px;border:1px solid #dde3ea;border-radius:10px;background:#fff;font-weight:650}.delivery input{margin-top:3px}
-.source-list{list-style:none;margin:8px 0 0;padding:0}.source-list li{padding:7px 0;border-top:1px solid #e8edf2}.source-list li:first-child{border-top:0}.source-list b{display:block;font-size:12px;color:#475569}.source-list .mono{font-size:12px;color:#263b4d}
-.pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#eaf2f8;color:#234f78;font-size:10px;font-weight:850;margin-left:6px}.pill.good{background:#eaf7ef;color:#14663f}.pill.warn{background:#fff3d6;color:#825100}
-.cleanup-list{margin:7px 0 0 18px;padding:0}.cleanup-list li{margin:5px 0}.mini{font-size:12px;color:var(--muted)}
+.source-list{list-style:none;margin:8px 0 0;padding:0}.source-list li{padding:7px 0;border-top:1px solid #e8edf2}.source-list li:first-child{border-top:0}.source-list b{display:block;font-size:12px;color:#475569}.source-list .mono{font-size:12px;color:#263b4d}.cleanup-list{margin:7px 0 0 18px;padding:0}.cleanup-list li{margin:5px 0}
 </style>
 </head>
 <body>
 <header>
   <h1>Curriculum Control Panel <span style="font-size:14px;opacity:.76">CANONICAL</span></h1>
-  <p>Choose the job and outputs. The request stays small: job + course + unit + pinned commits + teacher inputs. Manifests resolve the exact authorities.</p>
+  <p>Build creates good-enough core artifacts. Maintenance audits or improves current artifacts. Manifests resolve the current PMs and authorities.</p>
 </header>
 <main><div class="layout">
 <aside class="card">
@@ -39,11 +37,10 @@ label{display:block;font-size:13px;font-weight:800;margin:13px 0 6px}select,inpu
   <h3>Canonical GitHub</h3>
   <div class="small">System authority</div><div class="mono">tnezki/memories</div>
   <div class="small" style="margin-top:9px">Selected course</div><div id="courseRepoSide" class="mono">tnezki/physics</div>
-  <div class="status good" style="margin-top:14px">GitHub is the source of truth. The job pins current commits, uses exact paths, reads expanded authority folders directly, and retrieves binary assets only when required.</div>
+  <div class="status good" style="margin-top:14px">GitHub is the source of truth. Each request pins current system/course commits and resolves exact PM paths through manifests.</div>
 </aside>
-
 <section class="card">
-  <div class="tabs"><button class="tab active" data-tab="build">Build</button><button class="tab" data-tab="patches">Patches</button><button class="tab" data-tab="general">General</button></div>
+  <div class="tabs"><button class="tab active" data-tab="build">Build</button><button class="tab" data-tab="maintenance">Maintenance</button><button class="tab" data-tab="general">General</button></div>
 
   <div id="build" class="section active">
     <h2>Build request</h2>
@@ -51,22 +48,23 @@ label{display:block;font-size:13px;font-weight:800;margin:13px 0 6px}select,inpu
     <label>Job</label><select id="buildJob"></select>
     <div id="buildGithub" class="githubbox"></div>
     <div id="buildOutputs" class="outputbox"></div>
-    <label>Additional files <span class="small">(optional — always available)</span></label><div class="drop"><input id="buildAdditional" type="file" multiple><div class="small" style="margin-top:5px">Only attach run-specific material that is not already in canonical GitHub.</div></div>
+    <label>Additional files <span class="small">(optional)</span></label><div class="drop"><input id="buildAdditional" type="file" multiple><div class="small" style="margin-top:5px">Only attach run-specific material that is not already canonical in GitHub.</div></div>
     <label>Optional note</label><textarea id="buildNote" placeholder="Only add a note when this run needs a special instruction."></textarea>
     <div id="buildAfter" class="afterbox"></div>
     <div class="actions"><button id="saveBuild">Save Request ZIP</button></div>
   </div>
 
-  <div id="patches" class="section">
-    <h2>Patch request</h2>
-    <div class="row"><div><label>Course</label><select id="patchCourse"></select></div><div><label>Unit</label><select id="patchUnit"></select></div></div>
-    <label>Patch PM</label><select id="patchJob"></select>
-    <div id="patchGithub" class="githubbox"></div>
-    <div id="patchOutputs" class="outputbox"></div>
-    <label>Additional files <span class="small">(optional)</span></label><div class="drop"><input id="patchAdditional" type="file" multiple><div class="small" style="margin-top:5px">Screenshots or run-specific evidence only; the current artifact is resolved from the canonical course repo.</div></div>
-    <label>Patch instruction <span class="small">(optional)</span></label><textarea id="patchNote" placeholder="Usually leave blank when the Patch PM already defines the repair."></textarea>
-    <div id="patchAfter" class="afterbox"></div>
-    <div class="actions"><button id="savePatch">Save Request ZIP</button></div>
+  <div id="maintenance" class="section">
+    <h2>Maintenance request</h2>
+    <div class="row"><div><label>Course</label><select id="maintenanceCourse"></select></div><div><label>Unit</label><select id="maintenanceUnit"></select></div></div>
+    <label>Target</label><select id="maintenanceTarget"></select>
+    <label>Maintenance PM</label><select id="maintenanceJob"></select>
+    <div id="maintenanceGithub" class="githubbox"></div>
+    <div id="maintenanceOutputs" class="outputbox"></div>
+    <label>Additional files <span class="small">(optional)</span></label><div class="drop"><input id="maintenanceAdditional" type="file" multiple><div class="small" style="margin-top:5px">Screenshots or run-specific evidence only. The current target is resolved from the pinned course repo.</div></div>
+    <label>Maintenance instruction <span class="small">(optional)</span></label><textarea id="maintenanceNote" placeholder="Examples: WTC only; focus on U2-2S1-WTC; inspect the full Unit Bank."></textarea>
+    <div id="maintenanceAfter" class="afterbox"></div>
+    <div class="actions"><button id="saveMaintenance">Save Request ZIP</button></div>
   </div>
 
   <div id="general" class="section">
@@ -90,37 +88,40 @@ const COURSES={
   "AP Calculus AB":{folder:"calculus",repo:"tnezki/calculus",slug:"ap_calculus_ab",units:8},
   "Physics":{folder:"physics",repo:"tnezki/physics",slug:"physics",units:8}
 };
-const REQUEST_DB="curriculum-control-panel", REQUEST_STORE="handles", REQUEST_KEY="request-output-folder", ROOT_KEY="project-root";
-const $=id=>document.getElementById(id); const esc=s=>String(s??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let rootHandle=null,requestHandle=null,buildRows=[],patchRows=[],generalRows=[];
+const MAINT_TARGETS=[
+  ["unit_bank","Unit Bank"],["notes","Notes"],["practice","Practice"],["activities","Activities"],
+  ["exit","Exit Tickets"],["warmup","Warm-Ups"],["progress","Progress Tracker"],["review","Review"],
+  ["summative","Summative"],["other","Other / specify in instruction"]
+].map(x=>({key:x[0],label:x[1]}));
+const REQUEST_DB="curriculum-control-panel",REQUEST_STORE="handles",REQUEST_KEY="request-output-folder",ROOT_KEY="project-root";
+const $=id=>document.getElementById(id);const esc=s=>String(s??"").replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let rootHandle=null,requestHandle=null,buildRows=[],maintenanceRows=[],generalRows=[];
 
 const BUILD_FALLBACK=[
- ["1","assessment_plan","Build Assessment Plan","pms_build/assessment_plan/PM.txt"],
- ["2","framework","Build Framework","pms_build/framework/PM.txt"],
- ["2b","bank_map","Build Bank Map","pms_build/bank_map/PM.txt"],
- ["2c","bank_map_audit","Audit + Fix Bank Map","pms_build/bank_map_audit/PM.txt"],
- ["3a","bank_stage_3a","Build Bank Seeds","pms_build/bank_seeds/PM.txt"],
- ["3b","bank_stage_3b","Build Bank Instructional Parallels","pms_build/bank_instructional_parallels/PM.txt"],
- ["3c","bank_stage_3c","Build Bank Exit Tickets","pms_build/bank_exit_tickets/PM.txt"],
- ["3d","bank_stage_3d","Build Bank Summative","pms_build/bank_summative/PM.txt"],
- ["3e","bank_stage_3e","Final Bank Audit + Materialize","pms_build/bank_finalize/PM.txt"],
- ["4a","notes_map_4a","Build Notes Map","pms_build/notes_map/PM.txt"],
- ["4b","notes_build_4b","Build Notes","pms_build/notes/PM.txt"],
- ["5","practice","Build Practice","pms_build/practice/PM.txt"],
- ["6","activities","Build Activities","pms_build/activities/PM.txt"],
- ["7","exit","Build Exit Tickets","pms_build/exit/PM.txt"],
- ["8","warmup","Build Warm-Ups","pms_build/warmup/PM.txt"],
- ["9","progress","Build Progress Tracker","pms_build/progress/PM.txt"],
- ["10","review","Build Review","pms_build/review/PM.txt"],
- ["11","summative","Build Summative","pms_build/summative/PM.txt"],
- ["12","practice_to_summative","Practice → Summative","pms_build/practice_to_summative/PM.txt"],
- ["13","demos_investigations","Build Demos + Investigations","pms_build/demos_investigations/PM.txt"],
- ["14","performance_quick_checks","Build Performance Tasks + Quick Checks","pms_build/performance_tasks_quick_checks/PM.txt"],
- ["15","discourse_reflect","Build Discourse + Reflection","pms_build/discourse_reflection/PM.txt"],
- ["16","first_4_days","Build First 4 Days","pms_build/first_4_days/PM.txt"],
- ["17","unit_plan","Build Unit Plan","pms_build/unit_plan/PM.txt"],
- ["18","portfolio","Assess New Evidence","pms_build/portfolio/PM.txt"]
+ ["1","assessment_plan","Build Assessment Plan","pms_build/assessment_plan.txt"],
+ ["2","framework","Build Framework","pms_build/framework.txt"],
+ ["3a","bank_map","Build Bank Map","pms_build/bank_map.txt"],
+ ["3b","bank_complete","Build Complete Bank","pms_build/bank_complete.txt"],
+ ["4","notes","Build Notes","pms_build/notes.txt"],
+ ["5","practice","Build Practice","pms_build/practice.txt"],
+ ["6","activities","Build Activities","pms_build/activities.txt"],
+ ["7","exit","Build Exit Tickets","pms_build/exit.txt"],
+ ["8","warmup","Build Warm-Ups","pms_build/warmup.txt"],
+ ["9","progress","Build Progress Tracker","pms_build/progress.txt"],
+ ["10","review","Build Review","pms_build/review.txt"],
+ ["11","summative","Build Summative","pms_build/summative.txt"],
+ ["12","practice_to_summative","Practice to Summative","pms_build/practice_to_summative.txt"],
+ ["13","demos_investigations","Build Demos + Investigations","pms_build/demos_investigations.txt"],
+ ["14","performance_quick_checks","Build Performance Tasks + Quick Checks","pms_build/performance_tasks_quick_checks.txt"],
+ ["15","discourse","Build Discourse","pms_build/discourse.txt"],
+ ["16","first_4_days","Build First 4 Days","pms_build/first_4_days.txt"],
+ ["17","unit_plan","Build Unit Plan","pms_build/unit_plan.txt"],
+ ["18","portfolio","Portfolio / Assess New Evidence","pms_build/portfolio.txt"]
 ].map(x=>({step:x[0],key:x[1],label:x[2],path:x[3],entrypoint:x[3]}));
+const MAINTENANCE_FALLBACK=[
+ ["generic_audit_rebuild","Audit + Rebuild","pms_maintenance/generic_audit_rebuild.txt"],
+ ["generic_improve_diagrams","Improve Diagrams","pms_maintenance/generic_improve_diagrams.txt"]
+].map(x=>({key:x[0],label:x[1],path:x[2],entrypoint:x[2]}));
 const GENERAL_FALLBACK=[
  ["create_2_page_ws","Create 2-Page Worksheet","pms_general/create_2_page_ws/PM.txt"],
  ["create_desmos_activity","Create Desmos Activity","pms_general/create_desmos_activity/PM.txt"],
@@ -133,56 +134,43 @@ function openDb(){return new Promise((res,rej)=>{const r=indexedDB.open(REQUEST_
 async function dbPut(k,v){try{const db=await openDb();await new Promise((res,rej)=>{const tx=db.transaction(REQUEST_STORE,"readwrite");tx.objectStore(REQUEST_STORE).put(v,k);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});db.close()}catch(e){console.warn(e)}}
 async function dbGet(k){try{const db=await openDb();const v=await new Promise((res,rej)=>{const tx=db.transaction(REQUEST_STORE,"readonly"),r=tx.objectStore(REQUEST_STORE).get(k);r.onsuccess=()=>res(r.result||null);r.onerror=()=>rej(r.error)});db.close();return v}catch{return null}}
 async function getDir(parent,name,create=false){try{return await parent.getDirectoryHandle(name,{create})}catch{return null}}
-
 async function connectRoot(){if(!window.showDirectoryPicker){alert("Use current Chrome/Edge for folder access.");return}try{const h=await showDirectoryPicker({mode:"readwrite"}),m=await getDir(h,"memories");if(!m){setStatus("rootStatus","Selected folder does not contain memories/.","bad");return}rootHandle=h;await dbPut(ROOT_KEY,h);setStatus("rootStatus","Project root connected.","good");await restoreRequest()}catch(e){if(e.name!=="AbortError")setStatus("rootStatus","Could not connect: "+e.message,"bad")}}
 async function restoreRoot(){const h=await dbGet(ROOT_KEY);if(!h)return;try{const p=await h.queryPermission({mode:"readwrite"});if(p==="granted"&&await getDir(h,"memories")){rootHandle=h;setStatus("rootStatus","Project root restored.","good")}else setStatus("rootStatus","Saved project root available. Click Connect Project Root to restore permission.","warn")}catch{}}
 async function restoreRequest(){const h=await dbGet(REQUEST_KEY);if(!h)return;try{const p=await h.queryPermission({mode:"readwrite"});if(p==="granted"){requestHandle=h;setStatus("requestStatus","Ready: Downloads/_github_transfers/requests/","good")}else setStatus("requestStatus","Saved requests folder will request permission when you save.","warn")}catch{}}
 async function ensureRequestFolder(){if(requestHandle){try{let p=await requestHandle.queryPermission({mode:"readwrite"});if(p!=="granted")p=await requestHandle.requestPermission({mode:"readwrite"});if(p==="granted")return true}catch{}requestHandle=null}let h=await dbGet(REQUEST_KEY);if(h){try{let p=await h.queryPermission({mode:"readwrite"});if(p!=="granted")p=await h.requestPermission({mode:"readwrite"});if(p==="granted"){if(h.name==="_github_transfers")h=await h.getDirectoryHandle("requests",{create:true});requestHandle=h;await dbPut(REQUEST_KEY,h);setStatus("requestStatus","Ready: Downloads/_github_transfers/requests/","good");return true}}catch{}}if(!window.showDirectoryPicker){alert("Use current Chrome/Edge for direct request saving.");return false}try{let pick=await showDirectoryPicker({mode:"readwrite",startIn:"downloads"});if(pick.name==="_github_transfers")pick=await pick.getDirectoryHandle("requests",{create:true});else if(pick.name!=="requests"){const ok=confirm("Choose either Downloads/_github_transfers or its requests folder. Use the selected folder anyway?");if(!ok)return false}requestHandle=pick;await dbPut(REQUEST_KEY,pick);setStatus("requestStatus",`Ready: ${pick.name}/`,"good");return true}catch{return false}}
 
-function numberedLabel(p){return p?.step?`${p.step} — ${p.label}`:(p?.label||"")}
+function numberedLabel(p){return p?.step?`${p.step} - ${p.label}`:(p?.label||"")}
 async function githubJson(repo,path){const r=await fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref=main`,{headers:{Accept:"application/vnd.github.raw+json"}});if(!r.ok)throw Error(`${path} read failed: ${r.status}`);return await r.json()}
 async function resolveCommit(repo){const r=await fetch(`https://api.github.com/repos/${repo}/commits/main`,{headers:{Accept:"application/vnd.github+json"}});if(!r.ok)throw Error(`Could not pin ${repo}: ${r.status}`);const j=await r.json();if(!j.sha)throw Error(`Could not pin ${repo}: missing SHA`);return j.sha}
 async function discoverMenus(){
- try{const j=await githubJson(SYSTEM_REPO,"pms_build/MANIFEST.json");buildRows=(j.jobs||[]).map(x=>({step:x.step,key:x.job,label:x.label,path:x.entrypoint||`${x.path}/PM.txt`,entrypoint:x.entrypoint||`${x.path}/PM.txt`}));if(!buildRows.length)throw Error("empty build manifest")}catch(e){console.warn(e);buildRows=[...BUILD_FALLBACK]}
- try{const j=await githubJson(SYSTEM_REPO,"pms_maintenance/MANIFEST.json");patchRows=(j.jobs||[]).map(x=>({key:x.job,label:x.label||x.job,path:x.entrypoint,entrypoint:x.entrypoint,course:x.course||null})).sort((a,b)=>a.label.localeCompare(b.label));}catch(e){console.warn(e);patchRows=[]}
+ try{const j=await githubJson(SYSTEM_REPO,"pms_build/MANIFEST.json");buildRows=(j.jobs||[]).map(x=>({step:x.step,key:x.job,label:x.label,path:x.entrypoint||x.path,entrypoint:x.entrypoint||x.path}));if(!buildRows.length)throw Error("empty build manifest")}catch(e){console.warn(e);buildRows=[...BUILD_FALLBACK]}
+ try{const j=await githubJson(SYSTEM_REPO,"pms_maintenance/MANIFEST.json");maintenanceRows=(j.jobs||[]).map(x=>({key:x.job,label:x.label||x.job,path:x.entrypoint||x.path,entrypoint:x.entrypoint||x.path,group:x.group||null}));if(!maintenanceRows.length)throw Error("empty maintenance manifest")}catch(e){console.warn(e);maintenanceRows=[...MAINTENANCE_FALLBACK]}
  try{const j=await githubJson(SYSTEM_REPO,"pms_general/MANIFEST.json");generalRows=(j.jobs||[]).map(x=>({key:x.job,label:x.label,path:x.entrypoint,entrypoint:x.entrypoint}));if(!generalRows.length)throw Error("empty general manifest")}catch(e){console.warn(e);generalRows=[...GENERAL_FALLBACK]}
- renderBuildMenu();renderPatchMenu();renderGeneralMenu();
+ renderBuildMenu();renderMaintenanceMenu();renderGeneralMenu();
 }
-function initCourses(){for(const id of ["buildCourse","patchCourse"]){$(id).innerHTML=Object.keys(COURSES).map(c=>`<option>${esc(c)}</option>`).join("");$(id).value="Physics"}fillUnits("buildUnit","Physics");fillUnits("patchUnit","Physics");updateCourseSide()}
+function initCourses(){for(const id of ["buildCourse","maintenanceCourse"]){$(id).innerHTML=Object.keys(COURSES).map(c=>`<option>${esc(c)}</option>`).join("");$(id).value="Physics"}fillUnits("buildUnit","Physics");fillUnits("maintenanceUnit","Physics");$("maintenanceTarget").innerHTML=MAINT_TARGETS.map(x=>`<option value="${esc(x.key)}">${esc(x.label)}</option>`).join("");$("maintenanceTarget").value="unit_bank";updateCourseSide()}
 function fillUnits(id,course){$(id).innerHTML=Array.from({length:COURSES[course].units},(_,i)=>`<option value="${i+1}">Unit ${i+1}</option>`).join("")}
 function updateCourseSide(){const course=document.querySelector(".section.active select[id$='Course']")?.value||$("buildCourse").value;$("courseRepoSide").textContent=COURSES[course]?.repo||""}
-function renderBuildMenu(){const old=$("buildJob").value;$("buildJob").innerHTML=buildRows.map(p=>`<option value="${esc(p.path)}">${esc(numberedLabel(p))}</option>`).join("");const prefer=buildRows.find(x=>x.key==="notes_map_4a")||buildRows[0];if(buildRows.some(x=>x.path===old))$("buildJob").value=old;else if(prefer)$("buildJob").value=prefer.path;refreshBuild()}
-function renderPatchMenu(){const old=$("patchJob").value;$("patchJob").innerHTML=patchRows.length?patchRows.map(p=>`<option value="${esc(p.path)}">${esc(p.label)}</option>`).join(""):'<option value="">No Patch PMs found</option>';if(patchRows.some(x=>x.path===old))$("patchJob").value=old;refreshPatch()}
+function renderBuildMenu(){const old=$("buildJob").value;$("buildJob").innerHTML=buildRows.map(p=>`<option value="${esc(p.path)}">${esc(numberedLabel(p))}</option>`).join("");if(buildRows.some(x=>x.path===old))$("buildJob").value=old;refreshBuild()}
+function renderMaintenanceMenu(){const old=$("maintenanceJob").value;$("maintenanceJob").innerHTML=maintenanceRows.map(p=>`<option value="${esc(p.path)}">${esc(p.label)}</option>`).join("");if(maintenanceRows.some(x=>x.path===old))$("maintenanceJob").value=old;refreshMaintenance()}
 function renderGeneralMenu(){const old=$("generalJob").value;$("generalJob").innerHTML=generalRows.map(p=>`<option value="${esc(p.path)}">${esc(p.label)}</option>`).join("");if(generalRows.some(x=>x.path===old))$("generalJob").value=old;refreshGeneral()}
-function buildSelected(){return buildRows.find(x=>x.path===$("buildJob").value)}function patchSelected(){return patchRows.find(x=>x.path===$("patchJob").value)}function generalSelected(){return generalRows.find(x=>x.path===$("generalJob").value)}
+function buildSelected(){return buildRows.find(x=>x.path===$("buildJob").value)}function maintenanceSelected(){return maintenanceRows.find(x=>x.path===$("maintenanceJob").value)}function generalSelected(){return generalRows.find(x=>x.path===$("generalJob").value)}
+function maintenanceTargetSelected(){return MAINT_TARGETS.find(x=>x.key===$("maintenanceTarget").value)||MAINT_TARGETS[0]}
 
-function outputSpec(p,unit){const k=p?.key||"";if(k==="practice_to_summative")return ["Practice Sets","Activities","Warm-Ups","Exit Tickets","Progress Tracker","Review","Summative"].map((x,i)=>({id:["practice","activities","warmups","exit","progress","review","summative"][i],label:x,kind:"folder_zip"}));
- if(k==="demos_investigations")return [{id:"demos",label:"Demos",kind:"folder_zip"},{id:"investigations",label:"Investigations",kind:"folder_zip"}];
- if(k==="performance_quick_checks")return [{id:"performance_tasks",label:"Performance Tasks",kind:"folder_zip"},{id:"quick_checks",label:"Quick Checks",kind:"folder_zip"}];
- if(k==="discourse_reflect")return [{id:"discourse",label:"Discourse",kind:"folder_zip"},{id:"reflection",label:"Reflection",kind:"folder_zip"}];
- const map={assessment_plan:"Assessment Plan",framework:"Framework",bank_map:"Bank Map",bank_map_audit:"Audited Bank Map",bank_stage_3a:"Bank Stage 3A",bank_stage_3b:"Bank Stage 3B",bank_stage_3c:"Bank Stage 3C",bank_stage_3d:"Bank Stage 3D",bank_stage_3e:"Materialized Unit Bank",notes_map_4a:"Notes Map",notes_build_4b:"Notes",practice:"Practice Sets",activities:"Activities",exit:"Exit Tickets",warmup:"Warm-Ups",progress:"Progress Tracker",review:"Review",summative:"Summative",first_4_days:"First 4 Days",unit_plan:"Unit Plan",portfolio:"Portfolio Evidence Update"};return [{id:k||"output",label:map[k]||p?.label||"Requested output",kind:"zip_or_file"}]}
-function patchOutputSpec(p){return [{id:"replacement",label:(p?.label?"Complete replacement — "+p.label:"Complete updated replacement"),kind:"replacement"}]}
+function outputSpec(p){const k=p?.key||"";const map={assessment_plan:"Assessment Plan",framework:"Framework",bank_map:"Bank Map",bank_complete:"Complete Bank",notes:"Notes",practice:"Practice",activities:"Activities",exit:"Exit Tickets",warmup:"Warm-Ups",progress:"Progress Tracker",review:"Review",summative:"Summative",practice_to_summative:"Practice to Summative Bundle",demos_investigations:"Demos + Investigations",performance_quick_checks:"Performance Tasks + Quick Checks",discourse:"Discourse",first_4_days:"First 4 Days",unit_plan:"Unit Plan",portfolio:"Portfolio Evidence Update"};return [{id:k||"output",label:map[k]||p?.label||"Requested output",kind:"zip_or_file"}]}
+function maintenanceOutputSpec(target){return [{id:"replacement",label:`Corrected ${target?.label||"target"}`,kind:"replacement"}]}
 function generalOutputSpec(p){return [{id:"general_output",label:p?.label||"Requested output",kind:"file_or_files"}]}
-function outputHtml(spec,prefix){return `<strong>Output</strong><div class="small">Choose exactly what you want returned.</div><div class="checkgrid">${spec.map((x,i)=>`<label><input type="checkbox" data-output="${esc(prefix)}" value="${esc(x.id)}" data-label="${esc(x.label)}" data-kind="${esc(x.kind)}" checked><span>${esc(x.label)}</span></label>`).join("")}</div><label style="margin-top:13px">Delivery</label><div class="delivery"><label><input type="radio" name="${prefix}Delivery" value="auto" checked><span><b>Auto — recommended</b><br><span class="mini">One file → direct file. Multi-file folder → ZIP for handoff, then extract before GitHub sync. Multiple outputs → individual outputs.</span></span></label><label><input type="radio" name="${prefix}Delivery" value="individual"><span><b>Individual selected outputs</b><br><span class="mini">Return each selected output separately.</span></span></label><label><input type="radio" name="${prefix}Delivery" value="bundle"><span><b>Bundle selected outputs</b><br><span class="mini">Return one ZIP containing everything selected above.</span></span></label></div>`}
+function outputHtml(spec,prefix){return `<strong>Output</strong><div class="small">Choose exactly what you want returned.</div><div class="checkgrid">${spec.map(x=>`<label><input type="checkbox" data-output="${esc(prefix)}" value="${esc(x.id)}" data-label="${esc(x.label)}" data-kind="${esc(x.kind)}" checked><span>${esc(x.label)}</span></label>`).join("")}</div><label style="margin-top:13px">Delivery</label><div class="delivery"><label><input type="radio" name="${prefix}Delivery" value="auto" checked><span><b>Auto - recommended</b><br><span class="mini">One file -> direct file. Multi-file folder -> ZIP handoff. Use the PM's canonical delivery contract.</span></span></label><label><input type="radio" name="${prefix}Delivery" value="bundle"><span><b>Bundle selected outputs</b><br><span class="mini">Return one ZIP when the PM permits bundling.</span></span></label></div>`}
 function selectedOutputs(prefix){return [...document.querySelectorAll(`[data-output="${prefix}"]:checked`)].map(x=>({id:x.value,label:x.dataset.label,kind:x.dataset.kind}))}
 function delivery(prefix){return document.querySelector(`input[name="${prefix}Delivery"]:checked`)?.value||"auto"}
-function githubHtml(course,pmPath,extra=[]){const c=COURSES[course];const rows=[
- ["System manifest",`${SYSTEM_REPO}/${SYSTEM_MANIFEST}`],
- ["Job PM",`${SYSTEM_REPO}/${pmPath}`],
- ["Course repo",`${c.repo} — commit pinned when request is saved`],
- ...extra.map(x=>[x[0],x[1]])
-];return `<strong>This job will resolve from GitHub</strong><ul class="source-list">${rows.map(x=>`<li><b>${esc(x[0])}</b><span class="mono">${esc(x[1])}</span></li>`).join("")}</ul><div class="mini" style="margin-top:7px">The system manifest resolves Philosophy, Framework, Question Structure, shared PMs, and tools. The selected PM resolves only the additional files it actually needs.</div>`}
-function buildExtras(p,course,unit){const k=p?.key||"",c=COURSES[course],base=[];
- if(["notes_map_4a","notes_build_4b","practice","activities","exit","warmup","progress","review","summative","practice_to_summative"].includes(k))base.push(["Unit source",`${c.repo} — Unit ${unit}, resolved by PM`]);
- if(k==="notes_build_4b")base.push(["Notes Map",`${c.repo}/notes/unit${unit}_notes_map/unit${unit}_notes_map.json`]);
- return base}
-function afterHtml(mode,course,unit){const c=COURSES[course];return `<strong>After approval</strong><ul class="cleanup-list"><li>Put the returned replacement file(s) in the matching <span class="mono">${esc(c.folder)}/</span> location. If a multi-file folder arrives as a ZIP, extract it before sync.</li><li>Sync with GitHub Desktop and confirm the repo is clean/current.</li><li>After the GitHub sync is confirmed, delete the saved request ZIP and extra downloaded handoff copy.</li></ul>`}
-function refreshBuild(){const p=buildSelected(),course=$("buildCourse").value,unit=Number($("buildUnit").value);updateCourseSide();$("buildGithub").innerHTML=githubHtml(course,p?.path||"",buildExtras(p,course,unit));$("buildOutputs").innerHTML=outputHtml(outputSpec(p,unit),"build");$("buildAfter").innerHTML=afterHtml("build",course,unit)}
-function refreshPatch(){const p=patchSelected(),course=$("patchCourse").value,unit=Number($("patchUnit").value);updateCourseSide();$("patchGithub").innerHTML=githubHtml(course,p?.path||"",[["Current artifact",`${COURSES[course].repo} — resolved by Patch PM`]]);$("patchOutputs").innerHTML=outputHtml(patchOutputSpec(p),"patch");$("patchAfter").innerHTML=afterHtml("patch",course,unit)}
-function refreshGeneral(){const p=generalSelected();$("generalGithub").innerHTML=`<strong>This job will resolve from GitHub</strong><ul class="source-list"><li><b>System manifest</b><span class="mono">${esc(SYSTEM_REPO+"/"+SYSTEM_MANIFEST)}</span></li><li><b>General PM</b><span class="mono">${esc(SYSTEM_REPO+"/"+(p?.path||""))}</span></li></ul>`;$("generalOutputs").innerHTML=outputHtml(generalOutputSpec(p),"general");$("generalAfter").innerHTML=`<strong>After approval</strong><ul class="cleanup-list"><li>Keep the final file(s) you need.</li><li>After you confirm the result, delete the saved request ZIP and temporary downloaded copies.</li></ul>`}
+function githubHtml(course,pmPath,extra=[]){const c=COURSES[course];const rows=[["System manifest",`${SYSTEM_REPO}/${SYSTEM_MANIFEST}`],["Job PM",`${SYSTEM_REPO}/${pmPath}`],["Course repo",`${c.repo} - commit pinned when request is saved`],...extra];return `<strong>This job will resolve from GitHub</strong><ul class="source-list">${rows.map(x=>`<li><b>${esc(x[0])}</b><span class="mono">${esc(x[1])}</span></li>`).join("")}</ul><div class="mini" style="margin-top:7px">Resolve exact authorities through the system and relevant PM/artifact manifests. Read only what the selected job requires.</div>`}
+function afterHtml(course){const c=COURSES[course];return `<strong>After approval</strong><ul class="cleanup-list"><li>Put returned replacement file(s) in the matching <span class="mono">${esc(c.folder)}/</span> repo location. Extract any multi-file ZIP before sync.</li><li>Sync with GitHub Desktop and confirm the repo is clean/current.</li><li>After GitHub sync is confirmed, delete the saved request ZIP and temporary handoff copy.</li></ul>`}
+function refreshBuild(){const p=buildSelected(),course=$("buildCourse").value;updateCourseSide();$("buildGithub").innerHTML=githubHtml(course,p?.path||"");$("buildOutputs").innerHTML=outputHtml(outputSpec(p),"build");$("buildAfter").innerHTML=afterHtml(course)}
+function refreshMaintenance(){const p=maintenanceSelected(),course=$("maintenanceCourse").value,target=maintenanceTargetSelected();updateCourseSide();$("maintenanceGithub").innerHTML=githubHtml(course,p?.path||"",[["Current target",`${COURSES[course].repo} - ${target.label}, resolved at pinned commit`]]);$("maintenanceOutputs").innerHTML=outputHtml(maintenanceOutputSpec(target),"maintenance");$("maintenanceAfter").innerHTML=afterHtml(course)}
+function refreshGeneral(){const p=generalSelected();$("generalGithub").innerHTML=`<strong>This job will resolve from GitHub</strong><ul class="source-list"><li><b>System manifest</b><span class="mono">${esc(SYSTEM_REPO+"/"+SYSTEM_MANIFEST)}</span></li><li><b>General PM</b><span class="mono">${esc(SYSTEM_REPO+"/"+(p?.path||""))}</span></li></ul>`;$("generalOutputs").innerHTML=outputHtml(generalOutputSpec(p),"general");$("generalAfter").innerHTML=`<strong>After approval</strong><ul class="cleanup-list"><li>Keep the final file(s) you need.</li><li>Delete the saved request ZIP and temporary copies after confirming the result.</li></ul>`}
 
-async function manifestBase(mode,course,unit,job,outputs,deliver,note,attachments){const c=course?COURSES[course]:null;const systemCommit=await resolveCommit(SYSTEM_REPO);const courseCommit=c?await resolveCommit(c.repo):null;return {schema:"curriculum-control-request/4.0",mode,course:course||null,unit:unit||null,workflow:job?.key||null,workflow_label:numberedLabel(job)||job?.label||null,pm_entrypoint:job?.entrypoint||job?.path||null,system_repo:SYSTEM_REPO,system_commit:systemCommit,system_manifest:SYSTEM_MANIFEST,course_repo:c?.repo||null,course_commit:courseCommit,selected_outputs:outputs,delivery:deliver,teacher_inputs:{note:note||"",additional_files:attachments},runtime:{expanded_canonical_authorities:true,zip_handoff_only:true,fail_closed:true,routine_retrieval_silent:true}}}
-function requestText(m){let s="CURRICULUM CONTROL PANEL REQUEST\n\n";s+=`MODE: ${m.mode}\n`;if(m.course)s+=`COURSE: ${m.course}\n`;if(m.unit)s+=`UNIT: ${m.unit}\n`;s+=`JOB: ${m.workflow_label||m.workflow||"General"}\nPM: ${m.pm_entrypoint}\nSYSTEM: ${m.system_repo}@${m.system_commit}\nSYSTEM MANIFEST: ${m.system_manifest}\n`;if(m.course_repo)s+=`COURSE REPO: ${m.course_repo}@${m.course_commit}\n`;s+=`OUTPUTS: ${m.selected_outputs.map(x=>x.label).join("; ")}\nDELIVERY: ${m.delivery}\n`;if(m.teacher_inputs?.note)s+=`TEACHER NOTE: ${m.teacher_inputs.note}\n`;s+="\nEXECUTION\nUse exactly the pinned commits above. Read SYSTEM_MANIFEST.json first, then resolve the stable Philosophy, Framework, selected PM, shared PMs, and tools through manifests. The selected PM determines which Bank/map/resource files are additionally required. Read only what the job needs. Do not substitute stale uploads or similarly named files. Fail closed with the exact missing repo + commit + path if a required canonical dependency cannot be read. Routine retrieval remains silent.\n\nOUTPUT CONTRACT\nReturn only the selected outputs. One-file deliverable: return the file directly. Multi-file canonical folder: a ZIP may be used only as the handoff container and must be extracted before GitHub sync. Multiple selected outputs are returned individually unless the PM defines one inseparable package or BUNDLE was selected.\n";return s}
+async function manifestBase(mode,course,unit,job,outputs,deliver,note,attachments,target=null){const c=course?COURSES[course]:null;const systemCommit=await resolveCommit(SYSTEM_REPO);const courseCommit=c?await resolveCommit(c.repo):null;return {schema:"curriculum-control-request/4.1",mode,course:course||null,unit:unit||null,target:target||null,workflow:job?.key||null,workflow_label:numberedLabel(job)||job?.label||null,pm_entrypoint:job?.entrypoint||job?.path||null,system_repo:SYSTEM_REPO,system_commit:systemCommit,system_manifest:SYSTEM_MANIFEST,course_repo:c?.repo||null,course_commit:courseCommit,selected_outputs:outputs,delivery:deliver,teacher_inputs:{note:note||"",additional_files:attachments},runtime:{expanded_canonical_authorities:true,zip_handoff_only:true,fail_closed:true,routine_retrieval_silent:true}}}
+function requestText(m){let s="CURRICULUM CONTROL PANEL REQUEST\n\n";s+=`MODE: ${m.mode}\n`;if(m.course)s+=`COURSE: ${m.course}\n`;if(m.unit)s+=`UNIT: ${m.unit}\n`;if(m.target)s+=`TARGET: ${m.target.label} (${m.target.key})\n`;s+=`JOB: ${m.workflow_label||m.workflow||"General"}\nPM: ${m.pm_entrypoint}\nSYSTEM: ${m.system_repo}@${m.system_commit}\nSYSTEM MANIFEST: ${m.system_manifest}\n`;if(m.course_repo)s+=`COURSE REPO: ${m.course_repo}@${m.course_commit}\n`;s+=`OUTPUTS: ${m.selected_outputs.map(x=>x.label).join("; ")}\nDELIVERY: ${m.delivery}\n`;if(m.teacher_inputs?.note)s+=`TEACHER NOTE: ${m.teacher_inputs.note}\n`;s+="\nEXECUTION\nUse exactly the pinned commits above. Read SYSTEM_MANIFEST.json first, then resolve the selected PM and only its required authorities/resources through current manifests. Do not substitute stale uploads, old PM folders, or similarly named files. Fail closed with the exact missing repo + commit + path for a genuinely required canonical dependency.\n\nOUTPUT CONTRACT\nReturn only the selected output in the current PM's deployable form. One-file deliverable: direct file. Multi-file canonical folder: ZIP handoff preserving canonical relative paths.\n";return s}
 
 const crcTable=(()=>{let t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();function crc32(u){let c=0xffffffff;for(const b of u)c=crcTable[(c^b)&255]^(c>>>8);return(c^0xffffffff)>>>0}function u16(n){return new Uint8Array([n&255,(n>>>8)&255])}function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255])}function concat(ps){let n=ps.reduce((a,p)=>a+p.length,0),o=new Uint8Array(n),x=0;for(const p of ps){o.set(p,x);x+=p.length}return o}
 async function makeZip(entries){const enc=new TextEncoder(),ls=[],cs=[];let off=0;for(const e of entries){const name=enc.encode(e.name),data=e.data instanceof Uint8Array?e.data:new Uint8Array(e.data),crc=crc32(data),l=concat([u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data]);ls.push(l);cs.push(concat([u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off),name]));off+=l.length}const c=concat(cs),end=concat([u32(0x06054b50),u16(0),u16(0),u16(entries.length),u16(entries.length),u32(c.length),u32(off),u16(0)]);return new Blob([...ls,c,end],{type:"application/zip"})}
@@ -190,15 +178,14 @@ async function addFiles(entries,files,prefix){for(const f of files)entries.push(
 async function writeRequest(blob,name){if(!(await ensureRequestFolder()))return;const h=await requestHandle.getFileHandle(name,{create:true}),w=await h.createWritable();await w.write(blob);await w.close();setStatus("requestStatus",`Saved: ${requestHandle.name}/${name}`,"good")}
 function safeSlug(s){return String(s||"request").toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"")}
 async function saveBuild(){try{const p=buildSelected(),course=$("buildCourse").value,unit=Number($("buildUnit").value),outs=selectedOutputs("build");if(!p||!outs.length){alert("Choose at least one output.");return}const files=[...$("buildAdditional").files],m=await manifestBase("BUILD",course,unit,p,outs,delivery("build"),$("buildNote").value.trim(),files.map(f=>f.name)),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
-async function savePatch(){try{const p=patchSelected(),course=$("patchCourse").value,unit=Number($("patchUnit").value),outs=selectedOutputs("patch");if(!p||!outs.length){alert("Choose a Patch PM and output.");return}const files=[...$("patchAdditional").files],m=await manifestBase("PATCH",course,unit,p,outs,delivery("patch"),$("patchNote").value.trim(),files.map(f=>f.name)),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m)+"\nPATCH RULE\nApply the repair to the current artifact resolved from the pinned course repo. Preserve all out-of-scope content.\n")},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
+async function saveMaintenance(){try{const p=maintenanceSelected(),course=$("maintenanceCourse").value,unit=Number($("maintenanceUnit").value),target=maintenanceTargetSelected(),outs=selectedOutputs("maintenance");if(!p||!outs.length){alert("Choose a Maintenance PM and output.");return}const files=[...$("maintenanceAdditional").files],m=await manifestBase("MAINTENANCE",course,unit,p,outs,delivery("maintenance"),$("maintenanceNote").value.trim(),files.map(f=>f.name),target),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m)+"\nMAINTENANCE RULE\nWork memorylessly against the current target at the pinned course commit. Preserve all correct out-of-scope content and system-level authorities.\n")},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_${safeSlug(target.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
 async function saveGeneral(){try{const p=generalSelected(),primary=[...$("generalPrimary").files],extra=[...$("generalAdditional").files],outs=selectedOutputs("general");if(!p||!primary.length||!outs.length){alert("Choose the General PM, at least one primary source file, and an output.");return}const files=[...primary,...extra],m=await manifestBase("GENERAL",null,null,p,outs,delivery("general"),$("generalNote").value.trim(),files.map(f=>f.name));m.system_repo=SYSTEM_REPO;m.course_repo=null;const enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,primary,"inputs/primary/");await addFiles(entries,extra,"inputs/additional/");await writeRequest(await makeZip(entries),`general_${safeSlug(p.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
 
 function tab(name){document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));document.querySelectorAll(".section").forEach(x=>x.classList.toggle("active",x.id===name));updateCourseSide()}
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
-$("connectRoot").onclick=connectRoot;$("saveBuild").onclick=saveBuild;$("savePatch").onclick=savePatch;$("saveGeneral").onclick=saveGeneral;
+$("connectRoot").onclick=connectRoot;$("saveBuild").onclick=saveBuild;$("saveMaintenance").onclick=saveMaintenance;$("saveGeneral").onclick=saveGeneral;
 $("buildCourse").onchange=()=>{fillUnits("buildUnit",$("buildCourse").value);refreshBuild()};$("buildUnit").onchange=refreshBuild;$("buildJob").onchange=refreshBuild;
-$("patchCourse").onchange=()=>{fillUnits("patchUnit",$("patchCourse").value);refreshPatch()};$("patchUnit").onchange=refreshPatch;$("patchJob").onchange=refreshPatch;$("generalJob").onchange=refreshGeneral;
-
+$("maintenanceCourse").onchange=()=>{fillUnits("maintenanceUnit",$("maintenanceCourse").value);refreshMaintenance()};$("maintenanceUnit").onchange=refreshMaintenance;$("maintenanceTarget").onchange=refreshMaintenance;$("maintenanceJob").onchange=refreshMaintenance;$("generalJob").onchange=refreshGeneral;
 (async function init(){initCourses();await restoreRoot();await restoreRequest();await discoverMenus();})();
 </script>
 </body>
