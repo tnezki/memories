@@ -16,7 +16,7 @@ FLOW:
     -> VALIDATE I-CAN / EVIDENCE / SECURITY / REPRESENTATIONS
     -> SCRAMBLE FINAL SELECTED-RESPONSE ANSWER POSITIONS ON STAGED FORM DATA
     -> RENDER SIX FORMS + BUBBLE ANSWER SHEET + FR RESPONSE SHEET
-    -> SEMANTIC / SECURITY / KEY / PRINT / FINAL-BYTE QA
+    -> SEMANTIC / SECURITY / KEY / PRINT-CONTRACT / FINAL-BYTE QA
     -> PACKAGE ONE UNIT SUMMATIVE ZIP
 
 ======================================================================
@@ -431,7 +431,7 @@ If any instance fails:
   and rerun all dependent answer/representation/security checks.
 
 ======================================================================
-11. RENDER / PRINT / FINAL-BYTE QA
+11. RENDER / PRINT-CONTRACT / FINAL-BYTE QA
 ======================================================================
 
 SOURCE / ROUTING:
@@ -482,15 +482,21 @@ DOM:
 - no duplicate IDs;
 - no unresolved template tokens.
 
-PRINT / VISUAL:
-- render/inspect the full final artifact;
-- no clipped prompt, choice, table, MathJax, SVG, figure, or form label;
-- questions may flow naturally across physical sheets;
-- intentional form breaks occur only after Q16 and Q20;
-- bubble answer sheet prints cleanly;
-- FR response sheet prints cleanly;
-- no accidental extra blank pages;
-- `.no-print` content is absent from print output.
+PRINT / VISUAL — DETERMINISTIC / NON-BLOCKING:
+- validate print/layout behavior from the FINAL HTML plus the current deployed `css/summative_physics.css`;
+- verify the DOM/CSS print contract directly: question blocks are not malformed, required flow/break classes are present, form breaks occur only after Q16 and Q20, the bubble sheet and FR sheet have their required classes/structure, and `.no-print` content is governed by the deployed print CSS;
+- verify figures/tables/SVG/MathJax containers use the deployed shell conventions and do not contain obvious fixed dimensions or malformed markup that would force clipping;
+- DO NOT generate a PDF solely for Summative QA;
+- DO NOT invoke a PDF skill, browser-render pipeline, headless browser, screenshot pass, or print-to-PDF pass solely to prove layout;
+- DO NOT create a modified QA HTML copy with MathJax/CDN scripts removed, replaced, or rewritten;
+- DO NOT require successful network access to the external MathJax CDN during local QA; source ordering/configuration correctness is the required check;
+- DO NOT create or package QA HTML, PDF, screenshots, browser traces, or other secondary QA deliverables;
+- if a local visual renderer is already available and completes without external fetches or material delay, one OPTIONAL spot-check may be used to catch obvious clipping, but unavailable/failed visualization tooling is NOT a build failure when deterministic HTML/CSS QA passes;
+- if an optional visual spot-check reveals a real artifact defect, repair the FINAL HTML and rerun deterministic dependent checks; do not build a parallel QA artifact.
+
+DELIVERY BOUND:
+- once content/key/security checks, strict scrambling, deterministic DOM/CSS print-contract checks, final-byte checks, and ZIP-boundary checks pass, PACKAGE AND DELIVER immediately;
+- do not continue into secondary rendering, PDF creation, browser experimentation, CDN workarounds, or extra QA packaging.
 
 FINAL BYTES:
 - reopen the exact final HTML bytes after QA;
