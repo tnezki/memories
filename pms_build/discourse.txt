@@ -1,0 +1,402 @@
+BUILD DISCOURSE — TEACHER-GUIDE EMBEDDED / POINT-OF-USE / NO STANDALONE ARTIFACT
+==================================================================================
+
+STATUS: CURRENT
+STEP: 15
+JOB: discourse
+ROLE: Audit and strengthen content-specific classroom discourse support inside the current teacher-facing guides for the requested course/Unit.
+
+This is ONE discourse build/enhancement PM.
+There is no nested Discourse PM folder, local PM manifest, control-panel profile, standalone student Discourse document, or Reflection output.
+
+FLOW:
+  PHILOSOPHY + RUNTIME + CURRENT COURSE FRAMEWORK
+    -> RESOLVE EXISTING STUDENT ARTIFACT + TEACHER-GUIDE PAIRS
+    -> MAP DISCOURSE-WORTHY MOMENTS ACROSS REQUESTED SCOPE
+    -> PRESERVE GOOD EXISTING DISCOURSE
+    -> ADD / REPAIR POINT-OF-USE TEACHER DISCOURSE ONLY WHERE IT HELPS
+    -> INDEPENDENCE / ANSWER-LEAKAGE / SHELL / FINAL-BYTE QA
+    -> PACKAGE ONLY CHANGED TEACHER-FACING FILES
+
+======================================================================
+0. HARD BOUNDARY — DISCOURSE ONLY
+======================================================================
+
+This Step 15 job is DISCOURSE ONLY.
+
+REFLECTION IS OUT OF SCOPE.
+
+The system may contain a separate Gold Standard Reflection document/template, including:
+  Tools/templates/Reflections Template Gold Standard.docx
+
+That document is NOT an input to this Discourse job.
+Do not fetch it, modify it, recreate it, package it, convert it, or derive a new Reflection artifact from it.
+
+Do NOT create:
+- a standalone Discourse worksheet;
+- a standalone Discourse HTML page;
+- a Discourse student packet;
+- a Reflection worksheet/document;
+- a combined Discourse + Reflection artifact.
+
+Discourse now lives where the teacher uses it: INSIDE the relevant teacher guide / teacher-facing version at the point of use.
+
+======================================================================
+1. TOOL POLICY — EXECUTABLE HARD GATE
+======================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+This is a NO-WEB curriculum job.
+
+Pin the canonical system repository and selected course repository once at job start.
+Never mix later commits into the run.
+
+Resolve exact authorities and artifact paths through current manifests / Framework / course file-structure contracts / current family contracts.
+Direct-fetch exact declared paths at the pinned snapshots.
+
+If a required declared file cannot be fetched:
+  FAIL CLOSED
+and name the exact repo/path.
+
+Do not search around a missing declared path.
+Do not use stale uploads, old ZIPs, File Library copies, or remembered paths as substitutes for canonical GitHub.
+
+======================================================================
+2. AUTHORITY / READ ORDER
+======================================================================
+
+MANDATORY:
+1. current canonical `Curriculum_Philosophy.txt`;
+2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
+3. current selected Course Framework front door and its exact embedded/declared Unit Assessment Plan;
+4. this PM;
+5. only the current course files needed to resolve and inspect the requested teacher-guide scope.
+
+Authority:
+1. current explicit teacher instruction;
+2. Philosophy;
+3. current Course Framework / exact Unit Assessment Plan;
+4. this PM;
+5. current live student artifact + teacher-guide content;
+6. current live HTML/CSS implementation for that teacher-guide family.
+
+Question Structure is NOT a normal input to this job because this PM does not author new student questions or new evidence instruments.
+
+The Framework owns:
+- exact learning targets / I-cans;
+- Unit/section architecture;
+- evidence intent and independence requirements;
+- course-specific representation and discourse expectations;
+- deployed file paths / resource-family contracts.
+
+The existing student artifact owns the actual student-facing task the discourse must support.
+The existing teacher guide owns the current teacher-facing sequence/shell.
+This PM owns the discourse enhancement procedure.
+
+======================================================================
+3. PURPOSE — DISCOURSE IS EMBEDDED FACILITATION
+======================================================================
+
+Discourse support helps the teacher make student thinking visible and productive around worthwhile existing work.
+
+Good discourse may help students:
+- notice;
+- predict;
+- compare;
+- justify;
+- critique;
+- connect representations;
+- interpret evidence;
+- revise a claim/model;
+- synthesize what the class learned;
+- surface a misconception productively.
+
+Discourse is NOT:
+- extra filler questions;
+- a generic script pasted into every teacher guide;
+- a second curriculum sequence;
+- a separate student assignment;
+- an excuse to turn independent evidence into coached evidence.
+
+The teacher remains free to skip, shorten, adapt, or ignore any discourse move.
+
+======================================================================
+4. SCOPE RESOLUTION — EXISTING TEACHER GUIDES ONLY
+======================================================================
+
+For the requested course/Unit, resolve the current resource families that ALREADY have a teacher guide or teacher-facing version under the current Framework / file-structure contract.
+
+Examples may include, when currently deployed:
+- Notes teacher versions;
+- Activities teacher-facing companions/guides;
+- Demo teacher guides;
+- Investigation teacher guides;
+- Performance Task teacher guides;
+- other current teacher-facing instructional guides explicitly declared by the course.
+
+HARD:
+- do NOT create a new teacher guide solely because this PM wants a place to put discourse;
+- do NOT alter a student artifact in this job;
+- do NOT add a new resource family;
+- do NOT infer paths by repository search when the current contract should declare them.
+
+If a family has no teacher-facing guide/version and no current contract authorizes one:
+  mark it NOT APPLICABLE for this job.
+
+======================================================================
+5. INDEPENDENT-EVIDENCE EXCLUSION — HARD
+======================================================================
+
+Do not add facilitation that contaminates evidence intended to be independent.
+
+Normally EXCLUDE discourse coaching from:
+- Exit Tickets;
+- Quick Checks when used as independent evidence;
+- Summatives;
+- Progress Tracker evidence capture;
+- Portfolio scoring/judgment workflow;
+- any other artifact/phase the current Framework marks independent or secure.
+
+Performance Tasks may contain instructional/shared phases AND independent evidence phases.
+Add discourse only where the current task architecture permits collaboration/facilitation.
+Never add hints, leading prompts, worked reasoning, or teacher coaching inside an independent evidence phase.
+
+When uncertain whether a phase is coachable:
+  FAIL CLOSED on that proposed discourse insertion rather than weaken evidence validity.
+
+======================================================================
+6. MAP-FIRST GATE — BEFORE EDITING ANY GUIDE
+======================================================================
+
+Before changing teacher-guide HTML/content, build one private discourse map across the COMPLETE requested scope.
+
+For EACH candidate teacher-guide phase/moment record:
+- exact resource family;
+- exact file/path;
+- Unit/section;
+- student task / phase being supported;
+- exact learning target / I-can connection when applicable;
+- discourse purpose;
+- whether current discourse already exists;
+- whether current discourse is already good enough;
+- independence/security status;
+- planned teacher move(s), if any;
+- planned student move(s), if any;
+- Listen For / misconception/evidence focus, if useful;
+- press/follow-up question(s), if useful;
+- representation connection, if useful;
+- insertion location in the existing teacher guide;
+- KEEP / ADD / REPAIR / SKIP decision.
+
+WHOLE-SCOPE QA BEFORE EDITS:
+- discourse appears where it serves a real learning job;
+- no independent evidence is coached;
+- no generic script is repeated by template convenience;
+- no guide is changed merely to make all guides look identical;
+- strong existing discourse is preserved rather than rewritten cosmetically;
+- representation-heavy moments include representation-focused talk only when useful;
+- every proposed insertion is adjacent to a real student task/phase.
+
+Repair the map before editing.
+
+The map is a temporary working object.
+Do not package it or add it to the course repository.
+
+======================================================================
+7. POINT-OF-USE RULE — HARD
+======================================================================
+
+Discourse belongs next to the exact teacher-guide phase it supports.
+
+Do NOT create one detached Unit-wide appendix of generic discourse prompts when the teacher needs the support during a specific task.
+
+Use the EXISTING teacher-guide structure and current CSS hooks.
+Do not invent a universal Discourse CSS system.
+Do not add a new shared stylesheet.
+Do not restyle the guide.
+
+Possible teacher-facing components include only what is useful for that moment:
+
+TEACHER MOVES
+- concise facilitation actions;
+- normally 2–4 when needed;
+- protect productive struggle;
+- sequence noticing/pressing/connecting intentionally.
+
+STUDENT MOVES
+- likely productive student actions or talk;
+- normally 2–4 when needed;
+- describe useful participation, not a scripted performance.
+
+LISTEN FOR
+- strong reasoning/evidence;
+- important misconception;
+- representation connection;
+- language indicating partial understanding.
+
+PRESS / FOLLOW-UP
+- content-specific questions that deepen or clarify thinking;
+- do not ask a generic “why?” after every prompt;
+- do not reveal the answer through the question.
+
+ACCEPTABLE RESPONSES / SYNTHESIS
+- use only when the teacher needs calibration;
+- distinguish one strong example from criteria for other acceptable responses;
+- do not imply only one exact student sentence counts.
+
+Do NOT force all headings/components into every moment.
+A short, well-placed Teacher Move may be better than a full discourse block.
+
+======================================================================
+8. CONTENT QUALITY — HARD
+======================================================================
+
+Every discourse insertion must be specific to the actual student content in front of the teacher.
+
+BAD:
+- “Have students discuss with a partner.”
+- “Ask students to explain their reasoning.”
+- “Circulate and monitor.”
+repeated with no content-specific purpose.
+
+GOOD discourse identifies what students are comparing/noticing/justifying and what the teacher should listen for or press next.
+
+Discourse should:
+- use the exact current course language;
+- respect the exact I-can / learning job;
+- use current representations as reasoning objects when appropriate;
+- surface misconceptions without teaching the misconception as fact;
+- help the teacher decide what to press, connect, or leave unresolved;
+- preserve student intellectual ownership.
+
+Do not turn a concise teacher guide into a dense script.
+Useful brevity is preferred.
+
+======================================================================
+9. PRESERVE EXISTING ARTIFACTS — SURGICAL EDIT RULE
+======================================================================
+
+The current student artifact is read-only for this job.
+Its bytes/content must remain unchanged.
+
+For each teacher-facing file:
+- preserve current student task wording/order referenced by the guide;
+- preserve current answers/solutions;
+- preserve current figures/tables/representations;
+- preserve current CSS links and shell;
+- preserve current page/slide/task sequence;
+- preserve good existing discourse;
+- add/repair only the minimum teacher-facing discourse content required by the approved map.
+
+Do NOT:
+- rewrite student questions;
+- change answer keys;
+- redesign HTML;
+- change shared CSS;
+- move figures/assets;
+- add Reflection material;
+- add unrelated teacher notes;
+- “standardize” all guides into the same choreography.
+
+If the underlying student task itself is defective, report the upstream defect rather than silently repairing it here.
+
+======================================================================
+10. LIVE HTML/CSS / FORMAT AUTHORITY
+======================================================================
+
+Different teacher-guide families may use different shells.
+Use the live guide + CSS already deployed for that family as implementation authority.
+
+Examples:
+- a standard teacher guide may support ordinary `h2` / `h3` / `ul` blocks;
+- a mirrored Performance Task teacher version may use existing `.teacher-note` / `.teacher-answer` hooks;
+- a Notes teacher version may have its own teacher-only callout pattern.
+
+Use only existing compatible structures.
+Do not force one family’s markup into another family.
+
+If the current teacher-guide shell cannot hold the mapped discourse cleanly without redesigning shared CSS:
+  FAIL CLOSED as DISCOURSE_GUIDE_LAYOUT_CONFLICT
+for that file and report the exact path.
+
+======================================================================
+11. QA — FROZEN
+======================================================================
+
+TOOL / AUTHORITY
+- Philosophy first;
+- Runtime second;
+- current Course Framework before artifact inspection;
+- pinned system + course snapshots;
+- no web search/fetch/external research;
+- exact declared paths direct-fetched.
+
+SCOPE
+- Reflection excluded completely;
+- no standalone Discourse artifact;
+- only existing teacher-facing guides/versions considered;
+- student artifacts unchanged;
+- independent/secure evidence excluded from coaching.
+
+MAP
+- complete requested scope mapped before edits;
+- KEEP/ADD/REPAIR/SKIP decision for every candidate moment;
+- every insertion has a real discourse purpose;
+- no template-convenience discourse repetition.
+
+CONTENT
+- content-specific Teacher/Student Moves where used;
+- Listen For tied to actual reasoning/evidence/misconceptions;
+- follow-up questions do not leak answers;
+- current course terminology preserved;
+- representation talk is substantive when used;
+- no generic repeated facilitation script.
+
+HTML / FORMAT
+- existing stylesheet links unchanged;
+- existing teacher-guide shell preserved;
+- no new shared CSS;
+- no broken HTML;
+- no broken asset paths;
+- no student-content drift;
+- no answer/key drift;
+- print/screen behavior remains valid for the guide family.
+
+FINAL
+- only changed teacher-facing files packaged;
+- no Reflection template/package;
+- no student files packaged unless explicit current teacher instruction requires a complete deployable folder AND unchanged siblings are necessary for safe deployment;
+- no Framework/PM/maps/tools/QA logs in output;
+- delivered bytes match QA’d staging bytes.
+
+======================================================================
+12. OUTPUT / PATCH BOUNDARY
+======================================================================
+
+This job returns a COURSE-ROOT-RELATIVE PATCH containing only teacher-facing files changed by the discourse enhancement.
+
+Normal filename:
+  unit{U}_discourse_teacher_guide_patch.zip
+
+Preserve each changed file at its exact existing course-relative path inside the ZIP.
+
+Example concept only:
+  demo/u1_1_demo/u1_1_demo_teacher_guide.html
+  investigations/u1_1_investigation/u1_1_investigation_teacher_guide.html
+  performance_task___5134zrt/u1_1_performance_task/u1_1_performance_task_teacher_guide.html
+
+Actual paths come from the current Course Framework / file-structure contract.
+
+Do NOT create a top-level `discourse/` folder merely for this job.
+Discourse remains embedded in the owning teacher-guide files.
+
+If the full requested scope already contains strong, content-specific, properly placed discourse and no changes are justified:
+  return DISCOURSE_AUDIT_PASS
+with a concise list of checked teacher-guide paths,
+and return NO patch ZIP.
+
+END — BUILD DISCOURSE
