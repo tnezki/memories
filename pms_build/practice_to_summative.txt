@@ -16,6 +16,8 @@ It owns only:
 - execution order;
 - one shared pinned system/course snapshot;
 - staged handoff from an upstream child to a downstream child when required;
+- child-execution integrity gating;
+- acceptance/rejection of a child PASS against that child's own current contract;
 - stop-on-failure behavior;
 - final all-in-one course-root packaging.
 
@@ -90,6 +92,43 @@ If a required child job or entrypoint is missing:
   FAIL CLOSED as ORCHESTRATOR_CHILD_PM_MISSING.
 
 ============================================================================
+1A. CHILD EXECUTION INTEGRITY — ABSOLUTE HARD
+============================================================================
+
+The seven children are NOT permission to invent one replacement generator for all seven.
+
+HARD:
+- do not author a new cross-child HTML generator;
+- do not use one generic HTML template for multiple child families;
+- do not translate the seven PMs into a simplified local schema and render from that schema;
+- do not build all seven families in one ad-hoc generation pass;
+- do not treat file-count, link, or key checks as proof that a child PM was followed;
+- do not substitute "structurally valid HTML" for the child's exact deployed shell contract.
+
+A script/tool MAY assist one active child if that child's PM allows it, but while that child is
+active the script/tool must be child-scoped. It must not render another child family from a shared
+simplified template.
+
+Before rendering EACH child, create an in-run CHILD EXECUTION LEDGER entry containing:
+- child job;
+- resolved entrypoint;
+- entrypoint blob/SHA or equivalent pinned identity;
+- exact child-required authority files actually read;
+- exact deployed CSS files actually read when the child PM requires them;
+- exact live/deployed/proven shell exemplar paths actually read when the child PM requires them.
+
+When a child PM says to use a live/deployed/proven shell or implementation exemplar:
+- direct-fetch the applicable current course exemplar at the pinned course commit BEFORE rendering;
+- use the exemplar only for shell/DOM/class/stylesheet/page-topology behavior;
+- never copy old questions, answers, I-cans, or Unit content from the exemplar.
+
+If the child requires a live/deployed/proven exemplar and no applicable exemplar can be read:
+  FAIL CLOSED using that child's own shell/input failure classification.
+
+A child is not considered EXECUTED merely because its PM was read.
+Its output must be produced under that PM's active rules and then pass Section 4A below.
+
+============================================================================
 2. SCOPE
 ============================================================================
 
@@ -128,7 +167,15 @@ Use one expanded staging tree representing the selected course root.
 Each child writes its final deployable files into its canonical course-relative paths in
 that staging tree.
 
-After a child PASSES:
+For Practice provenance handoff safety, seed the staging tree with the pinned course repo's
+CURRENT complete deployed provenance folder when it exists:
+
+  practice_sets/_practice_provenance/
+
+Then let the current Practice child replace/update only the current Unit's provenance inside
+that staged folder according to the Practice PM. Preserve the other Units unchanged.
+
+After a child PASSES THE ACCEPTANCE GATE in Section 4A:
 - freeze that child's final deployed bytes;
 - do not rewrite them from orchestrator logic;
 - leave them available to later children when those children legitimately depend on them.
@@ -153,33 +200,33 @@ Run sequentially:
 
 1. PRACTICE
    Execute current registered `practice` PM completely.
-   Require child PASS.
+   Require child PASS + Section 4A acceptance.
 
 2. ACTIVITIES
    Execute current registered `activities` PM completely using the passed Practice staging
    outputs when Practice is its declared source.
-   Require child PASS.
+   Require child PASS + Section 4A acceptance.
 
 3. EXIT
    Execute current registered `exit` PM completely.
-   Require child PASS.
+   Require child PASS + Section 4A acceptance.
 
 4. WARM-UP
    Execute current registered `warmup` PM completely.
-   Require child PASS.
+   Require child PASS + Section 4A acceptance.
 
 5. PROGRESS
    Execute current registered `progress` PM completely.
-   Require child PASS.
+   Require child PASS + Section 4A acceptance.
 
 6. REVIEW
    Execute current registered `review` PM completely using the passed Practice staging
    outputs when Practice is its declared source.
-   Require child PASS.
+   Require child PASS + Section 4A acceptance.
 
 7. SUMMATIVE
    Execute current registered `summative` PM completely.
-   Require child PASS.
+   Require child PASS + Section 4A acceptance.
 
 If ANY child fails:
 - STOP;
@@ -187,6 +234,68 @@ If ANY child fails:
 - report the exact child and its child-PM failure classification;
 - do not claim Step 12 PASS;
 - do not continue into later children merely to produce a partial master package.
+
+============================================================================
+4A. CHILD PASS ACCEPTANCE / SHELL-CONFORMANCE GATE — ABSOLUTE HARD
+============================================================================
+
+A child's own statement of PASS is NECESSARY but NOT SUFFICIENT for Step 12 to accept it.
+
+Before freezing the child, perform a STATIC conformance check of the child's emitted deployable
+files against the CURRENT child PM and the exact live/deployed shell exemplar(s) that child PM
+required. This check does NOT rewrite the child and is NOT a second authoring/render pass.
+
+Derive the conformance checks from the active child PM; do not hardcode a substitute shell here.
+At minimum, verify every deterministic shell rule the child PM declares, including as applicable:
+- exact stylesheet hrefs and order;
+- required outer/body wrapper topology;
+- required structural class names and IDs;
+- required title/header structure;
+- deterministic page/section counts and ordering;
+- question/solution page alternation when declared;
+- workspace/response-surface placement when declared;
+- table hooks when declared;
+- figure/graph/diagram wrapper classes when declared;
+- student-facing caption prohibitions when declared;
+- MathJax head contract when declared;
+- prohibited inline CSS / extra stylesheet / invented wrapper behavior;
+- required hidden traceability metadata when declared;
+- required representation presence and relative asset references.
+
+LIVE-SHELL PARITY — HARD
+When the child PM names the current deployed HTML/CSS as implementation authority, compare the
+new artifact's shell fingerprint against the applicable exemplar. The fingerprint is structural,
+not curricular. It includes only shell behavior such as:
+- stylesheet sequence;
+- top-level DOM hierarchy;
+- required recurring class/ID hooks;
+- declared page topology/order;
+- representation wrappers;
+- print/page shell hooks.
+
+Do NOT compare or copy old curricular text.
+
+PASS REJECTION — HARD
+If any emitted file violates a deterministic HARD shell/render rule from the child PM:
+1. reject that child's claimed PASS;
+2. do NOT freeze the child;
+3. return control to the SAME child PM with the exact violated rule/path;
+4. allow the child to correct its own output under its own PM;
+5. rerun that child's own QA and this acceptance gate;
+6. only then accept/freeze the child.
+
+The orchestrator itself must not patch the HTML.
+
+If the child cannot satisfy its own shell after correction:
+  STOP and report the child's own failure classification.
+
+Examples of things that MUST NOT be accepted merely because files open successfully:
+- replacing a required deployed wrapper/class topology with generic `<main>/<section>` markup;
+- emitting a simplified hub instead of the declared live hub shell;
+- omitting declared figure/graph wrappers;
+- adding visible metadata/title blocks the PM forbids;
+- substituting generic workspace blocks for a declared response surface;
+- dropping a required representation while keeping only its prompt text.
 
 ============================================================================
 5. FAMILY ISOLATION / PARITY — HARD
@@ -219,7 +328,7 @@ If combined-mode orchestration would change a child artifact:
 6. NO SECOND AUTHORING / NO SECOND RENDER PASS
 ============================================================================
 
-After a child reports PASS, Step 12 must NOT:
+AFTER a child has passed Section 4A and been frozen, Step 12 must NOT:
 - rewrite its questions;
 - resize or redraw its figures;
 - change its HTML shell;
@@ -235,12 +344,17 @@ After a child reports PASS, Step 12 must NOT:
 - remove an external MathJax loader for local rendering;
 - perform another semantic/content audit already owned by the child PM.
 
+IMPORTANT:
+Section 4A happens BEFORE freeze. A child-local correction made under the SAME active child PM
+because its own HARD shell/QA rule failed is allowed. That is not orchestrator reauthoring.
+
 Artifact-specific QA belongs inside the active child PM.
 
-Step 12 bundle QA is intentionally SMALL:
-- every required child reached PASS;
+Step 12 bundle QA remains intentionally SMALL after all children are frozen:
+- every required child reached accepted PASS;
 - expected final course-relative child outputs exist;
 - no path collisions;
+- every local relative asset reference resolves inside the staged course tree;
 - master ZIP contains the passed staging bytes;
 - ZIP integrity passes.
 
@@ -288,6 +402,16 @@ for example as applicable:
   assessments_zxrtjp/
   BUILD_REPORT.txt
 
+PRACTICE PROVENANCE SYNC — HARD
+The master ZIP must contain a COMPLETE staged snapshot of:
+
+  practice_sets/_practice_provenance/
+
+when that folder exists in the pinned course repo or is created by the Practice child.
+Seed it from the pinned course snapshot, overlay the freshly built current Unit provenance,
+and package the whole resulting folder. This lets the teacher replace/sync the provenance
+folder wholesale without deleting provenance from other Units.
+
 HARD:
 - use the ACTUAL child output paths, not guessed legacy names;
 - do not put child ZIP files inside the master ZIP;
@@ -300,6 +424,19 @@ HARD:
 
 Canonical reusable CSS/assets remain in their deployed course locations unless a child PM itself
 explicitly requires a new deployable file.
+
+ASSET / ZIP PATH INTEGRITY — HARD
+Before packaging PASS:
+- parse local `src` / `href` references that are supposed to resolve inside the course tree;
+- resolve each reference from the emitted file's actual deployed directory;
+- require referenced child-local figures/assets to exist at that resolved path;
+- reject references that only work from another child's folder;
+- require exact filename/case matches;
+- require ZIP entries to preserve the deployed course-relative paths.
+
+If a reused Practice question is wrapped into Activities or Review and its visual asset must be
+child-local under that child's PM, verify the child's emitted reference resolves from the child
+file itself. Do not accept a Practice-relative path merely because the Practice copy exists.
 
 ============================================================================
 9. BUILD REPORT
@@ -314,8 +451,12 @@ Record only:
 - course commit;
 - Unit;
 - child PM job + resolved entrypoint;
+- child entrypoint pinned identity;
 - PASS/FAIL for each child;
+- Section 4A shell-conformance acceptance result for each child;
 - final deployed paths included;
+- practice provenance folder sync result;
+- asset/path integrity result;
 - any real upstream/child failure;
 - master ZIP integrity result.
 
@@ -330,18 +471,23 @@ Before Step 12 PASS verify:
 [ ] one fixed pinned system snapshot used for all children
 [ ] one fixed pinned course snapshot used for all children
 [ ] current pms_build/MANIFEST.json resolved at that system pin
-[ ] practice child PM PASS
-[ ] activities child PM PASS
-[ ] exit child PM PASS
-[ ] warmup child PM PASS
-[ ] progress child PM PASS
-[ ] review child PM PASS
-[ ] summative child PM PASS
+[ ] no cross-child replacement generator/template was used
+[ ] child execution ledger complete for all seven children
+[ ] practice child PM PASS + Section 4A accepted
+[ ] activities child PM PASS + Section 4A accepted
+[ ] exit child PM PASS + Section 4A accepted
+[ ] warmup child PM PASS + Section 4A accepted
+[ ] progress child PM PASS + Section 4A accepted
+[ ] review child PM PASS + Section 4A accepted
+[ ] summative child PM PASS + Section 4A accepted
 [ ] Activities/Review used fresh staged Practice when required
+[ ] child-required live/deployed shell exemplars were actually read before render
 [ ] no orchestrator-owned content/shell/CSS mutations
-[ ] no second generic browser/PDF/final-byte QA pass
+[ ] no second generic browser/PDF/final-byte authoring pass
 [ ] no output-path collisions
-[ ] master ZIP contains the exact passed child staging bytes
+[ ] all local child asset references resolve from their deployed file locations
+[ ] complete practice_sets/_practice_provenance/ staged/synced when applicable
+[ ] master ZIP contains the exact accepted/frozen child staging bytes
 [ ] BUILD_REPORT.txt is concise
 [ ] master ZIP integrity PASS
 
