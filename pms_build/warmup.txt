@@ -16,7 +16,8 @@ FLOW:
     -> PLACE INTO UNIVERSAL TWO-PAGE WARM-UP SHELL
     -> COPY REQUIRED CANONICAL FIGURES
     -> STRUCTURAL / MATHJAX / RENDER / FINAL-BYTE QA
-    -> RETURN SMALLEST DEPLOYABLE COURSE PATCH
+    -> PACKAGE UNIT WARM-UP FOLDER
+    -> RETURN ONE WARM-UP ZIP
 
 ======================================================================
 0. TOOL POLICY — EXECUTABLE HARD GATE
@@ -368,22 +369,43 @@ Do not invent new QA criteria mid-run.
 Park new systemic findings for later PM revision.
 
 ======================================================================
-10. OUTPUT / PATCH BOUNDARY
+10. OUTPUT / ZIP BOUNDARY — ALWAYS ZIP
 ======================================================================
 
-Primary course output:
+Primary LIVE course path:
   warmups/unit_{U}_warmups/unit_{U}_warmups.html
 
-If the build changes ONLY the HTML:
-  return that single HTML file directly.
+DELIVERY IS ALWAYS ONE ZIP, even when the HTML is the only changed file.
 
-If the build also adds/changes required local figure assets:
-  return ONE ZIP containing only the new/changed course repo files with repository-relative paths, for example:
+ZIP filename:
+  unit_{U}_warmups.zip
 
-  warmups/unit_{U}_warmups/unit_{U}_warmups.html
-  warmups/unit_{U}_warmups/figures/...
+ZIP ROOT — EXACT:
 
-Do NOT include unchanged shared CSS in the course patch.
+  unit_{U}_warmups/
+    unit_{U}_warmups.html
+    figures/...                [only when new/changed local figure assets are required]
+
+For Unit 1 this means:
+
+  unit_1_warmups.zip
+    unit_1_warmups/
+      unit_1_warmups.html
+
+The ZIP is intended to be extracted/copied into the EXISTING course `warmups/` directory.
+Therefore the deployed Unit 1 path becomes:
+
+  physics/warmups/unit_1_warmups/unit_1_warmups.html
+
+HARD PACKAGING RULES:
+- do NOT put an outer `physics/` folder inside the ZIP;
+- do NOT put an outer `warmups/` folder inside the ZIP;
+- the first folder inside the ZIP is exactly `unit_{U}_warmups/`;
+- preserve the internal `figures/` subfolder when required;
+- if no figure assets changed, the ZIP still contains the Unit folder + HTML;
+- include only new/changed files needed for this Warm-Up delivery;
+- do NOT include unchanged shared CSS.
+
 Do NOT include:
 - PM;
 - Framework;
@@ -393,5 +415,13 @@ Do NOT include:
 - tools;
 - QA logs;
 - staging files.
+
+FINAL ZIP QA:
+- archive opens successfully;
+- top-level archive entry is `unit_{U}_warmups/`;
+- `unit_{U}_warmups/unit_{U}_warmups.html` exists exactly once;
+- no `physics/` or `warmups/` wrapper exists inside the archive;
+- all included local figure links resolve after placement in the live course path;
+- delivered HTML bytes match the QA'd staging HTML bytes.
 
 END — BUILD WARM-UPS
