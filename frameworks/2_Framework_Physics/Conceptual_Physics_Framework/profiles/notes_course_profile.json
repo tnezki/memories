@@ -115,9 +115,11 @@
     "teacher": "same instructional sequence, browser-only; fixed student workspace heights are released; teacher support expands naturally downward with no print/page-fit optimization; answers/acceptable reasoning are scannable bulleted lists; Teacher Moves and Student Moves are separate labeled lists; no overlap. Vertical space is not a concern."
   },
   "teacher_support": {
-    "browser_only_rule": "Teacher Notes are used in the browser only. Do not optimize teacher guides for printed pages, student page breaks, or vertical compactness.",
-    "solution_rule": "Never render canonical teacher solutions as one long red paragraph. Use Answer / Acceptable Reasoning with bullets for distinct reasoning ideas and one bullet per labeled part for multipart tasks.",
-    "discourse_rule": "Use separate Teacher Moves and Student Moves lists. Teacher Moves are concise prompts/actions the teacher can use; Student Moves describe productive student reasoning/actions. Add Listen For / Likely Misconception when it materially helps.",
+    "browser_only_rule": "Teacher Notes are browser-only. Release fixed student workspaces and let teacher support expand naturally; do not optimize teacher guides for print/page fit.",
+    "visual_rule": "Match the established Algebra Notes teacher-guide convention: teacher-only answers/guidance/discourse are inside a red, bold wrapper using ordinary paragraph/list elements. Do not rely on h4 headings because base CSS renders h4 navy.",
+    "wtc_rule": "Every WTC gets Answer / Acceptable Reasoning, Teacher Moves, Student Moves, and Listen For when useful. Multipart answers use one bullet per labeled part.",
+    "stop_and_discuss_rule": "Every Stop and Discuss gets numbered acceptable reasoning matching its 2–4 prompts, plus content-specific Teacher Moves and Student Moves; add Listen For when useful.",
+    "example_yti_rule": "Every Example and every YTI gets its own canonical answer/solution plus Teacher Moves and Student Moves. Add Listen For when the item has a meaningful likely error.",
     "preferred_order": [
       "Answer / Acceptable Reasoning",
       "Teacher Moves",

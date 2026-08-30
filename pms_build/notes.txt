@@ -540,44 +540,122 @@ Teacher copy:
 - allow all teacher support to expand naturally downward;
 - do not insert teacher-only forced page breaks;
 - do not compress, hide, truncate, or abbreviate teacher support to save vertical space;
-- overlap is a hard failure;
-- teacher-only support must be visually distinct from student-facing content.
+- overlap is a hard failure.
 
-TEACHER GUIDE STRUCTURE — HARD
-------------------------------
-Every canonical WTC / Example / YTI teacher block must use a readable teacher-guide structure.
-Do not render teacher support as one long red paragraph.
+TEACHER-ONLY RED TEXT CONTRACT — HARD
+-------------------------------------
+Use the established Algebra/Notes teacher-guide convention:
 
-Required order:
+Teacher-only instructional text is rendered in a red, bold wrapper inside the teacher copy.
+
+Preferred markup shape:
+
+  <aside class="teacher-support">
+    <div style="color:red;font-weight:bold;">
+      <p>Answer / Acceptable Reasoning</p>
+      ...
+    </div>
+  </aside>
+
+Use ordinary `<p>`, `<ul>`, and `<ol>` inside the red wrapper so the teacher text inherits the red treatment.
+Do NOT use generic `h4` headings inside this wrapper because base CSS gives `h4` a navy color.
+Do NOT add a third stylesheet or redesign the Notes shell just to style teacher support.
+
+The following are teacher-only and should use the red treatment:
+- WTC answer/reasoning and discourse support;
+- Stop & Discuss answer/reasoning and discourse support;
+- every Example answer/solution and discourse support;
+- every You Try It answer/solution and discourse support;
+- section-level teacher guidance when present.
+
+Student-facing prompts, readings, figures, and workspaces remain in the normal student colors.
+
+TEACHER GUIDE CONTENT — HARD
+----------------------------
+Every canonical WTC, every Stop & Discuss, every Example, and every YTI gets teacher support.
+
+Use this order when the components apply:
 
 Answer / Acceptable Reasoning
-- use bullets for separate reasoning ideas;
-- for multipart tasks, use one bullet per labeled part:
+Teacher Moves
+Student Moves
+Listen For / Likely Misconception
+
+Do not render teacher support as one long paragraph.
+
+WTC
+---
+Always include:
+- Answer / Acceptable Reasoning;
+- Teacher Moves;
+- Student Moves;
+- Listen For / Likely Misconception when useful.
+
+For multipart WTCs:
+- one answer bullet per labeled part:
   - (a) ...
   - (b) ...
   - (c) ...
-- calculations should show the relationship, substitution/reasoning, result, units, and interpretation when relevant;
-- constructed diagrams/models should describe the required features clearly.
+- show relationship/substitution/result/units/interpretation when relevant.
 
-Teacher Moves
-- 1–3 concise moves or prompts the teacher can use to advance thinking;
-- phrase as usable discourse prompts/actions, not generic advice.
+STOP & DISCUSS — TEACHER SUPPORT HARD
+-------------------------------------
+EVERY Stop & Discuss gets a teacher-side answer/reasoning block immediately after its student white-space workspace.
 
-Student Moves
-- 1–3 likely productive student actions/reasoning moves;
-- describe what students should notice, say, draw, compare, calculate, or justify.
+Because a Stop & Discuss normally contains 2–4 prompts, the teacher answer must preserve the same numbering:
+- 1. acceptable vocabulary/notation response;
+- 2. acceptable conceptual/representation reasoning;
+- 3. additional reasoning/connection when present;
+- 4. additional reasoning/connection when present.
 
-Listen For / Likely Misconception
-- include when useful;
-- identify the specific idea, vocabulary confusion, representation error, or reasoning issue worth listening for.
+Then include:
+- Teacher Moves: normally 2–3 concise prompts/actions that deepen or clarify the discussion;
+- Student Moves: normally 2–3 likely productive student reasoning/discourse actions;
+- Listen For / Likely Misconception: 1–2 specific ideas when useful.
 
-For a very short single-answer item, Answer / Acceptable Reasoning may contain one bullet.
-Teacher Moves and Student Moves still remain separate labeled lists when instructional guidance is useful.
+Stop & Discuss teacher support must be grounded in the immediately preceding reading/representation.
+No generic repeated discourse script across the whole Unit.
 
-Do not create filler discourse moves merely to satisfy a count.
-The purpose is fast browser-side teacher support that is easy to scan while teaching.
+EXAMPLE / YTI — TEACHER SUPPORT HARD
+------------------------------------
+EVERY Example and EVERY YTI gets its own teacher-support block immediately after the released student workspace.
 
-Answers remain clearly teacher-only according to established course behavior.
+Always include:
+- Answer / Acceptable Reasoning;
+- Teacher Moves;
+- Student Moves.
+
+Include:
+- Listen For / Likely Misconception when the item has a meaningful likely error/misconception.
+
+For Answer / Acceptable Reasoning:
+- use the exact canonical Bank answer/solution as the content authority;
+- convert it into readable bullets when it contains more than one reasoning idea;
+- for calculations show relationship, substitution/reasoning, result, units, and interpretation when relevant;
+- for diagrams/models describe required features clearly;
+- for selected response identify the keyed choice AND why it is correct; mention distractor logic only when instructionally useful.
+
+Teacher Moves:
+- normally 1–3 concise prompts/actions;
+- should help the teacher reveal or advance the item's actual evidence job;
+- do not merely restate the question.
+
+Student Moves:
+- normally 1–3 productive actions;
+- describe what students should notice, say, draw, compare, calculate, justify, or revise.
+
+Do not create filler discourse moves merely to satisfy a number.
+Short/simple items may have one strong Teacher Move and one strong Student Move.
+
+REFERENCE / MATH NOTES DISCOURSE
+--------------------------------
+Do not automatically attach discourse moves to every Formula / Relationship or Physics Notes reference box.
+
+Add teacher discourse support only when that reference block is functioning as a meaningful discussion/representation checkpoint.
+When added, use the same red teacher-only wrapper with:
+- Teacher Moves;
+- Student Moves;
+- Listen For when useful.
 
 ARTIFACT SELF-CONTAINMENT — HARD
 --------------------------------
@@ -784,8 +862,13 @@ RENDER
 - student Notes preserve required Notability/page-flow behavior;
 - teacher Notes are browser-only: no teacher page-fit optimization or teacher-only forced breaks;
 - no overlap in student or teacher copy;
-- teacher WTC/Example/YTI guides use structured Answer / Teacher Moves / Student Moves / Listen For blocks;
-- multipart answers are bulleted by labeled part.
+- every WTC has red teacher Answer / Teacher Moves / Student Moves support;
+- every Stop & Discuss has numbered red teacher answers plus Teacher Moves / Student Moves;
+- every Example has its own red teacher Answer / Teacher Moves / Student Moves block;
+- every YTI has its own red teacher Answer / Teacher Moves / Student Moves block;
+- Listen For / Likely Misconception appears when it adds real instructional value;
+- multipart answers are bulleted by labeled part;
+- teacher-only headings/text do not fall back to navy/black because of generic heading tags.
 - provenance filenames use the exact OUTPUT contract; if a change log is produced it is named `NOTES_CHANGE_LOG.txt`, not an alias.
 
 Do not invent new QA criteria halfway through a run.
