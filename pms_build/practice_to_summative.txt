@@ -1,0 +1,350 @@
+BUILD PRACTICE TO SUMMATIVE — ORCHESTRATOR / CURRENT CHILD-PM DELEGATION
+============================================================================
+
+STATUS: CURRENT
+STEP: 12
+JOB: practice_to_summative
+ROLE: Run the current registered build PMs from Practice through Summative in one controlled request.
+
+THIS IS AN ORCHESTRATOR ONLY.
+
+It does NOT own question authoring, Bank selection, shell DOM, CSS, security rules,
+artifact-specific QA, or child packaging mechanics.
+
+It owns only:
+- child-PM resolution;
+- execution order;
+- one shared pinned system/course snapshot;
+- staged handoff from an upstream child to a downstream child when required;
+- stop-on-failure behavior;
+- final all-in-one course-root packaging.
+
+CORE RULE — HARD
+----------------
+DO NOT embed, restate, summarize, reconstruct, or reinterpret child PM logic here.
+
+The CURRENT registered child PM is the sole procedural authority for its artifact.
+If this orchestrator and a child PM appear to disagree about that child's content,
+rendering, shell, security, QA, path, or source rules:
+
+  THE CHILD PM WINS.
+
+This PM exists so the teacher can run the existing PM stack with one Control Panel request
+without maintaining a second duplicate implementation.
+
+============================================================================
+0. TOOL / SNAPSHOT POLICY
+============================================================================
+
+web_search_allowed = false
+web_fetch_allowed = false
+external_research_allowed = false
+repository_search_for_declared_sources_allowed = false
+
+Use repository connector/direct-fetch operations only.
+
+At job start:
+1. read the current canonical Curriculum Philosophy;
+2. read the current canonical System Runtime Contract;
+3. resolve the system and selected course repositories from the request/runtime;
+4. pin each required repository ONCE;
+5. use those SAME pinned commits for the entire Step 12 run.
+
+Never let a later child silently advance to a newer commit.
+
+When a child PM says to pin/read the system or course repository, the shared Step 12 pin
+satisfies that requirement. The child must use the already-pinned snapshot.
+
+============================================================================
+1. CURRENT CHILD PM RESOLUTION — HARD
+============================================================================
+
+From the SAME pinned system snapshot, direct-fetch:
+
+  pms_build/MANIFEST.json
+
+Resolve these CURRENT registered jobs from that manifest, in this exact order:
+
+  5  practice
+  6  activities
+  7  exit
+  8  warmup
+  9  progress
+  10 review
+  11 summative
+
+For each job:
+- resolve its `entrypoint` from the current registry;
+- direct-fetch that exact PM at the pinned system commit;
+- read it in full before executing that child;
+- execute that PM as the active procedural authority for the child.
+
+Do NOT:
+- use embedded copies of old PMs;
+- use the former nested Practice-to-Summative package;
+- use a legacy Recurring/Assessment mega-PM;
+- use a CONTROL_PANEL_PROFILE from an old PM folder;
+- guess a PM path when the current registry provides it.
+
+If a required child job or entrypoint is missing:
+  FAIL CLOSED as ORCHESTRATOR_CHILD_PM_MISSING.
+
+============================================================================
+2. SCOPE
+============================================================================
+
+Build exactly the resources owned by current Steps 5 through 11:
+
+- Practice
+- Activities
+- Exit Tickets
+- Warm-Ups
+- Progress Tracker
+- Review / Review Practice
+- Summative
+
+OUT OF SCOPE:
+- Notes
+- Demos
+- Investigations
+- Performance Tasks
+- Quick Checks
+- Discourse
+- Reflection
+- First 4 Days
+- Unit Plan
+- Portfolio
+- Bank authoring/upgrading
+- Framework or Assessment Plan authoring
+
+Do not expand Step 12 merely because another PM exists.
+
+============================================================================
+3. SHARED STAGING / UPSTREAM HANDOFF
+============================================================================
+
+Use one expanded staging tree representing the selected course root.
+
+Each child writes its final deployable files into its canonical course-relative paths in
+that staging tree.
+
+After a child PASSES:
+- freeze that child's final deployed bytes;
+- do not rewrite them from orchestrator logic;
+- leave them available to later children when those children legitimately depend on them.
+
+CURRENT IMPORTANT DEPENDENCIES:
+- Activities consumes the freshly built Practice outputs/handoff from THIS run.
+- Review consumes the freshly built Practice outputs/handoff from THIS run.
+
+For those dependencies, the freshly passed staged Practice bytes are the current Practice
+for this run. Do not fall back to an older deployed Practice copy from the course repository.
+
+All other source routing remains owned by the active child PM.
+
+If a child artifact collides with a different child's canonical path:
+  FAIL CLOSED as ORCHESTRATOR_PATH_COLLISION.
+
+============================================================================
+4. EXECUTION ORDER — HARD
+============================================================================
+
+Run sequentially:
+
+1. PRACTICE
+   Execute current registered `practice` PM completely.
+   Require child PASS.
+
+2. ACTIVITIES
+   Execute current registered `activities` PM completely using the passed Practice staging
+   outputs when Practice is its declared source.
+   Require child PASS.
+
+3. EXIT
+   Execute current registered `exit` PM completely.
+   Require child PASS.
+
+4. WARM-UP
+   Execute current registered `warmup` PM completely.
+   Require child PASS.
+
+5. PROGRESS
+   Execute current registered `progress` PM completely.
+   Require child PASS.
+
+6. REVIEW
+   Execute current registered `review` PM completely using the passed Practice staging
+   outputs when Practice is its declared source.
+   Require child PASS.
+
+7. SUMMATIVE
+   Execute current registered `summative` PM completely.
+   Require child PASS.
+
+If ANY child fails:
+- STOP;
+- preserve already-completed staging only for diagnosis;
+- report the exact child and its child-PM failure classification;
+- do not claim Step 12 PASS;
+- do not continue into later children merely to produce a partial master package.
+
+============================================================================
+5. FAMILY ISOLATION / PARITY — HARD
+============================================================================
+
+Every child must behave exactly as though its current PM were run independently against
+the same pinned inputs.
+
+The orchestrator must NOT carry across:
+- shell assumptions;
+- CSS selectors;
+- workspace rules;
+- figure sizing decisions;
+- question-selection rules;
+- security logic;
+- answer scrambling;
+- MathJax repair;
+- print mechanics;
+- artifact-specific normalizers;
+- artifact-specific browser/render work.
+
+A child's final deployed file bytes should match the bytes produced by the same child PM
+run independently from the same pinned inputs, except for nondeterministic archive metadata
+such as ZIP timestamps/compression metadata.
+
+If combined-mode orchestration would change a child artifact:
+  THE CHILD PM WINS.
+
+============================================================================
+6. NO SECOND AUTHORING / NO SECOND RENDER PASS
+============================================================================
+
+After a child reports PASS, Step 12 must NOT:
+- rewrite its questions;
+- resize or redraw its figures;
+- change its HTML shell;
+- change CSS;
+- rerun choice scrambling;
+- add or remove MathJax;
+- run a generic final-byte fixer over all children;
+- normalize another family's HTML;
+- create a QA-only HTML copy;
+- generate a PDF merely for bundle QA;
+- invoke a PDF skill for bundle QA;
+- launch a headless browser / print-to-PDF pass merely for bundle QA;
+- remove an external MathJax loader for local rendering;
+- perform another semantic/content audit already owned by the child PM.
+
+Artifact-specific QA belongs inside the active child PM.
+
+Step 12 bundle QA is intentionally SMALL:
+- every required child reached PASS;
+- expected final course-relative child outputs exist;
+- no path collisions;
+- master ZIP contains the passed staging bytes;
+- ZIP integrity passes.
+
+Do not turn orchestration into another build system.
+
+============================================================================
+7. CHILD DELIVERY DURING ORCHESTRATED MODE
+============================================================================
+
+A child PM may internally create/extract/reopen a ZIP when its own QA contract requires that.
+That is allowed.
+
+However, Step 12 does NOT need to return every child handoff separately by default.
+
+The primary Step 12 delivery is the all-in-one ZIP in Section 8.
+
+If the teacher explicitly requests individual child downloads too, return each child's
+CURRENT PM-declared handoff form exactly:
+- ZIP where the child PM requires ZIP;
+- direct file where the child PM requires a direct file.
+
+Do not invent a ZIP around a child whose current PM explicitly requires direct-file delivery.
+
+============================================================================
+8. PRIMARY OUTPUT — ALL-IN-ONE COURSE-ROOT ZIP
+============================================================================
+
+Return:
+
+  unit_{U}_practice_to_summative.zip
+
+ZIP ROOT:
+
+  unit_{U}_practice_to_summative/
+
+Inside that root, preserve the exact deployed course-parent paths produced by the children,
+for example as applicable:
+
+  practice_sets/
+  activities/
+  exit/
+  warmups/
+  progress/
+  reviews/
+  assessments_zxrtjp/
+  BUILD_REPORT.txt
+
+HARD:
+- use the ACTUAL child output paths, not guessed legacy names;
+- do not put child ZIP files inside the master ZIP;
+- do not include PM files;
+- do not include Framework/Assessment Plan source files;
+- do not include Bank source files;
+- do not include shared CSS merely because the artifacts reference it;
+- do not include tools or QA staging files;
+- do not include __MACOSX, .DS_Store, AppleDouble `._*`, __pycache__, or .pyc junk.
+
+Canonical reusable CSS/assets remain in their deployed course locations unless a child PM itself
+explicitly requires a new deployable file.
+
+============================================================================
+9. BUILD REPORT
+============================================================================
+
+Create a concise:
+
+  BUILD_REPORT.txt
+
+Record only:
+- system commit;
+- course commit;
+- Unit;
+- child PM job + resolved entrypoint;
+- PASS/FAIL for each child;
+- final deployed paths included;
+- any real upstream/child failure;
+- master ZIP integrity result.
+
+Do not duplicate every child's long QA report.
+
+============================================================================
+10. FINAL ORCHESTRATOR QA
+============================================================================
+
+Before Step 12 PASS verify:
+
+[ ] one fixed pinned system snapshot used for all children
+[ ] one fixed pinned course snapshot used for all children
+[ ] current pms_build/MANIFEST.json resolved at that system pin
+[ ] practice child PM PASS
+[ ] activities child PM PASS
+[ ] exit child PM PASS
+[ ] warmup child PM PASS
+[ ] progress child PM PASS
+[ ] review child PM PASS
+[ ] summative child PM PASS
+[ ] Activities/Review used fresh staged Practice when required
+[ ] no orchestrator-owned content/shell/CSS mutations
+[ ] no second generic browser/PDF/final-byte QA pass
+[ ] no output-path collisions
+[ ] master ZIP contains the exact passed child staging bytes
+[ ] BUILD_REPORT.txt is concise
+[ ] master ZIP integrity PASS
+
+Then deliver the master ZIP and stop.
+
+END — PRACTICE TO SUMMATIVE ORCHESTRATOR
