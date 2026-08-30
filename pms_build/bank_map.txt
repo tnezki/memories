@@ -1,50 +1,73 @@
-BUILD BANK MAP — STEP 2A / BANK-V2
-=====================================
+BUILD BANK MAP — STEP 3A / BANK-V2 / CORE DESIGN CONTRACT
+============================================================
 
 STATUS: CURRENT
-ROLE: Build one complete Unit Bank design map before any final Bank question prose is authored.
+STEP: 3a
+JOB: bank_map
+ROLE: Build one complete, executable Unit Bank design map before any final Bank question prose is authored.
 
-2A is the executable design stage.
-It maps the evidence job, question structure, response mode, representation, tool/render route, variation contract, and destination before 3A/3B/3C author final content.
+3a owns DESIGN, not finished questions.
 
-STARTUP — HARD
---------------
+The Map must be strong enough that a separate memoryless Bank builder can author the complete
+Bank without guessing curriculum intent, evidence demand, family identity, representation route,
+security role, or downstream selection behavior.
+
+CORE STANDARD
+-------------
+The goal is a strong usable design contract, not maximal polish.
+
+PASS when the map is:
+- curriculum-correct;
+- complete for the Unit;
+- traceable to current authorities;
+- executable by the Bank builder;
+- explicit about evidence, response, representations, families, security, and selection;
+- structurally/metadata complete.
+
+Do NOT spend time at map stage polishing final wording, final visuals, exact graph aesthetics,
+or finished question prose. Those belong in Bank authoring or later memoryless improvement audits.
+
+============================================================================
+0. STARTUP / AUTHORITY — HARD
+============================================================================
+
 Read:
 1. current Curriculum Philosophy;
 2. current Runtime Contract;
 3. current `_question_structure/` entrypoint + question-design schema/workflow;
 4. current course Framework + exact Unit Assessment Plan;
-5. current Framework-manifest Bank-v2 profile/runtime files;
+5. current Framework-declared Bank-v2 course profile/runtime files;
 6. `Tools/MANIFEST.json`.
 
-Resolve/pin repositories once. Fetch declared paths directly.
-No web search, public-web fetch, File Library search, prior-stage ZIP search, or repository search for a declared authority.
+Resolve/pin system and course repositories once.
+Use those same pins throughout the run.
+Fetch declared paths directly.
 
-AUTHORITY ORDER
----------------
+No web search.
+No public-web research.
+No File Library search.
+No prior-stage ZIP discovery.
+No substitution of similarly named files.
+
+Authority order:
 1. current explicit teacher instruction
 2. Curriculum Philosophy
 3. current Question Structure authority
 4. current course Framework + exact Unit Assessment Plan
-5. current Framework-declared Bank-v2 course profile
-6. this PM for mapping procedure
-7. registered tools for executable render routes
+5. current Framework-declared Bank-v2 profile
+6. this PM
+7. registered tools for executable representation routes
 
-PURPOSE
--------
-Separate:
-1. DESIGN MAP — what exact evidence/jobs/structures/representations must exist;
-2. CANONICAL BANK CONTENT — authored in 3A/3B/3C;
-3. DOWNSTREAM INSTANCES — deterministic selections or controlled family variants.
+============================================================================
+1. OUTPUT
+============================================================================
 
-2A authors NO final student prompts, final answer choices, final answers, or final solutions.
+Return ONE ZIP:
 
-OUTPUT
-------
-Return one ZIP:
   unitN_bank_map.zip
 
-ZIP top level:
+ZIP root:
+
   unitN_bank_map/
 
 Required files:
@@ -58,237 +81,343 @@ Required files:
 - summative_map.json
 - MAP_REPORT.txt
 
-The ZIP is transport only.
-Canonical expanded location:
+ZIP is transport only.
+
+Canonical expanded destination:
+
   banks/unitN_bank_map/
 
-QUESTION-DESIGN MAP — HARD
---------------------------
+3a authors NO:
+- final student prompts;
+- final answer choices;
+- final answers;
+- final solutions;
+- finished secure stimuli.
+
+============================================================================
+2. MAP_MANIFEST STATUS CONTRACT — HARD
+============================================================================
+
+This field is REQUIRED.
+
+When the integrated Map audit passes, MAP_MANIFEST.json MUST contain:
+
+  "status": "PASS"
+
+It must ALSO preserve the nested status fields:
+
+  "question_design": {
+    "status": "PASS",
+    ...
+  }
+
+  "qa": {
+    "status": "PASS",
+    ...
+  }
+
+Do not omit the top-level status.
+
+Downstream Bank jobs are allowed to require:
+
+  MAP_MANIFEST.status == "PASS"
+
+If Map QA has not passed:
+- do NOT emit top-level status PASS;
+- do NOT describe the map as accepted;
+- do NOT instruct downstream Bank authoring to proceed.
+
+The map fingerprint recipe must fingerprint the actual design slice files, not create a
+self-referential dependency on MAP_MANIFEST.json itself.
+
+============================================================================
+3. QUESTION-DESIGN ARCHITECTURE — HARD
+============================================================================
+
 Build `unitN_question_design_map.json` using the current question-design schema.
 
-For every exact I-can, map:
+For EVERY exact Unit I-can map:
+- exact I-can ID and text;
 - evidence_job;
-- content_modes;
+- student action required to demonstrate the evidence;
+- content modes;
 - formula/reverse paths when applicable;
 - vocabulary directions when applicable;
 - best-fit question structures;
 - structures to avoid;
-- representation opportunities;
-- tool opportunities;
+- representation opportunities/requirements;
+- tool opportunities/routes;
 - parallel-variation axes.
 
-For every destination slot/family, map:
+For EVERY destination slot/family map:
 - slot_id;
-- primary_i_can_id;
+- record_id;
+- record_mode;
+- destination;
+- section or Unit scope;
+- primary_i_can_id + exact primary_i_can;
 - supporting_i_can_ids as needed;
-- structure_id;
+- evidence_job;
+- student_action;
+- question_structure_id;
 - response_mode;
 - representation_mode;
-- tool route when applicable;
+- representation_need;
+- design_slot_id;
+- tool / representation route;
+- render_contract;
 - dependency_chain when applicable;
-- security role;
-- variation axes;
-- concise notes.
+- wording/length intent;
+- security role/level;
+- source_basis;
+- concise authoring_notes;
+- explicit variation axes.
 
-A structure/response/representation/tool field is executable. It is not a suggestion.
+A structure/response/representation/tool field is EXECUTABLE.
+It is not a suggestion.
 
-COMMON DESTINATION RECORD
--------------------------
-Every map record includes, as applicable:
-- record_id
-- record_mode
-- destination
-- section or Unit scope
-- primary_i_can_id + exact primary_i_can
-- supporting_i_can_ids
-- evidence_job
-- student_action
-- question_structure_id
-- response_mode
-- representation_mode
-- representation_need
-- design_slot_id
-- tool
-- render_contract
-- wording_profile / length intent
-- security_level
-- source_basis
-- concise authoring_notes
+Alignment must be true:
 
-For `selected_response`, also map:
-- choice_count or course default;
-- distractor_basis;
-- whether single-select or explicit multi-select.
+  exact I-can
+  -> evidence_job
+  -> student_action
+  -> question_structure_id
+  -> response_mode
+  -> representation_mode
+  -> executable render/tool route
 
-For table/data representations, `render_contract` must require semantic HTML table rendering and identify the established compact table class when the data set is small.
+All links must collect the SAME evidence.
 
-For graph representations supported by the registered graph tool:
-- `tool = graph_tool`
-- do not map an improvised graph route.
+============================================================================
+4. FAMILY-SEED DESIGN CONTRACT — HARD
+============================================================================
 
-For diagram/FBD/vector/model representations:
-- a generic route label such as `framework_approved_diagram_route` is NOT executable and must not PASS;
-- for an existing canonical asset, record an explicit `representation_route` with route_type=`canonical_asset`, repository, pinned commit, exact canonical path, and asset_id when available;
-- for a deterministic generator, record route_type=`registered_tool`, a `tool` key that resolves through `Tools/MANIFEST.json`, and the parameter / answer-neutrality contract needed by downstream authoring;
-- for a student-constructed diagram/FBD/vector, map an explicit blank response-surface contract; do not require a completed answer diagram;
-- if no exact asset or registered tool exists, redesign the slot to an evidence-equivalent non-diagram task only when the target permits it; otherwise FAIL the slot and report the missing route.
+Every `family_seed` additionally maps:
+- family_id;
+- family_type;
+- difficulty_intent;
+- intended_reasoning;
+- locked_elements;
+- allowed_variations;
+- required_variations;
+- forbidden_variations;
+- representation_variation_rule when applicable;
+- selection_tags.
 
-FAMILY MAP RECORD — HARD
-------------------------
-Every `family_seed` additionally includes:
-- family_id
-- family_type
-- difficulty_intent
-- intended_reasoning
-- locked_elements
-- allowed_variations
-- required_variations
-- forbidden_variations
-- representation_variation_rule when applicable
-- selection_tags
+Every lock token must resolve to an explicit mapped property.
 
-Every lock token resolves to an explicit field/property.
-Do not use vague “make another like this” variation.
+Required variation must demand meaningful semantic change when the family is instantiated again.
 
-WTC — DECOMPOSITION / NAVIGATION HARD GATE
---------------------------------------------
-Map one WTC per section, but WTC content is NOT locked to that section or even the current Unit.
+Forbidden:
+- vague "make another like this";
+- noun-only clones counted as meaningful variety;
+- number-only clones when deeper semantic independence is required;
+- irrelevant measurements inserted merely to make a variant look different.
 
-PRIMARY PURPOSE:
-WTC teaches students how to unpack and navigate a long multi-part FRQ. Content difficulty is not the goal. A WTC may use straightforward prior/current/future Physics so students can focus on identifying givens/asks, reading the shared representation, tracking dependencies, selecting a relationship/plan when useful, and communicating reasoning.
+The Map defines enough variety axes for the future builder/auditor to improve a family later
+without changing its evidence job.
 
-Each WTC map record must specify:
-- coverage_role = wtc_frq_practice;
+============================================================================
+5. REPRESENTATION ROUTES — HARD
+============================================================================
+
+Representations exist only when they serve the evidence job.
+
+Graph:
+- route through registered `graph_tool` when supported;
+- record the exact tool key/route;
+- map the evidence the graph must carry;
+- do not invent an alternate graph generator.
+
+Small data table:
+- semantic HTML;
+- require `<table class="values">` when the established compact-table treatment applies.
+
+Existing canonical image/diagram:
+- route_type = canonical_asset;
+- exact repository;
+- pinned commit;
+- canonical path;
+- asset_id when available.
+
+Registered deterministic visual generator:
+- route_type = registered_tool;
+- exact tool key;
+- parameter contract;
+- answer-neutrality contract when applicable.
+
+Student-constructed vector/FBD/model/diagram:
+- explicit blank response-surface contract;
+- answer-neutral;
+- do not require a completed answer diagram as the student surface.
+
+Direct text/equation:
+- no decorative figure merely to create "variety."
+
+Generic aliases such as:
+  framework_approved_diagram_route
+are NOT executable and must not PASS.
+
+If an evidence-essential representation has no executable route:
+- redesign only if an evidence-equivalent task is valid;
+- otherwise FAIL that slot and report the missing route.
+
+============================================================================
+6. DESTINATION DESIGN
+============================================================================
+
+Resolve destination counts from the CURRENT Bank-v2 course profile.
+Do not hard-code counts from another course.
+
+The current Map must fully design every destination required by the profile, including as applicable:
+- WTC;
+- Notes Example/YTI;
+- CYU;
+- Warm-Up;
+- Practice family pool;
+- Exit family pool;
+- Summative family pool/blueprints.
+
+PRACTICE
+--------
+Fit before category.
+
+Map exact I-cans/evidence jobs first, then allocate the required pool.
+Do not force quantitative/vocabulary/graph/diagram categories merely to fill a quota.
+
+The Practice map must make downstream deterministic selection feasible while preserving:
+- all required I-cans;
+- evidence/representation requirements;
+- family fidelity;
+- security status;
+- current profile set-size/count rules.
+
+EXIT / SUMMATIVE
+----------------
+Map enough secure families and explicit blueprint metadata to satisfy the current profile.
+
+Secure families may reuse learning/evidence architecture.
+They may NOT depend on reuse of exposed finished prompts or distinctive exposed stimuli.
+
+Selected-response records must map:
+- choice count/course default;
+- selection mode;
+- distractor basis tied to plausible evidence-job errors/misconceptions.
+
+Summative blueprint feasibility must be explicit and deterministic.
+
+============================================================================
+7. WTC / MULTIPART ROUTINES
+============================================================================
+
+When the current course profile requires WTC:
+- map the profile-required count;
 - one shared coherent stimulus/representation;
 - normally 3–5 connected labeled parts;
-- at least one part that actually reads/uses the shared stimulus/representation;
-- at least one real dependency / carry-forward in which a later part uses information, a conclusion, or a decision from an earlier part;
-- an explicit `decomposition_move_plan` chosen from the course-profile WTC move menu;
-- content provenance I-can when useful for teacher metadata;
-- accessibility plan if the Physics content has not yet been taught.
+- at least one part uses the shared stimulus;
+- at least one real carry-forward/dependency;
+- explicit decomposition_move_plan limited to moves the routine actually requires;
+- coverage_role = wtc_frq_practice unless the current profile says otherwise.
 
-The move menu is NOT a universal checklist. Planning/model-choice/justification is not mandatory in every WTC. Map only moves the planned student-facing parts will actually require.
-The problem may look long or intimidating while the underlying Physics remains straightforward; do not raise content difficulty merely to make WTC feel rigorous.
+Do not inflate content difficulty simply to make the routine look rigorous.
+Do not use WTC to satisfy Unit I-can coverage floors unless the current profile explicitly says so.
 
-If a legacy `required_frq_moves` field is emitted, it must contain only moves truly required by that WTC; do not auto-fill a fixed universal trio.
-WTC does not satisfy current Unit I-can coverage floors.
-Do not map WTC as four independent mini-questions.
+============================================================================
+8. DETERMINISTIC SELECTION
+============================================================================
 
-REPRESENTATION / TOOL PLAN — HARD
----------------------------------
-The map must distinguish:
-- graph -> registered graph tool when supported;
-- small data table -> semantic HTML `<table class="values">`;
-- diagram/FBD/vector/model -> approved source or deterministic route;
-- image/phenomenon -> declared course/Framework source;
-- direct text/equation -> no fake decorative figure.
+For any destination with a pool:
+1. satisfy hard I-can/evidence/security/representation constraints;
+2. deterministic tie-break second;
+3. no uncontrolled randomness.
 
-If representation_mode says students must use a representation, 3A/3B/3C must be able to render it visibly.
+Default stable-key architecture unless the current profile supersedes it:
 
-PRACTICE MIX — FIT BEFORE CATEGORY
-----------------------------------
-The section pool size remains the current course-profile count, but family-type composition is NOT a universal quota.
-
-For each section:
-1. map the exact I-cans/evidence jobs first;
-2. decide which content/question modes genuinely fit those jobs;
-3. allocate the full Practice pool from that fit;
-4. allow any family category to be zero when the section does not naturally support it.
-
-Do NOT create:
-- a quantitative/modeling family for a vocabulary/conceptual I-can merely to fill a quantitative bucket;
-- a vocabulary family for a model/relationship target merely to fill a vocabulary bucket;
-- a diagram/graph/table merely to satisfy representation variety.
-
-Quantitative/modeling is justified only when the target genuinely calls for relationship use, calculation, quantitative comparison, model interpretation, or similar mathematical reasoning.
-
-EVIDENCE / RESPONSE / REPRESENTATION ALIGNMENT — HARD
------------------------------------------------------
-Every destination record must state the actual `student_action` and pass this alignment check:
-
-  exact I-can -> evidence_job -> student_action -> question_structure_id
-  -> response_mode -> representation_mode -> tool/render route
-
-All links must describe the SAME evidence job.
-
-Examples:
-- evidence_job = "draw/construct a force diagram" -> constructed_response + student_constructed_fbd + blank response surface;
-- evidence_job = "identify which supplied force diagram is correct" -> selected_response + supplied diagram choices/representation;
-- evidence_job = "critique a supplied diagram" -> constructed_response or selected_response only if the chosen response actually captures critique evidence.
-
-Do NOT map a selected-response item as evidence that the student drew/constructed/built a representation.
-If response mode changes the student action, rewrite the evidence job honestly or choose a different response mode.
-
-DETERMINISTIC SELECTION
------------------------
-For destinations with pools:
-- satisfy I-can/evidence/composition/security/representation constraints first;
-- deterministic tie-break second;
-- no uncontrolled randomness.
-
-Stable key recipe:
   course|unit|section-or-unit|destination|form-or-set|bank_fingerprint
 
-MAP BUILD ORDER
----------------
-1. Pin memories/course commits.
-2. Resolve Framework, exact Assessment Plan, Bank-v2 profile, Question Structure, Tools manifest.
-3. Build exact Unit I-can/evidence architecture.
-4. Build `unitN_question_design_map.json`.
-5. Resolve destination inventory/record modes.
-6. Map WTC rigor/routes.
-7. Map exact instructional anchors.
-8. Map Practice families.
-9. Map CYU/Warm-Up exact content slots.
-10. Map secure Exit/Summative families and blueprints.
-11. Reconcile representations/tools/render contracts.
-12. Write destination slices + MAP_MANIFEST.
-13. Run integrated structural/executable audit.
-14. Repair map defects.
-15. Write MAP_REPORT and package.
+Map enough family diversity that deterministic rotation can actually produce meaningfully different
+sets/forms without violating coverage.
 
-INTEGRATED MAP AUDIT — HARD
----------------------------
-Before PASS:
-- every declared slice path exists;
-- IDs unique;
-- exact I-can IDs/text correct;
-- every record resolves to one design slot;
-- every question_structure_id resolves;
-- response_mode is compatible with the structure;
-- every record's evidence_job, student_action, response_mode, and representation_mode collect the same intended evidence;
-- construct/draw/build evidence is not mapped as selected_response unless the evidence job is explicitly selection/critique instead of construction;
-- Practice family type/content mode is justified by the actual I-can/evidence job, not a category quota;
-- selected_response records have a planned choice/distractor contract;
-- representation-required records have a real render/tool/source route;
-- every non-student-constructed diagram/FBD/vector route resolves to an exact pinned canonical asset OR a registered deterministic tool;
-- generic diagram route aliases/placeholders are forbidden;
-- graph records use `graph_tool` when supported;
-- small-table records require semantic compact HTML tables;
-- diagram/FBD/vector records do not rely on prose substitution;
-- WTC records satisfy the connected shared-stimulus/dependency decomposition gate;
-- each WTC decomposition_move_plan matches the actual planned parts and does not claim a universal move merely because it appears in a template;
-- WTC is not rejected solely because the underlying Physics is straightforward;
-- family locks/variation axes explicit;
-- deterministic selection feasible;
-- secure families forbid exposed finished-prompt reuse;
-- no finished prompt/answer prose leaked into the map.
+============================================================================
+9. GOOD-ENOUGH MAP AUDIT — HARD
+============================================================================
 
-FAIL if the map only labels structure/representation without an executable route.
-FAIL if family/category allocation forces a task type that does not fit the I-can/evidence job.
-FAIL if evidence_job, student_action, response_mode, and representation_mode disagree.
-FAIL if WTC move metadata/planning claims a move that its planned parts do not actually require.
+Before PASS verify:
 
-FINAL CHAT SUMMARY
-------------------
+[ ] exact Unit I-can inventory is correct
+[ ] every I-can has a clear evidence job
+[ ] every required destination record exists
+[ ] IDs are unique
+[ ] every record resolves to one design slot
+[ ] question_structure_id resolves
+[ ] response_mode matches student action
+[ ] representation_mode matches evidence job
+[ ] required representation has an executable route
+[ ] graph routes use graph_tool when supported
+[ ] small tables specify semantic HTML
+[ ] student-constructed representations are answer-neutral response surfaces
+[ ] no generic visual-route aliases/placeholders
+[ ] selected-response records have choice/distractor contracts
+[ ] Practice family counts/coverage/selection are feasible
+[ ] family locks + allowed/required/forbidden variations are explicit
+[ ] meaningful family variation is feasible
+[ ] Exit selection is feasible
+[ ] Summative blueprint(s) are feasible
+[ ] secure families forbid exposed finished-prompt reuse
+[ ] no finished prompt/choice/answer/solution prose leaked into Map
+[ ] map fingerprint is deterministic
+[ ] question_design.status = PASS
+[ ] qa.status = PASS
+[ ] TOP-LEVEL MAP_MANIFEST.status = PASS
+
+This audit judges whether the Map can drive a correct complete Bank.
+
+It does NOT require:
+- ideal final prose;
+- ideal graph styling;
+- perfect visual sizing;
+- maximal context novelty;
+- aesthetic optimization.
+
+Those are later authoring/improvement jobs.
+
+============================================================================
+10. BUILD ORDER
+============================================================================
+
+1. Pin repositories.
+2. Resolve authorities/profile/tools.
+3. Map exact Unit I-can/evidence architecture.
+4. Build unitN_question_design_map.json.
+5. Resolve destination inventories.
+6. Map exact-content instructional anchors.
+7. Map Practice families.
+8. Map CYU/Warm-Up.
+9. Map Exit/Summative secure families and blueprints.
+10. Reconcile representation/tool routes.
+11. Verify deterministic selection feasibility.
+12. Write destination slices.
+13. Run integrated good-enough Map audit.
+14. Repair only blocking Map defects.
+15. Set MAP_MANIFEST top-level status = PASS.
+16. Write MAP_REPORT.
+17. Package ZIP.
+18. STOP.
+
+============================================================================
+11. FINAL CHAT SUMMARY
+============================================================================
+
 Report:
 - course/unit;
 - profile identity;
-- question-design map status;
-- WTC rigor/representation routes;
-- exact-content counts;
-- family-seed counts;
-- graph/table/diagram tool routes;
-- deterministic blueprint feasibility;
-- QA PASS/FAIL;
+- exact I-can count;
+- exact-content slot count;
+- family-seed count;
+- representation/tool routes;
+- Practice/Exit/Summative feasibility;
+- Map QA result;
+- top-level MAP_MANIFEST.status;
 - output filename.
+
+END — BANK MAP 3A
