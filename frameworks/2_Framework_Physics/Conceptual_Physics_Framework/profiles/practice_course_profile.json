@@ -2,11 +2,25 @@
   "name": "Conceptual Physics Practice Sets Course Profile",
   "course": "Conceptual Physics",
   "course_family": "science",
-  "profile_version": "v1.1",
+  "profile_version": "v2.0",
   "framework_version": "v6.8",
-  "extends": "current Base Practice PM",
-  "role": "Render canonical finalized Bank routes; do not author replacement questions.",
-  "canonical_source": "finalized Unit Bank",
+  "extends": "current singular Build Practice PM",
+  "role": "Instantiate finalized Bank-v2 Practice family seeds into deterministic classroom Practice artifacts; reproduce CYU exact-content; preserve the established Practice HTML/CSS shell.",
+  "canonical_source": "finalized Unit Bank-v2",
+  "bank_v2": {
+    "practice_record_mode": "family_seed",
+    "family_pool_per_section": 30,
+    "set_size": 24,
+    "sets": [
+      "practice_set_1",
+      "practice_set_2",
+      "practice_set_3",
+      "extra_practice"
+    ],
+    "selection_rule": "Hard I-can/evidence/representation constraints first, then deterministic tie-break; rotate omissions when constraints allow.",
+    "variant_rule": "Instantiate only validated controlled variants from canonical_seed + transformation contract; preserve locked learning/evidence/structure/difficulty fields.",
+    "cyu_record_mode": "exact_content"
+  },
   "destinations": {
     "practice_set_1": 24,
     "practice_set_2": 24,
@@ -16,16 +30,33 @@
     "tarsia_pairs": 18,
     "blooket_questions": 20
   },
-  "response_mode": "Practice/CYU open response by default; Blooket selected response exception. Preserve any canonical representation required by the item.",
-  "representation_rule": "Copy canonical Bank figure bytes exactly; do not replace diagrams/graphs/tables with prose and do not invoke the graph tool downstream.",
+  "response_mode": "Practice/CYU follow the instantiated/canonical item response mode; Blooket is selected response. Required representations must remain executable.",
+  "representation_rule": "Preserve the finalized family/CYU representation contract. Reference canonical course assets in place, preserve semantic tables/inline SVG, copy Bank-local figure bytes only when the route requires a local artifact copy, and never invoke the graph tool downstream.",
   "paths": "contracts/course_file_structure.json",
-  "package": "section folders directly at ZIP root for extraction into practice_sets/",
+  "package": "section folders directly at ZIP root for extraction into practice_sets/, plus _practice_provenance/unitN/",
   "workspace_policy": {
     "practice_set_1": "ws-50",
     "practice_set_2": "ws-50",
     "practice_set_3": "ws-50",
     "extra_practice": "ws-50",
     "cyu": "canonical_3x2_plus_separate_blank_workspace_page_no_per_question_workspace"
+  },
+  "artifact_self_containment": {
+    "rule": "Finished Practice must be repairable without the Bank Map.",
+    "student_html_metadata": [
+      "task_id",
+      "source Bank family/CYU id",
+      "section",
+      "artifact_type",
+      "primary_i_can_id",
+      "exact i_can_text",
+      "question_structure_id",
+      "response_mode",
+      "representation_mode",
+      "variant_key when generated"
+    ],
+    "handoff": "_practice_provenance/unitN/PRACTICE_BUILD_HANDOFF.json",
+    "answer_visibility": "answers/solutions live in artifact-local handoff, never visibly in student Practice HTML"
   },
   "game_exports": {
     "required_for_physics": true,
@@ -34,7 +65,7 @@
       "otherwise derive downstream under this explicit Physics authorization"
     ],
     "derived_game_exports": true,
-    "source_scope": "nonsecure canonical Practice-family items from the same section only; never Exit or Summative",
+    "source_scope": "nonsecure same-section canonical Practice family content only; never Exit or Summative",
     "tarsia": {
       "pairs_per_section": 18,
       "format": "concise prompt + short unambiguous answer",
