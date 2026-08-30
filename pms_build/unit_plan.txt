@@ -48,8 +48,8 @@ MANDATORY:
 5. ORIGINAL exact requested Unit Assessment Plan resolved by the Framework/resource manifest;
 6. current course file-structure/deployment contract and any course-map/pacing contract required for this Unit;
 7. this PM;
-8. stable Gold Standard template:
-     `templates/unit_plan/Unit Plan Template Gold Standard.docx`;
+8. stable reusable Gold Standard template:
+     `Tools/templates/Unit Plan Template Gold Standard.docx`;
 9. pinned live course repository resources required to resolve Unit Plan hyperlinks, including the current teacher dashboard when declared/needed.
 
 Question Structure is NOT a normal Unit Plan input.
@@ -97,7 +97,10 @@ HARD BOUNDARY:
 ======================================================================
 
 Start from EXACTLY:
-  `templates/unit_plan/Unit Plan Template Gold Standard.docx`
+  `Tools/templates/Unit Plan Template Gold Standard.docx`
+
+This file lives in the shared reusable system template root under `Tools/templates/`.
+Direct-fetch this exact declared path at the pinned system snapshot; do not search for alternate copies or fall back to a PM-local template.
 
 Copy the template bytes to the working output and edit that copy.
 Do NOT recreate the DOCX from scratch.
@@ -320,7 +323,7 @@ If the authoritative Unit pacing cannot be represented legibly in the Gold Stand
 Use the current DOCX skill/tooling and obey its render-inspect-iterate gate.
 
 Required method:
-1. copy the Gold Standard DOCX to the final working filename;
+1. direct-fetch `Tools/templates/Unit Plan Template Gold Standard.docx` from the pinned system snapshot and copy it to the final working filename;
 2. inspect `word/document.xml`, relationships, tables, runs, and hyperlinks as needed;
 3. make targeted text replacements inside existing paragraphs/cells;
 4. update hyperlink relationship targets surgically;
@@ -344,7 +347,8 @@ SOURCE / AUTHORITY
 - stable Framework front door used;
 - exact requested Unit Assessment Plan used;
 - no Bank/question-content dependency;
-- Gold Standard template fetched from exact stable template path.
+- Gold Standard template fetched from exact stable path `Tools/templates/Unit Plan Template Gold Standard.docx`;
+- no PM-local or alternate template copy used.
 
 CONTENT
 - correct course / Unit number / Unit title;
