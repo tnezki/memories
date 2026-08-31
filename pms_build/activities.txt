@@ -1,5 +1,5 @@
-BUILD ACTIVITIES — SINGLE PASS / PRACTICE-ROUTED / LIVE-SHELL LOCK
-===================================================================
+BUILD ACTIVITIES — SINGLE PASS / PRACTICE-ROUTED / LIVE-SHELL LOCK / STUDENT-DIRECTIONS LOCK
+====================================================================================================
 
 STATUS: CURRENT
 ROLE: Build the complete Unit Activities package from the current Framework and the finished current Practice artifacts.
@@ -12,8 +12,8 @@ FLOW:
   CURRENT PRACTICE SET 2 + PRACTICE SET 3
     -> VERIFY PRACTICE HANDOFF
     -> WRAP IN APPROVED ACTIVITY SHELLS
-    -> BUILD 15-PAGE HUB
-    -> DOM / CSS / PATH QA
+    -> BUILD 15-PAGE HUB WITH TRUE STUDENT-FACING DIRECTIONS
+    -> DOM / CSS / PARTICIPATION-LANGUAGE / PATH QA
     -> PACKAGE
 
 Activities change HOW students participate.
@@ -21,10 +21,9 @@ They do not create a second question bank.
 
 The normal Activities build does NOT repair Practice questions.
 Variant rebuilding, wording repair, MathJax repair, image repair, Practice figure-wrapper repair,
-question-structure repair, answer repair, and representation redesign belong to the later
-surgical rebuild/repair workflow. If a source Practice item is defective, report the source
-item and preserve it here rather than silently creating a different Activity-only version.
-
+question-structure repair, answer repair, and representation redesign belong upstream.
+If a source Practice item is defective, report the source item and preserve it here rather
+than silently creating a different Activity-only version.
 
 
 ======================================================================
@@ -36,36 +35,24 @@ web_fetch_allowed = false
 external_research_allowed = false
 repository_search_for_declared_sources_allowed = false
 
-This is a NO-WEB curriculum build.
+Use canonical GitHub repository tools / connector direct-fetch operations at pinned commits.
 
-Use canonical GitHub repository tools / connector direct-fetch operations at the pinned commits.
 Do NOT use:
 - generic web search;
 - browser search;
 - public-web GitHub search;
-- raw/public URL fetch through a generic web browser;
-- repository-wide code/file search to locate a source whose exact path is already declared;
-- search-engine discovery for Practice files, Framework files, CSS, HTML shells, manifests, or provenance.
+- repository-wide code/file search for a source whose path is declared;
+- stale local ZIPs or chat copies as authority.
 
-The fact that the course repository is public does NOT authorize web search or public-web fetching.
-
-DIRECT-FETCH RULE — HARD
-------------------------
-Resolve the exact declared paths through:
+Resolve declared paths through:
   SYSTEM_MANIFEST.json
   -> Framework registry/manifest
   -> course file-structure contract
   -> current PM-declared Practice paths
 
-Then fetch those exact files directly at the pinned snapshot.
-
-For this Activities job, once the current Unit/sections are known, the required source paths are
-deterministic. Do not "find" Practice files programmatically by searching GitHub.
-
 If a declared file cannot be directly fetched at the pinned commit:
   FAIL CLOSED
 and name the exact repo/path that failed.
-Do not search around the failure.
 
 
 ======================================================================
@@ -75,55 +62,48 @@ Do not search around the failure.
 MANDATORY READ ORDER:
 1. current canonical `Curriculum_Philosophy.txt`;
 2. current canonical `SYSTEM_RUNTIME_CONTRACT.txt`;
-3. current canonical Physics Framework front door resolved through the Framework manifest;
+3. current canonical selected-course Framework front door through the Framework manifest;
 4. this Activities PM;
-5. only the purpose-specific files this PM requires.
+5. only purpose-specific files required below.
 
-Do not begin source discovery or artifact assembly before steps 1–4 are read.
+Pin system and selected-course repositories once at job start.
 
-Resolve and pin required repositories once at job start, then direct-fetch all declared resources
-from that pinned snapshot.
-
-Read only what this job needs after the mandatory authority read:
+Read only what this job needs:
 - current course Framework;
-- current Unit Assessment Plan / I-can authority as required for section labels and moves;
+- current Unit Assessment Plan / I-can authority for section labels and Moves;
 - current course file-structure contract;
 - current finished Practice Set 2 and Practice Set 3 for every requested section;
 - current Practice build handoff for the Unit;
 - current deployed Activity CSS;
-- current deployed Activity HTML shells as implementation exemplars.
+- current deployed Activity HTML shell as DOM/CSS implementation exemplar.
 
-For Physics, the current Framework rule is HARD:
+For Physics:
 - Activity Set 1 = finished Practice Set 2;
 - Activity Set 2 = finished Practice Set 3;
-- use the teacher-approved universal Activity hub and companion shells EXACTLY;
-- Physics changes content, not the Activity DOM.
+- use the teacher-approved Activity DOM/CSS shell;
+- Physics changes disciplinary content/evidence language, NOT participation mechanics.
 
 Do NOT read:
 - Bank Map;
 - Bank practice-family seeds;
 - old Activity ZIPs;
 - prior staging packages;
-- File Library copies;
-- downloaded PM-local reference packages.
+- old downloaded Activity packages.
 
-Do NOT select Bank families.
 Do NOT instantiate new Practice variants.
-Do NOT rewrite a Practice item because it appears repetitive or visually imperfect.
+Do NOT rewrite a Practice item.
 
 
 ======================================================================
 2. PRACTICE FRONT DOOR — HARD
 ======================================================================
 
-Use the current course file-structure contract to resolve the finished Practice artifacts.
+For Physics:
 
-For Physics, current section sources are:
-
-Activity Set 1 source:
+Activity Set 1:
   practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_2.html
 
-Activity Set 2 source:
+Activity Set 2:
   practice_sets/practice_sets_{U}_{S}/practice_set_{U}_{S}_3.html
 
 Unit Practice handoff:
@@ -133,19 +113,15 @@ Practice-owned Tarsia:
   practice_sets/practice_sets_{U}_{S}/tarsia_{U}_{S}_practice_3.txt
 
 HARD:
-- read the two finished Practice HTML files as the student-facing source;
-- preserve their final item order;
-- use all 24 finished questions in each source set;
-- use the Practice handoff to resolve the matching answer/solution and hidden identity metadata;
-- confirm each source question and handoff record agree before rendering Activity companions.
+- use all 24 finished questions from each source set;
+- preserve final Practice order;
+- use Practice HTML for exact student-facing prompt/choices/tables/figures/equations;
+- use Practice handoff for matching answer/solution and hidden identity;
+- source HTML and handoff must agree before Activity rendering.
 
-The finished Practice HTML owns the current student-facing prompt, choices, tables, figures,
-equations, and other representations for this downstream build.
-
-The Practice handoff owns the corresponding answer/solution and traceability fields.
-
-If source HTML and handoff disagree on item identity, order, prompt, choices, representation,
-or answer pairing, fail rather than guessing.
+If prompt, identity, representation, order, answer pairing, or required asset cannot be
+matched safely:
+  FAIL as PRACTICE_INPUT_DEFECT.
 
 
 ======================================================================
@@ -153,36 +129,39 @@ or answer pairing, fail rather than guessing.
 ======================================================================
 
 SYSTEM_CONTRACT_MISMATCH
-- current Framework/PM/file-structure rules disagree about the required Activity route or shell.
+- Framework/PM/file-structure rules disagree about the Activity route.
 
 PRACTICE_INPUT_DEFECT
-- required Practice Set 2 or Practice Set 3 is missing;
-- required Practice handoff is missing;
-- a source question cannot be matched safely to its handoff record;
-- required answer/solution is missing;
-- a required source representation path is broken.
+- required Practice source/handoff missing or mismatched;
+- required answer/solution missing;
+- required source representation path broken.
 
 ACTIVITY_SHELL_DEFECT
-- required current Activity CSS is missing;
-- the deployed Activity HTML shell and current CSS are structurally incompatible;
-- final HTML cannot satisfy the locked shell below.
+- required Activity CSS missing;
+- current DOM/CSS cannot satisfy the locked shell;
+- required projectable direction page cannot fit/read correctly without breaking shell.
 
-When the source Practice item itself has a content/variant/image defect that does NOT prevent
-safe downstream wrapping, do not fail and do not repair it here. Preserve it and report it as
-upstream repair work.
+ACTIVITY_DIRECTIONS_DEFECT
+- projectable direction pages are generic rather than activity-specific;
+- student-facing participation mechanics are missing;
+- two or more distinct structures reuse the same generic Routine/Directions block;
+- setup, role-switching, rotation, reveal, signature, station, or other defining mechanics are absent;
+- Looks Like / Doesn't Look Like blocks are copied generically across structures instead of
+  describing the actual structure.
+
+A build with ACTIVITY_DIRECTIONS_DEFECT is NOT PASS.
 
 
 ======================================================================
-4. LIVE HTML / CSS IS THE IMPLEMENTATION AUTHORITY — HARD
+4. LIVE HTML / CSS IS IMPLEMENTATION AUTHORITY — HARD
 ======================================================================
 
 DO NOT redesign Activities.
 
-For DOM assembly, inspect the current deployed course HTML/CSS before rendering.
-Use the current deployed Activity files as SHELL exemplars only.
-Do not copy their old section questions, old answers, or old I-can content.
+Use current deployed Activity HTML/CSS for DOM selectors, page geometry, print behavior,
+links, and visual implementation.
 
-For Physics, the current live CSS routes are:
+For Physics:
 
 HUB + QUESTIONS/SOLUTIONS:
   ../../css/base.css
@@ -196,59 +175,53 @@ FIND SOMEONE WHO:
   ../../css/base.css
   ../../css/activities/activity_find_someone_who.css
 
-Load exactly those two stylesheets for each companion, in that order.
+Load exactly those stylesheet routes for their corresponding artifacts.
 
 Do NOT:
-- add a third stylesheet;
-- embed replacement CSS;
-- switch Questions/Solutions to `activity_projector.css`;
+- add replacement inline layout CSS;
 - invent wrapper classes;
 - import legacy Activity CSS;
-- add inline layout CSS to replace the deployed styles.
+- simplify the hub to a generic `<main>` / repeated `<section>` design;
+- treat a visually valid but instructionally generic direction page as conforming.
 
-CSS comments may contain stale course wording. Selectors and deployed behavior are the
-implementation authority; stale comments are not content authority.
+IMPORTANT DISTINCTION:
+- current deployed DOM/CSS owns HOW the page is rendered;
+- this PM owns WHAT each participation-structure direction page must communicate.
+
+A current deployed page with weak/generic directions is NOT permission to preserve weak/generic
+directions. The DOM stays locked; the participation instructions must satisfy Section 6.
 
 
 ======================================================================
 5. REUSABLE ACTIVITY SETS — HARD
 ======================================================================
 
-Build exactly two reusable content sets per section:
+Build exactly two reusable content sets per section.
 
 SET 1
 - exact finished Practice Set 2;
 - all 24 questions;
-- exact order from the current source HTML.
+- exact order.
 
 SET 2
 - exact finished Practice Set 3;
 - all 24 questions;
-- exact order from the current source HTML.
+- exact order.
 
-Each set is rendered repeatedly into:
-1. Questions + Solutions projection deck;
+Render each set into:
+1. Questions + Solutions;
 2. Stations;
 3. Find Someone Who.
 
-Within one set, every companion must represent the SAME 24 source questions in the SAME
-question order unless the shell itself groups consecutive questions into pages/stations.
-
-No Activity-owned remixing.
-No thinning.
-No random selection.
-No alternate wording.
-No Activity-only variants.
-
-Presentation-only labels such as Problem 1, Station 2, partner signature, worksheet title,
-and solution-page label may change because they are shell mechanics, not question content.
+Within one set, all companions represent the SAME 24 source questions.
+No Activity-owned remixing, thinning, random selection, alternate wording, or variants.
 
 
 ======================================================================
-6. 15-PAGE ACTIVITY HUB — EXACT LIVE SHELL
+6. 15-PAGE ACTIVITY HUB — DOM LOCK + PARTICIPATION-LANGUAGE LOCK
 ======================================================================
 
-Build one hub per section:
+Build:
   activities/u{U}_{S}_act1/u{U}_{S}_act1.html
 
 Use:
@@ -259,7 +232,7 @@ Body:
   one direct `<div class="wrap">`
   containing exactly 15 direct `<section class="page">` pages.
 
-Exact page IDs and order:
+Exact IDs/order:
 1.  activity-options
 2.  teacher-student-moves
 3.  dir-whiteboard-indy
@@ -276,10 +249,7 @@ Exact page IDs and order:
 14. dir-find-someone-who
 15. dir-tarsia-puzzle-activity
 
-The CURRENT DEPLOYED HUB is the shell exemplar.
-Preserve its DOM structure and fixed participation-language architecture, including the hooks
-the CSS actually uses:
-
+Preserve current DOM hooks:
 - `.wrap`
 - `.page`
 - `.dir-header`
@@ -298,34 +268,359 @@ the CSS actually uses:
 - `.looks-header`
 
 Allowed section-specific substitutions:
-- Unit / section labels;
+- Unit/section labels;
 - section title/subtitle;
-- exact section I-can statements;
-- content-specific Teacher Moves / Student Moves;
-- Set 1 / Set 2 companion links;
+- exact section I-cans;
+- Physics-specific evidence language;
+- Set 1/2 companion links;
 - Stations links;
 - Find Someone Who links;
 - Practice-owned Tarsia link;
-- Desmos link/code only when actually supplied by current authority.
+- Desmos code/link only when actually supplied.
 
-PAGE 1 — ACTIVITY OPTIONS
-- every activity name links to its own same-document direction page;
-- projection/whiteboard structures link to Set 1 and Set 2 Questions/Solutions;
+
+----------------------------------------------------------------------
+6A. PAGE 1 — ACTIVITY OPTIONS
+----------------------------------------------------------------------
+
+Keep the current functional options page.
+
+Requirements:
+- activity names link to their same-document direction pages;
+- projection structures link to Set 1 and Set 2 Questions/Solutions;
 - Stations links to Set 1 and Set 2 Stations;
 - Find Someone Who links to Set 1 and Set 2 Find Someone Who;
-- Tarsia links to the existing Practice-owned Tarsia route;
-- Desmos remains teacher-selected unless a real current link/code is supplied;
-- identify Set 1 as Practice Set 2 and Set 2 as Practice Set 3.
+- Tarsia links to Practice-owned Tarsia;
+- Desmos remains teacher-selected unless a real link/code exists;
+- identify Set 1 as Practice Set 2;
+- identify Set 2 as Practice Set 3.
 
-PAGE 2 — TEACHER & STUDENT MOVES
-- one compact guide;
-- exact/faithful section I-cans;
-- content-specific teacher/student moves;
-- participation-structure moves only where useful.
+Do not redesign this page merely for visual preference if it is functional, readable, and
+conforms to the live DOM/CSS.
 
-Do not repeat I-can/discourse blocks inside later direction pages or student companions.
-Do not invent a 16th page.
-Do not add an Activity Check or Exit Ticket.
+
+----------------------------------------------------------------------
+6B. PAGE 2 — TEACHER & STUDENT MOVES — RICH GUIDE REQUIRED
+----------------------------------------------------------------------
+
+This is a TEACHER-FACING guide, not the student activity instructions.
+
+Use the current page shell, but the content must be meaningfully detailed.
+
+Required regions:
+
+1. I-CAN MOVES
+For EACH section I-can:
+- show the exact/faithful I-can;
+- provide at least TWO content-specific Teacher Moves;
+- provide at least TWO matching Student Moves.
+
+Teacher Moves should prompt the evidence demanded by that I-can, for example:
+- name the relevant representation/evidence;
+- require units/direction/reference frame when the task requires them;
+- ask for a check or comparison;
+- press for explanation rather than answer voting;
+- surface a likely misconception without giving the answer.
+
+Student Moves should describe observable evidence behavior, for example:
+- show the mathematical/physical evidence;
+- state units/direction/reference frame when relevant;
+- compare a result with the representation;
+- explain why evidence supports the claim;
+- revise after a contradiction or stronger model.
+
+2. PARTICIPATION-STRUCTURE MOVES
+Include useful Teacher Moves and Student Moves for the major structures, grouped when sensible.
+At minimum cover:
+- Whiteboard Indy;
+- Whiteboard Partners / Rally Coach;
+- Speed Dating / Think–Trade–Agree;
+- Showdown / Hot Seat;
+- Round Table;
+- Stations;
+- Find Someone Who.
+
+Each group must have at least TWO Teacher Moves and TWO Student Moves.
+
+Do NOT satisfy Page 2 with only one generic Teacher Moves list and one generic Student Moves list
+for the whole section.
+
+Keep this page compact enough to project/print cleanly, but prefer useful specificity over
+artificial brevity.
+
+
+----------------------------------------------------------------------
+6C. PAGES 3–15 — PROJECTABLE STUDENT DIRECTIONS — HARD
+----------------------------------------------------------------------
+
+These pages are STUDENT-FACING projectable directions.
+
+They are NOT miniature teacher guides.
+They are NOT generic reminders to "solve and explain."
+They must tell students HOW THE ACTIVITY WORKS.
+
+Except where a structure truly does not use a question-set link, each direction page must contain
+the following visible regions using the existing `.dir-row` / `.dir-label` shell:
+
+- Structure
+- Setup
+- Directions
+- Goal
+- Question Sets / Activity Link / Tarsia Link as appropriate
+- Looks Like Success
+- Doesn't Look Like
+
+The `Directions` region must be an ordered list whenever a sequence of actions exists.
+
+HARD ANTI-GENERIC RULE:
+The following pattern is NOT sufficient and must fail QA:
+  1. Use one of the linked question sets.
+  2. Students solve and explain.
+  3. Partners compare evidence and revise if needed.
+
+Distinct activity structures must have distinct participation mechanics.
+Do not reuse one generic Directions list across multiple pages.
+
+
+----------------------------------------------------------------------
+6D. CANONICAL PARTICIPATION MECHANICS BY PAGE
+----------------------------------------------------------------------
+
+Use these mechanics as the minimum behavioral contract.
+Physics-specific wording may be added, but do not erase the participation structure.
+
+WHITEBOARD INDY — `dir-whiteboard-indy`
+Structure:
+  Individual -> independent practice
+Setup:
+  Each student has a whiteboard and marker, or the teacher-approved equivalent.
+Directions must communicate:
+1. Notes/resources may be used when allowed.
+2. Try the problem before asking for an answer.
+3. Write large and clearly enough to be checked from across the room.
+4. Show reasoning/evidence, not only the final answer.
+5. Use help appropriately; do not copy.
+6. Correct mistakes and explain what changed.
+Goal:
+  individual accountability + low-stakes problem entry
+Looks Like Success must be specific to visible individual work.
+Doesn't Look Like must include waiting/copying/tiny-or-uncheckable work.
+
+WHITEBOARD PARTNERS — `dir-whiteboard-partners`
+Structure:
+  fast partner practice
+Setup:
+  partners with one shared board/marker unless current teacher setup specifies otherwise
+Directions must communicate:
+1. Both partners stay engaged.
+2. Alternate who writes/holds the marker.
+3. The non-writer checks/asks questions rather than waiting.
+4. Both partners must be able to explain the current step.
+5. Resolve disagreements before moving on.
+6. Fix mistakes together.
+Goal:
+  engagement + quick feedback
+Looks Like / Doesn't Look Like must focus on balanced participation and shared reasoning.
+
+RALLY COACH — `dir-rally-coach`
+Structure:
+  partner explanation + alternating solver/coach roles
+Setup:
+  partners with the approved writing surface(s)
+Directions must communicate:
+1. Partner A solves/explains while Partner B coaches.
+2. Coach asks questions/hints; coach does not take over.
+3. Solver states reasoning/evidence aloud.
+4. Check the work together.
+5. Switch roles for the next problem.
+6. Continue alternating.
+Goal:
+  verbal reasoning + procedural/conceptual accuracy
+Looks Like / Doesn't Look Like must distinguish coaching from answer-giving.
+
+SPEED DATING — `dir-speed-dating-math`
+Structure:
+  paired practice -> timed rotation -> strategy sharing
+Setup:
+  teacher-arranged partner/seat rotation; each student keeps their own work
+Directions must communicate:
+1. Solve the projected/assigned problem with the current partner.
+2. Each student records their own work.
+3. Compare strategies/evidence, not only answers.
+4. Ask at least one clarifying/checking question.
+5. Rotate when directed.
+6. With the new partner, begin the next problem and carry forward useful reasoning.
+Goal:
+  repeated explanation + exposure to multiple strategies
+Looks Like / Doesn't Look Like must mention rotation and strategy exchange.
+
+SHOWDOWN — `dir-showdown`
+Structure:
+  private solve -> simultaneous reveal -> compare
+Setup:
+  every student needs a response surface; group sizes as directed
+Directions must communicate:
+1. Work silently/independently during think time.
+2. Commit to a complete solution before reveal.
+3. Reveal responses together when cued.
+4. Compare differences.
+5. Explain why a method/result is supported.
+6. Revise only after discussion/evidence.
+Goal:
+  individual accountability before group comparison
+Looks Like / Doesn't Look Like must protect private think time and simultaneous reveal.
+
+THINK–TRADE–AGREE — `dir-think-trade-agree`
+Structure:
+  think alone -> trade reasoning -> agree/revise
+Setup:
+  individual work first, then partner exchange
+Directions must communicate:
+1. Solve/form a claim independently.
+2. Mark the evidence/reasoning you used.
+3. Trade explanations with a partner.
+4. Ask a clarifying question.
+5. Identify agreement/disagreement.
+6. Reach a defensible shared conclusion or record why disagreement remains.
+Goal:
+  independent thinking + evidence-based revision
+Looks Like / Doesn't Look Like must distinguish agreement by evidence from answer copying.
+
+ROUND TABLE — `dir-round-table`
+Structure:
+  small-group sequential contribution
+Setup:
+  one shared response surface or teacher-approved group format
+Directions must communicate:
+1. First person begins the solution/explanation.
+2. Pass to the next person after a meaningful step.
+3. Each student must add/check/explain something before passing.
+4. Group members may question a step but should not erase ownership of it.
+5. Continue until the solution/explanation is complete.
+6. Group reviews the full reasoning together.
+Goal:
+  distributed participation + connected reasoning
+Looks Like / Doesn't Look Like must prevent one student completing the whole task.
+
+MATHEMATICAL HOT SEAT / HOT SEAT — `dir-mathematical-hot-seat`
+Structure:
+  one student explains/describes while teammates question/check
+Setup:
+  one student in the active role; teammates can see the prompt/work as the current shell permits
+Directions must communicate:
+1. Hot-seat student explains the solution/representation/next step.
+2. Teammates ask evidence or clarification questions.
+3. Teammates do not simply give the answer.
+4. Hot-seat student may revise after questions.
+5. Confirm the final reasoning as a group.
+6. Rotate the hot-seat role.
+Goal:
+  precise explanation + accountable questioning
+Looks Like / Doesn't Look Like must distinguish questioning from answer feeding.
+
+RALLY COACH II — `dir-rally-coach-ii`
+Structure:
+  solver/coach roles switch every problem with explicit check
+Setup:
+  partners and approved writing surface(s)
+Directions must communicate:
+1. Solver owns the written solution and explanation.
+2. Coach listens for evidence, units, direction, representation use, or other section-specific needs.
+3. Coach asks questions before offering a hint.
+4. Pair checks the completed problem.
+5. Switch roles for the next problem.
+6. Repeat.
+Goal:
+  sustained partner coaching + equal role ownership
+Must not be a duplicate of generic Rally Coach prose; the explicit check/evidence role should
+distinguish this version.
+
+DESMOS — `dir-desmos-activity`
+When a real current Desmos link/code exists:
+- show the link/code;
+- explain how students enter/use the activity;
+- specify individual vs partner use;
+- specify what students should record/discuss;
+- specify completion/check expectations.
+When no real link/code exists:
+- clearly say teacher-selected Desmos activity/code required;
+- do NOT fabricate an activity/code;
+- keep the page useful as a setup placeholder, not a fake student task.
+
+STATIONS — `dir-stations`
+Structure:
+  small-group station rotation
+Setup:
+  station materials/pages distributed according to the current Stations companion
+Directions must communicate:
+1. Begin at assigned station.
+2. Work the station's problems collaboratively while each student remains accountable.
+3. Record/leave a readable strategy as required.
+4. Compare methods and resolve disagreements.
+5. Rotate only when directed.
+6. Continue until assigned stations are complete.
+Goal:
+  collaborative practice + multiple problem encounters
+Include direct Set 1 / Set 2 Stations links.
+Looks Like / Doesn't Look Like must mention rotation and shared-but-accountable work.
+
+FIND SOMEONE WHO — `dir-find-someone-who`
+Structure:
+  partner search + explain/check + signature
+Setup:
+  each student has their own Find Someone Who sheet
+Directions must communicate:
+1. Find a partner for a problem.
+2. Solve/explain/check the problem together.
+3. A signature is earned only after an explanation/check, not by showing an answer.
+4. Record reasoning you understand on your own sheet.
+5. Move to a different partner for another problem when directed/required.
+6. Continue until the assigned work is complete.
+Goal:
+  repeated peer explanation + individual written evidence
+Include direct Set 1 / Set 2 Find Someone Who links.
+Looks Like / Doesn't Look Like must mention meaningful explanation before signatures.
+
+TARSIA PUZZLE — `dir-tarsia-puzzle-activity`
+Structure:
+  collaborative matching puzzle
+Setup:
+  use the Practice-owned Tarsia pieces/file
+Directions must communicate:
+1. Match prompt/answer edges using mathematics/physics reasoning.
+2. Explain why a proposed match belongs before locking it in.
+3. Teammates check neighboring matches for consistency.
+4. Revise mismatches rather than forcing pieces.
+5. Continue until the puzzle is complete.
+6. Be prepared to justify selected matches.
+Goal:
+  retrieval + explanation + collaborative error correction
+Link only to the Practice-owned Tarsia.
+Do not regenerate Tarsia content.
+
+
+----------------------------------------------------------------------
+6E. LOOKS LIKE / DOESN'T LOOK LIKE — ACTIVITY-SPECIFIC
+----------------------------------------------------------------------
+
+Every direction page must use the existing right-side `.looks-like` shell when the live shell
+supports it.
+
+Each page should normally have at least THREE concise bullets in:
+- Looks Like Success
+- Doesn't Look Like
+
+The bullets must describe observable behavior specific to THAT structure.
+
+FORBIDDEN:
+reusing the identical generic set
+  "Students point to evidence."
+  "Students state units and directions."
+  "Partners compare reasoning."
+and the identical generic failure set on every structure page.
+
+Physics evidence language may appear inside the activity-specific bullets, but it must not replace
+the participation mechanics.
 
 
 ======================================================================
@@ -340,56 +635,31 @@ Use:
   ../../css/base.css
   ../../css/activities.css
 
-Body:
-  <div class="wrap">
-    [direct page sections]
-  </div>
+For 24 source questions:
+- exactly 48 direct `.page` sections;
+- strict Q1 / Solution 1 ... Q24 / Solution 24 alternation.
 
-For 24 source questions, render exactly 48 direct `.page` sections in strict order:
+Question page hooks:
+  `.page.question-page`
+  `.prob-head`
+  `.prob-num`
+  `.prob-q`
+  `.work`
 
-  Q1
-  Solution 1
-  Q2
-  Solution 2
-  ...
-  Q24
-  Solution 24
-
-Question page exact structural hooks:
-  <section class="page question-page">
-    <div class="prob-head">...</div>
-    <div class="prob-num">Problem N</div>
-    <div class="prob-q" ...source metadata...>
-      [exact finished Practice prompt FIRST]
-      [supporting representation after prompt]
-    </div>
-    <div class="work"></div>
-  </section>
-
-Solution page exact structural hooks:
-  <section class="page solution-page">
-    <div class="prob-head">...</div>
-    <div class="prob-num">Problem N</div>
-    <div class="prob-q" ...source metadata...>
-      [same source prompt FIRST]
-      [same supporting representation as needed]
-    </div>
-    <div class="solution"><strong>Solution:</strong> [verified Practice-handoff solution]</div>
-  </section>
+Solution page hooks:
+  `.page.solution-page`
+  `.prob-head`
+  `.prob-num`
+  `.prob-q`
+  `.solution`
 
 HARD:
-- never combine question and solution on one page;
-- never omit `.work` from a question page;
 - prompt before representation;
+- same source prompt/representation on solution page as needed;
+- verified Practice-handoff solution;
 - no student-facing descriptive figcaption;
-- no visible Bank/family/I-can/generator metadata.
-
-For an image/graph that must be wrapped for the projection CSS, use the EXISTING `.graph-block`
-hook. Preserve the source visual itself; changing the outer Activity wrapper is shell adaptation,
-not content repair.
-
-For tables, preserve semantic table content and use the table hooks already supported by
-`base.css` / `activities.css`. Do not invent a new table component.
+- no visible internal metadata;
+- image/graph outer wrapper uses existing `.graph-block` when required.
 
 
 ======================================================================
@@ -404,63 +674,23 @@ Use:
   ../../css/base.css
   ../../css/activities/activity_stations.css
 
-Body:
-  one `<div class="wrap">`
-  containing the direct `.page` sections.
-
-For a 24-question set:
+For each 24-question set:
 - 6 stations;
-- 4 consecutive source questions per station;
-- every station prompt page immediately followed by one blank back;
-- ALL six prompt/blank pairs appear before ANY solution page;
-- after the prompt/blank region, each station gets exactly two solution pages.
-
-Prompt page:
-  <section class="page station-question-page">
-    <div class="copy-note">...</div>
-    <div class="header">...</div>
-    <div class="station-grid">
-      exactly four `<article class="station-problem">` blocks
-    </div>
-    <div class="page-footer">...</div>
-  </section>
-
-Blank back:
-  <section class="page station-blank-page"></section>
-
-IMPORTANT:
-The deployed HTML/CSS uses `.station-blank-page`.
-Do NOT invent or require `.duplex-blank`.
+- 4 consecutive source questions/station;
+- prompt page immediately followed by `.page.station-blank-page`;
+- all six prompt/blank pairs before ANY solution pages;
+- exactly two solution pages per station.
 
 Each `.station-problem`:
-- contains its `.problem-number`;
-- contains the exact source prompt;
-- contains the source representation when required;
-- contains NO workspace, answer line, textarea, or giant blank response area.
+- problem number;
+- exact source prompt;
+- required representation;
+- NO workspace/answer line/giant response area.
 
-Image-bearing station visuals use the EXISTING `.figure` wrapper expected by
-`activity_stations.css`. Preserve the source image bytes/path/content.
+Use existing `.figure` outer wrapper for station image visuals when required.
 
-After all prompt/blank pairs, each station has exactly:
-
-  <section class="page station-answer-page station-solution-page-1">...</section>
-  <section class="page station-answer-page station-solution-page-2">...</section>
-
-Normally place Problems 1–2 on solution page 1 and Problems 3–4 on solution page 2, matching
-the current deployed shell.
-
-Each solution item repeats enough prompt/representation to understand the answer and then
-shows the verified Practice-handoff solution.
-
-Do not:
-- put solution pages between prompt stations;
-- make 1 or 3+ solution pages for a station;
-- add a student workspace to station cards;
-- change the landscape shell;
-- hide overflow to force bad content to fit.
-
-If the exact live two-page station solution shell cannot fit readably, report the station as
-an ACTIVITY_SHELL_DEFECT rather than inventing another page format.
+Do not invent `.duplex-blank`.
+Do not hide overflow to force bad content to fit.
 
 
 ======================================================================
@@ -475,100 +705,56 @@ Use:
   ../../css/base.css
   ../../css/activities/activity_find_someone_who.css
 
-IMPORTANT:
-The current deployed Find Someone Who HTML places `.page` sections directly in `<body>`.
-Do NOT invent a `.wrap` around them.
+Do NOT invent `.wrap` if the live shell places `.page` directly in body.
 
-STUDENT REGION
-For 24 source questions:
-- exactly 8 `.page.worksheet.student-worksheet-page` pages;
-- exactly 3 consecutive source questions per student page.
+Student region for 24 items:
+- 8 student pages;
+- 3 consecutive problems/page;
+- problem number;
+- partner signature line;
+- exact source prompt/representation;
+- workspace label;
+- workspace.
 
-First student page also carries the current `.intro` / Name line behavior.
+Teacher key region:
+- after all student pages;
+- 6 teacher pages;
+- 4 consecutive problems/page;
+- same prompt/representation;
+- verified answer/solution.
 
-Each student problem:
-  <article class="problem student-problem" ...source metadata...>
-    <div class="problem-number">Problem N</div>
-    <div class="signature-line">Partner signature: <span></span></div>
-    [exact source prompt]
-    [source representation when required]
-    <div class="workspace-label">Work / explanation</div>
-    <div class="workspace"></div>
-  </article>
-
-Preserve:
-- `.worksheet-title`
-- `.section-label`
-- `.intro`
-- `.problem-number`
-- `.signature-line`
-- `.workspace-label`
-- `.workspace`
-- `.page-footer`
-
-TEACHER KEY REGION
-After all 8 student pages:
-- exactly 6 `.page.worksheet.teacher-key-page` pages;
-- exactly 4 consecutive source questions per teacher page.
-
-Each teacher problem:
-  <article class="problem answer-problem" ...source metadata...>
-    <div class="problem-number">Problem N</div>
-    [same source prompt]
-    [same source representation when required]
-    <p><strong>Answer:</strong> [verified Practice-handoff answer/solution]</p>
-  </article>
-
-Do not compress the student pages to 4 questions per page.
-Do not remove signature lines.
-Do not remove student workspaces.
-Do not add signatures/workspaces to teacher-key problems.
-
-Image/graph visuals use the EXISTING `.graph-block` hook expected by this CSS.
-Preserve the source visual itself.
+Image/graph outer wrapper uses existing `.graph-block` when required.
 
 
 ======================================================================
-10. REPRESENTATION TRANSFER — PRESERVE CONTENT, ADAPT ONLY OUTER SHELL
+10. REPRESENTATION TRANSFER
 ======================================================================
 
-A representation is part of the source Practice question.
+Representations are part of the Practice source.
 
 Preserve:
-- image bytes or canonical source path;
+- image bytes/canonical source;
 - SVG content;
-- table headings and values;
+- table headings/values;
 - equation meaning/MathJax;
-- labels, units, axes, ticks, legends, and answer-neutral evidence;
+- labels/units/axes/ticks/legends;
+- answer-neutral evidence;
 - prompt-before-representation order.
 
-Do not:
-- redraw;
-- simplify;
-- crop away evidence;
-- substitute prose for a required visual;
-- generate a new visual because the Practice visual is unattractive;
-- repair a known Practice image or wrapper defect inside Activities.
+Only adapt outer wrapper for target Activity CSS:
+- Q/S -> `.graph-block`;
+- Stations -> `.figure`;
+- FSW -> `.graph-block`.
 
-Only adapt the OUTER representation wrapper when required by the target Activity CSS:
-- Questions/Solutions image/graph -> `.graph-block`;
-- Stations image -> `.figure`;
-- Find Someone Who image/graph -> `.graph-block`.
-
-That wrapper adaptation is required Activity rendering behavior.
-It does not mutate the source Practice artifact.
-
-If a source representation path cannot resolve, report PRACTICE_INPUT_DEFECT.
+If source representation cannot resolve:
+  PRACTICE_INPUT_DEFECT.
 
 
 ======================================================================
-11. SOURCE IDENTITY — CARRY FORWARD, DO NOT REAUTHOR
+11. SOURCE IDENTITY
 ======================================================================
 
-Activity companions are derivative views of finished Practice questions.
-
-Where compatible with the live shell, carry the source Practice question's hidden `data-*`
-identity metadata onto the Activity question wrapper, including available fields such as:
+Carry available hidden source `data-*` identity forward where compatible:
 - stable task ID;
 - source Practice family ID;
 - section;
@@ -578,11 +764,8 @@ identity metadata onto the Activity question wrapper, including available fields
 - representation mode;
 - variant key.
 
-Do not visibly print this metadata.
-Do not invent a new question identity merely because the item appears in an Activity wrapper.
-
-The same Practice source item appearing in Questions/Solutions, Stations, and Find Someone Who
-must retain the same underlying identity.
+Do not visibly print metadata.
+Do not invent new question identity because the item appears in an Activity wrapper.
 
 
 ======================================================================
@@ -590,12 +773,12 @@ must retain the same underlying identity.
 ======================================================================
 
 TARSIA
-- link to the current Practice-owned Tarsia file;
-- do not duplicate, regenerate, or package a second Tarsia export in Activities.
+- Practice-owned;
+- link, do not duplicate/regenerate.
 
 DESMOS
-- include a live link/code only when current authority actually supplies one;
-- otherwise preserve the teacher-selected/code-required behavior from the approved hub;
+- real link/code only when current authority supplies it;
+- otherwise truthful teacher-selected/code-required placeholder;
 - never fabricate a Desmos activity or code.
 
 
@@ -605,10 +788,10 @@ DESMOS
 
 Build one requested Unit at a time.
 
-Default output:
+Default:
   unit{U}_activities.zip
 
-ZIP root contains the section Activity folders DIRECTLY:
+ZIP root contains section Activity folders directly:
 
   u{U}_{S}_act1/
     u{U}_{S}_act1.html
@@ -618,131 +801,121 @@ ZIP root contains the section Activity folders DIRECTLY:
     u{U}_{S}_set2_stations.html
     u{U}_{S}_set1_find_someone_who.html
     u{U}_{S}_set2_find_someone_who.html
-    figures/ only if the rendered companions truly reference required local figure copies
-
-Use the exact current course-file-structure paths/names.
+    figures/ only when companions truly reference required local copies
 
 Do NOT package:
-- PM files;
-- Framework files;
-- Practice source HTML;
-- Practice provenance;
+- PM/Framework files;
+- Practice source HTML/provenance;
 - Bank data;
 - shared CSS;
 - tools;
 - duplicate Tarsia;
-- old Activity artifacts;
-- staging/temp files;
-- `__MACOSX`;
-- `.DS_Store`;
-- AppleDouble;
-- `__pycache__`;
-- `*.pyc`.
+- stale Activity artifacts;
+- staging/temp/junk.
 
 
 ======================================================================
 14. FROZEN QA — REQUIRED BEFORE DELIVERY
 ======================================================================
 
-Do not invent new QA criteria mid-run.
-New discoveries are reported for later PM/repair revision.
-
 TOOL ROUTING
-- Philosophy read first;
-- Runtime Contract read second;
-- Framework front door read before artifact source work;
-- web search not used;
-- generic web fetch not used;
-- repository-wide search not used for any declared source;
-- every declared source direct-fetched at the pinned snapshot;
+[ ] Philosophy first
+[ ] Runtime second
+[ ] current Framework before source work
+[ ] declared sources direct-fetched at pins
+[ ] no generic web/repository search
 
 SOURCE
-- exact current sections resolved;
-- Activity Set 1 source is Practice Set 2;
-- Activity Set 2 source is Practice Set 3;
-- 24 source questions in each set;
-- Practice handoff present;
-- every source question safely matches one handoff answer/solution;
-- no Bank Map read;
-- no Bank-family instantiation.
+[ ] exact current sections
+[ ] Set 1 = Practice Set 2
+[ ] Set 2 = Practice Set 3
+[ ] 24 questions each
+[ ] handoff matches every source question
+[ ] no Bank-family instantiation
 
 CONTENT
-- same 24 Set 1 source questions in Q/S, Stations, and FSW;
-- same 24 Set 2 source questions in Q/S, Stations, and FSW;
-- source order preserved;
-- prompt/choices/values/representations preserved;
-- no Activity-only variants or question rewrites;
-- no visible internal metadata;
-- no student answer leakage.
+[ ] same Set 1 items across Q/S, Stations, FSW
+[ ] same Set 2 items across Q/S, Stations, FSW
+[ ] order/prompt/values/representations preserved
+[ ] no Activity-only question variants
+[ ] no answer leakage
 
-HUB
-- exactly 15 direct `.page` sections under one `.wrap`;
-- exact page IDs/order;
-- Activity names link to correct direction pages;
-- Set 1/2 links correct;
-- Stations/FSW links correct;
-- Tarsia points to Practice;
-- Desmos truthful;
-- no Activity Check/Exit Ticket.
+HUB DOM
+[ ] exactly 15 direct `.page` sections under one `.wrap`
+[ ] exact IDs/order
+[ ] current required DOM hooks present
+[ ] correct links
+[ ] no 16th page / Activity Check / Exit Ticket
+
+PAGE 2 MOVES
+[ ] every section I-can has at least 2 Teacher Moves + 2 Student Moves
+[ ] moves are content/evidence-specific
+[ ] participation-structure moves present for major structures
+[ ] no single generic moves block standing in for all I-cans/structures
+
+PAGES 3–15 PROJECTABLE DIRECTIONS
+[ ] pages are student-facing
+[ ] Structure visible
+[ ] Setup visible
+[ ] ordered Directions visible when sequence exists
+[ ] Goal visible
+[ ] correct Question Sets / activity link visible when applicable
+[ ] each structure explains its defining participation mechanics
+[ ] no generic repeated 3-step Routine used across structures
+[ ] no two distinct structures have an identical full Directions list
+[ ] Looks Like / Doesn't Look Like are activity-specific
+[ ] identical generic success/failure blocks are not copied across structures
 
 QUESTIONS/SOLUTIONS
-- base.css then activities.css only;
-- one `.wrap`;
-- exactly 48 direct pages for 24 questions;
-- strict Q1/S1 ... Q24/S24 alternation;
-- exact `.prob-head`, `.prob-num`, `.prob-q`, `.work`, `.solution` hooks;
-- prompt before representation;
-- no question/solution combined page.
+[ ] correct CSS
+[ ] 48 pages/set
+[ ] strict Q/S alternation
+[ ] required hooks
+[ ] prompt before representation
 
 STATIONS
-- base.css then activity_stations.css only;
-- one `.wrap`;
-- exactly 6 prompt pages for a 24-item set;
-- exactly 4 `.station-problem` blocks per prompt page;
-- every prompt page immediately followed by `.page.station-blank-page`;
-- all prompt/blank pairs precede solutions;
-- no station workspace;
-- exactly two solution pages per station;
-- correct station solution-page classes;
-- no invented `.duplex-blank`;
-- required visuals/tables fit and resolve.
+[ ] correct CSS
+[ ] 6 prompt pages
+[ ] 4 problems/prompt
+[ ] prompt immediately followed by blank back
+[ ] all prompt/blank pairs before solutions
+[ ] no station workspace
+[ ] 2 solution pages/station
 
 FIND SOMEONE WHO
-- base.css then activity_find_someone_who.css only;
-- no invented `.wrap`;
-- 8 student pages x 3 problems;
-- every student problem has one problem number, signature line, workspace label, workspace;
-- 6 teacher pages x 4 problems;
-- teacher problems preserve prompt/representation and show correct handoff answer/solution.
+[ ] correct CSS
+[ ] no invented wrap
+[ ] 8 student pages x 3
+[ ] signatures/workspaces present
+[ ] 6 teacher pages x 4
+[ ] correct answers/representations
 
-HTML / PATHS
-- valid HTML document prefix;
-- MathJax configuration precedes MathJax library when used;
-- no unresolved template/code tokens;
-- exact companion filenames;
-- all relative links resolve;
-- all local image paths resolve;
-- ZIP extraction depth is correct;
-- no unused/generated junk.
+PATH / ASSET
+[ ] every local link resolves
+[ ] every local asset resolves from deployed child location
+[ ] no Practice-relative path accidentally retained in Activities
+[ ] no staging/temp path
+[ ] ZIP extraction depth correct
 
 
 ======================================================================
 15. OPERATING PRINCIPLES
 ======================================================================
 
-1. Activities are wrappers around finished Practice, not a second authoring stage.
-2. Activity Set 1 is Practice Set 2; Activity Set 2 is Practice Set 3.
-3. The current deployed Activity HTML/CSS owns the shell mechanics.
-4. Follow the live HTML/CSS; do not invent classes because a prose PM sounds plausible.
-5. Preserve source questions exactly during the normal Activities build.
-6. Practice defects are repaired upstream by the rebuild/repair workflow, then Activities are rerun.
-7. Build each reusable set once and keep it identical across its three companion views.
-8. Preserve the teacher-approved 15-page hub.
-9. Stations are prompt cards with blank backs, not worksheets.
-10. Find Someone Who keeps signatures and workspaces.
-11. Tarsia stays Practice-owned.
-12. No automatic Activity Check or Exit Ticket.
-13. Build means the complete Unit Activity package, not a sample.
-14. Public GitHub is still canonical-repository data, not a reason to use web search; direct-fetch declared paths only.
+1. Activities are wrappers around finished Practice, not a second question-authoring stage.
+2. Set 1 is Practice Set 2; Set 2 is Practice Set 3.
+3. Live HTML/CSS owns shell mechanics.
+4. This PM owns the participation-information contract of the 15-page hub.
+5. The Activity Options page may remain compact if functional.
+6. Teacher & Student Moves must be useful and specific.
+7. Projectable direction pages are student-facing directions that explain HOW each activity works.
+8. Different structures must have genuinely different participation instructions.
+9. Physics evidence language strengthens activity instructions; it does not replace activity mechanics.
+10. Preserve source questions exactly.
+11. Stations are prompt cards with blank backs.
+12. Find Someone Who keeps signatures and workspaces.
+13. Tarsia stays Practice-owned.
+14. No automatic Activity Check or Exit Ticket.
+15. Build means the complete Unit Activity package, not a sample.
 
-END — BUILD ACTIVITIES — SINGLE PASS / PRACTICE-ROUTED / LIVE-SHELL LOCK
+END — BUILD ACTIVITIES — SINGLE PASS / PRACTICE-ROUTED / LIVE-SHELL LOCK / STUDENT-DIRECTIONS LOCK
