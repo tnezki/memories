@@ -1,0 +1,662 @@
+AP CALCULUS AB FIRST 4 DAYS — SELF-EXECUTING BUILD REQUEST
+===============================================================
+
+EXECUTE THIS BUILD NOW.
+
+This file is BOTH the build request and the build PM.
+Do NOT reply asking the teacher to send a build request.
+Do NOT ask the teacher to upload the repositories.
+Use the connected GitHub repositories directly.
+
+REQUEST
+Mode: BUILD
+Course: AP Calculus AB
+Job: First 4 Days
+Output: ap_calculus_ab_first_4_days.zip
+
+REPOSITORIES
+- System: tnezki/memories
+- Course: tnezki/calculus
+- Gold-standard implementation reference: tnezki/algebra
+
+STARTUP BEHAVIOR — HARD
+1. Fresh-pin the current heads of all three repositories.
+2. Read the required current Philosophy, Runtime, AP Calculus Framework, relevant contracts/PMs, and the Algebra First 4 Days / Welcome examples.
+3. Execute the build immediately from the specifications below.
+4. Do NOT stop merely because Calculus is sparsely deployed.
+5. Do NOT ask for another request file.
+6. Do NOT ask for supporting repo files that can be fetched from GitHub.
+7. Ask the teacher a question ONLY for a genuinely unresolved blocking teacher decision.
+8. If the required existing blank unit-circle printable cannot be resolved after checking the declared/current printables locations, report that exact missing asset as the blocker. Otherwise continue.
+9. Produce the complete deployable ZIP and a short build note.
+
+The specifications below are authoritative for this one-off build.
+
+================================================================
+
+STATUS: ONE-OFF / TEMPORARY / TEACHER-SPECIFIC
+PURPOSE: Build a classroom-usable AP Calculus AB First 4 Days package for immediate use.
+THIS IS NOT A PERMANENT SYSTEM PM.
+Do not try to generalize this workflow for every course.
+Do not redesign the whole system.
+Do not block on architecture that can reasonably be handled inside this one build.
+
+TEACHER PRIORITY
+----------------
+GOOD ENOUGH FOR TOMORROW > PERFECT SYSTEM INTEGRATION.
+
+The result should be:
+- correct;
+- readable;
+- visually coherent;
+- Notability-friendly where students write;
+- easy to project where students view;
+- deployable into the Calculus repo;
+- similar in quality/feel to the current Algebra 1 First 4 Days package.
+
+Ask the teacher a question ONLY if a genuinely missing decision makes the build impossible.
+Do not reopen decisions already specified below.
+
+================================================================
+1. AUTHORITIES / REFERENCE COURSE
+================================================================
+
+At job start:
+
+1. Fresh-pin:
+   - tnezki/memories
+   - tnezki/calculus
+   - tnezki/algebra
+
+2. Read current:
+   - Curriculum_Philosophy.txt
+   - SYSTEM_RUNTIME_CONTRACT.txt
+   - AP Calculus AB Framework front door + current file-structure/deployment contracts
+   - current Question Structure authority when needed for AP-style task design
+   - current relevant recurring family PMs when they help with shell/resource behavior
+
+3. GOLD-STANDARD IMPLEMENTATION EXAMPLE:
+   tnezki/algebra
+
+Use the current Algebra implementation as the primary VISUAL / CLASSROOM-USABILITY example,
+especially:
+
+  misc/first_4_days/
+  misc/welcomes/
+
+Important examples include:
+- Algebra First 4 Days index;
+- Warm-Ups;
+- Notes student/teacher structure;
+- Practice / Extra Practice;
+- Investigation + teacher guide;
+- Activity package;
+- Exit Tickets / keys;
+- Welcome index + individual Welcome/Learning Target screens.
+
+ALLOWED:
+- copy useful shell/DOM/layout ideas;
+- preserve the same general student workflow;
+- mirror the First 4 Days folder organization where sensible;
+- reuse compatible non-content styling mechanics when technically practical.
+
+FORBIDDEN:
+- copy Algebra mathematics into Calculus;
+- copy Algebra learning targets/I-cans as Calculus content;
+- invent fake Unit 0 mastery architecture;
+- stall merely because Calculus currently has fewer deployed shells than Algebra.
+
+AP Calculus Framework + current teacher directions own the MATHEMATICS.
+Algebra owns the QUALITY BAR / IMPLEMENTATION EXAMPLE.
+
+================================================================
+2. OUTPUT / DELIVERY
+================================================================
+
+Build ONE complete deployable ZIP:
+
+  ap_calculus_ab_first_4_days.zip
+
+ZIP must contain course-root-relative deployable files.
+
+Preferred structure:
+
+  misc/
+    first_4_days/
+      index.html
+      first_4_days.css          [if useful]
+      warmups/
+      notes/
+      practice/
+      investigation/
+      activities/
+      exit/
+      overview/
+      figures/                  [only when needed]
+    welcomes/
+      welcome.html
+      slides/
+      figures/                  [only when needed]
+
+If Calculus lacks a required shared CSS shell:
+- do NOT fail merely because the repo is sparse;
+- use compatible current Algebra/Physics shell behavior as an implementation reference;
+- include the minimum CSS/assets needed to make this package deployable;
+- do not rebuild unrelated course infrastructure.
+
+NO SURVEY.
+Teacher will create survey separately.
+
+================================================================
+3. FOUR-DAY RESOURCE PLAN
+================================================================
+
+Build:
+
+- 4 Warm-Ups
+- 1 Notes resource
+- 3 Practice resources total:
+    Practice 1
+    Practice 2
+    Extra Practice
+- 1 Activity package
+- 1 Investigation
+- 3 Exit Tickets
+- 1 Course Overview
+- 1 Welcome index + 4 Welcome/Learning Target screens
+- teacher keys/guides where the Algebra example normally provides them
+
+Suggested day flow:
+
+DAY 1
+- Welcome / Learning Target
+- Warm-Up 1
+- Notes
+- Practice 1
+- Exit Ticket 1
+
+DAY 2
+- Welcome / Learning Target
+- Warm-Up 2
+- Investigation
+- Practice 2
+- Exit Ticket 2
+
+DAY 3
+- Welcome / Learning Target
+- Warm-Up 3
+- Activity
+- Extra Practice
+- Exit Ticket 3
+
+DAY 4
+- Welcome / Learning Target
+- Warm-Up 4
+- Course Overview / systems / organization
+- teacher may use remaining Practice/Activity flexibly
+
+This is not a locked bell schedule.
+If a small reorder improves instructional flow, make the change without asking.
+
+================================================================
+4. WARM-UPS
+================================================================
+
+Warm-Ups should feel like the current Algebra opening Warm-Ups:
+simple, focused, easy to project/use, familiar-skill review.
+
+DAY 1 — SLOPE
+Review slope of a line:
+- graphically;
+- from a table;
+- from ordered pairs.
+
+DAY 2 — FUNCTIONS
+- evaluate functions;
+- evaluate simple function compositions.
+
+DAY 3 — UNIT CIRCLE / RADIANS
+Use the teacher's existing BLANK UNIT CIRCLE from the printables/check area.
+Do not redraw a substitute if the existing file can be resolved.
+
+Include four angle-drawing tasks:
+- 2 angles with 0 < theta < 2pi;
+- 1 negative radian angle;
+- 1 radian angle greater than 2pi.
+
+If the exact blank unit-circle file cannot be resolved from current repo/input material:
+- identify that exact asset as the only missing asset;
+- do not invent a replacement without permission.
+
+DAY 4 — TRIG
+Evaluate trigonometric functions using radian measures.
+
+Keep Warm-Ups short.
+They are opening/retrieval work, not the main lesson.
+
+================================================================
+5. NOTES — 20–25 MINUTES MAX
+================================================================
+
+ONE Notes lesson only.
+
+Core learning:
+A. Estimate instantaneous rate of change GRAPHICALLY.
+B. Estimate area under a curve GRAPHICALLY with LRAM.
+
+TIME:
+The live teaching portion should be approximately 20–25 minutes.
+
+DO NOT overbuild this Notes resource.
+
+Use only FOUR Example -> You Try It pairs TOTAL.
+
+Keep the current Notes identity:
+- title / target / I-cans;
+- preview / vocabulary when useful;
+- Notice / Wonder;
+- What's to Come (WTC);
+- short instructional reading;
+- brief Stop & Discuss / sense-making;
+- Example -> You Try It;
+- summary;
+- common mistakes;
+- useful student workspace.
+
+------------------------------------------------
+5A. INSTANTANEOUS RATE OF CHANGE
+------------------------------------------------
+
+Students are NOT formally differentiating yet.
+
+Teach estimation from a graph by:
+1. selecting the target point on a curve;
+2. identifying its coordinates;
+3. selecting a second point;
+4. finding the secant slope;
+5. moving the second point closer to the target;
+6. comparing secant slopes;
+7. estimating the slope of the tangent line / instantaneous rate of change.
+
+Use simple quadratic and/or cubic curves with readable graph scales.
+
+Emphasize:
+- point coordinates matter;
+- slope is change in y / change in x;
+- the estimate should stabilize as the second point moves closer;
+- instantaneous rate is a LOCAL slope idea.
+
+------------------------------------------------
+5B. AREA / LRAM
+------------------------------------------------
+
+Estimate area under a graph with LEFT RIEMANN SUM only.
+
+Use approximately 5–10 rectangles.
+Do not introduce a full taxonomy of Riemann sums.
+
+Students should:
+- read the interval;
+- determine rectangle width;
+- use left-endpoint heights;
+- draw/see the rectangles;
+- add rectangle areas;
+- interpret the result as an estimate.
+
+Use simple quadratic/cubic graphs with visually readable intervals.
+
+------------------------------------------------
+5C. WTC
+------------------------------------------------
+
+Keep WTC.
+
+Purpose:
+teach students to unpack a hard AP-style FRQ, NOT to assess mastery of today's opening content.
+
+Use a challenging, coherent, multi-part AP-style free-response structure.
+
+Priority source:
+- current Question Structure authority / AP Calculus Framework.
+
+If the teacher later supplies AP Topics / question standards:
+- treat those as high-priority design guidance.
+
+Do NOT claim an invented question is an official College Board FRQ.
+
+Student instructions should preserve the Algebra WTC idea:
+- DO NOT SOLVE IT YET;
+- notice familiar notation/ideas;
+- underline/circle what matters;
+- mark unfamiliar language;
+- make reasonable structural attempts.
+
+================================================================
+6. PRACTICE — THREE PARALLEL LEARNING RESOURCES
+================================================================
+
+Build:
+
+1. Practice 1
+2. Practice 2
+3. Extra Practice
+
+ALL THREE cover BOTH:
+- instantaneous-rate / secant-line estimation;
+- LRAM / area estimation.
+
+Do NOT split one topic into one Practice and the other topic into another.
+
+These are parallel learning opportunities:
+- same learning coverage;
+- fresh values/graphs/prompts;
+- comparable difficulty;
+- enough repetition to build confidence;
+- useful representations.
+
+Practice exists to CREATE LEARNING.
+
+NOTABILITY-FIRST:
+- generous handwriting workspace;
+- graphs large enough to annotate;
+- students can draw secant/tangent estimates;
+- students can draw/mark rectangles;
+- no cramped screen-only formatting.
+
+Include a mix of:
+- direct graph-reading;
+- calculate secant slope from graph coordinates;
+- move a second point closer / compare slopes;
+- estimate tangent slope;
+- identify point + slope and write an estimated tangent line;
+- draw/read LRAM rectangles;
+- compute LRAM from a graph/table when appropriate;
+- short interpretation/check items.
+
+Practice 2 and Extra Practice should be true parallel versions, not weaker leftovers.
+
+ACTIVITY SOURCE:
+Use Practice 2 as the primary question source for the First 4 Days Activity.
+Extra Practice may supply parallel alternates when useful.
+Do not invent an unrelated second activity question bank.
+
+================================================================
+7. ACTIVITY
+================================================================
+
+Build one useful First 4 Days Activity package.
+
+Use the mature Algebra Activity implementation as the format/usability example.
+
+Purpose:
+change participation around worthwhile Practice mathematics.
+
+Use Practice 2 as the primary content source.
+
+Good structures may include:
+- Whiteboard Indy;
+- Whiteboard Partners;
+- Rally Coach;
+- Showdown;
+- Think–Trade–Agree;
+- Stations;
+- Find Someone Who;
+- other structures already proven in Algebra when they fit.
+
+Do not force every structure if the First 4 Days package is cleaner with a smaller useful menu.
+
+Student-facing direction pages must explain HOW the activity works.
+Do not use generic "solve, explain, compare" directions for every structure.
+
+Keep the mathematics focused on:
+- secant/tangent slope estimation;
+- local rate of change;
+- LRAM / graphical area estimation.
+
+================================================================
+8. INVESTIGATION — ABOUT 30 MINUTES
+================================================================
+
+This should be a genuine student investigation, similar in spirit to the strong Algebra
+First 4 Days investigation:
+students DO, DRAW, RECORD, TEST, COMPARE, and EXPLAIN.
+
+Usage:
+NOTABILITY-FIRST, with optional Desmos use.
+
+Target length:
+approximately 30 minutes.
+
+------------------------------------------------
+8A. PART A — GUESS THE TANGENT LINE
+------------------------------------------------
+
+Use simple quadratic and cubic functions.
+
+Students may use the Desmos calculator to guess/check.
+
+Core workflow:
+1. Graph the function.
+2. Identify a target x-value.
+3. Find the exact coordinates (x1, y1) of the point on the curve.
+4. Estimate the tangent slope m visually / by nearby secants / guess-and-check.
+5. Enter or write:
+
+      y = m(x - x1) + y1
+
+6. Adjust m until the line appears tangent at the chosen point.
+7. Record the estimated slope and tangent-line equation.
+8. Explain what visual evidence made the estimate reasonable.
+
+IMPORTANT:
+Emphasize TWO pieces:
+- coordinates of the point;
+- slope.
+
+Then use point-slope form:
+  y = m(x - x1) + y1
+
+Do not formally teach derivative rules.
+
+If no special Desmos activity/code exists:
+- use ordinary Desmos calculator directions;
+- do NOT fabricate a classroom code.
+
+------------------------------------------------
+8B. PART B — BUILD LRAM
+------------------------------------------------
+
+Use simple quadratic and cubic graphs.
+
+Students should estimate area over manageable intervals.
+
+For each task:
+- provide a clean graph;
+- specify interval and number of rectangles;
+- keep number of rectangles around 5–10;
+- students DRAW the left rectangles directly on the graph in Notability;
+- record rectangle width;
+- record/use left-endpoint heights;
+- calculate total estimated area;
+- briefly discuss whether the picture suggests under/over-estimation when meaningful.
+
+The student document must contain graph surfaces large enough to draw on.
+
+Keep the investigation exploratory and visual.
+Do not turn it into 30 minutes of prose.
+
+Provide a teacher guide with:
+- intended flow;
+- reasonable estimates;
+- likely misconceptions;
+- quick facilitation prompts;
+- where to stop if time is short.
+
+================================================================
+9. EXIT TICKETS — THREE SIMPLE EVIDENCE PULSES
+================================================================
+
+Build 3 short Exit Tickets.
+
+Use the current Algebra First 4 Days exit behavior as the classroom-use example:
+- projector-friendly;
+- printable/collectable;
+- parallel versions if the current shell supports them cleanly;
+- teacher key.
+
+Teacher authorizes builder to choose the exact simple cases.
+
+Keep them SIMPLE.
+
+Across the three tickets, sample:
+- estimate instantaneous rate from a graph / nearby secants;
+- identify a point + use an estimated slope to write a tangent-line equation;
+- draw/read a small LRAM and compute an estimated area.
+
+Do NOT make these miniature AP exams.
+Do NOT use WTC difficulty here.
+
+These are quick evidence pulses.
+
+================================================================
+10. COURSE OVERVIEW
+================================================================
+
+Build one AP Calculus AB First 4 Days Course Overview.
+
+Use the current Algebra First 4 Days / course overview as the organization example.
+
+Include useful opening systems such as:
+- where daily course materials live;
+- Notability expectations / file organization;
+- how students know what resource to open;
+- the role of Warm-Ups, Notes, Practice, Activities/Investigations, Exit Tickets;
+- how AP-style reasoning / communication will appear;
+- reasonable expectations for showing work, graphs, units/notation, explanations;
+- how to recover if absent / find missed material, when supported by current course systems.
+
+Keep it student-facing and practical.
+Do not invent policies not supported by teacher/course materials.
+
+NO SURVEY.
+
+================================================================
+11. WELCOME SCREENS — RECREATE THE ALGEBRA IDEA
+================================================================
+
+Build:
+
+  misc/welcomes/welcome.html
+  + FOUR First 4 Days welcome slides
+
+Use Algebra Welcome screens as the GOLD STANDARD visual model:
+- course name;
+- Day X of 4;
+- clear opening topic/title;
+- strong central visual;
+- Learning Target;
+- I Can statements;
+- simple projector-friendly layout;
+- link back to Welcome index.
+
+For the central visual:
+- use a supplied asset if available;
+- otherwise create a simple local answer-neutral math visual/graph/SVG;
+- do not use web image search merely to decorate the slide.
+
+Possible day identities:
+Day 1 — Rates of Change
+Day 2 — Tangent Lines / Approximation
+Day 3 — Radians / Collaboration / Visual Calculus
+Day 4 — Trig Readiness / Course Systems
+
+Exact titles may be improved for coherence.
+
+================================================================
+12. FIRST 4 DAYS INDEX
+================================================================
+
+Create a clean student-facing First 4 Days index similar to Algebra.
+
+It should organize the actual four days and link every built resource.
+
+Separate:
+- student resources;
+- teacher resources.
+
+Teacher resources should include keys/guides.
+
+Do not include nonexistent links.
+
+================================================================
+13. VISUAL / USABILITY STANDARD
+================================================================
+
+Before delivery, visually inspect representative pages.
+
+GOOD ENOUGH means:
+- no broken links/assets;
+- no clipped math/graphs;
+- readable in Chrome;
+- reasonable print behavior;
+- Notability documents have usable handwriting space;
+- graphs are large enough to annotate;
+- Welcome slides project cleanly;
+- titles/navigation make sense;
+- no visible internal metadata;
+- MathJax renders;
+- no obvious answer leakage;
+- teacher keys/guides exist where needed.
+
+Do not spend hours polishing tiny cosmetic differences.
+
+FIX:
+- broken;
+- unreadable;
+- cramped;
+- wrong;
+- missing;
+- confusing;
+- unusable.
+
+DO NOT BLOCK FOR:
+- perfect aesthetic parity;
+- minor spacing differences;
+- nonessential system refactors;
+- generalized future-proofing.
+
+================================================================
+14. FAIL-CLOSED BOUNDARY
+================================================================
+
+FAIL only for a REAL blocker such as:
+- required mathematical authority unavailable;
+- exact blank unit-circle asset required by teacher cannot be resolved;
+- output cannot be made deployable;
+- a critical required resource cannot be produced correctly.
+
+Do NOT fail merely because:
+- Calc repo is sparse;
+- a live Calc family shell does not yet exist;
+- Algebra and Calculus folder structures are not identical;
+- a perfect permanent PM architecture is absent.
+
+If one noncritical feature is imperfect, produce the strongest complete usable package and
+report that issue briefly rather than abandoning the whole build.
+
+================================================================
+15. FINAL DELIVERY
+================================================================
+
+Return:
+  ap_calculus_ab_first_4_days.zip
+
+Also include a SHORT build note stating:
+- pinned commits;
+- resources built;
+- any genuinely unresolved noncritical issue.
+
+Do not return a long design essay.
+Build the materials.
+
+END — AP CALCULUS AB FIRST 4 DAYS — ONE-OFF GOOD-ENOUGH BUILD PM
