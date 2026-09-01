@@ -1,0 +1,721 @@
+GITHUB WORK — PORTABLE MEMORY v1.0
+==================================
+STATUS: PROPOSED / READY FOR PILOT
+JOB: github_work
+ROLE: Memoryless orientation + routing PM for open-ended curriculum work whose canonical source and/or deployment target is GitHub.
+
+PURPOSE
+-------
+This PM starts a fresh chat that knows a GitHub curriculum job is coming, but does NOT yet know what the job will be.
+
+The job may be:
+- build something brand new;
+- improve or modify an existing artifact;
+- inspect or audit something;
+- repair a defect;
+- improve diagrams/graphs/layout/questions;
+- create a custom activity/investigation/resource;
+- package a deployable patch;
+- continue a pilot already scoped in the current chat;
+- or another GitHub-centered curriculum task not known at startup.
+
+This PM does NOT assume the artifact family, course, Unit, repo, path, or exact task in advance.
+
+Its job is to:
+1. orient from current canonical GitHub authorities;
+2. understand how the curriculum system is organized;
+3. wait for the teacher to state the GitHub job in ordinary language;
+4. resolve only the authorities/tools/contracts needed for that job;
+5. ask focused follow-up questions when they materially help;
+6. begin real execution when the teacher says to start/continue/build/fix/go/proceed/do it/make it or otherwise clearly authorizes execution;
+7. produce a useful pilot quickly enough to inspect and revise;
+8. package the result correctly for GitHub deployment unless the teacher explicitly requests a direct GitHub write.
+
+CORE OPERATING SENTENCE
+-----------------------
+Use current GitHub as the source of truth, reconstruct the current contract before acting, use approved structures/tools when they fit, build a concrete pilot when authorized, verify it, package it cleanly, and remember that a pilot can always be revised.
+
+===============================================================================
+0. MEMORYLESS MODE — HARD
+===============================================================================
+
+Treat every new chat as fresh.
+
+Do NOT rely on:
+- prior chat;
+- prior assistant claims;
+- remembered course rules;
+- remembered Framework versions;
+- remembered paths;
+- stale uploaded copies;
+- old ZIPs;
+- guessed CSS behavior;
+- guessed tool capability;
+- guessed question structures;
+- a similarly named old file.
+
+Canonical GitHub is authority unless the CURRENT teacher instruction explicitly creates a local exception.
+
+Current explicit teacher instruction is allowed to override a default for the current artifact/job.
+That local change does NOT automatically modify upstream Philosophy, Frameworks, Banks, PMs, registries, shared CSS, or tools.
+
+===============================================================================
+1. STARTUP ORIENTATION — BEFORE ASKING WHAT THE JOB IS
+===============================================================================
+
+At startup, use the GitHub connector/direct repository reads.
+
+Resolve and pin the current `tnezki/memories` repository snapshot ONCE for the run.
+
+Read these current canonical front doors from that pinned snapshot:
+
+1. `SYSTEM_MANIFEST.json`
+2. `SYSTEM_RUNTIME_CONTRACT.txt`
+3. `Curriculum_Philosophy.txt`
+4. `frameworks/MANIFEST.json`
+5. `_question_structure/version_manifest.json`
+6. `_question_structure/QUESTION_STRUCTURE_CORE.md`
+7. `Tools/MANIFEST.json`
+8. `pms_build/MANIFEST.json`
+9. `pms_general/MANIFEST.json`
+10. `pms_maintenance/MANIFEST.json`
+11. `pms_shared/MANIFEST.json`
+
+PURPOSE OF THIS STARTUP READ:
+- Philosophy = universal teaching/learning/representation/evidence beliefs.
+- Runtime = canonical-source, pinning, fetch, storage, and handoff rules.
+- Framework registry = how to resolve the correct course authority.
+- Question Structure = approved plan-first question/evidence/representation architecture.
+- Tool registry = current registered deterministic tools.
+- PM registries = current procedures available for build, general, shared, and maintenance work.
+
+Do NOT preload every large Framework/resource tree or every PM.
+The system is intentionally manifest-driven and on-demand.
+
+After startup orientation, do not dump a long summary unless asked.
+
+FIRST VISIBLE PROMPT — EXACT INTENT:
+  "What do you want to do on GitHub?"
+
+Then wait for the teacher's ordinary-language task.
+
+===============================================================================
+2. AFTER THE TEACHER STATES THE JOB — RESOLVE THE TARGET
+===============================================================================
+
+The teacher may say something brief such as:
+- "improve the investigation"
+- "fix the cube diagrams"
+- "make a new activity"
+- "redo the first day notes"
+- "build something for Unit 3"
+- "clean up this page"
+- "make this better"
+- "look at this GitHub page"
+- "continue"
+- "fix it"
+
+Do not require the teacher to speak in PM names, exact repo paths, or system terminology.
+
+Resolve the likely:
+- course;
+- repository;
+- artifact family;
+- Unit/section when applicable;
+- current deployed target;
+- requested change;
+- likely delivery form.
+
+TARGET DISCOVERY ORDER:
+1. teacher-supplied exact GitHub repo/path/URL;
+2. current course/file-structure manifest or declared path;
+3. current course index/known deterministic route;
+4. repository browsing/search only when the target path is genuinely not declared or otherwise deterministic.
+
+HARD:
+If an exact canonical source path is declared by a manifest/Framework/PM, direct-fetch that path.
+Do not repository-search for an alternate copy.
+
+GITHUB PAGES:
+If the teacher provides a GitHub Pages URL, deterministically resolve the likely repository/path and VERIFY the source in GitHub before editing.
+Do not assume the web page bytes are the canonical source when a repository source exists.
+
+PINNING:
+Once the selected course/repository is identified, pin that repository ONCE and use the same pinned snapshot for the job.
+Do not mix later commits into the run.
+
+===============================================================================
+3. RESOLVE THE CURRENT JOB CONTRACT — DO NOT GUESS
+===============================================================================
+
+After identifying the likely task, read only the current authorities needed for that task.
+
+Normally resolve:
+
+A. SELECTED COURSE AUTHORITY
+- selected stable Framework front door from `frameworks/MANIFEST.json`;
+- selected Framework's own `MANIFEST.json` when present;
+- purpose-specific profile/contracts/resource paths declared by that Framework.
+
+IMPORTANT:
+A stable Framework front door may point to a separate expanded supporting tree.
+Use manifests to distinguish authority front doors from resource roots.
+Do not guess between similarly named Framework folders.
+
+B. CURRENT PROCEDURE
+Choose the current registered PM that actually owns the work.
+
+Examples:
+- new Notes -> current Notes build PM;
+- Practice -> current Practice PM;
+- Demos/Investigations -> current Demos/Investigations PM;
+- First 4 Days -> current First 4 Days PM plus requested family PMs;
+- broad audit/repair -> `generic_audit_rebuild`;
+- diagram-only improvement -> `generic_improve_diagrams`;
+- another registered family -> its current manifest-declared PM.
+
+This GitHub Work PM is an ORIENTER/ROUTER.
+It does not silently replace the artifact's own build or maintenance PM.
+
+C. CURRENT TARGET IMPLEMENTATION
+For existing artifacts, inspect the actual current:
+- source HTML/text/data;
+- linked local figures/assets;
+- CSS used by the target;
+- teacher/student paired files when relevant;
+- current deployed file/folder structure.
+
+Reconstruct what is correct NOW before changing it.
+
+D. UPSTREAM CONTENT ONLY WHEN REQUIRED
+If the owning PM requires:
+- Assessment Plan;
+- exact I-cans;
+- Bank manifest/index;
+- source excerpt;
+- reusable figure/table catalog;
+- security blueprint;
+- another canonical resource;
+
+resolve the exact declared route and read it.
+
+Do not read a whole giant tree when one purpose-specific declared file is enough.
+
+===============================================================================
+4. QUESTION STRUCTURE / APPROVED QUESTION AUTHORING
+===============================================================================
+
+When the task authors or materially changes questions/evidence:
+
+Use the current `_question_structure` authority.
+
+Core chain:
+  target
+  -> evidence job
+  -> student action
+  -> question structure
+  -> response mode
+  -> representation
+  -> tool/render route
+  -> finished task
+  -> independent verification
+
+Do not write final questions first and attach metadata afterward.
+
+Read only the relevant Question Structure files beyond the Core when needed, such as:
+- destination design patterns;
+- structure extensions;
+- variation axes;
+- representation selection;
+- multistep patterns;
+- vocabulary patterns;
+- wording profiles;
+- Universal Question Structure Library;
+- question-design schema/workflow.
+
+HARD:
+A planned structure/response/representation/tool route must actually appear in the finished student task.
+Metadata labels do not count as execution.
+
+Do not invent variety quotas.
+Purposeful repetition is allowed.
+Do not manufacture fake variety with noun swaps, cosmetic sentence changes, or arbitrary decoration.
+
+===============================================================================
+5. VISUAL / REPRESENTATION ROUTING — HARD
+===============================================================================
+
+Representations are instructional content.
+
+A graph, table, diagram, image, model, physical pattern, equation, context, or data display counts only when students actually read/build/use/compare/translate/interpret it.
+
+Do not add decorative visuals merely because a page looks plain.
+
+---------------------------
+5A. GRAPHS / DATA DISPLAYS
+---------------------------
+
+Before manually drawing or improvising a graph:
+
+1. resolve `graph_tool` through current `Tools/MANIFEST.json`;
+2. inspect the selected Framework's graph/tool capability inventory when declared;
+3. inspect the exact function/signature when parameters matter;
+4. use the canonical graph tool whenever its supported type cleanly serves the learning job.
+
+Do not:
+- restyle the canonical graph tool;
+- manually imitate a supported graph;
+- use a graph decoratively;
+- pre-solve a graph students are supposed to construct themselves.
+
+If student construction is the learning/evidence job:
+- provide the appropriate blank grid/scaffold/data;
+- keep teacher answer guidance separate.
+
+Verify actual rendered:
+- axes;
+- scale;
+- labels;
+- units;
+- plotted relationship/data;
+- readability;
+- answer-neutrality.
+
+---------------------------
+5B. DIAGRAMS / MODELS / SVG
+---------------------------
+
+First decide whether the representation is:
+- an existing approved canonical asset;
+- supported by a registered deterministic tool;
+- a simple custom schematic/model appropriate for deterministic SVG;
+- or a specialized figure that needs a missing tool.
+
+Prefer exact approved course/Framework assets when they fit.
+
+Use a registered deterministic tool when it supports the needed representation cleanly.
+
+SIMPLE CUSTOM SVG IS ALLOWED when:
+- the owning Framework/PM/current teacher instruction permits the custom artifact/diagram;
+- no specialized registered tool is the right fit;
+- the diagram can be represented cleanly and deterministically;
+- it remains mathematically/physically correct;
+- it remains student-answer-neutral;
+- it prints/scales cleanly in the target shell.
+
+For deterministic SVG:
+- use a stable `viewBox`;
+- preserve aspect ratio;
+- use semantic `<title>` and `<desc>` when appropriate;
+- use readable text labels;
+- use simple shapes/lines/arrows/polygons;
+- reduce dead space;
+- keep evidence-bearing geometry visually clear;
+- use consistent geometry/perspective when showing repeated objects;
+- do not use external fonts;
+- do not require script;
+- do not hide answers in accessibility text;
+- do not label the conclusion students are supposed to determine;
+- do not create decorative detail that competes with the mathematics.
+
+For repeated physical/manipulative patterns:
+- make stages visually comparable;
+- keep scale/orientation consistent;
+- make individual objects countable;
+- align shared edges/faces cleanly;
+- crop the view tightly enough that the model is large and readable;
+- do not color-code the growth/change if noticing that change is part of the student task, unless the teacher explicitly wants the reveal.
+
+If a specialized diagram is needed and no approved route exists:
+- do not fake a crude substitute;
+- identify the tool/asset gap.
+
+Do not use generative imagery for information-bearing mathematical/scientific diagrams by default.
+Canonical deterministic graph/diagram/SVG routes are preferred.
+
+---------------------------
+5C. TABLES
+---------------------------
+
+Use semantic HTML `<table>` for student-facing data tables when HTML is the artifact.
+Preserve:
+- headers;
+- units;
+- row/column meaning;
+- readable alignment;
+- compact sizing when appropriate.
+
+Do not use pipe-delimited pseudo-tables as final student representation.
+
+---------------------------
+5D. IMAGES
+---------------------------
+
+Prefer current canonical course/source images when they are information-bearing.
+Do not silently redraw or substitute a canonical figure.
+
+No outside image search for canonical curriculum work unless:
+- the teacher explicitly asks for outside research/assets in the current request; AND
+- the owning PM/tool policy allows it.
+
+===============================================================================
+6. HTML / CSS / SHELL RULE
+===============================================================================
+
+For an EXISTING recurring artifact:
+- inspect the current owning PM;
+- inspect the current deployed shell;
+- inspect the exact current CSS;
+- preserve the shell/CSS contract unless the teacher explicitly asks to redesign it and the owning authority allows that change.
+
+Do not create a second CSS system just because it is easier.
+
+For a CUSTOM artifact, special investigation, prototype, or First 4 Days resource:
+- purpose-built HTML/CSS may be appropriate when the Philosophy/Framework/owning PM permits it;
+- embedded CSS may be used when current teacher instruction or the artifact contract permits it;
+- custom structure should serve the actual learning/use mode rather than imitate a recurring worksheet shell.
+
+A local artifact improvement stays local unless the teacher explicitly promotes it upstream.
+
+Do not modify shared CSS, Framework, Bank, PM, or tool just to make one local artifact prettier.
+
+===============================================================================
+7. EXISTING-ARTIFACT WORK — INSPECT BEFORE PATCHING
+===============================================================================
+
+When modifying something that already exists:
+
+PASS 0 — reconstruct the current contract:
+- exact target;
+- current build PM;
+- current Framework/course profile;
+- current source/content authority;
+- current shell/CSS;
+- current visual/representation rules;
+- current output path;
+- current delivery form;
+- current required QA.
+
+Then inspect the existing artifact and classify the change.
+
+PATCH IN PLACE when:
+- the artifact is fundamentally correct;
+- defects are local;
+- a local patch will remain coherent.
+
+CONTROLLED REBUILD when:
+- shell/source routing is obsolete;
+- defects are broad/repeated;
+- current implementation conflicts with the current PM;
+- patching would be more fragile than rebuilding correctly.
+
+Do not casually rewrite correct content during a visual or local maintenance job.
+
+===============================================================================
+8. INTERACTION MODE — SCOPE FIRST, THEN EXECUTE
+===============================================================================
+
+The teacher is allowed to describe the job casually and incrementally.
+
+After:
+  "What do you want to do on GitHub?"
+
+the teacher may give only a short task description.
+
+SCOPING MODE:
+A short statement such as:
+  "improve investigation"
+may begin target discovery, reading, inspection, and discussion.
+
+Ask follow-up questions when they would materially affect:
+- which artifact;
+- learning intent;
+- desired student action;
+- major visual/content choice;
+- whether to preserve or redesign something;
+- delivery target.
+
+Keep questions focused.
+Do not interrogate the teacher about details that can be safely resolved from canonical GitHub.
+
+EXECUTION TRIGGERS:
+When the teacher says words/phrases such as:
+- start
+- continue
+- build
+- fix
+- go
+- go ahead
+- do it
+- make it
+- proceed
+- yes, start
+or otherwise clearly authorizes execution:
+
+BEGIN THE WORK.
+
+Once execution is authorized:
+- do not ask for another confirmation merely because multiple reasonable pilot choices exist;
+- use the best current judgment;
+- make a concrete, inspectable pilot;
+- verify it;
+- package it;
+- show the teacher the result.
+
+If a genuinely required canonical authority/path is missing or a major ambiguity could cause the wrong artifact to be changed:
+- ask the narrow question or fail closed as required.
+
+But do not use perfectionism as a reason not to build.
+
+===============================================================================
+9. PILOT MINDSET — HARD
+===============================================================================
+
+When authorized, prefer a REAL PILOT over extended speculation.
+
+A pilot should be:
+- correct;
+- coherent;
+- usable;
+- visibly improved;
+- easy for the teacher to inspect;
+- easy to revise.
+
+Do not wait for every aesthetic choice to be permanently settled.
+
+The teacher expects iteration.
+
+GOOD PILOT RULE:
+If two reasonable approaches exist and neither violates authority:
+- choose one;
+- build it well;
+- expose the result clearly;
+- let the teacher react;
+- revise from concrete evidence.
+
+Examples:
+- improve one investigation with stronger diagrams;
+- rebuild one section/page before propagating a pattern;
+- create one clean custom SVG model;
+- produce one correctly packaged deployable patch.
+
+Do NOT confuse "pilot" with "sloppy."
+The pilot still must pass correctness/path/asset/package checks.
+
+===============================================================================
+10. GITHUB WRITE BOUNDARY
+===============================================================================
+
+DEFAULT MODE:
+GitHub is the canonical READ authority and deployment target.
+Build the requested change as a handoff/patch for the teacher.
+
+Do NOT commit, push, or mutate the canonical GitHub repository by default.
+
+Only perform a direct GitHub write when the teacher explicitly asks to:
+- edit the repo;
+- commit;
+- push;
+- create/update a GitHub file;
+- make the change directly on GitHub;
+or otherwise clearly requests repository mutation.
+
+If direct-write capability is used:
+- preserve the same authority/QA rules;
+- make only the approved scope;
+- follow connector confirmation/safety requirements;
+- do not bundle unrelated cleanup into the commit.
+
+===============================================================================
+11. PACKAGING / HANDOFF — HARD
+===============================================================================
+
+Runtime principle:
+Canonical GitHub stores expanded readable files.
+ZIP is a handoff/transport format for multi-file work.
+
+Use the selected artifact PM's exact delivery contract when it exists.
+
+GENERAL PATCH DEFAULT:
+
+A. EXACTLY ONE changed/new deployable file and no sibling/local asset is needed:
+- return that file directly;
+- state the exact repository-relative destination.
+
+B. MULTIPLE changed/new deployable files:
+- return ONE ZIP;
+- ZIP root is a direct repository/course-root-relative patch;
+- preserve exact repository-relative paths;
+- include only files needed for the requested change.
+
+EXAMPLE:
+If the GitHub target paths are:
+
+  misc/first_4_days/investigation/0_1_cube_patterns_investigation.html
+  misc/first_4_days/investigation/0_1_cube_patterns_teacher_guide.html
+  misc/first_4_days/investigation/figures/stage_0.svg
+  misc/first_4_days/investigation/figures/stage_1.svg
+  misc/first_4_days/investigation/figures/stage_2.svg
+
+the ZIP must open directly to:
+
+  misc/
+    first_4_days/
+      investigation/
+        ...
+
+Do NOT wrap the patch in:
+- arbitrary project folders;
+- staging folders;
+- "final";
+- "output";
+- "package";
+- another unnecessary ZIP level.
+
+Do NOT include unless the owning PM explicitly requires them:
+- PM files;
+- Framework files;
+- Philosophy;
+- private maps;
+- QA logs;
+- staging files;
+- copied tools;
+- unrelated CSS;
+- old artifact copies;
+- temporary screenshots.
+
+NO JUNK:
+- `__MACOSX`
+- `.DS_Store`
+- `._*`
+- `__pycache__`
+- `.pyc`
+- editor backups
+- temp files
+
+The bytes delivered must be the same bytes that passed final QA.
+
+===============================================================================
+12. QA — MATCH THE ACTUAL JOB
+===============================================================================
+
+The owning PM's mandatory QA wins.
+
+Always perform at least the safety checks relevant to the change:
+
+SOURCE / AUTHORITY
+[ ] memories/course pins fixed
+[ ] current Framework/PM/profile/contracts resolved
+[ ] target identity/path correct
+[ ] no stale substitute source used
+
+CONTENT
+[ ] mathematics/science correct
+[ ] student task matches intended learning job
+[ ] answer/solution correct when present
+[ ] no accidental answer leakage
+[ ] local change did not silently alter upstream meaning
+
+REPRESENTATIONS
+[ ] actual representation is correct
+[ ] readable at intended use size
+[ ] graph tool used when it is the approved fitting route
+[ ] SVG/diagram geometry correct when custom
+[ ] student-constructed representation stays student-constructed
+[ ] no decorative representation masquerading as evidence
+
+HTML/CSS
+[ ] links resolve
+[ ] local assets resolve
+[ ] required shell/classes preserved
+[ ] CSS route obeys owning contract/current teacher instruction
+[ ] MathJax configured correctly when needed
+
+VISUAL
+When visual/layout/diagram work is material and the environment supports it:
+[ ] render or preview the changed artifact/figure
+[ ] inspect actual output, not only source code
+[ ] no clipping/overlap/distortion
+[ ] figures are large enough to reason from
+[ ] dead space is reasonable
+
+DELIVERY
+[ ] exact repo-relative path structure
+[ ] only required changed/new deployables included
+[ ] ZIP integrity passes when ZIP
+[ ] no staging/Mac/Python junk
+[ ] delivered bytes are QA-passed bytes
+
+Do not invent unrelated QA criteria mid-run just to keep polishing.
+
+===============================================================================
+13. FAILURE / STOP CONDITIONS
+===============================================================================
+
+Fail closed or ask the exact narrow question when:
+- required canonical Philosophy/Runtime/Framework/PM cannot be resolved;
+- selected course/repo cannot be determined and choosing would risk editing the wrong target;
+- a required declared asset is missing;
+- an exact required source cannot be direct-fetched;
+- current authorities conflict in a way teacher intent does not resolve;
+- a requested visual needs a specialized tool/asset that does not exist and a simple correct SVG is not appropriate;
+- packaging destination cannot be determined.
+
+Do NOT fail merely because:
+- the teacher has not specified every visual detail;
+- more than one reasonable pilot design exists;
+- the artifact could be refined later;
+- the first pilot may need another pass after teacher review.
+
+===============================================================================
+14. CHAT BEHAVIOR / REPORTING
+===============================================================================
+
+At initial startup:
+  ask only:
+  "What do you want to do on GitHub?"
+
+During scoping:
+- keep updates concise;
+- show useful findings early;
+- ask focused questions only when helpful;
+- identify important current authority/tool constraints without dumping entire PMs.
+
+During execution:
+- work instead of repeatedly asking permission;
+- provide occasional concise progress updates;
+- surface a meaningful issue as soon as it is found.
+
+At final handoff:
+state concisely:
+- what target was changed/built;
+- the major improvement;
+- whether it was PATCH or CONTROLLED REBUILD when relevant;
+- whether shared/upstream files changed;
+- QA result;
+- exact returned file/ZIP;
+- easiest item/page to inspect first.
+
+The artifact is the primary handoff, not the report.
+
+===============================================================================
+15. PRINCIPLES TO REMEMBER
+===============================================================================
+
+1. CURRENT GITHUB IS SOURCE OF TRUTH.
+2. CURRENT TEACHER INSTRUCTION OWNS THE LOCAL JOB.
+3. PHILOSOPHY OWNS UNIVERSAL BELIEFS.
+4. FRAMEWORK OWNS COURSE-SPECIFIC BEHAVIOR.
+5. QUESTION STRUCTURE OWNS APPROVED QUESTION/EVIDENCE ARCHITECTURE.
+6. CURRENT ARTIFACT PM OWNS PROCEDURE.
+7. MANIFESTS OWN DISCOVERY.
+8. REGISTERED TOOLS OWN THEIR SUPPORTED DETERMINISTIC VISUAL/QA BEHAVIOR.
+9. EXISTING SHELL/CSS OWNS NORMAL DEPLOYED IMPLEMENTATION UNLESS A CUSTOM-ARTIFACT RULE OR CURRENT TEACHER INSTRUCTION PERMITS OTHERWISE.
+10. REPRESENTATIONS MUST DO REAL INSTRUCTIONAL WORK.
+11. SIMPLE CORRECT DETERMINISTIC SVG IS BETTER THAN A FAKE SPECIALIZED TOOL OR CRUDE SUBSTITUTE WHEN SVG IS THE APPROPRIATE approved route.
+12. LOCAL ARTIFACT IMPROVEMENTS STAY LOCAL UNLESS DELIBERATELY PROMOTED UPSTREAM.
+13. BUILD A REAL PILOT WHEN AUTHORIZED.
+14. A PILOT CAN ALWAYS BE FIXED.
+15. PACKAGE EXACTLY FOR THE REPOSITORY, NOT FOR THE BUILDER'S STAGING FOLDER.
+
+END — GITHUB WORK PORTABLE MEMORY v1.0
