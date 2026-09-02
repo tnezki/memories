@@ -1,0 +1,198 @@
+QUICK PM — SCHOOL REPO EDIT / BUILD WORKFLOW
+
+PURPOSE
+Use this PM when making quick edits or rebuilds to Troy's school-course repositories. The user should be able to say something brief such as:
+
+"Fix Exit 3: keep 1 and 2, change 3 to fraction multiplication, change 4 to what to do when confused. Redo practice, extra practice, Set 1, and Set 2 as parallel versions."
+
+Then follow the workflow below without requiring the user to re-explain the repository system.
+
+1. READ THE COURSE SYSTEM FIRST
+Before editing, read the relevant project philosophy, framework, PM, or memory files available for the course/system.
+
+Priority:
+1. Teacher/user instructions in the current request.
+2. Course philosophy / framework / PM files.
+3. Existing canonical files in GitHub.
+4. Neighboring files that establish naming, folder, CSS, and structural patterns.
+
+Do not substitute generic best practices for the project's established system.
+
+2. USE GITHUB AS SOURCE TRUTH
+Inspect the current canonical files in the correct GitHub repository before building.
+
+Determine:
+- exact repository
+- exact existing path
+- current filename
+- neighboring filenames
+- folder structure
+- linked CSS files
+- related teacher keys/guides
+- parallel versions
+- print/station/activity variants
+- referenced figures/images
+
+Do not guess file names or folder locations when GitHub can answer the question.
+
+Unless the user explicitly asks to commit/push/edit GitHub directly, treat GitHub as READ-ONLY source truth and return a replacement package/ZIP.
+
+3. LEARN THE NAMING PATTERN BEFORE CREATING FILES
+File and folder naming is important.
+
+Before creating or renaming anything:
+- inspect the target folder
+- inspect similar neighboring sections
+- preserve the existing naming convention
+- preserve an existing published path when the user wants to replace what is already there
+- do not invent "cleaner" names if that would break links
+
+Example:
+If the live file is:
+misc/first_4_days/activities/0_1_act1/0_1_set1_questions_solutions.html
+
+and the user says "redo Set 1," replace that exact file/path unless specifically told otherwise.
+
+4. PRESERVE THE EXISTING HTML/CSS SYSTEM
+Use the same shared CSS and HTML shell already used by the target resource.
+
+Before editing:
+- inspect the target HTML
+- inspect its CSS links
+- inspect a similar successful file if needed
+
+Rules:
+- do not create new CSS unless necessary and requested
+- do not duplicate shared CSS into the package when the repo already provides it
+- do not silently redesign the page
+- preserve MathJax setup, classes, page structure, print structure, navigation, and image paths unless the requested change requires otherwise
+- patch content in place whenever practical
+
+5. INTERPRET SHORT CHANGE REQUESTS INTELLIGENTLY
+When the user says:
+"fix A by changing B and C"
+
+identify the complete dependency set.
+
+Typical dependency examples:
+- practice changes -> practice key may also need updating
+- exit-ticket changes -> printable versions and exit key may also need updating
+- activity Set 1/Set 2 changes -> question/solution pages and station versions may both need updating
+- changing counts -> activity landing page/teacher guide may also need updating
+- changing a student investigation -> matching teacher guide may need updating
+
+Update directly affected files, but do not expand into unrelated redesigns.
+
+6. PARALLEL VERSION RULE
+When the user asks for Practice / Extra Practice / Set 1 / Set 2 to be parallel:
+
+Keep the same:
+- skills
+- sequence
+- approximate difficulty
+- representation type
+- number of problems, unless the user requests a count change
+
+Change:
+- numerical values
+- coordinates
+- fraction values
+- equation constants
+- wording where useful
+
+The versions should assess/practice the same thing without simply copying each other.
+
+7. COURSE-ROUTINE QUESTIONS
+When questions concern class routines, learning targets, section-day structure, bell work, portfolios, agenda use, etc.:
+
+Do not invent the answer from generic classroom practice.
+Look in the repo's:
+- welcome pages
+- notes
+- First 4 Days index
+- overview/course-system pages
+- teacher guides
+- philosophy/framework files
+
+Use the wording and routine actually supported by those sources.
+
+8. MINIMIZE CLARIFYING QUESTIONS
+If the repository can resolve an ambiguity, inspect it instead of asking the user.
+
+Ask only when a decision is genuinely not recoverable from:
+- the user's request
+- philosophy/framework/PM files
+- current GitHub files
+- neighboring examples
+
+For non-blocking choices, follow the strongest existing pattern.
+
+9. BUILD COMPLETE REPLACEMENT PACKAGES
+When returning a ZIP, structure it so the user can drop it into the repo easily.
+
+Preferred ZIP behavior:
+- top-level folder should match the repo-relative folder the user expects to replace
+- include every file necessary for that replacement
+- do not include unrelated helper files
+- do not include shared CSS/images already present in the repo unless the user specifically asks for a fully standalone package
+
+Example:
+activities/
+└── 0_1_act1/
+    ├── 0_1_set1_questions_solutions.html
+    ├── 0_1_set1_stations.html
+    ├── 0_1_set2_questions_solutions.html
+    └── 0_1_set2_stations.html
+
+If the user says "replace the whole investigation folder," package the whole investigation folder, not merely one deeply nested file.
+
+10. QA BEFORE RETURNING
+Before handing off, verify:
+
+STRUCTURE
+- filenames exactly match expected names
+- folders exactly match repo pattern
+- no accidental extra nesting
+- no missing dependent file
+
+HTML
+- CSS paths are correct relative paths
+- image paths are correct
+- MathJax syntax is valid
+- existing page/print structure is preserved
+- links point to intended files
+
+CONTENT
+- requested problem counts are correct
+- requested skills are all represented
+- parallel versions are actually parallel
+- answers/solutions are correct
+- keys match the new questions
+- teacher guides match the student version
+- old content that should have been replaced is gone
+
+PACKAGE
+- ZIP opens to the intended replacement folder
+- ZIP filename is clear and descriptive
+
+11. DO NOT DRIFT DURING REPACKAGING
+Once the user has approved or reviewed a version, packaging is not permission to redesign it.
+
+When asked to repackage:
+- preserve the approved student content
+- change only packaging/folder structure or explicitly requested related files
+- do not rewrite questions, alter interaction design, or change instructional decisions unless asked
+
+12. RESPONSE STYLE
+Keep the handoff concise.
+
+State:
+- what was changed
+- what related files were updated
+- the exact folder structure in the ZIP
+- any deliberate compatibility choice, such as preserving an old filename so a live link does not change
+
+Then provide the ZIP.
+
+DEFAULT OPERATING PRINCIPLE
+Read first. Match the existing system. Change only what the user asked and what must change with it. Preserve naming and CSS patterns. Resolve ambiguity from GitHub whenever possible. Return a complete, correctly structured, QA-checked replacement ZIP.
