@@ -64,6 +64,13 @@ HARD SEMANTIC GUARDS
 6. STRUCTURE REASONING ARCHITECTURE
    - QA must compare the catalog's actual reasoning architecture/required representation/response type with the mapped evidence job and action. Metadata presence alone cannot earn PASS.
 
+7. DIRECT READ / IDENTIFY / EXTRACT FROM A SUPPLIED REPRESENTATION
+   - If the evidence job is only to read, identify, name, locate, or extract a feature/value from a supplied graph/table/diagram, keep the student action direct.
+   - Do NOT add critique, correction, construction, explanation, or a second decision merely to fit a more elaborate structure.
+   - Prefer the current direct representation-reading structure that matches the exact job and destination (for example FEATURE-IDENTIFY-FROM-REPRESENTATION-01 when applicable).
+   - REPRESENTATION-CONSTRUCT-OR-CRITIQUE-01 may be used only when the actual evidence job genuinely requires construction, completion, or critique.
+   - Open response by itself does not justify a construct/critique structure.
+
 PROFILE-DRIVEN INVENTORY — HARD
 Do not hard-code Notes pairs, CYU, Warm-Ups, Practice 2/3, Exit A/B/C, or any historical count.
 Read the CURRENT Framework Bank profile and map ONLY the destinations it declares canonical Bank inventory.
@@ -100,7 +107,7 @@ Recommended Algebra destination slices:
 - summative_map.json
 - practice1_map.json
 - wtc_map.json
-- seed_map.json (may contain zero records)
+- seed_map.json (may contain zero records only when the profile declares no approved candidates for the Unit and no other durable seeds are found)
 
 MAP_MANIFEST must list the exact destination slices actually required. Downstream builders consume the manifest; they must not guess fixed filenames from an older architecture.
 
@@ -111,6 +118,7 @@ Top-level status = PASS only when:
 - every profile-required canonical destination is mapped
 - every mapped record is executable and semantically aligned
 - every selected Question Structure passes the Semantic Structure Fit guards above
+- every profile-declared approved seed candidate for the requested Unit is either mapped or explicitly rejected with a current teacher/higher-authority reason
 - no retired destination has been reintroduced without explicit current authority.
 
 QUESTION-DESIGN MAP
@@ -181,6 +189,15 @@ Map a seed only when it has durable reuse value. A seed may preserve:
 Record what is locked, what may vary, why it is useful, and which later artifacts may use it.
 Do not create filler seeds to reach a count, and do not force every seed into a finished question now.
 
+PROFILE-DECLARED APPROVED SEED CANDIDATES — HARD
+If the selected course Bank profile declares approved_seed_candidates for the requested Unit:
+- treat those records as already teacher-approved durable seed ideas;
+- map each one into seed_map.json unless the current teacher explicitly rejects it or a higher authority now makes it invalid;
+- preserve its stable seed_id/title and the declared preserve/why_useful/may_vary intent;
+- do not silently omit an approved seed merely because Seeds have no quota;
+- no-quota means do not add filler beyond useful/approved ideas.
+The Bank Complete step authors/stores mapped Seeds only, so approved seeds must be present in Step 3a if they are expected to survive into the canonical Bank.
+
 REPRESENTATIONS / TOOLS
 Map only representations that serve evidence. Routes must be executable: registered graph tool, canonical asset, semantic HTML table, registered deterministic tool, declared composite route, or explicit student response surface. No decorative visual quota.
 If an evidence job names more than one representation, route every one of them.
@@ -193,6 +210,7 @@ Verify at minimum:
 [ ] every finished-question destination uses current Question Structure unless explicitly exempt
 [ ] EVERY selected structure's reasoning architecture matches the evidence job/student action
 [ ] no construction evidence is mapped as read-only recognition
+[ ] no direct read/identify/extract evidence job is inflated into construct/critique/error-analysis/multi-step unless the target genuinely requires that added action
 [ ] every PROC-MULTISTEP-CHAIN record has an explicit real dependency contract
 [ ] every ERROR-DIAGNOSE record has misconception + worked-solution + diagnose/repair contract
 [ ] every mixed/multiple-representation task has routes for all required representations
@@ -202,6 +220,7 @@ Verify at minimum:
 [ ] Algebra Summative targets ~2 secure opportunities per current Mastery Goal and ~40 minutes total; exact count is justified
 [ ] Algebra Practice 1 is EXACTLY 24 per section = 8 Intro + 8 Review + 8 Mastery
 [ ] WTC/Seed roles correct; Seeds have no quota/filler
+[ ] all profile-declared approved seed candidates for this Unit are mapped or explicitly rejected with authority
 [ ] every required representation has an executable route
 [ ] security/variation rules explicit
 [ ] IDs unique and destination slices reconcile
@@ -212,23 +231,29 @@ Verify at minimum:
 QA REPORT REQUIREMENT
 MAP_REPORT must include a dedicated SEMANTIC QUESTION-STRUCTURE AUDIT summary with counts of:
 - construction-vs-read-only conflicts found/repaired
+- direct-read tasks improperly inflated to construct/critique/error-analysis/multi-step found/repaired
 - invalid multi-step mappings found/repaired
 - invalid error-diagnosis mappings found/repaired
 - incomplete mixed-representation routes found/repaired
 - student-construction response-surface conflicts found/repaired
 PASS with all zeros only AFTER repair; do not report zero merely because fields are present.
 
+MAP_REPORT must also report:
+- mapped seed count
+- approved profile seed candidate count for the requested Unit
+- any approved seed rejected and the exact authority/reason.
+
 BUILD ORDER
 1. Pin authorities.
 2. Resolve current Bank profile + Framework operational maps.
-3. Resolve canonical Bank inventory.
+3. Resolve canonical Bank inventory + any profile-declared approved seed candidates for the requested Unit.
 4. Build question-design slots.
-5. Resolve semantic Question Structure fit for every slot.
+5. Resolve semantic Question Structure fit for every slot, preserving direct evidence when direct evidence is the actual job.
 6. Map Exit evidence from Framework map.
 7. Map Summative V1 -> V2-V4 -> V5-V6 under ~2 opportunities/Mastery Goal and ~40-minute rule.
 8. Map exact 8/8/8 Practice 1.
 9. Map WTC.
-10. Map useful Seeds with no quota.
+10. Map profile-approved + other genuinely useful Seeds with no filler quota.
 11. Reconcile ALL representation/tool/response-surface/security routes.
 12. Run semantic audit, report, package, STOP.
 

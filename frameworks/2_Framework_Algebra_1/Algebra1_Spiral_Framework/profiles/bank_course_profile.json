@@ -2,12 +2,13 @@
   "name": "Algebra 1 Course Bank Profile",
   "course": "Algebra 1",
   "course_family": "spiral_math",
-  "profile_version": "v2.2",
+  "profile_version": "v2.3",
   "framework_version": "v7.2",
   "role": "Course-specific Bank inventory/content authority. Bank Map and Complete Bank PMs own universal execution procedure.",
   "question_structure": {
     "rule": "Use current universal Question Structure for every authored Bank question/task. Warm-Ups are outside Bank and are the explicit course exception.",
     "semantic_fit_rule": "A structure ID cannot PASS by name alone. Evidence job, student action, structure reasoning architecture/required representation, response mode, representation mode, and executable tool/response-surface route must all agree.",
+    "direct_read_rule": "When the evidence job is only to read, identify, name, or extract a feature from a supplied representation, keep the task direct. Do not add critique, correction, construction, or extra reasoning merely to fit a more elaborate structure. Use a current direct representation-reading structure when the library supports the destination and evidence job.",
     "seed_exception": "A seed record is not itself a finished question; when a seed becomes a question, Question Structure applies."
   },
   "canonical_maps": {
@@ -56,8 +57,55 @@
       "status": "canonical_when_useful",
       "count": "No quota",
       "role": "Reusable context, data, representation, misconception, source idea, visual idea, or problem setup that may support Practice, Notes, activities, investigations, or other builds without requiring a finished duplicate question.",
-      "keep_rule": "Keep a seed only when it preserves a genuinely reusable idea. Do not create filler seeds to reach a count."
+      "keep_rule": "Keep a seed only when it preserves a genuinely reusable idea. Do not create filler seeds to reach a count.",
+      "approved_seed_rule": "If this profile declares approved seed candidates for the requested Unit, map them unless the current teacher explicitly rejects one or a higher authority makes it invalid. No-quota means do not add filler; it does not authorize silently dropping already approved reusable seed ideas."
     }
+  },
+  "approved_seed_candidates": {
+    "1": [
+      {
+        "seed_id": "U1-SEED-REP-FOUR-VIEWS",
+        "title": "Relationship in Four Views",
+        "preserve": "One coherent relationship represented consistently by table, graph, rule/equation, and context.",
+        "why_useful": "Reusable across Notes, Practice, activities, investigations, and representation-transfer work without fixing one finished prompt.",
+        "may_vary": "relationship values, context, which representation is given first, and which representation students create or compare"
+      },
+      {
+        "seed_id": "U1-SEED-GRAPH-SCALE-INTERCEPT",
+        "title": "Graph Scale + Intercept",
+        "preserve": "A coordinate graph where reading the scale matters and an intercept has mathematical or contextual meaning.",
+        "why_useful": "Supports fresh graph-reading, scale, intercept, and parallel-evidence instances without number-only cloning.",
+        "may_vary": "scale, plotted relationship, intercept type/value, and natural context"
+      },
+      {
+        "seed_id": "U1-SEED-FUNCTION-MAPPING-MISCONCEPTION",
+        "title": "Function Mapping Misconception",
+        "preserve": "The distinction that one input with two outputs is not a function while repeated outputs are allowed.",
+        "why_useful": "Captures a durable misconception that can be represented with mappings, tables, ordered pairs, or graphs.",
+        "may_vary": "representation type, values, and whether the relation is or is not a function"
+      },
+      {
+        "seed_id": "U1-SEED-FAMILY-GROWTH-COMPARISON",
+        "title": "Function-Family Growth Comparison",
+        "preserve": "A small set of values or representations that makes additive versus multiplicative or other family-change behavior visible.",
+        "why_useful": "Supports early family recognition and comparison using evidence instead of family labels alone.",
+        "may_vary": "family pair, table/graph/context form, values, and strength of competing evidence"
+      },
+      {
+        "seed_id": "U1-SEED-EXPRESSION-ERROR-PATTERNS",
+        "title": "Expression Error Patterns",
+        "preserve": "High-value misconception patterns such as combining unlike terms, distributing to only one term, and sign/parentheses errors during substitution.",
+        "why_useful": "Reusable for Notes, Practice, discussion, error analysis, and targeted recovery without fixing a single worked solution.",
+        "may_vary": "expression, misconception selected, values, and whether the error is shown or anticipated"
+      },
+      {
+        "seed_id": "U1-SEED-EQUATION-MODEL-CONTEXT",
+        "title": "Equation-Model Context",
+        "preserve": "A situation with meaningful quantities, a clearly defined unknown, an equation that matches the situation, and a solution that can be interpreted with units/meaning.",
+        "why_useful": "Reusable for equation writing, modeling, solution interpretation, Notes, Practice, and investigations.",
+        "may_vary": "context, quantities, equation structure, and which quantity is unknown"
+      }
+    ]
   },
   "not_bank_inventory": [
     "Extra Practice",
