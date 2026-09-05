@@ -1,423 +1,170 @@
-BUILD BANK MAP — STEP 3A / BANK-V2 / CORE DESIGN CONTRACT
-============================================================
+BUILD BANK MAP — STEP 3A / PROFILE-DRIVEN BANK DESIGN
+========================================================
 
 STATUS: CURRENT
 STEP: 3a
 JOB: bank_map
-ROLE: Build one complete, executable Unit Bank design map before any final Bank question prose is authored.
+ROLE: Build one complete executable Unit Bank design map before final Bank question prose is authored.
 
-3a owns DESIGN, not finished questions.
+3a OWNS DESIGN, NOT FINISHED QUESTIONS.
 
-The Map must be strong enough that a separate memoryless Bank builder can author the complete
-Bank without guessing curriculum intent, evidence demand, family identity, representation route,
-security role, or downstream selection behavior.
-
-CORE STANDARD
--------------
-The goal is a strong usable design contract, not maximal polish.
-
-PASS when the map is:
-- curriculum-correct;
-- complete for the Unit;
-- traceable to current authorities;
-- executable by the Bank builder;
-- explicit about evidence, response, representations, families, security, and selection;
-- structurally/metadata complete.
-
-Do NOT spend time at map stage polishing final wording, final visuals, exact graph aesthetics,
-or finished question prose. Those belong in Bank authoring or later memoryless improvement audits.
-
-============================================================================
-0. STARTUP / AUTHORITY — HARD
-============================================================================
-
-Read:
-1. current Curriculum Philosophy;
-2. current Runtime Contract;
-3. current `_question_structure/` entrypoint + question-design schema/workflow;
-4. current course Framework + exact Unit Assessment Plan;
-5. current Framework-declared Bank-v2 course profile/runtime files;
-6. `Tools/MANIFEST.json`.
-
-Resolve/pin system and course repositories once.
-Use those same pins throughout the run.
-Fetch declared paths directly.
-
-No web search.
-No public-web research.
-No File Library search.
-No prior-stage ZIP discovery.
-No substitution of similarly named files.
-
-Authority order:
+AUTHORITY — HARD
 1. current explicit teacher instruction
-2. Curriculum Philosophy
-3. current Question Structure authority
-4. current course Framework + exact Unit Assessment Plan
-5. current Framework-declared Bank-v2 profile
+2. current Curriculum Philosophy
+3. current universal Question Structure authority
+4. current Course Framework + exact Unit Assessment Plan
+5. current Framework-declared Bank course profile + canonical operational maps
 6. this PM
-7. registered tools for executable representation routes
+7. registered tools/render contracts
 
-============================================================================
-1. OUTPUT
-============================================================================
+Pin the current system/course snapshot once. Do not silently substitute stale uploads or legacy Bank inventories.
 
-Return ONE ZIP:
+QUESTION STRUCTURE — HARD
+Every mapped FINISHED QUESTION/TASK must resolve through the current universal Question Structure workflow:
+  learning/evidence target -> evidence job -> student action -> structure -> response -> representation -> tool/render route.
+A course may explicitly exempt a resource. If the Framework says Warm-Ups are exempt, do not force Warm-Ups through Question Structure.
+Seed records are not finished questions; Question Structure applies when a seed becomes an authored question.
 
-  unitN_bank_map.zip
+PROFILE-DRIVEN INVENTORY — HARD
+Do not hard-code Notes pairs, CYU, Warm-Ups, Practice 2/3, Exit A/B/C, or any historical count.
+Read the CURRENT Framework Bank profile and map ONLY the destinations it declares canonical Bank inventory.
 
-ZIP root:
+For Algebra 1 v7.1, the current profile resolves to:
+- official Exit evidence/questions;
+- secure Summative V1-V6;
+- Practice 1;
+- WTC;
+- useful reusable Seeds when they earn a canonical role.
+Extra Practice, CYU, middle practice, Notes Examples/YTIs, and finished Warm-Up questions are downstream-generated and therefore are NOT Bank Map destinations.
+Other courses may resolve differently; follow their current profile.
 
-  unitN_bank_map/
+CANONICAL FRAMEWORK MAPS
+When the Framework declares an operational evidence/progression map, CONSUME IT; do not recreate its curriculum allocation.
+For Algebra:
+- curriculum/exit_evidence_map.json owns which Mastery/I-Can evidence jobs appear on each Exit and the reassessment chain;
+- curriculum/warmup_progression_map.json is NOT a Bank destination but is a downstream Framework authority.
+
+OUTPUT
+Return ONE ZIP: unitN_bank_map.zip
+ZIP root: unitN_bank_map/
 
 Required files:
 - MAP_MANIFEST.json
 - unitN_question_design_map.json
-- notes_map.json
-- practice_map.json
-- cyu_map.json
-- warmup_map.json
-- exit_map.json
-- summative_map.json
+- bank_inventory_map.json
+- one destination slice for every canonical destination declared by the course profile
+- seed_map.json when seeds are mapped
 - MAP_REPORT.txt
 
-ZIP is transport only.
+Recommended Algebra destination slices:
+- exit_map.json
+- summative_map.json
+- practice1_map.json
+- wtc_map.json
+- seed_map.json (may contain zero records)
 
-Canonical expanded destination:
+MAP_MANIFEST must list the exact destination slices actually required. Downstream builders consume the manifest; they must not guess fixed filenames from an older architecture.
 
-  banks/unitN_bank_map/
+MAP_MANIFEST ACCEPTANCE — HARD
+Top-level status = PASS only when:
+- question_design.status = PASS
+- qa.status = PASS
+- every profile-required canonical destination is mapped
+- every mapped record is executable and aligned
+- no retired destination has been reintroduced without explicit current authority.
 
-3a authors NO:
-- final student prompts;
-- final answer choices;
-- final answers;
-- final solutions;
-- finished secure stimuli.
+QUESTION-DESIGN MAP
+For every exact target/I-Can/evidence job needed by a canonical destination, map:
+- design_slot_id
+- exact target / goal / I-Can IDs + text
+- stage when relevant (Intro / Review / Mastery or course equivalent)
+- evidence_job
+- student_action
+- candidate/selected question_structure_id
+- response_mode
+- representation_mode + need
+- tool/render route
+- difficulty intent
+- allowed/required/forbidden variation axes
+- source_basis
+- security role
 
-============================================================================
-2. MAP_MANIFEST STATUS CONTRACT — HARD
-============================================================================
+EXIT — HARD
+Follow the Framework Exit map exactly.
+For Algebra normal sections:
+- 2 new current-Mastery evidence jobs
+- 2 fresh parallel reassessment jobs inherited from the previous section carryforward pair.
+U1.1 follows its Framework opening exception.
+Do not remap Intro/Review into official Exit slots unless the current Framework says to.
+Map secure/exposure status and parallel-variation axes. Reassessment must preserve evidence target and usable difficulty; it is not a literal-copy requirement.
 
-This field is REQUIRED.
+SUMMATIVE — HARD
+Build the Summative evidence blueprint from current Unit Mastery Goals and the Framework Exit evidence plan.
+For Algebra:
+1. map V1 first as the anchor secure form;
+2. map V2-V4 as parallel forms preserving blueprint/evidence/difficulty;
+3. map V5-V6 after V1-V4 as additional secure forms under the same evidence blueprint and comparable rigor.
+Do not reduce parallel forms to number-only clones when the structure permits meaningful fresh variation.
+Exact item count is evidence/time driven and must be explicitly resolved in the map.
 
-When the integrated Map audit passes, MAP_MANIFEST.json MUST contain:
+PRACTICE 1 — HARD
+Map primary independent practice from the exact section architecture.
+For Algebra, Practice 1 must have a TRUE BALANCE of:
+- Intro
+- Review
+- Mastery
+Visible stage headings are allowed/preferred by the current course profile.
+Equal counts are preferred; if total count requires otherwise, stage counts differ by at most one and no strand is token coverage.
+Mastery practice is informed by the Exit evidence map but Practice 1 must not become an Exit clone set.
+Exact Practice 1 count is resolved by the map from usable length + coverage needs, not inherited from legacy 24-question forms.
 
-  "status": "PASS"
+WTC
+When canonical, map one coherent section-level multipart routine using the current course profile. Normally 3-5 connected labeled parts, shared stimulus/representation, and at least one real carry-forward/dependency. Keep the role preview/decomposition; do not inflate difficulty to look rigorous.
 
-It must ALSO preserve the nested status fields:
+SEEDS
+Map a seed only when it has durable reuse value. A seed may preserve:
+- context/situation
+- dataset
+- graph/diagram idea
+- representation pairing
+- misconception/error pattern
+- source problem idea
+- useful mathematical setup
+Record what is locked, what may vary, why it is useful, and which later artifacts may use it.
+Do not force every seed into a finished question now.
 
-  "question_design": {
-    "status": "PASS",
-    ...
-  }
+REPRESENTATIONS / TOOLS
+Map only representations that serve evidence. Routes must be executable: registered graph tool, canonical asset, semantic HTML table, registered deterministic tool, or explicit student response surface. No decorative visual quota.
 
-  "qa": {
-    "status": "PASS",
-    ...
-  }
-
-Do not omit the top-level status.
-
-Downstream Bank jobs are allowed to require:
-
-  MAP_MANIFEST.status == "PASS"
-
-If Map QA has not passed:
-- do NOT emit top-level status PASS;
-- do NOT describe the map as accepted;
-- do NOT instruct downstream Bank authoring to proceed.
-
-The map fingerprint recipe must fingerprint the actual design slice files, not create a
-self-referential dependency on MAP_MANIFEST.json itself.
-
-============================================================================
-3. QUESTION-DESIGN ARCHITECTURE — HARD
-============================================================================
-
-Build `unitN_question_design_map.json` using the current question-design schema.
-
-For EVERY exact Unit I-can map:
-- exact I-can ID and text;
-- evidence_job;
-- student action required to demonstrate the evidence;
-- content modes;
-- formula/reverse paths when applicable;
-- vocabulary directions when applicable;
-- best-fit question structures;
-- structures to avoid;
-- representation opportunities/requirements;
-- tool opportunities/routes;
-- parallel-variation axes.
-
-For EVERY destination slot/family map:
-- slot_id;
-- record_id;
-- record_mode;
-- destination;
-- section or Unit scope;
-- primary_i_can_id + exact primary_i_can;
-- supporting_i_can_ids as needed;
-- evidence_job;
-- student_action;
-- question_structure_id;
-- response_mode;
-- representation_mode;
-- representation_need;
-- design_slot_id;
-- tool / representation route;
-- render_contract;
-- dependency_chain when applicable;
-- wording/length intent;
-- security role/level;
-- source_basis;
-- concise authoring_notes;
-- explicit variation axes.
-
-A structure/response/representation/tool field is EXECUTABLE.
-It is not a suggestion.
-
-Alignment must be true:
-
-  exact I-can
-  -> evidence_job
-  -> student_action
-  -> question_structure_id
-  -> response_mode
-  -> representation_mode
-  -> executable render/tool route
-
-All links must collect the SAME evidence.
-
-============================================================================
-4. FAMILY-SEED DESIGN CONTRACT — HARD
-============================================================================
-
-Every `family_seed` additionally maps:
-- family_id;
-- family_type;
-- difficulty_intent;
-- intended_reasoning;
-- locked_elements;
-- allowed_variations;
-- required_variations;
-- forbidden_variations;
-- representation_variation_rule when applicable;
-- selection_tags.
-
-Every lock token must resolve to an explicit mapped property.
-
-Required variation must demand meaningful semantic change when the family is instantiated again.
-
-Forbidden:
-- vague "make another like this";
-- noun-only clones counted as meaningful variety;
-- number-only clones when deeper semantic independence is required;
-- irrelevant measurements inserted merely to make a variant look different.
-
-The Map defines enough variety axes for the future builder/auditor to improve a family later
-without changing its evidence job.
-
-============================================================================
-5. REPRESENTATION ROUTES — HARD
-============================================================================
-
-Representations exist only when they serve the evidence job.
-
-Graph:
-- route through registered `graph_tool` when supported;
-- record the exact tool key/route;
-- map the evidence the graph must carry;
-- do not invent an alternate graph generator.
-
-Small data table:
-- semantic HTML;
-- require `<table class="values">` when the established compact-table treatment applies.
-
-Existing canonical image/diagram:
-- route_type = canonical_asset;
-- exact repository;
-- pinned commit;
-- canonical path;
-- asset_id when available.
-
-Registered deterministic visual generator:
-- route_type = registered_tool;
-- exact tool key;
-- parameter contract;
-- answer-neutrality contract when applicable.
-
-Student-constructed vector/FBD/model/diagram:
-- explicit blank response-surface contract;
-- answer-neutral;
-- do not require a completed answer diagram as the student surface.
-
-Direct text/equation:
-- no decorative figure merely to create "variety."
-
-Generic aliases such as:
-  framework_approved_diagram_route
-are NOT executable and must not PASS.
-
-If an evidence-essential representation has no executable route:
-- redesign only if an evidence-equivalent task is valid;
-- otherwise FAIL that slot and report the missing route.
-
-============================================================================
-6. DESTINATION DESIGN
-============================================================================
-
-Resolve destination counts from the CURRENT Bank-v2 course profile.
-Do not hard-code counts from another course.
-
-The current Map must fully design every destination required by the profile, including as applicable:
-- WTC;
-- Notes Example/YTI;
-- CYU;
-- Warm-Up;
-- Practice family pool;
-- Exit family pool;
-- Summative family pool/blueprints.
-
-PRACTICE
---------
-Fit before category.
-
-Map exact I-cans/evidence jobs first, then allocate the required pool.
-Do not force quantitative/vocabulary/graph/diagram categories merely to fill a quota.
-
-The Practice map must make downstream deterministic selection feasible while preserving:
-- all required I-cans;
-- evidence/representation requirements;
-- family fidelity;
-- security status;
-- current profile set-size/count rules.
-
-EXIT / SUMMATIVE
-----------------
-Map enough secure families and explicit blueprint metadata to satisfy the current profile.
-
-Secure families may reuse learning/evidence architecture.
-They may NOT depend on reuse of exposed finished prompts or distinctive exposed stimuli.
-
-Selected-response records must map:
-- choice count/course default;
-- selection mode;
-- distractor basis tied to plausible evidence-job errors/misconceptions.
-
-Summative blueprint feasibility must be explicit and deterministic.
-
-============================================================================
-7. WTC / MULTIPART ROUTINES
-============================================================================
-
-When the current course profile requires WTC:
-- map the profile-required count;
-- one shared coherent stimulus/representation;
-- normally 3–5 connected labeled parts;
-- at least one part uses the shared stimulus;
-- at least one real carry-forward/dependency;
-- explicit decomposition_move_plan limited to moves the routine actually requires;
-- coverage_role = wtc_frq_practice unless the current profile says otherwise.
-
-Do not inflate content difficulty simply to make the routine look rigorous.
-Do not use WTC to satisfy Unit I-can coverage floors unless the current profile explicitly says so.
-
-============================================================================
-8. DETERMINISTIC SELECTION
-============================================================================
-
-For any destination with a pool:
-1. satisfy hard I-can/evidence/security/representation constraints;
-2. deterministic tie-break second;
-3. no uncontrolled randomness.
-
-Default stable-key architecture unless the current profile supersedes it:
-
-  course|unit|section-or-unit|destination|form-or-set|bank_fingerprint
-
-Map enough family diversity that deterministic rotation can actually produce meaningfully different
-sets/forms without violating coverage.
-
-============================================================================
-9. GOOD-ENOUGH MAP AUDIT — HARD
-============================================================================
-
-Before PASS verify:
-
-[ ] exact Unit I-can inventory is correct
-[ ] every I-can has a clear evidence job
-[ ] every required destination record exists
-[ ] IDs are unique
-[ ] every record resolves to one design slot
-[ ] question_structure_id resolves
-[ ] response_mode matches student action
-[ ] representation_mode matches evidence job
-[ ] required representation has an executable route
-[ ] graph routes use graph_tool when supported
-[ ] small tables specify semantic HTML
-[ ] student-constructed representations are answer-neutral response surfaces
-[ ] no generic visual-route aliases/placeholders
-[ ] selected-response records have choice/distractor contracts
-[ ] Practice family counts/coverage/selection are feasible
-[ ] family locks + allowed/required/forbidden variations are explicit
-[ ] meaningful family variation is feasible
-[ ] Exit selection is feasible
-[ ] Summative blueprint(s) are feasible
-[ ] secure families forbid exposed finished-prompt reuse
-[ ] no finished prompt/choice/answer/solution prose leaked into Map
-[ ] map fingerprint is deterministic
+GOOD-ENOUGH MAP AUDIT — HARD
+Verify at minimum:
+[ ] exact Unit Assessment Plan / Mastery Goal identities correct
+[ ] current course profile read and canonical Bank inventory resolved
+[ ] retired legacy destinations absent unless explicitly current
+[ ] every finished-question destination uses current Question Structure unless explicitly exempt
+[ ] Framework operational maps consumed exactly where declared
+[ ] Exit chain feasible
+[ ] Summative V1-V6 blueprint feasible
+[ ] Practice 1 Intro/Review/Mastery balance feasible
+[ ] WTC/Seed roles correct
+[ ] every required representation has an executable route
+[ ] security/variation rules explicit
+[ ] IDs unique and destination slices reconcile
 [ ] question_design.status = PASS
 [ ] qa.status = PASS
-[ ] TOP-LEVEL MAP_MANIFEST.status = PASS
+[ ] MAP_MANIFEST.status = PASS
 
-This audit judges whether the Map can drive a correct complete Bank.
+BUILD ORDER
+1. Pin authorities.
+2. Resolve current Bank profile + Framework operational maps.
+3. Resolve canonical Bank inventory.
+4. Build question-design slots.
+5. Map Exit evidence from Framework map.
+6. Map Summative V1 -> V2-V4 -> V5-V6.
+7. Map balanced Practice 1.
+8. Map WTC.
+9. Map useful Seeds.
+10. Reconcile representation/tool/security routes.
+11. Audit, report, package, STOP.
 
-It does NOT require:
-- ideal final prose;
-- ideal graph styling;
-- perfect visual sizing;
-- maximal context novelty;
-- aesthetic optimization.
-
-Those are later authoring/improvement jobs.
-
-============================================================================
-10. BUILD ORDER
-============================================================================
-
-1. Pin repositories.
-2. Resolve authorities/profile/tools.
-3. Map exact Unit I-can/evidence architecture.
-4. Build unitN_question_design_map.json.
-5. Resolve destination inventories.
-6. Map exact-content instructional anchors.
-7. Map Practice families.
-8. Map CYU/Warm-Up.
-9. Map Exit/Summative secure families and blueprints.
-10. Reconcile representation/tool routes.
-11. Verify deterministic selection feasibility.
-12. Write destination slices.
-13. Run integrated good-enough Map audit.
-14. Repair only blocking Map defects.
-15. Set MAP_MANIFEST top-level status = PASS.
-16. Write MAP_REPORT.
-17. Package ZIP.
-18. STOP.
-
-============================================================================
-11. FINAL CHAT SUMMARY
-============================================================================
-
-Report:
-- course/unit;
-- profile identity;
-- exact I-can count;
-- exact-content slot count;
-- family-seed count;
-- representation/tool routes;
-- Practice/Exit/Summative feasibility;
-- Map QA result;
-- top-level MAP_MANIFEST.status;
-- output filename.
-
-END — BANK MAP 3A
+END — BANK MAP 3A PROFILE-DRIVEN

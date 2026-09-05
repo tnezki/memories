@@ -1,785 +1,144 @@
-BUILD COMPLETE BANK — STEP 3B / BANK-V2 / GOOD-ENOUGH CORE
-================================================================
+BUILD COMPLETE BANK — STEP 3B / PROFILE-DRIVEN BANK AUTHORING
+===============================================================
 
 STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
-ROLE: Build the complete canonical Unit Bank from one accepted 3a Bank Map in ONE run.
-
-This replaces the former separate:
-- Instructional Core stage;
-- Practice Families stage;
-- Assessment Families stage.
-
-Those old stages are now implementation phases INSIDE this one job, not separate teacher-facing jobs.
-
-PRIMARY GOAL
-------------
-Build a COMPLETE, CORRECT, TRACEABLE, DOWNSTREAM-READY Bank efficiently.
-
-The standard is GOOD-ENOUGH CORE:
-
-  correct + complete + usable + metadata-complete + executable + downstream-ready
-
-NOT:
-
-  endlessly polished + aesthetically perfect + maximally novel
-
-Later memoryless audit/improvement PMs may improve:
-- question variety;
-- wording;
-- rigor/difficulty;
-- graphs;
-- diagrams/images;
-- metadata consistency;
-- secure assessment quality;
-- layout/teacher inspection view.
-
-This job must not block a correct usable Bank merely because an optional later improvement is possible.
-
-============================================================================
-0. STARTUP / AUTHORITY — HARD
-============================================================================
-
-Read:
-1. current Curriculum Philosophy;
-2. current Runtime Contract;
-3. current `_question_structure/` authority/schema/workflow;
-4. current course Framework + exact Unit Assessment Plan;
-5. current Framework-declared Bank-v2 profile/runtime;
-6. current `Tools/MANIFEST.json`;
-7. the accepted 3a Unit Bank Map.
-
-Pin system and course repositories ONCE.
-Use the same pins throughout this run.
-No web search/public-web research.
-No File Library discovery.
-No prior ZIP discovery.
-
-Accepted Map inputs:
-
-  banks/unitN_bank_map/MAP_MANIFEST.json
-  banks/unitN_bank_map/unitN_question_design_map.json
-  banks/unitN_bank_map/notes_map.json
-  banks/unitN_bank_map/practice_map.json
-  banks/unitN_bank_map/cyu_map.json
-  banks/unitN_bank_map/warmup_map.json
-  banks/unitN_bank_map/exit_map.json
-  banks/unitN_bank_map/summative_map.json
-
-ENTRY GATE — HARD:
-- MAP_MANIFEST.status MUST equal "PASS";
-- question_design.status MUST equal "PASS";
-- qa.status MUST equal "PASS";
-- all declared Map slice paths/counts/identities must reconcile with the accepted manifest.
-
-If not:
-  FAIL CLOSED as BANK_MAP_NOT_ACCEPTED.
-
-ACCEPTED-MAP TRANSPORT RULE — HARD
-----------------------------------
-The accepted Map may be consumed directly through the connected repository reader at the exact
-pinned course commit.
-
-Do NOT require the accepted Map files to be copied byte-for-byte into the local runtime merely
-to prove they exist.
-
-When the exact declared path is read at the exact pinned commit and MAP_MANIFEST records the
-accepted SHA-256/fingerprint:
-- treat that direct pinned read as the canonical source;
-- preserve the recorded SHA-256/fingerprint as accepted identity metadata;
-- local re-hashing is OPTIONAL when raw bytes are actually materialized;
-- inability to materialize GitHub blobs into the local filesystem is NOT a curriculum/build blocker.
-
-Do NOT reconstruct or substitute a missing canonical Map file.
-If an exact declared Map path cannot be read from the pinned repository connection, FAIL CLOSED.
-
-============================================================================
-1. OLD / PARTIAL UNIT BANKS MUST NOT BLOCK THIS JOB
-============================================================================
-
-This job is a FULL REBUILD FROM THE ACCEPTED MAP.
-
-An existing:
-
-  banks/unitN/
-
-may be:
-- absent;
-- complete;
-- incomplete;
-- from an older profile-compatible run;
-- BLOCKED_PRE_AUTHORING;
-- a failed legacy 3A/3B/3C attempt.
-
-Do NOT require prior Bank stage completion.
-
-Do NOT treat blocker provenance or an empty old ITEM_INDEX as authority.
-
-Build the replacement Bank in a FRESH staging tree from:
-- accepted Map;
-- current authorities;
-- current registered tools.
-
-Never mutate the pinned course repository in place.
-
-Old/partial Bank content may be inspected only when the current Map explicitly routes to a canonical
-asset that lives there; otherwise it is NOT an authoring source.
-
-The final delivered `unitN/` is the complete replacement.
-
-============================================================================
-2. COMPLETE BANK INVENTORY
-============================================================================
-
-Author EVERY record required by the accepted Map/profile.
-
-This includes all mapped `exact_content`, such as:
-- WTC/multipart routines;
-- Notes Example/YTI;
-- CYU;
-- Warm-Up;
-- any other profile-defined exact instructional anchors.
-
-Author EVERY mapped Practice family seed.
-
-Author EVERY mapped secure Exit family seed.
-
-Author EVERY mapped secure Summative family seed and preserve the accepted blueprint metadata.
-
-Do not silently drop a mapped family because it feels repetitive.
-Do not add unmapped curriculum merely to improve variety.
-
-The Map owns:
-- evidence architecture;
-- counts;
-- family identities;
-- response modes;
-- representation behavior;
-- security roles;
-- blueprint architecture.
-
-3b owns:
-- finished prompts;
-- data/stimuli;
-- choices;
-- answers/solutions;
-- actual representation generation/rendering;
-- complete metadata;
-- final Bank storage/index/state.
-
-============================================================================
-3. GOOD-ENOUGH CORE ACCEPTANCE STANDARD
-============================================================================
-
-A Bank record is GOOD ENOUGH when it is:
-
-1. CORRECT
-   - content/physics/math correct;
-   - answer and solution correct;
-   - units/signs/relationships correct;
-   - representation consistent with the prompt.
-
-2. ALIGNED
-   - preserves exact mapped I-can;
-   - performs the mapped evidence job;
-   - performs the mapped intended reasoning;
-   - response mode honestly captures the student action.
-
-3. COMPLETE
-   - no placeholders;
-   - all required choices/answers/solutions exist;
-   - all required metadata exists;
-   - all map records are authored exactly once.
-
-4. USABLE
-   - student-facing wording is understandable;
-   - graph/table/diagram is legible;
-   - no broken refs;
-   - no answer-leaking student visual;
-   - task can actually be assigned.
-
-5. VARIED ENOUGH
-   - family seed is a complete distinct classroom task;
-   - required family variation axes are genuinely available;
-   - no obvious noun-only pseudo-variety;
-   - enough meaningful diversity exists for downstream deterministic sets/forms.
-
-6. DOWNSTREAM-READY
-   - ITEM_INDEX routes reconcile;
-   - BANK_MANIFEST is COMPLETE;
-   - Notes/Practice/Exit/Summative PMs can consume it without guessing.
-
-GOOD ENOUGH does NOT require:
-- best possible prose;
-- perfect aesthetics;
-- maximal novelty;
-- ideal image size;
-- ideal graph styling;
-- exhaustive pedagogical refinement.
-
-If a later memoryless audit can improve something WITHOUT fixing correctness/completeness/usability,
-that is not a reason to block this core build.
-
-============================================================================
-4. COMMON AUTHORED RECORD CONTRACT
-============================================================================
-
-Every authored exact-content item/family seed preserves the mapped identity/contract fields.
-
-As applicable include:
-- item_id or family_id;
-- record_mode;
-- destination;
-- section/Unit scope;
-- primary_i_can_id + exact primary_i_can;
-- supporting_i_can_ids;
-- evidence_job;
-- intended_reasoning;
-- question_structure_id;
-- response_mode;
-- representation_mode;
-- representation_need;
-- security_level;
-- difficulty_intent;
-- selection/blueprint tags;
-- question_design object with design_slot_id + tool/render route;
-- source_map_record_id;
-- source_basis.
-
-Finished content includes:
-- student_text;
-- student_html;
-- complete choices when selected response;
-- correct_choice/key when applicable;
-- answer;
-- solution_text;
-- solution_html;
-- figure_refs / representation_refs / table payloads as applicable.
-
-Family seeds additionally preserve:
-- locked_elements;
-- allowed_variations;
-- required_variations;
-- forbidden_variations;
-- representation_variation_rule.
-
-No placeholders.
-No internal generator labels in student-facing prose.
-
-============================================================================
-5. QUESTION / RESPONSE QUALITY
-============================================================================
-
-QUESTION STRUCTURE
-------------------
-Execute the mapped question_structure_id.
-Do not merely copy its label into metadata.
-
-SELECTED RESPONSE
------------------
-When mapped selected_response:
-- use mapped/course-default choice count;
-- render every choice visibly in student_html;
-- unique choices;
-- valid keyed answer;
-- distractors tied to plausible task-specific errors/misconceptions;
-- no arbitrary filler distractors.
-
-CONSTRUCTED RESPONSE
---------------------
-Prompt must actually require the mapped reasoning/construction/explanation.
-Provide an appropriate response surface when mapped.
-
-EXAMPLE / YTI
--------------
-Preserve mapped pair identity.
-Example models the target reasoning.
-YTI performs comparable evidence in a meaningfully changed situation.
-
-SECURE FAMILIES
----------------
-Security means fresh evidence.
-
-Allowed:
-- same I-can;
-- same evidence architecture;
-- same structure;
-- comparable difficulty.
-
-Forbidden:
-- exposed finished prompt reuse;
-- distinctive exposed data/stimulus reuse;
-- noun-only disguise of an exposed item;
-- answer-bearing visual.
-
-============================================================================
-6. REPRESENTATIONS — GOOD-ENOUGH VISUAL STANDARD
-============================================================================
-
-A representation must be ACCURATE, LEGIBLE, RELEVANT, and EXECUTABLE.
-
-It does NOT need to be aesthetically perfect.
-
-GRAPH
------
-Resolve `graph_tool` through Tools/MANIFEST.json when the Map requires/supports it.
-
-Graph PASS requires:
-- correct axes;
-- useful scale;
-- readable labels/units;
-- correct plotted relationship/data;
-- no clipped essential content;
-- answer-neutral student-facing version when required;
-- local/reference path works.
-
-Do not burn time tuning a graph merely because a later audit could make it prettier.
-
-SMALL TABLE
------------
-Use semantic HTML.
-Use `<table class="values">` where mapped/current Base CSS expects compact data tables.
-No pipe-delimited pseudo-tables.
-
-DIAGRAM / VECTOR / FBD / MODEL
--------------------------------
-Use the exact mapped route:
-- canonical asset;
-- registered deterministic tool;
-- student-constructed response surface.
-
-PASS requires:
-- physically/mathematically correct;
-- legible;
-- not distorted;
-- not answer-leaking;
-- required labels present;
-- correct reference path.
-
-A merely less-than-beautiful but correct readable diagram is GOOD ENOUGH.
-Crude/incorrect/unreadable diagrams are NOT.
-
-DIRECT TEXT / EQUATION
-----------------------
-Do not add decorative visuals merely to create variety.
-
-============================================================================
-7. FRESH ONE-RUN INTERNAL PHASES
-============================================================================
-
-The teacher sees ONE 3b job.
-The following are implementation phases only.
-
---------------------------------
-PHASE A — EXACT INSTRUCTIONAL
---------------------------------
-
-Author every accepted Map `exact_content` record.
-
-Write:
-- BANK_MANIFEST.json
-- ITEM_INDEX.json
-- notes/...
-- cyu/...
-- warmups/...
-- other exact-content profile slices
-- figures/... only when actually required
-- provenance/3a_build.json
-- provenance/3a_contract_qa.json
-- provenance/3a_report.txt
-
-For compatibility with the existing registered `qa_bank_3a_contract`, the staged BANK_MANIFEST
-may temporarily represent the legacy post-instructional state:
-
-  status = BUILDING
-  ready_for_downstream = false
-  completed includes "3A_instructional_core"
-
-REGISTERED VALIDATOR — BEST EFFORT, NOT TRANSPORT GATE
-
-If the runtime can materialize the required pinned canonical inputs beside the fresh staging tree
-without reconstructing/substituting files, run the registered `qa_bank_3a_contract`.
-
-If it runs and reports FAIL:
-- repair genuine mechanical core defects;
-- rerun the same validator;
-- do not weaken or change validator criteria.
-
-If the runtime CANNOT materialize the repository inputs required by that validator:
-- do NOT fail the Bank solely for that transport limitation;
-- record validator status = `NOT_RUN_TRANSPORT_LIMITATION`;
-- perform the Phase A mechanical reconciliation directly from:
-  1. the exact accepted Map records read at the pinned commit, and
-  2. the freshly authored local staging files.
-
-The direct reconciliation MUST verify the mechanical contracts the build depends on:
-- every mapped exact-content record exists exactly once;
-- mapped identity fields are preserved;
-- selected-response choices are complete/visible/keyed;
-- semantic tables/response surfaces/required render markers exist;
-- local generated representation refs resolve;
-- ITEM_INDEX routes/counts reconcile;
-- staged BANK_MANIFEST state reconciles.
-
-A registered-validator PASS is useful evidence, but transport availability is not itself part of
-the curriculum quality contract.
-
---------------------------------
-PHASE B — PRACTICE FAMILIES
---------------------------------
-
-Author every mapped Practice family seed into:
-
-  practice/section_<section-id>.json
-
-Update ITEM_INDEX.
-
-For compatibility with existing `qa_bank_3b_contract`, staged BANK_MANIFEST may temporarily
-represent the legacy post-Practice state:
-
-  status = BUILDING
-  ready_for_downstream = false
-  completed includes:
-    "3A_instructional_core"
-    "3B_practice_families"
-
-REGISTERED VALIDATOR — BEST EFFORT, NOT TRANSPORT GATE
-
-If its required pinned inputs are locally materializable without substitution, run the registered
-`qa_bank_3b_contract` against the SAME fresh staging tree.
-
-If it runs and reports FAIL:
-- repair genuine mechanical core defects;
-- rerun the same validator.
-
-If it cannot run because canonical repository inputs cannot be materialized locally:
-- record validator status = `NOT_RUN_TRANSPORT_LIMITATION`;
-- do NOT block the Bank for that reason alone;
-- perform direct Practice reconciliation against the exact accepted `practice_map.json` data
-  consumed from the pinned repository.
-
-Direct Practice reconciliation MUST verify:
-- every mapped Practice family exists exactly once;
-- section/family counts reconcile;
-- mapped identity/contract fields are preserved;
-- each canonical_seed is complete;
-- selected-response choices are visible/unique/keyed;
-- required tables/representations/render markers exist;
-- ITEM_INDEX routes reconcile.
-
-No intermediate GitHub commit or handoff is required.
-
---------------------------------
-PHASE C — SECURE ASSESSMENT
---------------------------------
-
-Author every mapped Exit family into:
-
-  exit/section_<section-id>.json
-
-Author every mapped Summative family/blueprint into the accepted canonical paths, normally:
-
-  summative/blueprint_A.json
-  summative/blueprint_B.json
-
-or exact current-profile/Map equivalents.
-
-Update ITEM_INDEX.
-
-Perform final secure-family and final-bank canonical QA from Section 10.
-
-============================================================================
-8. ITEM_INDEX
-============================================================================
-
-ITEM_INDEX is routing infrastructure, not a summary paragraph.
-
-It must:
-- index every canonical Bank record exactly once;
-- identify record mode/destination;
-- provide exact canonical slice path + record index/key;
-- preserve family/item identity;
-- reconcile with the final authored files;
-- contain no stale routes from a blocked/partial previous Bank.
-
-Final index count must equal the accepted Map's total authored Bank-record count.
-
-============================================================================
-9. FINAL BANK_MANIFEST — DOWNSTREAM COMPATIBILITY
-============================================================================
-
-The final BANK_MANIFEST must preserve the stable Bank-v2 downstream shape.
-
-Required final state:
-
-  "status": "COMPLETE"
-  "ready_for_downstream": true
-  "pending": []
-  "next_phase": null
-
-For backward compatibility, `completed` MUST include these legacy capability tokens even though
-they were produced in one 3b run:
-
-  "3A_instructional_core"
-  "3B_practice_families"
-  "3C_assessment_families"
-
-This is compatibility metadata, NOT a claim that three teacher-facing jobs were run.
-
-Preserve:
-- current profile identity;
-- accepted Bank Map path/fingerprint/status;
-- current pinned run identity;
-- complete record counts;
-- exact canonical paths;
-- qa_status = PASS when the FINAL CANONICAL QA in this PM passes.
-
-Also record validator execution separately, for example:
-
-  "validator_execution": {
-    "qa_bank_3a_contract": "PASS | NOT_RUN_TRANSPORT_LIMITATION",
-    "qa_bank_3b_contract": "PASS | NOT_RUN_TRANSPORT_LIMITATION"
-  }
-
-Do not falsely label a validator PASS when it did not execute.
-A transport-skipped validator does not prevent final `qa_status = PASS` when the direct
-reconciliation + final canonical QA pass.
-
-Paths must include as applicable:
-- item_index;
-- notes;
-- cyu;
-- warmups;
-- practice;
-- exit;
-- summative blueprints;
-- teacher_bank_html;
-- provenance reports.
-
-DOWNSTREAM NOTES HANDSHAKE
---------------------------
-Publish:
-
-  "downstream_contracts": {
-    "notes_route": {
-      "schema": "bank-notes-route/1.0",
-      "route_field": "paths.notes",
-      "route_template": "<exact BANK_MANIFEST.paths.notes value>",
-      "producer_stage": "3b_complete_bank"
-    }
-  }
-
-`route_template` must exactly equal `BANK_MANIFEST.paths.notes`.
-
-============================================================================
-10. FINAL CANONICAL QA — HARD
-============================================================================
-
-Before COMPLETE, verify:
-
-COVERAGE / COUNTS
-[ ] every accepted Map exact-content record authored exactly once
-[ ] every mapped Practice family authored exactly once
-[ ] every mapped Exit family authored exactly once
-[ ] every mapped Summative family authored exactly once
-[ ] no unmapped canonical records
-[ ] ITEM_INDEX count/routes reconcile
-[ ] final counts match accepted Map/profile
-
-ALIGNMENT
-[ ] exact I-can preserved
-[ ] evidence_job preserved
-[ ] question structure executed
-[ ] response mode honestly captures student action
-[ ] intended reasoning is present
-[ ] difficulty is reasonably aligned
-
-CONTENT CORRECTNESS
-[ ] every final prompt independently checked
-[ ] every answer/solution checked against final wording/data/visual
-[ ] units/signs/equations correct
-[ ] no contradictory student_html vs stored answer/data
-
-SELECTED RESPONSE
-[ ] complete visible unique choices
-[ ] valid key
-[ ] plausible task-specific distractors
+ROLE: Author the complete canonical Unit Bank from one accepted 3a Bank Map in one run.
+
+AUTHORITY — HARD
+1. current explicit teacher instruction
+2. current Curriculum Philosophy
+3. current universal Question Structure authority
+4. current Course Framework + exact Unit Assessment Plan + canonical operational maps
+5. current Framework Bank profile
+6. accepted 3a Bank Map (MAP_MANIFEST.status = PASS)
+7. this PM
+8. registered tools/render contracts
+
+Do not use an old/partial Unit Bank as curriculum authority. Build a fresh replacement staging tree from the accepted map/current authorities.
+
+ENTRY GATE — HARD
+Require:
+- MAP_MANIFEST.status = PASS
+- question_design.status = PASS
+- qa.status = PASS
+- every destination slice declared by MAP_MANIFEST readable and reconciled.
+If not, FAIL CLOSED as BANK_MAP_NOT_ACCEPTED.
+
+PROFILE-DRIVEN INVENTORY — HARD
+Author EXACTLY the canonical destinations declared by the accepted Map/current course profile. Do not revive historical inventories merely because old PMs/files exist.
+For Algebra 1 v7.1, canonical Bank content is:
+- official Exit questions
+- secure Summative V1-V6
+- Practice 1
+- WTC
+- canonical Seeds when mapped
+NOT Bank content: Extra Practice, CYU, Practice 2/3, fixed Notes Example/YTI pairs, finished Warm-Up questions.
+
+QUESTION STRUCTURE — HARD
+For every finished question/task, execute the mapped current universal Question Structure contract. Do not merely store a structure label. The authored prompt, response mode, representation, and evidence job must agree.
+A current course exemption may bypass this rule; Algebra Warm-Ups are the explicit exemption, but Warm-Ups are not authored by this Bank job.
+Seeds are not finished questions. When a later builder turns a seed into a question, that later question uses Question Structure.
+
+COMMON AUTHORED RECORD
+Preserve accepted map identity and include as applicable:
+- record/family/item ID
+- destination + section/unit scope
+- exact goal/I-Can/stage links
+- evidence_job + student_action
+- question_structure_id
+- response_mode
+- representation/tool route
+- security level
+- difficulty intent
+- variation axes
+- source_map_record_id/source_basis
+Finished content includes student prompt/HTML, answer/key, solution, and representation refs as required.
+No placeholders or internal authoring labels in student-facing prose.
+
+EXIT — ALGEBRA RULE
+Author the exact ticket architecture from the Framework/accepted map.
+Normal ticket:
+- Q1-Q2 = current new mastery evidence
+- Q3-Q4 = fresh parallel reassessment of previous section carryforward pair
+U1.1 = four new U1-MG01 opening questions, with Q1-Q2 designated carryforward pair.
+Parallel reassessment preserves evidence target + usable difficulty while varying allowed axes. Do not expose future secure parallels in ordinary Practice/Notes.
+
+SUMMATIVE — SECURE
+Author forms in this order:
+1. V1 anchor form from current Unit Mastery Goals + Exit evidence blueprint.
+2. V2-V4 parallel forms preserving blueprint/evidence/difficulty with fresh secure instances.
+3. V5-V6 additional secure forms under the same blueprint/comparable rigor after V1-V4 are complete.
+All forms must be independently usable and secure. Do not create pseudo-parallels by noun swaps or trivial number changes when the map requires deeper variation.
+
+PRACTICE 1 — ALGEBRA RULE
+Author the accepted balanced Intro / Review / Mastery Practice 1 map.
+- preserve visible stage grouping when mapped;
+- honor equal/near-equal stage counts;
+- Intro practices current learning;
+- Review practices the exact current Review goal at Review demand;
+- Mastery practices current Mastery goal independently and is informed by Exit evidence without copying secure Exit prompts/stimuli.
+Practice 1 may use canonical Seeds when the map routes them.
+
+WTC
+Author the accepted connected multipart routine. Keep one coherent stimulus/representation and real carry-forward. It is instructional preview/decomposition, not disguised secure assessment.
+
+SEEDS
+Store mapped seed records in a reusable non-student-facing slice. A seed should preserve the useful idea and variation guidance, not force a final prompt/answer unless the map separately defines a finished canonical question.
 
 REPRESENTATIONS
-[ ] graph_tool used when mapped/supported
-[ ] graphs accurate and legible
-[ ] semantic tables are real HTML
-[ ] required diagrams/vectors/FBDs visible or have correct response surface
-[ ] figure/representation refs resolve
-[ ] no answer-leaking student visuals
+Generate/copy only mapped executable representations. Graphs use registered graph tooling when required; small data tables use semantic HTML; student-constructed representations use answer-neutral response surfaces. No decorative figures for quota.
 
-VARIETY
-[ ] family seeds are complete usable tasks
-[ ] no obvious noun-only clone abuse
-[ ] required variation axes remain feasible
-[ ] Practice pool can support downstream rotation
-[ ] secure forms can obtain genuinely fresh stimuli
+BANK OUTPUT / MANIFEST
+Build one complete replacement Unit Bank with:
+- BANK_MANIFEST.json
+- ITEM_INDEX.json
+- destination slices exactly as declared by accepted MAP_MANIFEST
+- figures/assets actually used
+- provenance/build report
+- teacher inspection HTML when current profile/renderer requires it
 
-SECURITY
-[ ] secure family seeds do not reuse exposed finished prompts/stimuli
-[ ] blueprint metadata reconciles with accepted Map
+BANK_MANIFEST final state:
+  status = COMPLETE
+  ready_for_downstream = true
+  pending = []
+  qa_status = PASS
+It must list exact canonical paths for every authored destination and record the accepted Map fingerprint/current profile identity.
+Do not require legacy capability tokens that refer to retired Practice 2/3, CYU, Warm-Up, or Notes-pair Bank phases unless a current non-Algebra course profile still uses them.
 
-DOWNSTREAM
-[ ] BANK_MANIFEST COMPLETE
-[ ] ready_for_downstream = true
-[ ] Notes route handshake correct
-[ ] Practice/Exit/Summative consumers can resolve canonical slices
+ITEM_INDEX
+Index every canonical Bank record exactly once and no retired/stale record. Provide exact destination/path/key and security/record mode needed by downstream builders.
 
-CORE BOUNDARY
-[ ] no blocking correctness/completeness/usability defect remains
-[ ] optional aesthetic/polish improvements are NOT treated as blockers
-[ ] inability to run an OPTIONAL transport-dependent legacy validator is not treated as a blocker
-    when its direct reconciliation pass has completed successfully
+FINAL CANONICAL QA — HARD
+[ ] authored record count equals accepted Map record count
+[ ] only current profile canonical destinations authored
+[ ] exact goal/I-Can/stage identities preserved
+[ ] Question Structure executed for every finished question unless explicit current exemption
+[ ] all answers/solutions/math correct
+[ ] all required representations accurate, legible, answer-neutral where required, and refs resolve
+[ ] Exit chain matches Framework map
+[ ] Summative V1-V6 all satisfy accepted blueprint and security rules
+[ ] Practice 1 has true Intro/Review/Mastery balance and no secure prompt leakage
+[ ] WTC coherent and instructional
+[ ] Seeds reusable and clearly separated from finished questions
+[ ] no placeholders/internal labels in student content
+[ ] ITEM_INDEX reconciles
+[ ] BANK_MANIFEST status COMPLETE / ready_for_downstream true / qa_status PASS
 
-Do not PASS because JSON merely parses.
-Do not PASS by fabricating validator results.
-Do not FAIL a correct complete usable Bank merely because a later audit could make it better
-or because a legacy validator could not be executed for transport-only reasons.
+If any HARD check fails, repair or FAIL CLOSED. Do not claim COMPLETE.
 
-============================================================================
-11. TEACHER BANK HTML
-============================================================================
+BUILD ORDER
+1. Pin/read authorities + accepted map.
+2. Create fresh staging tree.
+3. Author Exit.
+4. Author Summative V1, then V2-V4, then V5-V6.
+5. Author Practice 1.
+6. Author WTC.
+7. Store mapped Seeds.
+8. Generate required representations/assets.
+9. Build ITEM_INDEX + inspection view/provenance.
+10. Run final QA.
+11. Package complete replacement Bank and STOP.
 
-Generate — MANDATORY:
-
-  banks/unitN/unitN.html
-
-A successful 3b build MUST include this teacher-readable HTML inspection file.
-The Bank may not be marked COMPLETE without it.
-
-Use exactly:
-  ../../css/base.css
-  ../../css/bank.css
-
-Use existing Bank class vocabulary as available:
-- nav
-- bank-section
-- resource-group
-- bank-item
-- meta
-- student-prompt
-- answer
-- evidence-map
-
-Teacher Bank view should make the canonical content easy to inspect.
-
-Include, as applicable:
-- section navigation;
-- exact targets/I-cans;
-- WTC;
-- Notes Example/YTI;
-- CYU;
-- Warm-Ups;
-- Practice families;
-- Exit families;
-- Summative blueprints.
-
-Preserve semantic tables/graphs/figures.
-
-This HTML is a derived inspection view, not curriculum authority.
-
-Do NOT generate PDF merely for QA.
-Do NOT invoke PDF tooling.
-Do NOT run print-to-PDF/headless-browser QA merely to approve the Bank.
-Do not create a second QA-only HTML copy.
-
-============================================================================
-12. PROVENANCE / REPORT
-============================================================================
-
-Preserve concise provenance sufficient to reconstruct the run:
-- system commit;
-- course commit;
-- accepted Map fingerprint;
-- profile identity;
-- exact-content count;
-- Practice count;
-- Exit count;
-- Summative count;
-- qa_bank_3a_contract execution status/result;
-- qa_bank_3b_contract execution status/result;
-- direct Phase A reconciliation result when validator was transport-skipped;
-- direct Practice reconciliation result when validator was transport-skipped;
-- final canonical QA result;
-- final Bank state.
-
-If a validator is skipped for transport reasons, say exactly:
-  `NOT_RUN_TRANSPORT_LIMITATION`
-Do not call it PASS.
-
-Legacy internal-phase provenance filenames may be retained because existing tooling already recognizes them.
-
-Also create one concise final:
-
-  provenance/complete_bank_report.txt
-
-Do not duplicate giant reasoning logs.
-
-============================================================================
-13. FULL-SNAPSHOT DELIVERY
-============================================================================
-
-Return ONE ZIP — MANDATORY ON GOOD-ENOUGH PASS:
-
-  unitN.zip
-
-If the accepted Map is readable and the complete authored Bank passes this PM's direct
-reconciliation + FINAL CANONICAL QA, emit the ZIP even when a legacy registered validator was
-`NOT_RUN_TRANSPORT_LIMITATION`.
-
-Do not withhold an otherwise good-enough Bank merely because GitHub repository blobs could not be
-materialized beside a validator.
-
-ZIP root:
-
-  unitN/
-
-It contains the COMPLETE final replacement Bank.
-
-Do NOT include:
-- `banks/` outer wrapper;
-- `unitN_bank_map/`;
-- PM files;
-- prior ZIPs;
-- blocked old staging;
-- temp/QA-only files;
-- `__MACOSX`;
-- `.DS_Store`;
-- `._*`;
-- `__pycache__`;
-- `.pyc`.
-
-ZIP integrity must PASS.
-
-This ZIP is the replacement for:
-
-  banks/unitN/
-
-============================================================================
-14. FINAL CHAT SUMMARY
-============================================================================
-
-Report:
-- course/unit;
-- accepted Map fingerprint;
-- exact-content count;
-- Practice family count;
-- Exit family count;
-- Summative family count;
-- graph/table/diagram route summary;
-- registered-validator execution status/results;
-- direct reconciliation result when a validator was transport-skipped;
-- final canonical QA PASS/FAIL;
-- BANK_MANIFEST status/ready_for_downstream;
-- confirmation that unitN.html is present;
-- output filename.
-
-STOP after delivery.
-
-END — COMPLETE BANK 3B
+END — COMPLETE BANK 3B PROFILE-DRIVEN

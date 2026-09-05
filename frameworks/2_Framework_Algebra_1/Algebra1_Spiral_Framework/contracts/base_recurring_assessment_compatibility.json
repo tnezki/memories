@@ -1,13 +1,28 @@
 {
   "contract_name": "Base Recurring + Assessment Resources Compatibility",
   "contract_version": "v2.0",
-  "framework_version": "v7.0",
+  "framework_version": "v7.1",
   "profile": "profiles/recurring_assessment_course_profile.json",
   "path_contract": "contracts/course_file_structure.json",
   "visual_contract": "contracts/recurring_assessment_visual_contract.json",
-  "conflict_rule": "Current Framework v7.0 course behavior overrides stale Algebra A/B/C Exit routing and Current/Review/Mastery Warm-Up routing; remove the obsolete active rules rather than stacking overrides.",
+  "conflict_rule": "Current Framework v7.1 course behavior overrides stale Algebra A/B/C Exit routing and Current/Review/Mastery Warm-Up routing; remove the obsolete active rules rather than stacking overrides.",
   "warmup": "Use the separate Solve / Diamond / Skill Review / Challenge four-slot fluency routine.",
   "exit": "One official four-question Exit per section: 2 new current-Mastery evidence + 2 previous-section parallel reassessments; U1.1 opening exception is intentionally deferred to the Bank/Exit map.",
   "reteach_check": "Targeted Intro/Review checks are generated on demand and are not automatically official/canonical.",
-  "progress_review_summative": "Preserve current renderer mechanics and current-Unit mastery orientation unless separately revised."
+  "progress_review_summative": "Preserve current renderer mechanics and current-Unit mastery orientation unless separately revised.",
+  "bank_canonical_for": [
+    "Official Exit Ticket questions",
+    "Summative secure questions",
+    "Practice 1 questions",
+    "WTC",
+    "canonical Bank seeds/assets when used"
+  ],
+  "framework_canonical_for": [
+    "Exit evidence allocation map",
+    "Warm-Up progression map",
+    "Progress Tracker learning goals/evidence language",
+    "Review target/learning architecture",
+    "Summative evidence scope"
+  ],
+  "warmup_source": "Generate from curriculum/warmup_progression_map.json; finished Warm-Up questions are not required Bank inventory."
 }

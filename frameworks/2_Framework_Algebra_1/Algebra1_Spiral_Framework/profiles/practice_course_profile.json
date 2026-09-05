@@ -1,21 +1,24 @@
 {
   "name": "Algebra 1 Practice Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.0",
-  "framework_version": "v7.0",
-  "role": "Course-specific Practice behavior. Exact final counts/package procedure will be reconciled in the upcoming Bank/Practice PM update.",
-  "canonical_roles": {
-    "practice_1": "Primary independent practice aligned to the section learning/evidence plan.",
-    "extra_practice": "Recovery and/or extension option.",
-    "cyu": "Retained Check Your Understanding route."
+  "profile_version": "v2.1",
+  "framework_version": "v7.1",
+  "role": "Course-specific Practice behavior. Practice 1 is canonical Bank content; Extra/CYU/middle practice are generated during Practice build.",
+  "question_structure_rule": "Use current universal Question Structure for all authored Practice questions.",
+  "practice_1": {
+    "source": "canonical Bank Practice 1",
+    "visible_blocks": [
+      "Intro",
+      "Review",
+      "Mastery"
+    ],
+    "balance_rule": "True balance across Intro / Review / Mastery. Equal counts when practical; otherwise difference <= 1. Do not let current Intro or current Mastery swallow the set.",
+    "alignment": "Intro block uses current section Intro; Review block uses exact current Review goal/stage; Mastery block uses exact current Mastery goal/stage and is informed by the Exit evidence map."
   },
-  "retired_required_roles": [
-    "Practice Set 2 as a required canonical Bank form",
-    "Practice Set 3 as a required canonical Bank form"
-  ],
-  "generated_middle_practice": {
-    "rule": "Middle practice may be purpose-authored/generated at artifact build time from the Assessment Plan, Question Structure, canonical source items, representations, and misconceptions. It must not invent new assessed content.",
-    "formats": [
+  "generated": {
+    "extra_practice": "Generate as recovery/extension from map, Practice 1, seeds, misconceptions, and Question Structure.",
+    "cyu": "Generate as a concise formative check from the same authorities.",
+    "middle_practice": [
       "stations",
       "Find Someone Who",
       "matching",
@@ -23,12 +26,11 @@
       "task cards",
       "partner sets",
       "whiteboards",
-      "other teacher-approved participation structures"
+      "other approved structures"
     ]
   },
-  "abundance_and_repetition": "Purposeful Algebra repetition remains good. Do not maximize shell variety or run an anti-clone rewrite simply because values/structures repeat.",
-  "response_mode": "constructed/open response by default; game formats may use selected response when explicitly authorized.",
-  "representation_rule": "Render the actual graph/table/context/diagram students must use. Do not replace a needed representation with prose.",
-  "visual_contract": "contracts/practice_visual_contract.json",
-  "count_note": "Do not use legacy 24/24/24/24/6 counts as current authority. New counts are a Bank/Practice PM decision to be made from the revised map."
+  "retired_required_roles": [
+    "Practice Set 2 as canonical Bank inventory",
+    "Practice Set 3 as canonical Bank inventory"
+  ]
 }

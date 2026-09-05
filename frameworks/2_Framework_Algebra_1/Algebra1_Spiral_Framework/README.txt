@@ -1,15 +1,16 @@
-ALGEBRA 1 FRAMEWORK v7.0 — CURRENT NOTES
+FRAMEWORK v7.1 UPDATE
+=====================
 
-Primary authority: Algebra1_Framework_PM.txt + exact assessment_plans/original HTML.
+Canonical operational maps added:
+- curriculum/exit_evidence_map.json + .html
+- curriculum/warmup_progression_map.json + .html
 
-Major revision:
-- replaced all eight embedded Assessment Plans with the approved v6 spiral plans, patched only to add the new Warm-Up and rolling Exit architecture;
-- regenerated assessment_plan_index.json, course_map.json, section_index.json, spiral_stage_map.json, and mastery_goal_map.json;
-- retired old Current Learning/Retrieval/Mastery derivative wording in favor of exact Intro/Review/Mastery language;
-- Algebra Warm-Ups are now Solve / Diamond / Skill Review / Challenge;
-- normal official Exit = 2 new current-Mastery evidence + 2 previous-section parallel reassessments;
-- U1.1 opening Exit pattern intentionally remains unresolved for the upcoming Bank/Exit map discussion;
-- retired Practice 2/3 and fixed six-Example/YTI Bank requirements;
-- smaller authoritative Bank direction is current, but exact new Bank counts/package mechanics are deferred to the Bank Map / Bank PM revision.
+Algebra Bank inventory now locked at the role level:
+- canonical: Exit, Summative V1-V6, Practice 1, WTC, useful Seeds
+- generated downstream: Extra Practice, CYU, middle practice, Notes Examples/YTIs, Warm-Up questions
+- retired Bank requirements: Practice 2/3, fixed Notes pairs, 139-per-section inventory
 
-Do not run a fresh full Algebra Bank with v6.41 inventory assumptions.
+Practice 1 uses a true Intro / Review / Mastery balance and may visibly label those blocks.
+All authored questions use current universal Question Structure except Algebra Warm-Ups.
+
+Exact Assessment Plan HTML remains primary learning authority; operational maps are canonical derivatives.

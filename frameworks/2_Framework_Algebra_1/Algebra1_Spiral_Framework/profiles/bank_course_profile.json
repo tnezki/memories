@@ -2,68 +2,71 @@
   "name": "Algebra 1 Course Bank Profile",
   "course": "Algebra 1",
   "course_family": "spiral_math",
-  "profile_version": "v2.0",
-  "framework_version": "v7.0",
-  "role": "Course-specific Bank content/evidence authority layered under the current Framework. The next Bank PM revision will own the updated execution procedure.",
-  "instructional_spine": {
-    "rule": "Use exact current Unit Assessment Plans. Preserve Intro/Review/Mastery and stable canonical goal identity.",
-    "downstream_alignment": "Instructional/evidence artifacts trace to the Assessment Plan; do not preserve stale old-Bank routing simply because files exist."
+  "profile_version": "v2.1",
+  "framework_version": "v7.1",
+  "role": "Course-specific Bank inventory/content authority. Bank Map and Complete Bank PMs own universal execution procedure.",
+  "question_structure": {
+    "rule": "Use current universal Question Structure for every authored Bank question/task. Warm-Ups are outside Bank and are the explicit course exception.",
+    "seed_exception": "A seed record is not itself a finished question; when a seed becomes a question, Question Structure applies."
   },
-  "bank_strategy": {
-    "rule": "Smaller authoritative Bank, not exhaustive inventory. Author strongest evidence first.",
-    "priority_order": [
-      "official Exit Ticket evidence map/questions",
-      "secure Summative evidence map/questions",
-      "Practice 1 primary independent practice",
-      "Extra Practice recovery/extension",
-      "CYU and WTC routes as retained course resources",
-      "other reusable content only when it earns a canonical Bank role"
-    ],
-    "downstream_generated": [
-      "Notes examples/YTI may be purpose-authored/refined when Notes are built",
-      "middle-practice formats such as stations, Find Someone Who, matching, sorting, task cards, partner sets, and whiteboards may be generated at artifact build time"
-    ]
+  "canonical_maps": {
+    "exit_evidence": "curriculum/exit_evidence_map.json",
+    "warmup_progression": "curriculum/warmup_progression_map.json",
+    "mastery_goals": "curriculum/mastery_goal_map.json"
   },
-  "retired_required_inventory": [
-    "Practice Set 2 as a required canonical Bank destination",
-    "Practice Set 3 as a required canonical Bank destination",
-    "fixed six Example/YTI pairs per section as a Bank requirement",
-    "139-per-section resolved inventory"
+  "bank_inventory": {
+    "exit": {
+      "status": "canonical",
+      "rule": "One official four-question ticket per section. Normal section = 2 current new mastery evidence questions + 2 fresh parallel reassessments of prior section carryforward pair. U1.1 = 4 opening questions; Q1-Q2 carry forward."
+    },
+    "summative": {
+      "status": "canonical_secure",
+      "forms": [
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "sequence": "Author V1 from the Exit/mastery evidence plan; build parallel V2-V4; then author additional secure V5-V6 under the same evidence blueprint and comparable rigor.",
+      "count": "Evidence/time driven by the Bank Map; do not inherit legacy counts."
+    },
+    "practice_1": {
+      "status": "canonical",
+      "role": "Primary independent practice",
+      "stage_balance": "True Intro / Review / Mastery balance. Visible stage headings are allowed and preferred for Algebra. Counts should be equal when practical; otherwise differ by at most one and no stage is token coverage.",
+      "count": "Resolved by Bank Map from coverage/usable-length needs, not legacy 24."
+    },
+    "wtc": {
+      "status": "canonical",
+      "count_per_section": 1,
+      "role": "Connected multipart preview/decomposition task, normally 3-5 parts with a shared stimulus/representation and real carry-forward."
+    },
+    "seeds": {
+      "status": "canonical_when_useful",
+      "count": "No quota",
+      "role": "Reusable context, data, representation, misconception, source idea, or problem setup that may support Practice, Notes, activities, investigations, or other builds without requiring a finished duplicate question."
+    }
+  },
+  "not_bank_inventory": [
+    "Extra Practice",
+    "CYU",
+    "Practice Set 2",
+    "Practice Set 3",
+    "fixed Notes Example/YTI pairs",
+    "finished Warm-Up questions",
+    "legacy 139-per-section inventory"
   ],
-  "inventory_note": "Exact counts for Practice 1, Extra Practice, CYU, WTC, game exports, and final Bank package structure are intentionally deferred to the upcoming Bank Map / Bank PM revision. Do not revive old counts by default.",
-  "warmups": {
-    "architecture": "Separate four-slot course-long fluency track",
-    "slots": [
-      "Q1 Solve / Equation Fluency",
-      "Q2 Diamond / Factoring Pattern",
-      "Q3 Skill Review",
-      "Q4 Challenge"
-    ],
-    "storage_note": "Whether Warm-Up questions are stored in the canonical Bank or generated through recurring-assessment planning is intentionally left to the next Bank/Map PM decision."
-  },
-  "exit_ticket": {
-    "questions": 4,
-    "normal_pattern": [
-      "2 new evidence opportunities from current section Mastery Goal(s)/supporting I Cans",
-      "2 fresh parallel reassessments of the previous section official Exit new evidence jobs"
-    ],
-    "cross_unit": "Unit N Section 1 normally reassesses Unit N-1 Section 5.",
-    "u1_1": "Opening exception intentionally deferred to Bank/Exit map; do not fake repeats.",
-    "intro_review": "Checked formatively elsewhere; targeted reteach/recovery checks can be generated on demand."
+  "downstream_rules": {
+    "extra_practice": "Generate with Practice build using current map + Practice 1 + seeds + Question Structure.",
+    "cyu": "Generate with Practice build using current map + seeds + Question Structure.",
+    "notes": "Purpose-author/refine Examples/YTIs during Notes using Assessment Plan + Exit map + seeds + Question Structure.",
+    "warmups": "Generate during recurring/Practice-to-Summative work from Framework Warm-Up progression map; do not require Bank questions."
   },
   "response_mode": {
     "canonical_instructional": "constructed/open response by default",
-    "unit_summative": "constructed/open response",
-    "blooket_exception": "selected response allowed when an explicit Blooket route is retained"
-  },
-  "representations": {
-    "system": [
-      "Graph",
-      "Equation",
-      "Table",
-      "Context"
-    ],
-    "rule": "Use applicable forms substantively; no decorative quota. Translation among forms is required when the mapped I Can calls for it."
-  },
-  "natural_parameters": "Choose pedagogically natural values. Difficulty should come from Algebra rather than arbitrary number inflation."
+    "summative": "constructed/open response",
+    "game_exception": "selected response only when a later explicit game route authorizes it"
+  }
 }
