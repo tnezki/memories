@@ -100,7 +100,7 @@ Number product-sum -> integer factor pairs -> factoring trinomials -> special fa
 Diamond is a family; blanks/known cells may vary when the mathematics warrants it.
 
 Q3 · SKILL REVIEW
-Rotate foundational skills: fractions, integer operations, order of operations, distribution, combining like terms, substitution/evaluation, exponent laws, function notation, and upcoming prerequisites. It may deliberately preteach a useful prerequisite.
+Rotate foundational skills: fractions, integer operations, order of operations, distribution, combining terms, substitution/evaluation, exponent laws, function notation, and upcoming prerequisites. It may deliberately preteach a useful prerequisite.
 For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use if needed.
 
 Q4 · CHALLENGE
@@ -116,7 +116,7 @@ A normal Algebra section has ONE official four-question Exit Ticket.
 
 Questions 1–2 = TWO NEW current-Mastery evidence opportunities.
 - Select from the current section Mastery Goal(s) and supporting I Can statements.
-- Use a coursewide Exit map to distribute I Can coverage intentionally across repeated goal appearances and later evidence routes.
+- Use the coursewide Exit map to distribute I Can coverage intentionally across repeated goal appearances and later evidence routes.
 - Do not force every supporting I Can onto one four-question ticket.
 
 Questions 3–4 = TWO FRESH PARALLEL REASSESSMENTS.
@@ -148,7 +148,7 @@ Progress Trackers organize the body of evidence around current Mastery Goals and
 Meeting is a professional judgment from sufficient independent evidence, not perfection and not simple averaging. Not Yet / Approaching / Meeting / Exceeding describe the body of evidence, not item-difficulty tiers.
 
 ================================================================
-7. BANK STRATEGY — CURRENT DIRECTION
+7. BANK STRATEGY — LOCKED ROLE ARCHITECTURE
 ================================================================
 
 The old giant Algebra Bank architecture is retired as a course requirement.
@@ -158,15 +158,17 @@ Smaller authoritative Bank; stronger map; strongest evidence first.
 
 Author/lock the strongest Exit Ticket and Summative evidence before filling ordinary classroom inventory. Practice and instruction then prepare students for those mapped evidence demands.
 
-Current roles:
+Canonical Bank roles:
 - Practice 1 = primary independent practice with a true Intro / Review / Mastery balance. The three stage blocks may be visibly labeled Intro, Review, and Mastery. No strand may be token coverage.
-- WTC remains canonical in the Bank, using the same connected multipart role as before.
-- Exit evidence/questions are canonical in the Bank.
-- Secure Summative forms V1-V6 are canonical in the Bank: author V1 from the Exit/mastery evidence plan; create parallel V2-V4; then create additional secure V5-V6 under the same evidence blueprint.
-- Useful reusable SEEDS may be canonical for any later artifact, not just Practice. Seeds preserve strong contexts, representations, misconceptions, data ideas, or problem setups without forcing premature finished-question duplication.
-- Extra Practice and CYU are NOT required Bank inventory; generate them with the Practice build from the map, Practice 1, seeds, misconceptions, and Question Structure.
-- Practice 2 and Practice 3 are no longer required canonical Bank files.
-- Warm-Up QUESTIONS are not Bank inventory; generate them later from curriculum/warmup_progression_map.json.
+- WTC = canonical connected multipart instructional preview/decomposition task.
+- Exit evidence/questions = canonical official evidence.
+- Secure Summative forms V1-V6 = canonical: author V1 from the Exit/mastery evidence plan; create parallel V2-V4; then create additional secure V5-V6 under the same evidence blueprint.
+- Useful reusable SEEDS = canonical when they earn a reusable role for later artifacts. Seeds preserve strong contexts, representations, misconceptions, data ideas, or problem setups without forcing premature finished-question duplication.
+
+Generated downstream, not canonical Bank inventory:
+- Extra Practice and CYU are generated with the Practice build from the map, Practice 1, seeds, misconceptions, and Question Structure.
+- Practice 2 and Practice 3 are retired as required canonical Bank files.
+- Warm-Up QUESTIONS are generated later from curriculum/warmup_progression_map.json.
 - Middle practice (stations, Find Someone Who, matching, sorting, task cards, partner sets, whiteboards, etc.) may be generated at artifact build time.
 - Notes do not require premade canonical Example/YTI inventory. Examples/YTIs are purpose-authored/refined during Notes from the Assessment Plan, Exit evidence map, representations, misconceptions, Question Structure, and useful canonical seeds.
 
@@ -197,7 +199,7 @@ NOTES
 Current Intro Learning Target/I Can statements are the instructional spine. Preserve the current Algebra reading/vocabulary/Math Notes/Reading Apprenticeship visual profile. Examples/YTIs may now be purpose-authored/refined at Notes build time rather than copied from a fixed six-pair Bank inventory. Never leak secure Exit reassessment or Summative items into ordinary Notes examples.
 
 PRACTICE
-Purposeful repeated Algebra is good. Practice 1 and Extra Practice are the current canonical anchors. Middle-practice formats can be generated later from the mapped learning architecture; they do not need permanent Practice 2/3 Bank routes.
+Practice 1 is the canonical Bank anchor and must preserve the mapped Intro / Review / Mastery balance. Extra Practice and CYU are generated downstream during the Practice build. Middle-practice formats can be generated later from the mapped learning architecture; they do not need permanent Practice 2/3 Bank routes.
 
 ACTIVITIES
 Activities change participation around worthwhile mapped mathematics. They may adapt/select canonical Bank items or purpose-author aligned middle-practice questions. They do not need to consume two fixed 24-question Bank routes.
@@ -230,19 +232,23 @@ Read the relevant current profile after this Framework:
 If a legacy lower profile contradicts this v7.1 architecture, this Framework wins and the stale profile should be reconciled at the smallest owning layer rather than treated as a competing rule.
 
 ================================================================
-12. PROCEDURE BOUNDARY / NEXT BUILD STEP
+12. CURRENT BUILD PROCEDURE / NEXT STEP
 ================================================================
 
-This Framework does NOT define the upcoming Bank Map/Bank PM execution procedure. The next design conversation should decide:
-- exact Bank-map structure under the smaller-Bank model,
-- exact canonical destinations/counts,
-- how Warm-Up content is stored/generated,
-- the U1.1 opening Exit Ticket pattern,
-- how the 2-new/2-repeat Exit chain is represented in the Bank map,
-- Practice 1 / Extra / CYU / WTC exact counts and routing,
-- Summative build sequence and secure independence,
-- how downstream generated middle practice traces back to the map.
+The role architecture and operational maps above are settled. Current procedure is owned by the registered PMs:
+- Step 3a `pms_build/bank_map.txt` maps only the current canonical Bank destinations and consumes the canonical Exit map rather than recreating it.
+- Step 3b `pms_build/bank_complete.txt` authors Exit first, then Summative V1-V6, balanced Practice 1, WTC, and mapped Seeds.
+- Steps 5-11 are profile-driven downstream builders. For Algebra they must use this Framework/profile architecture instead of Physics-specific or retired Bank routes.
 
-Do not run a new full Algebra Bank using the retired v6.41 inventory assumptions before that PM/map reconciliation.
+CURRENT NEXT BUILD:
+1. Pilot Unit 1 Bank Map under Step 3a.
+2. Inspect Exit allocation, Summative blueprint, Practice 1 Intro/Review/Mastery balance, WTC, and Seeds.
+3. If accepted, build the complete Unit 1 Bank under Step 3b.
+4. Then run the reconciled Practice-to-Summative chain for Unit 1 before scaling to Units 2-8.
+
+Do not revive v6.41 139-per-section, Practice 2/3, fixed Notes-pair, Bank-CYU, or Bank-Warm-Up assumptions.
+
+LEGACY SUPPORTING manifest.json NOTE
+The supporting-root `manifest.json` is an old packaging/hash inventory from v6.41 and is NOT an authority or discovery front door. Current builds must use this stable Framework front door, exact Assessment Plans, current profiles/contracts, and current operational maps. Do not use stale manifest hashes to override current files.
 
 END — ALGEBRA 1 FRAMEWORK v7.1

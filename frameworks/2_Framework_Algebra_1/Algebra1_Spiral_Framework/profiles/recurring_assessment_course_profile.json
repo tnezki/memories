@@ -1,13 +1,15 @@
 {
   "name": "Algebra 1 Recurring + Assessment Resource Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.1",
+  "profile_version": "v2.2",
   "framework_version": "v7.1",
-  "role": "Course-specific Warm-Up / Exit / Progress / Review / Summative behavior. Renderer mechanics remain owned by the current Base Recurring + Assessment PM.",
+  "role": "Course-specific Warm-Up / Exit / Progress / Review / Summative behavior. Shared PMs own procedure and rendering mechanics; this profile owns Algebra-specific behavior.",
   "warmups": {
     "usage_mode": "notability_first",
     "path_template": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
     "visible_title_pattern": "Section {U}.{S} — Day {D}",
+    "default_days_per_section": 3,
+    "days_rule": "Build three daily Warm-Ups per section by default unless the current teacher request/calendar explicitly changes the count.",
     "architecture": "Every daily Algebra Warm-Up uses four stable jobs; it is a separate fluency track, not a Current/Review/Mastery sampler.",
     "slots": {
       "Q1 Solve / Equation Fluency": "Compact solving mini-set. Course progression: one-step -> mixed one-step -> two-step -> combining like terms -> distribution -> multi-step -> variables both sides -> rational coefficients -> cumulative mix. Older types remain mixed.",
@@ -29,8 +31,8 @@
       "new_current_mastery": 2,
       "previous_section_reassessment": 2
     },
-    "new_slot_rule": "Select two new evidence opportunities from the current section Mastery Goal(s) and supporting I Can statements according to the coursewide Exit map. Prefer intentional distribution, not mechanical first-two selection.",
-    "repeat_slot_rule": "Use two fresh parallel questions that reassess the two new evidence jobs from the previous section official Exit Ticket. Preserve the evidence target and useful difficulty; do not simply copy the exact prompt unless there is a deliberate reason.",
+    "new_slot_rule": "Use the two new evidence opportunities assigned by the coursewide Exit evidence map; do not remap them downstream.",
+    "repeat_slot_rule": "Use the two fresh parallel reassessment questions authored in the canonical Bank for the previous section carryforward pair. Preserve the evidence target and useful difficulty.",
     "cross_unit_rule": "Unit N Section 1 normally reassesses Unit N-1 Section 5.",
     "u1_1_exception": "U1.1 uses four new U1-MG01 readiness/mastery evidence questions. Q1-Q2 are the carryforward pair for U1.2; Q3-Q4 are additional opening evidence.",
     "intro_review_rule": "Intro and Review evidence is primarily formative during instruction. If the teacher wants a focused Intro/Review check, generate a small reteach/recovery check on demand; it is not automatically official/canonical portfolio evidence.",
@@ -41,12 +43,7 @@
     "usage_mode": "print_first",
     "page_count": 2,
     "organization": "Mastery Goal -> supporting exact I Can statements -> portfolio evidence -> current evidence status -> next move",
-    "current_labels": [
-      "Not Yet",
-      "Approaching",
-      "Meeting",
-      "Exceeding"
-    ]
+    "current_labels": ["Not Yet", "Approaching", "Meeting", "Exceeding"]
   },
   "review": {
     "target_rule": "Unit Review prepares the CURRENT Unit Mastery Goals/supporting I Cans and does not mean the Section Spiral Review stage.",
@@ -56,7 +53,9 @@
   "summative": {
     "usage_mode": "secure_print",
     "family": "math_constructed_response",
-    "time": "Evidence/time driven; preserve the current secure form policy until the Summative/Bank PM is explicitly revised."
+    "canonical_forms": ["V1", "V2", "V3", "V4", "V5", "V6"],
+    "source_rule": "Render the six secure canonical Bank forms authored under the accepted Summative blueprint. Do not regenerate them downstream.",
+    "time": "Evidence/time driven; exact form length comes from the accepted Bank Map/Bank."
   },
   "targeted_reteach_check": {
     "status": "on-demand local formative resource",

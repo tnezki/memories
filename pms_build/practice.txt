@@ -1,591 +1,112 @@
-BUILD PRACTICE — SINGLE PASS / BANK-V2 FAMILY-SEED
-====================================================
+BUILD PRACTICE — SINGLE PASS / PROFILE-DRIVEN
+==============================================
 
 STATUS: CURRENT
-ROLE: Build the complete Unit Practice package from the current Framework and finalized Bank-v2.
+STEP: 5
+JOB: practice
+ROLE: Build the selected Unit Practice package from the selected course Framework/profile and COMPLETE canonical Unit Bank.
+
+THIS PM OWNS PROCEDURE, NOT COURSE-SPECIFIC INVENTORY.
+The selected course Framework/profile owns which Practice artifacts exist, which are Bank-canonical, which are generated downstream, counts, labels, stage behavior, and response expectations.
+
+FLOW
+  PHILOSOPHY + RUNTIME + QUESTION STRUCTURE + SELECTED COURSE FRAMEWORK/PROFILE + COMPLETE BANK
+    -> RESOLVE COURSE PRACTICE OUTPUTS
+    -> COPY/RENDER CANONICAL PRACTICE CONTENT
+    -> AUTHOR ONLY PROFILE-AUTHORIZED DOWNSTREAM PRACTICE
+    -> VERIFY ALIGNMENT/REPRESENTATIONS
+    -> RENDER IN CURRENT COURSE SHELLS
+    -> PACKAGE
+
+0. SNAPSHOT / AUTHORITY — HARD
+Pin system + selected course repositories once.
+Read in order:
+1. Curriculum Philosophy
+2. System Runtime Contract
+3. selected Course Framework front door + exact Unit Assessment Plan
+4. current universal Question Structure
+5. Framework-declared Practice profile
+6. Framework course-file-structure + Practice visual contract
+7. COMPLETE Unit Bank front door/index
+8. this PM
+9. current deployed Practice CSS/shell exemplar when the profile requires one
+
+Authority by domain:
+teacher instruction -> Philosophy -> Question Structure -> selected Framework/Assessment Plan -> selected Practice profile + COMPLETE Bank -> this PM -> renderer/CSS/shell.
+
+Never hard-code Physics, Algebra, Calculus, or another course's inventory into a different course build.
+Never search old ZIPs for missing content.
+
+1. BANK GATE — HARD
+Require BANK_MANIFEST status COMPLETE and ready_for_downstream=true.
+Resolve canonical Practice routes through BANK_MANIFEST/ITEM_INDEX only.
+Do not assume Practice 2/3, CYU, Extra, Tarsia, Blooket, family-pool counts, or historical filenames unless the CURRENT selected course profile says so.
+
+2. RESOLVE OUTPUT INVENTORY FROM PROFILE — HARD
+Build exactly the Practice artifacts declared by the selected course profile/current explicit request.
+
+ALGEBRA 1 v7.1 CURRENT RESOLUTION
+- Practice 1: source = canonical Bank Practice 1; preserve mapped visible Intro / Review / Mastery grouping and true balance.
+- Extra Practice: generated now from exact section architecture, Practice 1, canonical Seeds when useful, misconceptions, representations, and Question Structure.
+- CYU: generated now as a concise formative check from the same authorities.
+- Practice 2/3: NOT required/current outputs unless teacher explicitly asks for a local additional set.
+- Middle-practice participation formats are not required Step 5 Practice outputs unless the current profile explicitly assigns them here.
+
+OTHER COURSES
+Follow their current profile exactly. If Physics still declares four Practice sets + canonical CYU/Tarsia/Blooket, preserve that behavior. Do not apply Algebra's reduction to Physics.
+
+3. QUESTION AUTHORING — HARD
+Any newly authored Practice question uses current Question Structure:
+  target -> evidence job -> student action -> structure -> response -> representation -> tool/render route.
+Do not expose secure Exit/Summative prompts or distinctive secure stimuli.
+Canonical Bank Practice questions are rendered faithfully; do not rewrite them merely for variety.
+
+4. ALGEBRA PRACTICE 1 BALANCE — HARD
+When selected course is Algebra 1:
+- preserve three visible blocks: Intro, Review, Mastery when mapped/profile-authorized;
+- equal counts are preferred; otherwise stage counts differ by at most one;
+- Intro = current section Intro learning;
+- Review = exact current Review goal at Review demand;
+- Mastery = exact current Mastery goal at independent demand and informed by Exit evidence;
+- no strand may be token coverage;
+- Practice 1 is not an Exit clone set.
+
+5. GENERATED EXTRA / CYU — ALGEBRA
+Extra Practice:
+- recovery + extension mix;
+- draw on Practice 1 families, Seeds, misconceptions, alternate representations, and current Question Structure;
+- may repeat useful procedures intentionally;
+- do not turn it into a second secure assessment.
+
+CYU:
+- short formative snapshot of current learning and readiness for the section evidence demands;
+- course profile/teacher request determines exact size/layout;
+- author with Question Structure;
+- no secure prompt reuse.
+
+6. REPRESENTATIONS / VALUES
+Use actual graphs/tables/contexts/diagrams when required by the evidence job.
+Use current registered graph/tool routes and course render contracts.
+Choose natural values; difficulty comes from the mathematics, not arbitrary number inflation.
+
+7. RENDER / PATHS
+Use only current selected-course course-file-structure and visual contracts.
+If a deployed shell exemplar is required, fetch that same-course exemplar before rendering and use it only for DOM/class/path behavior, never as question authority.
+
+8. QA — HARD
+[ ] selected course/profile correctly resolved
+[ ] COMPLETE Bank gate passes
+[ ] output inventory matches current profile, not another course
+[ ] every canonical Practice source copied/rendered faithfully
+[ ] every newly authored question executes current Question Structure
+[ ] Algebra Practice 1 has true Intro/Review/Mastery balance when applicable
+[ ] no secure Exit/Summative leakage
+[ ] all answers/solutions correct
+[ ] representations accurate and refs resolve
+[ ] paths/CSS/shell match selected course contract
+[ ] no visible internal metadata
 
-This is ONE Practice build.
-There is no separate Practice map/build/render stage.
+If any hard check fails, repair or FAIL CLOSED with exact path/field.
 
-FLOW:
-  FINAL BANK -> SELECT FAMILIES -> INSTANTIATE -> VERIFY -> RENDER -> PACKAGE
-
-Practice is downstream of the Bank Map.
-Do NOT read the Bank Map during ordinary Practice production.
-
-AUTHORITY / STARTUP
--------------------
-Read current Philosophy + Runtime first.
-Resolve and pin required repositories once at job start.
-Read:
-- current Physics Framework;
-- current Question Structure authority;
-- current Physics Practice profile;
-- current Physics Practice visual contract;
-- current course file-structure contract;
-- finalized Unit Bank.
-
-For current Physics, pin:
-- system repo;
-- course repo.
-
-No web research, prior-ZIP archaeology, File Library search, or substitute-source hunting.
-
-BANK FRONT DOOR — HARD
-----------------------
-Read:
-  banks/unitN/BANK_MANIFEST.json
-  banks/unitN/ITEM_INDEX.json
-
-Require:
-- status = COMPLETE;
-- ready_for_downstream = true.
-
-Use only the Bank routes declared by BANK_MANIFEST:
-- `paths.practice`
-- `paths.cyu`
-
-Resolve the exact section files from the current Framework section IDs.
-
-Current Bank-v2 roles:
-- Practice = `family_seed`
-- CYU = `exact_content`
-
-Do NOT expect the Bank to contain 24 finished questions for Practice Set 1/2/3/Extra.
-The finalized Bank intentionally contains a 30-family Practice pool per section.
-
-Do NOT read `banks/unitN_bank_map/` for ordinary Practice production.
-
-FAILURE CLASSIFICATION
-----------------------
-When failing before build, classify the problem:
-
-SYSTEM_CONTRACT_MISMATCH
-- current PM/profile cannot consume the Bank's declared schema/route.
-
-BANK_INPUT_DEFECT
-- Bank is not COMPLETE/ready;
-- required Practice/CYU route is missing;
-- section Bank file is missing/malformed;
-- family seed lacks required transformation fields;
-- exact CYU item is incomplete.
-
-FRAMEWORK_INPUT_DEFECT
-- current Framework section/I-can/path/profile authority is missing or inconsistent.
-
-Report the exact path/field and pinned commits.
-Do not substitute old Practice files.
-
-OUTPUT FAMILY — PHYSICS
------------------------
-For every Framework section build:
-
-1. Practice Set 1 — 24 questions
-2. Practice Set 2 — 24 questions
-3. Practice Set 3 — 24 questions
-4. Extra Practice — 24 questions
-5. Check Your Understanding / CYU — exact 6 canonical questions
-6. Tarsia — 18 prompt/answer pairs
-7. Blooket — 20 selected-response questions
-
-Use exact deployed filenames from:
-  contracts/course_file_structure.json
-
-Current section folder:
-  practice_sets/practice_sets_{U}_{S}/
-
-Current filenames:
-  practice_set_{U}_{S}.html
-  practice_set_{U}_{S}_2.html
-  practice_set_{U}_{S}_3.html
-  extra_practice_{U}_{S}.html
-  cyu_{U}_{S}.html
-  tarsia_{U}_{S}_practice_3.txt
-  blooket_{U}_{S}_practice_3.csv
-
-PRACTICE FAMILY SELECTION — HARD
---------------------------------
-Read the current Physics Bank-v2 profile before selection.
-
-For each section:
-- there are 30 canonical Practice family seeds;
-- each Practice artifact selects 24 families;
-- every exact section I-can must appear meaningfully in every set;
-- satisfy hard I-can/evidence/representation constraints first;
-- then use deterministic tie-breaking;
-- rotate omissions across Set 1 / Set 2 / Set 3 / Extra when constraints allow;
-- no uncontrolled randomness;
-- no universal family-type quota.
-
-Deterministic selection key:
-  course|unit|section|practice|set_name|bank_fingerprint
-
-Use a stable hash ordering only AFTER hard constraints are satisfied.
-
-Same pinned Bank identity + same set name must select the same family IDs and order.
-
-Across the four sets, prefer broad use of the 30-family pool when compatible with the hard constraints.
-Do not sacrifice I-can/evidence quality just to maximize family coverage.
-
-FAMILY-SEED INSTANTIATION — HARD
---------------------------------
-Every selected Practice family becomes exactly one finished artifact question for that set.
-
-The canonical seed is a COMPLETE example of the family.
-A downstream variant may be created only from:
-- canonical seed content;
-- locked_elements;
-- allowed_variations;
-- required_variations;
-- forbidden_variations;
-- question_design;
-- representation contract;
-- exact I-can/evidence job.
-
-Preserve exactly:
-- primary_i_can_id;
-- exact primary I-can text;
-- evidence_job;
-- intended_reasoning;
-- question_structure_id;
-- response_mode;
-- representation_mode;
-- approximate difficulty;
-- security/nonsecure role.
-
-A variant may change only allowed axes.
-
-If a family appears in more than one Practice set:
-- the first deterministic occurrence MAY use the canonical seed unchanged;
-- later occurrences should normally instantiate a controlled variant;
-- satisfy at least one required evidence-primary variation axis;
-- a noun/name swap alone is not meaningful variation when the family requires more;
-- do not create semantic clones by merely changing a number/object/unit when the evidence experience remains effectively identical.
-
-Variant key:
-  family_id|set_name|bank_fingerprint
-
-Author from the family contract, then independently solve/check the finished item.
-
-QUESTION STRUCTURE — HARD
--------------------------
-Every finished Practice item must actually execute its approved `question_structure_id`.
-
-Do not merely preserve the metadata label.
-
-Check:
-  exact I-can
-    -> evidence job
-    -> student action
-    -> question structure
-    -> response mode
-    -> representation mode
-    -> finished prompt/choices/visual/workspace
-
-Selected response:
-- visible complete choices;
-- normally 4 choices;
-- exactly one keyed answer unless the structure explicitly allows otherwise;
-- choices unique;
-- distractors tied to plausible item-specific errors/misconceptions;
-- no answer leakage.
-
-Constructed response:
-- visible response surface/workspace;
-- if the evidence job requires drawing/constructing a representation, provide the correct blank student response surface.
-
-Quantitative Physics:
-- begin from a real physical situation when the family calls for contextual quantitative work;
-- equations are physical relationships, not naked answer machines;
-- units/sign/direction behavior must be correct.
-
-PRACTICE ARTIFACT SELF-CONTAINMENT — HARD
------------------------------------------
-Finished Practice becomes self-contained for ordinary later surgical repair.
-
-A future generic repair tool must NOT need the Bank Map.
-
-Every finished HTML question carries hidden local metadata:
-- `data-task-id`
-- `data-bank-family-id` or exact CYU `data-bank-id`
-- `data-section`
-- `data-artifact-type`
-- `data-primary-i-can-id`
-- `data-i-can-text`
-- `data-question-structure-id`
-- `data-response-mode`
-- `data-representation-mode`
-- `data-variant-key` for generated Practice-family instances
-
-Do not visibly print this metadata.
-
-Also create:
-  _practice_provenance/unitN/PRACTICE_BUILD_HANDOFF.json
-
-The handoff records, for every finished item:
-- artifact file;
-- local question number;
-- stable task ID;
-- source family/CYU ID;
-- exact I-can ID/text;
-- evidence job;
-- question structure;
-- response mode;
-- representation mode;
-- final prompt/student HTML;
-- choices/key when applicable;
-- answer;
-- solution;
-- representation refs/render route;
-- variant key / changed variation axes for family instances.
-
-This artifact-local handoff is allowed input to a future surgical Practice repair.
-The Bank Map is not.
-
-The student HTML MUST NOT contain answer/solution text.
-
-HTML / CSS FORMAT — ABSOLUTE HARD
----------------------------------
-DO NOT redesign Practice.
-
-Use the deployed proven shell:
-  ../../css/base.css
-  ../../css/practice_set.css
-
-Exactly in that order.
-
-Do not:
-- embed replacement Practice CSS;
-- add a third stylesheet;
-- invent cards/colors/title bars;
-- add visible I-can metadata;
-- add DOK/Bloom/family labels;
-- add teacher answers;
-- add decorative captions.
-
-The current live `css/practice_set.css` is the styling authority.
-The PM owns DOM assembly only.
-
-ORDINARY PRACTICE PAGE DOM — EXACT SHAPE
-----------------------------------------
-Use:
-
-  <div class="container">
-    <h1>...</h1>
-    <div class="dok-section">
-      <div class="problem" ...metadata...>
-        <div class="problem-body">
-          <p><span class="qnum">1.</span> [PROMPT STARTS HERE]</p>
-          [remaining prompt markup only when needed]
-          [representation]
-          <div class="workspace ws-50"></div>
-        </div>
-      </div>
-      ...
-    </div>
-  </div>
-
-HARD:
-- `.qnum` and the beginning of the final prompt MUST be in the SAME first visible `<p>`.
-- A number-only `<p>` followed by a second prompt paragraph is FAIL.
-- prompt first;
-- representation second;
-- workspace last.
-- one `.problem` per item;
-- one `.problem-body` per item;
-- do not add a second divider under the rounded card.
-
-Practice Set 1 / 2 / 3 / Extra:
-- use `ws-50` exactly for ordinary questions unless the current Physics Practice profile changes;
-- do not model-guess larger/smaller workspace during this build.
-
-TITLE
------
-Use the existing Practice title behavior from `practice_set.css`:
-- plain navy `<h1>`;
-- thick 4px navy rule underneath;
-- no filled title card.
-
-Use concise current resource names:
-- `Conceptual Physics Practice 1.3`
-- `Conceptual Physics Practice 2 1.3`
-- `Conceptual Physics Practice 3 1.3`
-- `Conceptual Physics Extra Practice 1.3`
-- `Conceptual Physics Check Your Understanding 1.3`
-
-Preserve established naming unless the current course path/profile explicitly changes it.
-
-MATHJAX
--------
-Use the established Practice MathJax head contract.
-
-Preferred current shell:
-  <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$','$']],
-      displayMath: [['$$','$$']],
-      processEscapes: true
-    }
-  };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-All intended equations must render through MathJax.
-Do not leave equation_relationship items as plain pseudo-math.
-
-TABLES
-------
-For ordinary two-column value/data tables use EXACTLY:
-
-  <table class="values compact-table">
-    <colgroup>
-      <col class="half-col">
-      <col class="half-col">
-    </colgroup>
-    ...
-  </table>
-
-Preserve all final item cell values/headings.
-Do not stretch a tiny two-column table full-width.
-Do not use Markdown/pipe tables.
-
-REPRESENTATIONS
----------------
-Representations are part of the question.
-
-Render order:
-1. qnum + prompt;
-2. representation;
-3. workspace.
-
-Approved render behaviors:
-- canonical course asset: reference the exact current course asset in place;
-- Bank/local binary figure: copy exact bytes when a local artifact copy is required by the route;
-- inline SVG: embed usable answer-neutral SVG;
-- semantic table: render semantic HTML;
-- student-constructed: render the explicit blank response surface.
-
-Use established Practice classes:
-- image figure: `<figure class="ps-figure">`
-- SVG/diagram: `<figure class="ps-diagram">`
-- compact table: `values compact-table`
-
-No descriptive student-facing `<figcaption>`.
-No graph tool invocation in downstream Practice.
-Do not redraw a canonical Bank visual merely for style.
-
-If a required representation route is broken, fail as BANK_INPUT_DEFECT rather than replacing it with prose.
-
-CYU — EXACT CONTENT + EXACT LAYOUT
----------------------------------
-CYU is NOT family-seed generation.
-
-Read the six exact canonical CYU records from `BANK_MANIFEST.paths.cyu`.
-Preserve exact:
-- prompt;
-- choices when selected response;
-- representation;
-- values;
-- I-can identity;
-- answer/solution in provenance only.
-
-Render:
-
-  <div class="container">
-    <h1>Conceptual Physics Check Your Understanding U.S</h1>
-    <div class="dok-section">
-      <div class="cyu-grid">
-        [6 .problem cards]
-      </div>
-      <section class="cyu-workspace-page" aria-label="Workspace"></section>
-    </div>
-  </div>
-
-Each CYU problem:
-- uses `.problem cyu-problem`;
-- qnum + prompt in same first `<p>`;
-- NO per-question `.workspace`;
-- six items only;
-- 3 rows x 2 columns via existing CSS;
-- separate blank workspace page after grid.
-
-Do not inherit `ws-50` into CYU.
-
-TARSIA — 18 PAIRS
------------------
-Treat Tarsia as a downstream derivative from NONSECURE Practice family content.
-
-If a current dedicated Bank export exists, copy it exactly.
-Otherwise derive deterministically under the current Physics Practice profile.
-
-Requirements:
-- exactly 18 prompt/answer pairs;
-- same-section nonsecure Practice families only;
-- concise prompts;
-- short unambiguous answers;
-- preserve exact I-can/evidence job;
-- `derived_from_bank_id` traceability in build provenance;
-- no Exit/Summative content;
-- no Bank mutation.
-
-BLOOKET — 20 QUESTIONS
-----------------------
-If a current dedicated Bank export exists, copy it exactly.
-Otherwise derive deterministically from same-section NONSECURE Practice family content.
-
-Requirements:
-- exactly 20 questions;
-- four visible choices;
-- exactly one correct answer;
-- plausible item-specific Physics distractors;
-- sensible answer-position variation;
-- preserve I-can/evidence job/approximate difficulty;
-- `derived_from_bank_id` traceability;
-- no secure Exit/Summative content;
-- no Bank mutation.
-
-Do not convert a family into a different learning target merely to fit Blooket.
-
-APPEND-ONLY TROUBLESHOOTING LOG
--------------------------------
-Maintain, when needed:
-
-  _practice_provenance/unitN/PRACTICE_CHANGE_LOG.txt
-
-PURPOSE:
-- troubleshooting;
-- compare repeated fresh-chat repair passes;
-- reconstruct why an item changed.
-
-THIS LOG IS NON-AUTHORITATIVE.
-
-Normal build/repair PMs MUST NOT read it as authoring input.
-Read it only when the teacher explicitly asks to troubleshoot/audit change history.
-
-For later repair entries, append:
-- run header;
-- original stable task ID;
-- original I-can ID/text;
-- original question_structure_id;
-- original source family/Bank ID;
-- original response/representation mode;
-- original prompt;
-- original answer/solution only when relevant to the repair;
-- repair class/reason;
-- before -> after;
-- whether I-can/structure/representation/answer changed;
-- verification performed.
-
-Never rewrite old log entries.
-
-QA — FROZEN BUILD CHECK
------------------------
-Before PASS verify:
-
-BANK / SELECTION
-- Bank COMPLETE + ready_for_downstream;
-- exact current section list;
-- 30 Practice family seeds per Physics section unless current profile says otherwise;
-- 24 selected families per P1/P2/P3/Extra;
-- every exact section I-can represented in each set;
-- deterministic selection key used;
-- omission rotation applied when compatible;
-- six exact CYU items per section.
-
-FAMILY VARIANTS
-- every finished Practice item derives from one selected canonical seed;
-- locked fields preserved;
-- only allowed variation axes changed;
-- required meaningful variation satisfied when a variant is created;
-- forbidden variation absent;
-- finished answer/solution independently checked;
-- approved question structure actually executed;
-- required representation actually visible/constructible;
-- selected response choices complete/keyed/unique;
-- no answer leakage.
-
-HTML / CSS
-- exactly base.css then practice_set.css;
-- no third stylesheet;
-- correct existing title shell;
-- ordinary Practice uses `.problem > .problem-body`;
-- qnum + prompt share the same first visible `<p>`;
-- prompt precedes representation;
-- representation precedes workspace;
-- ordinary Practice workspace is `ws-50`;
-- compact tables use `values compact-table` + half-col colgroup;
-- image/diagram classes match existing Practice CSS;
-- no descriptive figcaption;
-- intended MathJax renders.
-
-CYU
-- 6 exact questions;
-- `cyu-grid`;
-- no per-question workspace;
-- one `cyu-workspace-page` after grid;
-- qnum + prompt same first `<p>`.
-
-EXPORTS
-- 18 Tarsia pairs;
-- 20 Blooket questions;
-- Blooket has 4 choices + exactly 1 correct;
-- only nonsecure Practice sources;
-- traceability recorded.
-
-SELF-CONTAINMENT
-- hidden artifact metadata present;
-- PRACTICE_BUILD_HANDOFF.json contains answer/solution + local identity needed for later surgical repair;
-- student pages expose no answers/solutions;
-- no Bank Map dependency after artifact creation.
-
-Do not invent new QA criteria halfway through a run.
-New systemic criteria are parked for a later PM revision.
-
-OUTPUT
-------
-Return ONE ZIP:
-  unitN_practice.zip
-
-ZIP root is intended for extraction into course `practice_sets/`:
-
-  practice_sets_{U}_{S}/
-    practice_set_{U}_{S}.html
-    practice_set_{U}_{S}_2.html
-    practice_set_{U}_{S}_3.html
-    extra_practice_{U}_{S}.html
-    cyu_{U}_{S}.html
-    tarsia_{U}_{S}_practice_3.txt
-    blooket_{U}_{S}_practice_3.csv
-    figures/                 # only if actual local referenced figure copies are required
-
-  ...one folder per section...
-
-  _practice_provenance/
-    unitN/
-      PRACTICE_BUILD_HANDOFF.json
-      PRACTICE_BUILD_REPORT.txt
-      PRACTICE_CHANGE_LOG.txt      # only when useful; append-only/non-authoritative
-
-Do not include:
-- CSS files already deployed in course css/;
-- PM files;
-- Bank Map;
-- Bank ZIP;
-- staging files.
-
-REPORTING
----------
-Keep PRACTICE_BUILD_REPORT.txt short.
-
-Record:
-- pinned system/course commits;
-- Bank manifest identity/fingerprint;
-- family selection IDs per set;
-- variant counts;
-- CYU count;
-- Tarsia/Blooket counts;
-- QA PASS/FAIL;
-- material warnings only.
-
-Do not generate a giant inventory of unchanged items.
+9. OUTPUT
+Return the current course-relative Practice package required by the selected course profile and report the exact files created.
