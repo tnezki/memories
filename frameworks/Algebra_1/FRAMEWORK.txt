@@ -1,689 +1,239 @@
-ALGEBRA 1 FRAMEWORK - PORTABLE MEMORY v6.41 - COURSE-SPECIFIC PHILOSOPHY + BANK/NOTES/PRACTICE/ACTIVITIES/DEMOS-INVESTIGATIONS/PERFORMANCE-TASKS-QUICK-CHECKS/RECURRING-ASSESSMENT PARTNERS + CURATED REFERENCE BRAIN
-==============================================================================
+ALGEBRA 1 FRAMEWORK — PORTABLE MEMORY v7.0 — CURRENT MASTERY-SPIRAL / FLUENCY / EVIDENCE ARCHITECTURE
+=========================================================================================================
 
-
-CANONICAL STORAGE / DISCOVERY NOTE
-----------------------------------
-This stable `FRAMEWORK.txt` is the readable course authority front door. Git history owns version history; the filename does not change when the Framework is revised. Large supporting source/resource trees remain expanded and are resolved through this course's `MANIFEST.json` only when a job requires them.
-
-GENERIC RUN COMMAND CONTRACT
-----------------------------
-The teacher may use the current task PM directly. The task PM owns procedure: what to resolve, validate, assemble, audit, package, and return. This Framework does not own upload lists, Control Panel behavior, ZIP mechanics, or generic execution procedure.
-
-Authority is resolved from the pinned canonical snapshot. Current explicit teacher instruction may override a default for the specific job.
-
-FRAMEWORK ROLE DURING A RUN
-This Framework owns Algebra 1 course-specific behavior and contains the exact Unit Assessment Plans. The universal `_question_structure/` owns universal question/evidence structures. Tools/CSS/templates own implementation mechanics.
-
-ALGEBRA 1 COURSE PHILOSOPHY / BANK PROFILE — READ FIRST
--------------------------------------------------------
-System ownership for this course:
-  Curriculum Philosophy = universal teaching/learning/evidence principles
-  `_question_structure/` = universal question/evidence structure authority
-  THIS Framework = Algebra-specific behavior + exact Unit Assessment Plans
-  current task PM = execution procedure
-  Tools/CSS/templates = implementation/rendering mechanics
-
-Within this Framework, the ORIGINAL Unit Assessment Plan is exact authority for Unit terminology, Learning Targets, I-cans, Unit Source Alignment, Section Spiral Planning, Mastery Goals, and evidence architecture. Derivative indexes/profiles may retrieve or operationalize that content but may not rename or collapse its distinctions.
-
-Read `profiles/bank_course_profile.json` for compact Algebra-specific Bank behavior.
-
-MAP-FIRST AUTHORING / REPETITION DISCIPLINE — COURSE REFLECTION
----------------------------------------------------------------
-The current Curriculum Philosophy requires an explicit pre-authoring map for any multi-item / multi-section build that is authoring new learning or evidence content. In Algebra, use that map to see exact I-can coverage, evidence routes, Graph / Equation / Table / Context use, question/task families, and the actual student actions before template momentum drives the build.
-
-Purposeful repetition remains GOOD. Repeated solve/evaluate/simplify/factor/graph/table/translate families may cluster when they serve fluency, retrieval, repeated evidence, or a high-value representation. Do not impose anti-repetition quotas and do not maximize surface variety.
-
-The map should expose ACCIDENTAL repetition caused by template convenience: the same reasoning suffix, question shell, experience sequence, representation choice, or student action repeated across unrelated learning jobs because it was easy to render. Ask what mapped learning/evidence purpose the repetition serves. If the purpose is real, keep it. If it is only a template byproduct, revise the PLAN before authoring final resources.
-
-This map-first review is PRE-AUTHORING quality design, not a late anti-clone/diversification pass. After authoring, repair actual defects; do not cosmetically rewrite good repeated mathematics merely to make counts look more varied. See `contracts/map_first_repetition_contract.json`.
-
-ALGEBRA NOTES PARTNER - READ BEFORE ANY NOTES BUILD
----------------------------------------------------
-For Notes, read `profiles/notes_course_profile.json` immediately after this Framework PM. It is the course-
-specific partner layered on top of the Base Notes PM.
-
-Current Algebra Notes philosophy:
-- Exact Assessment Plan Learning Targets and I-can statements are the instructional spine. A section is not a
-  generic textbook chapter; its reading, representations, Math Notes, Examples/YTIs, and discussion revolve
-  around the exact I-cans.
-- The finalized Unit Bank is canonical for WTC + Notes Example/YTI prompts, values, figures, and answers. Notes
-  teach around those anchors rather than rewriting them or creating a second Notes question bank.
-- Algebra Notes are primarily current-learning instruction. Review/Mastery appears only when it genuinely supports
-  the current I-can or a canonical Bank anchor.
-- After the WTC and pre-reading setup, organize main content into visible I-can instructional clusters in
-  Assessment Plan order. Within a cluster, reading/representation, discussion, Math Notes, and canonical EX/YTI
-  interleave naturally rather than following a rigid pair-by-pair template.
-- Algebra instructional reading uses a Conceptual-Physics-like voice: mature, concrete, direct, explanatory, and
-  relationship-focused. A normal substantial reading is usually 3–4 developed paragraphs; a little more is
-  better when it genuinely improves understanding. Do not write thin blurbs merely to get to the problem.
-- Bold a target vocabulary/notation term the FIRST time it is meaningfully introduced or defined in the reading.
-  Do not bold every recurrence.
-- EVERY substantial reading is followed immediately by Stop and Discuss. The main S&D is 2–3 questions: 1–2
-  direct/text/vocabulary/representation questions plus the remaining conceptual/inferential question(s). Later
-  in the same I-can cluster, a useful S&D checkpoint is normally ONE focused conceptual question. Do not attach
-  S&D automatically after every Example/YTI.
-- Useful Math Notes abundance is desirable. CPM-style Math Notes are substantive references, not tiny labels:
-  show the actual mathematics, explain meaning, and include worked/reference connections when useful. For an
-  I-can involving multiple representations, actively look for opportunities to show Graph + Equation + Table +
-  Context together around one coherent relationship. The teacher can skip blocks live.
-- Show actual Algebra: equations, tables, graphs, number lines, area models, algebra tiles, function comparisons,
-  and contexts when they add meaning. Graph / Equation / Table / Context remains the representation system; no
-  decorative quota.
-- Canonical Bank content keeps its mathematics, but Notes presentation wrappers are mandatory: every graph uses
-  `<figure class="notes-graph">` so the 2.52in max-size rule fires; simple two-column task tables use
-  `compact-table` with two `half-col` columns so they stay centered, compact, and 50/50. Do not emit bare
-  full-width x/y tables when this compact structure fits.
-- Do not add visible graph figcaptions or decorative graph titles. Preserve only mathematically necessary axis
-  labels, units, ticks, legends, or other labels/data required to interpret the graph. New Notes-specific graph
-  calls normally use a blank title.
-- Reading Apprenticeship supports sense-making: vocabulary sort, skim/notice-predict-wonder, close-read/annotate,
-  discuss meaning/evidence, then apply.
-- Current Algebra opening sequence is Learning Target/I-can overview -> Vocabulary / Key Notation Preview + sort ->
-  What's to Come -> Let's Get Started Notice/Predict/Wonder skim -> close-reading directions -> I Can 1.
-- Notes are Notability-first. Current Algebra visual defaults and wrappers live in
-  `contracts/notes_visual_contract.json`; the approved pilot layout is preserved in
-  `reference_library/notes_layout/`.
-- The approved Unit 1 typography/scale pilot is now the Algebra Notes visual baseline: normal prose/list/table
-  text is 9pt, Example/YTI and I-can headings are 13pt, major Learning/Vocabulary/Summary/Mistakes headings
-  are 18pt, the title-card scale follows the visual contract, and graphs max at 2.52in x 2.52in. Preserve
-  the stronger 20pt What's to Come / Let's Get Started section-heading treatment.
-- Student Notes remain clean. Teacher Notes are a copy of the finalized student file with red/bold teacher support
-  added only inside existing workspaces. Main S&D teacher support includes direct answers + acceptable inference
-  reasoning + evidence to listen for; later one-question checkpoints name the intended insight.
-- Notes end with Summary + Common Mistakes, followed by the Framework-defined blank miscellaneous workspace. No
-  embedded Exit Ticket / Notes Exit Check and no Summary workspace in the current Algebra layout.
-- Production HTML still links exactly base.css then notes.css. The layout reference is NOT a third production
-  stylesheet; it records the approved rules to merge/preserve in the course-level notes.css.
-
-
-ALGEBRA TEACHER-GUIDE DISCOURSE PROFILE — HARD
-----------------------------------------------
-Meaningful discourse is embedded in instructional TEACHER guides where it helps the teacher
-facilitate the exact mathematics being learned. It is not a separate student resource.
-
-Compact teacher-guide format:
-
-  Discourse Moves
-  Teacher Moves
-  - 2–4 short, content-specific bullets
-  Student Moves
-  - 2–4 short, content-specific bullets
-
-Teacher move families:
-- wait / give think time
-- invite more than one strategy, observation, or conjecture
-- revoice a student idea without taking ownership of it
-- ask another student to restate/rephrase the reasoning
-- probe for why / how / evidence / representation
-- ask students to compare, agree/disagree, challenge, or build on another idea
-- connect student approaches, representations, claims, or observations
-
-Student move families:
-- explain
-- clarify
-- restate / summarize
-- compare
-- support with evidence
-- build on
-- question / challenge mathematically
-
-HARD:
-- Tailor the bullets to the exact I-can / task phase / representation / likely misconception.
-- Do not paste the same generic list repeatedly.
-- Keep the block short enough to function as a live-teaching reminder.
-- The teacher can skip/adapt moves live; this is support, not a script.
-- Student-facing files remain clean.
-
-PLACEMENT:
-- Notes teacher copy: ONE compact block for EACH visible I-can instructional cluster. Put it
-  after the most useful Math Notes / diagram / representation for that I-can when possible.
-  STUDENT Notes retain fixed Notability workspaces. TEACHER Notes release fixed heights and
-  expand naturally so answers/discourse push later content downward and never overlap.
-- Activity Options hub: do NOT place discourse blocks inside each individual activity.
-  Instead, place ONE teacher-facing `Teacher & Student Moves Guide` immediately after the
-  activity index. The guide has:
-    1. one compact Teacher Moves / Student Moves entry for each section I-can; and
-    2. compact participation-structure entries for the activity formats that need distinctive
-       facilitation (for example Stations, Find Someone Who, Rally Coach, Showdown, Speed
-       Dating, Think-Trade-Agree).
-  After that guide, keep the individual activity directions/companions unchanged. Printable
-  student companions do not get teacher discourse blocks.
-- Demo teacher guide: each substantive discussion-bearing slide/step gets a block in the
-  matching teacher-detail notes.
-- Investigation teacher guide: each substantive lab/task phase gets a block in the matching
-  teacher walkthrough.
-- Performance Task teacher guide: each major discussion-worthy phase gets a block. Do not
-  force discussion into independent evidence moments.
-- Quick Checks, Practice, Warm-Ups, Exit Tickets, Progress Trackers, Reviews, Review Practice,
-  and Summatives do not receive discourse coaching by default.
-
-PLANNING:
-For discussion-rich instruction, quietly plan with:
-anticipate -> monitor -> select -> sequence -> connect.
-Those five planning moves do not need to be printed as five headings.
-
-TEACHER-NOTES LAYOUT EXCEPTION — HARD
-- Fixed workspace heights are a STUDENT Notability contract, not a teacher-copy contract.
-- Teacher Notes may use a teacher-only style override: height:auto; min-height:0; overflow:visible.
-- Teacher answers + Discourse Moves must push later content downward; overlap is a hard failure.
-- Do not modify deployed student notes.css to solve teacher-only overflow.
-- Visible literal escape sequences such as \n, \r, or \t are final-byte defects in BOTH student and teacher HTML.
-
-PROCEDURE BOUNDARY — NOTES
----------------------------
-PROCEDURE BOUNDARY
-The current Notes PM resolves required inputs and packaging. This Framework contributes Algebra-specific Notes behavior and exact Unit authority only.
-
-ALGEBRA PRACTICE SETS PARTNER - READ BEFORE ANY PRACTICE BUILD
---------------------------------------------------------------
-For Practice Sets, read `profiles/practice_course_profile.json` immediately after this Framework PM, then
-`contracts/practice_visual_contract.json` and `contracts/course_file_structure.json`. This course-specific layer
-sits on top of the Base Practice PM.
-
-Current Algebra Practice behavior:
-- The finalized Unit Bank is canonical for Practice 1, Practice 2, Practice 3, Extra Practice, CYU, Tarsia, and
-  Blooket. The Practice builder renders/copies; it does NOT write replacement questions.
-- Current section counts are 24 + 24 + 24 + 24 Practice questions and 6 CYU questions, with 18 Tarsia pairs and
-  20 Blooket questions when used. These numbers come from the Algebra Bank profile and must match the finalized Bank.
-- Purposeful repeated Algebra families, numeric variants, and exact duplicates are preserved. No anti-clone pass.
-- Practice 1/2/3/Extra are parallel usable options, not a universal direct/justify/error/extension ladder.
-- Exact visible/browser title patterns are: `Algebra Practice U.S`; `Algebra Practice U.S :::: Set 2`;
-  `Algebra Practice U.S :::: Set 3`; `Algebra Extra Practice U.S`; `Algebra Check Your Understanding U.S`.
-- Student HTML is open response, clean, single-column, and shows only local question numbers. Hidden data-bank-id
-  traceability is allowed; no visible Bank metadata, DOK headers, answer dropdowns, or Alignment/evidence panels.
-  Blooket remains the selected-response exception.
-- Production HTML links exactly ../../css/base.css then ../../css/practice_set.css from the deployed section folder.
-  practice_set.css is UNIVERSAL across courses; the Framework mirror must remain byte-identical to the Base Practice
-  Starter copy.
-- Required HTML classes must actually be attached so CSS works: problem/problem-body/qnum, ps-figure or ps-diagram,
-  table.values, workspace + ws-25; ordinary two-column data tables additionally use compact-table + half-col.
-- Visible resource titles use the exact short Algebra naming patterns in the Practice profile and render as navy text
-  with a horizontal navy rule underneath, never a filled title box.
-- Decorative graph figcaptions/titles are omitted. Preserve mathematically necessary labels inside canonical visuals.
-- Initial build uses ws-25 for EVERY ordinary Practice problem. Existing ws-N utilities are intentionally available
-  for the teacher to manually enlarge individual workspaces later. Do not auto-size in the normal build.
-- Algebra CYU uses six canonical questions in a 3-row x 2-column cyu-grid, no per-question workspace, followed by one
-  blank full-page cyu-workspace-page.
-- Canonical graph/figure bytes are copied from the finalized Bank. Practice does not run/copy the Framework graph tool
-  and does not package per-section Practice graph-generator scripts. Missing canonical visuals are upstream Bank defects.
-- Tarsia/Blooket exports are copied from the Bank. `_practice_3` is a dashboard filename convention only.
-- Unit Practice ZIP contains section folders directly so extraction into `practice_sets/` produces live paths.
-
-PROCEDURE BOUNDARY — PRACTICE
-------------------------------
-PROCEDURE BOUNDARY
-The current Practice PM resolves required inputs and packaging. This Framework contributes Algebra-specific Practice behavior and exact Unit authority only.
-
-GRAPH TOOL CAPABILITY INVENTORY — FOR CANONICAL BANK/NOTES VISUAL AUTHORING, NOT PRACTICE RENDERING
-------------------------------------------------------------------------------------------------
-When authoring Bank/Notes/Demos/Investigations visuals, before inventing a figure or assuming the graph tool cannot represent something, read `GRAPH_TOOL_CAPABILITY_INVENTORY.md`. Demos/Investigations are authoring resources and may generate new supported visuals; Practice and normal Activities are excluded because they copy finalized Bank figure bytes and do not invoke the graph tool. The inventory is the easy-to-find list of supported graphs/models. In particular, use comparison grids, context/modeling graphs, number lines, data displays, area/manipulative models, and other supported types when they genuinely serve the learning job; do not reduce all visual authoring to plain tables/text merely because that is easiest.
-
-ALGEBRA-SPECIFIC PHILOSOPHY — HARD RULES
-• The ORIGINAL Assessment Plan exact I-can statements and Current Learning/Retrieval/Mastery architecture are the instructional
-  spine. Do not replace them with generic chapter headings or a second sequence.
-• Useful abundance is desirable. Within a 24-question Practice form, 3–5 closely related instances of one
-  high-value family may be exactly what students need. Do not maximize shell variety merely to make the Bank
-  look diverse.
-• The teacher can skip questions on the fly. A rich digital Bank is allowed to contain more usable options than
-  any one lesson/printout will use.
-• Repeated direct Algebra is legitimate: solve, evaluate, simplify, graph, complete/interpret a table, translate
-  representations, calculate, classify. Do not attach stock explanation wrappers simply to disguise repetition.
-• Graph • Equation • Table • Context are Algebra forms of meaning. Use the applicable forms substantively and
-  translate among them when the I-can supports it.
-• Canonical instructional/Summative Algebra items are constructed/open response. Blooket is the normal
-  selected-response exception.
-• Notes/downstream resources should remain compartmentalized around the exact I-can structure: readings,
-  explanations, Examples/YTIs, representations, Practice, and evidence all point back to those I-cans.
-• If the Framework/I-can architecture changes, downstream resources should be reconciled intentionally. Do not
-  preserve stale ordering simply because an older Bank/Notes file used it.
-
-PURPOSE
--------
-This Framework ZIP is the persistent curriculum-intelligence and positive-authoring
-reference layer for the Algebra 1 SPIRAL course.
-
-It is intentionally COMPACT. It does not carry hundreds of megabytes of raw books.
-Instead, the source material has been condensed and reorganized into section-aware
-reference packets that preserve the parts most useful for future AI builds:
-• strong question/task structures
-• natural Algebra wording models
-• useful contexts
-• common misconceptions/distractor ideas
-• Math Note ideas
-• reusable table/data structures
-• reusable and source-reference figures
-• curated source excerpts and source pointers
-• investigation / performance-task / Quick-Check idea hooks
-
-The goal is the same source-quality effect that makes AP Calculus stronger when AP
-Topic material is available and Physics stronger when a rich conceptual textbook,
-figures, and questions are available—without requiring the teacher to upload the
-original books every time.
-
-THIS IS A SPIRAL COURSE — HARD RULE
------------------------------------
-The ORIGINAL embedded Assessment Plans define TWO distinct vocabularies that must remain distinct:
-
-Unit Source Alignment:
-  Current Learning Source / Retrieval Source / Mastery Source
-
-Section Spiral Planning:
-  Intro / Review / Mastery
-
-These are not aliases. Do not rewrite one vocabulary into the other. Section Spiral Planning `Review` is retrieval practice. A student-facing `Unit Review` is different: it prepares students for the CURRENT Unit Mastery Goals/supporting I-cans and the same mastery evidence represented by the Progress Tracker and Summative.
-
-The curated library improves HOW Algebra is worded, represented, varied, scaffolded, and assessed; it does not invent a second curriculum sequence.
+CANONICAL STORAGE / DISCOVERY
+-----------------------------
+Stable front door: frameworks/Algebra_1/FRAMEWORK.txt
+Supporting root: frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework
+Git history owns version history. The stable filename does not change when revised.
 
 AUTHORITY BY DOMAIN
 1. Current explicit teacher instruction for the specific job.
-2. Current Curriculum Philosophy for universal principles.
-3. Current `_question_structure/` for universal question/evidence structures.
-4. THIS Algebra Framework for course-specific behavior; within it, the ORIGINAL embedded Unit Assessment Plan is exact authority for Unit learning/evidence content and terminology.
+2. Current Curriculum Philosophy.
+3. Current universal Question Structure.
+4. THIS Algebra 1 Framework; exact embedded Unit Assessment Plan HTML is exact Unit learning/evidence authority.
 5. Current task PM for procedure.
-6. Tools/CSS/templates for implementation mechanics.
-
-For Algebra-specific deployed paths, use `contracts/course_file_structure.json` unless the teacher explicitly changes the live structure.
-
-PROCEDURE BOUNDARY — BANK
---------------------------
-PROCEDURE BOUNDARY
-The current Bank PM resolves required inputs, validation, packaging, and delivery. This Framework contributes Algebra-specific Bank behavior and exact Unit authority only.
-
-PRIMARY READ ORDER
-------------------
-1. This Framework PM, especially the Algebra 1 Course Philosophy / Bank Profile above.
-2. For Bank work: profiles/bank_course_profile.json. For Notes work: profiles/notes_course_profile.json. For Practice work: profiles/practice_course_profile.json. For Demos/Investigations work: profiles/demos_investigations_course_profile.json. For Warm-Up/Exit/Progress/Review/Summative work: profiles/recurring_assessment_course_profile.json.
-3. contracts/authority.json.
-4. contracts/course_file_structure.json when the task creates, packages, links, or deploys course files.
-5. For Notes: contracts/base_notes_compatibility.json and contracts/notes_visual_contract.json. For Practice: contracts/base_practice_compatibility.json and contracts/practice_visual_contract.json. For Demos/Investigations: contracts/base_demos_investigations_compatibility.json and contracts/demos_investigations_visual_contract.json. For Warm-Up/Exit/Progress/Review/Summative: contracts/base_recurring_assessment_compatibility.json and contracts/recurring_assessment_visual_contract.json.
-6. ORIGINAL Assessment Plan for requested Unit.
-7. curriculum/section_index.json and curriculum/spiral_stage_map.json.
-8. profiles/language_reading_tone.json.
-9. profiles/assessment_evidence_philosophy.json.
-10. profiles/bank_authoring_quality.json.
-11. profiles/source_enrichment.json and profiles/curated_reference_library.json.
-12. reference_library/question_structures/section_enrichment.json for the section.
-13. reference_library/source_excerpts/section_source_excerpts.json.
-14. GRAPH_TOOL_CAPABILITY_INVENTORY.md before visual authoring; use it to discover supported graph/model types and Diamond variants.
-15. reference_library/reusable_figures/figure_catalog.json and relevant figure files.
-16. reference_library/reusable_tables/table_catalog.json.
-17. reference_library/math_notes/CPM_Math_Notes_Design_Principles.md when building Algebra Notes.
-18. reference_library/math_notes/math_note_ideas.json when building Notes or planning representations.
-19. reference_library/notes_layout/Algebra_Notes_HTML_Structure_Reference.md and
-    reference_library/notes_layout/Algebra_Notes_Layout_Reference_v1.css for current Algebra Notes structure/layout.
-20. reference_library/future_resource_hooks/section_future_resource_hooks.json when building investigations,
-    performance tasks, Quick Checks, or course upgrades.
-21. sources/indexes/source_documents.jsonl only as a fallback when the curated packet is insufficient.
-22. tools/~graph_tool_v12.py when a supported original graph/model is needed.
-23. tools/~finalize_bank.py as the SELF-CONTAINED source copied into the produced Bank.
-
-FINAL PACKAGE FORMAT GUARDS - HARD RULE
----------------------------------------
-The Framework intentionally exposes only TWO production Bank scripts.
-
-  tools/~graph_tool_v12.py
-    Authoritative editable mathematical/data figure generator. Copy intact into each produced Bank as
-    generate_graphs.py and append Unit calls only in the approved append area.
-
-  tools/~finalize_bank.py
-    SELF-CONTAINED local finalizer. Copy intact into each produced Bank as ~finalize_bank.py. It internally
-    embeds the current MathJax/currency repair and deterministic package-audit implementations, regenerates
-    figures, writes FINALIZER_REPORT.txt with concise mechanical review items when possible, validates both Bank HTML views, and creates unitN_bank_FINAL.zip when
-    there is no hard package failure. It requires no companion fixer/audit scripts.
-
-The authoring chat still owns curriculum judgment and mathematical answer verification. The finalizer handles
-deterministic cleanup/audit and reports suspicious items for teacher inspection; it does not rewrite
-curriculum.
-
-
-ALGEBRA PERFORMANCE TASKS + QUICK CHECKS PARTNER - READ BEFORE ANY PERFORMANCE TASK / QUICK CHECK BUILD
----------------------------------------------------------------------------------------------------------
-For these evidence resources, read `profiles/performance_tasks_quick_checks_course_profile.json` immediately after
-this Framework PM, then the relevant visual contract and `contracts/course_file_structure.json`. This layer sits on
-top of the Base Performance Tasks + Quick Checks PM.
-
-Current Algebra behavior:
-- FIRST map the exact Assessment Plan I-can statements for every requested section before writing any HTML. Build
-  and QA both complete course maps, then render from those maps. Do not discover the evidence architecture one
-  section at a time.
-- Quick Checks are quiz-like deeper evidence: a better/bigger picture than an Exit Ticket, independent, about
-  8-15 minutes maximum, printed/collected/scanned for portfolio evidence. One page is preferred when honest; up
-  to two pages is allowed. Never split a problem card. Use blank white workspace, not ruled lines. The approved
-  workspace is DOUBLED: small 1.40in, medium 2.40in, large 3.60in, xlarge 4.80in, equation-response 1.10in.
-- Build SIX parallel Quick Check versions per section from one mapped evidence blueprint, but HOUSE ALL SIX FORMS
-  INSIDE THE ONE dashboard-compatible HTML `u{U}_{S}_quick_check.html`. Do not create `_v2.html` through `_v6.html`.
-  Each version is a complete printable form inside that one file, with its own Version 1-6 footer label and a hard
-  print page break before the next form. Preserve exact I-can coverage/time/difficulty, make permitted value/context/
-  representation variations, and scramble question order across versions before renumbering. Do not create six
-  unrelated quizzes.
-- Quick Checks normally cover all exact current-section I-cans when that can fit honestly inside the time target;
-  otherwise the plan states what is evidenced and what is deferred. The plan rationale must be section-specific;
-  one stock "better than Exit Ticket" sentence repeated across 40 sections does not pass the map-first gate.
-- Performance Tasks are the main Algebra vehicle for DOK 4 and selected DOK 3 evidence. Across an all-course map,
-  DOK 4 should be a major/dominant role; a tiny DOK 4 minority is a plan failure unless the Assessment Plans give
-  a compelling reason. Design from the I-can/evidence job first, then verify the intended DOK is real. Do not use a
-  numeric quota and do not inflate DOK with generic reflection language.
-- Performance Tasks use coherent actions, not one template: collect/measure/model/test; move/time/graph/validate;
-  build/count/generalize/reverse-engineer; audit/repair/stress-test/defend; create/trade/reconstruct/evaluate/revise;
-  compare/optimize/recommend; analyze/select-model/validate. The all-course map should contain meaningful balance,
-  including audit/repair and create/reconstruct performances where the I-cans support them. The ACTION NAME IS A
-  PROMISE: create/trade must really exchange/reconstruct/evaluate; move must really move; collect must really collect;
-  build must really construct; audit/repair must contain a real error/mismatch. Do not relabel a worksheet.
-- Render from the mapped action. Shared performance_task.css controls appearance, NOT intellectual choreography.
-  Do not collapse all 40 tasks into a universal two-page/five-card shell or repeat one stock task heading everywhere.
-- Graph / Equation / Table / Context is a high-value Algebra pathway. Especially useful: collect data -> table ->
-  graph -> equation by hand and/or Desmos -> use the model -> test/evaluate it. Do not force all four when another
-  representation gives better evidence.
-- These are authoring evidence resources, so the Framework graph tool MAY generate new evidence figures/data
-  displays. When student graph construction is itself the evidence, provide the blank/appropriate scaffold instead.
-  If a prompt says a grid/table/diagram/data display is provided, it must actually exist in the HTML/assets.
-- MathJax must be USED, not merely loaded. Author every visible TeX-style expression with `$...$` inline or `$$...$$` display delimiters so content matches the established course-wide MathJax configuration, Framework finalizer, and `~fix_mathjax` repair workflow. Raw visible `x^2`, `b^2-4ac`, `\frac`, `\sqrt`, etc. outside delimiters is a hard failure. Escape literal currency dollar signs as `\$` in HTML source.
-- Use the established course-wide MathJax contract: `inlineMath: [['$','$']]`, `displayMath: [['$$','$$']]`, `processEscapes: true`, then load `tex-mml-chtml.js` with `async`. This must match the existing Framework finalizer and MathJax repair tool; do not invent a PT/QC-only delimiter system.
-- Every Performance Task teacher guide is the finalized student document copied page-for-page, with red answers,
-  sample answers, acceptable reasoning, or evaluation guidance inserted INSIDE the same workspaces.
-- Approved CSS is fixed: Performance Tasks use performance_task.css; Quick Checks use quick_check.css. Stable CSS
-  does not mean stable intellectual choreography.
-- Final all-course ZIP has EXACTLY TWO top-level roots: `performance_task___5134zrt/` and
-  `quick_check____htq5855/`. PLAN artifacts live inside those roots. CSS DOES NOT: production CSS lives at course-root
-  `css/performance_task.css` and `css/quick_check.css`. Section HTML links `../../css/...`. Any `.css` copied inside
-  either returned resource root is a packaging failure. Do not follow older README/comments that say otherwise.
-
-PROCEDURE BOUNDARY — PERFORMANCE TASKS / QUICK CHECKS
-----------------------------------------------------------
-PROCEDURE BOUNDARY
-The current Performance Tasks / Quick Checks PM owns execution inputs and packaging. This Framework contributes Algebra-specific evidence behavior and exact Unit authority only.
-
-ALGEBRA DEMOS + INVESTIGATIONS PARTNER - READ BEFORE ANY DEMOS/INVESTIGATIONS BUILD
----------------------------------------------------------------------------------------
-For Demos/Investigations, read `profiles/demos_investigations_course_profile.json` immediately after this Framework PM, then `contracts/demos_investigations_visual_contract.json`, `contracts/base_demos_investigations_compatibility.json`, and `contracts/course_file_structure.json`. This course-specific layer sits on top of the Base Demos + Investigations PM.
-
-Current Algebra behavior:
-- Execution inputs are resolved by the current Demos/Investigations PM; a Bank may be an optional course-specific reference when the PM/job calls for it.
-- When the teacher requests all Units, build all 8 Units x 5 sections in one production run: 40 Demos + 40 Investigations, each with a teacher guide. BEFORE ANY section HTML, create and QA the complete plan-first map defined in the profile (~demos_investigations_build_plan.json + .html); do not pause for approval unless the teacher asks. Only then render all 40 sections from that plan.
-- U1.1 and other approved prototypes define visual/teacher-guide quality, NOT the default intellectual mechanics. The builder chooses the Investigation type for EVERY section in the complete plan before any HTML exists. Same shell does not mean same experience.
-- Demos are projector-first 5-8 minute curiosity/intellectual-tension hooks that bridge into instruction. The PLAN chooses the hook choreography section by section: physical/manipulative reveal, graph/data reveal, class vote/prediction, movement/human model, competing claims, mini class data collection, contradiction/error reveal, build-then-reveal, four-view mystery, or another section-fit hook. Do NOT force one universal middle slide sequence. If later slides need earlier evidence, have students copy/record it before advancing; later slides use the student notes rather than repeating the prior table/graph/data. Preserve the approved demo.css and final discussion slide.
-- Investigations are optional print/Notability-friendly learning experiences authored from the exact Assessment Plan + Framework section intelligence. FIRST assign each section an Investigation type in the plan, including real student actions, artifact, representations, graph decision, materials, and 3-6 step experience sequence. THEN render. There is NO universal Task 1 / Task 2 shell or fixed middle choreography. Algebra modes include four-view connection; collect-data/build-model; human movement; make/build/manipulative; graph compare/transform; data analysis/model fit; modeling from context; error/claim critique; gallery walk/sort/classify; create-and-trade/reverse-engineer; and approved technology/simulation work. Repeating a mode is fine when it genuinely fits; there are no equal-use quotas.
-- Algebra representation system is Graph / Equation / Table / Context. Use applicable forms substantively. Some investigations should connect all four; others should use only the forms that matter or use a different meaningful action.
-- The section enrichment + future_resource_hooks records are primary ideation routes for Investigations. The graph-tool capability inventory is also a primary ideation route, not merely a rendering reference.
-- Demos/Investigations MAY invoke `tools/~graph_tool_v12.py`. The PLAN must make an explicit graph decision for every section before rendering. Before manually drawing or defaulting to text/table-only, inspect `GRAPH_TOOL_CAPABILITY_INVENTORY.md`; use supported context graphs, comparison grids, number lines, piecewise/inequality graphs, data displays, area models, algebra tiles, etc. when they create real learning value. An all-course Algebra plan with zero/near-zero generated graph/model use is not credible unless graph-heavy sections explicitly have students construct those representations themselves; re-plan before HTML.
-- Current Investigation student surface is intentionally cleaner than the historical archive: minimal decorative boxes, functional cards only when the task actually uses cards, workspace only where needed, compact tables, prompt-before-representation, and no descriptive captions.
-- Demo student HTML uses css/demo.css; Investigation student HTML uses css/investigation.css; all teacher guides use css/teacher_guide.css. Demo guides mirror every slide with notes below. Investigation guides keep the practical overview/Strong Synthesis first, then answered task replicas, and finish with a student-style synthesis replica plus acceptable responses/rationale. The plural `investigations.css`/activity-stations stylesheet is explicitly NOT part of this system.
-- Final all-course delivery is one real course-root drop-in ZIP containing the two root plan artifacts, css/ once, demo/, and investigations/.
-
-ALGEBRA ACTIVITIES PARTNER - READ BEFORE ANY ACTIVITIES BUILD
---------------------------------------------------------------
-For Activities, read `profiles/activities_course_profile.json` immediately after this Framework PM, then
-`contracts/activities_visual_contract.json`, `contracts/base_activities_compatibility.json`, and
-`contracts/course_file_structure.json`. This course-specific layer sits on top of the Base Activities PM.
-
-Current Algebra Activities behavior:
-- Build ONE ACTIVITY OPTIONS HUB per section at the existing dashboard path `activities/uU_S_act1/uU_S_act1.html`.
-  IMPORTANT: one dashboard Activity entry does NOT mean one chosen participation structure. The hub exposes the approved
-  Algebra activity options and links to reusable companion resources.
-- Build TWO reusable canonical question sets per section BEFORE building wrappers:
-    Set 1 = all 24 canonical questions routed from Practice Set 2
-    Set 2 = all 24 canonical questions routed from Practice Set 3
-  Use finalized Bank data/routing as the source; do not require generated Practice HTML. Preserve the intended current +
-  retrieval/mastery + previous-section spiral balance represented by those routes. If a required Practice Set 2 or Practice Set 3 route contains fewer than the expected 24 canonical items, report the upstream source limitation rather than inventing replacements.
-- The same Set 1 and Set 2 mathematics is reused across the hub's projection and printable wrappers. Participation changes; the underlying worthwhile mathematics does not.
-- The first-page Activity Options hub makes every activity NAME a same-document anchor link to that activity's projectable directions section/page inside uU_S_act1.html. Set 1 / Set 2 remain separate links beside the activity name.
-- Approved HUB projection options: Whiteboard Indy, Whiteboard Partners, Rally Coach, Speed Dating Math, Showdown,
-  Think/Trade/Agree, Round Table, Mathematical Hot Seat, Rally Coach II, and Desmos Activity (link/instructions only unless
-  an actual teacher/Framework Desmos source is supplied).
-- Approved HUB handout options: Stations and Find Someone Who. Tarsia may appear as a HUB option/link, but Tarsia content
-  remains owned by Practice; do not generate a second Tarsia export in Activities.
-- Do NOT invent new activity names/themes such as relays, races, quests, or games outside the approved library unless the
-  teacher explicitly requests one or this Framework is intentionally revised.
-- Per section, generate these required files:
-    uU_S_act1.html
-    uU_S_set1_questions_solutions.html
-    uU_S_set2_questions_solutions.html
-    uU_S_set1_stations.html
-    uU_S_set2_stations.html
-    uU_S_set1_find_someone_who.html
-    uU_S_set2_find_someone_who.html
-    figures/ only when referenced
-- Projection decks use all 24 routed questions and alternate Problem N page -> Solution N page.
-- QUESTION PROMPT FIRST for Activities: on every projection question and solution page, render the prompt text before any supporting table, graph, diagram, or figure.
-- Activity projection tables must use compact centered sizing for ordinary small/two-column data tables; do not let base.css stretch them across the whole slide.
-- Stations use the same 24 questions as six stations of four. Each station question page is followed by its answer page;
-  then repeat the 6-station + answer sequence once more when the current gold-standard CSS/format calls for two classroom
-  copies. Stations are printable and use the dedicated Stations stylesheet.
-- Find Someone Who uses the same 24 questions as the matching set in a printable student worksheet/record format plus
-  teacher answer key as supported by the supplied gold-standard stylesheet.
-- Do NOT add a mandatory Activity Check or copy official Exit Tickets into Activities. Activities are optional learning routes,
-  not an evidence subsystem.
-- Finalized Unit Bank is canonical for mathematics. Do not use secure Summatives, official Exit Tickets, Blooket, WTC, or
-  other protected/special-purpose destinations as ordinary Activity source content.
-- Purposeful repeated families and canonical exact repeats are rendered faithfully. Do not drop or replace routed items merely to manufacture variety; Activities must preserve all 24 items on each required route.
-- Copy canonical Bank figure bytes exactly. Normal Activities builds do not invoke or package the graph tool.
-- CSS is external and follows the tested gold-standard files already mirrored in the Framework:
-    Hub + projection decks -> `../../css/activities.css`
-    Stations               -> `../../css/activity_stations.css`
-    Find Someone Who       -> `../../css/activity_find_someone_who.css`
-  `activity_projector.css` is retained as reference/legacy only; do not load it with `activities.css`.
-- Teacher-live Activity hubs/companions are preserved during later course upgrades unless the teacher explicitly asks to
-  replace them.
-- Unit Activity ZIP contains the `uU_S_act1/` section folders directly so extraction into `activities/` creates live paths.
-
-PROCEDURE BOUNDARY — ACTIVITIES
---------------------------------
-PROCEDURE BOUNDARY
-The current Activities PM resolves required inputs and packaging. This Framework contributes Algebra-specific Activities behavior and exact Unit authority only.
-
-CANONICAL SPIRAL VOCABULARY — HARD
-----------------------------------
-Do not collapse the two Assessment Plan vocabularies.
-
-Unit Source Alignment = Current Learning Source / Retrieval Source / Mastery Source.
-Section Spiral Planning = Intro / Review / Mastery.
-
-They are not aliases. `Review` inside Section Spiral Planning means retrieval practice. The deployed student-facing `Unit Review` is not that stage: it prepares students for the CURRENT Unit Mastery Goals/supporting I-cans and the same mastery evidence represented by Progress Tracker + Summative. Historical/source Unit identity remains internal.
-
-ALGEBRA RECURRING + ASSESSMENT PARTNER - READ BEFORE WARM-UP / EXIT / PROGRESS / REVIEW / SUMMATIVE BUILDS
----------------------------------------------------------------------------------------------------------
-For these resources, read `profiles/recurring_assessment_course_profile.json` immediately after this Framework PM, then
-`contracts/base_recurring_assessment_compatibility.json`, `contracts/recurring_assessment_visual_contract.json`, and
-`contracts/course_file_structure.json`. This course-specific layer sits on top of the Base Recurring + Assessment Resources PM.
-
-Current Algebra behavior:
-- Warm-Ups are downstream renderings of canonical Bank Warm-Up routes. They are Notability-first and use the tested two-card
-  physical/import page geometry. HEADER IS LOCKED to only `<header class="warmup-header"><h1>Section U.S — Day D</h1></header>`.
-  Do not add a course/unit kicker, subtitle, Name/Date lines, or meta block. Do not add a visible workspace/WORK box; the blank
-  remainder inside each fixed-height problem card is the Notability writing area. If legacy markup remains, only `workspace
-  wu-ws-000` is allowed. The Bank profile owns counts/routing; the renderer must not invent replacements.
-- Exit Tickets are strictly projected. Each Bank-defined ticket is one full viewport with all questions visible at once; the first
-  viewport is the section/Ticket A-B-C index. No handwriting workspace.
-- Progress Tracker is a two-page print student-ownership document driven by the ORIGINAL Assessment Plan: Mastery Goal ->
-  supporting exact I-can statements -> portfolio evidence -> current evidence status -> next move.
-- Review CONTENT PROFILE: the CURRENT Unit's Mastery Goals + exact supporting I-cans are the content authority. Historical/source Unit identity is internal only. Algebra requires a meaningful DOK perspective and final readiness check in the main study guide.
-- Review Practice CONTENT PROFILE: four open-response questions per current Unit Mastery Goal. Prefer appropriate non-secure Bank items aligned to that Goal/I-can; when insufficient, the Base Recurring Review renderer may author fresh parallel review questions directly from the Goal/I-can. Secure Summative items and official Exit Tickets are excluded.
-- REVIEW SHELL OWNER: the current Base Recurring + Assessment PM is the ONLY owner of Review/Review Practice HTML structure, navigation, focus-heading presentation, CSS classes/paths, and packaging mechanics. This Framework must not be used as an alternate shell/template specification.
-- Algebra Summative uses the MATH constructed-response family: `../../css/base.css` then `../../css/summative_math.css`.
-  Form count and time/item policy remain owned by `profiles/bank_course_profile.json`; the current profile resolves to V1-V6.
-  A stale rendered/template HTML is NEVER form-count authority: ignore/remove V7/V8 sections, keys, selectors, or navigation when
-  they are absent from the current Bank/Framework. Generate visible version controls from the active form IDs.
-  Student forms hide internal DOK/section/Bank metadata and use flexible problem-card workspace by actual task demand.
-- CSS filenames and deployed paths are exact and live in `contracts/course_file_structure.json`; do not revive the old generic Physics Summative stylesheet inside Algebra.
-- These downstream resources reuse finalized Bank figures and do not package/invoke the graph tool.
-
-PROCEDURE BOUNDARY — RECURRING / ASSESSMENT
------------------------------------------------
-PROCEDURE BOUNDARY
-The current Recurring/Assessment PM resolves required inputs, rendering, QA, and packaging. This Framework contributes Algebra-specific content/profile requirements and exact Unit authority only.
-
-FILE STRUCTURE / DEPLOYMENT — HARD RULE
--------------------------------------
-The Framework owns the canonical Algebra course path contract in:
-
-  contracts/course_file_structure.json
-
-The teacher dashboard snapshot used to derive that contract is preserved at:
-
-  reference_library/deployment/teacher_dashboard_reference.html
-
-When a task creates, packages, links, moves, or upgrades a course resource, use the
-Framework path contract instead of copying a hard-coded path table from the task PM.
-If an older PM contains a conflicting course path, the Framework path contract wins
-unless the user's current instruction explicitly changes the structure.
-
-This keeps Notes, Banks, Practice, Demos, Investigations, Performance Tasks, Quick
-Checks, assessment files, and dashboard navigation synchronized when the site
-structure changes. Resource-specific CSS/class/layout rules may remain in the task PM,
-but deployment depth must be resolved from the Framework path.
-
-QUALITY ENRICHMENT — HARD RULE
-------------------------------
-Do not merely read the Assessment Plan and generate generic template questions.
-Before authoring a section, use its curated packet to build a private source/variety
-plan. Borrow INSTRUCTIONAL ROLES from the references—natural wording, task shape,
-representation, context, scaffold, misconception—not protected wording by default.
-
-A plain mathematical prompt is better than a fake story. If context is used, name
-real quantities and natural units. Avoid repeated GENERIC PSEUDOCONTEXT skeletons such as
-"A quantity starts...", "A plan begins...", or generic "units" when the quantity can
-be named or the context should be removed. This rule does NOT prohibit repeated concise
-procedural Practice families or numeric variants; those repetitions are often desirable.
-
-REUSABLE FIGURES
-----------------
-reference_library/reusable_figures/ contains two classes:
-
-APPROVED BANK EXAMPLES
-  Figures already generated for this course and judged useful. Direct reuse is allowed
-  when the labels/context still fit and remain answer-neutral; otherwise adapt/regenerate.
-
-SOURCE REFERENCE FIGURES
-  Crops from user-supplied Algebra source material. These preserve useful visual roles
-  and layouts for future AI inspection. Treat them primarily as visual models: recreate
-  or adapt the role for new student materials unless exact reuse is explicitly intended.
-
-The figure catalog maps files to candidate sections and roles. No figure quota exists.
-A representation-heavy section with almost no meaningful visual/table work must be
-rechecked before PASS.
-
-CPM VISUAL POINTERS
--------------------
-The CPM MHTML source referenced many remote images that were not physically embedded
-in the archive. Their alt descriptions/source pointers are condensed in
-reference_library/reusable_figures/cpm_visual_pointer_catalog.json. Use those records
-as visual-design references; do not require the original huge CPM archive for routine
-builds.
-
-TABLES / DATA
--------------
-reference_library/reusable_tables/table_catalog.json stores reusable TABLE STRUCTURES,
-not fixed-answer templates. Use them to vary representations and to make reasoning
-visible. Change values/context to fit the canonical item while preserving the intended
-mathematical structure.
-
-MATH NOTES / NOTES TONE
------------------------
-reference_library/math_notes/math_note_ideas.json gives section-specific Math Note ideas. They support
-downstream Notes and representation planning but never replace canonical Bank Examples/YTIs or override the
-Assessment Plan.
-
-Algebra Notes/downstream resources are intentionally compartmentalized around the exact I-can structure.
-Readings, explanatory notes, Examples/YTIs, representations, and Practice should make it obvious which I-can
-job they serve. Reorder/clean formatting when useful, but do not blur the section into a generic textbook
-chapter or preserve stale sequencing after the Framework/I-can architecture changes.
-
-Algebra Notes prose uses the Conceptual Physics benchmark for voice: clear, mature, concrete, direct, and
-conceptual, with explanations that develop relationships and why the mathematics works. A normal substantial
-I-can reading is usually 3–4 developed paragraphs; a little more is better when it adds real explanatory value.
-Avoid thin one- or two-paragraph blurbs and avoid dry procedure lists. Bold each target vocabulary/notation term
-at its first meaningful introduction/definition, then return to normal weight on later occurrences.
-
-Every substantial reading is followed immediately by Stop and Discuss: normally 2–3 questions with 1–2
-direct/text/vocabulary/representation checks and the remaining conceptual/inferential question(s). Later in the
-same I-can cluster, an additional checkpoint is normally one focused question when useful.
-
-Math Notes should be plentiful when useful. Treat them as durable references modeled on the substantive CPM
-"Methods and Meanings" role: definitions/meaning, representation connections, worked/reference examples, and
-clear structural relationships. For multiple-representation I-cans, look especially for a coherent 2x2
-Graph / Equation / Table / Context reference rather than merely naming the four forms.
-
-QUESTION VARIETY / ABUNDANCE
-----------------------------
-Use real mathematical variety when it helps the I-can: direct skill, reverse reasoning, representation
-translation, interpretation, compare/contrast, error analysis, modeling/context, create/complete a
-representation, and justification. Do not force all types into every section.
-
-For Algebra, variety is NOT the goal by itself. Within each 24-question Practice form, intentionally giving
-3–5 clean versions of a high-value family can be better than inventing five different wrappers. Repeated
-numeric/procedural forms are legitimate. Avoid fake variety from noun swaps, generic contexts, or stock
-reasoning suffixes.
-
-ASSESSMENT / GRADING PHILOSOPHY
--------------------------------
-The original Assessment Plan is authoritative. Evidence accumulates toward Mastery
-Goals. Meeting does not require perfection. Progress labels are not difficulty bands.
-Exceeding can emerge through transfer/less-familiar representation/extended reasoning
-rather than a mandatory trick question. Make reasoning visible when the evidence
-standard requires it. DOK is descriptive, not a quota.
-
-LIVE COURSE / FUTURE UPGRADES
------------------------------
-Teacher-live investigations, performance tasks, Quick Checks, and other resources may
-be added or improved after teaching and weekly reflection without being pushed back
-into the Banks. A later one-click course upgrade from newer Banks must preserve those
-live resources unless explicitly replaced.
-
-PACKAGE MAP
------------
-assessment_plans/original/                         authoritative unchanged plans
-curriculum/                                        section + spiral maps
-profiles/bank_course_profile.json                  Algebra-specific Bank behavior / embedded course layer
-profiles/                                          tone, evidence, enrichment contracts
-reference_library/question_structures/             section-specific question archetypes
-reference_library/source_excerpts/                 condensed strong source passages/models
-reference_library/reusable_figures/                approved + reference visual library
-reference_library/reusable_tables/                 reusable table/data structures
-reference_library/math_notes/                      CPM-informed design principles + section Math Note ideas
-reference_library/notes_layout/                     approved Algebra Notes HTML/CSS structure reference
-reference_library/deployment/shared_css/practice_set.css  approved Algebra Practice Sets CSS reference
-reference_library/deployment/shared_css/{warmup,exit,progress_tracker,review,review_practice,summative_math}.css  approved recurring/assessment CSS references
-profiles/recurring_assessment_course_profile.json   Algebra Warm-Up/Exit/Progress/Review/Summative behavior
-reference_library/future_resource_hooks/           investigation/PT/Quick-Check seeds
-reference_library/deployment/                      teacher-dashboard path/reference snapshot
-sources/indexes/source_documents.jsonl              compact fallback searchable corpus
-tools/~graph_tool_v12.py                           authoritative graph tool
-tools/~finalize_bank.py                            self-contained MathJax/polish/audit/final-ZIP tool
-contracts/                                         authority + file-structure + live-course upgrade rules
-
-V6.21 NOTE (2026-08-22): Added the shared Recurring + Assessment resource partner for Warm-Ups, Exit Tickets, Progress Tracker, Review, and Summative. Replaced the stale Algebra Framework Physics Summative stylesheet reference with `summative_math.css`, added exact live path/CSS contracts, and made the Framework/manifest/header agree on v6.23. No Bank/Notes/Practice/Activities curriculum behavior changed.
-
-PRE-ZIP FINAL-BYTE RULE: For any generated HTML resource, run the Framework `tools/~fix_mathjax_v10.py` against the complete UNZIPPED staging output before creating the deliverable ZIP, then rerun HTML/MathJax/path QA on the repaired bytes. The tool is a Framework/build-time dependency and is not packaged into ordinary resource ZIPs unless an explicit resource contract says otherwise. Bank `~finalize_bank.py` re-applies the embedded v10-equivalent repair before creating `unitN_bank_FINAL.zip`.
-
-END - ALGEBRA 1 FRAMEWORK v6.34
-
-
-v6.23 (2026-08-22): Warm-Up rendering correction — replaced the under-specified header/workspace behavior with the tested Notability contract: simple Section/Day header only and no visible workspace box.
-
-
-v6.23 (2026-08-22): Summative stale-template guard — current Framework/Bank form IDs outrank old rendered HTML. Current Algebra resolves to V1-V6; stale V7/V8 controls/content are removed rather than preserved.
-
-
-v6.26 (2026-08-22): added the Base Demos + Investigations partner; normal builds now use Base PM + Framework only (Bank optional reference), all-8-unit Algebra scope is explicit, demo.css and teacher_guide.css are preserved, investigation.css is intentionally redesigned, and the stray plural investigations.css/activity-stations file is explicitly excluded.
-
-v6.26 (2026-08-22): refined Demos/Investigations presentation contract: demos now explicitly use student-copied evidence instead of repeating prior-slide tables/evidence boxes; Investigation teacher guides keep Strong Synthesis in the overview and add a final student-style synthesis answer walkthrough; teacher-guide table styling is cleaner and more compact.
-
-
-v6.29 (2026-08-22): added the Performance Tasks + Quick Checks partner/profile, hard I-can/evidence map-first gate, approved PT/QC visual contracts/CSS mirrors, Algebra Performance Task DOK 4 + selected DOK 3 role, quiz-like 8-15 minute Quick Checks, mirrored red-answer PT teacher guides, and exact two-root all-course package contract.
-v6.28 (2026-08-22): replaced the loose Demos/Investigations variety-plan step with a hard plan-first authoring gate: map every section's Investigation type/action/artifact/representations/graph decision/experience sequence before any HTML, package the plan artifacts, and render faithfully from the plan. Added Algebra graph-use sanity checks before rendering.
-v6.27 (2026-08-22): strengthened Demos/Investigations course-wide variety planning; U1.1 is visual-quality reference rather than task-mechanics template; added Algebra Demo/Investigation mode libraries and made the graph-tool capability inventory an active authoring/ideation route for Demos/Investigations.
-
-
-V6.34 NOTE (2026-08-22): Reconciled Framework MathJax tooling to v10. The standalone tool is `tools/~fix_mathjax_v10.py`; the Bank finalizer embeds the v10 config-alignment repair and applies it before the final ZIP. Base resource PMs may invoke the Framework v10 tool against staging HTML before packaging. No Algebra learning architecture or approved visual format changed.
-
-v6.36 GENERIC-RUN RECONCILIATION
-- Generic command: `Carefully read PM and Run.`
-- Uploaded executable Base PM determines the operation.
-- Framework determines course-specific behavior and scope inputs.
-
-V6.36 NOTE (2026-08-23): Canonicalized Current Learning / Retrieval / Mastery terminology; retained legacy Intro/Review Bank-label compatibility; routed Unit Review + Review Practice to the current Unit Mastery Goals rather than the Retrieval stage; prohibited historical source-unit labels in student-facing mastery resources.
-
-V6.41 NOTE (2026-08-28): Reconciled authority ownership. Preserved Unit Source Alignment and Section Spiral Planning as distinct vocabularies; removed active alias rules; clarified section Review versus student-facing Unit Review; delegated universal question structures to `_question_structure/`, procedure to task PMs, and rendering mechanics to tools/CSS. All embedded Assessment Plans remain unchanged.
-
-V6.40 NOTE (2026-08-24): Reconciled Review ownership. Algebra Framework owns current-Unit Mastery content requirements and Algebra question-count/DOK expectations; the Base Recurring + Assessment PM is the sole Review/Review Practice shell/navigation/CSS/package owner.
+6. Tools/CSS/templates for implementation/rendering.
+
+The Framework owns Algebra-specific learning architecture, recurring routines, evidence behavior, representations, course content decisions, source intelligence, and exact Assessment Plans. PMs own execution procedure and packaging.
+
+READ ORDER
+1. Current Curriculum Philosophy
+2. Current universal Question Structure when questions/evidence are involved
+3. This Framework + contracts/authority.json
+4. Exact requested Unit Assessment Plan
+5. Current task PM
+6. Relevant course profile/contracts/indexes
+7. Curated references/tools only as needed
+
+================================================================
+1. FROZEN COURSE STRUCTURE
+================================================================
+  Unit 1: Foundations of Functions and Algebra
+  Unit 2: Linear Functions and Modeling
+  Unit 3: Systems and Constraints
+  Unit 4: Function Families and Transformations
+  Unit 5: Factoring and Quadratic Functions
+  Unit 6: Solving and Modeling with Quadratics
+  Unit 7: Exponential Functions and Modeling
+  Unit 8: Function Analysis, Modeling, and Synthesis
+
+Each Unit has five approved sections. Preserve the current section sequence unless the teacher explicitly reopens it. The exact section titles, Learning Targets, I Can statements, Intro/Review/Mastery placements, and Mastery Goals live in assessment_plans/original/ and the regenerated curriculum indexes.
+
+================================================================
+2. EXACT MASTERY SPIRAL — HARD
+================================================================
+
+Intro in Unit N -> Review in Unit N+1 -> Mastery in Unit N+2.
+Review in Unit N -> Mastery in Unit N+1.
+
+Unit 1 and Unit 2 include readiness/prior-course mastery windows so every Unit can still carry Intro + Review + Mastery simultaneously.
+
+Section numbers do NOT have to match across Units. Place Review/Mastery where they fit the current section best while preserving the exact learning path.
+
+CANONICAL GOAL IDENTITY — HARD
+If a goal appears as Review and later Mastery, keep the exact goal ID/title/description. Do not rewrite the goal to make it sound easier/harder. Stage changes support and evidence demand:
+  Intro = first learn the idea with support.
+  Review = same skill again with less support, a new representation, or a slightly harder context.
+  Mastery = independent use; choose representation/method when needed and explain when the task requires it.
+
+Same-day Intro, Review, and Mastery are distinct strands. They do not need to share the same topic.
+
+Future pipeline:
+  Unit 7 Intro -> Unit 8 Review -> Next Course Unit 1 Mastery.
+  Unit 8 Intro -> Next Course Unit 1 Review -> Next Course Unit 2 Mastery.
+
+Use curriculum/mastery_spiral_mapping.html and curriculum/mastery_goal_map.json as coursewide retrieval aids. Exact Unit Assessment Plan HTML remains primary authority.
+
+================================================================
+3. TWO DIFFERENT SPIRALS
+================================================================
+
+Algebra 1 has TWO intentionally different long-term systems:
+
+A. CONCEPTUAL / MASTERY SPIRAL
+Owned by the Assessment Plans: Intro -> Review -> Mastery.
+
+B. FLUENCY SPIRAL
+Owned primarily by Warm-Ups. It builds durable procedural/foundational capacity across the year and does not need to mirror today's Intro/Review/Mastery strands.
+
+Do not collapse these two systems.
+
+================================================================
+4. ALGEBRA WARM-UP ARCHITECTURE — HARD
+================================================================
+
+Every normal Algebra Warm-Up uses four stable jobs:
+
+Q1 · SOLVE / EQUATION FLUENCY
+A compact solving mini-set. Course progression:
+  one-step -> mixed one-step -> two-step -> combining like terms -> distribution -> multi-step -> variables on both sides -> rational coefficients -> cumulative mixed solving.
+Older types continue after harder types appear.
+
+Q2 · DIAMOND / FACTORING PATTERN
+Number product-sum -> integer factor pairs -> factoring trinomials -> special factoring patterns.
+Diamond is a family; blanks/known cells may vary when the mathematics warrants it.
+
+Q3 · SKILL REVIEW
+Rotate foundational skills: fractions, integer operations, order of operations, distribution, combining like terms, substitution/evaluation, exponent laws, function notation, and upcoming prerequisites. It may deliberately preteach a useful prerequisite.
+For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use if needed.
+
+Q4 · CHALLENGE
+Short reasoning/pattern/generalization/error-analysis/representation/nonroutine work. The challenge is not merely ugly arithmetic. Everyone can attempt it; full completion is not required for every student.
+
+Warm-Up routing is NOT 2 Current + 1 Review + 1 Mastery and is NOT an A/B/C stage sampler anymore.
+
+================================================================
+5. OFFICIAL EXIT TICKET ARCHITECTURE — HARD
+================================================================
+
+A normal Algebra section has ONE official four-question Exit Ticket.
+
+Questions 1–2 = TWO NEW current-Mastery evidence opportunities.
+- Select from the current section Mastery Goal(s) and supporting I Can statements.
+- Use a coursewide Exit map to distribute I Can coverage intentionally across repeated goal appearances and later evidence routes.
+- Do not force every supporting I Can onto one four-question ticket.
+
+Questions 3–4 = TWO FRESH PARALLEL REASSESSMENTS.
+- Reassess the two new evidence jobs from the PREVIOUS section's official Exit Ticket.
+- Preserve the evidence target and usable difficulty.
+- Vary values, representation, context, or structure when useful; do not merely copy exact wording by default.
+
+The chain continues across Unit boundaries:
+  Unit N Section 1 normally reassesses Unit N-1 Section 5.
+
+UNIT 1 SECTION 1 OPENING EXCEPTION
+There is no previous Algebra Exit Ticket. Do NOT fake two repeats. The exact U1.1 four-question opening pattern is intentionally left unresolved until the upcoming Bank/Exit map discussion. This is a declared open design decision, not permission to reuse the old A/B/C routing.
+
+INTRO / REVIEW FORMATIVE CHECKING
+Intro and Review are checked through instruction, Warm-Ups when naturally relevant, Practice, CYU, discussion, whiteboards, activities, teacher observation, and other formative work. If the teacher wants a focused Intro/Review check after reteaching, generate a small targeted RETEACH / RECOVERY CHECK (normally 1–3 focused questions). It is not automatically an official Exit Ticket, Bank requirement, or portfolio event.
+
+Exit Ticket A/B/C as three canonical stage tickets is RETIRED for Algebra 1.
+
+================================================================
+6. EVIDENCE / PORTFOLIO PHILOSOPHY
+================================================================
+
+Official Exit Tickets are short rolling mastery evidence, not the only evidence source.
+Quick Checks provide later deeper evidence.
+Performance Tasks provide richer transfer/modeling evidence where appropriate.
+Summatives provide broader secure evidence.
+Progress Trackers organize the body of evidence around current Mastery Goals and supporting I Can statements.
+
+Meeting is a professional judgment from sufficient independent evidence, not perfection and not simple averaging. Not Yet / Approaching / Meeting / Exceeding describe the body of evidence, not item-difficulty tiers.
+
+================================================================
+7. BANK STRATEGY — CURRENT DIRECTION
+================================================================
+
+The old giant Algebra Bank architecture is retired as a course requirement.
+
+CURRENT PRINCIPLE
+Smaller authoritative Bank; stronger map; strongest evidence first.
+
+Author/lock the strongest Exit Ticket and Summative evidence before filling ordinary classroom inventory. Practice and instruction then prepare students for those mapped evidence demands.
+
+Current roles:
+- Practice 1 = primary independent practice aligned to the section evidence/learning plan.
+- Extra Practice = recovery and/or extension.
+- CYU remains useful.
+- WTC remains a useful recurring plan/route.
+- Practice 2 and Practice 3 are no longer required canonical Bank files.
+- Middle practice (stations, Find Someone Who, matching, sorting, task cards, partner sets, whiteboards, etc.) may be generated at artifact build time.
+- Notes do not require six premade canonical Example/YTI pairs. Examples/YTIs may be purpose-authored/refined during the Notes build from the Assessment Plan, representations, misconceptions, Question Structure, and useful canonical source material.
+
+IMPORTANT: exact new Bank counts/package mechanics are intentionally deferred to the NEXT Bank Map / Bank PM revision. Do not revive legacy 139-per-section or 24/24/24/24 counts while that revision is pending.
+
+================================================================
+8. REPRESENTATION SYSTEM
+================================================================
+
+Graph · Equation · Table · Context are the core Algebra forms of meaning.
+Use the applicable forms substantively and translate among them when the exact I Can supports it. Representation use is not an equal-percentage quota.
+
+Function language develops across the course:
+  input/output -> function/not a function -> f(x) -> evaluation -> domain/range -> key features.
+
+Domain/range is woven where natural rather than isolated as a standalone section.
+Exponent laws are explicit in polynomial/exponential work and supported by Warm-Up Skill Review.
+Radicals/irrational values stay lean and appear naturally in quadratic solving.
+Statistics stays light and model-focused.
+Literal-equation rearranging and sequences do not require standalone sections under the current course map.
+
+================================================================
+9. NOTES / PRACTICE / ACTIVITIES
+================================================================
+
+NOTES
+Current Intro Learning Target/I Can statements are the instructional spine. Preserve the current Algebra reading/vocabulary/Math Notes/Reading Apprenticeship visual profile. Examples/YTIs may now be purpose-authored/refined at Notes build time rather than copied from a fixed six-pair Bank inventory. Never leak secure Exit reassessment or Summative items into ordinary Notes examples.
+
+PRACTICE
+Purposeful repeated Algebra is good. Practice 1 and Extra Practice are the current canonical anchors. Middle-practice formats can be generated later from the mapped learning architecture; they do not need permanent Practice 2/3 Bank routes.
+
+ACTIVITIES
+Activities change participation around worthwhile mapped mathematics. They may adapt/select canonical Bank items or purpose-author aligned middle-practice questions. They do not need to consume two fixed 24-question Bank routes.
+
+================================================================
+10. QUESTION / LANGUAGE / VALUES
+================================================================
+
+Canonical instructional and Summative Algebra items are constructed/open response by default. Blooket or another explicitly authorized game export may use selected response.
+
+Use natural high-school language and simple concrete verbs. Prefer input/output and ordered-pair language where useful. Use f(x) naturally without making wording artificially formal.
+
+Choose pedagogically natural values. Difficulty should come from the Algebra, not arbitrary random inflation.
+
+Use the current universal Question Structure for reasoning, comparison, misconception diagnosis, modeling, transfer, representation connections, and coherent multipart work. Direct questions should stay direct when that is the right evidence job.
+
+================================================================
+11. RESOURCE-SPECIFIC PROFILES
+================================================================
+
+Read the relevant current profile after this Framework:
+- profiles/bank_course_profile.json
+- profiles/notes_course_profile.json
+- profiles/practice_course_profile.json
+- profiles/activities_course_profile.json
+- profiles/recurring_assessment_course_profile.json
+- profiles/assessment_evidence_philosophy.json
+- performance/demos/investigations profiles as applicable
+
+If a legacy lower profile contradicts this v7.0 architecture, this Framework wins and the stale profile should be reconciled at the smallest owning layer rather than treated as a competing rule.
+
+================================================================
+12. PROCEDURE BOUNDARY / NEXT BUILD STEP
+================================================================
+
+This Framework does NOT define the upcoming Bank Map/Bank PM execution procedure. The next design conversation should decide:
+- exact Bank-map structure under the smaller-Bank model,
+- exact canonical destinations/counts,
+- how Warm-Up content is stored/generated,
+- the U1.1 opening Exit Ticket pattern,
+- how the 2-new/2-repeat Exit chain is represented in the Bank map,
+- Practice 1 / Extra / CYU / WTC exact counts and routing,
+- Summative build sequence and secure independence,
+- how downstream generated middle practice traces back to the map.
+
+Do not run a new full Algebra Bank using the retired v6.41 inventory assumptions before that PM/map reconciliation.
+
+END — ALGEBRA 1 FRAMEWORK v7.0

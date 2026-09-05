@@ -1,126 +1,34 @@
 {
-  "name": "Algebra 1 Practice Sets Course Profile",
+  "name": "Algebra 1 Practice Course Profile",
   "course": "Algebra 1",
-  "course_family": "spiral_math",
-  "profile_version": "v1.1",
-  "extends": "current Base Practice PM",
-  "role": "Course-specific layer for rendering finalized Algebra Bank Practice destinations into deployed student Practice resources. It does not author new questions.",
-  "canonical_source": {
-    "rule": "The finalized Unit Bank is canonical for Practice Set 1, Practice Set 2, Practice Set 3, Extra Practice, CYU, Tarsia, and Blooket content. Render/copy these destinations faithfully; do not rewrite or diversify questions.",
-    "mismatch_rule": "If the current Framework Assessment Plan/Practice inventory materially conflicts with the Bank, report an upstream blocking mismatch rather than silently repairing the Bank downstream."
+  "profile_version": "v2.0",
+  "framework_version": "v7.0",
+  "role": "Course-specific Practice behavior. Exact final counts/package procedure will be reconciled in the upcoming Bank/Practice PM update.",
+  "canonical_roles": {
+    "practice_1": "Primary independent practice aligned to the section learning/evidence plan.",
+    "extra_practice": "Recovery and/or extension option.",
+    "cyu": "Retained Check Your Understanding route."
   },
-  "destinations": {
-    "practice_set_1": {
-      "count": 24,
-      "student_page": true
-    },
-    "practice_set_2": {
-      "count": 24,
-      "student_page": true,
-      "dashboard_location": "teacher resources for assignment-choice only; not an answer key"
-    },
-    "practice_set_3": {
-      "count": 24,
-      "student_page": true,
-      "dashboard_location": "teacher resources for assignment-choice only; not an answer key"
-    },
-    "extra_practice": {
-      "count": 24,
-      "student_page": true
-    },
-    "cyu": {
-      "count": 6,
-      "student_page": true
-    },
-    "tarsia": {
-      "count": 18,
-      "copy_canonical_export": true
-    },
-    "blooket": {
-      "count": 20,
-      "copy_canonical_export": true,
-      "selected_response_exception": true
-    }
-  },
-  "abundance_and_repetition": {
-    "rule": "Purposeful Algebra repetition is desirable. The renderer preserves the Bank's repeated procedural families, numeric variants, and exact duplicates without anti-clone rewriting.",
-    "family_pattern": "A 24-question form may intentionally contain several clusters of 3-5 closely related high-value questions. Do not maximize shell variety.",
-    "form_role_rule": "Do not reinterpret Practice 1/2/3/Extra as a universal difficulty or reasoning ladder. They are parallel usable options unless the current Bank/Assessment Plan explicitly says otherwise."
-  },
-  "response_mode": {
-    "practice_html": "constructed/open response only",
-    "cyu": "constructed/open response only",
-    "blooket": "selected response allowed only in the canonical Blooket export"
-  },
-  "representation_rule": "Render every canonical graph/table/context/diagram the student must use. Do not replace representations with prose. Preserve graph/table content and graph-friendly values from the Bank.",
-  "student_page": {
-    "visible_metadata": "question number only; hidden data-bank-id traceability is allowed; no visible DOK/Bloom/I-can/Bank ID/question-family/source labels",
-    "answers": "Do not render Bank answers/solutions or Alignment/evidence panels on Practice pages.",
-    "numbering": "Sequential local numbering in destination order; hidden data-bank-id is allowed for traceability.",
-    "multipart": "Keep one coherent canonical multipart item under one visible number.",
-    "page_titles": {
-      "practice_set_1": "Algebra Practice {U}.{S}",
-      "practice_set_2": "Algebra Practice {U}.{S} :::: Set 2",
-      "practice_set_3": "Algebra Practice {U}.{S} :::: Set 3",
-      "extra_practice": "Algebra Extra Practice {U}.{S}",
-      "cyu": "Algebra Check Your Understanding {U}.{S}",
-      "rule": "Use the same exact short name in both the HTML <title> and visible <h1>. Do not prepend the long course/unit/section title."
-    },
-    "title_visual": "navy text with horizontal navy rule underneath; no filled title box"
-  },
-  "visual_contract": "contracts/practice_visual_contract.json",
-  "css_reference": "reference_library/deployment/shared_css/practice_set.css (byte-identical mirror of Base Practice Starter universal practice_set.css)",
-  "deployment_contract": "contracts/course_file_structure.json",
-  "workspace": {
-    "default_class": "ws-25",
-    "rule": "Initial generated ordinary Practice pages use ws-25 for every problem. Teacher can manually increase an individual problem with existing ws-N utility classes. Do not auto-inflate workspace during the normal build. CYU is the explicit exception defined below."
-  },
-  "figures": {
-    "class": "ps-figure",
-    "diagram_class": "ps-diagram",
-    "default_graph_max_width": "3.5in",
-    "generator_rule": "Copy finalized Bank figure bytes exactly. Do not run/copy the Framework graph tool and do not create or package Practice graph-generator scripts. Missing canonical visuals are upstream Bank defects.",
-    "caption_rule": "Do not emit visible decorative graph figcaptions/titles. Preserve mathematically necessary labels that are part of the canonical visual."
-  },
-  "tables": {
-    "base_class": "values",
-    "two_column_rule": "Ordinary two-column data tables use classes \"values compact-table\" with a two-column colgroup whose cols use \"half-col\"; preserve all canonical headings/cells exactly.",
-    "two_column_visual": "compact, centered, minimum useful width about 2.35in, 50/50 columns; do not stretch to full page width",
-    "other_tables": "Preserve canonical structure and use normal universal Practice/base table behavior unless another approved class is required."
-  },
-  "exports": {
-    "tarsia_rule": "Copy the canonical Bank export; `_practice_3` is only a deployment filename convention and does not imply derivation from Practice Set 3.",
-    "blooket_rule": "Copy the canonical Bank export; do not synthesize choices from Practice Set 3."
-  },
-  "package": {
-    "zip_name": "unit{U}_practice_sets.zip",
-    "root_rule": "Section folders directly at ZIP root; extract into course-root practice_sets/.",
-    "no_css_copy": true,
-    "no_pm_framework_bank_copy": true,
-    "no_graph_tool_or_generator": true
-  },
-  "qa": [
-    "24/24/24/24/6 Algebra HTML counts per section unless the current Framework explicitly changes them",
-    "18 Tarsia pairs and 20 Blooket questions when those exports are used",
-    "no rewritten/missing/extra canonical questions",
-    "all required HTML classes attached so practice_set.css rules fire",
-    "base.css then practice_set.css from final deployed-relative paths",
-    "all referenced figures exist",
-    "no answers or visible internal metadata in student HTML; hidden data-bank-id traceability is allowed",
-    "no __MACOSX/.DS_Store/AppleDouble/temp files",
-    "exact short Algebra page-title pattern used in both <title> and <h1>; h1 is navy text with horizontal rule and no fill",
-    "ordinary two-column data tables use compact-table + half-col structure",
-    "no visible decorative graph figcaptions/titles",
-    "CYU renders 6 questions as a 3x2 grid with no per-question workspace and one blank full-page workspace afterward",
-    "no graph tool or Practice graph-generator script packaged",
-    "Framework practice_set.css mirror is byte-identical to the Base Practice universal stylesheet"
+  "retired_required_roles": [
+    "Practice Set 2 as a required canonical Bank form",
+    "Practice Set 3 as a required canonical Bank form"
   ],
-  "cyu_layout": {
-    "count": 6,
-    "grid_class": "cyu-grid",
-    "layout": "3 rows x 2 columns",
-    "per_question_workspace": false,
-    "after_grid_workspace": "one blank full-page cyu-workspace-page",
-    "rule": "Keep all six canonical CYU questions separate and in order; change layout only."
-  }
+  "generated_middle_practice": {
+    "rule": "Middle practice may be purpose-authored/generated at artifact build time from the Assessment Plan, Question Structure, canonical source items, representations, and misconceptions. It must not invent new assessed content.",
+    "formats": [
+      "stations",
+      "Find Someone Who",
+      "matching",
+      "sorting",
+      "task cards",
+      "partner sets",
+      "whiteboards",
+      "other teacher-approved participation structures"
+    ]
+  },
+  "abundance_and_repetition": "Purposeful Algebra repetition remains good. Do not maximize shell variety or run an anti-clone rewrite simply because values/structures repeat.",
+  "response_mode": "constructed/open response by default; game formats may use selected response when explicitly authorized.",
+  "representation_rule": "Render the actual graph/table/context/diagram students must use. Do not replace a needed representation with prose.",
+  "visual_contract": "contracts/practice_visual_contract.json",
+  "count_note": "Do not use legacy 24/24/24/24/6 counts as current authority. New counts are a Bank/Practice PM decision to be made from the revised map."
 }

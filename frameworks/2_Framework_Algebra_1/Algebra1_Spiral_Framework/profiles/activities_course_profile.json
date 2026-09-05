@@ -1,34 +1,10 @@
 {
   "course": "Algebra 1",
-  "framework_version": "v6.41",
+  "framework_version": "v7.0",
   "resource": "activities",
   "status": "current",
-  "purpose": "One section Activity Options hub exposes approved participation structures around two full 24-question canonical routes; Activities change participation, not the mathematics.",
-  "dashboard_behavior": {
-    "one_dashboard_entry_per_section": true,
-    "entry_path": "activities/u{U}_{S}_act1/u{U}_{S}_act1.html",
-    "meaning": "Activity Options hub, not one AI-selected activity format"
-  },
-  "canonical_source": "finalized Unit Bank machine-readable data/routing + canonical figures/answers",
-  "do_not_require": [
-    "generated Practice HTML",
-    "separate Philosophy upload",
-    "graph tool",
-    "Base Practice PM"
-  ],
-  "question_sets": {
-    "set1": {
-      "source_route": "Practice Set 2",
-      "count": 24,
-      "role": "Reusable full Activity Question Set 1"
-    },
-    "set2": {
-      "source_route": "Practice Set 3",
-      "count": 24,
-      "role": "Reusable full Activity Question Set 2"
-    },
-    "selection_rule": "Use ALL 24 canonical items from the finalized Bank Practice Set 2 route for Set 1 and ALL 24 from Practice Set 3 for Set 2. Do not curate a shorter subset or rewrite mathematics."
-  },
+  "purpose": "Activities change participation structure around worthwhile mapped Algebra work. They are not required to consume Practice 2/3 Bank routes.",
+  "content_source": "Use the exact Assessment Plan + Question Structure + canonical Bank items/figures when useful. Purpose-author or adapt middle-practice questions when that creates a better activity without inventing new assessed content.",
   "approved_options": {
     "projection": [
       "Whiteboard Indy",
@@ -39,77 +15,19 @@
       "Think, Trade, Agree",
       "Round Table",
       "Mathematical Hot Seat",
-      "Rally Coach II",
-      "Desmos Activity"
+      "Desmos Activity when a real link/source exists"
     ],
     "handout": [
       "Stations",
       "Find Someone Who",
-      "Tarsia (Puzzle Activity)"
-    ],
-    "no_freelance_names": true,
-    "desmos_rule": "Directions/link option only unless a real teacher/Framework source is supplied; never fabricate a Desmos activity/link.",
-    "tarsia_rule": "Hub may link to existing Practice-owned Tarsia/generator route; Activities do not create a second Tarsia export."
+      "Tarsia when an approved route exists"
+    ]
   },
-  "required_section_files": [
-    "u{U}_{S}_act1.html",
-    "u{U}_{S}_set1_questions_solutions.html",
-    "u{U}_{S}_set2_questions_solutions.html",
-    "u{U}_{S}_set1_stations.html",
-    "u{U}_{S}_set2_stations.html",
-    "u{U}_{S}_set1_find_someone_who.html",
-    "u{U}_{S}_set2_find_someone_who.html"
-  ],
-  "companion_contracts": {
-    "hub": {
-      "stylesheet": "../../css/activities.css",
-      "role": "Activity Options menu + approved directions + companion links"
-    },
-    "projection": {
-      "stylesheet": "../../css/activities.css",
-      "count": 24,
-      "page_order": "Problem 1, Solution 1, Problem 2, Solution 2, ...",
-      "reuse": "same canonical set used by all projection participation options",
-      "dom_order": "prompt text first, then supporting table/graph/figure",
-      "table_rule": "ordinary small/two-column data tables use compact centered sizing; never stretch full-page by default"
-    },
-    "stations": {
-      "stylesheet": "../../css/activity_stations.css",
-      "count": 24,
-      "station_count": 6,
-      "questions_per_station": 4,
-      "repeat_classroom_copy_sequence": true
-    },
-    "find_someone_who": {
-      "stylesheet": "../../css/activity_find_someone_who.css",
-      "count": 24,
-      "reuse": "same canonical set in printable movement/peer-interaction worksheet"
-    }
-  },
+  "question_set_rule": "Choose a classroom-sized set that fits the activity and learning job. No fixed 24-question Practice 2/Practice 3 routing is authoritative now.",
   "source_exclusions": [
     "secure Summative",
-    "official Exit Ticket evidence",
-    "Blooket",
-    "WTC",
-    "Practice-owned Tarsia export as newly generated Activity content"
+    "official Exit Ticket evidence as ordinary practice material"
   ],
-  "closure": {
-    "mandatory": false,
-    "rule": "Do not append Activity Check/Exit Ticket by default. Optional formative closure only if explicitly requested/authorized."
-  },
-  "figures": "Copy finalized Bank figure bytes exactly into the section figures/ folder when referenced. Do not regenerate in ordinary Activities build.",
-  "graph_tool": "Do not invoke or package for ordinary Activities builds.",
-  "student_metadata": "No visible Bank IDs, I-can codes, DOK, structure IDs, evidence metadata, or generator labels.",
-  "teacher_live": "Preserve teacher-live hubs/companions on later rebuilds unless explicitly replaced.",
-  "normal_prompt": "Carefully read PM and Run.",
-  "hub_internal_links": {
-    "activity_name_rule": "Every activity name on the first page links to a same-document projectable directions anchor in u{U}_{S}_act1.html.",
-    "set_link_rule": "Set 1 / Set 2 links remain beside the activity name and point to the reusable projection or printable companion files as applicable.",
-    "stable_anchor_examples": [
-      "#dir-whiteboard-indy",
-      "#dir-rally-coach",
-      "#dir-stations",
-      "#dir-find-someone-who"
-    ]
-  }
+  "closure": "Optional formative closure only when useful/requested; do not append a fake official Exit Ticket.",
+  "student_metadata": "No visible Bank IDs, I Can codes, DOK, structure IDs, or authoring metadata."
 }

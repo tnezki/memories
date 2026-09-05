@@ -1,51 +1,68 @@
 {
+  "schema": "algebra-course-map/7.0",
   "course": "Algebra 1",
   "course_family": "Spiral Math",
-  "spiral_model": "Assessment Plan Current Learning/Retrieval/Mastery is authoritative; Framework does not invent recurrence.",
+  "spiral_model": "Intro in Unit N -> Review in Unit N+1 -> Mastery in Unit N+2; Review in Unit N -> Mastery in Unit N+1. Canonical goal wording stays stable across stages.",
+  "warmup_model": "Separate course-long four-slot fluency routine: Solve / Diamond / Skill Review / Challenge.",
+  "exit_ticket_model": "Normal section = 2 new current-Mastery evidence opportunities + 2 fresh parallel reassessments from previous section. U1.1 opening pattern intentionally deferred to Bank/Exit map.",
   "units": [
     {
       "unit": 1,
       "title": "Foundations of Functions and Algebra",
+      "essential_standard": "Use graphs, slope, rules, expressions, and equations as basic tools for Algebra 1.",
       "sections": [
         {
           "section_id": "1.1",
           "unit": 1,
           "section": 1,
           "title": "Multiple Representations of Relationships",
-          "learning_target": "Students will connect tables, graphs, equations, and contexts that represent the same relationship.",
+          "learning_target": "Connect tables, graphs, equations or rules, and contexts that represent the same relationship.",
           "i_can_statements": [
-            "I can construct a table, graph, equation, or context from another representation of the same relationship.",
-            "I can use features in one representation to work with a related table, graph, equation, or context.",
-            "I can determine whether two representations belong to the same relationship using evidence from values, rates, or patterns."
+            "Find matching values across different representations.",
+            "Create a table or graph from another representation.",
+            "Check whether two representations describe the same relationship.",
+            "Use values, rate, or pattern as evidence."
           ],
           "vocabulary_notation": [
-            "input-output pair",
-            "coordinate graph",
-            "equation",
-            "rate",
-            "equivalent representation"
+            "input",
+            "output",
+            "ordered pair",
+            "representation",
+            "rate"
           ],
           "representations": [
-            "Tables of input-output pairs",
+            "Tables",
             "Coordinate graphs",
-            "Equations and rules",
-            "Verbal contexts",
-            "Connections among multiple representations"
+            "Equations or rules",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Matching representations by visual appearance while ignoring scale or values.",
-            "Changing a table or graph without preserving the same ordered pairs or relationship."
-          ],
-          "modeling_application_practice": [
-            "Build a graph from a context about distance, cost, or time.",
-            "Formulate an equation from a table of values.",
-            "Use a graph to predict a missing table value.",
-            "Check whether a context and equation communicate the same relationship."
+            "Matching by appearance instead of values.",
+            "Ignoring graph scale."
           ],
           "spiral": {
-            "current_learning": "Connect tables, graphs, equations, and contexts that represent the same relationship.",
-            "retrieval": "Interpret and create graphs on the coordinate plane while connecting points, axes, intercepts, and graphical information to mathematical situations.",
-            "mastery": "Solve inequalities, represent solution sets graphically, and interpret solutions in context."
+            "intro": {
+              "text": "Connect tables, graphs, equations or rules, and contexts that represent the same relationship.",
+              "builds_toward_goal_id": "U3-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U2-MG04",
+              "text": "Create a new representation of a relationship and check that the important values and pattern stay the same.",
+              "source": "Prior-course readiness",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U1-MG01",
+              "text": "Use ordered pairs, axes, scales, and intercepts to read and create graphs.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": true,
+            "note": "U1.1 opening pattern intentionally deferred to the Bank/Exit map."
           }
         },
         {
@@ -53,40 +70,54 @@
           "unit": 1,
           "section": 2,
           "title": "Inputs, Outputs, and Functions",
-          "learning_target": "Students will interpret functions as rules that connect inputs and outputs without relying on formal domain and range language.",
+          "learning_target": "Use input-output rules and the basic idea of a function.",
           "i_can_statements": [
-            "I can formulate a rule that connects inputs to outputs in a table, graph, equation, or context.",
-            "I can apply an input-output rule to generate missing values and ordered pairs.",
-            "I can assess whether a rule gives one output for each input in a situation."
+            "Identify the input and output in a relationship.",
+            "Use a rule to find outputs.",
+            "Write ordered pairs from inputs and outputs.",
+            "Decide whether each input has only one output."
           ],
           "vocabulary_notation": [
             "input",
             "output",
             "function",
             "ordered pair",
-            "mapping diagram"
+            "mapping"
           ],
           "representations": [
             "Input-output tables",
-            "Function rules",
+            "Rules",
             "Ordered pairs",
-            "Mapping diagrams",
-            "Context-based input and output quantities"
+            "Mappings",
+            "Simple graphs"
           ],
           "misconceptions_failure_points": [
-            "Reversing inputs and outputs when applying a rule.",
-            "Treating a repeated input with two different outputs as a function."
-          ],
-          "modeling_application_practice": [
-            "Build a function rule from repeated input-output calculations.",
-            "Use a context to assign inputs and outputs meaning.",
-            "Predict outputs for new inputs using a rule.",
-            "Check a mapping for repeated inputs with different outputs."
+            "Reversing inputs and outputs.",
+            "Thinking repeated outputs make a relation not a function."
           ],
           "spiral": {
-            "current_learning": "Interpret functions as rules that connect inputs and outputs without relying on formal domain and range language.",
-            "retrieval": "Identify patterns and represent relationships using input-output rules, tables, words, and symbols.",
-            "mastery": "Evaluate numerical and algebraic expressions correctly using substitution and order of operations."
+            "intro": {
+              "text": "Use input-output rules and the basic idea of a function.",
+              "builds_toward_goal_id": "U3-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U2-MG03",
+              "text": "Use inputs and outputs to decide whether a relationship is a function.",
+              "source": "Prior-course readiness",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U1-MG03",
+              "text": "Evaluate numerical and algebraic expressions using substitution and order of operations.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -94,11 +125,12 @@
           "unit": 1,
           "section": 3,
           "title": "Function Families",
-          "learning_target": "Students will recognize common function families from graphs, tables, equations, and contexts.",
+          "learning_target": "Notice how common function families change in different ways.",
           "i_can_statements": [
-            "I can design examples of linear, quadratic, exponential, and absolute value relationships using more than one representation.",
-            "I can extend patterns in tables, graphs, equations, and contexts to work with common function families.",
-            "I can critique a proposed function family choice using evidence from rate of change, shape, or equation structure."
+            "Recognize a linear pattern from constant rate.",
+            "Notice basic quadratic, exponential, and absolute-value shapes or patterns.",
+            "Use a table, graph, equation, or context as evidence.",
+            "Explain why one family is more likely than another."
           ],
           "vocabulary_notation": [
             "linear",
@@ -108,26 +140,38 @@
             "function family"
           ],
           "representations": [
-            "Linear patterns",
-            "Quadratic patterns",
-            "Exponential growth and decay patterns",
-            "Absolute value patterns",
-            "Family features across representations"
+            "Family graphs",
+            "Tables",
+            "Simple equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Classifying a family from graph appearance alone without checking differences, ratios, or equation structure.",
-            "Confusing quadratic growth with exponential growth."
-          ],
-          "modeling_application_practice": [
-            "Create a context that fits a given family feature.",
-            "Use table patterns to choose a likely family.",
-            "Predict how a graph changes when a family pattern changes.",
-            "Critique family choices that rely only on appearance."
+            "Classifying only by graph shape.",
+            "Confusing quadratic and exponential growth."
           ],
           "spiral": {
-            "current_learning": "Recognize common function families from graphs, tables, equations, and contexts.",
-            "retrieval": "Recognize constant rate of change in tables, graphs, visual patterns, and situations.",
-            "mastery": "Accurately perform operations with integers, fractions, and decimals while interpreting results in mathematical and contextual situations."
+            "intro": {
+              "text": "Notice how common function families change in different ways.",
+              "builds_toward_goal_id": "U3-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U2-MG01",
+              "text": "Compare relationships across graphs, tables, equations, and contexts using clear evidence.",
+              "source": "Prior-course readiness",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U1-MG02",
+              "text": "Find slope or rate of change from a graph, table, equation, or context.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -135,11 +179,12 @@
           "unit": 1,
           "section": 4,
           "title": "Expressions and Structure",
-          "learning_target": "Students will interpret and rewrite algebraic expressions by identifying structure, meaning, and equivalent forms.",
+          "learning_target": "Read, evaluate, and rewrite expressions without changing their value.",
           "i_can_statements": [
-            "I can build equivalent expressions by using structure, grouping, and properties of operations.",
-            "I can apply rewriting strategies to make the meaning of an expression easier to work with.",
-            "I can determine whether two expressions are equivalent by using structure, substitution, or properties."
+            "Identify terms, coefficients, and factors.",
+            "Substitute values into an expression.",
+            "Combine like terms.",
+            "Use the distributive property correctly."
           ],
           "vocabulary_notation": [
             "term",
@@ -149,26 +194,38 @@
             "distributive property"
           ],
           "representations": [
-            "Algebraic expressions",
+            "Expressions",
             "Equivalent forms",
-            "Grouped terms and factors",
-            "Context meanings for terms",
+            "Grouped terms",
             "Substitution checks"
           ],
           "misconceptions_failure_points": [
-            "Combining unlike terms as though they were like terms.",
-            "Distributing a factor to only one term or changing the value while rewriting."
-          ],
-          "modeling_application_practice": [
-            "Build an expression for a cost, perimeter, or repeated quantity.",
-            "Rewrite an expression to reveal a useful structure.",
-            "Use substitution to test equivalence.",
-            "Connect terms and coefficients to a context."
+            "Combining unlike terms.",
+            "Distributing to only one term."
           ],
           "spiral": {
-            "current_learning": "Interpret and rewrite algebraic expressions by identifying structure, meaning, and equivalent forms.",
-            "retrieval": "Compare relationships using equations, graphs, tables, visual patterns, and contexts, then justify conclusions.",
-            "mastery": "Analyze and rewrite algebraic expressions using properties of operations and algebraic structure."
+            "intro": {
+              "text": "Read, evaluate, and rewrite expressions without changing their value.",
+              "builds_toward_goal_id": "U3-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U2-MG02",
+              "text": "Solve one-step inequalities and show the solution on a number line.",
+              "source": "Prior-course readiness",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U1-MG01",
+              "text": "Use ordered pairs, axes, scales, and intercepts to read and create graphs.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -176,40 +233,53 @@
           "unit": 1,
           "section": 5,
           "title": "Equations as Models",
-          "learning_target": "Students will write, solve, and interpret equations that model situations.",
+          "learning_target": "Write an equation from a situation and explain what its solution means.",
           "i_can_statements": [
-            "I can construct an equation that models a situation using meaningful quantities and operations.",
-            "I can use solution steps to solve an equation and connect the result to the situation.",
-            "I can predict whether a solution is reasonable by interpreting it in the original context."
+            "Define a variable.",
+            "Write an equation that matches a situation.",
+            "Use equivalent steps to solve when needed.",
+            "Check and interpret a solution in context."
           ],
           "vocabulary_notation": [
             "variable",
             "equation",
             "solution",
             "inverse operation",
-            "contextual quantity"
+            "quantity"
           ],
           "representations": [
-            "Context-based equations",
+            "Contexts",
+            "Equations",
             "Solution steps",
-            "Variables as quantities",
-            "Balanced relationships",
-            "Interpreted solutions"
+            "Written interpretations"
           ],
           "misconceptions_failure_points": [
-            "Performing an operation on only one side of an equation.",
-            "Reporting a numerical solution without interpreting units or context."
-          ],
-          "modeling_application_practice": [
-            "Formulate an equation from a real-world situation.",
-            "Use a solution to answer a context question.",
-            "Predict a reasonable value before solving.",
-            "Check whether a solution makes sense in context."
+            "Writing an equation that does not match the quantities.",
+            "Giving a number without explaining what it means."
           ],
           "spiral": {
-            "current_learning": "Write, solve, and interpret equations that model situations.",
-            "retrieval": "Represent linear relationships using tables, graphs, equations, and contextual descriptions.",
-            "mastery": "Solve one-variable equations and interpret solutions within mathematical and contextual situations."
+            "intro": {
+              "text": "Write an equation from a situation and explain what its solution means.",
+              "builds_toward_goal_id": "U3-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U2-MG01",
+              "text": "Compare relationships across graphs, tables, equations, and contexts using clear evidence.",
+              "source": "Prior-course readiness",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U1-MG04",
+              "text": "Use an input-output rule to find values, ordered pairs, and patterns.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]
@@ -217,45 +287,60 @@
     {
       "unit": 2,
       "title": "Linear Functions and Modeling",
+      "essential_standard": "Use slope, linear functions, representations, and data to describe, compare, and model linear relationships.",
       "sections": [
         {
           "section_id": "2.1",
           "unit": 2,
           "section": 1,
           "title": "Rate of Change and Slope",
-          "learning_target": "Students will interpret slope as a measure of constant rate of change.",
+          "learning_target": "Find and interpret slope as a constant rate of change.",
           "i_can_statements": [
-            "I can construct rate-of-change statements from tables, graphs, and situations.",
-            "I can apply slope calculations to interpret constant change between quantities.",
-            "I can determine whether a slope value is reasonable for a given context."
+            "Find slope from a graph.",
+            "Find slope from a table or two points.",
+            "Find slope from an equation.",
+            "Explain what slope means in a context."
           ],
           "vocabulary_notation": [
             "slope",
             "rate of change",
             "rise/run",
-            "positive/negative/zero/undefined slope"
+            "positive slope",
+            "negative slope"
           ],
           "representations": [
-            "Slope triangles on coordinate graphs",
-            "Tables showing equal input intervals",
-            "Contextual rate statements",
-            "Ratio notation for vertical change over horizontal change",
-            "Positive, negative, zero, and undefined slope examples"
+            "Graphs",
+            "Tables",
+            "Equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Reversing vertical and horizontal change or using inconsistent point order.",
-            "Interpreting slope as a starting value rather than a rate."
-          ],
-          "modeling_application_practice": [
-            "Connect speed, cost per item, and growth rates to slope",
-            "Build verbal interpretations for slopes in real situations",
-            "Use table patterns to model constant change",
-            "Represent increasing and decreasing rates with graph features"
+            "Using inconsistent point order.",
+            "Confusing slope with starting value."
           ],
           "spiral": {
-            "current_learning": "Interpret slope as a measure of constant rate of change.",
-            "retrieval": "Interpret functions as rules that connect inputs and outputs without relying on formal domain and range language.",
-            "mastery": "Recognize constant rate of change in tables, graphs, visual patterns, and situations."
+            "intro": {
+              "text": "Find and interpret slope as a constant rate of change.",
+              "builds_toward_goal_id": "U4-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U3-MG02",
+              "text": "Use function notation and key features to describe functions and recognize common function families.",
+              "source": "Unit 1 · Section 1.3 · Function Families",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U2-MG01",
+              "text": "Compare relationships across graphs, tables, equations, and contexts using clear evidence.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -263,40 +348,53 @@
           "unit": 2,
           "section": 2,
           "title": "Graphing Linear Functions",
-          "learning_target": "Students will graph linear functions and interpret key features.",
+          "learning_target": "Graph a linear function using slope and starting value.",
           "i_can_statements": [
-            "I can build graphs of linear functions using slope and intercept information.",
-            "I can use key features of a line to interpret a relationship.",
-            "I can extend a graph to predict outputs within a meaningful range."
+            "Identify slope and intercept from an equation.",
+            "Graph a line using slope and an intercept.",
+            "Use graph scale correctly.",
+            "Interpret a point or intercept in context."
           ],
           "vocabulary_notation": [
             "slope",
             "intercept",
-            "$y=mx+b$",
-            "linear graph",
-            "scale"
+            "linear function",
+            "scale",
+            "f(x)"
           ],
           "representations": [
-            "Coordinate plane graphs",
+            "Linear graphs",
             "Slope-intercept form",
-            "Intercepts and starting values",
-            "Tables generated from linear rules",
-            "Contextual graphs with labeled axes"
+            "Tables",
+            "Context graphs"
           ],
           "misconceptions_failure_points": [
             "Plotting the intercept on the wrong axis.",
-            "Using slope steps without respecting graph scale or sign."
-          ],
-          "modeling_application_practice": [
-            "Graph savings, distance, or subscription situations",
-            "Use intercepts to represent initial values",
-            "Connect slope direction to increasing or decreasing behavior",
-            "Create graphs from equations and contextual descriptions"
+            "Ignoring graph scale."
           ],
           "spiral": {
-            "current_learning": "Graph linear functions and interpret key features.",
-            "retrieval": "Connect tables, graphs, equations, and contexts that represent the same relationship.",
-            "mastery": "Interpret and create graphs on the coordinate plane while connecting points, axes, intercepts, and graphical information to mathematical situations."
+            "intro": {
+              "text": "Graph a linear function using slope and starting value.",
+              "builds_toward_goal_id": "U4-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U3-MG02",
+              "text": "Use function notation and key features to describe functions and recognize common function families.",
+              "source": "Unit 1 · Section 1.2 · Inputs, Outputs, and Functions",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U2-MG03",
+              "text": "Use inputs and outputs to decide whether a relationship is a function.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -304,40 +402,53 @@
           "unit": 2,
           "section": 3,
           "title": "Writing Linear Equations",
-          "learning_target": "Students will write linear equations from graphs, tables, and situations.",
+          "learning_target": "Write a linear equation from a graph, table, or situation.",
           "i_can_statements": [
-            "I can formulate linear equations from graphs, tables, and situations.",
-            "I can apply slope-intercept structure to connect rate and starting value.",
-            "I can design equivalent equations that represent the same linear relationship."
+            "Find the rate of change.",
+            "Find or determine the starting value.",
+            "Write an equation in y=mx+b or f(x)=mx+b form.",
+            "Check the equation with a point or value."
           ],
           "vocabulary_notation": [
             "slope-intercept form",
             "slope",
             "initial value",
-            "$m$",
-            "$b$"
+            "m",
+            "b"
           ],
           "representations": [
-            "Slope-intercept equations",
-            "Tables of input-output values",
-            "Graphs with marked intercepts",
-            "Verbal descriptions of rates and starting values",
-            "Equivalent equation forms"
+            "Graphs",
+            "Tables",
+            "Equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Using an arbitrary table value as the intercept.",
-            "Confusing the roles of $m$ and $b$ in $y=mx+b$."
-          ],
-          "modeling_application_practice": [
-            "Write rules for cell phone plans, savings, or distance",
-            "Translate graphs into equations",
-            "Use tables to calculate slope and initial value",
-            "Revise equations to make context features visible"
+            "Using a table value as the intercept without checking.",
+            "Switching the roles of m and b."
           ],
           "spiral": {
-            "current_learning": "Write linear equations from graphs, tables, and situations.",
-            "retrieval": "Interpret and rewrite algebraic expressions by identifying structure, meaning, and equivalent forms.",
-            "mastery": "Represent linear relationships using tables, graphs, equations, and contextual descriptions."
+            "intro": {
+              "text": "Write a linear equation from a graph, table, or situation.",
+              "builds_toward_goal_id": "U4-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U3-MG03",
+              "text": "Use structure, like terms, the distributive property, and substitution to make equivalent expressions.",
+              "source": "Unit 1 · Section 1.4 · Expressions and Structure",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U2-MG04",
+              "text": "Create a new representation of a relationship and check that the important values and pattern stay the same.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -345,40 +456,53 @@
           "unit": 2,
           "section": 4,
           "title": "Comparing Linear Representations",
-          "learning_target": "Students will analyze and compare linear relationships using multiple representations.",
+          "learning_target": "Compare linear relationships shown in different ways.",
           "i_can_statements": [
-            "I can construct comparison models for linear relationships shown in different forms.",
-            "I can use slope and intercept information to interpret similarities and differences.",
-            "I can critique conclusions about linear relationships using evidence from representations."
+            "Compare rates or slopes.",
+            "Compare starting values or intercepts.",
+            "Use outputs when the question asks about a specific input.",
+            "Support a conclusion with evidence from each representation."
           ],
           "vocabulary_notation": [
-            "slope",
-            "intercept",
             "rate",
+            "slope",
             "starting value",
-            "equivalent relationship"
+            "intercept",
+            "comparison"
           ],
           "representations": [
             "Pairs of graphs",
-            "Tables with different scales",
-            "Equations in slope-intercept form",
-            "Contextual descriptions",
-            "Feature comparison organizers"
+            "Tables",
+            "Equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Comparing lines only by current output values instead of rate and starting value.",
-            "Assuming the steeper-looking graph has greater slope without checking axis scales."
-          ],
-          "modeling_application_practice": [
-            "Compare competing plans or rates",
-            "Use representations to support choices",
-            "Translate unlike representations into common features",
-            "Check claims about which relationship grows faster"
+            "Comparing only one current output.",
+            "Judging a graph without checking scale."
           ],
           "spiral": {
-            "current_learning": "Analyze and compare linear relationships using multiple representations.",
-            "retrieval": "Recognize common function families from graphs, tables, equations, and contexts.",
-            "mastery": "Compare relationships using equations, graphs, tables, visual patterns, and contexts, then justify conclusions."
+            "intro": {
+              "text": "Compare linear relationships shown in different ways.",
+              "builds_toward_goal_id": "U4-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U3-MG01",
+              "text": "Connect tables, graphs, equations/rules, function notation, and contexts for the same relationship.",
+              "source": "Unit 1 · Section 1.1 · Multiple Representations of Relationships",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U2-MG02",
+              "text": "Solve one-step inequalities and show the solution on a number line.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -386,11 +510,12 @@
           "unit": 2,
           "section": 5,
           "title": "Linear Modeling with Data",
-          "learning_target": "Students will use linear models to represent and interpret real-world data.",
+          "learning_target": "Use a linear model to describe data and make a reasonable prediction.",
           "i_can_statements": [
-            "I can design linear models that represent patterns in real-world data.",
-            "I can predict values using a linear model and interpret the result.",
-            "I can assess whether a linear model fits a data situation well enough for the question being asked."
+            "Use a scatter plot to look for a linear trend.",
+            "Use or create a line of fit.",
+            "Interpret slope and intercept in context.",
+            "Make a prediction and explain whether it is reasonable."
           ],
           "vocabulary_notation": [
             "linear model",
@@ -401,25 +526,37 @@
           ],
           "representations": [
             "Scatter plots",
+            "Data tables",
             "Lines of fit",
-            "Tables of real-world data",
-            "Linear model equations",
-            "Residual-style reasonableness observations"
+            "Linear equations"
           ],
           "misconceptions_failure_points": [
             "Treating every data set as perfectly linear.",
-            "Using a prediction far outside the meaningful data range without considering model limits."
-          ],
-          "modeling_application_practice": [
-            "Model trends in measurement, cost, or time data",
-            "Use lines of fit to make predictions",
-            "Interpret slope and intercept in data contexts",
-            "Discuss when linear models are useful or limited"
+            "Predicting far outside the data without caution."
           ],
           "spiral": {
-            "current_learning": "Use linear models to represent and interpret real-world data.",
-            "retrieval": "Write, solve, and interpret equations that model situations.",
-            "mastery": "Identify patterns and represent relationships using input-output rules, tables, words, and symbols."
+            "intro": {
+              "text": "Use a linear model to describe data and make a reasonable prediction.",
+              "builds_toward_goal_id": "U4-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U3-MG04",
+              "text": "Write an equation from a situation, solve when needed, and explain what the solution means.",
+              "source": "Unit 1 · Section 1.5 · Equations as Models",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U2-MG01",
+              "text": "Compare relationships across graphs, tables, equations, and contexts using clear evidence.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]
@@ -427,45 +564,60 @@
     {
       "unit": 3,
       "title": "Systems and Constraints",
+      "essential_standard": "Use systems and inequalities to represent, solve, and interpret situations with more than one condition.",
       "sections": [
         {
           "section_id": "3.1",
           "unit": 3,
           "section": 1,
           "title": "Graphing and Elimination",
-          "learning_target": "Students will solve systems graphically and by elimination while interpreting the meaning of different solution types.",
+          "learning_target": "Solve systems by graphing or elimination and interpret the type of solution.",
           "i_can_statements": [
-            "I can construct graphical representations of systems and connect intersection points to solutions.",
-            "I can use elimination to solve systems and interpret the solution type.",
-            "I can determine whether a system has one solution, no solution, or infinitely many solutions from algebraic and graphical evidence."
+            "Find a system solution from a graph.",
+            "Use elimination to solve a system.",
+            "Check an ordered-pair solution.",
+            "Recognize one, none, or infinitely many solutions."
           ],
           "vocabulary_notation": [
-            "system of equations",
+            "system",
             "intersection",
             "elimination",
-            "one/no/infinitely many solutions"
+            "solution",
+            "solution type"
           ],
           "representations": [
-            "Graphs of two linear equations",
-            "Tables of paired values",
-            "Standard form equations",
-            "Intersection points",
-            "Solution-type statements"
+            "Graphs of two lines",
+            "Systems",
+            "Elimination work",
+            "Solution statements"
           ],
           "misconceptions_failure_points": [
-            "Assuming every system has exactly one solution.",
-            "Eliminating terms without applying equivalent operations to an entire equation."
-          ],
-          "modeling_application_practice": [
-            "Represent two competing plans as a system of equations",
-            "Interpret an intersection as a break-even point",
-            "Connect elimination steps to equivalent constraints",
-            "Use solution types to interpret whether a situation is possible, impossible, or always true"
+            "Assuming every system has one solution.",
+            "Changing only one term during an equation operation."
           ],
           "spiral": {
-            "current_learning": "Solve systems graphically and by elimination while interpreting the meaning of different solution types.",
-            "retrieval": "Graph linear functions and interpret key features.",
-            "mastery": "Connect tables, graphs, equations, and contexts that represent the same relationship."
+            "intro": {
+              "text": "Solve systems by graphing or elimination and interpret the type of solution.",
+              "builds_toward_goal_id": "U5-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U4-MG02",
+              "text": "Use slope and starting value to graph and write linear functions.",
+              "source": "Unit 2 · Section 2.2 · Graphing Linear Functions",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U3-MG01",
+              "text": "Connect tables, graphs, equations/rules, function notation, and contexts for the same relationship.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -473,40 +625,53 @@
           "unit": 3,
           "section": 2,
           "title": "Solving Systems by Substitution",
-          "learning_target": "Students will solve systems using substitution and choose efficient forms for solving.",
+          "learning_target": "Solve systems by substitution and choose when substitution is useful.",
           "i_can_statements": [
-            "I can formulate a substitution plan when one equation is already written in an efficient form.",
-            "I can apply substitution to solve systems and interpret the ordered-pair solution.",
-            "I can assess which algebraic method is more efficient for a given system."
+            "Identify when an equation is ready for substitution.",
+            "Substitute an expression for a variable.",
+            "Solve and back-substitute.",
+            "Check the ordered pair in both equations."
           ],
           "vocabulary_notation": [
             "substitution",
             "system",
-            "ordered-pair solution",
+            "ordered pair",
             "equivalent equation",
-            "solution method"
+            "solution"
           ],
           "representations": [
-            "Slope-intercept form equations",
-            "Equations solved for one variable",
+            "Equations",
             "Substitution work",
-            "Ordered-pair solutions",
-            "Contextual solution statements"
+            "Ordered pairs",
+            "Graphs for checking"
           ],
           "misconceptions_failure_points": [
-            "Substituting into only part of an expression or equation.",
-            "Failing to interpret the ordered pair in the original system."
-          ],
-          "modeling_application_practice": [
-            "Represent one quantity in terms of another before solving",
-            "Use substitution to connect two related constraints",
-            "Interpret a solution in a two-variable situation",
-            "Select an efficient solving pathway based on equation structure"
+            "Substituting into only part of an expression.",
+            "Stopping after finding only one variable."
           ],
           "spiral": {
-            "current_learning": "Solve systems using substitution and choose efficient forms for solving.",
-            "retrieval": "Write linear equations from graphs, tables, and situations.",
-            "mastery": "Interpret and rewrite algebraic expressions by identifying structure, meaning, and equivalent forms."
+            "intro": {
+              "text": "Solve systems by substitution and choose when substitution is useful.",
+              "builds_toward_goal_id": "U5-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U4-MG02",
+              "text": "Use slope and starting value to graph and write linear functions.",
+              "source": "Unit 2 · Section 2.3 · Writing Linear Equations",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U3-MG03",
+              "text": "Use structure, like terms, the distributive property, and substitution to make equivalent expressions.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -514,40 +679,53 @@
           "unit": 3,
           "section": 3,
           "title": "Writing and Solving Systems from Situations",
-          "learning_target": "Students will create and solve systems that model real-world situations.",
+          "learning_target": "Write and solve a system that represents two constraints.",
           "i_can_statements": [
-            "I can build a system of equations that represents two constraints in a situation.",
-            "I can predict the meaning of a solution before solving from the context and variables.",
-            "I can design a solution pathway that connects equations, calculations, and a contextual conclusion."
+            "Define two variables.",
+            "Write one equation for each constraint.",
+            "Choose a method and solve.",
+            "Interpret both coordinates in context."
           ],
           "vocabulary_notation": [
             "constraint",
             "system",
-            "variable definition",
+            "variable",
             "solution",
             "break-even"
           ],
           "representations": [
-            "Verbal situations",
+            "Contexts",
             "Variable definitions",
-            "Systems of equations",
-            "Graphs or tables for checking",
-            "Contextual conclusions"
+            "Systems",
+            "Graphs or tables"
           ],
           "misconceptions_failure_points": [
-            "Writing two equations that describe the same constraint instead of two distinct constraints.",
-            "Defining variables inconsistently with the equations or final interpretation."
-          ],
-          "modeling_application_practice": [
-            "Create a system from ticket, mixture, cost, or comparison situations",
-            "Choose variables that make the constraints clear",
-            "Interpret both coordinates of the solution in context",
-            "Check whether a solution is reasonable for the situation"
+            "Writing the same constraint twice.",
+            "Using variables inconsistently."
           ],
           "spiral": {
-            "current_learning": "Create and solve systems that model real-world situations.",
-            "retrieval": "Use linear models to represent and interpret real-world data.",
-            "mastery": "Write, solve, and interpret equations that model situations."
+            "intro": {
+              "text": "Write and solve a system that represents two constraints.",
+              "builds_toward_goal_id": "U5-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U4-MG04",
+              "text": "Build or use a linear model and judge whether it is useful.",
+              "source": "Unit 2 · Section 2.5 · Linear Modeling with Data",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U3-MG04",
+              "text": "Write an equation from a situation, solve when needed, and explain what the solution means.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -555,40 +733,53 @@
           "unit": 3,
           "section": 4,
           "title": "Graphing Linear Inequalities",
-          "learning_target": "Students will graph and interpret linear inequalities.",
+          "learning_target": "Graph and interpret a linear inequality.",
           "i_can_statements": [
-            "I can construct a boundary line and shaded region for a linear inequality.",
-            "I can use test points to interpret which region satisfies an inequality.",
-            "I can critique a graph of a linear inequality using the boundary, shading, and solution region."
+            "Graph the boundary line.",
+            "Choose a solid or dashed boundary.",
+            "Use a test point.",
+            "Shade and interpret the correct region."
           ],
           "vocabulary_notation": [
             "linear inequality",
-            "boundary line",
-            "solid/dashed line",
-            "test point",
+            "boundary",
+            "solid line",
+            "dashed line",
             "half-plane"
           ],
           "representations": [
-            "Linear inequalities",
-            "Solid and dashed boundary lines",
-            "Shaded half-planes",
-            "Test points",
-            "Solution-region statements"
+            "Inequalities",
+            "Boundary lines",
+            "Shaded regions",
+            "Test points"
           ],
           "misconceptions_failure_points": [
-            "Using a solid boundary for a strict inequality or dashed boundary for an inclusive inequality.",
-            "Shading by memorized direction instead of testing a point."
-          ],
-          "modeling_application_practice": [
-            "Represent limits such as budgets, minimums, and maximums",
-            "Use a test point to check a feasible region",
-            "Interpret boundary inclusion in context",
-            "Connect inequality symbols to shaded solution regions"
+            "Using the wrong boundary style.",
+            "Shading by memory instead of testing."
           ],
           "spiral": {
-            "current_learning": "Graph and interpret linear inequalities.",
-            "retrieval": "Interpret slope as a measure of constant rate of change.",
-            "mastery": "Recognize common function families from graphs, tables, equations, and contexts."
+            "intro": {
+              "text": "Graph and interpret a linear inequality.",
+              "builds_toward_goal_id": "U5-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U4-MG01",
+              "text": "Find slope across representations and explain what it means.",
+              "source": "Unit 2 · Section 2.1 · Rate of Change and Slope",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U3-MG02",
+              "text": "Use function notation and key features to describe functions and recognize common function families.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -596,11 +787,12 @@
           "unit": 3,
           "section": 5,
           "title": "Linear Systems of Inequalities",
-          "learning_target": "Students will analyze and interpret systems of linear inequalities.",
+          "learning_target": "Use several inequalities to describe a feasible region.",
           "i_can_statements": [
-            "I can formulate a system of inequalities that represents multiple constraints.",
-            "I can extend graphing strategies to represent overlapping solution regions.",
-            "I can apply feasible-region reasoning to interpret possible solutions in context."
+            "Write inequalities from constraints.",
+            "Graph each boundary and solution region.",
+            "Find the overlap.",
+            "Test whether a point is feasible."
           ],
           "vocabulary_notation": [
             "system of inequalities",
@@ -610,26 +802,38 @@
             "solution region"
           ],
           "representations": [
-            "Systems of inequalities",
-            "Multiple boundary lines",
-            "Overlapping shaded regions",
+            "Multiple inequalities",
+            "Overlapping regions",
             "Feasible points",
-            "Constraint-based contexts"
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Treating any point satisfying one inequality as feasible for the system.",
-            "Overlooking that the feasible region is the overlap of all constraints."
-          ],
-          "modeling_application_practice": [
-            "Represent real-world restrictions with more than one inequality",
-            "Interpret feasible and non-feasible points in context",
-            "Use overlapping regions to model choices under constraints",
-            "Connect graphical solutions to decision-making situations"
+            "Using a point that satisfies only one constraint.",
+            "Forgetting that the feasible region is the overlap."
           ],
           "spiral": {
-            "current_learning": "Analyze and interpret systems of linear inequalities.",
-            "retrieval": "Analyze and compare linear relationships using multiple representations.",
-            "mastery": "Interpret functions as rules that connect inputs and outputs without relying on formal domain and range language."
+            "intro": {
+              "text": "Use several inequalities to describe a feasible region.",
+              "builds_toward_goal_id": "U5-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U4-MG03",
+              "text": "Compare linear relationships using slope, starting value, outputs, and context.",
+              "source": "Unit 2 · Section 2.4 · Comparing Linear Representations",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U3-MG02",
+              "text": "Use function notation and key features to describe functions and recognize common function families.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]
@@ -637,17 +841,19 @@
     {
       "unit": 4,
       "title": "Function Families and Transformations",
+      "essential_standard": "Recognize and transform function families, work with polynomial expressions, and connect algebraic structure to graph features.",
       "sections": [
         {
           "section_id": "4.1",
           "unit": 4,
           "section": 1,
           "title": "Recognizing Function Families",
-          "learning_target": "Students will identify common function families from graphs, equations, tables, and contexts.",
+          "learning_target": "Use patterns and features to identify common function families.",
           "i_can_statements": [
-            "I can construct evidence for a function family using patterns in graphs, equations, tables, and contexts.",
-            "I can apply family features to sort representations into linear, quadratic, exponential, absolute value, and other familiar forms.",
-            "I can determine which representation gives the strongest evidence for a function family when features seem similar."
+            "Use first differences for linear patterns.",
+            "Use second differences for quadratic patterns.",
+            "Use ratios for exponential patterns.",
+            "Use graph or equation features as additional evidence."
           ],
           "vocabulary_notation": [
             "parent function",
@@ -657,26 +863,38 @@
             "absolute value"
           ],
           "representations": [
-            "Graphs of parent and familiar function families",
-            "Tables showing constant differences, second differences, or ratios",
-            "Equations in recognizable family forms",
-            "Contexts involving change patterns",
-            "Feature language such as intercept, vertex, rate, and symmetry"
+            "Graphs",
+            "Tables",
+            "Equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Choosing a family from one surface feature while ignoring conflicting table or equation evidence.",
-            "Treating all curved graphs as quadratic."
-          ],
-          "modeling_application_practice": [
-            "Use data patterns to choose a reasonable function family for a situation",
-            "Connect visible graph features to possible real-world behavior",
-            "Represent the same relationship with a graph, table, equation, and context",
-            "Critique whether a selected family fits all available evidence"
+            "Using graph shape as the only evidence.",
+            "Confusing second differences with ratios."
           ],
           "spiral": {
-            "current_learning": "Identify common function families from graphs, equations, tables, and contexts.",
-            "retrieval": "Solve systems graphically and by elimination while interpreting the meaning of different solution types.",
-            "mastery": "Analyze and compare linear relationships using multiple representations."
+            "intro": {
+              "text": "Use patterns and features to identify common function families.",
+              "builds_toward_goal_id": "U6-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U5-MG01",
+              "text": "Solve systems by graphing, substitution, or elimination and choose a useful method.",
+              "source": "Unit 3 · Section 3.1 · Graphing and Elimination",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U4-MG03",
+              "text": "Compare linear relationships using slope, starting value, outputs, and context.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -684,11 +902,12 @@
           "unit": 4,
           "section": 2,
           "title": "Translations",
-          "learning_target": "Students will graph and write translated functions using key points and key features.",
+          "learning_target": "Graph and write translated functions using key points and features.",
           "i_can_statements": [
-            "I can build translated graphs by moving key points and key features from a parent function.",
-            "I can use horizontal and vertical shifts to write equations for translated functions.",
-            "I can predict how changing values in an equation moves a graph left, right, up, or down."
+            "Move a graph up, down, left, or right.",
+            "Move key points consistently.",
+            "Connect a translation to an equation change.",
+            "Describe how a key feature moves."
           ],
           "vocabulary_notation": [
             "parent function",
@@ -698,26 +917,38 @@
             "key point"
           ],
           "representations": [
-            "Parent function graphs",
-            "Translated graphs on coordinate grids",
-            "Equations in transformation form",
-            "Key points, vertices, intercepts, and asymptotes where appropriate",
-            "Tables before and after translation"
+            "Parent graphs",
+            "Translated graphs",
+            "Equations",
+            "Key points"
           ],
           "misconceptions_failure_points": [
-            "Reversing the direction of horizontal shifts in equation form.",
-            "Moving only the vertex while leaving other key points inconsistent."
-          ],
-          "modeling_application_practice": [
-            "Shift a model to represent a changed starting value or benchmark",
-            "Use key points to sketch a translated relationship efficiently",
-            "Connect equation parameters to movement on a graph",
-            "Translate a graph to satisfy contextual constraints"
+            "Reversing horizontal direction.",
+            "Moving only one point."
           ],
           "spiral": {
-            "current_learning": "Graph and write translated functions using key points and key features.",
-            "retrieval": "Graph and interpret linear inequalities.",
-            "mastery": "Graph linear functions and interpret key features."
+            "intro": {
+              "text": "Graph and write translated functions using key points and features.",
+              "builds_toward_goal_id": "U6-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U5-MG03",
+              "text": "Graph a linear inequality using a boundary line and a correct solution region.",
+              "source": "Unit 3 · Section 3.4 · Graphing Linear Inequalities",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U4-MG02",
+              "text": "Use slope and starting value to graph and write linear functions.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -725,40 +956,53 @@
           "unit": 4,
           "section": 3,
           "title": "Transformations",
-          "learning_target": "Students will analyze and graph transformations involving stretches, compressions, and reflections.",
+          "learning_target": "Analyze stretches, compressions, reflections, and translations.",
           "i_can_statements": [
-            "I can design transformed graphs using stretches, compressions, reflections, and translations of parent functions.",
-            "I can apply transformation rules to key points and features across function families.",
-            "I can assess whether an equation, graph, or table represents the same transformed function."
+            "Recognize a vertical stretch or compression.",
+            "Recognize a reflection.",
+            "Apply a transformation to key points.",
+            "Connect parameter changes to graph changes."
           ],
           "vocabulary_notation": [
             "stretch",
             "compression",
             "reflection",
             "translation",
-            "transformation parameter"
+            "parameter"
           ],
           "representations": [
-            "Transformation equations using parameters",
-            "Graphs showing vertical stretches and compressions",
-            "Graphs reflected over an axis",
-            "Tables transformed from parent-function values",
-            "Key features such as vertex, intercepts, symmetry, and rate behavior"
+            "Transformed graphs",
+            "Equations",
+            "Tables",
+            "Key points"
           ],
           "misconceptions_failure_points": [
-            "Confusing vertical stretch/compression with horizontal movement.",
-            "Reflecting or scaling points inconsistently across the graph."
-          ],
-          "modeling_application_practice": [
-            "Adjust a parent function to fit a steeper, flatter, or reflected situation",
-            "Use a transformed table to generate a graph and equation",
-            "Connect parameter values to meaningful changes in a context",
-            "Check whether multiple representations model the same transformation"
+            "Confusing vertical and horizontal changes.",
+            "Scaling points inconsistently."
           ],
           "spiral": {
-            "current_learning": "Analyze and graph transformations involving stretches, compressions, and reflections.",
-            "retrieval": "Analyze and interpret systems of linear inequalities.",
-            "mastery": "Interpret slope as a measure of constant rate of change."
+            "intro": {
+              "text": "Analyze stretches, compressions, reflections, and translations.",
+              "builds_toward_goal_id": "U6-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U5-MG04",
+              "text": "Graph more than one inequality and use the overlap to represent possible solutions.",
+              "source": "Unit 3 · Section 3.5 · Linear Systems of Inequalities",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U4-MG01",
+              "text": "Find slope across representations and explain what it means.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -766,40 +1010,53 @@
           "unit": 4,
           "section": 4,
           "title": "Polynomial Operations",
-          "learning_target": "Students will add, subtract, and multiply polynomial expressions.",
+          "learning_target": "Add, subtract, and multiply polynomial expressions.",
           "i_can_statements": [
-            "I can formulate polynomial sums, differences, and products from area, perimeter, and expression contexts.",
-            "I can use structure and like terms to add, subtract, and multiply polynomial expressions.",
-            "I can extend polynomial operations to equivalent expressions written in different forms."
+            "Combine like terms.",
+            "Distribute signs and factors.",
+            "Multiply monomials and binomials.",
+            "Use exponent rules when they appear."
           ],
           "vocabulary_notation": [
             "polynomial",
-            "like terms",
             "monomial",
             "binomial",
-            "product"
+            "like terms",
+            "exponent"
           ],
           "representations": [
-            "Polynomial expressions in standard and factored forms",
-            "Area models and algebra tiles",
-            "Tables of expression values",
-            "Equivalent expressions after combining or multiplying terms",
-            "Contextual diagrams involving length, width, area, and total change"
+            "Polynomial expressions",
+            "Area models",
+            "Equivalent forms",
+            "Exponent notation"
           ],
           "misconceptions_failure_points": [
-            "Combining unlike polynomial terms.",
-            "Distributing a negative sign or multiplying binomials incompletely."
-          ],
-          "modeling_application_practice": [
-            "Represent area or perimeter situations with polynomial expressions",
-            "Use algebra tiles or area models to multiply binomials",
-            "Connect polynomial operations to equivalent forms of a model",
-            "Check whether an expression form makes sense for a context"
+            "Combining unlike terms.",
+            "Using an exponent rule where it does not apply."
           ],
           "spiral": {
-            "current_learning": "Add, subtract, and multiply polynomial expressions.",
-            "retrieval": "Solve systems using substitution and choose efficient forms for solving.",
-            "mastery": "Write linear equations from graphs, tables, and situations."
+            "intro": {
+              "text": "Add, subtract, and multiply polynomial expressions.",
+              "builds_toward_goal_id": "U6-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U5-MG01",
+              "text": "Solve systems by graphing, substitution, or elimination and choose a useful method.",
+              "source": "Unit 3 · Section 3.2 · Solving Systems by Substitution",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U4-MG02",
+              "text": "Use slope and starting value to graph and write linear functions.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -807,11 +1064,12 @@
           "unit": 4,
           "section": 5,
           "title": "Polynomial Structure and Quadratic Graphs",
-          "learning_target": "Students will connect polynomial expressions to quadratic graphs and key features.",
+          "learning_target": "Connect quadratic expression structure to graph features.",
           "i_can_statements": [
-            "I can construct connections between polynomial structure, quadratic graphs, and key features.",
-            "I can predict graph features from equivalent quadratic expressions.",
-            "I can critique whether a polynomial expression supports a claimed vertex, intercept, axis of symmetry, or direction of opening."
+            "Recognize a quadratic expression and graph.",
+            "Identify vertex, intercepts, and symmetry.",
+            "Connect equivalent forms to visible features.",
+            "Explain which form reveals a useful feature."
           ],
           "vocabulary_notation": [
             "quadratic",
@@ -821,26 +1079,38 @@
             "intercept"
           ],
           "representations": [
-            "Quadratic expressions in equivalent forms",
-            "Parabolas with vertex, intercepts, and axis of symmetry",
-            "Tables showing quadratic patterns",
-            "Factored or expanded expressions connected to graph features",
-            "Contexts modeled by quadratic relationships"
+            "Quadratic expressions",
+            "Parabolas",
+            "Tables",
+            "Equivalent forms"
           ],
           "misconceptions_failure_points": [
-            "Assuming every expression form reveals every graph feature equally well.",
-            "Confusing the vertex with an intercept or the axis of symmetry with a solution."
-          ],
-          "modeling_application_practice": [
-            "Use expression structure to predict features of a quadratic model",
-            "Connect expanded and factored forms to graph information",
-            "Choose a useful form for answering a contextual question",
-            "Revise a model when its graph features do not fit the situation"
+            "Confusing vertex and intercepts.",
+            "Assuming every form shows every feature."
           ],
           "spiral": {
-            "current_learning": "Connect polynomial expressions to quadratic graphs and key features.",
-            "retrieval": "Create and solve systems that model real-world situations.",
-            "mastery": "Use linear models to represent and interpret real-world data."
+            "intro": {
+              "text": "Connect quadratic expression structure to graph features.",
+              "builds_toward_goal_id": "U6-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U5-MG02",
+              "text": "Use two equations to model two constraints and interpret the solution.",
+              "source": "Unit 3 · Section 3.3 · Writing and Solving Systems from Situations",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U4-MG04",
+              "text": "Build or use a linear model and judge whether it is useful.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]
@@ -848,17 +1118,19 @@
     {
       "unit": 5,
       "title": "Factoring and Quadratic Functions",
+      "essential_standard": "Factor polynomial expressions and use quadratic forms to understand zeros and graph features.",
       "sections": [
         {
           "section_id": "5.1",
           "unit": 5,
           "section": 1,
           "title": "GCF and Structure",
-          "learning_target": "Students will identify common factors and use structure to rewrite polynomial expressions.",
+          "learning_target": "Factor out a greatest common factor and check the result.",
           "i_can_statements": [
-            "I can construct equivalent polynomial expressions by factoring out a greatest common factor.",
-            "I can apply structure to rewrite polynomial expressions in a more useful form.",
-            "I can determine whether a rewritten expression is reasonable by checking common factors and equivalent products."
+            "Find the GCF of coefficients.",
+            "Find common variable factors.",
+            "Factor the GCF from every term.",
+            "Multiply back to verify."
           ],
           "vocabulary_notation": [
             "greatest common factor",
@@ -868,26 +1140,37 @@
             "equivalent expression"
           ],
           "representations": [
-            "Polynomial expressions in expanded form",
-            "Factored expressions with greatest common factors",
-            "Area models for common-factor structure",
-            "Tables of term coefficients and variable powers",
-            "Verbal contexts involving shared quantities"
+            "Expanded expressions",
+            "Factored expressions",
+            "Area models"
           ],
           "misconceptions_failure_points": [
-            "Factoring out a quantity that is not common to every term.",
-            "Failing to verify the factored form by multiplication."
-          ],
-          "modeling_application_practice": [
-            "Use area or array models to represent common factors.",
-            "Rewrite expressions from contexts where quantities share a common part.",
-            "Build equivalent expressions to simplify repeated calculations.",
-            "Check factored expressions by multiplying back to the original expression."
+            "Factoring something not common to every term.",
+            "Leaving a common factor behind."
           ],
           "spiral": {
-            "current_learning": "Identify common factors and use structure to rewrite polynomial expressions.",
-            "retrieval": "Add, subtract, and multiply polynomial expressions.",
-            "mastery": "Solve systems using substitution and choose efficient forms for solving."
+            "intro": {
+              "text": "Factor out a greatest common factor and check the result.",
+              "builds_toward_goal_id": "U7-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U6-MG03",
+              "text": "Add, subtract, and multiply polynomials using structure, like terms, distribution, and exponent laws.",
+              "source": "Unit 4 · Section 4.4 · Polynomial Operations",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U5-MG01",
+              "text": "Solve systems by graphing, substitution, or elimination and choose a useful method.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -895,40 +1178,53 @@
           "unit": 5,
           "section": 2,
           "title": "Factoring Trinomials",
-          "learning_target": "Students will factor quadratic trinomials using patterns, products, sums, and structure.",
+          "learning_target": "Factor quadratic trinomials using product-sum reasoning.",
           "i_can_statements": [
-            "I can build factored forms of quadratic trinomials using product-sum relationships.",
-            "I can use patterns in coefficients and constants to factor quadratic trinomials.",
-            "I can predict missing factors or terms by extending product-sum reasoning."
+            "Find factor pairs for the constant or product.",
+            "Use sum information to choose a pair.",
+            "Write binomial factors.",
+            "Multiply back to check."
           ],
           "vocabulary_notation": [
             "trinomial",
             "binomial factor",
-            "product-sum relationship",
+            "product-sum",
             "factor pair",
             "quadratic"
           ],
           "representations": [
-            "Standard-form quadratic trinomials",
-            "Factored binomial products",
-            "Product-sum tables",
-            "Algebra tiles or area models",
-            "Partial-factor work showing structure"
+            "Trinomials",
+            "Binomial products",
+            "Diamond structures",
+            "Area models"
           ],
           "misconceptions_failure_points": [
-            "Using factor pairs that multiply correctly but do not produce the required middle term.",
-            "Stopping after finding one factor without verifying the full product."
-          ],
-          "modeling_application_practice": [
-            "Represent trinomials with area models before writing factors.",
-            "Build product-sum tables to organize factor choices.",
-            "Connect binomial multiplication to the reverse process of factoring.",
-            "Use structure to choose efficient factoring strategies."
+            "Choosing a pair with the right product but wrong sum.",
+            "Not checking the factorization."
           ],
           "spiral": {
-            "current_learning": "Factor quadratic trinomials using patterns, products, sums, and structure.",
-            "retrieval": "Connect polynomial expressions to quadratic graphs and key features.",
-            "mastery": "Solve systems graphically and by elimination while interpreting the meaning of different solution types."
+            "intro": {
+              "text": "Factor quadratic trinomials using product-sum reasoning.",
+              "builds_toward_goal_id": "U7-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U6-MG04",
+              "text": "Use polynomial and quadratic structure to identify features such as zeros, vertex, symmetry, and direction of opening.",
+              "source": "Unit 4 · Section 4.5 · Polynomial Structure and Quadratic Graphs",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U5-MG01",
+              "text": "Solve systems by graphing, substitution, or elimination and choose a useful method.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -936,40 +1232,52 @@
           "unit": 5,
           "section": 3,
           "title": "Special Factoring Patterns",
-          "learning_target": "Students will recognize and factor special polynomial patterns.",
+          "learning_target": "Recognize and factor common special polynomial patterns.",
           "i_can_statements": [
-            "I can design a strategy for factoring special polynomial patterns.",
-            "I can apply difference-of-squares and perfect-square-trinomial patterns.",
-            "I can assess whether a polynomial fits a special factoring pattern before rewriting it."
+            "Recognize a difference of squares.",
+            "Recognize a perfect-square trinomial.",
+            "Factor the pattern.",
+            "Check by multiplying."
           ],
           "vocabulary_notation": [
             "difference of squares",
             "perfect-square trinomial",
-            "factor",
             "square term",
+            "factor",
             "pattern"
           ],
           "representations": [
-            "Difference-of-squares expressions",
-            "Perfect-square trinomials",
-            "Squared binomial forms",
-            "Pattern templates using variables and coefficients",
-            "Visual square and rectangle models"
+            "Special patterns",
+            "Squared binomials",
+            "Geometric models"
           ],
           "misconceptions_failure_points": [
-            "Applying a special pattern when the polynomial does not meet its structural conditions.",
-            "Forgetting that a difference of squares requires subtraction between two square terms."
-          ],
-          "modeling_application_practice": [
-            "Create examples and nonexamples of special factoring patterns.",
-            "Use geometric models to represent perfect squares and differences of squares.",
-            "Connect pattern recognition to efficient rewriting.",
-            "Check special pattern factorizations by expanding."
+            "Using a pattern when conditions do not fit.",
+            "Forgetting difference of squares uses subtraction."
           ],
           "spiral": {
-            "current_learning": "Recognize and factor special polynomial patterns.",
-            "retrieval": "Identify common function families from graphs, equations, tables, and contexts.",
-            "mastery": "Create and solve systems that model real-world situations."
+            "intro": {
+              "text": "Recognize and factor common special polynomial patterns.",
+              "builds_toward_goal_id": "U7-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U6-MG01",
+              "text": "Identify common function families from graphs, tables, equations, and contexts.",
+              "source": "Unit 4 · Section 4.1 · Recognizing Function Families",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U5-MG03",
+              "text": "Graph a linear inequality using a boundary line and a correct solution region.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -977,11 +1285,12 @@
           "unit": 5,
           "section": 4,
           "title": "Factored Form and Zeros",
-          "learning_target": "Students will connect factors, zeros, intercepts, and graphs of quadratic functions.",
+          "learning_target": "Connect factored form, zeros, and x-intercepts.",
           "i_can_statements": [
-            "I can formulate quadratic functions in factored form from zeros or intercepts.",
-            "I can use factored form to predict zeros and x-intercepts of quadratic graphs.",
-            "I can extend connections among factors, zeros, intercepts, and graph behavior."
+            "Find zeros from factored form.",
+            "Connect zeros to x-intercepts.",
+            "Write factored form from zeros when enough information is given.",
+            "Interpret a zero in context."
           ],
           "vocabulary_notation": [
             "factored form",
@@ -991,26 +1300,38 @@
             "factor"
           ],
           "representations": [
-            "Factored quadratic functions",
-            "Zeros and x-intercepts",
+            "Factored functions",
+            "Zeros",
             "Quadratic graphs",
-            "Input-output tables near intercepts",
-            "Context statements involving break-even or height reaching zero"
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Treating factors themselves as zeros instead of setting each factor equal to zero.",
-            "Confusing x-intercepts with y-intercepts."
-          ],
-          "modeling_application_practice": [
-            "Write factored functions from graph intercepts.",
-            "Model situations where zeros represent meaningful values.",
-            "Use zeros to sketch or interpret quadratic graphs.",
-            "Connect algebraic factors to graphical crossings."
+            "Treating factors as zeros.",
+            "Confusing x- and y-intercepts."
           ],
           "spiral": {
-            "current_learning": "Connect factors, zeros, intercepts, and graphs of quadratic functions.",
-            "retrieval": "Graph and write translated functions using key points and key features.",
-            "mastery": "Graph and interpret linear inequalities."
+            "intro": {
+              "text": "Connect factored form, zeros, and x-intercepts.",
+              "builds_toward_goal_id": "U7-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U6-MG02",
+              "text": "Represent translations, stretches, compressions, and reflections across function families.",
+              "source": "Unit 4 · Section 4.2 · Translations",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U5-MG04",
+              "text": "Graph more than one inequality and use the overlap to represent possible solutions.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1018,11 +1339,12 @@
           "unit": 5,
           "section": 5,
           "title": "Comparing Quadratic Forms",
-          "learning_target": "Students will compare standard, vertex, and factored forms of quadratic functions and determine which form best reveals key features.",
+          "learning_target": "Choose the quadratic form that best shows the feature you need.",
           "i_can_statements": [
-            "I can construct equivalent quadratic forms to reveal different key features.",
-            "I can interpret standard, vertex, and factored forms to read key features of quadratic functions.",
-            "I can critique which quadratic form best supports a given question or context."
+            "Identify standard, vertex, and factored form.",
+            "Read useful features from each form.",
+            "Connect different forms to the same graph.",
+            "Explain which form is most useful for a question."
           ],
           "vocabulary_notation": [
             "standard form",
@@ -1032,26 +1354,37 @@
             "zeros"
           ],
           "representations": [
-            "Standard form",
-            "Vertex form",
-            "Factored form",
-            "Quadratic graphs with key features labeled",
-            "Contexts involving maximums, minimums, intercepts, and starting values"
+            "Three quadratic forms",
+            "Quadratic graphs",
+            "Feature tables"
           ],
           "misconceptions_failure_points": [
-            "Assuming one quadratic form is always best for every question.",
-            "Reading zeros, vertex, or intercepts from the wrong structural feature."
-          ],
-          "modeling_application_practice": [
-            "Choose the most useful form for a context-based question.",
-            "Rewrite quadratics to reveal zeros, vertex, or y-intercept.",
-            "Connect forms to graph features and contextual meaning.",
-            "Critique form choices in student solution strategies."
+            "Assuming one form is always best.",
+            "Reading a feature from the wrong part of an equation."
           ],
           "spiral": {
-            "current_learning": "Compare standard, vertex, and factored forms of quadratic functions and determine which form best reveals key features.",
-            "retrieval": "Analyze and graph transformations involving stretches, compressions, and reflections.",
-            "mastery": "Analyze and interpret systems of linear inequalities."
+            "intro": {
+              "text": "Choose the quadratic form that best shows the feature you need.",
+              "builds_toward_goal_id": "U7-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U6-MG02",
+              "text": "Represent translations, stretches, compressions, and reflections across function families.",
+              "source": "Unit 4 · Section 4.3 · Transformations",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U5-MG02",
+              "text": "Use two equations to model two constraints and interpret the solution.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]
@@ -1059,17 +1392,19 @@
     {
       "unit": 6,
       "title": "Solving and Modeling with Quadratics",
+      "essential_standard": "Solve quadratic equations in different ways and use quadratic models to answer real questions.",
       "sections": [
         {
           "section_id": "6.1",
           "unit": 6,
           "section": 1,
           "title": "Solving Quadratics by Factoring",
-          "learning_target": "Students will solve quadratic equations using factored form and interpret solutions.",
+          "learning_target": "Solve quadratic equations using factoring and the zero product property.",
           "i_can_statements": [
-            "I can construct factored quadratic equations from given zeros, intercepts, or contextual constraints.",
-            "I can apply the zero product property to solve quadratic equations in factored form.",
-            "I can determine whether solutions make sense in relation to a graph or context."
+            "Set the equation equal to zero when needed.",
+            "Factor the quadratic.",
+            "Use the zero product property.",
+            "Connect solutions to x-intercepts or context."
           ],
           "vocabulary_notation": [
             "quadratic equation",
@@ -1079,26 +1414,38 @@
             "solution"
           ],
           "representations": [
-            "Factored quadratic equations",
-            "Zeros and $x$-intercepts",
-            "Tables of values",
-            "Graphs of parabolas",
-            "Contextual solution statements"
+            "Factored equations",
+            "Zeros",
+            "Graphs",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Applying the zero product property before the equation is set equal to zero.",
-            "Keeping factor values instead of solving each factor equation for the variable."
-          ],
-          "modeling_application_practice": [
-            "Model break-even points using factored quadratic equations",
-            "Connect ground-contact times to zeros in projectile contexts",
-            "Represent rectangular area relationships with products of linear factors",
-            "Interpret when negative or repeated solutions are meaningful"
+            "Using zero product before the equation equals zero.",
+            "Stopping at the factors."
           ],
           "spiral": {
-            "current_learning": "Solve quadratic equations using factored form and interpret solutions.",
-            "retrieval": "Connect factors, zeros, intercepts, and graphs of quadratic functions.",
-            "mastery": "Connect polynomial expressions to quadratic graphs and key features."
+            "intro": {
+              "text": "Solve quadratic equations using factoring and the zero product property.",
+              "builds_toward_goal_id": "U8-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U7-MG02",
+              "text": "Factor quadratic trinomials and common special patterns.",
+              "source": "Unit 5 · Section 5.2 · Factoring Trinomials",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U6-MG03",
+              "text": "Add, subtract, and multiply polynomials using structure, like terms, distribution, and exponent laws.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1106,11 +1453,12 @@
           "unit": 6,
           "section": 2,
           "title": "Completing the Square",
-          "learning_target": "Students will solve quadratic equations by completing the square and connect the process to vertex form.",
+          "learning_target": "Solve a quadratic by completing the square and connect the result to vertex form.",
           "i_can_statements": [
-            "I can build perfect-square trinomials by adding the needed constant term.",
-            "I can use completing the square to solve quadratic equations and write equivalent vertex-form expressions.",
-            "I can predict how completing the square reveals the vertex and symmetry of a quadratic function."
+            "Build a perfect-square trinomial.",
+            "Keep both sides balanced.",
+            "Rewrite in vertex form.",
+            "Use square roots to solve."
           ],
           "vocabulary_notation": [
             "complete the square",
@@ -1120,26 +1468,39 @@
             "equivalent form"
           ],
           "representations": [
-            "Standard form equations",
-            "Perfect-square trinomials",
-            "Vertex form expressions",
-            "Algebra tiles or area models",
-            "Parabola vertices and axes of symmetry"
+            "Standard form",
+            "Perfect squares",
+            "Vertex form",
+            "Graphs",
+            "Radicals"
           ],
           "misconceptions_failure_points": [
-            "Adding a term to one side without preserving equality.",
-            "Using the coefficient of the linear term instead of half that coefficient when forming a square."
-          ],
-          "modeling_application_practice": [
-            "Model height or profit situations where the maximum or minimum is most useful",
-            "Connect area diagrams to completing-square steps",
-            "Rewrite quadratic models to reveal optimal input values",
-            "Interpret constants introduced during equivalent transformations"
+            "Adding to only one side.",
+            "Using the whole linear coefficient instead of half."
           ],
           "spiral": {
-            "current_learning": "Solve quadratic equations by completing the square and connect the process to vertex form.",
-            "retrieval": "Compare standard, vertex, and factored forms of quadratic functions and determine which form best reveals key features.",
-            "mastery": "Graph and write translated functions using key points and key features."
+            "intro": {
+              "text": "Solve a quadratic by completing the square and connect the result to vertex form.",
+              "builds_toward_goal_id": "U8-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U7-MG02",
+              "text": "Factor quadratic trinomials and common special patterns.",
+              "source": "Unit 5 · Section 5.3 · Special Factoring Patterns",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U6-MG04",
+              "text": "Use polynomial and quadratic structure to identify features such as zeros, vertex, symmetry, and direction of opening.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1147,40 +1508,55 @@
           "unit": 6,
           "section": 3,
           "title": "Quadratic Formula",
-          "learning_target": "Students will solve quadratic equations using the quadratic formula and interpret solutions.",
+          "learning_target": "Use the quadratic formula and discriminant to solve quadratic equations.",
           "i_can_statements": [
-            "I can design a coefficient map that organizes $a$, $b$, and $c$ before using the quadratic formula.",
-            "I can apply the quadratic formula to solve equations with rational, irrational, or no real solutions.",
-            "I can assess how the discriminant predicts the number and type of real solutions."
+            "Identify a, b, and c.",
+            "Substitute carefully into the formula.",
+            "Use the discriminant to predict real solutions.",
+            "Give exact or approximate answers as needed."
           ],
           "vocabulary_notation": [
             "quadratic formula",
             "discriminant",
-            "$a$",
-            "$b$",
-            "$c$"
+            "a",
+            "b",
+            "c",
+            "radical"
           ],
           "representations": [
-            "Standard form equations",
+            "Standard form",
             "Quadratic formula",
-            "Discriminant values",
-            "Exact and approximate solutions",
-            "Graphs with two, one, or no $x$-intercepts"
+            "Discriminant",
+            "Exact/approximate roots",
+            "Graphs"
           ],
           "misconceptions_failure_points": [
-            "Substituting signs incorrectly for $a$, $b$, or $c$.",
-            "Ignoring the discriminant when interpreting the number or type of real solutions."
-          ],
-          "modeling_application_practice": [
-            "Model solution type using the discriminant before calculating roots",
-            "Connect irrational solutions to graphing-window estimates",
-            "Interpret no-real-solution cases in physical contexts",
-            "Use formula outputs to answer context-specific questions"
+            "Sign errors in substitution.",
+            "Rounding too early."
           ],
           "spiral": {
-            "current_learning": "Solve quadratic equations using the quadratic formula and interpret solutions.",
-            "retrieval": "Identify common factors and use structure to rewrite polynomial expressions.",
-            "mastery": "Add, subtract, and multiply polynomial expressions."
+            "intro": {
+              "text": "Use the quadratic formula and discriminant to solve quadratic equations.",
+              "builds_toward_goal_id": "U8-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U7-MG04",
+              "text": "Compare standard, vertex, and factored forms and use the most useful form.",
+              "source": "Unit 5 · Section 5.5 · Comparing Quadratic Forms",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U6-MG02",
+              "text": "Represent translations, stretches, compressions, and reflections across function families.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1188,40 +1564,52 @@
           "unit": 6,
           "section": 4,
           "title": "Choosing and Defending Solution Methods",
-          "learning_target": "Students will compare factoring, completing the square, and the quadratic formula and select efficient solution methods.",
+          "learning_target": "Choose an efficient way to solve a quadratic equation.",
           "i_can_statements": [
-            "I can formulate a solution-method plan based on the structure of a quadratic equation.",
-            "I can use factoring, completing the square, or the quadratic formula when the equation structure supports the method.",
-            "I can critique a selected solution method for efficiency, accuracy, and fit to the equation."
+            "Look at equation structure before choosing a method.",
+            "Choose factoring when it is efficient.",
+            "Use completing the square or quadratic formula when appropriate.",
+            "Explain why the method fits."
           ],
           "vocabulary_notation": [
             "factoring",
             "completing the square",
             "quadratic formula",
-            "efficiency",
-            "equation structure"
+            "method",
+            "efficiency"
           ],
           "representations": [
-            "Standard form equations",
-            "Factored form equations",
-            "Vertex form equations",
-            "Method-selection flowcharts",
-            "Written solution-method comparisons"
+            "Quadratics in different forms",
+            "Method comparisons",
+            "Written reasoning"
           ],
           "misconceptions_failure_points": [
-            "Choosing a familiar method without considering equation structure or efficiency.",
-            "Claiming a method is best without comparing accuracy, complexity, or available structure."
-          ],
-          "modeling_application_practice": [
-            "Model decision-making with method-selection criteria",
-            "Revise inefficient solution plans for the same equation",
-            "Connect equation structure to the most efficient solving strategy",
-            "Interpret whether exact or approximate solutions are more useful"
+            "Choosing a method by habit.",
+            "Calling a method best without a reason."
           ],
           "spiral": {
-            "current_learning": "Compare factoring, completing the square, and the quadratic formula and select efficient solution methods.",
-            "retrieval": "Recognize and factor special polynomial patterns.",
-            "mastery": "Identify common function families from graphs, equations, tables, and contexts."
+            "intro": {
+              "text": "Choose an efficient way to solve a quadratic equation.",
+              "builds_toward_goal_id": "U8-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U7-MG01",
+              "text": "Factor polynomial expressions using a greatest common factor and check the result.",
+              "source": "Unit 5 · Section 5.1 · GCF and Structure",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U6-MG01",
+              "text": "Identify common function families from graphs, tables, equations, and contexts.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1229,40 +1617,53 @@
           "unit": 6,
           "section": 5,
           "title": "Quadratic Modeling and Optimization",
-          "learning_target": "Students will use quadratic functions to model real-world situations and interpret maximums, minimums, and intercepts.",
+          "learning_target": "Use a quadratic model to answer questions about maximums, minimums, intercepts, and meaningful solutions.",
           "i_can_statements": [
-            "I can construct quadratic models from real-world constraints, data, or key features.",
-            "I can extend quadratic models to predict maximums, minimums, intercepts, and meaningful solution values.",
-            "I can assess whether a quadratic model and its solutions are reasonable for the situation."
+            "Build or use a quadratic model.",
+            "Interpret the vertex.",
+            "Interpret zeros or intercepts.",
+            "Use a meaningful domain and reject impossible solutions."
           ],
           "vocabulary_notation": [
             "quadratic model",
             "maximum",
             "minimum",
             "vertex",
-            "intercept"
+            "domain"
           ],
           "representations": [
-            "Contextual quadratic models",
-            "Graphs with vertices and intercepts",
-            "Tables of input-output values",
-            "Vertex, standard, and factored forms",
-            "Domain restrictions and solution interpretations"
+            "Contexts",
+            "Graphs",
+            "Tables",
+            "Quadratic forms"
           ],
           "misconceptions_failure_points": [
-            "Interpreting the vertex without considering whether it is a maximum or minimum.",
-            "Keeping mathematically valid solutions that are not meaningful in context."
-          ],
-          "modeling_application_practice": [
-            "Model projectile height over time",
-            "Optimize area or revenue using quadratic functions",
-            "Interpret maximums and minimums in context",
-            "Restrict domains to meaningful values in real-world situations"
+            "Keeping impossible contextual solutions.",
+            "Confusing a maximum and minimum."
           ],
           "spiral": {
-            "current_learning": "Use quadratic functions to model real-world situations and interpret maximums, minimums, and intercepts.",
-            "retrieval": "Factor quadratic trinomials using patterns, products, sums, and structure.",
-            "mastery": "Analyze and graph transformations involving stretches, compressions, and reflections."
+            "intro": {
+              "text": "Use a quadratic model to answer questions about maximums, minimums, intercepts, and meaningful solutions.",
+              "builds_toward_goal_id": "U8-MG05",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U7-MG03",
+              "text": "Use factored form to find and interpret zeros of a quadratic function.",
+              "source": "Unit 5 · Section 5.4 · Factored Form and Zeros",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U6-MG02",
+              "text": "Represent translations, stretches, compressions, and reflections across function families.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]
@@ -1270,17 +1671,19 @@
     {
       "unit": 7,
       "title": "Exponential Functions and Modeling",
+      "essential_standard": "Use exponential patterns, functions, and models to describe repeated multiplicative change.",
       "sections": [
         {
           "section_id": "7.1",
           "unit": 7,
           "section": 1,
           "title": "Recognizing Growth and Decay",
-          "learning_target": "Students will identify exponential relationships from patterns, tables, graphs, and situations.",
+          "learning_target": "Identify exponential growth and decay from repeated multiplicative change.",
           "i_can_statements": [
-            "I can construct evidence from patterns, tables, graphs, and situations to support an exponential growth or decay relationship.",
-            "I can apply repeated multiplication and constant ratios to exponential patterns.",
-            "I can determine whether a relationship is exponential by checking how values change across representations."
+            "Find a constant ratio in a table.",
+            "Tell additive change from multiplicative change.",
+            "Identify growth or decay.",
+            "Use a graph, equation, or context as supporting evidence."
           ],
           "vocabulary_notation": [
             "exponential growth",
@@ -1290,26 +1693,38 @@
             "decay factor"
           ],
           "representations": [
-            "Tables with constant ratios",
-            "Graphs showing growth or decay curves",
-            "Verbal situations involving repeated percent change",
-            "Sequences of values or patterns",
-            "Equations in the form $y=ab^x$"
+            "Tables",
+            "Graphs",
+            "Equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Using constant differences to justify an exponential relationship.",
-            "Confusing a decay factor with the percent decrease."
-          ],
-          "modeling_application_practice": [
-            "Model population growth from a table of values",
-            "Model depreciation of an object over time",
-            "Connect repeated percent change to growth or decay factors",
-            "Sort evidence from tables, graphs, and contexts by type of change"
+            "Using constant differences as exponential evidence.",
+            "Confusing percent change with the factor."
           ],
           "spiral": {
-            "current_learning": "Identify exponential relationships from patterns, tables, graphs, and situations.",
-            "retrieval": "Solve quadratic equations using the quadratic formula and interpret solutions.",
-            "mastery": "Recognize and factor special polynomial patterns."
+            "intro": {
+              "text": "Identify exponential growth and decay from repeated multiplicative change.",
+              "builds_toward_goal_id": "NC1-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U8-MG05",
+              "text": "Build or use quadratic models and interpret maximums, minimums, intercepts, domains, and solutions.",
+              "source": "Unit 6 · Section 6.5 · Quadratic Modeling and Optimization",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U7-MG02",
+              "text": "Factor quadratic trinomials and common special patterns.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1317,11 +1732,12 @@
           "unit": 7,
           "section": 2,
           "title": "Writing Exponential Equations",
-          "learning_target": "Students will write exponential equations from tables, graphs, and situations.",
+          "learning_target": "Write an exponential equation from a table, graph, or situation.",
           "i_can_statements": [
-            "I can build exponential equations using an initial value and a growth or decay factor.",
-            "I can use exponential equations to predict values from tables, graphs, and situations.",
-            "I can formulate exponential equations that represent repeated percent increase or decrease."
+            "Identify the initial value.",
+            "Identify a growth or decay factor.",
+            "Write f(x)=ab^x.",
+            "Use the equation to find or predict a value."
           ],
           "vocabulary_notation": [
             "initial value",
@@ -1331,26 +1747,38 @@
             "percent change"
           ],
           "representations": [
-            "Initial values and growth factors",
-            "Tables of input-output values",
-            "Graphs with visible intercepts and multiplicative change",
-            "Context statements with percent growth or decay",
-            "Equations such as $f(x)=a(1+r)^x$ and $f(x)=a(1-r)^x$"
+            "Tables",
+            "Graphs",
+            "f(x)=ab^x",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Using the percent change itself as the multiplicative factor.",
-            "Switching the roles of initial value and growth/decay factor."
-          ],
-          "modeling_application_practice": [
-            "Create savings or investment models with repeated percent growth",
-            "Create depreciation models for cars, technology, or equipment",
-            "Translate table values into exponential equations",
-            "Use an equation to forecast future values within a context"
+            "Using the percent itself as the factor.",
+            "Switching a and b."
           ],
           "spiral": {
-            "current_learning": "Write exponential equations from tables, graphs, and situations.",
-            "retrieval": "Solve quadratic equations using factored form and interpret solutions.",
-            "mastery": "Identify common factors and use structure to rewrite polynomial expressions."
+            "intro": {
+              "text": "Write an exponential equation from a table, graph, or situation.",
+              "builds_toward_goal_id": "NC1-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U8-MG03",
+              "text": "Use the quadratic formula to solve and the discriminant to predict the number of real solutions.",
+              "source": "Unit 6 · Section 6.3 · Quadratic Formula",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U7-MG01",
+              "text": "Factor polynomial expressions using a greatest common factor and check the result.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1358,11 +1786,12 @@
           "unit": 7,
           "section": 3,
           "title": "Graphing and Analyzing Exponential Functions",
-          "learning_target": "Students will graph exponential functions and analyze key features.",
+          "learning_target": "Graph an exponential function and describe its key features.",
           "i_can_statements": [
-            "I can design graphs of exponential functions using key points, growth or decay factors, and asymptote behavior.",
-            "I can apply key features of exponential graphs to interpret domain, range, intercepts, and end behavior.",
-            "I can assess whether a graph is reasonable for an exponential equation or situation."
+            "Use key points to sketch the graph.",
+            "Identify the y-intercept.",
+            "Describe horizontal asymptote behavior.",
+            "Describe domain, range, and end behavior."
           ],
           "vocabulary_notation": [
             "asymptote",
@@ -1372,26 +1801,38 @@
             "end behavior"
           ],
           "representations": [
-            "Coordinate graphs of exponential functions",
-            "Tables generated from exponential equations",
-            "Key points such as the y-intercept",
-            "Horizontal asymptote behavior",
-            "Domain and range statements"
+            "Exponential graphs",
+            "Tables",
+            "Equations",
+            "Feature statements"
           ],
           "misconceptions_failure_points": [
-            "Drawing an exponential graph through its horizontal asymptote.",
-            "Treating end behavior as linear or ignoring the effect of the growth/decay factor."
-          ],
-          "modeling_application_practice": [
-            "Graph growth and decay models from equations",
-            "Connect an equation's parameters to graph behavior",
-            "Interpret asymptote behavior in real-world settings",
-            "Use key points to sketch and check exponential graphs"
+            "Drawing through the horizontal asymptote.",
+            "Treating exponential change like linear change."
           ],
           "spiral": {
-            "current_learning": "Graph exponential functions and analyze key features.",
-            "retrieval": "Solve quadratic equations by completing the square and connect the process to vertex form.",
-            "mastery": "Connect factors, zeros, intercepts, and graphs of quadratic functions."
+            "intro": {
+              "text": "Graph an exponential function and describe its key features.",
+              "builds_toward_goal_id": "NC1-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U8-MG02",
+              "text": "Complete the square to solve a quadratic and connect the work to vertex and symmetry.",
+              "source": "Unit 6 · Section 6.2 · Completing the Square",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U7-MG03",
+              "text": "Use factored form to find and interpret zeros of a quadratic function.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1399,14 +1840,15 @@
           "unit": 7,
           "section": 4,
           "title": "Comparing Function Families",
-          "learning_target": "Students will compare linear, quadratic, and exponential functions using multiple representations.",
+          "learning_target": "Compare linear, quadratic, and exponential functions using evidence.",
           "i_can_statements": [
-            "I can formulate comparisons among linear, quadratic, and exponential functions using rates, differences, ratios, and graph features.",
-            "I can use tables, graphs, equations, and situations to distinguish additive, quadratic, and multiplicative patterns.",
-            "I can critique claims about function families using evidence from multiple representations."
+            "Use first differences for linear patterns.",
+            "Use second differences for quadratic patterns.",
+            "Use ratios for exponential patterns.",
+            "Use graphs, equations, and contexts to support the comparison."
           ],
           "vocabulary_notation": [
-            "constant difference",
+            "first difference",
             "second difference",
             "constant ratio",
             "linear",
@@ -1414,26 +1856,38 @@
             "exponential"
           ],
           "representations": [
-            "Tables showing first differences, second differences, and ratios",
-            "Linear, quadratic, and exponential graphs",
-            "Equations for multiple function families",
-            "Context descriptions of change over time",
-            "Feature comparisons such as intercepts, growth patterns, and turning points"
+            "Comparison tables",
+            "Graphs",
+            "Equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Using only graph shape instead of differences, ratios, and equation structure.",
-            "Confusing constant second differences with constant ratios."
-          ],
-          "modeling_application_practice": [
-            "Choose a function family for a data pattern using evidence",
-            "Contrast additive growth with multiplicative growth",
-            "Analyze when an exponential model eventually exceeds a linear or quadratic model",
-            "Revise a model choice after checking multiple representations"
+            "Using graph shape only.",
+            "Confusing second differences and ratios."
           ],
           "spiral": {
-            "current_learning": "Compare linear, quadratic, and exponential functions using multiple representations.",
-            "retrieval": "Compare factoring, completing the square, and the quadratic formula and select efficient solution methods.",
-            "mastery": "Compare standard, vertex, and factored forms of quadratic functions and determine which form best reveals key features."
+            "intro": {
+              "text": "Compare linear, quadratic, and exponential functions using evidence.",
+              "builds_toward_goal_id": "NC1-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U8-MG04",
+              "text": "Choose and explain an efficient method for solving a quadratic equation.",
+              "source": "Unit 6 · Section 6.4 · Choosing and Defending Solution Methods",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U7-MG04",
+              "text": "Compare standard, vertex, and factored forms and use the most useful form.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1441,40 +1895,53 @@
           "unit": 7,
           "section": 5,
           "title": "Exponential Modeling with Data",
-          "learning_target": "Students will create and analyze exponential models using real-world data.",
+          "learning_target": "Build or use an exponential model from data and judge its limits.",
           "i_can_statements": [
-            "I can construct exponential models from real-world data using an initial value and a growth or decay factor.",
-            "I can extend exponential models to make predictions and interpret results in context.",
-            "I can assess model fit and limitations when exponential data do not follow a perfect pattern."
+            "Estimate or identify an initial value.",
+            "Estimate or identify a growth/decay factor.",
+            "Use the model to make a prediction.",
+            "Explain whether the prediction is reasonable."
           ],
           "vocabulary_notation": [
             "exponential model",
-            "initial value",
-            "growth/decay factor",
+            "data",
+            "growth factor",
             "prediction",
             "model fit"
           ],
           "representations": [
-            "Real-world data tables",
-            "Scatter plots with exponential trends",
-            "Exponential equations built from data",
-            "Predictions and residual reasoning",
-            "Contextual interpretations of parameters and outputs"
+            "Data tables",
+            "Scatter plots",
+            "Exponential equations",
+            "Predictions"
           ],
           "misconceptions_failure_points": [
-            "Assuming noisy data have a perfect constant ratio.",
-            "Making predictions without considering the meaningful domain or model limitations."
-          ],
-          "modeling_application_practice": [
-            "Model viral sharing, population change, or compound growth",
-            "Model decay situations such as medicine concentration or depreciation",
-            "Use data to estimate a growth or decay factor",
-            "Check whether a model prediction is reasonable for the context"
+            "Assuming noisy data have a perfect ratio.",
+            "Ignoring meaningful domain."
           ],
           "spiral": {
-            "current_learning": "Create and analyze exponential models using real-world data.",
-            "retrieval": "Use quadratic functions to model real-world situations and interpret maximums, minimums, and intercepts.",
-            "mastery": "Factor quadratic trinomials using patterns, products, sums, and structure."
+            "intro": {
+              "text": "Build or use an exponential model from data and judge its limits.",
+              "builds_toward_goal_id": "NC1-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "U8-MG01",
+              "text": "Use factoring and the zero product property to solve quadratic equations and interpret the solutions.",
+              "source": "Unit 6 · Section 6.1 · Solving Quadratics by Factoring",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U7-MG02",
+              "text": "Factor quadratic trinomials and common special patterns.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]
@@ -1482,46 +1949,61 @@
     {
       "unit": 8,
       "title": "Function Analysis, Modeling, and Synthesis",
+      "essential_standard": "Choose, transform, and analyze functions and models, including absolute value and piecewise relationships, using the representation that best fits the problem.",
       "sections": [
         {
           "section_id": "8.1",
           "unit": 8,
           "section": 1,
           "title": "Selecting Appropriate Models",
-          "learning_target": "Students will determine whether a situation is best modeled by a linear, quadratic, or exponential function.",
+          "learning_target": "Choose a linear, quadratic, or exponential model from evidence.",
           "i_can_statements": [
-            "I can construct evidence from tables, graphs, and contexts to choose a linear, quadratic, or exponential model.",
-            "I can apply rate, second-difference, and ratio patterns to select an appropriate function family.",
-            "I can determine whether a chosen model is reasonable for a situation and its data pattern."
+            "Use first differences, second differences, and ratios.",
+            "Use graph and equation features.",
+            "Connect the model choice to the context.",
+            "Change the model choice if new evidence does not fit."
           ],
           "vocabulary_notation": [
             "model",
             "linear",
             "quadratic",
             "exponential",
-            "difference/ratio pattern"
+            "difference",
+            "ratio"
           ],
           "representations": [
-            "Linear, quadratic, and exponential graphs",
-            "Tables showing first differences, second differences, and ratios",
-            "Equations in familiar function forms",
-            "Context descriptions with quantities and constraints",
-            "Verbal claims about growth, change, and turning behavior"
+            "Tables",
+            "Graphs",
+            "Equations",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Choosing a model from one or two points without checking the pattern of change.",
-            "Using additive evidence to justify an exponential model or ratio evidence to justify a linear model."
-          ],
-          "modeling_application_practice": [
-            "Sort situations by evidence rather than by surface words.",
-            "Choose a model for a data table and state the feature that supports the choice.",
-            "Revise a model choice when a new data point changes the pattern.",
-            "Connect real-world behavior to graph shape and equation structure."
+            "Choosing from one or two points.",
+            "Using the wrong change pattern as evidence."
           ],
           "spiral": {
-            "current_learning": "Determine whether a situation is best modeled by a linear, quadratic, or exponential function.",
-            "retrieval": "Compare linear, quadratic, and exponential functions using multiple representations.",
-            "mastery": "Compare factoring, completing the square, and the quadratic formula and select efficient solution methods."
+            "intro": {
+              "text": "Choose a linear, quadratic, or exponential model from evidence.",
+              "builds_toward_goal_id": "NC2-MG01",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "NC1-MG03",
+              "text": "Compare linear, quadratic, and exponential functions using differences, second differences, ratios, equations, graphs, and contexts.",
+              "source": "Unit 7 · Section 7.4 · Comparing Function Families",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U8-MG04",
+              "text": "Choose and explain an efficient method for solving a quadratic equation.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1529,40 +2011,54 @@
           "unit": 8,
           "section": 2,
           "title": "Transformations Across Function Families",
-          "learning_target": "Students will analyze transformations across multiple function families.",
+          "learning_target": "Analyze transformations across several function families.",
           "i_can_statements": [
-            "I can build transformed function rules from parent functions across linear, quadratic, exponential, and absolute value families.",
-            "I can use key points and key features to graph transformations across multiple function families.",
-            "I can formulate a transformation description that connects parameter changes to key point shifts across function families."
+            "Use parent functions as a reference.",
+            "Track translations, reflections, stretches, and compressions.",
+            "Move key points and features consistently.",
+            "Describe changes in domain or range when useful."
           ],
           "vocabulary_notation": [
             "parent function",
             "parameter",
             "translation",
             "reflection",
-            "stretch/compression"
+            "stretch",
+            "compression"
           ],
           "representations": [
-            "Parent function graphs",
-            "Transformed equations such as $f(x)+k$, $f(x-h)$, and $af(x)$",
-            "Key points before and after transformations",
-            "Feature tables for intercepts, vertex, asymptote, and direction",
-            "Context descriptions involving shifted or scaled models"
+            "Parent graphs",
+            "Transformed equations",
+            "Key points",
+            "Feature tables"
           ],
           "misconceptions_failure_points": [
-            "Applying a transformation rule as though it behaves identically in every algebraic position.",
-            "Moving one key feature without transforming the rest of the function consistently."
-          ],
-          "modeling_application_practice": [
-            "Move key points to create a transformed model for a situation.",
-            "Predict how changing a parameter changes a graph and its meaning.",
-            "Use transformations to adapt a familiar model to a new context.",
-            "Check whether a transformed equation preserves important constraints."
+            "Applying a transformation inconsistently.",
+            "Moving one feature but not the whole function."
           ],
           "spiral": {
-            "current_learning": "Analyze transformations across multiple function families.",
-            "retrieval": "Graph exponential functions and analyze key features.",
-            "mastery": "Solve quadratic equations by completing the square and connect the process to vertex form."
+            "intro": {
+              "text": "Analyze transformations across several function families.",
+              "builds_toward_goal_id": "NC2-MG02",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "NC1-MG01",
+              "text": "Identify exponential growth and decay using constant ratios, repeated multiplication, graphs, equations, tables, and contexts.",
+              "source": "Unit 7 · Section 7.1 · Recognizing Growth and Decay",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U8-MG02",
+              "text": "Complete the square to solve a quadratic and connect the work to vertex and symmetry.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1570,40 +2066,55 @@
           "unit": 8,
           "section": 3,
           "title": "Absolute Value Functions and Piecewise Thinking",
-          "learning_target": "Students will analyze and model situations involving absolute value functions.",
+          "learning_target": "Use absolute value and piecewise rules to describe changing behavior.",
           "i_can_statements": [
-            "I can design an absolute value or piecewise representation for situations with distance, change in direction, or two-part behavior.",
-            "I can apply key features of absolute value graphs to interpret vertex, intercepts, and rate of change.",
-            "I can predict outputs and intervals from absolute value and piecewise rules in context."
+            "Interpret the vertex of an absolute-value graph.",
+            "Use interval conditions in a piecewise rule.",
+            "Determine meaningful domain and range.",
+            "Connect a rule to a graph or context."
           ],
           "vocabulary_notation": [
             "absolute value",
             "piecewise function",
             "vertex",
             "interval",
-            "rate of change"
+            "domain",
+            "range"
           ],
           "representations": [
-            "Absolute value graphs with a vertex",
-            "Equations using $|x-h|$ structure",
-            "Piecewise rules and interval restrictions",
-            "Tables showing symmetry or two rates",
-            "Contexts involving distance from a target or changing direction"
+            "Absolute-value graphs",
+            "Piecewise rules",
+            "Intervals",
+            "Tables",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Treating absolute value as ordinary linear behavior across the vertex.",
-            "Ignoring interval conditions in a piecewise rule."
-          ],
-          "modeling_application_practice": [
-            "Model distance from a target value using absolute value.",
-            "Create a piecewise rule for a situation with different rates over intervals.",
-            "Connect a vertex to a minimum distance or turning point in context.",
-            "Use domain restrictions to make a model fit the situation."
+            "Ignoring interval conditions.",
+            "Treating absolute value as one linear rule across the vertex."
           ],
           "spiral": {
-            "current_learning": "Analyze and model situations involving absolute value functions.",
-            "retrieval": "Identify exponential relationships from patterns, tables, graphs, and situations.",
-            "mastery": "Solve quadratic equations using factored form and interpret solutions."
+            "intro": {
+              "text": "Use absolute value and piecewise rules to describe changing behavior.",
+              "builds_toward_goal_id": "NC2-MG03",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "NC1-MG02",
+              "text": "Write, evaluate, graph, and interpret exponential functions using initial value, growth/decay factor, function notation, and key features.",
+              "source": "Unit 7 · Section 7.3 · Graphing and Analyzing Exponential Functions",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U8-MG01",
+              "text": "Use factoring and the zero product property to solve quadratic equations and interpret the solutions.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1611,11 +2122,12 @@
           "unit": 8,
           "section": 4,
           "title": "Modeling Investigation",
-          "learning_target": "Students will create and analyze mathematical models using real-world data.",
+          "learning_target": "Create and judge a mathematical model using real-world data.",
           "i_can_statements": [
-            "I can formulate a mathematical model from real-world data and state the assumptions used.",
-            "I can extend a model to make predictions within a reasonable domain.",
-            "I can critique how well a model fits data, constraints, and the situation being studied."
+            "Choose a model from evidence.",
+            "State assumptions and constraints.",
+            "Make a prediction within a meaningful domain.",
+            "Explain the model's limits."
           ],
           "vocabulary_notation": [
             "model",
@@ -1625,26 +2137,38 @@
             "prediction"
           ],
           "representations": [
-            "Real-world data tables",
-            "Scatterplots or plotted coordinate pairs",
-            "Candidate linear, quadratic, exponential, or absolute value models",
-            "Residual-style observations about overprediction and underprediction",
-            "Written interpretation of model parameters and limits"
+            "Data tables",
+            "Scatter plots",
+            "Candidate models",
+            "Written assumptions"
           ],
           "misconceptions_failure_points": [
-            "Reporting a model without stating assumptions or a meaningful domain.",
-            "Treating a model prediction as exact even when data or constraints show limitations."
-          ],
-          "modeling_application_practice": [
-            "Choose a model for a small data set and defend the choice with evidence.",
-            "Use a model to make and check a prediction.",
-            "Revise a model when the data or domain makes the first model weak.",
-            "Interpret parameters and outputs in the original context."
+            "Giving a model without assumptions.",
+            "Treating predictions as exact."
           ],
           "spiral": {
-            "current_learning": "Create and analyze mathematical models using real-world data.",
-            "retrieval": "Create and analyze exponential models using real-world data.",
-            "mastery": "Use quadratic functions to model real-world situations and interpret maximums, minimums, and intercepts."
+            "intro": {
+              "text": "Create and judge a mathematical model using real-world data.",
+              "builds_toward_goal_id": "NC2-MG04",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "NC1-MG04",
+              "text": "Build and analyze exponential models from real-world data, make predictions, and judge model limits.",
+              "source": "Unit 7 · Section 7.5 · Exponential Modeling with Data",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U8-MG05",
+              "text": "Build or use quadratic models and interpret maximums, minimums, intercepts, domains, and solutions.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         },
         {
@@ -1652,11 +2176,12 @@
           "unit": 8,
           "section": 5,
           "title": "Function Synthesis and Capstone Analysis",
-          "learning_target": "Students will synthesize understanding of function families and representations to solve complex problems.",
+          "learning_target": "Use the representation that best helps solve and explain a complex function problem.",
           "i_can_statements": [
-            "I can construct a solution pathway that connects equations, graphs, tables, and contexts across function families.",
-            "I can use multiple representations to solve complex function problems and interpret results.",
-            "I can assess competing solution strategies and choose the representation that best supports the conclusion."
+            "Move among tables, graphs, equations, function notation, and contexts.",
+            "Choose a representation based on the information needed.",
+            "Check that representations describe the same relationship.",
+            "Use mathematical evidence to support a conclusion."
           ],
           "vocabulary_notation": [
             "function family",
@@ -1666,26 +2191,39 @@
             "strategy"
           ],
           "representations": [
-            "Multiple function-family graphs",
-            "Tables, equations, and contexts used together",
-            "Function-feature summaries",
-            "Student-generated model comparisons",
-            "Written reasoning about model choice and solution meaning"
+            "Graphs",
+            "Tables",
+            "Equations",
+            "Function notation",
+            "Contexts"
           ],
           "misconceptions_failure_points": [
-            "Choosing a representation by habit rather than by the information needed.",
-            "Combining results from different representations without checking that they describe the same relationship."
-          ],
-          "modeling_application_practice": [
-            "Select efficient representations for multi-step function tasks.",
-            "Synthesize evidence from several function families to solve a problem.",
-            "Revise a model or solution when a representation reveals a conflict.",
-            "Communicate why a chosen model or strategy fits the problem conditions."
+            "Choosing a representation by habit.",
+            "Combining information from different relationships."
           ],
           "spiral": {
-            "current_learning": "Synthesize understanding of function families and representations to solve complex problems.",
-            "retrieval": "Write exponential equations from tables, graphs, and situations.",
-            "mastery": "Solve quadratic equations using the quadratic formula and interpret solutions."
+            "intro": {
+              "text": "Use the representation that best helps solve and explain a complex function problem.",
+              "builds_toward_goal_id": "NC2-MG05",
+              "stage_expectation": "First learn the idea with support."
+            },
+            "review": {
+              "goal_id": "NC1-MG02",
+              "text": "Write, evaluate, graph, and interpret exponential functions using initial value, growth/decay factor, function notation, and key features.",
+              "source": "Unit 7 · Section 7.2 · Writing Exponential Equations",
+              "stage_expectation": "Use the same skill again with less support, a new representation, or a slightly harder context."
+            },
+            "mastery": {
+              "goal_id": "U8-MG03",
+              "text": "Use the quadratic formula to solve and the discriminant to predict the number of real solutions.",
+              "stage_expectation": "Use the skill independently; choose a representation or method when needed and explain when the task requires it."
+            }
+          },
+          "official_exit_ticket": {
+            "new_current_mastery_slots": 2,
+            "prior_section_reassessment_slots": 2,
+            "u1_1_exception": false,
+            "note": "Repeat slots are fresh parallel reassessments of the previous section official Exit Ticket new evidence jobs."
           }
         }
       ]

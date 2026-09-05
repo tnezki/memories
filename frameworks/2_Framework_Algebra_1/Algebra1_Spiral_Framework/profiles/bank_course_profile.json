@@ -2,53 +2,59 @@
   "name": "Algebra 1 Course Bank Profile",
   "course": "Algebra 1",
   "course_family": "spiral_math",
-  "profile_version": "v1.0",
-  "extends": "current Base Bank PM",
-  "role": "Course-specific layer applied after the universal Curriculum Philosophy and Base Bank PM. This profile owns Algebra-specific Bank behavior without redefining universal build/package mechanics.",
+  "profile_version": "v2.0",
+  "framework_version": "v7.0",
+  "role": "Course-specific Bank content/evidence authority layered under the current Framework. The next Bank PM revision will own the updated execution procedure.",
   "instructional_spine": {
-    "rule": "The ORIGINAL Unit Assessment Plan exact I-can statements and exact architecture are the section spine. Preserve both vocabularies as written: Unit Source Alignment uses Current Learning Source / Retrieval Source / Mastery Source; Section Spiral Planning uses Intro / Review / Mastery. Do not collapse them into aliases or replace them with generic textbook headings.",
-    "downstream_alignment": "Readings, Notes explanations, Examples/YTIs, Practice, evidence, and later downstream resources should remain compartmentalized around the exact I-can structure. When the Framework/I-can architecture changes, downstream resources must be intentionally reconciled rather than silently preserving stale ordering."
+    "rule": "Use exact current Unit Assessment Plans. Preserve Intro/Review/Mastery and stable canonical goal identity.",
+    "downstream_alignment": "Instructional/evidence artifacts trace to the Assessment Plan; do not preserve stale old-Bank routing simply because files exist."
   },
-  "abundance_philosophy": {
-    "rule": "Algebra benefits from useful abundance and repeated execution. Within a 24-question Practice form, it is often desirable to devote 3-5 ordinary clean questions to the same high-value procedural/representation family when students need that fluency.",
-    "teacher_choice": "The teacher may skip items on the fly. Do not make the canonical digital Bank sparse merely because every available question will not be used or printed.",
-    "anti_variety_rule": "Do not maximize the number of distinct question shells. Repeated solve/evaluate/simplify/graph/table/translate families are legitimate and may dominate when instructionally appropriate.",
-    "exact_duplicate_rule": "Exact prompt reuse is not a deterministic Bank failure. The later By-I-Can / Parallel review workflow is the place for teacher judgment about keep/replace/multiples/remap decisions."
+  "bank_strategy": {
+    "rule": "Smaller authoritative Bank, not exhaustive inventory. Author strongest evidence first.",
+    "priority_order": [
+      "official Exit Ticket evidence map/questions",
+      "secure Summative evidence map/questions",
+      "Practice 1 primary independent practice",
+      "Extra Practice recovery/extension",
+      "CYU and WTC routes as retained course resources",
+      "other reusable content only when it earns a canonical Bank role"
+    ],
+    "downstream_generated": [
+      "Notes examples/YTI may be purpose-authored/refined when Notes are built",
+      "middle-practice formats such as stations, Find Someone Who, matching, sorting, task cards, partner sets, and whiteboards may be generated at artifact build time"
+    ]
   },
-  "inventory": {
-    "mode": "base_counts_with_algebra_routing",
-    "wtc_per_section": 1,
-    "example_yti_pairs_per_section": 6,
-    "practice_set_1": 24,
-    "practice_set_2": 24,
-    "practice_set_3": 24,
-    "extra_practice": 24,
-    "cyu": 6,
-    "warm_up_1": 4,
-    "warm_up_2": 4,
-    "warm_up_3": 4,
-    "exit_ticket_a": 4,
-    "exit_ticket_b": 4,
-    "exit_ticket_c": 4,
-    "tarsia_pairs_when_used": 18,
-    "blooket_questions_when_used": 20,
-    "core_per_section": 139,
-    "granularity": "Counts are separate numbered canonical questions/tasks; do not bundle unrelated jobs to satisfy counts."
+  "retired_required_inventory": [
+    "Practice Set 2 as a required canonical Bank destination",
+    "Practice Set 3 as a required canonical Bank destination",
+    "fixed six Example/YTI pairs per section as a Bank requirement",
+    "139-per-section resolved inventory"
+  ],
+  "inventory_note": "Exact counts for Practice 1, Extra Practice, CYU, WTC, game exports, and final Bank package structure are intentionally deferred to the upcoming Bank Map / Bank PM revision. Do not revive old counts by default.",
+  "warmups": {
+    "architecture": "Separate four-slot course-long fluency track",
+    "slots": [
+      "Q1 Solve / Equation Fluency",
+      "Q2 Diamond / Factoring Pattern",
+      "Q3 Skill Review",
+      "Q4 Challenge"
+    ],
+    "storage_note": "Whether Warm-Up questions are stored in the canonical Bank or generated through recurring-assessment planning is intentionally left to the next Bank/Map PM decision."
   },
-  "spiral_routing": {
-    "authority": "The ORIGINAL Assessment Plan controls both Unit Source Alignment and Section Spiral Planning. Current Learning Source / Retrieval Source / Mastery Source are source-alignment labels; Intro / Review / Mastery are section-spiral labels. They are distinct. Student-facing Unit Review is current-Unit mastery preparation, not the Section Spiral Planning Review stage.",
-    "warm_up_1": "Q1 = one Diamond Problem mapped to the actual prerequisite/retrieval skill it exercises; Q2-Q4 = genuine prerequisite/retrieval questions connected to the section.",
-    "warm_up_2": "Normally 2 Current Learning + 1 Retrieval + 1 Mastery question.",
-    "warm_up_3": "Normally 1 Current Learning + 1 Retrieval + 2 Mastery questions.",
-    "exit_ticket_a": "Current Learning evidence: map to the exact current-section I-can(s).",
-    "exit_ticket_b": "Retrieval evidence: map to the exact Retrieval target(s) in the current Unit Assessment Plan.",
-    "exit_ticket_c": "Mastery evidence: map to the current Unit Mastery Goal and/or its explicit supporting I-can(s); never fake a Mastery Goal mapping."
+  "exit_ticket": {
+    "questions": 4,
+    "normal_pattern": [
+      "2 new evidence opportunities from current section Mastery Goal(s)/supporting I Cans",
+      "2 fresh parallel reassessments of the previous section official Exit new evidence jobs"
+    ],
+    "cross_unit": "Unit N Section 1 normally reassesses Unit N-1 Section 5.",
+    "u1_1": "Opening exception intentionally deferred to Bank/Exit map; do not fake repeats.",
+    "intro_review": "Checked formatively elsewhere; targeted reteach/recovery checks can be generated on demand."
   },
   "response_mode": {
-    "canonical_instructional": "constructed/open response only",
-    "unit_summative": "constructed/open response only",
-    "blooket_exception": "selected response is allowed only for the Blooket export destination",
-    "rule": "Do not copy selected-response habits from older Assessment Plan examples into the current canonical Algebra Bank/Summative."
+    "canonical_instructional": "constructed/open response by default",
+    "unit_summative": "constructed/open response",
+    "blooket_exception": "selected response allowed when an explicit Blooket route is retained"
   },
   "representations": {
     "system": [
@@ -57,28 +63,7 @@
       "Table",
       "Context"
     ],
-    "rule": "These are forms of mathematical meaning, not decorative labels. Build a section representation map and instantiate the applicable forms.",
-    "notes_floor": "When graph/table are applicable, the six Example/YTI pairs collectively include at least one substantive graph anchor and one substantive table anchor.",
-    "practice_floor": "When graph/table are applicable, every 24-question Practice form includes at least one substantive graph-use item and one substantive table-use item; representation-heavy sections should exceed the floor.",
-    "translation_examples": "Use meaningful graph<->equation, table<->graph, table<->equation, context->representation, and representation->interpretation work where the I-can supports it."
+    "rule": "Use applicable forms substantively; no decorative quota. Translation among forms is required when the mapped I Can calls for it."
   },
-  "natural_parameters": {
-    "rule": "Choose pedagogically natural values. Difficulty should come from Algebra, not arbitrary random inflation.",
-    "early_linear": "Slopes are usually small integers/simple fractions; intercepts are usually human-scale (often roughly -12 to 12); tables/points should fit intended visible axes.",
-    "early_exponential": "Use small starting values and modest factors for early pattern recognition so tables remain readable/hand-computable unless large growth is itself the point.",
-    "large_values": "Large values are appropriate when a genuine context/source creates them."
-  },
-  "summative": {
-    "versions": 6,
-    "v1_v4": "Same-day parallel constructed-response forms. Numeric/structural parallels are allowed; scramble question-family order while keeping connected blocks together.",
-    "v5_v6": "Independent makeup/alternate constructed-response forms with comparable evidence/rigor/time; not only numeric/order copies of V1-V4.",
-    "time_max_minutes": 45,
-    "item_count": "Evidence/time driven; do not pad to a universal question count."
-  },
-  "review_view": {
-    "rule": "Base PM generates unitN_review.html from the same canonical items, grouped by exact I-can then question_family_id. This is an internal Bank-folder view, not a dashboard resource.",
-    "current_scope": "Comparison only. Persistent Keep/Replace/Multiples OK/Rework/Remap ratings are intentionally deferred to a later review/repair system."
-  },
-  "graph_tool_capability_inventory": "GRAPH_TOOL_CAPABILITY_INVENTORY.md",
-  "diamond_problem_variants": "Diamond is a family, not one fixed prompt: top=product, bottom=sum, left/right=factors; any cell may be blank. Use the inventory to choose a variant that matches the actual prior/review skill. Do not force only one classic blank pattern."
+  "natural_parameters": "Choose pedagogically natural values. Difficulty should come from Algebra rather than arbitrary number inflation."
 }

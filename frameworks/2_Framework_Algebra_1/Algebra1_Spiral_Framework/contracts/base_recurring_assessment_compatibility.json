@@ -1,37 +1,13 @@
 {
   "contract_name": "Base Recurring + Assessment Resources Compatibility",
-  "contract_version": "v1.2",
-  "framework_version": "v6.41",
-  "normal_inputs": [
-    "current Base Recurring + Assessment Resources PM Starter ZIP",
-    "current Algebra Framework ZIP",
-    "finalized requested Unit Bank ZIP"
-  ],
-  "do_not_request_separately": [
-    "Curriculum Philosophy",
-    "Assessment Plan",
-    "CSS",
-    "old Warm-Up/Exit/Progress/Review/Summative PM",
-    "graph tool",
-    "Practice HTML"
-  ],
+  "contract_version": "v2.0",
+  "framework_version": "v7.0",
   "profile": "profiles/recurring_assessment_course_profile.json",
   "path_contract": "contracts/course_file_structure.json",
   "visual_contract": "contracts/recurring_assessment_visual_contract.json",
-  "conflict_rule": "Replace/remove an older active rule when behavior changes. Do not leave contradictory counts/paths/layouts active and rely on newest-wins.",
-  "bank_canonical_for": [
-    "Warm-Up questions",
-    "Exit Ticket questions",
-    "Review practice source questions",
-    "Summative secure questions",
-    "canonical figures"
-  ],
-  "assessment_plan_canonical_for": [
-    "Progress Tracker learning goals/evidence language",
-    "Review target/learning architecture",
-    "Summative evidence scope"
-  ],
-  "warmup_correction": "Simple Section/Day header only and no visible workspace; do not revive optional warmup kicker/subtitle/meta/workspace classes.",
-  "summative_stale_template_guard": "Current Framework + finalized Bank form IDs outrank any old rendered/template HTML. Extra V7/V8 sections/selectors in a stale artifact are removed, not treated as source content.",
-  "generic_run_default": "Build Warm-Ups, Exit Tickets, Progress Tracker, Unit Review + Review Practice, and Summative Assessment for the finalized Unit Bank when the teacher uses only Carefully read PM and Run."
+  "conflict_rule": "Current Framework v7.0 course behavior overrides stale Algebra A/B/C Exit routing and Current/Review/Mastery Warm-Up routing; remove the obsolete active rules rather than stacking overrides.",
+  "warmup": "Use the separate Solve / Diamond / Skill Review / Challenge four-slot fluency routine.",
+  "exit": "One official four-question Exit per section: 2 new current-Mastery evidence + 2 previous-section parallel reassessments; U1.1 opening exception is intentionally deferred to the Bank/Exit map.",
+  "reteach_check": "Targeted Intro/Review checks are generated on demand and are not automatically official/canonical.",
+  "progress_review_summative": "Preserve current renderer mechanics and current-Unit mastery orientation unless separately revised."
 }
