@@ -2,11 +2,12 @@
   "name": "Algebra 1 Course Bank Profile",
   "course": "Algebra 1",
   "course_family": "spiral_math",
-  "profile_version": "v2.1",
-  "framework_version": "v7.1",
+  "profile_version": "v2.2",
+  "framework_version": "v7.2",
   "role": "Course-specific Bank inventory/content authority. Bank Map and Complete Bank PMs own universal execution procedure.",
   "question_structure": {
     "rule": "Use current universal Question Structure for every authored Bank question/task. Warm-Ups are outside Bank and are the explicit course exception.",
+    "semantic_fit_rule": "A structure ID cannot PASS by name alone. Evidence job, student action, structure reasoning architecture/required representation, response mode, representation mode, and executable tool/response-surface route must all agree.",
     "seed_exception": "A seed record is not itself a finished question; when a seed becomes a question, Question Structure applies."
   },
   "canonical_maps": {
@@ -30,13 +31,21 @@
         "V6"
       ],
       "sequence": "Author V1 from the Exit/mastery evidence plan; build parallel V2-V4; then author additional secure V5-V6 under the same evidence blueprint and comparable rigor.",
-      "count": "Evidence/time driven by the Bank Map; do not inherit legacy counts."
+      "evidence_rule": "Target approximately two secure evidence opportunities per CURRENT Unit Mastery Goal.",
+      "time_rule": "Design the complete form for about a 40-minute class period. The Bank Map resolves exact item count from Mastery Goal count and item complexity; do not hard-code eight items across all Units.",
+      "count": "Evidence/time driven from the two-per-Mastery-Goal target; exact count is resolved by Bank Map."
     },
     "practice_1": {
       "status": "canonical",
       "role": "Primary independent practice",
-      "stage_balance": "True Intro / Review / Mastery balance. Visible stage headings are allowed and preferred for Algebra. Counts should be equal when practical; otherwise differ by at most one and no stage is token coverage.",
-      "count": "Resolved by Bank Map from coverage/usable-length needs, not legacy 24."
+      "count_per_section": 24,
+      "stage_counts": {
+        "Intro": 8,
+        "Review": 8,
+        "Mastery": 8
+      },
+      "stage_balance": "HARD: exactly 8 Intro + 8 Review + 8 Mastery. Visible stage headings are preferred for Algebra.",
+      "allocation_rule": "Within each 8-question block, distribute work for useful repetition and coverage; do not mechanically force equal I Can counts when that would create weak or fake variety."
     },
     "wtc": {
       "status": "canonical",
@@ -46,7 +55,8 @@
     "seeds": {
       "status": "canonical_when_useful",
       "count": "No quota",
-      "role": "Reusable context, data, representation, misconception, source idea, or problem setup that may support Practice, Notes, activities, investigations, or other builds without requiring a finished duplicate question."
+      "role": "Reusable context, data, representation, misconception, source idea, visual idea, or problem setup that may support Practice, Notes, activities, investigations, or other builds without requiring a finished duplicate question.",
+      "keep_rule": "Keep a seed only when it preserves a genuinely reusable idea. Do not create filler seeds to reach a count."
     }
   },
   "not_bank_inventory": [

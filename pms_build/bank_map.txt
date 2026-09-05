@@ -25,11 +25,50 @@ Every mapped FINISHED QUESTION/TASK must resolve through the current universal Q
 A course may explicitly exempt a resource. If the Framework says Warm-Ups are exempt, do not force Warm-Ups through Question Structure.
 Seed records are not finished questions; Question Structure applies when a seed becomes an authored question.
 
+SEMANTIC STRUCTURE FIT — HARD
+A structure ID that exists in the catalog is NOT enough to PASS. For every mapped finished task, read the CURRENT definition of the selected structure and verify all of the following agree:
+- evidence job
+- actual student action
+- structure reasoning architecture
+- structure required representation
+- response mode
+- mapped representation mode(s)
+- executable tool / asset / response-surface route(s)
+
+Do not use a generic fallback structure merely because it is broadly applicable.
+Direct tasks may stay direct when a more elaborate architecture is not earned by the evidence job.
+
+HARD SEMANTIC GUARDS
+1. CONSTRUCT / PLOT / CREATE / DRAW / BUILD
+   - If the evidence job requires the student to construct a representation, the response mode must collect that construction and the map must provide a real answer-neutral construction surface.
+   - A read-only supplied-representation structure such as FEATURE-IDENTIFY cannot stand in for construction evidence.
+
+2. PROC-MULTISTEP-CHAIN
+   - May PASS only when the map records a genuine dependency: an intermediate result/decision is required and is carried into a later step to obtain the final requested result.
+   - Store the dependency explicitly (for example intermediate_result_needed + carried_forward_to_final).
+   - Multiple actions or labels alone do not make a task multi-step.
+
+3. ERROR-DIAGNOSE-WORKED-SOLUTION
+   - May PASS only when there is a specific documented misconception/error target, a supplied worked-solution stimulus containing that error, and a student action that locates/explains/repairs the error.
+   - Do not map ordinary independent evaluation/solving to Error Diagnose merely to add variety.
+
+4. MIXED / MULTIPLE REPRESENTATIONS
+   - Every representation named by the evidence job/student action must have an executable route.
+   - A graph+table task requires both a graph route AND a semantic table route (or one declared composite route that explicitly renders both).
+   - representation_mode and representation_routes must honestly describe the full task.
+
+5. STUDENT-CONSTRUCTED GRAPHS / NUMBER LINES / TABLES
+   - Use an answer-neutral response surface. Do not pre-render the completed mathematical answer with a graph tool.
+   - A registered tool may create blank axes/templates only when that exact route is supported and answer-neutral.
+
+6. STRUCTURE REASONING ARCHITECTURE
+   - QA must compare the catalog's actual reasoning architecture/required representation/response type with the mapped evidence job and action. Metadata presence alone cannot earn PASS.
+
 PROFILE-DRIVEN INVENTORY — HARD
 Do not hard-code Notes pairs, CYU, Warm-Ups, Practice 2/3, Exit A/B/C, or any historical count.
 Read the CURRENT Framework Bank profile and map ONLY the destinations it declares canonical Bank inventory.
 
-For Algebra 1 v7.1, the current profile resolves to:
+For Algebra 1 v7.2, the current profile resolves to:
 - official Exit evidence/questions;
 - secure Summative V1-V6;
 - Practice 1;
@@ -70,7 +109,8 @@ Top-level status = PASS only when:
 - question_design.status = PASS
 - qa.status = PASS
 - every profile-required canonical destination is mapped
-- every mapped record is executable and aligned
+- every mapped record is executable and semantically aligned
+- every selected Question Structure passes the Semantic Structure Fit guards above
 - no retired destination has been reintroduced without explicit current authority.
 
 QUESTION-DESIGN MAP
@@ -83,11 +123,14 @@ For every exact target/I-Can/evidence job needed by a canonical destination, map
 - candidate/selected question_structure_id
 - response_mode
 - representation_mode + need
-- tool/render route
+- representation_route OR representation_routes sufficient for every required representation
 - difficulty intent
 - allowed/required/forbidden variation axes
 - source_basis
 - security role
+- structure_fit_notes when needed to prove semantic alignment
+- dependency_contract when selected structure is a genuine multi-step chain
+- misconception_contract when selected structure is error diagnosis
 
 EXIT — HARD
 Follow the Framework Exit map exactly.
@@ -101,40 +144,46 @@ Map secure/exposure status and parallel-variation axes. Reassessment must preser
 SUMMATIVE — HARD
 Build the Summative evidence blueprint from current Unit Mastery Goals and the Framework Exit evidence plan.
 For Algebra:
-1. map V1 first as the anchor secure form;
-2. map V2-V4 as parallel forms preserving blueprint/evidence/difficulty;
-3. map V5-V6 after V1-V4 as additional secure forms under the same evidence blueprint and comparable rigor.
+1. target approximately TWO secure evidence opportunities per CURRENT Unit Mastery Goal;
+2. design the complete form for about a 40-minute class period;
+3. resolve exact item count from Mastery Goal count + actual task complexity/time; do NOT hard-code 8 items across all Units;
+4. map V1 first as the anchor secure form;
+5. map V2-V4 as parallel forms preserving blueprint/evidence/difficulty;
+6. map V5-V6 after V1-V4 as additional secure forms under the same evidence blueprint and comparable rigor.
+The map must record the estimated total student time and explain any deliberate deviation from roughly two opportunities per Mastery Goal.
 Do not reduce parallel forms to number-only clones when the structure permits meaningful fresh variation.
-Exact item count is evidence/time driven and must be explicitly resolved in the map.
 
 PRACTICE 1 — HARD
-Map primary independent practice from the exact section architecture.
-For Algebra, Practice 1 must have a TRUE BALANCE of:
-- Intro
-- Review
-- Mastery
-Visible stage headings are allowed/preferred by the current course profile.
-Equal counts are preferred; if total count requires otherwise, stage counts differ by at most one and no strand is token coverage.
-Mastery practice is informed by the Exit evidence map but Practice 1 must not become an Exit clone set.
-Exact Practice 1 count is resolved by the map from usable length + coverage needs, not inherited from legacy 24-question forms.
+For Algebra 1, Practice 1 is EXACTLY 24 questions PER SECTION:
+- 8 Intro
+- 8 Review
+- 8 Mastery
+Use visible stage headings.
+Intro = current section Intro learning.
+Review = exact current Review goal at Review demand.
+Mastery = exact current Mastery goal at independent demand, informed by Exit evidence without copying secure Exit prompts/stimuli.
+Within each 8-question block, distribute work for useful repetition, I Can coverage, and natural Question Structure variety. Do NOT mechanically assign two questions to every I Can if that produces filler or fake structure variety.
 
 WTC
 When canonical, map one coherent section-level multipart routine using the current course profile. Normally 3-5 connected labeled parts, shared stimulus/representation, and at least one real carry-forward/dependency. Keep the role preview/decomposition; do not inflate difficulty to look rigorous.
+Every representation required by any WTC part must have an executable route or student response surface.
 
 SEEDS
+Seeds have NO quota.
 Map a seed only when it has durable reuse value. A seed may preserve:
 - context/situation
 - dataset
-- graph/diagram idea
+- graph/diagram/visual idea
 - representation pairing
 - misconception/error pattern
 - source problem idea
 - useful mathematical setup
 Record what is locked, what may vary, why it is useful, and which later artifacts may use it.
-Do not force every seed into a finished question now.
+Do not create filler seeds to reach a count, and do not force every seed into a finished question now.
 
 REPRESENTATIONS / TOOLS
-Map only representations that serve evidence. Routes must be executable: registered graph tool, canonical asset, semantic HTML table, registered deterministic tool, or explicit student response surface. No decorative visual quota.
+Map only representations that serve evidence. Routes must be executable: registered graph tool, canonical asset, semantic HTML table, registered deterministic tool, declared composite route, or explicit student response surface. No decorative visual quota.
+If an evidence job names more than one representation, route every one of them.
 
 GOOD-ENOUGH MAP AUDIT — HARD
 Verify at minimum:
@@ -142,11 +191,17 @@ Verify at minimum:
 [ ] current course profile read and canonical Bank inventory resolved
 [ ] retired legacy destinations absent unless explicitly current
 [ ] every finished-question destination uses current Question Structure unless explicitly exempt
+[ ] EVERY selected structure's reasoning architecture matches the evidence job/student action
+[ ] no construction evidence is mapped as read-only recognition
+[ ] every PROC-MULTISTEP-CHAIN record has an explicit real dependency contract
+[ ] every ERROR-DIAGNOSE record has misconception + worked-solution + diagnose/repair contract
+[ ] every mixed/multiple-representation task has routes for all required representations
+[ ] student-constructed graphs/number lines/tables use answer-neutral construction surfaces
 [ ] Framework operational maps consumed exactly where declared
 [ ] Exit chain feasible
-[ ] Summative V1-V6 blueprint feasible
-[ ] Practice 1 Intro/Review/Mastery balance feasible
-[ ] WTC/Seed roles correct
+[ ] Algebra Summative targets ~2 secure opportunities per current Mastery Goal and ~40 minutes total; exact count is justified
+[ ] Algebra Practice 1 is EXACTLY 24 per section = 8 Intro + 8 Review + 8 Mastery
+[ ] WTC/Seed roles correct; Seeds have no quota/filler
 [ ] every required representation has an executable route
 [ ] security/variation rules explicit
 [ ] IDs unique and destination slices reconcile
@@ -154,17 +209,27 @@ Verify at minimum:
 [ ] qa.status = PASS
 [ ] MAP_MANIFEST.status = PASS
 
+QA REPORT REQUIREMENT
+MAP_REPORT must include a dedicated SEMANTIC QUESTION-STRUCTURE AUDIT summary with counts of:
+- construction-vs-read-only conflicts found/repaired
+- invalid multi-step mappings found/repaired
+- invalid error-diagnosis mappings found/repaired
+- incomplete mixed-representation routes found/repaired
+- student-construction response-surface conflicts found/repaired
+PASS with all zeros only AFTER repair; do not report zero merely because fields are present.
+
 BUILD ORDER
 1. Pin authorities.
 2. Resolve current Bank profile + Framework operational maps.
 3. Resolve canonical Bank inventory.
 4. Build question-design slots.
-5. Map Exit evidence from Framework map.
-6. Map Summative V1 -> V2-V4 -> V5-V6.
-7. Map balanced Practice 1.
-8. Map WTC.
-9. Map useful Seeds.
-10. Reconcile representation/tool/security routes.
-11. Audit, report, package, STOP.
+5. Resolve semantic Question Structure fit for every slot.
+6. Map Exit evidence from Framework map.
+7. Map Summative V1 -> V2-V4 -> V5-V6 under ~2 opportunities/Mastery Goal and ~40-minute rule.
+8. Map exact 8/8/8 Practice 1.
+9. Map WTC.
+10. Map useful Seeds with no quota.
+11. Reconcile ALL representation/tool/response-surface/security routes.
+12. Run semantic audit, report, package, STOP.
 
 END — BANK MAP 3A PROFILE-DRIVEN

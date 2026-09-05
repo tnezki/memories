@@ -1,13 +1,13 @@
 {
   "name": "Algebra 1 Recurring + Assessment Resource Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.2",
-  "framework_version": "v7.1",
+  "profile_version": "v2.3",
+  "framework_version": "v7.2",
   "role": "Course-specific Warm-Up / Exit / Progress / Review / Summative behavior. Shared PMs own procedure and rendering mechanics; this profile owns Algebra-specific behavior.",
   "warmups": {
     "usage_mode": "notability_first",
     "path_template": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
-    "visible_title_pattern": "Section {U}.{S} — Day {D}",
+    "visible_title_pattern": "Section {U}.{S} \u2014 Day {D}",
     "default_days_per_section": 3,
     "days_rule": "Build three daily Warm-Ups per section by default unless the current teacher request/calendar explicitly changes the count.",
     "architecture": "Every daily Algebra Warm-Up uses four stable jobs; it is a separate fluency track, not a Current/Review/Mastery sampler.",
@@ -43,7 +43,12 @@
     "usage_mode": "print_first",
     "page_count": 2,
     "organization": "Mastery Goal -> supporting exact I Can statements -> portfolio evidence -> current evidence status -> next move",
-    "current_labels": ["Not Yet", "Approaching", "Meeting", "Exceeding"]
+    "current_labels": [
+      "Not Yet",
+      "Approaching",
+      "Meeting",
+      "Exceeding"
+    ]
   },
   "review": {
     "target_rule": "Unit Review prepares the CURRENT Unit Mastery Goals/supporting I Cans and does not mean the Section Spiral Review stage.",
@@ -53,9 +58,18 @@
   "summative": {
     "usage_mode": "secure_print",
     "family": "math_constructed_response",
-    "canonical_forms": ["V1", "V2", "V3", "V4", "V5", "V6"],
+    "canonical_forms": [
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ],
     "source_rule": "Render the six secure canonical Bank forms authored under the accepted Summative blueprint. Do not regenerate them downstream.",
-    "time": "Evidence/time driven; exact form length comes from the accepted Bank Map/Bank."
+    "evidence_rule": "Target approximately two secure evidence opportunities per CURRENT Unit Mastery Goal.",
+    "time_rule": "Design each full form for about a 40-minute class period; exact item count is resolved upstream by Bank Map from evidence and complexity, not hard-coded to eight.",
+    "time": "About 40 minutes by design; verify from the accepted Bank Map/Bank."
   },
   "targeted_reteach_check": {
     "status": "on-demand local formative resource",

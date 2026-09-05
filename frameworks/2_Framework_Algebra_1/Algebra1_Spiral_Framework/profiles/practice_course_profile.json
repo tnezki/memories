@@ -1,18 +1,25 @@
 {
   "name": "Algebra 1 Practice Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.1",
-  "framework_version": "v7.1",
+  "profile_version": "v2.2",
+  "framework_version": "v7.2",
   "role": "Course-specific Practice behavior. Practice 1 is canonical Bank content; Extra/CYU/middle practice are generated during Practice build.",
   "question_structure_rule": "Use current universal Question Structure for all authored Practice questions.",
   "practice_1": {
     "source": "canonical Bank Practice 1",
+    "count_per_section": 24,
     "visible_blocks": [
       "Intro",
       "Review",
       "Mastery"
     ],
-    "balance_rule": "True balance across Intro / Review / Mastery. Equal counts when practical; otherwise difference <= 1. Do not let current Intro or current Mastery swallow the set.",
+    "stage_counts": {
+      "Intro": 8,
+      "Review": 8,
+      "Mastery": 8
+    },
+    "balance_rule": "HARD: exactly 8 Intro + 8 Review + 8 Mastery per section.",
+    "allocation_rule": "Within each 8-question block, use purposeful repetition and varied natural structures. Do not force equal counts across I Cans if that produces poor questions.",
     "alignment": "Intro block uses current section Intro; Review block uses exact current Review goal/stage; Mastery block uses exact current Mastery goal/stage and is informed by the Exit evidence map."
   },
   "generated": {

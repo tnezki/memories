@@ -23,12 +23,16 @@ Require:
 - MAP_MANIFEST.status = PASS
 - question_design.status = PASS
 - qa.status = PASS
-- every destination slice declared by MAP_MANIFEST readable and reconciled.
+- every destination slice declared by MAP_MANIFEST readable and reconciled
+- MAP_REPORT semantic Question-Structure audit present and PASS.
 If not, FAIL CLOSED as BANK_MAP_NOT_ACCEPTED.
+
+SEMANTIC RECHECK — HARD
+Before authoring, spot/reconcile the accepted map against CURRENT Question Structure definitions. If the map contains a structure/action/response/representation mismatch, incomplete mixed-representation route, fake multi-step dependency, invalid Error Diagnose route, or construction task without an answer-neutral construction surface, FAIL CLOSED as BANK_MAP_SEMANTIC_MISMATCH. Do not author around a bad map.
 
 PROFILE-DRIVEN INVENTORY — HARD
 Author EXACTLY the canonical destinations declared by the accepted Map/current course profile. Do not revive historical inventories merely because old PMs/files exist.
-For Algebra 1 v7.1, canonical Bank content is:
+For Algebra 1 v7.2, canonical Bank content is:
 - official Exit questions
 - secure Summative V1-V6
 - Practice 1
@@ -37,7 +41,7 @@ For Algebra 1 v7.1, canonical Bank content is:
 NOT Bank content: Extra Practice, CYU, Practice 2/3, fixed Notes Example/YTI pairs, finished Warm-Up questions.
 
 QUESTION STRUCTURE — HARD
-For every finished question/task, execute the mapped current universal Question Structure contract. Do not merely store a structure label. The authored prompt, response mode, representation, and evidence job must agree.
+For every finished question/task, execute the mapped current universal Question Structure contract. Do not merely store a structure label. The authored prompt, response mode, representation, and evidence job must agree with the selected structure's actual reasoning architecture.
 A current course exemption may bypass this rule; Algebra Warm-Ups are the explicit exemption, but Warm-Ups are not authored by this Bank job.
 Seeds are not finished questions. When a later builder turns a seed into a question, that later question uses Question Structure.
 
@@ -49,7 +53,7 @@ Preserve accepted map identity and include as applicable:
 - evidence_job + student_action
 - question_structure_id
 - response_mode
-- representation/tool route
+- representation/tool/response-surface route(s)
 - security level
 - difficulty intent
 - variation axes
@@ -66,29 +70,35 @@ U1.1 = four new U1-MG01 opening questions, with Q1-Q2 designated carryforward pa
 Parallel reassessment preserves evidence target + usable difficulty while varying allowed axes. Do not expose future secure parallels in ordinary Practice/Notes.
 
 SUMMATIVE — SECURE
+For Algebra, accepted map should target approximately TWO secure evidence opportunities per CURRENT Unit Mastery Goal and a complete form designed for about 40 minutes. Exact item count may vary by Unit because Mastery Goal count and task complexity vary; do not hard-code 8.
 Author forms in this order:
 1. V1 anchor form from current Unit Mastery Goals + Exit evidence blueprint.
 2. V2-V4 parallel forms preserving blueprint/evidence/difficulty with fresh secure instances.
 3. V5-V6 additional secure forms under the same blueprint/comparable rigor after V1-V4 are complete.
 All forms must be independently usable and secure. Do not create pseudo-parallels by noun swaps or trivial number changes when the map requires deeper variation.
+Verify each finished form still fits the accepted approximate 40-minute demand.
 
 PRACTICE 1 — ALGEBRA RULE
-Author the accepted balanced Intro / Review / Mastery Practice 1 map.
-- preserve visible stage grouping when mapped;
-- honor equal/near-equal stage counts;
-- Intro practices current learning;
-- Review practices the exact current Review goal at Review demand;
-- Mastery practices current Mastery goal independently and is informed by Exit evidence without copying secure Exit prompts/stimuli.
+Author the accepted Practice 1 map exactly:
+- 24 questions per section
+- 8 Intro
+- 8 Review
+- 8 Mastery
+- visible stage grouping
+Intro practices current learning.
+Review practices the exact current Review goal at Review demand.
+Mastery practices current Mastery goal independently and is informed by Exit evidence without copying secure Exit prompts/stimuli.
+Within each block, purposeful repetition is allowed and preferred over filler. Do not manufacture fake structure variety or mechanical equal-I-Can quotas.
 Practice 1 may use canonical Seeds when the map routes them.
 
 WTC
-Author the accepted connected multipart routine. Keep one coherent stimulus/representation and real carry-forward. It is instructional preview/decomposition, not disguised secure assessment.
+Author the accepted connected multipart routine. Keep one coherent stimulus/representation and real carry-forward. It is instructional preview/decomposition, not disguised secure assessment. Materialize every required representation/response surface named by the map.
 
 SEEDS
-Store mapped seed records in a reusable non-student-facing slice. A seed should preserve the useful idea and variation guidance, not force a final prompt/answer unless the map separately defines a finished canonical question.
+Store mapped seed records in a reusable non-student-facing slice. Seeds have NO quota. A seed should preserve the useful idea and variation guidance, not force a final prompt/answer unless the map separately defines a finished canonical question. Do not add filler seeds during 3b.
 
 REPRESENTATIONS
-Generate/copy only mapped executable representations. Graphs use registered graph tooling when required; small data tables use semantic HTML; student-constructed representations use answer-neutral response surfaces. No decorative figures for quota.
+Generate/copy only mapped executable representations. Graphs use registered graph tooling when required; small data tables use semantic HTML; student-constructed representations use answer-neutral response surfaces. If a task requires graph + table, render both. No decorative figures for quota.
 
 BANK OUTPUT / MANIFEST
 Build one complete replacement Unit Bank with:
@@ -114,14 +124,15 @@ FINAL CANONICAL QA — HARD
 [ ] authored record count equals accepted Map record count
 [ ] only current profile canonical destinations authored
 [ ] exact goal/I-Can/stage identities preserved
-[ ] Question Structure executed for every finished question unless explicit current exemption
+[ ] Question Structure executed semantically for every finished question unless explicit current exemption
+[ ] no fake multi-step/error-diagnosis/construction-vs-read-only mismatch survived authoring
 [ ] all answers/solutions/math correct
-[ ] all required representations accurate, legible, answer-neutral where required, and refs resolve
+[ ] all required representations accurate, legible, answer-neutral where required, and ALL refs/routes resolve
 [ ] Exit chain matches Framework map
-[ ] Summative V1-V6 all satisfy accepted blueprint and security rules
-[ ] Practice 1 has true Intro/Review/Mastery balance and no secure prompt leakage
+[ ] Summative V1-V6 satisfy accepted blueprint, ~2 evidence opportunities/current Mastery Goal target, ~40-minute form demand, and security rules
+[ ] Practice 1 = exactly 24 per section = 8 Intro + 8 Review + 8 Mastery and no secure prompt leakage
 [ ] WTC coherent and instructional
-[ ] Seeds reusable and clearly separated from finished questions
+[ ] Seeds reusable, no quota/filler, and clearly separated from finished questions
 [ ] no placeholders/internal labels in student content
 [ ] ITEM_INDEX reconciles
 [ ] BANK_MANIFEST status COMPLETE / ready_for_downstream true / qa_status PASS
@@ -130,15 +141,16 @@ If any HARD check fails, repair or FAIL CLOSED. Do not claim COMPLETE.
 
 BUILD ORDER
 1. Pin/read authorities + accepted map.
-2. Create fresh staging tree.
-3. Author Exit.
-4. Author Summative V1, then V2-V4, then V5-V6.
-5. Author Practice 1.
-6. Author WTC.
-7. Store mapped Seeds.
-8. Generate required representations/assets.
-9. Build ITEM_INDEX + inspection view/provenance.
-10. Run final QA.
-11. Package complete replacement Bank and STOP.
+2. Semantic recheck of accepted map.
+3. Create fresh staging tree.
+4. Author Exit.
+5. Author Summative V1, then V2-V4, then V5-V6.
+6. Author exact 8/8/8 Practice 1.
+7. Author WTC.
+8. Store mapped Seeds.
+9. Generate required representations/assets/response surfaces.
+10. Build ITEM_INDEX + inspection view/provenance.
+11. Run final QA.
+12. Package complete replacement Bank and STOP.
 
 END — COMPLETE BANK 3B PROFILE-DRIVEN
