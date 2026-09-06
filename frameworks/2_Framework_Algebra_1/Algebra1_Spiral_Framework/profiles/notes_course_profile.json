@@ -1,0 +1,232 @@
+{
+  "name": "Algebra 1 Notes Course Profile",
+  "course": "Algebra 1",
+  "profile_version": "v1.0",
+  "framework_version": "v7.3",
+  "role": "Course-specific Algebra Notes behavior. The Notes PM owns build procedure/packaging; this profile owns Algebra-specific instructional rhythm, routine defaults, visual behavior, and course conventions.",
+  "path_contract": {
+    "student_path_template": "notes/u{U}_{S}_notes/u{U}_{S}_notes.html",
+    "teacher_path_template": "notes/u{U}_{S}_notes/u{U}_{S}_notes_teacher.html",
+    "figure_dir_template": "notes/u{U}_{S}_notes/figures",
+    "provenance_root_template": "notes/_notes_provenance/unit{U}"
+  },
+  "visual_contract": {
+    "body_class": "notes-alg",
+    "base_stylesheet": "../../css/base.css",
+    "artifact_stylesheet": "../../css/notes_alg.css",
+    "stylesheet_order": [
+      "../../css/base.css",
+      "../../css/notes_alg.css"
+    ],
+    "legacy_notes_css_allowed": false,
+    "page_level_style_allowed": false,
+    "inline_layout_or_color_style_allowed": false,
+    "design_language": [
+      "textbook-like paper page",
+      "serif reading text",
+      "sans-serif labels and navigation",
+      "strong red section banner",
+      "blue definition/example/reference language",
+      "cyan/light-blue discussion/review accents",
+      "cream reference surfaces",
+      "visual-first Math Notes"
+    ]
+  },
+  "instructional_spine": {
+    "primary": "Current section Intro Learning Target and exact I Can statements from the current Assessment Plan.",
+    "representations": [
+      "Graph",
+      "Equation",
+      "Table",
+      "Context"
+    ],
+    "language": "Use simple concrete high-school Algebra language. Prefer input/output and ordered-pair language where useful; use f(x) naturally.",
+    "teacher_choice_principle": "Build a complete ready-to-use toolbox, but the teacher is not expected to use every included component every time."
+  },
+  "standard_section_components": {
+    "required_in_normal_build": [
+      "Section title/opener",
+      "Exact Learning Target",
+      "Exact I Can statements",
+      "One-sentence Why It Matters",
+      "Short Let's Get Started",
+      "Exact canonical Bank WTC",
+      "Core reading organized by exact I Can",
+      "Visual-first Math Notes",
+      "Generated EX/YTI inventory",
+      "Section Summary",
+      "Common Mistakes to Watch as final visible section"
+    ],
+    "selective_by_section": [
+      "Vocabulary / Key Notation Preview",
+      "Talk to the Text / Close Reading",
+      "Stop & Discuss",
+      "Extra Formula / Relationship reference box",
+      "What I Figured Out / reflection",
+      "Miscellaneous final workspace"
+    ],
+    "teacher_may_skip_in_class": true,
+    "skip_rule": "Included routines must be modular enough that skipping one does not make later reading nonsensical."
+  },
+  "why_it_matters": {
+    "status": "standard",
+    "length": "one concise sentence",
+    "rule": "Explain why the mathematics is useful, foundational, or worth noticing. Do not invent fake career relevance."
+  },
+  "lets_get_started": {
+    "status": "standard",
+    "purpose": [
+      "activate prior knowledge",
+      "preview a useful representation or pattern",
+      "create a quick notice/predict/compare moment",
+      "connect to a prerequisite without teaching the whole section early"
+    ],
+    "size": "one prompt or tiny coherent set",
+    "visual_preference": "Prefer a visual, table, pattern, or diagram when natural.",
+    "not_allowed": [
+      "large calculation set",
+      "a second full lesson",
+      "an EX/YTI pair disguised as an opener"
+    ],
+    "exit_firewall_required": true
+  },
+  "wtc": {
+    "status": "standard_and_canonical",
+    "source": "Current completed Unit Bank canonical WTC",
+    "count_per_section": 1,
+    "rules": [
+      "Use exact canonical WTC once.",
+      "Preserve item ID, prompt, representation, I Can identity, and answer/solution lineage.",
+      "Do not silently rewrite or simplify.",
+      "Teacher copy may add instructional/discourse support.",
+      "Student copy must not leak the answer."
+    ],
+    "teacher_may_skip_in_class": true
+  },
+  "example_yti": {
+    "source_model": "Purpose-author/refine during Notes build from exact I Can -> accepted map evidence job/representation route -> Question Structure -> Practice1 calibration when useful -> fresh Notes-specific instance.",
+    "canonical_bank_inventory_required": false,
+    "default_pairs_per_i_can": 1,
+    "second_pair_policy": "A second pair is allowed only when the I Can has a materially different second learning job that cannot be represented well by the first pair.",
+    "earned_second_pair_reasons": [
+      "two genuinely different required representations",
+      "two different procedures or decision paths",
+      "conceptual interpretation plus distinct application/modeling",
+      "high-value misconception requiring a separate corrective instance"
+    ],
+    "teacher_may_skip_pairs_in_class": true,
+    "exit_firewall_required": true
+  },
+  "exit_firewall": {
+    "status": "hard",
+    "scope": "All generated Notes question/tasks, including Let's Get Started, EX/YTI, and question-like discussion prompts.",
+    "same_skill_allowed": true,
+    "prohibited_overlap": [
+      "same prompt",
+      "same or trivially changed wording preserving the Exit's distinctive task sequence",
+      "same values or data set",
+      "same context",
+      "same graph/table/equation stimulus",
+      "same distinctive representation with cosmetic changes only",
+      "near-parallel rehearsal that effectively gives away the Exit task"
+    ],
+    "failure_code": "NOTES_EXIT_NEAR_DUPLICATE"
+  },
+  "math_notes": {
+    "status": "visual_first",
+    "default": "Each I Can should include one meaningful visual anchor in or immediately beside Math Notes when the mathematics supports one.",
+    "preferred_visuals": [
+      "input -> rule -> output flow",
+      "annotated expression/equation with labels or arrows",
+      "mini table tied to an equation or graph",
+      "graph with labeled feature",
+      "side-by-side comparison cards",
+      "representation translation flow",
+      "process/decision flow",
+      "small diagram/model",
+      "compact formula/reference display"
+    ],
+    "paragraph_only_rule": "Allowed only when a visual would be artificial or less clear.",
+    "visual_rule": "Every visual must teach, organize, compare, or make structure visible; decorative visuals do not count.",
+    "graph_rule": "Use the registered Algebra graph tool for new coordinate/function graphs; do not hand-build coordinate SVG."
+  },
+  "vocabulary_preview": {
+    "status": "selective",
+    "use_when": "Vocabulary or notation load makes prior-knowledge sorting useful.",
+    "do_not_force_every_section": true
+  },
+  "talk_to_text": {
+    "status": "selective",
+    "use_when": "Reading or visual density makes annotation worthwhile.",
+    "do_not_force_every_section": true
+  },
+  "stop_and_discuss": {
+    "status": "selective",
+    "use_when": "Student talk materially improves interpretation, comparison, reasoning, critique, or misconception repair.",
+    "do_not_force_every_section": true
+  },
+  "section_close": {
+    "order": [
+      "Section Summary",
+      "Common Mistakes to Watch"
+    ],
+    "common_mistakes_status": "required_in_normal_build",
+    "common_mistakes_count": "2-4 high-value mistakes/misconceptions",
+    "common_mistakes_rule": "Common Mistakes to Watch is the final visible section.",
+    "notes_exit_check": "Do not add a Notes Exit Check."
+  },
+  "security_and_lineage": {
+    "secure_summative_exposure_allowed": false,
+    "exit_items_are_authoring_source": false,
+    "source_map_travels_with_notes": true,
+    "source_map_destination": "_notes_provenance/unitN/source_map/",
+    "generated_task_metadata": [
+      "stable Notes task ID",
+      "section ID",
+      "primary I Can ID",
+      "exact I Can text resolvable in artifact",
+      "evidence job",
+      "question_structure_id when applicable",
+      "representation mode/route",
+      "calibration Practice1 IDs when used",
+      "accepted_map_fingerprint",
+      "exit_firewall_checked"
+    ]
+  },
+  "teacher_copy": {
+    "derivation": "Derive from finalized student structure.",
+    "same_sequence": true,
+    "student_workspace_released": true,
+    "support_required_for_included": [
+      "WTC",
+      "Stop & Discuss",
+      "Example",
+      "You Try It"
+    ],
+    "support_may_include": [
+      "Answer / Acceptable Reasoning",
+      "Teacher Moves",
+      "Student Moves",
+      "Listen For",
+      "Likely Misconception"
+    ]
+  },
+  "qa": {
+    "required_checks": [
+      "exact Learning Target and I Can alignment",
+      "standard section components present unless explicitly omitted by teacher",
+      "WTC exact/canonical and present once",
+      "default one EX/YTI pair per exact I Can",
+      "second pairs have explicit justification",
+      "all generated Notes tasks pass Exit firewall",
+      "visual-first Math Notes used where mathematics supports one",
+      "Section Summary present",
+      "Common Mistakes present and final visible section",
+      "base.css then notes_alg.css only",
+      "no legacy notes.css",
+      "no page-level or inline layout/color CSS",
+      "no secure Summative leakage",
+      "source_map copied unchanged into Notes provenance"
+    ]
+  }
+}
