@@ -5,7 +5,7 @@ STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
 ROLE: Build or repair one complete canonical Unit Bank from one accepted Step 3a Bank Map.
-REVISION: 2026-09-06 vNEXT.3 — clean BUILD/REPAIR architecture + root bank.css viewer authority + source-map travel + strict finished-output QA + two-line continuation + File Library-first recovery.
+REVISION: 2026-09-06 vNEXT.4 — closed-project-source build + root bank.css authority + BUILD/REPAIR + source-map travel + strict QA + continuation + File Library artifact recovery.
 
 AUTHORITY — HARD
 1. current explicit teacher instruction / current build request
@@ -18,6 +18,42 @@ AUTHORITY — HARD
 8. registered tools/render contracts
 
 The accepted Step 3a Map is executable design authority. An existing Bank may be used as an authored starting point only in REPAIR mode; it is never curriculum authority.
+
+NO PUBLIC WEB RESEARCH — HARD
+Step 3b is a CLOSED-SOURCE production build.
+
+Allowed information sources are limited to:
+- files explicitly included in the build request/package;
+- the accepted Step 3a map and bundled/source map files;
+- current pinned Curriculum Philosophy;
+- current universal Question Structure authority;
+- current Course Framework, exact Unit Assessment Plan, and canonical operational maps;
+- current Framework Bank profile;
+- registered project tools/render contracts;
+- the current/recovered Bank artifact in REPAIR mode;
+- the user's ChatGPT File Library ONLY for recovering a previously generated matching project artifact needed to resume/repair;
+- explicitly named project repositories such as `tnezki/memories`, `tnezki/algebra`, `tnezki/physics`, or other repositories identified by the build request/current authorities.
+
+PROHIBITED:
+- public web search;
+- general internet research;
+- search engines;
+- outside curriculum websites;
+- external examples/question banks;
+- web searches for math questions, contexts, wording, CSS/layout ideas, standards, explanations, or replacement content;
+- silently filling a missing project dependency with outside information.
+
+GitHub/project-repository inspection is allowed only as a declared project source/dependency. It is NOT permission for open-ended web research.
+
+If a required build dependency is missing from the allowed project sources:
+- do not search the public web for a substitute;
+- recover it from the current conversation/File Library if it is a prior project artifact and that recovery is allowed;
+- otherwise FAIL CLOSED as `BANK_REQUIRED_PROJECT_SOURCE_MISSING` and state the exact missing dependency.
+
+WEB-USE QA — HARD
+Step 3b must not make public-web research part of the build process.
+The final BUILD_REPORT / PROVENANCE should identify the project sources actually used.
+If outside web research was used to create or repair Bank content, the build cannot PASS and must report `UNAUTHORIZED_PUBLIC_WEB_SOURCE`.
 
 CORE PRINCIPLE
 Map -> Bank -> downstream artifacts.
@@ -113,6 +149,7 @@ If repair discovers widespread semantic drift, stop repair and switch to BUILD r
 
 SOURCE-READ BUDGET — HARD
 - Use request-declared and manifest-declared paths directly.
+- Do not invoke public web search as a discovery fallback.
 - Read each unchanged authority once per pinned/content identity.
 - Record identities in the checkpoint.
 - Do not repeatedly reread Philosophy, Framework, Assessment Plan, Question Structure, Bank profile, accepted map slices, or registered tools for reassurance.
@@ -838,6 +875,8 @@ Preserve destination/path/key, security/record mode, source_map_record_id, and a
 
 PROVENANCE
 Record:
+- `source_policy = CLOSED_PROJECT_SOURCES_ONLY`
+- `public_web_research_used = false`
 - accepted map fingerprint + original pins
 - current build pins
 - compatibility status
@@ -852,6 +891,7 @@ Record:
 
 Before COMPLETE:
 [ ] accepted map status/fingerprint verified
+[ ] no public web research/outside curriculum sources were used; PROVENANCE records CLOSED_PROJECT_SOURCES_ONLY
 [ ] relevant authority compatibility verified; harmless repo drift not mistaken for semantic drift
 [ ] canonical record IDs/counts exactly reconcile
 [ ] source_map/ snapshot is complete and hash/fingerprint consistent
