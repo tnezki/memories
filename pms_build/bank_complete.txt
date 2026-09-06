@@ -5,7 +5,7 @@ STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
 ROLE: Author the complete canonical Unit Bank from one accepted 3a Bank Map as one logical, continuation-safe job.
-REVISION: 2026-09-06 final viewer totals + full map-metadata travel + strict render-QA schema + repetition/render cleanup + continuation-safe execution
+REVISION: 2026-09-06 content-addressed pin compatibility + final viewer totals + full map-metadata travel + strict render-QA schema + repetition/render cleanup + continuation-safe execution
 
 AUTHORITY — HARD
 1. current explicit teacher instruction
@@ -27,7 +27,7 @@ SOURCE-READ BUDGET — HARD
 - Read each required authority once per unchanged pinned identity. Record its path + commit/blob/fingerprint in the working checkpoint.
 - Do NOT repeatedly reread the same Philosophy, Framework, Assessment Plan, Question Structure file, Bank profile, accepted map slice, or registered tool simply for reassurance. Reopen only when a dependency is missing, a stored identity/hash does not match, or an actual conflict requires targeted resolution.
 - Do not inspect old Banks, historical artifacts, retired PMs, unrelated Units, or unrelated Question Structure types after the entry gate unless a HARD dependency explicitly points there.
-- The accepted 3a Map and its PASS MAP_REPORT are the primary semantic design proof. Step 3b verifies that those accepted pins still match and performs a TARGETED semantic recheck; it does not redo Step 3a.
+- The accepted 3a Map and its PASS MAP_REPORT are the primary semantic design proof. Step 3b verifies that the accepted map content is intact and that relevant higher-authority/tool identities remain compatible; it does not require whole-repository commit equality and does not redo Step 3a.
 
 PRODUCTION-FIRST BUDGET — HARD
 - Complete the entry gate, targeted semantic recheck, expected-record table, and first checkpoint early; begin authoring promptly rather than spending the majority of the run on source review.
@@ -59,7 +59,7 @@ If execution must stop because the run/turn is ending and NO HARD dependency/sem
 A continuation is the same Step 3b job, not a new build.
 
 CHECKPOINT INVALIDATION — HARD
-Restart the entry gate only when the accepted map fingerprint or a pinned higher authority/tool identity has actually changed, required staging files are missing/corrupt, or the user explicitly requests a restart. Otherwise resume.
+Restart the entry gate only when the accepted map fingerprint/content has actually changed, a relevant higher-authority/tool CONTENT identity has changed incompatibly, required staging files are missing/corrupt, or the user explicitly requests a restart. A repository commit SHA advancing by itself is NOT checkpoint invalidation. Otherwise resume.
 
 PARTIAL OUTPUT — HARD
 Never package or label a partial Bank COMPLETE. Runtime incompleteness is resumable working state; HARD validation/QA failure is a real fail-closed state. Keep these distinct.
@@ -73,10 +73,36 @@ Require:
 - MAP_REPORT semantic Question-Structure audit present and PASS.
 If not, FAIL CLOSED as BANK_MAP_NOT_ACCEPTED.
 
+CONTENT-ADDRESSED PIN COMPATIBILITY — HARD
+Repository commit SHAs are provenance snapshots, not blanket semantic invalidators. The accepted 3a Map may remain executable after either repository advances. Do NOT require the request's whole-repository commit SHA to equal MAP_MANIFEST.pinned_snapshot.
+
+Before declaring a pin mismatch, perform a TARGETED compatibility check:
+1. Reconcile the accepted map directory against MAP_MANIFEST file hashes and map_fingerprint. If those map files still match, the accepted map itself is unchanged.
+2. Compare only the CURRENT higher-authority/tool files that could change the map's meaning: Curriculum Philosophy; universal Question Structure authority actually used; current Course Framework; exact Unit Assessment Plan; canonical operational/mastery/spiral maps used by the Unit; current Framework Bank profile; and registered tools named by accepted representation routes.
+3. A newer repository commit is compatible when those relevant content identities are unchanged, or when the only intervening changes are downstream/lower-authority/nonsemantic files.
+
+Changes that DO NOT by themselves invalidate an accepted map include:
+- this Step 3b PM / bank_complete.txt or other lower build-orchestration PM changes;
+- generated Bank outputs, viewers, QA reports, figures/assets, staging or replacement packages;
+- agenda/calendar/site output changes;
+- storage/commit of the already-accepted map itself when its manifest hashes/fingerprint still reconcile;
+- cleanup/removal of retired Banks or unrelated artifacts;
+- unrelated Unit/course files.
+
+Changes that DO invalidate the accepted map include an actual incompatible content change to a relevant higher authority/tool above, or any accepted map file/hash/fingerprint mismatch. If invalidation is real, FAIL CLOSED as BANK_MAP_AUTHORITY_CHANGED and list the exact changed authority/tool file(s) and content identities. Do NOT report a generic repository-pin mismatch.
+
+When commit SHAs differ but the targeted compatibility check passes:
+- continue Step 3b from the same accepted map;
+- record pin_compatibility = COMPATIBLE_DRIFT in provenance/build report;
+- preserve MAP_MANIFEST.pinned_snapshot unchanged as the map's original provenance;
+- separately record the current Step 3b request/build repository pins as build-time provenance.
+
+This rule exists specifically so improving Step 3b itself or syncing generated Bank output does not force a pointless Step 3a rebuild when the accepted map and its real authorities have not changed.
+
 TARGETED SEMANTIC RECHECK — HARD
-Do not re-run the full Step 3a audit. First verify that the accepted map fingerprint and the higher-authority/tool pins named by the request still match the accepted MAP_REPORT. Then inspect only the Question Structure IDs and executable representation routes actually used by the accepted map, using the existing PASS MAP_REPORT as the starting evidence. Reopen a definition only when needed to resolve a concrete ambiguity or conflict.
+Do not re-run the full Step 3a audit. First reconcile the accepted map fingerprint/files and run the CONTENT-ADDRESSED PIN COMPATIBILITY check above. Then inspect only the Question Structure IDs and executable representation routes actually used by the accepted map, using the existing PASS MAP_REPORT as the starting evidence. Reopen a definition only when needed to resolve a concrete ambiguity or conflict.
 If the accepted map actually contains a structure/action/response/representation mismatch, incomplete mixed-representation route, fake multi-step dependency, invalid Error Diagnose route, or construction task without an answer-neutral construction surface, FAIL CLOSED as BANK_MAP_SEMANTIC_MISMATCH. Do not author around a bad map.
-A PASS accepted map with unchanged pins must not trigger a broad reread of the entire Question Structure authority, whole Framework, unrelated Units, or historical sources.
+A PASS accepted map with intact fingerprint and compatible relevant authorities must not trigger a broad reread of the entire Question Structure authority, whole Framework, unrelated Units, historical sources, or a Step 3a rebuild merely because repository HEAD advanced.
 
 ACCEPTED MAP EXECUTION CONTRACT — HARD
 The accepted 3a Map is executable design, not a suggestion. Step 3b may fresh-author values, wording, contexts, and representations only inside the variation contract of each accepted map record. It may NOT substitute a different task family, goal, I Can, evidence job, student action, structure, stage, destination, or representation job merely because a legacy template is available.
@@ -500,6 +526,8 @@ A browser file:// fetch failure is expected browser behavior and must not trigge
 FINAL CANONICAL QA — HARD
 [ ] authored record count equals accepted Map record count
 [ ] exact accepted map record ID set preserved; no missing/unexpected production rows
+[ ] accepted map files/fingerprint reconcile; repository SHA drift was evaluated by targeted content compatibility rather than whole-repo equality
+[ ] if build-time pins differ from map provenance pins, provenance records both and pin_compatibility = COMPATIBLE_DRIFT
 [ ] only current profile canonical destinations authored
 [ ] exact goal/I-Can/stage identities preserved in data; viewer shows readable IC# + actual I Can text
 [ ] every authored record contains a lossless full accepted-map `map_contract`; field-for-field metadata comparison reports zero loss
