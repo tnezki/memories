@@ -4,8 +4,8 @@ BUILD COMPLETE BANK — STEP 3B / PROFILE-DRIVEN BANK AUTHORING
 STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
-ROLE: Author the complete canonical Unit Bank from one accepted 3a Bank Map in one run.
-REVISION: 2026-09-06 teacher-view I Can labels + nonredundant MathJax + answer-neutral stimuli + graph-markup completeness QA
+ROLE: Author the complete canonical Unit Bank from one accepted 3a Bank Map as one logical, continuation-safe job.
+REVISION: 2026-09-06 execution-budget/checkpointing + teacher-view I Can labels + nonredundant MathJax + answer-neutral stimuli + graph-markup completeness QA
 
 AUTHORITY — HARD
 1. current explicit teacher instruction
@@ -19,6 +19,51 @@ AUTHORITY — HARD
 
 Do not use an old/partial Unit Bank, retired bank schema, legacy template library, legacy standards map, or historical artifact as curriculum authority. Build a fresh replacement staging tree from the accepted map/current authorities.
 
+EXECUTION / CONTINUATION CONTRACT — HARD
+Step 3b is a large production job. A valid build must not fail merely because one uninterrupted model turn is too short. Treat the work as ONE logical job that may continue from an explicit checkpoint.
+
+SOURCE-READ BUDGET — HARD
+- Use request-declared and manifest-declared paths directly. Do not perform repository-wide discovery/search when the required file/path is already declared and readable.
+- Read each required authority once per unchanged pinned identity. Record its path + commit/blob/fingerprint in the working checkpoint.
+- Do NOT repeatedly reread the same Philosophy, Framework, Assessment Plan, Question Structure file, Bank profile, accepted map slice, or registered tool simply for reassurance. Reopen only when a dependency is missing, a stored identity/hash does not match, or an actual conflict requires targeted resolution.
+- Do not inspect old Banks, historical artifacts, retired PMs, unrelated Units, or unrelated Question Structure types after the entry gate unless a HARD dependency explicitly points there.
+- The accepted 3a Map and its PASS MAP_REPORT are the primary semantic design proof. Step 3b verifies that those accepted pins still match and performs a TARGETED semantic recheck; it does not redo Step 3a.
+
+PRODUCTION-FIRST BUDGET — HARD
+- Complete the entry gate, targeted semantic recheck, expected-record table, and first checkpoint early; begin authoring promptly rather than spending the majority of the run on source review.
+- Once authorities are pinned and reconciled, stop broad analysis and move to generation.
+- Write destination slices and generated assets incrementally to the staging workspace as they are completed. Do not keep the entire Bank only in transient reasoning state.
+- Prefer deterministic scripts/batched transforms for repetitive record authoring support, asset generation, indexing, and QA comparison when this reduces repeated manual work without changing curriculum decisions.
+- Update the checkpoint after each major destination/phase so continuation can resume at the next unfinished phase.
+- Do not spend remaining execution time writing a long explanation while required production work is still unfinished.
+
+WORKING CHECKPOINT — HARD
+Create a noncanonical working checkpoint in the staging workspace before large-scale authoring, e.g. `.step3b_work/BUILD_CHECKPOINT.json`. It must track at minimum:
+- accepted_map_fingerprint
+- pinned authority identities/commits/blob hashes already read
+- expected record IDs/counts by destination
+- completed destinations/phases
+- generated representation/assets completed
+- QA phases completed
+- next_phase / next_destination
+- last_updated status.
+The checkpoint is working state only. Do NOT include `.step3b_work/` in the final canonical Bank ZIP.
+
+CONTINUATION — HARD
+If execution must stop because the run/turn is ending and NO HARD dependency/semantic/QA failure has been found:
+- do NOT say the request is invalid, blocked, or impossible;
+- do NOT emit a FAIL-CLOSED curriculum code;
+- persist the checkpoint and all completed staging outputs;
+- respond with status `STEP3B_INCOMPLETE_CONTINUE`, the completed phase, and the exact next phase;
+- on a user continuation such as `cont`, read the existing checkpoint first and resume from `next_phase`; do NOT restart source discovery, reread unchanged authorities, or discard completed outputs.
+A continuation is the same Step 3b job, not a new build.
+
+CHECKPOINT INVALIDATION — HARD
+Restart the entry gate only when the accepted map fingerprint or a pinned higher authority/tool identity has actually changed, required staging files are missing/corrupt, or the user explicitly requests a restart. Otherwise resume.
+
+PARTIAL OUTPUT — HARD
+Never package or label a partial Bank COMPLETE. Runtime incompleteness is resumable working state; HARD validation/QA failure is a real fail-closed state. Keep these distinct.
+
 ENTRY GATE — HARD
 Require:
 - MAP_MANIFEST.status = PASS
@@ -28,8 +73,10 @@ Require:
 - MAP_REPORT semantic Question-Structure audit present and PASS.
 If not, FAIL CLOSED as BANK_MAP_NOT_ACCEPTED.
 
-SEMANTIC RECHECK — HARD
-Before authoring, spot/reconcile the accepted map against CURRENT Question Structure definitions. If the map contains a structure/action/response/representation mismatch, incomplete mixed-representation route, fake multi-step dependency, invalid Error Diagnose route, or construction task without an answer-neutral construction surface, FAIL CLOSED as BANK_MAP_SEMANTIC_MISMATCH. Do not author around a bad map.
+TARGETED SEMANTIC RECHECK — HARD
+Do not re-run the full Step 3a audit. First verify that the accepted map fingerprint and the higher-authority/tool pins named by the request still match the accepted MAP_REPORT. Then inspect only the Question Structure IDs and executable representation routes actually used by the accepted map, using the existing PASS MAP_REPORT as the starting evidence. Reopen a definition only when needed to resolve a concrete ambiguity or conflict.
+If the accepted map actually contains a structure/action/response/representation mismatch, incomplete mixed-representation route, fake multi-step dependency, invalid Error Diagnose route, or construction task without an answer-neutral construction surface, FAIL CLOSED as BANK_MAP_SEMANTIC_MISMATCH. Do not author around a bad map.
+A PASS accepted map with unchanged pins must not trigger a broad reread of the entire Question Structure authority, whole Framework, unrelated Units, or historical sources.
 
 ACCEPTED MAP EXECUTION CONTRACT — HARD
 The accepted 3a Map is executable design, not a suggestion. Step 3b may fresh-author values, wording, contexts, and representations only inside the variation contract of each accepted map record. It may NOT substitute a different task family, goal, I Can, evidence job, student action, structure, stage, destination, or representation job merely because a legacy template is available.
@@ -426,23 +473,26 @@ FINAL CANONICAL QA — HARD
 
 If any HARD check fails, repair or FAIL CLOSED. Do not claim COMPLETE and do not set ready_for_downstream true.
 
-BUILD ORDER
-1. Pin/read authorities + accepted map.
-2. Semantic recheck of accepted map.
-3. Build expected-record table directly from accepted destination slices.
-4. Create fresh staging tree.
-5. Author Exit exactly from exit_map.json.
-6. Author Summative V1, then V2-V4, then V5-V6 exactly from summative_map.json; finished secure content required.
-7. Author exact 8/8/8 Practice 1 exactly from practice1_map.json.
-8. Author WTC exactly from wtc_map.json.
-9. Store mapped Seeds exactly from seed_map.json.
-10. Generate required representations/assets/response surfaces by ACTUALLY executing registered tooling where mapped; add render_trace.
+BUILD ORDER — CONTINUATION-SAFE
+0. If `.step3b_work/BUILD_CHECKPOINT.json` exists and its accepted-map/authority pins still match, RESUME from `next_phase`; skip completed source reads/phases.
+1. Pin/read each required authority ONCE + accepted map using declared paths; record identities in checkpoint state.
+2. Run the TARGETED semantic recheck only; do not redo Step 3a or broad source discovery.
+3. Build expected-record table directly from accepted destination slices and write/update the first checkpoint.
+4. Create/confirm fresh staging tree.
+5. Author Exit exactly from exit_map.json; write slice; checkpoint.
+6. Author Summative V1, then V2-V4, then V5-V6 exactly from summative_map.json; finished secure content required; write slice; checkpoint.
+7. Author exact 8/8/8 Practice 1 exactly from practice1_map.json; write slice; checkpoint.
+8. Author WTC exactly from wtc_map.json; write slice; checkpoint.
+9. Store mapped Seeds exactly from seed_map.json; write slice; checkpoint.
+10. Generate required representations/assets/response surfaces by ACTUALLY executing registered tooling where mapped; add render_trace; checkpoint generated asset set.
 11. Run finished-content representation scan: actual markup vs representation_mode/routes, unauthorized graph markup, answer-neutrality, matching-order leak, prompt duplication, MathJax redundancy.
 12. Build ITEM_INDEX + provenance.
-13. Run machine accepted-map vs authored-record/content comparison and write MAP_FIDELITY_REPORT.json.
-14. Run finished visual/render checks and write RENDER_QA_REPORT.json.
+13. Run machine accepted-map vs authored-record/content comparison and write MAP_FIDELITY_REPORT.json; checkpoint QA state.
+14. Run finished visual/render checks and write RENDER_QA_REPORT.json; checkpoint QA state.
 15. Build inspection.html + unit{unit}.html viewer without changing its approved layout; add readable I Can metadata, MathJax + compact-table/graph-asset rendering.
 16. Run final canonical QA.
-17. Package complete replacement Bank and STOP.
+17. Remove `.step3b_work/` from the final replacement tree, package complete replacement Bank, and STOP.
+
+If the execution window ends before Step 17 and no HARD failure exists, save/update the checkpoint and return `STEP3B_INCOMPLETE_CONTINUE` instead of restarting or misreporting failure.
 
 END — COMPLETE BANK 3B PROFILE-DRIVEN
