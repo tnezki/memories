@@ -5,7 +5,7 @@ STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
 ROLE: Author the complete canonical Unit Bank from one accepted 3a Bank Map in one run.
-REVISION: 2026-09-05 accepted-map fidelity + final QA + unit viewer hardening
+REVISION: 2026-09-06 accepted-map fidelity + registered-render execution + MathJax/table/graph QA
 
 AUTHORITY — HARD
 1. current explicit teacher instruction
@@ -94,6 +94,15 @@ Preserve accepted map identity and include as applicable:
 Finished content includes student prompt/HTML, answer/key, solution, and representation refs as required.
 No placeholders or internal authoring labels in student-facing prose.
 
+MATH RENDERING — ALGEBRA HARD
+Student-facing algebraic notation in HTML must use TeX rendered by MathJax when MathJax improves readability. This includes powers, fractions, radicals, function notation, inequalities, systems, and multi-term algebraic expressions.
+- Keep student_text as readable plain text for search/indexing.
+- In student_html, wrap inline math in \\( ... \\) and display math in \\[ ... \\].
+- Prefer TeX such as \\(2a-a^2\\), \\(f(x)=3x-2\\), and \\(\\frac{y_2-y_1}{x_2-x_1}\\) rather than raw caret notation or Unicode superscripts when rendered HTML is available.
+- Do not turn ordinary prose, labels, simple integers, or table headings into unnecessary MathJax.
+- unit{unit}.html must load MathJax and re-typeset after dynamically rendering/changing tabs, filters, or search results.
+- A math block that visibly exposes unrendered TeX delimiters/caret syntax in the GitHub Pages viewer is a render defect.
+
 EXIT — ALGEBRA RULE
 Author the exact ticket architecture from the Framework/accepted map.
 Normal ticket:
@@ -113,13 +122,13 @@ For U1.1 specifically, if any of Q1-Q4 is authored as readiness/legacy REASSESS 
 Do not derive Exit classification from an old Bank schema or generic readiness template.
 
 SUMMATIVE — SECURE
-For Algebra, accepted map should target approximately TWO secure evidence opportunities per CURRENT Unit Mastery Goal and a complete form designed for about 40 minutes. Exact item count may vary by Unit because Mastery Goal count and task complexity vary; do not hard-code 8.
+For Algebra, accepted map should target approximately TWO secure evidence opportunities per CURRENT Unit Mastery Goal and a complete form designed for about a 40-minute class period. Exact item count may vary by Unit because Mastery Goal count and task complexity vary; do not hard-code 8.
 Author forms in this order:
 1. V1 anchor form from current Unit Mastery Goals + accepted Summative blueprint.
 2. V2-V4 parallel forms preserving blueprint/evidence/difficulty with fresh secure instances.
 3. V5-V6 additional secure forms under the same blueprint/comparable rigor after V1-V4 are complete.
 All forms must be independently usable and secure. Do not create pseudo-parallels by noun swaps or trivial number changes when the map requires deeper variation.
-Verify each finished form still fits the accepted approximate 40-minute demand.
+The ~40-minute figure is a design envelope, not a quota. A shorter complete form is acceptable when it preserves all mapped evidence opportunities and rigor. Do NOT pad, lengthen, or add filler merely to consume time.
 
 SUMMATIVE CONTENT — HARD
 "Secure" does NOT mean "reference-only" or "placeholder" in the canonical Bank. Every mapped Summative slot must be actually authored in the secure Bank slice with:
@@ -167,8 +176,73 @@ Store mapped seed records in a reusable non-student-facing slice. Seeds have NO 
 SEED MAP-FIDELITY GATE — HARD
 When seed_map.json contains mapped approved candidates, store those exact seed identities and preserve their title, preserve/idea statement, why-useful rationale, and may-vary guidance. Do not replace approved seeds with generic template-library cards, blank-build cards, or different legacy seeds. Any approved mapped seed missing or materially replaced = SEED_MAP_DRIFT.
 
-REPRESENTATIONS
-Generate/copy only mapped executable representations. Graphs use registered graph tooling when required; small data tables use semantic HTML; student-constructed representations use answer-neutral response surfaces. If a task requires graph + table, render both. No decorative figures for quota.
+REPRESENTATIONS — HARD
+Generate/copy only mapped executable representations. If a task requires graph + table, render both. No decorative figures for quota.
+
+REGISTERED GRAPH TOOL EXECUTION — HARD
+When an accepted map/record routes a graph through the registered Algebra graph tool, the route is an execution requirement, not metadata.
+Current registered authority: Tools/~graph_tool_v12.py unless a higher current authority names a newer registered version.
+
+For every graph_tool-routed record:
+1. Read/copy the registered graph tool unchanged into the build workspace exactly as its own instructions require.
+2. Append only record-specific generation blocks below the tool's allowed append marker; do not rewrite or restyle the tool.
+3. Execute the tool to create an actual image asset under banks/unit{unit}/figures/.
+4. Reference that generated asset from student_html. Do NOT substitute a hand-built inline SVG while claiming graph_tool provenance.
+5. Store render_trace metadata sufficient to prove execution, including tool path/version or blob SHA, function used, generated asset path, and asset hash.
+6. Final QA must inspect the rendered asset, not only the declared route.
+
+Graph routing rules:
+- Standard algebra/coordinate graphs: create a square figure (normally 3.5 in × 3.5 in), invoke make_standard_graph, preserve its axes, arrows, tick/grid treatment, and native aspect ratio in HTML. Do not stretch the image with CSS.
+- Context/modeling graphs: invoke make_context_graph with natural bounds/labels. Preserve the generated asset's native aspect ratio; do not distort it to fill a card.
+- Blank coordinate response surfaces: generate the blank coordinate plane through the registered graph tool (for example make_standard_graph with no answer-bearing function) and keep it answer-neutral.
+- Discrete relations/point sets: use the registered graph-tool coordinate-plane styling, then plot the supplied points as POINTS ONLY in the appended generation block. Do not connect discrete points with line segments.
+- Continuous relationships: if the mathematical object is a continuous linear/function relationship, render the continuous relationship/curve. Do not make it look like a discrete data set by showing only oversized sample dots connected by segments unless those sampled points are themselves the evidence job.
+- A graph of a relation used for function/not-a-function evidence must preserve whether the relation is discrete or continuous; never connect points merely because they share a pattern.
+
+Graph legibility rules:
+- Standard coordinate-plane grid cells must remain visually square; x/y axes must be visible and distinguishable from grid lines according to the registered tool.
+- Axis/tick labels must be readable without crowding or duplication.
+- Graphs must not be horizontally or vertically stretched by viewer/card layout.
+- Every plotted, labeled, or student-required point/value must fit within the generated axis bounds with usable margin. If a WTC asks the student to plot (4,9), a response surface ending at y=6 is invalid.
+- Do not clip required intercepts, vertices, endpoints, points, arrows, labels, or student construction space.
+
+GRAPH TOOL FAIL-CLOSED CODES
+- GRAPH_TOOL_NOT_EXECUTED: record claims graph_tool but no executed generated asset/trace exists.
+- GRAPH_TOOL_SUBSTITUTED: graph_tool route was replaced by improvised inline SVG/manual graph rendering.
+- GRAPH_SEMANTIC_MODE_ERROR: discrete points were connected, or a continuous relationship was rendered as a misleading point chain.
+- GRAPH_RANGE_CLIP: required evidence/construction lies outside the response/stimulus bounds.
+- GRAPH_ASPECT_DISTORTION: standard coordinate graph is visibly stretched/non-square after rendering.
+
+TABLE RENDERING — HARD
+Small Algebra data/input-output tables use semantic HTML <table class="values"> and must stay compact and readable.
+- Natural content width by default; do not stretch a two-column/four-row table across the whole card merely because it appears beside a graph.
+- Center mathematical/numeric cell contents; keep headers visually distinct.
+- Blank student-entry tables use the same compact geometry and preserve obvious blank cells.
+- In graph+table or other split layouts, the graph may use the available visual area while the table keeps natural width and aligns to the top.
+- Do not let generic flex rules such as .split>* { flex:1 ... } force tables to become giant panels.
+
+Required Algebra viewer CSS behavior (equivalent implementation allowed):
+  .values{border-collapse:collapse;width:auto;max-width:100%;margin:10px 0}
+  .values th,.values td{border:1px solid #777;min-width:52px;padding:7px 11px;text-align:center}
+  .split>.values{flex:0 0 auto;align-self:flex-start}
+  .graph-img{display:block;max-width:420px;width:100%;height:auto;object-fit:contain}
+
+Student-facing tables should not alternate randomly between giant stretched panels and tiny cramped tables when the underlying table job is the same.
+
+RENDER / VISUAL QA REPORT — HARD
+Generate banks/unit{unit}/RENDER_QA_REPORT.json before final PASS. It must be based on the finished HTML/assets and report at minimum:
+- status
+- graph_tool_expected_count / graph_tool_executed_count
+- graph_tool_execution_mismatches
+- graph_semantic_mode_mismatches
+- graph_range_clip_mismatches
+- graph_aspect_distortion_mismatches
+- unresolved_representation_refs
+- mathjax_render_contract_mismatches
+- table_layout_contract_mismatches
+- total issue_count.
+PASS requires issue_count = 0.
+A route label, stored tool path, or provenance string by itself cannot earn PASS.
 
 BANK OUTPUT / MANIFEST
 Build one complete replacement Unit Bank with:
@@ -178,6 +252,7 @@ Build one complete replacement Unit Bank with:
 - figures/assets actually used
 - provenance/build report
 - MAP_FIDELITY_REPORT.json
+- RENDER_QA_REPORT.json
 - inspection.html summary
 - unit{unit}.html full teacher inspection viewer (for Unit 1: banks/unit1/unit1.html)
 
@@ -193,6 +268,7 @@ Must include:
   exact canonical destination paths
   exact canonical record counts
   unit viewer path
+  render QA report path/status
 Do not claim COMPLETE if any required field is absent.
 Do not require legacy capability tokens that refer to retired Practice 2/3, CYU, Warm-Up, or Notes-pair Bank phases unless a current non-Algebra course profile still uses them.
 
@@ -216,21 +292,36 @@ Generate banks/unit{unit}/MAP_FIDELITY_REPORT.json before final PASS. It must ma
 PASS requires mismatch_count = 0.
 The report must be based on actual field/content comparison, not self-declared provenance strings.
 
-UNIT HTML VIEWER — REQUIRED FOR ALGEBRA
+UNIT HTML VIEWER — REQUIRED FOR ALGEBRA / LAYOUT FROZEN
 Create banks/unit{unit}/unit{unit}.html as the human inspection surface so the teacher can inspect the finished Bank directly in GitHub Pages.
 For Unit 1 the expected URL is:
   https://tnezki.github.io/algebra/banks/unit1/unit1.html
 
+Preserve the current approved viewer information architecture and visual layout:
+- title/subtitle/status banner
+- toolbar tabs for Practice 1, Exit, WTC, Seeds, Summative blueprint, Build/QA
+- section selector + search
+- count cards
+- section/stage groupings
+- question cards + metadata line
+- collapsible Answer & solution
+Do not redesign the viewer while repairing representation rendering.
+
 Viewer requirements:
-- self-contained HTML/CSS/JS except for loading Bank JSON from the same folder
+- HTML/CSS/JS may continue loading Bank JSON from the same folder; direct file:// opening is NOT a requirement and is NOT a QA criterion.
+- It must work at the GitHub Pages URL / normal HTTP serving path.
 - clearly show Bank QA status, accepted map fingerprint, counts, and manifest readiness
 - tabs/sections for Exit, Practice 1, WTC, Seeds, Summative metadata/blueprint, and Build/QA
 - section/stage filtering and text search for large Practice inventory
 - show prompts, representations, answers/solutions for non-secure content in a teacher-friendly way
 - do NOT render secure Summative prompt/key text into the public HTML view; show secure form/slot metadata and QA/blueprint alignment only
-- show an obvious warning banner if manifest is not COMPLETE/PASS/ready_for_downstream or MAP_FIDELITY_REPORT mismatch_count > 0
-- all local JSON fetch paths must resolve from banks/unit{unit}/
-If unit{unit}.html is missing or cannot load the local Bank slices, final QA fails as VIEWER_MISSING_OR_BROKEN.
+- show an obvious warning banner if manifest is not COMPLETE/PASS/ready_for_downstream, MAP_FIDELITY_REPORT mismatch_count > 0, or RENDER_QA_REPORT issue_count > 0
+- all JSON/asset paths must resolve relative to banks/unit{unit}/ under HTTP/GitHub Pages
+- load MathJax v3 (or current project-equivalent) and typeset dynamically inserted content after render/tab/filter/search changes
+- preserve generated graph image aspect ratio; never use CSS that stretches a graph independently in x/y
+- apply the compact semantic table contract above.
+If unit{unit}.html is missing or cannot load the Bank slices/assets from its GitHub Pages-relative paths, final QA fails as VIEWER_MISSING_OR_BROKEN.
+A browser file:// fetch failure is expected browser behavior and must not trigger a build change.
 
 FINAL CANONICAL QA — HARD
 [ ] authored record count equals accepted Map record count
@@ -241,16 +332,24 @@ FINAL CANONICAL QA — HARD
 [ ] Question Structure executed semantically for every finished question unless explicit current exemption
 [ ] no fake multi-step/error-diagnosis/construction-vs-read-only mismatch survived authoring
 [ ] all answers/solutions/math correct
+[ ] Algebra student_html math uses MathJax/TeX where it materially improves readability
 [ ] all required representations accurate, legible, answer-neutral where required, and ALL refs/routes resolve
+[ ] every graph_tool-routed representation has an actual executed graph-tool asset + render trace; no hand-built SVG substitution
+[ ] standard coordinate graphs preserve square grid/aspect and visible graph-tool axes
+[ ] discrete point relations are not connected; continuous relationships are not reduced to misleading point chains
+[ ] every graph/task construction fits required plotted/student values within the axis bounds
+[ ] semantic tables are compact and are not stretched by split/flex viewer layout
 [ ] Exit chain and NEW/REASSESS roles match accepted map exactly
-[ ] Summative V1-V6 contain finished secure authored content, satisfy accepted blueprint, ~2 evidence opportunities/current Mastery Goal target, ~40-minute form demand, and security rules
+[ ] Summative V1-V6 contain finished secure authored content, satisfy accepted blueprint, ~2 evidence opportunities/current Mastery Goal target, and security rules; shorter-than-40-minute complete forms are acceptable and must not be padded
 [ ] Practice 1 = exactly 24 per section = 8 Intro + 8 Review + 8 Mastery, exact mapped learning jobs preserved, and no secure prompt leakage
 [ ] WTC exact mapped shared-stimulus/dependency progression preserved and instructional
 [ ] Seeds exact accepted mapped approved ideas preserved; no quota/filler/template substitution
 [ ] no placeholders/internal labels in student content
 [ ] ITEM_INDEX reconciles
 [ ] MAP_FIDELITY_REPORT.mismatch_count = 0
-[ ] unit{unit}.html exists and loads all non-secure slices/QA data
+[ ] RENDER_QA_REPORT.issue_count = 0
+[ ] unit{unit}.html exists and loads all required slices/assets over its normal GitHub Pages-relative paths
+[ ] viewer layout remains the approved current layout; representation fixes did not redesign it
 [ ] BANK_MANIFEST status COMPLETE / ready_for_downstream true / pending [] / qa_status PASS / accepted map fingerprint present
 
 If any HARD check fails, repair or FAIL CLOSED. Do not claim COMPLETE and do not set ready_for_downstream true.
@@ -265,11 +364,12 @@ BUILD ORDER
 7. Author exact 8/8/8 Practice 1 exactly from practice1_map.json.
 8. Author WTC exactly from wtc_map.json.
 9. Store mapped Seeds exactly from seed_map.json.
-10. Generate required representations/assets/response surfaces.
+10. Generate required representations/assets/response surfaces by ACTUALLY executing registered tooling where mapped; add render_trace.
 11. Build ITEM_INDEX + provenance.
 12. Run machine accepted-map vs authored-record comparison and write MAP_FIDELITY_REPORT.json.
-13. Build inspection.html + unit{unit}.html viewer.
-14. Run final canonical QA.
-15. Package complete replacement Bank and STOP.
+13. Run finished visual/render checks and write RENDER_QA_REPORT.json.
+14. Build inspection.html + unit{unit}.html viewer without changing its approved layout; add MathJax + compact-table/graph-asset rendering.
+15. Run final canonical QA.
+16. Package complete replacement Bank and STOP.
 
 END — COMPLETE BANK 3B PROFILE-DRIVEN
