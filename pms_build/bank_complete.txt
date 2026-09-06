@@ -5,7 +5,7 @@ STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
 ROLE: Author the complete canonical Unit Bank from one accepted 3a Bank Map as one logical, continuation-safe job.
-REVISION: 2026-09-06 execution-budget/checkpointing + teacher-view I Can labels + nonredundant MathJax + answer-neutral stimuli + graph-markup completeness QA
+REVISION: 2026-09-06 final viewer totals + full map-metadata travel + strict render-QA schema + repetition/render cleanup + continuation-safe execution
 
 AUTHORITY — HARD
 1. current explicit teacher instruction
@@ -141,6 +141,19 @@ Preserve accepted map identity and include as applicable:
 Finished content includes student prompt/HTML, answer/key, solution, and representation refs as required.
 No placeholders or internal authoring labels in student-facing prose.
 
+MAP TRAVEL / METADATA PRESERVATION — HARD
+The accepted map must travel with the authored artifact. Do not reduce a mapped record to only the fields needed by the immediate renderer.
+- For EVERY finished Bank record, preserve the full accepted 3a source-map record as an unchanged nested `map_contract` (or equivalently complete lossless map snapshot) in addition to the authored content fields.
+- `map_contract` must include every field present on the accepted map record, including IDs, destination/scope, stage, target/Mastery Goal links and text, primary/supporting I Can IDs/text, evidence_job, student_action, candidate/selected Question Structure IDs, response_mode, representation_mode/need, executable routes, security role, difficulty intent, variation axes, source basis/provenance, slot/role/grid metadata, and accepted-map fingerprint when present.
+- Do not silently omit a map field because the current Bank viewer does not use it. Unknown/additional current map fields are preserved too. Preservation is lossless, not a hand-maintained allowlist.
+- Authored prompt/answer/solution/render fields may be added beside the map snapshot; they may not mutate the preserved map snapshot.
+- `source_map_record_id` must resolve to the preserved `map_contract.record_id`/design identity.
+- ITEM_INDEX and provenance must retain enough lineage to locate the Bank record and its map contract.
+- This is the Bank-level implementation of the system rule: MAPS TRAVEL WITH ARTIFACTS. Later downstream PMs should preserve this lineage instead of rebuilding it from memory.
+
+MAP METADATA FIDELITY GATE — HARD
+Before PASS, compare each finished record's `map_contract` to its accepted 3a source record field-for-field. Any missing field, changed value, dropped route, dropped provenance, or metadata reduction is `MAP_METADATA_LOSS`. Report it in MAP_FIDELITY_REPORT and fail closed.
+
 MATH RENDERING — ALGEBRA HARD
 Student-facing algebraic notation in HTML must use TeX rendered by MathJax when MathJax improves readability. This includes powers, fractions, radicals, function notation, inequalities, systems, and multi-term algebraic expressions.
 - Keep student_text as readable plain text for search/indexing.
@@ -161,6 +174,19 @@ Purposeful repetition of a learning job is allowed; mechanical duplication of th
 - Do not produce a long cluster of verbatim identical student_text prompts merely because the map rows share a structure.
 - Exact duplicate student_text appearing more than twice within the same section/stage must be explicitly justified as fluency repetition; otherwise rewrite the prompts without changing the mapped demand.
 - Do not create fake variety by changing nouns only or inflating difficulty.
+
+UNIT-WIDE FRESH-PARALLEL / DUPLICATION GUARD — HARD
+The duplication review is UNIT-WIDE, not only within one section/stage.
+- For non-fluency Practice/Exit tasks that revisit the same spiraled learning job in later sections, do not copy the same finished prompt + values + stimulus into the later section. Author a fresh parallel inside the accepted variation contract.
+- Exact or near-exact duplicates across sections are invalid when the task is supposed to be a fresh Review/reassessment/practice opportunity.
+- Compare normalized prompt text AND stimulus signature (values/equation/table/graph parameters/context). Changing only the record ID, section number, or one noun does not make a fresh parallel.
+- Reuse is allowed only when the accepted map explicitly requires the identical shared stimulus or when exact repetition is deliberately documented as fluency.
+- `duplicate_prompt_review_mismatches` must include cross-section duplicates and near-duplicates that violate this rule.
+
+NONREDUNDANT MATH / REPRESENTATION GUARD — HARD
+- If an equation/expression is already fully written in the natural prompt sentence, do not repeat the identical expression in an adjacent `.equation-card` or standalone math block unless that separate object has a documented instructional purpose.
+- QA must normalize TeX/whitespace and compare prompt math against adjacent equation/reference blocks. An exact duplicate with no separate purpose is `MATH_REDUNDANT_DISPLAY`.
+- For a table+equation task, either place the equation naturally in the prompt OR provide it as the separate reference representation; do not automatically do both.
 
 MATCH / CLASSIFICATION ORDER — HARD
 When students match labeled representations to a supplied category/family list, the visible order must not leak the key.
@@ -323,6 +349,12 @@ Required Algebra viewer CSS behavior (equivalent implementation allowed):
 
 Student-facing tables should not alternate randomly between giant stretched panels and tiny cramped tables when the underlying table job is the same.
 
+VIEWER TABLE CSS ENFORCEMENT — HARD
+The generated unit viewer itself must contain an effective compact-table override. It is not enough for this PM to state the desired CSS.
+- When `.split>*` has a flexible rule, the final viewer MUST also contain an effective table-specific override equivalent to `.split>.values{flex:0 0 auto;align-self:flex-start}` after/with sufficient specificity to win the cascade.
+- Final Render QA must inspect the generated viewer CSS/DOM contract and fail if split tables can inherit a flex-grow rule that stretches them.
+- `table_layout_contract_mismatches` must include missing/overridden compact-table CSS, not just malformed table markup.
+
 RENDER / VISUAL QA REPORT — HARD
 Generate banks/unit{unit}/RENDER_QA_REPORT.json before final PASS. It must be based on the finished HTML/assets and report at minimum:
 - status
@@ -341,9 +373,16 @@ Generate banks/unit{unit}/RENDER_QA_REPORT.json before final PASS. It must be ba
 - duplicate_prompt_review_mismatches
 - table_layout_contract_mismatches
 - viewer_metadata_mismatches
+- required_schema_keys_missing
 - total issue_count.
-PASS requires issue_count = 0.
-A route label, stored tool path, or provenance string by itself cannot earn PASS.
+
+RENDER QA SCHEMA COMPLETENESS — HARD
+Every named field above is REQUIRED in the emitted report even when its value is an empty list or zero. Do not substitute a differently named summary and still claim PASS.
+- `required_schema_keys_missing` must list any missing required key.
+- If any required key is absent, `required_schema_keys_missing` is nonempty, status = FAIL, and total issue_count must be greater than 0.
+- PASS requires ALL required schema keys present, every mismatch list empty, all expected/executed counts reconciled, and total issue_count = 0.
+- Manual booleans may be additional evidence but may not replace the required machine-report fields.
+A route label, stored tool path, provenance string, or manual PASS assertion by itself cannot earn PASS.
 
 BANK OUTPUT / MANIFEST
 Build one complete replacement Unit Bank with:
@@ -399,15 +438,28 @@ Create banks/unit{unit}/unit{unit}.html as the human inspection surface so the t
 For Unit 1 the expected URL is:
   https://tnezki.github.io/algebra/banks/unit1/unit1.html
 
-Preserve the current approved viewer information architecture and visual layout:
+Preserve the approved viewer information architecture and return the stronger previous top-level summary experience:
 - title/subtitle/status banner
+- a visible TOP SUMMARY / TOTALS STRIP directly under the hero/top controls (not hidden only inside Build/QA)
 - toolbar tabs for Practice 1, Exit, WTC, Seeds, Summative blueprint, Build/QA
 - section selector + search
-- count cards
 - section/stage groupings
-- question cards + metadata line
+- question cards
+- readable I Can statement
+- complete collapsible Metadata / Map trace
 - collapsible Answer & solution
-Do not redesign the viewer while repairing representation rendering.
+
+TOP SUMMARY / TOTALS — HARD
+The top summary must show live totals derived from BANK_MANIFEST, not hand-entered numbers. At minimum show:
+- Practice 1 total
+- Exit total
+- WTC total
+- Seeds total
+- Summative secure item total + form count when available
+- canonical total
+- Bank QA / Map Fidelity / Render QA status
+Keep this compact and easy to scan. The Build/QA tab may contain deeper details, but it may not be the only place totals are visible.
+Do not otherwise redesign the approved viewer while repairing the final display contract.
 
 VIEWER I CAN DISPLAY — HARD
 The Bank JSON keeps the full canonical primary_i_can_id and primary_i_can_text unchanged. The teacher inspection viewer displays a readable short label instead of only the long machine ID.
@@ -417,13 +469,24 @@ The Bank JSON keeps the full canonical primary_i_can_id and primary_i_can_text u
 - If no short IC token can be derived, fall back to `primary_i_can_id — primary_i_can_text`.
 - Apply the same readable I Can display to secure Summative blueprint metadata when I Can information is shown; do not expose secure prompts/answers.
 
+VIEWER FULL METADATA / MAP TRACE — HARD
+The short `IC# — actual I Can statement` remains the readable headline, but it is NOT a replacement for metadata. The teacher viewer must expose ALL record metadata.
+- Every question/task card gets a collapsible `Metadata / Map trace` section.
+- Display all top-level authored metadata fields except the full student prompt/answer/solution bodies already shown elsewhere.
+- Display the complete preserved `map_contract` losslessly, including nested arrays/objects such as representation routes, variation axes, source_basis/provenance, slot/role/grid metadata, security role, and map fingerprint. A readable key/value or formatted JSON presentation is acceptable.
+- Display render_trace / representation_refs / tool provenance when present.
+- Do not hide canonical IDs merely because a short IC label is also displayed. The viewer should show both human-friendly labels and machine identities in metadata.
+- Secure Summative viewer rows may withhold secure prompt/stimulus/answer/solution, but MUST still expose their complete non-content metadata + map_contract/lineage.
+- `viewer_metadata_mismatches` must compare viewer-exposed metadata keys to the Bank record/map_contract keys and fail on omitted metadata.
+
 Viewer requirements:
 - HTML/CSS/JS may continue loading Bank JSON from the same folder; direct file:// opening is NOT a requirement and is NOT a QA criterion.
 - It must work at the GitHub Pages URL / normal HTTP serving path.
-- clearly show Bank QA status, accepted map fingerprint, counts, and manifest readiness
+- clearly show Bank QA status, accepted map fingerprint, manifest readiness, and the top summary totals derived from BANK_MANIFEST
 - tabs/sections for Exit, Practice 1, WTC, Seeds, Summative metadata/blueprint, and Build/QA
 - section/stage filtering and text search for large Practice inventory
 - show prompts, representations, answers/solutions for non-secure content in a teacher-friendly way
+- expose the complete Metadata / Map trace for every record without dropping map fields
 - do NOT render secure Summative prompt/key text into the public HTML view; show secure form/slot metadata and QA/blueprint alignment only
 - show an obvious warning banner if manifest is not COMPLETE/PASS/ready_for_downstream, MAP_FIDELITY_REPORT mismatch_count > 0, or RENDER_QA_REPORT issue_count > 0
 - all JSON/asset paths must resolve relative to banks/unit{unit}/ under HTTP/GitHub Pages
@@ -439,6 +502,9 @@ FINAL CANONICAL QA — HARD
 [ ] exact accepted map record ID set preserved; no missing/unexpected production rows
 [ ] only current profile canonical destinations authored
 [ ] exact goal/I-Can/stage identities preserved in data; viewer shows readable IC# + actual I Can text
+[ ] every authored record contains a lossless full accepted-map `map_contract`; field-for-field metadata comparison reports zero loss
+[ ] viewer exposes all record metadata + complete map_contract/lineage while keeping the short I Can statement readable
+[ ] top viewer summary/totals strip is visible outside Build/QA and derives totals/status from manifest/reports
 [ ] accepted evidence_job/student_action/structure/response/representation behavior preserved per record
 [ ] finished student_html representation actually matches representation_mode + accepted executable route
 [ ] Question Structure executed semantically for every finished question unless explicit current exemption
@@ -446,7 +512,7 @@ FINAL CANONICAL QA — HARD
 [ ] all answers/solutions/math correct
 [ ] Algebra student_html math uses MathJax/TeX where it materially improves readability
 [ ] MathJax does not use $...$ as inline delimiter; currency remains ordinary text
-[ ] no redundant duplicate full-expression block directly beneath a prompt that already contains the same expression
+[ ] no redundant duplicate full-expression/equation card adjacent to a prompt that already contains the same math without a documented separate purpose
 [ ] all required representations accurate, legible, answer-neutral where required, and ALL refs/routes resolve
 [ ] full-content scan found no unauthorized hand-built coordinate/function/modeling SVG/canvas graphs
 [ ] every graph_tool-routed representation has an actual executed graph-tool asset + render trace; no hand-built SVG substitution
@@ -456,8 +522,8 @@ FINAL CANONICAL QA — HARD
 [ ] graphs do not specially mark/label the answer-bearing feature students are asked to identify
 [ ] every graph/task construction fits required plotted/student values within the axis bounds
 [ ] matching/classification layouts do not reveal the answer through list/panel order
-[ ] non-fluency Practice does not contain unjustified clusters of verbatim identical prompts
-[ ] semantic tables are compact and are not stretched by split/flex viewer layout
+[ ] non-fluency Practice/Exit contains no unjustified exact or near-exact duplicate finished tasks within or across sections when fresh parallels are expected
+[ ] semantic tables are compact; generated viewer CSS contains an effective split-table flex override and tables are not stretched
 [ ] Exit chain and NEW/REASSESS roles match accepted map exactly
 [ ] Summative V1-V6 contain finished secure authored content, satisfy accepted blueprint, ~2 evidence opportunities/current Mastery Goal target, and security rules; shorter-than-40-minute complete forms are acceptable and must not be padded
 [ ] Practice 1 = exactly 24 per section = 8 Intro + 8 Review + 8 Mastery, exact mapped learning jobs preserved, and no secure prompt leakage
@@ -466,7 +532,7 @@ FINAL CANONICAL QA — HARD
 [ ] no placeholders/internal labels in student content
 [ ] ITEM_INDEX reconciles
 [ ] MAP_FIDELITY_REPORT.mismatch_count = 0
-[ ] RENDER_QA_REPORT.issue_count = 0
+[ ] RENDER_QA_REPORT contains every required schema key; required_schema_keys_missing = []; total issue_count = 0
 [ ] unit{unit}.html exists and loads all required slices/assets over its normal GitHub Pages-relative paths
 [ ] viewer layout remains the approved current layout; representation fixes did not redesign it
 [ ] BANK_MANIFEST status COMPLETE / ready_for_downstream true / pending [] / qa_status PASS / accepted map fingerprint present
@@ -489,7 +555,7 @@ BUILD ORDER — CONTINUATION-SAFE
 12. Build ITEM_INDEX + provenance.
 13. Run machine accepted-map vs authored-record/content comparison and write MAP_FIDELITY_REPORT.json; checkpoint QA state.
 14. Run finished visual/render checks and write RENDER_QA_REPORT.json; checkpoint QA state.
-15. Build inspection.html + unit{unit}.html viewer without changing its approved layout; add readable I Can metadata, MathJax + compact-table/graph-asset rendering.
+15. Build inspection.html + unit{unit}.html viewer using the approved layout with restored top totals strip; add readable I Can headline, COMPLETE Metadata / Map trace, MathJax + compact-table/graph-asset rendering.
 16. Run final canonical QA.
 17. Remove `.step3b_work/` from the final replacement tree, package complete replacement Bank, and STOP.
 
