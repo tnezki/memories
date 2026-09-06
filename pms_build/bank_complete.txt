@@ -5,7 +5,7 @@ STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
 ROLE: Author the complete canonical Unit Bank from one accepted 3a Bank Map in one run.
-REVISION: 2026-09-06 accepted-map fidelity + registered-render execution + MathJax/table/graph QA
+REVISION: 2026-09-06 teacher-view I Can labels + nonredundant MathJax + answer-neutral stimuli + graph-markup completeness QA
 
 AUTHORITY — HARD
 1. current explicit teacher instruction
@@ -98,10 +98,29 @@ MATH RENDERING — ALGEBRA HARD
 Student-facing algebraic notation in HTML must use TeX rendered by MathJax when MathJax improves readability. This includes powers, fractions, radicals, function notation, inequalities, systems, and multi-term algebraic expressions.
 - Keep student_text as readable plain text for search/indexing.
 - In student_html, wrap inline math in \\( ... \\) and display math in \\[ ... \\].
+- Use ONLY \\( ... \\) / \\[ ... \\] delimiters in the viewer. Do NOT register $...$ as an inline MathJax delimiter because ordinary currency such as $5 must remain ordinary text.
 - Prefer TeX such as \\(2a-a^2\\), \\(f(x)=3x-2\\), and \\(\\frac{y_2-y_1}{x_2-x_1}\\) rather than raw caret notation or Unicode superscripts when rendered HTML is available.
+- Render the algebra where it naturally appears in the sentence. If the complete expression/equation is already present in the prompt, do NOT repeat that same expression in a second standalone math block merely to make MathJax render it.
+- A separate display-math/reference block is allowed only when it has a real visual/instructional job: a large system, a formula that must remain visible across parts, a supplied equation separate from prose, or another genuinely useful reference object.
 - Do not turn ordinary prose, labels, simple integers, or table headings into unnecessary MathJax.
 - unit{unit}.html must load MathJax and re-typeset after dynamically rendering/changing tabs, filters, or search results.
 - A math block that visibly exposes unrendered TeX delimiters/caret syntax in the GitHub Pages viewer is a render defect.
+- A prompt that repeats the same full algebraic expression immediately below itself with no instructional purpose is a render/content defect.
+
+PROMPT / STIMULUS QUALITY — HARD
+Purposeful repetition of a learning job is allowed; mechanical duplication of the finished prompt is not the default.
+- Preserve the mapped evidence job and student action.
+- When several non-fluency Practice rows intentionally revisit the same job, vary the natural stem, values, representation, decision path, or misconception focus within the accepted variation contract.
+- Do not produce a long cluster of verbatim identical student_text prompts merely because the map rows share a structure.
+- Exact duplicate student_text appearing more than twice within the same section/stage must be explicitly justified as fluency repetition; otherwise rewrite the prompts without changing the mapped demand.
+- Do not create fake variety by changing nouns only or inflating difficulty.
+
+MATCH / CLASSIFICATION ORDER — HARD
+When students match labeled representations to a supplied category/family list, the visible order must not leak the key.
+- If the prompt lists categories as A, B, C, D equivalents, do not arrange graph/panel A-D so the correct answers follow the same list order.
+- Shuffle the panel order and/or category order while preserving the mapped evidence job.
+- Parallel items must not reuse a predictable answer-position pattern.
+- A four-family item that lists linear, quadratic, exponential, absolute-value and renders A=linear, B=quadratic, C=exponential, D=absolute-value is invalid because the layout gives away the matching order.
 
 EXIT — ALGEBRA RULE
 Author the exact ticket architecture from the Framework/accepted map.
@@ -178,6 +197,12 @@ When seed_map.json contains mapped approved candidates, store those exact seed i
 
 REPRESENTATIONS — HARD
 Generate/copy only mapped executable representations. If a task requires graph + table, render both. No decorative figures for quota.
+The finished student_html itself must agree with representation_mode and the accepted route. Metadata agreement alone is not enough.
+Examples:
+- mixed_graph_table must actually contain a graph + table.
+- mixed_table_equation must actually contain a table + equation; it may not silently substitute a graph.
+- supplied_context_graph must actually reference the registered generated graph asset.
+- student_constructed_graph must provide an answer-neutral construction surface rather than a completed answer graph.
 
 REGISTERED GRAPH TOOL EXECUTION — HARD
 When an accepted map/record routes a graph through the registered Algebra graph tool, the route is an execution requirement, not metadata.
@@ -189,7 +214,16 @@ For every graph_tool-routed record:
 3. Execute the tool to create an actual image asset under banks/unit{unit}/figures/.
 4. Reference that generated asset from student_html. Do NOT substitute a hand-built inline SVG while claiming graph_tool provenance.
 5. Store render_trace metadata sufficient to prove execution, including tool path/version or blob SHA, function used, generated asset path, and asset hash.
-6. Final QA must inspect the rendered asset, not only the declared route.
+6. Final QA must inspect the rendered asset and the finished student_html, not only the declared route.
+
+GRAPH MARKUP COMPLETENESS — HARD
+The prior QA mistake to avoid: counting only records that already declared graph_tool while ignoring extra improvised graphs embedded in student_html.
+- Scan EVERY finished student_html record for coordinate/function/modeling graph markup, regardless of representation metadata.
+- Any graph-like inline <svg>, <canvas>, hand-built axis/grid markup, or other improvised plot must be reconciled to the accepted representation route.
+- For Algebra coordinate/function/modeling graphs, a graph-like inline SVG such as <svg class="graph"> is NOT an acceptable substitute for the registered graph-tool asset.
+- Semantic non-graph SVG is allowed only when the accepted route explicitly calls for it, such as an accessible mapping/diagram representation.
+- If representation_mode says table+equation but student_html contains a coordinate graph, that is BOTH a representation-content mismatch and an unauthorized graph substitution.
+- Render QA graph_tool_expected_count must be derived from the accepted routes PLUS a full scan of finished graph-bearing content; unexpected graph markup cannot escape the denominator.
 
 Graph routing rules:
 - Standard algebra/coordinate graphs: create a square figure (normally 3.5 in × 3.5 in), invoke make_standard_graph, preserve its axes, arrows, tick/grid treatment, and native aspect ratio in HTML. Do not stretch the image with CSS.
@@ -199,17 +233,30 @@ Graph routing rules:
 - Continuous relationships: if the mathematical object is a continuous linear/function relationship, render the continuous relationship/curve. Do not make it look like a discrete data set by showing only oversized sample dots connected by segments unless those sampled points are themselves the evidence job.
 - A graph of a relation used for function/not-a-function evidence must preserve whether the relation is discrete or continuous; never connect points merely because they share a pattern.
 
+ANSWER-NEUTRAL GRAPH STIMULUS — HARD
+A supplied graph may contain the mathematical relationship/data needed to solve the question, but it must not add a visual cue that directly marks the feature the student is being asked to identify.
+- Do not add an isolated dot, callout, annotation, special color, label, halo, arrow, or other emphasis to an intercept when the question asks students to identify/interpret that intercept.
+- Apply the same rule to vertices, extrema, intersections, zeros, endpoints, specific coordinates, slope triangles, or other answer-bearing features.
+- Example: for "Identify the y-intercept and interpret it as a starting amount," draw the relationship normally; do NOT place a special dot on the y-intercept.
+- Natural discrete data points are allowed when the point set itself is the required stimulus. The prohibition is against extra answer-revealing emphasis, not legitimate data.
+- A marker may be used when the marker itself is a given datum the student must use for a different task and does not reveal the requested answer.
+- Student-construction response surfaces must contain no completed mathematical answer.
+
 Graph legibility rules:
 - Standard coordinate-plane grid cells must remain visually square; x/y axes must be visible and distinguishable from grid lines according to the registered tool.
 - Axis/tick labels must be readable without crowding or duplication.
 - Graphs must not be horizontally or vertically stretched by viewer/card layout.
 - Every plotted, labeled, or student-required point/value must fit within the generated axis bounds with usable margin. If a WTC asks the student to plot (4,9), a response surface ending at y=6 is invalid.
 - Do not clip required intercepts, vertices, endpoints, points, arrows, labels, or student construction space.
+- A hand-built graph with visibly rectangular grid cells cannot pass as a registered coordinate graph merely because its surrounding card has the right width.
 
 GRAPH TOOL FAIL-CLOSED CODES
 - GRAPH_TOOL_NOT_EXECUTED: record claims graph_tool but no executed generated asset/trace exists.
 - GRAPH_TOOL_SUBSTITUTED: graph_tool route was replaced by improvised inline SVG/manual graph rendering.
+- UNREGISTERED_GRAPH_MARKUP: finished content contains graph-like markup that is not represented by an accepted executable graph route.
+- REPRESENTATION_MARKUP_MISMATCH: representation_mode/route says one representation while finished student_html materially renders another.
 - GRAPH_SEMANTIC_MODE_ERROR: discrete points were connected, or a continuous relationship was rendered as a misleading point chain.
+- GRAPH_ANSWER_LEAK: a graph adds special emphasis to the feature/value the student is asked to determine.
 - GRAPH_RANGE_CLIP: required evidence/construction lies outside the response/stimulus bounds.
 - GRAPH_ASPECT_DISTORTION: standard coordinate graph is visibly stretched/non-square after rendering.
 
@@ -234,12 +281,19 @@ Generate banks/unit{unit}/RENDER_QA_REPORT.json before final PASS. It must be ba
 - status
 - graph_tool_expected_count / graph_tool_executed_count
 - graph_tool_execution_mismatches
+- unregistered_graph_markup_mismatches
+- representation_markup_mismatches
 - graph_semantic_mode_mismatches
+- graph_answer_leak_mismatches
 - graph_range_clip_mismatches
 - graph_aspect_distortion_mismatches
 - unresolved_representation_refs
 - mathjax_render_contract_mismatches
+- math_redundancy_mismatches
+- matching_order_leak_mismatches
+- duplicate_prompt_review_mismatches
 - table_layout_contract_mismatches
+- viewer_metadata_mismatches
 - total issue_count.
 PASS requires issue_count = 0.
 A route label, stored tool path, or provenance string by itself cannot earn PASS.
@@ -283,6 +337,7 @@ Generate banks/unit{unit}/MAP_FIDELITY_REPORT.json before final PASS. It must ma
 - unexpected authored records
 - identity-field mismatches
 - semantic behavior mismatches
+- finished representation-content vs mapped representation mismatches
 - Exit role/chain mismatches
 - Summative authored-content completeness + blueprint mismatches
 - Practice stage/grid/map mismatches
@@ -290,7 +345,7 @@ Generate banks/unit{unit}/MAP_FIDELITY_REPORT.json before final PASS. It must ma
 - Seed identity/content mismatches
 - total mismatch_count.
 PASS requires mismatch_count = 0.
-The report must be based on actual field/content comparison, not self-declared provenance strings.
+The report must compare actual authored content/markup as well as stored metadata; self-declared provenance strings cannot earn PASS.
 
 UNIT HTML VIEWER — REQUIRED FOR ALGEBRA / LAYOUT FROZEN
 Create banks/unit{unit}/unit{unit}.html as the human inspection surface so the teacher can inspect the finished Bank directly in GitHub Pages.
@@ -307,6 +362,14 @@ Preserve the current approved viewer information architecture and visual layout:
 - collapsible Answer & solution
 Do not redesign the viewer while repairing representation rendering.
 
+VIEWER I CAN DISPLAY — HARD
+The Bank JSON keeps the full canonical primary_i_can_id and primary_i_can_text unchanged. The teacher inspection viewer displays a readable short label instead of only the long machine ID.
+- Derive the short label from the terminal IC token of primary_i_can_id: e.g. 1.3-INTRO-IC4 -> IC4 and U1-MG01-IC3 -> IC3.
+- In each non-secure question card metadata line display: `IC4 — <actual primary_i_can_text>`.
+- Do not replace or mutate canonical IDs in JSON; this is display-only.
+- If no short IC token can be derived, fall back to `primary_i_can_id — primary_i_can_text`.
+- Apply the same readable I Can display to secure Summative blueprint metadata when I Can information is shown; do not expose secure prompts/answers.
+
 Viewer requirements:
 - HTML/CSS/JS may continue loading Bank JSON from the same folder; direct file:// opening is NOT a requirement and is NOT a QA criterion.
 - It must work at the GitHub Pages URL / normal HTTP serving path.
@@ -318,6 +381,7 @@ Viewer requirements:
 - show an obvious warning banner if manifest is not COMPLETE/PASS/ready_for_downstream, MAP_FIDELITY_REPORT mismatch_count > 0, or RENDER_QA_REPORT issue_count > 0
 - all JSON/asset paths must resolve relative to banks/unit{unit}/ under HTTP/GitHub Pages
 - load MathJax v3 (or current project-equivalent) and typeset dynamically inserted content after render/tab/filter/search changes
+- configure MathJax inline delimiters so \\( ... \\) works and ordinary currency dollar signs are NOT treated as math delimiters
 - preserve generated graph image aspect ratio; never use CSS that stretches a graph independently in x/y
 - apply the compact semantic table contract above.
 If unit{unit}.html is missing or cannot load the Bank slices/assets from its GitHub Pages-relative paths, final QA fails as VIEWER_MISSING_OR_BROKEN.
@@ -327,17 +391,25 @@ FINAL CANONICAL QA — HARD
 [ ] authored record count equals accepted Map record count
 [ ] exact accepted map record ID set preserved; no missing/unexpected production rows
 [ ] only current profile canonical destinations authored
-[ ] exact goal/I-Can/stage identities preserved
+[ ] exact goal/I-Can/stage identities preserved in data; viewer shows readable IC# + actual I Can text
 [ ] accepted evidence_job/student_action/structure/response/representation behavior preserved per record
+[ ] finished student_html representation actually matches representation_mode + accepted executable route
 [ ] Question Structure executed semantically for every finished question unless explicit current exemption
 [ ] no fake multi-step/error-diagnosis/construction-vs-read-only mismatch survived authoring
 [ ] all answers/solutions/math correct
 [ ] Algebra student_html math uses MathJax/TeX where it materially improves readability
+[ ] MathJax does not use $...$ as inline delimiter; currency remains ordinary text
+[ ] no redundant duplicate full-expression block directly beneath a prompt that already contains the same expression
 [ ] all required representations accurate, legible, answer-neutral where required, and ALL refs/routes resolve
+[ ] full-content scan found no unauthorized hand-built coordinate/function/modeling SVG/canvas graphs
 [ ] every graph_tool-routed representation has an actual executed graph-tool asset + render trace; no hand-built SVG substitution
+[ ] no representation_mode says table+equation while finished content displays graph+table or another material substitution
 [ ] standard coordinate graphs preserve square grid/aspect and visible graph-tool axes
 [ ] discrete point relations are not connected; continuous relationships are not reduced to misleading point chains
+[ ] graphs do not specially mark/label the answer-bearing feature students are asked to identify
 [ ] every graph/task construction fits required plotted/student values within the axis bounds
+[ ] matching/classification layouts do not reveal the answer through list/panel order
+[ ] non-fluency Practice does not contain unjustified clusters of verbatim identical prompts
 [ ] semantic tables are compact and are not stretched by split/flex viewer layout
 [ ] Exit chain and NEW/REASSESS roles match accepted map exactly
 [ ] Summative V1-V6 contain finished secure authored content, satisfy accepted blueprint, ~2 evidence opportunities/current Mastery Goal target, and security rules; shorter-than-40-minute complete forms are acceptable and must not be padded
@@ -365,11 +437,12 @@ BUILD ORDER
 8. Author WTC exactly from wtc_map.json.
 9. Store mapped Seeds exactly from seed_map.json.
 10. Generate required representations/assets/response surfaces by ACTUALLY executing registered tooling where mapped; add render_trace.
-11. Build ITEM_INDEX + provenance.
-12. Run machine accepted-map vs authored-record comparison and write MAP_FIDELITY_REPORT.json.
-13. Run finished visual/render checks and write RENDER_QA_REPORT.json.
-14. Build inspection.html + unit{unit}.html viewer without changing its approved layout; add MathJax + compact-table/graph-asset rendering.
-15. Run final canonical QA.
-16. Package complete replacement Bank and STOP.
+11. Run finished-content representation scan: actual markup vs representation_mode/routes, unauthorized graph markup, answer-neutrality, matching-order leak, prompt duplication, MathJax redundancy.
+12. Build ITEM_INDEX + provenance.
+13. Run machine accepted-map vs authored-record/content comparison and write MAP_FIDELITY_REPORT.json.
+14. Run finished visual/render checks and write RENDER_QA_REPORT.json.
+15. Build inspection.html + unit{unit}.html viewer without changing its approved layout; add readable I Can metadata, MathJax + compact-table/graph-asset rendering.
+16. Run final canonical QA.
+17. Package complete replacement Bank and STOP.
 
 END — COMPLETE BANK 3B PROFILE-DRIVEN
