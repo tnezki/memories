@@ -2,17 +2,83 @@ CURRICULUM SYSTEM RUNTIME CONTRACT
 =================================
 
 1. Canonical GitHub stores readable authorities and long-lived readable artifacts expanded. ZIP is a handoff/transport format only unless the resource is intrinsically an archive/binary bundle. A staged build checkpoint may remain a ZIP only when the PM explicitly treats the archive boundary/integrity as part of that temporary checkpoint contract.
+
 2. Resolve and pin the memories commit and selected course commit once at job start. Never mix later commits into the run.
+
 3. Resolve authorities through SYSTEM_MANIFEST.json and the relevant registry/manifest. Do not guess versioned filenames.
-4. DECLARED AUTHORITY DIRECT-FETCH RULE — HARD: when a required curriculum authority or resource is declared by the system manifest, Framework manifest, course manifest, artifact manifest, Bank manifest/index, or request snapshot, fetch that exact declared resource at the pinned commit. Do not use generic web search, repository-wide search, similarly named files, lightweight/alternate views, archived copies, ZIPs, prior uploads, or chat copies to discover, verify, supplement, or substitute a canonical curriculum source.
-5. TOOL ROUTING GATE — HARD:
-   a. A PM/profile may declare `web_search_allowed = false`, `web_fetch_allowed = false`, `external_research_allowed = false`, or equivalent tool-policy fields. Those declarations are executable constraints, not commentary.
-   b. When web search is forbidden, do not invoke a browser/web-search tool for discovery, validation, freshness checking, examples, supplementation, question writing, source comparison, or convenience.
-   c. When web fetch is forbidden, do not open/fetch public-web URLs as an alternate way to read a declared curriculum authority. Use the declared GitHub/course resource at the pinned snapshot instead.
-   d. Repository search is also forbidden for locating a source whose exact path is already declared. Direct path fetch is required.
-   e. If a required declared source cannot be fetched directly, FAIL CLOSED and name the exact missing repo/path/resource. Do not search around the failure.
-   f. Bank-v2 steps 2.5/2b, 3A, 3B, and 3C are NO-WEB curriculum-authoring jobs by default. For those jobs, web search, public-web fetch, and external research are forbidden unless the teacher explicitly requests outside research in the current request. A Framework/profile hint, source note, or model judgment that outside research might be useful does not override this rule.
-6. Read only the files the selected PM requires. Heavy source/resource trees are on-demand resources, not default authority payloads. When a manifest declares a purpose-specific canonical file, use that file directly instead of opening a broader aggregate and searching inside it.
-7. Fail closed if a required manifest, entrypoint, or canonical course artifact is missing at the pinned commit. Do not fall back to old uploads/chat copies or alternate representations.
-8. One output file is returned directly. Multi-file folders may be zipped for handoff, but the ZIP is extracted before canonical GitHub sync.
-9. PMs own procedure; manifests own stable discovery; Framework/course profiles own course-specific behavior; Git history owns version history.
+
+4. DECLARED AUTHORITY DIRECT-FETCH RULE - HARD
+When a required curriculum authority or resource is declared by the system manifest, Framework manifest, course manifest, artifact manifest, Bank manifest/index, or request snapshot, fetch that exact declared resource at the pinned commit.
+Do not use generic public-web search, repository-wide search, similarly named files, lightweight/alternate views, archived copies, prior uploads, or chat copies to discover, verify, supplement, or substitute a canonical curriculum source.
+If an exact repo/path is declared, direct-fetch that repo/path. Do not search for it.
+
+5. CONTROL PANEL REQUEST SOURCE POLICY - HARD
+Curriculum Control Panel requests are CLOSED-PROJECT-SOURCE jobs by default.
+Unless the CURRENT request explicitly opts into outside research, use:
+- request-provided files;
+- exact pinned project GitHub repositories and declared paths;
+- current manifests/Frameworks/PMs/tools resolved from those pinned repositories;
+- current canonical course artifacts;
+- File Library only for recovery of a previously generated matching project artifact when the selected PM/request explicitly permits that recovery.
+
+Public web is NOT an allowed default curriculum source.
+
+6. TOOL ROUTING GATE - HARD
+A request/PM/profile may declare tool-policy fields such as:
+- `web_search_allowed = false`
+- `web_fetch_allowed = false`
+- `public_web_fetch_allowed = false`
+- `external_research_allowed = false`
+- `project_github_direct_fetch_allowed = true`
+- `file_library_project_artifact_recovery_allowed = true`
+
+These declarations are EXECUTABLE CONSTRAINTS, not commentary.
+
+When `web_search_allowed = false`:
+- do not perform any action that would appear as `Searching the web` in the ChatGPT activity for the job;
+- do not invoke public web/search-engine/browser-search tools for discovery, validation, freshness checking, examples, supplementation, question writing, source comparison, CSS/layout ideas, or convenience;
+- do not use public-web search as a fallback after a failed project-source read;
+- do not narrate or attempt a web-search detour before using a permitted exact project source.
+
+When `public_web_fetch_allowed = false`:
+- do not open/fetch public websites as substitute curriculum sources;
+- do not use a public URL to bypass a declared project GitHub path.
+
+Direct reads from the exact pinned project GitHub repositories are ALLOWED when `project_github_direct_fetch_allowed = true`. Use GitHub/project-repository tools for those reads. A direct pinned project-repository read is not permission for public-web research.
+
+7. FILE LIBRARY RECOVERY - HARD
+File Library is not curriculum authority.
+When a request/PM permits `file_library_project_artifact_recovery_allowed = true`, it may be used only to recover a previously generated matching project artifact needed to resume/repair the current job.
+- Prefer the exact expected artifact name/course/unit/job identity.
+- Verify fingerprint/record identity before use.
+- Do not browse File Library for alternate curriculum authorities or outside replacements.
+- Do not use File Library to substitute for a missing declared canonical GitHub source.
+
+8. FAIL-CLOSED RULE - HARD
+If a required declared project source cannot be fetched directly at the pinned commit:
+- FAIL CLOSED;
+- name the exact missing repository + commit + path/resource;
+- do not search the public web;
+- do not search around the failure for similarly named files;
+- do not substitute old uploads/chat copies/alternate representations.
+
+Failure code for a required project dependency:
+`BANK_REQUIRED_PROJECT_SOURCE_MISSING` for Bank jobs, or the selected PM's equivalent missing-source code.
+
+If public web research is used despite a no-web request, the affected curriculum build cannot PASS. Record `UNAUTHORIZED_PUBLIC_WEB_SOURCE`.
+
+9. DEFAULT NO-WEB SCOPE - HARD
+All Curriculum Control Panel BUILD and MAINTENANCE requests are NO-PUBLIC-WEB by default.
+GENERAL requests created by the Control Panel are also no-public-web unless a future explicit request-level opt-in says otherwise.
+This includes Bank Map, Bank Complete, Notes, Practice, Activities, Exit, Warm-Up, Progress, Review, Summative, Practice-to-Summative, Demos/Investigations, Performance/Quick Checks, Discourse, First 4 Days, Unit Plan, Portfolio, and maintenance jobs.
+A Framework/profile hint, source note, model judgment, or convenience does not override the request-level no-web policy.
+Only explicit current teacher authorization for outside research may change it.
+
+10. READ BUDGET
+Read only the files the selected PM requires. Heavy source/resource trees are on-demand resources, not default authority payloads. When a manifest declares a purpose-specific canonical file, use that file directly instead of opening a broader aggregate and searching inside it.
+
+11. OUTPUT / HANDOFF
+One output file is returned directly. Multi-file folders may be zipped for handoff, but the ZIP is extracted before canonical GitHub sync.
+
+12. AUTHORITY OWNERSHIP
+PMs own procedure; manifests own stable discovery; Framework/course profiles own course-specific behavior; Git history owns version history.
