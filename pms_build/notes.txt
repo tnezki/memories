@@ -1,4 +1,4 @@
-BUILD NOTES — SINGLE PASS / BANK-V2.3 — ALGEBRA TEXTBOOK-STYLE PILOT
+BUILD NOTES — SINGLE PASS / BANK-V2.3 — ALGEBRA TEXTBOOK-STYLE PILOT vNEXT.1
 =========================================================================
 
 STATUS: PILOT
@@ -20,19 +20,35 @@ This job is NOT:
 - a requirement that every possible Notes routine appear in every section;
 - a requirement that the teacher complete every included Notes component in class.
 
-CORE PRINCIPLE — NOTES ARE A MODULAR TOOLBOX
---------------------------------------------
-Notes must teach the exact section Learning Target / I-can jobs, but the routine
-mix is flexible.
+CORE PRINCIPLE — BUILD A COMPLETE TOOLBOX; TEACHER CHOOSES WHAT TO USE
+----------------------------------------------------------------------
+Notes must teach the exact section Learning Target / I-can jobs and provide a useful
+set of ready-to-use instructional pieces.
 
-The teacher is NOT expected to do Vocabulary Preview, WTC, preview/skim,
-Talk to the Text / Close Reading, Stop & Discuss, and every EX/YTI pair every time.
+IMPORTANT:
+The builder should NOT omit useful standard components merely because the teacher
+may choose not to use them in class.
+
+Every normal Algebra section should provide:
+- a short Let's Get Started;
+- the exact canonical WTC;
+- the full generated EX/YTI inventory;
+- the core reading / visual Math Notes;
+- a concise Summary;
+- Common Mistakes to Watch as the final section.
+
+The teacher is NOT expected to do every included component every time.
+The Notes are a toolbox, not a required minute-by-minute script.
+
+Vocabulary Preview, Talk to the Text / Close Reading, Stop & Discuss, and similar
+reading/discourse routines remain selective. They should appear only when they earn
+their place.
 
 Build each section so that:
 - the core reading stands on its own;
-- each included routine can be skipped without making later reading nonsensical;
-- optional routines earn their place;
-- the page does not feel like a checklist of every strategy the system knows.
+- the teacher can skip any activity/routine without breaking later reading;
+- standard components are available without becoming a checklist the teacher must complete;
+- optional routines earn their place.
 
 TEACHER INPUT OVERRIDES
 -----------------------
@@ -40,10 +56,12 @@ If the request explicitly asks to include/omit a routine, follow it unless doing
 would violate curriculum authority or make the artifact unusable.
 
 When no teacher routine preference is supplied:
-- use the SMALLEST useful routine set;
-- do not stack all opening routines;
-- normally use at most ONE opening routine before the main reading;
+- INCLUDE the standard Algebra Notes toolbox listed above;
+- keep Let's Get Started short;
+- keep WTC exact and canonical;
+- use Vocabulary Preview selectively;
 - use Stop & Discuss only where discussion materially helps;
+- use Talk to the Text / Close Reading only where annotation is genuinely useful;
 - do not add a routine merely for visual variety.
 
 AUTHORITY / STARTUP
@@ -176,39 +194,44 @@ chooses to use most of it, but do not design the artifact as a mandatory 30–40
 
 SECTION CORE — REQUIRED
 -----------------------
-Every section requires:
+Every normal Algebra section requires:
 1. section/title shell;
 2. exact Learning Target;
 3. exact I-can statements;
-4. core instructional reading organized around exact I-can jobs;
-5. generated EX/YTI inventory using the rule below;
-6. concise close/summary.
+4. a one-sentence Why It Matters line;
+5. a short Let's Get Started;
+6. the exact canonical WTC;
+7. core instructional reading organized around exact I-can jobs;
+8. visual-first Math Notes;
+9. generated EX/YTI inventory using the rule below;
+10. concise Section Summary;
+11. Common Mistakes to Watch as the FINAL section.
 
 OPTIONAL ROUTINE MENU
 ---------------------
-The following are OPTIONAL by section unless teacher input/Framework explicitly requires them:
+The following remain OPTIONAL by section unless teacher input/Framework explicitly requires them:
 - Vocabulary / Key Notation Preview;
-- canonical WTC;
-- Let's Get Started / skim preview;
 - Talk to the Text / Close Reading directions;
 - Stop & Discuss;
-- Formula / Relationship reference box;
-- Common Mistakes;
+- extra Formula / Relationship reference box beyond the visual Math Notes;
 - What I Figured Out / reflection;
 - miscellaneous final workspace.
 
-Omission of an optional routine is NOT a QA failure.
+Omission of an OPTIONAL routine is NOT a QA failure.
 
 OPENING DENSITY — HARD
 ----------------------
-Do not automatically render:
-Vocabulary Preview + WTC + Let's Get Started + Close Reading directions
-before the first real mathematics.
+A normal Algebra section includes BOTH Let's Get Started and WTC, but neither should
+become a second lesson.
 
-Default:
-- choose zero or one substantial opening routine;
-- a tiny target/objective box does not count as the opening routine;
-- add a second opening routine only when there is a clear instructional reason.
+Default opening:
+- title / target / I-cans / Why It Matters;
+- short Let's Get Started;
+- exact canonical WTC;
+- then move into the core mathematics.
+
+Do NOT automatically stack Vocabulary Preview + Close Reading directions on top of
+that opening. Add either only when it clearly earns the time/space.
 
 EXAMPLE / YOU TRY IT — NEW GENERATION CONTRACT
 -----------------------------------------------
@@ -270,7 +293,7 @@ Mixed representations must visibly include every named representation.
 
 EXIT TICKET FIREWALL — HARD
 ----------------------------
-Before finalizing ANY generated Notes Example or YTI, compare it against ALL Unit Exit records.
+Before finalizing ANY GENERATED Notes question/task — including Let's Get Started, Example/YTI, or question-like discussion prompts — compare it against ALL Unit Exit records.
 
 Same I-can/evidence job is allowed.
 
@@ -297,17 +320,21 @@ QA must report:
 Fail code:
   NOTES_EXIT_NEAR_DUPLICATE
 
-WTC — OPTIONAL BUT CANONICAL
+WTC — STANDARD AND CANONICAL
 ----------------------------
-When WTC is included:
-- use the exact canonical Bank WTC once;
-- preserve item ID, prompt, representation, I-can identity, answer/solution lineage;
-- teacher copy may add instructional/discourse support;
-- student copy must not leak the answer.
+Every normal Algebra section includes the exact canonical Bank WTC ONCE.
 
-When WTC is omitted:
-- do not create a replacement WTC;
-- omission is not a defect.
+- preserve item ID, prompt, representation, I-can identity, answer/solution lineage;
+- do not rewrite or simplify it silently;
+- teacher copy may add instructional/discourse support;
+- student copy must not leak the answer;
+- the teacher may skip the WTC during instruction, but the build should still provide it.
+
+If teacher input explicitly omits WTC for a particular build, honor that request and
+record the omission in the build report.
+
+If the canonical WTC itself is a near-duplicate of an Exit item, do NOT silently alter
+either artifact. Flag the upstream conflict for review.
 
 VOCABULARY PREVIEW — OPTIONAL
 -----------------------------
@@ -328,17 +355,33 @@ If included, use:
 
 Do not force this into every section.
 
-LET'S GET STARTED / PREVIEW — OPTIONAL
---------------------------------------
-Use only when a skim/notice/wonder routine materially improves the section.
+LET'S GET STARTED — STANDARD SHORT OPENER
+-----------------------------------------
+Every normal Algebra section includes one short Let's Get Started.
 
-If included:
-  <section class="skim-section-task">
+Purpose:
+- activate prior knowledge;
+- preview a useful representation/pattern;
+- create a quick notice/predict/compare moment;
+- connect to a prerequisite without teaching the whole section early.
+
+Keep it short enough to use or skip easily.
+
+Preferred shell:
+  <section class="skim-section-task lets-get-started">
     <h2 class="lets-get-started-heading">Let's Get Started</h2>
-    ...
+    <div class="starter-visual">...</div>      <!-- when a visual helps -->
+    <p class="starter-prompt">...</p>
+    <div class="starter-response"></div>
   </section>
 
-Do not require prediction/notice/wonder in every Algebra section.
+Design rules:
+- normally 1 prompt or a tiny coherent set;
+- prefer a visual/table/pattern/diagram when natural;
+- do not require a large calculation;
+- do not turn it into an Example/YTI pair;
+- do not force prediction/notice/wonder wording when another short move is better;
+- all GENERATED Let's Get Started tasks must pass the Exit-ticket firewall.
 
 TALK TO THE TEXT / CLOSE READING — OPTIONAL
 -------------------------------------------
@@ -363,6 +406,63 @@ For each exact I-can:
 - place the generated EX/YTI pair at the most natural point in that I-can's reading.
 
 Do not create filler text just to separate routines.
+
+MATH NOTES — VISUAL FIRST
+-------------------------
+Math Notes should behave more like a compact textbook reference/figure than a paragraph
+inside a colored box.
+
+DEFAULT:
+Each I-can compartment should include one meaningful VISUAL ANCHOR in or immediately
+beside its Math Notes when the mathematics supports one.
+
+Useful visual anchors include:
+- input -> rule -> output flow;
+- annotated expression/equation with labels/arrows;
+- mini table tied to an equation or graph;
+- graph + labeled feature;
+- side-by-side comparison cards;
+- representation translation flow;
+- process/decision flow;
+- small diagram or model;
+- compact formula/reference display.
+
+HARD PREFERENCE:
+Visual first; prose second.
+The text should explain or name what the visual shows. It should not merely repeat the
+same idea as a paragraph.
+
+A paragraph-only Math Notes box is acceptable ONLY when a visual would be artificial or
+less clear.
+
+Preferred semantic shells:
+
+Flow:
+  <div class="math-visual math-flow" aria-label="...">
+    <div class="math-flow-node">Input</div>
+    <div class="math-flow-arrow">→</div>
+    <div class="math-flow-node">Rule</div>
+    <div class="math-flow-arrow">→</div>
+    <div class="math-flow-node">Output</div>
+  </div>
+
+Comparison:
+  <div class="math-visual math-compare-grid">
+    <div class="math-compare-card">...</div>
+    <div class="math-compare-card">...</div>
+  </div>
+
+Annotated structure:
+  <div class="math-visual annotated-expression">
+    ...
+  </div>
+
+Do not make decorative visuals.
+Every visual must teach, organize, compare, or make structure visible.
+
+Use registered graph tools for new coordinate/function graphs.
+Use semantic HTML/CSS for simple non-graph flows, labels, arrows, tables, and process
+diagrams.
 
 STOP & DISCUSS — OPTIONAL
 -------------------------
@@ -483,7 +583,14 @@ Target shell:
     <h2 class="h-target">Learning Target</h2>
     <p>EXACT Learning Target</p>
     <ul>EXACT I-can statements</ul>
+    <p class="why-it-matters"><strong>Why it matters:</strong> one concise, student-friendly reason this section is useful.</p>
   </section>
+
+WHY IT MATTERS
+--------------
+Keep this to ONE sentence.
+It should answer why the mathematics is useful, foundational, or worth noticing.
+Do not invent a fake career context merely to make the sentence sound relevant.
 
 TEACHER COPY
 ------------
@@ -513,15 +620,29 @@ For generated EX/YTI:
 
 CLOSE
 -----
-Every section needs a concise close, but not every close needs every legacy component.
+Every normal Algebra section closes in this order:
 
-Required:
-- short section summary.
+1. Section Summary
+2. Common Mistakes to Watch — FINAL section
 
-Optional when useful:
+Common Mistakes is REQUIRED for the normal Algebra build.
+Use 2–4 high-value mistakes/misconceptions drawn from the section content, accepted map,
+Practice calibration, and instructional reasoning.
+
+Preferred shell:
+  <section class="common-mistakes">
+    <h2 class="h-mistakes">Common Mistakes to Watch</h2>
+    <table class="compact-table mistake-table">
+      <thead><tr><th>Mistake</th><th>What to remember</th></tr></thead>
+      <tbody>...</tbody>
+    </table>
+  </section>
+
+Do not add content after Common Mistakes except non-visible script/closing HTML tags.
+
+Optional before the Summary when useful:
 - vocabulary reference;
 - What I Figured Out;
-- Common Mistakes;
 - final workspace.
 
 Do NOT add a Notes Exit Check.
@@ -568,10 +689,18 @@ EXIT FIREWALL
 - no near-duplicate Exit rehearsal;
 - notes_exit_duplicate_count = 0.
 
-OPTIONAL ROUTINES
-- omitted optional routines do NOT fail QA;
-- no section is padded merely to include every routine;
-- no routine stack overwhelms the start of the section.
+STANDARD / OPTIONAL ROUTINES
+- Let's Get Started present in every normal Algebra section unless teacher explicitly omitted it;
+- exact canonical WTC present once in every normal Algebra section unless teacher explicitly omitted it;
+- Vocabulary Preview / Talk to the Text / Stop & Discuss remain selective;
+- teacher can skip included routines without breaking the reading sequence;
+- no opening routine is padded into a second lesson.
+
+MATH NOTES / CLOSE
+- each I-can has a meaningful Math Notes visual anchor when the mathematics supports one;
+- paragraph-only Math Notes is used only when a visual would be artificial;
+- Section Summary present;
+- Common Mistakes to Watch present and is the FINAL visible section.
 
 RENDER
 - Algebra student + teacher HTML link base.css then notes_alg.css;
@@ -652,6 +781,9 @@ Record:
 
 REVISION
 --------
-2026-09-06 PILOT vNEXT — Bank-v2.3 Notes generation, one EX/YTI pair per I-can,
-earned second pair only, hard Exit-ticket firewall, modular routine menu, source_map
-travel, and Algebra textbook-style root stylesheet authority.
+2026-09-06 PILOT vNEXT.1 — Keep the successful textbook-style pilot, but make the
+Algebra Notes build a COMPLETE teacher-choice toolbox: standard short Let's Get Started,
+exact canonical WTC, one EX/YTI pair per I-can by default, hard Exit firewall across all
+generated Notes tasks, visual-first Math Notes, one-sentence Why It Matters, and Common
+Mistakes as the final visible section. Vocabulary / Talk to the Text / Stop & Discuss remain
+selective. Source-map travel and root notes_alg.css authority remain unchanged.
