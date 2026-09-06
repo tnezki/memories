@@ -1,161 +1,628 @@
-ALGEBRA 1 UNIT 1 — STEP 3B RERUN PORTABLE MEMORY
-===================================================
+BUILD COMPLETE BANK — STEP 3B / PROFILE-DRIVEN BANK AUTHORING
+===============================================================
 
-PURPOSE
-Run Step 3b one more time to produce the finished Algebra 1 Unit 1 Complete Bank ZIP from the already accepted Unit 1 Bank Map.
+STATUS: CURRENT
+STEP: 3b
+JOB: bank_complete
+ROLE: Build or repair one complete canonical Unit Bank from one accepted Step 3a Bank Map.
+REVISION: 2026-09-06 vNEXT clean rebuild — source-map travel, BUILD/REPAIR modes, representation completeness, graph evidence containment, teacher-inspection viewer, strict finished-output QA.
 
-This memory is CURRENT EXPLICIT TEACHER INSTRUCTION for this rerun. If a lower authority conflicts with a rule below, follow this memory.
+AUTHORITY — HARD
+1. current explicit teacher instruction / current build request
+2. current Curriculum Philosophy
+3. current universal Question Structure authority
+4. current Course Framework + exact Unit Assessment Plan + canonical operational maps
+5. current Framework Bank profile
+6. accepted Step 3a Bank Map (MAP_MANIFEST.status = PASS)
+7. this PM
+8. registered tools/render contracts
 
-CURRENT ACCEPTED MAP
-- Course: Algebra 1
-- Unit: 1
-- Accepted map status: PASS
-- Accepted map fingerprint:
-  38968f43b8b5ee65c20da0bfb6d66df19ba02925a61acaa4a3ba44de3eb84753
-- Canonical design counts:
-  - Exit: 20
-  - Secure Summative: 48
-  - Practice 1: 120
-  - WTC: 5 routines
-  - Seeds: 6
-  - Question/task records: 193
-  - Total canonical records including Seeds: 199
+The accepted Step 3a Map is executable design authority. An existing Bank may be used as an authored starting point only in REPAIR mode; it is never curriculum authority.
 
-DO NOT RERUN STEP 3A
-The accepted Unit 1 Bank Map is the design authority for this rerun. Do not rebuild or redesign the map unless a genuinely changed higher curriculum authority creates a real semantic conflict.
+CORE PRINCIPLE
+Map -> Bank -> downstream artifacts.
+The design map must travel with the artifact. Do not discard its metadata and reconstruct it later from memory.
 
-PIN / COMPATIBILITY RULE
-Do not invalidate the accepted map merely because the repository HEAD SHA changed.
-Use the current Step 3b compatibility rule:
-- verify the accepted map fingerprint and accepted map files;
-- verify the actual higher authorities that can change curriculum meaning;
-- harmless repository drift is COMPATIBLE_DRIFT, not a reason to rerun Step 3a.
-The most recent compatibility gate already passed for the current Philosophy, Question Structure, Algebra 1 Framework, Unit 1 plan, Exit evidence map, Bank profile, and registered graph tool.
+===============================================================================
+1. ENTRY GATE / COMPATIBILITY
+===============================================================================
 
-CRITICAL OVERRIDE — “MAPS TRAVEL WITH ARTIFACTS”
-Preserve the full accepted map with the finished Bank, but DO NOT copy the complete accepted map record into every finished Bank record.
+ENTRY GATE — HARD
+Require:
+- MAP_MANIFEST.status = PASS
+- question_design.status = PASS when that field exists
+- map qa.status = PASS when that field exists
+- every destination slice declared by MAP_MANIFEST is readable
+- MAP_REPORT semantic Question-Structure audit is present and PASS when required by the current map schema.
 
-For this rerun:
-1. Keep normal record-level linkage already required by the Bank architecture:
-   - source_map_record_id
-   - accepted_map_fingerprint
-   - mapped IDs / target / I Can / evidence / structure / representation metadata needed by the finished record.
-2. Package an unchanged source-map snapshot with the Bank, for example:
-   source_map/
-     MAP_MANIFEST.json
-     MAP_REPORT.txt
-     bank_inventory_map.json
-     exit_map.json
-     summative_map.json
-     practice1_map.json
-     wtc_map.json
-     seed_map.json
-     unit1_question_design_map.json
-3. The source_map files must be byte-for-byte copies of the accepted map files when possible.
-4. The teacher viewer may use source_map_record_id to expose the complete mapped metadata for inspection.
-5. DO NOT require a field-for-field embedded `map_contract` copy inside all 193 finished records.
-6. DO NOT spend the execution window reconstructing or duplicating the 120-record Practice map into every Practice record.
+If the accepted map itself is incomplete or FAIL, stop as BANK_MAP_NOT_ACCEPTED.
 
-This interpretation satisfies the teacher requirement:
-THE MAP MUST TRAVEL WITH THE ARTIFACT, WITHOUT EXPLODING RECORD SIZE OR BUILD TIME.
+ACCEPTED MAP FINGERPRINT — HARD
+- Recompute/verify the accepted map fingerprint according to MAP_MANIFEST.
+- Verify the accepted map file hashes when MAP_MANIFEST declares them.
+- Do not silently substitute a newer map.
 
-PRIMARY GOAL OF THIS RERUN
-Do not redesign the curriculum. Do not redesign the accepted Bank architecture.
-Make the already good Unit 1 Bank finish cleanly with the remaining viewer/render/QA repairs.
+PIN COMPATIBILITY — HARD
+A repository HEAD SHA change by itself does NOT invalidate an accepted map.
 
-FIX THESE ITEMS
-1. TEACHER VIEWER TOP SUMMARY
-Restore the more useful earlier top summary/totals area.
-At the top of unit1.html, visibly show at minimum:
-- Bank status / QA status
-- total canonical records
-- Practice count
-- Exit count
-- WTC count
-- Seeds count
-- Summative count/forms
-- generated graph count if available
-Keep the approved tabs, section filter, search, stage grouping, cards, and collapsible answers.
+When request pins are newer than the map's repository pins:
+1. verify the accepted map snapshot and fingerprint are unchanged;
+2. identify only the higher-authority files that could change the map's meaning:
+   - Curriculum Philosophy
+   - Question Structure authority
+   - Course Framework
+   - exact Unit Assessment Plan
+   - canonical operational maps used by the Unit
+   - Bank profile
+   - registered tools/render contracts when their behavior is part of executable map routes;
+3. compare those actual authority identities/content, not the whole repository commit;
+4. harmless changes elsewhere in the repository are COMPATIBLE_DRIFT and do not require Step 3a;
+5. if a relevant higher authority materially changed the accepted design meaning, stop as BANK_MAP_AUTHORITY_CHANGED and require a new Step 3a map.
 
-2. I CAN DISPLAY
-Keep the readable display:
-  IC4 — <actual I Can statement>
-Do not show only the long machine ID.
+Do not rerun Step 3a merely because Bank outputs, viewers, agenda files, unrelated Units, or this PM changed.
 
-3. FULL METADATA / MAP TRACE IN VIEWER
-For each non-secure finished question/task, provide a collapsible teacher-only metadata/map-trace area.
-It should make the mapped design inspectable, including as available:
-- record ID / design slot ID
+TARGETED SEMANTIC RECHECK — HARD
+Use the accepted PASS map/report as starting evidence. Do not redo the full Step 3a design audit.
+Reopen only the structure/route definitions actually used by the accepted map when a concrete ambiguity exists.
+If the accepted map itself contains a real structure/action/response/representation conflict, fail as BANK_MAP_SEMANTIC_MISMATCH.
+
+===============================================================================
+2. EXECUTION MODE
+===============================================================================
+
+MODE SELECTION — HARD
+Step 3b supports two internal execution modes:
+
+A. BUILD
+Use when:
+- no usable current Bank exists;
+- the accepted map fingerprint changed;
+- canonical record identity changed;
+- semantic design changed;
+- the existing Bank is too incomplete or contaminated to repair safely.
+
+BUILD authors the complete Bank from the accepted map.
+
+B. REPAIR
+Use when:
+- a current Bank exists;
+- its accepted_map_fingerprint matches the accepted Step 3a map;
+- its canonical record ID set can be reconciled to the accepted map;
+- requested defects are localized to authored wording/values, representations, rendering, viewer behavior, metadata exposure, QA, packaging, or other fixes allowed by the accepted variation contracts.
+
+REPAIR is preferred over full reauthoring when most current authored records are already good.
+
+REPAIR MODE — HARD
+In REPAIR mode:
+- accepted map remains authority;
+- current Bank is only the authored starting artifact;
+- identify an explicit touched-record/touched-surface set;
+- preserve untouched authored records byte-for-byte when practical;
+- repair touched records only inside their accepted map variation contracts;
+- rebuild affected assets;
+- rebuild viewer/reports/manifest as needed;
+- rerun MAP_FIDELITY and RENDER_QA across the COMPLETE final Bank, not only touched records;
+- package a complete replacement Bank, never a partial overlay.
+
+If repair discovers widespread semantic drift, stop repair and switch to BUILD rather than layering more patches.
+
+===============================================================================
+3. EXECUTION / CONTINUATION DISCIPLINE
+===============================================================================
+
+SOURCE-READ BUDGET — HARD
+- Use request-declared and manifest-declared paths directly.
+- Read each unchanged authority once per pinned/content identity.
+- Record identities in the checkpoint.
+- Do not repeatedly reread Philosophy, Framework, Assessment Plan, Question Structure, Bank profile, accepted map slices, or registered tools for reassurance.
+- Do not inspect historical Banks/retired templates unless a HARD dependency explicitly requires it.
+
+PRODUCTION-FIRST — HARD
+- Validate early.
+- Build the expected-record table early.
+- Begin authoring/repair promptly.
+- Write slices/assets incrementally.
+- Prefer deterministic scripts for repetitive indexing, asset generation, comparisons, and QA.
+- Do not spend the execution window reconstructing information already present in accepted map files.
+
+WORKING CHECKPOINT — HARD
+Create `.step3b_work/BUILD_CHECKPOINT.json` in staging with at minimum:
+- mode = BUILD or REPAIR
+- accepted_map_fingerprint
+- verified authority identities
+- expected record IDs/counts by destination
+- touched record/surface set when REPAIR
+- completed destinations/phases
+- generated assets completed
+- QA phases completed
+- next_phase / next_destination
+- last_updated.
+
+The checkpoint is working state only and is not included in the final canonical Bank.
+
+CONTINUATION — HARD
+If execution time ends and there is no real HARD failure:
+- save checkpoint and completed staging work;
+- return `STEP3B_INCOMPLETE_CONTINUE`;
+- state exact completed phase and next phase;
+- on `cont`, resume from checkpoint;
+- do not restart discovery or reread unchanged authorities.
+
+Runtime exhaustion is not a bad request, missing dependency, or curriculum failure.
+
+===============================================================================
+4. ACCEPTED MAP EXECUTION / METADATA
+===============================================================================
+
+ACCEPTED MAP EXECUTION CONTRACT — HARD
+Fresh authoring or repair may vary only fields/values allowed by the accepted record's variation contract.
+Do NOT change:
+- record/design-slot identity
 - destination
-- section/unit
+- unit/section scope
 - stage
-- target / Mastery Goal ID and text
-- primary I Can ID and text
-- supporting I Cans
+- target/Mastery Goal identity
+- primary/supporting I Can identity
 - evidence_job
 - student_action
-- Question Structure ID
+- selected Question Structure
 - response_mode
 - representation_mode / representation_need
-- representation routes / tool route
+- executable representation route(s)
 - security role
 - difficulty intent
-- allowed / required / forbidden variation axes
+- required/forbidden variation axes
+- destination-specific role/slot/grid metadata.
+
+Fresh values, wording, contexts, and representation instances are allowed only within the accepted variation contract.
+
+COMMON FINISHED RECORD
+Preserve as applicable:
+- record/family/item ID
+- destination + unit/section scope
+- stage
+- exact target/Mastery Goal ID + text
+- exact primary/supporting I Can IDs + text
+- evidence_job
+- student_action
+- selected Question Structure ID
+- response_mode
+- representation_mode / representation_need
+- representation/tool/response-surface routes
+- security role
+- difficulty intent
+- variation axes
 - source_map_record_id
 - accepted_map_fingerprint
-- source basis / provenance
+- source_basis/provenance linkage
+- destination-specific slot/role metadata
+- finished student_text / student_html
+- answer/key
+- solution/scoring criteria
+- representation_refs
+- render_trace when applicable.
+
+No placeholders or internal authoring labels in student-facing prose.
+
+MAPS TRAVEL WITH ARTIFACTS — HARD
+Preserve the full accepted map as a source snapshot bundled with the finished Bank.
+
+Required concept:
+  source_map/
+    MAP_MANIFEST.json
+    MAP_REPORT.txt (when present)
+    all accepted destination map slices
+    question-design/support maps declared by MAP_MANIFEST
+
+Rules:
+- copy accepted map files byte-for-byte when practical;
+- source_map/ must preserve the accepted fingerprint and file hashes;
+- do NOT duplicate the full map record inside every authored Bank record;
+- each authored record must keep `source_map_record_id` + `accepted_map_fingerprint` so the complete map metadata can be resolved;
+- ITEM_INDEX/provenance must preserve the same lineage;
+- unknown/new map fields remain preserved automatically because the original source-map files travel intact.
+
+This is the system rule:
+THE MAP TRAVELS WITH THE ARTIFACT WITHOUT EXPLODING RECORD SIZE OR BUILD TIME.
+
+SOURCE MAP SNAPSHOT QA — HARD
+Compare bundled source_map/ against the accepted Step 3a map:
+- expected files present;
+- byte/hash equality when declared;
+- accepted fingerprint unchanged.
+Any mismatch = SOURCE_MAP_SNAPSHOT_MISMATCH.
+
+===============================================================================
+5. PROFILE-DRIVEN INVENTORY
+===============================================================================
+
+PROFILE-DRIVEN INVENTORY — HARD
+Author exactly the canonical destinations declared by the accepted map/current course profile.
+Do not revive retired inventories because old files exist.
+
+When the current Algebra profile declares the established architecture, use:
+- official Exit questions
+- secure Summative forms
+- Practice 1
+- WTC
+- approved Seeds
+and do NOT revive retired Practice 2/3, Extra Practice, CYU, fixed Notes EX/YTI pairs, or finished Warm-Ups as canonical Bank content.
+
+Destination counts come from the accepted map/profile, not from hard-coded Unit 1 numbers in this PM.
+
+QUESTION STRUCTURE — HARD
+Every finished question/task must materially execute its mapped Question Structure.
+A structure label stored in metadata is not enough.
+Prompt, student action, response mode, representation, and evidence job must agree.
+
+Seeds are not finished questions. A downstream task created from a Seed must use the current Question Structure authority.
+
+===============================================================================
+6. PROMPT / MATH QUALITY
+===============================================================================
+
+MATH RENDERING — ALGEBRA HARD
+For Algebra student-facing HTML:
+- use MathJax/TeX when it materially improves readability;
+- use `\( ... \)` and `\[ ... \]`;
+- do NOT register `$...$` as inline MathJax because currency such as $5 must remain ordinary text;
+- keep student_text readable plain text for indexing/search;
+- do not turn simple prose, integers, or table headings into unnecessary math markup.
+
+NONREDUNDANT MATH — HARD
+If the complete equation/expression is already naturally present in the prompt, do not repeat the identical full expression in an adjacent equation card or standalone block unless the second display has a documented instructional/reference purpose.
+
+IMPORTANT:
+Nonredundant does NOT mean "remove the equation representation."
+If representation_mode requires an equation, the finished student surface must still contain a visible equation either:
+A. naturally inline in the prompt; OR
+B. as a separate equation/reference object.
+It must contain one usable equation representation, not zero and not needless duplicates.
+
+PROMPT QUALITY — HARD
+Purposeful repetition of a learning job is allowed.
+Mechanical duplication of finished non-fluency prompts/stimuli is not the default.
+
+Review the whole Unit, not only one section:
+- vary stem, values, representation pair, comparison focus, context, or misconception inside allowed axes;
+- do not fake variety with noun swaps only;
+- do not inflate difficulty just to make items look different;
+- exact or near-exact fresh-parallel duplicates across sections are invalid unless exact repetition is explicitly required/documented.
+
+MATCH / CLASSIFICATION ORDER — HARD
+Visible panel/category order may not leak the answer key.
+When matching families/categories to A/B/C/D panels, shuffle order/pattern so list order does not reveal answers.
+
+===============================================================================
+7. REPRESENTATION COMPLETENESS
+===============================================================================
+
+REPRESENTATION MODE IS A FINISHED-SURFACE CONTRACT — HARD
+representation_mode describes what the STUDENT CAN ACTUALLY SEE/USE, not merely metadata.
+
+Before PASS, parse/inspect every finished student_html and reconcile visible representation components to representation_mode and accepted routes.
+
+Examples:
+- `mixed_graph_table` => visible graph + visible table.
+- `mixed_table_equation` => visible table + visible equation.
+- `mixed_graph_equation` => visible graph + visible equation.
+- `mixed_graph_table_equation` => all three visible.
+- `supplied_graph` / `supplied_context_graph` => referenced graph asset actually visible.
+- `student_constructed_table` => answer-neutral table response surface visible.
+- `student_constructed_graph` => answer-neutral graph response surface visible.
+- diagram/mapping/number-line routes => the mapped semantic representation actually visible.
+
+EQUATION PRESENCE RULE — HARD
+For modes requiring an equation:
+- a complete equation visible in the natural prompt counts;
+- a separate equation-card/reference counts;
+- an answer/solution-only equation does NOT count;
+- metadata/trace-only equation does NOT count;
+- an equation mentioned generically ("the equation") without displaying it does NOT count.
+
+For example, a prompt saying "Compare the table and equation" with only a table rendered is invalid.
+
+REPRESENTATION COMPONENT QA
+Emit component-level mismatches with record ID, expected components, and observed components.
+A mixed representation missing one required component = REPRESENTATION_COMPONENT_MISSING.
+
+No PASS based only on representation_mode strings.
+
+===============================================================================
+8. GRAPH TOOL / GRAPH SEMANTICS
+===============================================================================
+
+REGISTERED GRAPH TOOL EXECUTION — HARD
+When the accepted route names a registered graph tool:
+1. use the registered tool unchanged as instructed;
+2. append only record-specific generation code where permitted;
+3. execute it;
+4. save the generated asset under the Bank figures/assets folder;
+5. reference the asset from finished student_html;
+6. store render_trace with tool identity, function, asset path/hash, dimensions when available.
+
+Do not claim graph-tool provenance while substituting a hand-built coordinate/function SVG.
+
+GRAPH MARKUP COMPLETENESS — HARD
+Scan every finished student_html for graph-like markup, regardless of metadata.
+Any coordinate/function/modeling `<svg>`, `<canvas>`, hand-built axis/grid, or improvised plot must reconcile to the accepted executable route.
+Unexpected graph markup cannot escape QA by being absent from metadata.
+
+GRAPH SEMANTIC MODE — HARD
+- discrete relations/point sets: plot points only unless the map explicitly requires connecting them;
+- continuous relationships: render the continuous curve/relationship;
+- do not turn continuous functions into misleading point chains;
+- do not connect discrete data merely because it follows a pattern.
+
+ANSWER-NEUTRAL GRAPH STIMULUS — HARD
+Do not add special visual emphasis that directly reveals the feature students are asked to determine:
+- no special intercept dot when asked for the intercept;
+- no callout/halo/annotation on requested vertex, zero, intersection, endpoint, coordinate, etc.;
+- natural data points are allowed when the point set itself is the legitimate supplied stimulus;
+- a marker may be used when it is a given datum for a different task and does not reveal the requested answer.
+
+GRAPH EVIDENCE CONTAINMENT — HARD
+Every mathematical value/feature the prompt requires the student to read, use, identify, compare, or construct from a graph must be inside the usable graph window.
+
+Before rendering/final PASS:
+1. derive the prompt-required graph evidence;
+2. compute/check its actual graph coordinate(s)/feature location;
+3. verify those coordinates/features are visible inside the rendered bounds;
+4. require usable margin, normally at least one grid interval from the clipping edge when practical, unless the boundary itself is intentionally the evidence;
+5. verify labels/arrows do not obscure the required evidence.
+
+Examples:
+- "Find y when x = 5" requires the actual point `(5, f(5))` to be visible.
+- "Find x when y = 8" requires the relevant intersection with `y=8` to be visible.
+- "Identify the y-intercept" requires the intercept to be inside the visible graph.
+- a student construction asking for `(4,9)` requires `(4,9)` to fit on the response surface.
+
+If a required point is outside a fixed standard graph range:
+- do NOT modify the registered graph tool styling/range contract just to rescue the item;
+- instead choose a new allowed equation/value/query inside the accepted variation contract so required evidence fits.
+For context graphs whose bounds are part of the allowed route, choose natural bounds that contain the required evidence.
+
+Failure code:
+GRAPH_REQUIRED_EVIDENCE_OUT_OF_VIEW.
+
+GRAPH RANGE / ASPECT — HARD
+- standard coordinate grids remain visually square;
+- preserve native image aspect ratio in HTML;
+- no horizontal/vertical stretching;
+- required plotted points/features/labels cannot be clipped;
+- context graph bounds must be natural and readable.
+
+===============================================================================
+9. TABLE / EQUATION / MIXED-REP VIEWER STYLE
+===============================================================================
+
+COMPACT TABLE STYLE — HARD
+Small input/output/data tables use semantic HTML `<table class="values">`.
+
+Preferred teacher/student inspection appearance:
+- natural content width;
+- narrow readable columns;
+- visible borders;
+- centered numeric/math contents;
+- compact padding;
+- distinct header cells;
+- table aligned near its partner representation rather than stretched across the card.
+
+Equivalent viewer CSS must preserve:
+  .values{
+    border-collapse:collapse;
+    width:auto;
+    max-width:100%;
+    margin:8px 0;
+  }
+  .values th,.values td{
+    border:1px solid #777;
+    min-width:52px;
+    padding:7px 11px;
+    text-align:center;
+  }
+  .split{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+  }
+  .split>.values{
+    flex:0 0 auto;
+    align-self:flex-start;
+  }
+
+If a generic `.split>*` rule exists, the table-specific override must win the cascade.
+
+GRAPH + TABLE LAYOUT
+For `mixed_graph_table`, show the graph and compact table as a real pair:
+- graph may take the larger visual area;
+- table stays compact;
+- both align near the top;
+- do not place the table far away or make it a giant panel.
+
+EQUATION DISPLAY
+A separate equation reference may use a compact `.equation-card` when it has a real representation job.
+Do not force a separate card when the same complete equation is already naturally readable in the prompt.
+
+===============================================================================
+10. TEACHER INSPECTION VIEWER
+===============================================================================
+
+UNIT VIEWER — REQUIRED WHEN COURSE PROFILE REQUIRES IT
+Create the Unit Bank HTML inspection surface declared by the profile (for Algebra this is `unit{unit}.html`).
+
+The viewer is a teacher inspection surface, not the curriculum authority.
+
+PREFERRED INFORMATION ARCHITECTURE — HARD FOR ALGEBRA
+Preserve the approved dense inspection layout:
+
+A. TOP CONTROLS
+- tabs: Practice 1, Exit, WTC, Seeds, Summative blueprint, Build/QA
+- section selector
+- search
+
+B. TOP TOTALS STRIP
+Directly below the controls/top area show compact count cards derived from BANK_MANIFEST/reports:
+- Questions/task total
+- Practice
+- Exit
+- Summative
+- WTC
+- Seeds
+- status/QA as space permits
+
+Use live manifest/report values; do not hand-enter Unit-specific totals in source.
+
+C. COMPACT CARD METADATA LINE
+At the top of every non-secure question card, show a fast-scan metadata line equivalent to:
+`P1-1.1-INTRO-01 · Intro · 1.1-LT · 1.1-INTRO-IC1 · REPRESENTATION-READ-THEN-CALCULATE-01 · mixed_graph_table`
+
+At minimum include:
+- record ID
+- stage
+- target/Mastery Goal ID
+- full primary I Can ID
+- selected Question Structure ID
+- representation_mode
+
+This compact line is IN ADDITION TO, not a replacement for, the readable I Can statement or full metadata trace.
+
+D. READABLE I CAN
+Show:
+`IC1 — <actual I Can statement>`
+Derive IC# from the terminal I Can token when possible.
+Keep the full canonical I Can ID in metadata.
+
+E. STUDENT SURFACE
+Show prompt + actual representations exactly as the student-facing authored record requires.
+
+F. ANSWER / SOLUTION
+Collapsible for non-secure content.
+
+G. COMPLETE METADATA / MAP TRACE
+Collapsible teacher-only trace resolving the Bank record + its source_map_record_id.
+Expose, as available:
+- record/design-slot IDs
+- destination
+- unit/section/stage
+- target/Mastery Goal ID + text
+- primary/supporting I Can IDs + text
+- evidence_job
+- student_action
+- Question Structure
+- response_mode
+- representation_mode / need
+- representation routes/tool routes
+- security role
+- difficulty intent
+- variation axes
+- source_map_record_id
+- accepted_map_fingerprint
+- source basis/provenance
 - render trace
-Do not hide or discard metadata just because the immediate artifact does not need it.
+- destination-specific slot/role metadata.
 
-For secure Summative records:
-- preserve and display safe blueprint/metadata lineage;
-- do NOT expose secure prompt, key, or solution in the public teacher viewer.
+The viewer may read these fields from the authored record and/or resolve them from bundled source_map/.
+Do not require duplicated full map records in every authored record.
 
-4. COMPACT TABLES
-Small semantic tables must remain compact.
-A split layout must not stretch a two-column table across half the card.
-Equivalent CSS must include the behavior:
-  .values { width:auto; max-width:100%; }
-  .split > .values { flex:0 0 auto; align-self:flex-start; }
-Graphs keep their native aspect ratio.
+SECURE SUMMATIVE VIEWER
+Do not expose secure Summative prompt, stimulus, key, or solution in a public GitHub Pages viewer.
+Expose safe blueprint/lineage metadata:
+- form
+- slot
+- target/MG
+- I Cans
+- evidence job
+- Question Structure
+- response/representation modes
+- timing/parallel-family metadata
+- source-map lineage.
 
-5. REDUNDANT EQUATION DISPLAY
-If an equation/expression is already naturally present in the prompt, do not immediately repeat the exact same full expression in a separate equation card unless that card has a real instructional/reference purpose.
-MathJax uses \( ... \) and \[ ... \] only.
-Do not use $...$ as an inline delimiter because currency must remain ordinary text.
+VIEWER SEARCH/FILTER
+Search/filter large inventories without dropping MathJax typesetting or representation rendering.
 
-6. PROMPT DUPLICATION
-Preserve mapped learning jobs and intended repetition, but avoid obvious mechanical duplication.
-Especially review repeated Compare Relationships items across Unit 1:
-- do not create verbatim or near-verbatim copies with identical values/stimuli when variation is allowed;
-- vary wording, values, representation pair, or comparison focus inside the accepted variation contract;
-- do not change the mapped evidence demand just to create variety.
+MATHJAX VIEWER
+Use MathJax v3/project equivalent and re-typeset dynamically rendered content.
+Inline delimiters use `\( ... \)`, not `$...$`.
 
-7. MATCHING ORDER
-Keep the corrected function-family matching behavior.
-Visible family/panel order must not reveal the answer key.
+===============================================================================
+11. DESTINATION-SPECIFIC CONTRACTS
+===============================================================================
 
-8. ANSWER-NEUTRAL GRAPHS
-Keep the corrected graph behavior:
-- use the registered graph tool;
-- no hand-built coordinate/function graph fallback;
-- no special dot/callout/annotation on an intercept, vertex, zero, intersection, or other feature the student is being asked to identify;
-- discrete point relations remain points;
-- continuous relationships remain continuous;
-- preserve square coordinate-grid appearance and native aspect ratio.
+EXIT
+Author the exact accepted Exit map.
+Preserve slot identity, NEW/REASSESS role, target, carry-forward source, evidence job, structure, response, and representation job.
+Fresh reassessments must remain fresh parallels inside allowed variation axes.
 
-RENDER QA — MUST ACTUALLY TEST THE FINISHED OUTPUT
-RENDER_QA_REPORT.json must contain the required fields. Missing fields are a QA failure, not an implicit PASS.
+SUMMATIVE — SECURE
+Author every accepted secure Summative slot as finished secure content:
+- prompt/stimulus
+- target/I Can/evidence job/student action
+- Question Structure
+- response mode
+- required representations
+- key
+- solution/scoring criteria
+- form/slot/family/parallel provenance.
 
-At minimum require:
+Secure does not mean reference-only.
+Do not pad forms to consume a time quota.
+Use current profile/map for form count and evidence count.
+
+PRACTICE
+Author the accepted Practice map exactly.
+When the current Algebra profile declares 24 per section = 8 Intro + 8 Review + 8 Mastery, enforce it.
+Intro/Review/Mastery meanings come from the current Framework/profile/map.
+Do not copy secure Exit/Summative prompts into Practice.
+
+WTC
+Preserve the accepted connected multipart routine:
+- coherent shared stimulus
+- real carry-forward
+- exact dependency contract
+- required response surfaces/representations.
+
+SEEDS
+Preserve mapped reusable seed identities/ideas/variation guidance.
+No filler quota.
+
+===============================================================================
+12. QA REPORTS
+===============================================================================
+
+MAP_FIDELITY_REPORT — HARD
+Generate machine-readable MAP_FIDELITY_REPORT.json based on accepted map vs finished Bank.
+
+At minimum report:
+- status
+- accepted_map_fingerprint
+- expected/authored record ID sets by destination
+- missing records
+- unexpected records
+- identity-field mismatches
+- semantic behavior mismatches
+- representation-content mismatches
+- destination-specific role/chain/blueprint/stage/dependency mismatches
+- source_map_snapshot_mismatches
+- mismatch_count
+
+PASS requires mismatch_count = 0.
+
+RENDER_QA_REPORT — HARD
+Generate from FINISHED student_html, viewer HTML/CSS/JS, assets, and render traces.
+
+Required keys:
 - status
 - graph_tool_expected_count
 - graph_tool_executed_count
 - graph_tool_execution_mismatches
 - unregistered_graph_markup_mismatches
+- representation_component_mismatches
 - representation_markup_mismatches
 - graph_semantic_mode_mismatches
 - graph_answer_leak_mismatches
+- graph_required_evidence_out_of_view_mismatches
 - graph_range_clip_mismatches
 - graph_aspect_distortion_mismatches
 - unresolved_representation_refs
@@ -164,84 +631,152 @@ At minimum require:
 - matching_order_leak_mismatches
 - duplicate_prompt_review_mismatches
 - table_layout_contract_mismatches
+- viewer_compact_metadata_mismatches
 - viewer_metadata_mismatches
+- secure_viewer_leak_mismatches
+- required_schema_keys_missing
 - issue_count
 
+Every required key must exist, even when empty/zero.
+Missing schema keys are themselves a FAIL.
+
 PASS requires:
-- every required field present;
-- issue_count = 0;
-- all mismatch arrays empty.
+- required_schema_keys_missing = []
+- graph tool expected/executed reconciled
+- every mismatch array empty
+- issue_count = 0.
 
-MAP FIDELITY
-The finished Bank must still reconcile to the accepted map:
-- exact accepted record ID set;
-- no missing or unexpected canonical records;
-- Exit chain preserved;
-- Summative blueprint preserved;
-- exact 8 Intro / 8 Review / 8 Mastery per section for Practice 1;
-- WTC dependency sequence preserved;
-- approved six Seeds preserved.
-MAP_FIDELITY_REPORT mismatch_count must equal 0.
+REQUIRED QA METHOD — REPRESENTATION COMPONENT PARSE
+Do not infer representation completeness from metadata.
+For each record:
+1. determine expected visible components from accepted representation_mode/routes;
+2. inspect finished student_html;
+3. count/identify actual visible graph/table/equation/diagram/response-surface components;
+4. fail if any required component is absent.
 
-DO NOT CHANGE
-- Do not change the accepted Unit 1 Bank Map.
-- Do not change the Algebra Framework for this rerun.
-- Do not change Question Structure.
-- Do not change graph_tool_v12.
-- Do not redesign the approved viewer information architecture.
-- Do not revive Practice 2/3, Extra Practice, CYU, finished Warm-Ups, or fixed Notes EX/YTI inventory as canonical Bank content.
-- Do not pad Summative forms just to reach a time quota.
-- Do not use historical Unit Banks as curriculum authority.
+For equation-required modes, inspect the visible prompt text/math AND separate equation/reference objects.
+Do not count answer/solution/metadata-only equations.
 
-RUNTIME / CONTINUATION DISCIPLINE
-This build has previously taken 20+ minutes.
+REQUIRED QA METHOD — GRAPH EVIDENCE CONTAINMENT
+For every graph-read/graph-use task:
+1. derive prompt-required graph values/features;
+2. compare against the actual generated graph bounds/parameters;
+3. fail if required evidence is outside or clipped;
+4. when possible record the offending requested value and computed coordinate.
 
-Treat Step 3b as one continuation-safe production job:
-- read each unchanged authority once;
-- use the accepted PASS map as the semantic starting point;
-- do not redo Step 3a;
-- do not repeatedly reread canonical sources for reassurance;
-- begin authoring promptly;
-- checkpoint completed destinations/phases;
-- write outputs incrementally;
-- if execution ends before packaging and there is no real HARD failure, return:
-  STEP3B_INCOMPLETE_CONTINUE
-  plus the exact completed phase and next phase.
-On "cont", resume from the checkpoint. Do not restart discovery.
+===============================================================================
+13. OUTPUT / MANIFEST
+===============================================================================
 
-Do not misreport runtime exhaustion as a bad request or missing dependency.
-
-FINAL OUTPUT
-Produce one complete replacement Bank ZIP only when all hard QA passes.
-Expected canonical Bank includes:
+COMPLETE BANK OUTPUT
+Build one complete replacement Unit Bank with:
 - BANK_MANIFEST.json
 - ITEM_INDEX.json
-- exit.json
-- summative secure slice
-- practice1.json
-- wtc.json
-- seeds.json
+- destination slices exactly as declared by accepted map/profile
 - figures/assets actually used
+- generate/render scripts/logs when required by profile/tool contract
 - PROVENANCE.json
 - BUILD_REPORT.txt
 - MAP_FIDELITY_REPORT.json
 - RENDER_QA_REPORT.json
-- inspection.html
-- unit1.html
-- source_map/ snapshot of the accepted map files
+- inspection.html when required
+- unit viewer when required
+- source_map/ accepted-map snapshot.
 
-Final manifest:
+BANK_MANIFEST FINAL STATE — HARD
+Must include:
 - status = COMPLETE
 - ready_for_downstream = true
 - pending = []
 - qa_status = PASS
-- accepted_map_fingerprint = 38968f43b8b5ee65c20da0bfb6d66df19ba02925a61acaa4a3ba44de3eb84753
+- accepted_map_fingerprint
+- accepted_map_root = source_map/ (or equivalent packaged path)
+- course/profile identity/version
+- canonical destination paths
+- exact canonical record counts
+- unit viewer path when required
+- map fidelity report path/status
+- render QA report path/status
+- registered tool identities when relevant.
 
-GITHUB SAFETY
-Read/inspect GitHub as needed.
-Do NOT write, commit, push, delete, or trigger a workflow that writes to GitHub.
-Return the complete replacement ZIP for the teacher to sync manually.
+ITEM_INDEX
+Index every canonical Bank record exactly once.
+No retired/stale records.
+Preserve destination/path/key, security/record mode, source_map_record_id, and accepted_map_fingerprint needed downstream.
 
-BOTTOM LINE
-This is a finishing rerun, not another redesign cycle.
-Use the accepted map, preserve the map as a bundled source snapshot, build the Bank, fix the viewer/render issues above, run real QA, and package the result.
+PROVENANCE
+Record:
+- accepted map fingerprint + original pins
+- current build pins
+- compatibility status
+- actual higher-authority identities used
+- registered tool identities
+- BUILD vs REPAIR mode
+- touched record/surface set for REPAIR.
+
+===============================================================================
+14. FINAL CANONICAL QA
+===============================================================================
+
+Before COMPLETE:
+[ ] accepted map status/fingerprint verified
+[ ] relevant authority compatibility verified; harmless repo drift not mistaken for semantic drift
+[ ] canonical record IDs/counts exactly reconcile
+[ ] source_map/ snapshot is complete and hash/fingerprint consistent
+[ ] every record retains source_map_record_id + accepted_map_fingerprint
+[ ] exact target/I Can/stage/evidence/student-action/structure/response identities preserved
+[ ] finished visible representations match representation_mode and routes
+[ ] every mixed representation contains every required visible component
+[ ] equation-required records contain a visible usable equation, not only a mention of one
+[ ] no unnecessary duplicate equation display when equation is already naturally in prompt
+[ ] all answers/solutions/math correct
+[ ] no unauthorized coordinate/function graph fallback
+[ ] graph tool routes actually executed
+[ ] standard graphs preserve square/native aspect
+[ ] discrete vs continuous semantics correct
+[ ] no answer-revealing special markers/callouts
+[ ] every prompt-required graph value/feature is visible inside graph bounds with usable margin
+[ ] matching/category order does not leak answers
+[ ] fresh parallels are not mechanical duplicates
+[ ] compact tables remain compact in final viewer CSS/layout
+[ ] viewer shows top controls + compact totals strip
+[ ] viewer compact metadata line includes ID/stage/target/full I Can ID/Question Structure/representation_mode
+[ ] viewer also shows readable IC# — actual statement
+[ ] full metadata/map trace remains available
+[ ] secure Summative public viewer leaks no secure prompt/stimulus/key/solution
+[ ] MAP_FIDELITY_REPORT mismatch_count = 0
+[ ] RENDER_QA_REPORT contains every required key and issue_count = 0
+[ ] BANK_MANIFEST COMPLETE / ready_for_downstream true / pending [] / qa_status PASS
+
+If a HARD check fails:
+- repair it within accepted variation authority and rerun QA; OR
+- fail closed with the specific code.
+Do not claim COMPLETE on a known defect.
+
+===============================================================================
+15. BUILD ORDER — CONTINUATION SAFE
+===============================================================================
+
+0. If a valid checkpoint exists, resume from next_phase.
+1. Read request + accepted map + actual required authorities ONCE.
+2. Run compatibility gate and targeted semantic recheck.
+3. Select BUILD or REPAIR.
+4. Build expected-record table from accepted map; in REPAIR also build touched-record/surface set.
+5. Create/confirm staging tree and checkpoint.
+6. Author/repair destination slices incrementally; checkpoint after each.
+7. Generate/regenerate required representations/assets by executing registered tools.
+8. Run representation-component scan.
+9. Run graph evidence-containment scan.
+10. Run prompt duplication, matching-order, MathJax, redundancy, table, and secure-viewer scans.
+11. Build ITEM_INDEX + PROVENANCE + source_map/ snapshot.
+12. Generate MAP_FIDELITY_REPORT.json.
+13. Build/update teacher inspection viewer with approved dense layout.
+14. Generate RENDER_QA_REPORT.json from finished outputs.
+15. Run final canonical QA.
+16. Remove `.step3b_work/` from final tree.
+17. Package one complete replacement Bank ZIP and STOP.
+
+If execution ends before Step 17 with no real HARD failure:
+return `STEP3B_INCOMPLETE_CONTINUE`, save checkpoint, and resume later.
+
+END — STEP 3B PROFILE-DRIVEN COMPLETE BANK
