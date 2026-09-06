@@ -5,7 +5,7 @@ STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
 ROLE: Build or repair one complete canonical Unit Bank from one accepted Step 3a Bank Map.
-REVISION: 2026-09-06 vNEXT clean rebuild — source-map travel, BUILD/REPAIR modes, representation completeness, graph evidence containment, teacher-inspection viewer, strict finished-output QA.
+REVISION: 2026-09-06 vNEXT.2 — clean BUILD/REPAIR architecture + source-map travel + strict finished-output QA + two-line continuation handoff + File Library-first full-Bank recovery.
 
 AUTHORITY — HARD
 1. current explicit teacher instruction / current build request
@@ -96,6 +96,7 @@ REPAIR MODE — HARD
 In REPAIR mode:
 - accepted map remains authority;
 - current Bank is only the authored starting artifact;
+- materialize the complete prior Bank locally as early as possible using the FULL BANK ARTIFACT RECOVERY order below;
 - identify an explicit touched-record/touched-surface set;
 - preserve untouched authored records byte-for-byte when practical;
 - repair touched records only inside their accepted map variation contracts;
@@ -125,6 +126,40 @@ PRODUCTION-FIRST — HARD
 - Prefer deterministic scripts for repetitive indexing, asset generation, comparisons, and QA.
 - Do not spend the execution window reconstructing information already present in accepted map files.
 
+FULL BANK ARTIFACT RECOVERY — HARD
+In REPAIR mode or a continuation of REPAIR, a complete prior Bank package is the preferred way to materialize the authored Bank and binary assets into the working sandbox.
+
+If the current sandbox does not already contain the complete Bank tree, use this recovery order immediately:
+1. use a complete Bank ZIP already attached in the current conversation when available;
+2. otherwise search the user's ChatGPT File Library ONCE with a targeted query for the most recent matching successful complete Bank ZIP, prioritizing the exact expected output name and course/unit/job identity (for example `algebra_1_u1_bank_complete.zip`);
+3. materialize that complete ZIP locally and overlay the saved REPAIR checkpoint/touched files;
+4. only if no matching complete Bank artifact exists in conversation files or File Library should connector/GitHub binary retrieval be attempted;
+5. do not reconstruct dozens/hundreds of binary assets piecemeal when a prior complete Bank package exists.
+
+FILE LIBRARY RECOVERY — HARD
+- File Library is a normal artifact source for recovering a previously generated complete Bank package; it is not curriculum authority.
+- Verify the recovered Bank's accepted_map_fingerprint and canonical record identity before using it as the REPAIR base.
+- Prefer the most recent matching COMPLETE/PASS Bank artifact whose fingerprint matches the accepted map.
+- Once a matching artifact is found, proceed directly to materialization + repair. Do not continue exploring alternate network routes.
+- Do not repeatedly search the File Library. One targeted recovery search is the default; broaden only if the exact expected artifact name is not found.
+- Do not use an unrelated or older Bank when the fingerprint/record set does not reconcile.
+
+NO NETWORK-DETOUR NARRATION — HARD
+Do not waste execution time or user-visible output narrating failed direct-network/GitHub binary materialization when a File Library recovery path is available.
+
+Specifically, do NOT produce process chatter such as:
+"The direct network route is blocked in the sandbox, but there's a better continuation path..."
+
+Instead:
+- search/recover/materialize silently as part of execution;
+- if a matching artifact is found and a user-visible progress note is genuinely needed, use at most:
+  `Found the prior complete Bank in File Library; resuming the repair from it.`
+- then continue the repair immediately.
+
+Only ask the user for a full Bank ZIP when:
+- no complete matching artifact exists in the current conversation or File Library; AND
+- the available connector cannot materialize the required binary assets.
+
 WORKING CHECKPOINT — HARD
 Create `.step3b_work/BUILD_CHECKPOINT.json` in staging with at minimum:
 - mode = BUILD or REPAIR
@@ -143,10 +178,35 @@ The checkpoint is working state only and is not included in the final canonical 
 CONTINUATION — HARD
 If execution time ends and there is no real HARD failure:
 - save checkpoint and completed staging work;
-- return `STEP3B_INCOMPLETE_CONTINUE`;
-- state exact completed phase and next phase;
+- package a downloadable continuation/checkpoint ZIP containing the checkpoint and all staged work needed to resume;
+- return internal status `STEP3B_INCOMPLETE_CONTINUE`;
 - on `cont`, resume from checkpoint;
 - do not restart discovery or reread unchanged authorities.
+
+CONTINUATION USER RESPONSE — HARD
+The user should never have to infer what to type next.
+
+When Step 3b stops in a valid `STEP3B_INCOMPLETE_CONTINUE` state, the USER-VISIBLE RESPONSE must contain EXACTLY TWO LINES and NOTHING ELSE.
+
+In REPAIR mode:
+[Download the Step 3b Repair Checkpoint ZIP](<actual checkpoint ZIP link>)
+TYPE `cont` TO GET REPAIRED BANK
+
+In BUILD mode:
+[Download the Step 3b Build Checkpoint ZIP](<actual checkpoint ZIP link>)
+TYPE `cont` TO GET BANK
+
+HARD presentation rules:
+- no explanation paragraph;
+- no status paragraph;
+- no description of what was completed;
+- no description of what remains;
+- no troubleshooting prose;
+- no code block;
+- the download link is line 1;
+- the type-cont instruction is line 2;
+- `cont` is the exact continuation command;
+- detailed phase/status information belongs INSIDE the checkpoint ZIP, not in the chat response.
 
 Runtime exhaustion is not a bad request, missing dependency, or curriculum failure.
 
