@@ -1,4 +1,4 @@
-ALGEBRA 1 FRAMEWORK — PORTABLE MEMORY v7.2 — CURRENT MASTERY-SPIRAL / FLUENCY / EVIDENCE ARCHITECTURE
+ALGEBRA 1 FRAMEWORK — PORTABLE MEMORY v7.3 — CURRENT MASTERY-SPIRAL / FLUENCY / EVIDENCE ARCHITECTURE
 =========================================================================================================
 
 CANONICAL STORAGE / DISCOVERY
@@ -67,7 +67,7 @@ Use curriculum/mastery_spiral_mapping.html and curriculum/mastery_goal_map.json 
 
 CANONICAL OPERATIONAL MAPS — HARD
 - curriculum/exit_evidence_map.json + .html own the coursewide Exit evidence allocation and reassessment chain.
-- curriculum/warmup_progression_map.json + .html own the four-lane course-long Warm-Up progression.
+- curriculum/warmup_progression_map.json + .html own the four-lane course-long Warm-Up progression, including section-by-section introduction/maintenance timing and Unit solve ceilings.
 These maps operationalize the Assessment Plans; they may not contradict them.
 
 ================================================================
@@ -91,22 +91,69 @@ Do not collapse these two systems.
 Every normal Algebra Warm-Up uses four stable jobs:
 
 Q1 · SOLVE / EQUATION FLUENCY
-A compact solving mini-set. Course progression:
-  one-step -> mixed one-step -> two-step -> combining like terms -> distribution -> multi-step -> variables on both sides -> rational coefficients -> cumulative mixed solving.
-Older types continue after harder types appear.
+A compact solving mini-set. Default = TWO equations.
+- Three equations are allowed when all are very short one-step retrieval.
+- One equation is allowed when the solve method is substantially longer.
+- Older solve types remain mixed after newer types appear.
+- Never introduce a solve type earlier than the current coursewide Warm-Up progression map permits.
+- Difficulty comes from fluent execution and method choice, not arbitrary coefficient inflation.
+
+COURSE-LONG SOLVE CEILINGS — HARD
+Unit 1:
+  one-step fluency -> simple two-step near the end.
+  NO distribution-to-solve, one-sided multi-step simplify-first equations, or variables on both sides in the Solve lane.
+
+Unit 2:
+  strengthen two-step -> combine like terms -> distribution -> one-sided multi-step.
+  Only a very simple variables-on-both-sides preview late in Unit 2.
+
+Unit 3:
+  finish the full linear-equation progression:
+  variables on both sides -> distribution/like terms -> reasonable rational/fraction coefficients -> cumulative full linear mix.
+
+Units 4–5:
+  maintain full linear solving.
+  Do NOT keep making linear equations uglier merely because the course is later.
+
+Unit 6:
+  maintain linear retrieval and add quadratic solve methods only AFTER each method has been taught.
+
+Units 7–8:
+  cumulative linear/quadratic solving and method choice.
+  Do NOT introduce logarithmic/exponential-equation solving.
+
+The exact section timing inside those ceilings is owned by:
+  curriculum/warmup_progression_map.json
 
 Q2 · DIAMOND / FACTORING PATTERN
-Number product-sum -> integer factor pairs -> factoring trinomials -> special factoring patterns.
+Number product-sum -> signed integer factor pairs -> trinomial structure -> special factoring patterns -> maintenance.
 Diamond is a family; blanks/known cells may vary when the mathematics warrants it.
+The numeric product-sum idea intentionally has a long runway before symbolic factoring.
 
 Q3 · SKILL REVIEW
-Rotate foundational skills: fractions, integer operations, order of operations, distribution, combining terms, substitution/evaluation, exponent laws, function notation, and upcoming prerequisites. It may deliberately preteach a useful prerequisite.
+Rotate foundational skills and useful prerequisites intentionally:
+fractions, integer operations, order of operations, distribution, combining terms,
+substitution/evaluation, exponent laws, function notation, graph/coordinate fluency,
+and upcoming prerequisites.
+It may preteach a prerequisite but should not become a second lesson on unreached content.
 For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use if needed.
 
 Q4 · CHALLENGE
-Short reasoning/pattern/generalization/error-analysis/representation/nonroutine work. The challenge is not merely ugly arithmetic. Everyone can attempt it; full completion is not required for every student.
+Short reasoning/pattern/generalization/error-analysis/representation/nonroutine work.
+The challenge is not merely ugly arithmetic.
+Across the three Warm-Ups in a normal section, vary the thinking when useful:
+pattern, explain, compare, error analysis, representation, generalize, model, critique.
+Everyone can attempt it; full completion is not required for every student.
 
-Warm-Up routing is NOT 2 Current + 1 Review + 1 Mastery and is NOT an A/B/C stage sampler anymore.
+DEFAULT SECTION RHYTHM
+- 3 Warm-Ups per section unless the teacher/calendar changes it.
+- Every day keeps the same four jobs.
+- The three days are fresh instances, not copies with changed numbers.
+- New fluency enters gradually; earlier fluency remains alive.
+- Warm-Up questions are generated downstream from the map and are NOT canonical Bank inventory.
+- Algebra Warm-Ups remain explicitly exempt from universal Question Structure.
+
+Warm-Up routing is NOT 2 Current + 1 Review + 1 Mastery and is NOT an A/B/C stage sampler.
 
 ================================================================
 5. OFFICIAL EXIT TICKET ARCHITECTURE — HARD
@@ -230,26 +277,28 @@ Read the relevant current profile after this Framework:
 - profiles/assessment_evidence_philosophy.json
 - performance/demos/investigations profiles as applicable
 
-If a legacy lower profile contradicts this v7.2 architecture, this Framework wins and the stale profile should be reconciled at the smallest owning layer rather than treated as a competing rule.
+If a legacy lower profile contradicts this v7.3 architecture, this Framework wins and the stale profile should be reconciled at the smallest owning layer rather than treated as a competing rule.
 
 ================================================================
-12. CURRENT BUILD PROCEDURE / NEXT STEP
+12. CURRENT BUILD PROCEDURE
 ================================================================
 
 The role architecture and operational maps above are settled. Current procedure is owned by the registered PMs:
-- Step 3a `pms_build/bank_map.txt` maps only the current canonical Bank destinations and consumes the canonical Exit map rather than recreating it. Its semantic QA must reject structure/action/representation mismatches rather than passing because metadata fields exist.
+- Step 3a `pms_build/bank_map.txt` maps only the current canonical Bank destinations and consumes the canonical Exit map rather than recreating it.
 - Step 3b `pms_build/bank_complete.txt` authors Exit first, then Summative V1-V6, Practice 1, WTC, and mapped Seeds.
-- Steps 5-11 are profile-driven downstream builders. For Algebra they must use this Framework/profile architecture instead of Physics-specific or retired Bank routes.
+- Step 8 `pms_build/warmup.txt` consumes the already-approved coursewide Warm-Up progression map and authors ONLY the requested Unit. It must not redesign the course progression during a Unit build.
+- Other downstream Steps are profile-driven and must use this Framework/profile architecture instead of Physics-specific or retired Bank routes.
 
-CURRENT NEXT BUILD:
-1. Re-run Unit 1 Bank Map under Step 3a using this v7.2 architecture.
-2. Inspect semantic Question Structure fit, representation routes, Exit allocation, Summative blueprint/time, exact 8/8/8 Practice 1 blocks, WTC, and Seeds.
-3. If accepted, build the complete Unit 1 Bank under Step 3b.
-4. Then run the reconciled Practice-to-Summative chain for Unit 1 before scaling to Units 2-8.
+WARM-UP BUILD SEQUENCE
+1. Keep the coursewide progression map stable.
+2. For a requested Unit, read the five exact section rows.
+3. Author the requested number of daily Warm-Ups inside those row/Unit ceilings.
+4. Render and QA the Unit package.
+5. If classroom testing exposes a SYSTEMIC progression problem, revise the coursewide map/Framework deliberately before the next Unit. Do not silently drift one Unit away from the map.
 
 Do not revive v6.41 139-per-section, Practice 2/3, fixed Notes-pair, Bank-CYU, or Bank-Warm-Up assumptions.
 
 LEGACY SUPPORTING manifest.json NOTE
 The supporting-root `manifest.json` is an old packaging/hash inventory from v6.41 and is NOT an authority or discovery front door. Current builds must use this stable Framework front door, exact Assessment Plans, current profiles/contracts, and current operational maps. Do not use stale manifest hashes to override current files.
 
-END — ALGEBRA 1 FRAMEWORK v7.2
+END — ALGEBRA 1 FRAMEWORK v7.3

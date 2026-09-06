@@ -1,25 +1,27 @@
 {
   "name": "Algebra 1 Recurring + Assessment Resource Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.3",
-  "framework_version": "v7.2",
+  "profile_version": "v2.4",
+  "framework_version": "v7.3",
   "role": "Course-specific Warm-Up / Exit / Progress / Review / Summative behavior. Shared PMs own procedure and rendering mechanics; this profile owns Algebra-specific behavior.",
   "warmups": {
     "usage_mode": "notability_first",
     "path_template": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
-    "visible_title_pattern": "Section {U}.{S} \u2014 Day {D}",
+    "visible_title_pattern": "Section {U}.{S} — Day {D}",
     "default_days_per_section": 3,
     "days_rule": "Build three daily Warm-Ups per section by default unless the current teacher request/calendar explicitly changes the count.",
-    "architecture": "Every daily Algebra Warm-Up uses four stable jobs; it is a separate fluency track, not a Current/Review/Mastery sampler.",
+    "architecture": "Every daily Algebra Warm-Up uses four stable jobs; it is a separate course-long fluency track, not a Current/Review/Mastery sampler.",
+    "progression_authority": "The coursewide curriculum/warmup_progression_map.json owns exact section-by-section introduction/maintenance timing. A Unit build must not introduce a later solve type early or redesign the course progression.",
     "slots": {
-      "Q1 Solve / Equation Fluency": "Compact solving mini-set. Course progression: one-step -> mixed one-step -> two-step -> combining like terms -> distribution -> multi-step -> variables both sides -> rational coefficients -> cumulative mix. Older types remain mixed.",
-      "Q2 Diamond / Factoring Pattern": "Product-sum number reasoning -> integer factor pairs -> factoring trinomials -> special factoring patterns.",
-      "Q3 Skill Review": "Foundational rotation: fractions, integers, order of operations, distribution, combining like terms, substitution/evaluation, exponent laws, function notation, and useful upcoming prerequisites.",
-      "Q4 Challenge": "Reasoning/pattern/generalization/error analysis/representation/nonroutine problem; not merely harder arithmetic."
+      "Q1 Solve / Equation Fluency": "Normally a 2-equation mini-set. Follow the current section row and Unit solve ceiling in the coursewide progression map. Older types remain mixed after new types appear; do not inflate coefficients for difficulty.",
+      "Q2 Diamond / Factoring Pattern": "Normally one product-sum/diamond/factoring-pattern job. Follow the coursewide map from numeric product-sum to signed factor pairs to factoring maintenance.",
+      "Q3 Skill Review": "Use the current section's planned prerequisite/review theme. A small coherent mini-set is allowed; do not turn this lane into random review.",
+      "Q4 Challenge": "One short reasoning/pattern/generalization/error analysis/representation/nonroutine problem; not merely harder arithmetic. Vary challenge thinking across the section when useful."
     },
     "calculator_language": "For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use if needed.",
     "layout": "Preserve the tested four-slot Notability layout unless a later visual decision changes it.",
     "progression_map": "curriculum/warmup_progression_map.json",
+    "progression_map_schema": "algebra-warmup-progression-map/1.1",
     "question_structure_exception": "Warm-Ups do not use the universal Question Structure requirement; follow the four stable fluency jobs and the Framework progression map."
   },
   "exit_tickets": {

@@ -1,12 +1,14 @@
-BUILD WARM-UPS — SINGLE PASS / PROFILE-DRIVEN
-==============================================
+BUILD WARM-UPS — SINGLE PASS / PROFILE-DRIVEN / COURSE-MAP LOCKED
+=================================================================
 
 STATUS: CURRENT
 STEP: 8
 JOB: warmup
-ROLE: Build the selected Unit Warm-Ups from the selected course Framework/profile and its declared Warm-Up source architecture.
+REVISION: 2026-09-06 vNEXT.2
+ROLE: Build the selected Unit Warm-Ups from the selected course Framework/profile and its already-approved Warm-Up source architecture.
 
 0. AUTHORITY — HARD
+-------------------
 Pin system + selected course repos once.
 Read:
 1. Curriculum Philosophy
@@ -14,53 +16,167 @@ Read:
 3. selected Course Framework + exact Unit Assessment Plan as applicable
 4. Framework-declared recurring/Warm-Up profile
 5. canonical Warm-Up progression/route map if declared
-6. COMPLETE Bank only if the selected course profile says Warm-Ups are Bank-routed
-7. this PM
-8. current course Warm-Up path/visual contract + same-course shell/CSS exemplar when required
+6. this PM
+7. current course Warm-Up path/visual contract + same-course shell/CSS exemplar when required
+
+NO PUBLIC WEB — HARD
+This is a closed-project-source build.
+Do not use public web search, search engines, outside curriculum websites, external question banks, or general internet research.
+Allowed sources are the request files, declared project GitHub repositories, registered project tools/contracts, and explicitly allowed recovery sources under the Runtime Contract.
+Missing required project source -> fail closed.
 
 QUESTION STRUCTURE
-Use it only when the selected course requires it. Algebra 1 explicitly exempts Warm-Ups from the universal Question Structure requirement.
+Use it only when the selected course requires it.
+Algebra 1 explicitly exempts Warm-Ups from the universal Question Structure requirement.
 
 1. SOURCE RESOLUTION — HARD
+---------------------------
 Do not assume every course stores finished Warm-Ups in the Bank.
 
-ALGEBRA 1 v7.1
+ALGEBRA 1 v7.3
 - finished Warm-Up questions are NOT Bank inventory;
 - author from curriculum/warmup_progression_map.json + recurring profile;
+- require map schema algebra-warmup-progression-map/1.1 or a later compatible schema;
+- the map is COURSE-LONG authority and must already contain all eight Units;
 - default = 3 daily Warm-Ups per section unless teacher/calendar changes it;
 - every day has four stable jobs:
   Q1 Solve / Equation Fluency
   Q2 Diamond / Factoring Pattern
   Q3 Skill Review
   Q4 Challenge
-- vary instances across the three days while staying inside the section progression row;
-- older solving/factoring skills continue to mix after harder types are introduced;
+- the Unit build consumes the five requested section rows; it does NOT redesign or extend the course progression;
+- never introduce a solve/factoring type earlier than the current section row or Unit ceiling permits;
+- older fluency continues to mix after harder types are introduced;
 - Challenge rewards reasoning, not ugly arithmetic;
 - encourage non-calculator fraction/integer attempts while still allowing calculator use when needed.
+
+Do NOT require a COMPLETE Bank for Algebra Warm-Ups.
+Do NOT use canonical Exit or secure Summative questions as Warm-Up source material.
+A current Bank may be read only when an explicit teacher request requires comparison/avoidance; otherwise the coursewide Warm-Up map is sufficient.
 
 OTHER COURSES
 If Physics or another course declares canonical Bank Warm-Up routes, render those faithfully and do not replace them with Algebra's four-lane routine.
 
-2. AUTHORING QUALITY — ALGEBRA
-Keep concise, routine-friendly wording.
-Q1 may contain a compact mini-set when profile says so.
-Use natural numbers/coefficients.
-Do not force each Warm-Up into Intro/Review/Mastery stage sampling.
-Do not turn Challenge into a mini-test.
+2. ALGEBRA DAILY AUTHORING — HARD
+---------------------------------
+Build the requested number of days INSIDE each section row.
 
-3. RENDER / PATHS
+Q1 · SOLVE / EQUATION FLUENCY
+- default mini-set = 2 equations;
+- 3 equations allowed only when all are very short one-step retrieval;
+- 1 equation allowed when the method is substantially longer;
+- across the normal three days, newly introduced work should appear gradually and earlier types should remain alive;
+- do not make every Q1 equation the newest type;
+- do not use coefficient inflation as fake difficulty;
+- obey the Unit solve ceiling exactly.
+
+Q2 · DIAMOND / FACTORING PATTERN
+- normally one job per day;
+- vary known/missing cells when mathematically useful;
+- stay inside the section's numeric/factoring progression;
+- do not jump from number product-sum directly to symbolic factoring before the map permits it.
+
+Q3 · SKILL REVIEW
+- follow the section's planned prerequisite/review theme;
+- normally one short job;
+- a 2–3 item mini-set is allowed only when all items serve one coherent narrow fluency purpose;
+- the lane is intentional prerequisite runway, not random review;
+- it may preview a prerequisite but must not teach unreached course content as a second lesson.
+
+Q4 · CHALLENGE
+- one short reasoning job;
+- keep it accessible enough that everyone can attempt it;
+- full completion is not required for every student;
+- across the section's days, vary thinking when useful:
+  pattern / explain / compare / error analysis / representation / generalize / model / critique;
+- do not merely increase arithmetic length.
+
+3. THREE-DAY SECTION RHYTHM
+---------------------------
+For the default three days:
+- Day 1 may emphasize clean entry/retrieval.
+- Day 2 may emphasize the new or expanding fluency named in the section row.
+- Day 3 should mix/strengthen the row and keep earlier fluency alive.
+
+This is a planning tendency, NOT three separate stages and NOT a rigid template.
+If a section row contains no new solve type, all three days may be cumulative maintenance with useful variation.
+
+Freshness:
+- do not clone Day 1 and only change numbers for Days 2–3;
+- repeated routines are good; accidental duplicate questions are not;
+- the four job identities stay stable while instances vary.
+
+4. MATHEMATICAL QUALITY
+-----------------------
+Keep concise, routine-friendly wording.
+Use natural numbers/coefficients.
+Prefer mentally readable arithmetic when the target is reasoning rather than computation.
+Representations must be accurate and answer-neutral.
+Challenge may use a representation, but should not require a large multi-step project.
+
+Warm-Ups create learning/retrieval; they are not official evidence events.
+Do not label questions Intro / Review / Mastery.
+
+5. RENDER / PATHS
+-----------------
 Use selected-course Warm-Up path/visual contract and proven same-course shell when required.
 Preserve current Notability-first behavior for Algebra.
 No visible internal metadata.
+Do not redesign the Warm-Up CSS/shell during content authoring unless the teacher explicitly opens a visual revision.
 
-4. QA — HARD
+6. QA — HARD
+-------------
+Before PASS verify:
+
+SOURCE / ARCHITECTURE
 [ ] selected course Warm-Up source architecture correctly resolved
-[ ] Algebra uses progression map, not Bank route
+[ ] Algebra uses the current coursewide progression map, not a Bank route
+[ ] Algebra map contains all 8 Units / 40 sections
+[ ] requested Unit section titles/IDs match current Framework
+[ ] Unit build did not alter progression timing
 [ ] other courses keep their declared routes
+
+COUNT / DAILY JOBS
 [ ] daily count matches profile/request
+[ ] every Algebra day has all four stable jobs
+[ ] normal Algebra section has 3 fresh days unless request says otherwise
+
+SOLVE LANE
+[ ] no solve type introduced before current row/Unit ceiling
+[ ] older solve types remain meaningfully mixed
+[ ] Q1 mini-set size is appropriate
+[ ] no arbitrary coefficient inflation
+
+DIAMOND / REVIEW / CHALLENGE
+[ ] Diamond stays inside mapped progression
+[ ] Skill Review follows mapped section purpose
+[ ] Challenge is reasoning/nonroutine rather than ugly arithmetic
+[ ] Challenge thinking is not needlessly cloned across all three days
+
+CORRECTNESS / RENDER
 [ ] all questions mathematically correct
-[ ] four Algebra jobs present each day
 [ ] representations accurate and answer-neutral
 [ ] paths/CSS/shell correct
+[ ] no public-web source used
 
-Return the deployable Unit Warm-Up package.
+7. OUTPUT
+--------
+Return the deployable Unit Warm-Up package using the current course path contract.
+
+For Algebra, include a concise build report in the package:
+  _warmup_provenance/
+    unitN/
+      WARMUP_BUILD_REPORT.txt
+
+Report:
+- Framework/profile/map identities;
+- requested Unit;
+- day count;
+- section rows consumed;
+- Unit solve ceiling;
+- counts by Q1/Q2/Q3/Q4;
+- QA PASS/FAIL;
+- material warning only.
+
+Do not create a new Warm-Up map inside the Unit package.
+Do not include PM copies or staging files.

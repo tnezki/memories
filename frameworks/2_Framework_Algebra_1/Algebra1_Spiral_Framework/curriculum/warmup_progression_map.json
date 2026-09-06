@@ -1,8 +1,9 @@
 {
-  "schema": "algebra-warmup-progression-map/1.0",
+  "schema": "algebra-warmup-progression-map/1.1",
   "course": "Algebra 1",
-  "framework_version": "v7.1",
-  "authority": "Framework course-long fluency map. It is separate from Intro/Review/Mastery.",
+  "framework_version": "v7.3",
+  "authority": "Framework course-long fluency map. It is separate from Intro/Review/Mastery and owns when each Warm-Up lane introduces, expands, and maintains content.",
+  "default_days_per_section": 3,
   "slots": [
     "Solve / Equation Fluency",
     "Diamond / Factoring Pattern",
@@ -10,15 +11,39 @@
     "Challenge"
   ],
   "question_structure_exception": "Warm-Ups are explicitly excluded from the universal Question Structure requirement. Keep the four stable jobs concise and routine-driven while maintaining mathematical quality.",
-  "solve_rule": "Older solving types remain mixed after harder types are introduced; the lane becomes cumulative rather than replacing old skills.",
-  "diamond_rule": "Progress from number product-sum reasoning to factor-pair fluency and then factoring maintenance.",
-  "skill_review_rule": "Rotate foundations and useful prerequisites. For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use when needed.",
+  "daily_design": {
+    "Q1 Solve / Equation Fluency": "Normally a 2-equation mini-set. Three equations are allowed when all are very short one-step retrieval; one equation is allowed when the method is substantially longer. Never introduce a solve type earlier than the current section row/unit ceiling. Across the three section days, mix older types with the newly introduced type rather than making every equation the newest type.",
+    "Q2 Diamond / Factoring Pattern": "Normally one diamond/product-sum/factoring-pattern job per day. Vary which cells are known when mathematically useful. Build speed and structure recognition without turning the lane into a second full factoring lesson.",
+    "Q3 Skill Review": "Normally one short review job; a 2-3 item mini-set is allowed only when every item serves the same narrow prerequisite/fluency purpose. Use the listed section theme as a planned prerequisite runway, not random review.",
+    "Q4 Challenge": "One short reasoning job. Across a section's three days, vary the thinking when useful: pattern, explain, compare, error analysis, representation, generalize, model, or critique. Challenge means thinking, not uglier arithmetic."
+  },
+  "solve_rule": "Older solving types remain mixed after harder types are introduced; the lane becomes cumulative rather than replacing old skills. Difficulty comes from method choice and fluency, not coefficient inflation.",
+  "solve_unit_ceiling": {
+    "Unit 1": "One-step fluency, then simple two-step near the end. No distribution-to-solve, no multi-step simplify-first equations, and no variables on both sides in the Solve lane.",
+    "Unit 2": "Strengthen two-step; add combining like terms, distribution, and one-sided multi-step. Only a very simple variables-on-both-sides preview late in Unit 2.",
+    "Unit 3": "Finish the full linear-equation progression: variables on both sides, distribution/like terms, then reasonable rational/fraction coefficients. End with a cumulative full linear mix.",
+    "Unit 4": "Maintain full linear solving. Do not keep making coefficients or steps harder merely because the course is later.",
+    "Unit 5": "Maintain full linear solving while the conceptual course shifts toward factoring/quadratics.",
+    "Unit 6": "Keep linear retrieval and add quadratic solving methods only after each method has been taught.",
+    "Unit 7": "Cumulative linear/quadratic solving. No logarithmic/exponential-equation solving is introduced.",
+    "Unit 8": "Representative cumulative Algebra solving with linear/quadratic method choice; prioritize fluency and judgment over maximal complexity."
+  },
+  "diamond_rule": "Progress from number product-sum reasoning to signed factor-pair fluency, then connect that structure to trinomial/special-pattern factoring and maintain it.",
+  "diamond_unit_progression": {
+    "Unit 1": "Positive product/sum -> signed integer product/sum.",
+    "Unit 2": "Broader signed factor-pair fluency.",
+    "Unit 3": "Larger/mixed signed product-sum fluency; maintain speed and accuracy.",
+    "Unit 4": "Bridge numeric product-sum thinking into monic trinomial structure near the end of the Unit.",
+    "Unit 5": "Use the lane for actual factoring fluency and special patterns as those are taught.",
+    "Units 6-8": "Maintain mixed factoring patterns so factoring remains available as a tool."
+  },
+  "skill_review_rule": "Rotate foundations and useful prerequisites intentionally. The lane may preteach an upcoming prerequisite, but should not become a second lesson on unreached content. For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use when needed.",
   "challenge_rule": "Short reasoning/pattern/generalization/error analysis/representation/nonroutine work; not merely uglier arithmetic. Everyone may attempt it; full completion is not required.",
   "sections": [
     {
       "section_id": "1.1",
       "section_title": "Multiple Representations of Relationships",
-      "solve": "One-step addition/subtraction equations; small integers.",
+      "solve": "One-step addition/subtraction equations with small integers.",
       "diamond": "Positive whole-number product/sum facts.",
       "skill_review": "Integer signs, number-line sense, ordered pairs.",
       "challenge": "Coordinate pattern or missing-point reasoning."
@@ -26,7 +51,7 @@
     {
       "section_id": "1.2",
       "section_title": "Inputs, Outputs, and Functions",
-      "solve": "One-step multiplication/division equations.",
+      "solve": "One-step multiplication/division equations with small integers.",
       "diamond": "Positive product/sum with varied missing cells.",
       "skill_review": "Basic fraction meaning and equivalent fractions.",
       "challenge": "Input-output pattern or rule reasoning."
@@ -34,7 +59,7 @@
     {
       "section_id": "1.3",
       "section_title": "Function Families",
-      "solve": "Mixed one-step equations including negatives.",
+      "solve": "Mixed one-step equations, including negative values.",
       "diamond": "Integer product/sum, including negative values.",
       "skill_review": "Order of operations.",
       "challenge": "Compare change patterns without naming a family from appearance alone."
@@ -42,7 +67,7 @@
     {
       "section_id": "1.4",
       "section_title": "Expressions and Structure",
-      "solve": "Introduce two-step equations; keep one-step mixed in.",
+      "solve": "Introduce simple two-step equations; keep one-step equations mixed in.",
       "diamond": "Integer factor-pair/product-sum fluency.",
       "skill_review": "Combine like terms.",
       "challenge": "Equivalent-expression error analysis."
@@ -50,7 +75,7 @@
     {
       "section_id": "1.5",
       "section_title": "Equations as Models",
-      "solve": "Mixed two-step equations.",
+      "solve": "Mixed one-step and two-step equations. Do not introduce distribution or variables on both sides in the Solve lane yet.",
       "diamond": "Integer product/sum fluency.",
       "skill_review": "Distributive property.",
       "challenge": "Estimate/check an equation-in-context solution."
@@ -58,7 +83,7 @@
     {
       "section_id": "2.1",
       "section_title": "Rate of Change and Slope",
-      "solve": "Two-step cumulative solving.",
+      "solve": "Cumulative one-step/two-step solving with signed values.",
       "diamond": "Integer factor pairs with broader values.",
       "skill_review": "Fraction operations and signed-number fluency.",
       "challenge": "Rate/slope reasoning from a simple representation."
@@ -66,7 +91,7 @@
     {
       "section_id": "2.2",
       "section_title": "Graphing Linear Functions",
-      "solve": "Solve after combining like terms.",
+      "solve": "Introduce solving after combining like terms on one side; keep two-step equations mixed in.",
       "diamond": "Factor-pair fluency; mixed signs.",
       "skill_review": "Graph scale, ordered pairs, slope basics.",
       "challenge": "Graphing or scale error analysis."
@@ -74,7 +99,7 @@
     {
       "section_id": "2.3",
       "section_title": "Writing Linear Equations",
-      "solve": "Solve after distribution.",
+      "solve": "Introduce simple equations that require distribution before solving; keep earlier types mixed.",
       "diamond": "Product-sum search with larger products.",
       "skill_review": "Substitution/evaluation and early function notation.",
       "challenge": "Write a rule/equation from a representation."
@@ -82,7 +107,7 @@
     {
       "section_id": "2.4",
       "section_title": "Comparing Linear Representations",
-      "solve": "Multi-step equations on one side.",
+      "solve": "Mix combining like terms and distribution in one-sided multi-step equations.",
       "diamond": "Mixed-sign product/sum.",
       "skill_review": "One-step inequalities and number-line notation.",
       "challenge": "Compare representations using evidence."
@@ -90,7 +115,7 @@
     {
       "section_id": "2.5",
       "section_title": "Linear Modeling with Data",
-      "solve": "Introduce variables on both sides.",
+      "solve": "Cumulative one-sided multi-step solving; introduce only very simple variables-on-both-sides equations late in the section.",
       "diamond": "Factor-pair fluency with larger integer products.",
       "skill_review": "Rates, percents, and simple data reading.",
       "challenge": "Judge a linear model or prediction."
@@ -98,7 +123,7 @@
     {
       "section_id": "3.1",
       "section_title": "Graphing and Elimination",
-      "solve": "Variables on both sides; cumulative earlier types remain.",
+      "solve": "Simple variables-on-both-sides equations; cumulative earlier types remain.",
       "diamond": "Mixed integer factor pairs.",
       "skill_review": "Integer arithmetic useful for elimination.",
       "challenge": "Interpret a system solution or spot an elimination error."
@@ -106,7 +131,7 @@
     {
       "section_id": "3.2",
       "section_title": "Solving Systems by Substitution",
-      "solve": "Variables on both sides with distribution/like terms.",
+      "solve": "Variables on both sides with distribution and/or combining like terms.",
       "diamond": "Product-sum with positive and negative products.",
       "skill_review": "Distribution and combining like terms.",
       "challenge": "Substitution-method error analysis."
@@ -114,7 +139,7 @@
     {
       "section_id": "3.3",
       "section_title": "Writing and Solving Systems from Situations",
-      "solve": "Introduce simple rational coefficients; keep integer solving mixed.",
+      "solve": "Introduce simple rational/fraction coefficients while keeping integer solving mixed.",
       "diamond": "Larger factor-pair/product-sum reasoning.",
       "skill_review": "Write equations from contexts.",
       "challenge": "Translate two constraints into a mathematical plan."
@@ -122,7 +147,7 @@
     {
       "section_id": "3.4",
       "section_title": "Graphing Linear Inequalities",
-      "solve": "Simple rational-coefficient equations.",
+      "solve": "Rational-coefficient linear equations, including selected variables-on-both-sides cases.",
       "diamond": "Mixed product-sum fluency.",
       "skill_review": "Inequality sign rules and graph notation.",
       "challenge": "Boundary-line/test-point reasoning."
@@ -130,7 +155,7 @@
     {
       "section_id": "3.5",
       "section_title": "Linear Systems of Inequalities",
-      "solve": "Cumulative linear-equation mix.",
+      "solve": "Full cumulative linear-equation mix: one-step, two-step, simplify first, distribution, variables both sides, and reasonable rational coefficients.",
       "diamond": "Mixed factor-pair fluency.",
       "skill_review": "Graphing linear inequalities.",
       "challenge": "Feasible-region reasoning."
@@ -138,7 +163,7 @@
     {
       "section_id": "4.1",
       "section_title": "Recognizing Function Families",
-      "solve": "Rational coefficients and cumulative linear solving.",
+      "solve": "Cumulative full linear solving with an accuracy/efficiency focus; do not increase difficulty just because the course is later.",
       "diamond": "Fast product-sum/factor-pair retrieval.",
       "skill_review": "Function notation and evaluation.",
       "challenge": "Use evidence to distinguish function families."
@@ -146,7 +171,7 @@
     {
       "section_id": "4.2",
       "section_title": "Translations",
-      "solve": "Cumulative multi-step solving.",
+      "solve": "Cumulative linear solving; mix short two-step and variables-on-both-sides work.",
       "diamond": "Factor-pair speed/accuracy.",
       "skill_review": "Coordinate changes under translations.",
       "challenge": "Predict a translated graph feature."
@@ -154,7 +179,7 @@
     {
       "section_id": "4.3",
       "section_title": "Transformations",
-      "solve": "Variables both sides with rational coefficients.",
+      "solve": "Cumulative linear solving with occasional reasonable rational coefficients.",
       "diamond": "Preview monic trinomial factor pairs through product-sum.",
       "skill_review": "Exponent product/power rules.",
       "challenge": "Transformation error analysis."
@@ -162,7 +187,7 @@
     {
       "section_id": "4.4",
       "section_title": "Polynomial Operations",
-      "solve": "Cumulative solve with distribution and like terms.",
+      "solve": "Cumulative linear solving with simplify-before-solve cases; avoid artificial coefficient inflation.",
       "diamond": "Monic trinomial product-sum patterns.",
       "skill_review": "Exponent laws in polynomial expressions.",
       "challenge": "Polynomial-equivalence reasoning."
@@ -170,7 +195,7 @@
     {
       "section_id": "4.5",
       "section_title": "Polynomial Structure and Quadratic Graphs",
-      "solve": "Cumulative linear solving.",
+      "solve": "Cumulative linear solving maintenance.",
       "diamond": "Monic factoring patterns plus early special-pattern recognition.",
       "skill_review": "Quadratic features: zeros, vertex, symmetry.",
       "challenge": "Choose which quadratic form would reveal a feature."
@@ -178,7 +203,7 @@
     {
       "section_id": "5.1",
       "section_title": "GCF and Structure",
-      "solve": "Cumulative linear solving; accuracy focus.",
+      "solve": "Cumulative linear solving maintenance; accuracy focus.",
       "diamond": "Product-sum and GCF awareness.",
       "skill_review": "Greatest common factor.",
       "challenge": "Spot useful algebraic structure before operating."
@@ -186,7 +211,7 @@
     {
       "section_id": "5.2",
       "section_title": "Factoring Trinomials",
-      "solve": "Cumulative linear solving.",
+      "solve": "Cumulative linear solving maintenance.",
       "diamond": "Monic trinomial factoring fluency.",
       "skill_review": "Multiply binomials / distributive check.",
       "challenge": "Check a proposed factorization."
@@ -194,7 +219,7 @@
     {
       "section_id": "5.3",
       "section_title": "Special Factoring Patterns",
-      "solve": "Cumulative linear solving.",
+      "solve": "Cumulative linear solving maintenance.",
       "diamond": "Difference-of-squares and perfect-square pattern recognition.",
       "skill_review": "Special factoring patterns.",
       "challenge": "Classify/fix a factoring-pattern error."
@@ -202,7 +227,7 @@
     {
       "section_id": "5.4",
       "section_title": "Factored Form and Zeros",
-      "solve": "Cumulative linear solving.",
+      "solve": "Cumulative linear solving maintenance.",
       "diamond": "Mixed factoring patterns.",
       "skill_review": "Zero product property.",
       "challenge": "Connect factors, zeros, and intercepts."
@@ -210,7 +235,7 @@
     {
       "section_id": "5.5",
       "section_title": "Comparing Quadratic Forms",
-      "solve": "Cumulative linear solving.",
+      "solve": "Cumulative linear solving maintenance; use a representative mix rather than harder-looking arithmetic.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Standard/vertex/factored forms.",
       "challenge": "Choose the form that best answers a question."
@@ -218,7 +243,7 @@
     {
       "section_id": "6.1",
       "section_title": "Solving Quadratics by Factoring",
-      "solve": "Cumulative linear solving plus simple factorable quadratics after instruction.",
+      "solve": "Maintain linear solving; after factoring equations are taught, add simple factorable quadratics.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Polynomial operations and exponent laws.",
       "challenge": "Choose the first useful move in a quadratic equation."
@@ -226,7 +251,7 @@
     {
       "section_id": "6.2",
       "section_title": "Completing the Square",
-      "solve": "Cumulative linear solving plus square-root/complete-square forms after instruction.",
+      "solve": "Maintain linear solving; after instruction, add square-root and completing-the-square-friendly quadratic forms.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Perfect squares and common radicals.",
       "challenge": "Reason about completing-square structure."
@@ -234,7 +259,7 @@
     {
       "section_id": "6.3",
       "section_title": "Quadratic Formula",
-      "solve": "Mixed linear/quadratic solving; formula-friendly coefficients.",
+      "solve": "Mixed linear/quadratic solving; after instruction include quadratic-formula cases with friendly coefficients.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Identify a, b, c; discriminant arithmetic.",
       "challenge": "Predict solution count before full solving."
@@ -242,7 +267,7 @@
     {
       "section_id": "6.4",
       "section_title": "Choosing and Defending Solution Methods",
-      "solve": "Mixed quadratic methods plus cumulative linear solving.",
+      "solve": "Mixed quadratic methods plus a short linear-retrieval item; emphasize choosing an efficient method.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Method-choice cues and algebra checks.",
       "challenge": "Defend an efficient quadratic solution method."
@@ -250,7 +275,7 @@
     {
       "section_id": "6.5",
       "section_title": "Quadratic Modeling and Optimization",
-      "solve": "Cumulative solving in equations that arise from models.",
+      "solve": "Cumulative linear/quadratic solving in equations that arise naturally from models.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Vertex/zeros/domain in quadratic contexts.",
       "challenge": "Optimization or impossible-solution reasoning."
@@ -258,7 +283,7 @@
     {
       "section_id": "7.1",
       "section_title": "Recognizing Growth and Decay",
-      "solve": "Cumulative linear/quadratic solving mix.",
+      "solve": "Cumulative linear/quadratic solving mix. Do not introduce logarithmic/exponential-equation solving.",
       "diamond": "Trinomial factoring maintenance.",
       "skill_review": "Additive vs multiplicative change; ratios.",
       "challenge": "Recognize growth/decay from evidence."
@@ -266,7 +291,7 @@
     {
       "section_id": "7.2",
       "section_title": "Writing Exponential Equations",
-      "solve": "Cumulative solve mix.",
+      "solve": "Cumulative linear/quadratic solve mix; prioritize clean retrieval over new solve types.",
       "diamond": "Factoring maintenance with GCF + trinomial patterns.",
       "skill_review": "Exponent laws and exponential evaluation.",
       "challenge": "Build an exponential rule from a pattern."
@@ -274,7 +299,7 @@
     {
       "section_id": "7.3",
       "section_title": "Graphing and Analyzing Exponential Functions",
-      "solve": "Cumulative solve mix.",
+      "solve": "Cumulative linear/quadratic solve mix.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Function notation; domain/range/key features.",
       "challenge": "Compare exponential graph features."
@@ -282,7 +307,7 @@
     {
       "section_id": "7.4",
       "section_title": "Comparing Function Families",
-      "solve": "Cumulative solve mix.",
+      "solve": "Cumulative linear/quadratic solve mix with occasional method choice.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "First differences, second differences, ratios.",
       "challenge": "Compare function families using evidence."
@@ -290,7 +315,7 @@
     {
       "section_id": "7.5",
       "section_title": "Exponential Modeling with Data",
-      "solve": "Cumulative solve mix.",
+      "solve": "Cumulative linear/quadratic solve mix in clean contexts; no logs.",
       "diamond": "Special-pattern + trinomial factoring maintenance.",
       "skill_review": "Percent growth/decay and model interpretation.",
       "challenge": "Judge an exponential model or prediction."
@@ -306,7 +331,7 @@
     {
       "section_id": "8.2",
       "section_title": "Transformations Across Function Families",
-      "solve": "Cumulative Algebra solving.",
+      "solve": "Cumulative linear/quadratic solving maintenance.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Transformation vocabulary and key-point movement.",
       "challenge": "Compare transformations across families."
@@ -314,7 +339,7 @@
     {
       "section_id": "8.3",
       "section_title": "Absolute Value Functions and Piecewise Thinking",
-      "solve": "Cumulative Algebra solving.",
+      "solve": "Cumulative linear/quadratic solving maintenance; keep the Solve lane separate from new piecewise content.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Absolute-value/piecewise basics; domain/range.",
       "challenge": "Piecewise or absolute-value interpretation."
@@ -322,7 +347,7 @@
     {
       "section_id": "8.4",
       "section_title": "Modeling Investigation",
-      "solve": "Cumulative Algebra solving in model contexts.",
+      "solve": "Cumulative Algebra solving in model contexts; emphasize selecting a reasonable method.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Model assumptions, domain, and constraints.",
       "challenge": "Modeling investigation reasoning or limitation."
@@ -330,7 +355,7 @@
     {
       "section_id": "8.5",
       "section_title": "Function Synthesis and Capstone Analysis",
-      "solve": "Cumulative Algebra solving proficiency mix.",
+      "solve": "Cumulative Algebra solving proficiency mix; representative retrieval, not maximum difficulty.",
       "diamond": "Mixed factoring maintenance.",
       "skill_review": "Representation choice and cross-family synthesis.",
       "challenge": "Capstone reasoning: choose evidence/representation and defend a conclusion."
