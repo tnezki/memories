@@ -5,7 +5,7 @@ STATUS: CURRENT
 STEP: 3b
 JOB: bank_complete
 ROLE: Build or repair one complete canonical Unit Bank from one accepted Step 3a Bank Map.
-REVISION: 2026-09-06 vNEXT.2 — clean BUILD/REPAIR architecture + source-map travel + strict finished-output QA + two-line continuation handoff + File Library-first full-Bank recovery.
+REVISION: 2026-09-06 vNEXT.3 — clean BUILD/REPAIR architecture + root bank.css viewer authority + source-map travel + strict finished-output QA + two-line continuation + File Library-first recovery.
 
 AUTHORITY — HARD
 1. current explicit teacher instruction / current build request
@@ -506,13 +506,84 @@ A separate equation reference may use a compact `.equation-card` when it has a r
 Do not force a separate card when the same complete equation is already naturally readable in the prompt.
 
 ===============================================================================
+9A. ROOT BANK CSS AUTHORITY — HARD
+===============================================================================
+
+CANONICAL STYLESHEET
+The Unit Bank inspection viewer MUST use the repository-root Bank stylesheet as its visual authority.
+
+For Algebra:
+- foundation: `css/base.css`
+- Bank viewer authority: `css/bank.css`
+- from `banks/unit{unit}/unit{unit}.html` and `banks/unit{unit}/inspection.html`, the required relative links are:
+
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/bank.css">
+
+`css/bank.css` MUST load after `css/base.css`.
+
+NO INLINE VIEWER REDESIGN — HARD
+- Do NOT generate a new page-level `<style>` block for the Bank inspection viewer.
+- Do NOT restyle cards, grids, totals, toolbar, tables, graphs, metadata, answers, or traces inside unit HTML.
+- Small inline style attributes are also prohibited for viewer layout/styling.
+- JavaScript may control show/hide/filter state by adding/removing approved classes; it may not inject replacement CSS.
+- A build may add NEW semantic markup/classes only when the canonical `css/bank.css` already defines their appearance or the current teacher explicitly authorizes a CSS revision.
+- If the desired appearance needs to change, update the owning root `css/bank.css` once, then all Banks inherit the change.
+
+VIEWER DOM CONTRACT — HARD
+The generated Bank viewer must use the canonical structural classes expected by `css/bank.css`:
+- `body.bank-viewer`
+- `.bank-header`
+- `.toolbar`
+- `.totals` containing `.total`
+- `.tab-panel`
+- `.section-block`
+- `.stage-heading` when a destination has stages
+- `.cards` as the card-grid wrapper
+- `.card`
+- `.meta-compact`
+- `.ican`
+- `.target`
+- `.student-surface`
+- `.split`
+- `.values`
+- `.representation`
+- `.graph-img`
+- `.equation-card`
+- `.answer`
+- `.trace`
+- `.secure` / `.secure-banner` when applicable
+- `.qa-card` for QA surfaces.
+
+GROUPING / GRID — HARD
+- Do not emit one long full-width stream of cards.
+- Group by section when section metadata exists.
+- For Practice, group inside each section by Intro / Review / Mastery.
+- For Exit, each Section Exit Ticket gets its own section heading and its ticket cards appear together in the `.cards` grid.
+- WTC, Seeds, and Summative blueprint use coherent grouped `.cards` grids appropriate to their metadata.
+- On wide screens `.cards` must render as the canonical responsive multi-column grid owned by `css/bank.css`; HTML must not override it.
+- On narrow screens the root CSS controls collapse to one column.
+
+STYLE REPEATABILITY QA — HARD
+Final viewer QA must verify BOTH HTML viewers:
+- required `../../css/base.css` link exists;
+- required `../../css/bank.css` link exists after base.css;
+- no page-level `<style>` block exists;
+- no layout/style injection script exists;
+- canonical DOM classes are present;
+- section/stage grouping exists where required;
+- `.cards` wrappers are used instead of a flat card stream.
+
+Any violation is `VIEWER_STYLESHEET_CONTRACT_MISMATCH`.
+
+===============================================================================
 10. TEACHER INSPECTION VIEWER
 ===============================================================================
 
 UNIT VIEWER — REQUIRED WHEN COURSE PROFILE REQUIRES IT
 Create the Unit Bank HTML inspection surface declared by the profile (for Algebra this is `unit{unit}.html`).
 
-The viewer is a teacher inspection surface, not the curriculum authority.
+The viewer is a teacher inspection surface, not the curriculum authority. Its VISUAL DESIGN is owned by root `css/bank.css`; Step 3b supplies semantic HTML/data and must not redesign the CSS.
 
 PREFERRED INFORMATION ARCHITECTURE — HARD FOR ALGEBRA
 Preserve the approved dense inspection layout:
@@ -692,6 +763,7 @@ Required keys:
 - duplicate_prompt_review_mismatches
 - table_layout_contract_mismatches
 - viewer_compact_metadata_mismatches
+- viewer_stylesheet_contract_mismatches
 - viewer_metadata_mismatches
 - secure_viewer_leak_mismatches
 - required_schema_keys_missing
@@ -800,6 +872,9 @@ Before COMPLETE:
 [ ] fresh parallels are not mechanical duplicates
 [ ] compact tables remain compact in final viewer CSS/layout
 [ ] viewer shows top controls + compact totals strip
+[ ] both viewer HTML files link `../../css/base.css` then `../../css/bank.css`
+[ ] no inline/page-generated viewer CSS replaces the root Bank stylesheet
+[ ] section/stage groups use canonical `.cards` grid wrappers; no flat full-width card stream
 [ ] viewer compact metadata line includes ID/stage/target/full I Can ID/Question Structure/representation_mode
 [ ] viewer also shows readable IC# — actual statement
 [ ] full metadata/map trace remains available
@@ -830,7 +905,7 @@ Do not claim COMPLETE on a known defect.
 10. Run prompt duplication, matching-order, MathJax, redundancy, table, and secure-viewer scans.
 11. Build ITEM_INDEX + PROVENANCE + source_map/ snapshot.
 12. Generate MAP_FIDELITY_REPORT.json.
-13. Build/update teacher inspection viewer with approved dense layout.
+13. Build/update teacher inspection viewer using canonical root `css/base.css` + `css/bank.css`, canonical DOM/grouping classes, and NO inline viewer CSS.
 14. Generate RENDER_QA_REPORT.json from finished outputs.
 15. Run final canonical QA.
 16. Remove `.step3b_work/` from final tree.
