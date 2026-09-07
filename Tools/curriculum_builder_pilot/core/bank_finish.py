@@ -17,7 +17,7 @@ from .git_snapshot import read_head_sha
 
 AI_SCHEMA = "curriculum-builder-ai-bank-content/0.5"
 TRANSFER_SCHEMA = 2
-PILOT_VERSION = "0.6.4"
+PILOT_VERSION = "0.6.6"
 
 
 def _write_json(path: Path, data: Any) -> None:
@@ -503,7 +503,7 @@ def _viewer(bank_root: Path, authored: List[Dict[str, Any]], stimuli: Dict[str, 
         f'<p class="meta-compact">Accepted map: {html.escape(fingerprint)} | 208 finished tasks</p></header>',
     ]
     for dest in ("Exit", "Practice 1", "WTC"):
-        parts.append(f'<section class="tab-panel"><h2>{html.escape(dest)}</h2>')
+        parts.append(f'<section class="tab-panel active"><h2>{html.escape(dest)}</h2>')
         for section, rows in sorted(_group(by_dest.get(dest, []), "section").items()):
             parts.append(f'<div class="section-block"><h3>Section {html.escape(section)}</h3><div class="cards">')
             if dest == "WTC" and rows:
@@ -523,7 +523,7 @@ def _viewer(bank_root: Path, authored: List[Dict[str, Any]], stimuli: Dict[str, 
             parts.append('</div></div>')
         parts.append('</section>')
     # Secure blueprint only: deliberately no prompt, stimulus, answer, or solution text.
-    parts.append('<section class="tab-panel secure"><h2>Summative secure blueprint</h2><div class="secure-banner">Secure prompts and keys are intentionally hidden in this viewer.</div><div class="cards">')
+    parts.append('<section class="tab-panel secure active"><h2>Summative secure blueprint</h2><div class="secure-banner">Secure prompts and keys are intentionally hidden in this viewer.</div><div class="cards">')
     for rec in by_dest.get("Summative", []):
         goal = rec.get("mastery_goal") or {}
         parts.append('<article class="card secure">')
