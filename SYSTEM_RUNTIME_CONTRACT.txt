@@ -90,3 +90,26 @@ One output file is returned directly. Multi-file folders may be zipped for hando
 
 12. AUTHORITY OWNERSHIP
 PMs own procedure; manifests own stable discovery; Framework/course profiles own course-specific behavior; Git history owns version history.
+
+13. AUTOMATIC OUTPUT FINALIZATION - HARD
+Every Curriculum Control Panel BUILD or MAINTENANCE job that produces or replaces files must run the current system finalization contract declared by SYSTEM_MANIFEST.json before returning the artifact.
+
+Resolve:
+- `finalization_contract` from SYSTEM_MANIFEST.json;
+- all finalizer/validator tools only through Tools/MANIFEST.json.
+
+Required order:
+1. complete the selected PM's normal build/repair and artifact-specific QA;
+2. run every artifact-specific registered validator/normalizer that the selected PM requires;
+3. run the registered universal `finalize_output` tool against the COMPLETE final staging tree;
+4. if finalization changes bytes that an artifact-specific validator covers, rerun that affected validator;
+5. package/return only after the required checks PASS.
+
+The universal finalization layer may repair only deterministic/mechanical output defects. It may not change curriculum meaning, question content, evidence mappings, difficulty, security, Learning Targets/I Cans, or other upstream-owned instructional decisions.
+
+MathJax/TeX repair is part of universal finalization through the registered `fix_mathjax_output` tool. The fixer must preserve the artifact's existing delimiter family. Current Algebra Notes use `\\(...\\)` and `\\[...\\]`; the finalizer must not convert them to dollar delimiters merely because a legacy script did so.
+
+A Control Panel artifact cannot report final PASS when required universal finalization returns nonzero. Repair allowed local/mechanical defects and rerun; otherwise report/fail according to the selected PM.
+
+The required successful terminal signal is:
+`FINALIZATION_QA: PASS`

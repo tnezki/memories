@@ -1,0 +1,87 @@
+CURRICULUM OUTPUT FINALIZATION CONTRACT
+======================================
+STATUS: CURRENT
+ROLE: Universal mechanical cleanup + final-byte QA before any Control Panel output is returned.
+
+CORE RULE
+---------
+PM BUILDS -> PM-SPECIFIC QA -> UNIVERSAL FINALIZER -> PACKAGE/RETURN
+
+This layer is deterministic and mechanical. It must never invent or rewrite curriculum meaning.
+
+1. WHEN IT RUNS — HARD
+---------------------
+For every Control Panel BUILD or MAINTENANCE request that produces or replaces files:
+- complete the selected PM's normal artifact-specific QA first;
+- run the registered `finalize_output` tool against the complete final staging tree BEFORE ZIP/file handoff;
+- if `finalize_output` changes files, rerun any artifact-specific validator whose checked bytes/contracts could have been affected;
+- package only after all required checks PASS.
+
+GENERAL jobs run it when the output contains HTML/JSON/TXT/CSV curriculum-style files. Pure prose/doc outputs may skip it when the selected PM says it is not applicable.
+
+2. REGISTERED TOOL RESOLUTION — HARD
+-----------------------------------
+Resolve tools only through `Tools/MANIFEST.json`.
+Never call an old similarly named script because it exists in Tools/.
+
+Universal finalizer:
+- `finalize_output`
+
+MathJax repair/audit called by the universal finalizer:
+- `fix_mathjax_output`
+
+3. WHAT THE UNIVERSAL FINALIZER MAY DO
+--------------------------------------
+Allowed automatic repairs/checks:
+- repair high-confidence MathJax/TeX control-character corruption;
+- repair high-confidence broken TeX command tails;
+- preserve the artifact's existing delimiter family;
+- verify MathJax config matches delimiters actually used;
+- verify MathJax config appears before the CDN;
+- check unreplaced template placeholders;
+- check duplicate HTML IDs;
+- check visible escaped whitespace artifacts;
+- check unexpected control characters.
+
+4. WHAT IT MAY NEVER DO
+-----------------------
+Do NOT automatically change:
+- Learning Targets or I Cans;
+- question meaning;
+- values/data merely for variety;
+- evidence jobs;
+- Intro/Review/Mastery placement;
+- WTC/Exit/Summative content;
+- security classifications;
+- difficulty;
+- representation requirements;
+- Bank map identity;
+- curriculum mappings.
+
+Those remain owned by the selected PM / Framework / Bank / teacher workflow.
+
+5. ARTIFACT-SPECIFIC REGISTERED TOOLS
+-------------------------------------
+The universal finalizer does NOT replace PM-specific tools. When the current PM requires them, continue to run the registered tools such as:
+- `qa_bank_3a_contract`
+- `qa_bank_3b_contract`
+- `qa_notes_4a_contract`
+- `qa_recurring_shell_contracts`
+- `qa_review_shell_contract`
+- `normalize_activity_shells`
+- `normalize_progress_tracker_shell`
+- `fix_notes_layout_contract`
+- `stable_bank_fingerprint`
+- `scramble_selected_response`
+
+Do not blindly run every artifact-specific tool on every artifact. The selected PM determines applicability and invocation.
+
+6. FAILURE RULE — HARD
+----------------------
+If `finalize_output` returns nonzero:
+- do not return PASS;
+- repair only mechanical/local output defects that are safe and owned by the current build;
+- rerun the same finalizer;
+- if the failure requires a curriculum/upstream decision, report it and fail/warn according to the selected PM.
+
+Final PASS requires `FINALIZATION_QA: PASS` whenever this contract applies.
