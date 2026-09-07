@@ -92,7 +92,7 @@ const COURSES={
   "Physics":{folder:"physics",repo:"tnezki/physics",slug:"physics",units:8}
 };
 const MAINT_TARGETS=[
-  ["unit_bank","Unit Bank"],["notes","Notes"],["practice","Practice"],["activities","Activities"],
+  ["bank_map","Bank Map"],["bank_complete","Complete Bank"],["unit_bank","Unit Bank (legacy Complete Bank target)"],["notes","Notes"],["practice","Practice"],["activities","Activities"],
   ["exit","Exit Tickets"],["warmup","Warm-Ups"],["progress","Progress Tracker"],["review","Review"],
   ["summative","Summative"],["other","Other / specify in instruction"]
 ].map(x=>({key:x[0],label:x[1]}));
@@ -151,7 +151,7 @@ async function discoverMenus(){
  try{const j=await githubJson(SYSTEM_REPO,"pms_general/MANIFEST.json");generalRows=(j.jobs||[]).map(x=>({key:x.job,label:x.label,path:x.entrypoint,entrypoint:x.entrypoint}));if(!generalRows.length)throw Error("empty general manifest")}catch(e){console.warn(e);generalRows=[...GENERAL_FALLBACK]}
  renderBuildMenu();renderMaintenanceMenu();renderGeneralMenu();
 }
-function initCourses(){for(const id of ["buildCourse","maintenanceCourse"]){$(id).innerHTML=Object.keys(COURSES).map(c=>`<option>${esc(c)}</option>`).join("");$(id).value="Physics"}fillUnits("buildUnit","Physics");fillUnits("maintenanceUnit","Physics");$("maintenanceTarget").innerHTML=MAINT_TARGETS.map(x=>`<option value="${esc(x.key)}">${esc(x.label)}</option>`).join("");$("maintenanceTarget").value="unit_bank";updateCourseSide()}
+function initCourses(){for(const id of ["buildCourse","maintenanceCourse"]){$(id).innerHTML=Object.keys(COURSES).map(c=>`<option>${esc(c)}</option>`).join("");$(id).value="Physics"}fillUnits("buildUnit","Physics");fillUnits("maintenanceUnit","Physics");$("maintenanceTarget").innerHTML=MAINT_TARGETS.map(x=>`<option value="${esc(x.key)}">${esc(x.label)}</option>`).join("");$("maintenanceTarget").value="bank_complete";updateCourseSide()}
 function fillUnits(id,course){$(id).innerHTML=Array.from({length:COURSES[course].units},(_,i)=>`<option value="${i+1}">Unit ${i+1}</option>`).join("")}
 function updateCourseSide(){const course=document.querySelector(".section.active select[id$='Course']")?.value||$("buildCourse").value;$("courseRepoSide").textContent=COURSES[course]?.repo||""}
 function renderBuildMenu(){const old=$("buildJob").value;$("buildJob").innerHTML=buildRows.map(p=>`<option value="${esc(p.path)}">${esc(numberedLabel(p))}</option>`).join("");if(buildRows.some(x=>x.path===old))$("buildJob").value=old;refreshBuild()}

@@ -51,7 +51,18 @@
     "wtc": {
       "status": "canonical",
       "count_per_section": 1,
-      "role": "Connected multipart preview/decomposition task, normally 3-5 parts with a shared stimulus/representation and real carry-forward."
+      "role": "Shared-stimulus multipart preview/decomposition task governed by the Algebra Framework WTC contract.",
+      "part_count": 4,
+      "part_labels": [
+        "Part A",
+        "Part B",
+        "Part C",
+        "Part D"
+      ],
+      "shared_stimulus_rule": "Begin with one meaningful shared context/stimulus before all four parts; every part belongs to that same situation.",
+      "dependency_rule": "Parts may be independent or naturally connected. Require carry-forward only when the mathematics genuinely requires an earlier result.",
+      "question_structure_rule": "Authenticate each part to its natural evidence_job, student_action, question_structure_id, response_mode, and representation routes. Do not force PROC-MULTISTEP-CHAIN-01 on the multipart container; chain structures require an explicit real dependency.",
+      "parts_plan_rule": "Store the four ordered labeled parts in parts_plan with per-part evidence/structure/response/representation metadata and a common shared_stimulus_id. Record depends_on only for real required dependencies; independent parts may omit it or use an empty list."
     },
     "seeds": {
       "status": "canonical_when_useful",

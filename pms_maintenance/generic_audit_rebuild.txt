@@ -72,6 +72,8 @@ FAIL CLOSED on a genuinely missing required authority.
 ============================================================================
 
 DEFAULT CORE TARGETS:
+- Bank Map (bank_map, Step 3a)
+- Complete Bank (bank_complete, Step 3b)
 - Notes
 - Practice
 - Activities
@@ -81,7 +83,7 @@ DEFAULT CORE TARGETS:
 - Review / Review Practice
 - Summative
 
-These are the normal meaning of "core" for this PM.
+These are the normal meaning of "core" for this PM. Bank stages use their own design/data contracts, not the downstream HTML shell contract. The legacy target unit_bank resolves to bank_complete.
 
 EXTENDED HTML TARGETS may be audited when explicitly requested and when they have a current
 registered build PM with a stable canonical output contract, for example:
@@ -92,8 +94,6 @@ registered build PM with a stable canonical output contract, for example:
 DO NOT use this generic PM by default for:
 - Assessment Plan;
 - Framework;
-- Bank Map;
-- Complete Bank;
 - Portfolio state/evidence;
 - Unit Plan DOCX;
 - binary template maintenance;
@@ -162,6 +162,8 @@ resolve those exact dependencies according to that PM.
 ============================================================================
 
 Before judging the artifact, reconstruct what "correct" means NOW.
+
+Resolve bank_map and bank_complete through the current build PM registry declared by SYSTEM_MANIFEST.json. Delegate design repair to the selected Bank Map PM and authored-content repair to the selected Complete Bank PM; this generic PM adds audit passes, not a second curriculum contract.
 
 Read the selected artifact's CURRENT registered build PM and extract a working contract:
 
@@ -297,6 +299,28 @@ Default action:
 - fix BLOCKER;
 - fix REPAIR;
 - do not churn stable content merely for IMPROVEMENT unless the requested focus explicitly asks for it.
+
+============================================================================
+6A. BANK STAGE AUDIT ADAPTERS — HARD
+============================================================================
+
+BANK MAP (bank_map / Step 3a)
+- Audit pre-authoring design against the current Framework, exact Unit authorities, Bank profile, and operational maps.
+- Check evidence jobs, student actions, Question Structure semantic fit, response modes, and executable representation/tool/response-surface routes.
+- Check WTC shared-stimulus architecture, profile-defined part count/labels/order, per-part mappings, and only genuine dependencies.
+- Check future-evidence reservations, secure/exposed roles, allowed variation, and downstream reuse boundaries.
+- Reconcile design slots, inventory, destination slices, counts, stable IDs, references, manifest hashes/fingerprint, and map QA/report consistency.
+- Repair/rebuild through the current bank_map PM. Do not author finished Bank questions in this stage. Regenerate affected map reports/hashes/fingerprint using its current contract; do not retain a stale PASS.
+
+COMPLETE BANK (bank_complete / Step 3b)
+- Apply the current Complete Bank entry gate: accepted map status, fingerprint/source snapshot, and relevant authority compatibility.
+- Audit authored question fidelity to that map, correctness of prompts/answers/solutions, uniqueness and collisions within/across destinations and secure forms, and allowed variation.
+- Inspect actual representations, asset routes, graph semantics, MathJax, WTC parts, teacher/student visibility, and secure reservations.
+- Reconcile inventory/index/manifest, MAP_FIDELITY_REPORT, RENDER_QA_REPORT, registered QA, complete replacement-tree integrity, and the selected PM packaging contract.
+- Use the current bank_complete BUILD/REPAIR decision and recheck the complete final Bank, not just touched records.
+- A defective or obsolete design map is an UPSTREAM_DEFECT: follow the selected PM entry-gate failure and identify Bank Map repair as prerequisite. Do not silently redesign the map in a Complete Bank audit. If the current request includes both stages, repair/accept Bank Map first, then execute Complete Bank against the new fingerprint.
+
+For both stages, run Passes 0–7 with these stage-specific meanings. HTML/CSS/print checks apply only to actual viewers or student surfaces, not to design JSON. Preserve unaffected records and higher authorities. A map change invalidates downstream acceptance claims tied to the old fingerprint; report affected consumers without rebuilding out-of-scope artifacts.
 
 ============================================================================
 7. PASS 1 — CORRECTNESS + EVIDENCE ALIGNMENT
@@ -488,6 +512,7 @@ For nonsecure artifacts:
 ============================================================================
 
 Run every mandatory validator/tool required by the CURRENT selected build PM.
+Resolve tool keys through Tools/MANIFEST.json and verify schema applicability before invocation. A tool name containing 3a/3b does not establish compatibility: the registered legacy Bank-v2 validators cover instructional-core/Practice-family schemas, not automatically the current profile-driven Bank Map/Complete Bank schema. Do not force retired inventory to satisfy a legacy validator or report an inapplicable tool as PASS. Run the selected PM's current semantic/fidelity/render/report checks; if it requires a validator that cannot handle the target schema, report the tooling blocker rather than bypassing the requirement.
 
 Do not replace the artifact-specific validator with this generic rubric.
 
@@ -503,6 +528,11 @@ Verify:
 - no `._*`;
 - no `__pycache__`;
 - no `.pyc`.
+
+After artifact-specific QA, resolve and run the universal finalization contract from SYSTEM_MANIFEST.json against the complete final output tree. If it changes covered bytes, rerun affected QA and refresh affected hashes/reports. Require FINALIZATION_QA: PASS before completion.
+
+LOCAL EDIT DELIVERY
+When the current teacher request requires local edits only, modify the authorized local repository directly, leave changes uncommitted, and do not create a handoff ZIP unless explicitly requested. Verify the complete final tree and local diff. This request-level delivery override applies to all packaging examples below; it does not waive content, manifest, or QA contracts.
 
 If the selected PM says one output file is returned directly:
   return that file directly.
@@ -596,7 +626,8 @@ Preserve:
 - current output contract.
 
 Do NOT:
-- silently edit Framework/Assessment Plan/Bank to make the artifact pass;
+- silently edit Framework/Assessment Plan or an out-of-scope Bank/Bank Map to make the artifact pass;
+- treat a selected Bank Map/Complete Bank target as protected against the very repairs authorized for that stage;
 - modify unrelated artifacts;
 - modify shared CSS unless the request explicitly includes shared-CSS repair;
 - weaken a validator;
@@ -667,7 +698,8 @@ State:
 - key changes made;
 - mandatory QA result;
 - final GOOD-ENOUGH status;
-- exact returned file/ZIP.
+- exact changed local files or returned file/ZIP, according to current request delivery;
+- universal finalization result and unresolved upstream/tooling issues.
 
 Do not dump hidden reasoning or giant QA logs.
 

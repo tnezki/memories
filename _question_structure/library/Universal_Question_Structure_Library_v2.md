@@ -2016,9 +2016,9 @@ These additions close specific gaps identified during curriculum-philosophy work
 - **applicability:** Alg1, PreCalc, APCalc, Physics, science
 - **destinations:** WTC, Notes
 - **content types:** upcoming section concept that can be previewed through a coherent object/context before formal instruction
-- **response type:** short multi-part free-response; usually 3–5 connected parts around one shared stimulus/object
+- **response type:** short multipart free-response around one shared stimulus/object; exact part count and labels come from the current course profile
 - **required representation:** actual graph/table/diagram/data/scenario/object appropriate to the section when available; do not substitute a list of disconnected prose prompts
-- **reasoning architecture:** Students encounter one meaningful shared object/context before direct teaching and are asked to notice/predict/attempt/compare/model in connected parts. Every part stays tied to that shared stimulus or conceptual thread. The task previews the intellectual territory without requiring mastery of content not yet taught.
+- **reasoning architecture:** Students encounter one meaningful shared object/context before direct teaching and are asked to notice/predict/attempt/compare/model in connected parts. Every part stays tied to that shared stimulus. Parts may be independent or naturally connected; do not force carry-forward. Authenticate each part to its natural student action/evidence job; this preview container does not require PROC-MULTISTEP-CHAIN-01. The task previews the intellectual territory without requiring mastery of content not yet taught.
 - **misconception/distractor strategy:** Do not grade missing future vocabulary/procedure as failure; use responses to surface prior models and productive questions.
 - **variation axes:** number of parts; representation; open noticing vs constrained prediction; amount of prior knowledge required
 - **DOK range:** 1–3 depending on prior knowledge, but DOK label is secondary because this is an instructional opener

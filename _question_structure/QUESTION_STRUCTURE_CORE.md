@@ -64,7 +64,7 @@ For Physics, use physical situations that naturally supply measurements. Do not 
 ## 5. Multi-step means dependency
 A task is multi-step only when an intermediate result is needed for the final requested result. Two dependent stages are enough.
 
-Do **not** create fake multi-step by labeling unrelated prompts (a) and (b).
+Do **not** create fake multi-step by labeling unrelated prompts (a) and (b). Multipart is not synonymous with a dependency chain: parts may independently use one meaningful shared stimulus. Authenticate each part to its natural evidence job/student action and structure. Use `PROC-MULTISTEP-CHAIN-01` only when an intermediate result is actually required later; never impose it merely because a WTC has labeled parts.
 
 For a relationship such as `d = r t`, legitimate dependency chains include:
 - given `d,t` → infer `r` → new `d` → find `t`
@@ -134,7 +134,7 @@ Content-mode categories are descriptive planning tools, not quotas. Do not force
 ## 8. Destination-specific design
 Destination changes the job.
 
-- **WTC:** coherent FRQ morphology; one shared stimulus; connected parts; decomposition/navigation practice. WTC may use prior, current, or future course content and does not satisfy current-section/Unit coverage floors.
+- **WTC:** coherent FRQ morphology; one shared stimulus; parts grounded in that situation, independent or naturally connected; decomposition/navigation practice. WTC may use prior, current, or future course content and does not satisfy current-section/Unit coverage floors.
 - **Example/YTI:** model then apply; when the I-can naturally supports formula use, a strong quantitative pair has priority over generic vocabulary/conceptual filler.
 - **Practice:** intentionally mixed menu based on I-can fit; may include formula, inverse, matching, vocabulary, diagrams, graphs, short answer, multi-step, conceptual/application. No category has a universal minimum. A category may be absent when the target does not support it. Repetition is allowed when purposeful.
 - **Warm-Up:** predictable retrieval/bridging; controlled repetition is useful.
@@ -147,7 +147,7 @@ Reject or repair:
 - mechanical equal I-can allocations caused by container counts
 - one generic shell spread across unrelated I-cans
 - context-noun collisions (objects/locations that do not fit the physics/setup)
-- fake multipart questions with independent parts
+- fake multipart questions whose parts lack a coherent shared stimulus, representation connection, or legitimate dependency
 - decorative diagrams/graphs
 - unseen “diagram” described only in prose when students must critique/interpret it
 - DOK/Bloom used as generation targets

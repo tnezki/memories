@@ -25,7 +25,11 @@ MATHJAX = HERE / "fix_mathjax_output.py"
 
 PLACEHOLDER_RE = re.compile(r"\{\{[A-Z0-9_][A-Z0-9_ .:\-/]*\}\}")
 ID_RE = re.compile(r"\bid\s*=\s*['\"]([^'\"]+)['\"]", re.I)
-PROTECTED_RE = re.compile(r"<script\b.*?</script>|<style\b.*?</style>", re.I | re.S)
+PROTECTED_RE = re.compile(
+    r"<!--.*?-->|<script\b[^>]*>.*?</script\s*>|<style\b[^>]*>.*?</style\s*>"
+    r"|<pre\b[^>]*>.*?</pre\s*>|<code\b[^>]*>.*?</code\s*>|<textarea\b[^>]*>.*?</textarea\s*>",
+    re.I | re.S,
+)
 VISIBLE_ESCAPED_WS_RE = re.compile(r"\\[nrt](?=\\|\s|<|$)")
 
 
@@ -39,11 +43,12 @@ def audit_html(path: Path):
     text = path.read_text(encoding="utf-8", errors="replace")
     issues = []
 
-    placeholders = PLACEHOLDER_RE.findall(text)
+    visible = PROTECTED_RE.sub("", text)
+    placeholders = PLACEHOLDER_RE.findall(visible)
     if placeholders:
         issues.append(f"unreplaced template placeholder(s): {', '.join(sorted(set(placeholders))[:6])}")
 
-    ids = ID_RE.findall(text)
+    ids = ID_RE.findall(visible)
     dupes = sorted({x for x in ids if ids.count(x) > 1})
     if dupes:
         issues.append(f"duplicate HTML id(s): {', '.join(dupes[:8])}")

@@ -245,6 +245,32 @@ class ValidatorTests(unittest.TestCase):
         report = qa.run(root, 1)
         self.assertEqual(report["status"], "PASS", report["findings"])
 
+    def wtc_findings(self, labels=("A", "B", "C", "D")):
+        # Independent jobs use the same situation, not a forced chain.
+        mapped = map_record("U1-WTC", "WTC", parts_plan=[
+            {"part": f"Part {label}", "evidence_job": "Read the shared situation."}
+            for label in "ABCD"
+        ])
+        authored = authored_from_map(mapped, "A tank contains water.\n" + "\n".join(
+            f"Part {label}: Interpret the tank data." for label in labels))
+        authored.update(coverage_role="wtc_frq_practice", coverage_counts_toward_unit_i_can_floor=False,
+                        wtc_frq=True, wtc_shared_stimulus=True, wtc_part_count=len(labels))
+        findings = []
+        qa.check_wtc(mapped, authored, findings, "wtc.json")
+        return {finding.code for finding in findings}
+
+    def test_four_independent_shared_stimulus_parts_pass(self):
+        self.assertEqual(self.wtc_findings(), set())
+
+    def test_missing_or_extra_part_fails_accepted_four_part_map(self):
+        for labels in (("A", "B", "C"), ("A", "B", "C", "D", "E")):
+            with self.subTest(labels=labels):
+                self.assertIn("WTC_MAP_PART_COUNT_MISMATCH", self.wtc_findings(labels))
+
+    def test_wrong_order_or_duplicate_part_fails(self):
+        self.assertIn("WTC_MAP_PART_LABEL_MISMATCH", self.wtc_findings(("B", "A", "C", "D")))
+        self.assertIn("WTC_DUPLICATE_PART_LABEL", self.wtc_findings(("A", "B", "C", "C")))
+
     def test_missing_selected_response_choices_fails(self):
         td, root = self.fixture()
         self.addCleanup(td.cleanup)

@@ -17,7 +17,15 @@ For every Control Panel BUILD or MAINTENANCE request that produces or replaces f
 - if `finalize_output` changes files, rerun any artifact-specific validator whose checked bytes/contracts could have been affected;
 - package only after all required checks PASS.
 
-GENERAL jobs run it when the output contains HTML/JSON/TXT/CSV curriculum-style files. Pure prose/doc outputs may skip it when the selected PM says it is not applicable.
+GENERAL jobs run it for generated student/teacher-facing HTML. A mixed staging tree may include other files, but their presence does not authorize MathJax repair of source code or authority prose.
+
+MATHJAX SCOPE — HARD
+- The registered fixer currently supports rendered `.html` only. It skips `.py`, `.js`, `.css`, shell/command files, Markdown, TXT authorities/PMs, JSON, CSV, and all other non-HTML files, even when passed directly. These files remain byte-for-byte unchanged; use their schema-specific validators where required.
+- Within HTML, repair only mathematical text outside scripts, styles, comments, pre/code/textarea blocks, and tag attributes. Embedded source spans remain unchanged. A narrowly targeted repair of a malformed MathJax delimiter configuration is the sole configuration exception.
+- Preserve `\(...\)` and `\[...\]`. Only explicitly configured legacy dollar delimiter families may be interpreted as math; dollar signs alone never opt a file or page into repair. Currency and JavaScript template syntax in ordinary HTML or source code are not math.
+- Apply high-confidence command/control-character repair within real math spans. Continue to fail on unbalanced rendered math, unresolved corruption, invalid MathJax configuration, and other required generated-HTML checks.
+- Serialized student_html or rendered TeX in other formats requires a future explicit schema-aware adapter; do not scan arbitrary JSON/TXT/CSV strings heuristically.
+- A scope skip is not curriculum-content certification. Generic HTML QA and artifact-specific validators still apply to their actual supported outputs.
 
 2. REGISTERED TOOL RESOLUTION — HARD
 -----------------------------------

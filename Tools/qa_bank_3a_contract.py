@@ -23,7 +23,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
-TOOL_VERSION = "1.0.0"
+TOOL_VERSION = "1.0.1"
 REPORT_SCHEMA = "bank-3a-contract-qa/1.0"
 
 
@@ -280,9 +280,11 @@ def check_wtc(map_rec: dict[str, Any], rec: dict[str, Any], findings: list[Findi
         return
     iid = str(rec.get("item_id", ""))
     text = str(rec.get("student_text") or "")
-    parts = re.findall(r"(?m)^\s*\(([a-e])\)\s+", text)
-    if not (3 <= len(parts) <= 5):
-        add(findings, "WTC_PART_COUNT", f"WTC must have 3-5 labeled parts; found {len(parts)}", item_id=iid, path=rel_path)
+    # Course profiles/maps own counts; multipart does not imply a dependency.
+    labels = re.findall(r"(?mi)^\s*(?:Part\s+([A-Z])\b|\(([a-z])\)\s+)", text)
+    parts = [(named or short).lower() for named, short in labels]
+    if len(parts) < 2:
+        add(findings, "WTC_PART_COUNT", f"WTC must have labeled parts matching its accepted map; found {len(parts)}", item_id=iid, path=rel_path)
     if len(parts) != len(set(parts)):
         add(findings, "WTC_DUPLICATE_PART_LABEL", f"WTC has duplicate part labels: {parts}", item_id=iid, path=rel_path)
     declared = rec.get("wtc_part_count")
@@ -291,6 +293,12 @@ def check_wtc(map_rec: dict[str, Any], rec: dict[str, Any], findings: list[Findi
     plan = map_rec.get("parts_plan") or map_rec.get("decomposition_move_plan")
     if isinstance(plan, list) and len(plan) != len(parts):
         add(findings, "WTC_MAP_PART_COUNT_MISMATCH", f"map plans {len(plan)} parts; authored prompt has {len(parts)}", item_id=iid, path=rel_path)
+    if isinstance(plan, list):
+        planned_labels = [norm_text(part.get("part") or part.get("label")) for part in plan if isinstance(part, dict)]
+        if len(planned_labels) == len(plan) and all(planned_labels):
+            expected = [re.sub(r"^part\s+", "", label, flags=re.I).strip("() .:").lower() for label in planned_labels]
+            if parts != expected:
+                add(findings, "WTC_MAP_PART_LABEL_MISMATCH", f"expected ordered labels {expected}; found {parts}", item_id=iid, path=rel_path)
     if rec.get("coverage_role") != "wtc_frq_practice":
         add(findings, "WTC_COVERAGE_ROLE", "coverage_role must be wtc_frq_practice", item_id=iid, path=rel_path)
     if rec.get("coverage_counts_toward_unit_i_can_floor") is not False:

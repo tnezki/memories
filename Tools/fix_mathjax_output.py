@@ -5,7 +5,8 @@ Stable canonical replacement for the old _fix_mathjax_v11.py.
 
 Key rule: preserve the file's existing math delimiter contract. Current Notes use
 \\(...\\) and \\[...\\]. Legacy files that already use $...$ / $$...$$ are also
-supported, but this tool never converts one delimiter family into another.
+supported when explicitly configured in rendered HTML. Non-HTML files and
+embedded source code are excluded. This tool never converts delimiter families.
 
 Usage:
     python3 Tools/fix_mathjax_output.py <file-or-folder>
@@ -21,7 +22,9 @@ import sys
 from pathlib import Path
 
 TARGET = Path(sys.argv[1]).expanduser() if len(sys.argv) > 1 else Path.cwd()
-SUPPORTED = {".html", ".txt", ".csv", ".json"}
+# Only rendered HTML is supported. Source files and serialized records need
+# their own schema-aware validators, never heuristic TeX rewriting.
+SUPPORTED = {".html"}
 
 BYTE_FIXES = [
     (b"\x0crac{", b"\\frac{"),
@@ -78,7 +81,9 @@ MATH_BLOCK_RE = re.compile(
 )
 
 PROTECTED_HTML_RE = re.compile(
-    r"(<!--.*?-->|<script\b.*?</script>|<style\b.*?</style>)", re.I | re.S
+    r"(<!--.*?-->|<script\b[^>]*>.*?</script\s*>|<style\b[^>]*>.*?</style\s*>"
+    r"|<pre\b[^>]*>.*?</pre\s*>|<code\b[^>]*>.*?</code\s*>|<textarea\b[^>]*>.*?</textarea\s*>"
+    r"|<![^>]*>|</?[A-Za-z][A-Za-z0-9:-]*(?:\s+(?:[^>\"']|\"[^\"]*\"|'[^']*')*)?\s*/?>)", re.I | re.S
 )
 
 
@@ -94,6 +99,11 @@ def split_math(match):
 
 def repair_math_content(content: str):
     hits = 0
+    # Repairs are confined to a real math span, never scripts/attributes/prose.
+    for bad, good in BYTE_FIXES:
+        bad_text, good_text = bad.decode("utf-8"), good.decode("utf-8")
+        hits += content.count(bad_text)
+        content = content.replace(bad_text, good_text)
 
     if MULTIROW_ENV_RE.search(content):
         def row_repl(m):
@@ -163,21 +173,28 @@ def repair_math_content(content: str):
     return content, hits
 
 
-def repair_math_blocks(text: str, allow_dollar: bool = True):
+def repair_math_blocks(text: str, allow_dollar: bool = False, allow_display: bool = False):
     total = 0
     def repl(match):
         nonlocal total
         open_delim, body, close_delim = split_math(match)
-        if open_delim.startswith("$") and not allow_dollar:
+        if (open_delim == "$" and not allow_dollar) or (open_delim == "$$" and not allow_display):
             return match.group(0)
         body, n = repair_math_content(body)
         total += n
         return open_delim + body + close_delim
-    return MATH_BLOCK_RE.sub(repl, text), total
+    # Disabled dollar syntax must not consume a span containing real current
+    # delimiters (for example currency surrounding a fraction).
+    pattern = MATH_BLOCK_RE.pattern
+    if not allow_dollar:
+        pattern = pattern.replace("|(?P<dollar_inline>", "|(?!)" + "(?P<dollar_inline>")
+    if not allow_display:
+        pattern = pattern.replace("|(?P<dollar_display>", "|(?!)" + "(?P<dollar_display>")
+    return re.sub(pattern, repl, text, flags=re.DOTALL), total
 
 
 def content_without_script_style(text: str) -> str:
-    return re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", text, flags=re.I | re.S)
+    return PROTECTED_HTML_RE.sub("\n", text)
 
 
 def delimiter_usage(text: str):
@@ -190,8 +207,16 @@ def delimiter_usage(text: str):
     }
 
 
+def configuration_spans(text: str):
+    for script in re.finditer(r"<script\b[^>]*>(.*?)</script\s*>", text, re.I | re.S):
+        assignment = re.search(r"(?:^|[;\n])\s*window\.MathJax\s*=\s*\{", script.group(1))
+        if assignment:
+            yield script.start(1) + assignment.start() + assignment.group().index("window.MathJax"), script.end(1)
+
+
 def config_support(text: str):
-    # Accept compact or expanded JavaScript formatting.
+    # Source examples and attributes cannot opt a page into dollar math.
+    text = "\n".join(text[start:end] for start, end in configuration_spans(text))
     return {
         "paren": bool(re.search(r"inlineMath\s*:\s*\[[^\]]*\\\\\([^\]]*\\\\\)", text, re.S)),
         "bracket": bool(re.search(r"displayMath\s*:\s*\[[^\]]*\\\\\[[^\]]*\\\\\]", text, re.S)),
@@ -201,18 +226,16 @@ def config_support(text: str):
 
 
 def repair_compact_current_config(text: str):
-    """Repair only obviously malformed current Notes config; preserve delimiter family."""
-    if "window.MathJax" not in text:
-        return text, 0
+    """Repair an actual delimiter config only, never a quoted source example."""
     usage = delimiter_usage(text)
     support = config_support(text)
-    # Current Notes contract: if paren/bracket math exists and config is missing it,
-    # normalize the tex object to include those delimiters. Do not add dollar delimiters.
     if (usage["paren"] and not support["paren"]) or (usage["bracket"] and not support["bracket"]):
-        pat = re.compile(r"window\.MathJax\s*=\s*\{\s*tex\s*:\s*\{.*?\}\s*\}\s*;?", re.S)
-        if pat.search(text):
-            repl = 'window.MathJax={tex:{inlineMath:[["\\\\(","\\\\)"]],displayMath:[["\\\\[","\\\\]"]],processEscapes:true}};'
-            return pat.sub(repl, text, count=1), 1
+        pat = re.compile(r"\s*window\.MathJax\s*=\s*\{\s*tex\s*:\s*\{.*?\}\s*\}\s*;?", re.S)
+        for start, end in configuration_spans(text):
+            match = pat.match(text, start, end)
+            if match:
+                repl = r'window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true}};'
+                return text[:start] + repl + text[match.end():], 1
     return text, 0
 
 
@@ -231,12 +254,16 @@ def audit(path: Path, text: str):
 
     # Only treat dollar signs as math delimiters when the HTML config actually
     # enables dollar math. Current Notes intentionally do not, so $5 is prose.
-    if path.suffix.lower() != ".html" or support.get("dollar_inline") or support.get("dollar_display"):
-        dollars = len(re.findall(r"(?<!\\)\$", visible))
+    if support.get("dollar_inline"):
+        dollars = len(re.findall(r"(?<!\\)\$(?!\$)", visible.replace("$$", "")))
         if dollars % 2:
             issues.append("odd unescaped $ delimiter count")
+    if support.get("dollar_display"):
+        displays = len(re.findall(r"(?<!\\)\$\$", visible))
+        if displays % 2:
+            issues.append("odd unescaped $$ delimiter count")
 
-    if path.suffix.lower() == ".html" and "window.MathJax" in text:
+    if list(configuration_spans(text)):
         for key, label in [
             ("paren", r"\\(...\\)"),
             ("bracket", r"\\[...\\]"),
@@ -258,7 +285,7 @@ def audit(path: Path, text: str):
             issues.append(desc)
 
     # Control chars other than newline/tab/carriage return.
-    bad_controls = [ord(ch) for ch in text if ord(ch) < 32 and ch not in "\n\r\t"]
+    bad_controls = [ord(ch) for ch in visible if ord(ch) < 32 and ch not in "\n\r\t"]
     if bad_controls:
         issues.append("unexpected control character remains")
 
@@ -273,44 +300,32 @@ def audit(path: Path, text: str):
 
 
 def process(path: Path):
-    raw = path.read_bytes()
-    changed = False
+    if path.suffix.lower() not in SUPPORTED:
+        return False, 0, []
+    original = path.read_bytes().decode("utf-8")
+    support = config_support(original)
+    # Split, transform only rendered text, then rejoin source spans verbatim.
+    chunks = PROTECTED_HTML_RE.split(original)
     repair_count = 0
-    for bad, good in BYTE_FIXES:
-        n = raw.count(bad)
-        if n:
-            raw = raw.replace(bad, good)
-            changed = True
-            repair_count += n
-
-    text = raw.decode("utf-8", errors="replace")
-
-    # JSON: only byte/control-tail repair; do not reinterpret escaped TeX delimiters.
-    if path.suffix.lower() != ".json":
-        allow_dollar = True
-        if path.suffix.lower() == ".html" and "window.MathJax" in text:
-            support = config_support(text)
-            allow_dollar = support["dollar_inline"] or support["dollar_display"]
-        new_text, n = repair_math_blocks(text, allow_dollar=allow_dollar)
-        if n:
-            text = new_text
-            changed = True
-            repair_count += n
-
-        if path.suffix.lower() == ".html":
-            new_text, n = repair_compact_current_config(text)
-            if n:
-                text = new_text
-                changed = True
-                repair_count += n
-
+    for i in range(0, len(chunks), 2):
+        chunks[i], count = repair_math_blocks(
+            chunks[i], allow_dollar=support["dollar_inline"],
+            allow_display=support["dollar_display"],
+        )
+        repair_count += count
+    text = "".join(chunks)
+    text, count = repair_compact_current_config(text)
+    repair_count += count
+    changed = text != original
     if changed:
         path.write_text(text, encoding="utf-8")
-
     return changed, repair_count, audit(path, text)
 
 
 def main():
+    if not TARGET.exists():
+        print(f"FAIL missing finalization target: {TARGET}")
+        return 2
     if TARGET.is_file():
         files = [TARGET] if TARGET.suffix.lower() in SUPPORTED else []
     else:

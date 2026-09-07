@@ -73,7 +73,10 @@
     "preserve_exact_canonical_content": true,
     "local_repair_allowed": false,
     "omit_on_exit_conflict": false,
-    "exit_conflict_behavior": "Keep canonical WTC, add teacher-copy warning, report BANK_WTC_REPAIR issue, continue."
+    "exit_conflict_behavior": "Keep canonical WTC, add teacher-copy warning, report BANK_WTC_REPAIR issue, continue.",
+    "architecture_source": "Current Algebra Framework WTC contract and Bank profile; preserve one shared setup followed by exactly Part A, Part B, Part C, Part D.",
+    "layout_rule": "Shared setup first, then the four parts in reading order. No divider lines or hr elements between parts; spacing and labels provide separation.",
+    "stale_architecture_behavior": "Do not silently reauthor canonical WTC in Notes. Report BANK_WTC_REPAIR and route the design defect to Bank Map before Complete Bank repair."
   },
   "example_yti": {
     "default_pairs_per_i_can": 1,

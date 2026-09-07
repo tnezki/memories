@@ -1,7 +1,7 @@
 # Destination Design Patterns
 
 ## WTC
-One coherent FRQ-style shared stimulus with connected parts. Optimize for decomposition/navigation moves, not a grab bag of section questions. Keep the normal Bank card format; do not create a separate worksheet visual system.
+One coherent FRQ-style shared stimulus followed by labeled parts that may be independent or naturally connected. Course profiles own exact part counts/labels. Authenticate each part to its natural evidence job; require a chain only when there is a real required dependency. Optimize for decomposition/navigation moves, not a grab bag of section questions. Keep the normal Bank card format; do not create a separate worksheet visual system.
 
 ## Example / YTI
 Example models; YTI applies. For formula-capable targets, prefer strong contextual quantitative anchors over generic vocabulary/conceptual filler. Related, not identical.
