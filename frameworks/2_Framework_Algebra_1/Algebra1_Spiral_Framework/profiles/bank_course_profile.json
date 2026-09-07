@@ -2,8 +2,8 @@
   "name": "Algebra 1 Course Bank Profile",
   "course": "Algebra 1",
   "course_family": "spiral_math",
-  "profile_version": "v2.3",
-  "framework_version": "v7.2",
+  "profile_version": "v2.4",
+  "framework_version": "v7.4",
   "role": "Course-specific Bank inventory/content authority. Bank Map and Complete Bank PMs own universal execution procedure.",
   "question_structure": {
     "rule": "Use current universal Question Structure for every authored Bank question/task. Warm-Ups are outside Bank and are the explicit course exception.",
@@ -14,8 +14,9 @@
   "canonical_maps": {
     "exit_evidence": "curriculum/exit_evidence_map.json",
     "warmup_progression": "curriculum/warmup_progression_map.json",
-    "mastery_goals": "curriculum/mastery_goal_map.json"
+    "mastery_goals": "assessment_plans/indexes/assessment_plan_index.json"
   },
+  "mastery_goal_source_rule": "Exact Unit Assessment Plan remains primary authority. assessment_plans/indexes/assessment_plan_index.json is the coursewide retrieval aid. Do not require the retired/missing curriculum/mastery_goal_map.json path.",
   "bank_inventory": {
     "exit": {
       "status": "canonical",
@@ -23,14 +24,7 @@
     },
     "summative": {
       "status": "canonical_secure",
-      "forms": [
-        "V1",
-        "V2",
-        "V3",
-        "V4",
-        "V5",
-        "V6"
-      ],
+      "forms": ["V1", "V2", "V3", "V4", "V5", "V6"],
       "sequence": "Author V1 from the Exit/mastery evidence plan; build parallel V2-V4; then author additional secure V5-V6 under the same evidence blueprint and comparable rigor.",
       "evidence_rule": "Target approximately two secure evidence opportunities per CURRENT Unit Mastery Goal.",
       "time_rule": "Design the complete form for about a 40-minute class period. The Bank Map resolves exact item count from Mastery Goal count and item complexity; do not hard-code eight items across all Units.",
@@ -40,11 +34,7 @@
       "status": "canonical",
       "role": "Primary independent practice",
       "count_per_section": 24,
-      "stage_counts": {
-        "Intro": 8,
-        "Review": 8,
-        "Mastery": 8
-      },
+      "stage_counts": {"Intro": 8, "Review": 8, "Mastery": 8},
       "stage_balance": "HARD: exactly 8 Intro + 8 Review + 8 Mastery. Visible stage headings are preferred for Algebra.",
       "allocation_rule": "Within each 8-question block, distribute work for useful repetition and coverage; do not mechanically force equal I Can counts when that would create weak or fake variety."
     },
@@ -53,12 +43,7 @@
       "count_per_section": 1,
       "role": "Shared-stimulus multipart preview/decomposition task governed by the Algebra Framework WTC contract.",
       "part_count": 4,
-      "part_labels": [
-        "Part A",
-        "Part B",
-        "Part C",
-        "Part D"
-      ],
+      "part_labels": ["Part A", "Part B", "Part C", "Part D"],
       "shared_stimulus_rule": "Begin with one meaningful shared context/stimulus before all four parts; every part belongs to that same situation.",
       "dependency_rule": "Parts may be independent or naturally connected. Require carry-forward only when the mathematics genuinely requires an earlier result.",
       "question_structure_rule": "Authenticate each part to its natural evidence_job, student_action, question_structure_id, response_mode, and representation routes. Do not force PROC-MULTISTEP-CHAIN-01 on the multipart container; chain structures require an explicit real dependency.",
