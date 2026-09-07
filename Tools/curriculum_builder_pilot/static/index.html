@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header><div><h1>Curriculum Builder <span>v0.8</span></h1><p>One normal AI handoff. Local Map audit, Bank build/audit, and final GitHub transfer stay on your Mac.</p></div></header>
+<header><div><h1>Curriculum Builder <span>v0.8.1</span></h1><p>One AI handoff. AI results and finished curriculum both use the same Apply Curriculum Transfers command.</p></div></header>
 <main>
   <aside class="card">
     <h2>Local System</h2>
@@ -18,25 +18,26 @@
   <section class="card main-card">
     <h2>Full Bank Pipeline</h2>
     <div class="row"><label>Course<select id="course"></select></label><label>Unit<select id="unit"></select></label></div>
-    <p class="muted">Fresh Map → local Map audit → Complete Bank → local Bank audit → one final transfer ZIP.</p>
+    <p class="muted">Fresh Map → local Map audit → Complete Bank → local Bank audit → one final Bank transfer ZIP.</p>
 
     <div class="simple-flow">
       <button id="startFullPipeline" class="primary">Start Fresh Full Pipeline</button>
-      <button id="continueFullPipeline" class="primary">Continue / Import AI Result</button>
+      <button id="continueFullPipeline" class="primary">Continue After Transfer Command</button>
       <button id="openAIExchange">Open AI Exchange Folder</button>
+      <button id="openTransferInbox">Open Transfer Inbox</button>
       <div class="three-steps">
         <div><b>1</b><span>ONE AI handoff</span></div>
-        <div><b>2</b><span>Local Map + Bank audits</span></div>
-        <div><b>3</b><span>One GitHub transfer</span></div>
+        <div><b>2</b><span>Apply AI-result ZIP + local audits</span></div>
+        <div><b>3</b><span>Apply final Bank transfer</span></div>
       </div>
-      <p class="muted small"><b>Normal run:</b> click Start, upload the single handoff ZIP from the AI Exchange folder to ChatGPT, download <code>AI_FULL_BANK_RESULT.json</code>, then click Continue. The app moves the JSON out of Downloads automatically.</p>
+      <p class="muted small"><b>Normal run:</b> Start → upload the one handoff ZIP to ChatGPT → download the returned AI-result ZIP → run <b>Apply Curriculum Transfers.command</b> → Continue → run the same transfer command on the finished Bank. No loose JSON and no manual file hunting.</p>
     </div>
 
     <div id="result" class="result hidden"></div>
 
     <details>
       <summary>Maintenance / cleanup</summary>
-      <p class="muted small">The app workspace now lives in Documents/Curriculum Builder. This does not touch your GitHub transfer folder.</p>
+      <p class="muted small">The app workspace lives in Documents/Curriculum Builder. This does not touch your GitHub transfer folder.</p>
       <button id="archiveLegacy">Archive old pilot files from Downloads</button>
       <div id="cleanupResult" class="muted small"></div>
     </details>

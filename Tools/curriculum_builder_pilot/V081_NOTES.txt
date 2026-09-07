@@ -1,0 +1,12 @@
+Curriculum Builder v0.8.1 - transport cleanup
+
+- No Bank rebuild is required for this update.
+- AI returns one ZIP instead of a loose JSON file.
+- Apply Curriculum Transfers.command now handles two safe package types:
+  1) Curriculum Builder AI-result ZIP -> installs only to Documents/Curriculum Builder/AI Exchange.
+  2) Existing github_transfer ZIP -> handled by the existing GitHub transfer helper exactly as before.
+- The AI-result importer scans both Downloads and Downloads/_github_transfers, so browser download location is no longer important.
+- Intermediate AI results never write to GitHub.
+- Future Bank handoffs include AI_RESULT_PACKAGE_CONTRACT.json with the exact return-ZIP contract.
+- Final Bank transfer names are simplified, e.g. ALG1_U1_BANK_TRANSFER.zip.
+- The existing repo launcher is not replaced by this update, preserving its executable bit.

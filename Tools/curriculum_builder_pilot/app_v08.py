@@ -59,7 +59,7 @@ def _bootstrap_python_runtime() -> None:
     if not _graphics_ready(runtime_python):
         raise RuntimeError("Curriculum Builder runtime exists but cannot import matplotlib/numpy.")
     env = os.environ.copy()
-    env["CURRICULUM_BUILDER_RUNTIME"] = "managed-v08"
+    env["CURRICULUM_BUILDER_RUNTIME"] = "managed-v081"
     os.execve(str(runtime_python), [str(runtime_python), str(HERE / "app_v08.py")], env)
 
 
@@ -79,7 +79,6 @@ def _prune_app_owned(days: int = 14) -> int:
         if not parent.is_dir():
             continue
         for path in list(parent.rglob("*")):
-            # Only prune top-level dated run folders/archive leaves; never touch Current.
             if not path.is_dir() or path.name == "Current":
                 continue
             try:
@@ -91,6 +90,48 @@ def _prune_app_owned(days: int = 14) -> int:
     return removed
 
 
+def _ensure_transfer_bridge(transfer_root: Path) -> dict:
+    tools = transfer_root / "_tools"
+    github_helper = tools / "apply_curriculum_transfers.py"
+    source = HERE / "support" / "apply_builder_ai_results.py"
+    dest = tools / "apply_builder_ai_results.py"
+    command = transfer_root / "Apply Curriculum Transfers.command"
+    if not source.is_file():
+        return {"ready": False, "detail": f"Builder AI-result importer source is missing: {source}", "command": str(command)}
+    if not github_helper.is_file():
+        return {"ready": False, "detail": f"Existing GitHub transfer helper is missing: {github_helper}", "command": str(command)}
+    tools.mkdir(parents=True, exist_ok=True)
+    if not dest.is_file() or dest.read_bytes() != source.read_bytes():
+        shutil.copy2(source, dest)
+
+    script = '''#!/bin/bash
+set -e
+ROOT="$HOME/Downloads/_github_transfers"
+echo "=== Curriculum Builder AI result packages ==="
+/usr/bin/python3 "$ROOT/_tools/apply_builder_ai_results.py"
+echo
+echo "=== Curriculum GitHub transfers ==="
+/usr/bin/python3 "$ROOT/_tools/apply_curriculum_transfers.py"
+echo
+echo "Transfer processing complete. Review GitHub Desktop for any repository changes."
+echo "Press Return to close."
+read
+'''
+    if not command.is_file() or command.read_text(encoding="utf-8", errors="ignore") != script:
+        command.write_text(script, encoding="utf-8")
+    command.chmod(0o755)
+
+    proc = subprocess.run(
+        ["/usr/bin/python3", str(dest), "--self-test"],
+        text=True,
+        capture_output=True,
+        timeout=30,
+    )
+    ready = proc.returncode == 0 and "SELF_TEST: PASS" in proc.stdout
+    detail = proc.stdout.strip() if ready else (proc.stderr.strip() or proc.stdout.strip() or "self-test failed")
+    return {"ready": ready, "detail": detail, "command": str(command), "importer": str(dest)}
+
+
 _bootstrap_python_runtime()
 APP_HOME.mkdir(parents=True, exist_ok=True)
 WORKSPACE_ROOT.mkdir(parents=True, exist_ok=True)
@@ -99,7 +140,7 @@ _ensure_convenience_launcher()
 _prune_app_owned(14)
 
 from core.authorities import make_context
-from core.full_pipeline_v08 import continue_full_pipeline, start_full_pipeline
+from core.full_pipeline_v081 import continue_full_pipeline, start_full_pipeline
 from core.git_snapshot import read_head_sha
 
 STATIC = HERE / "static"
@@ -109,11 +150,12 @@ STAGING_ROOT = Path(os.environ.get("CURRICULUM_BUILDER_STAGING", str(WORKSPACE_R
 TRANSFER_ROOT = Path(os.environ.get("CURRICULUM_TRANSFER_ROOT", str(TRANSFER_ROOT_DEFAULT))).expanduser()
 HOST = CONFIG.get("host", "127.0.0.1")
 PORT = int(os.environ.get("CURRICULUM_BUILDER_PORT", CONFIG.get("port", 8765)))
+TRANSFER_BRIDGE = _ensure_transfer_bridge(TRANSFER_ROOT)
 
 JOBS = [{
     "key": "full_bank_pipeline",
     "label": "FULL - Map -> Audit -> Bank -> Audit",
-    "purpose": "Fresh staged Bank Map and Complete Bank with one normal AI handoff, local audits, and one final GitHub transfer ZIP.",
+    "purpose": "Fresh staged Bank Map and Complete Bank with one AI handoff, local audits, and one final GitHub transfer ZIP.",
 }]
 
 
@@ -162,7 +204,7 @@ def _archive_legacy_downloads() -> dict:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "CurriculumBuilder/0.8.0"
+    server_version = "CurriculumBuilder/0.8.1"
 
     def log_message(self, fmt, *args):
         sys.stdout.write("[builder] " + fmt % args + "\n")
@@ -196,6 +238,9 @@ class Handler(BaseHTTPRequestHandler):
                 "launcher": str(CONVENIENCE_LAUNCHER),
                 "python_executable": sys.executable,
                 "graphics_runtime_ready": _graphics_ready(Path(sys.executable)),
+                "transfer_bridge_ready": bool(TRANSFER_BRIDGE.get("ready")),
+                "transfer_bridge_detail": TRANSFER_BRIDGE.get("detail"),
+                "transfer_command": TRANSFER_BRIDGE.get("command"),
                 "memories_exists": memories.is_dir(),
                 "algebra_exists": algebra.is_dir(),
                 "memories_head": read_head_sha(memories),
@@ -256,6 +301,12 @@ class Handler(BaseHTTPRequestHandler):
                     subprocess.run(["open", str(folder)], check=False)
                 self._send_json({"status": "PASS", "folder": str(folder)})
                 return
+            if self.path == "/api/reveal-transfer-inbox":
+                TRANSFER_ROOT.mkdir(parents=True, exist_ok=True)
+                if sys.platform == "darwin":
+                    subprocess.run(["open", str(TRANSFER_ROOT)], check=False)
+                self._send_json({"status": "PASS", "folder": str(TRANSFER_ROOT)})
+                return
             if self.path == "/api/archive-legacy-downloads":
                 self._send_json({"status": "PASS", **_archive_legacy_downloads()})
                 return
@@ -273,8 +324,9 @@ def main():
     print(f"Workspace: {STAGING_ROOT}")
     print(f"AI Exchange: {AI_EXCHANGE_ROOT}")
     print(f"Transfer inbox: {TRANSFER_ROOT}")
+    print(f"Transfer bridge: {'READY' if TRANSFER_BRIDGE.get('ready') else 'NOT READY'}")
     print(f"Convenience launcher: {CONVENIENCE_LAUNCHER}")
-    print("Normal Full Bank Pipeline: one AI handoff -> local Map audit -> local Bank build/audit -> one transfer")
+    print("Normal Full Bank Pipeline: one AI handoff ZIP -> one AI result ZIP -> Apply Curriculum Transfers -> Continue -> final transfer")
     print(f"Open: {url}")
     threading.Timer(0.6, lambda: webbrowser.open(url)).start()
     try:
