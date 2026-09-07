@@ -1,7 +1,7 @@
 {
   "name": "Algebra 1 Notes Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v1.1",
+  "profile_version": "v1.3",
   "framework_version": "v7.3",
   "role": "Course-specific Algebra Notes behavior. Framework owns learning; Notes PM owns procedure; reusable template owns shell/order; notes_alg.css owns visuals.",
   "template_contract": {
@@ -70,7 +70,13 @@
     "background": "white",
     "count_per_section": 1,
     "source": "current complete Unit Bank",
-    "exit_conflict_rule": "fail closed and repair WTC upstream; Exit remains protected"
+    "exit_conflict_rule": "Protect Exit. Try up to 3 safe WTC stimulus repairs. If a clean repair is found, use it in Notes and document the proposed upstream Bank repair. If no clean repair is found, keep the exact canonical WTC in student Notes, add a teacher-copy warning immediately above it, document the upstream repair need, and continue as PASS_WITH_UPSTREAM_WTC_REPAIR when all other QA passes.",
+    "exit_conflict_retry_limit": 3,
+    "exit_conflict_fallback": "keep_canonical_wtc_add_teacher_warning_and_continue",
+    "repair_candidate_may_be_used_in_notes": true,
+    "exit_conflict_is_build_stopping_after_retries": false,
+    "omit_wtc_on_exit_conflict": false,
+    "teacher_warning_required_when_unresolved": true
   },
   "i_can_compartment": {
     "heading": "I Can N badge + exact I Can text",
@@ -99,7 +105,18 @@
       "representation translation",
       "mathematical process/decision diagrams"
     ],
-    "production_graphs": "registered Algebra graph tool"
+    "production_graphs": "registered Algebra graph tool",
+    "representation_diversity_rule": "Do not count a restatement as a distinct representation. A table row and the ordered pair copied from that row are the same relationship view for layout purposes. When showing multiple representations, prefer genuinely different forms such as rule/equation, table, graph, and context. Ordered pairs may be highlighted as connections within those views.",
+    "preferred_multi_rep_set": [
+      "Rule / Equation",
+      "Table",
+      "Graph",
+      "Context / Situation"
+    ],
+    "redundant_pair_examples": [
+      "table row + copied ordered pair",
+      "evaluated rule + same numeric pair written separately"
+    ]
   },
   "example_yti": {
     "default_pairs_per_i_can": 1,

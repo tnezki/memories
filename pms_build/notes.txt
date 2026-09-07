@@ -96,9 +96,13 @@ Same I Can/evidence job is allowed.
 Same task instance is not.
 
 If canonical WTC conflicts materially with Exit:
-- do not alter Exit;
-- do not silently preserve the conflict;
-- fail closed with NOTES_WTC_EXIT_CONFLICT so WTC can be repaired upstream.
+- NEVER alter or expose the secure Exit item;
+- try up to 3 safe WTC stimulus repairs using allowed variation axes while preserving the WTC evidence job, structure, dependency chain, representation demand, and difficulty;
+- if a clean repaired WTC is found, use that repaired WTC in the Notes build and record the exact proposed upstream Bank repair in the build report/handoff;
+- if no clean repair is found after 3 attempts, KEEP the exact canonical WTC in the student Notes, add a clear TEACHER-COPY warning immediately above that WTC, document the conflict and proposed upstream repair, and CONTINUE the Unit Notes build;
+- do NOT omit a canonical WTC solely because of an Exit conflict;
+- a WTC/Exit conflict by itself is NOT a build-stopping failure after the repair attempts are exhausted;
+- report status as PASS_WITH_UPSTREAM_WTC_REPAIR when the rest of Notes QA passes.
 
 SECURE SUMMATIVE
 ----------------
@@ -263,6 +267,23 @@ Good forms:
 - process/decision diagrams grounded in actual mathematics.
 
 Styled text cards alone do NOT satisfy the visual requirement.
+
+REPRESENTATION DIVERSITY — HARD
+-------------------------------
+Do not count two surfaces as different representations when one merely restates the other.
+
+Examples:
+- a table row and the ordered pair copied from that same row are NOT two distinct views;
+- an evaluated rule and the same numeric pair written beside it are NOT two distinct views.
+
+For multiple-representation Math Notes, prefer genuinely different forms such as:
+- Rule / Equation
+- Table
+- Graph
+- Context / Situation
+
+An ordered pair may be highlighted as a connection INSIDE the table/graph/rule comparison,
+but it should not replace a genuinely different representation when the purpose is to compare views.
 
 MATCHING HIGHLIGHTS
 -------------------
@@ -462,7 +483,7 @@ SOURCE / ALIGNMENT
 [ ] exact current Learning Target
 [ ] exact current I Can statements
 [ ] current complete Bank
-[ ] exact canonical WTC once
+[ ] exact canonical WTC once OR documented safe repaired WTC; unresolved conflicts retain canonical WTC with teacher warning
 [ ] accepted source_map copied unchanged
 
 TEMPLATE / ORDER
@@ -485,6 +506,7 @@ READING / MATH NOTES
 [ ] each I Can has substantive reading
 [ ] each Math Notes canvas contains real mathematics, not styled labels only
 [ ] representations visually correspond where appropriate
+[ ] no redundant pseudo-views (for example, table row + copied ordered pair counted as separate representations)
 [ ] production graphs use registered graph tool
 
 EX/YTI
@@ -499,6 +521,7 @@ DISCUSSION
 [ ] 2–3 Stop and Discuss prompts after each YTI
 [ ] prompts grounded in the I Can block
 [ ] no Exit rehearsal
+[ ] WTC/Exit conflicts attempted up to 3 times, then repaired or documented without stopping the build
 
 RENDER
 [ ] base.css then notes_alg.css
@@ -524,7 +547,7 @@ SYSTEM_CONTRACT_MISMATCH
 NOTES_TEMPLATE_CONTRACT_MISMATCH
 NOTES_STYLESHEET_CONTRACT_MISMATCH
 NOTES_EXIT_NEAR_DUPLICATE
-NOTES_WTC_EXIT_CONFLICT
+NOTES_WTC_EXIT_CONFLICT   # report/warning only after repair attempts; not build-stopping by itself
 NOTES_REQUIRED_REPRESENTATION_MISSING
 NOTES_SECURE_CONTENT_LEAK
 NOTES_RENDER_QA_FAIL
@@ -557,6 +580,11 @@ REPORT:
 
 REVISION
 --------
+2026-09-06 v1.2 — unresolved WTC/Exit conflicts KEEP the canonical WTC, add a teacher warning, document upstream repair, and continue. Math Notes may not count redundant restatements as separate representations.
+
+2026-09-06 v1.1 — WTC/Exit conflict handling changed from immediate fail-closed to
+up to 3 safe repair attempts, then document/omit and continue as PASS_WITH_UPSTREAM_WTC_REPAIR.
+
 2026-09-06 v1.0 — approved Algebra Notes layout pilot v6 converted into a reusable
 template + root CSS architecture. Full-width title banner; learning sidebar + Section
 Introduction; Vocabulary Preview; Section Preview; global Close Reading directions; white
