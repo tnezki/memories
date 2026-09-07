@@ -1,0 +1,406 @@
+BUILD ALGEBRA 1 BANK — MASTERY GOAL FAMILY ARCHITECTURE
+========================================================
+
+STATUS: CURRENT / OLD CONTROL PANEL
+JOB: bank_map_and_build
+ROLE: Build the canonical Algebra 1 Unit Bank as reusable question families organized by Mastery Goal -> I Can -> Family.
+
+CORE ARCHITECTURE
+-----------------
+Do NOT begin by filling Practice, Exit, Summative, WTC, or other destination slots.
+
+Build the reusable question architecture first:
+
+  Mastery Goal
+    -> exact I Can statements
+      -> exactly 3 materially different question families per I Can
+        -> one complete exemplar per family
+        -> clear fresh-instance variation rules
+
+For the common current Algebra pattern:
+  4 Mastery Goals x 4 I Cans x 3 families = 48 families.
+
+Those families are reusable question TYPES, not fixed destination questions.
+Downstream jobs later select a family and author a fresh instance for the destination.
+
+=================================================
+0. SOURCE BOUNDARY — HARD
+=================================================
+
+Use ONLY:
+1. current request / current explicit teacher instruction;
+2. request-provided files;
+3. exact pinned project GitHub sources from:
+   - tnezki/memories
+   - tnezki/algebra
+
+DO NOT USE:
+- public web search or fetch;
+- search engines;
+- outside curriculum websites;
+- ChatGPT File Library;
+- prior chats;
+- saved memory;
+- old request packages;
+- stale uploads;
+- existing Banks as question/content sources.
+
+Direct reads from the pinned project GitHub repositories are allowed.
+Pin memories and algebra commits ONCE at job start. Do not mix commits.
+
+If a required source is missing, STOP and report exact repository + commit + path.
+Do not hunt for substitutes.
+
+=================================================
+1. EXACT SOURCE LOCATIONS
+=================================================
+
+SYSTEM REPOSITORY: tnezki/memories
+
+Read:
+  SYSTEM_MANIFEST.json
+  Curriculum_Philosophy.txt
+  SYSTEM_RUNTIME_CONTRACT.txt
+  Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt
+  frameworks/MANIFEST.json
+  frameworks/Algebra_1/FRAMEWORK.txt
+  frameworks/Algebra_1/MANIFEST.json
+
+Algebra resource root:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+
+For Unit N, exact Unit Assessment Plan:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html
+
+Coursewide Mastery Goal / I Can retrieval aid:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  assessment_plans/indexes/assessment_plan_index.json
+
+Bank course profile:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  profiles/bank_course_profile.json
+
+Exit routing reference only:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  curriculum/exit_evidence_map.json
+
+Question Structure:
+  _question_structure/version_manifest.json
+  _question_structure/QUESTION_STRUCTURE_CORE.md
+Resolve the exact current Universal Question Structure Library from the version manifest.
+
+Registered tools:
+  Tools/MANIFEST.json
+
+Graph tool:
+  resolve Tools/MANIFEST.json -> tools.graph_tool
+If graph_tool is Tools/~graph_tool_v13.py, also stage/read:
+  Tools/~graph_tool_v12.py
+v13 is the authoritative line-weight adapter over the v12 behavior base; keep both files together when executing graph generation.
+
+Canonical Bank viewer template:
+  Tools/templates/algebra/bank/bank_viewer_template.html
+
+Universal finalizer:
+  Tools/finalize_output.py
+  Tools/FINALIZE_OUTPUT_CONTRACT.txt
+
+COURSE REPOSITORY: tnezki/algebra
+Canonical destination:
+  banks/unitN/
+
+IMPORTANT:
+Existing banks/unitN/ content is NOT question authority for a fresh build.
+The new transfer must replace the old Bank cleanly; obsolete old Bank files must not remain mixed into the new architecture.
+
+=================================================
+2. AUTHORITY ORDER
+=================================================
+
+1. current explicit teacher instruction
+2. Curriculum Philosophy
+3. Algebra Framework + exact Unit Assessment Plan
+4. Algebra Bank course profile
+5. current Question Structure
+6. this PM
+7. registered tools / rendering contracts
+
+Assessment Plan owns learning.
+Bank profile owns course Bank architecture.
+This PM owns execution.
+
+=================================================
+3. RESOLVE MASTERY GOALS
+=================================================
+
+For requested Unit N:
+1. Resolve current Unit Mastery Goals from the exact Assessment Plan.
+2. Resolve each Mastery Goal's exact ordered I Can statements.
+3. Preserve exact goal IDs/titles/text and exact I Can wording/order.
+4. If no explicit I Can ID exists, derive a stable locator from goal ID + authoritative I Can order and record that it is derived.
+5. Do not invent goals/I Cans to satisfy a quota.
+
+Expected family count = total I Cans x 3.
+For 4 MGs x 4 I Cans, expected family count = 48.
+
+=================================================
+4. THREE FAMILIES PER I CAN — HARD
+=================================================
+
+Author EXACTLY THREE materially different question families per I Can:
+
+Family A — CORE / DIRECT EVIDENCE
+  Clean, strong direct proof of the I Can.
+
+Family B — ALTERNATE REPRESENTATION / APPLICATION
+  Same I Can through a meaningfully different representation, setup, context, or direction.
+
+Family C — REASONING / MISCONCEPTION / TRANSFER
+  A genuinely different reasoning route: interpretation, comparison, reverse thinking, error diagnosis, missing information, transfer, etc.
+
+Do NOT force error analysis when another third route is more natural.
+
+MATERIAL DIFFERENCE RULE:
+Changing only numbers, names, nouns, coordinates, colors, or context words is NOT a new family.
+Families should differ in the way students demonstrate the skill.
+
+=================================================
+5. FAMILY RECORD
+=================================================
+
+Each family must contain:
+- family_id
+- family_label A/B/C
+- unit
+- exact Mastery Goal identity
+- exact I Can identity/text
+- family_name
+- family_purpose
+- evidence_job
+- student_action
+- question_structure_id
+- response_mode
+- representation_mode / representation_need
+- executable representation route(s)
+- difficulty_intent
+- invariant
+- variation_axes
+- forbidden_variations
+- allowed_destinations
+- best_use
+- avoid_uses
+- fresh_instance_rule
+- exemplar:
+    - complete student_html
+    - answer/key
+    - short solution/scoring guidance
+    - structured representation data when needed
+
+Every exemplar is a REAL complete student-usable question, not a template placeholder.
+
+=================================================
+6. AUTHORING RULES
+=================================================
+
+Use current Question Structure for every family.
+Structure must match evidence job, student action, response mode, and representation.
+
+Keep direct tasks direct.
+For construction, provide a real answer-neutral response surface.
+For error diagnosis, provide a specific worked misconception/error.
+For multistep, require a genuine dependency.
+For graph work, use the current registered graph tool. Do not hand-build coordinate SVG as a substitute.
+
+Author ONE strong exemplar per family.
+Do NOT mass-author parallel destination instances in this job.
+
+=================================================
+7. DELIVERY MAP
+=================================================
+
+Create delivery_map.json as a ROUTING layer, not another question bank.
+
+For every family record, identify appropriate possible uses:
+- Practice
+- Exit new evidence
+- Exit reassessment
+- secure Summative
+- recovery/reteach
+- Notes Example/YTI or activities when appropriate
+
+Do not force every family into every destination.
+Record:
+- best_use
+- acceptable_uses
+- avoid_uses
+- secure_instance_rule when Summative is allowed
+- reassessment_freshness_rule when reassessment is allowed
+
+=================================================
+8. CANONICAL OUTPUT
+=================================================
+
+Write to:
+  tnezki/algebra
+  banks/unitN/
+
+Required structure:
+
+banks/unitN/
+  BANK_MANIFEST.json
+  FAMILY_INDEX.json
+  delivery_map.json
+  BUILD_REPORT.txt
+  PROVENANCE.json
+  unitN.html
+
+  mastery_goals/
+    <MG-ID>.json
+    ...
+
+  figures/
+    only assets actually used by exemplars
+
+Do NOT create permanent Exit/Practice/Summative/WTC question inventories in the Bank.
+Those are downstream fresh-instance products.
+
+=================================================
+9. VIEWER — LOCKED LAYOUT
+=================================================
+
+Use the canonical template:
+  Tools/templates/algebra/bank/bank_viewer_template.html
+
+Copy it as:
+  banks/unitN/unitN.html
+
+Do not invent a different viewer layout.
+
+Required visual organization:
+- strongest grouping = Mastery Goal;
+- each Mastery Goal has a full-width, obvious MG banner;
+- exactly four I Can columns on a normal desktop when the MG has four I Cans;
+- display the families as three rows:
+    Row A = Family A for I Can 1, 2, 3, 4
+    Row B = Family B for I Can 1, 2, 3, 4
+    Row C = Family C for I Can 1, 2, 3, 4
+- therefore each normal family row has FOUR cards across;
+- every card shows its I Can identity/text, family label/name, purpose, exemplar, and collapsible answer/specification;
+- responsive layout may reduce to 2 or 1 columns on narrow screens.
+
+GRAPH DISPLAY SIZE IN VIEWER:
+- coordinate/context graph images: max-width 220px;
+- center graphs inside the card;
+- do not allow graphs to dominate the card/page.
+
+=================================================
+10. LIGHT QA — ONLY FIVE CHECKS
+=================================================
+
+1. COUNT / IDENTITY
+   - exact MGs/I Cans preserved;
+   - exactly 3 families per I Can;
+   - unique family IDs;
+   - expected family count reconciles.
+
+2. FAMILY DISTINCTNESS
+   - A/B/C for one I Can are materially different types;
+   - number-only / noun-only clones FAIL.
+
+3. EXEMPLAR COMPLETENESS
+   - complete usable prompt;
+   - all referenced values/data present;
+   - required representation visible;
+   - no TODO/TBD/placeholders.
+
+4. MATH / REPRESENTATION
+   - answer/solution correct;
+   - graph/table/equation agrees with prompt;
+   - registered graph tool used when required;
+   - no answer leakage.
+
+5. FINALIZATION
+   - run Tools/finalize_output.py on finished Bank tree;
+   - require FINALIZATION_QA: PASS.
+
+That is the QA. Do not expand into a giant audit.
+If one check fails, repair the concrete defect and rerun that check + finalization.
+
+=================================================
+11. MANIFEST / PROVENANCE
+=================================================
+
+BANK_MANIFEST.json includes at minimum:
+- schema
+- course = Algebra 1
+- unit
+- architecture = mastery_goal_i_can_question_family
+- status = COMPLETE
+- ready_for_downstream = true
+- qa_status = PASS
+- mastery_goal_count
+- i_can_count
+- families_per_i_can = 3
+- family_count
+- exemplar_count
+- viewer = unitN.html
+- source_policy = CLOSED_PROJECT_SOURCES_ONLY
+- public_web_research_used = false
+- file_library_recovery_used = false
+
+PROVENANCE.json records:
+- pinned memories commit
+- pinned algebra commit
+- exact Unit Assessment Plan path
+- Bank profile path
+- Question Structure identity
+- graph tool identity
+- source_policy = CLOSED_PROJECT_SOURCES_ONLY
+- public_web_research_used = false
+- file_library_recovery_used = false
+
+BUILD_REPORT.txt stays short:
+- PASS/FAIL
+- MG count
+- I Can count
+- expected/actual family count
+- exemplar count
+- QA result
+- finalization result
+
+=================================================
+12. TRANSFER / REPLACEMENT
+=================================================
+
+Package through Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt.
+Do not write directly to repositories. Do not run Git commands. Do not commit/push.
+
+Destination:
+  algebra/banks/unitN/
+
+If banks/unitN/ already contains an older Bank architecture:
+- include REPLACE for same-path files;
+- include DELETE actions for obsolete files/directories' files that are not part of the new Bank;
+- use expected existing hashes when available;
+- do not leave old exit/, practice/, summative/, wtc/, source_map/, or legacy viewer files mixed with the new family Bank.
+
+If the old pilot path banks/mastery_goal_bank/unitN/ exists, it is not canonical.
+Do not use it as source authority. It may be removed after the canonical replacement is verified.
+
+=================================================
+13. GOOD-ENOUGH STOP
+=================================================
+
+When:
+- expected families exist;
+- A/B/C are materially distinct;
+- exemplars are complete/correct;
+- five-check QA passes;
+- BANK_MANIFEST says COMPLETE / ready_for_downstream / PASS;
+- FINALIZATION_QA passes;
+
+STOP AND DELIVER.
+Do not continue polishing or mass-author destination questions.
+
+END — ALGEBRA 1 BANK

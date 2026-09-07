@@ -2,60 +2,69 @@
   "name": "Algebra 1 Course Bank Profile",
   "course": "Algebra 1",
   "course_family": "spiral_math",
-  "profile_version": "v2.4",
+  "profile_version": "v3.0",
   "framework_version": "v7.4",
-  "role": "Course-specific Bank inventory/content authority. Bank Map and Complete Bank PMs own universal execution procedure.",
+  "role": "Course-specific authority for the canonical Mastery Goal -> I Can -> Question Family Bank architecture. The Bank PM owns execution.",
   "question_structure": {
-    "rule": "Use current universal Question Structure for every authored Bank question/task. Warm-Ups are outside Bank and are the explicit course exception.",
-    "semantic_fit_rule": "A structure ID cannot PASS by name alone. Evidence job, student action, structure reasoning architecture/required representation, response mode, representation mode, and executable tool/response-surface route must all agree.",
-    "direct_read_rule": "When the evidence job is only to read, identify, name, or extract a feature from a supplied representation, keep the task direct. Do not add critique, correction, construction, or extra reasoning merely to fit a more elaborate structure. Use a current direct representation-reading structure when the library supports the destination and evidence job.",
-    "seed_exception": "A seed record is not itself a finished question; when a seed becomes a question, Question Structure applies."
+    "rule": "Use current universal Question Structure for every authored Bank family exemplar. Warm-Ups are outside Bank.",
+    "semantic_fit_rule": "A structure ID cannot PASS by name alone. Evidence job, student action, reasoning architecture, required representation, response mode, representation mode, and executable route must agree.",
+    "direct_read_rule": "When the evidence job is only to read, identify, name, or extract a feature from a supplied representation, keep the task direct rather than adding artificial critique or construction."
   },
   "canonical_maps": {
     "exit_evidence": "curriculum/exit_evidence_map.json",
     "warmup_progression": "curriculum/warmup_progression_map.json",
     "mastery_goals": "assessment_plans/indexes/assessment_plan_index.json"
   },
-  "mastery_goal_source_rule": "Exact Unit Assessment Plan remains primary authority. assessment_plans/indexes/assessment_plan_index.json is the coursewide retrieval aid. Do not require the retired/missing curriculum/mastery_goal_map.json path.",
-  "bank_inventory": {
-    "exit": {
-      "status": "canonical",
-      "rule": "One official four-question ticket per section. Normal section = 2 current new mastery evidence questions + 2 fresh parallel reassessments of prior section carryforward pair. U1.1 = 4 opening questions; Q1-Q2 carry forward."
-    },
-    "summative": {
-      "status": "canonical_secure",
-      "forms": ["V1", "V2", "V3", "V4", "V5", "V6"],
-      "sequence": "Author V1 from the Exit/mastery evidence plan; build parallel V2-V4; then author additional secure V5-V6 under the same evidence blueprint and comparable rigor.",
-      "evidence_rule": "Target approximately two secure evidence opportunities per CURRENT Unit Mastery Goal.",
-      "time_rule": "Design the complete form for about a 40-minute class period. The Bank Map resolves exact item count from Mastery Goal count and item complexity; do not hard-code eight items across all Units.",
-      "count": "Evidence/time driven from the two-per-Mastery-Goal target; exact count is resolved by Bank Map."
-    },
-    "practice_1": {
-      "status": "canonical",
-      "role": "Primary independent practice",
-      "count_per_section": 24,
-      "stage_counts": {"Intro": 8, "Review": 8, "Mastery": 8},
-      "stage_balance": "HARD: exactly 8 Intro + 8 Review + 8 Mastery. Visible stage headings are preferred for Algebra.",
-      "allocation_rule": "Within each 8-question block, distribute work for useful repetition and coverage; do not mechanically force equal I Can counts when that would create weak or fake variety."
-    },
-    "wtc": {
-      "status": "canonical",
-      "count_per_section": 1,
-      "role": "Shared-stimulus multipart preview/decomposition task governed by the Algebra Framework WTC contract.",
-      "part_count": 4,
-      "part_labels": ["Part A", "Part B", "Part C", "Part D"],
-      "shared_stimulus_rule": "Begin with one meaningful shared context/stimulus before all four parts; every part belongs to that same situation.",
-      "dependency_rule": "Parts may be independent or naturally connected. Require carry-forward only when the mathematics genuinely requires an earlier result.",
-      "question_structure_rule": "Authenticate each part to its natural evidence_job, student_action, question_structure_id, response_mode, and representation routes. Do not force PROC-MULTISTEP-CHAIN-01 on the multipart container; chain structures require an explicit real dependency.",
-      "parts_plan_rule": "Store the four ordered labeled parts in parts_plan with per-part evidence/structure/response/representation metadata and a common shared_stimulus_id. Record depends_on only for real required dependencies; independent parts may omit it or use an empty list."
-    },
-    "seeds": {
-      "status": "canonical_when_useful",
-      "count": "No quota",
-      "role": "Reusable context, data, representation, misconception, source idea, visual idea, or problem setup that may support Practice, Notes, activities, investigations, or other builds without requiring a finished duplicate question.",
-      "keep_rule": "Keep a seed only when it preserves a genuinely reusable idea. Do not create filler seeds to reach a count.",
-      "approved_seed_rule": "If this profile declares approved seed candidates for the requested Unit, map them unless the current teacher explicitly rejects one or a higher authority makes it invalid. No-quota means do not add filler; it does not authorize silently dropping already approved reusable seed ideas."
-    }
+  "mastery_goal_source_rule": "The exact Unit Assessment Plan is primary authority. assessment_plans/indexes/assessment_plan_index.json is the coursewide retrieval aid.",
+  "bank_architecture": {
+    "organizing_unit": "Mastery Goal -> I Can -> Question Family",
+    "families_per_i_can": 3,
+    "family_labels": ["A", "B", "C"],
+    "family_A_intent": "Core/direct evidence",
+    "family_B_intent": "Alternate representation/application",
+    "family_C_intent": "Reasoning/misconception/transfer; do not force error analysis when another third route is more natural",
+    "exemplars_per_family": 1,
+    "material_difference_rule": "The three families must differ in how students demonstrate the skill. Number/name/context swaps alone do not create a new family.",
+    "fresh_instance_rule": "Downstream assessment/practice products select an approved family and author a fresh instance by changing meaningful variation axes while preserving the family invariant and exact I Can.",
+    "canonical_output": "banks/unitN/",
+    "canonical_files": [
+      "BANK_MANIFEST.json",
+      "FAMILY_INDEX.json",
+      "delivery_map.json",
+      "BUILD_REPORT.txt",
+      "PROVENANCE.json",
+      "unitN.html",
+      "mastery_goals/",
+      "figures/"
+    ]
+  },
+  "not_permanent_bank_inventory": [
+    "finished Exit Ticket instances",
+    "finished Practice sets",
+    "secure Summative forms",
+    "finished WTC sets",
+    "Extra Practice",
+    "CYU",
+    "Practice Set 2",
+    "Practice Set 3",
+    "fixed Notes Example/YTI pairs",
+    "finished Warm-Up questions",
+    "legacy destination-slot inventories"
+  ],
+  "delivery_rules": {
+    "exit": "Follow curriculum/exit_evidence_map.json for allocation, then select appropriate Bank families and author fresh instances. Reassessments must be fresh instances, not copied exemplars.",
+    "practice": "Practice builds select families appropriate to Intro/Review/Mastery purpose and instantiate fresh questions. Repetition may reuse a family with fresh instances; do not clone one prompt repeatedly.",
+    "summative": "Secure Summative builds select secure-appropriate families under the Unit evidence blueprint and author fresh secure instances/parallels. Family exemplars themselves are not secure forms.",
+    "wtc": "WTC is built downstream as a shared-stimulus multipart task. Family Bank records may inform evidence/representation choices but WTC is not permanent Bank inventory.",
+    "notes": "Notes may use family architecture, delivery map, Assessment Plan, and Question Structure to purpose-author Examples/YTIs. Bank exemplars are references, not mandatory copies.",
+    "recovery": "Recovery may favor diagnostic/alternate families while still preserving the exact I Can evidence target."
+  },
+  "viewer": {
+    "template": "Tools/templates/algebra/bank/bank_viewer_template.html",
+    "primary_grouping": "Mastery Goal",
+    "desktop_columns": 4,
+    "family_rows": ["A", "B", "C"],
+    "graph_max_width_px": 220
   },
   "approved_seed_candidates": {
     "1": [
@@ -63,60 +72,45 @@
         "seed_id": "U1-SEED-REP-FOUR-VIEWS",
         "title": "Relationship in Four Views",
         "preserve": "One coherent relationship represented consistently by table, graph, rule/equation, and context.",
-        "why_useful": "Reusable across Notes, Practice, activities, investigations, and representation-transfer work without fixing one finished prompt.",
+        "why_useful": "Reusable inspiration for alternate representation families and downstream tasks.",
         "may_vary": "relationship values, context, which representation is given first, and which representation students create or compare"
       },
       {
         "seed_id": "U1-SEED-GRAPH-SCALE-INTERCEPT",
         "title": "Graph Scale + Intercept",
         "preserve": "A coordinate graph where reading the scale matters and an intercept has mathematical or contextual meaning.",
-        "why_useful": "Supports fresh graph-reading, scale, intercept, and parallel-evidence instances without number-only cloning.",
+        "why_useful": "Supports graph-reading, scale, intercept, and fresh parallel instances.",
         "may_vary": "scale, plotted relationship, intercept type/value, and natural context"
       },
       {
         "seed_id": "U1-SEED-FUNCTION-MAPPING-MISCONCEPTION",
         "title": "Function Mapping Misconception",
         "preserve": "The distinction that one input with two outputs is not a function while repeated outputs are allowed.",
-        "why_useful": "Captures a durable misconception that can be represented with mappings, tables, ordered pairs, or graphs.",
+        "why_useful": "Captures a durable misconception for diagnostic or alternate families.",
         "may_vary": "representation type, values, and whether the relation is or is not a function"
       },
       {
         "seed_id": "U1-SEED-FAMILY-GROWTH-COMPARISON",
         "title": "Function-Family Growth Comparison",
         "preserve": "A small set of values or representations that makes additive versus multiplicative or other family-change behavior visible.",
-        "why_useful": "Supports early family recognition and comparison using evidence instead of family labels alone.",
+        "why_useful": "Supports comparison/transfer family design using evidence instead of labels alone.",
         "may_vary": "family pair, table/graph/context form, values, and strength of competing evidence"
       },
       {
         "seed_id": "U1-SEED-EXPRESSION-ERROR-PATTERNS",
         "title": "Expression Error Patterns",
         "preserve": "High-value misconception patterns such as combining unlike terms, distributing to only one term, and sign/parentheses errors during substitution.",
-        "why_useful": "Reusable for Notes, Practice, discussion, error analysis, and targeted recovery without fixing a single worked solution.",
+        "why_useful": "Supports diagnostic families and targeted recovery without fixing one permanent question.",
         "may_vary": "expression, misconception selected, values, and whether the error is shown or anticipated"
       },
       {
         "seed_id": "U1-SEED-EQUATION-MODEL-CONTEXT",
         "title": "Equation-Model Context",
-        "preserve": "A situation with meaningful quantities, a clearly defined unknown, an equation that matches the situation, and a solution that can be interpreted with units/meaning.",
-        "why_useful": "Reusable for equation writing, modeling, solution interpretation, Notes, Practice, and investigations.",
+        "preserve": "A situation with meaningful quantities, a clearly defined unknown, an equation that matches the situation, and a solution interpreted with units/meaning.",
+        "why_useful": "Reusable for application/transfer family design and downstream modeling tasks.",
         "may_vary": "context, quantities, equation structure, and which quantity is unknown"
       }
     ]
-  },
-  "not_bank_inventory": [
-    "Extra Practice",
-    "CYU",
-    "Practice Set 2",
-    "Practice Set 3",
-    "fixed Notes Example/YTI pairs",
-    "finished Warm-Up questions",
-    "legacy 139-per-section inventory"
-  ],
-  "downstream_rules": {
-    "extra_practice": "Generate with Practice build using current map + Practice 1 + seeds + Question Structure.",
-    "cyu": "Generate with Practice build using current map + seeds + Question Structure.",
-    "notes": "Purpose-author/refine Examples/YTIs during Notes using Assessment Plan + Exit map + seeds + Question Structure.",
-    "warmups": "Generate during recurring/Practice-to-Summative work from Framework Warm-Up progression map; do not require Bank questions."
   },
   "response_mode": {
     "canonical_instructional": "constructed/open response by default",
