@@ -1,7 +1,7 @@
 {
   "name": "Algebra 1 Notes Course Profile",
   "course": "Algebra 1",
-  "framework_version": "v7.3",
+  "framework_version": "v7.4",
   "role": "Course-specific Notes constants. Framework owns learning; checklist PM owns procedure; template owns shell/order; notes_alg.css owns visuals.",
   "template_contract": {
     "path": "Tools/templates/algebra/notes/notes_alg_section_template.html",
@@ -53,13 +53,10 @@
   "math_notes": {
     "status": "substantive_visual_reference",
     "hard_rule": "Actual mathematics must be visible; styled labels alone do not satisfy Math Notes.",
-    "core_representation_family": [
-      "Graph",
-      "Equation / Rule",
-      "Table",
-      "Context"
-    ],
-    "representation_diversity_rule": "A restatement is not a distinct representation. A table row plus the same ordered pair copied beside it is one view, not two."
+    "representation_contract_source": "Algebra 1 Framework \u00a78 \u2014 inherit exactly; profile does not redefine it.",
+    "four_view_enforcement": "When four views are shown, use Equation/Rule, Table, Graph, Context/Situation exactly.",
+    "ordered_pairs_role": "Correspondence notation only; never an independent replacement for Graph in a four-view set.",
+    "required_graph_route": "Use the current registered Algebra graph tool directly."
   },
   "representation_fidelity": {
     "hard_rule": "When a prompt names a representation, render that representation literally.",
@@ -98,7 +95,10 @@
     "summative_read_default": false,
     "old_graph_script_inspection_default": false,
     "repeated_fingerprint_checks_default": false,
-    "render_strategy": "assemble full Unit, render once, fix local defects only"
+    "render_strategy": "assemble full Unit, render once, fix local defects only",
+    "prior_chat_context_allowed": false,
+    "project_conversation_history_allowed": false,
+    "assistant_saved_memory_allowed": false
   },
   "repair_policy": {
     "build_may_fix": [
@@ -120,5 +120,11 @@
       "PASS_WITH_WARNINGS",
       "FAIL_BLOCKING_DEPENDENCY"
     ]
+  },
+  "output_contract": {
+    "section_folder_pattern": "notes/u{unit}_{section}_notes/",
+    "student_filename_pattern": "u{unit}_{section}_notes.html",
+    "teacher_filename_pattern": "u{unit}_{section}_notes_teacher.html",
+    "generic_student_teacher_filenames_allowed": false
   }
 }

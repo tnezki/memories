@@ -14,12 +14,17 @@ If an exact repo/path is declared, direct-fetch that repo/path. Do not search fo
 
 5. CONTROL PANEL REQUEST SOURCE POLICY - HARD
 Curriculum Control Panel requests are CLOSED-PROJECT-SOURCE jobs by default.
-Unless the CURRENT request explicitly opts into outside research, use:
+Use only:
+- the CURRENT request and current explicit teacher instruction for that job;
 - request-provided files;
 - exact pinned project GitHub repositories and declared paths;
 - current manifests/Frameworks/PMs/tools resolved from those pinned repositories;
-- current canonical course artifacts;
-- File Library only for recovery of a previously generated matching project artifact when the selected PM/request explicitly permits that recovery.
+- current canonical course artifacts.
+
+CONVERSATION ISOLATION - HARD
+Prior chats, project conversation history, saved/personal memory, assistant/model memory, prior assistant outputs, and stale chat/upload copies are NOT permitted curriculum sources or ambiguity resolvers for a Control Panel job. Ignore them for job execution even if they are visible to the model. They may not be used to discover files, select between competing sources, supplement missing content, or justify curriculum decisions. A current explicit teacher correction in the active request/turn remains allowed.
+
+File Library recovery is OFF by default. It may be used only when the CURRENT request explicitly sets `file_library_project_artifact_recovery_allowed = true`.
 
 Public web is NOT an allowed default curriculum source.
 
@@ -30,7 +35,10 @@ A request/PM/profile may declare tool-policy fields such as:
 - `public_web_fetch_allowed = false`
 - `external_research_allowed = false`
 - `project_github_direct_fetch_allowed = true`
-- `file_library_project_artifact_recovery_allowed = true`
+- `prior_chat_context_allowed = false`
+- `project_conversation_history_allowed = false`
+- `assistant_saved_memory_allowed = false`
+- `file_library_project_artifact_recovery_allowed = false`
 
 These declarations are EXECUTABLE CONSTRAINTS, not commentary.
 
@@ -47,8 +55,8 @@ When `public_web_fetch_allowed = false`:
 Direct reads from the exact pinned project GitHub repositories are ALLOWED when `project_github_direct_fetch_allowed = true`. Use GitHub/project-repository tools for those reads. A direct pinned project-repository read is not permission for public-web research.
 
 7. FILE LIBRARY RECOVERY - HARD
-File Library is not curriculum authority.
-When a request/PM permits `file_library_project_artifact_recovery_allowed = true`, it may be used only to recover a previously generated matching project artifact needed to resume/repair the current job.
+File Library is not curriculum authority and is disabled by default for Control Panel jobs.
+Only when the CURRENT request explicitly sets `file_library_project_artifact_recovery_allowed = true` may it be used to recover a previously generated matching project artifact needed to resume/repair the current job. A PM/profile alone does not silently enable recovery when the request says false.
 - Prefer the exact expected artifact name/course/unit/job identity.
 - Verify fingerprint/record identity before use.
 - Do not browse File Library for alternate curriculum authorities or outside replacements.

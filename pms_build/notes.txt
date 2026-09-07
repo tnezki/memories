@@ -145,10 +145,13 @@ Do not conduct a separate research pass.
     - use real equations/rules, tables, graphs, contexts, mappings, diagrams, or processes
     - styled labels alone do not count
 
-[ ] C8. Representation diversity
-    - Graph · Equation/Rule · Table · Context are the core Algebra forms when applicable
-    - do not count a restatement as a new representation
-    - a table row and the same ordered pair copied beside it are NOT two different views
+[ ] C8. Representation diversity — FOLLOW FRAMEWORK EXACTLY
+    - Algebra Framework §8 owns the representation system.
+    - If Math Notes intentionally show FOUR views of one relationship, use exactly:
+      Equation/Rule | Table | Graph | Context/Situation.
+    - Ordered Pairs may appear only as correspondence notation inside the table/graph connection.
+    - A standalone Ordered Pairs card does NOT count as a fourth view and may not replace Graph.
+    - do not count a restatement as a new representation.
 
 [ ] C9. Representation fidelity — HARD
     If the prompt names a representation, render that representation literally.
@@ -174,9 +177,12 @@ Do not conduct a separate research pass.
     Missing named representation -> NOTES_REQUIRED_REPRESENTATION_MISSING.
 
 [ ] C10. Graphs
+    - when the Framework/learning job requires Graph, generate an ACTUAL graph with the current registered Algebra graph tool
     - call the registered Algebra graph tool directly
+    - do not replace a required graph with Ordered Pairs, prose, or a duplicate table
     - do not inspect old graph scripts for examples/patterns
     - do not build a new graph tool during Notes
+    - if the registered graph tool cannot produce the required graph, REPORT NOTES_REQUIRED_GRAPH_MISSING with owner GRAPH_TOOL_REPAIR; do not pretend the representation set is complete
 
 =====================================================
 D. WTC CHECKLIST
@@ -339,6 +345,9 @@ CONTENT
 [ ] named representations are literal/real
 [ ] no table represented only as ordered-pair prose
 [ ] Math Notes contain actual mathematics
+[ ] every four-view comparison is Equation/Rule + Table + Graph + Context/Situation
+[ ] no standalone Ordered Pairs card is counted as a fourth view beside the same table
+[ ] every required graph is an actual graph produced through the registered Algebra graph tool
 
 VISUAL
 [ ] canonical template used
@@ -392,7 +401,18 @@ WARNING means continue and return the build with the issue documented.
 J. OUTPUT
 =====================================================
 
-Return ONE Unit Notes ZIP with normal course paths plus:
+Return ONE Unit Notes ZIP with canonical section paths/names:
+
+notes/u{unit}_{section}_notes/u{unit}_{section}_notes.html
+notes/u{unit}_{section}_notes/u{unit}_{section}_notes_teacher.html
+
+Example:
+notes/u1_1_notes/u1_1_notes.html
+notes/u1_1_notes/u1_1_notes_teacher.html
+
+Do NOT rename these to student.html / teacher.html or other generic filenames.
+
+Plus:
 
 _notes_provenance/
   unitN/
