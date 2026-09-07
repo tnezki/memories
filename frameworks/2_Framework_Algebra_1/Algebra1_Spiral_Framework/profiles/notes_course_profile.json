@@ -1,14 +1,17 @@
 {
   "name": "Algebra 1 Notes Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v1.4",
   "framework_version": "v7.3",
-  "role": "Course-specific Algebra Notes behavior. Framework owns learning; Notes PM owns procedure; reusable template owns shell/order; notes_alg.css owns visuals.",
+  "role": "Course-specific Notes constants. Framework owns learning; checklist PM owns procedure; template owns shell/order; notes_alg.css owns visuals.",
   "template_contract": {
     "path": "Tools/templates/algebra/notes/notes_alg_section_template.html",
     "status": "canonical_reusable_shell",
-    "rule": "Normal Algebra Notes sections must instantiate this shell rather than recreate page structure.",
-    "template_may_change_only_by_review": true
+    "recreate_shell_allowed": false
+  },
+  "assessment_plan_contract": {
+    "authority": "Framework-owned exact Unit Assessment Plan",
+    "path_pattern": "frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html",
+    "alternate_course_repo_search_allowed": false
   },
   "visual_contract": {
     "base_stylesheet": "../../css/base.css",
@@ -17,12 +20,13 @@
       "../../css/base.css",
       "../../css/notes_alg.css"
     ],
-    "legacy_notes_css_allowed": false,
+    "body_class": "notes-alg",
+    "page_root_class": "container notes-page",
+    "page_surface": "white",
     "page_level_style_allowed": false,
     "inline_layout_or_color_style_allowed": false,
-    "banner": "full-width maroon/red section banner with section number inside",
-    "top_intro": "left learning sidebar + right Section Introduction",
-    "i_can_heading": "maroon I Can N badge with white text + exact I Can statement"
+    "legacy_notes_css_allowed": false,
+    "workspace": "compact lined Notes workspace; notes_alg.css must override shared base.css .workspace height and border"
   },
   "standard_section_order": [
     "Full-width section banner",
@@ -37,152 +41,84 @@
     "What I Understand Now",
     "Common Mistakes to Watch"
   ],
-  "section_intro": {
-    "status": "standard",
-    "purpose": "Short meaningful passage connecting the section to mathematical/scientific thinking, representation, modeling, structure, reasoning, or evidence.",
-    "fake_relevance_prohibited": true
-  },
-  "vocabulary_preview": {
-    "status": "standard",
-    "format": "Know for sure | Recognize | Don't know yet",
-    "style_family": "cream/red"
-  },
-  "section_preview": {
-    "status": "standard",
-    "rows": [
-      "What I noticed",
-      "What I wonder"
-    ],
-    "style_family": "cream/red",
-    "post_summary_conclusion_row": false
-  },
-  "close_reading": {
-    "status": "standard_single_global_box",
-    "applies_to": [
-      "What's To Come",
-      "core reading",
-      "Math Notes"
-    ],
-    "separate_talk_to_text_callouts": false
-  },
-  "wtc": {
-    "status": "standard_and_canonical",
-    "background": "white",
-    "count_per_section": 1,
-    "source": "current complete Unit Bank",
-    "exit_conflict_rule": "Protect Exit. Try up to 3 safe WTC stimulus repairs. If a clean repair is found, use it in Notes and document the proposed upstream Bank repair. If no clean repair is found, keep the exact canonical WTC in student Notes, add a teacher-copy warning immediately above it, document the upstream repair need, and continue as PASS_WITH_UPSTREAM_WTC_REPAIR when all other QA passes.",
-    "exit_conflict_retry_limit": 3,
-    "exit_conflict_fallback": "keep_canonical_wtc_add_teacher_warning_and_continue",
-    "repair_candidate_may_be_used_in_notes": true,
-    "exit_conflict_is_build_stopping_after_retries": false,
-    "omit_wtc_on_exit_conflict": false,
-    "teacher_warning_required_when_unresolved": true
-  },
-  "i_can_compartment": {
-    "heading": "I Can N badge + exact I Can text",
-    "order": [
-      "robust reading",
-      "Math Notes",
-      "Example",
-      "You Try It",
-      "Stop and Discuss"
-    ],
-    "reading_paragraphs_default": "2-4 concise paragraphs",
-    "stop_discuss_prompts": "2-3"
-  },
+  "i_can_compartment_order": [
+    "robust reading",
+    "Math Notes",
+    "Example",
+    "You Try It",
+    "Stop and Discuss"
+  ],
+  "reading_paragraphs_default": "2-4 concise paragraphs",
+  "stop_discuss_prompts_default": "2-3",
   "math_notes": {
     "status": "substantive_visual_reference",
-    "outer_style": "cream surface with blue border/header; inner white mathematical canvas",
-    "hard_rule": "Actual mathematics must be made visible. Styled labels/cards alone do not satisfy Math Notes.",
-    "preferred_forms": [
-      "situation + rule + table + graph with corresponding parts highlighted",
-      "rule -> table -> graph",
-      "situation keywords matched to equation parts",
-      "annotated equation/expression",
-      "side-by-side match/mismatch",
-      "value/rate/pattern evidence examples",
-      "mapping diagrams",
-      "representation translation",
-      "mathematical process/decision diagrams"
-    ],
-    "production_graphs": "registered Algebra graph tool",
-    "representation_diversity_rule": "Do not count a restatement as a distinct representation. A table row and the ordered pair copied from that row are the same relationship view for layout purposes. When showing multiple representations, prefer genuinely different forms such as rule/equation, table, graph, and context. Ordered pairs may be highlighted as connections within those views.",
-    "preferred_multi_rep_set": [
-      "Rule / Equation",
-      "Table",
+    "hard_rule": "Actual mathematics must be visible; styled labels alone do not satisfy Math Notes.",
+    "core_representation_family": [
       "Graph",
-      "Context / Situation"
+      "Equation / Rule",
+      "Table",
+      "Context"
     ],
-    "redundant_pair_examples": [
-      "table row + copied ordered pair",
-      "evaluated rule + same numeric pair written separately"
-    ]
+    "representation_diversity_rule": "A restatement is not a distinct representation. A table row plus the same ordered pair copied beside it is one view, not two."
+  },
+  "representation_fidelity": {
+    "hard_rule": "When a prompt names a representation, render that representation literally.",
+    "table": "Real semantic HTML table. Ordered-pair prose is not a table.",
+    "graph": "Actual graph stimulus or actual blank coordinate plane.",
+    "mapping": "Actual mapping diagram.",
+    "ordered_pairs": "Tuple/list notation only when ordered pairs are the intended representation/job.",
+    "context": "Actual situation/context.",
+    "missing_representation_fail_code": "NOTES_REQUIRED_REPRESENTATION_MISSING"
+  },
+  "wtc": {
+    "source": "current complete Unit Bank",
+    "count_per_section": 1,
+    "preserve_exact_canonical_content": true,
+    "local_repair_allowed": false,
+    "omit_on_exit_conflict": false,
+    "exit_conflict_behavior": "Keep canonical WTC, add teacher-copy warning, report BANK_WTC_REPAIR issue, continue."
   },
   "example_yti": {
     "default_pairs_per_i_can": 1,
+    "second_pair_only_when_earned": true,
     "student_example_solved": false,
     "student_yti_solved": false,
     "teacher_copy_worked_reasoning": true,
-    "second_pair_only_when_earned": true,
-    "exit_firewall_required": true
-  },
-  "end_of_section": {
-    "vocabulary_reference": {
-      "status": "standard",
-      "position": "before Section Summary",
-      "columns": [
-        "Term",
-        "Meaning in this section"
-      ],
-      "style_family": "blue/navy"
-    },
-    "section_summary": "standard",
-    "what_i_understand_now": {
-      "status": "standard",
-      "position": "after Section Summary",
-      "response_length": "2-4 sentences",
-      "connection": "one value, rate, pattern, table, graph, equation, situation, or representation"
-    },
-    "common_mistakes": {
-      "status": "standard",
-      "position": "final visible section",
-      "count": "2-4"
-    }
-  },
-  "security": {
-    "secure_summative_as_notes_source": false,
-    "exit_prompt_as_notes_source": false,
-    "source_map_travels_with_notes": true
+    "focused_exit_duplicate_check": true,
+    "max_local_regeneration_attempts": 3
   },
   "build_efficiency": {
-    "mode": "template_driven_fast_path",
-    "principle": "Build Notes as a controlled fill-in-the-template job, not a new curriculum-design or recovery pass.",
-    "default_reads": [
-      "exact Unit Assessment Plan",
-      "notes_course_profile.json",
-      "canonical Notes template",
-      "Notes CSS",
-      "BANK_MANIFEST.json",
-      "wtc.json",
-      "exit.json"
-    ],
-    "on_demand_only": {
-      "practice1.json": "Only when a specific Example/YTI needs difficulty calibration."
-    },
-    "do_not_read_by_default": [
-      "full ITEM_INDEX.json",
-      "full source_map contents",
-      "seeds.json",
-      "summative_secure.json",
-      "prior Notes from File Library"
-    ],
+    "mode": "checklist",
+    "repository_hunting_allowed": false,
     "file_library_recovery_default": false,
+    "source_map_read_default": false,
+    "item_index_read_default": false,
+    "practice1_read_default": false,
+    "seeds_read_default": false,
+    "summative_read_default": false,
+    "old_graph_script_inspection_default": false,
     "repeated_fingerprint_checks_default": false,
-    "focused_exit_duplicate_check": [
-      "Example",
-      "You Try It"
+    "render_strategy": "assemble full Unit, render once, fix local defects only"
+  },
+  "repair_policy": {
+    "build_may_fix": [
+      "generated Example/YTI near-duplicate",
+      "generated Notes representation missing",
+      "local HTML/path/image defect",
+      "local render clipping/overlap"
     ],
-    "max_regeneration_attempts_per_ex_yti": 3,
-    "render_strategy": "Assemble full Unit, render once, then fix actual defects."
+    "report_only": [
+      "Framework defect",
+      "Assessment Plan defect",
+      "canonical Bank/WTC defect",
+      "Exit defect",
+      "template/CSS system defect",
+      "registered graph-tool defect"
+    ],
+    "final_statuses": [
+      "PASS",
+      "PASS_WITH_WARNINGS",
+      "FAIL_BLOCKING_DEPENDENCY"
+    ]
   }
 }

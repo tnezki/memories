@@ -1,609 +1,395 @@
-BUILD NOTES — SINGLE PASS / ALGEBRA TEXTBOOK NOTES v1.0
-=====================================================
+BUILD NOTES — CHECKLIST MODE
+================================
 
-STATUS: PILOT-APPROVED SHELL
-ROLE: Build complete student + teacher Notes for the requested Unit from the current
-Framework, current Unit Assessment Plan, completed Bank, accepted source_map, and current
-Algebra Notes profile.
+ROLE
+----
+Build the requested Algebra 1 Unit Notes from the current canonical authorities.
+This PM is an execution checklist. It does not redesign the course, repair upstream
+curriculum, search for alternate authorities, or improve canonical sources during the build.
 
-This remains ONE Notes build. There is no separate Notes Map stage.
-
-JOB
----
-SOURCE -> PLAN -> GENERATE -> PLACE -> ASSEMBLE -> RENDER -> CHECK
-
-NOTES FAST PATH — HARD
-----------------------
-This build is intentionally template-driven. Do not turn Notes into a research or recovery job.
-
-DEFAULT UNIT NOTES WORKFLOW:
-1. Resolve the pinned current authorities once.
-2. Read the exact Unit Assessment Plan for Learning Target / I Can text.
-3. Read the current Notes profile + reusable template + Notes CSS.
-4. Read BANK_MANIFEST.json only to confirm COMPLETE / ready_for_downstream.
-5. Read wtc.json and exit.json.
-6. Fill the approved section shell.
-7. Generate reading, Math Notes, vocabulary, preview, summary, reflection, and Common Mistakes directly from the exact section Learning Target / I Cans.
-8. Generate one Example/YTI pair per I Can by default.
-9. Run the intensive duplicate check ONLY on generated Example/YTI tasks against current Unit Exit items.
-10. Assemble the Unit, render once, fix actual render defects, and return the package.
-
-DO NOT by default:
-- search File Library;
-- recover prior Notes;
-- search for alternate sources;
-- read secure Summative;
-- read the full ITEM_INDEX;
-- read the full source_map;
-- read all Practice1 records;
-- read Seeds;
-- perform repeated fingerprint checks after the pinned Bank manifest is accepted;
-- re-resolve paths already declared by the request/manifests;
-- repeatedly narrate path/tool checks.
-
-Practice1 may be read ONLY when a specific Example/YTI needs difficulty calibration.
-source_map may be copied into provenance without deep-reading every record when the request already pins the accepted Bank/map identity.
-
-The Notes build should behave like a controlled fill-in-the-template job, not a new curriculum-design pass.
-
-
-AUTHORITY / STARTUP — HARD
---------------------------
-Read:
-1. Current Curriculum Philosophy
-2. Current SYSTEM_RUNTIME_CONTRACT
-3. Current Algebra 1 Framework
-4. Exact requested Unit Assessment Plan
-5. profiles/notes_course_profile.json
-6. completed current Unit Bank + accepted source_map
-7. current Question Structure
-8. Tools/templates/algebra/notes/notes_alg_section_template.html
-9. css/base.css + css/notes_alg.css
-10. this PM
-
-NO PUBLIC WEB — HARD
---------------------
-Ordinary Notes builds are closed-project-source only.
-Do not use public web search, outside curriculum sites, or general internet research.
-The approved template/CSS already capture the desired visual language.
-
-Missing required canonical dependency -> fail closed.
-
-ALGEBRA NOTES OWNERSHIP
------------------------
-- Framework / Assessment Plan own exact Learning Target and I Can content.
-- Bank owns exact canonical WTC, Practice calibration, Exit protection boundary, and lineage.
-- Question Structure owns question/task reasoning architecture when applicable.
-- notes_course_profile.json owns Algebra-specific Notes behavior.
-- Tools/templates/algebra/notes/notes_alg_section_template.html owns recurring HTML shell/order/classes.
-- css/notes_alg.css owns visual styling.
-- this PM owns build procedure, generation rules, packaging, and QA.
-
-Do NOT re-invent section layout during the build.
-Do NOT write per-page CSS to imitate the approved pilot.
-
-BANK INPUT — CURRENT ARCHITECTURE
----------------------------------
-Require current Bank:
-  BANK_MANIFEST.status = COMPLETE
-  ready_for_downstream = true
-  accepted_map_root exists
-  accepted_map_fingerprint exists
-
-Read canonical/current by default:
-  BANK_MANIFEST.json
-  wtc.json
-  exit.json
-
-Read ONLY on demand:
-  practice1.json  -> only when a specific EX/YTI needs calibration
-
-Do not deep-read by default:
-  ITEM_INDEX.json
-  seeds.json
-  source_map/
-  summative_secure.json
-
-If provenance requires source_map/, copy the accepted pinned source_map unchanged without opening every record.
-
-Do NOT require legacy canonical Notes EX/YTI files.
-
-WTC
----
-Use exact canonical Bank WTC once per normal section.
-Preserve canonical prompt/representation/ID.
-Student copy must not leak answer.
-Teacher copy adds support after the exact student WTC.
-
-HARD EXIT FIREWALL — FOCUSED
------------------------------
-The intensive Exit duplicate check is for generated Example/YTI tasks.
-
-For each generated Example and You Try It:
-- compare against current Unit Exit items;
-- if prompt/stimulus is too close, regenerate the Notes task;
-- try at most 3 times;
-- then use the cleanest non-duplicate version and document any remaining concern.
-
-Do NOT run the same expensive duplicate-search routine over ordinary reading prose,
-Vocabulary Preview, Section Preview, Math Notes explanation, Summary, reflection, or
-Common Mistakes.
-
-Stop & Discuss should remain conceptual/discussion-oriented and must not copy an Exit prompt,
-but it does not require a full duplicate-search pass unless it becomes a task-specific
-assessment rehearsal.
-
-Prohibit:
-- same prompt;
-- same values/data;
-- same context;
-- same graph/table/equation stimulus;
-- cosmetic rewrites of the same distinctive task;
-- near-parallel rehearsal that effectively gives away the Exit.
-
-Same I Can/evidence job is allowed.
-Same task instance is not.
-
-If canonical WTC conflicts materially with Exit:
-- NEVER alter or expose the secure Exit item;
-- try up to 3 safe WTC stimulus repairs using allowed variation axes while preserving the WTC evidence job, structure, dependency chain, representation demand, and difficulty;
-- if a clean repaired WTC is found, use that repaired WTC in the Notes build and record the exact proposed upstream Bank repair in the build report/handoff;
-- if no clean repair is found after 3 attempts, KEEP the exact canonical WTC in the student Notes, add a clear TEACHER-COPY warning immediately above that WTC, document the conflict and proposed upstream repair, and CONTINUE the Unit Notes build;
-- do NOT omit a canonical WTC solely because of an Exit conflict;
-- a WTC/Exit conflict by itself is NOT a build-stopping failure after the repair attempts are exhausted;
-- report status as PASS_WITH_UPSTREAM_WTC_REPAIR when the rest of Notes QA passes.
-
-SECURE SUMMATIVE
-----------------
-Secure Summative prompts are NOT Notes authoring sources and must not be exposed.
+CORE RULE
+---------
+DO THE DECLARED BUILD.
+CHECK EACH STEP.
+FIX ONLY LOCAL BUILD DEFECTS THAT THIS PM OWNS.
+DO NOT CHANGE CANONICAL CURRICULUM.
+REPORT UPSTREAM DEFECTS FOR LATER REPAIR.
 
 =====================================================
-1. APPROVED ALGEBRA SECTION SHELL — HARD
+A. AUTHORITY CHECKLIST
 =====================================================
 
-Use the reusable template:
-  Tools/templates/algebra/notes/notes_alg_section_template.html
+[ ] A1. Resolve the pinned job snapshot ONCE.
 
-Normal section order:
+[ ] A2. Read, in this order:
+    1. Current Curriculum Philosophy
+    2. Current SYSTEM_RUNTIME_CONTRACT
+    3. Current Algebra 1 Framework
+    4. Current Question Structure
+    5. Exact requested Unit Assessment Plan resolved by the Framework
+    6. Current Algebra Notes profile
+    7. Canonical Algebra Notes template
+    8. css/base.css
+    9. css/notes_alg.css
+   10. Current Unit BANK_MANIFEST.json
+   11. Current Unit wtc.json
+   12. Current Unit exit.json
+   13. This PM
 
-1. Full-width section banner
-2. Top intro grid
-   LEFT:
-   - What you'll learn about
-   - exact Learning Target
-   - exact I Cans
-   - ...and why
-   RIGHT:
-   - Section Introduction
-3. Vocabulary / Key Notation Preview
-4. Section Preview
-5. Close Reading Directions
-6. What's To Come
-7. I Can 1 block
-8. I Can 2 block
-9. additional exact I Can blocks in Framework order
-10. Vocabulary Reference
-11. Section Summary
-12. What I Understand Now
-13. Common Mistakes to Watch — final visible section
+[ ] A3. Use the Framework-owned Unit Assessment Plan:
+    frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+    assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html
 
-Do not add content after Common Mistakes except closing HTML/scripts.
+[ ] A4. If the request/Framework already gives an exact repo/path/commit, use it.
+    Do NOT search for competing assessment plans or choose by recency, filename,
+    memory, or directory inspection.
 
-FULL-WIDTH BANNER
------------------
-The red section banner begins at the left content edge and spans the usable page width.
-Section number lives inside the red banner before the section title.
+[ ] A5. Confirm Bank:
+    BANK_MANIFEST.status = COMPLETE
+    ready_for_downstream = true
+    accepted_map_fingerprint exists
 
-TOP INTRO GRID
---------------
-Left sidebar:
-- exact Learning Target;
-- exact I Can statements;
-- concise Why It Matters.
+NORMAL NOTES BUILD DOES NOT READ:
+    ITEM_INDEX.json
+    practice1.json
+    seeds.json
+    source_map/
+    summative_secure.json
+    prior Notes from File Library
+    old graph-generation scripts
 
-Right main area:
-- label: Section Introduction;
-- short meaningful opening passage of similar visual weight to the sidebar;
-- connect the section to mathematical/scientific thinking, representation, modeling,
-  structure, reasoning, or evidence when natural;
-- no fake career relevance;
-- do not simply restate the Learning Target.
+FATAL SOURCE FAILURES:
+    missing Philosophy
+    missing Runtime Contract
+    missing Framework
+    missing exact Unit Assessment Plan
+    missing Notes profile/template/CSS
+    missing complete Bank manifest
+    missing wtc.json
+    missing exit.json
 
-=====================================================
-2. VOCABULARY / SECTION PREVIEW / CLOSE READING
-=====================================================
-
-VOCABULARY PREVIEW — STANDARD
------------------------------
-Normal Algebra section includes:
-- useful vocabulary / notation list;
-- prior-knowledge sort:
-  Know for sure | Recognize | Don't know yet.
-
-Keep only vocabulary that matters for this section.
-Do not pad the list.
-
-SECTION PREVIEW — STANDARD
---------------------------
-Use exactly two pre-reading rows:
-- What I noticed
-- What I wonder
-
-Directions should ask students to skim headings, tables, graphs, and examples before
-close reading.
-
-Do NOT add a third preview-conclusion row later.
-The post-reading reflection is owned by What I Understand Now.
-
-Section Preview visually uses the SAME cream/red family as Vocabulary Preview.
-Do not use the older pale-blue preview styling.
-
-CLOSE READING DIRECTIONS — STANDARD
------------------------------------
-Use one blue directions box before WTC.
-
-Direction language:
-READ IN SHORT CHUNKS.
-Students annotate words and visuals together:
-- underline evidence;
-- circle/highlight bold vocabulary;
-- label arrows/important features;
-- connect text to tables/graphs/figures;
-- jot short questions/connections in margins.
-
-This single directions box applies through WTC and the core reading.
-Do NOT insert separate TALK TO THE TEXT callout boxes inside every I Can section.
+If one of those is missing, STOP and report the exact missing dependency.
+Do not substitute an older or similar source.
 
 =====================================================
-3. I CAN COMPARTMENTS — HARD
+B. SECTION SHELL CHECKLIST
 =====================================================
 
-Each exact I Can gets one major section in Framework order.
+For each exact section in the Unit:
 
-Heading form:
-  [maroon badge with white text: I Can N] + exact I Can text
+[ ] B1. Use the canonical reusable template.
+    Tools/templates/algebra/notes/notes_alg_section_template.html
 
-Example:
-  I Can 1 | Find matching values across different representations.
+[ ] B2. Preserve the exact section order:
+    1. Full-width section banner
+    2. Learning sidebar + Section Introduction
+    3. Vocabulary / Key Notation Preview
+    4. Section Preview
+    5. Close Reading Directions
+    6. What's To Come
+    7. I Can compartments in exact Framework order
+    8. Vocabulary Reference
+    9. Section Summary
+   10. What I Understand Now
+   11. Common Mistakes to Watch — final visible section
 
-The badge is visual only.
-Do not rewrite exact I Can wording.
+[ ] B3. Preserve exact Learning Target and exact I Can wording from the Unit Assessment Plan.
 
-Every I Can compartment contains, in order:
-1. robust reading;
-2. substantive Math Notes;
-3. Example;
-4. You Try It;
-5. Stop and Discuss.
+[ ] B4. Do not create page-level CSS, inline layout/color CSS, or alternate page shells.
 
-ROBUST READING
---------------
-Reading should be more than a transition paragraph.
-
-Default:
-- 2–4 concise paragraphs;
-- define/clarify the concept;
-- connect words to representations;
-- explain what students should notice;
-- prepare students to interpret the Math Notes;
-- use bold vocabulary naturally;
-- give students something worth annotating under the global Close Reading directions.
-
-Avoid:
-- generic filler;
-- repeating the same sentence in prose and Math Notes;
-- unnecessary formalism.
+[ ] B5. Load exactly:
+    ../../css/base.css
+    ../../css/notes_alg.css
+    in that order.
 
 =====================================================
-4. MATH NOTES — SUBSTANTIVE VISUAL REFERENCE
+C. STANDARD GENERATED CONTENT CHECKLIST
 =====================================================
 
-Math Notes keep the approved cream surface + blue border/header language.
+These parts are purpose-authored directly from the exact section Learning Target / I Cans.
+Do not conduct a separate research pass.
 
-HARD STANDARD:
-The inner white Math Notes canvas must make ACTUAL MATHEMATICS visible.
+[ ] C1. Section Introduction
+    - short meaningful opening
+    - no fake career relevance
+    - not a restatement of the Learning Target
 
-Good forms:
-- same relationship shown as situation + rule + table + graph with corresponding parts
-  highlighted consistently;
-- rule -> table -> graph translation;
-- situation key words highlighted and matched to exact equation parts;
-- annotated expression/equation;
-- side-by-side MATCH / MISMATCH;
-- values/rate/pattern evidence examples;
-- real mapping diagrams;
-- graph/table/equation alignment;
-- process/decision diagrams grounded in actual mathematics.
+[ ] C2. Vocabulary Preview
+    - only useful section vocabulary/notation
+    - Know for sure | Recognize | Don't know yet
 
-Styled text cards alone do NOT satisfy the visual requirement.
+[ ] C3. Section Preview
+    - exactly two rows:
+      What I noticed
+      What I wonder
 
-REPRESENTATION DIVERSITY — HARD
--------------------------------
-Do not count two surfaces as different representations when one merely restates the other.
+[ ] C4. Close Reading Directions
+    - one global directions box
+    - no repeated Talk to the Text boxes
 
-Examples:
-- a table row and the ordered pair copied from that same row are NOT two distinct views;
-- an evaluated rule and the same numeric pair written beside it are NOT two distinct views.
+[ ] C5. For each exact I Can, generate:
+    1. robust reading
+    2. substantive Math Notes
+    3. Example
+    4. You Try It
+    5. Stop and Discuss
 
-For multiple-representation Math Notes, prefer genuinely different forms such as:
-- Rule / Equation
-- Table
-- Graph
-- Context / Situation
+[ ] C6. Robust reading
+    - normally 2–4 concise paragraphs
+    - teaches the idea
+    - connects words to representations
+    - contains substance worth annotating
 
-An ordered pair may be highlighted as a connection INSIDE the table/graph/rule comparison,
-but it should not replace a genuinely different representation when the purpose is to compare views.
+[ ] C7. Math Notes
+    - actual mathematics must be visible
+    - use real equations/rules, tables, graphs, contexts, mappings, diagrams, or processes
+    - styled labels alone do not count
 
-MATCHING HIGHLIGHTS
--------------------
-When corresponding quantities appear across representations, use consistent highlight
-families to make the connection visible.
+[ ] C8. Representation diversity
+    - Graph · Equation/Rule · Table · Context are the core Algebra forms when applicable
+    - do not count a restatement as a new representation
+    - a table row and the same ordered pair copied beside it are NOT two different views
 
-Example:
-- starting amount in situation <-> intercept/constant term;
-- per-unit amount <-> rate/coefficient;
-- one ordered pair <-> table row <-> graph point <-> evaluated rule.
+[ ] C9. Representation fidelity — HARD
+    If the prompt names a representation, render that representation literally.
 
-Use color sparingly and consistently.
+    TABLE:
+      Use a real semantic HTML table with labeled rows/columns/cells.
+      A sentence or list of ordered pairs is NOT a table.
 
-GRAPHS
-------
-Production builds use the registered Algebra graph tool for coordinate/function graphs.
-Do not hand-build coordinate SVG in production.
-The approved pilot used self-contained SVG only for layout testing.
+    GRAPH:
+      Use an actual graph stimulus, or an actual blank coordinate plane when students
+      are constructing the graph.
 
-=====================================================
-5. EXAMPLE / YOU TRY IT
-=====================================================
+    MAPPING:
+      Use an actual mapping diagram.
 
-Generate Notes EX/YTI during the Notes build.
+    ORDERED PAIRS:
+      Use ordered-pair notation only when ordered pairs themselves are the intended job.
+      Do not substitute ordered-pair prose for a table.
 
-DEFAULT:
-One Example/YTI pair per exact I Can.
+    CONTEXT:
+      Use an actual situation/context.
 
-SECOND PAIR:
-Only when the I Can contains a materially distinct second instructional job:
-- different required representation;
-- different decision/procedure;
-- concept + application/modeling;
-- major misconception requiring its own instructional instance.
+    Missing named representation -> NOTES_REQUIRED_REPRESENTATION_MISSING.
 
-STUDENT COPY
-------------
-Both Example and YTI show:
-- full prompt;
-- needed representation/stimulus;
-- blank workspace.
-
-The Example is NOT pre-solved in the student copy.
-
-The teacher models the Example live.
-The YTI is the fresh parallel student attempt.
-
-TEACHER COPY
-------------
-Teacher copy adds after each Example/YTI:
-- correct answer;
-- worked reasoning / solution;
-- useful teacher move;
-- likely misconception/listen-for when useful.
-
-Do not put worked Example answers into the student Notes.
+[ ] C10. Graphs
+    - call the registered Algebra graph tool directly
+    - do not inspect old graph scripts for examples/patterns
+    - do not build a new graph tool during Notes
 
 =====================================================
-6. STOP AND DISCUSS
+D. WTC CHECKLIST
 =====================================================
 
-Every normal I Can compartment includes Stop and Discuss after the YTI.
+[ ] D1. Use the exact canonical Bank WTC once per normal section.
+    Preserve canonical ID, prompt, values, representation, and response surfaces.
 
-Use 2–3 concise prompts.
+[ ] D2. Student copy must not reveal WTC answers.
 
-Prompts should:
-- connect directly to the reading/Math Notes/Example/YTI just completed;
-- ask students to explain, compare, identify evidence, critique, or connect representations;
-- not become a second practice set;
-- avoid cloning Exit evidence tasks.
+[ ] D3. Teacher copy may add support after the exact WTC.
 
-Provide a modest response area.
+[ ] D4. If canonical WTC conflicts with a secure Exit item:
+    - DO NOT alter Exit
+    - DO NOT alter WTC in the Notes build
+    - DO NOT omit WTC
+    - keep the exact canonical WTC
+    - add a clear TEACHER-COPY warning immediately above it
+    - record WTC_EXIT_CONFLICT in the build report
+    - name the recommended upstream owner: BANK/WTC REPAIR
+    - continue the Notes build
 
-=====================================================
-7. END-OF-SECTION REFERENCE / REFLECTION
-=====================================================
-
-VOCABULARY REFERENCE — STANDARD
--------------------------------
-Place before Section Summary.
-
-Two columns:
-  Term | Meaning in this section
-
-Use the approved Algebra blue/navy reference styling.
-Definitions should be concise and section-specific.
-
-SECTION SUMMARY — STANDARD
---------------------------
-Short bullet summary of the most durable section ideas.
-
-WHAT I UNDERSTAND NOW — STANDARD
---------------------------------
-Place immediately after Summary.
-
-Prompt students to explain the most important idea from the section in 2–4 sentences
-and connect it to one relevant value, rate, pattern, table, graph, equation, situation,
-or representation.
-
-Provide generous blank writing space.
-
-COMMON MISTAKES — STANDARD / FINAL
-----------------------------------
-Final visible section.
-
-Use 2–4 high-value mistakes:
-  Mistake | What to remember
-
-Draw from:
-- section concepts;
-- accepted map;
-- Practice calibration;
-- known mathematical misconceptions.
+This is a reportable upstream defect, not a Notes-build repair job.
 
 =====================================================
-8. VISUAL CONTRACT — HARD
+E. EXAMPLE / YOU TRY IT CHECKLIST
 =====================================================
 
-Production Algebra Notes load EXACTLY:
-  ../../css/base.css
-  ../../css/notes_alg.css
+[ ] E1. Default = one Example/YTI pair per exact I Can.
 
-in that order.
+[ ] E2. Add a second pair only when the I Can has a genuinely distinct second job.
 
-Do not load legacy notes.css.
-No page-level <style>.
-No inline layout/color style.
-No CSS injection script.
+[ ] E3. Student Example:
+    - full prompt
+    - real needed representation
+    - blank workspace
+    - NO worked answer
 
-Root:
-  <body class="notes-alg">
-  teacher:
-  <body class="notes-alg teacher-copy">
+[ ] E4. Student YTI:
+    - fresh parallel task
+    - real needed representation
+    - blank workspace
+    - NO worked answer
 
-Template classes/order must be preserved unless a reviewed template revision changes them.
+[ ] E5. Teacher copy may add:
+    - answer
+    - worked reasoning
+    - teacher move
+    - listen-for / likely misconception
 
-=====================================================
-9. TEACHER COPY
-=====================================================
+[ ] E6. Focused Exit duplicate check — ONLY for generated Example/YTI tasks.
+    Compare against current Unit Exit items for:
+    - same prompt
+    - same values/data
+    - same context
+    - same graph/table/equation stimulus
+    - cosmetic rewrite
+    - near-parallel rehearsal that effectively gives away the Exit
 
-Derive teacher copy from finalized student HTML structure.
+    Same I Can/evidence job is allowed.
+    Same task instance is not.
 
-Same:
-- title;
-- sidebar;
-- introduction;
-- Vocabulary Preview;
-- Section Preview;
-- Close Reading directions;
-- WTC;
-- readings;
-- Math Notes;
-- prompts;
-- Stop and Discuss;
-- reference/summary/reflection/mistakes.
+[ ] E7. If an Example/YTI is too close:
+    - regenerate that LOCAL Notes task
+    - maximum 3 attempts
+    - this is a local build correction and is allowed
 
-Add teacher support to:
-- WTC;
-- each Example;
-- each YTI;
-- Stop and Discuss when useful.
-
-Teacher support may include:
-- Answer / Acceptable Reasoning;
-- Worked Reasoning;
-- Teacher Move;
-- Listen For;
-- Likely Misconception.
-
-Teacher copy releases student workspace height where support needs room.
+[ ] E8. Do NOT run the intensive duplicate-search routine over:
+    reading
+    Vocabulary Preview
+    Section Preview
+    Math Notes explanation/reference
+    Section Summary
+    What I Understand Now
+    Common Mistakes
 
 =====================================================
-10. SOURCE MAP / PROVENANCE
+F. STOP / END-OF-SECTION CHECKLIST
 =====================================================
 
-Bundle accepted source_map unchanged under:
-  _notes_provenance/unitN/source_map/
+[ ] F1. Stop and Discuss
+    - 2–3 concise prompts
+    - explain / compare / identify evidence / connect representations
+    - not a second practice set
+    - not a copied Exit prompt
 
-Generated task metadata stays compact:
-- Notes task ID;
-- section ID;
-- I Can ID;
-- evidence job;
-- Question Structure ID when applicable;
-- representation route;
-- Practice1 calibration IDs when used;
-- accepted_map_fingerprint;
-- exit_firewall_checked.
+[ ] F2. Vocabulary Reference before Section Summary.
+    Columns:
+    Term | Meaning in this section
 
-Do not duplicate full map records in every task.
+[ ] F3. Section Summary
+    - short durable bullets
+
+[ ] F4. What I Understand Now
+    - after Summary
+    - 2–4 sentence reflection prompt
+    - generous response space
+
+[ ] F5. Common Mistakes
+    - 2–4 high-value mistakes
+    - final visible section
 
 =====================================================
-11. QA — HARD
+G. ASSEMBLY / RENDER CHECKLIST
 =====================================================
 
-SOURCE / ALIGNMENT
-[ ] no File Library recovery unless explicitly required by a missing permitted dependency
-[ ] exact current Learning Target
-[ ] exact current I Can statements
-[ ] current complete Bank
-[ ] exact canonical WTC once OR documented safe repaired WTC; unresolved conflicts retain canonical WTC with teacher warning
-[ ] accepted source_map copied unchanged
+[ ] G1. Derive teacher copy from finalized student structure.
 
-TEMPLATE / ORDER
-[ ] reusable Algebra Notes template used
-[ ] full-width red section banner
-[ ] section number inside banner
-[ ] left learning sidebar + right Section Introduction
-[ ] Vocabulary Preview
-[ ] Section Preview uses cream/red family
-[ ] one global Close Reading Directions box
-[ ] WTC white page treatment
-[ ] exact I Can order
-[ ] maroon I Can badges
-[ ] Vocabulary Reference before Summary
-[ ] Summary
-[ ] What I Understand Now
-[ ] Common Mistakes final
+[ ] G2. Assemble all requested sections before render QA.
 
-READING / MATH NOTES
-[ ] each I Can has substantive reading
-[ ] each Math Notes canvas contains real mathematics, not styled labels only
-[ ] representations visually correspond where appropriate
-[ ] no redundant pseudo-views (for example, table row + copied ordered pair counted as separate representations)
-[ ] production graphs use registered graph tool
+[ ] G3. Render once.
 
-EX/YTI
-[ ] one pair per I Can by default
-[ ] second pairs explicitly justified
-[ ] Example student copy is UNSOLVED
-[ ] YTI student copy is UNSOLVED
-[ ] teacher copy includes worked reasoning
-[ ] focused EX/YTI Exit duplicate check PASS
+[ ] G4. Fix ONLY actual local render defects:
+    broken relative path
+    missing generated image
+    clipping/overlap
+    local HTML syntax defect
+    template placeholder not filled
+    local Notes task representation missing
+    local Example/YTI Exit duplication
 
-DISCUSSION
-[ ] 2–3 Stop and Discuss prompts after each YTI
-[ ] prompts grounded in the I Can block
-[ ] no Exit rehearsal
-[ ] WTC/Exit conflicts attempted up to 3 times, then repaired or documented without stopping the build
+[ ] G5. Do NOT use render QA as permission to:
+    rewrite Framework
+    rewrite Assessment Plan
+    rewrite Bank
+    repair WTC
+    change Exit
+    redesign template/CSS
+    search alternate sources
 
-RENDER
+If QA exposes one of those, REPORT it.
+
+=====================================================
+H. FINAL QA — REPORT, DO NOT REDESIGN
+=====================================================
+
+SOURCE
+[ ] pinned snapshot resolved once
+[ ] Philosophy read
+[ ] Runtime Contract read
+[ ] Framework read
+[ ] Question Structure read
+[ ] exact Framework-owned Unit Assessment Plan read
+[ ] Notes profile/template/CSS read
+[ ] complete Bank manifest read
+[ ] WTC + Exit read
+[ ] no alternate-authority hunting
+[ ] no File Library recovery
+
+CONTENT
+[ ] exact Learning Targets
+[ ] exact I Cans
+[ ] exact section order
+[ ] exact canonical WTC present once
+[ ] student WTC answer-neutral
+[ ] one EX/YTI pair per I Can by default
+[ ] student Examples unsolved
+[ ] student YTIs unsolved
+[ ] focused EX/YTI Exit check complete
+[ ] named representations are literal/real
+[ ] no table represented only as ordered-pair prose
+[ ] Math Notes contain actual mathematics
+
+VISUAL
+[ ] canonical template used
 [ ] base.css then notes_alg.css
-[ ] no legacy notes.css
-[ ] no inline/page-level CSS
+[ ] body uses notes-alg
+[ ] main uses container notes-page
+[ ] white Notes page surface
+[ ] no page-level/inline layout CSS
 [ ] no clipping/overlap
-[ ] MathJax readable
-[ ] tables readable
-[ ] graphs readable
-[ ] teacher support readable
-[ ] reasonable Notability/print flow
+[ ] graphs/tables readable
+[ ] Notes workspace uses Notes CSS, not shared 300px dashed base workspace
 
 SECURITY
-[ ] no secure Summative prompt leakage
-[ ] no Exit prompt/stimulus copying
-[ ] no student WTC answer leakage
-
-FAIL CODES
-----------
-BANK_INPUT_DEFECT
-SOURCE_INPUT_DEFECT
-SYSTEM_CONTRACT_MISMATCH
-NOTES_TEMPLATE_CONTRACT_MISMATCH
-NOTES_STYLESHEET_CONTRACT_MISMATCH
-NOTES_EXIT_NEAR_DUPLICATE
-NOTES_WTC_EXIT_CONFLICT   # report/warning only after repair attempts; not build-stopping by itself
-NOTES_REQUIRED_REPRESENTATION_MISSING
-NOTES_SECURE_CONTENT_LEAK
-NOTES_RENDER_QA_FAIL
+[ ] no secure Summative prompts used
+[ ] no Exit prompt/stimulus copied into generated EX/YTI
+[ ] no student answer leakage
 
 =====================================================
-12. OUTPUT
+I. ISSUE REPORTING / OWNERSHIP
+=====================================================
+
+The build report must contain an issues array/list.
+
+For every detected issue record:
+- issue_code
+- section_id if applicable
+- description
+- severity: WARNING | BLOCKING
+- owner
+- build_action_taken
+- recommended_followup
+
+OWNERS:
+FRAMEWORK_REPAIR
+BANK_WTC_REPAIR
+NOTES_TEMPLATE_CSS_REPAIR
+GRAPH_TOOL_REPAIR
+NOTES_LOCAL_TASK_REPAIR
+SOURCE_PACKAGE_REPAIR
+
+RULE:
+Only NOTES_LOCAL_TASK_REPAIR and ordinary local render/path defects may be fixed
+inside this Notes build.
+
+Everything else is REPORT ONLY.
+
+BLOCKING means the build cannot produce a valid artifact from the declared authorities.
+WARNING means continue and return the build with the issue documented.
+
+=====================================================
+J. OUTPUT
 =====================================================
 
 Return ONE Unit Notes ZIP with normal course paths plus:
@@ -613,33 +399,24 @@ _notes_provenance/
     NOTES_BUILD_HANDOFF.json
     NOTES_BUILD_REPORT.txt
     IMAGE_USE_MANIFEST.json
-    source_map/
 
-REPORT:
-- source policy;
-- pins;
-- Bank/map identity;
-- template identity/hash;
-- stylesheet identity/hash;
-- section component counts;
-- EX/YTI counts;
-- focused EX/YTI Exit duplicate-check result;
-- WTC/Exit conflict result;
-- render QA;
-- final PASS/FAIL.
+Compact provenance only:
+- pinned system commit
+- pinned course commit
+- Bank path/status
+- accepted_map_fingerprint from BANK_MANIFEST
+- canonical WTC IDs used
+- generated Notes task IDs
+- section / I Can IDs
+- focused Exit duplicate-check result
+- graph tool identity for generated graphs
+- issue report
 
-REVISION
---------
-2026-09-06 v1.3 — FAST PATH: Notes is template-driven. Default reads reduced to the exact Unit plan, profile/template/CSS, Bank manifest, WTC, and Exit. No File Library recovery, full ITEM_INDEX/source_map/Seeds/Summative reads, or repeated fingerprint checks by default. Intensive Exit duplicate checking is focused on generated EX/YTI tasks.
+Do NOT copy/deep-read source_map for Notes provenance.
 
-2026-09-06 v1.2 — unresolved WTC/Exit conflicts KEEP the canonical WTC, add a teacher warning, document upstream repair, and continue. Math Notes may not count redundant restatements as separate representations.
+FINAL STATUS:
+PASS
+PASS_WITH_WARNINGS
+FAIL_BLOCKING_DEPENDENCY
 
-2026-09-06 v1.1 — WTC/Exit conflict handling changed from immediate fail-closed to
-up to 3 safe repair attempts, then document/omit and continue as PASS_WITH_UPSTREAM_WTC_REPAIR.
-
-2026-09-06 v1.0 — approved Algebra Notes layout pilot v6 converted into a reusable
-template + root CSS architecture. Full-width title banner; learning sidebar + Section
-Introduction; Vocabulary Preview; Section Preview; global Close Reading directions; white
-WTC; robust I Can reading; substantive visual Math Notes; unsolved student Examples/YTIs;
-2–3 Stop & Discuss prompts per I Can; Vocabulary Reference; Summary; What I Understand Now;
-Common Mistakes final.
+Do not invent additional final-status categories.
