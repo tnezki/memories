@@ -1,338 +1,210 @@
-GENERIC AUDIT + REBUILD — MEMORYLESS / GOOD-ENOUGH CORE / CURRENT-PM DELEGATION
-=================================================================================
+GENERIC AUDIT + REBUILD — CURRENT TARGET / ACTUAL DEFECTS ONLY
+============================================================
 
 STATUS: CURRENT
-ROLE: Audit the current deployed curriculum artifact against the CURRENT registered build contract, repair only actual defects, and return the smallest correct deployable change.
+JOB: generic_audit_rebuild
+ROLE: Audit the current deployed artifact against its CURRENT registered build contract, repair only actual defects, and return the smallest correct deployable change.
 
-THIS PM DOES NOT OWN AN ARTIFACT'S CURRICULUM OR BUILD CONTRACT.
-The selected artifact's CURRENT registered build PM remains the procedural authority for curriculum sources, output paths, structure, CSS/assets, security, artifact-specific QA, and canonical delivery.
+================================================================
+0. SOURCE / SAFETY BOUNDARY — HARD
+================================================================
 
-If this PM conflicts with the selected artifact build PM:
-  THE SELECTED ARTIFACT BUILD PM WINS.
+For Curriculum Control Panel jobs, use ONLY:
+- current request/current explicit teacher instruction;
+- request-provided files;
+- exact pinned canonical project GitHub sources declared by the request/system.
 
-============================================================================
-0. MEMORYLESS OPERATING MODE — HARD
-============================================================================
+Do NOT use prior chats, remembered project facts, File Library recovery, stale uploads/packages, public web search/fetch, or outside curriculum sources unless the CURRENT request explicitly opts into a different source policy.
 
-Treat the run as if no prior chat exists.
+SOURCE/DELIVERY SAFETY PRECEDENCE
+- current request + SYSTEM_RUNTIME_CONTRACT define the allowed source and delivery boundary;
+- the selected artifact build PM defines the artifact contract INSIDE that boundary;
+- an artifact PM may not re-enable a source that the current request/runtime prohibits.
 
-Do NOT rely on:
-- conversation memory;
-- prior assistant claims;
-- old request packages or ZIPs;
-- guessed artifact paths;
-- remembered Bank/Framework facts;
-- old PM folders or stale package manifests;
-- public web research.
+If an artifact-PM instruction conflicts with the current request/runtime source or transfer safety rules, obey the current request/runtime and report the stale PM conflict as an upstream maintenance defect.
 
-At job start:
-1. pin the current system repository once;
-2. pin the selected course repository once;
-3. use those SAME pins for the entire run;
-4. resolve the current PM registries from the pinned system snapshot;
-5. resolve the selected artifact's CURRENT build PM;
-6. read that build PM and only the canonical authorities/resources it requires;
-7. resolve the exact deployed target at the pinned course commit.
+Pin system/course commits once. No mixed commits.
+FAIL CLOSED only when a genuinely required current canonical project source cannot be read.
 
-No mixed commits.
+================================================================
+1. DO THESE STEPS IN ORDER
+================================================================
 
-web_search_allowed = false
-web_fetch_allowed = false
-external_research_allowed = false
+1. Pin current system/course snapshots.
+2. Resolve the selected artifact's CURRENT build PM.
+3. Resolve the exact deployed target at the pinned course commit.
+4. Run CURRENT-SHAPE FAST GATE before considering migration/rebuild.
+5. Reconstruct only the CURRENT artifact contract from current authorities.
+6. Run the applicable audit passes.
+7. Classify findings as BLOCKER / REPAIR / IMPROVEMENT.
+8. Choose PATCH vs CONTROLLED REBUILD from actual defects only.
+9. Repair the smallest reliable scope.
+10. Re-audit affected/dependent passes + mandatory artifact QA.
+11. Run universal finalization.
+12. Return the smallest correct local repository transfer change and STOP.
 
-FAIL CLOSED only when a genuinely required current authority cannot be read from the declared pinned source.
+Do not spend time explaining historical architectures unless a present defect actually depends on them.
 
-============================================================================
-1. TARGET SCOPE
-============================================================================
+================================================================
+2. CURRENT-SHAPE FAST GATE — HARD
+================================================================
 
-DEFAULT CORE TARGETS:
-- Bank Map (bank_map / Step 3a)
-- Complete Bank (bank_complete / Step 3b)
-- Notes
-- Practice
-- Activities
-- Exit Tickets
-- Warm-Ups
-- Progress Tracker
-- Review / Review Practice
-- Summative
+RUN BEFORE theorizing about old migrations.
 
-Do not use this generic PM by default for Framework, Assessment Plan, Portfolio state, Unit Plan DOCX, Control Panel, binary template maintenance, or system registries/manifests.
+Read the ACTUAL deployed target first:
+- directory/file listing;
+- current manifest/index/report when present;
+- actual schema, filenames, counts, IDs, fingerprint, and provenance.
 
-============================================================================
-2. REQUEST INPUTS
-============================================================================
+Compare that ACTUAL shape to the CURRENT build PM/profile.
 
-The request should identify:
-- course;
-- Unit when applicable;
-- target artifact job/name;
-- optional explicit target path/file;
-- optional audit focus.
+NOT DEFECTS BY THEMSELVES
+- different repository commit SHA;
+- different PM version/date;
+- different audit date;
+- truthful older generation pins;
+- retired filenames that are not actually present;
+- historical inventory rules that are not active.
 
-AUDIT FOCUS values:
-- FULL_GOOD_ENOUGH [default]
-- CONTENT_CORRECTNESS
-- ALIGNMENT_RIGOR
-- METADATA_TRACEABILITY
-- VARIETY
-- GRAPHS_IMAGES_DIAGRAMS
-- LAYOUT_PRINT
-- SECURITY
-- DELIVERY_CONTRACT
+Do NOT:
+- invent CREATE/DELETE work for absent legacy files;
+- infer an old inventory from historical knowledge;
+- read old PMs/package manifests merely to explain current shape;
+- rebuild because pins changed.
 
-A focused audit still runs minimum source/identity, correctness, path/reference, mandatory artifact-QA, and delivery checks.
+If current shape matches current contract, preserve the architecture and proceed directly to semantic/content QA.
+If an actual structural mismatch exists, record the exact present mismatch, then evaluate patch vs rebuild.
 
-============================================================================
-3. TARGET RESOLUTION — HARD
-============================================================================
+A stale convenience/retrieval pointer is not automatically a target BLOCKER when the current authority chain provides another exact declared route and the missing aid is not required for execution. Report it as upstream cleanup instead of inventing a substitute.
 
-A. If the current request explicitly identifies a provided file/folder as the artifact to audit, use it as the working target while current pinned GitHub authorities govern correctness.
-
-B. Otherwise resolve the canonical deployed target from the selected CURRENT build PM and its declared manifest/index path, then direct-read that exact target at the pinned course commit.
-
-Do not choose similarly named files by memory or repository search when the current path is declared.
-
-============================================================================
-3A. CURRENT-SHAPE / AUTHORITY-DRIFT FAST GATE — HARD
-============================================================================
-
-RUN THIS BEFORE theorizing about migrations, legacy inventories, or rebuild scope.
-
-1. Read the ACTUAL deployed target directory/file listing first.
-2. Read the target's current manifest/index/report when one exists.
-3. Record the target's actual schema, filenames, counts, IDs, fingerprint, and declared provenance.
-4. Compare that ACTUAL shape to the CURRENT build PM/profile.
-
-HARD RULES:
-- A changed repository commit SHA alone is NOT a defect.
-- A changed PM version/date alone is NOT a defect.
-- A changed audit date alone is NOT a defect.
-- Old generation pins may remain truthful historical provenance.
-- Record a newer audit snapshot separately when the artifact is re-audited without rebuilding.
-- Do NOT infer that legacy filenames, retired destinations, or old inventory distributions exist unless they are actually present in the target.
-- Do NOT plan CREATE/DELETE migration work for files that are already current or not present.
-- Do NOT read historical PMs or old package manifests merely to explain why the current artifact looks different.
-- A stale convenience/retrieval pointer is not a target-artifact BLOCKER when the CURRENT build PM/profile provides another exact canonical authority route and the missing aid is not required for execution. Report it as an upstream cleanup item instead of inventing a substitute.
-
-FAST-GATE OUTCOMES:
-A. CURRENT SHAPE MATCHES CURRENT CONTRACT
-   - preserve the current architecture;
-   - continue directly to semantic/content audit;
-   - do not begin from a rebuild hypothesis.
-
-B. ACTUAL LEGACY / STRUCTURAL MISMATCH EXISTS
-   - record the exact present mismatch;
-   - then evaluate PATCH vs CONTROLLED REBUILD.
-
-This gate does NOT trust an existing PASS claim blindly. It only prevents speculative migration work. Semantic and artifact-specific QA still run.
-
-============================================================================
-4. FRESH CURRENT CONTRACT — PASS 0
-============================================================================
-
-Reconstruct only what "correct NOW" means.
-
-Read the selected CURRENT build PM and extract:
-
-AUTHORITY
-- exact curriculum sources;
-- Framework / Assessment Plan routes;
-- Bank routes and upstream dependencies;
-- security sources.
-
-OUTPUT
-- canonical deployed path(s);
-- expected file inventory;
-- transfer/delivery contract.
-
-STRUCTURE / REPRESENTATION
-- required sections/cards/forms/pages;
-- CSS/assets;
-- response surfaces;
-- graph/table/diagram routes;
-- MathJax or render requirements.
-
-CONTENT
-- required counts;
-- exact target/I-Can/evidence routing;
-- answer/solution expectations;
-- allowed variation/family fidelity.
-
-QA / SECURITY
-- required validators and semantic checks;
-- secure vs exposed content;
-- answer visibility;
-- finished-prompt reuse restrictions.
-
-Do not invent new requirements merely because they sound desirable.
-
-============================================================================
-5. FINDING CLASSES / GOOD-ENOUGH FLOOR
-============================================================================
+================================================================
+3. FINDING CLASSES
+================================================================
 
 BLOCKER
-- incorrect math/physics/answer;
+- incorrect answer/math/physics;
 - wrong target/evidence;
 - missing required current content;
 - genuinely broken required dependency;
 - security exposure;
-- unusable representation;
-- mandatory validator failure;
-- output/delivery contract failure.
+- unusable required representation;
+- mandatory validator/finalization failure;
+- output/transfer contract failure.
 
 REPAIR
-- current artifact violates the current build contract but remains understandable;
-- incomplete/false metadata;
-- materially weak duplication/variety;
+- current artifact violates current contract but remains understandable;
+- false/incomplete metadata;
+- material duplication/variety problem below good-enough floor;
 - meaningful layout/figure/path inconsistency.
 
 IMPROVEMENT
-- useful enhancement above the good-enough floor.
+- worthwhile enhancement above good-enough.
 
-Default:
-- fix BLOCKER;
-- fix REPAIR;
-- do not churn stable content for IMPROVEMENT unless the requested focus asks for it.
+Fix BLOCKER + REPAIR. Do not churn stable content for IMPROVEMENT unless requested.
 
 GOOD ENOUGH = CORRECT + ALIGNED + COMPLETE + USABLE + VARIED ENOUGH + TRACEABLE + DOWNSTREAM/DELIVERY READY.
 
-============================================================================
-6. AUDIT PASSES
-============================================================================
+================================================================
+4. AUDIT PASSES
+================================================================
 
-PASS 1 — CORRECTNESS + EVIDENCE ALIGNMENT
-Check, as applicable:
-- exact targets/I-Cans/goals;
-- evidence_job and student_action;
-- Question Structure semantic fit;
-- response mode;
-- math/physics correctness;
-- prompt/data/visual consistency;
-- answer/key/solution correctness;
-- constructed response actually elicits claimed evidence;
-- selected-response choices are unique and plausible.
+PASS 1 — CORRECTNESS / EVIDENCE
+- exact target/I-Can/goal routing
+- evidence_job + student_action
+- Question Structure semantic fit
+- response mode
+- prompt/data/visual consistency
+- math/physics/answer/solution correctness
 
-PASS 2 — COMPLETENESS + METADATA + TRACEABILITY
-Check:
-- required files/sections/cards/forms/counts;
-- unique IDs;
-- source/design/family provenance;
-- exact section/Unit metadata;
-- truthful difficulty/representation/security metadata;
-- no placeholder/TODO/TBD content;
-- no stale routes that are actually active.
+PASS 2 — COMPLETENESS / TRACEABILITY
+- required files/sections/cards/forms/counts
+- unique IDs
+- truthful source/design/family provenance
+- section/Unit/stage metadata
+- representation/difficulty/security metadata
+- no active TODO/TBD/placeholders or stale routes
 
 PASS 3 — REPRESENTATIONS
-For every evidence-bearing graph/table/image/diagram/model:
-- accurate;
-- relevant;
-- legible;
-- correctly routed;
-- aspect preserved;
-- not clipped/distorted;
-- no answer leakage;
-- registered graph/tool route used when required;
-- student-constructed surfaces remain answer-neutral;
-- semantic tables used when required.
+- accurate, relevant, legible
+- correct executable route
+- correct graph/table/diagram semantics
+- aspect/containment preserved
+- no clipping or answer leakage
+- student-construction surface answer-neutral
 
-PASS 4 — VARIETY + RIGOR + QUESTION QUALITY
-Check:
-- obvious near duplicates;
-- number-only cloning where semantic variation is required;
-- fake/noun-only variety;
-- balanced required coverage;
-- appropriate difficulty intent;
-- meaningful context/stimulus/representation variety;
-- secure-form independence;
-- no exposed finished prompt reused in secure assessment.
+PASS 4 — VARIETY / RIGOR / QUALITY
+- obvious near duplicates
+- number-only cloning where deeper variation is required
+- fake noun-only variety
+- required coverage and difficulty intent
+- meaningful context/stimulus/representation variation
+- secure-form independence
 
-PASS 5 — USABILITY + LAYOUT + SHELL
-Check only what the selected build PM requires:
-- canonical CSS/shell/classes;
-- readable hierarchy;
-- no clipping/collision;
-- usable response areas;
-- figure containment;
-- print/page-break rules when required;
-- MathJax behavior when required;
-- teacher-only content remains teacher-only.
+PASS 5 — USABILITY / SHELL
+Only checks required by current build PM:
+- canonical CSS/shell/classes
+- readable hierarchy
+- no collision/clipping
+- usable response areas
+- figure containment
+- print rules when required
+- MathJax when required
+- teacher-only content protected
 
-Do not invent browser/PDF QA when the build PM does not require it.
+PASS 6 — SECURITY / DOWNSTREAM
+- no answer/key leakage
+- secure prompt freshness/independence
+- form/blueprint counts
+- canonical paths/IDs remain usable downstream
 
-PASS 6 — SECURITY + DOWNSTREAM INTEGRITY
-Check:
-- no answer/key leakage;
-- secure prompt freshness;
-- form/blueprint counts;
-- canonical paths/IDs still satisfy downstream consumers;
-- upstream ownership remains intact.
+PASS 7 — ARTIFACT QA / DELIVERY
+- run mandatory current-PM validators/tools
+- verify tool/schema applicability
+- do not force legacy validators onto current schemas
+- verify paths/files/assets/ZIP inventory
+- run universal finalization
+- require FINALIZATION_QA: PASS
 
-PASS 7 — ARTIFACT-SPECIFIC QA + DELIVERY
-- run every mandatory validator/tool required by the CURRENT selected build PM;
-- verify tool/schema applicability before invoking;
-- do not force legacy validators onto incompatible current schemas;
-- verify exact output paths/file count/assets/ZIP inventory;
-- run the universal finalization contract from SYSTEM_MANIFEST.json;
-- require FINALIZATION_QA: PASS before completion.
-
-============================================================================
-7. BANK STAGE ADAPTERS — HARD
-============================================================================
+================================================================
+5. BANK STAGE ADAPTERS
+================================================================
 
 BANK MAP / STEP 3A
-- begin with the Current-Shape Fast Gate;
-- audit actual pre-authoring design against current Framework, exact Unit authorities, Bank profile, and operational maps;
-- verify evidence jobs, student actions, Question Structure semantic fit, response modes, and executable representation/tool/response-surface routes;
-- verify WTC shared stimulus, current part count/order/labels, per-part mapping, and only real dependencies;
-- verify future-evidence/security/variation boundaries;
-- reconcile design slots, inventory, destination slices, IDs, references, hashes, fingerprint, manifest, and report;
+- run Current-Shape Fast Gate first;
+- audit design against current Framework, exact Unit authorities, Bank profile, operational maps, and Question Structure;
+- verify WTC stimulus/parts/dependencies, security, variation, routes, IDs, counts, slices, hashes, fingerprint, manifest, and report;
 - do not author finished questions;
-- preserve byte-for-byte correct map/design files when they pass;
-- if only audit provenance changes, preserve the original generation snapshot and record the current audit snapshot separately;
+- preserve byte-for-byte correct design/map files;
+- if only audit provenance changes, preserve original generation snapshot and record current audit snapshot separately;
 - regenerate hashes/fingerprint only when covered bytes actually change.
 
-Do not treat different generation pins as proof the Bank Map is obsolete.
-Do not migrate retired Bank filenames unless those files are ACTUALLY present or the current Bank Map PM explicitly requires such migration.
+Different generation pins are not proof that a map is obsolete.
 
 COMPLETE BANK / STEP 3B
-- apply the current Complete Bank entry gate using the accepted current map and fingerprint;
-- audit authored question fidelity to that map;
-- verify correctness of prompts/answers/solutions;
-- verify uniqueness/collisions across instructional destinations and secure forms;
-- inspect actual graph/table/diagram/MathJax routes and WTC parts;
-- verify teacher/student visibility and secure reservations;
-- reconcile inventory/index/manifest, MAP_FIDELITY_REPORT, RENDER_QA_REPORT, and required validators;
-- recheck the complete final Bank after repair, not only touched records.
+- apply current Complete Bank entry gate using accepted map/fingerprint;
+- audit authored fidelity, correctness, uniqueness, representations, WTC, security, inventory/index/manifest, MAP_FIDELITY_REPORT, RENDER_QA_REPORT, and required validators;
+- recheck the COMPLETE final Bank after repair, not only touched records.
 
-A truly defective current design map is UPSTREAM_DEFECT for a Complete Bank audit. Do not silently redesign Step 3a inside a Step 3b-only request.
+A truly defective current design map is UPSTREAM_DEFECT for a Step 3b-only audit. Do not silently redesign Step 3a inside Step 3b.
 
-============================================================================
-8. PATCH VS CONTROLLED REBUILD
-============================================================================
+================================================================
+6. PATCH VS CONTROLLED REBUILD
+================================================================
 
-Choose the smallest reliable correction.
-
-PATCH IN PLACE when:
-- artifact identity/content is fundamentally correct;
-- defects are localized;
-- patching will not create hidden inconsistency.
+PATCH when defects are localized and identity/content is fundamentally correct.
 
 CONTROLLED REBUILD only when an ACTUAL current-contract mismatch makes patching unreliable, for example:
 - structurally wrong shell/DOM;
 - wrong current source routing;
 - widespread/repetitive current-contract failures;
-- deterministic structure cannot be restored safely in place.
+- deterministic structure cannot be safely restored in place.
 
-A different historical generation version or commit is not enough by itself.
+A different historical commit, PM date, or generation version is not enough.
+If existing content is correct and authoritative: PRESERVE IT.
 
-If existing content is correct and authoritative:
-  PRESERVE IT.
-
-============================================================================
-9. REPAIR ORDER
-============================================================================
+================================================================
+7. REPAIR ORDER
+================================================================
 
 1. required authority/source/path defects
 2. correctness/answer defects
@@ -341,19 +213,19 @@ If existing content is correct and authoritative:
 5. metadata/traceability
 6. representation correctness
 7. security
-8. variety/rigor below good-enough floor
+8. variety/rigor below good-enough
 9. shell/layout/usability
 10. explicitly requested cosmetic improvement
 
-============================================================================
-10. POST-REPAIR RE-AUDIT — HARD
-============================================================================
+================================================================
+8. POST-REPAIR / STOP RULE
+================================================================
 
-After repairs:
-- rerun every pass that produced BLOCKER or REPAIR;
+After repair:
+- rerun every pass that found BLOCKER/REPAIR;
 - rerun dependent passes affected by the change;
 - rerun mandatory artifact QA;
-- rerun finalization and delivery/package integrity.
+- rerun finalization and delivery/package checks.
 
 STOP when:
 - no BLOCKER remains;
@@ -363,63 +235,56 @@ STOP when:
 
 Do not recursively polish forever.
 
-============================================================================
-11. CHANGE BOUNDARY
-============================================================================
+================================================================
+9. CHANGE BOUNDARY
+================================================================
 
 Preserve:
-- curriculum authority;
-- exact I-Cans/goals;
-- approved Bank routing;
-- security architecture;
-- canonical CSS/assets;
-- current output contract;
-- correct generation provenance.
+- curriculum authority
+- exact goals/I-Cans
+- approved Bank routing
+- security architecture
+- canonical CSS/assets
+- correct generation provenance
+- current output contract
 
 Do NOT:
-- edit Framework/Assessment Plan or unrelated Bank stages merely to make the selected target pass;
+- edit Framework/Assessment Plan/unrelated stages merely to make target pass;
 - weaken validators;
 - modify unrelated artifacts;
-- substitute public web research;
-- invent missing current authorities;
-- manufacture legacy cleanup work that is not present in the deployed target.
+- invent missing authorities;
+- use prohibited source recovery;
+- manufacture legacy cleanup work that is not present.
 
-If a real defect originates upstream and cannot be faithfully repaired within target scope:
-  report UPSTREAM_DEFECT and fail closed when required.
+If a real upstream defect blocks faithful target repair, report UPSTREAM_DEFECT and fail closed where required.
 
-============================================================================
-12. DELIVERY — HARD
-============================================================================
+================================================================
+10. DELIVERY — HARD
+================================================================
 
-Follow the selected CURRENT build PM plus the current SYSTEM_RUNTIME_CONTRACT.
+Follow current SYSTEM_RUNTIME_CONTRACT + local_transfer_contract.
 
-For Control Panel BUILD/MAINTENANCE jobs with a known canonical repository destination:
-- return ONE local repository transfer ZIP using the system local_transfer_contract;
-- include only the exact canonical files that changed when maintenance scope permits narrow replacement;
-- use DELETE only for an actually present obsolete active file and only with the required expected hash;
+For Control Panel jobs with a known canonical repository destination:
+- return ONE local repository transfer ZIP;
+- maintenance returns only exact changed canonical files when narrow replacement is safe;
+- DELETE only an actually present obsolete active file with required expected hash;
 - perform NO Git operations.
 
-For jobs without a known repository destination, use the selected PM's normal direct-file/ZIP delivery.
+The transfer wrapper is transport only and does not change canonical artifact content/directory shape.
 
-The transfer wrapper does not change the canonical artifact content or directory shape.
+================================================================
+11. FINAL REPORT
+================================================================
 
-============================================================================
-13. FINAL CHAT REPORT
-============================================================================
-
-Keep it concise. State:
-- target artifact;
-- pinned system/course snapshots;
-- selected current build PM;
-- audit focus;
-- BLOCKER / REPAIR / IMPROVEMENT findings;
-- PATCH or CONTROLLED REBUILD;
-- exact files changed;
-- mandatory QA result;
-- GOOD-ENOUGH status;
-- finalization result;
-- unresolved upstream/tooling issues.
-
-Do not dump hidden reasoning or giant QA logs.
+Keep concise:
+- target + pinned system/course snapshots
+- current build PM
+- audit focus
+- BLOCKER / REPAIR / IMPROVEMENT findings
+- PATCH or CONTROLLED REBUILD
+- exact files changed
+- mandatory QA + finalization result
+- final GOOD-ENOUGH status
+- unresolved upstream/tooling issue, if any
 
 END — GENERIC AUDIT + REBUILD
