@@ -10,7 +10,7 @@ It starts from reported defects.
 
 CORE FLOW
 ---------
-READ REPORT -> GROUP DEFECTS -> ASK TEACHER -> CONFIRM SELECTED FIXES ->
+RESOLVE REPORT -> READ REPORT -> GROUP DEFECTS -> ASK TEACHER -> CONFIRM SELECTED FIXES ->
 FETCH ONLY OWNERS -> REPAIR -> RECHECK -> RETURN REPLACEMENTS + REPAIR REPORT
 
 ============================================================================
@@ -32,25 +32,53 @@ Use the current request, current uploaded defect report(s), and exact pinned can
 No public-web research.
 
 ============================================================================
-1. INPUT
+1. DEFECT REPORT RESOLUTION — HARD
 ============================================================================
 
-Preferred inputs:
-- BUILD_REPORT / IMPROVEMENT_REPORT / QA_REPORT / defect JSON/TXT;
-- course;
-- Unit when applicable;
-- artifact;
-- pinned system/course commits if provided.
+A defect report does NOT have to be physically inside the Control Panel request ZIP.
 
-If no defect report is supplied:
-ask the teacher to upload or identify the exact report.
-Do NOT replace this PM with a fresh generic audit.
+Resolve the report in this order:
+
+A. CURRENT REQUEST ATTACHMENT
+If the current request explicitly includes a BUILD_REPORT / IMPROVEMENT_REPORT / QA_REPORT /
+defect TXT/JSON for the selected artifact:
+- use that exact report.
+
+B. CANONICAL CURRENT ARTIFACT REPORT
+If no report is attached:
+1. resolve the selected artifact's CURRENT build PM from the pinned system snapshot;
+2. read only enough of that build PM/output contract to identify the canonical report/provenance path;
+3. direct-fetch that exact report from the PINNED COURSE COMMIT;
+4. use it as the defect source.
+
+Examples:
+- Notes may expose a canonical Unit report such as:
+  notes/_notes_provenance/unitN/NOTES_BUILD_REPORT.txt
+  when the current Notes PM declares that output route.
+- Other artifact types must use THEIR OWN current PM-declared report path.
+
+DO NOT hardcode a Notes path for all artifacts.
+DO NOT repository-search for reports.
+DO NOT choose by filename similarity or recency.
+
+C. EXPLICIT REPORT PATH
+If the current request gives an exact canonical report path, direct-fetch that path at the pinned commit.
+
+D. ONLY THEN ASK
+Ask the teacher to upload/identify a report ONLY when:
+- no report is attached;
+- no exact report path is supplied;
+- and the selected artifact's current PM does not declare a canonical report path that can be fetched.
+
+Missing a report from the REQUEST ZIP alone is NOT a blocker.
+
+Do NOT substitute a fresh generic audit when no report can be resolved.
 
 ============================================================================
 2. READ REPORT FIRST — HARD
 ============================================================================
 
-Before opening the target artifact or upstream authorities:
+Once the report is resolved:
 
 1. Read the defect report.
 2. Extract every reported issue.
@@ -212,14 +240,14 @@ Do not preemptively modify multiple layers.
 Return:
 1. replacement files/folders only for approved repairs;
 2. DEFECT_REPAIR_REPORT.txt containing:
-   - source defect report(s)
-   - teacher decisions
-   - files changed
-   - exact defects repaired
-   - exact defects left/accepted
-   - uniqueness results for changed tasks
-   - QA/recheck results
-   - remaining issues
+   - exact source defect report path/identity;
+   - teacher decisions;
+   - files changed;
+   - exact defects repaired;
+   - exact defects left/accepted;
+   - uniqueness results for changed tasks;
+   - QA/recheck results;
+   - remaining issues.
 
 FINAL STATUS:
 PASS
