@@ -12,6 +12,41 @@ JOB
 ---
 SOURCE -> PLAN -> GENERATE -> PLACE -> ASSEMBLE -> RENDER -> CHECK
 
+NOTES FAST PATH — HARD
+----------------------
+This build is intentionally template-driven. Do not turn Notes into a research or recovery job.
+
+DEFAULT UNIT NOTES WORKFLOW:
+1. Resolve the pinned current authorities once.
+2. Read the exact Unit Assessment Plan for Learning Target / I Can text.
+3. Read the current Notes profile + reusable template + Notes CSS.
+4. Read BANK_MANIFEST.json only to confirm COMPLETE / ready_for_downstream.
+5. Read wtc.json and exit.json.
+6. Fill the approved section shell.
+7. Generate reading, Math Notes, vocabulary, preview, summary, reflection, and Common Mistakes directly from the exact section Learning Target / I Cans.
+8. Generate one Example/YTI pair per I Can by default.
+9. Run the intensive duplicate check ONLY on generated Example/YTI tasks against current Unit Exit items.
+10. Assemble the Unit, render once, fix actual render defects, and return the package.
+
+DO NOT by default:
+- search File Library;
+- recover prior Notes;
+- search for alternate sources;
+- read secure Summative;
+- read the full ITEM_INDEX;
+- read the full source_map;
+- read all Practice1 records;
+- read Seeds;
+- perform repeated fingerprint checks after the pinned Bank manifest is accepted;
+- re-resolve paths already declared by the request/manifests;
+- repeatedly narrate path/tool checks.
+
+Practice1 may be read ONLY when a specific Example/YTI needs difficulty calibration.
+source_map may be copied into provenance without deep-reading every record when the request already pins the accepted Bank/map identity.
+
+The Notes build should behave like a controlled fill-in-the-template job, not a new curriculum-design pass.
+
+
 AUTHORITY / STARTUP — HARD
 --------------------------
 Read:
@@ -55,14 +90,21 @@ Require current Bank:
   accepted_map_root exists
   accepted_map_fingerprint exists
 
-Read canonical/current:
+Read canonical/current by default:
   BANK_MANIFEST.json
-  ITEM_INDEX.json
   wtc.json
   exit.json
-  practice1.json
+
+Read ONLY on demand:
+  practice1.json  -> only when a specific EX/YTI needs calibration
+
+Do not deep-read by default:
+  ITEM_INDEX.json
   seeds.json
   source_map/
+  summative_secure.json
+
+If provenance requires source_map/, copy the accepted pinned source_map unchanged without opening every record.
 
 Do NOT require legacy canonical Notes EX/YTI files.
 
@@ -73,16 +115,23 @@ Preserve canonical prompt/representation/ID.
 Student copy must not leak answer.
 Teacher copy adds support after the exact student WTC.
 
-HARD EXIT FIREWALL
-------------------
-Before finalizing any generated Notes question/task, compare it against all current Unit
-Exit records.
+HARD EXIT FIREWALL — FOCUSED
+-----------------------------
+The intensive Exit duplicate check is for generated Example/YTI tasks.
 
-Generated Notes tasks include:
-- any question-like Section Preview extension beyond the fixed notice/wonder shell;
-- Example;
-- You Try It;
-- Stop & Discuss prompts when they become task-specific evidence rehearsal.
+For each generated Example and You Try It:
+- compare against current Unit Exit items;
+- if prompt/stimulus is too close, regenerate the Notes task;
+- try at most 3 times;
+- then use the cleanest non-duplicate version and document any remaining concern.
+
+Do NOT run the same expensive duplicate-search routine over ordinary reading prose,
+Vocabulary Preview, Section Preview, Math Notes explanation, Summary, reflection, or
+Common Mistakes.
+
+Stop & Discuss should remain conceptual/discussion-oriented and must not copy an Exit prompt,
+but it does not require a full duplicate-search pass unless it becomes a task-specific
+assessment rehearsal.
 
 Prohibit:
 - same prompt;
@@ -480,6 +529,7 @@ Do not duplicate full map records in every task.
 =====================================================
 
 SOURCE / ALIGNMENT
+[ ] no File Library recovery unless explicitly required by a missing permitted dependency
 [ ] exact current Learning Target
 [ ] exact current I Can statements
 [ ] current complete Bank
@@ -515,7 +565,7 @@ EX/YTI
 [ ] Example student copy is UNSOLVED
 [ ] YTI student copy is UNSOLVED
 [ ] teacher copy includes worked reasoning
-[ ] Exit firewall PASS
+[ ] focused EX/YTI Exit duplicate check PASS
 
 DISCUSSION
 [ ] 2–3 Stop and Discuss prompts after each YTI
@@ -573,13 +623,15 @@ REPORT:
 - stylesheet identity/hash;
 - section component counts;
 - EX/YTI counts;
-- Exit firewall result;
+- focused EX/YTI Exit duplicate-check result;
 - WTC/Exit conflict result;
 - render QA;
 - final PASS/FAIL.
 
 REVISION
 --------
+2026-09-06 v1.3 — FAST PATH: Notes is template-driven. Default reads reduced to the exact Unit plan, profile/template/CSS, Bank manifest, WTC, and Exit. No File Library recovery, full ITEM_INDEX/source_map/Seeds/Summative reads, or repeated fingerprint checks by default. Intensive Exit duplicate checking is focused on generated EX/YTI tasks.
+
 2026-09-06 v1.2 — unresolved WTC/Exit conflicts KEEP the canonical WTC, add a teacher warning, document upstream repair, and continue. Math Notes may not count redundant restatements as separate representations.
 
 2026-09-06 v1.1 — WTC/Exit conflict handling changed from immediate fail-closed to

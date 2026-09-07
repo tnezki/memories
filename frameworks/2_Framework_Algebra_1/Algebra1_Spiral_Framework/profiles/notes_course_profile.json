@@ -1,7 +1,7 @@
 {
   "name": "Algebra 1 Notes Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v1.3",
+  "profile_version": "v1.4",
   "framework_version": "v7.3",
   "role": "Course-specific Algebra Notes behavior. Framework owns learning; Notes PM owns procedure; reusable template owns shell/order; notes_alg.css owns visuals.",
   "template_contract": {
@@ -153,5 +153,36 @@
     "secure_summative_as_notes_source": false,
     "exit_prompt_as_notes_source": false,
     "source_map_travels_with_notes": true
+  },
+  "build_efficiency": {
+    "mode": "template_driven_fast_path",
+    "principle": "Build Notes as a controlled fill-in-the-template job, not a new curriculum-design or recovery pass.",
+    "default_reads": [
+      "exact Unit Assessment Plan",
+      "notes_course_profile.json",
+      "canonical Notes template",
+      "Notes CSS",
+      "BANK_MANIFEST.json",
+      "wtc.json",
+      "exit.json"
+    ],
+    "on_demand_only": {
+      "practice1.json": "Only when a specific Example/YTI needs difficulty calibration."
+    },
+    "do_not_read_by_default": [
+      "full ITEM_INDEX.json",
+      "full source_map contents",
+      "seeds.json",
+      "summative_secure.json",
+      "prior Notes from File Library"
+    ],
+    "file_library_recovery_default": false,
+    "repeated_fingerprint_checks_default": false,
+    "focused_exit_duplicate_check": [
+      "Example",
+      "You Try It"
+    ],
+    "max_regeneration_attempts_per_ex_yti": 3,
+    "render_strategy": "Assemble full Unit, render once, then fix actual defects."
   }
 }
