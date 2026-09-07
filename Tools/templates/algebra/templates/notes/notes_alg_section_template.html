@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{COURSE}} · {{SECTION_ID}} {{SECTION_TITLE}} · {{COPY_LABEL}}</title>
+<script>
+window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true}};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/notes_alg.css">
+</head>
+<body class="notes-alg {{COPY_CLASS}}">
+<main class="container notes-page">
+
+<header class="title">
+  <div class="kicker">{{COURSE}} · {{UNIT_LABEL}} · {{UNIT_TITLE}}</div>
+  <div class="title-banner">
+    <div class="sec">{{SECTION_ID}}</div>
+    <h1>{{SECTION_TITLE}}</h1>
+  </div>
+  <p class="quote">{{SECTION_TAGLINE}}</p>
+</header>
+
+<section class="top-intro-grid">
+  <aside class="learning-sidebar">
+    <h2>What you'll learn about</h2>
+    <p class="lt"><strong>Learning Target:</strong> {{LEARNING_TARGET}}</p>
+    <ul>
+      {{I_CAN_LIST_ITEMS}}
+    </ul>
+    <div class="why-label">...and why</div>
+    <p class="why-copy">{{WHY_IT_MATTERS}}</p>
+  </aside>
+
+  <section class="section-intro">
+    <p class="eyebrow">Section Introduction</p>
+    <h2>{{INTRO_HEADING}}</h2>
+    {{INTRO_PARAGRAPHS}}
+    <p class="intro-close">{{INTRO_CLOSE}}</p>
+  </section>
+</section>
+
+<section class="block vocab-preview-section">
+  <h2 class="red-heading">Vocabulary / Key Notation Preview</h2>
+  <p class="vocab-list">{{VOCAB_LIST}}</p>
+  <div class="vocab-box">
+    <p>Sort the vocabulary. Write each vocabulary word in the column that best matches what you know right now. You may move a word later.</p>
+    <table class="sort-table">
+      <thead><tr><th>Know for sure</th><th>Recognize</th><th>Don't know yet</th></tr></thead>
+      <tbody><tr><td></td><td></td><td></td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block section-preview">
+  <h2 class="red-heading">Section Preview</h2>
+  <div class="section-preview-shell">
+    <p class="preview-intro">Skim before close reading. Look at the headings, tables, graphs, and examples. Find 1–2 things you notice and 1–2 things you wonder about.</p>
+    <table class="preview-table">
+      <tbody>
+        <tr><th>What I noticed</th><td></td></tr>
+        <tr><th>What I wonder</th><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block close-reading">
+  <h2>Close Reading Directions</h2>
+  <p><strong>READ IN SHORT CHUNKS.</strong> Annotate the words and visuals together. Underline evidence, circle or highlight bold vocabulary, label arrows or important features, connect sentences to tables and graphs, and jot short questions or connections in the margins. Use these directions through the What's To Come section and the reading that follows.</p>
+</section>
+
+<section class="block wtc" data-wtc-id="{{WTC_ID}}" data-canonical="true">
+  <h2>What's To Come</h2>
+  <p class="wtc-lead"><strong>PREVIEW / DECOMPOSE.</strong> Use the connected parts to see where this section is headed. Annotate the representations and prompts as you work.</p>
+  {{WTC_CONTENT}}
+  {{WTC_TEACHER_SUPPORT}}
+</section>
+
+<!-- Repeat this I CAN BLOCK once per exact I Can in Framework order. -->
+<section class="ican" data-i-can-id="{{I_CAN_ID}}">
+  <h2>
+    <span class="ican-badge">I Can {{I_CAN_NUMBER}}</span>
+    <span class="ican-title-text">{{I_CAN_TEXT}}</span>
+  </h2>
+
+  <div class="reading">
+    {{ROBUST_READING_PARAGRAPHS}}
+  </div>
+
+  <section class="math-notes">
+    <div class="math-head">
+      <span class="label">MATH NOTES</span>
+      <span class="title2">{{MATH_NOTES_TITLE}}</span>
+    </div>
+    <div class="math-body">
+      <div class="math-canvas">
+        {{SUBSTANTIVE_MATH_NOTES_VISUAL}}
+      </div>
+      {{MATH_NOTES_TAKEAWAY}}
+    </div>
+  </section>
+
+  <section class="task example" data-task-id="{{EXAMPLE_ID}}">
+    <h3>Example {{I_CAN_NUMBER}}: {{EXAMPLE_TITLE}}</h3>
+    {{EXAMPLE_PROMPT_AND_REPRESENTATION}}
+    <div class="workspace"></div>
+    {{EXAMPLE_TEACHER_SUPPORT}}
+  </section>
+
+  <section class="task yti" data-task-id="{{YTI_ID}}">
+    <h3>You Try It {{I_CAN_NUMBER}}: {{YTI_TITLE}}</h3>
+    {{YTI_PROMPT_AND_REPRESENTATION}}
+    <div class="workspace"></div>
+    {{YTI_TEACHER_SUPPORT}}
+  </section>
+
+  <section class="stop">
+    <h3>Stop and Discuss</h3>
+    <ol>
+      {{STOP_DISCUSS_LIST_ITEMS}}
+    </ol>
+    <div class="stop-space"></div>
+    {{STOP_DISCUSS_TEACHER_SUPPORT}}
+  </section>
+</section>
+<!-- END REPEATED I CAN BLOCK -->
+
+<section class="vocab-reference">
+  <h2>Vocabulary Reference</h2>
+  <table>
+    <thead><tr><th>Term</th><th>Meaning in this section</th></tr></thead>
+    <tbody>
+      {{VOCAB_REFERENCE_ROWS}}
+    </tbody>
+  </table>
+</section>
+
+<section class="summary">
+  <h2>Section Summary</h2>
+  <ul>
+    {{SUMMARY_LIST_ITEMS}}
+  </ul>
+</section>
+
+<section class="understand-now">
+  <h2>What I Understand Now</h2>
+  <p>{{UNDERSTAND_NOW_PROMPT}}</p>
+  <div class="understand-space"></div>
+</section>
+
+<section class="mistakes">
+  <h2>Common Mistakes to Watch</h2>
+  <table>
+    <thead><tr><th>Mistake</th><th>What to remember</th></tr></thead>
+    <tbody>
+      {{COMMON_MISTAKE_ROWS}}
+    </tbody>
+  </table>
+</section>
+
+</main>
+</body>
+</html>
