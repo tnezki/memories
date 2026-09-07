@@ -2,7 +2,8 @@
   "name": "Algebra 1 Notes Course Profile",
   "course": "Algebra 1",
   "framework_version": "v7.4",
-  "role": "Course-specific Notes constants. Framework owns learning; checklist PM owns procedure; template owns shell/order; notes_alg.css owns visuals.",
+  "profile_version": "v2.0-family-bank-compatible",
+  "role": "Course-specific Notes constants. Framework/Assessment Plan own learning; Notes PM owns procedure; template owns shell/order; notes_alg.css owns visuals. Notes author instructional WTC and Example/YTI locally and do not depend on permanent Bank Exit/WTC inventories.",
   "template_contract": {
     "path": "Tools/templates/algebra/notes/notes_alg_section_template.html",
     "status": "canonical_reusable_shell",
@@ -11,7 +12,15 @@
   "assessment_plan_contract": {
     "authority": "Framework-owned exact Unit Assessment Plan",
     "path_pattern": "frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html",
+    "section_learning_rule": "Notes use the exact section Learning Target and exact section I Can statements. Do not replace them with the current Unit mastery-goal I Cans.",
     "alternate_course_repo_search_allowed": false
+  },
+  "bank_relationship": {
+    "canonical_bank_architecture": "mastery_goal_i_can_question_family",
+    "normal_notes_bank_dependency": "none",
+    "reason": "Section Notes teach Intro learning. In the spiral architecture those I Cans may belong to a future mastery goal, so the current Unit Bank is not the instructional authority for Notes.",
+    "bank_exemplar_copy_allowed": false,
+    "teacher_supplied_bank_family_use": "architecture_reference_only; author a fresh instructional instance"
   },
   "visual_contract": {
     "base_stylesheet": "../../css/base.css",
@@ -34,8 +43,8 @@
     "Vocabulary / Key Notation Preview",
     "Section Preview: What I noticed / What I wonder",
     "Close Reading Directions",
-    "Exact canonical WTC",
-    "I Can compartments in exact Framework order",
+    "Fresh What's To Come",
+    "I Can compartments in exact Assessment Plan order",
     "Vocabulary Reference",
     "Section Summary",
     "What I Understand Now",
@@ -53,7 +62,7 @@
   "math_notes": {
     "status": "substantive_visual_reference",
     "hard_rule": "Actual mathematics must be visible; styled labels alone do not satisfy Math Notes.",
-    "representation_contract_source": "Algebra 1 Framework \u00a78 \u2014 inherit exactly; profile does not redefine it.",
+    "representation_contract_source": "Algebra 1 Framework §8 — inherit exactly; profile does not redefine it.",
     "four_view_enforcement": "When four views are shown, use Equation/Rule, Table, Graph, Context/Situation exactly.",
     "ordered_pairs_role": "Correspondence notation only; never an independent replacement for Graph in a four-view set.",
     "required_graph_route": "Use the current registered Algebra graph tool directly."
@@ -68,44 +77,53 @@
     "missing_representation_fail_code": "NOTES_REQUIRED_REPRESENTATION_MISSING"
   },
   "wtc": {
-    "source": "current complete Unit Bank",
+    "source": "authored locally during Notes from exact section Learning Target/I Cans + Framework WTC contract + current Question Structure",
     "count_per_section": 1,
-    "preserve_exact_canonical_content": true,
-    "local_repair_allowed": false,
-    "omit_on_exit_conflict": false,
-    "exit_conflict_behavior": "Keep canonical WTC, add teacher-copy warning, report BANK_WTC_REPAIR issue, continue.",
-    "architecture_source": "Current Algebra Framework WTC contract and Bank profile; preserve one shared setup followed by exactly Part A, Part B, Part C, Part D.",
-    "layout_rule": "Shared setup first, then the four parts in reading order. No divider lines or hr elements between parts; spacing and labels provide separation.",
-    "stale_architecture_behavior": "Do not silently reauthor canonical WTC in Notes. Report BANK_WTC_REPAIR and route the design defect to Bank Map before Complete Bank repair."
+    "shared_stimulus_required": true,
+    "part_count": 4,
+    "part_labels": [
+      "Part A",
+      "Part B",
+      "Part C",
+      "Part D"
+    ],
+    "student_answer_neutral": true,
+    "teacher_copy_support_allowed": true,
+    "local_repair_allowed": true,
+    "bank_wtc_dependency": false,
+    "layout_rule": "Shared setup first, then Parts A-D in reading order. No divider lines or hr elements between parts; spacing and labels provide separation."
   },
   "example_yti": {
     "default_pairs_per_i_can": 1,
     "second_pair_only_when_earned": true,
+    "same_architecture_parallel_default": true,
     "student_example_solved": false,
     "student_yti_solved": false,
     "teacher_copy_worked_reasoning": true,
-    "focused_exit_duplicate_check": true,
-    "max_local_regeneration_attempts": 3
+    "exit_duplicate_check": false,
+    "exit_freshness_owner": "downstream Exit/Summative build",
+    "bank_exemplar_copy_allowed": false
   },
   "build_efficiency": {
     "mode": "checklist",
     "repository_hunting_allowed": false,
     "file_library_recovery_default": false,
+    "bank_read_default": false,
     "source_map_read_default": false,
     "item_index_read_default": false,
     "practice1_read_default": false,
-    "seeds_read_default": false,
     "summative_read_default": false,
     "old_graph_script_inspection_default": false,
-    "repeated_fingerprint_checks_default": false,
     "render_strategy": "assemble full Unit, render once, fix local defects only",
     "prior_chat_context_allowed": false,
     "project_conversation_history_allowed": false,
-    "assistant_saved_memory_allowed": false
+    "assistant_saved_memory_allowed": false,
+    "public_web_allowed": false
   },
   "repair_policy": {
     "build_may_fix": [
-      "generated Example/YTI near-duplicate",
+      "generated Example/YTI defect",
+      "generated WTC defect",
       "generated Notes representation missing",
       "local HTML/path/image defect",
       "local render clipping/overlap"
@@ -113,8 +131,6 @@
     "report_only": [
       "Framework defect",
       "Assessment Plan defect",
-      "canonical Bank/WTC defect",
-      "Exit defect",
       "template/CSS system defect",
       "registered graph-tool defect"
     ],

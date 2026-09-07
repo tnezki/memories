@@ -3,17 +3,51 @@ BUILD NOTES — CHECKLIST MODE
 
 ROLE
 ----
-Build the requested Algebra 1 Unit Notes from the current canonical authorities.
-This PM is an execution checklist. It does not redesign the course, repair upstream
-curriculum, search for alternate authorities, or improve canonical sources during the build.
+Build the requested Algebra 1 Unit Notes from the current canonical instructional authorities.
+
+The canonical Bank is now a Mastery Goal -> I Can -> Question Family library.
+Notes do NOT require permanent Bank Exit/WTC/Practice/Summative inventories.
+Notes author their own instructional WTC, Examples, and You Try It tasks from the exact
+section Learning Target / I Cans.
 
 CORE RULE
 ---------
-DO THE DECLARED BUILD.
-CHECK EACH STEP.
-FIX ONLY LOCAL BUILD DEFECTS THAT THIS PM OWNS.
-DO NOT CHANGE CANONICAL CURRICULUM.
-REPORT UPSTREAM DEFECTS FOR LATER REPAIR.
+DO THE DECLARED NOTES BUILD.
+USE THE EXACT UNIT ASSESSMENT PLAN.
+AUTHOR INSTRUCTIONAL TASKS LOCALLY.
+FIX ONLY LOCAL NOTES DEFECTS.
+DO NOT SEARCH FOR ALTERNATE CURRICULUM.
+
+=====================================================
+0. SOURCE BOUNDARY — HARD
+=====================================================
+
+Use ONLY:
+1. current request / current explicit teacher instruction;
+2. request-provided files;
+3. exact pinned project GitHub sources from:
+   - tnezki/memories
+   - tnezki/algebra
+
+DO NOT USE:
+- public web search or public web fetch;
+- search engines;
+- outside curriculum websites;
+- ChatGPT File Library;
+- prior chats;
+- saved memory;
+- old request packages;
+- stale uploads;
+- prior Notes as curriculum authority.
+
+Direct reads from the pinned project GitHub repositories are allowed.
+
+Pin memories and algebra commits ONCE at job start.
+Do not mix commits during the run.
+
+If a required source is missing:
+STOP and report exact repository + commit + path.
+Do not hunt for a substitute.
 
 =====================================================
 A. AUTHORITY CHECKLIST
@@ -22,41 +56,49 @@ A. AUTHORITY CHECKLIST
 [ ] A1. Resolve the pinned job snapshot ONCE.
 
 [ ] A2. Read, in this order:
-    1. Current Curriculum Philosophy
-    2. Current SYSTEM_RUNTIME_CONTRACT
+    1. Curriculum_Philosophy.txt
+    2. SYSTEM_RUNTIME_CONTRACT.txt
     3. Current Algebra 1 Framework
     4. Current Question Structure
-    5. Exact requested Unit Assessment Plan resolved by the Framework
+    5. Exact requested Unit Assessment Plan
     6. Current Algebra Notes profile
     7. Canonical Algebra Notes template
     8. css/base.css
     9. css/notes_alg.css
-   10. Current Unit BANK_MANIFEST.json
-   11. Current Unit wtc.json
-   12. Current Unit exit.json
-   13. This PM
+   10. Tools/MANIFEST.json
+   11. This PM
 
-[ ] A3. Use the Framework-owned Unit Assessment Plan:
+[ ] A3. Exact Unit Assessment Plan:
     frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
     assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html
 
-[ ] A4. If the request/Framework already gives an exact repo/path/commit, use it.
-    Do NOT search for competing assessment plans or choose by recency, filename,
-    memory, or directory inspection.
+[ ] A4. Notes profile:
+    frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+    profiles/notes_course_profile.json
 
-[ ] A5. Confirm Bank:
-    BANK_MANIFEST.status = COMPLETE
-    ready_for_downstream = true
-    accepted_map_fingerprint exists
+[ ] A5. Canonical template:
+    Tools/templates/algebra/notes/notes_alg_section_template.html
 
-NORMAL NOTES BUILD DOES NOT READ:
-    ITEM_INDEX.json
-    practice1.json
-    seeds.json
-    source_map/
-    summative_secure.json
-    prior Notes from File Library
-    old graph-generation scripts
+[ ] A6. Resolve current graph tool only from:
+    Tools/MANIFEST.json -> tools.graph_tool
+
+NORMAL NOTES BUILD DOES NOT REQUIRE OR READ:
+    banks/unitN/BANK_MANIFEST.json
+    FAMILY_INDEX.json
+    delivery_map.json
+    mastery_goals/
+    Exit question inventories
+    WTC question inventories
+    Practice inventories
+    Summative inventories
+    prior Notes
+    old graph scripts
+
+WHY:
+The current Bank owns reusable mastery question families.
+Notes own instructional examples/WTC for the section's exact Intro Learning Target and I Cans.
+In a spiral course those section I Cans may belong to a future Mastery Goal, so the current
+Unit Bank is not the instructional authority for Notes.
 
 FATAL SOURCE FAILURES:
     missing Philosophy
@@ -64,12 +106,8 @@ FATAL SOURCE FAILURES:
     missing Framework
     missing exact Unit Assessment Plan
     missing Notes profile/template/CSS
-    missing complete Bank manifest
-    missing wtc.json
-    missing exit.json
-
-If one of those is missing, STOP and report the exact missing dependency.
-Do not substitute an older or similar source.
+    missing current Question Structure
+    missing registered graph tool when a required graph must be generated
 
 =====================================================
 B. SECTION SHELL CHECKLIST
@@ -77,45 +115,49 @@ B. SECTION SHELL CHECKLIST
 
 For each exact section in the Unit:
 
-[ ] B1. Use the canonical reusable template.
+[ ] B1. Use:
     Tools/templates/algebra/notes/notes_alg_section_template.html
 
-[ ] B2. Preserve the exact section order:
+[ ] B2. Preserve exact visible order:
     1. Full-width section banner
     2. Learning sidebar + Section Introduction
     3. Vocabulary / Key Notation Preview
     4. Section Preview
     5. Close Reading Directions
     6. What's To Come
-    7. I Can compartments in exact Framework order
+    7. I Can compartments in exact Assessment Plan order
     8. Vocabulary Reference
     9. Section Summary
    10. What I Understand Now
    11. Common Mistakes to Watch — final visible section
 
-[ ] B3. Preserve exact Learning Target and exact I Can wording from the Unit Assessment Plan.
+[ ] B3. Preserve exact section Learning Target and exact section I Can wording
+    from the Unit Assessment Plan.
 
-[ ] B4. Do not create page-level CSS, inline layout/color CSS, or alternate page shells.
+[ ] B4. Do not replace the section I Cans with the current Unit mastery I Cans.
+    The section Learning Target / I Cans are the instructional authority for Notes.
 
-[ ] B5. Load exactly:
+[ ] B5. Do not create page-level CSS, inline layout/color CSS, or alternate page shells.
+
+[ ] B6. Load exactly:
     ../../css/base.css
     ../../css/notes_alg.css
     in that order.
 
 =====================================================
-C. STANDARD GENERATED CONTENT CHECKLIST
+C. STANDARD GENERATED CONTENT
 =====================================================
 
-These parts are purpose-authored directly from the exact section Learning Target / I Cans.
+Author directly from the exact section Learning Target / I Cans.
 Do not conduct a separate research pass.
 
 [ ] C1. Section Introduction
     - short meaningful opening
-    - no fake career relevance
+    - not fake career relevance
     - not a restatement of the Learning Target
 
 [ ] C2. Vocabulary Preview
-    - only useful section vocabulary/notation
+    - useful section vocabulary/notation only
     - Know for sure | Recognize | Don't know yet
 
 [ ] C3. Section Preview
@@ -127,7 +169,7 @@ Do not conduct a separate research pass.
     - one global directions box
     - no repeated Talk to the Text boxes
 
-[ ] C5. For each exact I Can, generate:
+[ ] C5. For each exact section I Can:
     1. robust reading
     2. substantive Math Notes
     3. Example
@@ -145,129 +187,138 @@ Do not conduct a separate research pass.
     - use real equations/rules, tables, graphs, contexts, mappings, diagrams, or processes
     - styled labels alone do not count
 
-[ ] C8. Representation diversity — FOLLOW FRAMEWORK EXACTLY
-    - Algebra Framework §8 owns the representation system.
-    - If Math Notes intentionally show FOUR views of one relationship, use exactly:
-      Equation/Rule | Table | Graph | Context/Situation.
-    - Ordered Pairs may appear only as correspondence notation inside the table/graph connection.
-    - A standalone Ordered Pairs card does NOT count as a fourth view and may not replace Graph.
-    - do not count a restatement as a new representation.
+[ ] C8. Representation system — FOLLOW FRAMEWORK EXACTLY
+    If four views of one relationship are intentionally shown, use exactly:
+      Equation/Rule | Table | Graph | Context/Situation
+    Ordered pairs may appear as correspondence notation, but are not a fifth independent view.
 
 [ ] C9. Representation fidelity — HARD
-    If the prompt names a representation, render that representation literally.
+    If the prompt names a representation, render it literally.
 
     TABLE:
-      Use a real semantic HTML table with labeled rows/columns/cells.
-      A sentence or list of ordered pairs is NOT a table.
+      real semantic HTML table
 
     GRAPH:
-      Use an actual graph stimulus, or an actual blank coordinate plane when students
-      are constructing the graph.
+      actual graph stimulus, or actual blank coordinate plane for construction
 
     MAPPING:
-      Use an actual mapping diagram.
+      actual mapping diagram
 
     ORDERED PAIRS:
-      Use ordered-pair notation only when ordered pairs themselves are the intended job.
-      Do not substitute ordered-pair prose for a table.
+      ordered-pair notation when ordered pairs themselves are the intended representation/job
 
     CONTEXT:
-      Use an actual situation/context.
+      actual situation/context
 
-    Missing named representation -> NOTES_REQUIRED_REPRESENTATION_MISSING.
+    Missing named representation -> NOTES_REQUIRED_REPRESENTATION_MISSING
 
 [ ] C10. Graphs
-    - when the Framework/learning job requires Graph, generate an ACTUAL graph with the current registered Algebra graph tool
-    - call the registered Algebra graph tool directly
-    - do not replace a required graph with Ordered Pairs, prose, or a duplicate table
+    - use the current registered Algebra graph tool
+    - do not hand-build coordinate SVG as a substitute
     - do not inspect old graph scripts for examples/patterns
-    - do not build a new graph tool during Notes
-    - if the registered graph tool cannot produce the required graph, REPORT NOTES_REQUIRED_GRAPH_MISSING with owner GRAPH_TOOL_REPAIR; do not pretend the representation set is complete
+    - do not restyle the registered graph tool inside Notes
+    - if the registered tool cannot produce a required graph:
+      report NOTES_REQUIRED_GRAPH_MISSING with owner GRAPH_TOOL_REPAIR
 
 =====================================================
-D. WTC CHECKLIST
+D. WHAT'S TO COME — AUTHORED IN NOTES
 =====================================================
 
-[ ] D1. Use the exact canonical Bank WTC once per normal section.
-    Preserve canonical ID, prompt, values, representation, and response surfaces.
+The Bank no longer stores a permanent WTC question set.
 
-[ ] D2. Student copy must not reveal WTC answers.
+[ ] D1. Author exactly one fresh WTC per normal section from:
+    - exact section Learning Target
+    - section Intro direction / I Cans
+    - Framework WTC contract
+    - current Question Structure
 
-[ ] D3. Teacher copy may add support after the exact WTC.
+[ ] D2. Structure:
+    - one meaningful shared stimulus/situation FIRST
+    - Part A
+    - Part B
+    - Part C
+    - Part D
+    - all four parts belong to the SAME shared stimulus
 
-[ ] D4. If canonical WTC conflicts with a secure Exit item:
-    - DO NOT alter Exit
-    - DO NOT alter WTC in the Notes build
-    - DO NOT omit WTC
-    - keep the exact canonical WTC
-    - add a clear TEACHER-COPY warning immediately above it
-    - record WTC_EXIT_CONFLICT in the build report
-    - name the recommended upstream owner: BANK/WTC REPAIR
-    - continue the Notes build
+[ ] D3. Parts may be independent or naturally connected.
+    Require carry-forward only when the mathematics genuinely requires an earlier result.
 
-This is a reportable upstream defect, not a Notes-build repair job.
+[ ] D4. WTC is instructional preview/decomposition, not a mini summative.
+    It may provide useful support appropriate to first learning.
+
+[ ] D5. Student copy:
+    - complete prompt/representations
+    - answer-neutral
+    - no worked answers
+
+[ ] D6. Teacher copy:
+    - answer
+    - brief reasoning
+    - useful teaching move / likely issue when valuable
+
+[ ] D7. Use local stable IDs:
+    U{unit}-S{section}-WTC-A
+    U{unit}-S{section}-WTC-B
+    U{unit}-S{section}-WTC-C
+    U{unit}-S{section}-WTC-D
+
+[ ] D8. WTC defects authored during Notes are LOCAL NOTES defects.
+    Repair them in this build. Do not route them back to Bank.
 
 =====================================================
-E. EXAMPLE / YOU TRY IT CHECKLIST
+E. EXAMPLE / YOU TRY IT
 =====================================================
 
-[ ] E1. Default = one Example/YTI pair per exact I Can.
+[ ] E1. Default = one Example/YTI pair per exact section I Can.
 
-[ ] E2. Add a second pair only when the I Can has a genuinely distinct second job.
+[ ] E2. For each pair, first choose one natural question architecture
+    from the current Question Structure that fits the exact I Can.
 
-[ ] E3. Student Example:
+[ ] E3. Example and YTI should normally be two FRESH INSTANCES of the same
+    underlying question architecture:
+    - same evidence job
+    - comparable demand
+    - different values/data/context/representation details as useful
+    - not cosmetic word swaps
+
+[ ] E4. Add a second Example/YTI pair only when the I Can has a genuinely
+    distinct second mathematical job.
+
+[ ] E5. Student Example:
     - full prompt
     - real needed representation
     - blank workspace
     - NO worked answer
 
-[ ] E4. Student YTI:
+[ ] E6. Student YTI:
     - fresh parallel task
     - real needed representation
     - blank workspace
     - NO worked answer
 
-[ ] E5. Teacher copy may add:
+[ ] E7. Teacher copy may add:
     - answer
     - worked reasoning
     - teacher move
     - listen-for / likely misconception
 
-[ ] E6. Focused Exit duplicate check — ONLY for generated Example/YTI tasks.
-    Compare against current Unit Exit items for:
-    - same prompt
-    - same values/data
-    - same context
-    - same graph/table/equation stimulus
-    - cosmetic rewrite
-    - near-parallel rehearsal that effectively gives away the Exit
+[ ] E8. Do NOT run an Exit-duplicate check.
+    Exit items are downstream fresh-instance products and may not exist yet.
+    Later Exit/Summative builds own the responsibility to create fresh secure/public
+    instances rather than copying public Notes tasks.
 
-    Same I Can/evidence job is allowed.
-    Same task instance is not.
-
-[ ] E7. If an Example/YTI is too close:
-    - regenerate that LOCAL Notes task
-    - maximum 3 attempts
-    - this is a local build correction and is allowed
-
-[ ] E8. Do NOT run the intensive duplicate-search routine over:
-    reading
-    Vocabulary Preview
-    Section Preview
-    Math Notes explanation/reference
-    Section Summary
-    What I Understand Now
-    Common Mistakes
+[ ] E9. Do not copy a Bank exemplar verbatim into Notes even if a Bank is manually
+    supplied in the request. A Bank family may inform architecture only when the teacher
+    explicitly provides it; Notes still author a fresh instructional instance.
 
 =====================================================
-F. STOP / END-OF-SECTION CHECKLIST
+F. STOP / END-OF-SECTION
 =====================================================
 
 [ ] F1. Stop and Discuss
     - 2–3 concise prompts
     - explain / compare / identify evidence / connect representations
     - not a second practice set
-    - not a copied Exit prompt
 
 [ ] F2. Vocabulary Reference before Section Summary.
     Columns:
@@ -286,7 +337,7 @@ F. STOP / END-OF-SECTION CHECKLIST
     - final visible section
 
 =====================================================
-G. ASSEMBLY / RENDER CHECKLIST
+G. ASSEMBLY / RENDER
 =====================================================
 
 [ ] G1. Derive teacher copy from finalized student structure.
@@ -295,59 +346,53 @@ G. ASSEMBLY / RENDER CHECKLIST
 
 [ ] G3. Render once.
 
-[ ] G4. Fix ONLY actual local render defects:
+[ ] G4. Fix ONLY actual local Notes defects:
     broken relative path
     missing generated image
     clipping/overlap
     local HTML syntax defect
     template placeholder not filled
     local Notes task representation missing
-    local Example/YTI Exit duplication
+    weak/incorrect locally authored WTC
+    weak/incorrect locally authored Example/YTI
 
 [ ] G5. Do NOT use render QA as permission to:
     rewrite Framework
     rewrite Assessment Plan
-    rewrite Bank
-    repair WTC
-    change Exit
     redesign template/CSS
     search alternate sources
+    alter the registered graph tool
 
-If QA exposes one of those, REPORT it.
+If one of those is exposed, REPORT it.
 
 =====================================================
-H. FINAL QA — REPORT, DO NOT REDESIGN
+H. FINAL QA — KEEP IT SMALL
 =====================================================
 
 SOURCE
 [ ] pinned snapshot resolved once
-[ ] Philosophy read
-[ ] Runtime Contract read
-[ ] Framework read
-[ ] Question Structure read
-[ ] exact Framework-owned Unit Assessment Plan read
+[ ] Philosophy / Runtime / Framework / Question Structure read
+[ ] exact Unit Assessment Plan read
 [ ] Notes profile/template/CSS read
-[ ] complete Bank manifest read
-[ ] WTC + Exit read
+[ ] registered graph tool resolved
 [ ] no alternate-authority hunting
+[ ] no public web
 [ ] no File Library recovery
 
 CONTENT
 [ ] exact Learning Targets
-[ ] exact I Cans
+[ ] exact section I Cans
 [ ] exact section order
-[ ] exact canonical WTC present once
+[ ] one fresh WTC shared stimulus + Parts A-D per section
 [ ] student WTC answer-neutral
 [ ] one EX/YTI pair per I Can by default
 [ ] student Examples unsolved
 [ ] student YTIs unsolved
-[ ] focused EX/YTI Exit check complete
+[ ] YTI is a fresh parallel of its Example
 [ ] named representations are literal/real
-[ ] no table represented only as ordered-pair prose
 [ ] Math Notes contain actual mathematics
-[ ] every four-view comparison is Equation/Rule + Table + Graph + Context/Situation
-[ ] no standalone Ordered Pairs card is counted as a fourth view beside the same table
-[ ] every required graph is an actual graph produced through the registered Algebra graph tool
+[ ] four-view comparisons use Equation/Rule + Table + Graph + Context/Situation
+[ ] required graphs use current registered graph tool
 
 VISUAL
 [ ] canonical template used
@@ -358,20 +403,20 @@ VISUAL
 [ ] no page-level/inline layout CSS
 [ ] no clipping/overlap
 [ ] graphs/tables readable
-[ ] Notes workspace uses Notes CSS, not shared 300px dashed base workspace
+[ ] Notes workspace uses Notes CSS
 
 SECURITY
-[ ] no secure Summative prompts used
-[ ] no Exit prompt/stimulus copied into generated EX/YTI
+[ ] no secure Summative content used
 [ ] no student answer leakage
+
+Do not add a giant audit after these checks.
+Fix concrete local defects, finalize, and stop.
 
 =====================================================
 I. ISSUE REPORTING / OWNERSHIP
 =====================================================
 
-The build report must contain an issues array/list.
-
-For every detected issue record:
+Build report issues list fields:
 - issue_code
 - section_id if applicable
 - description
@@ -382,20 +427,20 @@ For every detected issue record:
 
 OWNERS:
 FRAMEWORK_REPAIR
-BANK_WTC_REPAIR
 NOTES_TEMPLATE_CSS_REPAIR
 GRAPH_TOOL_REPAIR
 NOTES_LOCAL_TASK_REPAIR
 SOURCE_PACKAGE_REPAIR
 
-RULE:
 Only NOTES_LOCAL_TASK_REPAIR and ordinary local render/path defects may be fixed
-inside this Notes build.
+inside the Notes build.
 
 Everything else is REPORT ONLY.
 
-BLOCKING means the build cannot produce a valid artifact from the declared authorities.
-WARNING means continue and return the build with the issue documented.
+FINAL STATUS:
+PASS
+PASS_WITH_WARNINGS
+FAIL_BLOCKING_DEPENDENCY
 
 =====================================================
 J. OUTPUT
@@ -410,8 +455,6 @@ Example:
 notes/u1_1_notes/u1_1_notes.html
 notes/u1_1_notes/u1_1_notes_teacher.html
 
-Do NOT rename these to student.html / teacher.html or other generic filenames.
-
 Plus:
 
 _notes_provenance/
@@ -423,20 +466,23 @@ _notes_provenance/
 Compact provenance only:
 - pinned system commit
 - pinned course commit
-- Bank path/status
-- accepted_map_fingerprint from BANK_MANIFEST
-- canonical WTC IDs used
-- generated Notes task IDs
+- exact Unit Assessment Plan path
 - section / I Can IDs
-- focused Exit duplicate-check result
+- generated WTC IDs
+- generated Notes Example/YTI task IDs
 - graph tool identity for generated graphs
 - issue report
 
-Do NOT copy/deep-read source_map for Notes provenance.
+Do NOT include:
+- Bank fingerprint
+- Exit IDs
+- canonical Bank WTC IDs
+- source_map provenance
 
-FINAL STATUS:
-PASS
-PASS_WITH_WARNINGS
-FAIL_BLOCKING_DEPENDENCY
+FINAL STEP:
+Run current universal finalization.
+Require FINALIZATION_QA: PASS.
 
-Do not invent additional final-status categories.
+Then STOP AND DELIVER.
+
+END — BUILD NOTES
