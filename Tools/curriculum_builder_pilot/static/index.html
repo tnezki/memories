@@ -7,30 +7,44 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header><div><h1>Curriculum Builder <span>v0.8.1</span></h1><p>One AI handoff. AI results and finished curriculum both use the same Apply Curriculum Transfers command.</p></div></header>
+<header><div><h1>Curriculum Builder <span>v0.9</span></h1><p>Local curriculum pipeline with one AI handoff when semantic authoring is needed.</p></div></header>
 <main>
   <aside class="card">
     <h2>Local System</h2>
     <div id="systemStatus" class="status warn">Checking local repositories...</div>
     <dl id="systemMeta"></dl>
-    <div class="rule good">NO PUBLIC WEB CURRICULUM SOURCES<br>NO FILE LIBRARY<br>NO GIT COMMANDS<br>NO DIRECT REPO WRITES</div>
+    <div class="rule good">LOCAL PROJECT SOURCES ONLY<br>NO FILE LIBRARY<br>NO GIT COMMANDS<br>NO DIRECT REPO WRITES</div>
   </aside>
   <section class="card main-card">
-    <h2>Full Bank Pipeline</h2>
+    <h2>Curriculum Build</h2>
     <div class="row"><label>Course<select id="course"></select></label><label>Unit<select id="unit"></select></label></div>
-    <p class="muted">Fresh Map → local Map audit → Complete Bank → local Bank audit → one final Bank transfer ZIP.</p>
+    <label>Job<select id="job"></select></label>
+    <p id="purpose" class="muted"></p>
+
+    <div id="bankFlow" class="simple-flow hidden">
+      <button id="startBank" class="primary">Start Fresh Full Bank Pipeline</button>
+      <button id="continueBank" class="primary">Continue Bank</button>
+      <div class="three-steps">
+        <div><b>1</b><span>One AI handoff</span></div>
+        <div><b>2</b><span>Local Map + Bank audits</span></div>
+        <div><b>3</b><span>Bank transfer</span></div>
+      </div>
+    </div>
+
+    <div id="notesFlow" class="simple-flow hidden">
+      <button id="startNotes" class="primary">Start Notes</button>
+      <button id="continueNotes" class="primary">Continue Notes</button>
+      <div class="three-steps">
+        <div><b>1</b><span>One Notes AI handoff</span></div>
+        <div><b>2</b><span>Local assembly + QA</span></div>
+        <div><b>3</b><span>Notes transfer</span></div>
+      </div>
+      <p class="muted small">Notes uses the exact current Assessment Plan, complete Bank WTC/Exit, canonical Notes template/CSS, registered graph tool, and one AI content result ZIP.</p>
+    </div>
 
     <div class="simple-flow">
-      <button id="startFullPipeline" class="primary">Start Fresh Full Pipeline</button>
-      <button id="continueFullPipeline" class="primary">Continue After Transfer Command</button>
       <button id="openAIExchange">Open AI Exchange Folder</button>
       <button id="openTransferInbox">Open Transfer Inbox</button>
-      <div class="three-steps">
-        <div><b>1</b><span>ONE AI handoff</span></div>
-        <div><b>2</b><span>Apply AI-result ZIP + local audits</span></div>
-        <div><b>3</b><span>Apply final Bank transfer</span></div>
-      </div>
-      <p class="muted small"><b>Normal run:</b> Start → upload the one handoff ZIP to ChatGPT → download the returned AI-result ZIP → run <b>Apply Curriculum Transfers.command</b> → Continue → run the same transfer command on the finished Bank. No loose JSON and no manual file hunting.</p>
     </div>
 
     <div id="result" class="result hidden"></div>

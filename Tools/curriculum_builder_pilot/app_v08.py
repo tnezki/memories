@@ -59,7 +59,7 @@ def _bootstrap_python_runtime() -> None:
     if not _graphics_ready(runtime_python):
         raise RuntimeError("Curriculum Builder runtime exists but cannot import matplotlib/numpy.")
     env = os.environ.copy()
-    env["CURRICULUM_BUILDER_RUNTIME"] = "managed-v081"
+    env["CURRICULUM_BUILDER_RUNTIME"] = "managed-v090"
     os.execve(str(runtime_python), [str(runtime_python), str(HERE / "app_v08.py")], env)
 
 
@@ -75,7 +75,7 @@ def _ensure_convenience_launcher() -> None:
 def _prune_app_owned(days: int = 14) -> int:
     cutoff = time.time() - days * 86400
     removed = 0
-    for parent in (WORKSPACE_ROOT / "full_pipeline", AI_EXCHANGE_ROOT / "Archive"):
+    for parent in (WORKSPACE_ROOT / "full_pipeline", WORKSPACE_ROOT / "notes_pipeline", AI_EXCHANGE_ROOT / "Archive"):
         if not parent.is_dir():
             continue
         for path in list(parent.rglob("*")):
@@ -141,6 +141,7 @@ _prune_app_owned(14)
 
 from core.authorities import make_context
 from core.full_pipeline_v081 import continue_full_pipeline, start_full_pipeline
+from core.notes_pipeline_v09 import continue_notes_pipeline, start_notes_pipeline
 from core.git_snapshot import read_head_sha
 
 STATIC = HERE / "static"
@@ -152,11 +153,18 @@ HOST = CONFIG.get("host", "127.0.0.1")
 PORT = int(os.environ.get("CURRICULUM_BUILDER_PORT", CONFIG.get("port", 8765)))
 TRANSFER_BRIDGE = _ensure_transfer_bridge(TRANSFER_ROOT)
 
-JOBS = [{
-    "key": "full_bank_pipeline",
-    "label": "FULL - Map -> Audit -> Bank -> Audit",
-    "purpose": "Fresh staged Bank Map and Complete Bank with one AI handoff, local audits, and one final GitHub transfer ZIP.",
-}]
+JOBS = [
+    {
+        "key": "full_bank_pipeline",
+        "label": "Full Bank - Map -> Audit -> Bank -> Audit",
+        "purpose": "Fresh staged Bank Map and Complete Bank with one AI handoff, local audits, and one final GitHub transfer ZIP.",
+    },
+    {
+        "key": "notes_build",
+        "label": "Build Notes",
+        "purpose": "Build student + teacher Algebra Notes from the complete current Bank, exact Assessment Plan, canonical Notes template, and one AI content handoff.",
+    },
+]
 
 
 def _json_bytes(obj) -> bytes:
@@ -180,6 +188,7 @@ def _archive_legacy_downloads() -> dict:
         "AI_BANK_CONTENT*.json",
         "AI_SEMANTIC_REVIEW*.json",
         "AI_FULL_BANK_RESULT*.json",
+        "AI_NOTES_RESULT*.json",
     ]
     for pattern in patterns:
         for path in DOWNLOADS.glob(pattern):
@@ -204,7 +213,7 @@ def _archive_legacy_downloads() -> dict:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "CurriculumBuilder/0.8.1"
+    server_version = "CurriculumBuilder/0.9.0"
 
     def log_message(self, fmt, *args):
         sys.stdout.write("[builder] " + fmt % args + "\n")
@@ -294,6 +303,14 @@ class Handler(BaseHTTPRequestHandler):
                 result = continue_full_pipeline(ctx, STAGING_ROOT, AI_EXCHANGE_ROOT, DOWNLOADS, TRANSFER_ROOT)
                 self._send_json(result)
                 return
+            if self.path == "/api/start-notes-pipeline":
+                result = start_notes_pipeline(ctx, STAGING_ROOT, AI_EXCHANGE_ROOT)
+                self._send_json(result, 200 if result.get("status") != "BLOCKED" else 409)
+                return
+            if self.path == "/api/continue-notes-pipeline":
+                result = continue_notes_pipeline(ctx, STAGING_ROOT, AI_EXCHANGE_ROOT, TRANSFER_ROOT)
+                self._send_json(result)
+                return
             if self.path == "/api/reveal-ai-exchange":
                 folder = AI_EXCHANGE_ROOT / "Current" / "algebra_1" / f"unit{unit}"
                 folder.mkdir(parents=True, exist_ok=True)
@@ -326,7 +343,8 @@ def main():
     print(f"Transfer inbox: {TRANSFER_ROOT}")
     print(f"Transfer bridge: {'READY' if TRANSFER_BRIDGE.get('ready') else 'NOT READY'}")
     print(f"Convenience launcher: {CONVENIENCE_LAUNCHER}")
-    print("Normal Full Bank Pipeline: one AI handoff ZIP -> one AI result ZIP -> Apply Curriculum Transfers -> Continue -> final transfer")
+    print("Bank: one AI handoff ZIP -> one AI result ZIP -> Apply Curriculum Transfers -> Continue -> final transfer")
+    print("Notes: one AI handoff ZIP -> one Notes AI result ZIP -> Apply Curriculum Transfers -> Continue -> final Notes transfer")
     print(f"Open: {url}")
     threading.Timer(0.6, lambda: webbrowser.open(url)).start()
     try:

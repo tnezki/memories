@@ -1,0 +1,536 @@
+BUILD ALGEBRA 1 BANK — SINGLE PASS MAP + AUTHOR
+=================================================
+
+STATUS: PILOT / OLD CONTROL PANEL
+JOB: bank_map_and_build
+ROLE: In one Control Panel job, design the Unit Bank Map and immediately author the complete Algebra 1 Unit Bank from that map.
+
+THIS PM REPLACES THE SEPARATE MAP -> AUDIT -> COMPLETE BANK CHAIN FOR THIS JOB.
+Do not stop after mapping.
+Do not invoke a separate Audit + Rebuild job.
+Do not search for alternate sources.
+Do not use an existing Bank as curriculum/content authority.
+
+=================================================
+0. SOURCE BOUNDARY — HARD
+=================================================
+
+For a Curriculum Control Panel job, use ONLY:
+
+1. current request / current explicit teacher instruction;
+2. request-provided files;
+3. exact pinned project GitHub sources from:
+   - tnezki/memories
+   - tnezki/algebra
+
+DO NOT USE:
+- public web search;
+- public web fetch;
+- search engines;
+- outside curriculum sites;
+- ChatGPT File Library;
+- prior chats;
+- saved memory;
+- old request packages;
+- stale uploads;
+- old Banks as question sources.
+
+Direct reads from the pinned project GitHub repositories are allowed.
+They are the declared project source, not outside web research.
+
+Pin the memories commit and algebra commit ONCE at job start.
+Do not mix commits during the run.
+
+If a required source is missing:
+STOP and report the exact repository + commit + path.
+Do not hunt for a substitute.
+
+=================================================
+1. EXACT SOURCE LOCATIONS
+=================================================
+
+SYSTEM REPOSITORY
+Repository:
+  tnezki/memories
+
+System front door:
+  SYSTEM_MANIFEST.json
+
+Read these exact system authorities:
+  Curriculum_Philosophy.txt
+  SYSTEM_RUNTIME_CONTRACT.txt
+  Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt
+
+Framework registry:
+  frameworks/MANIFEST.json
+
+Algebra Framework front door:
+  frameworks/Algebra_1/FRAMEWORK.txt
+
+Algebra Framework manifest:
+  frameworks/Algebra_1/MANIFEST.json
+
+Algebra resource root declared by that manifest:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+
+For Unit N use the exact Unit Assessment Plan:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html
+
+Algebra Bank profile:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  profiles/bank_course_profile.json
+
+Coursewide goal / I Can retrieval aid:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  assessment_plans/indexes/assessment_plan_index.json
+
+Official Exit allocation / reassessment chain:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+  curriculum/exit_evidence_map.json
+
+Question Structure package:
+  _question_structure/version_manifest.json
+  _question_structure/QUESTION_STRUCTURE_CORE.md
+
+Resolve the exact current Universal Question Structure Library
+from _question_structure/version_manifest.json.
+Do not guess a versioned filename.
+
+Registered tools:
+  Tools/MANIFEST.json
+
+Current graph tool:
+  resolve Tools/MANIFEST.json -> tools.graph_tool
+  currently: Tools/~graph_tool_v12.py
+
+Universal finalizer:
+  Tools/finalize_output.py
+
+Finalization contract:
+  Tools/FINALIZE_OUTPUT_CONTRACT.txt
+
+COURSE REPOSITORY
+Repository:
+  tnezki/algebra
+
+Canonical Unit Bank destination:
+  banks/unitN/
+
+IMPORTANT:
+For a fresh build, do NOT use existing files under banks/unitN/
+as question/content sources.
+They may be replaced by this build.
+Existing Bank content is not authority.
+
+=================================================
+2. AUTHORITY ORDER
+=================================================
+
+Use this order when resolving conflicts:
+
+1. current explicit teacher instruction
+2. Curriculum Philosophy
+3. Algebra Framework + exact Unit Assessment Plan
+4. Algebra Bank profile + exit_evidence_map
+5. current Question Structure
+6. this PM
+7. registered tools / rendering contracts
+
+The Unit Assessment Plan owns the learning.
+The Bank profile owns Bank inventory.
+The Exit map owns official Exit allocation.
+This PM owns the single-pass procedure.
+
+=================================================
+3. CURRENT BANK INVENTORY
+=================================================
+
+Build ONLY the current canonical Algebra Bank inventory:
+
+1. Exit
+2. secure Summative V1-V6
+3. Practice 1
+4. WTC
+5. useful / approved Seeds
+
+Do NOT add:
+- Extra Practice
+- CYU
+- Practice 2
+- Practice 3
+- finished Warm-Ups
+- fixed Notes Example/YTI inventory
+- retired legacy inventory
+
+=================================================
+4. SINGLE-PASS WORKFLOW
+=================================================
+
+Do these steps in order and KEEP GOING in the same job.
+
+STEP A — RESOLVE
+1. Pin system/course commits.
+2. Read the exact authorities listed above once.
+3. Resolve exact Unit sections, Learning Targets, Mastery Goals, I Cans,
+   Intro/Review/Mastery routes, Exit allocation, and approved Unit seeds.
+
+STEP B — MAP
+4. Create the complete Unit question-design map.
+5. Give every finished-task slot:
+   - design_slot_id
+   - destination
+   - unit / section
+   - stage when relevant
+   - exact Mastery Goal
+   - exact primary/supporting I Can
+   - evidence_job
+   - student_action
+   - question_structure_id
+   - response_mode
+   - representation_mode / need
+   - representation route
+   - difficulty intent
+   - variation guidance
+   - security role
+   - destination-specific role
+6. Save the map under banks/unitN/source_map/.
+7. Compute one accepted_map_fingerprint for the finished map.
+
+STEP C — AUTHOR
+8. Author the complete Bank directly from that map in this order:
+
+   A. Exit
+   B. Summative V1
+   C. Summative V2-V4 as true parallels
+   D. Summative V5-V6 as additional secure forms
+   E. Practice 1
+   F. WTC
+   G. Seeds
+
+9. Generate all required graphs / assets with registered tools.
+10. Build the inspection viewer.
+11. Run ONLY the lightweight QA in Section 10.
+12. Run universal finalization.
+13. Package the canonical Unit Bank through the current local-repository transfer contract.
+14. STOP.
+
+Do not create intermediate transfer packages.
+Do not ask for a separate map approval unless the current teacher explicitly requests one.
+
+=================================================
+5. EXIT — AUTHOR FIRST
+=================================================
+
+Follow:
+  .../curriculum/exit_evidence_map.json
+
+Normal section:
+- Q1-Q2 = two NEW current-section Mastery evidence questions
+- Q3-Q4 = fresh parallel reassessments of the previous section carry-forward pair
+
+Unit 1 Section 1 exception:
+- four opening readiness/mastery questions
+- Q1-Q2 become the carry-forward pair for U1.2
+
+HARD AUTHORING RULE:
+A reassessment must be a NEW INSTANCE.
+
+Preserve the evidence target, but change enough of the instance to make it fresh:
+- values and/or
+- graph/table data and/or
+- context and/or
+- representation details and/or
+- scale / signs / placement when useful
+
+Do NOT reuse the exact same:
+- prompt
+- values
+- graph
+- table
+- stimulus
+- generated graph file
+
+U1.1's four opening questions should be four meaningfully different evidence tasks,
+not four cosmetic versions of the same question.
+
+=================================================
+6. SUMMATIVE — SECURE
+=================================================
+
+Use the approved Exit/mastery evidence architecture as the guide.
+
+Author:
+- V1 = anchor secure form
+- V2-V4 = true parallels to V1
+- V5-V6 = additional secure forms under the same blueprint
+
+Use approximately two secure evidence opportunities per current Unit Mastery Goal.
+Keep the full form reasonable for about a 40-minute class period.
+
+Do not force a fixed item count if the current Unit goal count makes another count better.
+
+Secure content must remain secure:
+- do not expose secure prompts
+- do not expose keys
+- do not expose solutions
+in the public Bank inspection viewer.
+
+=================================================
+7. PRACTICE 1
+=================================================
+
+Exactly 24 questions PER SECTION:
+
+- 8 Intro
+- 8 Review
+- 8 Mastery
+
+Use visible stage labels/headings in the viewer.
+
+Intro:
+current section Intro learning with appropriate support.
+
+Review:
+exact current Review goal at Review demand.
+
+Mastery:
+exact current Mastery goal at independent demand.
+
+Use Exit evidence as a guide to what matters,
+but DO NOT copy secure Exit or Summative questions into Practice.
+
+Purposeful repetition is good.
+Mechanical prompt cloning is not.
+
+=================================================
+8. WTC
+=================================================
+
+Exactly one WTC per normal section.
+
+Structure:
+- one meaningful shared stimulus / situation first
+- Part A
+- Part B
+- Part C
+- Part D
+
+All four parts belong to the SAME shared stimulus.
+
+Only create a dependency when the mathematics genuinely requires
+an earlier part's result.
+
+Use the section's Intro direction as the instructional preview target.
+
+=================================================
+9. SEEDS
+=================================================
+
+Use approved Unit seeds from:
+  profiles/bank_course_profile.json
+
+No filler quota.
+
+Keep a seed only when it preserves a reusable:
+- context
+- dataset
+- representation
+- misconception
+- visual idea
+- problem setup
+
+Seeds are not finished questions.
+
+=================================================
+10. LIGHTWEIGHT QA ONLY — DO NOT EXPAND
+=================================================
+
+This job intentionally uses a SHORT sanity check.
+Do not run a giant audit framework.
+Do not create dozens of QA categories.
+Do not reopen the map after it is complete unless one of these checks finds a real defect.
+
+PASS only these checks:
+
+1. INVENTORY / COUNT
+   - all expected IDs exist once
+   - no missing or extra finished-task records
+   - Practice = exactly 8 Intro + 8 Review + 8 Mastery per section
+   - WTC = one shared stimulus + Parts A-D per section
+   - Summative V1-V6 all exist
+
+2. EXIT FRESHNESS
+   - NEW questions are not duplicates of each other
+   - reassessments are not exact/cosmetic copies of their source question
+   - no reassessment reuses the same graph/table/stimulus file from its source
+
+3. PROMPT COMPLETENESS
+   - every value/data item named by the directions is actually present
+   - if the prompt says "plot these points," the points are actually shown in the prompt
+   - if the prompt says "use the graph/table/equation," that representation is actually visible
+   - no TODO/TBD/placeholders
+
+4. REPRESENTATION CHECK
+   - required graph/table/equation/context is actually rendered
+   - student construction surfaces are blank / answer-neutral
+   - graph contents agree with the prompt
+   - required graph evidence is inside the visible bounds
+
+5. MATH / KEY CHECK
+   - answer and solution match the authored prompt
+   - arithmetic/algebra is correct
+   - no answer leakage in student-facing content
+
+6. SECURITY
+   - secure Summative prompts/keys/solutions are not exposed in the public viewer
+   - Practice does not copy secure Summative/Exit task instances
+
+7. FINALIZATION
+   - run Tools/finalize_output.py on the finished Bank tree
+   - require FINALIZATION_QA: PASS
+
+THAT IS THE QA.
+Do not add separate MAP_FIDELITY_REPORT or giant RENDER_QA schemas unless
+the current teacher explicitly asks for them.
+
+If one of the checks fails:
+fix the concrete defect and rerun only the affected check plus finalization.
+
+=================================================
+11. CANONICAL OUTPUT LOCATIONS
+=================================================
+
+Write the complete Unit Bank under:
+
+  tnezki/algebra
+  banks/unitN/
+
+Required structure:
+
+banks/unitN/
+  BANK_MANIFEST.json
+  ITEM_INDEX.json
+  PROVENANCE.json
+  BUILD_REPORT.txt
+  unitN.html
+
+  source_map/
+    MAP_MANIFEST.json
+    unitN_question_design_map.json
+    exit_map.json
+    summative_map.json
+    practice1_map.json
+    wtc_map.json
+    seed_map.json
+
+  exit/
+    section_N.1.json
+    section_N.2.json
+    ...
+
+  practice/
+    section_N.1.json
+    section_N.2.json
+    ...
+
+  summative/
+    V1.json
+    V2.json
+    V3.json
+    V4.json
+    V5.json
+    V6.json
+
+  wtc/
+    section_N.1.json
+    section_N.2.json
+    ...
+
+  seeds.json
+
+  figures/
+    only assets actually used
+
+Use the exact section IDs from the Unit Assessment Plan.
+Do not invent alternate filenames.
+
+=================================================
+12. BANK MANIFEST
+=================================================
+
+BANK_MANIFEST.json must include at minimum:
+
+- schema
+- course = Algebra 1
+- unit
+- status = COMPLETE
+- ready_for_downstream = true
+- pending = []
+- qa_status = PASS
+- accepted_map_fingerprint
+- finished_task_count
+- seed_count
+- destination_counts
+- inspection_viewer = unitN.html
+
+Only set COMPLETE/PASS after the lightweight QA passes.
+
+=================================================
+13. PROVENANCE / REPORT
+=================================================
+
+PROVENANCE.json records:
+
+- pinned memories commit
+- pinned algebra commit
+- source_policy = CLOSED_PROJECT_SOURCES_ONLY
+- public_web_research_used = false
+- file_library_recovery_used = false
+- exact Unit Assessment Plan path
+- Bank profile path
+- Exit map path
+- Question Structure identity
+- registered graph tool identity
+- accepted_map_fingerprint
+
+BUILD_REPORT.txt should be SHORT.
+
+Include:
+- PASS / FAIL
+- Unit
+- map slot count
+- finished task count
+- Exit count
+- Practice count
+- Summative count
+- WTC count
+- seed count
+- lightweight QA result
+- finalization result
+- any concrete defects repaired during the run
+
+Do not create an essay.
+
+=================================================
+14. GOOD-ENOUGH STOP
+=================================================
+
+When:
+
+- the current canonical inventory is complete;
+- the lightweight QA passes;
+- BANK_MANIFEST says COMPLETE / ready_for_downstream / PASS;
+- FINALIZATION_QA passes;
+
+STOP AND DELIVER.
+
+Do not:
+- reread authorities for reassurance;
+- run another audit;
+- improve valid questions merely because another version might be prettier;
+- search for more sources;
+- compare against old Banks;
+- continue polishing after PASS.
+
+END — SINGLE PASS BANK MAP + BUILD
