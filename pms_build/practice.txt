@@ -1,114 +1,499 @@
-BUILD PRACTICE — SINGLE PASS / PROFILE-DRIVEN
-==============================================
+BUILD PRACTICE — ALGEBRA 1 / FAMILY-BANK DOWNSTREAM
+========================================================
 
 STATUS: CURRENT
 STEP: 5
 JOB: practice
-ROLE: Build the selected Unit Practice package from the selected course Framework/profile and COMPLETE canonical Unit Bank.
+ROLE: Build the complete Algebra 1 section Practice package from the exact Unit Assessment Plan,
+the current family Bank, current Question Structure, and current Practice profile.
 
-THIS PM OWNS PROCEDURE, NOT COURSE-SPECIFIC INVENTORY.
-The selected course Framework/profile owns which Practice artifacts exist, which are Bank-canonical, which are generated downstream, counts, labels, stage behavior, and response expectations.
+THIS BUILD PRODUCES EXACTLY:
+- Practice 1
+- Extra Practice
+- Check Your Understanding (CYU)
+- Tarsia export
+- Blooket export
 
-FLOW
-  PHILOSOPHY + RUNTIME + QUESTION STRUCTURE + SELECTED COURSE FRAMEWORK/PROFILE + COMPLETE BANK
-    -> RESOLVE COURSE PRACTICE OUTPUTS
-    -> COPY/RENDER CANONICAL PRACTICE CONTENT
-    -> AUTHOR ONLY PROFILE-AUTHORIZED DOWNSTREAM PRACTICE
-    -> VERIFY ALIGNMENT/REPRESENTATIONS
-    -> RENDER IN CURRENT COURSE SHELLS
-    -> PACKAGE
+DO NOT BUILD:
+- Practice 2
+- Practice 3
 
-0. SNAPSHOT / AUTHORITY — HARD
-Pin system + selected course repositories once.
-Read in order:
-1. Curriculum Philosophy
-2. System Runtime Contract
-3. selected Course Framework front door + exact Unit Assessment Plan
-4. current universal Question Structure
-5. Framework-declared Practice profile
-6. Framework course-file-structure + Practice visual contract
-7. COMPLETE Unit Bank front door/index
-8. this PM
-9. current deployed Practice CSS/shell exemplar when the profile requires one
+CORE IDEA
+---------
+The Bank owns reusable Mastery Goal -> I Can -> Question Family architecture.
+Practice owns FRESH student-facing instances.
 
-Authority by domain:
-teacher instruction -> Philosophy -> Question Structure -> selected Framework/Assessment Plan -> selected Practice profile + COMPLETE Bank -> this PM -> renderer/CSS/shell.
+Do not copy Bank exemplars as finished Practice questions.
+Do not rebuild a giant destination-question Bank inside Practice.
 
-Never hard-code Physics, Algebra, Calculus, or another course's inventory into a different course build.
-Never search old ZIPs for missing content.
+========================================================
+0. SOURCE BOUNDARY — HARD
+========================================================
 
-1. BANK GATE — HARD
-Require BANK_MANIFEST status COMPLETE and ready_for_downstream=true.
-Resolve canonical Practice routes through BANK_MANIFEST/ITEM_INDEX only.
-Do not assume Practice 2/3, CYU, Extra, Tarsia, Blooket, family-pool counts, or historical filenames unless the CURRENT selected course profile says so.
+Use ONLY:
+1. current request / current explicit teacher instruction;
+2. request-provided files;
+3. exact pinned project GitHub sources from:
+   - tnezki/memories
+   - tnezki/algebra
 
-2. RESOLVE OUTPUT INVENTORY FROM PROFILE — HARD
-Build exactly the Practice artifacts declared by the selected course profile/current explicit request.
+DO NOT USE:
+- public web search;
+- public web fetch;
+- search engines;
+- outside curriculum websites;
+- ChatGPT File Library;
+- prior chats;
+- saved memory;
+- old request packages;
+- stale uploads.
 
-ALGEBRA 1 v7.2 CURRENT RESOLUTION
-- Practice 1: source = canonical Bank Practice 1; EXACTLY 24 questions per section = 8 Intro + 8 Review + 8 Mastery, with visible stage grouping.
-- Extra Practice: generated now from exact section architecture, Practice 1, canonical Seeds when useful, misconceptions, representations, and Question Structure.
-- CYU: generated now as a concise formative check from the same authorities.
-- Practice 2/3: NOT required/current outputs unless teacher explicitly asks for a local additional set.
-- Middle-practice participation formats are not required Step 5 Practice outputs unless the current profile explicitly assigns them here.
+Direct reads from the pinned project GitHub repositories are allowed.
 
-OTHER COURSES
-Follow their current profile exactly. If Physics still declares four Practice sets + canonical CYU/Tarsia/Blooket, preserve that behavior. Do not apply Algebra's reduction to Physics.
+Pin memories and algebra commits ONCE at job start.
+Do not mix commits during the run.
 
-3. QUESTION AUTHORING — HARD
-Any newly authored Practice question uses current Question Structure:
-  target -> evidence job -> student action -> structure -> response -> representation -> tool/render route.
-Do not expose secure Exit/Summative prompts or distinctive secure stimuli.
-Canonical Bank Practice questions are rendered faithfully; do not rewrite them merely for variety.
+If a required source is missing:
+STOP and report exact repository + commit + path.
+Do not hunt for a substitute.
 
-4. ALGEBRA PRACTICE 1 — HARD
-When selected course is Algebra 1:
-- preserve exactly 24 questions per section;
-- preserve three visible blocks: Intro, Review, Mastery;
-- each block contains exactly 8 questions;
-- Intro = current section Intro learning;
-- Review = exact current Review goal at Review demand;
-- Mastery = exact current Mastery goal at independent demand and informed by Exit evidence;
-- purposeful repetition is allowed; do not force mechanical equal-I-Can counts or fake structure variety;
-- Practice 1 is not an Exit clone set.
+========================================================
+1. READ ORDER / AUTHORITIES
+========================================================
 
-5. GENERATED EXTRA / CYU — ALGEBRA
-Extra Practice:
-- recovery + extension mix;
-- draw on Practice 1 families, Seeds, misconceptions, alternate representations, and current Question Structure;
-- may repeat useful procedures intentionally;
-- do not turn it into a second secure assessment.
+Read in this order:
+
+1. Curriculum_Philosophy.txt
+2. SYSTEM_RUNTIME_CONTRACT.txt
+3. frameworks/Algebra_1/FRAMEWORK.txt
+4. exact Unit N Assessment Plan:
+   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+   assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html
+5. current universal Question Structure
+6. Algebra Bank profile:
+   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+   profiles/bank_course_profile.json
+7. Algebra Practice profile:
+   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+   profiles/practice_course_profile.json
+8. current Unit family Bank:
+   algebra/banks/unitN/BANK_MANIFEST.json
+   algebra/banks/unitN/FAMILY_INDEX.json
+   algebra/banks/unitN/delivery_map.json
+   algebra/banks/unitN/mastery_goals/*.json
+9. Tools/QUESTION_FRESHNESS_CONTRACT.txt
+10. current registered graph tool from Tools/MANIFEST.json
+11. deployed course CSS:
+    algebra/css/base.css
+    algebra/css/practice_set.css
+    algebra/css/practice_stages.css
+12. this PM
+
+FRESHNESS-ONLY READS
+--------------------
+For duplicate/repeat checking only, read current student-facing artifacts for the SAME Unit/section
+when they exist at their canonical paths, especially:
+- Notes student pages
+- earlier Practice outputs generated in this same job
+- existing public Exit / Quick Check / Review / Activity surfaces if already built
+
+These files are NOT curriculum authorities and may not be used as question sources.
+Their only role is to prevent accidental question-instance repetition.
+
+========================================================
+2. LEARNING ROUTING — HARD
+========================================================
+
+For each exact section, preserve the three simultaneous spiral strands from the Assessment Plan:
+
+INTRO
+- exact current section Intro Learning Target / I Cans
+- first learning with appropriate support
+
+REVIEW
+- exact current Review goal / stage
+- less support, fresh representation or modestly harder use
+
+MASTERY
+- exact current Mastery Goal / supporting I Can evidence
+- independent use at full current demand
+
+IMPORTANT FAMILY-BANK RULE
+--------------------------
+The CURRENT Unit family Bank is required for the current Unit MASTERY strand.
+
+Intro and Review may point to goals that belong to another Unit in the long-term spiral.
+Do NOT block Practice because a future Unit family Bank has not been built yet.
+For Intro/Review:
+- use the exact Assessment Plan goal/I Can;
+- use current Question Structure;
+- author appropriate fresh question architecture directly.
+
+If the relevant other-Unit family Bank already exists, it MAY be consulted for architecture only,
+but it is not required and its exemplar may not be copied.
+
+========================================================
+3. PRACTICE 1 — EXACTLY 24 PER SECTION
+========================================================
+
+For every section create:
+
+PRACTICE 1
+- exactly 24 questions
+- exactly 8 Intro
+- exactly 8 Review
+- exactly 8 Mastery
+
+VISIBLE ORDER:
+1. Intro
+2. Review
+3. Mastery
+
+Use a visible stage heading before each block:
+
+  <div class="practice-stage-label">Intro</div>
+  <div class="practice-stage-label">Review</div>
+  <div class="practice-stage-label">Mastery</div>
+
+The eight questions in a block should form useful practice, not a mechanical cloning run.
+
+INTRO:
+- supportive but real mathematics;
+- current section learning;
+- may use direct examples before transfer.
+
+REVIEW:
+- exact Review goal;
+- somewhat less scaffolded than Intro;
+- use useful representation changes.
+
+MASTERY:
+- select suitable family architecture from the current Unit Bank;
+- instantiate FRESH questions from the family invariant + variation axes;
+- do not copy the Bank exemplar;
+- use more than one family when useful;
+- do not mechanically force all three families for every I Can.
+
+Purposeful procedural repetition is allowed.
+Number-only repetition should be used only when the mathematical job genuinely benefits from fluency.
+
+========================================================
+4. EXTRA PRACTICE — EXACTLY 24 PER SECTION
+========================================================
+
+Create exactly 24 Extra Practice questions per section:
+
+- 8 Intro
+- 8 Review
+- 8 Mastery
+
+Use the SAME visible stage labels as Practice 1.
+
+Extra Practice is NOT Practice 1 with changed numbers.
+
+Within each stage, favor:
+- recovery from common misconceptions;
+- another legitimate family/architecture;
+- alternate representation;
+- reverse thinking / missing information;
+- application / transfer;
+- a useful fluency run when appropriate.
+
+Practice 1 and Extra Practice may share:
+- the same target;
+- the same I Can;
+- the same family architecture.
+
+They may NOT share the same finished question instance or a cosmetic near-copy.
+
+========================================================
+5. CHECK YOUR UNDERSTANDING — EXACTLY 6 PER SECTION
+========================================================
+
+CYU is a concise formative snapshot.
+
+Create exactly 6 questions:
+- 2 Intro
+- 2 Review
+- 2 Mastery
+
+Preserve the current 2-column CYU grid and separate student workspace page.
+
+Do NOT create three large stage sections inside the CYU grid.
+Instead put the stage label INSIDE each question:
+
+  <span class="practice-stage-tag">Intro</span>
+  <span class="practice-stage-tag">Review</span>
+  <span class="practice-stage-tag">Mastery</span>
+
+Place the tag immediately before the question prompt.
+
+CYU questions:
+- are fresh instances;
+- are concise;
+- cover the three section strands;
+- should expose whether the student is ready to move on;
+- do not become mini secure assessments.
+
+========================================================
+6. TARSIA — EXACTLY 18 MATCHES PER SECTION
+========================================================
+
+Create:
+  tarsia_{unit}_{section}.txt
+
+Exactly 18 question-answer match pairs:
+- 6 Intro
+- 6 Review
+- 6 Mastery
+
+FORMAT:
+one pair per line:
+  question,answer
+
+Tarsia constraints:
+- each question must be short and self-contained;
+- each answer must be unambiguous;
+- avoid duplicate answer text when that would create ambiguous matching;
+- choose text-friendly evidence jobs;
+- do not force graph/image questions into the text export;
+- use fresh instances, not copied Practice/CYU prompts.
+
+Tarsia is an independent Practice artifact.
+It is NOT "Practice 3" and must not be named as Practice 3.
+
+========================================================
+7. BLOOKET — EXACTLY 20 QUESTIONS PER SECTION
+========================================================
+
+Create:
+  blooket_{unit}_{section}.csv
+
+Use the established Blooket CSV columns:
+
+Question #,Question Text,Answer 1,Answer 2,Answer 3,Answer 4,Time Limit (sec),Correct Answer(s)
+
+Exactly 20 selected-response questions.
+
+Stage balance:
+- approximately one third Intro
+- approximately one third Review
+- approximately one third Mastery
+- no stage may have fewer than 6 questions
+
+Default time:
+- 20 seconds unless a question genuinely needs more time.
+
+Blooket constraints:
+- exactly one defensible correct option unless the Blooket format explicitly requires otherwise;
+- distractors should come from plausible misconceptions, sign errors, reversed coordinates,
+  wrong operation order, wrong representation reading, etc.;
+- do not use nonsense distractors merely to fill four choices;
+- text-only unless the current Blooket export route explicitly supports another representation;
+- author FRESH instances; do not simply convert Practice/CYU wording into multiple choice.
+
+Blooket is an approved selected-response game exception.
+It is NOT "Practice 3" and must not be named as Practice 3.
+
+========================================================
+8. QUESTION STRUCTURE / REPRESENTATIONS
+========================================================
+
+Every newly authored question follows current Question Structure:
+
+target
+-> evidence job
+-> student action
+-> question structure
+-> response mode
+-> representation mode
+-> executable route
+
+Keep direct work direct.
+Do not inflate simple tasks into artificial critique.
+
+If a question names a representation, render it literally:
+- table = semantic HTML table
+- graph = actual graph / blank graph
+- context = actual situation
+- mapping = actual mapping
+- ordered pairs = ordered-pair notation when that is the intended representation
+
+Use the current registered graph tool for required Algebra graphs.
+Do not hand-build coordinate SVG as a substitute.
+
+Choose natural values.
+Difficulty comes from the mathematics, not arbitrary number inflation.
+
+========================================================
+9. QUESTION FRESHNESS GATE — HARD
+========================================================
+
+Follow:
+  Tools/QUESTION_FRESHNESS_CONTRACT.txt
+
+Build a compact comparison surface for the current section from:
+
+A. Bank family EXEMPLARS
+   - compare against the exemplar surface;
+   - family reuse is allowed;
+   - exemplar copying is not.
+
+B. current student Notes prompts, when present
+
+C. all earlier outputs created in THIS Practice job
+   - Practice 1
+   - Extra Practice
+   - CYU
+   - Tarsia
+   - Blooket
+
+D. already-built student-facing public artifacts for this same Unit/section when present
+
+FAIL / REPAIR:
+- exact repeated prompt;
+- same values/data + same stimulus;
+- same graph/table/context reused as the same task;
+- cosmetic rewrite that is functionally the same finished question;
+- converting the exact same question from open response to Blooket and calling it new.
+
+ALLOW:
+- same Mastery Goal;
+- same I Can;
+- same family architecture;
+- same evidence job;
+- intentional procedural fluency sequences when repetition itself is the instructional purpose.
+
+When a repeat is found:
+1. repair only the newer/local question;
+2. keep the original artifact unchanged;
+3. change meaningful variation axes while preserving the target;
+4. recheck.
+
+Terminal build signal:
+  QUESTION_FRESHNESS: PASS
+
+Do NOT create a giant duplicate audit when there are no collisions.
+Report only:
+- surfaces compared
+- collisions found
+- collisions repaired
+- final PASS/FAIL
+
+========================================================
+10. CSS / VISUAL CONTRACT
+========================================================
+
+Practice 1, Extra Practice, and CYU load, in this order:
+
+1. ../../css/base.css
+2. ../../css/practice_set.css
+3. ../../css/practice_stages.css
+
+PRACTICE 1 / EXTRA PRACTICE:
+- use .practice-stage-label before Intro, Review, Mastery blocks.
 
 CYU:
-- short formative snapshot of current learning and readiness for the section evidence demands;
-- course profile/teacher request determines exact size/layout;
-- author with Question Structure;
-- no secure prompt reuse.
+- use .practice-stage-tag inside each question.
 
-6. REPRESENTATIONS / VALUES
-Use actual graphs/tables/contexts/diagrams when required by the evidence job.
-Use current registered graph/tool routes and course render contracts.
-Student-constructed representations need answer-neutral construction surfaces.
-Choose natural values; difficulty comes from the mathematics, not arbitrary number inflation.
+Do not duplicate this styling inline.
+Do not create separate stage CSS for Practice vs Extra vs CYU.
 
-7. RENDER / PATHS
-Use only current selected-course course-file-structure and visual contracts.
-If a deployed shell exemplar is required, fetch that same-course exemplar before rendering and use it only for DOM/class/path behavior, never as question authority.
+========================================================
+11. OUTPUT PATHS — CANONICAL
+========================================================
 
-8. QA — HARD
-[ ] selected course/profile correctly resolved
-[ ] COMPLETE Bank gate passes
-[ ] output inventory matches current profile, not another course
-[ ] every canonical Practice source copied/rendered faithfully
-[ ] every newly authored question executes current Question Structure semantically
-[ ] Algebra Practice 1 = exactly 24 per section = 8 Intro + 8 Review + 8 Mastery
-[ ] no secure Exit/Summative leakage
-[ ] all answers/solutions correct
-[ ] representations accurate and refs/routes resolve
-[ ] paths/CSS/shell match selected course contract
-[ ] no visible internal metadata
+For section U.S write to:
 
-If any hard check fails, repair or FAIL CLOSED with exact path/field.
+practice_sets/practice_sets_{unit}_{section}/
 
-9. OUTPUT
-Return the current course-relative Practice package required by the selected course profile and report the exact files created.
+Required current files:
+
+practice_set_{unit}_{section}.html
+extra_practice_{unit}_{section}.html
+cyu_{unit}_{section}.html
+tarsia_{unit}_{section}.txt
+blooket_{unit}_{section}.csv
+figures/
+  only figures actually referenced by current HTML outputs
+
+LEGACY FILES TO REMOVE WHEN PRESENT:
+- practice_set_{unit}_{section}_2.html
+- practice_set_{unit}_{section}_3.html
+- tarsia_{unit}_{section}_practice_3.txt
+- blooket_{unit}_{section}_practice_3.csv
+- unreferenced figures belonging only to retired Practice 2/3 outputs
+
+Use safe transfer DELETE only with exact current SHA-256 as required by the transfer contract.
+Do not guess hashes.
+If a stale binary cannot be safely deleted through the transfer contract, report the exact path
+and use a verified local cleanup helper rather than an unsafe delete guess.
+
+========================================================
+12. QA — SMALL AND HARD
+========================================================
+
+For each section verify:
+
+INVENTORY
+[ ] Practice 1 exists
+[ ] Extra Practice exists
+[ ] CYU exists
+[ ] Tarsia exists
+[ ] Blooket exists
+[ ] Practice 2 does not exist in the new output
+[ ] Practice 3 does not exist in the new output
+
+COUNTS
+[ ] Practice 1 = 24 = 8 Intro + 8 Review + 8 Mastery
+[ ] Extra Practice = 24 = 8 Intro + 8 Review + 8 Mastery
+[ ] CYU = 6 = 2 Intro + 2 Review + 2 Mastery
+[ ] Tarsia = 18 pairs = 6 Intro + 6 Review + 6 Mastery
+[ ] Blooket = 20; each stage >= 6
+
+QUALITY
+[ ] exact Assessment Plan strands preserved
+[ ] current Mastery family architecture used appropriately
+[ ] Bank exemplars not copied
+[ ] Question Structure fits actual student action
+[ ] answers/solutions are mathematically correct
+[ ] required representations are real and accurate
+[ ] graph tool route correct
+[ ] Tarsia matches are unique/unambiguous
+[ ] Blooket distractors plausible and one correct answer
+
+VISUAL
+[ ] Practice 1 stage labels visible
+[ ] Extra Practice stage labels visible
+[ ] CYU stage tag visible inside every question
+[ ] no inline stage-label styling
+[ ] CSS order correct
+[ ] no clipping/overlap
+
+FRESHNESS
+[ ] QUESTION_FRESHNESS: PASS
+
+FINALIZATION
+[ ] run current Tools/finalize_output.py
+[ ] FINALIZATION_QA: PASS
+
+If all pass:
+STOP AND DELIVER.
+
+Do not continue polishing.
+
+========================================================
+13. TRANSFER
+========================================================
+
+Package through:
+  Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt
+
+Destination:
+  tnezki/algebra
+  practice_sets/practice_sets_{unit}_{section}/
+
+Never commit, push, pull, branch, merge, or create a PR.
+Teacher reviews local changes and alone decides whether to commit/push.
+
+END — BUILD PRACTICE

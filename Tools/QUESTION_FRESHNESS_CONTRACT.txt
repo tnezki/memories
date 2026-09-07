@@ -1,0 +1,115 @@
+QUESTION FRESHNESS CONTRACT
+===========================
+
+STATUS: CURRENT
+ROLE: Small shared gate for question-producing curriculum builds after the family Bank.
+
+PURPOSE
+-------
+Allow repeated SKILLS and FAMILY ARCHITECTURES while preventing accidental reuse of the same
+finished question instance across student-facing artifacts.
+
+CORE DISTINCTION
+----------------
+ALLOWED:
+- same Mastery Goal
+- same I Can
+- same evidence job
+- same question family / structure
+- fresh parallel instances
+- deliberate fluency runs when repetition itself is instructionally useful
+
+NOT ALLOWED:
+- exact repeated finished question
+- same distinctive values/data + same prompt
+- same graph/table/context/stimulus used as the same task
+- cosmetic rewrite of the same finished question
+- taking an existing open-response item and merely converting it to selected response
+- copying a Bank exemplar verbatim into a downstream artifact
+
+BANK RULE
+---------
+The family Bank is an architecture source.
+Its exemplar proves the family is usable.
+The exemplar is NOT the default downstream question.
+
+A downstream instance should preserve:
+- exact target / I Can
+- family invariant
+- intended student action
+- appropriate difficulty
+
+and change meaningful variation axes when possible.
+
+WHAT TO COMPARE
+---------------
+For the current Unit/section/build, compare the new question against:
+
+1. relevant Bank family exemplars;
+2. already-built student-facing artifacts at their canonical paths;
+3. earlier questions generated in the current build;
+4. secure siblings when the build itself owns multiple secure forms.
+
+Do not use compared artifacts as curriculum/question sources.
+They are freshness surfaces only.
+
+FRESHNESS LEVELS
+----------------
+
+A. EXACT INSTANCE DUPLICATE — FAIL
+Same prompt/stimulus/values or effectively identical student task.
+
+B. COSMETIC PARALLEL — REPAIR BY DEFAULT
+Only nouns, names, or numbers changed while the full surface is otherwise the same.
+Exception: a deliberate procedural fluency run inside one instructional artifact may keep a stable
+prompt form when repeated execution is the instructional purpose.
+
+C. FAMILY REUSE — PASS
+Same underlying architecture but a meaningfully fresh instance:
+different values plus another meaningful axis when possible, such as representation, direction,
+context, missing information, misconception, comparison, or decision.
+
+REPRESENTATION SIGNATURE
+------------------------
+When representations carry the task, compare their meaningful content:
+- table values/labels
+- graph data/equation/window/key points
+- context quantities/relationships
+- mapping pairs
+- worked-error steps
+- shared stimulus data
+
+A renamed image file is not fresh if the graph/data are the same task.
+
+REPAIR RULE
+-----------
+When a collision is found:
+1. preserve the older/canonical artifact;
+2. repair only the newer/local item;
+3. keep the same target and evidence job;
+4. vary meaningful allowed axes;
+5. recheck.
+
+SECURITY
+--------
+For secure Summative/assessment builds:
+- never use public artifact wording/stimuli verbatim;
+- check secure forms against each other;
+- preserve blueprint/evidence equivalence while changing the instance.
+
+REPORTING
+---------
+Keep reporting compact.
+
+Required final signal:
+  QUESTION_FRESHNESS: PASS
+
+If collisions occur, report only:
+- number of comparison surfaces
+- collisions found
+- collisions repaired
+- unresolved collisions, if any
+
+Do not create a giant audit when no collision exists.
+
+END — QUESTION FRESHNESS CONTRACT

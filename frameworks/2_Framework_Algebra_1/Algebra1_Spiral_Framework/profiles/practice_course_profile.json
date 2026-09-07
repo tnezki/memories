@@ -1,43 +1,111 @@
 {
   "name": "Algebra 1 Practice Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.2",
-  "framework_version": "v7.2",
-  "role": "Course-specific Practice behavior. Practice 1 is canonical Bank content; Extra/CYU/middle practice are generated during Practice build.",
-  "question_structure_rule": "Use current universal Question Structure for all authored Practice questions.",
-  "practice_1": {
-    "source": "canonical Bank Practice 1",
-    "count_per_section": 24,
-    "visible_blocks": [
-      "Intro",
-      "Review",
-      "Mastery"
-    ],
-    "stage_counts": {
-      "Intro": 8,
-      "Review": 8,
-      "Mastery": 8
+  "profile_version": "v3.0-family-bank-downstream",
+  "framework_version": "v7.4",
+  "role": "Course-specific Practice behavior for the canonical family-Bank architecture. Practice artifacts are generated downstream as fresh instances; Practice 2/3 are retired.",
+  "question_structure_rule": "Use current universal Question Structure for every authored Practice question. Blooket is the explicit selected-response game exception.",
+  "bank_relationship": {
+    "architecture": "Mastery Goal -> I Can -> Question Family",
+    "mastery_use": "Use current Unit Bank family architecture for the section Mastery strand and author fresh instances.",
+    "intro_review_use": "Intro/Review are owned by the exact Unit Assessment Plan and may reference goals from other Units. Future/other Unit Banks are optional architecture references, never blocking dependencies.",
+    "bank_exemplar_copy_allowed": false,
+    "same_family_reuse_allowed": true
+  },
+  "outputs": {
+    "practice_1": {
+      "required": true,
+      "filename_pattern": "practice_set_{unit}_{section}.html",
+      "count_per_section": 24,
+      "stage_counts": {
+        "Intro": 8,
+        "Review": 8,
+        "Mastery": 8
+      },
+      "stage_display": "three visible blocks using .practice-stage-label"
     },
-    "balance_rule": "HARD: exactly 8 Intro + 8 Review + 8 Mastery per section.",
-    "allocation_rule": "Within each 8-question block, use purposeful repetition and varied natural structures. Do not force equal counts across I Cans if that produces poor questions.",
-    "alignment": "Intro block uses current section Intro; Review block uses exact current Review goal/stage; Mastery block uses exact current Mastery goal/stage and is informed by the Exit evidence map."
+    "extra_practice": {
+      "required": true,
+      "filename_pattern": "extra_practice_{unit}_{section}.html",
+      "count_per_section": 24,
+      "stage_counts": {
+        "Intro": 8,
+        "Review": 8,
+        "Mastery": 8
+      },
+      "stage_display": "three visible blocks using .practice-stage-label",
+      "purpose": "Recovery + alternate representation + extension/transfer; not a numeric clone of Practice 1."
+    },
+    "cyu": {
+      "required": true,
+      "filename_pattern": "cyu_{unit}_{section}.html",
+      "count_per_section": 6,
+      "stage_counts": {
+        "Intro": 2,
+        "Review": 2,
+        "Mastery": 2
+      },
+      "layout": "existing two-column CYU grid + separate workspace page",
+      "stage_display": "put .practice-stage-tag inside each question rather than separate stage sections"
+    },
+    "tarsia": {
+      "required": true,
+      "filename_pattern": "tarsia_{unit}_{section}.txt",
+      "pair_count": 18,
+      "stage_counts": {
+        "Intro": 6,
+        "Review": 6,
+        "Mastery": 6
+      },
+      "format": "one comma-separated question,answer pair per line",
+      "rule": "Text-friendly, unique/unambiguous matches; fresh instances; not Practice 3."
+    },
+    "blooket": {
+      "required": true,
+      "filename_pattern": "blooket_{unit}_{section}.csv",
+      "question_count": 20,
+      "minimum_per_stage": 6,
+      "columns": [
+        "Question #",
+        "Question Text",
+        "Answer 1",
+        "Answer 2",
+        "Answer 3",
+        "Answer 4",
+        "Time Limit (sec)",
+        "Correct Answer(s)"
+      ],
+      "default_time_seconds": 20,
+      "rule": "Plausible misconception distractors, one defensible correct answer, fresh text-friendly instances; not Practice 3."
+    }
   },
-  "generated": {
-    "extra_practice": "Generate as recovery/extension from map, Practice 1, seeds, misconceptions, and Question Structure.",
-    "cyu": "Generate as a concise formative check from the same authorities.",
-    "middle_practice": [
-      "stations",
-      "Find Someone Who",
-      "matching",
-      "sorting",
-      "task cards",
-      "partner sets",
-      "whiteboards",
-      "other approved structures"
-    ]
+  "retired_outputs": [
+    "Practice Set 2",
+    "Practice Set 3",
+    "tarsia_*_practice_3.txt naming",
+    "blooket_*_practice_3.csv naming"
+  ],
+  "freshness": {
+    "contract": "Tools/QUESTION_FRESHNESS_CONTRACT.txt",
+    "required_terminal_signal": "QUESTION_FRESHNESS: PASS",
+    "minimum_surfaces": [
+      "Bank exemplars",
+      "current student Notes when present",
+      "all earlier outputs in the same Practice build",
+      "already-built student-facing same-section artifacts when present"
+    ],
+    "family_reuse_allowed": true,
+    "finished_instance_reuse_allowed": false
   },
-  "retired_required_roles": [
-    "Practice Set 2 as canonical Bank inventory",
-    "Practice Set 3 as canonical Bank inventory"
-  ]
+  "visual_contract": {
+    "stylesheets": [
+      "../../css/base.css",
+      "../../css/practice_set.css",
+      "../../css/practice_stages.css"
+    ],
+    "practice_extra_stage_class": "practice-stage-label",
+    "cyu_stage_class": "practice-stage-tag",
+    "inline_stage_css_allowed": false
+  },
+  "output_root_pattern": "practice_sets/practice_sets_{unit}_{section}/"
 }
