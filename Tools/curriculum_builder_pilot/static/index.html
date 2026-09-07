@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Curriculum Builder Pilot</title>
+<title>Curriculum Builder</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header><div><h1>Curriculum Builder <span>PILOT v0.7</span></h1><p>Run the whole Bank pipeline in staging. Mechanical facts stay local; AI is used only for semantic authoring/judgment.</p></div></header>
+<header><div><h1>Curriculum Builder <span>v0.8</span></h1><p>One normal AI handoff. Local Map audit, Bank build/audit, and final GitHub transfer stay on your Mac.</p></div></header>
 <main>
   <aside class="card">
     <h2>Local System</h2>
@@ -16,39 +16,31 @@
     <div class="rule good">NO PUBLIC WEB CURRICULUM SOURCES<br>NO FILE LIBRARY<br>NO GIT COMMANDS<br>NO DIRECT REPO WRITES</div>
   </aside>
   <section class="card main-card">
-    <h2>Bank Pipeline Pilot</h2>
+    <h2>Full Bank Pipeline</h2>
     <div class="row"><label>Course<select id="course"></select></label><label>Unit<select id="unit"></select></label></div>
-    <label>Job<select id="job"></select></label>
-    <p id="purpose" class="muted"></p>
+    <p class="muted">Fresh Map → local Map audit → Complete Bank → local Bank audit → one final transfer ZIP.</p>
 
-    <div id="fullPipelineFlow" class="simple-flow hidden">
+    <div class="simple-flow">
       <button id="startFullPipeline" class="primary">Start Fresh Full Pipeline</button>
-      <button id="continueFullPipeline" class="primary">Continue from Downloads</button>
+      <button id="continueFullPipeline" class="primary">Continue / Import AI Result</button>
+      <button id="openAIExchange">Open AI Exchange Folder</button>
       <div class="three-steps">
-        <div><b>1</b><span>Build + audit Map</span></div>
-        <div><b>2</b><span>Build + audit Bank</span></div>
-        <div><b>3</b><span>One final transfer</span></div>
+        <div><b>1</b><span>ONE AI handoff</span></div>
+        <div><b>2</b><span>Local Map + Bank audits</span></div>
+        <div><b>3</b><span>One GitHub transfer</span></div>
       </div>
-      <p class="muted small">Start once. The app runs every local stage it can. If AI is needed, it puts one clearly named ZIP in Downloads. Upload that ZIP to ChatGPT, leave the returned JSON in Downloads, then click <b>Continue from Downloads</b>. Repeat only if the pipeline asks for another AI result.</p>
-    </div>
-
-    <div id="completeBankFlow" class="simple-flow hidden">
-      <button id="prepareCompleteBank" class="primary">Prepare Complete Bank</button>
-      <button id="finishCompleteBank" class="primary">Finish Complete Bank from Downloads</button>
-    </div>
-
-    <div id="simpleAudit" class="simple-flow hidden">
-      <button id="runAudit" class="primary">Run Audit</button>
-      <button id="finishAudit" class="primary" disabled>Finish Audit from Downloads</button>
-    </div>
-
-    <div id="otherFlow" class="actions hidden">
-      <button id="preflight">Local Preflight</button>
-      <button id="skeleton">Build Local Map Skeleton</button>
-      <button id="workOrder" disabled>Prepare AI Work Order</button>
+      <p class="muted small"><b>Normal run:</b> click Start, upload the single handoff ZIP from the AI Exchange folder to ChatGPT, download <code>AI_FULL_BANK_RESULT.json</code>, then click Continue. The app moves the JSON out of Downloads automatically.</p>
     </div>
 
     <div id="result" class="result hidden"></div>
+
+    <details>
+      <summary>Maintenance / cleanup</summary>
+      <p class="muted small">The app workspace now lives in Documents/Curriculum Builder. This does not touch your GitHub transfer folder.</p>
+      <button id="archiveLegacy">Archive old pilot files from Downloads</button>
+      <div id="cleanupResult" class="muted small"></div>
+    </details>
+
     <details id="details"><summary>Technical details</summary><h3>Run Log</h3><div id="log" class="log"><div class="muted">No run yet.</div></div></details>
   </section>
 </main>
