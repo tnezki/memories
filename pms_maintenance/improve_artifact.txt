@@ -335,73 +335,33 @@ QUESTIONS / TASKS
 - fresh values alone do not make a materially different task when the distinctive prompt/stimulus is otherwise cloned.
 
 ============================================================================
-5. CROSS-ARTIFACT COLLISION FIREWALL — HARD
+5. PROBLEM UNIQUENESS GATE — HARD
 ============================================================================
 
-Run this whenever the improvement ADDS or CHANGES any student-facing question/task,
-including WTC parts, Examples, YTIs, Practice questions, Activities, Exit items, Review items,
-Summative items, Quick Checks, Performance Tasks, or other question-like prompts.
+Whenever this improvement CREATES or CHANGES a student-facing task/question:
 
-CHECK THE CHANGED/NEW TASK AGAINST:
+CALL:
+pms_shared/problem_uniqueness/PM.txt
 
-A. THE CURRENT TARGET ARTIFACT
-- other tasks in the same section;
-- other tasks in the same Unit/artifact;
-- avoid accidental internal duplicates.
+Provide the changed candidate task and current pinned snapshot.
 
-B. CURRENT EXISTING SIBLING ARTIFACTS
-Use exact canonical routes declared by the Framework/build PM/manifests when they exist, including as applicable:
-- WTC;
-- Notes Example/YTI;
-- Practice;
-- Activities;
-- Exit Tickets;
-- Warm-Ups;
-- Review;
-- Summative;
-- Performance Tasks / Quick Checks;
-- Demos / Investigations;
-- other current student-facing task artifacts.
+Do NOT duplicate cross-artifact collision logic inside this PM.
+The shared Problem Uniqueness PM owns:
+- same-artifact duplicate checks;
+- sibling-artifact collision checks;
+- protected/secure evidence collision checks;
+- declared future-blueprint/reservation checks;
+- safe collision classification.
 
-C. SECURE / PROTECTED EVIDENCE
-Always protect secure Exit/Summative/other protected evidence when the course architecture declares it.
-Do not expose secure prompt text in the improvement report.
+Caller action:
+- DISTINCT / SAME_EVIDENCE_JOB_OK -> continue
+- NEAR_DUPLICATE / EXACT_DUPLICATE -> revise the LOCAL changed task, then recheck
+- PROTECTED_ASSESSMENT_COLLISION -> revise the LOCAL task; never expose secure content
+- FUTURE_BLUEPRINT_COLLISION -> revise or report intentional reservation conflict
+- INSUFFICIENT_SOURCE -> follow shared PM caller-action contract
 
-D. FUTURE / NOT-YET-BUILT ARTIFACTS
-If a sibling artifact does not exist yet:
-- look ONLY for an existing canonical blueprint, Bank destination, evidence map, Assessment Plan reservation,
-  source map, or other declared future-task specification that the current Framework/build PM says owns that future job;
-- compare the changed/new task against that planned evidence job/stimulus/representation when such a source exists;
-- do NOT invent future questions merely to run a collision check;
-- if no artifact and no future blueprint exists, record NOT_YET_AVAILABLE and continue.
-
-COLLISION TEST
-Flag:
-- exact prompt reuse;
-- same distinctive values/data;
-- same context;
-- same graph/table/equation/image stimulus;
-- cosmetic rewrite;
-- same unusual dependency chain;
-- near-parallel rehearsal that would effectively give away protected evidence.
-
-Allowed:
-- same Learning Target / I Can;
-- same broad concept;
-- same general evidence job;
-- ordinary unavoidable mathematical vocabulary;
-- deliberate repeated fluency when the artifact contract calls for it.
-
-ACTION
-For an ordinary instructional task:
-- revise the LOCAL changed task to remove the collision.
-
-For teacher-requested exact wording/content:
-- preserve the teacher's requested change;
-- report the collision before final handoff and identify the conflicting artifact generically/with safe IDs.
-
-For secure evidence:
-- never leak secure content while explaining the conflict.
+Maximum automatic local rewrite attempts: 3.
+After 3 unsuccessful attempts, stop rewriting and report the unresolved collision.
 
 ============================================================================
 6. REPEAT / REDUNDANCY CHECK — HARD
@@ -436,8 +396,8 @@ After edits:
 [ ] no accidental target/learning change
 [ ] literal required representations present
 [ ] registered tools used when required
-[ ] changed/new questions passed collision firewall
-[ ] future planned evidence checked when a declared blueprint exists
+[ ] changed/new questions passed shared Problem Uniqueness gate
+[ ] shared Problem Uniqueness result includes declared future-blueprint check when applicable
 [ ] no secure prompt leakage
 [ ] no new low-value repetition in changed scope
 [ ] current artifact-specific build PM QA still passes
@@ -462,10 +422,7 @@ Record each unresolved issue with:
 - recommended_followup
 
 Useful issue codes:
-IMPROVE_COLLISION_EXISTING_ARTIFACT
-IMPROVE_COLLISION_SECURE_EVIDENCE
-IMPROVE_COLLISION_FUTURE_BLUEPRINT
-IMPROVE_FUTURE_COLLISION_SOURCE_NOT_AVAILABLE
+Use the shared Problem Uniqueness classifications for task-collision findings.
 IMPROVE_REQUIRED_REPRESENTATION_MISSING
 IMPROVE_REGISTERED_TOOL_FAILURE
 IMPROVE_UPSTREAM_CONTRACT_DEFECT

@@ -1,0 +1,233 @@
+PROBLEM UNIQUENESS — SHARED READ-ONLY COLLISION AUDITOR
+=======================================================
+
+STATUS: CURRENT
+ROLE: Audit one or more NEW/CHANGED student-facing tasks for meaningful uniqueness
+against current curriculum artifacts and declared future evidence plans.
+
+THIS PM IS READ-ONLY.
+It does not rewrite the candidate task.
+It does not modify canonical artifacts.
+It returns a collision result to the calling PM.
+
+USE WHEN
+--------
+Call this PM whenever another workflow CREATES or CHANGES a student-facing task, including:
+- WTC / recurring task parts;
+- Notes Examples / You Try It;
+- Practice;
+- Activities;
+- Exit Tickets;
+- Review;
+- Summative;
+- Quick Checks;
+- Performance Tasks;
+- Demos / Investigations with student questions;
+- other prompt/stimulus-based student evidence.
+
+Do NOT call it for:
+- prose-only edits;
+- layout-only edits;
+- vocabulary wording;
+- CSS;
+- unchanged questions;
+- purely teacher-facing commentary.
+
+============================================================================
+0. INPUT CONTRACT
+============================================================================
+
+The calling PM must provide:
+
+- course
+- Unit/section when applicable
+- candidate_task_id
+- candidate artifact type
+- candidate prompt
+- candidate values/data
+- candidate context
+- candidate representation/stimulus description
+- candidate response mode
+- candidate evidence job / I Can / Learning Target when known
+- security classification when known
+- pinned system commit
+- pinned course commit
+
+If multiple candidate tasks are supplied, audit each independently.
+
+Do not use prior chat, saved/model memory, File Library, or public web as uniqueness sources.
+
+============================================================================
+1. SOURCE RESOLUTION — HARD
+============================================================================
+
+Use ONLY exact canonical sources declared by:
+- current Framework;
+- current artifact build PM;
+- Bank manifest/index;
+- assessment plan;
+- artifact manifests;
+- request snapshot.
+
+Do not repository-search for "similar questions."
+Do not load entire repositories.
+Do not invent alternate sources.
+
+READ ONLY what is needed to compare the candidate task.
+
+============================================================================
+2. COMPARISON ORDER
+============================================================================
+
+Compare the candidate against:
+
+A. SAME ARTIFACT / SAME UNIT
+- other tasks in the same section;
+- other tasks in the same artifact;
+- duplicate internal prompts/stimuli.
+
+B. EXISTING SIBLING ARTIFACTS
+When they exist and their exact routes are declared:
+- WTC;
+- Notes Example / YTI;
+- Practice;
+- Activities;
+- Exit Tickets;
+- Warm-Ups when they contain comparable task instances;
+- Review;
+- Summative;
+- Quick Checks / Performance Tasks;
+- Demos / Investigations;
+- other student-facing evidence artifacts.
+
+C. SECURE / PROTECTED EVIDENCE
+Always include declared protected/secure evidence sources.
+Never expose secure prompt text in the result.
+
+D. FUTURE / NOT-YET-BUILT ARTIFACTS
+If a sibling artifact does not yet exist:
+- inspect ONLY an existing declared future-task blueprint/reservation if one exists, such as:
+  assessment plan;
+  Bank destination;
+  evidence map;
+  source map;
+  approved question map;
+  other Framework-declared future artifact specification.
+- do NOT invent future tasks merely to compare.
+- if no artifact and no declared future blueprint exists, mark:
+  FUTURE_SOURCE_NOT_AVAILABLE
+  and continue.
+
+============================================================================
+3. WHAT COUNTS AS A COLLISION
+============================================================================
+
+FLAG as meaningful collision when one or more of these are materially shared:
+
+- exact prompt;
+- same distinctive values/data;
+- same context;
+- same graph/table/equation/image stimulus;
+- same unusual representation setup;
+- same unusual dependency chain or multi-part structure;
+- cosmetic rewrite of the same task;
+- same task with only number swaps when semantic variation is expected;
+- near-parallel rehearsal that would effectively give away protected evidence.
+
+DO NOT flag merely because tasks share:
+- the same Learning Target / I Can;
+- the same broad concept;
+- the same evidence job;
+- ordinary mathematical vocabulary;
+- a common routine required for fluency;
+- an unavoidable standard representation.
+
+============================================================================
+4. CLASSIFICATION
+============================================================================
+
+Return EXACTLY one primary classification per candidate:
+
+DISTINCT
+- no meaningful collision found.
+
+SAME_EVIDENCE_JOB_OK
+- same target/evidence job, but task instance is meaningfully distinct.
+
+NEAR_DUPLICATE
+- materially too close in prompt/stimulus/context/reasoning path.
+
+EXACT_DUPLICATE
+- same task or functionally identical task.
+
+PROTECTED_ASSESSMENT_COLLISION
+- candidate would leak/rehearse secure or protected evidence too closely.
+
+FUTURE_BLUEPRINT_COLLISION
+- candidate conflicts with a declared future evidence reservation/blueprint.
+
+INSUFFICIENT_SOURCE
+- a required declared source for the check could not be read.
+
+============================================================================
+5. RESULT FORMAT
+============================================================================
+
+Return one compact result object/report per candidate:
+
+candidate_task_id:
+classification:
+severity: PASS | WARNING | FAIL
+conflict_artifact_type:
+conflict_id:
+conflict_section:
+collision_axes:
+  - prompt
+  - values/data
+  - context
+  - stimulus/representation
+  - reasoning/dependency
+safe_explanation:
+future_sources_checked:
+future_sources_not_available:
+recommended_caller_action:
+
+SECURE RULE:
+For protected evidence:
+- use safe IDs and generic descriptions;
+- do not quote or paraphrase secure prompt content closely enough to reveal it.
+
+============================================================================
+6. CALLER ACTION CONTRACT
+============================================================================
+
+This PM NEVER repairs.
+
+The calling PM decides what to do:
+
+DISTINCT / SAME_EVIDENCE_JOB_OK
+-> continue.
+
+NEAR_DUPLICATE / EXACT_DUPLICATE
+-> caller may regenerate or revise the LOCAL candidate task, then call this PM again.
+
+PROTECTED_ASSESSMENT_COLLISION
+-> caller must revise/regenerate the local candidate unless the teacher explicitly requires exact wording;
+   if teacher requires exact wording, caller reports the unresolved conflict without exposing secure content.
+
+FUTURE_BLUEPRINT_COLLISION
+-> caller revises candidate or reports the intentional reservation conflict.
+
+INSUFFICIENT_SOURCE
+-> caller fails closed only if the missing source is required by the current artifact contract;
+   otherwise report the limitation.
+
+============================================================================
+7. STOP RULE
+============================================================================
+
+This PM ends after classification/report.
+No curriculum edits.
+No artifact edits.
+No upstream repairs.
+No public-web search.
