@@ -7,49 +7,39 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
-  <div>
-    <h1>Curriculum Builder <span>PILOT v0.6</span></h1>
-    <p>Choose the job and run it. Mechanical facts stay local; AI is used only when semantic judgment is actually needed.</p>
-  </div>
-</header>
+<header><div><h1>Curriculum Builder <span>PILOT v0.7</span></h1><p>Run the whole Bank pipeline in staging. Mechanical facts stay local; AI is used only for semantic authoring/judgment.</p></div></header>
 <main>
   <aside class="card">
     <h2>Local System</h2>
-    <div id="systemStatus" class="status warn">Checking local repositories…</div>
+    <div id="systemStatus" class="status warn">Checking local repositories...</div>
     <dl id="systemMeta"></dl>
     <div class="rule good">NO PUBLIC WEB CURRICULUM SOURCES<br>NO FILE LIBRARY<br>NO GIT COMMANDS<br>NO DIRECT REPO WRITES</div>
   </aside>
-
   <section class="card main-card">
     <h2>Bank Pipeline Pilot</h2>
-    <div class="row">
-      <label>Course<select id="course"></select></label>
-      <label>Unit<select id="unit"></select></label>
-    </div>
+    <div class="row"><label>Course<select id="course"></select></label><label>Unit<select id="unit"></select></label></div>
     <label>Job<select id="job"></select></label>
     <p id="purpose" class="muted"></p>
+
+    <div id="fullPipelineFlow" class="simple-flow hidden">
+      <button id="startFullPipeline" class="primary">Start Fresh Full Pipeline</button>
+      <button id="continueFullPipeline" class="primary">Continue from Downloads</button>
+      <div class="three-steps">
+        <div><b>1</b><span>Build + audit Map</span></div>
+        <div><b>2</b><span>Build + audit Bank</span></div>
+        <div><b>3</b><span>One final transfer</span></div>
+      </div>
+      <p class="muted small">Start once. The app runs every local stage it can. If AI is needed, it puts one clearly named ZIP in Downloads. Upload that ZIP to ChatGPT, leave the returned JSON in Downloads, then click <b>Continue from Downloads</b>. Repeat only if the pipeline asks for another AI result.</p>
+    </div>
 
     <div id="completeBankFlow" class="simple-flow hidden">
       <button id="prepareCompleteBank" class="primary">Prepare Complete Bank</button>
       <button id="finishCompleteBank" class="primary">Finish Complete Bank from Downloads</button>
-      <div class="three-steps">
-        <div><b>1</b><span>Lock accepted map</span></div>
-        <div><b>2</b><span>AI authors content only</span></div>
-        <div><b>3</b><span>Local render + QA + transfer</span></div>
-      </div>
-      <p class="muted small">Prepare once. After ChatGPT returns AI_BANK_CONTENT.json, leave it in Downloads and click Finish Complete Bank from Downloads. The pilot validates, renders, runs QA/finalization, and creates the transfer ZIP. On the first graph-producing run, it may create a cached local Python graphics runtime outside the repositories if matplotlib/numpy are not already installed.</p>
     </div>
 
     <div id="simpleAudit" class="simple-flow hidden">
       <button id="runAudit" class="primary">Run Audit</button>
       <button id="finishAudit" class="primary" disabled>Finish Audit from Downloads</button>
-      <div class="three-steps">
-        <div><b>1</b><span>Local audit</span></div>
-        <div><b>2</b><span>AI only if needed</span></div>
-        <div><b>3</b><span>Local repair + transfer</span></div>
-      </div>
-      <p class="muted small">If AI is needed, the pilot puts one clearly named ZIP in your Downloads folder. After ChatGPT returns the JSON, leave it in Downloads and click <b>Finish Audit from Downloads</b>. No file hunting.</p>
     </div>
 
     <div id="otherFlow" class="actions hidden">
@@ -59,12 +49,7 @@
     </div>
 
     <div id="result" class="result hidden"></div>
-
-    <details id="details">
-      <summary>Technical details</summary>
-      <h3>Run Log</h3>
-      <div id="log" class="log"><div class="muted">No run yet.</div></div>
-    </details>
+    <details id="details"><summary>Technical details</summary><h3>Run Log</h3><div id="log" class="log"><div class="muted">No run yet.</div></div></details>
   </section>
 </main>
 <script src="app.js"></script>
