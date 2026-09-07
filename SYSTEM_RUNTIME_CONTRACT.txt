@@ -85,8 +85,18 @@ Only explicit current teacher authorization for outside research may change it.
 10. READ BUDGET
 Read only the files the selected PM requires. Heavy source/resource trees are on-demand resources, not default authority payloads. When a manifest declares a purpose-specific canonical file, use that file directly instead of opening a broader aggregate and searching inside it.
 
-11. OUTPUT / HANDOFF
-One output file is returned directly. Multi-file folders may be zipped for handoff, but the ZIP is extracted before canonical GitHub sync.
+11. OUTPUT / HANDOFF — LOCAL REPO TRANSFER
+For Curriculum Control Panel BUILD and MAINTENANCE jobs whose canonical repository destination is known, return ONE local repository transfer ZIP using the contract declared by `local_transfer_contract` in SYSTEM_MANIFEST.json.
+
+The transfer ZIP is an OUTER transport wrapper only. It does not change the selected PM's canonical artifact content, filename, directory shape, or deployable form. The canonical artifact files live under `payload/<repo-folder>/<canonical-relative-path>` and TRANSFER_MANIFEST.json tells the local helper exactly which files to create, replace, or intentionally delete.
+
+For a one-file artifact with a known canonical repo path, wrap that file in the transfer package instead of returning a naked file.
+For a multi-file artifact, wrap the complete canonical replacement tree or exact approved changed-file set as required by the selected PM/maintenance scope.
+Do not require the teacher to unzip and manually place returned curriculum files.
+
+If the current authorities do not declare enough information to resolve a safe repository destination, fail as `TRANSFER_DESTINATION_UNDECLARED` rather than guessing.
+
+The local transfer helper performs no Git operations. After installation, changes remain uncommitted for teacher review in GitHub Desktop.
 
 12. AUTHORITY OWNERSHIP
 PMs own procedure; manifests own stable discovery; Framework/course profiles own course-specific behavior; Git history owns version history.

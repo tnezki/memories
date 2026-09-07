@@ -1,0 +1,102 @@
+LOCAL REPOSITORY TRANSFER CONTRACT
+==================================
+
+STATUS: CURRENT
+SCHEMA: github_transfer / 2
+
+PURPOSE
+-------
+Provide a safe outer transport wrapper for Curriculum Control Panel BUILD and MAINTENANCE
+outputs so finished files can be installed into the teacher's local Git working folders without
+manual unzip/copy steps and without any Git operation.
+
+CANONICAL SOURCE / REVIEW MODEL
+-------------------------------
+- Canonical GitHub is the source of truth at job start.
+- Each job pins the exact system/course commits before reading authorities.
+- Generated changes remain local and uncommitted after transfer installation.
+- The teacher reviews changes in GitHub Desktop and alone decides whether to commit/push.
+- The transfer mechanism MUST NOT commit, push, pull, branch, merge, create PRs, or modify GitHub remotely.
+
+OUTER WRAPPER RULE
+------------------
+When a Control Panel BUILD or MAINTENANCE job has a known repository destination, return ONE
+transfer ZIP with this root structure:
+
+  TRANSFER_MANIFEST.json
+  payload/
+    <repo-folder>/
+      <canonical relative paths...>
+
+The outer transfer ZIP is handoff/transport only. It does NOT change the artifact PM's canonical
+content, filename, folder shape, or deployable form. If a PM says the canonical artifact has root
+`unitN_bank_map/`, that describes the artifact payload; the transfer wrapper may place those files
+at the declared canonical repository destination.
+
+TRANSFER_MANIFEST.json
+----------------------
+Required:
+  schema_version: 2
+  package_type: "github_transfer"
+  package_id: stable descriptive string
+  files: non-empty array
+
+Each files[] entry uses one of:
+
+CREATE
+  {
+    "action": "create",
+    "source": "payload/<repo-folder>/path/file.ext",
+    "destination": "<repo-folder>/path/file.ext"
+  }
+
+REPLACE
+  {
+    "action": "replace",
+    "source": "payload/<repo-folder>/path/file.ext",
+    "destination": "<repo-folder>/path/file.ext",
+    "expected_existing_sha256": "<recommended when canonical existing bytes are known>"
+  }
+
+DELETE
+  {
+    "action": "delete",
+    "destination": "<repo-folder>/path/file.ext",
+    "expected_existing_sha256": "<required>"
+  }
+
+SAFETY
+------
+- Destinations are relative to /Users/troynezki/Documents/GitHub.
+- Absolute paths and .. traversal are forbidden.
+- CREATE may create missing parent directories inside the GitHub root.
+- CREATE fails if the destination file already exists.
+- REPLACE fails if the destination file does not exist.
+- DELETE requires the exact expected existing SHA-256 and fails on mismatch.
+- Replaced/deleted files are backed up before changes.
+- A failed package rolls back touched files and removes newly-created empty directories.
+- Ordinary ZIPs without TRANSFER_MANIFEST.json are ignored.
+- No Git command is allowed.
+
+CURRENT CANONICAL INSTALL CONVENTION
+------------------------------------
+Bank Map / Step 3a:
+  <course-repo-folder>/banks/unitN/source_map/
+
+Complete Bank / Step 3b:
+  <course-repo-folder>/banks/unitN/
+  The accepted Step 3a map remains inside source_map/.
+
+Downstream artifacts:
+  use the exact canonical paths declared by their current build PM/profile.
+  Do not guess a destination. If no destination can be resolved from current authorities,
+  fail as TRANSFER_DESTINATION_UNDECLARED rather than placing files arbitrarily.
+
+MAINTENANCE
+-----------
+Audit + Rebuild and Improve Artifact return replacement files to the exact canonical paths of the
+selected target. When a maintenance repair intentionally removes an obsolete active file, use
+DELETE with the exact expected SHA-256. Git history is the recovery authority; do not create
+shadow save/old/archive folders merely for rollback.
+
+END
