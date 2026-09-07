@@ -350,6 +350,13 @@ Prefer small audits that expose the exact classroom content the teacher needs to
 DECLARED OUTPUT-SCOPE RULE — HARD
 Each job declares what it may replace. Everything inside that scope may be repaired/redesigned when needed. Everything outside is protected.
 
+GOOD-ENOUGH / STOP RULE — HARD
+Good enough does not mean careless or minimum effort. It means the artifact is correct, aligned, complete for its declared job, usable, traceable, and ready for the intended next step.
+
+Once the current job's HARD contract and required QA pass and no BLOCKER/REPAIR defect remains, STOP. Do not keep reopening passed upstream work, polishing optional details, re-reading unchanged authorities for reassurance, or delaying a usable artifact to chase theoretical perfection. Improvements above the good-enough floor belong in a later targeted Improve Artifact job unless the teacher explicitly asks for them now.
+
+Prefer strong, useful work delivered and tested in the real classroom over endless optimization inside one build.
+
 SYSTEMIC IMPROVEMENT LOOP
 A real build is regression testing of the workflow. If it exposes a repeatable problem, identify the owning layer:
 - artifact defect -> artifact
@@ -385,3 +392,4 @@ Lifecycle:
 14. DOK/BLOOM DESCRIBE COMPLETED TASKS; THEY DO NOT DRIVE QUOTAS.
 15. CHANGE THE SMALLEST CORRECT OWNING LAYER.
 16. TEACHER REVIEW/SYNC IS THE FINAL AUTHORITY PROMOTION STEP.
+17. WHEN THE HARD CONTRACT PASSES AND NO REAL DEFECT REMAINS, GOOD ENOUGH MEANS STOP AND DELIVER.

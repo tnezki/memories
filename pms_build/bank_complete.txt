@@ -10,6 +10,22 @@ CORE PRINCIPLE
 Assessment Plan -> accepted Bank Map -> Complete Bank -> downstream artifacts.
 Step 3b AUTHORS the accepted design. It does not redesign Step 3a.
 
+AUDITED-MAP HANDOFF — HARD
+A deployed Step 3a map with MAP_MANIFEST.status = PASS and a completed Audit + Rebuild PASS is the accepted executable design contract for Step 3b.
+Step 3b does NOT proactively re-audit the 208 design slots, re-derive curriculum routing, or reopen passed Question Structure decisions.
+A newer repository/PM commit, provenance date, retrieval-pointer cleanup, source-policy cleanup, delivery/checkpoint change, or other non-design maintenance change does NOT invalidate the accepted map.
+
+Reopen Step 3a only when:
+- the accepted map fails its own manifest/hash/fingerprint entry gate; OR
+- the current request explicitly identifies a material design-authority change; OR
+- authoring exposes one specific concrete contradiction between the accepted map and a current HARD authority.
+
+Otherwise: TRUST THE ACCEPTED MAP AND AUTHOR.
+
+GOOD-ENOUGH EXECUTION — HARD
+Follow the Curriculum Philosophy good-enough rule. Finish the declared complete Bank, run the required deterministic QA once in batches, repair concrete failures, rerun only affected checks, and STOP when the HARD contract passes.
+Do not spend build time chasing optional polish, rereading passed authorities for reassurance, or improving valid questions merely because another version could be prettier or more novel.
+
 ================================================================
 0. SOURCE BOUNDARY — HARD
 ================================================================
@@ -48,31 +64,45 @@ Pin system/course commits once. No mixed commits.
 The accepted Step 3a map is executable design authority.
 An existing Bank may be an authored starting artifact in REPAIR mode; it is never curriculum authority.
 
+EXECUTION-ONLY READ RULE — HARD
+After the accepted audited map passes the entry gate, do not reread the full Unit Assessment Plan or operational maps to reconstruct fields already carried by the map.
+For normal BUILD, read only what is needed to EXECUTE mapped records:
+- Curriculum Philosophy good-enough/source boundary;
+- current Question Structure definitions actually referenced by mapped records, only as needed to author their behavior;
+- Framework Bank/representation rules and current Bank profile;
+- registered tool/render/CSS contracts actually used.
+If a required target/evidence/identity field is missing from the accepted map, treat that as BANK_MAP_NOT_ACCEPTED rather than rebuilding the missing design inside Step 3b.
+
 ================================================================
 2. DO THESE STEPS IN ORDER
 ================================================================
 
 1. Pin current system/course snapshots.
-2. Read accepted map + required current authorities ONCE.
-3. Verify map status, required slices, hashes/fingerprint, and targeted authority compatibility.
+2. Read the accepted deployed source_map/ and this PM's required execution authorities ONCE.
+3. Verify accepted map PASS, required slices, declared hashes/fingerprint, and audit PASS when recorded.
 4. Select BUILD or REPAIR.
-5. Build expected-record table from accepted map.
-6. Author/repair every canonical destination exactly to mapped identity/behavior.
-7. Generate required representations/assets with registered tools/routes.
-8. Build ITEM_INDEX + PROVENANCE + source_map snapshot.
-9. Run representation/graph/prompt/security/viewer scans.
-10. Generate MAP_FIDELITY_REPORT.json.
-11. Generate RENDER_QA_REPORT.json.
-12. Build/update teacher inspection viewer from canonical root CSS.
-13. Run final canonical QA + universal finalization.
+5. Build one expected-record table directly from the accepted map.
+6. Author/repair all canonical destinations. For Algebra author in this order: Exit -> Summative V1 -> V2-V4 -> V5-V6 -> Practice 1 -> WTC -> Seeds.
+7. Generate all required representations/assets with registered tools/routes.
+8. Build ITEM_INDEX + PROVENANCE + byte-faithful source_map snapshot.
+9. Run representation/graph/prompt/security/viewer checks as BATCH QA, not repeated per-record rediscovery.
+10. Generate MAP_FIDELITY_REPORT.json + RENDER_QA_REPORT.json.
+11. Build/update teacher inspection viewer from canonical root CSS.
+12. Repair only concrete QA failures and rerun only affected QA plus required final checks.
+13. Run universal finalization.
 14. Produce the complete canonical Bank tree, wrap/transfer per current runtime, STOP.
 
-Do not re-run Step 3a design work when the accepted map already passes and no concrete map defect is found.
-Do not reread unchanged authorities for reassurance.
-Do not inspect historical Banks/retired templates unless a current hard dependency requires it.
+DO NOT:
+- redo Step 3a design work;
+- re-derive I Can/evidence routing already encoded in the accepted map;
+- re-audit every Question Structure mapping that already passed Step 3a + Audit/Rebuild;
+- compare old/retired Bank architectures;
+- reread unchanged authorities for reassurance;
+- search File Library, public web, old chats, or historical packages;
+- voluntarily stop to create a checkpoint while production can continue.
 
 ================================================================
-3. ENTRY GATE / COMPATIBILITY
+3. ENTRY GATE — ACCEPT THE AUDITED MAP
 ================================================================
 
 REQUIRE
@@ -82,31 +112,23 @@ REQUIRE
 - every slice declared by MAP_MANIFEST readable
 - required MAP_REPORT semantic audit present/PASS
 - declared map file hashes/fingerprint verify
+- current Audit + Rebuild PASS when the map records a later audit snapshot
 
-If not: BANK_MAP_NOT_ACCEPTED.
+If the map fails its own gate: BANK_MAP_NOT_ACCEPTED.
 
-PIN COMPATIBILITY — HARD
-A repository HEAD SHA change alone does NOT invalidate an accepted map.
+TRUST BOUNDARY — HARD
+Passing Step 3a + Audit/Rebuild means design work is DONE for Step 3b.
 
-When current request pins are newer than map generation pins:
-1. preserve the accepted map snapshot/fingerprint;
-2. compare only relevant higher-authority content that could change design meaning:
-   - Philosophy
-   - Question Structure
-   - Framework
-   - exact Unit Assessment Plan
-   - operational maps actually used
-   - Bank profile
-   - registered executable tools/routes when relevant;
-3. harmless unrelated changes = COMPATIBLE_DRIFT;
-4. a material higher-authority change that changes accepted design meaning = BANK_MAP_AUTHORITY_CHANGED and Step 3a must be repaired first.
+Do not proactively compare the full current Philosophy, Question Structure, Framework, Assessment Plan, operational maps, or Bank profile against old generation pins simply because the repository commit changed.
 
-Do NOT rerun Step 3a merely because this PM, viewers, unrelated Units, agendas, or repository SHA changed.
+Treat changed repository SHA, PM version, audit date, retrieval pointer, packaging rule, source-policy wording, finalization mechanics, or viewer procedure as non-design drift unless the current request explicitly says the design authority changed.
 
-TARGETED SEMANTIC RECHECK
-Trust the accepted PASS map/report as starting evidence.
-Reopen mapped structure/route definitions only when a concrete ambiguity or conflict exists.
-A real map structure/action/response/representation conflict = BANK_MAP_SEMANTIC_MISMATCH.
+If authoring exposes a SPECIFIC concrete contradiction that makes a mapped record impossible or invalid:
+- name the exact map record + exact current HARD authority conflict;
+- stop as BANK_MAP_AUTHORITY_CHANGED or BANK_MAP_SEMANTIC_MISMATCH;
+- return Step 3a for targeted repair.
+
+Do not turn one concrete contradiction into a full speculative re-audit of all design slots.
 
 ================================================================
 4. BUILD VS REPAIR
@@ -413,25 +435,35 @@ Before COMPLETE verify:
 - BANK_MANIFEST COMPLETE + ready_for_downstream + qa_status PASS
 - universal FINALIZATION_QA: PASS
 
-If a HARD check fails, repair within accepted variation authority and rerun affected QA, or fail closed with the specific code.
+If a HARD check fails, repair within accepted variation authority and rerun the affected QA plus any dependent final check, or fail closed with the specific code.
 Never claim COMPLETE on a known defect.
 
+GOOD-ENOUGH STOP
+When every HARD check above passes, MAP_FIDELITY mismatch_count = 0, RENDER_QA issue_count = 0, BANK_MANIFEST is COMPLETE/PASS, and FINALIZATION_QA passes:
+  STOP AND DELIVER.
+Do not start another optional polish cycle.
+
 ================================================================
-14. WORK CHECKPOINT / CONTINUATION
+14. WORK CHECKPOINT / CONTINUATION — EMERGENCY ONLY
 ================================================================
 
-For a long build, a staging checkpoint may track:
-- mode
-- accepted_map_fingerprint
-- verified authority identities
-- expected counts/record IDs
-- completed destinations/assets/QA
-- touched set for REPAIR
-- next phase
+A fresh BUILD must attempt to finish the complete Bank in the CURRENT run.
 
-Checkpoint is working state only and is not canonical Bank output.
-If execution must continue, return a continuation package created from CURRENT staging work only. Do not search File Library or old chats/packages to recover it.
-On continuation, resume from the current identified checkpoint without restarting authority discovery.
+Checkpointing is NOT a planned build phase and is NOT a normal stopping point.
+Do not voluntarily stop after a destination, time estimate, or arbitrary amount of work just to return a checkpoint.
+
+A staging checkpoint may be maintained silently while working, but return a continuation package only when execution is actually forced to stop by runtime/tool limits and the complete Bank cannot be finished in the current run.
+
+If forced continuation is necessary:
+- package CURRENT staging work only;
+- record completed destinations/assets/QA and exact next phase;
+- on `cont`, resume immediately from that checkpoint;
+- do not restart authority discovery;
+- do not search File Library, old chats, or old packages;
+- do not return repeated checkpoints while productive execution can continue.
+
+The target behavior for a normal fresh Unit Bank BUILD is:
+  one request -> one production run -> one complete transfer ZIP.
 
 ================================================================
 15. DELIVERY — HARD
