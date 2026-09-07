@@ -29,6 +29,29 @@ def make_context(github_root: Path, course_folder: str, course: str, unit: int) 
     )
 
 
+def _resolve_universal_structure_library(question_root: Path, manifest_path: Path) -> Path:
+    """Resolve the exact current Universal Question Structure Library from its manifest.
+
+    The pilot must not guess a versioned filename. The version manifest is the
+    authority for which library file belongs to the current package.
+    """
+    manifest = read_json(manifest_path)
+    candidates: List[str] = []
+    for entry in manifest.get("files", []) if isinstance(manifest, dict) else []:
+        if not isinstance(entry, dict):
+            continue
+        rel = str(entry.get("path") or "")
+        name = Path(rel).name
+        if rel.startswith("library/") and name.startswith("Universal_Question_Structure_Library") and name.endswith(".md"):
+            candidates.append(rel)
+    if len(candidates) != 1:
+        raise ValueError(
+            "Question Structure manifest must declare exactly one Universal Question Structure Library; "
+            f"found {len(candidates)}: {candidates}"
+        )
+    return question_root / candidates[0]
+
+
 def resolve_common(ctx: ProjectContext) -> Dict[str, Path]:
     memories = ctx.memories_dir
     system_manifest_path = memories / "SYSTEM_MANIFEST.json"
@@ -44,13 +67,18 @@ def resolve_common(ctx: ProjectContext) -> Dict[str, Path]:
     maintenance_registry_path = memories / system["maintenance_pms"]
     tools_registry_path = memories / system["tools"]
 
+    question_root = memories / system["question_structure"]["path"]
+    question_manifest_path = question_root / system["question_structure"]["manifest"]
+    question_library_path = _resolve_universal_structure_library(question_root, question_manifest_path)
+
     return {
         "system_manifest": system_manifest_path,
         "runtime_contract": memories / system["runtime_contract"],
         "local_transfer_contract": memories / system["local_transfer_contract"],
         "philosophy": memories / system["philosophy"],
-        "question_structure_manifest": memories / system["question_structure"]["path"] / system["question_structure"]["manifest"],
-        "question_structure_entrypoint": memories / system["question_structure"]["path"] / system["question_structure"]["entrypoint"],
+        "question_structure_manifest": question_manifest_path,
+        "question_structure_entrypoint": question_root / system["question_structure"]["entrypoint"],
+        "question_structure_library": question_library_path,
         "framework_registry": framework_registry_path,
         "framework_manifest": framework_manifest_path,
         "framework": memories / course_entry["entrypoint"],
@@ -79,6 +107,7 @@ def resolve_bank_sources(ctx: ProjectContext, job: str) -> List[Path]:
         common["philosophy"],
         common["question_structure_manifest"],
         common["question_structure_entrypoint"],
+        common["question_structure_library"],
         common["framework_registry"],
         common["framework_manifest"],
         common["framework"],

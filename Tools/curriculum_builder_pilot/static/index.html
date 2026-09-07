@@ -9,8 +9,8 @@
 <body>
 <header>
   <div>
-    <h1>Curriculum Builder <span>PILOT v0.1</span></h1>
-    <p>Local mechanical pipeline first. AI is used only at the explicit authoring/judgment boundary.</p>
+    <h1>Curriculum Builder <span>PILOT v0.6</span></h1>
+    <p>Choose the job and run it. Mechanical facts stay local; AI is used only when semantic judgment is actually needed.</p>
   </div>
 </header>
 <main>
@@ -18,7 +18,7 @@
     <h2>Local System</h2>
     <div id="systemStatus" class="status warn">Checking local repositories…</div>
     <dl id="systemMeta"></dl>
-    <div class="rule good">NO PUBLIC WEB<br>NO FILE LIBRARY<br>NO GIT COMMANDS</div>
+    <div class="rule good">NO PUBLIC WEB CURRICULUM SOURCES<br>NO FILE LIBRARY<br>NO GIT COMMANDS<br>NO DIRECT REPO WRITES</div>
   </aside>
 
   <section class="card main-card">
@@ -30,25 +30,41 @@
     <label>Job<select id="job"></select></label>
     <p id="purpose" class="muted"></p>
 
-    <div class="actions">
-      <button id="preflight">1 · Preflight</button>
-      <button id="workOrder" disabled>2 · Prepare AI Work Order</button>
+    <div id="completeBankFlow" class="simple-flow hidden">
+      <button id="prepareCompleteBank" class="primary">Prepare Complete Bank</button>
+      <button id="finishCompleteBank" class="primary">Finish Complete Bank from Downloads</button>
+      <div class="three-steps">
+        <div><b>1</b><span>Lock accepted map</span></div>
+        <div><b>2</b><span>AI authors content only</span></div>
+        <div><b>3</b><span>Local render + QA + transfer</span></div>
+      </div>
+      <p class="muted small">Prepare once. After ChatGPT returns AI_BANK_CONTENT.json, leave it in Downloads and click Finish Complete Bank from Downloads. The pilot validates, renders, runs QA/finalization, and creates the transfer ZIP. On the first graph-producing run, it may create a cached local Python graphics runtime outside the repositories if matplotlib/numpy are not already installed.</p>
     </div>
 
-    <div class="pipeline">
-      <div class="pipe"><b>LOCAL</b><span>Resolve authorities</span></div>
-      <div class="arrow">→</div>
-      <div class="pipe"><b>LOCAL</b><span>Mechanical preflight</span></div>
-      <div class="arrow">→</div>
-      <div class="pipe ai"><b>AI</b><span>Author / semantic judgment</span></div>
-      <div class="arrow">→</div>
-      <div class="pipe future"><b>NEXT</b><span>Local deterministic build + QA</span></div>
+    <div id="simpleAudit" class="simple-flow hidden">
+      <button id="runAudit" class="primary">Run Audit</button>
+      <button id="finishAudit" class="primary" disabled>Finish Audit from Downloads</button>
+      <div class="three-steps">
+        <div><b>1</b><span>Local audit</span></div>
+        <div><b>2</b><span>AI only if needed</span></div>
+        <div><b>3</b><span>Local repair + transfer</span></div>
+      </div>
+      <p class="muted small">If AI is needed, the pilot puts one clearly named ZIP in your Downloads folder. After ChatGPT returns the JSON, leave it in Downloads and click <b>Finish Audit from Downloads</b>. No file hunting.</p>
     </div>
 
-    <h3>Run Log</h3>
-    <div id="log" class="log"><div class="muted">Choose a job and run Preflight.</div></div>
+    <div id="otherFlow" class="actions hidden">
+      <button id="preflight">Local Preflight</button>
+      <button id="skeleton">Build Local Map Skeleton</button>
+      <button id="workOrder" disabled>Prepare AI Work Order</button>
+    </div>
 
     <div id="result" class="result hidden"></div>
+
+    <details id="details">
+      <summary>Technical details</summary>
+      <h3>Run Log</h3>
+      <div id="log" class="log"><div class="muted">No run yet.</div></div>
+    </details>
   </section>
 </main>
 <script src="app.js"></script>

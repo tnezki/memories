@@ -1,74 +1,69 @@
-# Curriculum Builder Pilot v0.1
+# Curriculum Builder Pilot v0.4
 
-A local, standard-library-only pilot for the Curriculum Build system.
+Narrow local pilot for the Algebra Bank pipeline.
 
-## Purpose
+## Normal Audit + Rebuild flow
 
-Move deterministic Curriculum Build work out of ChatGPT and into a local app:
+The teacher should not need to remember the internal steps.
 
-1. resolve local canonical authorities from the `memories` repo;
-2. resolve course/unit targets from the selected local course repo;
-3. show a visible pass/fail run log;
-4. create exact, minimal AI authoring work orders only when language-model judgment is required;
-5. keep all normal execution off the public web and out of File Library;
-6. use no Git commands and perform no commit/push/pull/branch/merge/PR operations.
+1. Choose course, unit, and **Audit + Rebuild — Bank Map**.
+2. Click **Run Audit**.
+3. The pilot runs preflight + local mechanical/semantic lint automatically.
+4. If no semantic candidates remain, it stops at PASS with no AI handoff.
+5. If AI is needed, the pilot automatically creates the constrained handoff and copies it to `~/Downloads` with an easy filename such as `AI_HANDOFF_Algebra1_U1_BANK_MAP.zip`.
+6. Upload that ZIP to ChatGPT.
+7. Download the returned `AI_SEMANTIC_REVIEW.json` normally into Downloads.
+8. Click **Finish Audit from Downloads**.
+9. The pilot finds the matching review automatically, validates the run/pins/candidate IDs/current structures/library IDs, stages only allowed repairs, re-audits locally, and creates the `github_transfer/2` ZIP.
+10. Run the existing **Apply Curriculum Transfers.command**, review in GitHub Desktop, and only the teacher decides whether to commit/push.
 
-The pilot starts with the Algebra Bank pipeline:
-
-- Bank Map / Step 3a
-- Audit + Rebuild Bank Map
-- Complete Bank / Step 3b
-
-## What v0.1 does now
-
-- Runs entirely on the local Mac with Python 3 standard library only.
-- Reads `/Users/troynezki/Documents/GitHub` by default.
-- Reads local repository HEAD identities by inspecting `.git` metadata directly; it does not run Git.
-- Resolves `SYSTEM_MANIFEST.json`, Framework registry/front door, build/maintenance PM registries, Bank profile, Algebra operational maps, exact Unit Assessment Plan, and required Bank target paths.
-- Performs a mechanical preflight for the selected pipeline stage.
-- Creates a timestamped run folder in `~/Downloads/_curriculum_builder_pilot/runs/`.
-- Creates an AI work-order bundle containing only the exact source files needed for the selected stage.
-- Never searches the web, File Library, old chat output, or historical Bank folders.
-- Stops on a missing declared dependency instead of hunting for substitutes.
-
-## AI boundary in v0.1
-
-The first pilot intentionally uses a **manual AI handoff** rather than embedding an API key or local model.
-
-The app prepares:
-
-- `AI_WORK_ORDER.txt`
-- `RUN_MANIFEST.json`
-- `inputs/` snapshot of exact authorities/target files
-- `AI_HANDOFF.zip`
-
-That package is the clean AI boundary. A future provider can send the same bundle directly to a model without changing the mechanical pipeline.
-
-## Start
-
-Double-click:
-
-`Start Curriculum Builder.command`
-
-The app opens:
-
-`http://127.0.0.1:8765`
-
-If macOS blocks the command the first time, right-click it and choose **Open**.
+Technical details remain available under a disclosure panel, but are not part of the normal workflow.
 
 ## Safety
 
-This pilot is read-only with respect to the GitHub working repos.
+- No public web.
+- No File Library.
+- No Git commands.
+- No GitHub writes.
+- No direct canonical repo writes by the pilot.
+- Mechanical facts outrank AI speculation.
+- AI receives only the locked unresolved semantic boundary.
 
-It creates runtime work only under:
+## Scope
 
-`/Users/troynezki/Downloads/_curriculum_builder_pilot`
+v0.4 simplifies the proven Bank Map Audit + Rebuild loop. Build Bank Map and Complete Bank still retain pilot/manual controls while their deterministic/AI boundaries are being developed.
 
-No Git commands are used anywhere in the pilot.
+## v0.5 Complete Bank pilot
 
-## Environment overrides for testing
+When **3b — Build Complete Bank** is selected, use **Prepare Complete Bank**.
+The pilot first verifies the accepted Bank Map locally, requires zero unresolved map semantic candidates, locks every finished-task design slot and destination count, preserves Seeds locally, and creates one easy-to-find file in Downloads:
 
-- `CURRICULUM_GITHUB_ROOT`
-- `CURRICULUM_BUILDER_STAGING`
-- `CURRICULUM_BUILDER_PORT`
+`AI_HANDOFF_Algebra1_U1_COMPLETE_BANK.zip`
 
+The AI step is content-only. It may not change map IDs, counts, routing, targets, evidence jobs, structures, response modes, representation routes, security roles, or Seeds. It returns `AI_BANK_CONTENT.json`; local import/render/QA is the next pilot stage.
+
+## v0.6 Complete Bank finish stage
+
+After the AI returns `AI_BANK_CONTENT.json`, leave the file in `~/Downloads` and click **Finish Complete Bank from Downloads**.
+
+The pilot then performs the rest locally:
+
+- matches the JSON to the exact prior Complete Bank run and repository pins;
+- re-verifies the accepted Bank Map snapshot did not change;
+- validates the exact 208 locked design-slot IDs and 5 WTC shared-stimulus IDs;
+- preserves all map-owned identity/routing fields and the six mapped Seeds;
+- renders prose/equations/tables and graph assets;
+- uses the registered graph tool through an append-only generation script;
+- writes canonical destination slices, ITEM_INDEX, provenance, inspection viewer, MAP_FIDELITY_REPORT, and RENDER_QA_REPORT;
+- hides secure Summative prompts/keys from the inspection viewer;
+- runs universal finalization and requires `FINALIZATION_QA: PASS`;
+- creates a fail-closed `github_transfer/2` ZIP in `_github_transfers`;
+- never writes directly into the canonical course repository.
+
+
+## v0.6.1 graphics runtime fix
+
+The registered graph tool requires `matplotlib` and `numpy`. The pilot now probes local Python interpreters first. If none can run the graph tool, it creates a cached virtual environment under the pilot staging root (`_curriculum_builder_pilot/_runtime/graph_python`) and installs those runtime packages once. This is package/runtime setup only; it is not curriculum web research and never changes the course or memories repositories. Later graph builds reuse the cached local environment.
+
+## v0.6.2 graphics runtime repair
+Graph generation now bootstraps matplotlib/numpy and executes the registered graph tool in the exact same Python process that passed the dependency check. This avoids macOS virtual-environment launcher mismatches while preserving the registered graph tool unchanged.
