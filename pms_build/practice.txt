@@ -37,6 +37,31 @@ Use ONLY:
    - tnezki/memories
    - tnezki/algebra
 
+HARD TOOL BAN
+-------------
+For this job, DO NOT INVOKE any:
+- public web-search tool;
+- search-engine tool;
+- public webpage fetch/browser tool;
+- outside internet research tool;
+- ChatGPT File Library search;
+- prior-chat or saved-memory retrieval as a curriculum source.
+
+Allowed remote reads are LIMITED to the exact pinned project GitHub sources named above.
+
+Direct GitHub connector reads from tnezki/memories and tnezki/algebra are allowed.
+Downloading/reconstructing files from those exact pinned GitHub blobs for local execution is allowed.
+Running pinned project tools locally is allowed.
+
+If ANY public-web/search/browser tool is invoked for any reason:
+STOP IMMEDIATELY with:
+  PUBLIC_WEB_TOOL_VIOLATION
+Produce NO artifact and NO transfer ZIP.
+
+Do not justify a public-web call as implementation help, dependency discovery, binary recovery,
+hash lookup, documentation lookup, or convenience. Use only the pinned project sources and local
+execution. If the pinned sources are insufficient, fail closed instead.
+
 DO NOT USE:
 - public web search;
 - public web fetch;
@@ -47,8 +72,6 @@ DO NOT USE:
 - saved memory;
 - old request packages;
 - stale uploads.
-
-Direct reads from the pinned project GitHub repositories are allowed.
 
 Pin memories and algebra commits ONCE at job start.
 Do not mix commits during the run.
@@ -434,6 +457,16 @@ and use a verified local cleanup helper rather than an unsafe delete guess.
 ========================================================
 
 For each section verify:
+
+SOURCE ISOLATION
+[ ] PUBLIC_WEB_USED = false
+[ ] no public web/search/browser tool was invoked
+[ ] all remote reads came only from the exact pinned tnezki/memories and tnezki/algebra sources
+[ ] no File Library / prior-chat / saved-memory curriculum source used
+
+If any source-isolation check fails:
+STOP with PUBLIC_WEB_TOOL_VIOLATION (or the exact applicable source-boundary failure)
+and produce no artifact.
 
 INVENTORY
 [ ] Practice 1 exists
