@@ -1,68 +1,452 @@
-BUILD ACTIVITIES — SINGLE PASS / PROFILE-DRIVEN
-================================================
+BUILD ACTIVITIES — ALGEBRA 1 / FAMILY-BANK DOWNSTREAM
+=========================================================
 
 STATUS: CURRENT
 STEP: 6
 JOB: activities
-ROLE: Build the selected Unit Activities package from the selected course Framework/profile and the current passed Practice handoff/Bank sources allowed by that profile.
+ROLE: Build one complete, reusable Algebra 1 Activities package per section from the exact
+Assessment Plan, current family Bank architecture, current Practice package, Question Structure,
+and current Activity visual shell.
 
-Activities change participation structure around worthwhile mathematics. They do not create a competing curriculum or second secure assessment bank.
+ACTIVITIES PRINCIPLE
+--------------------
+Activities change HOW students participate around worthwhile mathematics.
+They do not create a second curriculum, a second 24-question Practice bank, or a secure assessment.
 
-0. AUTHORITY — HARD
-Pin system + selected course repositories once.
-Read:
-1. Curriculum Philosophy
-2. Runtime Contract
-3. selected Course Framework + exact Unit Assessment Plan
-4. current Question Structure when new/adapted questions are authored
-5. Framework-declared Activities profile
-6. current course-file-structure + Activities visual contracts
-7. passed current Practice handoff from this run when the profile uses it
-8. COMPLETE Bank/Seeds only when the profile authorizes them
-9. this PM
-10. same-course deployed Activity shell/CSS exemplar when required
+THIS BUILD PRODUCES PER SECTION
+-------------------------------
+1. Activity Options / Directions page
+2. One classroom-sized Activity Question Set + teacher solutions
+3. Stations handout using that SAME Activity Question Set
+4. Find Someone Who handout using that SAME Activity Question Set
+5. Optional links/routing to the Practice-owned Tarsia and Blooket files when present
 
-Never hard-code Practice Set 2/3 as universal source routes.
+DO NOT BUILD
+------------
+- Practice 2
+- Practice 3
+- a second or third 24-question activity bank
+- fake external activity links
+- duplicate Tarsia or Blooket question inventories
+- official Exit Tickets
 
-1. SOURCE RESOLUTION — HARD
-Resolve source behavior from the CURRENT selected-course Activities profile.
+========================================================
+0. SOURCE BOUNDARY — HARD
+========================================================
 
-ALGEBRA 1 v7.1
-- do NOT require Practice 2/3;
-- use exact Assessment Plan + Question Structure + nonsecure current Practice 1/Extra/CYU and/or canonical Seeds when useful;
-- purpose-author/adapt a classroom-sized middle-practice set when that makes the activity better;
-- never use secure Exit or Summative items as ordinary activity material.
+Use ONLY:
+1. current request / explicit teacher instruction;
+2. request-provided files;
+3. exact pinned project GitHub sources from:
+   - tnezki/memories
+   - tnezki/algebra
 
-OTHER COURSES
-If a current profile explicitly routes Activities from finished Practice sets, preserve that route. Do not remove course-specific behavior merely to make PMs uniform.
+HARD TOOL BAN
+-------------
+Do NOT invoke any:
+- public web-search tool;
+- search-engine tool;
+- public webpage fetch/browser tool;
+- outside internet research tool;
+- ChatGPT File Library search;
+- prior-chat or saved-memory retrieval as a curriculum source.
 
-2. APPROVED PARTICIPATION STRUCTURES
-Use only structures approved by the selected course profile/current teacher instruction.
-For Algebra this may include projection structures (whiteboards, Rally Coach, Speed Dating, Showdown, etc.) and handout structures (Stations, Find Someone Who, Tarsia when an approved route exists).
-Do not fabricate external activity links.
+Allowed remote reads are limited to the exact pinned project GitHub sources above.
 
-3. QUESTION AUTHORING / ADAPTATION
-If new or adapted questions are required, use current Question Structure and preserve the exact mapped learning/evidence job.
-Do not invent new assessed content.
-Purposeful repetition is allowed.
+Direct GitHub connector reads from those repos are allowed.
+Downloading/reconstructing exact pinned GitHub files for local execution is allowed.
+Running pinned project tools locally is allowed.
 
-4. SIZE / SELECTION
-Use the profile's classroom-sized set rule. No universal 24-question quota.
-Choose enough work to support the participation structure without filler.
+If ANY public-web/search/browser tool is invoked:
+STOP with:
+  PUBLIC_WEB_TOOL_VIOLATION
+Produce NO artifact and NO transfer ZIP.
 
-5. RENDER / PATHS
-Use current selected-course Activity visual/path contracts and same-course shell exemplar when required.
-No visible Bank IDs, I Can codes, DOK, structure IDs, or generator labels.
-Optional formative closure only when profile/teacher requests it; never append a fake official Exit Ticket.
+If a declared project dependency is missing:
+STOP with the exact repository + commit + path.
+Do not search outside the project for a substitute.
 
-6. QA — HARD
-[ ] selected course Activities profile resolved
-[ ] source route is valid for that course
-[ ] no retired Algebra Practice2/3 dependency
-[ ] no secure assessment leakage
-[ ] any authored/adapted question uses Question Structure
-[ ] approved activity names/directions only
-[ ] paths/CSS/DOM match course contract
-[ ] all questions/solutions/representations correct
+========================================================
+1. READ ORDER / AUTHORITY
+========================================================
 
-Return the selected course's deployable Activities package.
+Read in this order:
+
+1. Curriculum_Philosophy.txt
+2. SYSTEM_RUNTIME_CONTRACT.txt
+3. frameworks/Algebra_1/FRAMEWORK.txt
+4. exact Unit N Assessment Plan
+5. current universal Question Structure
+6. Algebra Bank profile
+7. Algebra Practice profile
+8. Algebra Activities profile
+9. current Unit family Bank:
+   algebra/banks/unitN/BANK_MANIFEST.json
+   algebra/banks/unitN/FAMILY_INDEX.json
+   algebra/banks/unitN/delivery_map.json
+   algebra/banks/unitN/mastery_goals/*.json
+10. current synced Unit Practice artifacts for the same section
+11. Tools/QUESTION_FRESHNESS_CONTRACT.txt
+12. current registered graph tool from Tools/MANIFEST.json
+13. algebra/css/base.css
+14. algebra/css/activities.css
+15. same-course deployed Activity shell exemplar
+16. this PM
+
+AUTHORITY BY DOMAIN
+-------------------
+teacher instruction
+-> Philosophy
+-> Question Structure
+-> exact Assessment Plan / Framework
+-> Bank family architecture
+-> Activities profile
+-> current Practice package for current nonsecure classroom context
+-> this PM
+-> CSS/shell.
+
+Practice is NOT an authority for changing targets.
+It is useful for:
+- knowing what students have already seen;
+- linking the current Tarsia/Blooket outputs;
+- avoiding accidental repeats;
+- judging appropriate classroom timing/demand.
+
+========================================================
+2. SECTION LEARNING BALANCE — HARD
+========================================================
+
+Every section Activity Question Set contains exactly 12 questions:
+
+- 4 Intro
+- 4 Review
+- 4 Mastery
+
+These are INTERNAL authoring allocations.
+Do NOT visibly label every student question Intro / Review / Mastery unless the teacher explicitly requests it.
+
+The set should feel like one coherent class activity, not three mini worksheets pasted together.
+
+INTRO
+- exact current section Intro Learning Target/I Cans
+- accessible entry and representation work
+
+REVIEW
+- exact section Review goal/stage
+- less support, fresh use, useful retrieval
+
+MASTERY
+- exact current Mastery Goal / supporting I Can
+- use current Unit family Bank architecture
+- fresh independent instances, not copied Bank exemplars
+
+If Intro/Review point to another Unit in the spiral, do not require that future/other Unit Bank.
+The exact Assessment Plan is enough to author fresh Intro/Review work.
+
+========================================================
+3. ACTIVITY QUESTION SET — ONE SET ONLY
+========================================================
+
+Create one reusable 12-question set per section.
+
+Canonical filename:
+  u{unit}_{section}_activity_questions_solutions.html
+
+The page contains:
+- 12 numbered student prompts
+- teacher answer/solution immediately available in the teacher-facing version or clearly separated teacher area
+- enough reasoning to support facilitation
+- representation assets actually needed by the questions
+
+The SAME 12-question set powers:
+- projected whiteboards
+- partners / Rally Coach
+- Speed Dating Math
+- Showdown
+- Think, Trade, Agree
+- Round Table
+- Mathematical Hot Seat
+- Stations
+- Find Someone Who
+
+Do NOT create Set 1 and Set 2 merely to imitate the retired Practice 2/3 architecture.
+
+QUESTION MIX
+------------
+Across the 12:
+- vary natural Question Structure families;
+- include direct work when direct work is the right job;
+- include some reasoning/compare/error/representation work when mathematically natural;
+- use purposeful procedural repetition only when it earns instructional value;
+- avoid twelve unrelated one-off gimmicks.
+
+========================================================
+4. ACTIVITY OPTIONS / DIRECTIONS PAGE
+========================================================
+
+Create:
+  u{unit}_{section}_act1.html
+
+Purpose:
+one teacher-facing launch page with projection-ready directions and links to the reusable set/handouts.
+
+Approved projection/participation structures:
+- Whiteboard Indy
+- Whiteboard Partners
+- Rally Coach
+- Speed Dating Math
+- Showdown
+- Think, Trade, Agree
+- Round Table
+- Mathematical Hot Seat
+
+Approved printable handouts:
+- Stations
+- Find Someone Who
+
+Optional Practice-owned linked formats when present:
+- Tarsia
+- Blooket import CSV
+
+Do not fabricate Desmos, external-site, or teacher-code links.
+If no approved project link exists, omit the linked option rather than inventing it.
+
+DIRECTIONS QUALITY
+------------------
+Each structure should include:
+- setup
+- concise student directions
+- participation expectation
+- what success looks like
+- one or two teacher monitoring moves
+
+Keep directions reusable and classroom-realistic.
+Do not overload the page with long pedagogy essays.
+
+========================================================
+5. STATIONS
+========================================================
+
+Create:
+  u{unit}_{section}_activity_stations.html
+
+Use the SAME 12 Activity Set questions.
+
+Default layout:
+- 4 stations
+- 3 questions per station
+
+Group questions intentionally so each station has a coherent mini-purpose or useful mixture.
+Do not merely assign Q1–3, Q4–6, Q7–9, Q10–12 if another grouping better supports movement/variety.
+
+Student handout must be print-ready and answer-neutral.
+
+========================================================
+6. FIND SOMEONE WHO
+========================================================
+
+Create:
+  u{unit}_{section}_activity_find_someone_who.html
+
+Use the SAME 12 Activity Set questions.
+
+Each problem gets:
+- prompt
+- enough work space for the response demanded
+- partner/signature space
+
+Directions require mathematical explanation/checking before signature.
+Do not turn it into answer-copying.
+
+========================================================
+7. PRACTICE-OWNED TARSIA / BLOOKET ROUTING
+========================================================
+
+If the current section Practice package contains:
+
+  practice_sets/practice_sets_{unit}_{section}/tarsia_{unit}_{section}.txt
+  practice_sets/practice_sets_{unit}_{section}/blooket_{unit}_{section}.csv
+
+the Activity Options page MAY link to those exact current files.
+
+Do not regenerate, rename, or duplicate them inside Activities.
+Do not use retired names containing "_practice_3".
+
+Tarsia/Blooket remain Practice-owned outputs.
+
+========================================================
+8. QUESTION STRUCTURE / REPRESENTATIONS
+========================================================
+
+Every newly authored Activity question uses current Question Structure:
+
+target
+-> evidence job
+-> student action
+-> structure
+-> response mode
+-> representation mode
+-> executable route
+
+Keep direct questions direct.
+Do not force critique/error analysis onto every problem.
+
+If a question names a representation, provide the actual representation:
+- semantic HTML table
+- actual graph or blank graph as appropriate
+- actual mapping
+- actual context
+- ordered-pair notation when intended
+
+Use current registered graph tool for Algebra graphs.
+No handmade coordinate SVG substitute.
+
+Choose natural high-school values.
+Difficulty comes from mathematics and independence, not inflated arithmetic.
+
+========================================================
+9. QUESTION FRESHNESS GATE — HARD
+========================================================
+
+Follow:
+  Tools/QUESTION_FRESHNESS_CONTRACT.txt
+
+Compare every newly authored Activity Set question against:
+
+A. relevant Bank family exemplars
+B. current student Notes prompts for the same section
+C. current Practice 1
+D. current Extra Practice
+E. current CYU
+F. current Tarsia prompts
+G. current Blooket prompts
+H. earlier Activity questions generated in this same Unit build
+I. already-built public same-section artifacts when present
+
+FAIL / REPAIR:
+- exact repeated finished question
+- same distinctive values/data + same prompt
+- same graph/table/context used as the same task
+- cosmetic rewrite of an existing student-facing item
+- conversion of an existing prompt to a participation structure with no meaningful fresh instance
+
+ALLOW:
+- same target
+- same I Can
+- same family architecture
+- same evidence job
+- same mathematical procedure when repetition is genuinely useful
+
+IMPORTANT
+---------
+The participation wrapper does NOT make a repeated question fresh.
+A Practice question copied into Stations is still the same question.
+
+When a collision occurs:
+repair the NEW Activity question only, preserve the target, and vary meaningful axes.
+
+Terminal signal:
+  QUESTION_FRESHNESS: PASS
+
+========================================================
+10. PATHS / VISUAL CONTRACT
+========================================================
+
+Canonical section folder:
+  activities/u{unit}_{section}_act1/
+
+Required files:
+  u{unit}_{section}_act1.html
+  u{unit}_{section}_activity_questions_solutions.html
+  u{unit}_{section}_activity_stations.html
+  u{unit}_{section}_activity_find_someone_who.html
+  figures/
+    only current referenced figures
+
+Stylesheets:
+1. ../../css/base.css
+2. ../../css/activities.css
+
+Use current deployed same-course Activity DOM/classes where still appropriate.
+
+LEGACY CLEANUP
+--------------
+When rebuilding a section, legacy two-set files may be removed if present and safely hashable:
+
+- u{unit}_{section}_set1_questions_solutions.html
+- u{unit}_{section}_set2_questions_solutions.html
+- u{unit}_{section}_set1_stations.html
+- u{unit}_{section}_set2_stations.html
+- u{unit}_{section}_set1_find_someone_who.html
+- u{unit}_{section}_set2_find_someone_who.html
+- figures used only by those retired set files
+
+Use transfer DELETE only with exact required SHA-256.
+Never guess delete hashes.
+If exact bytes cannot be recovered safely, leave the legacy files and report exact cleanup paths.
+
+========================================================
+11. QA — SMALL AND HARD
+========================================================
+
+SOURCE ISOLATION
+[ ] PUBLIC_WEB_USED = false
+[ ] only exact pinned tnezki/memories + tnezki/algebra remote reads
+[ ] no File Library / prior-chat / saved-memory curriculum source
+
+INVENTORY — EACH SECTION
+[ ] Activity Options page exists
+[ ] one 12-question Activity Set exists
+[ ] Stations exists
+[ ] Find Someone Who exists
+[ ] no new Set 2
+[ ] no new Practice 2/3 dependency
+[ ] Tarsia/Blooket links, when shown, use current Practice-owned filenames
+
+BALANCE
+[ ] 12 questions total
+[ ] internal allocation = 4 Intro + 4 Review + 4 Mastery
+[ ] student experience is coherent, not visibly fragmented unless requested
+
+QUALITY
+[ ] exact Assessment Plan targets preserved
+[ ] Mastery questions use appropriate Bank family architecture
+[ ] Bank exemplars not copied
+[ ] no secure Exit/Summative leakage
+[ ] all answers/solutions correct
+[ ] Question Structure semantically fits actual task
+[ ] representations accurate
+[ ] graph tool route correct
+[ ] activity directions are usable in a real classroom
+
+FRESHNESS
+[ ] QUESTION_FRESHNESS: PASS
+
+VISUAL
+[ ] same-course activity shell/CSS
+[ ] print handouts readable
+[ ] no clipping/overlap
+[ ] no visible internal IDs/structure metadata
+
+FINALIZATION
+[ ] run current Tools/finalize_output.py
+[ ] FINALIZATION_QA: PASS
+
+If all hard checks pass:
+STOP AND DELIVER.
+
+========================================================
+12. TRANSFER
+========================================================
+
+Package through:
+  Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt
+
+Destination:
+  tnezki/algebra
+  activities/u{unit}_{section}_act1/
+
+Never commit, push, pull, branch, merge, or create a PR.
+Teacher reviews local changes and alone decides whether to commit/push.
+
+END — BUILD ACTIVITIES

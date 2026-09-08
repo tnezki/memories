@@ -1,0 +1,85 @@
+{
+  "name": "Algebra 1 Activities Course Profile",
+  "course": "Algebra 1",
+  "profile_version": "v3.0-family-bank-downstream",
+  "framework_version": "v7.4",
+  "role": "Course-specific Activities behavior. Activities change participation around fresh aligned mathematics; they do not recreate Practice 2/3 or a second question bank.",
+  "question_structure_rule": "Use current universal Question Structure for all newly authored Activity questions.",
+  "source_boundary": {
+    "allowed_remote_sources": [
+      "tnezki/memories pinned commit",
+      "tnezki/algebra pinned commit"
+    ],
+    "public_web_allowed": false,
+    "file_library_allowed": false,
+    "prior_chat_as_curriculum_source_allowed": false
+  },
+  "section_question_set": {
+    "count": 12,
+    "stage_counts": {
+      "Intro": 4,
+      "Review": 4,
+      "Mastery": 4
+    },
+    "student_stage_labels_required": false,
+    "rule": "One fresh reusable set per section powers all participation structures. Do not create Set 1/Set 2 replacements for retired Practice 2/3."
+  },
+  "approved_projection_structures": [
+    "Whiteboard Indy",
+    "Whiteboard Partners",
+    "Rally Coach",
+    "Speed Dating Math",
+    "Showdown",
+    "Think, Trade, Agree",
+    "Round Table",
+    "Mathematical Hot Seat"
+  ],
+  "approved_printable_structures": [
+    "Stations",
+    "Find Someone Who"
+  ],
+  "practice_owned_optional_links": {
+    "tarsia": "practice_sets/practice_sets_{unit}_{section}/tarsia_{unit}_{section}.txt",
+    "blooket": "practice_sets/practice_sets_{unit}_{section}/blooket_{unit}_{section}.csv"
+  },
+  "outputs": {
+    "root_pattern": "activities/u{unit}_{section}_act1/",
+    "activity_options": "u{unit}_{section}_act1.html",
+    "question_set_teacher": "u{unit}_{section}_activity_questions_solutions.html",
+    "stations": "u{unit}_{section}_activity_stations.html",
+    "find_someone_who": "u{unit}_{section}_activity_find_someone_who.html"
+  },
+  "stations": {
+    "station_count": 4,
+    "questions_per_station": 3
+  },
+  "freshness": {
+    "contract": "Tools/QUESTION_FRESHNESS_CONTRACT.txt",
+    "required_terminal_signal": "QUESTION_FRESHNESS: PASS",
+    "compare_against": [
+      "Bank exemplars",
+      "student Notes",
+      "Practice 1",
+      "Extra Practice",
+      "CYU",
+      "Tarsia",
+      "Blooket",
+      "earlier Activity questions in same build",
+      "other already-built public same-section artifacts"
+    ],
+    "participation_wrapper_makes_repeat_fresh": false
+  },
+  "retired": [
+    "Practice Set 2 dependency",
+    "Practice Set 3 dependency",
+    "two 24-question Activity source sets",
+    "retired _practice_3 Tarsia/Blooket filenames"
+  ],
+  "visual": {
+    "stylesheets": [
+      "../../css/base.css",
+      "../../css/activities.css"
+    ],
+    "reuse_current_deployed_activity_shell": true
+  }
+}
