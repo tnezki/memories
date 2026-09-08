@@ -4,10 +4,9 @@ BUILD WARM-UPS — ALGEBRA 1 / COURSE-MAP LOCKED / FOUR-LANE ROUTINE
 STATUS: CURRENT
 STEP: 8
 JOB: warmup
-REVISION: 2026-09-07 v3.0
-ROLE: Build the selected Algebra 1 Unit Warm-Ups from the exact coursewide Warm-Up progression map
-and recurring course profile. Warm-Ups are a separate fluency/retrieval track, not Bank inventory
-and not an Intro/Review/Mastery sampler.
+REVISION: 2026-09-07 v3.1
+ROLE: Build the selected Algebra 1 Unit Warm-Ups from the exact coursewide Warm-Up progression map.
+Warm-Ups are a separate fluency/retrieval track, not Bank inventory and not an Intro/Review/Mastery sampler.
 
 CORE OUTPUT
 -----------
@@ -20,8 +19,10 @@ For a normal Algebra Unit:
   Q3 Skill Review
   Q4 Challenge
 
-Also create a compact SCREEN VIEWER that shows all four questions for each day in ONE HORIZONTAL ROW,
-similar to the four-column Bank viewer.
+Required outputs:
+1. Notability-first Warm-Up file
+2. compact Bank-style 4-Up Viewer
+3. shared figures folder
 
 ========================================================
 0. SOURCE BOUNDARY — HARD
@@ -34,31 +35,18 @@ Use ONLY:
    - tnezki/memories
    - tnezki/algebra
 
-HARD TOOL BAN
--------------
-Do NOT invoke:
-- public web search;
-- search engines;
-- public webpage/browser fetch;
-- outside internet research;
-- external curriculum/question banks;
-- ChatGPT File Library;
-- prior-chat or saved-memory retrieval as a curriculum source.
+Do NOT invoke public web search, search engines, public webpage/browser fetch, outside internet
+research, external curriculum/question banks, ChatGPT File Library, or prior-chat/saved-memory
+retrieval as a curriculum source.
 
-Allowed remote reads are LIMITED to the exact pinned project GitHub sources above.
-
-Direct GitHub connector reads from those repos are allowed.
-Downloading/reconstructing exact pinned GitHub files for local execution is allowed.
-Running pinned project tools locally is allowed.
+Allowed remote reads are LIMITED to exact pinned project GitHub sources.
 
 If ANY public-web/search/browser tool is invoked:
 STOP with:
   PUBLIC_WEB_TOOL_VIOLATION
 Produce NO artifact and NO transfer ZIP.
 
-If a declared project dependency is missing:
-STOP with exact repository + commit + path.
-Do not search outside the project for a substitute.
+Missing declared project dependency -> fail closed with exact repository + commit + path.
 
 ========================================================
 1. READ ORDER / AUTHORITIES
@@ -67,30 +55,25 @@ Do not search outside the project for a substitute.
 Pin memories + algebra commits once at job start.
 
 Read in this order:
-
 1. Curriculum_Philosophy.txt
 2. SYSTEM_RUNTIME_CONTRACT.txt
 3. current Algebra 1 Framework
 4. exact selected Unit Assessment Plan only as needed for section identity/context
-5. Algebra recurring assessment course profile:
-   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
-   profiles/recurring_assessment_course_profile.json
-6. canonical coursewide Warm-Up progression map:
-   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
-   curriculum/warmup_progression_map.json
+5. Algebra recurring assessment course profile
+6. curriculum/warmup_progression_map.json
 7. Tools/QUESTION_FRESHNESS_CONTRACT.txt
-8. current registered graph tool from Tools/MANIFEST.json when a graph is genuinely required
-9. algebra/css/base.css
-10. algebra/css/warmup.css
-11. current same-course deployed Warm-Up HTML only as a visual/path shell reference
-12. current Bank viewer only as the compact four-column VIEWER layout reference:
-    algebra/banks/unit1/unit1.html
-13. this PM
+8. Tools/MANIFEST.json
+9. registered graph tool from Tools/MANIFEST.json
+10. graph tool behavior base required by the registered entrypoint
+11. algebra/css/base.css
+12. algebra/css/warmup.css
+13. current same-course Warm-Up HTML as shell/path reference
+14. algebra/banks/unit1/unit1.html as the VIEWER layout reference
+15. this PM
 
 QUESTION STRUCTURE EXCEPTION
 ----------------------------
 Algebra Warm-Ups are explicitly EXEMPT from the universal Question Structure requirement.
-Do not force warm-up questions into the downstream Question Structure taxonomy.
 
 ========================================================
 2. SOURCE ARCHITECTURE — HARD
@@ -98,98 +81,107 @@ Do not force warm-up questions into the downstream Question Structure taxonomy.
 
 Finished Warm-Up questions are NOT Bank inventory.
 
-PRIMARY AUTHORITY:
+Primary authority:
+  frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
   curriculum/warmup_progression_map.json
 
-Require:
-  schema = algebra-warmup-progression-map/1.1
-or a later explicitly compatible schema.
+Require schema:
+  algebra-warmup-progression-map/1.1
+or later explicitly compatible schema.
 
-The progression map is COURSE-LONG authority and must contain the complete Algebra course progression.
+The coursewide map owns when each Warm-Up lane introduces, expands, and maintains content.
+The Unit build consumes the map. It does not rewrite progression timing.
 
 Do NOT:
-- require a COMPLETE Bank;
-- use Bank exemplars as Warm-Up source material;
-- use Exit Ticket questions as Warm-Up source material;
-- use secure Summative questions;
-- redesign solve/factoring timing inside a Unit build;
+- require Bank question inventory;
+- copy Bank exemplars;
+- use Exit or secure Summative questions as source material;
 - introduce later fluency before the map permits it.
 
-The selected Unit build CONSUMES the map.
-It does not rewrite or extend it.
-
 ========================================================
-3. DAILY ALGEBRA ARCHITECTURE — EXACTLY FOUR STABLE JOBS
+3. DAILY ALGEBRA ARCHITECTURE — EXACTLY FOUR JOBS
 ========================================================
 
-Every daily Algebra Warm-Up contains:
+Every daily Warm-Up contains:
 
 Q1 · SOLVE / EQUATION FLUENCY
 Q2 · DIAMOND / FACTORING PATTERN
 Q3 · SKILL REVIEW
 Q4 · CHALLENGE
 
-These identities remain stable for the entire course.
-
-Do NOT label Warm-Up questions:
-- Intro
-- Review
-- Mastery
-
+Do NOT label Warm-Ups Intro / Review / Mastery.
 Warm-Ups are not official evidence events.
 
 ========================================================
 4. Q1 — SOLVE / EQUATION FLUENCY
 ========================================================
 
-Follow the exact current section row and Unit solve ceiling from the progression map.
+Follow the exact current section row and Unit solve ceiling.
 
-DEFAULT:
+Default:
 - 2 equations
 
-ALLOW:
-- 3 equations only when all are very short one-step retrieval
-- 1 equation when the current method is substantially longer
+Allow:
+- 3 only when all are very short one-step retrieval;
+- 1 when the current method is substantially longer.
 
-Across a normal three-day section:
+Across three days:
 - introduce newly permitted work gradually;
 - keep earlier equation types alive;
-- do not make all three days the newest solve type;
-- do not inflate coefficients as fake difficulty;
-- prefer clean values that keep attention on algebraic structure.
+- do not make all work the newest type;
+- do not inflate coefficients as fake difficulty.
 
 FRACTION / INTEGER CALCULATOR LANGUAGE
 --------------------------------------
-When fraction/integer fluency is present, include brief language that encourages:
-  "Try without a calculator first. Use a calculator if you need one."
+When fraction/integer fluency is present, include concise language such as:
 
-Equivalent concise wording is allowed.
+  Try without a calculator first. Use a calculator if you need one.
 
-The tone must:
-- encourage mental/manual fluency;
-- clearly allow calculator use when needed;
-- never make calculator use sound prohibited or shameful.
+The tone encourages mental/manual fluency while explicitly allowing calculator use.
 
 ========================================================
-5. Q2 — DIAMOND / FACTORING PATTERN
+5. Q2 — DIAMOND / FACTORING PATTERN — GRAPH TOOL REQUIRED
 ========================================================
 
 Normally one job per day.
 
-Follow the exact progression map timing:
+Follow exact mapped progression:
 - numeric product/sum
 - signed factor pairs
 - missing-cell variations
 - symbolic factoring patterns
 - factoring maintenance
 
-Do not jump to symbolic factoring before the map permits it.
+HARD VISUAL RULE
+----------------
+Every visual diamond problem MUST be generated by the CURRENT REGISTERED GRAPH TOOL.
 
-Vary which values/cells are known when useful.
-Use natural, readable values.
+Current registered entrypoint is resolved from:
+  Tools/MANIFEST.json
 
-If the established diamond graphic is needed, use the current project figure/render route.
-Do not invent a new visual language during the Unit build.
+The currently registered v13 entrypoint re-exports the v12 public surface.
+The diamond helper is:
+  make_diamond(top, left, right, bottom, filename=...)
+
+When using v13, stage its required v12 behavior base beside it or otherwise resolve it exactly
+as the registered tool requires.
+
+DO NOT:
+- hand-draw diamonds in SVG;
+- build diamonds with CSS borders/transforms;
+- use ad hoc HTML shapes;
+- create a replacement diamond renderer;
+- paste an old diamond image when fresh values are required.
+
+For each diamond:
+- pass the intended visible top/left/right/bottom values to make_diamond;
+- use '' for intentionally blank cells;
+- save to the current Warm-Up figures folder;
+- reuse the SAME generated figure in Notability view and 4-Up Viewer.
+
+If the graph tool cannot be resolved or make_diamond is unavailable:
+STOP with:
+  GRAPH_TOOL_DIAMOND_UNAVAILABLE
 
 ========================================================
 6. Q3 — SKILL REVIEW
@@ -197,21 +189,10 @@ Do not invent a new visual language during the Unit build.
 
 Follow the exact section prerequisite/review purpose from the progression map.
 
-Normally:
-- one short job
+Normally one short job.
+A 2–3 item mini-set is allowed only when all items serve one coherent narrow fluency purpose.
 
-Allow:
-- a 2–3 item mini-set only when all items serve one coherent narrow fluency purpose.
-
-Q3 is:
-- intentional prerequisite runway;
-- retrieval of useful prior mathematics;
-- sometimes a small prerequisite preview.
-
-Q3 is NOT:
-- random spiral review;
-- a second lesson on unreached content;
-- copied current Practice/Activity work.
+Q3 is intentional prerequisite runway, not random review and not a second lesson on unreached content.
 
 ========================================================
 7. Q4 — CHALLENGE
@@ -219,13 +200,7 @@ Q3 is NOT:
 
 One short reasoning/nonroutine job per day.
 
-Challenge should be:
-- accessible enough that every student can begin;
-- worth discussing;
-- concise enough for a Warm-Up;
-- reasoning-focused rather than arithmetic-heavy.
-
-Useful forms include:
+Useful forms:
 - pattern
 - explain
 - compare
@@ -234,16 +209,10 @@ Useful forms include:
 - generalize
 - model
 - critique
-- "always / sometimes / never"
-- find an example / counterexample
+- always/sometimes/never
+- example/counterexample
 
-Across the three days, vary the type of thinking when useful.
-
-Do not turn Q4 into:
-- a long project;
-- a mini performance task;
-- merely harder arithmetic;
-- a hidden current-section test.
+Challenge means thinking, not uglier arithmetic.
 
 ========================================================
 8. THREE-DAY SECTION RHYTHM
@@ -251,255 +220,276 @@ Do not turn Q4 into:
 
 Default = 3 days per section unless current teacher/calendar instruction says otherwise.
 
-Planning tendency:
+Day 1: clean entry/retrieval
+Day 2: emphasize new or expanding mapped fluency
+Day 3: mix/strengthen and keep earlier fluency alive
 
-DAY 1
-- clean entry / retrieval
-- establish current row fluency
-
-DAY 2
-- emphasize the new or expanding fluency permitted by the row
-
-DAY 3
-- mix and strengthen the row
-- keep earlier fluency alive
-
-This is NOT three separate stages.
-Do not visibly label Day 1 / Day 2 / Day 3 as Intro/Review/Mastery.
-
-If a section row contains no newly introduced solve/factoring type, all three days may be cumulative
-maintenance with useful variation.
+This is a planning tendency, not three visible stages.
 
 ========================================================
-9. FRESHNESS — ROUTINES MAY REPEAT; FINISHED QUESTIONS MAY NOT
+9. FRESHNESS
 ========================================================
 
 Follow:
   Tools/QUESTION_FRESHNESS_CONTRACT.txt
 
-WARM-UP-SPECIFIC INTERPRETATION
--------------------------------
-EXPECTED / ALLOWED:
-- same four daily jobs
-- same equation type
-- same diamond structure
-- same prerequisite skill
-- same challenge family
-- deliberate short fluency runs
-- fresh values/instances of familiar routines
+Allowed:
+- same four jobs;
+- same equation/factoring type;
+- same diamond structure;
+- fresh values/instances;
+- deliberate routine repetition.
 
-FAIL / REPAIR:
-- exact repeated finished question inside the new Unit build
-- same distinctive values/data + same prompt
-- same exact table/graph/context used as the same task
-- exact student-facing prompt copied from Notes/Practice/CYU/Activities/Exit
-- Day 2 or Day 3 cloned from Day 1 with no meaningful variation beyond a trivial rename
+Repair:
+- exact repeated finished question;
+- same distinctive values/data + same prompt;
+- same exact table/graph/context as the same task;
+- exact student-facing prompt copied from another artifact.
 
-For Warm-Ups, a fresh value-set parallel may be pedagogically appropriate.
-Do not over-repair useful routine repetition.
+Warm-Ups may use clean fresh value-set parallels when routine fluency is the instructional purpose.
 
-Compare newly authored Warm-Ups against:
-1. other Warm-Ups in the same new Unit build
-2. current Notes student prompts for the same Unit
-3. current Practice / Extra Practice / CYU
-4. current Activities question sets
-5. current public Exit questions when present
-
-Comparison artifacts are freshness-only.
-They are not curriculum authorities or question sources.
-
-Terminal:
+Required terminal:
   QUESTION_FRESHNESS: PASS
 
 ========================================================
-10. MAIN NOTABILITY-FIRST WARM-UP FILE
+10. MATHJAX — REQUIRED IN BOTH HTML FILES
+========================================================
+
+BOTH:
+  unit_{U}_warmups.html
+and:
+  unit_{U}_warmups_view.html
+
+MUST include a working MathJax configuration and loader.
+
+At minimum configure inline/display math for the notation used by the artifact, including $...$
+when the content uses dollar-delimited math.
+
+Use the existing same-course MathJax pattern unless the current system finalizer requires a newer
+canonical form.
+
+HARD RULES
+----------
+- do not strip MathJax from the Warm-Up output;
+- do not convert all mathematics to plain text;
+- do not rely on browser-native rendering of TeX;
+- both main file and viewer must typeset the same math correctly.
+
+After finalization, inspect the final HTML and verify:
+[ ] MathJax config remains present
+[ ] MathJax loader remains present
+[ ] representative equations/fractions/exponents render correctly
+[ ] no raw TeX is visibly broken
+
+If either final HTML lacks required MathJax:
+STOP with:
+  MATHJAX_MISSING
+
+========================================================
+11. MAIN NOTABILITY-FIRST WARM-UP FILE
 ========================================================
 
 Canonical path:
 
   warmups/unit_{U}_warmups/unit_{U}_warmups.html
 
-Preserve the established Notability-first two-problem-per-physical-page behavior from:
-- base.css
-- warmup.css
+Preserve established Notability-first two-problem-per-physical-page behavior:
+- Q1 + Q2 on first page for a day
+- Q3 + Q4 on continuation page
+- Section/Day header on first page
+- generous handwriting workspace
+- no clipping / accidental blank overflow
 
-For each day:
-- first physical page contains Q1 + Q2
-- continuation physical page contains Q3 + Q4
-- section/day header appears on the first page
-- sufficient handwritten workspace remains available
-- no clipping / accidental blank overflow page
-
-Visible title pattern:
+Visible title:
   Section {U}.{S} — Day {D}
 
-QUESTION LABELS
----------------
-Use clear stable labels in the problem-title area:
-
+Problem labels:
   1 · Solve / Equation Fluency
   2 · Diamond / Factoring Pattern
   3 · Skill Review
   4 · Challenge
 
-Do not expose internal IDs or map metadata.
-
 ========================================================
-11. FOUR-UP SCREEN VIEWER — REQUIRED
+12. TOP-RIGHT VIEWER LINK — HARD
 ========================================================
 
-Also create:
+The MAIN Notability page must include an easy-to-find link in the TOP RIGHT:
+
+  View All Warm-Ups
+
+Target:
+  unit_{U}_warmups_view.html
+
+SCREEN BEHAVIOR
+---------------
+- visually anchored at the top right of the page;
+- present immediately without needing to scroll;
+- styled as a compact button/link;
+- must not overlap the first Warm-Up header;
+- may use a small fixed/sticky top-right control if that is the cleanest implementation;
+- hide it from print/Notability output if necessary so it does not consume handwriting space.
+
+The viewer page must include a matching TOP-RIGHT return link:
+
+  Notability View
+
+Target:
+  unit_{U}_warmups.html
+
+Use relative local links only.
+
+========================================================
+13. BANK-STYLE 4-UP VIEWER — REQUIRED
+========================================================
+
+Create:
 
   warmups/unit_{U}_warmups/unit_{U}_warmups_view.html
 
 PURPOSE
 -------
-A fast screen-only way to inspect the entire Unit's Warm-Ups without scrolling through
-large handwriting workspaces.
+A fast screen-first inspection page modeled after the Bank viewer.
 
-The viewer REUSES the exact same authored Warm-Up questions.
-It creates ZERO new question instances.
+VISUAL MODEL
+------------
+Use the Bank viewer as the visual idea:
+  algebra/banks/unit1/unit1.html
+
+Do NOT copy Bank content architecture.
+Copy the useful viewing behavior:
+- wide screen container;
+- clean section/day banners;
+- compact bordered cards;
+- four equal cards across on desktop;
+- easy vertical scanning through the Unit.
 
 LAYOUT — HARD
 -------------
-Model the compact structure after the Bank viewer's four-column idea.
+Group by SECTION.
 
-For EACH section/day:
-- one day header;
-- directly below it, ONE ROW of FOUR question cards:
+For each section:
+- section banner with section number + title
+
+For each day:
+- small Day header
+- directly underneath, ONE FOUR-CARD ROW:
+
   Q1 | Q2 | Q3 | Q4
 
 Desktop:
   grid-template-columns: repeat(4, minmax(0, 1fr))
 
-Responsive:
-- 2 columns on medium screens
-- 1 column on narrow screens
+Medium:
+  repeat(2, minmax(0, 1fr))
+
+Narrow:
+  1fr
 
 Each card shows:
-- job label
-- exact question content
-- actual table/graph/diamond/representation when used
+- question number/job name;
+- EXACT SAME student question content as main Warm-Up;
+- actual table/graph/diamond/representation.
 
-Viewer does NOT show:
-- student workspace
-- blank writing lines
-- answers
-- solutions
-- internal IDs
-- provenance metadata
+NO:
+- workspace;
+- answer;
+- solution;
+- internal IDs;
+- provenance;
+- giant page-height cards.
 
-VIEWER NAVIGATION
------------------
-Main Notability file must include a visible link:
-  "4-Up Viewer"
+The viewer creates ZERO new question instances.
 
-The 4-Up Viewer must include a visible return link:
-  "Notability View"
-
-Use relative local links only.
-
-The link should be easy to find but visually small enough that it does not disrupt the tested
-Notability layout.
-
-VIEWER STYLE
-------------
-Use base.css plus compact viewer-specific CSS.
-Do NOT stretch warmup.css's handwriting card heights into the viewer.
-The viewer is screen-first and compact.
+Viewer cards should be compact enough that a teacher can quickly scan the whole Unit.
 
 ========================================================
-12. FIGURES / REPRESENTATIONS
+14. FIGURES / GRAPH ROUTING
 ========================================================
-
-Representations must be:
-- mathematically correct;
-- answer-neutral;
-- legible in both main and viewer files.
-
-Use semantic HTML for tables.
-
-Use the current registered graph tool for Algebra coordinate graphs when a graph is required.
-Do not hand-build coordinate SVG as a substitute.
 
 Store Warm-Up-owned figures in:
 
   warmups/unit_{U}_warmups/figures/
 
-Both the Notability file and 4-Up Viewer should reference the SAME figure assets.
-Do not duplicate the figure inventory just for the viewer.
+Use the current registered graph tool for ALL generated mathematical graphics it supports.
+
+ROUTING
+-------
+Diamond:
+  make_diamond(...)
+
+Ordinary Algebra coordinate graph:
+  make_standard_graph(...)
+
+Real-world/modeling custom axes:
+  make_context_graph(...)
+
+Do not hand-build coordinate SVG.
+
+The main file and viewer reference the SAME figure assets.
 
 ========================================================
-13. QA — HARD
+15. QA — HARD
 ========================================================
 
-SOURCE ISOLATION
+SOURCE
 [ ] PUBLIC_WEB_USED = false
-[ ] only exact pinned tnezki/memories + tnezki/algebra remote reads
-[ ] no File Library / prior-chat / saved-memory curriculum source
-
-ARCHITECTURE
-[ ] coursewide Warm-Up progression map resolved
-[ ] map schema compatible
-[ ] all requested Unit section rows found
-[ ] Unit build did not alter course progression timing
-[ ] Warm-Ups did not require Bank question inventory
-[ ] universal Question Structure was not forced onto Algebra Warm-Ups
+[ ] exact pinned project sources only
+[ ] coursewide progression map resolved and compatible
 
 COUNT
-[ ] normal Unit has 3 days per section unless explicitly changed
-[ ] every day has exactly Q1/Q2/Q3/Q4
-[ ] all expected section/day combinations are present
+[ ] normal Unit has 3 days/section unless changed
+[ ] every day has Q1/Q2/Q3/Q4
 
-Q1
-[ ] solve type does not exceed section/Unit ceiling
-[ ] earlier solve types remain mixed appropriately
-[ ] mini-set size appropriate
-[ ] no coefficient inflation
-[ ] fraction/integer language encourages no-calculator-first but explicitly permits calculator if needed
+MATHJAX
+[ ] MathJax config in main HTML
+[ ] MathJax loader in main HTML
+[ ] MathJax config in viewer HTML
+[ ] MathJax loader in viewer HTML
+[ ] representative TeX renders correctly after finalization
 
-Q2 / Q3 / Q4
-[ ] Diamond/factoring timing obeys map
-[ ] Skill Review follows mapped prerequisite purpose
-[ ] Challenge is concise reasoning/nonroutine work
-[ ] challenge thinking varies when useful
+GRAPH TOOL
+[ ] Tools/MANIFEST.json resolved
+[ ] current registered graph tool used
+[ ] required graph-tool base staged/resolved
+[ ] every diamond figure produced by make_diamond
+[ ] no handmade diamond SVG/CSS/HTML
+[ ] coordinate graphs use registered graph routing
 
-FRESHNESS
-[ ] no exact repeated finished Warm-Up question
-[ ] no exact student-facing question copied from other current artifacts
-[ ] routine/family repetition was not incorrectly treated as a defect
-[ ] QUESTION_FRESHNESS: PASS
+MAIN PAGE
+[ ] Notability layout preserved
+[ ] top-right View All Warm-Ups link present
+[ ] link does not disrupt print/Notability layout
 
-MAIN NOTABILITY FILE
-[ ] correct canonical path
-[ ] first page per day = Q1 + Q2
-[ ] continuation page = Q3 + Q4
-[ ] visible Section/Day header
-[ ] stable job labels
-[ ] handwriting workspace preserved
-[ ] 4-Up Viewer link present
-[ ] no clipping / overlap / accidental blank overflow
-
-FOUR-UP VIEWER
+VIEWER
 [ ] unit_{U}_warmups_view.html exists
-[ ] exact same questions as main file
-[ ] one day = one four-card row on desktop
-[ ] Q1/Q2/Q3/Q4 order exact
+[ ] top-right Notability View return link present
+[ ] section grouping present
+[ ] each day renders Q1/Q2/Q3/Q4 in one row on desktop
+[ ] viewer matches Bank-style compact-card viewing intent
 [ ] no workspaces
 [ ] no solutions
-[ ] representations preserved
+[ ] exact same questions and figures as main file
 [ ] responsive 4 -> 2 -> 1 columns
-[ ] return link to Notability View present
+
+QUALITY
+[ ] progression ceilings obeyed
+[ ] Diamond/factoring timing obeyed
+[ ] Skill Review intentional
+[ ] Challenge reasoning-focused
+[ ] calculator language correct when relevant
+[ ] QUESTION_FRESHNESS: PASS
 
 FINALIZATION
-[ ] run current Tools/finalize_output.py
+[ ] run Tools/fix_mathjax_output.py as required by current finalization contract
+[ ] run Tools/finalize_output.py
+[ ] re-check MathJax AFTER finalization
 [ ] FINALIZATION_QA: PASS
 
 If all hard checks pass:
 STOP AND DELIVER.
 
 ========================================================
-14. OUTPUT / PROVENANCE
+16. OUTPUT
 ========================================================
 
 Deploy:
@@ -511,27 +501,22 @@ Deploy:
       only referenced current figures
 
 Also include:
-
-  _warmup_provenance/
-    unit{U}/
-      WARMUP_BUILD_REPORT.txt
+  _warmup_provenance/unit{U}/WARMUP_BUILD_REPORT.txt
 
 Report:
 - pinned Framework/profile/map identities
-- requested Unit
-- section/day count
-- section rows consumed
-- Unit solve ceiling
+- registered graph tool identity
+- section/day counts
 - Q1/Q2/Q3/Q4 counts
-- freshness result
+- diamond figure count
+- MathJax QA result
 - viewer QA result
+- freshness result
 - finalization result
 - material warning only
 
-Do not include PM copies or staging files in the course artifact.
-
 ========================================================
-15. TRANSFER
+17. TRANSFER
 ========================================================
 
 Package through:
