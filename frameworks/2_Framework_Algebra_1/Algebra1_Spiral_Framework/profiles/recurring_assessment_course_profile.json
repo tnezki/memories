@@ -1,13 +1,14 @@
 {
   "name": "Algebra 1 Recurring + Assessment Resource Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.4",
-  "framework_version": "v7.3",
+  "profile_version": "v2.5",
+  "framework_version": "v7.4",
   "role": "Course-specific Warm-Up / Exit / Progress / Review / Summative behavior. Shared PMs own procedure and rendering mechanics; this profile owns Algebra-specific behavior.",
   "warmups": {
-    "usage_mode": "notability_first",
+    "usage_mode": "notability_first_plus_four_up_viewer",
     "path_template": "warmups/unit_{U}_warmups/unit_{U}_warmups.html",
-    "visible_title_pattern": "Section {U}.{S} — Day {D}",
+    "viewer_path_template": "warmups/unit_{U}_warmups/unit_{U}_warmups_view.html",
+    "visible_title_pattern": "Section {U}.{S} \u2014 Day {D}",
     "default_days_per_section": 3,
     "days_rule": "Build three daily Warm-Ups per section by default unless the current teacher request/calendar explicitly changes the count.",
     "architecture": "Every daily Algebra Warm-Up uses four stable jobs; it is a separate course-long fluency track, not a Current/Review/Mastery sampler.",
@@ -19,10 +20,26 @@
       "Q4 Challenge": "One short reasoning/pattern/generalization/error analysis/representation/nonroutine problem; not merely harder arithmetic. Vary challenge thinking across the section when useful."
     },
     "calculator_language": "For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use if needed.",
-    "layout": "Preserve the tested four-slot Notability layout unless a later visual decision changes it.",
+    "layout": "Preserve the tested two-problem-per-physical-page Notability layout: Q1+Q2 on the first page for a day and Q3+Q4 on its continuation page.",
+    "viewer": {
+      "required": true,
+      "purpose": "Compact screen-only inspection of the exact same Warm-Up questions.",
+      "desktop_layout": "One day per row with Q1, Q2, Q3, Q4 in four equal columns.",
+      "responsive_layout": "4 columns desktop, 2 medium, 1 narrow.",
+      "workspace": false,
+      "answers": false,
+      "new_question_instances": 0,
+      "main_link_label": "4-Up Viewer",
+      "return_link_label": "Notability View"
+    },
     "progression_map": "curriculum/warmup_progression_map.json",
     "progression_map_schema": "algebra-warmup-progression-map/1.1",
-    "question_structure_exception": "Warm-Ups do not use the universal Question Structure requirement; follow the four stable fluency jobs and the Framework progression map."
+    "question_structure_exception": "Warm-Ups do not use the universal Question Structure requirement; follow the four stable fluency jobs and the Framework progression map.",
+    "freshness": {
+      "contract": "Tools/QUESTION_FRESHNESS_CONTRACT.txt",
+      "required_terminal_signal": "QUESTION_FRESHNESS: PASS",
+      "rule": "Stable routines and fresh value-set parallels are allowed. Exact repeated finished questions or exact copies of current student-facing prompts are repaired."
+    }
   },
   "exit_tickets": {
     "usage_mode": "projector_or_collect",
