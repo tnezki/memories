@@ -16,7 +16,7 @@ For Algebra 1, Activities owns TWO reusable 24-question activity sets per sectio
 
 Those 48 questions are the ONLY new question instances authored by Activities for that section.
 
-Stations and Find Someone Who REUSE those same questions.
+Stations, Find Someone Who, and the dashboard Practice 2/3 quick-view mirrors REUSE those same questions.
 They do NOT create additional question inventories.
 
 ========================================================
@@ -76,10 +76,14 @@ Read in this order:
 13. current registered graph tool from Tools/MANIFEST.json
 14. algebra/css/base.css
 15. algebra/css/activities.css
-16. GOLD-STANDARD ACTIVITY PAGE:
+16. algebra/css/practice_set.css
+17. GOLD-STANDARD ACTIVITY PAGE:
     algebra/activities/u2_1_act1/u2_1_act1.html
-17. matching deployed U2.1 Set 1 / Set 2 Activity handout shells when needed
-18. this PM
+18. matching deployed U2.1 Set 1 / Set 2 Activity handout shells when needed
+19. existing dashboard-visible Practice 2/3 path convention:
+    algebra/practice_sets/practice_sets_2_1/practice_set_2_1_2.html
+    algebra/practice_sets/practice_sets_2_1/practice_set_2_1_3.html
+20. this PM
 
 ========================================================
 2. MAIN ACTIVITY PAGE — GOLD STANDARD IS HARD
@@ -221,10 +225,6 @@ Questions 1–8   = Intro
 Questions 9–16  = Review
 Questions 17–24 = Mastery
 
-The main Question/Solution pages may visually preserve the existing gold-standard set shell.
-Internal stage metadata is allowed.
-Do not add extra visible stage clutter unless already part of the gold-standard shell.
-
 ========================================================
 6. SET 1 / SET 2 QUESTION + SOLUTION FILES
 ========================================================
@@ -263,15 +263,6 @@ Station 4 = Set questions 13–16 = Review
 Station 5 = Set questions 17–20 = Mastery
 Station 6 = Set questions 21–24 = Mastery
 
-So the visible progression is:
-
-- Station 1 — Intro
-- Station 2 — Intro
-- Station 3 — Review
-- Station 4 — Review
-- Station 5 — Mastery
-- Station 6 — Mastery
-
 Preserve the practical six-station classroom format from the established Activity architecture.
 
 ========================================================
@@ -289,14 +280,53 @@ DO NOT author new Find Someone Who questions.
 Use the established compact printable handout architecture.
 Do NOT make one full printed page per problem.
 
-The handout should support:
-- independent attempt first;
-- peer explanation/check;
-- movement between partners;
-- recording enough work to show understanding.
+========================================================
+9. DASHBOARD QUICK-VIEW PRACTICE 2 / PRACTICE 3 — REUSE ONLY
+========================================================
+
+Also create dashboard-visible quick-view mirrors at the established Practice paths:
+
+  practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_2.html
+  practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_3.html
+
+MAPPING
+-------
+Practice 2 quick-view = EXACT SAME 24 questions as Activity Set 1.
+Practice 3 quick-view = EXACT SAME 24 questions as Activity Set 2.
+
+These are NOT additional authored Practice sets.
+They are dashboard mirrors so the existing dashboard/file-routing convention can find and open
+the Activity questions quickly.
+
+NEW QUESTION COUNT REMAINS:
+  48
+
+QUICK-VIEW RENDER RULES
+-----------------------
+- question-only view;
+- all 24 questions visible in normal order;
+- preserve actual tables/graphs/representations;
+- NO answer key;
+- NO teacher solutions;
+- NO student workspace blocks;
+- NO blank work areas;
+- NO extra response pages;
+- compact enough to scan questions quickly;
+- use existing Practice shell/CSS so the dashboard view looks familiar.
+
+Use:
+  ../../css/base.css
+  ../../css/practice_set.css
+  ../../css/practice_stages.css when current stage labels are rendered.
+
+The quick-view mirror may show Intro / Review / Mastery headings for navigation, but it must not
+add new mathematics or alter the question wording from its owning Activity set.
+
+Do not generate Tarsia/Blooket from Practice 2/3.
+Those remain the current Practice-owned files created by the Practice build.
 
 ========================================================
-9. TARSIA ROUTING — PRACTICE-OWNED
+10. TARSIA ROUTING — PRACTICE-OWNED
 ========================================================
 
 If current Practice contains:
@@ -311,18 +341,14 @@ Do NOT:
 - use retired "_practice_3" filenames.
 
 ========================================================
-10. BLOOKET
+11. BLOOKET
 ========================================================
 
 Blooket remains Practice-owned.
-
 Do not duplicate its questions inside Activities.
 
-Because the U2.1 gold-standard main page does not require Blooket in the Activity Options shell,
-do not add a new Blooket block merely for uniformity.
-
 ========================================================
-11. QUESTION STRUCTURE / REPRESENTATIONS
+12. QUESTION STRUCTURE / REPRESENTATIONS
 ========================================================
 
 Every newly authored Set 1 / Set 2 question follows current Question Structure:
@@ -348,11 +374,11 @@ Use the current registered Algebra graph tool for generated graphs.
 Do not hand-build coordinate SVG.
 
 Activity-owned figures should live in the section Activity figures folder.
-Do not depend on Bank figure paths for final Activity rendering unless the current visual contract
-explicitly declares that asset shared.
+Dashboard quick-view mirrors may reference the exact same Activity-owned figures through correct
+relative paths; do not create a second image inventory solely for the mirrors.
 
 ========================================================
-12. QUESTION FRESHNESS GATE — HARD
+13. QUESTION FRESHNESS GATE — HARD
 ========================================================
 
 Follow:
@@ -370,11 +396,11 @@ Therefore:
 - same family + fresh parameters may PASS.
 
 Still FAIL:
-- exact wording + exact values/data;
-- exact graph/table/stimulus reused;
+- exact wording + exact values/data copied from Practice/Extra;
+- exact graph/table/stimulus reused from Practice/Extra;
 - exact Bank exemplar copied;
 - Set 1 and Set 2 duplicating each other;
-- identical finished questions elsewhere in Activities.
+- identical newly-authored questions elsewhere in Activities.
 
 Compare the 48 newly authored Activity questions against:
 - Practice 1
@@ -386,22 +412,28 @@ Compare the 48 newly authored Activity questions against:
 - relevant Bank exemplars
 - each other
 
-Stations and Find Someone Who are excluded from duplicate counting because they are
-INTENTIONAL RENDERS OF THE SAME 48 QUESTIONS.
+INTENTIONAL REUSE — EXCLUDE FROM NEW-DUPLICATE COUNT
+------------------------------------------------------
+The following are expected render reuse and must NOT be counted as duplicate authoring:
+- Set 1 Stations
+- Set 2 Stations
+- Set 1 Find Someone Who
+- Set 2 Find Someone Who
+- Practice 2 dashboard quick-view mirror
+- Practice 3 dashboard quick-view mirror
 
 Required reporting must distinguish:
   NEW QUESTION INSTANCES: 48
-  REUSED ACTIVITY RENDERS: Stations + Find Someone Who
+  REUSED ACTIVITY RENDERS: Stations + Find Someone Who + Practice 2/3 quick views
 
 Terminal signal:
   QUESTION_FRESHNESS: PASS
 
 ========================================================
-13. OUTPUT PATHS — CANONICAL
+14. OUTPUT PATHS — CANONICAL
 ========================================================
 
-For section U.S:
-
+ACTIVITY SECTION FOLDER:
   activities/u{unit}_{section}_act1/
 
 Required canonical files:
@@ -420,8 +452,12 @@ Required canonical files:
   figures/
     only currently referenced Activity-owned figures
 
+DASHBOARD QUICK-VIEW MIRRORS:
+  practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_2.html
+  practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_3.html
+
 ========================================================
-14. RETIRE THE BAD 12-QUESTION ARCHITECTURE
+15. RETIRE THE BAD 12-QUESTION ARCHITECTURE
 ========================================================
 
 When present, remove the short-lived 12-question architecture files:
@@ -430,8 +466,9 @@ When present, remove the short-lived 12-question architecture files:
   u{unit}_{section}_activity_stations.html
   u{unit}_{section}_activity_find_someone_who.html
 
-Do NOT delete the canonical Set 1 / Set 2 files.
-Those names are active again under this PM.
+Do NOT delete:
+- Set 1 / Set 2 Activity files
+- Practice 2 / Practice 3 dashboard quick-view paths
 
 Use transfer DELETE only with exact required SHA-256.
 Never guess hashes.
@@ -442,7 +479,7 @@ If exact bytes cannot be safely recovered:
 - do not block correct new output solely because safe legacy deletion is unavailable.
 
 ========================================================
-15. QA — HARD
+16. QA — HARD
 ========================================================
 
 SOURCE ISOLATION
@@ -490,6 +527,17 @@ FIND SOMEONE WHO
 [ ] compact practical printable layout
 [ ] not one page per question
 
+DASHBOARD QUICK VIEWS
+[ ] Practice 2 quick-view exists at established dashboard path
+[ ] Practice 3 quick-view exists at established dashboard path
+[ ] Practice 2 questions exactly mirror Activity Set 1
+[ ] Practice 3 questions exactly mirror Activity Set 2
+[ ] no workspaces
+[ ] no solutions
+[ ] no new question instances
+[ ] tables/graphs/representations remain visible
+[ ] dashboard-compatible filenames preserved
+
 QUALITY
 [ ] exact Assessment Plan targets preserved
 [ ] Mastery architecture aligns to current family Bank
@@ -498,11 +546,10 @@ QUALITY
 [ ] all questions/solutions correct
 [ ] all representations accurate
 [ ] graph tool route correct
-[ ] Activity-owned figures are self-contained where required
 
 FRESHNESS
 [ ] exactly 48 new instances checked
-[ ] Stations/FSW recognized as intentional reuse, not duplicate authoring
+[ ] Stations/FSW/Practice2/Practice3 recognized as intentional render reuse
 [ ] QUESTION_FRESHNESS: PASS
 
 FINALIZATION
@@ -513,11 +560,15 @@ If all hard checks pass:
 STOP AND DELIVER.
 
 ========================================================
-16. TRANSFER
+17. TRANSFER
 ========================================================
 
 Package through:
   Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt
+
+The transfer may write to BOTH:
+- activities/u{unit}_{section}_act1/
+- practice_sets/practice_sets_{unit}_{section}/
 
 Never commit, push, pull, branch, merge, or create a PR.
 Teacher reviews local changes and alone decides whether to commit/push.

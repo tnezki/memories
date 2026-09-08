@@ -1,9 +1,9 @@
 {
   "name": "Algebra 1 Activities Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v3.1-two-parallel-24-question-sets",
+  "profile_version": "v3.2-two-parallel-sets-plus-dashboard-quickviews",
   "framework_version": "v7.4",
-  "role": "Activities owns exactly two 24-question fresh parallel sets per section. Set 1 parallels Practice 1; Set 2 parallels Extra Practice. Stations and Find Someone Who reuse those same 48 questions.",
+  "role": "Activities owns exactly two 24-question fresh parallel sets per section. Set 1 parallels Practice 1; Set 2 parallels Extra Practice. Stations, Find Someone Who, and dashboard Practice 2/3 pages are reuse-only renders of those same 48 questions.",
   "question_structure_rule": "Use current universal Question Structure for newly authored Set 1 and Set 2 questions.",
   "source_boundary": {
     "allowed_remote_sources": [
@@ -79,6 +79,26 @@
     "set2_filename": "u{unit}_{section}_set2_find_someone_who.html",
     "layout": "compact practical printable handout; not one page per problem"
   },
+  "dashboard_quick_views": {
+    "reuse_only": true,
+    "new_questions_authored": 0,
+    "purpose": "Quick dashboard-accessible question view with no student workspaces.",
+    "practice2": {
+      "mirrors": "Activity Set 1",
+      "path": "practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_2.html"
+    },
+    "practice3": {
+      "mirrors": "Activity Set 2",
+      "path": "practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_3.html"
+    },
+    "render_rules": [
+      "questions only",
+      "no workspaces",
+      "no solutions",
+      "preserve tables/graphs/representations",
+      "use existing Practice shell/CSS"
+    ]
+  },
   "practice_owned_optional_links": {
     "tarsia": "practice_sets/practice_sets_{unit}_{section}/tarsia_{unit}_{section}.txt"
   },
@@ -88,17 +108,27 @@
     "activities_override": "Set 1 may intentionally parallel Practice 1 and Set 2 may intentionally parallel Extra Practice using fresh values/data/context. Exact duplicates still fail.",
     "count_only_new_authored_instances": true,
     "expected_new_instances_per_section": 48,
-    "stations_and_fsw_are_intentional_reuse": true
+    "intentional_reuse_renders": [
+      "Set 1 Stations",
+      "Set 2 Stations",
+      "Set 1 Find Someone Who",
+      "Set 2 Find Someone Who",
+      "Practice 2 dashboard quick-view",
+      "Practice 3 dashboard quick-view"
+    ]
   },
   "outputs": {
-    "root_pattern": "activities/u{unit}_{section}_act1/",
+    "activity_root_pattern": "activities/u{unit}_{section}_act1/",
+    "practice_root_pattern": "practice_sets/practice_sets_{unit}_{section}/",
     "activity_options": "u{unit}_{section}_act1.html",
     "set1_questions_solutions": "u{unit}_{section}_set1_questions_solutions.html",
     "set2_questions_solutions": "u{unit}_{section}_set2_questions_solutions.html",
     "set1_stations": "u{unit}_{section}_set1_stations.html",
     "set2_stations": "u{unit}_{section}_set2_stations.html",
     "set1_find_someone_who": "u{unit}_{section}_set1_find_someone_who.html",
-    "set2_find_someone_who": "u{unit}_{section}_set2_find_someone_who.html"
+    "set2_find_someone_who": "u{unit}_{section}_set2_find_someone_who.html",
+    "practice2_quick_view": "practice_set_{unit}_{section}_2.html",
+    "practice3_quick_view": "practice_set_{unit}_{section}_3.html"
   },
   "retire_when_safe": [
     "u{unit}_{section}_activity_questions_solutions.html",
@@ -106,9 +136,13 @@
     "u{unit}_{section}_activity_find_someone_who.html"
   ],
   "visual": {
-    "stylesheets": [
+    "activity_stylesheets": [
       "../../css/base.css",
       "../../css/activities.css"
+    ],
+    "quick_view_stylesheets": [
+      "../../css/base.css",
+      "../../css/practice_set.css"
     ],
     "reuse_u2_1_gold_standard_shell": true
   }
