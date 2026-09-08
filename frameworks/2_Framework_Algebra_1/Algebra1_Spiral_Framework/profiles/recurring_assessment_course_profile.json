@@ -1,7 +1,7 @@
 {
   "name": "Algebra 1 Recurring + Assessment Resource Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.7",
+  "profile_version": "v2.8",
   "framework_version": "v7.4",
   "role": "Course-specific Warm-Up / Exit / Progress / Review / Summative behavior. Shared PMs own procedure and rendering mechanics; this profile owns Algebra-specific behavior.",
   "warmups": {
@@ -64,26 +64,111 @@
     }
   },
   "exit_tickets": {
-    "usage_mode": "projector_or_collect",
+    "usage_mode": "projector_plus_four_same_day_print_versions",
     "path_template": "exit/exit{U}/exit_{U}.html",
+    "viewer_path_template": "exit/exit{U}/exit_{U}_view.html",
     "instance_map_template": "exit/exit{U}/EXIT_INSTANCE_MAP.json",
-    "architecture": "family_bank_instantiation_with_carryforward_reassessment",
-    "questions_per_official_ticket": 4,
-    "menu": "One official Exit Ticket link per section. No A/B/C tickets.",
-    "normal_pattern": {
-      "new_current_mastery": 2,
-      "previous_section_reassessment": 2
+    "architecture": "two_tickets_per_section_continuous_two_new_two_reassess_chain",
+    "tickets_per_section": 2,
+    "ticket_labels": [
+      "A",
+      "B"
+    ],
+    "questions_per_ticket": 4,
+    "canonical_evidence_slots": [
+      "N1",
+      "N2",
+      "R1",
+      "R2"
+    ],
+    "screen_order": [
+      "N1",
+      "N2",
+      "R1",
+      "R2"
+    ],
+    "new_evidence": {
+      "count_per_ticket": 2,
+      "source": "curriculum/exit_evidence_map.json section new_evidence_jobs",
+      "ticket_a_rule": "Use fresh instances of the section's two mapped current Mastery evidence jobs.",
+      "ticket_b_rule": "Use fresh second opportunities on the SAME two mapped section evidence jobs; do not invent different section targets."
     },
-    "source_rule": "The coursewide Exit evidence map owns slot evidence; the current family Bank supplies reusable architecture; the Exit build creates fresh finished instances.",
-    "new_slot_rule": "Use exact new evidence opportunities assigned by curriculum/exit_evidence_map.json.",
-    "instructional_parallel_rule": "For straightforward procedural/direct evidence, fresh number/data swaps from familiar instructional structures are acceptable. Exact copies are forbidden.",
-    "repeat_slot_rule": "Q3-Q4 reassess previous official Q1-Q2. Preserve same evidence target and same family ID by default.",
-    "repeat_parallel_rule": "For Exit-to-Exit reassessment, fresh number/data/value swaps are explicitly acceptable and often preferred.",
-    "cross_unit_rule": "Unit N Section 1 reassesses Unit N-1 Section 5 Q1-Q2 using the prior Unit EXIT_INSTANCE_MAP.json.",
-    "u1_1_exception": "U1.1 uses four new U1-MG01 opening evidence questions. Q1-Q2 are the carryforward pair for U1.2; Q3-Q4 are additional opening evidence.",
-    "layout": "One official 4-question ticket per section in a 2x2 grid; prompt before representation; no visible internal metadata.",
-    "print_rule": "Print/Collect uses the exact same four questions as screen. Do not generate alternate print forms.",
-    "evidence_map": "curriculum/exit_evidence_map.json"
+    "rolling_reassessment": {
+      "count_per_ticket": 2,
+      "carryforward_slots": [
+        "N1",
+        "N2"
+      ],
+      "ticket_a_source": "previous section Ticket B N1/N2",
+      "ticket_b_source": "same section Ticket A N1/N2",
+      "next_section_rule": "Next section Ticket A reassesses previous section Ticket B N1/N2.",
+      "cross_unit_rule": "Unit N Section 1 Ticket A reassesses Unit N-1 Section 5 Ticket B N1/N2 from the prior EXIT_INSTANCE_MAP.json.",
+      "same_family_default": true,
+      "number_data_swap_allowed": true,
+      "comparability_priority": true
+    },
+    "u1_1_exception": {
+      "ticket_a": "Use four opening evidence jobs; first pair is N1/N2, second pair is opening_new in R1/R2 positions.",
+      "ticket_b": "N1/N2 are fresh second opportunities on designated U1.1 new pair; R1/R2 reassess U1.1 Ticket A N1/N2."
+    },
+    "same_day_print_versions": {
+      "count": 4,
+      "fresh_parallel_instances_required": true,
+      "same_four_evidence_jobs_required": true,
+      "rotation": {
+        "Version 1": [
+          "N1",
+          "N2",
+          "R1",
+          "R2"
+        ],
+        "Version 2": [
+          "N2",
+          "R1",
+          "R2",
+          "N1"
+        ],
+        "Version 3": [
+          "R1",
+          "R2",
+          "N1",
+          "N2"
+        ],
+        "Version 4": [
+          "R2",
+          "N1",
+          "N2",
+          "R1"
+        ]
+      },
+      "purpose": "Same-day anti-copy forms with the same evidence blueprint and rotated visible positions."
+    },
+    "instructional_parallel_rule": "Straightforward new-evidence questions may use fresh number/data parallels from familiar instructional structures. Exact copies are forbidden; distinctive surfaces should vary another meaningful axis when practical.",
+    "reassessment_parallel_rule": "Exit-to-Exit reassessment preserves same target and same family by default. Fresh number/data/value swaps are explicitly acceptable and often preferred.",
+    "viewer": {
+      "required": true,
+      "link_label": "View All Exit Tickets",
+      "link_position": "top right",
+      "return_label": "Exit Ticket View",
+      "grouping": "Section -> Ticket A -> four canonical screen cards; Ticket B -> four canonical screen cards",
+      "show_print_versions": false,
+      "workspace": false,
+      "answers": false,
+      "desktop_columns": 4,
+      "medium_columns": 2,
+      "narrow_columns": 1,
+      "new_question_instances": 0
+    },
+    "layout": "Unit index with Ticket A and Ticket B links per section; canonical screen ticket uses 2x2 four-question layout; print/collect renders four same-day versions.",
+    "evidence_map": "curriculum/exit_evidence_map.json",
+    "evidence_map_cadence_note": "Use evidence-map allocations; legacy one-ticket-per-section cadence prose is superseded by this current profile/PM.",
+    "freshness": {
+      "contract": "Tools/QUESTION_FRESHNESS_CONTRACT.txt",
+      "required_terminal_signal": "QUESTION_FRESHNESS: PASS",
+      "new_evidence_override": "Clean number/data parallels may pass for straightforward procedural/direct tasks.",
+      "reassessment_override": "Same family/structure plus fresh values/data is expected and may pass because comparability is the purpose.",
+      "same_day_versions_rule": "All four versions use fresh sibling instances; exact sibling duplicates fail."
+    }
   },
   "progress_tracker": {
     "usage_mode": "print_first",
