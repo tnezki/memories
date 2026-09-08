@@ -1,10 +1,10 @@
 {
   "name": "Algebra 1 Activities Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v3.0-family-bank-downstream",
+  "profile_version": "v3.1-two-parallel-24-question-sets",
   "framework_version": "v7.4",
-  "role": "Course-specific Activities behavior. Activities change participation around fresh aligned mathematics; they do not recreate Practice 2/3 or a second question bank.",
-  "question_structure_rule": "Use current universal Question Structure for all newly authored Activity questions.",
+  "role": "Activities owns exactly two 24-question fresh parallel sets per section. Set 1 parallels Practice 1; Set 2 parallels Extra Practice. Stations and Find Someone Who reuse those same 48 questions.",
+  "question_structure_rule": "Use current universal Question Structure for newly authored Set 1 and Set 2 questions.",
   "source_boundary": {
     "allowed_remote_sources": [
       "tnezki/memories pinned commit",
@@ -14,15 +14,31 @@
     "file_library_allowed": false,
     "prior_chat_as_curriculum_source_allowed": false
   },
-  "section_question_set": {
-    "count": 12,
-    "stage_counts": {
-      "Intro": 4,
-      "Review": 4,
-      "Mastery": 4
+  "gold_standard_main_page": "algebra/activities/u2_1_act1/u2_1_act1.html",
+  "main_page_rule": "Preserve the U2.1 gold-standard Activity Options page structure and visual behavior, including Teacher & Student Moves, Structure, Setup, Directions, Goal, Looks Like Success, Doesn't Look Like, Rally Coach II, Desmos placeholder, Stations, Find Someone Who, and Tarsia routing.",
+  "question_sets": {
+    "new_question_instances_per_section": 48,
+    "set1": {
+      "count": 24,
+      "source_parallel": "Practice 1",
+      "stage_counts": {
+        "Intro": 8,
+        "Review": 8,
+        "Mastery": 8
+      },
+      "filename": "u{unit}_{section}_set1_questions_solutions.html"
     },
-    "student_stage_labels_required": false,
-    "rule": "One fresh reusable set per section powers all participation structures. Do not create Set 1/Set 2 replacements for retired Practice 2/3."
+    "set2": {
+      "count": 24,
+      "source_parallel": "Extra Practice",
+      "stage_counts": {
+        "Intro": 8,
+        "Review": 8,
+        "Mastery": 8
+      },
+      "filename": "u{unit}_{section}_set2_questions_solutions.html"
+    },
+    "intentional_parallel_rule": "Fresh number/data/context swaps are allowed and expected. Exact duplicate finished questions are forbidden."
   },
   "approved_projection_structures": [
     "Whiteboard Indy",
@@ -32,54 +48,68 @@
     "Showdown",
     "Think, Trade, Agree",
     "Round Table",
-    "Mathematical Hot Seat"
+    "Mathematical Hot Seat",
+    "Rally Coach II",
+    "Desmos Activity"
   ],
   "approved_printable_structures": [
     "Stations",
     "Find Someone Who"
   ],
-  "practice_owned_optional_links": {
-    "tarsia": "practice_sets/practice_sets_{unit}_{section}/tarsia_{unit}_{section}.txt",
-    "blooket": "practice_sets/practice_sets_{unit}_{section}/blooket_{unit}_{section}.csv"
-  },
-  "outputs": {
-    "root_pattern": "activities/u{unit}_{section}_act1/",
-    "activity_options": "u{unit}_{section}_act1.html",
-    "question_set_teacher": "u{unit}_{section}_activity_questions_solutions.html",
-    "stations": "u{unit}_{section}_activity_stations.html",
-    "find_someone_who": "u{unit}_{section}_activity_find_someone_who.html"
-  },
   "stations": {
-    "station_count": 4,
-    "questions_per_station": 3
+    "reuse_only": true,
+    "new_questions_authored": 0,
+    "station_count_per_set": 6,
+    "questions_per_station": 4,
+    "mapping": {
+      "Station 1": "questions 1-4 Intro",
+      "Station 2": "questions 5-8 Intro",
+      "Station 3": "questions 9-12 Review",
+      "Station 4": "questions 13-16 Review",
+      "Station 5": "questions 17-20 Mastery",
+      "Station 6": "questions 21-24 Mastery"
+    },
+    "set1_filename": "u{unit}_{section}_set1_stations.html",
+    "set2_filename": "u{unit}_{section}_set2_stations.html"
+  },
+  "find_someone_who": {
+    "reuse_only": true,
+    "new_questions_authored": 0,
+    "set1_filename": "u{unit}_{section}_set1_find_someone_who.html",
+    "set2_filename": "u{unit}_{section}_set2_find_someone_who.html",
+    "layout": "compact practical printable handout; not one page per problem"
+  },
+  "practice_owned_optional_links": {
+    "tarsia": "practice_sets/practice_sets_{unit}_{section}/tarsia_{unit}_{section}.txt"
   },
   "freshness": {
     "contract": "Tools/QUESTION_FRESHNESS_CONTRACT.txt",
     "required_terminal_signal": "QUESTION_FRESHNESS: PASS",
-    "compare_against": [
-      "Bank exemplars",
-      "student Notes",
-      "Practice 1",
-      "Extra Practice",
-      "CYU",
-      "Tarsia",
-      "Blooket",
-      "earlier Activity questions in same build",
-      "other already-built public same-section artifacts"
-    ],
-    "participation_wrapper_makes_repeat_fresh": false
+    "activities_override": "Set 1 may intentionally parallel Practice 1 and Set 2 may intentionally parallel Extra Practice using fresh values/data/context. Exact duplicates still fail.",
+    "count_only_new_authored_instances": true,
+    "expected_new_instances_per_section": 48,
+    "stations_and_fsw_are_intentional_reuse": true
   },
-  "retired": [
-    "Practice Set 2 dependency",
-    "Practice Set 3 dependency",
-    "two 24-question Activity source sets",
-    "retired _practice_3 Tarsia/Blooket filenames"
+  "outputs": {
+    "root_pattern": "activities/u{unit}_{section}_act1/",
+    "activity_options": "u{unit}_{section}_act1.html",
+    "set1_questions_solutions": "u{unit}_{section}_set1_questions_solutions.html",
+    "set2_questions_solutions": "u{unit}_{section}_set2_questions_solutions.html",
+    "set1_stations": "u{unit}_{section}_set1_stations.html",
+    "set2_stations": "u{unit}_{section}_set2_stations.html",
+    "set1_find_someone_who": "u{unit}_{section}_set1_find_someone_who.html",
+    "set2_find_someone_who": "u{unit}_{section}_set2_find_someone_who.html"
+  },
+  "retire_when_safe": [
+    "u{unit}_{section}_activity_questions_solutions.html",
+    "u{unit}_{section}_activity_stations.html",
+    "u{unit}_{section}_activity_find_someone_who.html"
   ],
   "visual": {
     "stylesheets": [
       "../../css/base.css",
       "../../css/activities.css"
     ],
-    "reuse_current_deployed_activity_shell": true
+    "reuse_u2_1_gold_standard_shell": true
   }
 }
