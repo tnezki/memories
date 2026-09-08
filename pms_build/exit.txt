@@ -1,60 +1,577 @@
-BUILD EXIT TICKETS — SINGLE PASS / PROFILE-DRIVEN
-==================================================
+BUILD EXIT TICKETS — ALGEBRA 1 / FAMILY BANK / CARRYFORWARD REASSESSMENT
+===============================================================================
 
 STATUS: CURRENT
 STEP: 7
 JOB: exit
-ROLE: Render/build the selected Unit official Exit Ticket artifact from the selected course Framework/profile and COMPLETE canonical Unit Bank.
+REVISION: 2026-09-07 v3.0
+ROLE: Build one official four-question Algebra 1 Exit Ticket per section from the exact
+coursewide Exit evidence map and the current family Bank.
 
-0. AUTHORITY — HARD
-Pin system + selected course repos once.
-Read:
-1. Curriculum Philosophy
-2. Runtime Contract
-3. current Question Structure
-4. selected Course Framework + exact Unit Assessment Plan
-5. Framework-declared recurring/Exit profile + canonical operational Exit map when declared
-6. COMPLETE Unit Bank manifest/index + canonical Exit route
-7. this PM
-8. selected-course Exit visual/path contract + same-course deployed shell exemplar when required
+CORE PRINCIPLE
+--------------
+Exit Tickets are official evidence events.
 
-Do not hard-code Physics A/B/C or Algebra 2-new/2-repeat into every course. The selected profile controls architecture.
+The coursewide Exit evidence map owns WHAT evidence is collected and WHEN.
+The family Bank owns reusable question architecture.
+The Exit build owns the fresh finished instances.
 
-1. BANK / SOURCE GATE — HARD
-Require COMPLETE Bank and exact canonical Exit records declared by Bank manifest/index.
-If the selected course Bank contains finished official Exit questions, render them faithfully.
-If the selected profile instead declares family instantiation, follow that course's current family contract.
-Never borrow Practice/Summative content to fill a missing official Exit route.
+For a normal section:
+- Q1-Q2 = NEW current-section Mastery evidence
+- Q3-Q4 = REASSESSMENT of the previous section's Q1-Q2 carryforward pair
 
-2. ALGEBRA 1 v7.1 — HARD
-One official four-question ticket per section.
-Use exact canonical Bank ticket records authored from curriculum/exit_evidence_map.json:
-- Q1-Q2 = current section's two new mapped Mastery evidence jobs;
-- Q3-Q4 = fresh parallel reassessments of previous section carryforward pair;
-- U1.1 = four new U1-MG01 opening questions with Q1-Q2 as carryforward pair.
-No A/B/C stage tickets.
-Do not re-author or remap downstream unless repairing an identified upstream Bank defect.
+The reassessment is deliberately comparable to the earlier evidence.
+It should be fresh, but it does NOT need to look novel.
 
-3. OTHER COURSES
-Preserve their current profile. If Physics uses secure family pools / A-B-C forms, keep that behavior. Course profile wins.
+========================================================
+0. SOURCE BOUNDARY — HARD
+========================================================
 
-4. QUESTION STRUCTURE / SECURITY
-Every authored/instantiated Exit question must execute current Question Structure unless the selected course explicitly exempts it.
-Preserve security and fresh-parallel rules.
-Do not leak answers/internal metadata into student output.
+Use ONLY:
+1. current request / current explicit teacher instruction;
+2. request-provided files;
+3. exact pinned project GitHub sources from:
+   - tnezki/memories
+   - tnezki/algebra
 
-5. RENDER
-Use selected-course Exit path/visual contracts. Preserve prompt-before-representation behavior when profile requires it. Build projector/collect/print variants only when current profile requires them.
+HARD TOOL BAN
+-------------
+Do NOT invoke:
+- public web search;
+- search engines;
+- public webpage/browser fetch;
+- outside internet research;
+- external curriculum/question banks;
+- ChatGPT File Library;
+- prior-chat or saved-memory retrieval as a curriculum source.
 
-6. QA — HARD
-[ ] correct course architecture selected
-[ ] canonical Exit source complete
-[ ] exact goal/I Can/evidence allocation preserved
-[ ] Algebra chain matches Exit map when applicable
-[ ] no cross-course A/B/C leakage
-[ ] Question Structure executed for authored/instantiated items
-[ ] answers/solutions/representations correct
-[ ] security preserved
-[ ] shell/CSS/paths correct
+Allowed remote reads are LIMITED to the exact pinned project GitHub sources above.
 
-Return one deployable Unit Exit package.
+Direct GitHub connector reads from those repos are allowed.
+Downloading/reconstructing exact pinned GitHub files for local execution is allowed.
+Running pinned project tools locally is allowed.
+
+If ANY public-web/search/browser tool is invoked:
+STOP with:
+  PUBLIC_WEB_TOOL_VIOLATION
+Produce NO artifact and NO transfer ZIP.
+
+If a declared project dependency is missing:
+STOP with exact repository + commit + path.
+Do not search outside the project for a substitute.
+
+========================================================
+1. READ ORDER / AUTHORITIES
+========================================================
+
+Pin memories + algebra commits once at job start.
+
+Read in this order:
+
+1. Curriculum_Philosophy.txt
+2. SYSTEM_RUNTIME_CONTRACT.txt
+3. current universal Question Structure
+4. current Algebra 1 Framework
+5. exact selected Unit Assessment Plan
+6. Algebra recurring assessment course profile:
+   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+   profiles/recurring_assessment_course_profile.json
+7. canonical coursewide Exit evidence map:
+   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/
+   curriculum/exit_evidence_map.json
+8. current Unit family Bank:
+   algebra/banks/unit{U}/BANK_MANIFEST.json
+   algebra/banks/unit{U}/FAMILY_INDEX.json
+   algebra/banks/unit{U}/delivery_map.json
+   algebra/banks/unit{U}/mastery_goals/*.json
+9. prior official Exit instance map when reassessment crosses a Unit boundary:
+   algebra/exit/exit{U-1}/EXIT_INSTANCE_MAP.json
+10. current student-facing Notes / Practice / Activities / Warm-Ups / CYU / prior Exit
+    as FRESHNESS COMPARISON SURFACES ONLY
+11. Tools/QUESTION_FRESHNESS_CONTRACT.txt
+12. current registered graph tool from Tools/MANIFEST.json when needed
+13. algebra/css/exit.css
+14. current same-course Exit shell/path exemplar
+15. this PM
+
+AUTHORITY BY DOMAIN
+-------------------
+Exit evidence map
+-> exact evidence allocation and carryforward chain
+
+Family Bank
+-> reusable architecture / invariants / allowed variation
+
+Question Structure
+-> authored question execution
+
+Previously built student artifacts
+-> freshness comparison only, NEVER target/question authority
+
+========================================================
+2. FAMILY BANK GATE — HARD
+========================================================
+
+Require:
+
+  schema_version = family-bank/1.0
+  status = COMPLETE
+  ready_for_downstream = true
+  qa = PASS
+
+The Bank contains reusable families and exemplars.
+It does NOT contain frozen finished Exit Tickets.
+
+DO NOT:
+- require old canonical Exit records;
+- copy Bank exemplars into Exit;
+- rebuild a giant Bank inventory;
+- treat Practice/Notes questions as the official Exit source.
+
+For each new Exit slot:
+1. resolve exact Mastery Goal / I Can / evidence job from exit_evidence_map.json;
+2. identify Exit-allowed family choices from delivery_map.json;
+3. choose the family whose invariant/evidence job best executes the mapped evidence;
+4. create a fresh finished instance.
+
+========================================================
+3. OFFICIAL TICKET ARCHITECTURE — HARD
+========================================================
+
+Exactly ONE official four-question Exit Ticket per section.
+
+NORMAL SECTION
+--------------
+Q1 = new current-section Mastery evidence
+Q2 = new current-section Mastery evidence
+Q3 = fresh reassessment of previous section Q1
+Q4 = fresh reassessment of previous section Q2
+
+NO:
+- Ticket A
+- Ticket B
+- Ticket C
+- Intro / Review / Mastery ticket variants
+- Version 1 / 2 / 3 / 4 print forms as separate question inventories
+
+Printing/collecting the ticket uses the SAME four questions shown on screen.
+Do not create alternate print questions.
+
+========================================================
+4. OPENING / TERMINAL EXCEPTIONS
+========================================================
+
+U1.1
+----
+Follow the exact opening exception in exit_evidence_map.json.
+
+U1.1 has four NEW U1-MG01 evidence questions:
+- Q1-Q2 = designated carryforward pair for U1.2
+- Q3-Q4 = additional opening evidence
+- no fake previous-section reassessment
+
+UNIT BOUNDARY
+-------------
+For Unit N Section 1:
+- Q3-Q4 reassess Unit N-1 Section 5 Q1-Q2
+- read the prior Unit EXIT_INSTANCE_MAP.json
+- preserve the prior carried family/evidence architecture
+
+If Unit N > 1 and the required prior official carryforward instance record is missing:
+STOP with:
+  MISSING_PRIOR_EXIT_CARRYFORWARD
+and report the exact missing path.
+
+Do not guess which prior family was used.
+Do not silently substitute a different evidence route.
+
+U8.5
+----
+Follow the terminal rule in exit_evidence_map.json.
+Do not invent a nonexistent later Algebra Exit Ticket.
+
+========================================================
+5. Q1-Q2 NEW EVIDENCE AUTHORING
+========================================================
+
+For each mapped NEW evidence slot:
+
+1. preserve exact Mastery Goal;
+2. preserve primary I Can;
+3. include mapped supporting I Can evidence when required;
+4. preserve exact evidence job;
+5. select an appropriate Exit-allowed family;
+6. create a fresh finished instance;
+7. execute current Question Structure;
+8. verify correctness and representation.
+
+NEW-EVIDENCE PARALLEL RULE
+--------------------------
+Students may have practiced the same skill or family in:
+- Notes
+- Practice 1
+- Extra Practice
+- CYU
+- Activities
+- Warm-Ups
+
+That is expected.
+
+For straightforward procedural/direct tasks, it is ACCEPTABLE for an Exit question to be a
+clean fresh parallel that keeps the same prompt skeleton and changes the values/data.
+
+Examples of acceptable fresh parallelism:
+- same solve/evaluate structure with new values;
+- same table-reading structure with new table values;
+- same slope-from-two-points structure with new points;
+- same input/output structure with a new rule and values.
+
+For a DISTINCTIVE task surface, change more than numbers when practical:
+- graph
+- table with unusual pattern
+- context/stimulus
+- error-analysis setup
+- reasoning/decision prompt
+- shared data set
+
+For those, prefer changing at least one additional meaningful axis such as:
+- representation details;
+- direction;
+- missing information;
+- context relationship;
+- misconception;
+- comparison target;
+- decision.
+
+Do NOT force novelty that weakens the evidence job.
+
+========================================================
+6. Q3-Q4 REASSESSMENT — COMPARABILITY FIRST
+========================================================
+
+This is the key repeat rule.
+
+A reassessment question must preserve:
+
+- same source evidence job as prior Q1/Q2;
+- same Mastery Goal / I Can target;
+- SAME FAMILY ID by default;
+- same family invariant;
+- same response mode;
+- same representation mode by default;
+- similar usable difficulty;
+- similar amount of reasoning/work.
+
+The purpose is to measure the same evidence again.
+
+REASSESSMENT FRESHNESS OVERRIDE
+-------------------------------
+For official Exit-to-Exit reassessment:
+
+A number/data/value swap is EXPLICITLY ACCEPTABLE and OFTEN PREFERRED.
+
+Examples:
+- new coordinates on the same type of coordinate-plane task;
+- new values in the same evaluation structure;
+- new slope values in the same graph/table architecture;
+- new input/output rule with the same missing-value job;
+- new scale/intercepts on the same kind of graph-reading task.
+
+Do NOT change family merely to make the repeat "look fresh."
+
+Do NOT add a new representation or reasoning demand unless the family/source evidence already
+permits it and comparability remains strong.
+
+Still prohibited:
+- exact previous question repeated;
+- same distinctive values/data/stimulus;
+- same graph/table reused;
+- same answer accidentally preserved through trivial renaming when the whole task is effectively identical.
+
+This Exit-specific repeat rule OVERRIDES the shared freshness contract's normal
+"cosmetic parallel — repair by default" behavior for Q3-Q4 reassessment.
+
+========================================================
+7. CARRYFORWARD CHAIN — MACHINE-READABLE
+========================================================
+
+Create:
+
+  exit/exit{U}/EXIT_INSTANCE_MAP.json
+
+Purpose:
+- preserve exactly what family/architecture was used;
+- allow the next section / next Unit to build comparable Q3-Q4 reassessments;
+- make the carryforward chain deterministic and traceable.
+
+For every section and Q1-Q4 record:
+
+- section_id
+- slot
+- role: new | reassessment | opening_new
+- mastery_goal_id
+- primary_i_can_id or index
+- evidence_job
+- family_id
+- family_label
+- question_structure_id
+- response_mode
+- representation_mode
+- source_section_id when reassessment
+- source_slot when reassessment
+- source_family_id when reassessment
+- compact instance signature:
+  - key values/data identity
+  - representation signature
+  - context/stimulus signature when applicable
+- canonical student question ID
+- answer / correctness checksum MAY be retained only if it does not leak into student HTML
+
+The map is internal build metadata.
+Do not display it in the student ticket.
+
+CARRYFORWARD SOURCE
+-------------------
+For Section S>1 in the current Unit:
+- Q3 sources the already-built current-Unit Section S-1 Q1 record
+- Q4 sources the already-built current-Unit Section S-1 Q2 record
+
+For Unit Section 1:
+- use prior Unit Section 5 Q1/Q2 records
+
+========================================================
+8. QUESTION FRESHNESS GATE — HARD
+========================================================
+
+Follow:
+  Tools/QUESTION_FRESHNESS_CONTRACT.txt
+
+WITH THESE EXIT-SPECIFIC RULES:
+
+A. Q1-Q2 NEW EVIDENCE
+- exact duplicate = FAIL
+- clean number/data parallel to prior instructional work = MAY PASS
+- distinctive reasoning/representation task should usually vary another meaningful axis when practical
+
+B. Q3-Q4 REASSESSMENT
+- same family/structure is EXPECTED
+- fresh values/data may be sufficient
+- comparability is more important than novelty
+- exact previous finished instance still FAILS
+
+COMPARE NEW EXIT INSTANCES AGAINST
+----------------------------------
+1. relevant Bank exemplars
+2. current Notes student prompts
+3. Practice 1
+4. Extra Practice
+5. CYU
+6. Activities Set 1 / Set 2
+7. Warm-Ups
+8. earlier Exit questions in the current build
+9. the exact prior official Exit source for Q3-Q4
+10. prior public Exit artifacts for the same target when present
+
+Compared artifacts are freshness surfaces only.
+
+REPAIR RULE
+-----------
+Repair the NEW Exit item only.
+Never alter prior canonical evidence to resolve a collision.
+
+Required terminal signal:
+  QUESTION_FRESHNESS: PASS
+
+Compact report:
+- comparison surfaces
+- exact collisions
+- collisions repaired
+- reassessment parallels accepted
+- unresolved collisions
+
+========================================================
+9. QUESTION STRUCTURE / QUALITY
+========================================================
+
+Every authored Exit question must execute current Question Structure.
+
+Preserve:
+- target
+- evidence job
+- student action
+- structure
+- response mode
+- representation mode
+- executable route
+
+Keep direct questions direct.
+Do not force critique/error analysis into a direct evidence job.
+
+Use natural, readable values.
+
+Difficulty should come from the mathematics/evidence demand, not inflated arithmetic.
+
+========================================================
+10. REPRESENTATIONS
+========================================================
+
+If the question names a representation, provide the real representation:
+- semantic HTML table
+- graph
+- mapping
+- coordinate plane
+- context
+- ordered pairs
+
+Prompt-before-representation when required by the current Exit shell/profile.
+
+Use the current registered graph tool for Algebra coordinate graphs.
+Do not hand-build coordinate SVG as a substitute.
+
+Store current Exit-owned figures in:
+
+  exit/exit{U}/figures/
+
+Do not reuse a Notes/Practice/Activity graph file as the exact Exit task.
+Generate the fresh Exit representation.
+
+========================================================
+11. RENDER / PATHS
+========================================================
+
+Canonical Unit path:
+
+  exit/exit{U}/exit_{U}.html
+
+Also create:
+
+  exit/exit{U}/EXIT_INSTANCE_MAP.json
+
+Student-visible page:
+- Unit index/menu at top
+- ONE link per section
+- one official ticket per section
+- 4 questions in a 2x2 grid
+- one full viewport where practical
+- no A/B/C
+- no alternate numbered forms
+- no answers
+- no internal metadata
+
+PRINT / COLLECT
+---------------
+If the current shell has a Print / Collect control:
+- preserve it;
+- print the SAME four questions;
+- include student name line if current shell supports it;
+- do not create additional question versions.
+
+========================================================
+12. QA — HARD
+========================================================
+
+SOURCE ISOLATION
+[ ] PUBLIC_WEB_USED = false
+[ ] only exact pinned tnezki/memories + tnezki/algebra remote reads
+[ ] no File Library / prior-chat / saved-memory curriculum source
+
+BANK / MAP
+[ ] family Bank schema/status/downstream readiness PASS
+[ ] exact Exit evidence map resolved
+[ ] exact section IDs/titles match Framework
+[ ] exact evidence jobs preserved
+[ ] Exit-allowed family selected for each new slot
+
+ARCHITECTURE
+[ ] exactly one official 4-question ticket per section
+[ ] no A/B/C tickets
+[ ] no alternate print question forms
+[ ] normal Q1-Q2 = new evidence
+[ ] normal Q3-Q4 = prior carryforward reassessment
+[ ] U1.1 opening exception correct
+[ ] Unit boundary carryforward correct
+
+REASSESSMENT
+[ ] Q3 source = prior section Q1
+[ ] Q4 source = prior section Q2
+[ ] same evidence target
+[ ] same family ID by default
+[ ] same response/representation mode by default
+[ ] usable difficulty comparable
+[ ] fresh values/data/stimulus
+[ ] no exact repeat
+
+NEW EVIDENCE
+[ ] no exact Notes/Practice/Activity/Warm-Up question copied
+[ ] straightforward procedural parallels may use fresh number/data swaps
+[ ] distinctive surfaces vary an additional meaningful axis when practical
+[ ] Bank exemplar not copied
+
+FRESHNESS
+[ ] QUESTION_FRESHNESS: PASS
+
+CORRECTNESS
+[ ] all answers/solutions verified internally
+[ ] all representations correct
+[ ] graph tool route correct
+[ ] no answer/internal metadata leakage
+
+INSTANCE MAP
+[ ] EXIT_INSTANCE_MAP.json exists
+[ ] all section Q1-Q4 records present
+[ ] reassessment source links exact
+[ ] carryforward Q1-Q2 family IDs recorded
+
+VISUAL
+[ ] one section link per section
+[ ] 2x2 ticket layout
+[ ] prompt-before-representation where required
+[ ] print uses same four questions
+[ ] no clipping/overlap
+
+FINALIZATION
+[ ] run current Tools/finalize_output.py
+[ ] FINALIZATION_QA: PASS
+
+If all hard checks pass:
+STOP AND DELIVER.
+
+========================================================
+13. BUILD REPORT
+========================================================
+
+Include:
+
+  _exit_provenance/
+    unit{U}/
+      EXIT_BUILD_REPORT.txt
+
+Report only:
+- pinned Framework/profile/evidence-map/Bank identities
+- Unit
+- section count
+- total official question count
+- new-evidence count
+- reassessment count
+- reassessment parallels accepted by number/data-only rule
+- exact collisions found/repaired
+- QUESTION_FRESHNESS result
+- finalization result
+- material warning only
+
+Do not include PM copies or staging files in the course artifact.
+
+========================================================
+14. TRANSFER
+========================================================
+
+Package through:
+  Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt
+
+Destination repo:
+  tnezki/algebra
+
+Never commit, push, pull, branch, merge, or create a PR.
+Teacher reviews local changes and alone decides whether to commit/push.
+
+END — BUILD EXIT TICKETS

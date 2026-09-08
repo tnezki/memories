@@ -1,7 +1,7 @@
 {
   "name": "Algebra 1 Recurring + Assessment Resource Profile",
   "course": "Algebra 1",
-  "profile_version": "v2.5",
+  "profile_version": "v2.6",
   "framework_version": "v7.4",
   "role": "Course-specific Warm-Up / Exit / Progress / Review / Summative behavior. Shared PMs own procedure and rendering mechanics; this profile owns Algebra-specific behavior.",
   "warmups": {
@@ -44,18 +44,30 @@
   "exit_tickets": {
     "usage_mode": "projector_or_collect",
     "path_template": "exit/exit{U}/exit_{U}.html",
+    "instance_map_template": "exit/exit{U}/EXIT_INSTANCE_MAP.json",
+    "architecture": "family_bank_instantiation_with_carryforward_reassessment",
     "questions_per_official_ticket": 4,
-    "menu": "One official Exit Ticket link per section. Retire A/B/C as three canonical stage tickets.",
+    "menu": "One official Exit Ticket link per section. No A/B/C tickets.",
     "normal_pattern": {
       "new_current_mastery": 2,
       "previous_section_reassessment": 2
     },
-    "new_slot_rule": "Use the two new evidence opportunities assigned by the coursewide Exit evidence map; do not remap them downstream.",
-    "repeat_slot_rule": "Use the two fresh parallel reassessment questions authored in the canonical Bank for the previous section carryforward pair. Preserve the evidence target and useful difficulty.",
-    "cross_unit_rule": "Unit N Section 1 normally reassesses Unit N-1 Section 5.",
-    "u1_1_exception": "U1.1 uses four new U1-MG01 readiness/mastery evidence questions. Q1-Q2 are the carryforward pair for U1.2; Q3-Q4 are additional opening evidence.",
-    "intro_review_rule": "Intro and Review evidence is primarily formative during instruction. If the teacher wants a focused Intro/Review check, generate a small reteach/recovery check on demand; it is not automatically official/canonical portfolio evidence.",
-    "layout": "One full viewport with four questions in a 2x2 grid; prompt before representation; no visible internal metadata.",
+    "source_rule": "The coursewide Exit evidence map owns slot evidence; the current family Bank supplies reusable architecture; the Exit build creates fresh finished instances.",
+    "new_slot_rule": "Use the exact two new evidence opportunities assigned by curriculum/exit_evidence_map.json. Select an Exit-allowed family that best executes the mapped evidence job and create a fresh instance.",
+    "instructional_parallel_rule": "For straightforward procedural/direct evidence, fresh number/data swaps from familiar Notes/Practice/Activity structures are acceptable. Exact finished-question copies are forbidden. Distinctive graphs/tables/contexts/reasoning prompts should vary another meaningful axis when practical.",
+    "repeat_slot_rule": "Q3-Q4 reassess the previous official Q1-Q2 carryforward pair. Preserve the same evidence target and same family ID by default, with comparable response/representation mode and usable difficulty.",
+    "repeat_parallel_rule": "For Exit-to-Exit reassessment, a fresh number/data/value swap is explicitly acceptable and often preferred. Exact prior values/data/stimulus may not be reused. Do not change family merely to make the repeat look novel.",
+    "cross_unit_rule": "Unit N Section 1 reassesses Unit N-1 Section 5 Q1-Q2 using the prior Unit EXIT_INSTANCE_MAP.json. Missing prior carryforward metadata fails closed with MISSING_PRIOR_EXIT_CARRYFORWARD.",
+    "u1_1_exception": "U1.1 uses four new U1-MG01 opening evidence questions. Q1-Q2 are the carryforward pair for U1.2; Q3-Q4 are additional opening evidence.",
+    "terminal_rule": "U8.5 has no later Algebra Exit Ticket; follow the coursewide Exit evidence map terminal rule.",
+    "freshness": {
+      "contract": "Tools/QUESTION_FRESHNESS_CONTRACT.txt",
+      "required_terminal_signal": "QUESTION_FRESHNESS: PASS",
+      "new_evidence_override": "Clean number/data parallels may pass for straightforward procedural/direct tasks; exact copies fail.",
+      "reassessment_override": "Same family/structure plus fresh values/data is expected and may pass because comparability is the purpose."
+    },
+    "layout": "One official 4-question ticket per section in a 2x2 grid; one full viewport where practical; prompt before representation; no visible internal metadata.",
+    "print_rule": "Print/Collect uses the exact same four questions as the screen ticket. Do not generate alternate print forms.",
     "evidence_map": "curriculum/exit_evidence_map.json"
   },
   "progress_tracker": {
