@@ -238,10 +238,93 @@
         "security_role": {
           "type": "string"
         },
+        "metadata": {
+          "$ref": "#/$defs/question_metadata"
+        },
         "notes": {
           "type": "string"
         }
       }
+    },
+    "question_metadata": {
+      "type": "object",
+      "description": "Optional provenance/alignment metadata recorded after or alongside question design. Metadata describes the finished task; it does not override evidence/structure requirements.",
+      "properties": {
+        "curriculum_topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "course_framework": {
+          "type": "string"
+        },
+        "textbook_section": {
+          "type": "string"
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "source_ref": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "source_treatment": {
+          "type": "string"
+        },
+        "mathematical_practices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "task_verb": {
+          "type": "string"
+        },
+        "calculator_policy": {
+          "enum": [
+            "not_permitted",
+            "permitted",
+            "required",
+            "neutral"
+          ]
+        },
+        "ap_exam_style": {
+          "type": "string"
+        },
+        "difficulty_stage": {
+          "enum": [
+            "Intro",
+            "Review",
+            "Mastery"
+          ]
+        },
+        "dok": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        },
+        "bloom": {
+          "type": "string"
+        },
+        "question_family_id": {
+          "type": "string"
+        },
+        "audit_status": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
     }
   }
 }

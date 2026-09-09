@@ -1,17 +1,18 @@
 {
   "package": "_question_structure",
-  "version": "1.2",
+  "version": "1.3",
   "created": "2026-08-27",
-  "updated": "2026-08-29",
-  "purpose": "Dedicated question-design/structure authority with plan-first JSON workflow, executable render/completion gates, and hard evidence-response-representation alignment.",
+  "updated": "2026-09-08",
+  "purpose": "Dedicated question-design/structure authority with plan-first JSON workflow, executable render/completion gates, hard evidence-response-representation alignment, and optional traceable question metadata/provenance.",
   "source_basis": [
     "teacher-authored variety rules from 2026-08-27",
     "Question_Structure_and_Visual_Toolkit_v1_7 structure library/catalog",
     "2026-08-29 Bank-v2 pilot QA: selected-response, table, graph, diagram, and representation execution hardening",
-    "2026-08-29 Unit 1 Bank Map regression: fit-before-category allocation, evidence/response alignment, and concrete diagram-route enforcement"
+    "2026-08-29 Unit 1 Bank Map regression: fit-before-category allocation, evidence/response alignment, and concrete diagram-route enforcement",
+    "2026-09-08 AP Calculus build request: add optional topic/source/practice/calculator/provenance metadata without changing the executable evidence chain"
   ],
-  "authority_note": "Core/workflow/catalog files in this package override conflicting question-authoring guidance in older combined toolkits; visual assets remain owned by the visual toolkit/course Framework. Structure/response/representation/tool fields are executable acceptance criteria, not descriptive metadata. Category labels never justify a task that does not fit the target.",
-  "file_count": 20,
+  "authority_note": "Core/workflow/catalog files in this package override conflicting question-authoring guidance in older combined toolkits; visual assets remain owned by the visual toolkit/course Framework. Structure/response/representation/tool fields are executable acceptance criteria, not descriptive metadata. Category labels never justify a task that does not fit the target. Metadata is descriptive/provenance support and never substitutes for the executable evidence-response-representation chain.",
+  "file_count": 21,
   "files": [
     {
       "path": "QUESTION_STRUCTURE_CORE.md",
@@ -50,8 +51,8 @@
     },
     {
       "path": "contracts/question_design_schema.json",
-      "bytes": 5138,
-      "sha256": "2be1192855094241f94717ff7f6cdd14bd7e16cc598882b23cce4278082f4fe3"
+      "bytes": 7069,
+      "sha256": "51c905d4ab3c0993d83f9d91bb18a9c7022b8db1905ed90aff3ce4e402febabd"
     },
     {
       "path": "contracts/question_design_workflow.json",
@@ -87,6 +88,11 @@
       "path": "guides/parallel_family_rules.md",
       "bytes": 950,
       "sha256": "ffe5593fdafb2d1e8150af368e5d7e35b65a0b2c7e11625dda449179de16c083"
+    },
+    {
+      "path": "guides/question_metadata.md",
+      "bytes": 1283,
+      "sha256": "755c6ad5996f2c97313c449fb0b67d4f79f3434fec7765ba8f71a2d58c81d54b"
     },
     {
       "path": "guides/representation_selection.md",
