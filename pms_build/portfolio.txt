@@ -1,602 +1,604 @@
-PORTFOLIO / ASSESS NEW EVIDENCE — SINGLE PASS / COURSE-NEUTRAL BODY-OF-EVIDENCE ENGINE
-================================================================================================
+PORTFOLIO / ASSESS NEW EVIDENCE — PERSISTENT DRIVE WORKFLOW
+============================================================
 
 STATUS: CURRENT
 STEP: 18
 JOB: portfolio
-ROLE: Analyze newly supplied student evidence, map it to the current Course Framework learning architecture, update the private longitudinal Portfolio State, and recommend next instructional / Progress Tracker moves while preserving teacher professional judgment.
+ROLE: Ingest newly supplied student evidence, preserve it in the private Portfolio Drive, update the longitudinal body of evidence, regenerate current student/teacher outputs, and produce current PowerSchool import CSVs without averaging evidence or replacing teacher professional judgment.
 
-This is ONE build PM.
-There is no nested Portfolio PM folder, local manifest, control-panel profile, bundled Algebra-only rubric, or separate schema dependency.
+THIS PM REPLACES THE LEGACY PORTFOLIO STATE-ZIP WORKFLOW.
+The canonical persistent state is the teacher's Google Drive Portfolio folder, not a returned Portfolio State ZIP.
 
-FLOW:
-  PHILOSOPHY + RUNTIME + CURRENT COURSE FRAMEWORK
-    -> RESOLVE EXACT UNIT / I-CAN / MASTERY-GOAL EVIDENCE ARCHITECTURE
-    -> LOAD PRIOR PORTFOLIO STATE WHEN SUPPLIED
-    -> INSPECT NEW ASSESSMENT / PERFORMANCE / SURVEY EVIDENCE
-    -> MAP EACH USABLE EVIDENCE POINT TO THE EXACT LEARNING TARGET
-    -> JUDGE EVIDENCE STRENGTH WITHOUT POINT AVERAGING
-    -> UPDATE LONGITUDINAL BODY-OF-EVIDENCE RECOMMENDATIONS
-    -> COMPARE STUDENT SELF-REPORT WITH DEMONSTRATED EVIDENCE WHEN SURVEY DATA EXISTS
-    -> GENERATE STUDENT FEEDBACK + TEACHER REVIEW QUEUE + TRACKER RECOMMENDATIONS
-    -> RETURN ONE COMPLETE PRIVATE PORTFOLIO STATE ZIP
+NORMAL TEACHER WORKFLOW
+-----------------------
+1. In the Curriculum Control Panel choose Course + Unit + Job 18.
+2. Attach the NEW evidence for this run.
+3. On the FIRST Portfolio run for that course/unit, also attach the current PowerSchool template/export so the roster, stable IDs, periods, and export shape can be initialized.
+4. Save the request ZIP and run it in a new chat.
+5. The job does the rest: preserve raw evidence, read prior Portfolio data from Drive, append new evidence, recalculate current status, replace current PDFs/data, and return downloadable PDFs + PowerSchool CSVs.
+
+Routine later runs should normally require ONLY the new evidence.
+Do not require the teacher to re-upload old evidence, prior reports, prior trackers, or the roster after initialization unless the roster/template genuinely changed.
 
 ======================================================================
-0. TOOL / PRIVACY POLICY — EXECUTABLE HARD GATE
+0. PRIVATE WORKFLOW / TOOL POLICY — HARD
 ======================================================================
 
-This is a PRIVATE STUDENT-EVIDENCE workflow.
+This is a PRIVATE student-evidence workflow.
 
 HARD:
-- do not place student work, names, IDs, reports, survey responses, portfolio state, or grade-like data in the public course repository;
-- do not write student evidence to GitHub;
+- never place student evidence, student names, IDs, reports, grade-like data, survey responses, or Portfolio state in a public course repository;
+- never write student Portfolio data to GitHub;
 - do not use public-web search to interpret student work;
-- do not infer missing student identity;
-- do not preserve unnecessary sensitive personal information from uploaded surveys/files;
-- do not calculate or export an overall course grade unless a future explicit teacher instruction and current Portfolio policy authorize that action;
-- teacher professional judgment remains final.
+- do not infer ambiguous student identity;
+- minimize preserved personal data to what the workflow actually needs;
+- teacher professional judgment remains final;
+- do not expose internal rubric/schema/PM mechanics in student-facing reports.
 
-Use current uploaded files directly. For scans/photos/PDFs, inspect the actual student-facing pages. If handwriting or an image cannot be read defensibly, mark the evidence unresolved and route it to teacher review rather than guessing.
+Allowed sources:
+1. current request / teacher instruction;
+2. files attached to the current request;
+3. current private Portfolio state in the connected Google Drive location defined below;
+4. exact pinned project GitHub sources from the request for system/course learning authority and public Bank links.
+
+Do NOT recover old Portfolio data from prior chats, saved memory, or File Library.
+The persistent Drive state is the longitudinal authority.
+
+If Google Drive access required by this job is unavailable, STOP with `PORTFOLIO_DRIVE_UNAVAILABLE` rather than silently creating a disconnected local-only state.
 
 ======================================================================
-1. AUTHORITY / READ ORDER
+1. CANONICAL DRIVE LOCATION / FOLDER SHAPE
 ======================================================================
 
-Pin the system repository and selected course repository once at job start. Never mix later commits into the run.
+Portfolio root folder name:
+  ____Portfolio_Data
+
+For selected Course and Unit N, canonical path:
+  ____Portfolio_Data/<Course>/unit N/
+
+Examples:
+  ____Portfolio_Data/Algebra 1/unit 1/
+  ____Portfolio_Data/Physics/unit 1/
+  ____Portfolio_Data/AP Calculus AB/unit 1/
+
+Inside each unit folder use exactly:
+
+  01 Evidence Inbox/
+  02 Portfolio Data/
+  03 Student Packets/
+  04 Class & Intervention Summaries/
+  05 PowerSchool Exports/
+
+Do not create `MOCKUP`, `test`, `old`, `archive`, `html`, or duplicate output folders.
+
+If the course folder exists but `unit N` does not, create `unit N` and the five standard subfolders.
+If the exact Portfolio root cannot be resolved confidently, STOP and report the problem; do not guess another Drive folder.
+
+DRIVE CLEANUP RULE:
+- `01 Evidence Inbox` is historical/raw: preserve all legitimate source evidence.
+- `02 Portfolio Data` is persistent system state: preserve history files and replace only current-state files as specified.
+- `03 Student Packets`, `04 Class & Intervention Summaries`, and `05 PowerSchool Exports` are CURRENT outputs: replace stale current outputs rather than accumulating obsolete versions.
+- no standalone HTML files are stored in Drive.
+
+======================================================================
+2. AUTHORITY / READ ORDER
+======================================================================
+
+Pin the system repository and selected course repository exactly as declared by the request. Never mix later commits into the run.
 
 Read in this order:
-1. current explicit teacher instruction for this Portfolio run;
-2. current `Curriculum_Philosophy.txt`, especially Assessment / Grading / Portfolio;
+1. current request and teacher note;
+2. current `Curriculum_Philosophy.txt`;
 3. current `SYSTEM_RUNTIME_CONTRACT.txt`;
 4. current Course Framework front door;
-5. the exact Framework-embedded Unit Assessment Plan for every Unit represented in the uploaded evidence;
+5. exact Unit Assessment Plan / learning architecture for every represented unit;
 6. this Portfolio PM;
-7. the current complete Unit Bank ONLY when needed to resolve a course-generated item, canonical answer/solution, evidence route, representation, or exact Bank provenance;
-8. deployed assessment artifact / clean assessment pages when available;
-9. prior Portfolio State ZIP when supplied;
-10. new teacher-uploaded student work, assessment exports, and survey files.
+7. current Unit Bank only when needed to resolve item intent, canonical answer/solution, family provenance, or stable public I Can link;
+8. prior private Portfolio state from Drive;
+9. newly attached evidence / PowerSchool initialization files.
 
-Authority by domain:
-- Philosophy owns universal evidence / grading beliefs;
-- Framework + embedded Assessment Plan own exact course learning targets, Mastery Goals, evidence meaning, and course-specific assessment architecture;
-- Bank may clarify canonical item intent and answer/solution when applicable, but it does not replace the Framework as learning authority;
-- this PM owns Portfolio mechanics and data handling;
-- teacher judgment owns final instructional/proficiency decisions.
+Framework / Assessment Plan owns exact learning goals and I Can wording.
+This PM owns the current Portfolio status/rollup/display mechanics below.
+Teacher judgment owns final decisions.
 
-Do not invent a second learning taxonomy inside Portfolio.
+LEGACY STATUS OVERRIDE:
+Older Framework/tracker artifacts may still contain `Not Yet / Approaching / Meeting / Exceeding` or older Exit Ticket terminology. Do NOT use those labels for current Portfolio output. Until the broader curriculum migration is complete, the current Portfolio status model in this PM is authoritative for Job 18.
 
 ======================================================================
-2. PURPOSE — EVIDENCE, NOT POINTS
+3. FIRST-RUN INITIALIZATION / STUDENT REGISTRY
 ======================================================================
 
-Core principle:
-  Instruction creates opportunities to learn;
-  assessment gathers evidence;
-  the portfolio organizes that evidence over time;
-  the grade eventually communicates the best current professional judgment of what the student understands.
+Canonical registry:
+  02 Portfolio Data/student_registry.csv
 
-The Portfolio is NOT a points accumulator.
+On a later run, load and use it.
 
-Do NOT use:
-- simple averaging;
-- percent-correct thresholds as automatic proficiency labels;
-- `latest score wins`;
-- one weak event as an automatic downgrade;
-- one routine correct response as automatic proof of Meeting;
-- DOK/Bloom as proficiency levels;
-- completion/compliance as evidence of understanding.
+On the FIRST run for a course/unit, if `student_registry.csv` does not exist:
+- require a current PowerSchool template/export or other explicit teacher roster source attached to the request;
+- prefer the stable PowerSchool/student ID already supplied by that source;
+- create one stable `student_key` per student;
+- preserve display name, first name, last name, class period/section, active status, and identifier quality;
+- do NOT invent student IDs;
+- preserve only the fields needed for identity/export continuity.
 
-Use the body of evidence considering:
-- alignment to the exact target;
-- quality/correctness;
-- conceptual/model understanding;
-- independence;
-- reasoning when required;
-- representation use when required;
-- consistency;
-- recency;
-- breadth across valid opportunities;
-- transfer/complexity where the target calls for it;
-- contradictory evidence;
-- growth over time.
+Minimum registry columns:
+  student_key, powerschool_id, display_name, first_name, last_name, period, active, identifier_quality
+
+Optional teacher-approved evidence-condition fields may be added later when needed, but do not copy unrelated sensitive fields merely because they exist in an export.
+
+If no registry exists and no adequate roster/template is attached, STOP with:
+  `PORTFOLIO_REGISTRY_REQUIRED`
+and tell the teacher to rerun with the current PowerSchool template/export.
+
+If the attached PowerSchool files represent multiple periods, combine them into one registry while preserving period.
+If a later PowerSchool template is intentionally supplied, reconcile adds/drops/period changes conservatively and preserve stable student keys.
 
 ======================================================================
-3. ACCEPTED NEW-EVIDENCE SOURCES
+4. POWERSCHOOL TEMPLATE / EXPORT CONTINUITY
 ======================================================================
 
-Portfolio may process any teacher-supplied evidence that can be mapped defensibly to the current Framework, including:
-- Exit Tickets;
+During initialization, preserve enough template structure in `02 Portfolio Data` to reproduce the teacher's accepted import shape without asking for the template every run.
+
+Recommended persistent files:
+  powerschool_template_<period>.csv
+  powerschool_export_schema.json
+
+Preserve the teacher-supplied column names/order and non-Score fields needed for a valid import.
+For current exports, change only the grade/status field(s) that the accepted template expects unless the teacher explicitly authorizes another change.
+
+Algebra 1 current PowerSchool policy:
+- one living assignment per unit;
+- current status REPLACES prior status rather than averaging attempts;
+- valid grade-scale values: `I`, `C`, `B`, `A`, `A+`;
+- `I` means In Progress, not a zero/F.
+
+Generate a current PowerSchool CSV for each class period on every successful Algebra Portfolio run and save it in `05 PowerSchool Exports`.
+Also return those CSVs as downloadable chat artifacts at the end of the run.
+
+If later evidence from another unit changes a prior unit's official status, update the affected prior-unit export as part of the same Portfolio workflow when the current Portfolio policy supports that cross-unit evidence route.
+
+======================================================================
+5. RAW EVIDENCE INGESTION — PRESERVE FIRST
+======================================================================
+
+Every newly attached assessed-work file must be preserved in `01 Evidence Inbox` BEFORE derived Portfolio outputs are considered complete.
+
+Do not modify the source bytes.
+Use a normalized descriptive filename when the metadata is defensible, for example:
+  YYYY-MM-DD_Algebra1_U1_S1.1_QuickCheck01_3rd-6th_RAW.pdf
+
+If date/section/source number cannot be established confidently, use a conservative normalized name containing the original basename rather than inventing metadata.
+
+Record a SHA-256 for each source file.
+Use the source hash to prevent accidental duplicate counting on later reruns.
+If the exact same source hash is already present in the evidence ledger, do not append duplicate evidence events; report it as an already-ingested source unless the teacher explicitly requests reprocessing/correction.
+
+Accepted sources may include:
 - Quick Checks;
+- Checkpoints;
 - Summatives;
+- investigations/labs;
 - performance tasks;
-- investigations / labs;
-- quizzes;
 - written explanations;
-- modeling / representation work;
-- teacher-observed independent performance when the observation is documented clearly enough;
-- other valid assessed work;
-- student surveys / self-assessments.
+- modeling/representation work;
+- documented independent teacher observation;
+- student reflection containing actual demonstrated content;
+- other teacher-supplied assessed work that maps defensibly to the Framework.
 
-The source label does NOT determine proficiency automatically. Judge what the task actually elicited and how independently it was produced.
-
-COURSE-GENERATED ASSESSMENTS:
-When clean assessment pages or deployed artifacts are available, use them to establish exact prompt order, question boundaries, representations, and target mapping before reading handwriting.
-
-If a course-generated item can be confidently matched to a canonical Bank record, preserve that provenance. Never force a weak Bank match.
-
-CUSTOM / TEACHER-AUTHORED ASSESSMENT:
-If the item is not in the Bank but the exact target is clear from the Framework / Assessment Plan, map directly to that target and record that Bank provenance is absent.
+Source type does not automatically determine evidence strength.
 
 ======================================================================
-4. STUDENT SURVEY / SELF-ASSESSMENT — EXPLICIT CONTRACT
+6. STUDENT SEGMENTATION / IDENTITY
 ======================================================================
 
-A teacher may upload a student survey in the same Portfolio run. Survey files may be CSV, spreadsheet, PDF, form export, or another readable format.
+Use `student_registry.csv` as the identity authority.
 
-Survey information has TWO possible evidence roles:
+For multi-student scan PDFs:
+1. establish page/student boundaries;
+2. match printed/written student identity to the registry;
+3. preserve page references;
+4. never guess an ambiguous match;
+5. route unresolved identity to the teacher review queue.
 
-A. SELF-REPORT / CONTEXT EVIDENCE
-Examples:
-- confidence rating;
-- "I think I understand...";
-- perceived strength/weakness;
-- preferred next practice target;
-- reflection on what felt difficult;
-- study / preparation reflection.
-
-Self-report is useful for:
-- student metacognition;
-- selecting feedback language;
-- identifying confidence gaps;
-- intervention/grouping questions for the teacher;
-- comparing perceived understanding with demonstrated evidence;
-- choosing a next evidence opportunity.
-
-SELF-REPORT HARD RULE:
-Self-report does NOT directly raise or lower Not Yet / Approaching / Meeting / Exceeding.
-Do not convert a Likert rating, confidence percentage, or student claim into a proficiency status.
-
-B. SURVEY CONTENT-RESPONSE EVIDENCE
-A survey question MAY count as demonstrated evidence when it actually asks the student to explain, reason, model, calculate, interpret, compare, or otherwise demonstrate course understanding and the target can be mapped defensibly.
-
-In that case assess the CONTENT RESPONSE like any other student response.
-The fact that the response happened inside a survey does not make it self-report.
-
-CONFIDENCE CALIBRATION:
-When both self-report and demonstrated evidence exist for the same target, record a non-graded calibration observation such as:
-- aligned confidence;
-- possibly underconfident;
-- possibly overconfident;
-- insufficient demonstrated evidence to compare.
-
-Calibration is a coaching / instructional signal, NOT a proficiency label.
-
-DATA MINIMIZATION:
-Ignore survey fields unrelated to learning/evidence unless the teacher explicitly says they matter for this Portfolio action. Do not preserve sensitive personal information merely because it appears in the export.
+If a rostered student has no matched submission, keep the student in all current-state/report calculations and mark the run-specific source as `no submission` / no new evidence rather than dropping the student.
 
 ======================================================================
-5. STUDENT IDENTITY / FILE SEGMENTATION
+7. PROMPT -> TARGET -> EXPECTED EVIDENCE
 ======================================================================
 
-Use an existing stable student identifier when supplied by the teacher/system.
-
-If only a student name is available:
-- create a deterministic normalized student key;
-- preserve the display name separately;
-- set `identifier_quality = name_only`.
-
-Never invent an ID.
-
-If two records may refer to the same student but identity is not certain:
-- do NOT merge;
-- preserve both safely;
-- add the case to teacher review.
-
-If one uploaded PDF contains many students:
-1. identify clean/blank assessment pages when present;
-2. establish prompt/question order;
-3. identify student boundaries;
-4. segment evidence by student and question;
-5. if boundaries are ambiguous, process the safe subset and send ambiguous pages to teacher review.
-
-======================================================================
-6. PROMPT -> TARGET -> EXPECTED EVIDENCE MAPPING
-======================================================================
-
-Before judging any response establish:
-
+Before judging handwriting, establish:
   source artifact / clean prompt
-    -> exact question / task
-    -> exact Framework I-can(s)
-    -> Mastery Goal(s) when the Framework uses them
-    -> evidence job / required reasoning / required representation
-    -> expected evidence / answer / solution basis
+    -> exact question/task
+    -> exact Framework I Can
+    -> Mastery Goal
+    -> evidence job / required representation/reasoning
+    -> expected answer/solution basis
     -> student response
 
-Use the strongest available mapping source:
-1. explicit assessment metadata / current Framework route;
-2. confident canonical Bank match;
-3. direct Framework / Assessment Plan interpretation of a teacher-authored task.
+Use strongest available mapping:
+1. explicit assessment metadata/current Framework route;
+2. confident current Bank match;
+3. direct Framework/Assessment Plan mapping of a teacher-authored item.
 
-Do not infer the target from student handwriting when the prompt provides a stronger source.
+Do not infer the target from handwriting when the prompt gives a stronger source.
+If mapping is materially ambiguous, preserve the observation, set it unusable for automatic status movement, and route to teacher review.
 
-If target mapping is materially ambiguous:
-- set evidence strength to `UNUSABLE` for status purposes;
-- preserve the observation;
-- route it to teacher review.
+Every question/evidence event should have ONE primary I Can unless the task genuinely supplies independently judgeable evidence for multiple targets.
 
 ======================================================================
-7. COURSE-NEUTRAL EVIDENCE RUBRIC — INLINE AUTHORITY
+8. ITEM-LEVEL EVIDENCE STRENGTH — INTERNAL
 ======================================================================
 
-Apply ONLY dimensions that the task was designed to elicit.
-Do not penalize a response for missing reasoning, representation, or explanation that was never requested.
+Use exactly:
+- `UNUSABLE`
+- `LIMITED`
+- `PARTIAL`
+- `CONVINCING`
+- `STRONG_TRANSFER`
 
-Possible dimensions:
+Interpretation:
+UNUSABLE — no defensible target judgment from this response.
+LIMITED — major error/misconception; little valid evidence of intended target.
+PARTIAL — meaningful correct thinking but incomplete/inconsistent/undermined by an important gap.
+CONVINCING — substantially demonstrates the intended target; minor slips may remain if understanding is still clear.
+STRONG_TRANSFER — convincing plus meaningful transfer, connection, critique, modeling, strategic representation use, or successful less-routine application.
 
-1. ACCURACY / DISCIPLINARY CORRECTNESS
-Correct results, claims, calculations, relationships, units, notation, directions/signs, terminology, or disciplinary conclusions as applicable.
+Do not convert these labels to points.
+Do not penalize a response for reasoning/representation that the task did not ask for.
 
-2. CONCEPTUAL / MODEL UNDERSTANDING
-Evidence that the student understands the idea, relationship, phenomenon, model, structure, or meaning rather than only performing an isolated routine.
-
-3. REASONING / JUSTIFICATION
-Logical explanation, evidence, argument, critique, derivation, interpretation, or defense when required by the task.
-
-4. REPRESENTATION / COMMUNICATION
-Correct and meaningful use, construction, interpretation, or connection of applicable graphs, tables, equations, diagrams, models, vectors, FBDs, number lines, written language, symbolic notation, or other course-specific forms.
-
-5. APPLICATION / TRANSFER
-Successful use of understanding in a changed context, less-routine situation, multi-step task, modeling situation, or connected representation when the task provides that opportunity.
-
-6. INDEPENDENCE
-Whether the evidence represents independent student performance to the degree that can actually be known from the source. Do not invent independence metadata when the context is unknown.
-
-ITEM EVIDENCE STRENGTH — use exactly one:
-- `UNUSABLE` — no defensible target judgment can be made from this response;
-- `LIMITED` — major error/misconception; little valid evidence of the intended target;
-- `PARTIAL` — meaningful correct thinking exists but is incomplete, inconsistent, or undermined by an important gap;
-- `CONVINCING` — response substantially demonstrates the intended target independently; minor slips may remain if they do not undermine the demonstrated understanding;
-- `STRONG_TRANSFER` — convincing evidence plus meaningful transfer, connection, critique, modeling, strategic representation use, or successful less-routine application.
-
-Do not convert these labels into points.
+Useful error classes when supported:
+  execution_slip
+  procedural_gap
+  conceptual_misconception
+  representation_error
+  reasoning_gap
+  interpretation_context_error
+  communication_notation_issue
+  no_usable_evidence
 
 ======================================================================
-8. ERROR / MISCONCEPTION CLASSIFICATION
+9. OPPORTUNITY / INDEPENDENCE METADATA
 ======================================================================
 
-When useful, classify one or more:
-- `execution_slip`;
-- `procedural_gap`;
-- `conceptual_misconception`;
-- `representation_error`;
-- `reasoning_gap`;
-- `interpretation_context_error`;
-- `communication_notation_issue`;
-- `no_usable_evidence`.
+Each evidence event must record enough metadata to decide whether demonstrations are independent.
 
-Course-specific language may be added in the human observation, but do not proliferate new status systems.
+Minimum fields include:
+- evidence_event_id
+- student_key
+- source_id / source_sha256
+- source_date
+- source_type
+- unit / section
+- page / question identifier
+- question_lineage when known
+- Mastery Goal ID
+- I Can ID
+- evidence_role: `new`, `reassess-current`, `reassess-old`, or `transfer`
+- opportunity_id
+- independent_opportunity: yes / no / uncertain
+- evidence_strength
+- error_class when applicable
+- concise evidence note
+- teacher_review flag
 
-An execution slip is not automatically a conceptual misconception.
-Track recurring misconceptions longitudinally with states such as:
-- observed;
-- repeated;
-- improving;
-- resolved.
-
-Do not mark a misconception resolved from one ambiguous response.
-
-======================================================================
-9. BODY-OF-EVIDENCE STATUS
-======================================================================
-
-Use the current Progress Tracker language exactly:
-- `Not Yet`;
-- `Approaching`;
-- `Meeting`;
-- `Exceeding`.
-
-These describe the quality and sufficiency of accumulated demonstrated evidence.
-They are not numerical bands.
-
-NOT YET
-Evidence is absent, unusable, substantially incorrect, highly contradictory, or currently insufficient to support the target.
-`Not Yet` means insufficient evidence YET, not permanent failure.
-
-APPROACHING
-Meaningful valid evidence exists, but proficiency is not yet secure. Evidence may be incomplete, inconsistent, overly routine for the target, dependent on cues, or contradicted by an unresolved misconception.
-
-MEETING
-The accumulated evidence convincingly supports independent performance of the target with sufficient alignment, quality, consistency, and recency for the current Framework expectation.
-
-EXCEEDING
-The student meets the target AND demonstrates meaningful transfer, connection, critique, modeling, generalization, or strategic representation use when those behaviors are legitimate extensions of the target.
-Do not award Exceeding merely for more work, a harder-looking page, a high percentage, or extra words.
+Two questions on the same paper are NOT automatically two independent opportunities.
+A rich artifact may contain multiple genuinely independent demonstrations when the task structure supports that conclusion; record them explicitly rather than treating the whole artifact as one pulse by default.
 
 ======================================================================
-10. STATUS UPDATE LOGIC — CONSERVATIVE, NOT FORMULAIC
+10. CURRENT I CAN STATUS — HARD CURRENT MODEL
 ======================================================================
 
-There is NO universal number-of-items rule for Meeting.
-Use the actual evidence architecture of the target and source.
+Student-facing/status symbols:
+  ○ No Evidence
+  ◐ Developing
+  ● Mastered
+  ★ Transfer
 
-A single rich, well-aligned independent performance may be stronger evidence than several tiny pulses.
-Several short evidence pulses across time may collectively become convincing.
-A Summative is important evidence but is not automatically allowed to erase the larger portfolio pattern.
+Use CSS-drawn same-size status markers in PDF templates for ○/◐/● so glyph/font metrics do not create inconsistent circle sizes. The star may remain a symbol.
 
-When new evidence AGREES with the prior pattern:
-- strengthen confidence in the current status when warranted;
-- raise status only when the accumulated evidence supports it.
+NO EVIDENCE
+No usable demonstrated evidence is currently available for that I Can.
 
-When new evidence CONTRADICTS an established Meeting/Exceeding:
-- do not automatically lower the status from one weak event;
-- record the contradiction;
-- inspect recency, independence, error type, and target alignment;
-- recommend another evidence opportunity when needed;
-- route consequential ambiguous changes to teacher review.
+DEVELOPING
+Some usable evidence exists, but mastery is not yet established.
+A single routine `CONVINCING` response normally remains Developing.
 
-When evidence shows clear sustained growth:
-- allow newer convincing evidence to outweigh older limited evidence through professional judgment;
-- preserve the old evidence historically rather than deleting it.
+MASTERED — DEFAULT RULE
+An I Can reaches `● Mastered` when the body of evidence contains at least TWO independent convincing demonstrations, normally from different opportunities, with at least one reasonably current demonstration.
 
-LOW-CONFIDENCE evidence cannot automatically change a status.
+A rich artifact may be sufficient when it contains multiple genuinely independent convincing demonstrations within the artifact.
+Approved accommodations do not lower the status of valid evidence.
+Teacher judgment resolves mixed/unusual cases.
 
-======================================================================
-11. PROGRESS TRACKER CONNECTION
-======================================================================
+Do NOT automatically lower an established Mastered status because of one later weak response. Record the contradiction and recommend another look when warranted.
 
-Portfolio reports against the CURRENT Framework / Progress Tracker learning architecture.
-It does not deploy or rewrite the live tracker unless a future explicit action authorizes tracker sync.
+TRANSFER
+`★ Transfer` means the I Can is already securely mastered AND the body of evidence includes meaningful `STRONG_TRANSFER` evidence. Transfer is not awarded merely for extra work, more words, or a harder-looking page.
 
-For each affected target provide:
-- exact I-can ID/text;
-- Mastery Goal ID/text when applicable;
-- previous recommended status when known;
-- current recommended status;
-- supporting evidence-event IDs;
-- short `What This Shows` language suitable for the Progress Tracker;
-- misconception/concern when applicable;
-- recommended next move;
-- confidence;
-- teacher-review flag when needed.
-
-Survey self-report may influence `recommended next move` and feedback language, but never the proficiency status by itself.
+LOW-CONFIDENCE/AMBIGUOUS evidence cannot automatically produce a consequential status change.
 
 ======================================================================
-12. STUDENT FEEDBACK
+11. ALGEBRA 1 MASTERY GOAL + UNIT STATUS
 ======================================================================
 
-For each affected student produce concise feedback that communicates:
-- what current demonstrated evidence shows;
-- specific strengths;
-- one or two important gaps/misconceptions when present;
-- exact learning goal(s) in student-readable language;
-- a practical next move.
+Current Algebra architecture is 4 Mastery Goals per unit, 4 I Cans per Mastery Goal.
 
-When useful, incorporate survey reflection constructively, for example:
-- evidence and confidence appear aligned;
-- the student seems stronger than they believe;
-- the student reports confidence but needs another demonstrated evidence opportunity.
+MASTERY GOAL RULE — LOCKED FOR CURRENT ALGEBRA 1:
+A Mastery Goal is DEMONSTRATED when at least 2 of its 4 I Cans are `● Mastered` or `★ Transfer`.
 
-Do NOT expose:
-- internal Bank IDs;
-- PM/rubric implementation language;
-- hidden confidence codes;
-- schema fields;
-- teacher-review mechanics.
+UNIT / POWERSCHOOL SCALE — LOCKED FOR CURRENT ALGEBRA 1:
+- `I` = In Progress: 0 or 1 of 4 Mastery Goals demonstrated
+- `C` = Meeting: 2 of 4 Mastery Goals demonstrated
+- `B` = Advancing: 3 of 4 Mastery Goals demonstrated
+- `A` = Mastery: 4 of 4 Mastery Goals demonstrated
+- `A+` = Mastery ★: 4 of 4 Mastery Goals demonstrated PLUS meaningful transfer/extension evidence
 
-Do not report grade percentages unless an explicit future grading action authorizes them.
+A+ is recognition of meaningful transfer; ordinary complete mastery is fully sufficient for A.
+Do not create an early F from missing/early evidence.
+
+For courses other than Algebra 1, DO NOT assume this 2-of-4 / I-C-B-A-A+ rule unless the current course Framework/Portfolio policy explicitly adopts it. Resolve the current course-specific rollup or keep the report at I Can/Mastery Goal evidence level and flag missing rollup policy.
 
 ======================================================================
-13. TEACHER REVIEW / CLASS PATTERNS
+12. PERSISTENT DATA FILES — 02 PORTFOLIO DATA
 ======================================================================
 
-Teacher review is REQUIRED when:
-- student identity is ambiguous;
-- handwriting/scan quality is insufficient;
-- page/question mapping is uncertain;
-- target mapping is uncertain;
-- Framework and artifact metadata conflict;
-- response supports two materially different interpretations;
-- a low/medium-confidence judgment would cause a consequential status change;
-- prior Portfolio State appears incompatible/corrupt;
-- survey records cannot be matched confidently to students;
-- survey content appears unrelated/sensitive and its use is unclear.
+Use a normalized long-format state so future runs can append safely.
 
-Also produce a teacher summary containing:
-- students processed;
-- demonstrated evidence items mapped;
-- survey responses/context records processed when supplied;
-- items/cases sent to review;
-- proposed status changes;
-- common misconceptions/patterns;
-- confidence-calibration patterns when survey data exists;
-- students/targets needing near-term follow-up;
-- data-quality or mapping problems.
+Required persistent files:
 
-Class trends can guide instruction but are NEVER individual proof.
+1. `student_registry.csv`
+   stable student identity/period data.
 
-======================================================================
-14. PERSISTENT PORTFOLIO STATE — APPEND / MERGE CONTRACT
-======================================================================
+2. `evidence_ledger.csv` — APPEND-ONLY
+   one row per mapped evidence event; never replace history with only the newest assessment.
 
-Every successful run returns a COMPLETE updated Portfolio State ZIP.
-Never return only a sparse set of changed student records.
+3. `i_can_status_current.csv`
+   one row per student x unit x I Can containing current status, supporting event IDs, last evidence date, confidence, contradiction flag, and next move.
 
-If a prior state is supplied:
-- validate it first;
-- preserve every unaffected student;
-- preserve every prior evidence event;
-- append new evidence;
-- update current recommendations without deleting the historical basis;
-- historical correction requires explicit teacher approval and an audit record.
+4. `mastery_goal_status_current.csv`
+   one row per student x Mastery Goal with mastered-I-Can count and demonstrated/not-yet state.
 
-If no prior state is supplied:
-- create a new state cleanly;
-- do not pretend prior evidence exists.
+5. `unit_status_current.csv`
+   one row per student x unit with current unit status/grade-scale value where a current course rule exists.
 
-Scans/images/raw student uploads are NOT copied into the Portfolio State ZIP.
-Store only the minimum provenance needed to trace the judgment.
+6. `class_i_can_summary.csv`
+   current class/combined counts and percentages used by teacher summaries.
+
+7. `intervention_groups.csv`
+   current grouping recommendations.
+
+8. `review_queue.csv`
+   unresolved identity/scan/mapping/judgment cases. Empty file with headers is acceptable when no cases exist.
+
+9. `run_history.csv` — APPEND-ONLY
+   run ID, date, source hashes, students processed, events appended, review count, outputs generated.
+
+10. `run_manifest.json`
+    current run metadata and exact pinned system/course commits.
+
+11. PowerSchool template/schema continuity files from Section 4 when initialized.
+
+CURRENT-state files are replaced on each successful run.
+History files (`evidence_ledger.csv`, `run_history.csv`, raw inbox files) are append/preserve.
+Never delete prior legitimate evidence merely because current status changed.
 
 ======================================================================
-15. REQUIRED PORTFOLIO STATE ZIP STRUCTURE
+13. STUDENT PACKET — CURRENT PDF CONTRACT
 ======================================================================
 
-Return exactly ONE private ZIP named with the course when practical, for example:
-  `physics_portfolio_state.zip`
+Produce ONE current student-packet PDF per class period and save in:
+  03 Student Packets/
 
-Required archive root:
+PACKET LENGTH: exactly 2 content pages per student whenever technically possible.
+This should print as one duplex sheet per student.
+Do not create a redundant third Progress Tracker page.
 
-portfolio_state/
-  PORTFOLIO_STATE.json
-  evidence_ledger.csv
-  teacher_summary.md
-  policy/
-    EVIDENCE_RUBRIC.json
-  students/
-    <student_key>/
-      summary.json
-      unit_<N>/
-        evidence.json
-        survey_context.json
-        progress_tracker_recommendations.json
-        reports/
-          <evidence_event_id>.md
-  review/
-    TEACHER_REVIEW_QUEUE.csv
-  audit/
-    RUN_MANIFEST.json
-    MAPPING_AUDIT.csv
+PDF outline/bookmarks:
+- top level by class period when useful;
+- student-name bookmarks jump to page 1 of that student's packet.
 
-`survey_context.json` may be empty/absent for a Unit when no survey evidence was supplied.
-Do not manufacture placeholder survey data.
+PAGE 1 — CURRENT PROGRESS REPORT
+Use the established clean Portfolio visual language: navy top rule/headings, generous whitespace, rounded bordered cards, readable print scale.
+Include:
+- course/unit + `Current Progress Report`;
+- student name, period, report number/date;
+- unit title;
+- Essential Standard;
+- large current unit status/grade block when current course rollup exists;
+- `Your current picture` with Mastery Goal summary;
+- `What you are showing` — concise evidence-based strengths;
+- `Your next best target` — one exact I Can;
+- END THE PAGE with the practice/next-step area, not in the middle of the page.
 
-The generated `policy/EVIDENCE_RUBRIC.json` is a snapshot of THIS PM's inline rubric so the private state remains interpretable later. It is not a separate system dependency.
+BOTTOM OF PAGE 1 — PRACTICE LINK + LIGHT REFLECTION
+When the current public Unit Bank exposes a confirmed stable I Can fragment anchor, generate a QR code directly to that target.
+For Algebra 1 this follows the canonical Bank interface, e.g.:
+  https://tnezki.github.io/algebra/banks/unit1/unit1.html#U1-MG01-IC04
 
-======================================================================
-16. PORTFOLIO_STATE.json MINIMUM SCHEMA
-======================================================================
+Do not invent a fragment ID; use the exact canonical I Can ID confirmed in the current Bank.
 
-Top-level minimum:
-- `schema`;
-- `portfolio_version`;
-- `course`;
-- `created_at` when determinable;
-- `updated_at` when determinable;
-- `rubric_version`;
-- `students`.
+Keep directions simple, such as:
+  `Practice this target — Scan the QR code to open this I Can in the Unit Bank.`
 
-Student minimum:
-- `student_key`;
-- `display_name` when known;
-- stable ID when actually supplied;
-- `identifier_quality`;
-- `units`.
+Then include a small acknowledgement/reflection area with room to write. Keep it low-burden and useful, for example:
+- `I looked at my next target and the practice examples.` [checkbox]
+- `What I need to work on / ask about next:` ______________________________
 
-Demonstrated evidence minimum:
-- `evidence_event_id`;
-- `source_type`;
-- `source_label`;
-- `unit`;
-- exact `i_can_ids`;
-- applicable `mastery_goal_ids`;
-- `item_evidence_strength`;
-- `observation`;
-- `confidence`;
-- minimal source provenance;
-- misconception/error classification when useful.
+Do NOT require an immediate correction problem.
+Do NOT invent remediation problems inside the Portfolio report.
+The Portfolio identifies WHAT to work on; the reviewed curriculum Bank supplies practice/examples.
 
-Survey self-report minimum:
-- `evidence_event_id`;
-- `source_type = survey_self_report`;
-- source label/date when known;
-- mapped target IDs only when defensible;
-- summarized learning-relevant response;
-- `proficiency_eligible = false`;
-- confidence-calibration observation when applicable.
+PAGE 2 — EVIDENCE DETAIL / FULL UNIT PICTURE
+This page replaces the old separate Progress Tracker.
+Include:
+- status key ○ / ◐ / ● / ★;
+- every Mastery Goal in the unit;
+- every I Can under each Mastery Goal with current status;
+- demonstrated/not-yet Mastery Goal state;
+- compact recent evidence section when it fits cleanly;
+- concise `Strengths shown` / `Next watch` only when they add information rather than repeating page 1.
 
-Survey content-response items that genuinely demonstrate learning use the normal demonstrated-evidence schema and record `source_type = survey_content_response`.
+For current Algebra units this means all 4 MGs / all 16 I Cans must fit legibly on page 2.
+No third tracker page.
 
-STATUS labels are exactly:
-- Not Yet;
-- Approaching;
-- Meeting;
-- Exceeding.
+Student-facing language should be plain and specific. Do not expose internal evidence labels like CONVINCING/PARTIAL unless the teacher explicitly asks for them.
+
+HTML/CSS RENDERING RULE:
+Build the PDF from a consistent HTML/CSS presentation layer so repeated runs preserve layout. The HTML is an intermediate rendering source only; DO NOT store standalone HTML in Drive.
+Until a separate canonical Portfolio template file is formally locked, follow this page contract consistently and avoid redesigning it from run to run.
 
 ======================================================================
-17. PRIVACY / DATA MINIMIZATION QA
+14. CLASS & INTERVENTION SUMMARY PDF
 ======================================================================
 
-Before delivery verify:
-- no raw scans/photos/student PDFs in the ZIP;
-- no public-repository destination;
-- no invented student IDs;
-- no unnecessary sensitive survey fields preserved;
-- student records are segmented correctly;
-- prior students were not dropped during merge;
-- no student-facing report exposes internal metadata;
-- audit records contain only necessary provenance.
+Produce ONE current teacher-facing PDF in:
+  04 Class & Intervention Summaries/
+
+The purpose is rapid analysis and intervention planning, not a decorative report.
+
+For a typical 4-question Quick Check affecting four I Cans, use this organization:
+
+PAGE 1 — COMBINED ALGEBRA 1 / COURSE SUMMARY
+- all affected I Cans on ONE page when reasonably possible;
+- each I Can card shows counts/percentage by internal evidence strength plus no submission;
+- list the students who still need stronger/additional evidence;
+- group student names under period headers (e.g. `3rd Hour` first, then `6th Hour`);
+- use bulleted name lists in 2 or 3 columns depending on fit;
+- first name + last initial is acceptable to conserve space;
+- do not repeat `(3rd)` / `(6th)` after every student name.
+
+PAGE 2+ — INDIVIDUAL CLASS BREAKDOWNS
+- one page per class when the affected I Can count is about four;
+- keep ALL four I Can cards on the same page when they fit;
+- include actual student names, not just counts;
+- favor compact readable columns over splitting two I Cans per page.
+
+FINAL PAGE — COMBINED INTERVENTION GROUPS
+Do NOT make separate intervention pages by class.
+Combine available students across periods, but show period headers so the teacher can locate them.
+Include a clear key:
+
+`Reteach / targeted practice`
+  Evidence shows a substantial gap, misconception, or unusable response; instruction/practice is likely needed before another attempt.
+
+`Brief guided practice`
+  Student showed part of the idea but not enough yet; likely needs a short example, prompt, or check-in rather than a full reteach.
+
+`Ready for independent reassessment`
+  Student already has a convincing demonstration but has not yet satisfied the independent body-of-evidence rule; no reteach is implied — the student needs another independent opportunity.
+
+`No evidence / absent`
+  No usable evidence from the relevant opportunity; the student needs a first/current evidence opportunity.
+
+When useful, also identify students already Mastered/Transfer who should not be pulled for routine reteaching.
+
+ALGEBRA INTERVENTION CONTEXT:
+The teacher has a 29-minute intervention period Tuesday-Friday. Thursday is guaranteed math; other days may also be available. Use this context to make the groupings practical, but do NOT create a day-by-day schedule unless explicitly requested.
 
 ======================================================================
-18. EVIDENCE / MAPPING / STATE QA
+15. NEXT-TARGET / INTERVENTION LOGIC
 ======================================================================
 
-For every demonstrated evidence item verify:
-- source student is known with adequate confidence;
-- exact prompt/task is known adequately;
-- exact target mapping is defensible;
-- applicable rubric dimensions match the task;
-- evidence strength follows the final response, not an assumed score;
-- representation/reasoning expectations come from the task/Framework;
-- status recommendation considers the full available body of evidence;
-- survey self-report did not directly alter proficiency;
-- consequential uncertainty is routed to review.
+Choose student `next best target` using the CURRENT body of evidence, not simply the last wrong answer.
+Prefer targets that are:
+- aligned to the current/nearby unit;
+- blocking a Mastery Goal from becoming demonstrated;
+- already close to Mastered and needing another independent opportunity; OR
+- showing a clear misconception that merits targeted support.
 
-For the complete state verify:
-- valid JSON/CSV files;
-- unique evidence_event_ids;
-- historical evidence append-only unless audited correction exists;
-- all referenced event IDs resolve;
-- all referenced I-can/Mastery Goal IDs resolve to the pinned Framework when required;
-- every current status has traceable supporting evidence;
-- no numerical averaging logic introduced;
-- no unresolved template tokens;
-- final ZIP re-opens successfully.
+Do not send a secure/mastered student back to pointless routine repetition.
+When all nearby routine targets are secure, consider a legitimate Transfer/extension opportunity.
+
+Class intervention categories are instructional recommendations, not proficiency labels.
 
 ======================================================================
-19. FAIL-CLOSED CONDITIONS
+16. TEACHER REVIEW — FAIL SAFE
 ======================================================================
 
-Stop rather than guess if:
-- current Philosophy or Framework cannot be resolved;
-- the relevant exact Framework learning target cannot be determined for evidence that would change status;
-- no student evidence is actually supplied;
-- student boundaries/identity cannot be determined safely for all records being merged;
-- prior state cannot be parsed safely and merge risks data loss.
+Teacher review is required for:
+- ambiguous student identity;
+- unreadable handwriting/scan;
+- uncertain page/question boundaries;
+- uncertain target mapping;
+- Framework/artifact conflict;
+- materially ambiguous response interpretation;
+- low-confidence evidence that would cause a consequential status change;
+- duplicate/corrupt prior state;
+- roster/template conflicts.
 
-A missing Bank is NOT automatically fatal for a clearly identifiable teacher-authored/custom assessment. It IS fatal for a course-generated item when canonical answer/evidence intent is required and cannot otherwise be resolved confidently.
+Safe subset processing is allowed: process defensible records and isolate ambiguous cases in `review_queue.csv` rather than guessing.
 
-If only a subset is safely processable:
-- process the safe subset;
-- preserve all prior state;
-- route unresolved cases to teacher review.
+A review case must not silently block unrelated students from receiving updated reports.
 
 ======================================================================
-20. OUTPUT BOUNDARY
+17. POWERSCHOOL / CURRENT OFFICIAL STATUS
 ======================================================================
 
-Successful Portfolio processing returns:
-  ONE complete private Portfolio State ZIP.
+PowerSchool receives the current official unit judgment, not an average of attempts.
+Portfolio preserves the evidence/history that supports that judgment.
 
-Do not return a public course-repository patch containing student evidence.
-Do not include:
-- raw student scans/images/PDFs;
-- Framework files;
-- Bank files;
-- this PM;
-- QA scratch files;
-- public dashboard/course artifacts.
+For Algebra 1:
+- use I/C/B/A/A+ exactly;
+- preserve exact current PowerSchool template structure;
+- create one current CSV per class period;
+- save to `05 PowerSchool Exports`;
+- return the CSVs as chat downloads along with the PDFs.
 
-This step maintains private evidence state; it does not modify curriculum source files.
+Do NOT fabricate a grade for a course whose current unit-rollup policy is unresolved.
+
+======================================================================
+18. SUCCESSFUL-RUN OUTPUT / CHAT HANDOFF
+======================================================================
+
+A successful run must leave the Drive unit folder current and internally coherent.
+
+At end of chat provide concise links to:
+- each class Student Packets PDF;
+- the Class & Intervention Summary PDF;
+- each current PowerSchool CSV generated for the selected course/unit.
+
+If review cases exist, mention the count and the most important unresolved issue briefly.
+Do not force the teacher to browse `02 Portfolio Data` during normal use.
+Do not return/store a standalone HTML teacher summary.
+Do not return a legacy Portfolio State ZIP as the primary artifact.
+
+======================================================================
+19. RUN QA — GOOD-ENOUGH HARD CHECKS
+======================================================================
+
+Before declaring success verify:
+1. raw new evidence is preserved in `01 Evidence Inbox` with source hash;
+2. student registry exists and all reports/rows resolve to stable student keys;
+3. evidence ledger is preserved + appended, not overwritten with only new evidence;
+4. duplicate source hashes are not double-counted;
+5. I Can status uses ○/◐/●/★ current rules;
+6. Algebra MG rule is 2-of-4 and unit scale is I/C/B/A/A+;
+7. student packets are current 2-page-per-student PDFs with bookmarks and no redundant tracker page;
+8. QR links use confirmed canonical Bank fragment IDs when available;
+9. class summary keeps the affected I Cans together on one page when reasonably possible and includes actionable student lists;
+10. combined intervention page contains the category key;
+11. no standalone HTML is stored in Drive;
+12. current PowerSchool CSVs are generated for Algebra and preserve template shape;
+13. stale derived PDFs/CSVs are replaced/cleaned while raw evidence/history is preserved;
+14. teacher-review cases are isolated rather than guessed.
+
+If a check fails, repair that concrete defect before final delivery.
+
+======================================================================
+20. STOP RULE
+======================================================================
+
+When:
+- new evidence is safely preserved;
+- persistent data is updated without history loss;
+- current student status is defensible;
+- current PDFs are regenerated;
+- current PowerSchool CSVs are regenerated where policy exists;
+- Drive derived-output folders contain current, not stale, deliverables;
+- review cases are isolated;
+- final download links are provided;
+
+STOP.
+Do not continue polishing, redesigning, or creating extra artifacts.
 
 END — PORTFOLIO / ASSESS NEW EVIDENCE
