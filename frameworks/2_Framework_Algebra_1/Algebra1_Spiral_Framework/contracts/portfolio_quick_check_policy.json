@@ -1,0 +1,61 @@
+{
+  "schema": "algebra-portfolio-quick-check-policy/1.0",
+  "status": "CURRENT",
+  "course": "Algebra 1",
+  "purpose": "Own the current Algebra 1 Portfolio status, rollup, and Quick Check mechanics while Unit Assessment Plans continue to own exact Unit learning content.",
+  "authority_scope": [
+    "I Can Portfolio status language",
+    "default I Can mastery sufficiency rule",
+    "Mastery Goal rollup",
+    "Unit/PowerSchool status scale",
+    "Quick Check recurring slot architecture",
+    "live reassessment target selection"
+  ],
+  "i_can_statuses": [
+    {"code": "NO_EVIDENCE", "symbol": "open_circle", "label": "No Evidence", "meaning": "No usable demonstrated evidence is currently available for the I Can."},
+    {"code": "DEVELOPING", "symbol": "half_circle", "label": "Developing", "meaning": "Some usable evidence exists, but mastery is not yet established."},
+    {"code": "MASTERED", "symbol": "filled_circle", "label": "Mastered", "meaning": "The body of evidence supports secure independent performance under the current rule and teacher judgment."},
+    {"code": "TRANSFER", "symbol": "star", "label": "Transfer", "meaning": "The I Can is securely mastered and the body of evidence includes meaningful transfer/extension evidence."}
+  ],
+  "mastered_default_rule": {
+    "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities, with at least one reasonably current demonstration.",
+    "rich_artifact_exception": "A rich artifact may be sufficient when it contains multiple genuinely independent convincing demonstrations.",
+    "mixed_evidence": "Teacher professional judgment resolves mixed or unusual cases.",
+    "later_weak_event": "One later weak event does not automatically remove established mastery; record the contradiction and seek another look when warranted.",
+    "accommodations": "Approved accommodations do not lower the evidence status of a valid demonstration."
+  },
+  "mastery_goal_rule": {
+    "i_cans_per_goal": 4,
+    "demonstrated_when": "At least 2 of 4 I Cans are Mastered or Transfer."
+  },
+  "unit_scale": [
+    {"code": "I", "label": "In Progress", "rule": "0 or 1 of 4 Mastery Goals demonstrated"},
+    {"code": "C", "label": "Meeting", "rule": "2 of 4 Mastery Goals demonstrated"},
+    {"code": "B", "label": "Advancing", "rule": "3 of 4 Mastery Goals demonstrated"},
+    {"code": "A", "label": "Mastery", "rule": "4 of 4 Mastery Goals demonstrated"},
+    {"code": "A+", "label": "Mastery + Transfer", "rule": "4 of 4 Mastery Goals demonstrated plus meaningful transfer/extension evidence"}
+  ],
+  "powerschool_rule": "One living assignment per unit. Current official status replaces the prior status; attempts are not averaged. Earlier Unit status may improve later when new valid evidence demonstrates an older Unit I Can.",
+  "quick_check": {
+    "student_artifact_name": "Quick Check",
+    "replaces_old_name": "Exit Ticket",
+    "normal_length": "about 4 questions",
+    "common_to_class": true,
+    "live_selection_rule": "Curriculum predicts evidence slots. Portfolio selects current reassessment I Cans from live need. Teacher approves/edits the actual questions.",
+    "question_mapping": "Each question has one primary I Can evidence target unless a richer task genuinely provides separately judgeable evidence for more than one target.",
+    "versioning_rule": "When parallel print versions are built, preserve target/representation/reasoning/difficulty, scramble appropriately, and keep one identical common item across versions for fairness/comparison."
+  },
+  "checkpoint": {
+    "student_artifact_name": "Checkpoint",
+    "replaces_old_name": "Quick Check",
+    "default_question_count": 6,
+    "personalized": true,
+    "visible_i_can_label": true,
+    "selection_rule": "Use live Portfolio need to choose current-unit gaps, older-unit reassessment, and transfer/extension when appropriate."
+  },
+  "legacy_retirements": [
+    "Not Yet / Approaching / Meeting / Exceeding as current Algebra Portfolio status labels",
+    "fixed previous-section Exit Ticket reassessment chain",
+    "curriculum/exit_evidence_map.json as active evidence-routing authority"
+  ]
+}

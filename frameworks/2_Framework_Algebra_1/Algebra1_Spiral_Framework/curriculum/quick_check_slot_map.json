@@ -1,0 +1,65 @@
+{
+  "schema": "algebra-quick-check-slot-map/1.0",
+  "status": "CURRENT",
+  "course": "Algebra 1",
+  "purpose": "Define predictable Quick Check evidence slots without freezing just-in-time reassessment targets.",
+  "selection_principle": "The curriculum predicts the evidence slots; the Portfolio determines the just-in-time reassessment targets; the teacher approves the actual questions.",
+  "common_rules": {
+    "target_length": 4,
+    "common_to_whole_class": true,
+    "new_targets": "Resolve from the current section Mastery/I Can learning architecture.",
+    "reassessment_targets": "Select from live Portfolio need at build/use time, not months ahead.",
+    "teacher_selection_page": "Show the exact selected I Can for each slot with four strong sample questions across the row so the teacher can choose, alter, or replace the final item.",
+    "final_print": "Build fresh parallel/scrambled versions from teacher-approved anchors while preserving target and usable difficulty; keep one identical common item across versions."
+  },
+  "patterns": [
+    {
+      "scope": "Unit 1 Section 1",
+      "pattern": "two_current_i_cans_two_questions_each",
+      "slots": [
+        {"slot": 1, "role": "new_current", "target": "current I Can A", "relationship": "first question for target A"},
+        {"slot": 2, "role": "new_current", "target": "current I Can A", "relationship": "second independent question for target A on the same Quick Check; still one assessment opportunity for body-of-evidence independence purposes unless the task itself creates independently judgeable demonstrations"},
+        {"slot": 3, "role": "new_current", "target": "current I Can B", "relationship": "first question for target B"},
+        {"slot": 4, "role": "new_current", "target": "current I Can B", "relationship": "second independent question for target B on the same Quick Check; still one assessment opportunity for body-of-evidence independence purposes unless the task itself creates independently judgeable demonstrations"}
+      ],
+      "reason": "No prior Algebra Portfolio evidence exists at course opening."
+    },
+    {
+      "scope": "Unit 1 Sections 2-5",
+      "pattern": "two_new_two_current_unit_reassessment",
+      "slots": [
+        {"slot": 1, "role": "new_current", "target": "current section I Can"},
+        {"slot": 2, "role": "new_current", "target": "current section I Can"},
+        {"slot": 3, "role": "reassess_current_unit", "target": "live Portfolio-selected Unit 1 I Can"},
+        {"slot": 4, "role": "reassess_current_unit", "target": "live Portfolio-selected Unit 1 I Can"}
+      ]
+    },
+    {
+      "scope": "Unit 2+ Section 1",
+      "pattern": "two_new_two_older_unit_reassessment",
+      "slots": [
+        {"slot": 1, "role": "new_current", "target": "current section I Can"},
+        {"slot": 2, "role": "new_current", "target": "current section I Can"},
+        {"slot": 3, "role": "reassess_older_unit", "target": "live Portfolio-selected older-unit I Can"},
+        {"slot": 4, "role": "reassess_older_unit", "target": "live Portfolio-selected older-unit I Can"}
+      ],
+      "reason": "At a new Unit opening there is little current-unit Portfolio history, so reassessment capacity is better spent on unresolved older-unit evidence."
+    },
+    {
+      "scope": "Unit 2+ Sections 2-5",
+      "pattern": "two_new_one_current_one_older",
+      "slots": [
+        {"slot": 1, "role": "new_current", "target": "current section I Can"},
+        {"slot": 2, "role": "new_current", "target": "current section I Can"},
+        {"slot": 3, "role": "reassess_current_unit", "target": "live Portfolio-selected current-unit I Can"},
+        {"slot": 4, "role": "reassess_older_unit", "target": "live Portfolio-selected older-unit I Can"}
+      ]
+    }
+  ],
+  "selection_tiebreakers": [
+    "Prefer I Cans where another independent convincing opportunity could establish Mastered.",
+    "Prefer widespread class need when the Quick Check is common to the whole class.",
+    "Use intervention/reteach information to distinguish students who need instruction before reassessment from students ready for another independent opportunity.",
+    "Do not waste routine reassessment slots on students/targets already securely mastered when a meaningful transfer opportunity or another unresolved target is more useful."
+  ]
+}
