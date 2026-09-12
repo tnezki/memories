@@ -294,15 +294,28 @@ GRAPH DISPLAY SIZE IN VIEWER:
 - center graphs inside the card;
 - do not allow graphs to dominate the card/page.
 
+STABLE FRAGMENT ANCHORS — HARD:
+- every Mastery Goal container MUST expose its exact canonical goal ID as its HTML id;
+- every I Can heading/container MUST expose its exact canonical I Can ID as its HTML id;
+- examples: #U1-MG01 and #U1-MG01-IC04;
+- do not invent aliases, shortened slugs, index-based anchors, or anchors derived from display wording;
+- if an I Can ID is derived under Section 3, use that same recorded stable ID as the fragment anchor;
+- fragment IDs are part of the public interface and MUST remain stable across rebuilds unless the canonical ID itself changes;
+- the viewer loads Bank data asynchronously, so it MUST explicitly honor location.hash after rendering and on later hash changes;
+- direct URLs such as unit1.html#U1-MG01-IC04 must scroll to the exact requested target after the target exists in the DOM;
+- the canonical viewer template owns this behavior so all future Unit Banks inherit it.
+
 =================================================
 10. LIGHT QA — ONLY FIVE CHECKS
 =================================================
 
-1. COUNT / IDENTITY
+1. COUNT / IDENTITY / ANCHORS
    - exact MGs/I Cans preserved;
    - exactly 3 families per I Can;
    - unique family IDs;
-   - expected family count reconciles.
+   - expected family count reconciles;
+   - every MG and I Can has exactly one matching canonical fragment anchor;
+   - direct-fragment behavior is tested for at least one MG and the first/last I Can in the unit.
 
 2. FAMILY DISTINCTNESS
    - A/B/C for one I Can are materially different types;

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Algebra 1 Bank</title>
 <script>
-window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true}};
+window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]" ]],processEscapes:true}};
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -16,11 +16,14 @@ body{margin:0}
 .top{background:#fff;border:1px solid #d7dde6;border-radius:14px;padding:20px;margin-bottom:22px}
 .top h1{margin:0 0 7px}.count{font-weight:700}
 .goal{background:#fff;border:1px solid #cfd6df;border-radius:14px;margin:24px 0;overflow:hidden}
+.goal,.ican-head{scroll-margin-top:18px}
 .goal-banner{padding:16px 18px;background:#e9eef5;border-bottom:1px solid #cfd6df}
 .goal-banner h2{margin:0 0 5px;font-size:1.35rem}.goal-banner p{margin:0}
 .ican-heads,.family-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:12px 14px}
 .ican-heads{padding-bottom:4px}
 .ican-head{font-size:.88rem;font-weight:700;padding:8px 10px;border-radius:8px;background:#f5f7fa;border:1px solid #dfe4eb}
+.ican-head:target{outline:3px solid #315f95;outline-offset:2px;background:#eef4fb}
+.goal:target>.goal-banner{outline:3px solid #315f95;outline-offset:-3px}
 .row-label{padding:9px 14px 0;font-size:.82rem;font-weight:800;color:#536171;text-transform:uppercase;letter-spacing:.04em}
 .family{border:1px solid #d6dde6;border-radius:10px;background:#fbfcfe;padding:12px;min-width:0}
 .family-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
@@ -74,6 +77,12 @@ function familyCard(f,ican){
  <dt>Forbidden</dt><dd>${esc((f.forbidden_variations||[]).join('; '))}</dd><dt>Best use</dt><dd>${esc(f.best_use)}</dd>
  </dl></details></article>`;
 }
+function jumpToHash(){
+ const id=decodeURIComponent(location.hash.slice(1));
+ if(!id)return;
+ const target=document.getElementById(id);
+ if(target)target.scrollIntoView({block:'start'});
+}
 async function main(){
  try{
   const [manifest,index]=await Promise.all([getManifest(),getJson('FAMILY_INDEX.json')]);
@@ -86,9 +95,9 @@ async function main(){
   const host=document.getElementById('bank');
   for(const g of goals){
    const mg=g.mastery_goal, icans=g.i_cans||[];
-   const section=document.createElement('section'); section.className='goal';
+   const section=document.createElement('section'); section.className='goal'; section.id=mg.goal_id;
    let html=`<header class="goal-banner"><h2>${esc(mg.goal_id)} · ${esc(mg.title)}</h2><p>${esc(mg.exact_text)}</p></header>`;
-   html+=`<div class="ican-heads">${icans.map(ic=>`<div class="ican-head">${esc(ic.i_can_id)}<br>${esc(ic.exact_text)}</div>`).join('')}</div>`;
+   html+=`<div class="ican-heads">${icans.map(ic=>`<div class="ican-head" id="${esc(ic.i_can_id)}">${esc(ic.i_can_id)}<br>${esc(ic.exact_text)}</div>`).join('')}</div>`;
    for(const label of ['A','B','C']){
     html+=`<div class="row-label">Family ${label}</div><div class="family-row">`;
     html+=icans.map(ic=>{const f=(ic.families||[]).find(x=>x.family_label===label);return f?familyCard(f,ic):'<div class="family">Missing family</div>'}).join('');
@@ -97,8 +106,10 @@ async function main(){
    section.innerHTML=html; host.appendChild(section);
   }
   if(window.MathJax?.typesetPromise) await MathJax.typesetPromise();
+  jumpToHash();
  }catch(err){document.getElementById('bank').innerHTML=`<div class="error"><strong>Viewer could not load Bank data.</strong><br>${esc(err.message)}</div>`;document.getElementById('count').textContent='Load failed';}
 }
+window.addEventListener('hashchange',jumpToHash);
 main();
 </script>
 </body>
