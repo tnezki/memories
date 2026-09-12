@@ -1,5 +1,5 @@
 {
-  "schema": "algebra-portfolio-quick-check-policy/1.0",
+  "schema": "algebra-portfolio-quick-check-policy/1.1",
   "status": "CURRENT",
   "course": "Algebra 1",
   "purpose": "Own the current Algebra 1 Portfolio status, rollup, and Quick Check mechanics while Unit Assessment Plans continue to own exact Unit learning content.",
@@ -9,13 +9,35 @@
     "Mastery Goal rollup",
     "Unit/PowerSchool status scale",
     "Quick Check recurring slot architecture",
-    "live reassessment target selection"
+    "live reassessment target selection",
+    "student Portfolio practice-link routing",
+    "teacher longitudinal evidence-sort contract"
   ],
   "i_can_statuses": [
-    {"code": "NO_EVIDENCE", "symbol": "open_circle", "label": "No Evidence", "meaning": "No usable demonstrated evidence is currently available for the I Can."},
-    {"code": "DEVELOPING", "symbol": "half_circle", "label": "Developing", "meaning": "Some usable evidence exists, but mastery is not yet established."},
-    {"code": "MASTERED", "symbol": "filled_circle", "label": "Mastered", "meaning": "The body of evidence supports secure independent performance under the current rule and teacher judgment."},
-    {"code": "TRANSFER", "symbol": "star", "label": "Transfer", "meaning": "The I Can is securely mastered and the body of evidence includes meaningful transfer/extension evidence."}
+    {
+      "code": "NO_EVIDENCE",
+      "symbol": "open_circle",
+      "label": "No Evidence",
+      "meaning": "No usable demonstrated evidence is currently available for the I Can."
+    },
+    {
+      "code": "DEVELOPING",
+      "symbol": "half_circle",
+      "label": "Developing",
+      "meaning": "Some usable evidence exists, but mastery is not yet established."
+    },
+    {
+      "code": "MASTERED",
+      "symbol": "filled_circle",
+      "label": "Mastered",
+      "meaning": "The body of evidence supports secure independent performance under the current rule and teacher judgment."
+    },
+    {
+      "code": "TRANSFER",
+      "symbol": "star",
+      "label": "Transfer",
+      "meaning": "The I Can is securely mastered and the body of evidence includes meaningful transfer/extension evidence."
+    }
   ],
   "mastered_default_rule": {
     "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities, with at least one reasonably current demonstration.",
@@ -29,11 +51,31 @@
     "demonstrated_when": "At least 2 of 4 I Cans are Mastered or Transfer."
   },
   "unit_scale": [
-    {"code": "I", "label": "In Progress", "rule": "0 or 1 of 4 Mastery Goals demonstrated"},
-    {"code": "C", "label": "Meeting", "rule": "2 of 4 Mastery Goals demonstrated"},
-    {"code": "B", "label": "Advancing", "rule": "3 of 4 Mastery Goals demonstrated"},
-    {"code": "A", "label": "Mastery", "rule": "4 of 4 Mastery Goals demonstrated"},
-    {"code": "A+", "label": "Mastery + Transfer", "rule": "4 of 4 Mastery Goals demonstrated plus meaningful transfer/extension evidence"}
+    {
+      "code": "I",
+      "label": "In Progress",
+      "rule": "0 or 1 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "C",
+      "label": "Meeting",
+      "rule": "2 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "B",
+      "label": "Advancing",
+      "rule": "3 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "A",
+      "label": "Mastery",
+      "rule": "4 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "A+",
+      "label": "Mastery + Transfer",
+      "rule": "4 of 4 Mastery Goals demonstrated plus meaningful transfer/extension evidence"
+    }
   ],
   "powerschool_rule": "One living assignment per unit. Current official status replaces the prior status; attempts are not averaged. Earlier Unit status may improve later when new valid evidence demonstrates an older Unit I Can.",
   "quick_check": {
@@ -57,5 +99,17 @@
     "Not Yet / Approaching / Meeting / Exceeding as current Algebra Portfolio status labels",
     "fixed previous-section Exit Ticket reassessment chain",
     "curriculum/exit_evidence_map.json as active evidence-routing authority"
-  ]
+  ],
+  "student_practice_link": {
+    "viewer": "banks/unitN/student.html",
+    "required_display": "Exact Mastery Goal + exact I Can + recommended Bank family",
+    "url_pattern": "https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
+    "family_anchor": "canonical family_id",
+    "family_selection": "Choose a family whose evidence job fits the student's next move; Family A is the normal direct/core starting point, while B/C may be preferable when the body of evidence clearly calls for alternate representation or misconception reasoning."
+  },
+  "teacher_summary": {
+    "latest_evidence": "Use 2 x 2 I Can cards for newest-source analysis; combined first, then period pages.",
+    "longitudinal_sort": "Final combined 2 x 2 page uses full Portfolio history and sorts students into Reteach / Brief guided practice / Ready for another independent demonstration / No evidence / Review flags.",
+    "contradiction_rule": "A later weak event does not automatically demote established mastery; put meaningful conflict in Review flags for teacher judgment."
+  }
 }

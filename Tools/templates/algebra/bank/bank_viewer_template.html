@@ -25,7 +25,7 @@ body{margin:0}
 .ican-head:target{outline:3px solid #315f95;outline-offset:2px;background:#eef4fb}
 .goal:target>.goal-banner{outline:3px solid #315f95;outline-offset:-3px}
 .row-label{padding:9px 14px 0;font-size:.82rem;font-weight:800;color:#536171;text-transform:uppercase;letter-spacing:.04em}
-.family{border:1px solid #d6dde6;border-radius:10px;background:#fbfcfe;padding:12px;min-width:0}
+.family{scroll-margin-top:12px;border:1px solid #d6dde6;border-radius:10px;background:#fbfcfe;padding:12px;min-width:0}
 .family-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
 .badge{flex:0 0 auto;font-size:.72rem;font-weight:800;padding:3px 7px;border-radius:999px;background:#e6edf7}
 .family-name{font-weight:800;line-height:1.2}
@@ -45,7 +45,8 @@ dl{display:grid;grid-template-columns:105px 1fr;gap:4px 7px;font-size:.76rem}dt{
 .error{background:#fff1f1;border:1px solid #e3aaaa;padding:14px;border-radius:8px}
 @media(max-width:1200px){.ican-heads,.family-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.wrap{padding:10px}.ican-heads,.family-row{grid-template-columns:1fr}.goal-banner{padding:12px}.figure,.graph{max-width:200px}}
-@media print{body{background:#fff}.wrap{max-width:none}.goal{break-inside:avoid}.family{break-inside:avoid}}
+.hash-target{outline:4px solid #e5b700;outline-offset:2px}
+@media print{body{background:#fff}.wrap{max-width:none}.goal{break-inside:avoid}.family{scroll-margin-top:12px;break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -64,7 +65,7 @@ async function getManifest(){try{return await getJson('BANK_MANIFEST.json')}catc
 function familyCard(f,ican){
  const ex=f.exemplar||{};
  const routes=(f.representation_routes||[]).map(x=>x.type||x.route||'').filter(Boolean).join(', ');
- return `<article class="family">
+ return `<article class="family" id="${esc(f.family_id)}">
  <div class="family-head"><span class="badge">Family ${esc(f.family_label)}</span><span class="family-name">${esc(f.family_name)}</span></div>
  <div class="ican-mini">${esc(ican.i_can_id)} · ${esc(ican.exact_text)}</div>
  <p class="purpose">${esc(f.family_purpose)}</p>
@@ -78,10 +79,11 @@ function familyCard(f,ican){
  </dl></details></article>`;
 }
 function jumpToHash(){
+ document.querySelectorAll('.hash-target').forEach(x=>x.classList.remove('hash-target'));
  const id=decodeURIComponent(location.hash.slice(1));
  if(!id)return;
  const target=document.getElementById(id);
- if(target)target.scrollIntoView({block:'start'});
+ if(target){target.classList.add('hash-target');target.scrollIntoView({block:'start'});}
 }
 async function main(){
  try{

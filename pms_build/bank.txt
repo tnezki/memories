@@ -99,8 +99,9 @@ If graph_tool is Tools/~graph_tool_v13.py, also stage/read:
   Tools/~graph_tool_v12.py
 v13 is the authoritative line-weight adapter over the v12 behavior base; keep both files together when executing graph generation.
 
-Canonical Bank viewer template:
+Canonical Bank viewer templates:
   Tools/templates/algebra/bank/bank_viewer_template.html
+  Tools/templates/algebra/bank/student_bank_template.html
 
 Universal finalizer:
   Tools/finalize_output.py
@@ -223,8 +224,8 @@ Create delivery_map.json as a ROUTING layer, not another question bank.
 
 For every family record, identify appropriate possible uses:
 - Practice
-- Exit new evidence
-- Exit reassessment
+- Quick Check new evidence
+- Quick Check reassessment
 - secure Summative
 - recovery/reteach
 - Notes Example/YTI or activities when appropriate
@@ -254,6 +255,7 @@ banks/unitN/
   BUILD_REPORT.txt
   PROVENANCE.json
   unitN.html
+  student.html
 
   mastery_goals/
     <MG-ID>.json
@@ -269,13 +271,17 @@ Those are downstream fresh-instance products.
 9. VIEWER — LOCKED LAYOUT
 =================================================
 
-Use the canonical template:
+Use BOTH canonical templates:
   Tools/templates/algebra/bank/bank_viewer_template.html
+  Tools/templates/algebra/bank/student_bank_template.html
 
-Copy it as:
+Copy them as:
   banks/unitN/unitN.html
+  banks/unitN/student.html
 
-Do not invent a different viewer layout.
+`unitN.html` is the technical/teacher family matrix.
+`student.html` is the student practice view grouped Mastery Goal -> I Can -> Family A/B/C.
+Do not invent different viewer layouts.
 
 Required visual organization:
 - strongest grouping = Mastery Goal;
@@ -297,13 +303,15 @@ GRAPH DISPLAY SIZE IN VIEWER:
 STABLE FRAGMENT ANCHORS — HARD:
 - every Mastery Goal container MUST expose its exact canonical goal ID as its HTML id;
 - every I Can heading/container MUST expose its exact canonical I Can ID as its HTML id;
-- examples: #U1-MG01 and #U1-MG01-IC04;
+- every family card MUST expose its exact canonical family_id as its HTML id;
+- examples: #U1-MG01, #U1-MG01-IC04, and #U1-MG01-IC04-A;
 - do not invent aliases, shortened slugs, index-based anchors, or anchors derived from display wording;
 - if an I Can ID is derived under Section 3, use that same recorded stable ID as the fragment anchor;
 - fragment IDs are part of the public interface and MUST remain stable across rebuilds unless the canonical ID itself changes;
 - the viewer loads Bank data asynchronously, so it MUST explicitly honor location.hash after rendering and on later hash changes;
-- direct URLs such as unit1.html#U1-MG01-IC04 must scroll to the exact requested target after the target exists in the DOM;
-- the canonical viewer template owns this behavior so all future Unit Banks inherit it.
+- direct URLs such as unit1.html#U1-MG01-IC04 and student.html#U1-MG01-IC04-A must scroll to and visibly highlight the exact requested target after the target exists in the DOM;
+- the student viewer MUST keep all three families for one I Can grouped together and MUST stack them vertically on narrow/mobile screens;
+- the canonical viewer templates own this behavior so all future Unit Banks inherit it.
 
 =================================================
 10. LIGHT QA — ONLY FIVE CHECKS
@@ -314,8 +322,9 @@ STABLE FRAGMENT ANCHORS — HARD:
    - exactly 3 families per I Can;
    - unique family IDs;
    - expected family count reconciles;
-   - every MG and I Can has exactly one matching canonical fragment anchor;
-   - direct-fragment behavior is tested for at least one MG and the first/last I Can in the unit.
+   - every MG, I Can, and family has exactly one matching canonical fragment anchor;
+   - direct-fragment behavior is tested for at least one MG, the first/last I Can, and at least one family in the unit;
+   - student.html is tested at desktop and narrow/mobile width so one I Can's A/B/C families remain visually grouped.
 
 2. FAMILY DISTINCTNESS
    - A/B/C for one I Can are materially different types;
@@ -358,6 +367,8 @@ BANK_MANIFEST.json includes at minimum:
 - family_count
 - exemplar_count
 - viewer = unitN.html
+- student_viewer = student.html
+- fragment_anchors = canonical MG ID / I Can ID / family_id
 - source_policy = CLOSED_PROJECT_SOURCES_ONLY
 - public_web_research_used = false
 - file_library_recovery_used = false

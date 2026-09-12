@@ -1,7 +1,7 @@
 {
   "course_family": "spiral_math",
   "course": "Algebra 1",
-  "framework_version": "v7.5-portfolio-quick-check-alignment",
+  "framework_version": "v7.6-portfolio-template-student-bank-alignment",
   "authority_order": [
     "current explicit teacher instruction for the specific job",
     "current Curriculum Philosophy",
@@ -21,10 +21,11 @@
   "quick_check_rule": "Quick Check is the current common short-evidence artifact. Curriculum defines predictable evidence slots; live Portfolio state selects just-in-time reassessment targets; the teacher approves the actual questions. Do not freeze future reassessment I Cans months ahead.",
   "portfolio_status_rule": "I Can status uses No Evidence / Developing / Mastered / Transfer. Algebra Mastery Goal is demonstrated when at least 2 of its 4 I Cans are Mastered or Transfer. Unit status uses I/C/B/A/A+ under the current policy contract.",
   "independence_rule": "An I Can normally reaches Mastered from at least two independent convincing demonstrations, normally from different opportunities and with at least one reasonably current demonstration. A rich artifact may suffice when it contains multiple genuinely independent demonstrations. Teacher judgment resolves mixed or unusual cases.",
-  "bank_rule": "The canonical Algebra Bank is reusable question-family architecture organized Mastery Goal -> I Can -> materially different families. It supports fresh downstream authoring; it does not freeze future Quick Check reassessment targets.",
+  "bank_rule": "The canonical Algebra Bank is reusable question-family architecture organized Mastery Goal -> I Can -> materially different families. It exposes a technical unitN.html view and a student.html view grouped Mastery Goal -> I Can -> A/B/C. Canonical MG, I Can, and family IDs are permanent fragment anchors for Portfolio deep links. The Bank does not freeze future Quick Check reassessment targets.",
   "derivative_index_rule": "If a derivative JSON/index conflicts with exact Assessment Plan learning content, use the Assessment Plan for learning content and regenerate the derivative. If a legacy recurring-assessment derivative conflicts with the current Portfolio/Quick Check policy, use the current policy and quick_check_slot_map.",
   "task_pm_rule": "Task PM owns execution procedure and packaging. Framework owns Algebra-specific learning/evidence/resource behavior. PMs may not revive retired Exit Ticket mechanics or retired Portfolio labels.",
   "operational_map_rule": "Current delegated operational maps are curriculum/quick_check_slot_map.json for Quick Check slot architecture and curriculum/warmup_progression_map.json for Warm-Up fluency progression. curriculum/exit_evidence_map.* is retired compatibility metadata only.",
   "question_structure_rule": "Use current universal Question Structure for authored questions across Bank/downstream resources unless an explicit course rule exempts the resource. Algebra Warm-Ups are the explicit exception. Structure ID, reasoning architecture, student action, response mode, representation, and executable route must agree semantically; metadata-only alignment is not sufficient.",
-  "framework_amendment": "frameworks/Algebra_1/FRAMEWORK_PORTFOLIO_QUICK_CHECK_AMENDMENT.txt"
+  "framework_amendment": "frameworks/Algebra_1/FRAMEWORK_PORTFOLIO_QUICK_CHECK_AMENDMENT.txt",
+  "portfolio_template_rule": "Current Portfolio presentation is owned by Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json plus the registered student/teacher HTML templates and shared CSS. Student reports use two pages; teacher summaries use 2 x 2 I Can cards and end with a longitudinal Portfolio Evidence Sort."
 }

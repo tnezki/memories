@@ -77,7 +77,7 @@ The current canonical Bank is reusable question-family architecture organized:
 
 The Bank supports fresh downstream authoring and practice/example access.
 It does not freeze future Quick Check reassessment targets.
-The Bank viewer exposes stable canonical I Can fragment anchors so Portfolio QR codes can link directly to the selected I Can.
+The Bank exposes two public views: `unitN.html` for the technical/teacher family matrix and `student.html` for student practice grouped Mastery Goal -> I Can -> Family A/B/C. Stable canonical Mastery Goal IDs, I Can IDs, and family IDs are permanent fragment anchors. Portfolio QR codes link to the exact recommended family, e.g. `student.html#U1-MG01-IC04-A`.
 
 5. LEGACY RETIREMENTS
 ---------------------
@@ -88,6 +88,10 @@ Retired for current Algebra 1 execution:
 - old Bank assumptions that conflict with the current Mastery Goal -> I Can -> family architecture.
 
 The old exit_evidence_map files remain only as compatibility pointers to the current Quick Check map.
+
+5A. PORTFOLIO PRESENTATION / TEACHER SORT
+------------------------------------------
+Canonical Portfolio presentation is owned by `Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json` and its registered HTML/CSS templates. Student packets are exactly two content pages: current progress/action path, then full Unit evidence picture. Teacher summaries use a 2 x 2 I Can-card analysis view. The final teacher page is a longitudinal Portfolio Evidence Sort built from the full evidence history, with Reteach / Brief guided practice / Ready for another independent demonstration / No evidence / Review flags.
 
 6. BUILD PROCEDURE ALIGNMENT
 ----------------------------

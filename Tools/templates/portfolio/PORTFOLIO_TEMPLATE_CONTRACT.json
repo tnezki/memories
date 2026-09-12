@@ -1,0 +1,56 @@
+{
+  "schema": "portfolio-template-contract/1.0",
+  "status": "CURRENT",
+  "purpose": "Canonical visual and information architecture for Portfolio student packets and teacher evidence summaries.",
+  "student_packet": {
+    "template": "Tools/templates/portfolio/student_packet_template.html",
+    "css": "Tools/templates/portfolio/portfolio.css",
+    "page_size": "US Letter portrait",
+    "pages_per_student": 2,
+    "page_1": [
+      "current unit status",
+      "current Mastery Goal picture",
+      "strengths shown",
+      "next best target",
+      "exact MG + I Can + Bank family practice path",
+      "QR/direct family link",
+      "short student check-in"
+    ],
+    "page_2": [
+      "all unit Mastery Goals",
+      "all I Cans with current status",
+      "Mastery Goal demonstrated/not-yet state",
+      "compact recent evidence"
+    ],
+    "forbidden": [
+      "redundant third progress-tracker page",
+      "generated remediation questions inside report",
+      "student-facing internal evidence-strength labels"
+    ]
+  },
+  "teacher_summary": {
+    "template": "Tools/templates/portfolio/teacher_summary_template.html",
+    "css": "Tools/templates/portfolio/portfolio.css",
+    "page_size": "US Letter landscape",
+    "latest_evidence_pages": "2x2 I Can card layout; combined course first, then one page per period when about four affected I Cans fit.",
+    "longitudinal_page": "Final combined Portfolio Evidence Sort page uses a 2x2 I Can card layout and the full evidence history, not only the latest assessment.",
+    "longitudinal_categories": [
+      "Reteach / targeted practice",
+      "Brief guided practice",
+      "Ready for another independent demonstration",
+      "No evidence / absent",
+      "Review flags"
+    ],
+    "name_format": "Bulleted compact lists. Group periods under headers when needed. First name + last initial is acceptable.",
+    "status_summary": "Show current No Evidence / Developing / Mastered / Transfer counts, independent opportunity count, latest evidence source/date, and review flags for each displayed I Can."
+  },
+  "bank_practice_link": {
+    "student_view_pattern": "https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
+    "required_path_fields": [
+      "Mastery Goal ID/title",
+      "I Can ID/exact text",
+      "family ID/label/name"
+    ],
+    "stable_anchor_rule": "Family anchor is the canonical family_id, e.g. U1-MG01-IC04-A. I Can and Mastery Goal anchors remain canonical IDs."
+  }
+}

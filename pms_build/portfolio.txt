@@ -93,9 +93,10 @@ Read in this order:
 4. current Course Framework front door;
 5. exact Unit Assessment Plan / learning architecture for every represented unit;
 6. this Portfolio PM;
-7. current Unit Bank only when needed to resolve item intent, canonical answer/solution, family provenance, or stable public I Can link;
-8. prior private Portfolio state from Drive;
-9. newly attached evidence / PowerSchool initialization files.
+7. current Portfolio template contract + templates from Tools/MANIFEST.json;
+8. current Unit Bank when needed to resolve item intent, canonical answer/solution, family provenance, or stable public MG/I Can/family link;
+9. prior private Portfolio state from Drive;
+10. newly attached evidence / PowerSchool initialization files.
 
 Framework / Assessment Plan owns exact learning goals and I Can wording.
 This PM owns the current Portfolio status/rollup/display mechanics below.
@@ -365,7 +366,7 @@ Required persistent files:
    current class/combined counts and percentages used by teacher summaries.
 
 7. `intervention_groups.csv`
-   current grouping recommendations.
+   current grouping recommendations. Include at least: student_key, period, unit, mastery_goal_id, i_can_id, category, reason, independent_opportunities, latest_source, latest_date, review_flag.
 
 8. `review_queue.csv`
    unresolved identity/scan/mapping/judgment cases. Empty file with headers is acceptable when no cases exist.
@@ -428,6 +429,24 @@ Do NOT require an immediate correction problem.
 Do NOT invent remediation problems inside the Portfolio report.
 The Portfolio identifies WHAT to work on; the reviewed curriculum Bank supplies practice/examples.
 
+EXACT STUDENT BANK PRACTICE PATH — HARD
+For the selected next target, resolve one recommended Bank family and print all three identifiers on page 1:
+- exact Mastery Goal ID + title;
+- exact I Can ID + exact I Can text;
+- exact Family ID + Family label/name.
+
+The QR/direct link MUST use the student Bank viewer and canonical family anchor:
+  https://tnezki.github.io/algebra/banks/unitN/student.html#<family_id>
+Example:
+  https://tnezki.github.io/algebra/banks/unit1/student.html#U1-MG01-IC04-A
+
+Family recommendation default:
+- substantial gap/no usable understanding -> start with the clean core Family A unless another family is clearly the better documented misconception route;
+- partial understanding -> Family A or the family that directly addresses the observed gap;
+- convincing first demonstration but not yet Mastered -> prefer a meaningfully different Family B route when appropriate rather than repeating the same surface;
+- never direct a student to a family whose evidence job does not match the selected I Can.
+The Portfolio report is practice guidance, not the reassessment itself.
+
 PAGE 2 — EVIDENCE DETAIL / FULL UNIT PICTURE
 This page replaces the old separate Progress Tracker.
 Include:
@@ -443,9 +462,8 @@ No third tracker page.
 
 Student-facing language should be plain and specific. Do not expose internal evidence labels like CONVINCING/PARTIAL unless the teacher explicitly asks for them.
 
-HTML/CSS RENDERING RULE:
-Build the PDF from a consistent HTML/CSS presentation layer so repeated runs preserve layout. The HTML is an intermediate rendering source only; DO NOT store standalone HTML in Drive.
-Until a separate canonical Portfolio template file is formally locked, follow this page contract consistently and avoid redesigning it from run to run.
+CANONICAL TEMPLATE RULE — HARD:
+Resolve `Tools/MANIFEST.json -> templates.portfolio_contract`, then use the registered `portfolio_student_packet` template and `portfolio_css`. Do not redesign the report from run to run. HTML/CSS is an intermediate rendering layer only; DO NOT store standalone HTML in Drive.
 
 ======================================================================
 14. CLASS & INTERVENTION SUMMARY PDF
@@ -454,6 +472,7 @@ Until a separate canonical Portfolio template file is formally locked, follow th
 Produce ONE current teacher-facing PDF in:
   04 Class & Intervention Summaries/
 
+Resolve `Tools/MANIFEST.json -> templates.portfolio_teacher_summary` and `portfolio_css`; use that canonical 2 x 2 card presentation.
 The purpose is rapid analysis and intervention planning, not a decorative report.
 
 For a typical 4-question Quick Check affecting four I Cans, use this organization:
@@ -473,24 +492,34 @@ PAGE 2+ — INDIVIDUAL CLASS BREAKDOWNS
 - include actual student names, not just counts;
 - favor compact readable columns over splitting two I Cans per page.
 
-FINAL PAGE — COMBINED INTERVENTION GROUPS
-Do NOT make separate intervention pages by class.
-Combine available students across periods, but show period headers so the teacher can locate them.
-Include a clear key:
+FINAL PAGE — COMBINED PORTFOLIO EVIDENCE SORT — LONGITUDINAL
+Do NOT make separate intervention-sort pages by class.
+This final page MUST use the FULL current Portfolio body of evidence, not only the newest Quick Check/source.
+Use the same 2 x 2 I Can-card language as the other teacher pages. For each affected/currently important I Can show:
+- current counts: No Evidence / Developing / Mastered / Transfer;
+- number of independent evidence opportunities recorded;
+- latest evidence source + date;
+- compact student lists sorted into the categories below;
+- Review flags when contradictory/ambiguous evidence needs teacher judgment.
 
+Categories:
 `Reteach / targeted practice`
   Evidence shows a substantial gap, misconception, or unusable response; instruction/practice is likely needed before another attempt.
 
 `Brief guided practice`
   Student showed part of the idea but not enough yet; likely needs a short example, prompt, or check-in rather than a full reteach.
 
-`Ready for independent reassessment`
-  Student already has a convincing demonstration but has not yet satisfied the independent body-of-evidence rule; no reteach is implied — the student needs another independent opportunity.
+`Ready for another independent demonstration`
+  Student already has convincing evidence but has not yet satisfied the independent body-of-evidence rule; no reteach is implied.
 
 `No evidence / absent`
-  No usable evidence from the relevant opportunity; the student needs a first/current evidence opportunity.
+  No usable evidence exists for the relevant I Can/current opportunity; the student needs a first usable opportunity.
 
-When useful, also identify students already Mastered/Transfer who should not be pulled for routine reteaching.
+`Review flags`
+  Evidence conflicts with established mastery, independence is uncertain, identity/mapping is ambiguous, or another teacher-judgment issue prevents automatic movement.
+
+Do not automatically demote established mastery because of one later weak event. Put the contradiction in Review flags and recommend another look.
+When useful, identify students already Mastered/Transfer who should not be pulled for routine reteaching.
 
 ALGEBRA INTERVENTION CONTEXT:
 The teacher has a 29-minute intervention period Tuesday-Friday. Thursday is guaranteed math; other days may also be available. Use this context to make the groupings practical, but do NOT create a day-by-day schedule unless explicitly requested.
@@ -574,13 +603,14 @@ Before declaring success verify:
 5. I Can status uses ○/◐/●/★ current rules;
 6. Algebra MG rule is 2-of-4 and unit scale is I/C/B/A/A+;
 7. student packets are current 2-page-per-student PDFs with bookmarks and no redundant tracker page;
-8. QR links use confirmed canonical Bank fragment IDs when available;
-9. class summary keeps the affected I Cans together on one page when reasonably possible and includes actionable student lists;
-10. combined intervention page contains the category key;
+8. student page 1 prints exact MG + I Can + family and QR links to `student.html#<family_id>` using a confirmed canonical family anchor;
+9. class summary keeps the affected I Cans in the canonical 2 x 2 card layout when reasonably possible and includes actionable student lists;
+10. final Portfolio Evidence Sort uses the full longitudinal body of evidence, shows current status/opportunity/latest-source context, and includes the category key + Review flags;
 11. no standalone HTML is stored in Drive;
 12. current PowerSchool CSVs are generated for Algebra and preserve template shape;
 13. stale derived PDFs/CSVs are replaced/cleaned while raw evidence/history is preserved;
-14. teacher-review cases are isolated rather than guessed.
+14. teacher-review cases are isolated rather than guessed;
+15. canonical Portfolio templates/CSS are used without ad hoc visual redesign.
 
 If a check fails, repair that concrete defect before final delivery.
 
