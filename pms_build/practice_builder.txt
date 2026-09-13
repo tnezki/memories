@@ -1,0 +1,92 @@
+BUILD ONE-OFF TEACHER PRACTICE — PRACTICE BUILDER
+===================================================
+
+STATUS: PILOT
+JOB: teacher_practice_builder
+ROLE: Build one teacher-requested, one-off Algebra 1 practice packet from approved Unit Bank family architecture.
+
+THIS IS NOT pms_build/practice.txt.
+Do not overwrite or modify canonical section Practice Set / Extra Practice / CYU / Tarsia / Blooket files.
+
+INPUT
+-----
+Require PRACTICE_BUILDER_REQUEST.json with schema algebra-teacher-practice-builder-request/1.0.
+Pin and use exactly the declared tnezki/memories and tnezki/algebra commits.
+
+SOURCE BOUNDARY
+---------------
+Use only the request and exact pinned project sources. No public web research, File Library recovery, stale uploads, or prior-chat curriculum sourcing.
+
+REQUIRED SOURCES
+----------------
+Read:
+1. Curriculum_Philosophy.txt
+2. SYSTEM_RUNTIME_CONTRACT.txt
+3. current Question Structure
+4. frameworks/Algebra_1/FRAMEWORK.txt
+5. selected Unit Bank BANK_MANIFEST.json, FAMILY_INDEX.json, selected mastery_goals/*.json, figures/assets as needed
+6. Tools/QUESTION_FRESHNESS_CONTRACT.txt
+7. Tools/MANIFEST.json for graph/finalization tools
+8. this PM
+
+ENTRY GATE
+----------
+Selected Unit Bank must be COMPLETE, ready_for_downstream=true, qa=PASS.
+Every selected I Can and family ID must exist exactly in the pinned Bank.
+Fail closed on mismatch.
+
+AUTHORING
+---------
+Create exactly request.question_count student questions.
+Auto-balance across selected I Cans first, then across selected families within those I Cans as reasonably evenly as the count allows.
+
+For every question:
+- preserve exact selected I Can and Bank family invariant/evidence job/question structure;
+- create a fresh instance using allowed variation axes;
+- do not copy the Bank exemplar;
+- do not invent a new family when an approved selected family exists;
+- solve independently and provide answer + concise solution;
+- use real tables/graphs/representations when the family requires them;
+- use the registered graph tool for supported graphs;
+- use MathJax \( ... \) / \[ ... \], never $...$ delimiters;
+- keep arithmetic/numbers natural unless teacher_note explicitly requests otherwise.
+
+FRESHNESS
+---------
+Compare against selected family exemplars and, when available, banks/unitN/student_practice_pool.json plus already-public same-Unit Practice/Quick Check prompts. Family reuse is allowed; finished-instance copying or cosmetic near-copy is not.
+Terminal signal: QUESTION_FRESHNESS: PASS.
+
+OUTPUT
+------
+This is a one-off printable artifact. Do NOT create a GitHub transfer package and do NOT save into the course repository or Portfolio Drive.
+Return one ZIP containing exactly:
+- practice_student.html
+- practice_student.pdf
+- practice_teacher_key.html
+- practice_teacher_key.pdf
+- practice_source_map.json
+
+LAYOUT
+------
+Student packet:
+- plain white print pages;
+- name/date at top;
+- exact I Can printed compactly with each question;
+- enough workspace for the response mode;
+- no toner-heavy cards/banners;
+- no ruled workspace lines unless mathematically necessary.
+
+Teacher key:
+- same question order;
+- answer + concise solution immediately under each question;
+- representations must match student packet.
+
+SOURCE MAP
+----------
+For every question record:
+question_number, i_can_id, i_can_exact_text, family_id, family_name, evidence_job, question_structure_id, prompt/student_html, answer, solution, representation refs/tool route, and pinned source commits.
+
+QA
+--
+Verify exact question count, selected-ID fidelity, math correctness, representation fidelity, no duplicate/near-copy finished instances, MathJax/currency safety, readable print layout, and FINALIZATION_QA: PASS.
+Stop when hard QA passes.
