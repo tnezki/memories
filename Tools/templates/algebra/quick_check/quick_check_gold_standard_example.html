@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quick Check 1.2 - Adjustable A-D Layout</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+@page{size:letter portrait;margin:.42in}
+*{box-sizing:border-box}
+:root{
+  --ink:#111827;--navy:#173f6a;--muted:#4b5563;--rule:#525b66;
+  --grid:#4f5965;--axis:#111827;
+  --q1h:4.20in;--q2h:4.20in;--q3h:4.50in;--q4h:4.20in
+}
+body{margin:0;background:#e7ebef;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.page{
+  width:7.66in;height:10.16in;margin:16px auto;background:white;
+  position:relative;page-break-after:always;overflow:hidden;padding:0 .04in
+}
+.page:last-of-type{page-break-after:auto}
+.student-row{
+  display:grid;grid-template-columns:1fr 2.0in;gap:.28in;
+  padding-top:.02in;margin:0 0 .08in;font-size:10.5pt
+}
+.fill{display:inline-block;border-bottom:1.3px solid #30343a;min-width:3.55in;height:.17in;vertical-align:bottom}
+.fill.date{min-width:1.38in}
+.header{
+  display:grid;grid-template-columns:1fr auto;gap:.2in;align-items:end;
+  padding:.04in 0 .08in;border-bottom:1.7px solid var(--navy)
+}
+.title{font-size:17pt;font-weight:800;line-height:1.05;color:var(--navy)}
+.sub{font-size:9.3pt;margin-top:.035in;color:var(--muted)}
+.version-label{font-size:9pt;font-weight:800;color:var(--navy);white-space:nowrap}
+.directions{font-size:8.8pt;font-style:italic;color:var(--muted);margin:.07in 0 .08in}
+.page2-top{height:.02in}
+.page-body{min-height:0}
+.question{
+  position:relative;padding:.09in .02in .09in;
+  display:flex;flex-direction:column;min-height:0;overflow:hidden
+}
+.question + .question{
+  border-top:1.8px solid var(--rule);margin-top:.03in;padding-top:.14in
+}
+.qhead{display:flex;justify-content:space-between;gap:.18in;align-items:flex-start;margin-bottom:.05in;flex:none}
+.qleft{display:flex;gap:.05in;align-items:baseline;min-width:0}
+.qnumber{font-size:12pt;font-weight:800;color:var(--navy);flex:none}
+.qtitle{font-size:12pt;font-weight:800;color:var(--navy);margin:0}
+.ican{font-size:8.6pt;font-style:italic;color:var(--muted);text-align:right;max-width:3.45in;line-height:1.25}
+.prompt{font-size:11.2pt;line-height:1.4;margin:.05in 0 .06in;flex:none}
+.mini-direction{font-size:8.8pt;font-style:italic;color:var(--muted);margin:.02in 0 .03in}
+.workarea{flex:1;min-height:.40in;margin-top:.02in;background:none}
+.source-q1{height:var(--q1h)} .source-q2{height:var(--q2h)} .source-q3{height:var(--q3h)} .source-q4{height:var(--q4h)}
+.graph{display:block;margin:.06in auto 0;max-width:100%;width:100%;height:0;flex:1 1 0;min-height:1.15in}
+.graph.intercept{height:0}
+.graph .grid{stroke:var(--grid)!important;stroke-width:1.35!important}
+.graph .axis{stroke:var(--axis)!important;stroke-width:2!important}
+.graph text{fill:#252b33!important;font-size:9.2px!important}
+.graph .relation{stroke:var(--navy)!important;stroke-width:2.7!important}
+.graph .point{fill:#8b1e1e!important}
+.graph .plabel{fill:#8b1e1e!important;font-size:10px!important;font-weight:700!important}
+.answers{display:flex;justify-content:space-between;gap:.35in;font-size:10.7pt;margin-top:.06in}
+.footer{
+  position:absolute;left:.04in;right:.04in;bottom:0;border-top:1.2px solid #7d8794;
+  padding-top:.05in;font-size:8.1pt;color:var(--muted);display:flex;justify-content:space-between
+}
+.layout-controls{
+  position:sticky;top:0;z-index:20;width:min(11.7in,calc(100% - 24px));
+  margin:10px auto 4px;background:#fff;border:1px solid #aeb8c4;border-radius:10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);padding:10px 12px;font-size:12px
+}
+.layout-controls .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.layout-controls h2{font-size:14px;margin:0;color:var(--navy)}
+.layout-controls .hint{color:var(--muted);font-size:11px}
+.control-grid{display:grid;grid-template-columns:1.15fr repeat(4,minmax(160px,1fr));gap:8px}
+.size-control,.split-control{border:1px solid #d5dbe2;border-radius:7px;padding:7px 8px}
+.size-control label,.split-control label{display:flex;justify-content:space-between;align-items:center;font-weight:700;color:#263445;margin-bottom:4px}
+.size-control .inputs,.split-control .inputs{display:grid;grid-template-columns:1fr 58px;gap:6px;align-items:center}
+.size-control input[type=range],.split-control input[type=range]{width:100%}
+.size-control input[type=number],.split-control input[type=number]{width:58px;padding:4px;border:1px solid #aeb8c4;border-radius:5px;text-align:right;font:inherit}
+.split-note{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.25}
+.fit-summary{display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-size:10px;max-width:330px}
+.fit-chip{padding:3px 5px;border-radius:999px;border:1px solid #cbd5df;background:#f8fafc}
+.fit-ok{color:#137a4b;border-color:#9bd6bd;background:#f0fbf6} .fit-warn{color:#b42318;border-color:#efb1ab;background:#fff5f4}
+.control-buttons{display:flex;gap:6px}
+.control-buttons button{border:1px solid #8da0b3;background:#fff;color:var(--navy);font-weight:700;border-radius:6px;padding:6px 9px;cursor:pointer}
+.control-buttons button.print{background:var(--navy);color:#fff;border-color:var(--navy)}
+.screen-version-note{width:7.66in;margin:12px auto -6px;font-weight:800;color:var(--navy);font-size:12px}
+@media(max-width:1050px){
+  .control-grid{grid-template-columns:1fr 1fr}
+  .layout-controls{position:relative}
+}
+@media print{
+  .layout-controls,.screen-version-note{display:none!important}
+  body{background:#fff}
+  .page{margin:0}
+}
+</style>
+</head>
+<body>
+
+<section class="layout-controls" aria-label="Quick Check layout controls">
+  <div class="top">
+    <div>
+      <h2>Quick Check page layout · Versions A-D</h2>
+      <div class="hint">Choose the page split and problem heights once. Print creates all four versions: number/value swaps + deterministic question-order scramble.</div>
+    </div>
+    <div class="fit-summary" id="fitSummary"></div>
+    <div class="control-buttons">
+      <button id="resetSizes" type="button">Reset</button>
+      <button class="print" id="printNow" type="button">Print A-D (8 pages)</button>
+    </div>
+  </div>
+
+  <div class="control-grid">
+    <div class="split-control">
+      <label><span>Problems on page 1</span><span><output id="splitOutput">2</output></span></label>
+      <div class="inputs">
+        <input id="pageSplitRange" type="range" min="1" max="3" step="1" value="2">
+        <input id="pageSplitNumber" type="number" min="1" max="3" step="1" value="2">
+      </div>
+      <div class="split-note" id="splitNote">Page 1: 2 problems · Page 2: 2 problems</div>
+    </div>
+
+    <div class="size-control" data-q="1">
+      <label><span>U1-MG03-IC01 height</span><span><output>4.20</output> in</span></label>
+      <div class="inputs"><input type="range" min="1.80" max="7.80" step="0.05" value="4.20"><input type="number" min="1.80" max="7.80" step="0.05" value="4.20"></div>
+    </div>
+    <div class="size-control" data-q="2">
+      <label><span>U1-MG03-IC02 height</span><span><output>4.20</output> in</span></label>
+      <div class="inputs"><input type="range" min="1.80" max="7.80" step="0.05" value="4.20"><input type="number" min="1.80" max="7.80" step="0.05" value="4.20"></div>
+    </div>
+    <div class="size-control" data-q="3">
+      <label><span>U1-MG01-IC03 height</span><span><output>4.50</output> in</span></label>
+      <div class="inputs"><input type="range" min="1.80" max="7.80" step="0.05" value="4.50"><input type="number" min="1.80" max="7.80" step="0.05" value="4.50"></div>
+    </div>
+    <div class="size-control" data-q="4">
+      <label><span>U1-MG01-IC04 height</span><span><output>4.20</output> in</span></label>
+      <div class="inputs"><input type="range" min="1.80" max="7.80" step="0.05" value="4.20"><input type="number" min="1.80" max="7.80" step="0.05" value="4.20"></div>
+    </div>
+  </div>
+</section>
+
+<div id="pagesRoot"></div>
+
+<div id="templates" hidden>
+<template id="tpl-A-1"><section class="question source-q1" data-source-q="1"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Substitute and evaluate.</h2></div><span class="ican">U1-MG03-IC01 Substitute a value for a variable.</span></div><p class="prompt">Evaluate \(4x-7\) when \(x=-3\).</p><div class="workarea"></div></section></template>
+<template id="tpl-A-2"><section class="question source-q2" data-source-q="2"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Use order of operations.</h2></div><span class="ican">U1-MG03-IC02 Use order of operations correctly.</span></div><p class="prompt">Evaluate \(20-4(3)+2^2\).</p><p class="mini-direction" style="margin-left:0">Show the order of your steps, not just the final answer.</p><div class="workarea"></div></section></template>
+<template id="tpl-A-3"><section class="question source-q3" data-source-q="3"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Read the ordered pair from the graph.</h2></div><span class="ican">U1-MG01-IC03 Read a graph using its scale.</span></div><p class="prompt">The y-axis is labeled in increments of 5. Write the coordinates of point P.</p><svg aria-label="Coordinate graph with x scale by ones and y scale by fives" class="graph" role="img" viewbox="0 0 420 225"><line class="grid" x1="45.0" x2="45.0" y1="12" y2="203"></line><line class="grid" x1="80.7" x2="80.7" y1="12" y2="203"></line><line class="grid" x1="116.4" x2="116.4" y1="12" y2="203"></line><line class="grid" x1="152.1" x2="152.1" y1="12" y2="203"></line><line class="grid" x1="187.8" x2="187.8" y1="12" y2="203"></line><line class="grid" x1="223.5" x2="223.5" y1="12" y2="203"></line><line class="grid" x1="259.2" x2="259.2" y1="12" y2="203"></line><line class="grid" x1="294.9" x2="294.9" y1="12" y2="203"></line><line class="grid" x1="330.6" x2="330.6" y1="12" y2="203"></line><line class="grid" x1="366.3" x2="366.3" y1="12" y2="203"></line><line class="grid" x1="402.0" x2="402.0" y1="12" y2="203"></line><line class="grid" x1="45" x2="402" y1="203.0" y2="203.0"></line><line class="grid" x1="45" x2="402" y1="183.9" y2="183.9"></line><line class="grid" x1="45" x2="402" y1="164.8" y2="164.8"></line><line class="grid" x1="45" x2="402" y1="145.7" y2="145.7"></line><line class="grid" x1="45" x2="402" y1="126.6" y2="126.6"></line><line class="grid" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="grid" x1="45" x2="402" y1="88.4" y2="88.4"></line><line class="grid" x1="45" x2="402" y1="69.3" y2="69.3"></line><line class="grid" x1="45" x2="402" y1="50.2" y2="50.2"></line><line class="grid" x1="45" x2="402" y1="31.1" y2="31.1"></line><line class="grid" x1="45" x2="402" y1="12.0" y2="12.0"></line><line class="axis" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="axis" x1="223.5" x2="223.5" y1="12" y2="203"></line><text text-anchor="middle" x="45.0" y="121.5">-5</text><text text-anchor="middle" x="80.7" y="121.5">-4</text><text text-anchor="middle" x="116.4" y="121.5">-3</text><text text-anchor="middle" x="152.1" y="121.5">-2</text><text text-anchor="middle" x="187.8" y="121.5">-1</text><text text-anchor="middle" x="259.2" y="121.5">1</text><text text-anchor="middle" x="294.9" y="121.5">2</text><text text-anchor="middle" x="330.6" y="121.5">3</text><text text-anchor="middle" x="366.3" y="121.5">4</text><text text-anchor="middle" x="402.0" y="121.5">5</text><text text-anchor="end" x="218.5" y="206.0">-25</text><text text-anchor="end" x="218.5" y="186.9">-20</text><text text-anchor="end" x="218.5" y="167.8">-15</text><text text-anchor="end" x="218.5" y="148.7">-10</text><text text-anchor="end" x="218.5" y="129.6">-5</text><text text-anchor="end" x="218.5" y="91.4">5</text><text text-anchor="end" x="218.5" y="72.3">10</text><text text-anchor="end" x="218.5" y="53.2">15</text><text text-anchor="end" x="218.5" y="34.1">20</text><text text-anchor="end" x="218.5" y="15.0">25</text><circle class="point" cx="116.4" cy="50.2" r="5"></circle><text class="plabel" x="124.4" y="43.2">P</text></svg><p class="prompt"><strong>P = ( __________ , __________ )</strong></p></section></template>
+<template id="tpl-A-4"><section class="question source-q4" data-source-q="4"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Identify both intercepts.</h2></div><span class="ican">U1-MG01-IC04 Identify and interpret intercepts when they are shown.</span></div><p class="prompt">Use the graph. Write the x-intercept and y-intercept as ordered pairs.</p><svg aria-label="Line graph crossing both axes" class="graph intercept" role="img" viewbox="0 0 360 205"><line class="grid" x1="38.0" x2="38.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="185.0" y2="185.0"></line><line class="grid" x1="63.6" x2="63.6" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="170.6" y2="170.6"></line><line class="grid" x1="89.2" x2="89.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="156.2" y2="156.2"></line><line class="grid" x1="114.8" x2="114.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="141.8" y2="141.8"></line><line class="grid" x1="140.3" x2="140.3" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="127.3" y2="127.3"></line><line class="grid" x1="165.9" x2="165.9" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="112.9" y2="112.9"></line><line class="grid" x1="191.5" x2="191.5" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="grid" x1="217.1" x2="217.1" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="84.1" y2="84.1"></line><line class="grid" x1="242.7" x2="242.7" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="69.7" y2="69.7"></line><line class="grid" x1="268.2" x2="268.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="55.2" y2="55.2"></line><line class="grid" x1="293.8" x2="293.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="40.8" y2="40.8"></line><line class="grid" x1="319.4" x2="319.4" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="26.4" y2="26.4"></line><line class="grid" x1="345.0" x2="345.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="12.0" y2="12.0"></line><line class="axis" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="axis" x1="191.5" x2="191.5" y1="12" y2="185"></line><text text-anchor="middle" x="38.0" y="111.5">-6</text><text text-anchor="end" x="187.5" y="188.0">-6</text><text text-anchor="middle" x="89.2" y="111.5">-4</text><text text-anchor="end" x="187.5" y="159.2">-4</text><text text-anchor="middle" x="140.3" y="111.5">-2</text><text text-anchor="end" x="187.5" y="130.3">-2</text><text text-anchor="middle" x="242.7" y="111.5">2</text><text text-anchor="end" x="187.5" y="72.7">2</text><text text-anchor="middle" x="293.8" y="111.5">4</text><text text-anchor="end" x="187.5" y="43.8">4</text><text text-anchor="middle" x="345.0" y="111.5">6</text><text text-anchor="end" x="187.5" y="15.0">6</text><line class="relation" x1="38.0" x2="191.5" y1="141.8" y2="12.0"></line><circle class="point" cx="89.2" cy="98.5" r="4"></circle><circle class="point" cx="191.5" cy="12.0" r="4"></circle></svg><div class="answers"><span>x-intercept: ( ______ , ______ )</span><span>y-intercept: ( ______ , ______ )</span></div></section></template>
+<template id="tpl-B-1"><section class="question source-q1" data-source-q="1"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Substitute and evaluate.</h2></div><span class="ican">U1-MG03-IC01 Substitute a value for a variable.</span></div><p class="prompt">Evaluate \(5a+2\) when \(a=-4\).</p><div class="workarea"></div></section></template>
+<template id="tpl-B-2"><section class="question source-q2" data-source-q="2"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Use order of operations.</h2></div><span class="ican">U1-MG03-IC02 Use order of operations correctly.</span></div><p class="prompt">Evaluate \(18+2(5)-3^2\).</p><p class="mini-direction" style="margin-left:0">Show the order of your steps, not just the final answer.</p><div class="workarea"></div></section></template>
+<template id="tpl-B-3"><section class="question source-q3" data-source-q="3"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Read the ordered pair from the graph.</h2></div><span class="ican">U1-MG01-IC03 Read a graph using its scale.</span></div><p class="prompt">The y-axis is labeled in increments of 5. Write the coordinates of point P.</p><svg aria-label="Coordinate graph with x scale by ones and y scale by fives" class="graph" role="img" viewbox="0 0 420 225"><line class="grid" x1="45.0" x2="45.0" y1="12" y2="203"></line><line class="grid" x1="80.7" x2="80.7" y1="12" y2="203"></line><line class="grid" x1="116.4" x2="116.4" y1="12" y2="203"></line><line class="grid" x1="152.1" x2="152.1" y1="12" y2="203"></line><line class="grid" x1="187.8" x2="187.8" y1="12" y2="203"></line><line class="grid" x1="223.5" x2="223.5" y1="12" y2="203"></line><line class="grid" x1="259.2" x2="259.2" y1="12" y2="203"></line><line class="grid" x1="294.9" x2="294.9" y1="12" y2="203"></line><line class="grid" x1="330.6" x2="330.6" y1="12" y2="203"></line><line class="grid" x1="366.3" x2="366.3" y1="12" y2="203"></line><line class="grid" x1="402.0" x2="402.0" y1="12" y2="203"></line><line class="grid" x1="45" x2="402" y1="203.0" y2="203.0"></line><line class="grid" x1="45" x2="402" y1="183.9" y2="183.9"></line><line class="grid" x1="45" x2="402" y1="164.8" y2="164.8"></line><line class="grid" x1="45" x2="402" y1="145.7" y2="145.7"></line><line class="grid" x1="45" x2="402" y1="126.6" y2="126.6"></line><line class="grid" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="grid" x1="45" x2="402" y1="88.4" y2="88.4"></line><line class="grid" x1="45" x2="402" y1="69.3" y2="69.3"></line><line class="grid" x1="45" x2="402" y1="50.2" y2="50.2"></line><line class="grid" x1="45" x2="402" y1="31.1" y2="31.1"></line><line class="grid" x1="45" x2="402" y1="12.0" y2="12.0"></line><line class="axis" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="axis" x1="223.5" x2="223.5" y1="12" y2="203"></line><text text-anchor="middle" x="45.0" y="121.5">-5</text><text text-anchor="middle" x="80.7" y="121.5">-4</text><text text-anchor="middle" x="116.4" y="121.5">-3</text><text text-anchor="middle" x="152.1" y="121.5">-2</text><text text-anchor="middle" x="187.8" y="121.5">-1</text><text text-anchor="middle" x="259.2" y="121.5">1</text><text text-anchor="middle" x="294.9" y="121.5">2</text><text text-anchor="middle" x="330.6" y="121.5">3</text><text text-anchor="middle" x="366.3" y="121.5">4</text><text text-anchor="middle" x="402.0" y="121.5">5</text><text text-anchor="end" x="218.5" y="206.0">-25</text><text text-anchor="end" x="218.5" y="186.9">-20</text><text text-anchor="end" x="218.5" y="167.8">-15</text><text text-anchor="end" x="218.5" y="148.7">-10</text><text text-anchor="end" x="218.5" y="129.6">-5</text><text text-anchor="end" x="218.5" y="91.4">5</text><text text-anchor="end" x="218.5" y="72.3">10</text><text text-anchor="end" x="218.5" y="53.2">15</text><text text-anchor="end" x="218.5" y="34.1">20</text><text text-anchor="end" x="218.5" y="15.0">25</text><circle class="point" cx="294.9" cy="31.1" r="5"></circle><text class="plabel" x="302.9" y="24.1">P</text></svg><p class="prompt"><strong>P = ( __________ , __________ )</strong></p></section></template>
+<template id="tpl-B-4"><section class="question source-q4" data-source-q="4"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Identify both intercepts.</h2></div><span class="ican">U1-MG01-IC04 Identify and interpret intercepts when they are shown.</span></div><p class="prompt">Use the graph. Write the x-intercept and y-intercept as ordered pairs.</p><svg aria-label="Line graph crossing both axes" class="graph intercept" role="img" viewbox="0 0 360 205"><line class="grid" x1="38.0" x2="38.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="185.0" y2="185.0"></line><line class="grid" x1="63.6" x2="63.6" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="170.6" y2="170.6"></line><line class="grid" x1="89.2" x2="89.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="156.2" y2="156.2"></line><line class="grid" x1="114.8" x2="114.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="141.8" y2="141.8"></line><line class="grid" x1="140.3" x2="140.3" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="127.3" y2="127.3"></line><line class="grid" x1="165.9" x2="165.9" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="112.9" y2="112.9"></line><line class="grid" x1="191.5" x2="191.5" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="grid" x1="217.1" x2="217.1" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="84.1" y2="84.1"></line><line class="grid" x1="242.7" x2="242.7" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="69.7" y2="69.7"></line><line class="grid" x1="268.2" x2="268.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="55.2" y2="55.2"></line><line class="grid" x1="293.8" x2="293.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="40.8" y2="40.8"></line><line class="grid" x1="319.4" x2="319.4" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="26.4" y2="26.4"></line><line class="grid" x1="345.0" x2="345.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="12.0" y2="12.0"></line><line class="axis" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="axis" x1="191.5" x2="191.5" y1="12" y2="185"></line><text text-anchor="middle" x="38.0" y="111.5">-6</text><text text-anchor="end" x="187.5" y="188.0">-6</text><text text-anchor="middle" x="89.2" y="111.5">-4</text><text text-anchor="end" x="187.5" y="159.2">-4</text><text text-anchor="middle" x="140.3" y="111.5">-2</text><text text-anchor="end" x="187.5" y="130.3">-2</text><text text-anchor="middle" x="242.7" y="111.5">2</text><text text-anchor="end" x="187.5" y="72.7">2</text><text text-anchor="middle" x="293.8" y="111.5">4</text><text text-anchor="end" x="187.5" y="43.8">4</text><text text-anchor="middle" x="345.0" y="111.5">6</text><text text-anchor="end" x="187.5" y="15.0">6</text><line class="relation" x1="345.0" x2="191.5" y1="12.0" y2="185.0"></line><circle class="point" cx="268.2" cy="98.5" r="4"></circle><circle class="point" cx="191.5" cy="185.0" r="4"></circle></svg><div class="answers"><span>x-intercept: ( ______ , ______ )</span><span>y-intercept: ( ______ , ______ )</span></div></section></template>
+<template id="tpl-C-1"><section class="question source-q1" data-source-q="1"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Substitute and evaluate.</h2></div><span class="ican">U1-MG03-IC01 Substitute a value for a variable.</span></div><p class="prompt">Evaluate \(12-3m\) when \(m=-2\).</p><div class="workarea"></div></section></template>
+<template id="tpl-C-2"><section class="question source-q2" data-source-q="2"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Use order of operations.</h2></div><span class="ican">U1-MG03-IC02 Use order of operations correctly.</span></div><p class="prompt">Evaluate \(25-3(4)+2^3\).</p><p class="mini-direction" style="margin-left:0">Show the order of your steps, not just the final answer.</p><div class="workarea"></div></section></template>
+<template id="tpl-C-3"><section class="question source-q3" data-source-q="3"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Read the ordered pair from the graph.</h2></div><span class="ican">U1-MG01-IC03 Read a graph using its scale.</span></div><p class="prompt">The y-axis is labeled in increments of 5. Write the coordinates of point P.</p><svg aria-label="Coordinate graph with x scale by ones and y scale by fives" class="graph" role="img" viewbox="0 0 420 225"><line class="grid" x1="45.0" x2="45.0" y1="12" y2="203"></line><line class="grid" x1="80.7" x2="80.7" y1="12" y2="203"></line><line class="grid" x1="116.4" x2="116.4" y1="12" y2="203"></line><line class="grid" x1="152.1" x2="152.1" y1="12" y2="203"></line><line class="grid" x1="187.8" x2="187.8" y1="12" y2="203"></line><line class="grid" x1="223.5" x2="223.5" y1="12" y2="203"></line><line class="grid" x1="259.2" x2="259.2" y1="12" y2="203"></line><line class="grid" x1="294.9" x2="294.9" y1="12" y2="203"></line><line class="grid" x1="330.6" x2="330.6" y1="12" y2="203"></line><line class="grid" x1="366.3" x2="366.3" y1="12" y2="203"></line><line class="grid" x1="402.0" x2="402.0" y1="12" y2="203"></line><line class="grid" x1="45" x2="402" y1="203.0" y2="203.0"></line><line class="grid" x1="45" x2="402" y1="183.9" y2="183.9"></line><line class="grid" x1="45" x2="402" y1="164.8" y2="164.8"></line><line class="grid" x1="45" x2="402" y1="145.7" y2="145.7"></line><line class="grid" x1="45" x2="402" y1="126.6" y2="126.6"></line><line class="grid" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="grid" x1="45" x2="402" y1="88.4" y2="88.4"></line><line class="grid" x1="45" x2="402" y1="69.3" y2="69.3"></line><line class="grid" x1="45" x2="402" y1="50.2" y2="50.2"></line><line class="grid" x1="45" x2="402" y1="31.1" y2="31.1"></line><line class="grid" x1="45" x2="402" y1="12.0" y2="12.0"></line><line class="axis" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="axis" x1="223.5" x2="223.5" y1="12" y2="203"></line><text text-anchor="middle" x="45.0" y="121.5">-5</text><text text-anchor="middle" x="80.7" y="121.5">-4</text><text text-anchor="middle" x="116.4" y="121.5">-3</text><text text-anchor="middle" x="152.1" y="121.5">-2</text><text text-anchor="middle" x="187.8" y="121.5">-1</text><text text-anchor="middle" x="259.2" y="121.5">1</text><text text-anchor="middle" x="294.9" y="121.5">2</text><text text-anchor="middle" x="330.6" y="121.5">3</text><text text-anchor="middle" x="366.3" y="121.5">4</text><text text-anchor="middle" x="402.0" y="121.5">5</text><text text-anchor="end" x="218.5" y="206.0">-25</text><text text-anchor="end" x="218.5" y="186.9">-20</text><text text-anchor="end" x="218.5" y="167.8">-15</text><text text-anchor="end" x="218.5" y="148.7">-10</text><text text-anchor="end" x="218.5" y="129.6">-5</text><text text-anchor="end" x="218.5" y="91.4">5</text><text text-anchor="end" x="218.5" y="72.3">10</text><text text-anchor="end" x="218.5" y="53.2">15</text><text text-anchor="end" x="218.5" y="34.1">20</text><text text-anchor="end" x="218.5" y="15.0">25</text><circle class="point" cx="152.1" cy="164.8" r="5"></circle><text class="plabel" x="160.1" y="157.8">P</text></svg><p class="prompt"><strong>P = ( __________ , __________ )</strong></p></section></template>
+<template id="tpl-C-4"><section class="question source-q4" data-source-q="4"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Identify both intercepts.</h2></div><span class="ican">U1-MG01-IC04 Identify and interpret intercepts when they are shown.</span></div><p class="prompt">Use the graph. Write the x-intercept and y-intercept as ordered pairs.</p><svg aria-label="Line graph crossing both axes" class="graph intercept" role="img" viewbox="0 0 360 205"><line class="grid" x1="38.0" x2="38.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="185.0" y2="185.0"></line><line class="grid" x1="63.6" x2="63.6" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="170.6" y2="170.6"></line><line class="grid" x1="89.2" x2="89.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="156.2" y2="156.2"></line><line class="grid" x1="114.8" x2="114.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="141.8" y2="141.8"></line><line class="grid" x1="140.3" x2="140.3" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="127.3" y2="127.3"></line><line class="grid" x1="165.9" x2="165.9" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="112.9" y2="112.9"></line><line class="grid" x1="191.5" x2="191.5" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="grid" x1="217.1" x2="217.1" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="84.1" y2="84.1"></line><line class="grid" x1="242.7" x2="242.7" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="69.7" y2="69.7"></line><line class="grid" x1="268.2" x2="268.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="55.2" y2="55.2"></line><line class="grid" x1="293.8" x2="293.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="40.8" y2="40.8"></line><line class="grid" x1="319.4" x2="319.4" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="26.4" y2="26.4"></line><line class="grid" x1="345.0" x2="345.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="12.0" y2="12.0"></line><line class="axis" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="axis" x1="191.5" x2="191.5" y1="12" y2="185"></line><text text-anchor="middle" x="38.0" y="111.5">-6</text><text text-anchor="end" x="187.5" y="188.0">-6</text><text text-anchor="middle" x="89.2" y="111.5">-4</text><text text-anchor="end" x="187.5" y="159.2">-4</text><text text-anchor="middle" x="140.3" y="111.5">-2</text><text text-anchor="end" x="187.5" y="130.3">-2</text><text text-anchor="middle" x="242.7" y="111.5">2</text><text text-anchor="end" x="187.5" y="72.7">2</text><text text-anchor="middle" x="293.8" y="111.5">4</text><text text-anchor="end" x="187.5" y="43.8">4</text><text text-anchor="middle" x="345.0" y="111.5">6</text><text text-anchor="end" x="187.5" y="15.0">6</text><line class="relation" x1="217.1" x2="63.6" y1="185.0" y2="12.0"></line><circle class="point" cx="140.3" cy="98.5" r="4"></circle><circle class="point" cx="191.5" cy="156.2" r="4"></circle></svg><div class="answers"><span>x-intercept: ( ______ , ______ )</span><span>y-intercept: ( ______ , ______ )</span></div></section></template>
+<template id="tpl-D-1"><section class="question source-q1" data-source-q="1"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Substitute and evaluate.</h2></div><span class="ican">U1-MG03-IC01 Substitute a value for a variable.</span></div><p class="prompt">Evaluate \(6-2p\) when \(p=-5\).</p><div class="workarea"></div></section></template>
+<template id="tpl-D-2"><section class="question source-q2" data-source-q="2"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Use order of operations.</h2></div><span class="ican">U1-MG03-IC02 Use order of operations correctly.</span></div><p class="prompt">Evaluate \(16+5(2)-2^3\).</p><p class="mini-direction" style="margin-left:0">Show the order of your steps, not just the final answer.</p><div class="workarea"></div></section></template>
+<template id="tpl-D-3"><section class="question source-q3" data-source-q="3"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Read the ordered pair from the graph.</h2></div><span class="ican">U1-MG01-IC03 Read a graph using its scale.</span></div><p class="prompt">The y-axis is labeled in increments of 5. Write the coordinates of point P.</p><svg aria-label="Coordinate graph with x scale by ones and y scale by fives" class="graph" role="img" viewbox="0 0 420 225"><line class="grid" x1="45.0" x2="45.0" y1="12" y2="203"></line><line class="grid" x1="80.7" x2="80.7" y1="12" y2="203"></line><line class="grid" x1="116.4" x2="116.4" y1="12" y2="203"></line><line class="grid" x1="152.1" x2="152.1" y1="12" y2="203"></line><line class="grid" x1="187.8" x2="187.8" y1="12" y2="203"></line><line class="grid" x1="223.5" x2="223.5" y1="12" y2="203"></line><line class="grid" x1="259.2" x2="259.2" y1="12" y2="203"></line><line class="grid" x1="294.9" x2="294.9" y1="12" y2="203"></line><line class="grid" x1="330.6" x2="330.6" y1="12" y2="203"></line><line class="grid" x1="366.3" x2="366.3" y1="12" y2="203"></line><line class="grid" x1="402.0" x2="402.0" y1="12" y2="203"></line><line class="grid" x1="45" x2="402" y1="203.0" y2="203.0"></line><line class="grid" x1="45" x2="402" y1="183.9" y2="183.9"></line><line class="grid" x1="45" x2="402" y1="164.8" y2="164.8"></line><line class="grid" x1="45" x2="402" y1="145.7" y2="145.7"></line><line class="grid" x1="45" x2="402" y1="126.6" y2="126.6"></line><line class="grid" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="grid" x1="45" x2="402" y1="88.4" y2="88.4"></line><line class="grid" x1="45" x2="402" y1="69.3" y2="69.3"></line><line class="grid" x1="45" x2="402" y1="50.2" y2="50.2"></line><line class="grid" x1="45" x2="402" y1="31.1" y2="31.1"></line><line class="grid" x1="45" x2="402" y1="12.0" y2="12.0"></line><line class="axis" x1="45" x2="402" y1="107.5" y2="107.5"></line><line class="axis" x1="223.5" x2="223.5" y1="12" y2="203"></line><text text-anchor="middle" x="45.0" y="121.5">-5</text><text text-anchor="middle" x="80.7" y="121.5">-4</text><text text-anchor="middle" x="116.4" y="121.5">-3</text><text text-anchor="middle" x="152.1" y="121.5">-2</text><text text-anchor="middle" x="187.8" y="121.5">-1</text><text text-anchor="middle" x="259.2" y="121.5">1</text><text text-anchor="middle" x="294.9" y="121.5">2</text><text text-anchor="middle" x="330.6" y="121.5">3</text><text text-anchor="middle" x="366.3" y="121.5">4</text><text text-anchor="middle" x="402.0" y="121.5">5</text><text text-anchor="end" x="218.5" y="206.0">-25</text><text text-anchor="end" x="218.5" y="186.9">-20</text><text text-anchor="end" x="218.5" y="167.8">-15</text><text text-anchor="end" x="218.5" y="148.7">-10</text><text text-anchor="end" x="218.5" y="129.6">-5</text><text text-anchor="end" x="218.5" y="91.4">5</text><text text-anchor="end" x="218.5" y="72.3">10</text><text text-anchor="end" x="218.5" y="53.2">15</text><text text-anchor="end" x="218.5" y="34.1">20</text><text text-anchor="end" x="218.5" y="15.0">25</text><circle class="point" cx="330.6" cy="145.7" r="5"></circle><text class="plabel" x="338.6" y="138.7">P</text></svg><p class="prompt"><strong>P = ( __________ , __________ )</strong></p></section></template>
+<template id="tpl-D-4"><section class="question source-q4" data-source-q="4"><div class="qhead"><div class="qleft"><div class="qnumber">1.</div><h2 class="qtitle">Identify both intercepts.</h2></div><span class="ican">U1-MG01-IC04 Identify and interpret intercepts when they are shown.</span></div><p class="prompt">Use the graph. Write the x-intercept and y-intercept as ordered pairs.</p><svg aria-label="Line graph crossing both axes" class="graph intercept" role="img" viewbox="0 0 360 205"><line class="grid" x1="38.0" x2="38.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="185.0" y2="185.0"></line><line class="grid" x1="63.6" x2="63.6" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="170.6" y2="170.6"></line><line class="grid" x1="89.2" x2="89.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="156.2" y2="156.2"></line><line class="grid" x1="114.8" x2="114.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="141.8" y2="141.8"></line><line class="grid" x1="140.3" x2="140.3" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="127.3" y2="127.3"></line><line class="grid" x1="165.9" x2="165.9" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="112.9" y2="112.9"></line><line class="grid" x1="191.5" x2="191.5" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="grid" x1="217.1" x2="217.1" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="84.1" y2="84.1"></line><line class="grid" x1="242.7" x2="242.7" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="69.7" y2="69.7"></line><line class="grid" x1="268.2" x2="268.2" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="55.2" y2="55.2"></line><line class="grid" x1="293.8" x2="293.8" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="40.8" y2="40.8"></line><line class="grid" x1="319.4" x2="319.4" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="26.4" y2="26.4"></line><line class="grid" x1="345.0" x2="345.0" y1="12" y2="185"></line><line class="grid" x1="38" x2="345" y1="12.0" y2="12.0"></line><line class="axis" x1="38" x2="345" y1="98.5" y2="98.5"></line><line class="axis" x1="191.5" x2="191.5" y1="12" y2="185"></line><text text-anchor="middle" x="38.0" y="111.5">-6</text><text text-anchor="end" x="187.5" y="188.0">-6</text><text text-anchor="middle" x="89.2" y="111.5">-4</text><text text-anchor="end" x="187.5" y="159.2">-4</text><text text-anchor="middle" x="140.3" y="111.5">-2</text><text text-anchor="end" x="187.5" y="130.3">-2</text><text text-anchor="middle" x="242.7" y="111.5">2</text><text text-anchor="end" x="187.5" y="72.7">2</text><text text-anchor="middle" x="293.8" y="111.5">4</text><text text-anchor="end" x="187.5" y="43.8">4</text><text text-anchor="middle" x="345.0" y="111.5">6</text><text text-anchor="end" x="187.5" y="15.0">6</text><line class="relation" x1="345.0" x2="140.3" y1="127.3" y2="12.0"></line><circle class="point" cx="293.8" cy="98.5" r="4"></circle><circle class="point" cx="191.5" cy="40.8" r="4"></circle></svg><div class="answers"><span>x-intercept: ( ______ , ______ )</span><span>y-intercept: ( ______ , ______ )</span></div></section></template>
+</div>
+
+<script>
+(function(){
+  const VERSION_ORDER = {"A": [1, 2, 3, 4], "B": [3, 1, 4, 2], "C": [2, 4, 1, 3], "D": [4, 3, 2, 1]};
+  const defaults={1:4.20,2:4.20,3:4.50,4:4.20};
+  const root=document.documentElement;
+  const pagesRoot=document.getElementById('pagesRoot');
+
+  function cloneQuestion(version, sourceQ){
+    const tpl=document.getElementById(`tpl-${version}-${sourceQ}`);
+    return tpl.content.firstElementChild.cloneNode(true);
+  }
+
+  function buildPages(split){
+    pagesRoot.innerHTML='';
+    ['A','B','C','D'].forEach(version=>{
+      const order=VERSION_ORDER[version];
+      const note=document.createElement('div');
+      note.className='screen-version-note';
+      note.textContent=`Preview · Version ${version} · printed order ${order.join(' → ')}`;
+      pagesRoot.appendChild(note);
+
+      const p1=document.createElement('section');
+      p1.className='page page1';
+      p1.dataset.version=version;
+      p1.dataset.page='1';
+      p1.innerHTML=`
+        <div class="student-row">
+          <div>Name: <span class="fill"></span></div>
+          <div>Date: <span class="fill date"></span></div>
+        </div>
+        <div class="header">
+          <div>
+            <div class="title">Quick Check 1.2</div>
+            <div class="sub">Inputs, Outputs, and Functions · Algebra 1 · Unit 1</div>
+          </div>
+          <div class="version-label">VERSION ${version}</div>
+        </div>
+        <div class="directions">Show enough work to make your thinking clear.</div>
+        <div class="page-body"></div>
+        <div class="footer"><span>Quick Check 1.2</span><span>Version ${version} · Page 1 of 2</span></div>`;
+      const p2=document.createElement('section');
+      p2.className='page page2';
+      p2.dataset.version=version;
+      p2.dataset.page='2';
+      p2.innerHTML=`
+        <div class="page2-top"></div>
+        <div class="page-body"></div>
+        <div class="footer"><span>Quick Check 1.2</span><span>Version ${version} · Page 2 of 2</span></div>`;
+
+      order.forEach((sourceQ,idx)=>{
+        const q=cloneQuestion(version,sourceQ);
+        q.querySelector('.qnumber').textContent=`${idx+1}.`;
+        (idx<split ? p1 : p2).querySelector('.page-body').appendChild(q);
+      });
+
+      pagesRoot.appendChild(p1);
+      pagesRoot.appendChild(p2);
+    });
+    if(window.MathJax?.typesetPromise){
+      MathJax.typesetClear?.([pagesRoot]);
+      MathJax.typesetPromise([pagesRoot]).then(()=>setTimeout(updateFit,40));
+    } else {
+      requestAnimationFrame(updateFit);
+    }
+  }
+
+  function setSize(q,val,save=true){
+    val=Math.max(1.8,Math.min(7.8,Number(val)||defaults[q]));
+    root.style.setProperty(`--q${q}h`,`${val.toFixed(2)}in`);
+    const box=document.querySelector(`.size-control[data-q="${q}"]`);
+    box.querySelector('input[type=range]').value=val.toFixed(2);
+    box.querySelector('input[type=number]').value=val.toFixed(2);
+    box.querySelector('output').value=val.toFixed(2);
+    if(save) localStorage.setItem(`qc12_ad_q${q}_height`,val.toFixed(2));
+    requestAnimationFrame(updateFit);
+  }
+
+  function setSplit(val,save=true){
+    const n=Math.max(1,Math.min(3,parseInt(val,10)||2));
+    document.getElementById('pageSplitRange').value=n;
+    document.getElementById('pageSplitNumber').value=n;
+    document.getElementById('splitOutput').value=n;
+    document.getElementById('splitNote').textContent=`Page 1: ${n} problem${n===1?'':'s'} · Page 2: ${4-n} problem${4-n===1?'':'s'}`;
+    if(save) localStorage.setItem('qc12_ad_split',String(n));
+    buildPages(n);
+  }
+
+  function pageFreeInches(page){
+    const footer=page.querySelector('.footer');
+    const body=page.querySelector('.page-body');
+    const items=[...body.querySelectorAll('.question')];
+    const target=items.length ? items[items.length-1] : body;
+    return (footer.getBoundingClientRect().top-target.getBoundingClientRect().bottom)/96;
+  }
+
+  function updateFit(){
+    const box=document.getElementById('fitSummary');
+    box.innerHTML='';
+    document.querySelectorAll('.page').forEach(page=>{
+      const free=pageFreeInches(page);
+      const chip=document.createElement('span');
+      chip.className='fit-chip '+(free>=0?'fit-ok':'fit-warn');
+      chip.textContent=`${page.dataset.version}${page.dataset.page}: ${free>=0?free.toFixed(2)+' free':Math.abs(free).toFixed(2)+' over'}`;
+      box.appendChild(chip);
+    });
+  }
+
+  document.querySelectorAll('.size-control').forEach(box=>{
+    const q=box.dataset.q;
+    const range=box.querySelector('input[type=range]');
+    const num=box.querySelector('input[type=number]');
+    range.addEventListener('input',()=>setSize(q,range.value));
+    num.addEventListener('input',()=>setSize(q,num.value));
+    const saved=localStorage.getItem(`qc12_ad_q${q}_height`);
+    setSize(q,saved??defaults[q],false);
+  });
+
+  const savedSplit=localStorage.getItem('qc12_ad_split') || '2';
+  document.getElementById('pageSplitRange').addEventListener('input',e=>setSplit(e.target.value));
+  document.getElementById('pageSplitNumber').addEventListener('input',e=>setSplit(e.target.value));
+  setSplit(savedSplit,false);
+
+  document.getElementById('resetSizes').addEventListener('click',()=>{
+    Object.entries(defaults).forEach(([q,v])=>{
+      localStorage.removeItem(`qc12_ad_q${q}_height`);
+      setSize(q,v,false);
+    });
+    localStorage.removeItem('qc12_ad_split');
+    setSplit(2,false);
+  });
+
+  document.getElementById('printNow').addEventListener('click',()=>window.print());
+  window.addEventListener('resize',updateFit);
+  window.addEventListener('load',()=>setTimeout(updateFit,250));
+})();
+</script>
+</body>
+</html>

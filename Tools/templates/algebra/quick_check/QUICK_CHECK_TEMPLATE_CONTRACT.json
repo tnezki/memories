@@ -1,0 +1,101 @@
+{
+  "schema": "algebra-quick-check-template-contract/1.0",
+  "status": "CURRENT",
+  "course": "Algebra 1",
+  "purpose": "Lock the teacher-approved Quick Check selector/build/print presentation while allowing question content to vary by approved I Can/family selection.",
+  "artifact": {
+    "one_quick_check_per_section": true,
+    "versions": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "student_pages_per_version": 2,
+    "total_pdf_pages": 8,
+    "approved_files": [
+      "quick_N_S.html",
+      "quick_N_S.pdf",
+      "quick_N_S.json"
+    ]
+  },
+  "student_print": {
+    "page_size": "US Letter portrait",
+    "page1_first_field": "Name line at the very top; Date may share the top row.",
+    "page1_header": "Compact Quick Check title/course/unit + version only.",
+    "page2_header": "NONE; page 2 begins with assessment content.",
+    "problem_label": "Every problem visibly includes exact I Can code followed by exact I Can statement.",
+    "math": "Use MathJax for mathematical notation.",
+    "problem_surfaces": "Plain white; no shaded problem cards.",
+    "workspace": "Plain white space; no repeated ruled workspace lines.",
+    "separation": "Use compact typography and simple divider rules rather than decorative boxes.",
+    "paper_use": "Avoid large unused bottom areas; use page space efficiently without crowding.",
+    "graphs": "Grid and axes must photocopy clearly. Template CSS may override graph-tool line weights to a darker/heavier print-safe treatment."
+  },
+  "screen_only_layout_controls": {
+    "required": true,
+    "hide_when_printing": true,
+    "page_split": {
+      "label": "Problems on page 1",
+      "allowed": [
+        1,
+        2,
+        3
+      ],
+      "meaning": "remaining problems print on page 2"
+    },
+    "per_problem_height": {
+      "control": "slider plus exact numeric input in inches",
+      "scope": "source problem/evidence architecture; same height follows that problem across scrambled versions"
+    },
+    "fit_feedback": "Show free-space or overflow indicator for each of the eight pages, labeled A1,A2,B1,B2,C1,C2,D1,D2.",
+    "reset": true,
+    "print_button": "Print A-D (8 pages)",
+    "persistence": "Browser localStorage may retain teacher geometry choices for that HTML."
+  },
+  "versioning": {
+    "same_evidence_architecture": true,
+    "allowed": [
+      "simple number/value swaps",
+      "deterministic question-order scramble",
+      "answer-choice scramble when applicable"
+    ],
+    "forbidden": [
+      "new I Can between versions",
+      "new evidence job between versions",
+      "difficulty drift",
+      "inventing materially different parallel questions merely for anti-copying"
+    ],
+    "question_number_authority": "Printed question number is not evidence authority; lineage JSON maps each printed position back to the source slot/I Can/family."
+  },
+  "builder": {
+    "unit_page_pattern": "quick_check____htq5855/quickN/quick_N.html",
+    "four_slots": true,
+    "candidate_source": "current Unit Bank family architecture",
+    "optional_teacher_note": true,
+    "approved_links": "Active section shows direct HTML and PDF links when approved files exist.",
+    "request_schema": "algebra-quick-check-build-request/1.1"
+  },
+  "delivery": {
+    "contract": "Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt",
+    "schema_version": 2,
+    "required_root": [
+      "TRANSFER_MANIFEST.json",
+      "payload/"
+    ],
+    "package_type": "github_transfer",
+    "v1_fallback_forbidden": true
+  },
+  "qa": [
+    "one HTML, one 8-page student PDF, one JSON source map only in approved artifact set",
+    "no teacher answer-key pages inside the 8-page student PDF",
+    "all eight default pages fit with print tolerance",
+    "page 2 has no repeated header/name field",
+    "no shaded problem cards and no ruled workspace lines",
+    "exact I Can code + statement visible for every problem",
+    "MathJax used for math",
+    "graphs are photocopy-safe",
+    "screen controls are absent from print",
+    "source map remains deterministic after scramble"
+  ]
+}

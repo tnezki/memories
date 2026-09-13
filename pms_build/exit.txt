@@ -1,63 +1,129 @@
-BUILD QUICK CHECKS - ALGEBRA 1 / LIVE PORTFOLIO ROUTING
-=======================================================
+BUILD QUICK CHECKS - ALGEBRA 1 / TEACHER SELECTOR + APPROVED PRINT
+=================================================================
 STATUS: CURRENT
 STEP: 7
 JOB: exit
 DISPLAY NAME: Build Quick Checks
-REVISION: 2026-09-12 v4.0
+REVISION: 2026-09-13 v5.0
 
 ROLE
 ----
-Build the current common Algebra 1 Quick Check from the current section's predictable evidence slots, the current family Bank, and live Portfolio reassessment need. The retired fixed Ticket A/Ticket B rolling chain is NOT current authority.
+Own the Algebra 1 Quick Check build workflow. There is ONE Quick Check per section. Do not revive the retired Ticket A/Ticket B chain.
+
+TWO ENTRY MODES
+---------------
+A. CURRICULUM CONTROL PANEL STEP 7
+If the request does NOT contain teacher_approved_question_architectures, build or repair the unit-specific selector/control page at:
+  quick_check____htq5855/quickN/quick_N.html
+The selector is the normal teacher entry point for section Quick Checks.
+
+B. UNIT QUICK CHECK SELECTOR REQUEST
+If the request schema is algebra-quick-check-build-request/1.1 and contains four teacher-approved question architectures, build exactly ONE approved section Quick Check from those selections. Do not reopen selection unless the request is invalid.
 
 SOURCE BOUNDARY
-Use current request, exact pinned project sources, and current private Portfolio state only when reassessment selection is needed. No public web, prior chat/memory, or File Library recovery.
+---------------
+Use the current request and exact pinned project sources. No public web, prior chat/memory, or File Library recovery. Private Portfolio state may guide reassessment only when explicitly supplied/authorized; the public selector must never require private student data.
 
 READ ORDER
-1. SYSTEM_MANIFEST + Philosophy/amendments + runtime
+----------
+1. SYSTEM_MANIFEST + Philosophy/amendments + runtime/local-transfer contract
 2. current Algebra Framework manifest/front door/amendment
 3. exact Unit Assessment Plan for learning content
-4. contracts/portfolio_quick_check_policy.json
-5. curriculum/quick_check_slot_map.json
-6. current Unit Bank manifest/index/delivery map/families
-7. current private Portfolio state for live reassessment targets
-8. this PM
-9. registered print/viewer tools/templates
+4. contracts/authority.json
+5. contracts/portfolio_quick_check_policy.json
+6. Tools/templates/algebra/quick_check/QUICK_CHECK_TEMPLATE_CONTRACT.json
+7. Tools/templates/algebra/quick_check/quick_check_gold_standard_example.html for structure/behavior only
+8. curriculum/quick_check_slot_map.json
+9. current Unit Bank manifest/index/delivery map/families
+10. this PM
 
 CORE RULE
-The curriculum predicts the evidence slots; the Portfolio determines the just-in-time reassessment targets; the teacher approves the actual questions.
+---------
+The curriculum predicts the evidence slots; live Portfolio need may guide reassessment; the selector exposes eligible choices; the teacher approves the actual four question architectures. Teacher approval in the selector request is final.
 
-CURRENT SLOT PATTERNS
+SLOT PATTERNS
+-------------
 - Unit 1 Section 1: 2 current I Cans, 2 questions each = 4 questions.
-- Unit 1 Sections 2-5: 2 new current I Cans + 2 live current-unit reassessment I Cans.
-- Unit 2+ Section 1: 2 new current I Cans + 2 live older-unit reassessment I Cans.
-- Unit 2+ Sections 2-5: 2 new + 1 live current-unit reassessment + 1 live older-unit reassessment.
-Use exact quick_check_slot_map.json if it differs from this summary.
+- Unit 1 Sections 2-5: 2 new/current + 2 current-unit reassessment.
+- Unit 2+ Section 1: 2 new/current + 2 older-unit reassessment.
+- Unit 2+ Sections 2-5: 2 new/current + 1 current-unit reassessment + 1 older-unit reassessment.
+Use exact quick_check_slot_map.json if it differs.
 
-TEACHER SELECTION PAGE
-Before final print, show four horizontal I Can rows (or two I Can rows with two question selections each for U1.1). Each row shows exact I Can + four strong candidate questions/instances for teacher selection/editing/replacement. Live reassessment rows come from current Portfolio need, not a frozen map.
+UNIT SELECTOR / CONTROL PAGE - HARD
+-----------------------------------
+- one section tab/button per section;
+- four question slots;
+- each slot shows exact I Can code + exact statement and Bank-derived family possibilities;
+- teacher selects one possibility per slot;
+- an optional build-note textarea sits beside/near the request action and is packaged into the request;
+- active section shows direct Approved HTML and Approved PDF links beside the section buttons when those files exist;
+- request pins current system/course commits and explicitly names this PM, the Quick Check template contract, and LOCAL_REPO_TRANSFER_CONTRACT;
+- request delivery MUST spell out github_transfer / 2 root structure. Never fall back to github_transfer/1.
 
 QUESTION AUTHORING
-Use the current family Bank as source architecture. Author fresh instances; do not copy secure/future assessment content. Each question has one primary I Can unless the task genuinely provides separately judgeable evidence for multiple I Cans and that mapping is deliberate/recorded.
+------------------
+Use the teacher-selected Bank family as the evidence architecture. Author a fresh instance. Preserve the selected I Can, family/evidence job, representation/reasoning demand, and difficulty. A teacher build note may fine-tune surface/layout/value choices but may not silently change those invariants.
 
-PRINT VERSIONS
-After teacher approves anchors, make parallel number/value-switch versions preserving evidence target, representation/reasoning demand, and difficulty. Scramble versions as appropriate and keep one identical/common item across versions when the current print workflow calls for it. Preserve hidden question lineage/mapping metadata.
+VERSIONS - HARD
+---------------
+Create four versions A-D from the same four approved source questions. Normal variation is only:
+- simple number/value swaps;
+- deterministic question-order scramble;
+- answer-choice scramble when applicable.
+Do not invent materially different parallel questions merely to control copying. No identical-common-item requirement exists unless the teacher explicitly asks for one.
 
-SOURCE MAP
-For a recurring Quick Check that will be Portfolio-ingested, create/update a clean task source map under curriculum/quick_check_source_maps when the item arrangement/multi-target/aggregation behavior would otherwise be ambiguous. The map describes TASK ROLES, not student outcomes.
+GOLD-STANDARD PRINT / HTML - HARD
+---------------------------------
+Follow QUICK_CHECK_TEMPLATE_CONTRACT.json literally. In particular:
+- one HTML contains all A-D versions and screen-only layout controls;
+- one PDF contains exactly 8 STUDENT pages, 2 pages/version;
+- every problem visibly prints exact I Can code + statement;
+- Name is at the very top of page 1; page 2 has no repeated title/header/name;
+- MathJax for math;
+- no shaded problem cards;
+- no ruled workspace lines; use plain white workspace;
+- simple divider rules only;
+- darken graph grid/axis line weights enough to photocopy clearly even if this overrides graph-tool defaults;
+- controls: problems-on-page-1 selector (1-3), per-source-problem height slider + exact numeric box, Reset, A1-D2 free/overflow indicators, Print A-D (8 pages);
+- controls disappear in print;
+- default geometry must fit all eight pages and avoid large dead space.
 
-TERMINOLOGY
-Student-facing/current metadata says Quick Check. Do not create Ticket A/Ticket B cadence or label unless teacher explicitly requests a legacy artifact.
+APPROVED ARTIFACT SET
+---------------------
+Store exactly these together under:
+  quick_check____htq5855/quickN/approved/quick_N_S/
 
-DELIVERY
-Use canonical course destination declared by current Quick Check artifact contract and normal local repository transfer wrapper. No student Portfolio data belongs in the transfer.
+1. quick_N_S.html - canonical adjustable/reprint source
+2. quick_N_S.pdf  - single 8-page student PDF generated from a fit default layout
+3. quick_N_S.json - exact lineage/source map: version, printed position, source slot, I Can code + exact text, family, evidence job, values, answer, and any deliberate aggregation/multi-target behavior
+
+SOURCE MAP RULE
+---------------
+For newly generated approved Quick Checks, the sibling approved JSON is the primary exact map. Use framework curriculum/quick_check_source_maps only for legacy/special aggregation, multi-target overrides, compatibility, or when approved JSON is unavailable. Do not duplicate routine maps without need.
+
+TRANSFER DELIVERY - HARD
+------------------------
+Return ONE local repository transfer ZIP following Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt exactly:
+  TRANSFER_MANIFEST.json
+  payload/
+    algebra/
+      <canonical approved files...>
+
+TRANSFER_MANIFEST.json must use schema_version: 2 and package_type: "github_transfer". Use CREATE for missing files and REPLACE for existing approved files. github_transfer/1, manifest.json, github_transfer_manifest.json, or repo_files/ wrappers are invalid. Perform NO Git operations.
 
 QA
-- exact slot pattern;
-- live reassessment targets when applicable;
-- exact I Can mapping;
-- fresh parallel instances preserve demand;
-- source map exists when multi-target/aggregation is material;
-- current Quick Check naming;
+--
+- exact teacher-selected four architectures;
+- same I Can/evidence jobs across versions;
+- only allowed simple version changes;
+- exact visible I Can code + statement;
+- MathJax; no shaded cards; no ruled workspace; no repeated page-2 header;
+- graph print contrast;
+- layout controls work and do not print;
+- all A1-D2 pages default-fit with tolerance;
+- exactly 1 HTML + 1 eight-page student PDF + 1 JSON;
+- no teacher-key pages in student PDF;
+- source map deterministic after scramble;
+- exact github_transfer / 2 wrapper passes transfer helper recognition;
 - finalization PASS.
 Then stop.
