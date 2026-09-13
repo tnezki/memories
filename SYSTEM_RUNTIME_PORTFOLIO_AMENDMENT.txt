@@ -3,7 +3,7 @@ SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY / DRIVE ROUTING
 STATUS: CURRENT
 SCOPE: Job 18 Portfolio only.
 
-This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt Section 11 and fixes the canonical private Drive destination for Portfolio state.
+This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt Section 11 and fixes the canonical private Drive destination and completion gate for Portfolio state.
 
 Portfolio / Assess New Evidence is a private state-and-report workflow, not a repository artifact build. Even though it is selected from the Control Panel Build tab and the request pins a course repository for curriculum authority, its canonical outputs do NOT have a repository destination.
 
@@ -26,10 +26,43 @@ For workflow/job = portfolio:
 The canonical private state path is therefore:
   ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
 
+DRIVE PERSISTENCE IS A COMPLETION GATE - HARD
+---------------------------------------------
+A Portfolio run is NOT complete merely because PDFs/CSVs were generated or downloadable artifacts were returned. Persistent Google Drive state is part of the required result.
+
+Required execution order:
+1. Resolve the exact canonical Drive root/course/unit tree.
+2. Preserve the new raw evidence in `01 Evidence Inbox`.
+3. Write/update all required longitudinal/current-state files in `02 Portfolio Data`.
+4. Write the current class Student Packet PDFs in `03 Student Packets`.
+5. Write the current Teacher Summary PDF in `04 Class & Intervention Summaries`.
+6. Write the current PowerSchool CSV(s) in `05 PowerSchool Exports`.
+7. RE-READ/LIST the exact canonical unit folder and each required subfolder and verify the expected current files are present before reporting PASS or delivering the run as complete.
+
+The post-write verification must confirm, at minimum:
+- the exact canonical root ID was used;
+- all five required subfolders exist under the selected canonical unit folder;
+- the newly supplied raw evidence exists in `01 Evidence Inbox`;
+- `02 Portfolio Data` contains the required persistent state set for the run, including the current registry/ledger/status/history/manifest files required by the Portfolio PM;
+- current Student Packet PDF(s) exist in `03 Student Packets`;
+- the current Teacher Summary PDF exists in `04 Class & Intervention Summaries`;
+- current PowerSchool CSV(s) exist in `05 PowerSchool Exports`.
+
+If any required Drive write, replacement, or verification fails:
+- do NOT claim the Portfolio run completed successfully;
+- do NOT treat the downloadable files alone as a successful run;
+- repair the failed Drive persistence step in the same run when possible;
+- otherwise stop with `PORTFOLIO_DRIVE_PERSISTENCE_FAILED` and identify the missing/unverified destination.
+
+The final response for a successful Portfolio run must explicitly confirm that canonical Drive persistence was verified, in addition to returning the downloadable artifacts.
+
+Canonical persistent data may remain as CSV/JSON/PDF files stored in Drive. Native Google Docs/Sheets are not required unless a later policy explicitly calls for them. The hard requirement is that the canonical Drive files actually exist and are verified before completion.
+
 DELIVERY
 --------
 - new raw evidence and longitudinal data remain in that private Drive tree;
 - normal returned artifacts are individual class Student Packet PDFs, one Teacher Summary PDF, and current PowerSchool CSV(s);
+- downloadable artifacts are secondary to the required canonical Drive persistence gate above;
 - DO NOT wrap Portfolio/student data in a GitHub Transfer ZIP;
 - DO NOT write Portfolio/student data to GitHub;
 - the local repository transfer contract applies only when a separate request explicitly changes canonical repository code/templates/policies.
