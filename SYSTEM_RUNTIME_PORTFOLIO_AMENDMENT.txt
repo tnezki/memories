@@ -1,0 +1,20 @@
+SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY EXCEPTION
+======================================================
+STATUS: CURRENT
+SCOPE: Job 18 Portfolio only.
+
+This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt Section 11.
+
+Portfolio / Assess New Evidence is a private state-and-report workflow, not a repository artifact build. Even though it is selected from the Control Panel Build tab and the request pins a course repository for curriculum authority, its canonical outputs do NOT have a repository destination.
+
+For workflow/job = portfolio:
+- private Google Drive `____Portfolio_Data/<Course>/unit N/` is the persistent state destination;
+- new raw evidence and longitudinal data remain in that private Drive tree;
+- normal returned artifacts are individual class Student Packet PDFs, one Teacher Summary PDF, and current PowerSchool CSV(s);
+- DO NOT wrap Portfolio/student data in a GitHub Transfer ZIP;
+- DO NOT write Portfolio/student data to GitHub;
+- the local repository transfer contract applies only when a separate request explicitly changes canonical repository code/templates/policies.
+
+The Control Panel request manifest should declare delivery = portfolio_drive_and_individual_artifacts and local_repo_transfer_required_for_known_destination = false for Job 18.
+
+All other SYSTEM_RUNTIME_CONTRACT rules remain in force.

@@ -1,0 +1,60 @@
+{
+  "schema": "algebra-quick-check-source-map/1.0",
+  "status": "CURRENT",
+  "course": "Algebra 1",
+  "unit": 1,
+  "section": "1.1",
+  "canonical_source_label": "Quick Check 01",
+  "legacy_printed_aliases": [
+    "Section 1.1 · Ticket A",
+    "Unit 1 Exit Ticket · Section 1.1 · Ticket A",
+    "ExitTicketA"
+  ],
+  "mapping_basis": "Map by clean task signature/evidence job before judging student work. Parallel versions may shuffle order; question number is not authority.",
+  "opportunity_id": "ALG1-U1-S1.1-QUICKCHECK01",
+  "tasks": [
+    {
+      "task_key": "movement_from_origin_endpoint",
+      "prompt_signature": ["Start at the origin", "Move", "Write the ordered pair for the endpoint"],
+      "targets": [
+        {"i_can_id": "U1-MG01-IC01", "judgment_job": "Judge whether the endpoint ordered pair/coordinate result is correct."},
+        {"i_can_id": "U1-MG01-IC02", "judgment_job": "Separately judge whether horizontal movement is controlled by x and vertical movement by y, including signs/directions."}
+      ],
+      "same_source_opportunity": true,
+      "independence_note": "The task may provide separately judgeable evidence for IC01 and IC02, but both judgments belong to the same Quick Check opportunity and are not independent demonstrations of either I Can."
+    },
+    {
+      "task_key": "read_graph_scale",
+      "prompt_signature": ["graph", "scale", "input", "output"],
+      "targets": [
+        {"i_can_id": "U1-MG01-IC03", "judgment_job": "Judge whether the student correctly reads the requested value using the displayed graph scale."}
+      ]
+    },
+    {
+      "task_key": "both_intercepts_context",
+      "prompt_signature": ["x-intercept", "y-intercept", "ordered pairs", "explain what each intercept means"],
+      "targets": [
+        {"i_can_id": "U1-MG01-IC04", "judgment_job": "Judge identification and contextual interpretation of intercepts."}
+      ],
+      "aggregate_group": "IC04_INTERCEPT_EVIDENCE"
+    },
+    {
+      "task_key": "single_intercept_context",
+      "prompt_signature": ["y-intercept", "ordered pair", "explain what it means"],
+      "targets": [
+        {"i_can_id": "U1-MG01-IC04", "judgment_job": "Judge identification and contextual interpretation of the intercept."}
+      ],
+      "aggregate_group": "IC04_INTERCEPT_EVIDENCE"
+    }
+  ],
+  "aggregation_rules": {
+    "U1-MG01-IC04": "Synthesize the two intercept responses into ONE source-level IC04 evidence judgment for Quick Check 01. They are two prompts inside one assessment opportunity, not two independent opportunities. Preserve item-level observations internally when useful, but do not double-count independence."
+  },
+  "evidence_strength_guardrails": {
+    "CONVINCING": "Substantially demonstrates the intended target; a minor execution slip may remain when understanding is still clear.",
+    "PARTIAL": "Meaningful correct target reasoning is visible, but an important part is incomplete/inconsistent or one significant error undermines a complete demonstration.",
+    "LIMITED": "Some target-relevant work is present, but a major misconception/error means little valid demonstration of the intended target.",
+    "UNUSABLE": "Blank, irrelevant, unreadable, or otherwise insufficient for a defensible target judgment."
+  },
+  "version_rule": "All parallel versions preserve these evidence roles. Determine the clean task first, then map the response. Do not infer the I Can from handwriting alone."
+}

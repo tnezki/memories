@@ -1,56 +1,47 @@
 {
-  "schema": "portfolio-template-contract/1.0",
-  "status": "CURRENT",
-  "purpose": "Canonical visual and information architecture for Portfolio student packets and teacher evidence summaries.",
-  "student_packet": {
-    "template": "Tools/templates/portfolio/student_packet_template.html",
-    "css": "Tools/templates/portfolio/portfolio.css",
-    "page_size": "US Letter portrait",
-    "pages_per_student": 2,
-    "page_1": [
-      "current unit status",
-      "current Mastery Goal picture",
-      "strengths shown",
-      "next best target",
-      "exact MG + I Can + Bank family practice path",
-      "QR/direct family link",
-      "short student check-in"
-    ],
-    "page_2": [
-      "all unit Mastery Goals",
-      "all I Cans with current status",
-      "Mastery Goal demonstrated/not-yet state",
-      "compact recent evidence"
-    ],
-    "forbidden": [
-      "redundant third progress-tracker page",
-      "generated remediation questions inside report",
-      "student-facing internal evidence-strength labels"
-    ]
+  "schema":"portfolio-template-contract/1.1",
+  "status":"CURRENT",
+  "purpose":"Teacher-approved recurring Portfolio visual AND wording contract. Data changes; recurring report structure/labels/prompts do not drift between runs.",
+  "fidelity_rule":"The HTML templates are canonical shells, not examples. Preserve fixed text exactly except declared tokens/loops. Do not synonymize headings, reflection prompts, teacher categories, table columns, page titles, or footer purpose statements.",
+  "student_packet":{
+    "template":"Tools/templates/portfolio/student_packet_template.html",
+    "css":"Tools/templates/portfolio/portfolio.css",
+    "page_size":"US Letter portrait",
+    "pages_per_student":2,
+    "page_1_title":"Current Progress Report",
+    "page_2_title":"Unit Evidence Picture",
+    "page_2_subtitle":"All 4 Mastery Goals and all 16 I Cans",
+    "fixed_sections":["Essential Standard","Your current picture","What you are showing","Your next best target","When I am ready to work on this","My check-in"],
+    "reflection_prompts":["I found the exact MG, I Can, and family listed above.","What do I think I need to understand or practice better?","What is one question I want to ask when I work on this?"],
+    "recent_evidence_columns":["I Can","Target","Evidence","What this showed"],
+    "recent_evidence_labels_allowed":["Convincing","Partial","Limited","Unusable","No evidence"],
+    "forbidden":["third progress-tracker page","invented remediation questions","ad hoc reflection prompts","row-by-row redundant status words when the status marker already communicates status","renaming Unit Evidence Picture to Evidence Detail","free-form alternate feedback architecture"]
   },
-  "teacher_summary": {
-    "template": "Tools/templates/portfolio/teacher_summary_template.html",
-    "css": "Tools/templates/portfolio/portfolio.css",
-    "page_size": "US Letter landscape",
-    "latest_evidence_pages": "2x2 I Can card layout; combined course first, then one page per period when about four affected I Cans fit.",
-    "longitudinal_page": "Final combined Portfolio Evidence Sort page uses a 2x2 I Can card layout and the full evidence history, not only the latest assessment.",
-    "longitudinal_categories": [
-      "Reteach / targeted practice",
-      "Brief guided practice",
-      "Ready for another independent demonstration",
-      "No evidence / absent",
-      "Review flags"
-    ],
-    "name_format": "Bulleted compact lists. Group periods under headers when needed. First name + last initial is acceptable.",
-    "status_summary": "Show current No Evidence / Developing / Mastered / Transfer counts, independent opportunity count, latest evidence source/date, and review flags for each displayed I Can."
+  "student_feedback_frames":{
+    "current_picture":"Use a short factual body-of-evidence snapshot. On an early first-source run, explicitly say that one Quick Check can provide strong first evidence but does not establish mastery by itself.",
+    "strength":"Use evidence-grounded sentences beginning with You showed... or You also...; mention the exact demonstrated skill, not internal rubric mechanics.",
+    "family_A_note":"Start with the direct Family A example. After that makes sense, the other two families stay grouped with this same I Can in the Student Bank.",
+    "family_B_note":"Use Family B for another representation or route on the same I Can. The other families stay grouped with this same I Can in the Student Bank.",
+    "family_C_note":"Use Family C for reasoning, misconception checking, or transfer on the same I Can. The other families stay grouped with this same I Can in the Student Bank."
   },
-  "bank_practice_link": {
-    "student_view_pattern": "https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
-    "required_path_fields": [
-      "Mastery Goal ID/title",
-      "I Can ID/exact text",
-      "family ID/label/name"
-    ],
-    "stable_anchor_rule": "Family anchor is the canonical family_id, e.g. U1-MG01-IC04-A. I Can and Mastery Goal anchors remain canonical IDs."
+  "teacher_summary":{
+    "template":"Tools/templates/portfolio/teacher_summary_template.html",
+    "css":"Tools/templates/portfolio/portfolio.css",
+    "page_size":"US Letter landscape",
+    "latest_combined_title_pattern":"Combined {COURSE} - I Can Summary",
+    "latest_subtitle_pattern":"{STUDENT_COUNT} students - {SOURCE_LABEL} - {MG_LABEL} evidence snapshot",
+    "latest_card_primary_stat":"Convincing first evidence",
+    "latest_card_body_label":"Students needing stronger or additional evidence",
+    "latest_card_rule":"One needs-evidence list only. Do not invent separate name buckets for convincing/partial/limited/unusable on latest-source pages.",
+    "period_rule":"Combined page groups 3rd Hour then 6th Hour (or current period order). Individual period pages omit repeated period suffixes after names.",
+    "name_format":"First name + last initial; bulleted; 2 or 3 columns as fit allows; never append period after every name.",
+    "longitudinal_title_pattern":"Combined {COURSE} - Portfolio Evidence Sort",
+    "longitudinal_categories":["Reteach / targeted practice","Brief guided practice","Ready for another independent demonstration","No evidence / absent","Review flags"],
+    "longitudinal_rule":"Use full evidence ledger/current status, not only newest source. Preserve current status counts, independent opportunity count, latest source/date, and Review flags."
+  },
+  "bank_practice_link":{
+    "student_view_pattern":"https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
+    "required_path_fields":["Mastery Goal ID/title","I Can ID/exact text","family ID/label/name"],
+    "stable_anchor_rule":"Family anchor is canonical family_id; I Can and MG anchors remain canonical IDs."
   }
 }

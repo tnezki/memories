@@ -1,102 +1,49 @@
 ALGEBRA 1 FRAMEWORK AMENDMENT - PORTFOLIO / QUICK CHECK
 ========================================================
 STATUS: CURRENT
-APPLIES WITH: frameworks/Algebra_1/FRAMEWORK.txt v7.4 until the front door is next fully regenerated
-SCOPE: recurring short-evidence architecture, Portfolio status/rollup mechanics, and current Bank role language only
+SCOPE: recurring short-evidence architecture, Portfolio status/rollup, evidence-source mapping, Bank practice routing, and recurring Portfolio presentation.
 
-WHY THIS EXISTS
----------------
-The v7.4 Framework front door still contains legacy hard wording for the retired Exit Ticket chain, old Portfolio labels, and an older Bank role architecture. The teacher has approved a newer Portfolio + Quick Check system. This amendment resolves that conflict now without rewriting unrelated course-learning content.
+This amendment supersedes conflicting legacy Exit Ticket/Portfolio mechanics in the older Framework/Assessment Plan boilerplate while preserving exact Unit learning content.
 
-AUTHORITY
----------
-For the scope named above, THIS AMENDMENT plus:
-- contracts/authority.json
-- contracts/portfolio_quick_check_policy.json
-- curriculum/quick_check_slot_map.json
-supersede conflicting v7.4 Framework Sections 5, 6, the recurring-assessment portions of 7, and the old build-procedure references in 12.
+1. CURRENT NAMES
+- Common short evidence pulse: Quick Check.
+- Prior name Exit Ticket is retired for current Algebra execution.
+- Larger personalized six-question event: Checkpoint.
+Legacy printed scans may be matched by old names as aliases, but current reports/data use Quick Check.
 
-All other v7.4 Framework rules remain in force unless separately revised.
-Exact Unit Assessment Plans remain authority for Unit learning content as defined in the migration notice.
+2. PORTFOLIO STATUS / ROLLUP
+I Can: No Evidence / Developing / Mastered / Transfer.
+Mastered normally requires at least two independent convincing demonstrations, normally from different opportunities and with one reasonably current demonstration. A rich artifact may suffice only when it genuinely contains multiple independent demonstrations. Teacher judgment resolves mixed/unusual cases. One later weak event does not automatically erase mastery.
+A Mastery Goal is demonstrated at 2 of 4 I Cans Mastered or Transfer.
+Unit/PowerSchool: I=0-1 MG, C=2, B=3, A=4, A+=4 plus meaningful transfer/extension. PowerSchool is one living Unit assignment; current status replaces prior status rather than averaging attempts.
 
-1. CURRENT SHORT-EVIDENCE ARTIFACT
-----------------------------------
-The current common short-evidence artifact is QUICK CHECK.
-The prior student-facing name Exit Ticket is retired for Algebra 1.
-The prior artifact called Quick Check is now CHECKPOINT.
+3. QUICK CHECK SLOTS
+Use curriculum/quick_check_slot_map.json. Reassessment targets are selected from live Portfolio need, not frozen months ahead.
+Core sentence: The curriculum predicts the evidence slots; the Portfolio determines the just-in-time reassessment targets; the teacher approves the actual questions.
 
-A normal Quick Check is about four questions and common to the class.
-Its architecture is slot-based rather than frozen-target-based.
+4. EVIDENCE-SOURCE MAPPING - HARD
+For known recurring sources, use current maps under curriculum/quick_check_source_maps before interpreting handwriting.
+Map the CLEAN TASK first, then judge the response.
+Question number is not authority when parallel versions shuffle order.
+A task may support more than one separately judgeable I Can when the task genuinely asks both evidence jobs. Those target judgments still share the same source opportunity unless independence is explicitly defensible.
+Repeated prompts for the same I Can on one Quick Check are not automatically independent. When a source map specifies aggregation, synthesize one source-level I Can judgment while preserving useful item observations internally.
 
-Core sentence:
-  The curriculum predicts the evidence slots; the Portfolio determines the just-in-time reassessment targets; the teacher approves the actual questions.
+For Unit 1 Section 1 Quick Check 01 specifically, the movement-from-origin endpoint task provides separately judgeable IC01 and IC02 evidence; the two intercept prompts combine into one IC04 source-level judgment. Use the registered source map.
 
-Use curriculum/quick_check_slot_map.json as the operational slot map.
-Do not revive the fixed previous-section Exit Ticket reassessment chain.
+5. BANK ROLE
+Bank = Mastery Goal -> exact I Can -> three materially different families. Student view is student.html grouped MG -> I Can -> A/B/C. Portfolio prints exact MG + I Can + recommended family and links to student.html#<family_id>. Direct links must visibly mark the exact target on desktop/mobile.
 
-2. CURRENT PORTFOLIO STATUS
----------------------------
-I Can status:
-- No Evidence
-- Developing
-- Mastered
-- Transfer
+6. PORTFOLIO REPORT FIDELITY - HARD
+The registered Portfolio template contract, HTML templates, and CSS own the recurring student/teacher report presentation. They own fixed headings, reflection prompts, table columns, card anatomy, category labels, and layout—not merely colors.
+Job 18 fills data slots. It may not rewrite the report into a new feedback system, change reflection prompts, invent new teacher name buckets, rename the approved pages, or add a third tracker page.
+Intentional redesign requires teacher approval and promotion of a new template version.
 
-Default Mastered rule:
-An I Can normally reaches Mastered when the body of evidence contains at least two independent convincing demonstrations, normally from different opportunities, with at least one reasonably current demonstration. A rich artifact may be sufficient when it contains multiple genuinely independent convincing demonstrations. Teacher professional judgment resolves mixed/unusual cases. Approved accommodations do not lower the status of valid evidence. One later weak event does not automatically erase established mastery.
+Student packet = exactly two pages: Current Progress Report; Unit Evidence Picture.
+Teacher summary = combined 2x2 latest-evidence page, period 2x2 pages, final combined longitudinal Portfolio Evidence Sort.
+The approved recent-evidence table may show Convincing/Partial/Limited/Unusable as compact evidence descriptors; other internal mechanics remain hidden.
+Teacher name lists use first name + last initial when compact; period is a group header, not repeated after every name.
 
-Algebra Mastery Goal rule:
-A Mastery Goal is demonstrated when at least 2 of its 4 I Cans are Mastered or Transfer.
-
-Current Unit/PowerSchool scale:
-- I = In Progress = 0 or 1 of 4 Mastery Goals demonstrated
-- C = Meeting = 2 of 4
-- B = Advancing = 3 of 4
-- A = Mastery = 4 of 4
-- A+ = Mastery plus meaningful transfer/extension evidence
-
-A+ recognizes transfer; complete ordinary mastery is fully sufficient for A.
-PowerSchool uses one living assignment per Unit; current status replaces the prior status rather than averaging attempts.
-Later valid evidence may improve an earlier Unit status.
-
-3. QUICK CHECK SLOT ARCHITECTURE
---------------------------------
-Use the exact current patterns in curriculum/quick_check_slot_map.json.
-Summary:
-- Unit 1 Section 1: two current I Cans, two questions for each.
-- Unit 1 Sections 2-5: two new current + two live current-Unit reassessment slots.
-- Unit 2+ Section 1: two new current + two live older-Unit reassessment slots.
-- Unit 2+ Sections 2-5: two new current + one live current-Unit reassessment + one live older-Unit reassessment.
-
-Reassessment targets are chosen from current Portfolio need at use/build time, not preassigned months ahead.
-
-4. BANK ROLE ALIGNMENT
-----------------------
-The current canonical Bank is reusable question-family architecture organized:
-  Mastery Goal -> exact I Can -> materially different reusable families.
-
-The Bank supports fresh downstream authoring and practice/example access.
-It does not freeze future Quick Check reassessment targets.
-The Bank exposes two public views: `unitN.html` for the technical/teacher family matrix and `student.html` for student practice grouped Mastery Goal -> I Can -> Family A/B/C. Stable canonical Mastery Goal IDs, I Can IDs, and family IDs are permanent fragment anchors. Portfolio QR codes link to the exact recommended family, e.g. `student.html#U1-MG01-IC04-A`.
-
-5. LEGACY RETIREMENTS
----------------------
-Retired for current Algebra 1 execution:
-- fixed Official Exit Ticket chain;
-- curriculum/exit_evidence_map.* as active routing authority;
-- Not Yet / Approaching / Meeting / Exceeding as current Algebra Portfolio labels;
-- old Bank assumptions that conflict with the current Mastery Goal -> I Can -> family architecture.
-
-The old exit_evidence_map files remain only as compatibility pointers to the current Quick Check map.
-
-5A. PORTFOLIO PRESENTATION / TEACHER SORT
-------------------------------------------
-Canonical Portfolio presentation is owned by `Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json` and its registered HTML/CSS templates. Student packets are exactly two content pages: current progress/action path, then full Unit evidence picture. Teacher summaries use a 2 x 2 I Can-card analysis view. The final teacher page is a longitudinal Portfolio Evidence Sort built from the full evidence history, with Reteach / Brief guided practice / Ready for another independent demonstration / No evidence / Review flags.
-
-6. BUILD PROCEDURE ALIGNMENT
-----------------------------
-Current Bank build uses the registered Build Bank PM in pms_build/bank.txt.
-Current Portfolio build uses Job 18 pms_build/portfolio.txt.
-Current recurring Quick Check/Checkpoint PMs should consume this amendment, the policy contract, the live Portfolio state, and the quick_check_slot_map rather than reconstructing retired Exit mechanics.
+7. LEGACY RETIREMENTS
+Retired for current execution: fixed Exit Ticket chain; active exit_evidence_map routing; Not Yet/Approaching/Meeting/Exceeding as Algebra Portfolio labels; Ticket A/B as current source naming; ad hoc recurring report redesign.
 
 END - ALGEBRA 1 FRAMEWORK AMENDMENT
