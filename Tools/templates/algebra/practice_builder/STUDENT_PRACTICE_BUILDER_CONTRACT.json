@@ -1,5 +1,5 @@
 {
-  "schema": "algebra-student-practice-builder-contract/1.0",
+  "schema": "algebra-student-practice-builder-contract/1.1",
   "status": "LOCKED",
   "approved_date": "2026-09-13",
   "course": "Algebra 1",
@@ -8,13 +8,25 @@
   "hard_rules": [
     "Keep the student Practice Builder at Unit level immediately after Student Bank on student and teacher dashboards for preview access.",
     "Student selects Unit, exact I Can statements, and question count; no Family A/B/C controls are exposed to students.",
-    "Question choices come only from a QA-approved student_practice_pool.json for the selected Unit.",
-    "If a Unit pool is unavailable or not QA PASS, fail closed rather than generating questions live.",
+    "Question choices come only from an APPROVED + QA PASS banks/unitN/student_practice_pool.json for the selected Unit.",
+    "A production-ready Unit pool covers every exact I Can and every approved A/B/C family in the COMPLETE downstream-ready Unit Bank, with four pre-authored solved instances per family unless teacher instruction changes that count.",
+    "If a Unit pool is unavailable or not APPROVED / QA PASS, fail closed rather than generating questions live.",
     "Generated questions are grouped by I Can statement.",
     "Do not use a large toner-heavy page header in the generated worksheet.",
     "Student workspace is blank whitespace: no bordered response boxes and no ruled workspace lines unless mathematically required.",
     "Provide Student PDF and separate Answer Key PDF plus New Version behavior.",
+    "The browser may select and reorder approved instances only; it may not alter values, prompts, answers, or mathematical representations.",
+    "The Unit dropdown may expose Units 1-8, but only a Unit with an approved pool becomes usable; future pools activate without redesigning the builder.",
+    "Support ?unit=N and optional ?ican=<exact I Can ID> so dashboard and Portfolio QR routes can preselect a target without exposing student identity.",
     "MathJax uses \\( ... \\) and \\[ ... \\] delimiters; currency remains literal text.",
     "Do not change this locked interaction/layout contract without explicit teacher instruction."
-  ]
+  ],
+  "unit1_production_baseline": {
+    "i_can_count": 16,
+    "family_count": 48,
+    "instances_per_family": 4,
+    "question_count": 192,
+    "pool_status_required": "APPROVED",
+    "qa_required": "PASS"
+  }
 }
