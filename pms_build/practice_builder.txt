@@ -1,16 +1,16 @@
-BUILD ONE-OFF TEACHER PRACTICE — PRACTICE BUILDER
-===================================================
+BUILD SAVED TEACHER PRACTICE — PRACTICE BUILDER
+================================================
 
-STATUS: PILOT
+STATUS: CURRENT
 JOB: teacher_practice_builder
-ROLE: Build one teacher-requested, one-off Algebra 1 practice packet from approved Unit Bank family architecture.
+ROLE: Build one teacher-requested Algebra 1 practice packet from approved Unit Bank family architecture and save it into the public course Practice Builder library.
 
 THIS IS NOT pms_build/practice.txt.
 Do not overwrite or modify canonical section Practice Set / Extra Practice / CYU / Tarsia / Blooket files.
 
 INPUT
 -----
-Require PRACTICE_BUILDER_REQUEST.json with schema algebra-teacher-practice-builder-request/1.0.
+Require PRACTICE_BUILDER_REQUEST.json with schema algebra-teacher-practice-builder-request/1.1.
 Pin and use exactly the declared tnezki/memories and tnezki/algebra commits.
 
 SOURCE BOUNDARY
@@ -27,7 +27,10 @@ Read:
 5. selected Unit Bank BANK_MANIFEST.json, FAMILY_INDEX.json, selected mastery_goals/*.json, figures/assets as needed
 6. Tools/QUESTION_FRESHNESS_CONTRACT.txt
 7. Tools/MANIFEST.json for graph/finalization tools
-8. this PM
+8. Tools/templates/algebra/practice_builder/TEACHER_PRACTICE_LIBRARY_CONTRACT.json
+9. current Unit library index when it exists:
+   algebra/practice_builder___p7r4x/generated/unitN/index.json
+10. this PM
 
 ENTRY GATE
 ----------
@@ -48,31 +51,60 @@ For every question:
 - solve independently and provide answer + concise solution;
 - use real tables/graphs/representations when the family requires them;
 - use the registered graph tool for supported graphs;
-- use MathJax \( ... \) / \[ ... \], never $...$ delimiters;
+- use MathJax \\( ... \\) / \\[ ... \\], never $...$ delimiters;
 - keep arithmetic/numbers natural unless teacher_note explicitly requests otherwise.
 
 FRESHNESS
 ---------
-Compare against selected family exemplars and, when available, banks/unitN/student_practice_pool.json plus already-public same-Unit Practice/Quick Check prompts. Family reuse is allowed; finished-instance copying or cosmetic near-copy is not.
+Compare against selected family exemplars and, when available, banks/unitN/student_practice_pool.json plus already-public same-Unit Practice/Quick Check prompts and previously saved Teacher Practice library items when practical.
+Family reuse is allowed; finished-instance copying or cosmetic near-copy is not.
 Terminal signal: QUESTION_FRESHNESS: PASS.
 
-OUTPUT
-------
-This is a one-off printable artifact. Do NOT create a GitHub transfer package and do NOT save into the course repository or Portfolio Drive.
-Return one ZIP containing exactly:
-- practice_student.html
-- practice_student.pdf
-- practice_teacher_key.html
-- practice_teacher_key.pdf
-- practice_source_map.json
+LIBRARY ID / TITLE
+------------------
+Read the pinned current Unit index when present.
+- If no index exists, allocate practice_001.
+- Otherwise allocate one greater than the highest existing numeric practice_### ID.
+- Never reuse or overwrite an existing practice ID.
+
+Title:
+- use request.practice_name when nonblank;
+- otherwise if all selected I Cans share one Mastery Goal, use:
+    Unit N · <Mastery Goal title> · <question_count> Questions
+- otherwise use:
+    Unit N · Targeted Practice · <question_count> Questions
+
+SAVE PATH
+---------
+Write the new practice to:
+  algebra/practice_builder___p7r4x/generated/unitN/practice_###/
+
+Required files:
+  student.html
+  student.pdf
+  teacher_key.html
+  teacher_key.pdf
+  source_map.json
+
+Update/create:
+  algebra/practice_builder___p7r4x/generated/unitN/index.json
+
+The index must preserve all prior records and append the new practice with:
+- id
+- title
+- created date
+- question_count
+- selected_i_cans
+- selected_i_can_text
+- relative file links for student HTML/PDF, teacher HTML/PDF, and source map
 
 LAYOUT
 ------
 Student packet:
 - plain white print pages;
 - name/date at top;
-- exact I Can printed compactly with each question;
-- enough workspace for the response mode;
+- exact I Can printed compactly with each question or coherent I Can grouping;
+- enough blank whitespace for the response mode;
 - no toner-heavy cards/banners;
 - no ruled workspace lines unless mathematically necessary.
 
@@ -88,5 +120,18 @@ question_number, i_can_id, i_can_exact_text, family_id, family_name, evidence_jo
 
 QA
 --
-Verify exact question count, selected-ID fidelity, math correctness, representation fidelity, no duplicate/near-copy finished instances, MathJax/currency safety, readable print layout, and FINALIZATION_QA: PASS.
-Stop when hard QA passes.
+Verify exact question count, selected-ID fidelity, math correctness, representation fidelity, no duplicate/near-copy finished instances, MathJax/currency safety, readable print layout, source-map completeness, next-ID uniqueness, and FINALIZATION_QA: PASS.
+
+DELIVERY — HARD
+---------------
+Return ONE GitHub Transfer ZIP using Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt schema v2.
+The transfer must:
+- CREATE the five files under the new practice_### folder;
+- CREATE the Unit index when absent, otherwise REPLACE the Unit index while preserving all prior records;
+- never modify normal practice_sets;
+- never commit/push/pull/branch/merge/create PR.
+
+Do not return a separate disposable artifact ZIP. The saved library copy is the finished artifact.
+Teacher reviews/applies the transfer locally and alone decides whether to commit/push.
+
+Stop when HARD QA passes.
