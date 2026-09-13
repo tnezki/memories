@@ -1,5 +1,5 @@
 {
-  "schema": "algebra-teacher-practice-library-contract/1.0",
+  "schema": "algebra-teacher-practice-library-contract/1.1",
   "status": "CURRENT",
   "approved_date": "2026-09-13",
   "course": "Algebra 1",
@@ -7,6 +7,7 @@
   "library_path": "practice_builder___p7r4x/library.html",
   "storage_root": "practice_builder___p7r4x/generated/unitN/",
   "practice_folder_pattern": "practice_###",
+  "id_rule": "Read only the pinned Unit index. If absent use practice_001; otherwise use one greater than the highest exact practice_### ID. Do not search the repository for IDs.",
   "required_saved_files": [
     "student.html",
     "student.pdf",
@@ -14,8 +15,39 @@
     "teacher_key.pdf",
     "source_map.json"
   ],
+  "exact_saved_file_count": 5,
+  "asset_rule": "Saved HTML is self-contained. Any required graph/image is embedded directly in HTML and carried into the PDFs; do not create extra asset files or broken relative links.",
   "unit_index": "generated/unitN/index.json",
+  "unit_index_schema": "algebra-teacher-practice-library-index/1.0",
+  "unit_index_record_fields": [
+    "id",
+    "title",
+    "created",
+    "question_count",
+    "selected_i_cans",
+    "selected_i_can_text",
+    "files.student_html",
+    "files.student_pdf",
+    "files.teacher_html",
+    "files.teacher_pdf",
+    "files.source_map"
+  ],
   "navigation": "Teacher Practice Builder exposes Build New Practice and Saved Practices. Saved Practices is grouped by Unit and links directly to Student PDF/HTML, Teacher Key PDF/HTML, and Source Map.",
   "security": "Saved teacher practices are public practice resources. Do not use this library for secure summative material or private Portfolio data.",
-  "preservation": "Never overwrite a prior saved practice. Allocate the next practice_### ID and preserve existing index records."
+  "preservation": "Never overwrite a prior saved practice. Preserve every existing Unit-index record and append exactly one new record.",
+  "transfer": {
+    "contract_path": "Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt",
+    "schema_version": 2,
+    "package_type": "github_transfer",
+    "new_practice_files_action": "create",
+    "existing_unit_index_action": "replace",
+    "missing_unit_index_action": "create"
+  },
+  "qa": {
+    "finalization_contract": "Tools/FINALIZE_OUTPUT_CONTRACT.txt",
+    "finalizer_resolution": "Tools/MANIFEST.json -> finalize_output",
+    "pdf_rule": "Render PDFs only from final finalized HTML bytes and visually inspect first/middle/final pages as applicable.",
+    "fail_closed_on_missing_pdf_capability": true
+  },
+  "dependency_authority": "pms_build/practice_builder.txt contains the complete required/optional dependency path manifest. Executors must not search the repository to infer additional build conventions."
 }

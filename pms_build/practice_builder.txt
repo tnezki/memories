@@ -3,6 +3,7 @@ BUILD SAVED TEACHER PRACTICE — PRACTICE BUILDER
 
 STATUS: CURRENT
 JOB: teacher_practice_builder
+REVISION: 2026-09-13 v2.0
 ROLE: Build one teacher-requested Algebra 1 practice packet from approved Unit Bank family architecture and save it into the public course Practice Builder library.
 
 THIS IS NOT pms_build/practice.txt.
@@ -17,32 +18,113 @@ SOURCE BOUNDARY
 ---------------
 Use only the request and exact pinned project sources. No public web research, File Library recovery, stale uploads, or prior-chat curriculum sourcing.
 
-REQUIRED SOURCES
-----------------
-Read:
+NO-DISCOVERY RULE — HARD
+------------------------
+This PM is the complete dependency/path manifest for this job.
+Do NOT spend the run searching the repository to discover conventions, templates, transfer rules, artifact names, or destination paths.
+Do NOT infer a different saved-practice structure from neighboring files.
+If a REQUIRED path below is missing at the pinned commit, fail closed and report that exact missing path.
+OPTIONAL paths may be absent without failure.
+
+COMPLETE DEPENDENCY MANIFEST
+----------------------------
+All paths are relative to the named pinned repository.
+
+SYSTEM REPO: tnezki/memories — REQUIRED
 1. Curriculum_Philosophy.txt
 2. SYSTEM_RUNTIME_CONTRACT.txt
-3. current Question Structure
+3. _question_structure/QUESTION_STRUCTURE_CORE.md
 4. frameworks/Algebra_1/FRAMEWORK.txt
-5. selected Unit Bank BANK_MANIFEST.json, FAMILY_INDEX.json, selected mastery_goals/*.json, figures/assets as needed
-6. Tools/QUESTION_FRESHNESS_CONTRACT.txt
-7. Tools/MANIFEST.json for graph/finalization tools
-8. Tools/templates/algebra/practice_builder/TEACHER_PRACTICE_LIBRARY_CONTRACT.json
-9. current Unit library index when it exists:
-   algebra/practice_builder___p7r4x/generated/unitN/index.json
-10. this PM
+5. Tools/QUESTION_FRESHNESS_CONTRACT.txt
+6. Tools/MANIFEST.json
+7. Tools/FINALIZE_OUTPUT_CONTRACT.txt
+8. Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt
+9. Tools/templates/algebra/practice_builder/TEACHER_PRACTICE_LIBRARY_CONTRACT.json
+10. pms_build/practice_builder.txt
+
+COURSE REPO: tnezki/algebra — REQUIRED
+11. banks/unitN/BANK_MANIFEST.json
+12. banks/unitN/FAMILY_INDEX.json
+13. For each distinct selected Mastery Goal ID resolved from FAMILY_INDEX.json:
+    banks/unitN/mastery_goals/<MASTERY_GOAL_ID>.json
+14. practice_builder___p7r4x/library.html
+
+COURSE REPO: tnezki/algebra — OPTIONAL / FRESHNESS ONLY
+15. banks/unitN/student_practice_pool.json
+16. practice_builder___p7r4x/generated/unitN/index.json
+17. Previously saved practice source maps listed by that Unit index.
+
+IMPORTANT:
+- practice_001 or any other prior saved practice is NOT a template dependency and does not need to be cloned.
+- The exact saved-artifact contract is defined here and in TEACHER_PRACTICE_LIBRARY_CONTRACT.json.
+- Do not crawl practice_sets, dashboards, unrelated PMs, or neighboring folders to learn how to build this artifact.
+
+PATH RESOLUTION — DETERMINISTIC
+-------------------------------
+Let N = request.unit.
+
+Unit Bank root:
+  banks/unitN/
+
+Unit library root:
+  practice_builder___p7r4x/generated/unitN/
+
+Unit library index:
+  practice_builder___p7r4x/generated/unitN/index.json
+
+Selected Mastery Goal files:
+- Look up every request.selected_families ID in banks/unitN/FAMILY_INDEX.json.
+- Collect the distinct mastery_goal_id values represented by those selected families.
+- Fetch exactly one file per distinct ID from:
+    banks/unitN/mastery_goals/<MASTERY_GOAL_ID>.json
+- Do not inspect unrelated Mastery Goal files.
 
 ENTRY GATE
 ----------
 Selected Unit Bank must be COMPLETE, ready_for_downstream=true, qa=PASS.
-Every selected I Can and family ID must exist exactly in the pinned Bank.
+Every selected I Can and family ID must exist exactly in the pinned FAMILY_INDEX.json and selected Mastery Goal files.
+Every selected family must belong to one of request.selected_i_cans.
 Fail closed on mismatch.
+
+NEXT PRACTICE ID — DETERMINISTIC
+--------------------------------
+Use only the pinned Unit library index.
+
+If practice_builder___p7r4x/generated/unitN/index.json does not exist:
+  target practice ID = practice_001
+
+If it exists:
+1. Read practices[].id only.
+2. Accept IDs matching exactly: practice_[0-9][0-9][0-9]
+3. Find the highest numeric suffix.
+4. target practice ID = next integer, zero-padded to three digits.
+5. Never reuse or overwrite an existing ID.
+
+Example:
+practice_001, practice_002, practice_004 -> next is practice_005.
+
+No repository search is needed to determine the ID.
+
+TITLE — DETERMINISTIC
+---------------------
+- use request.practice_name when nonblank;
+- otherwise if all selected I Cans share one Mastery Goal, use:
+    Unit N · <Mastery Goal title> · <question_count> Questions
+- otherwise use:
+    Unit N · Targeted Practice · <question_count> Questions
+
+QUESTION ALLOCATION — DETERMINISTIC DEFAULT
+-------------------------------------------
+Create exactly request.question_count student questions.
+
+For distribution=auto_balance:
+1. Work through request.selected_i_cans in request order using round-robin allocation until the total question count is assigned.
+2. Within each I Can, rotate through that I Can's request.selected_families in request order as evenly as possible.
+3. A one-question remainder goes to the earliest I Can/family in that rotation.
+4. Do not invent an unselected family to improve balance.
 
 AUTHORING
 ---------
-Create exactly request.question_count student questions.
-Auto-balance across selected I Cans first, then across selected families within those I Cans as reasonably evenly as the count allows.
-
 For every question:
 - preserve exact selected I Can and Bank family invariant/evidence job/question structure;
 - create a fresh instance using allowed variation axes;
@@ -50,88 +132,228 @@ For every question:
 - do not invent a new family when an approved selected family exists;
 - solve independently and provide answer + concise solution;
 - use real tables/graphs/representations when the family requires them;
-- use the registered graph tool for supported graphs;
+- resolve the registered graph tool only from Tools/MANIFEST.json;
 - use MathJax \\( ... \\) / \\[ ... \\], never $...$ delimiters;
 - keep arithmetic/numbers natural unless teacher_note explicitly requests otherwise.
 
 FRESHNESS
 ---------
-Compare against selected family exemplars and, when available, banks/unitN/student_practice_pool.json plus already-public same-Unit Practice/Quick Check prompts and previously saved Teacher Practice library items when practical.
+Required comparison:
+- selected family exemplars.
+
+When optional sources exist, also compare against:
+- banks/unitN/student_practice_pool.json;
+- previously saved Teacher Practice source maps listed in the Unit index.
+
 Family reuse is allowed; finished-instance copying or cosmetic near-copy is not.
+Do not crawl unrelated course artifacts merely to search for similar wording.
 Terminal signal: QUESTION_FRESHNESS: PASS.
 
-LIBRARY ID / TITLE
-------------------
-Read the pinned current Unit index when present.
-- If no index exists, allocate practice_001.
-- Otherwise allocate one greater than the highest existing numeric practice_### ID.
-- Never reuse or overwrite an existing practice ID.
+SAVED ARTIFACT — EXACT CONTRACT
+-------------------------------
+Create exactly this folder:
+  algebra/practice_builder___p7r4x/generated/unitN/<target_practice_id>/
 
-Title:
-- use request.practice_name when nonblank;
-- otherwise if all selected I Cans share one Mastery Goal, use:
-    Unit N · <Mastery Goal title> · <question_count> Questions
-- otherwise use:
-    Unit N · Targeted Practice · <question_count> Questions
-
-SAVE PATH
----------
-Write the new practice to:
-  algebra/practice_builder___p7r4x/generated/unitN/practice_###/
-
-Required files:
+Create exactly these five saved files inside it:
   student.html
   student.pdf
   teacher_key.html
   teacher_key.pdf
   source_map.json
 
-Update/create:
-  algebra/practice_builder___p7r4x/generated/unitN/index.json
+Do not add a separate CSS file, image folder, metadata file, or disposable ZIP inside the saved practice folder.
 
-The index must preserve all prior records and append the new practice with:
-- id
+SELF-CONTAINED REPRESENTATIONS — HARD
+-------------------------------------
+Because the saved folder has exactly five files:
+- any generated graph/image required by student.html or teacher_key.html must be embedded directly in the HTML, normally as a data URI or inline SVG;
+- the same representation must appear in the PDFs;
+- source_map.json records the representation route/tool and enough lineage to reproduce it;
+- do not create broken relative links to temporary graph files or Bank figure paths.
+
+STUDENT HTML / PDF LAYOUT
+-------------------------
+- plain white print pages;
+- compact title, not a toner-heavy banner;
+- Name and Date at top;
+- exact I Can shown compactly with each question OR questions grouped coherently by exact I Can;
+- enough blank whitespace for the response mode;
+- no bordered response/workspace boxes;
+- no ruled workspace lines unless mathematically necessary;
+- real tables/graphs when the evidence architecture requires them.
+
+TEACHER KEY HTML / PDF
+----------------------
+- same question order and same representations as student version;
+- answer + concise solution immediately under each question;
+- no hidden change to values, graph, or prompt between student and key.
+
+SOURCE MAP — EXACT REQUIRED FIELDS
+----------------------------------
+Top level must include:
+- schema: algebra-teacher-practice-source-map/1.0
+- course
+- unit
+- practice_id
 - title
-- created date
 - question_count
 - selected_i_cans
-- selected_i_can_text
-- relative file links for student HTML/PDF, teacher HTML/PDF, and source map
+- selected_families
+- pins.system_repo / pins.system_commit / pins.course_repo / pins.course_commit
+- questions[]
 
-LAYOUT
-------
-Student packet:
-- plain white print pages;
-- name/date at top;
-- exact I Can printed compactly with each question or coherent I Can grouping;
-- enough blank whitespace for the response mode;
-- no toner-heavy cards/banners;
-- no ruled workspace lines unless mathematically necessary.
+Every questions[] record must include:
+- question_number
+- i_can_id
+- i_can_exact_text
+- family_id
+- family_name
+- evidence_job
+- question_structure_id
+- student_html
+- answer
+- solution
+- representation
 
-Teacher key:
-- same question order;
-- answer + concise solution immediately under each question;
-- representations must match student packet.
+representation may be null when no representation is required. When used, record type, embedded=true, and tool/route lineage.
 
-SOURCE MAP
-----------
-For every question record:
-question_number, i_can_id, i_can_exact_text, family_id, family_name, evidence_job, question_structure_id, prompt/student_html, answer, solution, representation refs/tool route, and pinned source commits.
+UNIT LIBRARY INDEX — EXACT CONTRACT
+-----------------------------------
+Path:
+  algebra/practice_builder___p7r4x/generated/unitN/index.json
 
-QA
---
-Verify exact question count, selected-ID fidelity, math correctness, representation fidelity, no duplicate/near-copy finished instances, MathJax/currency safety, readable print layout, source-map completeness, next-ID uniqueness, and FINALIZATION_QA: PASS.
+When absent, create it with:
+{
+  "schema": "algebra-teacher-practice-library-index/1.0",
+  "course": "Algebra 1",
+  "unit": N,
+  "updated": "YYYY-MM-DD",
+  "practices": []
+}
 
-DELIVERY — HARD
----------------
-Return ONE GitHub Transfer ZIP using Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt schema v2.
-The transfer must:
-- CREATE the five files under the new practice_### folder;
-- CREATE the Unit index when absent, otherwise REPLACE the Unit index while preserving all prior records;
-- never modify normal practice_sets;
-- never commit/push/pull/branch/merge/create PR.
+When present:
+- preserve every existing practice record byte-semantically;
+- append exactly one new record;
+- do not renumber, delete, reorder, or rewrite prior practice IDs.
 
-Do not return a separate disposable artifact ZIP. The saved library copy is the finished artifact.
+Append record shape:
+{
+  "id": "practice_###",
+  "title": "...",
+  "created": "YYYY-MM-DD",
+  "question_count": N,
+  "selected_i_cans": ["..."],
+  "selected_i_can_text": ["..."],
+  "files": {
+    "student_html": "practice_###/student.html",
+    "student_pdf": "practice_###/student.pdf",
+    "teacher_html": "practice_###/teacher_key.html",
+    "teacher_pdf": "practice_###/teacher_key.pdf",
+    "source_map": "practice_###/source_map.json"
+  }
+}
+
+PDF / RENDER QA — HARD
+----------------------
+1. Build and finalize student.html and teacher_key.html first.
+2. Run the registered finalize_output tool from Tools/MANIFEST.json on the complete staging tree.
+3. If finalization changes HTML, use those final bytes as the PDF source.
+4. Render student.pdf from student.html and teacher_key.pdf from teacher_key.html at US Letter size.
+5. Verify PDFs open successfully and page count is nonzero.
+6. Visually inspect at minimum the first page, one middle page when present, and the final page of each PDF.
+7. Verify MathJax is rendered, embedded graphs/tables are visible, no question is clipped, and no answer leaks into student pages.
+8. If a required rendering capability is unavailable, fail as PRACTICE_PDF_RENDER_UNAVAILABLE rather than returning unverified PDFs.
+
+QA — HARD
+---------
+Verify:
+- exact question count;
+- selected-ID fidelity;
+- deterministic allocation completed as specified;
+- math correctness;
+- representation fidelity;
+- no duplicate/near-copy finished instances;
+- MathJax/currency safety;
+- readable print layout;
+- source-map completeness;
+- exactly five saved artifact files;
+- embedded representation integrity;
+- next-ID uniqueness;
+- Unit index preserves prior records and appends exactly one;
+- FINALIZATION_QA: PASS;
+- QUESTION_FRESHNESS: PASS.
+
+DELIVERY — EXACT GITHUB TRANSFER v2
+-----------------------------------
+Return ONE GitHub Transfer ZIP using Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt.
+Do not return a separate disposable artifact ZIP.
+
+ZIP root must be exactly:
+  TRANSFER_MANIFEST.json
+  payload/
+    algebra/
+      practice_builder___p7r4x/
+        generated/
+          unitN/
+            index.json
+            practice_###/
+              student.html
+              student.pdf
+              teacher_key.html
+              teacher_key.pdf
+              source_map.json
+
+TRANSFER_MANIFEST.json must use:
+  "schema_version": 2
+  "package_type": "github_transfer"
+
+Manifest actions:
+- CREATE each of the five new practice files.
+- CREATE Unit index if it did not exist at the pinned course commit.
+- otherwise REPLACE Unit index.
+- No other course file is modified.
+- No memories file is included in the completed practice build transfer.
+
+Never modify normal practice_sets.
+Never commit/push/pull/branch/merge/create PR.
 Teacher reviews/applies the transfer locally and alone decides whether to commit/push.
+
+EXECUTION ORDER — DO NOT DEVIATE
+--------------------------------
+1. Parse request and verify schema.
+2. Verify exact pinned commits.
+3. Fetch only the REQUIRED dependency paths listed above.
+4. Fetch OPTIONAL paths only when present and useful for freshness/index state.
+5. Run Entry Gate.
+6. Determine target practice ID from pinned Unit index.
+7. Resolve exact selected Mastery Goal files.
+8. Allocate question counts deterministically.
+9. Author + independently solve all questions.
+10. Build source_map.json.
+11. Build final student.html and teacher_key.html with embedded representations.
+12. Run PM-specific checks and QUESTION_FRESHNESS.
+13. Run universal finalizer.
+14. Render and visually QA both PDFs.
+15. Build/update Unit index.
+16. Run final structural QA.
+17. Package exact GitHub Transfer v2 wrapper.
+18. Validate ZIP root, manifest, payload file existence, and CREATE/REPLACE actions.
+19. Return ONE GitHub Transfer ZIP and stop.
+
+FAIL-CLOSED CODES
+-----------------
+Use a precise failure code instead of repository exploration:
+- PRACTICE_REQUIRED_PATH_MISSING: <path>
+- PRACTICE_PIN_MISMATCH
+- PRACTICE_BANK_NOT_READY
+- PRACTICE_SELECTED_ID_MISMATCH
+- PRACTICE_LIBRARY_INDEX_INVALID
+- PRACTICE_TARGET_ID_COLLISION
+- PRACTICE_AUTHORING_QA_FAIL
+- PRACTICE_FRESHNESS_FAIL
+- PRACTICE_FINALIZATION_FAIL
+- PRACTICE_PDF_RENDER_UNAVAILABLE
+- PRACTICE_PDF_QA_FAIL
+- PRACTICE_TRANSFER_QA_FAIL
 
 Stop when HARD QA passes.
