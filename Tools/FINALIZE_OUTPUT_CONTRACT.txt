@@ -17,14 +17,15 @@ For every Control Panel BUILD or MAINTENANCE request that produces or replaces f
 - if `finalize_output` changes files, rerun any artifact-specific validator whose checked bytes/contracts could have been affected;
 - package only after all required checks PASS.
 
-GENERAL jobs run it for generated student/teacher-facing HTML. A mixed staging tree may include other files, but their presence does not authorize MathJax repair of source code or authority prose.
+GENERAL jobs run it for generated student/teacher-facing HTML. A mixed staging tree may include other files, but their presence does not authorize heuristic MathJax repair of source code or authority prose.
 
-MATHJAX SCOPE — HARD
-- The registered fixer currently supports rendered `.html` only. It skips `.py`, `.js`, `.css`, shell/command files, Markdown, TXT authorities/PMs, JSON, CSV, and all other non-HTML files, even when passed directly. These files remain byte-for-byte unchanged; use their schema-specific validators where required.
+MATHJAX / CURRENCY SCOPE — HARD
+- The registered `fix_mathjax_output` fixer supports rendered `.html` only. It skips `.py`, `.js`, `.css`, shell/command files, Markdown, TXT authorities/PMs, JSON, CSV, and all other non-HTML files, even when passed directly. These files remain byte-for-byte unchanged by that fixer; use their schema-specific validators where required.
+- Before the MathJax fixer, the registered `fix_mathjax_currency_guard` protects high-confidence prose currency when a rendered HTML page explicitly enables `$...$` inline MathJax. It operates only on rendered text outside scripts, styles, comments, pre/code/textarea blocks, and tag attributes.
+- The currency guard also has one explicit schema-aware serialized-data adapter: `family-bank/*` JSON may be repaired only in rendered exemplar fields `student_html`, `answer`, `solution`, and `scoring_guidance`. It must not heuristically rewrite arbitrary JSON/TXT/CSV strings.
 - Within HTML, repair only mathematical text outside scripts, styles, comments, pre/code/textarea blocks, and tag attributes. Embedded source spans remain unchanged. A narrowly targeted repair of a malformed MathJax delimiter configuration is the sole configuration exception.
-- Preserve `\(...\)` and `\[...\]`. Only explicitly configured legacy dollar delimiter families may be interpreted as math; dollar signs alone never opt a file or page into repair. Currency and JavaScript template syntax in ordinary HTML or source code are not math.
-- Apply high-confidence command/control-character repair within real math spans. Continue to fail on unbalanced rendered math, unresolved corruption, invalid MathJax configuration, and other required generated-HTML checks.
-- Serialized student_html or rendered TeX in other formats requires a future explicit schema-aware adapter; do not scan arbitrary JSON/TXT/CSV strings heuristically.
+- Preserve `\(...\)` and `\[...\]`. Only explicitly configured legacy dollar delimiter families may be interpreted as math; dollar signs alone never opt a file or page into repair. Currency and JavaScript template syntax in ordinary HTML or supported rendered family-bank fields are not math.
+- Apply high-confidence command/control-character repair within real math spans. Continue to fail on unbalanced rendered math, unresolved corruption, ambiguous numeric dollar collisions, invalid MathJax configuration, and other required generated-output checks.
 - A scope skip is not curriculum-content certification. Generic HTML QA and artifact-specific validators still apply to their actual supported outputs.
 
 2. REGISTERED TOOL RESOLUTION — HARD
@@ -35,12 +36,16 @@ Never call an old similarly named script because it exists in Tools/.
 Universal finalizer:
 - `finalize_output`
 
+Currency protection preflight called by the universal finalizer:
+- `fix_mathjax_currency_guard`
+
 MathJax repair/audit called by the universal finalizer:
 - `fix_mathjax_output`
 
 3. WHAT THE UNIVERSAL FINALIZER MAY DO
 --------------------------------------
 Allowed automatic repairs/checks:
+- escape high-confidence prose currency markers that would otherwise collide with configured `$...$` MathJax delimiters;
 - repair high-confidence MathJax/TeX control-character corruption;
 - repair high-confidence broken TeX command tails;
 - preserve the artifact's existing delimiter family;

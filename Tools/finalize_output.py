@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Universal mechanical finalizer for curriculum outputs.
 
-Runs the registered MathJax repair/audit, then performs generic final-byte HTML
-checks that are safe for every artifact family. It never changes curriculum
-meaning, questions, mappings, difficulty, or assessment evidence.
+Runs the MathJax currency guard, the registered MathJax repair/audit, then
+performs generic final-byte HTML checks that are safe for every artifact family.
+It never changes curriculum meaning, questions, mappings, difficulty, or
+assessment evidence.
 
 Usage:
     python3 Tools/finalize_output.py <file-or-folder>
@@ -21,6 +22,7 @@ from pathlib import Path
 
 TARGET = Path(sys.argv[1]).expanduser() if len(sys.argv) > 1 else Path.cwd()
 HERE = Path(__file__).resolve().parent
+CURRENCY_GUARD = HERE / "fix_mathjax_currency_guard.py"
 MATHJAX = HERE / "fix_mathjax_output.py"
 
 PLACEHOLDER_RE = re.compile(r"\{\{[A-Z0-9_][A-Z0-9_ .:\-/]*\}\}")
@@ -69,8 +71,11 @@ def main():
         print(f"FAIL missing finalization target: {TARGET}")
         return 2
 
-    proc = subprocess.run([sys.executable, str(MATHJAX), str(TARGET)], text=True)
-    failed = proc.returncode != 0
+    currency_proc = subprocess.run([sys.executable, str(CURRENCY_GUARD), str(TARGET)], text=True)
+    failed = currency_proc.returncode != 0
+
+    mathjax_proc = subprocess.run([sys.executable, str(MATHJAX), str(TARGET)], text=True)
+    failed = failed or mathjax_proc.returncode != 0
 
     for path in html_files(TARGET):
         issues = audit_html(path)
