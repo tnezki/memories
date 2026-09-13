@@ -1,13 +1,29 @@
 {
-  "schema": "algebra-portfolio-quick-check-policy/1.2",
+  "schema": "algebra-portfolio-quick-check-policy/1.3",
   "status": "CURRENT",
   "course": "Algebra 1",
   "purpose": "Own current Algebra 1 Portfolio status/rollup, Quick Check mechanics, evidence-source mapping, practice-link routing, and recurring report fidelity while Unit Assessment Plans own exact learning content.",
   "i_can_statuses": [
-    {"code":"NO_EVIDENCE","symbol":"open_circle","label":"No Evidence"},
-    {"code":"DEVELOPING","symbol":"half_circle","label":"Developing"},
-    {"code":"MASTERED","symbol":"filled_circle","label":"Mastered"},
-    {"code":"TRANSFER","symbol":"star","label":"Transfer"}
+    {
+      "code": "NO_EVIDENCE",
+      "symbol": "open_circle",
+      "label": "No Evidence"
+    },
+    {
+      "code": "DEVELOPING",
+      "symbol": "half_circle",
+      "label": "Developing"
+    },
+    {
+      "code": "MASTERED",
+      "symbol": "filled_circle",
+      "label": "Mastered"
+    },
+    {
+      "code": "TRANSFER",
+      "symbol": "star",
+      "label": "Transfer"
+    }
   ],
   "mastered_default_rule": {
     "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities, with at least one reasonably current demonstration.",
@@ -16,48 +32,110 @@
     "later_weak_event": "One later weak event does not automatically remove established mastery; record the contradiction and seek another look when warranted.",
     "accommodations": "Approved accommodations do not lower the evidence status of a valid demonstration."
   },
-  "mastery_goal_rule": {"i_cans_per_goal":4,"demonstrated_when":"At least 2 of 4 I Cans are Mastered or Transfer."},
+  "mastery_goal_rule": {
+    "i_cans_per_goal": 4,
+    "demonstrated_when": "At least 2 of 4 I Cans are Mastered or Transfer."
+  },
   "unit_scale": [
-    {"code":"I","label":"In Progress","rule":"0 or 1 of 4 Mastery Goals demonstrated"},
-    {"code":"C","label":"Meeting","rule":"2 of 4 Mastery Goals demonstrated"},
-    {"code":"B","label":"Advancing","rule":"3 of 4 Mastery Goals demonstrated"},
-    {"code":"A","label":"Mastery","rule":"4 of 4 Mastery Goals demonstrated"},
-    {"code":"A+","label":"Mastery + Transfer","rule":"4 of 4 Mastery Goals demonstrated plus meaningful transfer/extension evidence"}
+    {
+      "code": "I",
+      "label": "In Progress",
+      "rule": "0 or 1 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "C",
+      "label": "Meeting",
+      "rule": "2 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "B",
+      "label": "Advancing",
+      "rule": "3 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "A",
+      "label": "Mastery",
+      "rule": "4 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "A+",
+      "label": "Mastery + Transfer",
+      "rule": "4 of 4 Mastery Goals demonstrated plus meaningful transfer/extension evidence"
+    }
   ],
   "powerschool_rule": "One living assignment per unit. Current official status replaces prior status; attempts are not averaged. Earlier Unit status may improve later when valid evidence demonstrates an older Unit I Can.",
   "quick_check": {
-    "student_artifact_name":"Quick Check",
-    "replaces_old_name":"Exit Ticket",
-    "normal_length":"about 4 questions",
-    "common_to_class":true,
-    "live_selection_rule":"Curriculum predicts evidence slots. Portfolio selects current reassessment I Cans from live need. Teacher approves/edits actual questions.",
-    "mapping_rule":"Map the clean task before judging handwriting. A task may provide separately judgeable evidence for more than one I Can when the task genuinely contains both evidence jobs; those judgments still share the same source opportunity unless independence is explicitly supported.",
-    "same_source_rule":"Repeated prompts for one I Can on the same Quick Check are not automatically independent opportunities. Source maps may require a single synthesized source-level judgment.",
-    "source_maps_root":"curriculum/quick_check_source_maps"
+    "student_artifact_name": "Quick Check",
+    "replaces_old_name": "Exit Ticket",
+    "normal_length": "about 4 questions",
+    "common_to_class": true,
+    "live_selection_rule": "Curriculum predicts evidence slots. Portfolio selects current reassessment I Cans from live need. Teacher approves/edits actual questions.",
+    "mapping_rule": "Map the clean task before judging handwriting. A task may provide separately judgeable evidence for more than one I Can when the task genuinely contains both evidence jobs; those judgments still share the same source opportunity unless independence is explicitly supported.",
+    "same_source_rule": "Repeated prompts for one I Can on the same Quick Check are not automatically independent opportunities. Source maps may require a single synthesized source-level judgment.",
+    "source_maps_root": "curriculum/quick_check_source_maps"
   },
-  "checkpoint": {"student_artifact_name":"Checkpoint","replaces_old_name":"Quick Check","default_question_count":6,"personalized":true,"visible_i_can_label":true},
+  "checkpoint": {
+    "student_artifact_name": "Checkpoint",
+    "replaces_old_name": "Quick Check",
+    "default_question_count": 6,
+    "personalized": true,
+    "visible_i_can_label": true
+  },
   "student_practice_link": {
-    "viewer":"banks/unitN/student.html",
-    "required_display":"Exact Mastery Goal + exact I Can + recommended Bank family",
-    "url_pattern":"https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
-    "family_anchor":"canonical family_id",
-    "family_selection":"Choose the family whose evidence job fits the student's next move. Family A is the normal direct/core starting point; B/C may be preferable when evidence clearly calls for another representation or misconception route."
+    "viewer": "banks/unitN/student.html",
+    "required_display": "Exact Mastery Goal + exact I Can + recommended Bank family",
+    "url_pattern": "https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
+    "family_anchor": "canonical family_id",
+    "family_selection": "Choose the family whose evidence job fits the student's next move. Family A is the normal direct/core starting point; B/C may be preferable when evidence clearly calls for another representation or misconception route."
   },
   "report_fidelity": {
-    "contract":"Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
-    "rule":"Registered Portfolio templates own recurring headings, prompts, table/card anatomy, and fixed feedback categories as well as visual layout. Job 18 fills declared data slots and may not redesign or rephrase the report from run to run.",
-    "student_recent_evidence_exception":"The approved Page 2 Recent evidence table may show the internal evidence word Convincing/Partial/Limited/Unusable as a compact evidence descriptor; do not expose unrelated internal mechanics or rubric metadata.",
-    "teacher_name_rule":"Use compact first-name + last-initial lists where needed. Group by period header when relevant; do not append period after every student name."
+    "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
+    "rule": "Registered Portfolio templates own recurring headings, prompts, table/card anatomy, and fixed feedback categories as well as visual layout. Job 18 fills declared data slots and may not redesign or rephrase the report from run to run.",
+    "student_recent_evidence_exception": "The approved Page 2 Recent evidence table may show the internal evidence word Convincing/Partial/Limited/Unusable as a compact evidence descriptor; do not expose unrelated internal mechanics or rubric metadata.",
+    "teacher_name_rule": "Use compact first-name + last-initial lists where needed. Group by period header when relevant; do not append period after every student name.",
+    "student_action_rule": "Use only the fixed student next-action vocabulary and why/next-step frames declared by the Portfolio template contract. Do not invent alternate action labels or generic coaching text."
   },
   "teacher_summary": {
-    "latest_evidence":"Use approved 2 x 2 I Can cards. Combined first, then one page per period. Each latest-evidence card has one list: Students needing stronger or additional evidence; do not invent new evidence-category name buckets.",
-    "longitudinal_sort":"Final combined 2 x 2 page uses full Portfolio history and the fixed categories Reteach / Brief guided practice / Ready for another independent demonstration / No evidence / Review flags.",
-    "contradiction_rule":"A later weak event does not automatically demote established mastery; put meaningful conflict in Review flags for teacher judgment."
+    "latest_evidence": "Use approved 2 x 2 I Can cards. Combined first, then one page per period. Each latest-evidence card has one list: Students needing stronger or additional evidence; do not invent new evidence-category name buckets.",
+    "longitudinal_sort": "Final combined 2 x 2 page uses full Portfolio history and the fixed categories Reteach / Brief guided practice / Ready for another independent demonstration / No evidence / Review flags.",
+    "contradiction_rule": "A later weak event does not automatically demote established mastery; put meaningful conflict in Review flags for teacher judgment."
   },
   "legacy_retirements": [
     "Not Yet / Approaching / Meeting / Exceeding as current Algebra Portfolio status labels",
     "fixed previous-section Exit Ticket reassessment chain",
     "curriculum/exit_evidence_map.json as active evidence-routing authority",
     "Ticket A/Ticket B labels as current Portfolio source labels unless preserving a legacy printed alias for source matching"
-  ]
+  ],
+  "student_next_action": {
+    "principle": "I Can proficiency status and student next action are separate. Developing may mean practice + check soon OR another independent check, depending on the body of evidence.",
+    "states": [
+      {
+        "code": "NEEDS_FIRST_CHECK",
+        "label": "Needs first check",
+        "rule": "No usable evidence exists."
+      },
+      {
+        "code": "PRACTICE_AND_CHECK",
+        "label": "Practice + check soon",
+        "rule": "Developing without one convincing independent demonstration, or a clear current gap should be repaired before another independent check."
+      },
+      {
+        "code": "NEEDS_ANOTHER_DEMONSTRATION",
+        "label": "Needs another independent check",
+        "rule": "Developing with one convincing independent demonstration but not yet enough independent convincing evidence for Mastered."
+      },
+      {
+        "code": "SECURE",
+        "label": "Secure",
+        "rule": "Current I Can status is Mastered."
+      },
+      {
+        "code": "EXTENSION",
+        "label": "Extension",
+        "rule": "Current I Can status is Transfer, or routine nearby targets are secure and a legitimate transfer/extension move is selected."
+      }
+    ],
+    "page_1_rule": "The single selected target must say Why this is next and Next step using the canonical Portfolio template frames. The reason must describe the evidence condition that makes this target the priority; when factually true it may also state that mastering the target would make the Mastery Goal demonstrated.",
+    "page_2_rule": "Every I Can row shows one compact Next: label from the five states so students can distinguish practice-before-recheck from another-evidence-needed."
+  }
 }

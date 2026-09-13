@@ -117,6 +117,16 @@ I Can symbols:
 A single routine CONVINCING demonstration normally remains Developing.
 Mastered normally requires at least TWO independent convincing demonstrations, usually different opportunities, with one reasonably current. Rich-artifact exception only when genuinely independent demonstrations exist. One later weak event does not automatically demote established mastery; meaningful contradiction -> Review flag.
 
+STUDENT NEXT-ACTION STATE - HARD
+Status and next action are separate. Compute one stable action code/label for every I Can using the current Portfolio template contract:
+- NO_EVIDENCE -> NEEDS_FIRST_CHECK / "Needs first check"
+- DEVELOPING with no convincing independent demonstration, or a clear current gap that should be repaired before the next independent check -> PRACTICE_AND_CHECK / "Practice + check soon"
+- DEVELOPING with one convincing independent demonstration and no unresolved evidence problem blocking another clean demonstration -> NEEDS_ANOTHER_DEMONSTRATION / "Needs another independent check"
+- MASTERED -> SECURE / "Secure"
+- TRANSFER -> EXTENSION / "Extension"
+
+Do not use a generic Developing action for both cases. Do not invent alternate action labels.
+
 Algebra MG demonstrated = at least 2 of 4 I Cans Mastered/Transfer.
 Unit/PowerSchool:
 I = 0-1 MG demonstrated
@@ -132,7 +142,7 @@ No early F from missing/early evidence.
 02 Portfolio Data must contain current coherent versions of:
 - student_registry.csv
 - evidence_ledger.csv (append-only)
-- i_can_status_current.csv
+- i_can_status_current.csv (include current status plus student_action_code and student_action_label)
 - mastery_goal_status_current.csv
 - unit_status_current.csv
 - class_i_can_summary.csv
@@ -166,14 +176,18 @@ Controlled data language:
 - Strength bullets: evidence-grounded sentence frames beginning "You showed..." / "You also..." and naming the demonstrated skill. Do not mention internal rubric mechanics.
 - Next target: exactly one I Can selected from current body of evidence.
 - Print exact MG ID/title, I Can ID/exact text, and recommended family label/name.
-- Family note MUST use the matching approved frame in PORTFOLIO_TEMPLATE_CONTRACT.json; do not invent a different coaching paragraph.
+- Immediately below the practice path show fixed labels `Why this is next` and `Next step`.
+- `Why this is next` MUST use the approved why-frame for the selected action state and explain the evidence condition that makes this I Can the priority. When factually true, one additional sentence may state that mastering this I Can would make its Mastery Goal demonstrated.
+- `Next step` MUST use the approved next-step sentence for the selected action state.
+- Do not substitute the family note or a generic coaching paragraph for the why/next-step fields. Family-specific practice guidance remains in the QR/action area.
 - QR -> https://tnezki.github.io/algebra/banks/unitN/student.html#<family_id> using confirmed canonical family anchor.
 - Reflection prompts remain exactly those in template contract.
 
 PAGE 2 fixed title:
 Unit Evidence Picture
 Subtitle: All <MG count> Mastery Goals and all <I Can count> I Cans.
-Show all MG/I Can status markers with no redundant status word under every row. MG footer shows mastered count + demonstrated/not-yet/no-evidence state.
+Show all MG/I Can status markers with no redundant status word under every row. Every I Can row also shows one compact `Next:` line using ONLY the canonical action label: Needs first check / Practice + check soon / Needs another independent check / Secure / Extension. This is required because two Developing I Cans can need different next moves. MG footer shows mastered count + demonstrated/not-yet/no-evidence state.
+Render each generated I Can row with the canonical CSS anatomy: status marker + `.ican-main`; exact I Can text in `.ican-text`; `Next: <label>` in `.ican-next`.
 Recent evidence table uses EXACT columns:
 I Can | Target | Evidence | What this showed
 The approved evidence column may show Convincing / Partial / Limited / Unusable / No evidence. Keep the What this showed note concise and target-specific.
@@ -209,6 +223,7 @@ Teacher intervention context: 29-minute Tue-Fri; Thursday guaranteed math. Use t
 11. NEXT TARGET / PRACTICE FAMILY
 ===========================================================
 Choose from full current evidence, not just last wrong answer. Prefer a target blocking MG demonstration, close to mastery and needing another opportunity, or showing a clear misconception.
+The selected target's `Why this is next` must name the evidence reason, not merely restate the skill. Use the fixed why-frame for the action state; add the optional MG-impact sentence only when true.
 Family A = normal direct/core start. Family B = alternate representation/route. Family C = reasoning/misconception/transfer. Use exact approved family-note frame. Report guidance is practice, not reassessment.
 
 ===========================================================
@@ -239,7 +254,7 @@ Before PASS verify:
 5 ledger/history append preserved;
 6 current statuses/rollups correct;
 7 exactly 2 student pages per student + bookmarks;
-8 student report headings/reflection/table columns/family-note frames match canonical template contract;
+8 student report headings/reflection/table columns/why-next/next-step frames and page-2 Next: labels match canonical template contract;
 9 QR exact family route confirmed;
 10 teacher newest-source cards use ONLY "Students needing stronger or additional evidence" list and approved 2x2 structure;
 11 final Evidence Sort uses full history/fixed categories/no repeated period suffixes;

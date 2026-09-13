@@ -1,47 +1,130 @@
 {
-  "schema":"portfolio-template-contract/1.1",
-  "status":"CURRENT",
-  "purpose":"Teacher-approved recurring Portfolio visual AND wording contract. Data changes; recurring report structure/labels/prompts do not drift between runs.",
-  "fidelity_rule":"The HTML templates are canonical shells, not examples. Preserve fixed text exactly except declared tokens/loops. Do not synonymize headings, reflection prompts, teacher categories, table columns, page titles, or footer purpose statements.",
-  "student_packet":{
-    "template":"Tools/templates/portfolio/student_packet_template.html",
-    "css":"Tools/templates/portfolio/portfolio.css",
-    "page_size":"US Letter portrait",
-    "pages_per_student":2,
-    "page_1_title":"Current Progress Report",
-    "page_2_title":"Unit Evidence Picture",
-    "page_2_subtitle":"All 4 Mastery Goals and all 16 I Cans",
-    "fixed_sections":["Essential Standard","Your current picture","What you are showing","Your next best target","When I am ready to work on this","My check-in"],
-    "reflection_prompts":["I found the exact MG, I Can, and family listed above.","What do I think I need to understand or practice better?","What is one question I want to ask when I work on this?"],
-    "recent_evidence_columns":["I Can","Target","Evidence","What this showed"],
-    "recent_evidence_labels_allowed":["Convincing","Partial","Limited","Unusable","No evidence"],
-    "forbidden":["third progress-tracker page","invented remediation questions","ad hoc reflection prompts","row-by-row redundant status words when the status marker already communicates status","renaming Unit Evidence Picture to Evidence Detail","free-form alternate feedback architecture"]
+  "schema": "portfolio-template-contract/1.2",
+  "status": "CURRENT",
+  "purpose": "Teacher-approved recurring Portfolio visual AND wording contract. Data changes; recurring report structure/labels/prompts do not drift between runs.",
+  "fidelity_rule": "The HTML templates are canonical shells, not examples. Preserve fixed text exactly except declared tokens/loops. Do not synonymize headings, reflection prompts, teacher categories, table columns, page titles, or footer purpose statements.",
+  "student_packet": {
+    "template": "Tools/templates/portfolio/student_packet_template.html",
+    "css": "Tools/templates/portfolio/portfolio.css",
+    "page_size": "US Letter portrait",
+    "pages_per_student": 2,
+    "page_1_title": "Current Progress Report",
+    "page_2_title": "Unit Evidence Picture",
+    "page_2_subtitle": "All 4 Mastery Goals and all 16 I Cans",
+    "fixed_sections": [
+      "Essential Standard",
+      "Your current picture",
+      "What you are showing",
+      "Your next best target",
+      "Why this is next",
+      "Next step",
+      "When I am ready to work on this",
+      "My check-in"
+    ],
+    "reflection_prompts": [
+      "I found the exact MG, I Can, and family listed above.",
+      "What do I think I need to understand or practice better?",
+      "What is one question I want to ask when I work on this?"
+    ],
+    "recent_evidence_columns": [
+      "I Can",
+      "Target",
+      "Evidence",
+      "What this showed"
+    ],
+    "recent_evidence_labels_allowed": [
+      "Convincing",
+      "Partial",
+      "Limited",
+      "Unusable",
+      "No evidence"
+    ],
+    "forbidden": [
+      "third progress-tracker page",
+      "invented remediation questions",
+      "ad hoc reflection prompts",
+      "row-by-row redundant status words when the status marker already communicates status",
+      "renaming Unit Evidence Picture to Evidence Detail",
+      "free-form alternate feedback architecture"
+    ],
+    "page_1_target_fields": [
+      "exact next I Can",
+      "exact MG + I Can + Bank family practice path",
+      "Why this is next",
+      "Next step"
+    ],
+    "page_2_i_can_row": "Each I Can row shows the status marker, exact I Can text, and one compact Next: action label from student_action_states."
   },
-  "student_feedback_frames":{
-    "current_picture":"Use a short factual body-of-evidence snapshot. On an early first-source run, explicitly say that one Quick Check can provide strong first evidence but does not establish mastery by itself.",
-    "strength":"Use evidence-grounded sentences beginning with You showed... or You also...; mention the exact demonstrated skill, not internal rubric mechanics.",
-    "family_A_note":"Start with the direct Family A example. After that makes sense, the other two families stay grouped with this same I Can in the Student Bank.",
-    "family_B_note":"Use Family B for another representation or route on the same I Can. The other families stay grouped with this same I Can in the Student Bank.",
-    "family_C_note":"Use Family C for reasoning, misconception checking, or transfer on the same I Can. The other families stay grouped with this same I Can in the Student Bank."
+  "student_feedback_frames": {
+    "current_picture": "Use a short factual body-of-evidence snapshot. On an early first-source run, explicitly say that one Quick Check can provide strong first evidence but does not establish mastery by itself.",
+    "strength": "Use evidence-grounded sentences beginning with You showed... or You also...; mention the exact demonstrated skill, not internal rubric mechanics.",
+    "family_A_note": "Start with the direct Family A example. After that makes sense, the other two families stay grouped with this same I Can in the Student Bank.",
+    "family_B_note": "Use Family B for another representation or route on the same I Can. The other families stay grouped with this same I Can in the Student Bank.",
+    "family_C_note": "Use Family C for reasoning, misconception checking, or transfer on the same I Can. The other families stay grouped with this same I Can in the Student Bank.",
+    "target_reason_rule": "Use the approved page_1_why_frame from the selected student_action_state. An optional second sentence may state that mastering this I Can would make its Mastery Goal demonstrated, but only when that is factually true.",
+    "target_next_step_rule": "Use the approved page_1_next_step from the selected student_action_state. Do not replace it with a generic coaching paragraph."
   },
-  "teacher_summary":{
-    "template":"Tools/templates/portfolio/teacher_summary_template.html",
-    "css":"Tools/templates/portfolio/portfolio.css",
-    "page_size":"US Letter landscape",
-    "latest_combined_title_pattern":"Combined {COURSE} - I Can Summary",
-    "latest_subtitle_pattern":"{STUDENT_COUNT} students - {SOURCE_LABEL} - {MG_LABEL} evidence snapshot",
-    "latest_card_primary_stat":"Convincing first evidence",
-    "latest_card_body_label":"Students needing stronger or additional evidence",
-    "latest_card_rule":"One needs-evidence list only. Do not invent separate name buckets for convincing/partial/limited/unusable on latest-source pages.",
-    "period_rule":"Combined page groups 3rd Hour then 6th Hour (or current period order). Individual period pages omit repeated period suffixes after names.",
-    "name_format":"First name + last initial; bulleted; 2 or 3 columns as fit allows; never append period after every name.",
-    "longitudinal_title_pattern":"Combined {COURSE} - Portfolio Evidence Sort",
-    "longitudinal_categories":["Reteach / targeted practice","Brief guided practice","Ready for another independent demonstration","No evidence / absent","Review flags"],
-    "longitudinal_rule":"Use full evidence ledger/current status, not only newest source. Preserve current status counts, independent opportunity count, latest source/date, and Review flags."
+  "teacher_summary": {
+    "template": "Tools/templates/portfolio/teacher_summary_template.html",
+    "css": "Tools/templates/portfolio/portfolio.css",
+    "page_size": "US Letter landscape",
+    "latest_combined_title_pattern": "Combined {COURSE} - I Can Summary",
+    "latest_subtitle_pattern": "{STUDENT_COUNT} students - {SOURCE_LABEL} - {MG_LABEL} evidence snapshot",
+    "latest_card_primary_stat": "Convincing first evidence",
+    "latest_card_body_label": "Students needing stronger or additional evidence",
+    "latest_card_rule": "One needs-evidence list only. Do not invent separate name buckets for convincing/partial/limited/unusable on latest-source pages.",
+    "period_rule": "Combined page groups 3rd Hour then 6th Hour (or current period order). Individual period pages omit repeated period suffixes after names.",
+    "name_format": "First name + last initial; bulleted; 2 or 3 columns as fit allows; never append period after every name.",
+    "longitudinal_title_pattern": "Combined {COURSE} - Portfolio Evidence Sort",
+    "longitudinal_categories": [
+      "Reteach / targeted practice",
+      "Brief guided practice",
+      "Ready for another independent demonstration",
+      "No evidence / absent",
+      "Review flags"
+    ],
+    "longitudinal_rule": "Use full evidence ledger/current status, not only newest source. Preserve current status counts, independent opportunity count, latest source/date, and Review flags."
   },
-  "bank_practice_link":{
-    "student_view_pattern":"https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
-    "required_path_fields":["Mastery Goal ID/title","I Can ID/exact text","family ID/label/name"],
-    "stable_anchor_rule":"Family anchor is canonical family_id; I Can and MG anchors remain canonical IDs."
-  }
+  "bank_practice_link": {
+    "student_view_pattern": "https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
+    "required_path_fields": [
+      "Mastery Goal ID/title",
+      "I Can ID/exact text",
+      "family ID/label/name"
+    ],
+    "stable_anchor_rule": "Family anchor is canonical family_id; I Can and MG anchors remain canonical IDs."
+  },
+  "student_action_states": {
+    "NEEDS_FIRST_CHECK": {
+      "page_2_label": "Needs first check",
+      "when": "No usable evidence exists for the I Can.",
+      "page_1_why_frame": "There is not yet usable evidence for this I Can, so it is a clear missing piece in {MG_ID}.",
+      "page_1_next_step": "Show this I Can on the next appropriate evidence check."
+    },
+    "PRACTICE_AND_CHECK": {
+      "page_2_label": "Practice + check soon",
+      "when": "The I Can is Developing and the current body of evidence does not yet contain one convincing independent demonstration, or the newest usable evidence shows a clear gap that should be repaired before another independent check.",
+      "page_1_why_frame": "Your current evidence shows a gap or incomplete understanding here, so this I Can should be practiced and checked again soon.",
+      "page_1_next_step": "Practice this I Can, then show it again on another check."
+    },
+    "NEEDS_ANOTHER_DEMONSTRATION": {
+      "page_2_label": "Needs another independent check",
+      "when": "The I Can is Developing and already has one convincing independent demonstration but has not yet met the normal Mastered rule.",
+      "page_1_why_frame": "You already showed this I Can convincingly once; Mastered normally needs another independent convincing demonstration.",
+      "page_1_next_step": "Show this I Can again on another independent check."
+    },
+    "SECURE": {
+      "page_2_label": "Secure",
+      "when": "The I Can is Mastered.",
+      "page_1_why_frame": "This I Can is already secure and is not normally selected as the next routine target.",
+      "page_1_next_step": "Keep using this skill as needed while you work on the next target."
+    },
+    "EXTENSION": {
+      "page_2_label": "Extension",
+      "when": "The I Can is Transfer, or routine nearby targets are secure and the selected next move is legitimate transfer/extension.",
+      "page_1_why_frame": "Your nearby routine targets are secure, so the next useful step is transfer or extension.",
+      "page_1_next_step": "Use this I Can in a less-routine or connected situation."
+    }
+  },
+  "student_action_rule": "Status and next action are separate. Use only the declared student_action_states labels/frames. Page 1 must explain WHY the selected target is next and WHAT happens next. Page 2 must show the compact action label for every I Can. Do not invent alternate action vocabulary."
 }
