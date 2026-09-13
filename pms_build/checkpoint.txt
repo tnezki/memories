@@ -1,0 +1,306 @@
+BUILD / RUN PERSONALIZED CHECKPOINTS - ALGEBRA 1
+================================================
+STATUS: CURRENT PILOT
+JOB: checkpoint
+REVISION: 2026-09-13 v1.0
+
+ROLE
+----
+Own the Algebra 1 personalized Checkpoint workflow.
+
+A Checkpoint is NOT the common section Quick Check. It is a larger personalized six-question evidence event generated just in time from current private Portfolio state and the reviewed Unit Bank.
+
+TWO ENTRY MODES
+---------------
+A. CURRICULUM CONTROL PANEL / TOOL BUILD
+If the request is a normal curriculum-control BUILD request and does NOT use schema algebra-checkpoint-build-request/1.0, build or repair the course-level teacher tool at:
+  checkpoints___trmn78/checkpoint_builder.html
+Return the repository change as one valid github_transfer / 2 package.
+
+B. CHECKPOINT BUILDER REQUEST
+If CHECKPOINT_REQUEST.json uses schema algebra-checkpoint-build-request/1.0, execute the personalized private Checkpoint run described below.
+This mode is NOT a GitHub artifact build. It reads private Drive state, writes private Checkpoint state/output, and returns the printable HTML and PDF individually.
+
+============================================================
+0. SOURCE POLICY / PRIVACY - HARD
+============================================================
+- No public web search or external research.
+- Use current request/current teacher instruction, exact pinned project GitHub authorities, and the explicitly authorized canonical private Portfolio Drive state.
+- Do not use prior chat, saved memory, File Library, or guessed rosters as authority.
+- Never write student names, IDs, statuses, intervention groups, Checkpoint plans, answers, or source maps to GitHub.
+- The public Checkpoint Builder may contain curriculum choices and selection criteria only. It must not contain a stored roster or Portfolio state.
+
+============================================================
+1. AUTHORITY / READ ORDER
+============================================================
+Read in this order:
+1. pinned SYSTEM_MANIFEST.json;
+2. Curriculum Philosophy + declared amendments;
+3. SYSTEM_RUNTIME_CONTRACT + declared runtime amendments, especially SYSTEM_RUNTIME_CHECKPOINT_AMENDMENT.txt;
+4. Algebra Framework manifest/front door/current amendment;
+5. Algebra authority contract;
+6. current Algebra Portfolio/Quick Check policy and current checkpoint_policy.json;
+7. exact selected Unit Assessment Plan for learning content;
+8. selected Unit Bank BANK_MANIFEST.json + FAMILY_INDEX.json + exact family/mastery-goal records actually needed;
+9. Tools/templates/algebra/checkpoint/CHECKPOINT_PILOT_TEMPLATE_CONTRACT.json;
+10. this PM;
+11. CHECKPOINT_REQUEST.json;
+12. current private Drive state for the selected Unit.
+
+Teacher instruction for the current run is highest authority for run-specific choices. Exact Unit Assessment Plan owns learning content. Current Portfolio owns live student evidence need. Reviewed Bank families own question architecture. This PM owns procedure.
+
+============================================================
+2. BANK GATE - HARD
+============================================================
+Before resolving students or authoring questions, verify the selected Unit Bank:
+  banks/unitN/BANK_MANIFEST.json
+
+Require:
+- status = COMPLETE
+- ready_for_downstream = true
+- qa = PASS
+- FAMILY_INDEX.json available
+
+If not, STOP with CHECKPOINT_BANK_NOT_READY.
+Do not invent a substitute Bank or question-family architecture.
+
+============================================================
+3. CANONICAL PRIVATE DRIVE - HARD
+============================================================
+Use exact root:
+  title: ____Portfolio_Data
+  folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
+
+Resolve by exact root ID first. Never globally search for a same-named root when the ID is available.
+Then resolve:
+  Algebra 1 / unit N / 02 Portfolio Data /
+
+Minimum required live files:
+- student_registry.csv
+- i_can_status_current.csv
+- intervention_groups.csv
+
+Read when useful:
+- evidence_ledger.csv
+- mastery_goal_status_current.csv
+- class_i_can_summary.csv
+- review_queue.csv
+- unit_status_current.csv
+
+If the canonical root/current Unit Portfolio state cannot be accessed, STOP with CHECKPOINT_DRIVE_STATE_UNAVAILABLE. Do not ask the teacher for manual CSV exports when the canonical Drive is accessible.
+
+============================================================
+4. RESOLVE THE TEACHER SELECTION - HARD
+============================================================
+One Unit per run only.
+Supported period scope:
+- 3rd
+- 6th
+- both
+
+Supported selection modes:
+A. individual
+- Match the typed name to active student_registry.csv.
+- Never fuzzy-guess through ambiguity.
+
+B. manual
+- Match every typed name to the active registry.
+- Preserve teacher-selected subset only.
+
+C. class
+- Include every active rostered student in the selected period scope.
+
+D. all
+- Include every active Algebra 1 student in both periods.
+
+E. intervention
+- Resolve current membership from intervention_groups.csv using the requested canonical group.
+- Apply the optional I Can filter when supplied.
+
+F. ican
+- Use the exact requested I Can.
+- Select students in the requested period scope for whom the current body of evidence makes another useful demonstration on that I Can appropriate.
+- Do not include students already secure merely to fill a count unless teacher instruction explicitly requests confirmation/extension.
+
+G. another_demo
+- Use the exact requested I Can.
+- Select only students whose current student_action_code for that I Can is NEEDS_ANOTHER_DEMONSTRATION.
+- This is the explicit second-independent-evidence pathway.
+
+If typed identity is ambiguous, STOP with CHECKPOINT_STUDENT_MATCH_REVIEW_REQUIRED and identify the ambiguous input.
+If the resolved scope contains zero students, STOP with CHECKPOINT_SELECTION_EMPTY. Do not silently broaden the selection.
+
+============================================================
+5. TARGETING EACH STUDENT
+============================================================
+The governing principle is:
+  Portfolio decides what evidence is useful now; the Bank supplies how to ask for it.
+
+Use the full current body of evidence, not only the latest wrong response.
+
+When the teacher request does not force a single target, normally prioritize:
+1. NEEDS_ANOTHER_DEMONSTRATION
+2. PRACTICE_AND_CHECK
+3. NEEDS_FIRST_CHECK
+4. meaningful Review flags when another clean independent look is appropriate
+5. SECURE only for balanced confirmation or legitimate extension after more urgent needs are covered
+
+Normally spread six questions across about 2-3 I Cans. This is a default, not a quota.
+If the selection mode intentionally focuses on one I Can, give that I Can meaningful repeated coverage while preserving the same-source independence rule.
+
+Do not lower the target because a student previously struggled. Select an evidence route that is interpretable and appropriate to the current need.
+
+============================================================
+6. BANK FAMILY SELECTION / AUTHORING
+============================================================
+For every question:
+1. choose exact I Can;
+2. choose an approved family in the selected Unit Bank;
+3. preserve family evidence job, representation/reasoning demand, and difficulty;
+4. author a fresh instance;
+5. independently verify the answer/key.
+
+Family routing:
+- A = normal direct/core start;
+- B = alternate representation/context/route when useful;
+- C = misconception diagnosis/reasoning route when current evidence calls for it.
+
+Do not mechanically force A/B/C balance.
+Legacy Bank allowed_destinations arrays may still use the retired Exit Ticket name and may not yet list Checkpoint. Current checkpoint_policy.json owns Checkpoint routing; do not reject an otherwise appropriate reviewed family solely because that older destination list has not been migrated.
+Do not invent a new question architecture when an approved family fits.
+Do not simply copy exemplar numbers/values unless teacher explicitly requests it.
+
+Teacher note may tune surface details such as values, graph size, calculator burden, or emphasis. It may not silently change the selected Unit, student scope, exact I Can learning content, or unsupported evidence claims.
+
+============================================================
+7. SIX-QUESTION CHECKPOINT / INDEPENDENCE
+============================================================
+Current Algebra rule: exactly 6 questions per selected student unless a later explicit teacher instruction changes the course policy.
+
+A personalized Checkpoint is one source event.
+If the same I Can appears more than once on the same Checkpoint:
+- item observations may be preserved separately;
+- the prompts may provide a richer source-level judgment;
+- they do NOT become multiple independent opportunities for that I Can merely because there are multiple questions.
+
+Create a stable opportunity_id for each student/I Can source-level opportunity.
+
+============================================================
+8. PILOT PRINT / HTML STRUCTURE
+============================================================
+Follow CHECKPOINT_PILOT_TEMPLATE_CONTRACT.json.
+This is a pilot structure, not a gold-standard visual lock.
+
+Required now:
+- one combined HTML for the whole run;
+- exactly 2 student pages per selected student;
+- 6 questions/student;
+- student name prefilled;
+- exact I Can code + exact I Can statement visible with every question;
+- MathJax for mathematical notation;
+- plain white response/workspace areas;
+- no decorative shaded problem cards;
+- no ruled workspace lines;
+- page 2 does not repeat a full title/name header;
+- PDF bookmarks by student;
+- PDF order: 3rd Hour alphabetically, then 6th Hour alphabetically.
+
+The HTML must begin with a SCREEN-ONLY Teacher Run Summary that does not print. Show:
+- Unit and run selection criterion;
+- resolved students grouped by period;
+- for every student, six planned questions with I Can + Bank family;
+- any review flag or unusual targeting decision that deserves teacher attention.
+
+This summary is a sanity-check surface before printing. Do not expose internal answers in the student print pages.
+
+============================================================
+9. PRIVATE SOURCE MAP - HARD
+============================================================
+Create checkpoint_source_map.json for every run.
+Minimum per student:
+- stable student key
+- display name
+- period
+
+Minimum per printed question:
+- printed_number
+- source_question_id
+- exact I Can ID + exact text
+- family_id + family_name
+- evidence_job
+- exact final prompt
+- values/parameters
+- verified answer/key
+- opportunity_id
+
+The private Checkpoint source map is the primary lineage authority when this Checkpoint is later scanned into Portfolio. Portfolio should map the clean printed task before judging handwriting.
+
+Do not place this source map in the public course repository.
+
+============================================================
+10. DRIVE PERSISTENCE / RUN FOLDER - HARD
+============================================================
+Under the exact selected Unit folder, resolve/create:
+  06 Checkpoints/
+
+For each run create a unique dated/run-specific child folder. Never overwrite an older Checkpoint run.
+Use a defensible pattern such as:
+  YYYY-MM-DD_Checkpoint_01/
+  YYYY-MM-DD_Checkpoint_02/
+
+Save at minimum:
+- checkpoint.html
+- checkpoint.pdf
+- checkpoint_source_map.json
+- run_manifest.json
+
+run_manifest.json records:
+- run ID/date
+- selected Unit
+- teacher selection criteria
+- resolved student count/period counts
+- pinned project commits
+- source Bank fingerprint/manifest info when available
+- output file names
+- source-map file name
+- any review warnings
+
+After writing, re-list/re-read the exact run folder and verify all four expected files exist before PASS.
+If persistence fails, STOP with CHECKPOINT_DRIVE_PERSISTENCE_FAILED and do not claim success merely because local/downloadable files exist.
+
+============================================================
+11. DELIVERY - CHECKPOINT RUN EXCEPTION
+============================================================
+MODE A / TOOL BUILD:
+Return one github_transfer / 2 package following Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt exactly.
+
+MODE B / ACTUAL CHECKPOINT RUN:
+- update the canonical private Drive as above;
+- return checkpoint.html individually;
+- return checkpoint.pdf individually;
+- do NOT return student/source-map data in a GitHub Transfer ZIP;
+- do NOT write student data to GitHub.
+
+The source map and run manifest normally remain private in Drive and do not need to be separately returned unless teacher asks.
+
+============================================================
+12. QA / STOP
+============================================================
+Before PASS verify:
+1. selected Unit Bank passed the hard gate;
+2. exact canonical Drive root ID was used;
+3. selected students were resolved from current active registry/intervention/status data;
+4. no ambiguous identity was guessed;
+5. exactly 6 questions per selected student;
+6. every question maps to exact I Can + approved Bank family;
+7. fresh instances preserve family evidence architecture;
+8. same-source independence is not inflated;
+9. HTML has screen-only teacher run summary;
+10. student print pages contain no answer key/internal teacher metadata;
+11. exactly 2 student pages/student;
+12. print order is 3rd alpha then 6th alpha;
+13. private source map is complete/deterministic;
+14. unique 06 Checkpoints run folder was written and verified;
+15. actual run returns HTML + PDF individually and writes no student data to GitHub.
+
+Then stop.

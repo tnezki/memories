@@ -20,11 +20,22 @@ For workflow/job = portfolio:
 - NEVER create another top-level folder named `____Portfolio_Data`;
 - ignore same-named Portfolio roots anywhere else in Drive;
 - under the canonical root, resolve the exact `<Course>` child; create that course child only inside the canonical root when it is genuinely absent;
-- under that canonical course folder, resolve/create `unit N` and the five Portfolio subfolders;
+- under that canonical course folder, resolve/create `unit N` and the five Portfolio-owned subfolders listed below;
+- preserve any current course-authorized sibling workflow folders, including `06 Checkpoints`; do not delete or overwrite them during a Portfolio run;
 - if the exact canonical root ID cannot be accessed, FAIL CLOSED with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE` rather than creating or selecting a substitute root.
 
 The canonical private state path is therefore:
   ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
+
+Portfolio-owned subfolders:
+  01 Evidence Inbox/
+  02 Portfolio Data/
+  03 Student Packets/
+  04 Class & Intervention Summaries/
+  05 PowerSchool Exports/
+
+Course-authorized sibling workflow folder:
+  06 Checkpoints/   (created/owned by the personalized Checkpoint workflow; Portfolio preserves it)
 
 DRIVE PERSISTENCE IS A COMPLETION GATE - HARD
 ---------------------------------------------
@@ -37,16 +48,18 @@ Required execution order:
 4. Write the current class Student Packet PDFs in `03 Student Packets`.
 5. Write the current Teacher Summary PDF in `04 Class & Intervention Summaries`.
 6. Write the current PowerSchool CSV(s) in `05 PowerSchool Exports`.
-7. RE-READ/LIST the exact canonical unit folder and each required subfolder and verify the expected current files are present before reporting PASS or delivering the run as complete.
+7. RE-READ/LIST the exact canonical unit folder and each Portfolio-owned subfolder and verify the expected current files are present before reporting PASS or delivering the run as complete.
+8. If `06 Checkpoints` exists, preserve it untouched except when the current Portfolio evidence source is a Checkpoint and the course policy requires reading that run's private source map for lineage.
 
 The post-write verification must confirm, at minimum:
 - the exact canonical root ID was used;
-- all five required subfolders exist under the selected canonical unit folder;
+- all five Portfolio-owned subfolders exist under the selected canonical unit folder;
 - the newly supplied raw evidence exists in `01 Evidence Inbox`;
 - `02 Portfolio Data` contains the required persistent state set for the run, including the current registry/ledger/status/history/manifest files required by the Portfolio PM;
 - current Student Packet PDF(s) exist in `03 Student Packets`;
 - the current Teacher Summary PDF exists in `04 Class & Intervention Summaries`;
-- current PowerSchool CSV(s) exist in `05 PowerSchool Exports`.
+- current PowerSchool CSV(s) exist in `05 PowerSchool Exports`;
+- any existing `06 Checkpoints` sibling was not deleted or repurposed.
 
 If any required Drive write, replacement, or verification fails:
 - do NOT claim the Portfolio run completed successfully;

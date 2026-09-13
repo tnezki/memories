@@ -1,0 +1,107 @@
+{
+  "schema": "algebra-checkpoint-policy/1.0",
+  "status": "PILOT_CURRENT",
+  "course": "Algebra 1",
+  "purpose": "Own the just-in-time personalized Checkpoint workflow while the Unit Assessment Plan owns exact learning content, the Portfolio owns current evidence need, and the reviewed Unit Bank owns question-family architecture.",
+  "name": "Checkpoint",
+  "scope": {
+    "builder_level": "course",
+    "one_unit_per_run": true,
+    "default_question_count": 6,
+    "personalized": true,
+    "visible_i_can_label": true,
+    "normal_use_timing": "Generate only when the teacher is ready to use it so the newest Portfolio state can guide targeting."
+  },
+  "source_of_truth": {
+    "portfolio_root_title": "____Portfolio_Data",
+    "portfolio_root_id": "1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o",
+    "current_state_folder": "02 Portfolio Data",
+    "required_state_files": [
+      "student_registry.csv",
+      "i_can_status_current.csv",
+      "intervention_groups.csv"
+    ],
+    "use_when_helpful": [
+      "evidence_ledger.csv",
+      "mastery_goal_status_current.csv",
+      "class_i_can_summary.csv",
+      "review_queue.csv",
+      "unit_status_current.csv"
+    ],
+    "bank_manifest_pattern": "banks/unit{unit}/BANK_MANIFEST.json",
+    "family_index_pattern": "banks/unit{unit}/FAMILY_INDEX.json",
+    "bank_gate": "Selected Unit Bank must be COMPLETE, ready_for_downstream=true, and qa=PASS. Fail closed rather than inventing question families."
+  },
+  "selection_modes": [
+    "individual student",
+    "manually selected students",
+    "whole selected class or classes",
+    "all active Algebra 1 students",
+    "Portfolio intervention group",
+    "students needing evidence for a specific I Can",
+    "students needing another independent demonstration for a specific I Can"
+  ],
+  "period_scope": ["3rd", "6th", "both"],
+  "another_demonstration_rule": {
+    "action_code": "NEEDS_ANOTHER_DEMONSTRATION",
+    "label": "Needs another independent check",
+    "note": "This is intentionally included in the pilot and may be removed later by teacher decision."
+  },
+  "targeting": {
+    "principle": "Portfolio decides what evidence is useful now; the Bank supplies how that evidence is elicited.",
+    "priority_order_when_request_does_not_force_one_target": [
+      "NEEDS_ANOTHER_DEMONSTRATION",
+      "PRACTICE_AND_CHECK",
+      "NEEDS_FIRST_CHECK",
+      "review-flagged targets when teacher judgment supports another clean look",
+      "SECURE only when needed for balanced confirmation or legitimate extension"
+    ],
+    "normal_i_can_span": "Usually 2-3 target I Cans across six questions, adjusted when the selected mode intentionally focuses on one I Can.",
+    "family_rule": "Use an approved Bank family whose evidence job fits the student's next need. Family A is the normal direct/core route; B or C may be better when current evidence calls for another representation, context route, or misconception diagnosis.",
+    "fresh_instance_rule": "Author a fresh instance from the approved family architecture. Do not merely copy the exemplar values, and do not create a new architecture when an approved family fits.",
+    "legacy_destination_compatibility": "Older Bank family allowed_destinations arrays may still say Exit Ticket and may not yet list Checkpoint. That legacy destination vocabulary is not a prohibition on Checkpoint use when the current checkpoint policy selects the family by evidence job.",
+    "teacher_note_rule": "A teacher note may tune surface choices, emphasis, or print practicality but may not silently override exact I Can learning content or create unsupported evidence claims."
+  },
+  "independence": {
+    "checkpoint_is_one_source": true,
+    "same_i_can_repeated_questions": "Multiple questions for one I Can within the same Checkpoint may provide richer evidence but normally count as one source opportunity for that I Can, not multiple independent opportunities.",
+    "source_map_required": true
+  },
+  "output": {
+    "print_order": ["3rd Hour alphabetical", "6th Hour alphabetical"],
+    "student_name_prefilled": true,
+    "student_pages_per_checkpoint": 2,
+    "pdf_bookmarks_by_student": true,
+    "html_teacher_run_summary": "screen-only; show resolved student membership and per-student I Can/family plan before printing",
+    "print_style": [
+      "plain white workspace",
+      "MathJax for mathematics",
+      "no decorative toner-heavy shading",
+      "no ruled workspace lines",
+      "exact I Can code and statement visible with each question",
+      "no repeated full page-2 header"
+    ],
+    "private_drive_folder": "06 Checkpoints",
+    "run_folder_rule": "Create a unique dated/run-specific child folder. Never overwrite an older Checkpoint run.",
+    "private_files": ["checkpoint.html", "checkpoint.pdf", "checkpoint_source_map.json", "run_manifest.json"],
+    "returned_files": ["checkpoint.html", "checkpoint.pdf"]
+  },
+  "source_map": {
+    "minimum_student_fields": ["student_key", "display_name", "period"],
+    "minimum_question_fields": ["printed_number", "i_can_id", "i_can_exact_text", "family_id", "family_name", "evidence_job", "prompt", "values", "answer_or_key", "opportunity_id"],
+    "portfolio_ingestion_rule": "When later Checkpoint evidence is ingested, the private source map saved with that run is the primary lineage authority. Map the clean printed task before judging handwriting."
+  },
+  "privacy": {
+    "public_builder_contains_private_student_data": false,
+    "github_student_data_allowed": false,
+    "drive_resolution_rule": "Resolve live roster, statuses, intervention groups, and evidence from the canonical private Drive only when the request executes.",
+    "manual_name_rule": "Typed names may exist in the teacher's downloaded request ZIP but are never committed to GitHub."
+  },
+  "failure_modes": {
+    "drive_unavailable": "CHECKPOINT_DRIVE_STATE_UNAVAILABLE",
+    "bank_not_ready": "CHECKPOINT_BANK_NOT_READY",
+    "empty_selection": "CHECKPOINT_SELECTION_EMPTY",
+    "ambiguous_student": "CHECKPOINT_STUDENT_MATCH_REVIEW_REQUIRED",
+    "persistence_failed": "CHECKPOINT_DRIVE_PERSISTENCE_FAILED"
+  }
+}

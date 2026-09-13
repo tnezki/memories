@@ -1,7 +1,7 @@
-ALGEBRA 1 FRAMEWORK AMENDMENT - PORTFOLIO / QUICK CHECK
-========================================================
+ALGEBRA 1 FRAMEWORK AMENDMENT - PORTFOLIO / QUICK CHECK / CHECKPOINT
+====================================================================
 STATUS: CURRENT
-SCOPE: recurring short-evidence architecture, Portfolio status/rollup, evidence-source mapping, Bank practice routing, and recurring Portfolio presentation.
+SCOPE: recurring evidence architecture, Portfolio status/rollup, evidence-source mapping, Bank practice routing, personalized Checkpoint mechanics, and recurring Portfolio presentation.
 
 This amendment supersedes conflicting legacy Exit Ticket/Portfolio mechanics in the older Framework/Assessment Plan boilerplate while preserving exact Unit learning content.
 
@@ -9,7 +9,7 @@ This amendment supersedes conflicting legacy Exit Ticket/Portfolio mechanics in 
 - Common short evidence pulse: Quick Check.
 - Prior name Exit Ticket is retired for current Algebra execution.
 - Larger personalized six-question event: Checkpoint.
-Legacy printed scans may be matched by old names as aliases, but current reports/data use Quick Check.
+Legacy printed scans may be matched by old names as aliases, but current reports/data use Quick Check and Checkpoint.
 
 2. PORTFOLIO STATUS / ROLLUP
 I Can: No Evidence / Developing / Mastered / Transfer.
@@ -20,40 +20,6 @@ Unit/PowerSchool: I=0-1 MG, C=2, B=3, A=4, A+=4 plus meaningful transfer/extensi
 3. QUICK CHECK SLOTS
 Use curriculum/quick_check_slot_map.json. Reassessment targets are selected from live Portfolio need, not frozen months ahead.
 Core sentence: The curriculum predicts the evidence slots; the Portfolio determines the just-in-time reassessment targets; the teacher approves the actual questions.
-
-4. EVIDENCE-SOURCE MAPPING - HARD
-For known recurring sources, use current maps under curriculum/quick_check_source_maps before interpreting handwriting.
-Map the CLEAN TASK first, then judge the response.
-Question number is not authority when parallel versions shuffle order.
-A task may support more than one separately judgeable I Can when the task genuinely asks both evidence jobs. Those target judgments still share the same source opportunity unless independence is explicitly defensible.
-Repeated prompts for the same I Can on one Quick Check are not automatically independent. When a source map specifies aggregation, synthesize one source-level I Can judgment while preserving useful item observations internally.
-
-For Unit 1 Section 1 Quick Check 01 specifically, the movement-from-origin endpoint task provides separately judgeable IC01 and IC02 evidence; the two intercept prompts combine into one IC04 source-level judgment. Use the registered source map.
-
-5. BANK ROLE
-Bank = Mastery Goal -> exact I Can -> three materially different families. Student view is student.html grouped MG -> I Can -> A/B/C. Portfolio prints exact MG + I Can + recommended family and links to student.html#<family_id>. Direct links must visibly mark the exact target on desktop/mobile.
-
-6. PORTFOLIO REPORT FIDELITY - HARD
-The registered Portfolio template contract, HTML templates, and CSS own the recurring student/teacher report presentation. They own fixed headings, reflection prompts, table columns, card anatomy, category labels, and layout—not merely colors.
-Job 18 fills data slots. It may not rewrite the report into a new feedback system, change reflection prompts, invent new teacher name buckets, rename the approved pages, or add a third tracker page.
-Intentional redesign requires teacher approval and promotion of a new template version.
-
-Student packet = exactly two pages: Current Progress Report; Unit Evidence Picture.
-Teacher summary = combined 2x2 latest-evidence page, period 2x2 pages, final combined longitudinal Portfolio Evidence Sort.
-The approved recent-evidence table may show Convincing/Partial/Limited/Unusable as compact evidence descriptors; other internal mechanics remain hidden.
-Teacher name lists use first name + last initial when compact; period is a group header, not repeated after every name.
-
-6A. STUDENT NEXT-ACTION LAYER - HARD
-I Can status and next instructional/evidence action are separate. A Developing I Can may mean the student needs practice before another check OR already has one convincing demonstration and only needs another independent demonstration.
-
-Use only the current policy/template action vocabulary:
-- Needs first check
-- Practice + check soon
-- Needs another independent check
-- Secure
-- Extension
-
-Page 1 explains why the selected I Can is the next priority and states the next step. Page 2 shows the compact Next: label for every I Can. Do not invent alternate labels or collapse these distinctions back into a generic Developing message.
 
 3A. QUICK CHECK BUILD WORKFLOW - HARD
 There is ONE Quick Check per section. The normal Algebra build path is a unit-specific Quick Check selector/control page at quick_check____htq5855/quickN/quick_N.html. The teacher chooses the four question architectures, may add an optional fine-tuning note, and downloads a pinned request ZIP. A fresh build chat follows the selected PM and registered Quick Check visual/template contract, then returns one github_transfer / 2 package.
@@ -78,7 +44,74 @@ Use the registered Quick Check template contract and example. Required behavior:
 3C. QUICK CHECK SOURCE MAP AUTHORITY
 For a newly generated approved Quick Check, the sibling approved quick_N_S.json is the primary exact lineage/source map for version order, values, answers, I Can, family, and evidence job. Framework curriculum/quick_check_source_maps remains the override/compatibility location for legacy scans, special aggregation, multi-target behavior, or cases where an approved artifact JSON is unavailable. Do not maintain duplicate routine maps in two places without a specific override need.
 
+3D. PERSONALIZED CHECKPOINT WORKFLOW - HARD
+Checkpoint is a COURSE-LEVEL teacher tool, not a per-Unit dashboard artifact. Normal teacher entry is:
+  checkpoints___trmn78/checkpoint_builder.html
+
+The teacher chooses exactly one Unit and a student scope. The public page stores no roster/Portfolio data. It creates a pinned request; the actual run resolves current private Portfolio state from the canonical Drive at execution time.
+
+Supported pilot student scopes include:
+- individual student;
+- manually selected students;
+- whole selected class/classes;
+- all active Algebra 1 students;
+- current Portfolio intervention group;
+- students needing evidence for a specific I Can;
+- students whose action state for a specific I Can is Needs another independent check.
+
+Checkpoint is generated JUST IN TIME, not prebuilt months ahead. Current Portfolio state decides which evidence is useful; the reviewed selected Unit Bank supplies question-family architecture. Default Checkpoint length is six questions/student. One Unit per run.
+
+Actual Checkpoint runs save a unique dated/run-specific folder under:
+  ____Portfolio_Data / Algebra 1 / unit N / 06 Checkpoints /
+
+Private run output includes printable HTML/PDF plus deterministic source map and run manifest. HTML/PDF are returned to the teacher individually. Student data and personalized source maps never go to GitHub.
+
+The registered Checkpoint pilot template contract owns the current structure while it is under testing. It is intentionally PILOT, not gold-standard, until the teacher approves the resulting print behavior.
+
+3E. CHECKPOINT SOURCE MAP / INDEPENDENCE
+Every personalized Checkpoint run must save checkpoint_source_map.json mapping each student and printed question to exact I Can, approved Bank family/evidence job, exact prompt/values, verified answer/key, and source-level opportunity ID.
+
+When a later scan of that Checkpoint is ingested, the private source map saved with that exact run is the primary lineage authority. Map the clean task before judging handwriting.
+
+Repeated questions for the same I Can on one Checkpoint may strengthen one source-level judgment but do not become multiple independent opportunities merely because multiple questions were printed.
+
+4. EVIDENCE-SOURCE MAPPING - HARD
+For known recurring sources, use current maps before interpreting handwriting.
+Map the CLEAN TASK first, then judge the response.
+Question number is not authority when parallel versions shuffle order or personalized Checkpoints differ by student.
+A task may support more than one separately judgeable I Can when the task genuinely asks both evidence jobs. Those target judgments still share the same source opportunity unless independence is explicitly defensible.
+Repeated prompts for the same I Can on one Quick Check or Checkpoint are not automatically independent. When a source map specifies aggregation, synthesize one source-level I Can judgment while preserving useful item observations internally.
+
+For Unit 1 Section 1 Quick Check 01 specifically, the movement-from-origin endpoint task provides separately judgeable IC01 and IC02 evidence; the two intercept prompts combine into one IC04 source-level judgment. Use the registered source map.
+
+5. BANK ROLE
+Bank = Mastery Goal -> exact I Can -> three materially different families. Student view is student.html grouped MG -> I Can -> A/B/C. Portfolio prints exact MG + I Can + recommended family and links to student.html#<family_id>. Direct links must visibly mark the exact target on desktop/mobile.
+
+Bank families also supply Checkpoint question architecture. Portfolio need determines what should be checked; the Checkpoint PM selects an approved family whose evidence job fits that need and authors a fresh instance. Do not invent a new Checkpoint question architecture when an appropriate approved Bank family exists.
+
+6. PORTFOLIO REPORT FIDELITY - HARD
+The registered Portfolio template contract, HTML templates, and CSS own the recurring student/teacher report presentation. They own fixed headings, reflection prompts, table columns, card anatomy, category labels, and layout—not merely colors.
+Job 18 fills data slots. It may not rewrite the report into a new feedback system, change reflection prompts, invent new teacher name buckets, rename the approved pages, or add a third tracker page.
+Intentional redesign requires teacher approval and promotion of a new template version.
+
+Student packet = exactly two pages: Current Progress Report; Unit Evidence Picture.
+Teacher summary = combined 2x2 latest-evidence page, period 2x2 pages, final combined longitudinal Portfolio Evidence Sort.
+The approved recent-evidence table may show Convincing/Partial/Limited/Unusable as compact evidence descriptors; other internal mechanics remain hidden.
+Teacher name lists use first name + last initial when compact; period is a group header, not repeated after every name.
+
+6A. STUDENT NEXT-ACTION LAYER - HARD
+I Can status and next instructional/evidence action are separate. A Developing I Can may mean the student needs practice before another check OR already has one convincing demonstration and only needs another independent demonstration.
+
+Use only the current policy/template action vocabulary:
+- Needs first check
+- Practice + check soon
+- Needs another independent check
+- Secure
+- Extension
+
+Page 1 explains why the selected I Can is the next priority and states the next step. Page 2 shows the compact Next: label for every I Can. Do not invent alternate labels or collapse these distinctions back into a generic Developing message.
+
 7. LEGACY RETIREMENTS
-Retired for current execution: fixed Exit Ticket chain; active exit_evidence_map routing; Not Yet/Approaching/Meeting/Exceeding as Algebra Portfolio labels; Ticket A/B as current source naming; ad hoc recurring report redesign.
+Retired for current execution: fixed Exit Ticket chain; active exit_evidence_map routing; Not Yet/Approaching/Meeting/Exceeding as Algebra Portfolio labels; Ticket A/B as current source naming; ad hoc recurring report redesign; prebuilt/frozen personalized Checkpoints that ignore current Portfolio need.
 
 END - ALGEBRA 1 FRAMEWORK AMENDMENT

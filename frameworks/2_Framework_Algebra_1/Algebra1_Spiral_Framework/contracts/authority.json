@@ -1,7 +1,7 @@
 {
   "course_family": "spiral_math",
   "course": "Algebra 1",
-  "framework_version": "v7.9-quick-check-gold-standard",
+  "framework_version": "v8.0-checkpoint-pilot",
   "authority_order": [
     "current explicit teacher instruction for the specific job",
     "current Curriculum Philosophy plus declared current philosophy amendments",
@@ -11,19 +11,24 @@
     "current executable task PM for procedure",
     "current registered templates/tools for implementation"
   ],
-  "assessment_plan_rule": "Exact Unit Assessment Plan HTML owns Unit learning content. Legacy Exit Ticket/Portfolio wording embedded in older plans does not override current Portfolio/Quick Check policy.",
+  "assessment_plan_rule": "Exact Unit Assessment Plan HTML owns Unit learning content. Legacy Exit Ticket/Portfolio wording embedded in older plans does not override current Portfolio/Quick Check/Checkpoint policy.",
   "portfolio_quick_check_policy": "contracts/portfolio_quick_check_policy.json",
+  "checkpoint_policy": "contracts/checkpoint_policy.json",
   "quick_check_slot_map": "curriculum/quick_check_slot_map.json",
   "quick_check_source_maps_root": "curriculum/quick_check_source_maps",
   "quick_check_rule": "Quick Check is one common short-evidence artifact per section. Curriculum defines predictable slots; live Portfolio need may guide reassessment; the unit Quick Check selector exposes eligible choices; teacher approves the exact four question architectures and may add a fine-tuning note.",
-  "source_mapping_rule": "For a newly generated approved Quick Check, use its sibling approved JSON lineage/source map before judging responses. Use curriculum/quick_check_source_maps for legacy/special aggregation, multi-target overrides, compatibility, or missing approved JSON. Map by clean task/evidence job rather than shuffled question number.",
+  "checkpoint_rule": "Checkpoint is a larger personalized six-question evidence event generated just in time. One Unit is selected per run. Current private Portfolio state determines useful evidence needs; the reviewed Unit Bank supplies question-family architecture.",
+  "checkpoint_builder_rule": "Normal teacher entry is the course-level page checkpoints___trmn78/checkpoint_builder.html. The public builder stores no roster or Portfolio data; it creates a pinned request whose execution resolves current private Drive state.",
+  "checkpoint_drive_rule": "Actual Checkpoint runs use the canonical ____Portfolio_Data root ID and save unique run folders under Algebra 1 / unit N / 06 Checkpoints. Actual student outputs are private Drive + individual HTML/PDF delivery, not GitHub transfer output.",
+  "source_mapping_rule": "For a newly generated approved Quick Check, use its sibling approved JSON lineage/source map before judging responses. Use curriculum/quick_check_source_maps for legacy/special aggregation, multi-target overrides, compatibility, or missing approved JSON. For a personalized Checkpoint, use the private checkpoint_source_map.json saved with that exact run under 06 Checkpoints. Map by clean task/evidence job rather than printed number alone.",
   "portfolio_status_rule": "I Can status uses No Evidence / Developing / Mastered / Transfer. Algebra Mastery Goal is demonstrated when at least 2 of 4 I Cans are Mastered or Transfer. Unit status uses I/C/B/A/A+.",
-  "independence_rule": "Mastered normally requires at least two independent convincing demonstrations, usually from different opportunities. Same-paper repeated items are not automatically independent.",
-  "bank_rule": "Canonical Algebra Bank is Mastery Goal -> I Can -> family architecture with technical unitN.html and student.html. MG, I Can, and family IDs are permanent fragment anchors. Student deep links must visibly identify the targeted family on desktop and mobile.",
+  "independence_rule": "Mastered normally requires at least two independent convincing demonstrations, usually from different opportunities. Same-paper or same-Checkpoint repeated items are not automatically independent.",
+  "bank_rule": "Canonical Algebra Bank is Mastery Goal -> I Can -> family architecture with technical unitN.html and student.html. MG, I Can, and family IDs are permanent fragment anchors. Student deep links must visibly identify the targeted family on desktop and mobile. Checkpoint authoring must use reviewed Bank family architecture whenever an appropriate family exists. Legacy family allowed_destinations labels that still say Exit Ticket do not block Checkpoint routing under the current checkpoint policy.",
   "portfolio_template_rule": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json plus registered student/teacher HTML/CSS own recurring report structure AND fixed recurring wording. PM/data fill slots; ad hoc redesign/rephrasing is not allowed.",
   "task_pm_rule": "Task PM owns procedure and delivery. Framework/policy owns Algebra evidence behavior. PMs may not revive retired Exit Ticket mechanics or invent alternate Portfolio report structures.",
   "framework_amendment": "frameworks/Algebra_1/FRAMEWORK_PORTFOLIO_QUICK_CHECK_AMENDMENT.txt",
   "student_next_action_rule": "Current policy/template own the stable student next-action layer. Proficiency status and next action are distinct; Developing may route to Practice + check soon or Needs another independent check based on current evidence.",
   "quick_check_builder_rule": "Normal Algebra execution uses quick_check____htq5855/quickN/quick_N.html. Approved section output is one HTML + one 8-page PDF + one JSON source map under the unit approved folder.",
-  "quick_check_template_contract": "Tools/templates/algebra/quick_check/QUICK_CHECK_TEMPLATE_CONTRACT.json"
+  "quick_check_template_contract": "Tools/templates/algebra/quick_check/QUICK_CHECK_TEMPLATE_CONTRACT.json",
+  "checkpoint_template_contract": "Tools/templates/algebra/checkpoint/CHECKPOINT_PILOT_TEMPLATE_CONTRACT.json"
 }

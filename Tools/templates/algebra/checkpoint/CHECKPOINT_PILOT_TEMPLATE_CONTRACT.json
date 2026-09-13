@@ -1,0 +1,31 @@
+{
+  "schema": "algebra-checkpoint-template-contract/0.1-pilot",
+  "status": "PILOT",
+  "purpose": "Stable enough for structure testing without declaring a final gold-standard Checkpoint visual template.",
+  "student_artifact": {
+    "questions_per_student": 6,
+    "pages_per_student": 2,
+    "duplex_safe": true,
+    "name_prefilled": true,
+    "page_2_full_header": false,
+    "exact_i_can_visible_per_question": true,
+    "mathjax": true,
+    "workspace": "plain white",
+    "ruled_workspace_lines": false,
+    "shaded_question_cards": false,
+    "pdf_bookmarks_by_student": true,
+    "print_order": ["3rd Hour alphabetical", "6th Hour alphabetical"]
+  },
+  "screen_only_teacher_summary": {
+    "required": true,
+    "show": [
+      "run/unit/selection summary",
+      "resolved student list",
+      "per-student six-question plan",
+      "I Can and Bank family for every question"
+    ],
+    "must_not_print": true
+  },
+  "teacher_review_before_print": "The HTML should make the resolved personalization visible enough for the teacher to sanity-check the structure before printing.",
+  "pilot_note": "Teacher review of this first implementation may change page geometry, density, wording, or controls. Do not promote this contract to gold-standard status without explicit approval."
+}

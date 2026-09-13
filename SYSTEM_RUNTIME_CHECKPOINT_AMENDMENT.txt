@@ -1,0 +1,59 @@
+SYSTEM RUNTIME AMENDMENT - ALGEBRA CHECKPOINT / PRIVATE DRIVE DELIVERY
+=====================================================================
+STATUS: CURRENT
+SCOPE: Algebra 1 personalized Checkpoint runs executed from pms_build/checkpoint.txt Mode B.
+
+This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt for the live personalized Checkpoint workflow.
+
+PURPOSE
+-------
+A Checkpoint run is a private state-informed assessment generation workflow, not a public repository artifact build. The public course repository owns the Checkpoint Builder and curriculum authorities; the actual selected students, personalized question plans, source map, and generated run outputs remain private.
+
+CANONICAL PRIVATE DRIVE ROOT - HARD
+-----------------------------------
+Use this exact Google Drive folder as the one and only Portfolio/Checkpoint root:
+
+  title: ____Portfolio_Data
+  folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
+
+For an Algebra Checkpoint run:
+1. fetch/open the exact root by folder ID before resolving course/unit folders;
+2. never globally search for another same-named root when the ID is available;
+3. resolve `Algebra 1 / unit N / 02 Portfolio Data` for current roster/evidence state;
+4. resolve/create `Algebra 1 / unit N / 06 Checkpoints` for Checkpoint persistence;
+5. create a unique dated/run-specific child folder under `06 Checkpoints`;
+6. never overwrite an older Checkpoint run;
+7. if the exact root/current Unit state cannot be accessed, fail closed rather than substituting another location.
+
+REQUIRED LIVE STATE
+-------------------
+At minimum, the selected Unit's `02 Portfolio Data` must provide current:
+- student_registry.csv
+- i_can_status_current.csv
+- intervention_groups.csv
+
+Use additional Portfolio files when needed for sound targeting.
+
+PRIVATE PERSISTENCE IS A COMPLETION GATE
+----------------------------------------
+A Checkpoint run is not complete merely because an HTML/PDF can be downloaded.
+Before PASS, the exact run folder under `06 Checkpoints` must contain and verify:
+- checkpoint.html
+- checkpoint.pdf
+- checkpoint_source_map.json
+- run_manifest.json
+
+If a required write/verification fails, stop with CHECKPOINT_DRIVE_PERSISTENCE_FAILED.
+
+DELIVERY
+--------
+Successful actual Checkpoint run:
+- persist private run state/output under the canonical Drive tree;
+- return the printable HTML individually;
+- return the printable PDF individually;
+- do not package student Checkpoint outputs in a GitHub Transfer ZIP;
+- do not write student data or the personalized source map to GitHub.
+
+A separate Mode A request that creates/repairs the public Checkpoint Builder IS a repository artifact build and follows the normal github_transfer / 2 contract.
+
+All other SYSTEM_RUNTIME_CONTRACT rules remain in force.
