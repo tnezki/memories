@@ -1,0 +1,91 @@
+CURRICULUM CONTROL PANEL ARCHITECTURE CONTRACT
+==============================================
+STATUS: CURRENT
+REVISION: 2026-09-13 v1.0
+
+PURPOSE
+-------
+Keep the canonical Curriculum Control Panel small and stable while moving day-to-day artifact operation closer to the teacher's actual course dashboards.
+
+CORE MODEL — HARD
+-----------------
+The canonical Curriculum Control Panel is the BUILD FACTORY.
+The course Teacher Dashboard is the OPERATING SURFACE.
+
+The canonical control panel exposes exactly two top-level modes:
+1. Build
+2. General
+
+Do NOT expose a generic Maintenance tab in the canonical control panel.
+
+BUILD MODE
+----------
+Build is for initial course/unit establishment and initial artifact-family setup.
+Its active menu is owned by:
+  pms_build/MANIFEST.json
+
+The current generic initial-build menu is:
+1. Build Assessment Plan
+2. Build Framework
+3. Build Bank
+4. Build Notes
+5. Build Practice
+6. Build Activities
+7. Build Quick Checks
+8. Build Warm-Ups
+9. Build Review
+10. Build Summative
+11. Build Unit Plan
+
+The build registry intentionally does NOT expose these retired/operational/legacy jobs:
+- Progress Tracker
+- Practice to Summative
+- Discourse
+- First 4 Days
+- Portfolio / Assess New Evidence
+- generic Demos + Investigations
+- combined Performance Tasks + Checkpoints
+
+Their PM files may remain in repository history/current storage when needed by other workflows. Absence from the Build menu does not require deletion of the PM file.
+
+GENERAL MODE
+------------
+General remains available for purpose-specific general PMs that are not a course/unit build lifecycle step.
+Its active menu is owned by:
+  pms_general/MANIFEST.json
+
+DASHBOARD MAINTENANCE MODEL — HARD
+----------------------------------
+Once an artifact exists, routine improve/rebuild/replace work should be launched from an artifact-specific control page linked from the teacher dashboard.
+
+The control page should already know as much context as the teacher clicked from:
+- course;
+- unit;
+- section when applicable;
+- artifact family;
+- current canonical artifact paths.
+
+The teacher should not have to reselect those values in a generic maintenance console.
+
+Expected ownership pattern:
+- course-level tools: personalized Checkpoint, Teacher Practice, other live course tools;
+- unit-level tools: Quick Check selector, Performance Task control, future Summative control, other unit-owned tools;
+- section-level tools: Notes, Practice, Activities, Investigation and similar section artifacts.
+
+Artifact-specific control pages may use pms_maintenance or dedicated PMs internally. The maintenance PM registry may remain a system resource even though it is not a canonical Control Panel tab.
+
+COURSE-SPECIFIC BUILDS
+----------------------
+Do not place a course-specific legacy build PM in the generic Build menu merely because the PM exists.
+Physics, Algebra 1, and AP Calculus may each gain dashboard/control tools appropriate to their deployed resource architecture.
+Add a new generic Build job only after explicit teacher approval that it belongs in the shared initial-build lifecycle.
+
+QUICK CHECK EXCEPTION
+---------------------
+Algebra Build Quick Checks remains in the initial Build menu because its Build-mode job creates/repairs the Unit selector. Routine section Quick Checks are then built from the Unit selector itself.
+
+PORTFOLIO / PRIVATE EVIDENCE
+----------------------------
+Portfolio/evidence processing is an operational private-data workflow, not an initial curriculum build job. Do not reintroduce it to the generic Build menu.
+
+END
