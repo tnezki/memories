@@ -1,14 +1,33 @@
-SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY EXCEPTION
-======================================================
+SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY / DRIVE ROUTING
+============================================================
 STATUS: CURRENT
 SCOPE: Job 18 Portfolio only.
 
-This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt Section 11.
+This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt Section 11 and fixes the canonical private Drive destination for Portfolio state.
 
 Portfolio / Assess New Evidence is a private state-and-report workflow, not a repository artifact build. Even though it is selected from the Control Panel Build tab and the request pins a course repository for curriculum authority, its canonical outputs do NOT have a repository destination.
 
+CANONICAL PORTFOLIO DRIVE ROOT - HARD
+-------------------------------------
+Use this exact Google Drive folder as the one and only Portfolio root:
+
+  title: ____Portfolio_Data
+  folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
+
 For workflow/job = portfolio:
-- private Google Drive `____Portfolio_Data/<Course>/unit N/` is the persistent state destination;
+- fetch/open the canonical root by the exact folder ID above BEFORE resolving any course/unit folder;
+- NEVER discover the Portfolio root by global name search when the canonical ID is available;
+- NEVER create another top-level folder named `____Portfolio_Data`;
+- ignore same-named Portfolio roots anywhere else in Drive;
+- under the canonical root, resolve the exact `<Course>` child; create that course child only inside the canonical root when it is genuinely absent;
+- under that canonical course folder, resolve/create `unit N` and the five Portfolio subfolders;
+- if the exact canonical root ID cannot be accessed, FAIL CLOSED with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE` rather than creating or selecting a substitute root.
+
+The canonical private state path is therefore:
+  ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
+
+DELIVERY
+--------
 - new raw evidence and longitudinal data remain in that private Drive tree;
 - normal returned artifacts are individual class Student Packet PDFs, one Teacher Summary PDF, and current PowerSchool CSV(s);
 - DO NOT wrap Portfolio/student data in a GitHub Transfer ZIP;

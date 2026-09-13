@@ -3,7 +3,7 @@ PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT DRIVE WORKFLOW
 STATUS: CURRENT
 STEP: 18
 JOB: portfolio
-REVISION: 2026-09-12 v2.0 - TEMPLATE-FIDELITY / SOURCE-MAP LOCK
+REVISION: 2026-09-12 v2.1 - CANONICAL DRIVE ROOT / STATUS-MARKER QA
 
 ROLE
 ----
@@ -34,10 +34,24 @@ Read:
 Exact Unit Assessment Plan owns exact MG/I Can learning content. Current Algebra Portfolio policy owns status/rollup/Quick Check mechanics. Registered Portfolio templates own recurring report structure and fixed recurring wording. This PM owns execution.
 
 ===========================================================
-1. DRIVE STATE
+1. DRIVE STATE - CANONICAL ROOT HARD
 ===========================================================
+The exact Portfolio root is declared by SYSTEM_RUNTIME_PORTFOLIO_AMENDMENT.txt:
+
+  title: ____Portfolio_Data
+  folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
+
+HARD ROUTING RULE:
+1. Fetch/open that exact root by folder ID first.
+2. Do NOT globally search Drive for a folder named `____Portfolio_Data` when that ID is available.
+3. Do NOT create another top-level `____Portfolio_Data` folder.
+4. Ignore same-named Portfolio roots anywhere else in Drive.
+5. Inside the exact root, resolve the exact `<Course>` child. If the course child is absent, create it INSIDE this root only.
+6. Inside that canonical course folder, resolve/create `unit N`.
+7. If the exact root ID cannot be accessed, STOP with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE`. Never substitute another same-named root.
+
 Canonical path:
-  ____Portfolio_Data/<Course>/unit N/
+  ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
 with exactly:
   01 Evidence Inbox/
   02 Portfolio Data/
@@ -157,7 +171,7 @@ class_i_can_summary newest-source rows use source-level I Can judgments after an
 ===========================================================
 9. STUDENT PACKET - TEMPLATE FIDELITY HARD
 ===========================================================
-Resolve Tools/MANIFEST.json -> portfolio_contract/student template/CSS. The registered HTML is a CANONICAL SHELL, not an example.
+Resolve Tools/MANIFEST.json -> Portfolio template contract/student template/CSS. The registered HTML is a CANONICAL SHELL, not an example.
 
 Exactly 2 content pages/student; one PDF per period; student bookmarks. No third tracker page.
 Do not paraphrase fixed template text or invent alternate feedback/reflection systems.
@@ -191,6 +205,14 @@ Render each generated I Can row with the canonical CSS anatomy: status marker + 
 Recent evidence table uses EXACT columns:
 I Can | Target | Evidence | What this showed
 The approved evidence column may show Convincing / Partial / Limited / Unusable / No evidence. Keep the What this showed note concise and target-specific.
+
+STATUS MARKER RENDERING - HARD
+The four page-2/legend states must be visually distinguishable in the rendered PDF:
+- No Evidence = empty outlined circle
+- Developing = LEFT HALF of circle filled navy
+- Mastered = fully filled navy circle
+- Transfer = navy star
+The canonical CSS implements Developing with a clipped pseudo-element rather than a gradient because the PDF renderer previously dropped gradient fill. QA the actual rendered PDF, not only browser HTML. If Developing renders as an empty circle, the report cannot PASS.
 
 ===========================================================
 10. TEACHER SUMMARY - TEMPLATE FIDELITY HARD
@@ -235,7 +257,7 @@ Preserve stored template shape and non-score fields. Change only accepted Score/
 13. DELIVERY - HARD PORTFOLIO EXCEPTION
 ===========================================================
 Successful Job 18 delivery:
-- update canonical private Drive state;
+- update canonical private Drive state under exact root ID 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o;
 - return each class Student Packets PDF individually;
 - return Teacher Summary PDF individually;
 - return current PowerSchool CSV(s) individually.
@@ -247,20 +269,22 @@ A separate repository-change request may create a transfer ZIP, but this evidenc
 14. QA / STOP
 ===========================================================
 Before PASS verify:
-1 raw evidence preserved/hash recorded;
-2 registry includes all rostered students, including non-submitters;
-3 source map used when declared and clean-task mapping precedes response judgment;
-4 dual-target/aggregation rules followed; no same-source independence inflation;
-5 ledger/history append preserved;
-6 current statuses/rollups correct;
-7 exactly 2 student pages per student + bookmarks;
-8 student report headings/reflection/table columns/why-next/next-step frames and page-2 Next: labels match canonical template contract;
-9 QR exact family route confirmed;
-10 teacher newest-source cards use ONLY "Students needing stronger or additional evidence" list and approved 2x2 structure;
-11 final Evidence Sort uses full history/fixed categories/no repeated period suffixes;
-12 current terminology says Quick Check, not Ticket A/Exit Ticket, except explicit legacy alias metadata;
-13 PowerSchool CSVs preserve template shape;
-14 no student data written to GitHub; no report HTML stored in Drive;
-15 outputs returned individually, not as transfer ZIP.
+1 exact Drive root ID is 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o and no alternate same-named root was created/used;
+2 raw evidence preserved/hash recorded;
+3 registry includes all rostered students, including non-submitters;
+4 source map used when declared and clean-task mapping precedes response judgment;
+5 dual-target/aggregation rules followed; no same-source independence inflation;
+6 ledger/history append preserved;
+7 current statuses/rollups correct;
+8 exactly 2 student pages per student + bookmarks;
+9 student report headings/reflection/table columns/why-next/next-step frames and page-2 Next: labels match canonical template contract;
+10 rendered PDF visibly distinguishes No Evidence, Developing half-filled, Mastered filled, and Transfer star;
+11 QR exact family route confirmed;
+12 teacher newest-source cards use ONLY "Students needing stronger or additional evidence" list and approved 2x2 structure;
+13 final Evidence Sort uses full history/fixed categories/no repeated period suffixes;
+14 current terminology says Quick Check, not Ticket A/Exit Ticket, except explicit legacy alias metadata;
+15 PowerSchool CSVs preserve template shape;
+16 no student data written to GitHub; no report HTML stored in Drive;
+17 outputs returned individually, not as transfer ZIP.
 
 If a check fails, repair that concrete defect before delivery. When all pass, stop.
