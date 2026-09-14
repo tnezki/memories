@@ -4,7 +4,7 @@ BUILD ASSESSMENT PLAN — SINGLE PASS / ATOMIC EVIDENCE AUTHORITY
 STATUS: CURRENT
 STEP: 1
 JOB: assessment_plan
-REVISION: 2026-09-13 v2.0 — ATOMIC I-CAN / LEAN PLAN / MACHINE MAP
+REVISION: 2026-09-13 v2.1 — HUMAN-FACING ID + STATEMENT RULE
 ROLE: Create or revise the authoritative Unit Assessment Plan that defines exact learning and exact evidence addresses before Bank, Portfolio, Notes, Practice, Quick Check, Checkpoint, or Summative authoring.
 
 CORE FLOW
@@ -128,6 +128,14 @@ If a migration is intentional, record it in the machine map and declare which ol
 
 Every exact I Can has exactly one PRIMARY Mastery Goal for deterministic Portfolio/Bank routing. Supporting cross-goal relationships may be noted, but do not create ambiguous primary ownership.
 
+HUMAN-FACING IDENTITY DISPLAY RULE — HARD
+Whenever an Assessment Plan shows an I Can to a human reader, show BOTH:
+  <full stable I Can ID> + <exact I Can statement>
+Never show a human-facing code-only list or compressed range such as `U1-MG03-IC01 through U1-MG03-IC07`.
+If several I Cans belong to one Mastery Goal, list them individually with the exact statement next to each code.
+Whenever a Mastery Goal code is shown to a human reader, pair it with its title (and goal statement where the context calls for it).
+Machine-readable fields may store IDs as identifiers, but the same record/map must also carry the exact text/title needed to resolve them.
+
 ================================================================
 5. SECTION CONTRACT — LEAN DEFAULT
 ================================================================
@@ -180,7 +188,7 @@ For every MG include:
 - stable MG ID;
 - concise title;
 - goal statement;
-- exact primary I Can IDs;
+- exact primary I Can IDs AND their exact I Can statements, displayed together;
 - concise convincing-evidence description.
 
 Do not simply make one MG per section unless that is genuinely the strongest organization.
@@ -274,7 +282,8 @@ CONSISTENCY
 - section names and Unit title are consistent;
 - machine map exact text matches HTML exact text;
 - declared counts match actual records;
-- stale derivative Unit records are explicitly superseded when applicable.
+- stale derivative Unit records are explicitly superseded when applicable;
+- no human-facing I Can or Mastery Goal appears as an unexplained code/range without its exact statement/title.
 
 LEANNESS
 - no automatic Learning Ladder;
