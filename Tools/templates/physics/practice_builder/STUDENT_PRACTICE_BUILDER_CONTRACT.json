@@ -1,0 +1,35 @@
+{
+  "schema": "physics-student-practice-builder-contract/1.0",
+  "status": "CURRENT_PILOT",
+  "approved_date": "2026-09-13",
+  "course": "Conceptual Physics",
+  "canonical_path": "practice_builder___p7r4x/student_practice_builder.html",
+  "reference_interaction_contract": "Tools/templates/algebra/practice_builder/STUDENT_PRACTICE_BUILDER_CONTRACT.json",
+  "purpose": "Student-controlled printable Physics practice assembled locally from QA-approved, pre-authored family-Bank instances. The browser does not author or modify physics questions.",
+  "hard_rules": [
+    "Keep Student Bank and Student Practice Builder at Unit level on both the Physics student dashboard and Physics teacher dashboard.",
+    "Student selects Unit, exact I Can statements, and question count; no Family A/B/C controls are exposed to students.",
+    "Whenever an I Can is shown, display its canonical code and full exact statement together.",
+    "Questions come only from an APPROVED + QA PASS banks/unitN/student_practice_pool.json.",
+    "A production-ready Unit pool covers every exact I Can and every approved A/B/C family in the COMPLETE downstream-ready Physics Unit Bank, with four solved fresh instances per family unless explicit teacher instruction changes that count.",
+    "If the selected Unit pool is missing or not APPROVED / QA PASS, fail closed rather than authoring questions in the browser.",
+    "The browser may select and reorder approved instances only; it may not change wording, values, diagrams, tables, choices, answers, solutions, or physics.",
+    "Generated questions are grouped by exact I Can statement.",
+    "Use the approved clean worksheet style: compact heading, blank whitespace workspace, no ruled lines or bordered work boxes unless a mathematical/diagram response surface itself requires one.",
+    "Preserve Physics representations that carry evidence, including diagrams, force/vector models, tables, data, and equations.",
+    "Provide Student PDF, separate Answer Key PDF, New Version, and Print / Save PDF.",
+    "Support ?unit=N and optional ?ican=<canonical I Can ID> so dashboard and Portfolio routes can preselect a target without student identity in the URL.",
+    "MathJax uses \\( ... \\) and \\[ ... \\] delimiters only; literal currency is not interpreted as math.",
+    "Do not add a Teacher Practice Builder to this contract; that is a separate later course-level tool."
+  ],
+  "unit1_production_baseline": {
+    "bank_status_required": "COMPLETE",
+    "bank_qa_required": "PASS",
+    "i_can_count": 19,
+    "family_count": 57,
+    "instances_per_family": 4,
+    "question_count": 228,
+    "pool_status_required": "APPROVED",
+    "pool_qa_required": "PASS"
+  }
+}
