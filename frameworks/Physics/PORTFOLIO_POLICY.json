@@ -1,0 +1,141 @@
+{
+  "schema": "physics-portfolio-policy/1.0",
+  "status": "CURRENT",
+  "course": "Physics",
+  "purpose": "Own current Physics Portfolio status/rollup, evidence interpretation, Bank/practice routing, and recurring report fidelity while exact Unit Assessment Plans own learning content.",
+  "portfolio_drive_course_folder": "Physics",
+  "i_can_statuses": [
+    {
+      "code": "NO_EVIDENCE",
+      "symbol": "open_circle",
+      "label": "No Evidence"
+    },
+    {
+      "code": "DEVELOPING",
+      "symbol": "half_circle",
+      "label": "Developing"
+    },
+    {
+      "code": "MASTERED",
+      "symbol": "filled_circle",
+      "label": "Mastered"
+    },
+    {
+      "code": "TRANSFER",
+      "symbol": "star",
+      "label": "Transfer"
+    }
+  ],
+  "mastered_default_rule": {
+    "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities, with at least one reasonably current demonstration.",
+    "rich_artifact_exception": "A rich artifact may be sufficient when it contains multiple genuinely independent convincing demonstrations.",
+    "mixed_evidence": "Teacher professional judgment resolves mixed or unusual cases.",
+    "later_weak_event": "One later weak event does not automatically remove established mastery; record the contradiction and seek another look when warranted.",
+    "accommodations": "Approved accommodations do not lower the evidence status of a valid demonstration."
+  },
+  "mastery_goal_rule": {
+    "general_rule": "A Mastery Goal is demonstrated when at least half of its exact I Cans, rounded up, are Mastered or Transfer.",
+    "formula": "required_mastered_or_transfer = ceil(i_can_count_in_goal / 2)",
+    "unit1_thresholds": {
+      "U1-MG01": 2,
+      "U1-MG02": 2,
+      "U1-MG03": 4,
+      "U1-MG04": 2
+    }
+  },
+  "unit_scale": [
+    {
+      "code": "I",
+      "label": "In Progress",
+      "rule": "0 or 1 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "C",
+      "label": "Meeting",
+      "rule": "2 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "B",
+      "label": "Advancing",
+      "rule": "3 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "A",
+      "label": "Mastery",
+      "rule": "4 of 4 Mastery Goals demonstrated"
+    },
+    {
+      "code": "A+",
+      "label": "Mastery + Transfer",
+      "rule": "4 of 4 Mastery Goals demonstrated plus meaningful transfer/extension evidence"
+    }
+  ],
+  "powerschool_rule": "One living assignment per unit. Current official status replaces prior status; attempts are not averaged. Earlier Unit status may improve later when valid evidence demonstrates an older Unit I Can.",
+  "evidence_mapping": {
+    "clean_task_first": "Map the clean task before judging the student response.",
+    "multi_target_rule": "One task may yield separate judgments for multiple I Cans only when the task genuinely provides separately judgeable evidence for each.",
+    "same_source_rule": "Repeated prompts for one I Can on the same source are not automatically independent opportunities. Aggregate to one source-level I Can judgment when the prompts are one evidence opportunity.",
+    "source_map_rule": "When an approved source map/lineage file exists, use it before question-number assumptions. Otherwise derive the mapping from the clean task and exact current Unit learning authority, and record the mapping as run provenance."
+  },
+  "student_practice_link": {
+    "student_bank_viewer": "banks/unitN/student.html",
+    "student_bank_url_pattern": "https://tnezki.github.io/physics/banks/unit{unit}/student.html#{family_id}",
+    "practice_builder": "practice_builder___p7r4x/student_practice_builder.html",
+    "practice_builder_url_pattern": "https://tnezki.github.io/physics/practice_builder___p7r4x/student_practice_builder.html?unit={unit}&ican={i_can_id}",
+    "required_display": "Exact Mastery Goal code/title + exact I Can code/full statement + recommended Bank family label/name.",
+    "family_anchor": "canonical family_id",
+    "family_selection": "Choose the family whose evidence job fits the student next move. Family A is the normal direct/core start; B/C may be preferable when current evidence calls for another representation or misconception/reasoning route."
+  },
+  "report_fidelity": {
+    "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
+    "rule": "Registered Portfolio templates own recurring headings, prompts, table/card anatomy, fixed feedback categories, and layout. Fill declared data slots; do not redesign per run.",
+    "human_learning_label_rule": "Whenever an I Can is shown to a teacher or student, display canonical code and the full exact statement together. Never show code-only ranges as the human learning label."
+  },
+  "teacher_summary": {
+    "latest_evidence": "Use approved I Can cards. Combined first, then one page per period when useful. Each newest-source card uses one list: Students needing stronger or additional evidence.",
+    "longitudinal_sort": "Final combined page uses full Portfolio history and fixed categories Reteach / targeted practice; Brief guided practice; Ready for another independent demonstration; No evidence / absent; Review flags.",
+    "contradiction_rule": "A later weak event does not automatically demote established mastery; put meaningful conflict in Review flags for teacher judgment."
+  },
+  "student_next_action": {
+    "principle": "I Can proficiency status and student next action are separate.",
+    "states": [
+      {
+        "code": "NEEDS_FIRST_CHECK",
+        "label": "Needs first check",
+        "rule": "No usable evidence exists."
+      },
+      {
+        "code": "PRACTICE_AND_CHECK",
+        "label": "Practice + check soon",
+        "rule": "Developing without one convincing independent demonstration, or a clear current gap should be repaired before another independent check."
+      },
+      {
+        "code": "NEEDS_ANOTHER_DEMONSTRATION",
+        "label": "Needs another independent check",
+        "rule": "Developing with one convincing independent demonstration but not yet enough independent convincing evidence for Mastered."
+      },
+      {
+        "code": "SECURE",
+        "label": "Secure",
+        "rule": "Current I Can status is Mastered."
+      },
+      {
+        "code": "EXTENSION",
+        "label": "Extension",
+        "rule": "Current I Can status is Transfer, or routine nearby targets are secure and a legitimate transfer/extension move is selected."
+      }
+    ]
+  },
+  "unit_readiness": {
+    "1": {
+      "status": "CURRENT",
+      "assessment_plan": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unit1_assessment_plan/unit1_assessment_plan.html",
+      "learning_map": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/unit1_learning_map.json",
+      "bank_manifest": "banks/unit1/BANK_MANIFEST.json",
+      "family_index": "banks/unit1/FAMILY_INDEX.json",
+      "student_bank": "banks/unit1/student.html",
+      "practice_builder": "practice_builder___p7r4x/student_practice_builder.html"
+    },
+    "2-8": "NOT_YET_MIGRATED_FOR_PORTFOLIO; fail closed until exact Unit learning authority and current Family Bank are deliberately migrated."
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "schema": "curriculum-framework-manifest/1.2",
+  "schema": "curriculum-framework-manifest/1.3",
   "course": "Physics",
   "entrypoint": "frameworks/Physics/FRAMEWORK.txt",
   "resource_root": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework",
   "storage": "expanded",
-  "note": "FRAMEWORK.txt is the stable authority front door. Unit-specific registered amendments may supersede legacy course rules only for their declared scope.",
+  "note": "FRAMEWORK.txt is the stable authority front door. Unit-specific registered amendments/policies may supersede legacy course rules only for their declared scope.",
   "assessment_plan_pattern": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html",
   "assessment_plan_runtime": {
     "authority_rule": "The original Unit Assessment Plan HTML is exact authority for Unit Learning Targets, I Cans, Mastery Goals, and evidence scope.",
@@ -43,6 +43,26 @@
       }
     }
   },
+  "portfolio_runtime": {
+    "status": "CURRENT_FOR_MIGRATED_UNITS",
+    "pm": "pms_build/portfolio.txt",
+    "policy": "frameworks/Physics/PORTFOLIO_POLICY.json",
+    "template_contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
+    "private_drive_course_folder": "Physics",
+    "unit_overrides": {
+      "1": {
+        "status": "CURRENT",
+        "learning_map": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/unit1_learning_map.json",
+        "bank_manifest": "banks/unit1/BANK_MANIFEST.json",
+        "family_index": "banks/unit1/FAMILY_INDEX.json",
+        "student_bank": "banks/unit1/student.html",
+        "student_practice_builder": "practice_builder___p7r4x/student_practice_builder.html"
+      }
+    },
+    "fail_closed_rule": "A Physics Unit without a CURRENT portfolio_runtime unit override and downstream-ready Family Bank is not eligible for a Portfolio run."
+  },
+  "current_portfolio_policy": "frameworks/Physics/PORTFOLIO_POLICY.json",
+  "portfolio_template_contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
   "bank_profiles": {
     "legacy_bank_v2": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_v2_course_profile.json",
     "family_bank": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/family_bank_course_profile.json"

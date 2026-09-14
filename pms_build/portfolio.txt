@@ -1,9 +1,8 @@
 PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT DRIVE WORKFLOW
 ===========================================================
 STATUS: CURRENT
-STEP: 18
 JOB: portfolio
-REVISION: 2026-09-12 v2.1 - CANONICAL DRIVE ROOT / STATUS-MARKER QA
+REVISION: 2026-09-13 v3.0 - COURSE-AWARE PORTFOLIO RUNTIME
 
 ROLE
 ----
@@ -17,38 +16,45 @@ Normal Portfolio delivery is persistent private Google Drive state PLUS individu
 ===========================================================
 Use only current request/current teacher instruction, request attachments, exact pinned project GitHub authorities, and current private Portfolio Drive state. No public web; no prior-chat/memory/File-Library recovery.
 
-Read:
+Read in this order:
 1. SYSTEM_MANIFEST.json
 2. Curriculum_Philosophy.txt AND every declared philosophy_amendment
 3. SYSTEM_RUNTIME_CONTRACT.txt AND every declared runtime/local-transfer amendment
-4. current Course Framework manifest/front door
-5. current Framework amendment/policy/authority contract
-6. exact selected Unit Assessment Plan for learning content
-7. declared Portfolio evidence source map for the attached recurring source, when one exists
+4. current Course Framework MANIFEST.json and stable Framework front door
+5. exact selected Unit Assessment Plan + current Unit learning map/override
+6. current course Portfolio policy declared by the Framework manifest
+7. declared evidence source map/lineage file for the attached source, when one exists
 8. this PM
 9. Tools/MANIFEST.json -> Portfolio template contract + student/teacher templates + CSS
-10. current Unit Bank manifest/family records only as needed for exact practice family routing
+10. current downstream-ready Unit Family Bank manifest/index/family records
 11. prior private Portfolio Drive state
-12. new request evidence/setup files
+12. new request evidence/support/setup files
 
-Exact Unit Assessment Plan owns exact MG/I Can learning content. Current Algebra Portfolio policy owns status/rollup/Quick Check mechanics. Registered Portfolio templates own recurring report structure and fixed recurring wording. This PM owns execution.
+COURSE POLICY RESOLUTION - HARD
+- If the Framework manifest declares `current_portfolio_policy`, read that exact file.
+- Algebra compatibility: if no `current_portfolio_policy` exists but `current_portfolio_quick_check_policy` does, use that exact policy.
+- The exact Unit Assessment Plan owns learning content.
+- The course Portfolio policy owns statuses, rollup, evidence-source mechanics, student practice routes, and any course-specific terminology.
+- Registered Portfolio templates own recurring report structure/fixed wording.
+- This PM owns execution.
+
+Fail closed if the selected Unit is not declared Portfolio-ready by the current Framework manifest/policy or if its required current Family Bank is unavailable/downstream-not-ready.
 
 ===========================================================
 1. DRIVE STATE - CANONICAL ROOT HARD
 ===========================================================
 The exact Portfolio root is declared by SYSTEM_RUNTIME_PORTFOLIO_AMENDMENT.txt:
-
   title: ____Portfolio_Data
   folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
 
 HARD ROUTING RULE:
 1. Fetch/open that exact root by folder ID first.
-2. Do NOT globally search Drive for a folder named `____Portfolio_Data` when that ID is available.
+2. Do NOT globally search Drive for a same-named root when that ID is available.
 3. Do NOT create another top-level `____Portfolio_Data` folder.
-4. Ignore same-named Portfolio roots anywhere else in Drive.
-5. Inside the exact root, resolve the exact `<Course>` child. If the course child is absent, create it INSIDE this root only.
-6. Inside that canonical course folder, resolve/create `unit N`.
-7. If the exact root ID cannot be accessed, STOP with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE`. Never substitute another same-named root.
+4. Ignore same-named Portfolio roots elsewhere.
+5. Resolve the exact course child from the course policy/request (for current Physics use `Physics`; for Algebra use `Algebra 1`). Create it only INSIDE the canonical root if absent.
+6. Resolve/create `unit N` inside that course child.
+7. If the exact root ID cannot be accessed, STOP with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE`.
 
 Canonical path:
   ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
@@ -59,20 +65,20 @@ with exactly:
   04 Class & Intervention Summaries/
   05 PowerSchool Exports/
 
-Create missing unit/five folders on first run. Do not create mock/test/archive/html folders.
-Preserve raw/history. Replace stale current PDFs/CSVs/current-state files.
+Create missing Unit/five folders on first run. Preserve raw/history. Replace stale current PDFs/CSVs/current-state files.
 
 FIRST RUN:
-If 02 Portfolio Data/student_registry.csv is absent, require current PowerSchool template/export attachment. Build registry from explicit roster source; never infer roster from submissions. Preserve stable ID, display name, period, active status, identifier quality only as needed.
-If missing: PORTFOLIO_REGISTRY_REQUIRED.
-
-Later runs use registry + stored PowerSchool template/schema; normally teacher uploads only new evidence.
+If `02 Portfolio Data/student_registry.csv` is absent, require a current PowerSchool template/export attachment. Build the registry from that explicit roster source; never infer roster from submissions. If missing: `PORTFOLIO_REGISTRY_REQUIRED`.
+Later runs use the stored registry + stored PowerSchool template/schema.
 
 ===========================================================
-2. RAW EVIDENCE FIRST
+2. RAW EVIDENCE / SUPPORT FILES
 ===========================================================
-Before declaring success, save each newly attached assessed-work file unchanged into 01 Evidence Inbox with a defensible normalized name and _RAW suffix. Current Algebra terminology uses QuickCheck, not ExitTicket, unless original basename must be retained for ambiguity.
-Record SHA-256. Do not double-count a source hash already in evidence_ledger.csv.
+Before declaring success, save each newly attached STUDENT EVIDENCE file unchanged into `01 Evidence Inbox` with a defensible normalized name and `_RAW` suffix. Record SHA-256. Do not double-count a source hash already in evidence_ledger.csv.
+
+Files explicitly marked supporting/source-map/key are teacher references, not student evidence. Do not count them as student submissions or copy them into the raw student-evidence ledger as evidence events.
+
+Use the course policy's current source terminology when a source type is known. Preserve an original/legacy basename when needed for defensible matching.
 
 ===========================================================
 3. SEGMENT / IDENTIFY
@@ -83,24 +89,16 @@ Use student_registry.csv as identity authority. For multi-student scan PDFs, est
 4. MAP CLEAN TASK BEFORE JUDGING RESPONSE - HARD
 ===========================================================
 Establish:
-  clean prompt/task -> declared source-map task (when available) -> exact I Can(s) -> MG -> evidence job -> student response.
+  clean prompt/task -> declared source map/lineage when available -> exact I Can(s) -> MG -> evidence job -> student response.
 
-For known Quick Checks, first resolve the source map under the Framework manifest's portfolio_evidence_source_maps_root. Map by task signature/evidence job, NOT shuffled question number.
+Use exact code + full I Can statement together in human-facing output.
+Never infer current learning from retired derivative indexes when the Framework manifest declares a Unit override.
 
 A single task MAY yield separate judgments for multiple I Cans only when the task genuinely provides separately judgeable evidence for each. These target judgments still share one source opportunity unless independence is explicitly defensible.
-
-Repeated questions for the same I Can on one Quick Check are NOT independent opportunities. If the source map declares aggregation, preserve item observations internally but create one source-level I Can judgment for status/summaries.
-
-UNIT 1 SECTION 1 QUICK CHECK 01:
-Use curriculum/quick_check_source_maps/unit1_section1_quick_check01.json. In particular:
-- movement-from-origin endpoint task -> separately judge IC01 endpoint/ordered-pair result AND IC02 x/y axis roles;
-- graph-scale task -> IC03;
-- both-intercepts + single-intercept prompts -> IC04 and synthesize ONE Quick Check 01 IC04 judgment;
-- all share the same Quick Check opportunity for independence counting.
-Current display/source label is Quick Check 01 even if a legacy printed page says Ticket A/Exit Ticket.
+Repeated prompts for the same I Can on one source are NOT independent opportunities. Follow source-level aggregation rules from the course policy/source map when present.
 
 ===========================================================
-5. INTERNAL ITEM/SOURCE EVIDENCE STRENGTH
+5. INTERNAL EVIDENCE STRENGTH
 ===========================================================
 Use exactly UNUSABLE / LIMITED / PARTIAL / CONVINCING / STRONG_TRANSFER.
 
@@ -110,50 +108,36 @@ LIMITED: some target-relevant work exists, but major error/misconception means l
 UNUSABLE: blank/irrelevant/unreadable/no defensible target judgment.
 STRONG_TRANSFER: convincing plus meaningful transfer/connection/critique/modeling/less-routine application.
 
-Judge only what the task asks. Do not convert to points. Keep evidence interpretation concise and stable.
+Judge only what the task asks. Do not convert to points.
 
 ===========================================================
 6. OPPORTUNITY / LONGITUDINAL LEDGER
 ===========================================================
 Persist evidence_ledger.csv append-only. Minimum event/source fields: stable event ID, student key, source hash/date/type/label, page/task ID, question lineage when known, MG, I Can, evidence role, opportunity_id, independent_opportunity, strength, concise note, review flag.
 
-Multiple mapped judgments from the same Quick Check may each have independent_opportunity=yes relative to prior SOURCES, but they do not count as separate opportunities for one I Can merely because there were multiple prompts. Use a source-level opportunity count per student/I Can.
+Multiple mapped judgments from the same source do not create multiple independent opportunities for one I Can merely because they appear as separate prompts/rows.
 
 ===========================================================
-7. CURRENT STATUS / ALGEBRA ROLLUP
+7. CURRENT STATUS / COURSE ROLLUP
 ===========================================================
-I Can symbols:
+Resolve exact I Can statuses, mastery rule, MG demonstrated rule, Unit scale, and next-action vocabulary from the CURRENT COURSE PORTFOLIO POLICY. Do not hard-code Algebra's fixed 2-of-4 MG rule into another course.
+
+The current shared status model is normally:
 ○ No Evidence
 ◐ Developing
 ● Mastered
 ★ Transfer
+but the course policy is authoritative.
 
-A single routine CONVINCING demonstration normally remains Developing.
-Mastered normally requires at least TWO independent convincing demonstrations, usually different opportunities, with one reasonably current. Rich-artifact exception only when genuinely independent demonstrations exist. One later weak event does not automatically demote established mastery; meaningful contradiction -> Review flag.
+A single routine CONVINCING demonstration normally remains Developing. Mastered normally requires at least two independent convincing demonstrations unless the current course policy says otherwise.
+Status and next action are separate.
 
-STUDENT NEXT-ACTION STATE - HARD
-Status and next action are separate. Compute one stable action code/label for every I Can using the current Portfolio template contract:
-- NO_EVIDENCE -> NEEDS_FIRST_CHECK / "Needs first check"
-- DEVELOPING with no convincing independent demonstration, or a clear current gap that should be repaired before the next independent check -> PRACTICE_AND_CHECK / "Practice + check soon"
-- DEVELOPING with one convincing independent demonstration and no unresolved evidence problem blocking another clean demonstration -> NEEDS_ANOTHER_DEMONSTRATION / "Needs another independent check"
-- MASTERED -> SECURE / "Secure"
-- TRANSFER -> EXTENSION / "Extension"
-
-Do not use a generic Developing action for both cases. Do not invent alternate action labels.
-
-Algebra MG demonstrated = at least 2 of 4 I Cans Mastered/Transfer.
-Unit/PowerSchool:
-I = 0-1 MG demonstrated
-C = 2
-B = 3
-A = 4
-A+ = 4 + meaningful transfer/extension
-No early F from missing/early evidence.
+For Physics Unit 1, follow `frameworks/Physics/PORTFOLIO_POLICY.json`: MG demonstrated threshold is half of the exact I Cans in that MG, rounded up; Unit scale remains I/C/B/A/A+ across the four MGs.
 
 ===========================================================
 8. PERSISTENT DATA FILES
 ===========================================================
-02 Portfolio Data must contain current coherent versions of:
+`02 Portfolio Data` must contain coherent current versions of:
 - student_registry.csv
 - evidence_ledger.csv (append-only)
 - i_can_status_current.csv (include current status plus student_action_code and student_action_label)
@@ -166,7 +150,7 @@ No early F from missing/early evidence.
 - run_manifest.json
 - stored PowerSchool template(s) + schema
 
-class_i_can_summary newest-source rows use source-level I Can judgments after any required within-source aggregation. Do not let duplicate prompts inflate counts.
+Newest-source summary rows use source-level I Can judgments after required within-source aggregation.
 
 ===========================================================
 9. STUDENT PACKET - TEMPLATE FIDELITY HARD
@@ -174,7 +158,7 @@ class_i_can_summary newest-source rows use source-level I Can judgments after an
 Resolve Tools/MANIFEST.json -> Portfolio template contract/student template/CSS. The registered HTML is a CANONICAL SHELL, not an example.
 
 Exactly 2 content pages/student; one PDF per period; student bookmarks. No third tracker page.
-Do not paraphrase fixed template text or invent alternate feedback/reflection systems.
+Do not paraphrase fixed headings/reflection/table architecture.
 
 PAGE 1 fixed title/sections:
 Current Progress Report
@@ -182,37 +166,34 @@ Essential Standard
 Your current picture
 What you are showing
 Your next best target
+Why this is next
+Next step
 When I am ready to work on this
 My check-in
 
-Controlled data language:
-- Current picture: short factual body-of-evidence snapshot. On an early first-source run, explicitly say one Quick Check can give strong first evidence but does not establish mastery by itself.
-- Strength bullets: evidence-grounded sentence frames beginning "You showed..." / "You also..." and naming the demonstrated skill. Do not mention internal rubric mechanics.
-- Next target: exactly one I Can selected from current body of evidence.
-- Print exact MG ID/title, I Can ID/exact text, and recommended family label/name.
-- Immediately below the practice path show fixed labels `Why this is next` and `Next step`.
-- `Why this is next` MUST use the approved why-frame for the selected action state and explain the evidence condition that makes this I Can the priority. When factually true, one additional sentence may state that mastering this I Can would make its Mastery Goal demonstrated.
-- `Next step` MUST use the approved next-step sentence for the selected action state.
-- Do not substitute the family note or a generic coaching paragraph for the why/next-step fields. Family-specific practice guidance remains in the QR/action area.
-- QR -> https://tnezki.github.io/algebra/banks/unitN/student.html#<family_id> using confirmed canonical family anchor.
-- Reflection prompts remain exactly those in template contract.
+Controlled language:
+- Current picture: short factual body-of-evidence snapshot. On an early first-source run, explicitly say one evidence source can give strong first evidence but does not establish mastery by itself.
+- Strength bullets begin `You showed...` / `You also...` and name the demonstrated skill.
+- Next target: exactly one I Can selected from full current body of evidence.
+- Print exact MG code/title, I Can code/full exact statement, and recommended family label/name.
+- Use approved Why-this-is-next and Next-step frames from the template contract/action state.
+- Report guidance is practice, not reassessment.
+- Resolve the exact Student Bank family URL from the current COURSE PORTFOLIO POLICY. Never hard-code the Algebra domain/path for another course.
+- When a course policy declares a Student Practice Builder route, it may also be emitted as a digital hyperlink for the selected I Can, but the printed QR remains the exact Student Bank family unless the current template contract is deliberately changed.
 
 PAGE 2 fixed title:
 Unit Evidence Picture
-Subtitle: All <MG count> Mastery Goals and all <I Can count> I Cans.
-Show all MG/I Can status markers with no redundant status word under every row. Every I Can row also shows one compact `Next:` line using ONLY the canonical action label: Needs first check / Practice + check soon / Needs another independent check / Secure / Extension. This is required because two Developing I Cans can need different next moves. MG footer shows mastered count + demonstrated/not-yet/no-evidence state.
-Render each generated I Can row with the canonical CSS anatomy: status marker + `.ican-main`; exact I Can text in `.ican-text`; `Next: <label>` in `.ican-next`.
-Recent evidence table uses EXACT columns:
+Subtitle is dynamic: `All <MG count> Mastery Goals and all <I Can count> I Cans.`
+Show all MG/I Can status markers. Every I Can row shows code + full exact statement and one compact `Next:` action label.
+Recent evidence table columns remain:
 I Can | Target | Evidence | What this showed
-The approved evidence column may show Convincing / Partial / Limited / Unusable / No evidence. Keep the What this showed note concise and target-specific.
 
-STATUS MARKER RENDERING - HARD
-The four page-2/legend states must be visually distinguishable in the rendered PDF:
+STATUS MARKERS:
 - No Evidence = empty outlined circle
-- Developing = LEFT HALF of circle filled navy
-- Mastered = fully filled navy circle
+- Developing = LEFT HALF filled navy
+- Mastered = fully filled navy
 - Transfer = navy star
-The canonical CSS implements Developing with a clipped pseudo-element rather than a gradient because the PDF renderer previously dropped gradient fill. QA the actual rendered PDF, not only browser HTML. If Developing renders as an empty circle, the report cannot PASS.
+QA the rendered PDF.
 
 ===========================================================
 10. TEACHER SUMMARY - TEMPLATE FIDELITY HARD
@@ -220,71 +201,68 @@ The canonical CSS implements Developing with a clipped pseudo-element rather tha
 One landscape PDF using canonical teacher template/CSS.
 
 LATEST-EVIDENCE PAGES:
-1. Combined page title: "Combined <Course> - I Can Summary"
-2. Then one page per period when four affected I Cans fit.
-3. Use 2 x 2 I Can cards.
-4. Each card header: exact I Can ID; "I can <skill>."; bold "Convincing first evidence: n/N (p%)" plus Partial/Limited/Unusable/No submission.
-5. Each card body has ONE category only: "Students needing stronger or additional evidence".
-6. Combined card groups names by period header in period order. Individual period page does not repeat period on each name.
-7. Names = first name + last initial, bulleted, 2 or 3 columns as fit allows.
-8. NEVER invent separate name buckets such as "Substantial gap", "Unusable response", or "Convincing first evidence" on these newest-source pages.
+- Combined page first, then period pages when useful.
+- Use the canonical I Can card layout. If the newest source contains more I Cans than fit one page, continue onto additional pages rather than dropping targets.
+- Card header shows exact I Can code + full statement and source evidence counts.
+- Each card body uses ONE category only: `Students needing stronger or additional evidence`.
+- Combined card groups names by period header in period order; individual period pages do not repeat period on every name.
+- Names = first name + last initial, compact columns as fit allows.
 
-FINAL PAGE:
-Title: "Combined <Course> - Portfolio Evidence Sort"
-Use full longitudinal state, not only newest source. Same 2 x 2 I Can layout. Each card shows current ○/◐/●/★ counts, independent opportunity count, latest source/date, and fixed categories:
+FINAL PAGE(S):
+Title: `Combined <Course> - Portfolio Evidence Sort`
+Use full longitudinal state and fixed categories:
 - Reteach / targeted practice
 - Brief guided practice
 - Ready for another independent demonstration
 - No evidence / absent
 - Review flags
-Do not append "· 3rd" or "· 6th" after every name. Group by period only when needed for clarity.
-
-Teacher intervention context: 29-minute Tue-Fri; Thursday guaranteed math. Use to make groups practical, but do not invent a day-by-day schedule.
+If more current I Cans require cards than fit one page, continue the canonical layout across additional pages.
 
 ===========================================================
 11. NEXT TARGET / PRACTICE FAMILY
 ===========================================================
-Choose from full current evidence, not just last wrong answer. Prefer a target blocking MG demonstration, close to mastery and needing another opportunity, or showing a clear misconception.
-The selected target's `Why this is next` must name the evidence reason, not merely restate the skill. Use the fixed why-frame for the action state; add the optional MG-impact sentence only when true.
-Family A = normal direct/core start. Family B = alternate representation/route. Family C = reasoning/misconception/transfer. Use exact approved family-note frame. Report guidance is practice, not reassessment.
+Choose from full current evidence, not just the last wrong answer. Prefer a target blocking MG demonstration, close to mastery and needing another opportunity, or showing a clear misconception.
+
+Family A = normal direct/core start. Family B = alternate representation/route. Family C = reasoning/misconception/transfer. Use the exact family whose evidence job fits the next move and resolve all IDs/names from the current Family Bank.
 
 ===========================================================
 12. POWERSCHOOL
 ===========================================================
-Preserve stored template shape and non-score fields. Change only accepted Score/status field(s). For Algebra produce current CSV per period every successful run; save in 05 PowerSchool Exports and return as individual downloadable artifacts. Current official status replaces prior status.
+Preserve stored template shape and non-score fields. Change only accepted Score/status fields. Produce current CSV per period every successful run and save in `05 PowerSchool Exports`; return them as individual downloadable artifacts. Current official status replaces prior status.
 
 ===========================================================
 13. DELIVERY - HARD PORTFOLIO EXCEPTION
 ===========================================================
-Successful Job 18 delivery:
-- update canonical private Drive state under exact root ID 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o;
+Successful delivery:
+- update canonical private Drive state under exact root ID 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o and exact course child;
 - return each class Student Packets PDF individually;
 - return Teacher Summary PDF individually;
 - return current PowerSchool CSV(s) individually.
 Do NOT return a GitHub Transfer ZIP for these Portfolio outputs.
 Do NOT create/store standalone report HTML in Drive.
-A separate repository-change request may create a transfer ZIP, but this evidence run does not.
 
 ===========================================================
 14. QA / STOP
 ===========================================================
 Before PASS verify:
-1 exact Drive root ID is 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o and no alternate same-named root was created/used;
-2 raw evidence preserved/hash recorded;
+1 exact Drive root ID and exact course child used;
+2 raw student evidence preserved/hash recorded; supporting files not miscounted as evidence;
 3 registry includes all rostered students, including non-submitters;
-4 source map used when declared and clean-task mapping precedes response judgment;
-5 dual-target/aggregation rules followed; no same-source independence inflation;
+4 clean-task mapping precedes response judgment and current Unit override/learning map is honored;
+5 source map/lineage used when declared; no same-source independence inflation;
 6 ledger/history append preserved;
-7 current statuses/rollups correct;
+7 current statuses/MG rollups/Unit rollup match current course policy;
 8 exactly 2 student pages per student + bookmarks;
-9 student report headings/reflection/table columns/why-next/next-step frames and page-2 Next: labels match canonical template contract;
-10 rendered PDF visibly distinguishes No Evidence, Developing half-filled, Mastered filled, and Transfer star;
-11 QR exact family route confirmed;
-12 teacher newest-source cards use ONLY "Students needing stronger or additional evidence" list and approved 2x2 structure;
-13 final Evidence Sort uses full history/fixed categories/no repeated period suffixes;
-14 current terminology says Quick Check, not Ticket A/Exit Ticket, except explicit legacy alias metadata;
+9 every human-facing I Can shows code + full exact statement;
+10 student report fixed headings/reflection/table/action frames match template contract;
+11 rendered status markers visibly distinguish all four states;
+12 Student Bank QR uses the exact current course/family route, never another course's domain;
+13 newest-source teacher cards use one needs-evidence list and no invented buckets;
+14 longitudinal sort uses full history/fixed categories;
 15 PowerSchool CSVs preserve template shape;
 16 no student data written to GitHub; no report HTML stored in Drive;
 17 outputs returned individually, not as transfer ZIP.
 
 If a check fails, repair that concrete defect before delivery. When all pass, stop.
+
+END - PORTFOLIO / ASSESS NEW EVIDENCE
