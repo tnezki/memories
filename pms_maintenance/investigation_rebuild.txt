@@ -1,0 +1,261 @@
+PHYSICS INVESTIGATION REBUILD — SECTION DASHBOARD PILOT
+========================================================
+
+STATUS: PILOT
+JOB: investigation_rebuild
+ROLE: Rebuild exactly one existing Physics section Investigation from a section-level dashboard request.
+
+This PM is intentionally narrow. It does NOT rebuild the Unit, Demo, Notes, Practice, Activities, Bank, Quick Check, Performance Task, Review, Warm-Ups, or Summative.
+
+FLOW
+----
+REQUEST -> PINNED AUTHORITIES -> READ EXACT SECTION SCOPE -> READ CURRENT INVESTIGATION ->
+APPLY TEACHER IDEA/FILES -> AUTHOR STUDENT + TEACHER INVESTIGATION -> RENDER/QA ->
+ONE GITHUB TRANSFER ZIP
+
+============================================================================
+0. FRESH / CLOSED PROJECT MODE — HARD
+============================================================================
+
+Treat the run as if no prior chat exists.
+
+Allowed:
+- current request and current teacher instruction;
+- files inside the current request ZIP;
+- exact project GitHub files at the commits pinned by the request.
+
+Do NOT use:
+- prior conversation history;
+- saved/model memory;
+- prior assistant drafts;
+- File Library recovery;
+- public web search;
+- generic outside curriculum.
+
+Direct reads of exact pinned project GitHub resources are allowed.
+Do not repository-hunt for alternate paths when the request or manifest declares an exact path.
+
+If a teacher-approved external simulation/reference URL is supplied in the request, you may preserve/link that exact URL in the rebuilt artifact. Do not infer undocumented behavior of an external simulation. If the build requires details not supplied by the teacher/current project sources, fail closed rather than inventing them.
+
+============================================================================
+1. REQUIRED REQUEST FIELDS — HARD
+============================================================================
+
+Require:
+- schema = physics-investigation-rebuild-request/0.1
+- course = Physics
+- unit
+- section
+- section_id
+- section_title
+- system_repo + system_commit
+- course_repo + course_commit
+- target.student_path
+- target.teacher_path
+- target.folder
+- teacher_inputs.direction
+- teacher_inputs.notes
+- teacher_inputs.style_preferences
+- teacher_inputs.materials_constraints
+- teacher_inputs.approved_external_links
+- teacher_inputs.additional_files
+
+If target.student_path or target.teacher_path does not match:
+  investigations/u{unit}_{section}_investigation/u{unit}_{section}_investigation.html
+  investigations/u{unit}_{section}_investigation/u{unit}_{section}_investigation_teacher_guide.html
+STOP with INVESTIGATION_TARGET_PATH_MISMATCH.
+
+============================================================================
+2. AUTHORITY / READ ORDER
+============================================================================
+
+Read from the request-pinned system snapshot:
+1. SYSTEM_MANIFEST.json
+2. current Curriculum Philosophy and declared amendments
+3. current SYSTEM_RUNTIME_CONTRACT.txt and declared amendments
+4. frameworks/Physics/MANIFEST.json
+5. frameworks/Physics/FRAMEWORK.txt
+6. exact selected Unit Assessment Plan resolved by the manifest assessment_plan_pattern
+7. Physics curriculum section/I-Can indexes only as needed to identify exact section scope
+8. this PM
+9. Tools/MANIFEST.json and current finalization/local-transfer contracts
+
+Read from the request-pinned Physics course snapshot:
+10. exact current student investigation at target.student_path
+11. exact current teacher guide at target.teacher_path
+12. current section Notes only when needed to preserve vocabulary/notation/timing continuity
+13. request attachments
+
+Authority:
+1. current explicit teacher notes/idea in this request
+2. exact current Assessment Plan/I-Cans for scope
+3. Curriculum Philosophy
+4. Physics Framework
+5. this PM
+6. current artifact style/implementation
+
+Attachments are teacher-supplied references. Use them according to the teacher note; do not silently treat them as higher authority than explicit scope/I-Cans.
+
+============================================================================
+3. SCOPE — EXACTLY ONE SECTION INVESTIGATION
+============================================================================
+
+The selected investigation folder is the hard change boundary.
+
+Normal outputs:
+- replace target.student_path
+- replace target.teacher_path
+
+Additional files may be created/replaced ONLY inside target.folder when genuinely necessary for the rebuilt investigation, for example a local image/data asset explicitly supplied or created for this investigation.
+
+Do NOT modify:
+- teacher dashboard;
+- Framework;
+- PMs/contracts;
+- Notes;
+- Demo;
+- Practice;
+- Activities;
+- Banks;
+- assessments;
+- any other section.
+
+============================================================================
+4. REBUILD INTENT
+============================================================================
+
+teacher_inputs.direction has two allowed values:
+
+improve
+- treat the current investigation as the starting point;
+- preserve what already works;
+- implement the teacher's requested changes;
+- do not redesign unrelated parts just because a different design is possible.
+
+replace
+- the teacher is intentionally replacing the investigation concept;
+- use the current artifact for useful shell/print conventions only;
+- build the new teacher-selected idea while preserving exact section scope/I-Cans.
+
+If teacher notes clearly conflict with the selected direction, the explicit teacher note wins.
+
+============================================================================
+5. INVESTIGATION DESIGN RULES
+============================================================================
+
+Start from:
+exact section I-Can/evidence intent -> phenomenon/question -> what students actually DO ->
+data/observations -> representation/model -> interpretation -> claim/reasoning/discussion.
+
+Use the teacher-supplied style_preferences and materials_constraints as the primary local design profile for this run.
+
+Physics defaults when consistent with the teacher request:
+- use a concrete, observable physical situation;
+- prefer student action/data/observation over passive worksheet completion;
+- conceptual meaning comes before mechanical formula use;
+- equations/formulas describe relationships in the phenomenon;
+- graphs/tables/diagrams/models must be used for evidence, not decoration;
+- a prediction/initial claim is valuable when the outcome is not already given away;
+- evidence and reasoning should follow what students actually measured/observed;
+- keep student directions concise enough for real classroom use;
+- do not over-script software/tool mechanics the teacher can demonstrate live;
+- do not tell students what their data is supposed to show;
+- keep the task feasible with the materials actually supplied/approved by the teacher;
+- do not default to specialized equipment that the request does not authorize.
+
+Simulation/video/data-based investigations are valid when they create a better evidence route than a weak physical setup. Use only teacher-approved links supplied in the request or already present in the current project artifact/resources.
+
+============================================================================
+6. STUDENT ARTIFACT
+============================================================================
+
+The student investigation must be classroom-ready and printable.
+
+Include only pieces that the investigation actually needs, such as:
+- title / short purpose or question;
+- name/partner when appropriate;
+- initial claim/prediction when useful;
+- materials;
+- concise procedure/setup;
+- data table / observation structure;
+- graph/model/representation space when useful;
+- analysis / claim-evidence-reasoning / discussion;
+- blank usable workspace.
+
+Do not add decorative complexity.
+Do not add long teacher-facing directions to the student page.
+Do not reveal expected results or solutions.
+
+Preserve the current course's print-conscious behavior. Use page breaks intentionally. Avoid avoidable blank pages, clipped content, microscopic text, and excessive toner-heavy blocks.
+
+============================================================================
+7. TEACHER GUIDE
+============================================================================
+
+The teacher guide must match the rebuilt student investigation exactly.
+
+Include concise teacher-use information:
+- purpose / exact section alignment;
+- setup/materials;
+- likely timing;
+- teacher prep and launch;
+- what students should physically do/collect;
+- expected pattern/result only in teacher copy;
+- useful discussion/press questions;
+- likely misconceptions or measurement/setup problems;
+- safety/setup cautions when relevant;
+- answer/model guidance for student analysis prompts.
+
+Do not turn the teacher guide into a second textbook chapter.
+
+============================================================================
+8. ATTACHMENTS / LINKS
+============================================================================
+
+Request attachments may include old labs, screenshots, photos of equipment, PDFs, images, data tables, or other teacher references.
+
+Use them only for the selected investigation.
+If an attachment should become a deployed local asset, place it inside target.folder and reference it relatively.
+Do not place teacher-only/private material in the public course repo unless the teacher clearly intended it to be deployed.
+
+For teacher_inputs.approved_external_links:
+- preserve exact URL spelling;
+- link only when it serves the actual student/teacher task;
+- do not add unrelated resource links merely because they were supplied.
+
+============================================================================
+9. QA — HARD
+============================================================================
+
+Before PASS verify:
+1. exact Unit/section scope and I-Cans are correct;
+2. teacher notes/selected idea are actually implemented;
+3. student and teacher versions describe the same activity;
+4. materials are consistent with teacher constraints;
+5. all promised tables/graphs/diagrams/data spaces actually exist;
+6. no student answer leakage;
+7. no invented simulation behavior;
+8. external links are exact teacher-approved/current-project links;
+9. HTML parses cleanly;
+10. JavaScript, if any, has no syntax error;
+11. MathJax/currency/finalization checks are run when applicable;
+12. print/render inspection shows intentional page flow and no clipping;
+13. no unrelated repository files are changed.
+
+If a current investigation cannot be opened at the pinned course commit, STOP with INVESTIGATION_SOURCE_MISSING.
+If exact section scope cannot be resolved from the pinned Framework/Assessment Plan, STOP with INVESTIGATION_SCOPE_UNRESOLVED.
+
+============================================================================
+10. DELIVERY — HARD
+============================================================================
+
+Return exactly ONE local GitHub Transfer ZIP using the current Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt.
+
+Expected payload destination:
+  payload/physics/investigations/u{unit}_{section}_investigation/...
+
+Use REPLACE for the current student/teacher HTML files.
+Use CREATE/REPLACE only for necessary assets inside that same folder.
+
+Do not commit, push, pull, branch, merge, or create a PR.
+Stop after the verified transfer ZIP is produced.
