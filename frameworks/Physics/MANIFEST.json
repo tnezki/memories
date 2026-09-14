@@ -1,11 +1,28 @@
 {
-  "schema": "curriculum-framework-manifest/1.0",
+  "schema": "curriculum-framework-manifest/1.1",
   "course": "Physics",
   "entrypoint": "frameworks/Physics/FRAMEWORK.txt",
   "resource_root": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework",
   "storage": "expanded",
   "note": "FRAMEWORK.txt is the stable authority front door. resource_root preserves the current large supporting tree without mass-moving assets.",
   "assessment_plan_pattern": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html",
+  "assessment_plan_runtime": {
+    "authority_rule": "The original Unit Assessment Plan HTML is exact authority for Unit Learning Targets, I Cans, Mastery Goals, and evidence scope.",
+    "unit_learning_map_pattern": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/unitN_learning_map.json",
+    "unit_overrides": {
+      "1": {
+        "status": "CURRENT",
+        "plan": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unit1_assessment_plan/unit1_assessment_plan.html",
+        "learning_map": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/unit1_learning_map.json",
+        "id_policy": "PRIMARY_MASTERY_GOAL_IDS",
+        "supersedes_unit_records_in": [
+          "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/i_can_index.json",
+          "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/curriculum/section_index.json"
+        ],
+        "note": "For Unit 1 only, the revised Assessment Plan and unit1_learning_map.json supersede the legacy Unit 1 records in the global derivative indexes. Unit 2+ records remain current until separately revised."
+      }
+    }
+  },
   "bank_profiles": {
     "bank_v2": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_v2_course_profile.json",
     "bank_v2_map": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_v2_course_profile.json"
@@ -21,7 +38,7 @@
     "canonical_storage": "expanded_course_repo",
     "handoff_zip_rule": "unitN.zip is transport/output only. After extraction and sync, downstream jobs read the expanded banks/unitN/ tree. Prior stage ZIPs are never canonical inputs and must not be searched for in File Library, uploads, or old staging locations."
   },
-  "bank_v2_note": "The Bank-v2 course profile is current for Steps 2A, 3A, 3B, and 3C and for downstream Bank-aware routing. Canonical Bank content is the expanded course-repository banks/unitN/ tree addressed through BANK_MANIFEST.json and ITEM_INDEX.json. Do not use or search for prior stage ZIPs as inputs. This manifest-declared Bank-v2 route supersedes legacy Bank-profile wording retained inside older Framework summary sections.",
+  "bank_v2_note": "The legacy Bank-v2 route remains current for Units not yet migrated. For Unit 1, downstream Bank work must first use assessment_plan_runtime.unit_overrides.1 and may not treat the legacy Unit 1 records in i_can_index.json/section_index.json as current learning authority.",
   "deprecated_resources": {
     "legacy_bank_profile": {
       "path": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_course_profile.json",
