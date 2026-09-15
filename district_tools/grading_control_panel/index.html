@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grading & Evidence Control Panel</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Grading &amp; Evidence Control Panel <span style="font-size:13px;opacity:.78">PILOT</span></h1>
+    <p>Package student evidence for ChatGPT and request individual feedback, class patterns, and ready-to-use review/extension stations.</p>
+  </div>
+</header>
+<main>
+  <a class="back" href="../">&larr; District Tools</a>
+  <div class="grid">
+    <section class="card">
+      <h2>Build a grading request</h2>
+      <p class="small">Only student evidence is required. The rubric and teacher notes are optional.</p>
+
+      <div class="row">
+        <div>
+          <label for="className">Class / group name <span class="required">*</span></label>
+          <input id="className" type="text" placeholder="Example: 7th Grade Science - Hour 2">
+        </div>
+        <div>
+          <label for="assignmentName">Assignment / evidence set <span class="required">*</span></label>
+          <input id="assignmentName" type="text" placeholder="Example: Ecosystems CER">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label for="gradeSubject">Grade / subject <span class="small">(optional)</span></label>
+          <input id="gradeSubject" type="text" placeholder="Example: Grade 2 Reading, Algebra 1, HS Art">
+        </div>
+        <div>
+          <label for="teacherName">Teacher name <span class="small">(optional)</span></label>
+          <input id="teacherName" type="text" placeholder="Your name">
+        </div>
+      </div>
+
+      <label for="evidenceFiles">1. Student evidence <span class="required">*</span></label>
+      <div class="drop">
+        <input id="evidenceFiles" type="file" multiple>
+        <div class="small" style="margin-top:7px"><b>Best results:</b> one file per student with the student's name in the filename. Combined class scans are also okay when student names are visible in the work.</div>
+        <ul id="evidenceList" class="file-list"></ul>
+      </div>
+
+      <label for="rubricFiles">2. Rubric / scoring guide <span class="small">(optional)</span></label>
+      <div class="drop">
+        <input id="rubricFiles" type="file" multiple>
+        <div class="small" style="margin-top:7px">If a rubric is included, the response may score against it. Without a rubric, the request asks for evidence-based feedback and mastery indicators rather than an invented numeric grade.</div>
+        <ul id="rubricList" class="file-list"></ul>
+      </div>
+
+      <label for="teacherNotes">3. Teacher notes <span class="small">(optional)</span></label>
+      <textarea id="teacherNotes" placeholder="Add anything ChatGPT should know about this evidence set."></textarea>
+      <div class="small" style="margin-top:7px"><b>Useful hints you can add:</b> click any idea to place it in your notes, then edit it as needed.</div>
+      <div class="chips" id="noteHints">
+        <button type="button" class="chip" data-note="Focus on reasoning more than small arithmetic or spelling errors.">Focus on reasoning</button>
+        <button type="button" class="chip" data-note="This is formative. Do not assign a final numeric grade.">Formative only</button>
+        <button type="button" class="chip" data-note="Ignore Question 7 when judging student understanding.">Ignore a question</button>
+        <button type="button" class="chip" data-note="Students worked in pairs, so do not treat shared language as evidence of copying.">Students worked in pairs</button>
+        <button type="button" class="chip" data-note="Accept multiple valid solution methods when the evidence supports the thinking.">Allow multiple methods</button>
+        <button type="button" class="chip" data-note="Pay special attention to vocabulary, explanation, and use of evidence.">Focus on explanation</button>
+      </div>
+
+      <div id="buildStatus" class="status warn">Add the required fields and at least one evidence file.</div>
+      <div class="actions">
+        <button id="buildZip" type="button">Build Request ZIP</button>
+        <button id="clearForm" class="secondary" type="button">Clear</button>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h2>What happens next?</h2>
+      <div class="step"><div class="step-num">1</div><p>Complete this form and download the request ZIP.</p></div>
+      <div class="step"><div class="step-num">2</div><p>Upload that ZIP to ChatGPT. The request contains the instructions, so a short message such as <b>"Run this grading request"</b> is enough.</p></div>
+      <div class="step"><div class="step-num">3</div><p>ChatGPT should return one response ZIP. Unzip it and open <code>CLICK_ME.html</code>.</p></div>
+      <div class="divider"></div>
+      <h3>The response requests</h3>
+      <p class="small">Individual student reports, class-wide patterns, recommended student groupings, review stations built around common mistakes, and 1-2 extension stations for students ready to move farther.</p>
+      <div class="status good"><b>Teacher review stays central.</b> The package asks ChatGPT to show its evidence basis and flag uncertainty rather than silently guessing.</div>
+      <div class="divider"></div>
+      <p class="privacy"><b>Student data:</b> this page processes selected files in your browser to make the ZIP; it does not upload them by itself. Upload/use student evidence only in ways allowed by your district's student-data and AI policies.</p>
+    </aside>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
