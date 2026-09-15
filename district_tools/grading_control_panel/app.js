@@ -106,7 +106,7 @@
       }
 
       const request = {
-        schema: "district-grading-request/0.1-pilot",
+        schema: "district-grading-request/0.2-pilot",
         created_at: createdAt,
         teacher: {
           name: teacherName || null,
@@ -124,10 +124,11 @@
         rubric_files: rubricManifest,
         requested_outputs: {
           student_reports: true,
+          combined_student_reports_pdf: true,
           class_analysis: true,
           recommended_groupings: true,
-          review_stations: "2-4 based on the most instructionally useful common mistakes/patterns",
-          extension_stations: "1-2 for students who demonstrate readiness"
+          common_print_packet: "One class-wide review/extension packet based on the most important common patterns",
+          individualized_print_packets: "Student-specific review/extension practice based on each student's evidence"
         }
       };
 
@@ -166,7 +167,7 @@
 
     return `# District Grading & Evidence Request - Pilot\n\n` +
 `## Your task\n` +
-`Analyze the student evidence in this ZIP and return exactly ONE response ZIP. The teacher should only need to unzip it and open \`CLICK_ME.html\`. Do not return a collection of loose files as the primary deliverable.\n\n` +
+`Analyze the student evidence in this ZIP and return exactly ONE response ZIP. Begin from this packaged request; no additional teacher prompt is required to define the task. The teacher should only need to unzip the response and open \`CLICK_ME.html\`. Do not return a collection of loose files as the primary deliverable.\n\n` +
 `Class / group: ${request.teacher.class_or_group}\n` +
 `Assignment / evidence set: ${request.assignment.name}\n` +
 `Grade / subject: ${request.teacher.grade_subject || "Not provided; infer only when the evidence makes it reasonably clear."}\n` +
@@ -195,26 +196,29 @@
 `  <one print-friendly HTML report per identified student>\n` +
 `class/\n` +
 `  class_overview.html\n` +
-`stations/\n` +
-`  index.html\n` +
-`  review_01.html\n` +
-`  review_02.html\n` +
-`  ...\n` +
-`  extension_01.html\n` +
-`  ...\n` +
+`print/\n` +
+`  all_student_reports.html\n` +
+`  all_student_reports.pdf\n` +
+`  common_review_extension_packet.html\n` +
+`  common_review_extension_packet.pdf\n` +
+`  individualized/\n` +
+`    <one print-friendly HTML practice packet per identified student>\n` +
+`  individualized_packets.pdf\n` +
 `data/\n` +
 `  analysis.json\n` +
 `  request.json\n` +
 `\`\`\`\n\n` +
-`All links must be relative and work when the ZIP is unzipped and opened locally with no web server. Use static HTML/CSS with no external CDN dependencies.\n\n` +
+`All HTML links must be relative and work when the ZIP is unzipped and opened locally with no web server. Use static HTML/CSS with no external CDN dependencies. PDFs must be generated as finished printable files, not placeholders.\n\n` +
 `## CLICK_ME.html\n` +
 `Create a simple teacher dashboard with three obvious areas:\n` +
-`1. **Individual Student Reports** - clear links/cards for every identified student.\n` +
+`1. **Individual Student Reports** - clear links/cards for every identified student, plus an obvious **Print All Student Reports** link/button to \`print/all_student_reports.pdf\`.\n` +
 `2. **Class Data** - a link to the class overview and a short summary of the biggest patterns.\n` +
-`3. **Stations** - a link to the station plan and printable station pages.\n\n` +
-`The teacher should not need to open the data folder.\n\n` +
+`3. **Print Options** - simple print choices for class-wide and individualized follow-up:\n` +
+`   - **Common Class Review + Extension** - one general packet based on the most important shared mistakes/unfinished understandings, with 1-2 extension opportunities when evidence supports them.\n` +
+`   - **Individualized Practice** - student-specific practice packets matched to each student's evidence, with extension instead of remediation when appropriate.\n\n` +
+`The teacher should not need to open the data folder. Make the print links prominent and understandable without technical knowledge.\n\n` +
 `## Individual student reports\n` +
-`Each report should be concise, printable, and grounded in that student's evidence. Include:\n` +
+`Keep the individual report format concise, printable, and grounded in that student's evidence. Include:\n` +
 `- student name/label and assignment;\n` +
 `- what the student demonstrated successfully;\n` +
 `- the most important misconception(s), gap(s), or revision need(s);\n` +
@@ -223,6 +227,7 @@
 `- 1-3 concrete next steps;\n` +
 `- an uncertainty note when the evidence is incomplete or ambiguous.\n\n` +
 `Do not include other students' names or performance in an individual student's report.\n\n` +
+`Also create \`print/all_student_reports.html\` and \`print/all_student_reports.pdf\` containing every student's report in roster/identified order, with a clear page break between students. Preserve the same report content rather than creating a shortened second version.\n\n` +
 `## Class analysis\n` +
 `Create \`class/class_overview.html\` for the teacher. Include:\n` +
 `- number of student evidence sets successfully analyzed;\n` +
@@ -233,14 +238,27 @@
 `- students who appear ready for extension;\n` +
 `- any evidence-quality or identification problems that limit conclusions.\n\n` +
 `Groupings are instructional recommendations, not permanent labels.\n\n` +
-`## Stations\n` +
-`Create a station set driven by the actual class patterns:\n` +
-`- 2-4 **review stations** targeting the most useful common mistakes or unfinished understandings;\n` +
-`- 1-2 **extension stations** for students whose evidence shows readiness.\n` +
-`- If the evidence does not justify that many distinct stations, create fewer rather than inventing needs.\n\n` +
-`The station index should be teacher-facing and include grouping recommendations, a short rotation/setup plan, materials, and answer/facilitation notes. Each individual station page should be a clean printable student-facing page with a clear purpose, directions, and activity/task set; keep teacher answers off the printable student portion. For early-elementary evidence, favor concise teacher-led or hands-on directions instead of text-heavy worksheets.\n\n` +
+`## Print option 1 - Common Class Review + Extension\n` +
+`Create one general/common packet driven by actual class patterns, not a generic worksheet. It should:\n` +
+`- target the 1-3 most instructionally useful common mistakes or unfinished understandings;\n` +
+`- include concise reteach/support directions or examples when useful;\n` +
+`- include practice that directly addresses those patterns;\n` +
+`- include 1-2 clearly labeled extension opportunities when class evidence supports them;\n` +
+`- avoid student names;\n` +
+`- be usable as a whole-class handout, small-group task, or station-style activity at the teacher's discretion;\n` +
+`- be age-appropriate and, for early elementary, favor concise teacher-led/hands-on directions over text-heavy worksheets.\n\n` +
+`Provide both \`print/common_review_extension_packet.html\` and \`print/common_review_extension_packet.pdf\`.\n\n` +
+`## Print option 2 - Individualized Practice\n` +
+`Create one student-specific practice packet for every identified student. Each packet should:\n` +
+`- use the student's name/label clearly at the top;\n` +
+`- target that student's most important next step(s) from the submitted evidence;\n` +
+`- avoid unnecessary practice on skills already demonstrated securely;\n` +
+`- provide extension/transfer work instead of remediation when the student is ready;\n` +
+`- contain enough context to be usable without showing the original analysis report;\n` +
+`- never mention or compare the student to classmates.\n\n` +
+`Save the individual HTML packets in \`print/individualized/\`. Also create \`print/individualized_packets.pdf\` containing all individualized packets with a clear page break between students so the teacher can print the full class set at once and distribute pages by student.\n\n` +
 `## data/analysis.json\n` +
-`Store the structured analysis that supports the HTML pages. Include student identifiers/labels, evidence-file mapping, rubric results when applicable, strengths, needs, class pattern counts, grouping recommendations, station mappings, and uncertainty flags. Copy this request's \`request.json\` into \`data/request.json\`.\n\n` +
+`Store the structured analysis that supports the HTML pages and print materials. Include student identifiers/labels, evidence-file mapping, rubric results when applicable, strengths, needs, class pattern counts, grouping recommendations, common-packet targets, individualized-practice targets, and uncertainty flags. Copy this request's \`request.json\` into \`data/request.json\`.\n\n` +
 `## Final delivery\n` +
 `Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open \`CLICK_ME.html\`.\n`;
   }
