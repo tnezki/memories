@@ -1,8 +1,73 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
+  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.0";
+  const RESPONSE_CSS_FALLBACK = String.raw`:root{
+  --ink:#172033;
+  --muted:#5d687b;
+  --line:#d5dde8;
+  --soft:#f4f7fa;
+  --panel:#ffffff;
+  --hero:#eef3f8;
+  --accent:#365f82;
+  --accent-dark:#284b68;
+  --success:#176b46;
+  --warn:#8a5a00;
+  --shadow:0 8px 24px rgba(20,34,50,.06);
+}
+*{box-sizing:border-box}
+html{background:#fff;color:var(--ink)}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.5}
+a{color:var(--accent-dark)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px}
+.hero{background:var(--hero);border:1px solid var(--line);border-radius:24px;padding:32px 36px;margin:10px 0 24px}
+.eyebrow{margin:0 0 2px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);font-size:15px}
+.hero h1{margin:0;font-size:42px;line-height:1.08;letter-spacing:-.02em}
+.subtitle{margin:10px 0 0;font-size:20px;color:var(--ink)}
+.quick-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:12px 20px;border-radius:12px;border:1px solid #9fb4c8;background:#fff;color:var(--accent);font-weight:800;text-decoration:none;font-size:17px}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn:hover{filter:brightness(.98)}
+.section{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.section h2{margin:0 0 6px;font-size:25px;line-height:1.2}
+.section-intro{margin:0 0 18px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.card h3{margin:0 0 5px;font-size:18px}.card p{margin:5px 0;color:var(--muted)}
+.card a{font-weight:800;text-decoration:none}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
+.stat{border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:14px}.stat strong{display:block;font-size:28px;line-height:1.05}.stat span{color:var(--muted);font-size:13px}
+.notice{border-left:4px solid var(--accent);background:var(--soft);border-radius:10px;padding:12px 14px;margin:14px 0}
+.notice.warn{border-left-color:var(--warn)}
+.notice.good{border-left-color:var(--success)}
+.report-page,.practice-page,.packet-page{max-width:8in;margin:0 auto;padding:.1in 0;color:#111}
+.report-head{border-bottom:2px solid #cfd7e2;padding-bottom:12px;margin-bottom:18px}
+.report-head .eyebrow{font-size:12px}.report-head h1{font-size:30px;margin:0}.report-meta{color:#555;margin-top:4px}
+.report-section{margin:18px 0}.report-section h2{font-size:19px;margin:0 0 7px}.report-section p,.report-section li{font-size:15px}
+ul.clean{margin:7px 0 0;padding-left:21px}ul.clean li{margin:5px 0}
+.feedback-box{border:1px solid #d8dee7;border-radius:12px;padding:13px 15px;margin:12px 0;background:#fafbfc}
+.practice-block{border:1px solid #cfd7e2;border-radius:12px;padding:14px;margin:14px 0;break-inside:avoid}.practice-block h2,.practice-block h3{margin-top:0}
+.name-line{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid #bfc8d3;padding-bottom:8px;margin-bottom:14px;font-weight:700}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}th,td{border:1px solid #d6dde6;padding:8px 9px;text-align:left;vertical-align:top}th{background:#f3f6f9}
+.small{font-size:13px;color:var(--muted)}
+.page-break{break-before:page;page-break-before:always}
+.no-print{display:block}
+@media(max-width:700px){.wrap{padding:12px}.hero{padding:24px 20px;border-radius:18px}.hero h1{font-size:32px}.subtitle{font-size:17px}.btn{width:100%}.section{padding:17px}}
+@media print{
+  @page{size:letter;margin:.55in}
+  body{font-size:11pt;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .hero,.section{box-shadow:none}
+  .no-print,.quick-actions,.screen-only{display:none!important}
+  .report-page,.practice-page,.packet-page{max-width:none;padding:0}
+  a{color:#000;text-decoration:none}
+  .page-break{break-before:page;page-break-before:always}
+  .practice-block,.feedback-box,.card,.stat{break-inside:avoid}
+}
+`;
 
   const evidenceInput = $("evidenceFiles");
+  const rosterInput = $("rosterFiles");
   const rubricInput = $("rubricFiles");
   const notesInput = $("teacherNotes");
   const buildButton = $("buildZip");
@@ -18,6 +83,7 @@
   });
 
   evidenceInput.addEventListener("change", () => renderFiles(evidenceInput.files, $("evidenceList")));
+  rosterInput.addEventListener("change", () => renderFiles(rosterInput.files, $("rosterList")));
   rubricInput.addEventListener("change", () => renderFiles(rubricInput.files, $("rubricList")));
   buildButton.addEventListener("click", buildRequestZip);
   $("clearForm").addEventListener("click", clearForm);
@@ -50,7 +116,8 @@
       setStatus("Add the required fields and at least one evidence file.", "warn");
       return false;
     }
-    setStatus(`Ready to package ${count} evidence file${count === 1 ? "" : "s"}.`, "good");
+    const rosterNote = rosterInput.files.length ? ` Roster included (${rosterInput.files.length} file${rosterInput.files.length === 1 ? "" : "s"}).` : "";
+    setStatus(`Ready to package ${count} evidence file${count === 1 ? "" : "s"}.${rosterNote}`, "good");
     return true;
   }
 
@@ -65,9 +132,11 @@
     $("gradeSubject").value = "";
     $("teacherName").value = "";
     evidenceInput.value = "";
+    rosterInput.value = "";
     rubricInput.value = "";
     notesInput.value = "";
     $("evidenceList").innerHTML = "";
+    $("rosterList").innerHTML = "";
     $("rubricList").innerHTML = "";
     refreshStatus();
   }
@@ -88,6 +157,7 @@
 
       const usedPaths = new Set();
       const evidenceManifest = [];
+      const rosterManifest = [];
       const rubricManifest = [];
       const entries = [];
 
@@ -98,6 +168,13 @@
         entries.push({ name: path, data: new Uint8Array(await file.arrayBuffer()) });
       }
 
+      for (const file of [...rosterInput.files]) {
+        const packagedName = uniqueName(safeFileName(file.name), usedPaths, "roster");
+        const path = `roster/${packagedName}`;
+        rosterManifest.push(fileManifest(file, path));
+        entries.push({ name: path, data: new Uint8Array(await file.arrayBuffer()) });
+      }
+
       for (const file of [...rubricInput.files]) {
         const packagedName = uniqueName(safeFileName(file.name), usedPaths, "rubric");
         const path = `rubric/${packagedName}`;
@@ -105,38 +182,49 @@
         entries.push({ name: path, data: new Uint8Array(await file.arrayBuffer()) });
       }
 
+      const scannedWorkFilename = `${friendlyFilePart(className)}_${friendlyFilePart(assignmentName)}_Scanned_Student_Work.pdf`;
       const request = {
-        schema: "district-grading-request/0.2-pilot",
+        schema: "district-grading-request/0.3-pilot",
+        response_style_version: RESPONSE_STYLE_VERSION,
         created_at: createdAt,
         teacher: {
           name: teacherName || null,
           class_or_group: className,
           grade_subject: gradeSubject || null
         },
-        assignment: {
-          name: assignmentName
-        },
+        assignment: { name: assignmentName },
         scoring_policy: rubricManifest.length
           ? "Use the provided rubric/scoring guide when it clearly applies. Show evidence for scores and flag uncertainty."
           : "Do not invent a numeric grade. Provide evidence-based feedback and mastery/next-step indicators only.",
         teacher_notes_present: Boolean(teacherNotes),
         evidence_files: evidenceManifest,
+        roster_files: rosterManifest,
         rubric_files: rubricManifest,
         requested_outputs: {
           student_reports: true,
           combined_student_reports_pdf: true,
           class_analysis: true,
           recommended_groupings: true,
+          scanned_student_work_pdf: `scanned_work/${scannedWorkFilename}`,
           common_print_packet: "One class-wide review/extension packet based on the most important common patterns",
           individualized_print_packets: "Student-specific review/extension practice based on each student's evidence"
-        }
+        },
+        click_me_quick_actions: [
+          "Print All Student Reports (PDF)",
+          "Print All Individualized Practice (PDF)",
+          "View Scanned Student Work (PDF)"
+        ],
+        click_me_no_duplicate_quick_actions: true
       };
 
+      const responseCss = await loadResponseCss();
       const requestInstructions = buildInstructions(request, teacherNotes);
       entries.unshift(
         { name: "REQUEST_READ_ME_FIRST.md", data: enc.encode(requestInstructions) },
         { name: "request.json", data: enc.encode(JSON.stringify(request, null, 2)) },
-        { name: "teacher_notes.txt", data: enc.encode(teacherNotes || "No teacher notes were provided.") }
+        { name: "teacher_notes.txt", data: enc.encode(teacherNotes || "No teacher notes were provided.") },
+        { name: "response_contract/styles.css", data: enc.encode(responseCss) },
+        { name: "response_contract/STYLE_VERSION.txt", data: enc.encode(RESPONSE_STYLE_VERSION + "\n") }
       );
 
       const zipBlob = makeZip(entries);
@@ -151,6 +239,17 @@
     }
   }
 
+  async function loadResponseCss() {
+    try {
+      const url = new URL("response_styles.css", window.location.href);
+      const response = await fetch(url, { cache: "no-store" });
+      if (response.ok) return await response.text();
+    } catch (error) {
+      console.warn("Using embedded response CSS fallback.", error);
+    }
+    return RESPONSE_CSS_FALLBACK;
+  }
+
   function fileManifest(file, packagedPath) {
     return {
       original_name: file.name,
@@ -160,107 +259,139 @@
     };
   }
 
+  function friendlyFilePart(value) {
+    const cleaned = String(value || "Work")
+      .normalize("NFKD")
+      .replace(/[^A-Za-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 54);
+    return cleaned || "Work";
+  }
+
   function buildInstructions(request, teacherNotes) {
     const rubricLine = request.rubric_files.length
       ? "A rubric/scoring guide is included. Use it only where it clearly applies to the submitted evidence."
       : "No rubric/scoring guide is included. Do NOT invent a numeric grade or point scale.";
+    const rosterLine = request.roster_files.length
+      ? "A roster is included. Use it only to resolve student names, identify missing/unmatched evidence, and preserve roster order. Do not infer achievement from the roster."
+      : "No roster is included. Resolve names only from the submitted evidence and filenames; flag uncertainty rather than guessing.";
+    const scannedPath = request.requested_outputs.scanned_student_work_pdf;
 
-    return `# District Grading & Evidence Request - Pilot\n\n` +
-`## Your task\n` +
-`Analyze the student evidence in this ZIP and return exactly ONE response ZIP. Begin from this packaged request; no additional teacher prompt is required to define the task. The teacher should only need to unzip the response and open \`CLICK_ME.html\`. Do not return a collection of loose files as the primary deliverable.\n\n` +
-`Class / group: ${request.teacher.class_or_group}\n` +
-`Assignment / evidence set: ${request.assignment.name}\n` +
-`Grade / subject: ${request.teacher.grade_subject || "Not provided; infer only when the evidence makes it reasonably clear."}\n` +
-`${rubricLine}\n\n` +
-`Teacher notes:\n${teacherNotes || "No additional notes provided."}\n\n` +
-`## Evidence rules\n` +
-`- Judge student work from the supplied evidence, rubric (if present), and teacher notes.\n` +
-`- Do not research students or use outside personal information.\n` +
-`- Do not rely on prior chats, memories, or prior student records unless they are included in this request ZIP.\n` +
-`- Do not use public web research to decide whether student work is correct. General subject-matter knowledge may be used to interpret the evidence and create practice.\n` +
-`- Do not silently guess when a student identity, response, rubric match, or piece of handwriting is unclear. Flag uncertainty.\n` +
-`- If some files cannot be read, process the readable evidence and clearly list the unreadable/ambiguous files.\n` +
-`- If one file contains work from multiple students, separate students only when names/labels are reasonably clear. Otherwise use neutral labels such as Student 01 and flag the mapping issue.\n\n` +
-`## Scoring / feedback policy\n` +
-`- ${request.scoring_policy}\n` +
-`- Evidence comments should distinguish demonstrated strengths from next steps.\n` +
-`- Do not rank students against one another.\n` +
-`- Make student-facing language age-appropriate when the grade level can be determined.\n` +
-`- Treat any AI-produced score or classification as a teacher-review recommendation, not an irreversible final grade.\n\n` +
-`## Required response ZIP structure\n\n` +
-`\`\`\`text\n` +
-`CLICK_ME.html\n` +
-`assets/\n` +
-`  styles.css\n` +
-`students/\n` +
-`  <one print-friendly HTML report per identified student>\n` +
-`class/\n` +
-`  class_overview.html\n` +
-`print/\n` +
-`  all_student_reports.html\n` +
-`  all_student_reports.pdf\n` +
-`  common_review_extension_packet.html\n` +
-`  common_review_extension_packet.pdf\n` +
-`  individualized/\n` +
-`    <one print-friendly HTML practice packet per identified student>\n` +
-`  individualized_packets.pdf\n` +
-`data/\n` +
-`  analysis.json\n` +
-`  request.json\n` +
-`\`\`\`\n\n` +
-`All HTML links must be relative and work when the ZIP is unzipped and opened locally with no web server. Use static HTML/CSS with no external CDN dependencies. PDFs must be generated as finished printable files, not placeholders.\n\n` +
-`## CLICK_ME.html\n` +
-`Create a simple teacher dashboard with three obvious areas:\n` +
-`1. **Individual Student Reports** - clear links/cards for every identified student, plus an obvious **Print All Student Reports** link/button to \`print/all_student_reports.pdf\`.\n` +
-`2. **Class Data** - a link to the class overview and a short summary of the biggest patterns.\n` +
-`3. **Print Options** - simple print choices for class-wide and individualized follow-up:\n` +
-`   - **Common Class Review + Extension** - one general packet based on the most important shared mistakes/unfinished understandings, with 1-2 extension opportunities when evidence supports them.\n` +
-`   - **Individualized Practice** - student-specific practice packets matched to each student's evidence, with extension instead of remediation when appropriate.\n\n` +
-`The teacher should not need to open the data folder. Make the print links prominent and understandable without technical knowledge.\n\n` +
-`## Individual student reports\n` +
-`Keep the individual report format concise, printable, and grounded in that student's evidence. Include:\n` +
-`- student name/label and assignment;\n` +
-`- what the student demonstrated successfully;\n` +
-`- the most important misconception(s), gap(s), or revision need(s);\n` +
-`- specific evidence references when feasible (question/task/criterion);\n` +
-`- rubric criterion results/scores only when a provided rubric supports them;\n` +
-`- 1-3 concrete next steps;\n` +
-`- an uncertainty note when the evidence is incomplete or ambiguous.\n\n` +
-`Do not include other students' names or performance in an individual student's report.\n\n` +
-`Also create \`print/all_student_reports.html\` and \`print/all_student_reports.pdf\` containing every student's report in roster/identified order, with a clear page break between students. Preserve the same report content rather than creating a shortened second version.\n\n` +
-`## Class analysis\n` +
-`Create \`class/class_overview.html\` for the teacher. Include:\n` +
-`- number of student evidence sets successfully analyzed;\n` +
-`- strengths demonstrated by much of the class;\n` +
-`- the most instructionally important common mistakes/misconceptions;\n` +
-`- counts (and percentages when the denominator is reliable) for major patterns;\n` +
-`- students who appear to share each instructional need;\n` +
-`- students who appear ready for extension;\n` +
-`- any evidence-quality or identification problems that limit conclusions.\n\n` +
-`Groupings are instructional recommendations, not permanent labels.\n\n` +
-`## Print option 1 - Common Class Review + Extension\n` +
-`Create one general/common packet driven by actual class patterns, not a generic worksheet. It should:\n` +
-`- target the 1-3 most instructionally useful common mistakes or unfinished understandings;\n` +
-`- include concise reteach/support directions or examples when useful;\n` +
-`- include practice that directly addresses those patterns;\n` +
-`- include 1-2 clearly labeled extension opportunities when class evidence supports them;\n` +
-`- avoid student names;\n` +
-`- be usable as a whole-class handout, small-group task, or station-style activity at the teacher's discretion;\n` +
-`- be age-appropriate and, for early elementary, favor concise teacher-led/hands-on directions over text-heavy worksheets.\n\n` +
-`Provide both \`print/common_review_extension_packet.html\` and \`print/common_review_extension_packet.pdf\`.\n\n` +
-`## Print option 2 - Individualized Practice\n` +
-`Create one student-specific practice packet for every identified student. Each packet should:\n` +
-`- use the student's name/label clearly at the top;\n` +
-`- target that student's most important next step(s) from the submitted evidence;\n` +
-`- avoid unnecessary practice on skills already demonstrated securely;\n` +
-`- provide extension/transfer work instead of remediation when the student is ready;\n` +
-`- contain enough context to be usable without showing the original analysis report;\n` +
-`- never mention or compare the student to classmates.\n\n` +
-`Save the individual HTML packets in \`print/individualized/\`. Also create \`print/individualized_packets.pdf\` containing all individualized packets with a clear page break between students so the teacher can print the full class set at once and distribute pages by student.\n\n` +
-`## data/analysis.json\n` +
-`Store the structured analysis that supports the HTML pages and print materials. Include student identifiers/labels, evidence-file mapping, rubric results when applicable, strengths, needs, class pattern counts, grouping recommendations, common-packet targets, individualized-practice targets, and uncertainty flags. Copy this request's \`request.json\` into \`data/request.json\`.\n\n` +
-`## Final delivery\n` +
-`Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open \`CLICK_ME.html\`.\n`;
+    return `# District Grading & Evidence Request - Pilot
+
+## Task
+Analyze the student evidence in this ZIP and return exactly ONE response ZIP. This packaged request is the complete build contract; no additional teacher prompt is required. The teacher should only need to unzip the response and open CLICK_ME.html.
+
+Class / group: ${request.teacher.class_or_group}
+Assignment / evidence set: ${request.assignment.name}
+Grade / subject: ${request.teacher.grade_subject || "Not provided; infer only when the evidence makes it reasonably clear."}
+${rubricLine}
+${rosterLine}
+
+Teacher notes:
+${teacherNotes || "No additional notes provided."}
+
+## Evidence rules
+- Judge student work from the supplied evidence, rubric (if present), roster (identity/order only), and teacher notes.
+- Do not research students or use outside personal information.
+- Do not rely on prior chats, memories, or prior student records unless they are included in this request ZIP.
+- Do not use public web research to decide whether student work is correct. General subject-matter knowledge may be used to interpret evidence and create follow-up practice.
+- Do not silently guess when a student identity, response, rubric match, or piece of handwriting is unclear. Flag uncertainty.
+- If some files cannot be read, process the readable evidence and clearly list the unreadable or ambiguous files.
+- If a roster student has no identifiable submitted work, mark that as no evidence submitted rather than as incorrect work.
+- If evidence names a student not found on the roster, keep the evidence and flag the mismatch rather than discarding it.
+
+## Scoring and feedback policy
+- ${request.scoring_policy}
+- Distinguish demonstrated strengths from next steps.
+- Do not rank students against one another.
+- Make student-facing language age-appropriate when the grade level can be determined.
+- Treat any AI-produced score or classification as a teacher-review recommendation, not an irreversible final grade.
+
+## Locked response styling
+The request includes response_contract/styles.css. Copy those exact bytes to assets/styles.css in the response ZIP and use that stylesheet for ALL response HTML pages. Do not substitute a new visual theme. Avoid page-specific inline CSS except when strictly necessary for content generated from evidence. The goal is repeatable output across grading runs.
+
+Use the stylesheet classes as intended:
+- CLICK_ME.html: wrap, hero, eyebrow, subtitle, quick-actions, btn, section, grid, card, summary-grid, stat, notice.
+- Student reports: report-page, report-head, report-meta, report-section, feedback-box, clean.
+- Practice/packets: practice-page or packet-page, name-line, practice-block.
+- Combined printable documents: page-break between students.
+
+## Required response ZIP structure
+~~~text
+CLICK_ME.html
+assets/
+  styles.css
+scanned_work/
+  ${scannedPath.split('/').pop()}
+students/
+  <one print-friendly HTML report per identified student>
+class/
+  class_overview.html
+print/
+  all_student_reports.html
+  all_student_reports.pdf
+  common_review_extension_packet.html
+  common_review_extension_packet.pdf
+  individualized/
+    <one print-friendly HTML practice packet per identified student>
+  individualized_packets.pdf
+data/
+  analysis.json
+  request.json
+~~~
+
+All links must be relative and work when the ZIP is unzipped and opened locally with no web server. PDFs must be finished printable files, not placeholders.
+
+## Scanned student work archive
+Create ${scannedPath} as the teacher-friendly archive of the submitted student work.
+- If the submitted evidence is already one combined scan PDF, preserve the page content and simply give it the required teacher-friendly filename.
+- If the submitted evidence is multiple scanned PDFs/images, combine the readable pages into one PDF in a sensible evidence/roster order while preserving the original work.
+- Do not redraw, rewrite, clean up, or alter student answers.
+- If a submitted file cannot reasonably be represented in the combined PDF, keep the readable work in the PDF and record the limitation in class/class_overview.html and data/analysis.json.
+
+## CLICK_ME.html layout - fixed
+Keep the dashboard compact. Use this order:
+
+1. Hero/header with class, assignment, and grade/subject.
+2. ONE top quick-action row with exactly these three prominent buttons:
+   - Print All Student Reports (PDF) -> print/all_student_reports.pdf
+   - Print All Individualized Practice (PDF) -> print/individualized_packets.pdf
+   - View Scanned Student Work (PDF) -> ${scannedPath}
+3. Individual Student Reports section with one link/card per student.
+4. Class Data section with a concise pattern summary and link to class/class_overview.html.
+5. Print Options section containing ONLY items that are not duplicates of the three top quick actions:
+   - Common Class Review + Extension -> common packet PDF/HTML.
+   - Individual Student Practice -> one clearly labeled link/card per student's individualized HTML packet.
+
+Do NOT repeat Print All Student Reports, Print All Individualized Practice, or View Scanned Student Work again lower on CLICK_ME.html. The teacher should never have to click a second-looking button just to discover it is the same file.
+
+## Individual student reports
+Keep the current concise report format: student name/label and assignment; demonstrated strengths; the most important misconception/gap/revision need; specific evidence references when feasible; rubric criterion results only when supported; 1-3 concrete next steps; and an uncertainty note when needed. Do not include other students' names or performance.
+
+Create print/all_student_reports.html and print/all_student_reports.pdf containing every student's full report in roster order when a roster is available, otherwise identified order. Put a clear page break between students. Do not create a shortened second version.
+
+## Class analysis
+Create class/class_overview.html for the teacher. Include the number of evidence sets analyzed, class strengths, the most instructionally important common mistakes, reliable counts/percentages for major patterns, suggested instructional groupings, students ready for extension, and evidence/identity limitations. Groupings are instructional recommendations, not permanent labels.
+
+## Print option - Common Class Review + Extension
+Create one general packet driven by actual class patterns, not a generic worksheet. Target the 1-3 most useful common mistakes or unfinished understandings, include concise support/examples when useful, include practice that directly addresses the patterns, and include 1-2 extension opportunities when evidence supports them. Avoid student names. Make it usable as whole-class work, small-group work, or stations at teacher discretion. Provide both HTML and PDF.
+
+## Print option - Individualized Practice
+Create one student-specific practice packet for every identified student. Target that student's highest-leverage next step(s), avoid unnecessary practice on already-secure skills, and use extension/transfer instead of remediation when appropriate. Never compare the student to classmates. Save individual HTML packets in print/individualized/ and create print/individualized_packets.pdf containing the entire class set with a page break between students.
+
+## data/analysis.json
+Store the structured analysis behind the reports and print materials. Include student identifiers/labels, evidence-file mapping, roster matching status when applicable, rubric results when applicable, strengths, needs, class pattern counts, grouping recommendations, common-packet targets, individualized-practice targets, and uncertainty flags. Copy request.json into data/request.json.
+
+## Final QA before delivery
+- assets/styles.css exactly matches response_contract/styles.css from this request.
+- CLICK_ME.html has exactly one top quick-action row and no duplicate quick-action links lower on the page.
+- The scanned-work PDF exists at ${scannedPath} and the top dashboard link opens it.
+- Combined student-report PDF contains all identified students in roster/identified order with page breaks.
+- Combined individualized-practice PDF contains all identified students with page breaks.
+- All relative HTML links resolve after unzip.
+- Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open CLICK_ME.html.
+`;
   }
 
   function slug(value) {

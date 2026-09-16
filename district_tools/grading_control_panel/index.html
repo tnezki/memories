@@ -18,7 +18,7 @@
   <div class="grid">
     <section class="card">
       <h2>Build a grading request</h2>
-      <p class="small">Only student evidence is required. The rubric and teacher notes are optional.</p>
+      <p class="small">Only student evidence is required. A roster, rubric, and teacher notes are optional.</p>
 
       <div class="row">
         <div>
@@ -48,14 +48,21 @@
         <ul id="evidenceList" class="file-list"></ul>
       </div>
 
-      <label for="rubricFiles">2. Rubric / scoring guide <span class="small">(optional)</span></label>
+      <label for="rosterFiles">2. Class roster <span class="small">(optional)</span></label>
+      <div class="drop">
+        <input id="rosterFiles" type="file" multiple>
+        <div class="small" style="margin-top:7px">Helpful when scans or filenames make student names difficult to read. CSV, spreadsheet, PDF, document, or text rosters are fine. The roster is used only to match names and preserve class order.</div>
+        <ul id="rosterList" class="file-list"></ul>
+      </div>
+
+      <label for="rubricFiles">3. Rubric / scoring guide <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rubricFiles" type="file" multiple>
         <div class="small" style="margin-top:7px">If a rubric is included, the response may score against it. Without a rubric, the request asks for evidence-based feedback and mastery indicators rather than an invented numeric grade.</div>
         <ul id="rubricList" class="file-list"></ul>
       </div>
 
-      <label for="teacherNotes">3. Teacher notes <span class="small">(optional)</span></label>
+      <label for="teacherNotes">4. Teacher notes <span class="small">(optional)</span></label>
       <textarea id="teacherNotes" placeholder="Add anything ChatGPT should know about this evidence set."></textarea>
       <div class="small" style="margin-top:7px"><b>Useful hints you can add:</b> click any idea to place it in your notes, then edit it as needed.</div>
       <div class="chips" id="noteHints">
@@ -65,6 +72,12 @@
         <button type="button" class="chip" data-note="Students worked in pairs, so do not treat shared language as evidence of copying.">Students worked in pairs</button>
         <button type="button" class="chip" data-note="Accept multiple valid solution methods when the evidence supports the thinking.">Allow multiple methods</button>
         <button type="button" class="chip" data-note="Pay special attention to vocabulary, explanation, and use of evidence.">Focus on explanation</button>
+        <button type="button" class="chip" data-note="Do not lower the academic evaluation for spelling or grammar unless writing mechanics are part of the target or rubric.">Ignore writing mechanics</button>
+        <button type="button" class="chip" data-note="Credit partial understanding when the work shows a correct idea even if the final answer is incomplete or incorrect.">Look for partial understanding</button>
+        <button type="button" class="chip" data-note="Treat blank or missing responses as insufficient evidence, not automatically as a misconception or lack of understanding.">Missing is not incorrect</button>
+        <button type="button" class="chip" data-note="Keep each student's feedback concise and prioritize only the highest-leverage next steps.">Keep feedback concise</button>
+        <button type="button" class="chip" data-note="For students who show secure understanding, prioritize extension, transfer, or application instead of extra repetition.">Extend mastered students</button>
+        <button type="button" class="chip" data-note="Flag unreadable scans, uncertain names, or ambiguous responses instead of guessing what the student wrote.">Flag unclear scans</button>
       </div>
 
       <div id="buildStatus" class="status warn">Add the required fields and at least one evidence file.</div>
