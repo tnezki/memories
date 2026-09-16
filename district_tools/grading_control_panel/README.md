@@ -36,13 +36,19 @@ The teacher selects one authoritative mode:
 
 Free-form notes may add grading directions but may not silently change the selected mode. Conflicts are recorded in `data/qa.json` and the run continues.
 
+## Duplex-safe student printing
+
+The combined student-report PDF and combined individualized-practice PDF are built for two-sided printing. Each student's segment must occupy an even number of physical pages. After final rendering, a one-page student receives one blank back page, a two-page student receives no blank, a three-page student receives one blank fourth page, and so on. This guarantees that the next student always begins on the front of a new sheet and prevents two students from sharing opposite sides of the same piece of paper.
+
+The rule is enforced in both the combined printable HTML and the finished PDF, and `data/qa.json` records each student's page count before and after padding. Stations are not padded by this rule because they are not individual-student packets.
+
 ## Built-in response contract
 
 The control panel owns the grading-response build contract directly in `app.js`. Each request ZIP includes:
 
 - `REQUEST_READ_ME_FIRST.md` - complete response/build instructions;
 - `request.json` - teacher choices and source manifests;
-- `response_contract/styles.css` - locked general response stylesheet;
+- `response_contract/styles.css` - locked general response stylesheet, including the duplex blank-page class;
 - `response_contract/stations.css` - locked station stylesheet based on the current Algebra station format;
 - style-version files;
 - `response_contract/MATH_VISUAL_QA.md` - hard MathJax, graph, visual, evidence-rating, station, and QA requirements;
