@@ -1,20 +1,84 @@
 /* Canonical Portfolio presentation layer */
 :root{--navy:#173f73;--ink:#17243a;--muted:#63738b;--line:#b9c9de;--pale:#f5f8fc;--bluepale:#eaf1fa;--white:#fff;--accent:#294f82}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-.student-page{width:8.5in;height:11in;padding:.34in .42in .34in;position:relative;overflow:hidden;break-after:page;background:#fff}
+.student-page{width:8.5in;height:11in;padding:.30in .38in .30in;position:relative;overflow:hidden;break-after:page;background:#fff}
 .teacher-page{width:11in;height:8.5in;padding:.30in .36in .28in;position:relative;overflow:hidden;break-after:page;background:#fff}
+
+/* STUDENT REPORT: larger-print two-page layout */
+.student-page .top-rule{height:6px;background:var(--navy);margin-bottom:12px}
+.student-page .eyebrow{font-size:15px;font-weight:700;color:var(--muted);letter-spacing:.055em;text-transform:uppercase}
+.student-page h1{font-size:44px;line-height:1.02;color:var(--navy);margin:8px 0 4px;letter-spacing:-.01em}
+.student-page .subtitle{font-size:18px;font-weight:700;margin:0;color:#40516b}
+.student-page .meta{position:absolute;right:.38in;top:.31in;text-align:right;font-size:15px;line-height:1.42}
+.student-page .meta strong{font-size:18px}
+.student-page .standard{border:2px solid var(--navy);background:var(--bluepale);border-radius:13px;padding:14px 16px;margin-top:16px;font-size:16px;line-height:1.3}
+.student-page .standard strong{color:var(--navy);font-size:18px;margin-right:9px}
+.student-page .snapshot{display:grid;grid-template-columns:1.34in 1fr;gap:12px;margin-top:14px}
+.student-page .grade{height:150px;border-radius:14px;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.student-page .grade .letter{font-size:70px;font-weight:800;line-height:.92}
+.student-page .grade .label{font-size:15px;font-weight:700;margin-top:12px;letter-spacing:.025em;text-align:center}
+.student-page .picture{height:150px;border:2px solid var(--navy);border-radius:14px;background:var(--bluepale);padding:14px 16px}
+.student-page .picture h2{font-size:25px;line-height:1.08;margin:0 0 8px;color:var(--navy)}
+.student-page .picture .lead{font-size:17px;font-weight:700;line-height:1.2}
+.student-page .picture p{font-size:13.5px;line-height:1.28;margin:6px 0 8px}
+.student-page .mg-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.student-page .mg-chip{background:#fff;border:1.3px solid var(--line);border-radius:8px;text-align:center;padding:5px 3px;font-size:11.5px;line-height:1.1}
+.student-page .mg-chip b{display:block;color:var(--navy);font-size:14px}
+
+.evidence-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:15px 0 6px}
+.evidence-heading h2{font-size:25px;line-height:1.05;color:var(--navy);margin:0 0 3px}
+.evidence-heading p{font-size:13px;font-weight:700;color:#40516b;margin:0}
+.student-page .legend{display:flex;align-items:center;justify-content:flex-end;gap:9px;font-size:11.5px;line-height:1.15;margin:0;flex-wrap:wrap;max-width:4.1in}
+.student-page .legend b{margin-right:1px}
+.legend-item{display:flex;align-items:center;gap:4px;white-space:nowrap}
+.status-dot{width:16px;height:16px;border:2px solid var(--navy);border-radius:50%;display:inline-block;position:relative;flex:none;background:#fff}
+.status-dot.developing{background:#fff;overflow:hidden}.status-dot.developing::before{content:"";position:absolute;left:0;top:0;bottom:0;width:50%;background:var(--navy)}
+.status-dot.mastered{background:var(--navy)}
+.status-star{color:var(--navy);font-size:19px;line-height:1}
+.student-page .next-key{font-size:11.5px;line-height:1.24;color:#465873;margin:0 0 8px}
+.student-page .next-key b{color:var(--navy)}
+
+.student-page .unit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.student-page .unit-grid>.mg-card:last-child:nth-child(odd){grid-column:1/-1}
+.student-page .mg-card{border:1.5px solid var(--line);border-radius:11px;overflow:hidden;min-height:0;break-inside:avoid;background:#fff}
+.student-page .mg-head{background:var(--bluepale);padding:11px 12px 9px;border-bottom:1px solid var(--line)}
+.student-page .mg-head h2{font-size:22px;line-height:1.1;color:var(--navy);margin:0 0 5px}
+.student-page .mg-head p{font-size:14px;line-height:1.22;margin:0;color:#45566e}
+.student-page .ican{display:grid;grid-template-columns:21px 1fr;gap:7px;align-items:start;padding:8px 10px;border-bottom:1px solid #e0e7f0;font-size:14.5px;line-height:1.2}
+.student-page .ican:last-of-type{border-bottom:0}
+.student-page .ican-main{min-width:0}
+.student-page .ican-text{font-size:14.5px;line-height:1.2}
+.student-page .ican-next{font-size:12.5px;line-height:1.16;margin-top:3px;color:#4d5f76;font-weight:700}
+.student-page .ican-next b{color:var(--navy)}
+.student-page .mg-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;font-size:12.5px;font-weight:700;color:#3f5068;background:#fbfcfe}
+.student-page .mg-foot strong{color:var(--navy)}
+.student-back h1{font-size:36px;margin-top:7px}
+.student-back .back-grid{margin-top:14px}
+
+.student-page .recent{margin-top:12px;border:1.5px solid var(--line);border-radius:11px;padding:11px 12px}
+.student-page .recent h2{font-size:22px;color:var(--navy);margin:0 0 7px}
+.student-page .recent table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.22}
+.student-page .recent th{text-align:left;color:#3d506a;font-size:12.5px;padding:5px 6px;border-bottom:1.5px solid var(--navy)}
+.student-page .recent td{padding:5px 6px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.student-page .recent tr:last-child td{border-bottom:0}
+.student-page .recent .judgment{font-weight:700}
+
+.practice-box{margin-top:12px;border:2px solid var(--navy);border-radius:12px;background:var(--pale);padding:11px 12px;display:grid;grid-template-columns:1fr 1.12in;gap:14px;align-items:center;break-inside:avoid}
+.practice-box h2{font-size:23px;line-height:1.05;color:var(--navy);margin:0 0 4px}
+.practice-box p{font-size:14.5px;line-height:1.25;margin:0 0 6px;color:#40516b}
+.practice-target{font-size:14.5px;line-height:1.24;color:var(--ink)}
+.practice-target b{color:var(--navy)}
+.student-page .qrbox{text-align:center}
+.student-page .qrbox img{width:1.02in;height:1.02in;border:1px solid #d6dce5;padding:3px;background:#fff}
+.student-page .qrbox .qrlabel{font-size:11.5px;line-height:1.18;color:#41526a;margin-top:3px}
+
+.student-page .footer{position:absolute;left:.38in;right:.38in;bottom:.18in;display:flex;justify-content:space-between;gap:12px;font-size:9px;color:var(--muted)}
+
+/* TEACHER REPORT: preserve approved existing presentation */
 .top-rule{height:5px;background:var(--navy);margin-bottom:12px}.eyebrow{font-size:8.6px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
 h1{font-size:25px;line-height:1.05;color:var(--navy);margin:5px 0 3px}.subtitle,.sub{font-size:10.5px;font-weight:700;margin:0;color:#40516b}.meta{position:absolute;right:.42in;top:.36in;text-align:right;font-size:9.2px;line-height:1.42}.meta strong{font-size:10.8px}
-.standard{border:1.6px solid var(--navy);background:var(--bluepale);border-radius:11px;padding:11px 13px;margin-top:10px;font-size:9.2px;line-height:1.3}.standard strong{color:var(--navy);font-size:10.3px;margin-right:8px}
-.snapshot{display:grid;grid-template-columns:1.2in 1fr;gap:10px;margin-top:10px}.grade{height:111px;border-radius:12px;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}.grade .letter{font-size:43px;font-weight:800;line-height:1}.grade .label{font-size:9px;font-weight:700;margin-top:9px;letter-spacing:.03em}.picture{height:111px;border:1.6px solid var(--navy);border-radius:12px;background:var(--bluepale);padding:11px 13px}.picture h2,.panel h2,.action h2{margin:0;color:var(--navy)}.picture h2{font-size:14px;margin-bottom:7px}.picture .lead{font-size:10px;font-weight:700}.picture p{font-size:8.1px;line-height:1.28;margin:4px 0 6px}.mg-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.mg-chip{background:#fff;border:1px solid var(--line);border-radius:7px;text-align:center;padding:4px 2px;font-size:6.8px;line-height:1.15}.mg-chip b{display:block;color:var(--navy);font-size:8.4px}
-.middle{display:grid;grid-template-columns:.86fr 1.14fr;gap:10px;margin-top:10px}.panel{border:1.2px solid var(--line);border-radius:11px;padding:11px 13px;min-height:159px}.panel h2{font-size:14px;margin-bottom:8px}.panel ul{margin:0;padding-left:17px}.panel li{font-size:8.6px;line-height:1.34;margin-bottom:7px}.target-panel{border-left:5px solid var(--navy)}.target{font-size:10.4px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:7px}.path{background:var(--bluepale);border-radius:8px;padding:7px 8px;margin:6px 0 7px}.path-row{font-size:7.8px;line-height:1.28;margin:2px 0}.path-row b{color:var(--navy);display:inline-block;min-width:.63in}.family{font-weight:800}.target-note{font-size:8.1px;line-height:1.3;color:#33445e}
-.reason-row{display:grid;grid-template-columns:.92in 1fr;gap:6px;margin-top:5px;font-size:7.8px;line-height:1.25;color:#33445e}.reason-row b{color:var(--navy)}.reason-row.next-row{margin-top:4px;padding-top:4px;border-top:1px solid #d7e0eb}.next-key{font-size:7.1px;line-height:1.25;color:#465873;margin:-2px 0 8px}.next-key b{color:var(--navy)}
-.action{margin-top:10px;border:1.4px solid var(--navy);border-radius:12px;padding:12px 13px;background:var(--pale);min-height:212px}.action h2{font-size:15px;margin-bottom:4px}.action-intro{font-size:8.4px;color:#42536c;margin-bottom:8px}.action-grid{display:grid;grid-template-columns:1fr 1.25in;gap:14px;align-items:start}.steps{font-size:8.4px;line-height:1.38}.steps ol{margin:4px 0 7px 17px;padding:0}.steps li{margin-bottom:3px}.qrbox{text-align:center}.qrbox img{width:1.05in;height:1.05in;border:1px solid #d6dce5;padding:3px;background:#fff}.qrbox .qrlabel{font-size:7.3px;line-height:1.25;color:#41526a;margin-top:3px}.reflect-title{font-size:9.2px;font-weight:700;color:var(--navy);margin-top:6px}.checkrow{font-size:8.2px;margin-top:3px}.prompt{font-size:8px;margin-top:5px}.write-line{border-bottom:1px solid #8699b2;height:17px}.write-line.tall{height:24px}
-.footer{position:absolute;left:.42in;right:.42in;bottom:.22in;display:flex;justify-content:space-between;font-size:6.6px;color:var(--muted)}.teacher-page .footer{left:.36in;right:.36in}
-.legend{display:flex;align-items:center;gap:10px;font-size:8.1px;margin:8px 0 9px}.legend b{margin-right:2px}.legend-item{display:flex;align-items:center;gap:4px}.status-dot{width:11px;height:11px;border:1.5px solid var(--navy);border-radius:50%;display:inline-block;position:relative;flex:none;background:#fff}.status-dot.developing{background:#fff;overflow:hidden}.status-dot.developing::before{content:"";position:absolute;left:0;top:0;bottom:0;width:50%;background:var(--navy)}.status-dot.mastered{background:var(--navy)}.status-star{color:var(--navy);font-size:12px;line-height:1}
-.unit-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mg-card{border:1.2px solid var(--line);border-radius:10px;overflow:hidden;min-height:238px}.mg-head{background:var(--bluepale);padding:9px 10px 8px;border-bottom:1px solid var(--line)}.mg-head h2{font-size:13.2px;color:var(--navy);margin:0 0 3px}.mg-head p{font-size:7.8px;line-height:1.26;margin:0;color:#45566e}.ican{display:grid;grid-template-columns:16px 1fr;gap:5px;align-items:start;padding:6px 9px;border-bottom:1px solid #e0e7f0;font-size:7.8px;line-height:1.23}.ican:last-of-type{border-bottom:0}.ican-main{min-width:0}.ican-text{font-size:7.8px;line-height:1.23}.ican-next{font-size:6.65px;line-height:1.15;margin-top:2px;color:#4d5f76;font-weight:700}.ican-next b{color:var(--navy)}.mg-foot{display:flex;justify-content:space-between;align-items:center;padding:6px 9px;font-size:7.5px;font-weight:700;color:#3f5068;background:#fbfcfe}.mg-foot strong{color:var(--navy)}
-.recent{margin-top:10px;border:1.2px solid var(--line);border-radius:10px;padding:10px 11px}.recent h2{font-size:13.4px;color:var(--navy);margin:0 0 6px}.recent table{width:100%;border-collapse:collapse;font-size:7.5px}.recent th{text-align:left;color:#3d506a;font-size:7.1px;padding:3px 5px;border-bottom:1.2px solid var(--navy)}.recent td{padding:4px 5px;border-bottom:1px solid #e2e8f0;vertical-align:top}.recent tr:last-child td{border-bottom:0}.recent .judgment{font-weight:700}
-/* teacher 2 x 2 card system */
-.teacher-page h1{font-size:21px;margin:4px 0 2px}.teacher-page .sub{font-size:9px}.tgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;margin-top:10px;height:6.83in}.tcard{border:1.2px solid var(--line);border-radius:10px;overflow:hidden;min-height:0}.tcard-head{background:var(--bluepale);padding:8px 10px 7px;border-bottom:1px solid var(--line)}.tcard-head .id{font-size:7.3px;font-weight:800;color:var(--navy);letter-spacing:.02em}.tcard-head h2{font-size:12.2px;line-height:1.14;margin:3px 0 5px;color:var(--navy)}.stats{display:flex;flex-wrap:wrap;gap:5px 9px;font-size:6.9px;color:#465873}.stats b{color:#1d3558}.tbody{padding:7px 10px 8px}.group-label{font-size:7.2px;font-weight:800;color:#31445f;margin-bottom:4px}.period-label{font-size:7px;font-weight:800;color:var(--navy);margin:4px 0 2px}.names,.inline{columns:3;column-gap:18px;margin:0;padding-left:14px}.names li,.inline li{font-size:6.65px;line-height:1.32;break-inside:avoid;margin:0 0 1px}
+.teacher-page .footer{position:absolute;left:.36in;right:.36in;bottom:.22in;display:flex;justify-content:space-between;font-size:6.6px;color:var(--muted)}
+.teacher-page h1{font-size:21px;margin:4px 0 2px}.teacher-page .sub{font-size:9px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;margin-top:10px;height:6.83in}.tcard{border:1.2px solid var(--line);border-radius:10px;overflow:hidden;min-height:0}.tcard-head{background:var(--bluepale);padding:8px 10px 7px;border-bottom:1px solid var(--line)}.tcard-head .id{font-size:7.3px;font-weight:800;color:var(--navy);letter-spacing:.02em}.tcard-head h2{font-size:12.2px;line-height:1.14;margin:3px 0 5px;color:var(--navy)}.stats{display:flex;flex-wrap:wrap;gap:5px 9px;font-size:6.9px;color:#465873}.stats b{color:#1d3558}.tbody{padding:7px 10px 8px}.group-label{font-size:7.2px;font-weight:800;color:#31445f;margin-bottom:4px}.period-label{font-size:7px;font-weight:800;color:var(--navy);margin:4px 0 2px}.names,.inline{columns:3;column-gap:18px;margin:0;padding-left:14px}.names li,.inline li{font-size:6.65px;line-height:1.32;break-inside:avoid;margin:0 0 1px}
 .sortkey{margin-top:8px;border:1px solid var(--line);background:var(--pale);border-radius:8px;padding:7px 9px;font-size:6.6px;line-height:1.28;color:#40516a}.sortgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:9px;margin-top:8px;height:6.52in}.sort-card .tcard-head{padding:7px 9px 6px}.status-strip{display:flex;flex-wrap:wrap;gap:4px 8px;font-size:6.5px;color:#41536c}.status-strip b{color:#1f385d}.opportunity{font-size:6.2px;color:#596a82;margin-top:3px}.sort-card .tbody{padding:6px 9px}.sort-row{margin-bottom:4px}.sort-row>b{display:block;font-size:6.6px;color:#253c5f;margin-bottom:1px}.sort-row .inline{columns:3;padding-left:13px}.flag-none{font-size:6.3px;color:#68768a;font-style:italic}.review-flag{font-size:6.3px;color:#7b3f00;font-weight:700}
 @media print{html,body{background:#fff}.student-page,.teacher-page{break-after:page}}

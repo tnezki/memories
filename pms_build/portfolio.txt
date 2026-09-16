@@ -2,7 +2,7 @@ PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT DRIVE WORKFLOW
 ===========================================================
 STATUS: CURRENT
 JOB: portfolio
-REVISION: 2026-09-13 v3.0 - COURSE-AWARE PORTFOLIO RUNTIME
+REVISION: 2026-09-16 v3.1 - LARGE-PRINT TWO-PAGE STUDENT REPORT + PRACTICE BUILDER QR
 
 ROLE
 ----
@@ -157,36 +157,65 @@ Newest-source summary rows use source-level I Can judgments after required withi
 ===========================================================
 Resolve Tools/MANIFEST.json -> Portfolio template contract/student template/CSS. The registered HTML is a CANONICAL SHELL, not an example.
 
-Exactly 2 content pages/student; one PDF per period; student bookmarks. No third tracker page.
-Do not paraphrase fixed headings/reflection/table architecture.
+Exactly 2 content pages/student; one PDF per period; student bookmarks. No third tracker page. Because each student is exactly two pages, combined class PDFs are duplex-safe by construction.
+Do not paraphrase fixed headings/table/card architecture.
 
-PAGE 1 fixed title/sections:
+LARGE-PRINT RULE:
+- Use the enlarged student typography owned by the canonical CSS.
+- The redesign starts near twice the former student-report font baseline.
+- Render/inspect the actual PDF. If one area does not fit, first change the Mastery Goal split between pages (2+2 default, then 1+3 or 3+1) before reducing type.
+- Never shrink the whole report back to the prior small-print scale merely to preserve a preferred split.
+- No clipping, overlap, or content loss is allowed.
+
+PAGE 1 fixed structure:
 Current Progress Report
 Essential Standard
 Your current picture
-What you are showing
-Your next best target
-Why this is next
-Next step
-When I am ready to work on this
-My check-in
-
-Controlled language:
-- Current picture: short factual body-of-evidence snapshot. On an early first-source run, explicitly say one evidence source can give strong first evidence but does not establish mastery by itself.
-- Strength bullets begin `You showed...` / `You also...` and name the demonstrated skill.
-- Next target: exactly one I Can selected from full current body of evidence.
-- Print exact MG code/title, I Can code/full exact statement, and recommended family label/name.
-- Use approved Why-this-is-next and Next-step frames from the template contract/action state.
-- Report guidance is practice, not reassessment.
-- Resolve the exact Student Bank family URL from the current COURSE PORTFOLIO POLICY. Never hard-code the Algebra domain/path for another course.
-- When a course policy declares a Student Practice Builder route, it may also be emitted as a digital hyperlink for the selected I Can, but the printed QR remains the exact Student Bank family unless the current template contract is deliberately changed.
-
-PAGE 2 fixed title:
 Unit Evidence Picture
-Subtitle is dynamic: `All <MG count> Mastery Goals and all <I Can count> I Cans.`
-Show all MG/I Can status markers. Every I Can row shows code + full exact statement and one compact `Next:` action label.
-Recent evidence table columns remain:
+
+Keep the compact current-progress summary at the top: Unit status, MG demonstrated count, approved current-picture text, and MG chips.
+Below it, show the first portion of the current Mastery Goal cards using exact current I Can status/action data.
+
+PAGE 2 fixed structure:
+Unit Evidence Picture
+Recent evidence - <latest evidence label>
+Your Practice
+
+Show every remaining Mastery Goal card, then the Recent evidence table, then the Practice Builder QR block.
+
+MASTERY GOAL DISTRIBUTION:
+- For a four-MG Unit, begin with 2 MG cards on page 1 and 2 on page 2.
+- If rendered card heights/readability require it, 1+3 or 3+1 is explicitly allowed.
+- All current MGs must appear exactly once across the two pages.
+- Never omit an I Can to make the layout fit.
+
+CURRENT-PICTURE LANGUAGE:
+- Use a short factual body-of-evidence snapshot.
+- On an early first-source run, explicitly say one evidence source can give strong first evidence but does not establish mastery by itself.
+
+I CAN CARDS:
+- Print exact MG code/title and exact I Can code/full statement.
+- Every I Can row has its status marker plus one compact `Next:` action label from the template contract.
+- No code-only human labels.
+
+RECENT EVIDENCE:
+Columns remain:
 I Can | Target | Evidence | What this showed
+Use enlarged report type from the canonical CSS.
+
+PRACTICE BUILDER QR - HARD:
+- The printed student-report QR opens the current COURSE Student Practice Builder, NOT the Student Bank.
+- Resolve the exact Practice Builder URL pattern from the current course Portfolio policy.
+- URL contains only Unit + exact selected I Can ID, normally `?unit={unit}&ican={i_can_id}`.
+- The Practice Builder must therefore open with that exact I Can already checked.
+- Never put student name, student ID, period, evidence text, status, or other student-specific state in the URL/QR.
+- Show the selected exact I Can code + full statement beside the QR.
+
+SELECTED PRACTICE I CAN:
+- Prefer a current `PRACTICE_AND_CHECK` I Can when evidence shows a demonstrated gap/incomplete understanding.
+- Do not choose a `NEEDS_FIRST_CHECK` I Can merely because it lacks evidence when a demonstrated practice need exists.
+- If multiple PRACTICE_AND_CHECK targets exist, use the normal next-target priorities in section 11.
+- If none exist, use the normal next-target rule so the QR still opens a meaningful selected target.
 
 STATUS MARKERS:
 - No Evidence = empty outlined circle
@@ -219,11 +248,13 @@ Use full longitudinal state and fixed categories:
 If more current I Cans require cards than fit one page, continue the canonical layout across additional pages.
 
 ===========================================================
-11. NEXT TARGET / PRACTICE FAMILY
+11. NEXT TARGET / PRACTICE ROUTING
 ===========================================================
 Choose from full current evidence, not just the last wrong answer. Prefer a target blocking MG demonstration, close to mastery and needing another opportunity, or showing a clear misconception.
 
-Family A = normal direct/core start. Family B = alternate representation/route. Family C = reasoning/misconception/transfer. Use the exact family whose evidence job fits the next move and resolve all IDs/names from the current Family Bank.
+For the printed Practice Builder QR, demonstrated practice need has priority: select a `PRACTICE_AND_CHECK` target before a no-evidence-only `NEEDS_FIRST_CHECK` target when such a demonstrated need exists.
+
+Family A/B/C remains Bank/question-family evidence architecture for curriculum generation and teacher reasoning. The student Practice Builder does not expose family controls, and the Portfolio report no longer routes the student through a Student Bank family anchor.
 
 ===========================================================
 12. POWERSCHOOL
@@ -252,16 +283,17 @@ Before PASS verify:
 5 source map/lineage used when declared; no same-source independence inflation;
 6 ledger/history append preserved;
 7 current statuses/MG rollups/Unit rollup match current course policy;
-8 exactly 2 student pages per student + bookmarks;
+8 exactly 2 student pages per student + bookmarks; combined student PDFs are duplex-safe;
 9 every human-facing I Can shows code + full exact statement;
-10 student report fixed headings/reflection/table/action frames match template contract;
+10 student report fixed headings/table/card/Practice Builder architecture match the current template contract;
 11 rendered status markers visibly distinguish all four states;
-12 Student Bank QR uses the exact current course/family route, never another course's domain;
-13 newest-source teacher cards use one needs-evidence list and no invented buckets;
-14 longitudinal sort uses full history/fixed categories;
-15 PowerSchool CSVs preserve template shape;
-16 no student data written to GitHub; no report HTML stored in Drive;
-17 outputs returned individually, not as transfer ZIP.
+12 all Mastery Goals/I Cans appear exactly once across the two student pages with no clipping/overlap; use 2+2, 1+3, or 3+1 as rendered fit requires;
+13 printed QR resolves the exact current COURSE Practice Builder and opens with the selected exact I Can checked; it is not a Student Bank QR and contains no student identity/state;
+14 newest-source teacher cards use one needs-evidence list and no invented buckets;
+15 longitudinal sort uses full history/fixed categories;
+16 PowerSchool CSVs preserve template shape;
+17 no student data written to GitHub; no report HTML stored in Drive;
+18 outputs returned individually, not as transfer ZIP.
 
 If a check fails, repair that concrete defect before delivery. When all pass, stop.
 
