@@ -18,7 +18,7 @@
   <div class="grid">
     <section class="card">
       <h2>Build a grading request</h2>
-      <p class="small">Only student evidence is required. A roster, rubric, and teacher notes are optional. Choose the grade/score output for each run.</p>
+      <p class="small">Only student evidence is required. A roster, rubric, and teacher notes are optional.</p>
 
       <div class="row">
         <div>
@@ -58,23 +58,29 @@
       <label for="rubricFiles">3. Rubric / scoring guide <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rubricFiles" type="file" multiple>
-        <div class="small" style="margin-top:7px">A rubric or scoring guide gives the analysis explicit criteria. Whether the response returns a score, mastery level, or feedback only is controlled by the Grade / score output choice below.</div>
+        <div class="small" style="margin-top:7px">A rubric or scoring guide gives the analysis explicit criteria. It can also control the optional grade/score when selected below.</div>
         <ul id="rubricList" class="file-list"></ul>
       </div>
 
-      <label for="gradeOutput">4. Grade / score output</label>
+      <label>4. Evidence rating</label>
+      <div class="status good" style="margin-top:0">
+        <b>Convincing / Limited / Incorrect / Not Observed</b><br>
+        <span class="small" style="color:inherit">Every student report uses this evidence language. Not Observed means there is not enough usable evidence; it is not the same as Incorrect.</span>
+      </div>
+
+      <label for="gradeOutput">5. Optional grade / score</label>
       <select id="gradeOutput" style="width:100%;font:inherit;border:1px solid #cbd4df;border-radius:10px;padding:11px 12px;background:#fff;color:#18202a">
-        <option value="mastery" selected>Mastery level - Secure / Developing / Needs Revision</option>
-        <option value="none">Feedback only - no grade or mastery label</option>
+        <option value="none" selected>No separate grade / score</option>
         <option value="rubric">Use the supplied rubric / scoring guide</option>
         <option value="recommend">Recommend a grade from the evidence</option>
       </select>
-      <div class="small" style="margin-top:7px"><b>This choice is authoritative.</b> Teacher notes can add details such as a grading scale, but they cannot override this selection. If you choose a rubric score, upload the rubric above.</div>
+      <div class="small" style="margin-top:7px"><b>This choice is authoritative.</b> The evidence rating still appears either way. If you choose rubric scoring, attach the rubric above. If you choose a recommended grade, ChatGPT may make a teacher-review recommendation from the submitted evidence and any grading directions you add below.</div>
 
-      <label for="teacherNotes">5. Teacher notes <span class="small">(optional)</span></label>
+      <label for="teacherNotes">6. Teacher notes <span class="small">(optional)</span></label>
       <textarea id="teacherNotes" placeholder="Add anything ChatGPT should know about this evidence set."></textarea>
       <div class="small" style="margin-top:7px"><b>Useful hints you can add:</b> click any idea to place it in your notes, then edit it as needed.</div>
       <div class="chips" id="noteHints">
+        <button type="button" class="chip" data-note="Give specific positive feedback on what the student demonstrated. Then clearly identify what is incorrect, incomplete, or needs revision and state what the student needs to fix.">Positive + clear fixes</button>
         <button type="button" class="chip" data-note="Focus on reasoning more than small arithmetic or spelling errors.">Focus on reasoning</button>
         <button type="button" class="chip" data-note="This is formative; prioritize feedback and next steps over the grade or score.">Formative emphasis</button>
         <button type="button" class="chip" data-note="Ignore Question 7 when judging student understanding.">Ignore a question</button>
@@ -83,9 +89,9 @@
         <button type="button" class="chip" data-note="Pay special attention to vocabulary, explanation, and use of evidence.">Focus on explanation</button>
         <button type="button" class="chip" data-note="Do not lower the academic evaluation for spelling or grammar unless writing mechanics are part of the target or rubric.">Ignore writing mechanics</button>
         <button type="button" class="chip" data-note="Credit partial understanding when the work shows a correct idea even if the final answer is incomplete or incorrect.">Look for partial understanding</button>
-        <button type="button" class="chip" data-note="Treat blank or missing responses as insufficient evidence, not automatically as a misconception or lack of understanding.">Missing is not incorrect</button>
+        <button type="button" class="chip" data-note="Treat blank or missing responses as Not Observed, not automatically as Incorrect.">Missing is not incorrect</button>
         <button type="button" class="chip" data-note="Keep each student's feedback concise and prioritize only the highest-leverage next steps.">Keep feedback concise</button>
-        <button type="button" class="chip" data-note="For students who show secure understanding, prioritize extension, transfer, or application instead of extra repetition.">Extend mastered students</button>
+        <button type="button" class="chip" data-note="For students whose evidence is Convincing, prioritize extension, transfer, or application instead of extra repetition.">Extend convincing students</button>
         <button type="button" class="chip" data-note="Flag unreadable scans, uncertain names, or ambiguous responses instead of guessing what the student wrote.">Flag unclear scans</button>
       </div>
 
@@ -103,7 +109,7 @@
       <div class="step"><div class="step-num">3</div><p>ChatGPT should return one response ZIP. Unzip it and open <code>CLICK_ME.html</code>.</p></div>
       <div class="divider"></div>
       <h3>The response requests</h3>
-      <p class="small">Individual student reports, class-wide patterns, recommended groupings, and print-ready follow-up materials: one common class packet plus individualized student practice.</p>
+      <p class="small">Individual student reports, class-wide patterns, recommended groupings, common and individualized practice, plus a six-station review/extension set with answer key.</p>
       <div class="status good"><b>Teacher review stays central.</b> The package asks ChatGPT to show its evidence basis and flag uncertainty rather than silently guessing.</div>
       <div class="divider"></div>
       <p class="privacy"><b>Student data:</b> this page processes selected files in your browser to make the ZIP; it does not upload them by itself. Upload/use student evidence only in ways allowed by your district's student-data and AI policies.</p>

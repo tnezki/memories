@@ -8,73 +8,97 @@ This is a district-wide pilot tool for packaging student evidence into a self-co
 2. Upload student evidence (required).
 3. Upload a class roster (optional, but strongly recommended for combined handwritten class scans). The roster is packaged under `roster/` and is used only to resolve names, identify unmatched/missing evidence, and preserve class order.
 4. Upload a rubric/scoring guide (optional).
-5. Choose the **Grade / score output** for the run.
-6. Add teacher notes (optional). Clickable note hints cover reasoning, formative emphasis, ignored questions, paired work, multiple methods, explanation/vocabulary, writing mechanics, partial understanding, missing evidence, concise feedback, extension, and unclear scans.
-7. Click **Build Request ZIP**.
-8. Upload the generated ZIP to ChatGPT. The packaged request is the complete task contract, so no special run phrase is required.
-9. ChatGPT is instructed to return one response ZIP. The teacher unzips it and opens `CLICK_ME.html`.
+5. Every report uses the evidence-rating language **Convincing / Limited / Incorrect / Not Observed**.
+6. Choose whether to also return a separate grade/score: none, use the supplied rubric/scoring guide, or recommend a grade from the evidence.
+7. Add teacher notes (optional). Clickable hints include a new **Positive + clear fixes** option that asks for specific positive feedback followed by a clear explanation of what is wrong/incomplete and what needs fixing.
+8. Click **Build Request ZIP**.
+9. Upload the ZIP to ChatGPT. The packaged request is the complete task contract.
+10. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
+
+## Evidence rating behavior
+
+The evidence language is fixed across runs:
+
+- **Convincing** - the submitted evidence clearly and sufficiently demonstrates the target.
+- **Limited** - meaningful correct evidence is present, but it is incomplete, inconsistent, or insufficient.
+- **Incorrect** - the student attempted the target and the evidence demonstrates a substantive incorrect idea, method, or conclusion.
+- **Not Observed** - there is not enough usable evidence to judge the target. Blank, omitted, missing, or unreadable work is not automatically Incorrect.
+
+The evidence rating is independent from the optional grade/score. This avoids the earlier conflict where a run could simultaneously request a grade and prohibit one.
+
+## Optional grade/score
+
+The teacher selects one authoritative mode:
+
+- **No separate grade / score** (default) - reports show the evidence rating only.
+- **Use the supplied rubric / scoring guide** - requires a rubric upload and follows the scale actually provided.
+- **Recommend a grade from the evidence** - returns the evidence rating plus a teacher-review grade recommendation. Objective item-based work may use points/percent correct; open-ended work may use evidence-based professional judgment. The result is explicitly a recommendation, not a final grade.
+
+Free-form notes may add grading directions but may not silently change the selected mode. Conflicts are recorded in `data/qa.json` and the run continues.
 
 ## Built-in response contract
 
-The control panel owns the grading-response build contract directly in `app.js`; no separate PM selection is required. Each request ZIP includes:
+The control panel owns the grading-response build contract directly in `app.js`. Each request ZIP includes:
 
-- `REQUEST_READ_ME_FIRST.md` - the complete response/build instructions;
-- `request.json` - teacher choices, source file manifest, and expected outputs;
-- `response_contract/styles.css` - the locked response stylesheet;
-- `response_contract/STYLE_VERSION.txt` - the stylesheet contract version;
-- `response_contract/MATH_VISUAL_QA.md` - hard MathJax, graphing, visual-creation, and QA requirements;
-- `response_contract/MATH_VISUAL_QA_VERSION.txt` - the math/visual contract version;
-- submitted evidence, roster (if any), rubric (if any), and teacher notes.
+- `REQUEST_READ_ME_FIRST.md` - complete response/build instructions;
+- `request.json` - teacher choices and source manifests;
+- `response_contract/styles.css` - locked general response stylesheet;
+- `response_contract/stations.css` - locked station stylesheet based on the current Algebra station format;
+- style-version files;
+- `response_contract/MATH_VISUAL_QA.md` - hard MathJax, graph, visual, evidence-rating, station, and QA requirements;
+- submitted evidence, roster, rubric, and teacher notes.
 
-The response contract requires ChatGPT to copy the provided response stylesheet exactly to `assets/styles.css` so dashboards, student reports, class analysis, and printable packets have a consistent visual system across runs.
+## Stations print option
 
-The same built-in contract now makes visual correctness a hard requirement:
+`CLICK_ME.html` keeps the same three top quick actions, then includes **Stations** under Print Options.
 
-- mathematical notation must be typeset with MathJax and visually checked in HTML and PDF;
-- any required graph must exist as a real mathematically accurate SVG/PNG asset rather than being described in prose; a dedicated grapher is preferred when available, otherwise another approved accurate graph-generation capability may be used;
-- any referenced image/diagram/figure must actually be created and embedded;
-- `data/qa.json` records MathJax rendering checks, grade-output compliance, graph-generation method/assets, visual assets, link checks, PDF checks, and failures. A response cannot claim PASS with raw TeX, a missing graph, or a missing referenced visual.
+The station set contains:
 
-## Pilot scoring behavior
+- **Stations 1-4: Review** - the four most useful things the class needs to fix. Each station has 4-6 questions, prefers one landscape page, and may use at most two pages when needed.
+- **Stations 5-6: Extension** - transfer/application/challenge for students showing Convincing evidence. Each also has 4-6 questions.
+- If fewer than four distinct misconceptions are genuinely present, remaining review stations become clearly labeled consolidation/prerequisite/transfer work tied to observed needs instead of inventing fake misconceptions.
+- A separate complete answer key is required.
 
-The teacher now selects one authoritative grade-output mode for each request. Free-form notes may add details, but they cannot override the selected mode. If a note conflicts, the response follows the selected mode, records the conflict, and continues instead of stalling.
+The locked station CSS follows the current Algebra station look: letter landscape, Arial, dark navy header, Classroom Copy/Answer Key label, 2x2 problem grid, compact tables/visuals, and landscape solution pages.
 
-- **Mastery level** (default): report exactly one of `Secure`, `Developing`, or `Needs Revision`; no numeric/letter conversion.
-- **Feedback only**: return feedback and next steps with no grade or mastery label.
-- **Use supplied rubric / scoring guide**: requires an uploaded rubric; use only the scoring/scale the rubric actually defines.
-- **Recommend a grade from the evidence**: use a supplied rubric/scale when available. Without one, objective item-by-item work may receive an evidence-based percent/points-correct recommendation when equal weighting is reasonable; subjective/open-ended work falls back to a mastery level rather than inventing a numeric/letter scale.
+Expected station outputs:
 
-For combined scans, the request also includes an identity-pass rule: use `roster/` when provided; if a handwritten name remains unreadable after one reasonable pass, assign a stable neutral label such as `Student 01`, preserve the page mapping, flag uncertainty, and continue the run.
+- `print/stations/index.html` - teacher landing page;
+- `print/stations/stations.html` and `stations.pdf`;
+- `print/stations/answer_key.html` and `answer_key.pdf`;
+- `assets/stations.css` - exact copy of the locked request stylesheet.
 
 ## Requested response package
 
-The generated request instructs ChatGPT to return a mostly self-contained ZIP containing (MathJax may be the sole external runtime dependency for HTML math when a local/serialized render is not available; PDFs remain fully rendered/offline):
+The response ZIP includes:
 
-- `CLICK_ME.html` - teacher dashboard;
-- `assets/styles.css` - exact copy of the locked request stylesheet;
-- `assets/graphs/` - actual graph assets with their generation method recorded in QA when graphs are needed;
-- `assets/visuals/` - actual created diagrams/images/figures when visuals are needed;
-- `scanned_work/` - one teacher-friendly combined PDF of the submitted student work with a descriptive class/assignment filename;
-- `students/` - one print-friendly report per identified student;
-- `class/class_overview.html` - class strengths, common mistakes, pattern counts, groupings, extension readiness, and limitations;
-- `print/all_student_reports.pdf` - all individual student reports combined with page breaks;
-- `print/all_student_reports.html` - browser-printable equivalent;
-- `print/common_review_extension_packet.pdf` and `.html` - one general class follow-up packet based on common needs;
-- `print/individualized/` - one student-specific practice packet per identified student;
-- `print/individualized_packets.pdf` - the entire individualized class set combined with page breaks;
-- `data/analysis.json` - structured analysis behind the reports and print materials;
-- `data/qa.json` - required MathJax/graph/visual/link/PDF QA record;
-- `data/request.json` - copy of the original request metadata.
+- `CLICK_ME.html`;
+- `assets/styles.css` and `assets/stations.css`;
+- `assets/graphs/` and `assets/visuals/` when needed;
+- `scanned_work/` with the combined teacher-friendly source-work PDF;
+- `students/` with individual reports;
+- `class/class_overview.html`;
+- combined report and individualized-practice PDFs;
+- common class review/extension packet;
+- the six-station set and answer key;
+- `data/analysis.json`, `data/qa.json`, and `data/request.json`.
+
+## Math, graphs, and visuals
+
+- Mathematical notation is rendered with MathJax and visually checked in HTML/PDF.
+- If a graph is needed, an actual mathematically accurate graph asset is generated and embedded. The response cannot replace it with prose such as "the graph shows...".
+- If a question refers to a diagram/image/figure, the actual visual must exist and be embedded.
+- These rules apply to stations and answer keys too.
 
 ## CLICK_ME dashboard rule
 
-The top of `CLICK_ME.html` has exactly three quick actions:
+The top contains exactly these three quick actions:
 
 1. **Print All Student Reports (PDF)**
 2. **Print All Individualized Practice (PDF)**
 3. **View Scanned Student Work (PDF)**
 
-Those three combined actions are not repeated lower on the page. Lower sections contain the individual student report links, class data, the common review/extension packet, and individual student practice links only.
+They are not repeated lower on the page. Print Options then contains the distinct choices **Common Class Review + Extension**, **Stations**, and individual student practice links.
 
 ## Privacy / data handling
 
@@ -82,4 +106,4 @@ The control panel reads selected files in the browser and packages them locally 
 
 ## Implementation note
 
-The pilot uses a small built-in ZIP writer (STORE/no compression) so the page has no third-party JavaScript dependency. `response_styles.css` is the repository copy of the locked response stylesheet; the builder loads it into each request ZIP and has the same CSS embedded as a fallback for local/offline use.
+The pilot uses a small built-in ZIP writer (STORE/no compression) so the builder has no third-party JavaScript dependency. The builder loads the locked CSS files into each request ZIP and also contains embedded fallbacks for local/offline operation.
