@@ -1,7 +1,8 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
-  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.0";
+  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.1";
+  const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.0";
   const RESPONSE_CSS_FALLBACK = String.raw`:root{
   --ink:#172033;
   --muted:#5d687b;
@@ -64,6 +65,84 @@ ul.clean{margin:7px 0 0;padding-left:21px}ul.clean li{margin:5px 0}
   .page-break{break-before:page;page-break-before:always}
   .practice-block,.feedback-box,.card,.stat{break-inside:avoid}
 }
+
+/* Math, graph, and created-visual support (style contract 1.1) */
+.math-inline{white-space:nowrap}
+.math-display{margin:12px 0;overflow-x:auto;overflow-y:hidden;padding:4px 0}
+.visual-block{margin:16px 0;break-inside:avoid;page-break-inside:avoid}
+.visual-block img,.graph-frame img,.graph-image,.instructional-visual{display:block;max-width:100%;height:auto;margin:0 auto}
+.graph-frame{margin:16px auto;padding:10px;border:1px solid #d6dde6;border-radius:12px;background:#fff;break-inside:avoid;page-break-inside:avoid}
+.figure-caption{margin:6px auto 0;max-width:92%;font-size:12px;line-height:1.35;color:#5d687b;text-align:center}
+mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media print{
+  .math-display,.visual-block,.graph-frame,mjx-container{break-inside:avoid;page-break-inside:avoid}
+  .figure-caption{color:#333}
+}
+`;
+
+  const MATH_VISUAL_QA_CONTRACT = String.raw`# Math, Graph, and Visual QA Contract
+
+STATUS: REQUIRED
+VERSION: district-grading-math-visual-qa/1.0
+
+This contract is executable. It applies to every student report, class page, common packet, individualized packet, combined HTML/PDF, and any other generated instructional content in the response ZIP.
+
+## 1. Math rendering - HARD
+- When mathematical notation is used, author it as valid TeX and render it with MathJax. Do not leave raw TeX, dollar-delimited source, Unicode approximations, or plain-text substitutes where formatted mathematics is appropriate.
+- Preferred delimiters are \\( ... \\) for inline mathematics and \\[ ... \\] for display mathematics.
+- Every HTML page containing mathematical notation must load or contain working MathJax output. MathJax 3 TeX-to-SVG is preferred because it creates stable printable output.
+- If MathJax is loaded at runtime, the MathJax script is the sole allowed external runtime dependency. Package navigation, CSS, graph images, diagrams, and other assets must remain relative/local.
+- Generate PDFs only after MathJax has finished typesetting. The PDF is not allowed to contain raw TeX delimiters or unrendered expressions.
+- Inspect the rendered HTML and PDF, not just the source code. If raw delimiters, missing symbols, clipped equations, or failed typesetting are visible, repair and re-check before delivery.
+- If MathJax cannot be rendered and verified, do not silently substitute plain text. Treat that as MATHJAX_RENDER_QA_FAILED and repair before final delivery.
+
+Recommended runtime configuration when a local serialized MathJax result is not available:
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\\\(', '\\\\)']],
+      displayMath: [['\\\\[', '\\\\]']]
+    },
+    svg: { fontCache: 'global' }
+  };
+  MathJax runtime: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js
+
+## 2. Graphs - HARD
+- If the response says, implies, or asks the student to use a graph, create the actual graph. Never write a placeholder such as "the graph shows...", "see graph", "graph here", or describe a graph that is not present.
+- Use the available graphing/grapher tool as the source of truth for function graphs, equations, inequalities, coordinate data, or other 2-D mathematical graphs. Do not replace required graph-tool use with ASCII art, CSS approximations, or an invented sketch.
+- After using the grapher, capture/export the resulting graph as a real SVG or PNG asset under assets/graphs/ and embed it in every HTML/PDF location that refers to it.
+- Preserve the grapher's mathematical content: correct equation/data, useful window, labeled axes when instructionally appropriate, legible tick marks, and visible key features needed by the task.
+- Do not invent coordinates that were not supplied or legitimately derived for the task. For student evidence, preserve the submitted data/equation and clearly distinguish any teacher-created follow-up graph from student work.
+- If a required graph cannot be created with the available graphing tool, do not ship a prose placeholder. Treat that as GRAPH_TOOL_REQUIRED_UNAVAILABLE and repair before final delivery.
+
+## 3. Images and diagrams - HARD
+- If instructions, feedback, or practice refer to an image, diagram, figure, model, geometry drawing, lab setup, visual pattern, or other visual, create and embed the actual visual.
+- Never write "the image shows...", "see image", "diagram below", or similar language unless the referenced visual file exists and is visible in that exact output.
+- Use an appropriate visual creation method: image generation for illustrative/photo-like content, or a clean SVG/diagram for schematic instructional visuals. The visual must be saved under assets/visuals/ and embedded in the related HTML/PDF.
+- Do not use a text box or alt text as a substitute for a missing visual.
+- Do not alter the scanned student-work archive when creating teacher-generated follow-up visuals.
+
+## 4. Visual asset rules
+- Every generated graph or visual must have a descriptive filename, a local relative path, meaningful alt text in HTML, and a short caption only when the caption helps instruction.
+- Generated visuals must remain legible in print. Avoid tiny labels, cropped axes, low-resolution raster images, and page-break placement that separates a prompt from the visual it requires.
+- Keep graphs and diagrams with the question/explanation they support whenever possible.
+
+## 5. Required QA record
+Create data/qa.json. It must record at minimum:
+- overall_status: PASS only when all required checks below pass;
+- mathjax.pages_with_math;
+- mathjax.rendered_and_checked;
+- mathjax.raw_tex_visible_count;
+- graphs.required_count;
+- graphs.grapher_used_count;
+- graphs.assets with page and asset path;
+- visuals.required_count;
+- visuals.created_count;
+- visuals.assets with page and asset path;
+- links.all_relative_links_resolve;
+- pdfs.rendered_and_visually_checked;
+- failures as an array (empty for PASS).
+
+Final delivery cannot report PASS when raw TeX is visible, a required graph was not made with the grapher, a referenced visual is missing, an image/graph link is broken, or a PDF contains an unrendered/clipped required visual.
 `;
 
   const evidenceInput = $("evidenceFiles");
@@ -184,7 +263,8 @@ ul.clean{margin:7px 0 0;padding-left:21px}ul.clean li{margin:5px 0}
 
       const scannedWorkFilename = `${friendlyFilePart(className)}_${friendlyFilePart(assignmentName)}_Scanned_Student_Work.pdf`;
       const request = {
-        schema: "district-grading-request/0.3-pilot",
+        schema: "district-grading-request/0.4-pilot",
+        math_visual_qa_version: MATH_VISUAL_QA_VERSION,
         response_style_version: RESPONSE_STYLE_VERSION,
         created_at: createdAt,
         teacher: {
@@ -214,7 +294,13 @@ ul.clean{margin:7px 0 0;padding-left:21px}ul.clean li{margin:5px 0}
           "Print All Individualized Practice (PDF)",
           "View Scanned Student Work (PDF)"
         ],
-        click_me_no_duplicate_quick_actions: true
+        click_me_no_duplicate_quick_actions: true,
+        rendering_contract: {
+          mathjax_required_when_math_present: true,
+          grapher_required_when_graph_needed: true,
+          create_all_referenced_visuals: true,
+          qa_record_required: "data/qa.json"
+        }
       };
 
       const responseCss = await loadResponseCss();
@@ -224,7 +310,9 @@ ul.clean{margin:7px 0 0;padding-left:21px}ul.clean li{margin:5px 0}
         { name: "request.json", data: enc.encode(JSON.stringify(request, null, 2)) },
         { name: "teacher_notes.txt", data: enc.encode(teacherNotes || "No teacher notes were provided.") },
         { name: "response_contract/styles.css", data: enc.encode(responseCss) },
-        { name: "response_contract/STYLE_VERSION.txt", data: enc.encode(RESPONSE_STYLE_VERSION + "\n") }
+        { name: "response_contract/STYLE_VERSION.txt", data: enc.encode(RESPONSE_STYLE_VERSION + "\n") },
+        { name: "response_contract/MATH_VISUAL_QA.md", data: enc.encode(MATH_VISUAL_QA_CONTRACT) },
+        { name: "response_contract/MATH_VISUAL_QA_VERSION.txt", data: enc.encode(MATH_VISUAL_QA_VERSION + "\n") }
       );
 
       const zipBlob = makeZip(entries);
@@ -315,13 +403,28 @@ Use the stylesheet classes as intended:
 - CLICK_ME.html: wrap, hero, eyebrow, subtitle, quick-actions, btn, section, grid, card, summary-grid, stat, notice.
 - Student reports: report-page, report-head, report-meta, report-section, feedback-box, clean.
 - Practice/packets: practice-page or packet-page, name-line, practice-block.
+- Math/visual content: math-inline, math-display, visual-block, graph-frame, figure-caption.
 - Combined printable documents: page-break between students.
+
+## Math, graph, and visual rendering - HARD
+The request includes response_contract/MATH_VISUAL_QA.md. Follow it as an executable contract, not a suggestion.
+
+- MATH: If mathematical notation appears, author valid TeX and render it with MathJax. Inspect the rendered page and rendered PDF. Raw TeX/delimiters visible to the teacher or student are a QA failure.
+- GRAPHS: If any report, explanation, question, or packet needs a graph, use the available graphing/grapher tool and include the actual rendered graph asset. Do not merely say what a graph would show. Do not use a prose placeholder, ASCII art, or CSS sketch instead of the graphing tool.
+- IMAGES/DIAGRAMS: If text refers to an image, diagram, figure, model, or other visual, create the actual visual and embed it. Never refer to a visual that does not exist in the output.
+- Store generated graphs under assets/graphs/ and other created visuals under assets/visuals/. Embed the same real assets in HTML and the corresponding PDFs.
+- Create data/qa.json and record MathJax, grapher, visual, link, and PDF checks required by the included QA contract.
+- If a required graphing tool or MathJax rendering cannot be completed, repair before delivery rather than substituting prose.
 
 ## Required response ZIP structure
 ~~~text
 CLICK_ME.html
 assets/
   styles.css
+  graphs/
+    <actual graph SVG/PNG assets when graphs are used>
+  visuals/
+    <actual created visual assets when visuals are used>
 scanned_work/
   ${scannedPath.split('/').pop()}
 students/
@@ -338,10 +441,11 @@ print/
   individualized_packets.pdf
 data/
   analysis.json
+  qa.json
   request.json
 ~~~
 
-All links must be relative and work when the ZIP is unzipped and opened locally with no web server. PDFs must be finished printable files, not placeholders.
+All package navigation, CSS, graph assets, and visual assets must use relative local links and work when the ZIP is unzipped. PDFs must be finished printable files, not placeholders. MathJax is the sole allowed external runtime dependency when a local/serialized MathJax result is not available; PDFs must already contain fully rendered mathematics and remain usable offline.
 
 ## Scanned student work archive
 Create ${scannedPath} as the teacher-friendly archive of the submitted student work.
@@ -389,6 +493,11 @@ Store the structured analysis behind the reports and print materials. Include st
 - The scanned-work PDF exists at ${scannedPath} and the top dashboard link opens it.
 - Combined student-report PDF contains all identified students in roster/identified order with page breaks.
 - Combined individualized-practice PDF contains all identified students with page breaks.
+- Every page containing math has been rendered with MathJax and visually checked; no raw TeX/delimiters are visible in HTML or PDF.
+- Every graph that is referenced or instructionally required was actually created with the graphing/grapher tool, exported/captured as a real asset, embedded, and visually checked.
+- Every referenced image/diagram/figure exists as a real embedded asset; there are no missing-visual placeholders.
+- Generated graphs/visuals are legible in the related PDFs and are not clipped or separated from the prompt they support.
+- data/qa.json exists and reports PASS with no unresolved math, graph, visual, link, or PDF failures.
 - All relative HTML links resolve after unzip.
 - Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open CLICK_ME.html.
 `;

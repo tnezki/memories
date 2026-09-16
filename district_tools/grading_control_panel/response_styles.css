@@ -60,3 +60,16 @@ ul.clean{margin:7px 0 0;padding-left:21px}ul.clean li{margin:5px 0}
   .page-break{break-before:page;page-break-before:always}
   .practice-block,.feedback-box,.card,.stat{break-inside:avoid}
 }
+
+/* Math, graph, and created-visual support (style contract 1.1) */
+.math-inline{white-space:nowrap}
+.math-display{margin:12px 0;overflow-x:auto;overflow-y:hidden;padding:4px 0}
+.visual-block{margin:16px 0;break-inside:avoid;page-break-inside:avoid}
+.visual-block img,.graph-frame img,.graph-image,.instructional-visual{display:block;max-width:100%;height:auto;margin:0 auto}
+.graph-frame{margin:16px auto;padding:10px;border:1px solid #d6dde6;border-radius:12px;background:#fff;break-inside:avoid;page-break-inside:avoid}
+.figure-caption{margin:6px auto 0;max-width:92%;font-size:12px;line-height:1.35;color:#5d687b;text-align:center}
+mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media print{
+  .math-display,.visual-block,.graph-frame,mjx-container{break-inside:avoid;page-break-inside:avoid}
+  .figure-caption{color:#333}
+}

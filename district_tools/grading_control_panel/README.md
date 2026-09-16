@@ -21,9 +21,18 @@ The control panel owns the grading-response build contract directly in `app.js`;
 - `request.json` - teacher choices, source file manifest, and expected outputs;
 - `response_contract/styles.css` - the locked response stylesheet;
 - `response_contract/STYLE_VERSION.txt` - the stylesheet contract version;
+- `response_contract/MATH_VISUAL_QA.md` - hard MathJax, graphing, visual-creation, and QA requirements;
+- `response_contract/MATH_VISUAL_QA_VERSION.txt` - the math/visual contract version;
 - submitted evidence, roster (if any), rubric (if any), and teacher notes.
 
 The response contract requires ChatGPT to copy the provided response stylesheet exactly to `assets/styles.css` so dashboards, student reports, class analysis, and printable packets have a consistent visual system across runs.
+
+The same built-in contract now makes visual correctness a hard requirement:
+
+- mathematical notation must be typeset with MathJax and visually checked in HTML and PDF;
+- any required graph must be created with the available grapher/graphing tool and embedded as a real graph asset rather than described in prose;
+- any referenced image/diagram/figure must actually be created and embedded;
+- `data/qa.json` records MathJax rendering checks, grapher use, visual assets, link checks, PDF checks, and failures. A response cannot claim PASS with raw TeX, a missing graph, or a missing referenced visual.
 
 ## Pilot scoring behavior
 
@@ -32,10 +41,12 @@ The response contract requires ChatGPT to copy the provided response stylesheet 
 
 ## Requested response package
 
-The generated request instructs ChatGPT to return a static, offline-friendly ZIP containing:
+The generated request instructs ChatGPT to return a mostly self-contained ZIP containing (MathJax may be the sole external runtime dependency for HTML math when a local/serialized render is not available; PDFs remain fully rendered/offline):
 
 - `CLICK_ME.html` - teacher dashboard;
 - `assets/styles.css` - exact copy of the locked request stylesheet;
+- `assets/graphs/` - actual grapher-created graph assets when graphs are needed;
+- `assets/visuals/` - actual created diagrams/images/figures when visuals are needed;
 - `scanned_work/` - one teacher-friendly combined PDF of the submitted student work with a descriptive class/assignment filename;
 - `students/` - one print-friendly report per identified student;
 - `class/class_overview.html` - class strengths, common mistakes, pattern counts, groupings, extension readiness, and limitations;
@@ -45,6 +56,7 @@ The generated request instructs ChatGPT to return a static, offline-friendly ZIP
 - `print/individualized/` - one student-specific practice packet per identified student;
 - `print/individualized_packets.pdf` - the entire individualized class set combined with page breaks;
 - `data/analysis.json` - structured analysis behind the reports and print materials;
+- `data/qa.json` - required MathJax/graph/visual/link/PDF QA record;
 - `data/request.json` - copy of the original request metadata.
 
 ## CLICK_ME dashboard rule
