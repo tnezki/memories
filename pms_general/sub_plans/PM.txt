@@ -1,0 +1,147 @@
+SUB PLANS — PILOT WORKING PM v0.1
+================================
+STATUS: PILOT / WORKING — test and revise from real sub-plan runs.
+
+PURPOSE
+-------
+Create a complete substitute-teacher package from five teacher direction inputs while preserving Troy Nezki's established sub-plan style, current MMHS schedule, current seating chart, and Google Drive organization.
+
+THIS IS A GOOGLE DRIVE WORKFLOW — HARD
+--------------------------------------
+This GENERAL PM is explicitly authorized to read and write the Google Drive resources declared in sibling PROFILE.json and the run-specific destination folder it resolves beneath the declared Sub Plans root folder.
+
+Do not use public web search. Do not recover content from prior chats, saved memory, or unrelated File Library items. The teacher's current request plus the pinned PM/PROFILE and declared Google Drive resources are the authority for this job.
+
+REQUIRED SIBLING AUTHORITY
+--------------------------
+Read pms_general/sub_plans/PROFILE.json immediately after this PM. It owns:
+- Google Drive folder IDs and document IDs;
+- current course/hour labels;
+- Monday and Tuesday-Friday bell times;
+- stable Crewtime/Prep behavior;
+- destination naming rules;
+- source-template routing.
+
+INPUT CONTRACT
+--------------
+The request manifest supplies:
+- plan_type: monday | tuesday_friday | emergency
+- date: YYYY-MM-DD for dated modes; null for emergency
+- exactly five class direction fields:
+  1st Hour — STEM
+  2nd Hour — Physics
+  3rd Hour — Algebra 1
+  4th Hour — AP Calculus
+  6th Hour — Algebra 1
+- optional additional note
+- optional attached source/material files
+
+If a dated mode is selected and date is missing, fail closed and ask for the date.
+Emergency mode MUST NOT place a calendar date in the plan heading.
+
+SOURCE / STYLE AUTHORITY
+------------------------
+Use sources in this order:
+1. Teacher's current five direction inputs and current run note.
+2. PROFILE.json for stable workflow facts and exact Drive resource IDs.
+3. Current native Google Doc template for the selected schedule.
+4. Current MMHS Daily Schedules document for bell-time verification.
+5. Current Seating Chart document for the current class seating reference.
+6. Recent completed plans in the Sub Plans root folder only when needed to resolve a style question not already settled by the templates/profile.
+
+Do not silently carry stale course names, times, dates, assignments, links, or student-specific facts from old completed plans.
+
+WRITING STYLE — HARD
+--------------------
+- Keep substitute directions concise, practical, and easy to scan.
+- Lightly edit the teacher's wording for grammar, spelling, sentence flow, and clarity.
+- Preserve the teacher's instructional intent. Do not add requirements, change rigor, or invent procedures.
+- Prefer one short paragraph or a few short sentences per class unless the teacher's directions genuinely need steps.
+- Preserve the established stable substitute-information sections from the selected current template: emergency information, discipline, attendance, passes, phone policy, and contact information.
+- Preserve the established 6th-hour team-teaching note unless the teacher explicitly changes it.
+- Crewtime and 5th-hour Prep are automatic from PROFILE.json and do not consume direction boxes.
+
+PLAN MODE ROUTING
+-----------------
+MONDAY
+- Require date.
+- Use the current Monday template as the native structural/style base.
+- Use Monday bell times from PROFILE.json, verified against the current schedule document.
+- Create/reuse a child folder named exactly with the ISO date: YYYY-MM-DD.
+- The plan heading includes the resolved weekday/date.
+
+TUESDAY-FRIDAY
+- Require date.
+- Use the current Non-Monday template as the native structural/style base.
+- Use Tuesday-Friday bell times from PROFILE.json, verified against the current schedule document.
+- Create/reuse a child folder named exactly with the ISO date: YYYY-MM-DD.
+- The plan heading includes the resolved weekday/date.
+
+EMERGENCY
+- Do not put a date in either plan heading.
+- Create/reuse the child folder named Emergency beneath the Sub Plans root.
+- From the same five teacher direction inputs, maintain TWO reusable native plan documents in that folder:
+  1. Emergency Sub Plans - Monday
+  2. Emergency Sub Plans - Tuesday-Friday
+- The Monday copy uses Monday times/template structure; the Tuesday-Friday copy uses the regular times/template structure.
+- Shared supporting materials are stored once in the Emergency folder and referenced by both plans when applicable.
+
+GOOGLE DOC CONSTRUCTION
+-----------------------
+The current Monday and Non-Monday Google Docs are templates/references, so use a native copy-and-adapt route rather than rebuilding their structure from scratch.
+
+For each plan document:
+1. Copy the correct current native template into the resolved destination folder, or update the existing exact-title pilot output on a rerun instead of creating duplicate copies.
+2. Preserve the template's overall ordering and stable substitute-information sections.
+3. Replace the date/header behavior according to the selected mode.
+4. Replace each of the five class-direction blocks with the cleaned teacher direction for that class.
+5. Preserve Crewtime, Lunch, Prep, and stable 6th-hour team-teaching behavior from the current profile/template.
+6. Verify that all class names/times match PROFILE.json and the current MMHS schedule source.
+7. Read back the finished document before completion.
+
+SEATING CHART
+-------------
+A current copy/reference to the declared Seating Chart must be available inside every resolved destination folder so the substitute package is self-contained.
+
+- For a new dated folder, copy the current Seating Chart into that folder with title "Seating Chart - Current".
+- For Emergency, maintain one current copy with that title in the Emergency folder.
+- On reruns, update/reuse the exact-title seating-chart copy rather than accumulating duplicates.
+- Do not alter seating assignments as part of this PM.
+
+MATERIAL CREATION
+-----------------
+After cleaning the five class directions, determine what materials the substitute actually needs.
+
+Create or place supporting materials only when required by the teacher's directions:
+- If the teacher attaches a run-specific file, place a copy in the resolved destination folder and reference its exact name in the appropriate class direction when useful.
+- If the teacher gives enough content to create a simple printed handout/directions sheet, create a polished student-facing Google Doc in the destination folder.
+- If the direction points students to Canvas, Notability, an existing classroom resource, or another already-available item, do not invent a duplicate handout.
+- Never invent missing assignment content merely because a direction says "worksheet," "practice," or similar. If required material cannot be faithfully created from the request/sources, keep the plan accurate and surface the missing material instead of fabricating it.
+
+PACKAGE COMPLETENESS
+--------------------
+The resolved destination folder should contain everything generated or copied for that absence/emergency package:
+- finished sub-plan document(s);
+- Seating Chart - Current;
+- every run-specific attached file that the substitute needs;
+- every supporting handout/material generated by this PM.
+
+Do not create an extra GitHub transfer ZIP for the sub-plan run itself. This is a private Google Drive output workflow.
+
+FINAL QA
+--------
+Before completion verify:
+- correct mode and date behavior;
+- correct Monday vs Tuesday-Friday times;
+- all five teacher direction inputs are present in the correct class blocks;
+- Crewtime and Prep are handled automatically;
+- wording cleanup did not change teacher intent;
+- stable substitute-information sections remain present;
+- seating chart copy/reference is present in the destination folder;
+- all required supporting materials are present and named clearly;
+- no stale assignment/date/class content leaked from prior plans;
+- no duplicate pilot output was unnecessarily created on rerun.
+
+OUTPUT
+------
+Return the Google Drive link to the resolved destination folder and a short list of the files created/updated there.
