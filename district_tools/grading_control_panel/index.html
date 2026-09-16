@@ -18,7 +18,7 @@
   <div class="grid">
     <section class="card">
       <h2>Build a grading request</h2>
-      <p class="small">Only student evidence is required. A roster, rubric, and teacher notes are optional.</p>
+      <p class="small">Only student evidence is required. A roster, rubric, and teacher notes are optional. Choose the grade/score output for each run.</p>
 
       <div class="row">
         <div>
@@ -51,23 +51,32 @@
       <label for="rosterFiles">2. Class roster <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rosterFiles" type="file" multiple>
-        <div class="small" style="margin-top:7px">Helpful when scans or filenames make student names difficult to read. CSV, spreadsheet, PDF, document, or text rosters are fine. The roster is used only to match names and preserve class order.</div>
+        <div class="small" style="margin-top:7px"><b>Strongly recommended for combined handwritten class scans.</b> CSV, spreadsheet, PDF, document, or text rosters are fine. The roster is used only to match names, identify unmatched/missing evidence, and preserve class order.</div>
         <ul id="rosterList" class="file-list"></ul>
       </div>
 
       <label for="rubricFiles">3. Rubric / scoring guide <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rubricFiles" type="file" multiple>
-        <div class="small" style="margin-top:7px">If a rubric is included, the response may score against it. Without a rubric, the request asks for evidence-based feedback and mastery indicators rather than an invented numeric grade.</div>
+        <div class="small" style="margin-top:7px">A rubric or scoring guide gives the analysis explicit criteria. Whether the response returns a score, mastery level, or feedback only is controlled by the Grade / score output choice below.</div>
         <ul id="rubricList" class="file-list"></ul>
       </div>
 
-      <label for="teacherNotes">4. Teacher notes <span class="small">(optional)</span></label>
+      <label for="gradeOutput">4. Grade / score output</label>
+      <select id="gradeOutput" style="width:100%;font:inherit;border:1px solid #cbd4df;border-radius:10px;padding:11px 12px;background:#fff;color:#18202a">
+        <option value="mastery" selected>Mastery level - Secure / Developing / Needs Revision</option>
+        <option value="none">Feedback only - no grade or mastery label</option>
+        <option value="rubric">Use the supplied rubric / scoring guide</option>
+        <option value="recommend">Recommend a grade from the evidence</option>
+      </select>
+      <div class="small" style="margin-top:7px"><b>This choice is authoritative.</b> Teacher notes can add details such as a grading scale, but they cannot override this selection. If you choose a rubric score, upload the rubric above.</div>
+
+      <label for="teacherNotes">5. Teacher notes <span class="small">(optional)</span></label>
       <textarea id="teacherNotes" placeholder="Add anything ChatGPT should know about this evidence set."></textarea>
       <div class="small" style="margin-top:7px"><b>Useful hints you can add:</b> click any idea to place it in your notes, then edit it as needed.</div>
       <div class="chips" id="noteHints">
         <button type="button" class="chip" data-note="Focus on reasoning more than small arithmetic or spelling errors.">Focus on reasoning</button>
-        <button type="button" class="chip" data-note="This is formative. Do not assign a final numeric grade.">Formative only</button>
+        <button type="button" class="chip" data-note="This is formative; prioritize feedback and next steps over the grade or score.">Formative emphasis</button>
         <button type="button" class="chip" data-note="Ignore Question 7 when judging student understanding.">Ignore a question</button>
         <button type="button" class="chip" data-note="Students worked in pairs, so do not treat shared language as evidence of copying.">Students worked in pairs</button>
         <button type="button" class="chip" data-note="Accept multiple valid solution methods when the evidence supports the thinking.">Allow multiple methods</button>

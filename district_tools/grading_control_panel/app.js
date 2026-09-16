@@ -2,7 +2,7 @@
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
   const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.1";
-  const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.0";
+  const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.1";
   const RESPONSE_CSS_FALLBACK = String.raw`:root{
   --ink:#172033;
   --muted:#5d687b;
@@ -83,7 +83,7 @@ mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
   const MATH_VISUAL_QA_CONTRACT = String.raw`# Math, Graph, and Visual QA Contract
 
 STATUS: REQUIRED
-VERSION: district-grading-math-visual-qa/1.0
+VERSION: district-grading-math-visual-qa/1.1
 
 This contract is executable. It applies to every student report, class page, common packet, individualized packet, combined HTML/PDF, and any other generated instructional content in the response ZIP.
 
@@ -108,11 +108,11 @@ Recommended runtime configuration when a local serialized MathJax result is not 
 
 ## 2. Graphs - HARD
 - If the response says, implies, or asks the student to use a graph, create the actual graph. Never write a placeholder such as "the graph shows...", "see graph", "graph here", or describe a graph that is not present.
-- Use the available graphing/grapher tool as the source of truth for function graphs, equations, inequalities, coordinate data, or other 2-D mathematical graphs. Do not replace required graph-tool use with ASCII art, CSS approximations, or an invented sketch.
-- After using the grapher, capture/export the resulting graph as a real SVG or PNG asset under assets/graphs/ and embed it in every HTML/PDF location that refers to it.
-- Preserve the grapher's mathematical content: correct equation/data, useful window, labeled axes when instructionally appropriate, legible tick marks, and visible key features needed by the task.
+- Generate the graph with the best available approved graph-generation capability. If a dedicated graphing/grapher tool is exposed, prefer and use it. If not, use another mathematically accurate plotting capability that can create a verifiable SVG or PNG. The required outcome is a correct graph asset, not a dependency on one tool name.
+- Save the resulting graph as a real SVG or PNG asset under assets/graphs/ and embed it in every HTML/PDF location that refers to it.
+- Preserve the mathematical content: correct equation/data, useful window, labeled axes when instructionally appropriate, legible tick marks, and visible key features needed by the task.
 - Do not invent coordinates that were not supplied or legitimately derived for the task. For student evidence, preserve the submitted data/equation and clearly distinguish any teacher-created follow-up graph from student work.
-- If a required graph cannot be created with the available graphing tool, do not ship a prose placeholder. Treat that as GRAPH_TOOL_REQUIRED_UNAVAILABLE and repair before final delivery.
+- If no available capability can create a graph required only by newly generated follow-up content, revise that generated task so it no longer depends on the missing graph while preserving the instructional target. Never ship prose that refers to a missing graph. If a graph is essential and cannot be created, record GRAPH_ASSET_CREATION_FAILED and do not claim PASS.
 
 ## 3. Images and diagrams - HARD
 - If instructions, feedback, or practice refer to an image, diagram, figure, model, geometry drawing, lab setup, visual pattern, or other visual, create and embed the actual visual.
@@ -132,9 +132,14 @@ Create data/qa.json. It must record at minimum:
 - mathjax.pages_with_math;
 - mathjax.rendered_and_checked;
 - mathjax.raw_tex_visible_count;
+- grade_output.selected_mode;
+- grade_output.followed;
+- grade_output.teacher_note_conflicts as an array;
 - graphs.required_count;
-- graphs.grapher_used_count;
-- graphs.assets with page and asset path;
+- graphs.created_count;
+- graphs.dedicated_grapher_available;
+- graphs.dedicated_grapher_used_when_available;
+- graphs.assets with page, asset path, and generation_method;
 - visuals.required_count;
 - visuals.created_count;
 - visuals.assets with page and asset path;
@@ -142,12 +147,13 @@ Create data/qa.json. It must record at minimum:
 - pdfs.rendered_and_visually_checked;
 - failures as an array (empty for PASS).
 
-Final delivery cannot report PASS when raw TeX is visible, a required graph was not made with the grapher, a referenced visual is missing, an image/graph link is broken, or a PDF contains an unrendered/clipped required visual.
+Final delivery cannot report PASS when raw TeX is visible, a required graph asset is missing or mathematically incorrect, a referenced visual is missing, an image/graph link is broken, or a PDF contains an unrendered/clipped required visual.
 `;
 
   const evidenceInput = $("evidenceFiles");
   const rosterInput = $("rosterFiles");
   const rubricInput = $("rubricFiles");
+  const gradeOutputInput = $("gradeOutput");
   const notesInput = $("teacherNotes");
   const buildButton = $("buildZip");
   const status = $("buildStatus");
@@ -163,7 +169,11 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
 
   evidenceInput.addEventListener("change", () => renderFiles(evidenceInput.files, $("evidenceList")));
   rosterInput.addEventListener("change", () => renderFiles(rosterInput.files, $("rosterList")));
-  rubricInput.addEventListener("change", () => renderFiles(rubricInput.files, $("rubricList")));
+  rubricInput.addEventListener("change", () => {
+    renderFiles(rubricInput.files, $("rubricList"));
+    refreshStatus();
+  });
+  gradeOutputInput.addEventListener("change", refreshStatus);
   buildButton.addEventListener("click", buildRequestZip);
   $("clearForm").addEventListener("click", clearForm);
 
@@ -195,7 +205,13 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
       setStatus("Add the required fields and at least one evidence file.", "warn");
       return false;
     }
-    const rosterNote = rosterInput.files.length ? ` Roster included (${rosterInput.files.length} file${rosterInput.files.length === 1 ? "" : "s"}).` : "";
+    if (gradeOutputInput.value === "rubric" && !rubricInput.files.length) {
+      setStatus("Grade output is set to rubric scoring, but no rubric/scoring guide is attached.", "bad");
+      return false;
+    }
+    const rosterNote = rosterInput.files.length
+      ? ` Roster included (${rosterInput.files.length} file${rosterInput.files.length === 1 ? "" : "s"}).`
+      : " If this is one combined handwritten class scan, adding a roster is strongly recommended.";
     setStatus(`Ready to package ${count} evidence file${count === 1 ? "" : "s"}.${rosterNote}`, "good");
     return true;
   }
@@ -213,6 +229,7 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
     evidenceInput.value = "";
     rosterInput.value = "";
     rubricInput.value = "";
+    gradeOutputInput.value = "mastery";
     notesInput.value = "";
     $("evidenceList").innerHTML = "";
     $("rosterList").innerHTML = "";
@@ -232,6 +249,7 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
       const gradeSubject = $("gradeSubject").value.trim();
       const teacherName = $("teacherName").value.trim();
       const teacherNotes = notesInput.value.trim();
+      const gradeOutput = resolveGradeOutput(gradeOutputInput.value, rubricInput.files.length > 0);
       const createdAt = new Date().toISOString();
 
       const usedPaths = new Set();
@@ -263,7 +281,7 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
 
       const scannedWorkFilename = `${friendlyFilePart(className)}_${friendlyFilePart(assignmentName)}_Scanned_Student_Work.pdf`;
       const request = {
-        schema: "district-grading-request/0.4-pilot",
+        schema: "district-grading-request/0.5-pilot",
         math_visual_qa_version: MATH_VISUAL_QA_VERSION,
         response_style_version: RESPONSE_STYLE_VERSION,
         created_at: createdAt,
@@ -273,9 +291,8 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
           grade_subject: gradeSubject || null
         },
         assignment: { name: assignmentName },
-        scoring_policy: rubricManifest.length
-          ? "Use the provided rubric/scoring guide when it clearly applies. Show evidence for scores and flag uncertainty."
-          : "Do not invent a numeric grade. Provide evidence-based feedback and mastery/next-step indicators only.",
+        grade_output: gradeOutput,
+        scoring_policy: gradeOutput.policy,
         teacher_notes_present: Boolean(teacherNotes),
         evidence_files: evidenceManifest,
         roster_files: rosterManifest,
@@ -297,7 +314,8 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
         click_me_no_duplicate_quick_actions: true,
         rendering_contract: {
           mathjax_required_when_math_present: true,
-          grapher_required_when_graph_needed: true,
+          actual_graph_asset_required_when_graph_needed: true,
+          preferred_graph_generation: "Use a dedicated grapher when available; otherwise use the best accurate graph-generation capability available.",
           create_all_referenced_visuals: true,
           qa_record_required: "data/qa.json"
         }
@@ -338,6 +356,39 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
     return RESPONSE_CSS_FALLBACK;
   }
 
+
+  function resolveGradeOutput(mode, hasRubric) {
+    switch (mode) {
+      case "none":
+        return {
+          mode: "none",
+          label: "Feedback only",
+          policy: "Return feedback and next steps only. Do not return a numeric grade, letter grade, point score, or mastery label. A provided rubric may organize feedback but must not be converted into a reported score unless the teacher changes this mode."
+        };
+      case "rubric":
+        return {
+          mode: "rubric",
+          label: "Use supplied rubric / scoring guide",
+          policy: "Use the supplied rubric/scoring guide as the grading authority. Report criterion scores and an overall score/grade only when the supplied rubric or scale defines how to do so. Do not invent missing weights, cut scores, or letter-grade conversions."
+        };
+      case "recommend":
+        return {
+          mode: "recommend",
+          label: "Recommend a grade from the evidence",
+          policy: hasRubric
+            ? "Return an evidence-based grade recommendation using the supplied rubric/scoring guide when it applies. State the basis and flag uncertainty."
+            : "Return an evidence-based grade recommendation. For clearly objective item-by-item work, a percentage/points-correct recommendation may be calculated from observable correctness when equal weighting is reasonable; state that assumption. Apply any explicit grading scale supplied in teacher notes. For subjective/open-ended work without a defensible scale, return the mastery level Secure / Developing / Needs Revision instead of inventing a numeric or letter grade, and flag the limitation."
+        };
+      case "mastery":
+      default:
+        return {
+          mode: "mastery",
+          label: "Mastery level",
+          policy: "Return exactly one overall mastery level for each student: Secure, Developing, or Needs Revision, supported by the submitted evidence. Do not convert that mastery level into a numeric or letter grade unless the teacher selects a different grade-output mode."
+        };
+    }
+  }
+
   function fileManifest(file, packagedPath) {
     return {
       original_name: file.name,
@@ -358,11 +409,11 @@ Final delivery cannot report PASS when raw TeX is visible, a required graph was 
 
   function buildInstructions(request, teacherNotes) {
     const rubricLine = request.rubric_files.length
-      ? "A rubric/scoring guide is included. Use it only where it clearly applies to the submitted evidence."
-      : "No rubric/scoring guide is included. Do NOT invent a numeric grade or point scale.";
+      ? "A rubric/scoring guide is included under rubric/ and listed in request.json. Use it according to the selected grade-output mode."
+      : "No rubric/scoring guide is included.";
     const rosterLine = request.roster_files.length
-      ? "A roster is included. Use it only to resolve student names, identify missing/unmatched evidence, and preserve roster order. Do not infer achievement from the roster."
-      : "No roster is included. Resolve names only from the submitted evidence and filenames; flag uncertainty rather than guessing.";
+      ? "A roster is included under roster/ and listed in request.json under roster_files. Use it only to resolve student names, identify missing/unmatched evidence, and preserve roster order. Do not infer achievement from the roster."
+      : "No roster is included. Resolve names only from the submitted evidence and filenames; after one reasonable identity pass, use stable neutral labels for unreadable names rather than stalling or guessing.";
     const scannedPath = request.requested_outputs.scanned_student_work_pdf;
 
     return `# District Grading & Evidence Request - Pilot
@@ -375,6 +426,8 @@ Assignment / evidence set: ${request.assignment.name}
 Grade / subject: ${request.teacher.grade_subject || "Not provided; infer only when the evidence makes it reasonably clear."}
 ${rubricLine}
 ${rosterLine}
+Selected grade / score output: ${request.grade_output.label}
+Authoritative grading policy: ${request.grade_output.policy}
 
 Teacher notes:
 ${teacherNotes || "No additional notes provided."}
@@ -388,8 +441,10 @@ ${teacherNotes || "No additional notes provided."}
 - If some files cannot be read, process the readable evidence and clearly list the unreadable or ambiguous files.
 - If a roster student has no identifiable submitted work, mark that as no evidence submitted rather than as incorrect work.
 - If evidence names a student not found on the roster, keep the evidence and flag the mismatch rather than discarding it.
+- IDENTITY PASS: For combined scans, do one reasonable pass to match pages to students. Use roster/ when supplied. If a handwritten name remains unreadable, assign a stable neutral label such as Student 01, preserve the page/evidence mapping, flag the uncertainty, and continue the analysis. Do not let uncertain names stall the entire run.
 
 ## Scoring and feedback policy
+- The selected grade-output mode in request.json is authoritative. Teacher notes may add grading details (for example, a scale) but may not override the selected mode. If a note conflicts with the selected mode, follow the selected mode, record the conflict in data/qa.json, and continue rather than stalling.
 - ${request.scoring_policy}
 - Distinguish demonstrated strengths from next steps.
 - Do not rank students against one another.
@@ -410,11 +465,11 @@ Use the stylesheet classes as intended:
 The request includes response_contract/MATH_VISUAL_QA.md. Follow it as an executable contract, not a suggestion.
 
 - MATH: If mathematical notation appears, author valid TeX and render it with MathJax. Inspect the rendered page and rendered PDF. Raw TeX/delimiters visible to the teacher or student are a QA failure.
-- GRAPHS: If any report, explanation, question, or packet needs a graph, use the available graphing/grapher tool and include the actual rendered graph asset. Do not merely say what a graph would show. Do not use a prose placeholder, ASCII art, or CSS sketch instead of the graphing tool.
+- GRAPHS: If any report, explanation, question, or packet needs a graph, generate an actual mathematically accurate graph with the best available approved graph-generation capability. Prefer a dedicated grapher when it is exposed; otherwise use another accurate plotting capability. Include the real SVG/PNG asset. Do not merely say what a graph would show, and never ship a prose placeholder, ASCII art, or CSS sketch in place of a required graph.
 - IMAGES/DIAGRAMS: If text refers to an image, diagram, figure, model, or other visual, create the actual visual and embed it. Never refer to a visual that does not exist in the output.
 - Store generated graphs under assets/graphs/ and other created visuals under assets/visuals/. Embed the same real assets in HTML and the corresponding PDFs.
-- Create data/qa.json and record MathJax, grapher, visual, link, and PDF checks required by the included QA contract.
-- If a required graphing tool or MathJax rendering cannot be completed, repair before delivery rather than substituting prose.
+- Create data/qa.json and record MathJax, grade-output, graph-generation, visual, link, and PDF checks required by the included QA contract.
+- If a dedicated grapher is unavailable, use another accurate graph-generation capability. If no capability can create a graph needed only for newly generated follow-up practice, revise that generated task so it does not depend on a missing graph. Never substitute prose that refers to a graph that is not present. MathJax rendering failures must still be repaired before delivery.
 
 ## Required response ZIP structure
 ~~~text
@@ -471,7 +526,7 @@ Keep the dashboard compact. Use this order:
 Do NOT repeat Print All Student Reports, Print All Individualized Practice, or View Scanned Student Work again lower on CLICK_ME.html. The teacher should never have to click a second-looking button just to discover it is the same file.
 
 ## Individual student reports
-Keep the current concise report format: student name/label and assignment; demonstrated strengths; the most important misconception/gap/revision need; specific evidence references when feasible; rubric criterion results only when supported; 1-3 concrete next steps; and an uncertainty note when needed. Do not include other students' names or performance.
+Keep the current concise report format: student name/label and assignment; the grade/score/mastery result required by request.grade_output; demonstrated strengths; the most important misconception/gap/revision need; specific evidence references when feasible; rubric criterion results only when supported; 1-3 concrete next steps; and an uncertainty note when needed. Do not include other students' names or performance.
 
 Create print/all_student_reports.html and print/all_student_reports.pdf containing every student's full report in roster order when a roster is available, otherwise identified order. Put a clear page break between students. Do not create a shortened second version.
 
@@ -494,10 +549,10 @@ Store the structured analysis behind the reports and print materials. Include st
 - Combined student-report PDF contains all identified students in roster/identified order with page breaks.
 - Combined individualized-practice PDF contains all identified students with page breaks.
 - Every page containing math has been rendered with MathJax and visually checked; no raw TeX/delimiters are visible in HTML or PDF.
-- Every graph that is referenced or instructionally required was actually created with the graphing/grapher tool, exported/captured as a real asset, embedded, and visually checked.
+- Every graph that is referenced or instructionally required exists as a mathematically accurate SVG/PNG asset created with the best available approved graph-generation capability, embedded, and visually checked; data/qa.json records the generation method and whether a dedicated grapher was available/used.
 - Every referenced image/diagram/figure exists as a real embedded asset; there are no missing-visual placeholders.
 - Generated graphs/visuals are legible in the related PDFs and are not clipped or separated from the prompt they support.
-- data/qa.json exists and reports PASS with no unresolved math, graph, visual, link, or PDF failures.
+- data/qa.json records the selected grade-output mode, whether it was followed, any teacher-note conflict, and reports PASS with no unresolved math, graph, visual, link, or PDF failures.
 - All relative HTML links resolve after unzip.
 - Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open CLICK_ME.html.
 `;

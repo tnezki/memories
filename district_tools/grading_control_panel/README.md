@@ -6,12 +6,13 @@ This is a district-wide pilot tool for packaging student evidence into a self-co
 
 1. Enter a class/group name and assignment/evidence-set name.
 2. Upload student evidence (required).
-3. Upload a class roster (optional). The roster is used only to help resolve names, identify unmatched/missing evidence, and preserve class order.
+3. Upload a class roster (optional, but strongly recommended for combined handwritten class scans). The roster is packaged under `roster/` and is used only to resolve names, identify unmatched/missing evidence, and preserve class order.
 4. Upload a rubric/scoring guide (optional).
-5. Add teacher notes (optional). Clickable note hints cover reasoning, formative-only use, ignored questions, paired work, multiple methods, explanation/vocabulary, writing mechanics, partial understanding, missing evidence, concise feedback, extension, and unclear scans.
-6. Click **Build Request ZIP**.
-7. Upload the generated ZIP to ChatGPT. The packaged request is the complete task contract, so no special run phrase is required.
-8. ChatGPT is instructed to return one response ZIP. The teacher unzips it and opens `CLICK_ME.html`.
+5. Choose the **Grade / score output** for the run.
+6. Add teacher notes (optional). Clickable note hints cover reasoning, formative emphasis, ignored questions, paired work, multiple methods, explanation/vocabulary, writing mechanics, partial understanding, missing evidence, concise feedback, extension, and unclear scans.
+7. Click **Build Request ZIP**.
+8. Upload the generated ZIP to ChatGPT. The packaged request is the complete task contract, so no special run phrase is required.
+9. ChatGPT is instructed to return one response ZIP. The teacher unzips it and opens `CLICK_ME.html`.
 
 ## Built-in response contract
 
@@ -30,14 +31,20 @@ The response contract requires ChatGPT to copy the provided response stylesheet 
 The same built-in contract now makes visual correctness a hard requirement:
 
 - mathematical notation must be typeset with MathJax and visually checked in HTML and PDF;
-- any required graph must be created with the available grapher/graphing tool and embedded as a real graph asset rather than described in prose;
+- any required graph must exist as a real mathematically accurate SVG/PNG asset rather than being described in prose; a dedicated grapher is preferred when available, otherwise another approved accurate graph-generation capability may be used;
 - any referenced image/diagram/figure must actually be created and embedded;
-- `data/qa.json` records MathJax rendering checks, grapher use, visual assets, link checks, PDF checks, and failures. A response cannot claim PASS with raw TeX, a missing graph, or a missing referenced visual.
+- `data/qa.json` records MathJax rendering checks, grade-output compliance, graph-generation method/assets, visual assets, link checks, PDF checks, and failures. A response cannot claim PASS with raw TeX, a missing graph, or a missing referenced visual.
 
 ## Pilot scoring behavior
 
-- With a rubric/scoring guide: ChatGPT may score against it when the match is clear and must show/flag evidence and uncertainty.
-- Without a rubric/scoring guide: ChatGPT is instructed not to invent a numeric grade. It provides evidence-based feedback, mastery/next-step indicators, class analysis, and follow-up practice.
+The teacher now selects one authoritative grade-output mode for each request. Free-form notes may add details, but they cannot override the selected mode. If a note conflicts, the response follows the selected mode, records the conflict, and continues instead of stalling.
+
+- **Mastery level** (default): report exactly one of `Secure`, `Developing`, or `Needs Revision`; no numeric/letter conversion.
+- **Feedback only**: return feedback and next steps with no grade or mastery label.
+- **Use supplied rubric / scoring guide**: requires an uploaded rubric; use only the scoring/scale the rubric actually defines.
+- **Recommend a grade from the evidence**: use a supplied rubric/scale when available. Without one, objective item-by-item work may receive an evidence-based percent/points-correct recommendation when equal weighting is reasonable; subjective/open-ended work falls back to a mastery level rather than inventing a numeric/letter scale.
+
+For combined scans, the request also includes an identity-pass rule: use `roster/` when provided; if a handwritten name remains unreadable after one reasonable pass, assign a stable neutral label such as `Student 01`, preserve the page mapping, flag uncertainty, and continue the run.
 
 ## Requested response package
 
@@ -45,7 +52,7 @@ The generated request instructs ChatGPT to return a mostly self-contained ZIP co
 
 - `CLICK_ME.html` - teacher dashboard;
 - `assets/styles.css` - exact copy of the locked request stylesheet;
-- `assets/graphs/` - actual grapher-created graph assets when graphs are needed;
+- `assets/graphs/` - actual graph assets with their generation method recorded in QA when graphs are needed;
 - `assets/visuals/` - actual created diagrams/images/figures when visuals are needed;
 - `scanned_work/` - one teacher-friendly combined PDF of the submitted student work with a descriptive class/assignment filename;
 - `students/` - one print-friendly report per identified student;
