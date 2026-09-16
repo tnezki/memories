@@ -1,10 +1,10 @@
-SUB PLANS — PILOT WORKING PM v0.1
+SUB PLANS — PILOT WORKING PM v0.2
 ================================
 STATUS: PILOT / WORKING — test and revise from real sub-plan runs.
 
 PURPOSE
 -------
-Create a complete substitute-teacher package from five teacher direction inputs while preserving Troy Nezki's established sub-plan style, current MMHS schedule, current seating chart, and Google Drive organization.
+Create complete substitute-teacher package(s) from teacher-entered hourly directions while preserving Troy Nezki's established sub-plan style, current MMHS schedule, current seating chart, and Google Drive organization.
 
 THIS IS A GOOGLE DRIVE WORKFLOW — HARD
 --------------------------------------
@@ -25,24 +25,31 @@ Read pms_general/sub_plans/PROFILE.json immediately after this PM. It owns:
 INPUT CONTRACT
 --------------
 The request manifest supplies:
-- plan_type: monday | tuesday_friday | emergency
-- date: YYYY-MM-DD for dated modes; null for emergency
-- exactly five class direction fields:
+- plan_types: one or more of monday | non_monday | emergency
+- dates.monday: YYYY-MM-DD when Monday is selected; otherwise null
+- dates.non_monday: YYYY-MM-DD when Non-Monday is selected; otherwise null
+- hourly direction fields for:
   1st Hour — STEM
   2nd Hour — Physics
   3rd Hour — Algebra 1
+  Crewtime
   4th Hour — AP Calculus
+  5th Hour — Prep
   6th Hour — Algebra 1
 - optional additional note
 - optional attached source/material files
 
-If a dated mode is selected and date is missing, fail closed and ask for the date.
+At least one plan type must be selected. Monday and Non-Monday may be selected together, and either or both may also be selected with Emergencies.
+If Monday is selected and dates.monday is missing, fail closed and ask for the Monday date.
+If Non-Monday is selected and dates.non_monday is missing, fail closed and ask for the Non-Monday date.
 Emergency mode MUST NOT place a calendar date in the plan heading.
+
+The five instructional-class fields (1st, 2nd, 3rd, 4th, 6th) are expected to contain teacher directions. Crewtime and 5th-hour Prep are optional override fields: when blank, use the stable PROFILE/template default for that block.
 
 SOURCE / STYLE AUTHORITY
 ------------------------
 Use sources in this order:
-1. Teacher's current five direction inputs and current run note.
+1. Teacher's current hourly direction inputs, selected plan types/dates, and current run note.
 2. PROFILE.json for stable workflow facts and exact Drive resource IDs.
 3. Current native Google Doc template for the selected schedule.
 4. Current MMHS Daily Schedules document for bell-time verification.
@@ -59,28 +66,30 @@ WRITING STYLE — HARD
 - Prefer one short paragraph or a few short sentences per class unless the teacher's directions genuinely need steps.
 - Preserve the established stable substitute-information sections from the selected current template: emergency information, discipline, attendance, passes, phone policy, and contact information.
 - Preserve the established 6th-hour team-teaching note unless the teacher explicitly changes it.
-- Crewtime and 5th-hour Prep are automatic from PROFILE.json and do not consume direction boxes.
+- Crewtime and 5th-hour Prep have their own optional direction boxes. If left blank, use the stable PROFILE.json/template defaults.
 
 PLAN MODE ROUTING
 -----------------
+The selected checkboxes are independent outputs. Execute every selected mode in the same run using the same hourly direction set unless the current request explicitly says otherwise.
+
 MONDAY
-- Require date.
+- Require dates.monday.
 - Use the current Monday template as the native structural/style base.
 - Use Monday bell times from PROFILE.json, verified against the current schedule document.
-- Create/reuse a child folder named exactly with the ISO date: YYYY-MM-DD.
-- The plan heading includes the resolved weekday/date.
+- Create/reuse a child folder named exactly with the Monday ISO date: YYYY-MM-DD.
+- The plan heading includes the resolved Monday date.
 
-TUESDAY-FRIDAY
-- Require date.
+NON-MONDAY
+- Require dates.non_monday.
 - Use the current Non-Monday template as the native structural/style base.
 - Use Tuesday-Friday bell times from PROFILE.json, verified against the current schedule document.
-- Create/reuse a child folder named exactly with the ISO date: YYYY-MM-DD.
+- Create/reuse a child folder named exactly with the Non-Monday ISO date: YYYY-MM-DD.
 - The plan heading includes the resolved weekday/date.
 
 EMERGENCY
 - Do not put a date in either plan heading.
 - Create/reuse the child folder named Emergency beneath the Sub Plans root.
-- From the same five teacher direction inputs, maintain TWO reusable native plan documents in that folder:
+- From the same teacher hourly inputs, maintain TWO reusable native plan documents in that folder:
   1. Emergency Sub Plans - Monday
   2. Emergency Sub Plans - Tuesday-Friday
 - The Monday copy uses Monday times/template structure; the Tuesday-Friday copy uses the regular times/template structure.
@@ -94,8 +103,8 @@ For each plan document:
 1. Copy the correct current native template into the resolved destination folder, or update the existing exact-title pilot output on a rerun instead of creating duplicate copies.
 2. Preserve the template's overall ordering and stable substitute-information sections.
 3. Replace the date/header behavior according to the selected mode.
-4. Replace each of the five class-direction blocks with the cleaned teacher direction for that class.
-5. Preserve Crewtime, Lunch, Prep, and stable 6th-hour team-teaching behavior from the current profile/template.
+4. Replace the 1st, 2nd, 3rd, 4th, and 6th-hour class-direction blocks with the cleaned teacher direction for that class.
+5. For Crewtime and 5th-hour Prep, use the teacher-entered override when present; otherwise preserve the stable PROFILE/template default. Preserve Lunch and the stable 6th-hour team-teaching behavior unless explicitly changed.
 6. Verify that all class names/times match PROFILE.json and the current MMHS schedule source.
 7. Read back the finished document before completion.
 
@@ -110,7 +119,7 @@ A current copy/reference to the declared Seating Chart must be available inside 
 
 MATERIAL CREATION
 -----------------
-After cleaning the five class directions, determine what materials the substitute actually needs.
+After cleaning the hourly directions, determine what materials the substitute actually needs.
 
 Create or place supporting materials only when required by the teacher's directions:
 - If the teacher attaches a run-specific file, place a copy in the resolved destination folder and reference its exact name in the appropriate class direction when useful.
@@ -131,10 +140,11 @@ Do not create an extra GitHub transfer ZIP for the sub-plan run itself. This is 
 FINAL QA
 --------
 Before completion verify:
-- correct mode and date behavior;
-- correct Monday vs Tuesday-Friday times;
-- all five teacher direction inputs are present in the correct class blocks;
-- Crewtime and Prep are handled automatically;
+- every selected checkbox mode was built and unselected modes were not built;
+- correct date behavior for each selected dated mode and no date for Emergency;
+- correct Monday vs Non-Monday times;
+- all five instructional-class direction inputs are present in the correct class blocks;
+- Crewtime and Prep use teacher overrides when supplied and stable defaults when blank;
 - wording cleanup did not change teacher intent;
 - stable substitute-information sections remain present;
 - seating chart copy/reference is present in the destination folder;
@@ -144,4 +154,4 @@ Before completion verify:
 
 OUTPUT
 ------
-Return the Google Drive link to the resolved destination folder and a short list of the files created/updated there.
+Return the Google Drive link for every destination folder created/updated in the run and a short list of files created/updated in each.

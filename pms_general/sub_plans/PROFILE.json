@@ -1,5 +1,5 @@
 {
-  "schema": "sub-plans-profile/0.1",
+  "schema": "sub-plans-profile/0.2",
   "status": "pilot",
   "teacher": "Troy Nezki",
   "school_year": "2026-27",
@@ -31,11 +31,55 @@
     }
   },
   "directions": [
-    {"period": 1, "course": "STEM"},
-    {"period": 2, "course": "Physics"},
-    {"period": 3, "course": "Algebra 1"},
-    {"period": 4, "course": "AP Calculus"},
-    {"period": 6, "course": "Algebra 1"}
+    {
+      "key": "period_1",
+      "label": "1st Hour",
+      "period": 1,
+      "course": "STEM",
+      "required": true
+    },
+    {
+      "key": "period_2",
+      "label": "2nd Hour",
+      "period": 2,
+      "course": "Physics",
+      "required": true
+    },
+    {
+      "key": "period_3",
+      "label": "3rd Hour",
+      "period": 3,
+      "course": "Algebra 1",
+      "required": true
+    },
+    {
+      "key": "crewtime",
+      "label": "Crewtime",
+      "required": false,
+      "default_from": "automatic_blocks.crewtime"
+    },
+    {
+      "key": "period_4",
+      "label": "4th Hour",
+      "period": 4,
+      "course": "AP Calculus",
+      "required": true
+    },
+    {
+      "key": "period_5",
+      "label": "5th Hour",
+      "period": 5,
+      "course": "Prep",
+      "required": false,
+      "default_from": "automatic_blocks.period_5"
+    },
+    {
+      "key": "period_6",
+      "label": "6th Hour",
+      "period": 6,
+      "course": "Algebra 1",
+      "required": true
+    }
   ],
   "automatic_blocks": {
     "crewtime": "Students should work quietly on schoolwork.",
