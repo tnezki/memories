@@ -1,5 +1,5 @@
 {
-  "schema": "algebra-quick-check-template-contract/1.0",
+  "schema": "algebra-quick-check-template-contract/1.1",
   "status": "CURRENT",
   "course": "Algebra 1",
   "purpose": "Lock the teacher-approved Quick Check selector/build/print presentation while allowing question content to vary by approved I Can/family selection.",
@@ -48,6 +48,15 @@
       "control": "slider plus exact numeric input in inches",
       "scope": "source problem/evidence architecture; same height follows that problem across scrambled versions"
     },
+    "per_problem_graph_size": {
+      "control": "slider plus exact numeric input; percentage of available problem width is acceptable",
+      "scope": "when a source problem contains a graph, graph size is adjustable independently for that source problem and follows it across scrambled versions"
+    },
+    "per_problem_workspace": {
+      "control": "slider plus exact numeric input in inches",
+      "scope": "writable workspace is adjustable independently for that source problem and follows it across scrambled versions"
+    },
+    "independent_geometry_rule": "Changing graph size must not automatically force workspace to grow, and changing workspace must not automatically force graph size to grow. Overall problem height remains independently adjustable; fit/overflow feedback must reveal incompatible combinations rather than silently clipping content.",
     "fit_feedback": "Show free-space or overflow indicator for each of the eight pages, labeled A1,A2,B1,B2,C1,C2,D1,D2.",
     "reset": true,
     "print_button": "Print A-D (8 pages)",
@@ -96,6 +105,7 @@
     "MathJax used for math",
     "graphs are photocopy-safe",
     "screen controls are absent from print",
+    "graph size and workspace are independently adjustable from overall problem height when applicable",
     "source map remains deterministic after scramble"
   ]
 }
