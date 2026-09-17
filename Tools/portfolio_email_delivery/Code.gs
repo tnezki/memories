@@ -2,10 +2,12 @@ const PORTFOLIO_EMAIL = Object.freeze({
   RECIPIENT_FILE: 'email_recipients_current.csv',
   MANIFEST_FILE: 'email_delivery_manifest.csv',
   LOG_FILE: 'email_send_log.csv',
+  NOTE_FILE: 'email_message_notes.csv',
   DATA_FOLDER: '02 Portfolio Data',
   PACKET_FOLDER: '03 Student Packets',
   EMAIL_FOLDER: 'Email Delivery',
-  ALL_PERIODS: '__ALL__'
+  ALL_PERIODS: '__ALL__',
+  NOTE_MAX_LENGTH: 1000
 });
 
 function doGet() {
@@ -62,6 +64,70 @@ function getUnitMeta(course, unit) {
   const periods = Array.from(new Set(recipients.rows.map(r => String(r.period || '').trim()).filter(Boolean)))
     .sort(naturalCompare_);
   return { periods: [PORTFOLIO_EMAIL.ALL_PERIODS].concat(periods) };
+}
+
+function getMessageNotes(course, unit, period) {
+  assertAuthorized_();
+  const state = getUnitState_(course, unit);
+  const recipients = readCsvObjects_(requireSingleFile_(state.dataFolder, PORTFOLIO_EMAIL.RECIPIENT_FILE));
+  requireColumns_(recipients.headers, [
+    'student_key', 'student_name', 'period', 'student_email', 'guardian_emails',
+    'contact_status', 'contact_source_sha256', 'verified_at'
+  ], PORTFOLIO_EMAIL.RECIPIENT_FILE);
+  const selectedPeriod = period || PORTFOLIO_EMAIL.ALL_PERIODS;
+  const notes = readMessageNotes_(state.dataFolder);
+  const students = recipients.rows
+    .filter(r => selectedPeriod === PORTFOLIO_EMAIL.ALL_PERIODS || String(r.period || '').trim() === selectedPeriod)
+    .map(r => {
+      const key = String(r.student_key || '').trim();
+      const saved = notes.students.get(key) || { note: '', includeThisWeek: false, updatedAt: '' };
+      return {
+        studentKey: key,
+        studentName: String(r.student_name || '').trim(),
+        period: String(r.period || '').trim(),
+        note: saved.note,
+        includeThisWeek: !!saved.includeThisWeek,
+        updatedAt: saved.updatedAt || ''
+      };
+    })
+    .sort((a, b) => naturalCompare_(a.period, b.period) || a.studentName.localeCompare(b.studentName));
+  return {
+    course: String(course),
+    unit: String(unit),
+    period: selectedPeriod,
+    weeklyNote: notes.weeklyNote,
+    weeklyUpdatedAt: notes.weeklyUpdatedAt,
+    students: students
+  };
+}
+
+function saveMessageNotes(request) {
+  assertAuthorized_();
+  request = request || {};
+  const course = String(request.course || '').trim();
+  const unit = String(request.unit || '').trim();
+  const selectedPeriod = String(request.period || PORTFOLIO_EMAIL.ALL_PERIODS).trim() || PORTFOLIO_EMAIL.ALL_PERIODS;
+  const state = getUnitState_(course, unit);
+  const recipients = readCsvObjects_(requireSingleFile_(state.dataFolder, PORTFOLIO_EMAIL.RECIPIENT_FILE));
+  const eligible = recipients.rows.filter(r => selectedPeriod === PORTFOLIO_EMAIL.ALL_PERIODS || String(r.period || '').trim() === selectedPeriod);
+  const eligibleKeys = new Set(eligible.map(r => String(r.student_key || '').trim()).filter(Boolean));
+  const notes = readMessageNotes_(state.dataFolder);
+  const now = new Date().toISOString();
+
+  notes.weeklyNote = safeNote_(request.weeklyNote);
+  notes.weeklyUpdatedAt = now;
+
+  const submitted = Array.isArray(request.students) ? request.students : [];
+  submitted.forEach(item => {
+    const key = String(item && item.studentKey || '').trim();
+    if (!key || !eligibleKeys.has(key)) throw new Error('A submitted student note does not match the current selected roster. Reload notes and try again.');
+    const note = safeNote_(item.note);
+    const includeThisWeek = !!item.includeThisWeek && !!note;
+    notes.students.set(key, { note: note, includeThisWeek: includeThisWeek, updatedAt: now });
+  });
+
+  writeMessageNotes_(state.dataFolder, notes);
+  return getMessageNotes(course, unit, selectedPeriod);
 }
 
 function runPreflight(course, unit, period) {
@@ -122,6 +188,7 @@ function sendLiveReports(request) {
     const state = getUnitState_(request.course, request.unit);
     let sent = 0, failed = 0;
     const failures = [];
+    const sentStudentKeys = [];
     sendRows.forEach(row => {
       try {
         const file = getVerifiedReportFile_(row, state);
@@ -135,6 +202,7 @@ function sendLiveReports(request) {
         if (row.guardianEmails.length) message.bcc = row.guardianEmails.join(',');
         MailApp.sendEmail(message);
         appendSendLog_(request.course, request.unit, row, 'LIVE', row.studentEmail, row.guardianEmails.join('|'), 'SENT', '');
+        sentStudentKeys.push(row.studentKey);
         sent++;
       } catch (err) {
         const msg = safeError_(err);
@@ -143,11 +211,22 @@ function sendLiveReports(request) {
         failed++;
       }
     });
+
+    let noteResetWarning = '';
+    if (sentStudentKeys.length) {
+      try {
+        markStudentNotesSent_(state.dataFolder, sentStudentKeys);
+      } catch (err) {
+        noteResetWarning = 'Reports were sent, but the Include this week checkboxes could not be reset automatically: ' + safeError_(err);
+      }
+    }
+
     return {
       ok: failed === 0,
       sent: sent,
       failed: failed,
       failures: failures,
+      noteResetWarning: noteResetWarning,
       remainingRecipientQuota: MailApp.getRemainingDailyQuota()
     };
   } finally {
@@ -168,6 +247,8 @@ function buildPreflight_(course, unit, period, verifyFiles) {
     'report_date', 'pdf_file_id', 'pdf_file_name', 'pdf_sha256'
   ], PORTFOLIO_EMAIL.MANIFEST_FILE);
 
+  const messageNotes = readMessageNotes_(state.dataFolder);
+  const weeklyNote = messageNotes.weeklyNote || '';
   const selectedPeriod = period || PORTFOLIO_EMAIL.ALL_PERIODS;
   const recipients = recipientCsv.rows.filter(r => selectedPeriod === PORTFOLIO_EMAIL.ALL_PERIODS || String(r.period || '').trim() === selectedPeriod);
   if (!recipients.length) throw new Error('No recipient rows match the selected period.');
@@ -190,6 +271,8 @@ function buildPreflight_(course, unit, period, verifyFiles) {
     const guardianInvalid = guardians.invalid;
     const guardianEmails = guardians.valid;
     const contactStatus = String(rec.contact_status || '').trim().toUpperCase();
+    const savedNote = messageNotes.students.get(key) || { note: '', includeThisWeek: false };
+    const studentNote = savedNote.includeThisWeek ? String(savedNote.note || '').trim() : '';
 
     if (!['READY','WARNING_NO_GUARDIAN'].includes(contactStatus)) issues.push('Contact status is not send-ready');
     if (contactStatus === 'WARNING_NO_GUARDIAN') warnings.push('Contact file marks no guardian email');
@@ -235,6 +318,8 @@ function buildPreflight_(course, unit, period, verifyFiles) {
       reportFileId: fileId,
       reportFileName: fileName,
       reportSha256: reportHash,
+      weeklyNote: weeklyNote,
+      studentNote: studentNote,
       issues: issues,
       warnings: warnings,
       alreadySent: alreadySent,
@@ -271,6 +356,7 @@ function buildPreflight_(course, unit, period, verifyFiles) {
         reportNumber: String(m.report_number || '').trim(), reportDate: String(m.report_date || '').trim(),
         reportFileId: String(m.pdf_file_id || '').trim(), reportFileName: String(m.pdf_file_name || '').trim(),
         reportSha256: String(m.pdf_sha256 || '').trim().toLowerCase(),
+        weeklyNote: weeklyNote, studentNote: '',
         issues: ['Report exists without a matching current recipient row'], warnings: [],
         alreadySent: false, sendable: false, status: 'BLOCKED'
       });
@@ -283,10 +369,11 @@ function buildPreflight_(course, unit, period, verifyFiles) {
   const alreadySentCount = rows.filter(r => r.alreadySent && !r.issues.length).length;
   const sendRows = rows.filter(r => r.sendable && !r.alreadySent);
   const recipientCountToSend = sendRows.reduce((n, r) => n + 1 + r.guardianEmails.length, 0);
-  const digest = digestPreview_(course, unit, selectedPeriod, rows);
+  const digest = digestPreview_(course, unit, selectedPeriod, rows, weeklyNote);
 
   return {
     course: String(course), unit: String(unit), period: selectedPeriod,
+    weeklyNote: weeklyNote,
     rows: rows,
     digest: digest,
     blockingCount: blockingCount,
@@ -301,6 +388,7 @@ function buildPreflight_(course, unit, period, verifyFiles) {
 
 function getVerifiedReportFile_(row, state) {
   if (!row.reportFileId) throw new Error('Missing report Drive file ID');
+  if (!state.emailFolder) throw new Error('Missing Drive folder: ' + PORTFOLIO_EMAIL.EMAIL_FOLDER);
   const file = DriveApp.getFileById(row.reportFileId);
   if (file.getMimeType() !== 'application/pdf') throw new Error('Report attachment is not a PDF');
   if (file.getName() !== row.reportFileName) throw new Error('Report filename no longer matches manifest');
@@ -325,7 +413,7 @@ function getUnitState_(course, unit) {
   const unitFolder = requireSingleFolder_(courseFolder, 'unit ' + unitValue);
   const dataFolder = requireSingleFolder_(unitFolder, PORTFOLIO_EMAIL.DATA_FOLDER);
   const packetFolder = requireSingleFolder_(unitFolder, PORTFOLIO_EMAIL.PACKET_FOLDER);
-  const emailFolder = requireSingleFolder_(packetFolder, PORTFOLIO_EMAIL.EMAIL_FOLDER);
+  const emailFolder = getOptionalSingleFolder_(packetFolder, PORTFOLIO_EMAIL.EMAIL_FOLDER);
   return { root: root, courseFolder: courseFolder, unitFolder: unitFolder, dataFolder: dataFolder, packetFolder: packetFolder, emailFolder: emailFolder };
 }
 
@@ -346,11 +434,38 @@ function buildSubject_(row) {
 
 function buildBody_(row, teacherDisplayName) {
   const first = firstName_(row.studentName);
-  return 'Hello,\n\nAttached is ' + first + "'s current " + row.course + ' Unit ' + row.unit + ' Portfolio progress report. ' +
-    'It summarizes the current body of evidence, next targets, and practice guidance. This report may update as new evidence is added.\n\n- ' + teacherDisplayName;
+  const lines = [
+    'Hello,',
+    '',
+    'Attached is ' + first + "'s current " + row.course + ' Unit ' + row.unit + ' Portfolio Progress Report. You can expect an updated Portfolio report about once each week as new evidence is collected.',
+    '',
+    'This Portfolio is designed to show growth over time, not to collect or average scores from individual assignments. Assessments, checks, classwork, and other evidence update the current picture of what a student knows and can do. As students learn more and provide stronger evidence, their Portfolio status can improve.',
+    '',
+    'PowerSchool will show one current grade for each unit once there is enough evidence to make that grade meaningful and fair. Individual assessments and checks are not entered as separate grades to be averaged together; they provide evidence that updates the current Unit grade.',
+    '',
+    'What "Next" means:',
+    '- Needs first check - We do not yet have usable evidence for this skill.',
+    '- Practice + check soon - More practice or support is needed before another independent check.',
+    '- Needs another independent check - There is already convincing evidence, but another independent demonstration is needed to confirm mastery.',
+    '- Secure - Current evidence supports mastery of this skill.',
+    '- Extension - The skill is secure and the student is ready to apply it in a new or more challenging situation.'
+  ];
+  if (row.weeklyNote) {
+    lines.push('', "This week's note:", row.weeklyNote);
+  }
+  if (row.studentNote) {
+    lines.push('', 'Teacher note for ' + first + ':', row.studentNote);
+  }
+  lines.push(
+    '',
+    'These "Next" statements are next steps, not grades. The report will continue to change as ' + first + ' learns, practices, and provides new evidence.',
+    '',
+    '- ' + teacherDisplayName
+  );
+  return lines.join('\n');
 }
 
-function digestPreview_(course, unit, period, rows) {
+function digestPreview_(course, unit, period, rows, weeklyNote) {
   const compact = rows.map(r => ({
     studentKey: r.studentKey,
     period: r.period,
@@ -359,11 +474,15 @@ function digestPreview_(course, unit, period, rows) {
     reportNumber: r.reportNumber,
     reportFileId: r.reportFileId,
     reportSha256: r.reportSha256,
+    studentNote: r.studentNote || '',
     issues: r.issues,
     warnings: r.warnings,
     alreadySent: r.alreadySent
   }));
-  return sha256Text_(JSON.stringify({ course: String(course), unit: String(unit), period: String(period), rows: compact }));
+  return sha256Text_(JSON.stringify({
+    course: String(course), unit: String(unit), period: String(period),
+    weeklyNote: String(weeklyNote || ''), rows: compact
+  }));
 }
 
 function appendSendLog_(course, unit, row, mode, toEmail, bccEmails, status, error) {
@@ -395,6 +514,73 @@ function readOptionalLog_(dataFolder) {
     'to_email','bcc_emails','status','error'
   ], PORTFOLIO_EMAIL.LOG_FILE);
   return parsed.rows;
+}
+
+function readMessageNotes_(dataFolder) {
+  const out = { weeklyNote: '', weeklyUpdatedAt: '', students: new Map() };
+  const f = getOptionalSingleFile_(dataFolder, PORTFOLIO_EMAIL.NOTE_FILE);
+  if (!f) return out;
+  const parsed = readCsvObjects_(f);
+  requireColumns_(parsed.headers, ['scope','student_key','note','include_this_week','updated_at'], PORTFOLIO_EMAIL.NOTE_FILE);
+  let weeklyCount = 0;
+  parsed.rows.forEach(r => {
+    const scope = String(r.scope || '').trim().toUpperCase();
+    const key = String(r.student_key || '').trim();
+    const note = String(r.note || '').trim();
+    const includeThisWeek = /^(true|yes|1)$/i.test(String(r.include_this_week || '').trim());
+    const updatedAt = String(r.updated_at || '').trim();
+    if (scope === 'WEEKLY') {
+      weeklyCount++;
+      if (weeklyCount > 1) throw new Error('Multiple WEEKLY rows exist in ' + PORTFOLIO_EMAIL.NOTE_FILE + '. Resolve the duplicate before sending.');
+      out.weeklyNote = note;
+      out.weeklyUpdatedAt = updatedAt;
+    } else if (scope === 'STUDENT') {
+      if (!key) throw new Error('A STUDENT row in ' + PORTFOLIO_EMAIL.NOTE_FILE + ' is missing student_key.');
+      if (out.students.has(key)) throw new Error('Duplicate student_key in ' + PORTFOLIO_EMAIL.NOTE_FILE + ': ' + key);
+      out.students.set(key, { note: note, includeThisWeek: includeThisWeek && !!note, updatedAt: updatedAt });
+    }
+  });
+  return out;
+}
+
+function writeMessageNotes_(dataFolder, notes) {
+  const header = ['scope','student_key','note','include_this_week','updated_at'];
+  const lines = [csvLine_(header)];
+  lines.push(csvLine_(['WEEKLY','',notes.weeklyNote || '',notes.weeklyNote ? 'TRUE' : 'FALSE',notes.weeklyUpdatedAt || new Date().toISOString()]));
+  Array.from(notes.students.keys()).sort(naturalCompare_).forEach(key => {
+    const row = notes.students.get(key) || {};
+    if (!row.note && !row.includeThisWeek) return;
+    lines.push(csvLine_(['STUDENT',key,row.note || '',row.includeThisWeek ? 'TRUE' : 'FALSE',row.updatedAt || new Date().toISOString()]));
+  });
+  const text = lines.join('\n') + '\n';
+  let f = getOptionalSingleFile_(dataFolder, PORTFOLIO_EMAIL.NOTE_FILE);
+  if (!f) f = dataFolder.createFile(PORTFOLIO_EMAIL.NOTE_FILE, text, 'text/csv');
+  else f.setContent(text);
+}
+
+function markStudentNotesSent_(dataFolder, studentKeys) {
+  const keySet = new Set((studentKeys || []).map(x => String(x || '').trim()).filter(Boolean));
+  if (!keySet.size) return;
+  const notes = readMessageNotes_(dataFolder);
+  let changed = false;
+  keySet.forEach(key => {
+    const row = notes.students.get(key);
+    if (row && row.includeThisWeek) {
+      row.includeThisWeek = false;
+      row.updatedAt = new Date().toISOString();
+      notes.students.set(key, row);
+      changed = true;
+    }
+  });
+  if (changed) writeMessageNotes_(dataFolder, notes);
+}
+
+function safeNote_(value) {
+  const s = String(value == null ? '' : value).replace(/\r\n/g, '\n').trim();
+  if (s.length > PORTFOLIO_EMAIL.NOTE_MAX_LENGTH) {
+    throw new Error('A message note is too long. Maximum length is ' + PORTFOLIO_EMAIL.NOTE_MAX_LENGTH + ' characters.');
+  }
+  return s;
 }
 
 function readCsvObjects_(file) {
@@ -460,6 +646,14 @@ function firstName_(studentName) {
 function requireSingleFolder_(parent, name) {
   const it = parent.getFoldersByName(name);
   if (!it.hasNext()) throw new Error('Missing Drive folder: ' + name);
+  const first = it.next();
+  if (it.hasNext()) throw new Error('Duplicate Drive folders named ' + name + '. Resolve the ambiguity before sending.');
+  return first;
+}
+
+function getOptionalSingleFolder_(parent, name) {
+  const it = parent.getFoldersByName(name);
+  if (!it.hasNext()) return null;
   const first = it.next();
   if (it.hasNext()) throw new Error('Duplicate Drive folders named ' + name + '. Resolve the ambiguity before sending.');
   return first;

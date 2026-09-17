@@ -1,12 +1,13 @@
 {
-  "schema": "portfolio-email-delivery-contract/1.0",
+  "schema": "portfolio-email-delivery-contract/1.1",
   "status": "CURRENT",
-  "purpose": "Teacher-approved, privacy-preserving email delivery of current Portfolio student reports from the canonical private Portfolio Drive. Contact import and report preparation are Portfolio-state operations; actual email sending is an explicit teacher action in a teacher-owned Google Apps Script web app.",
-  "separation_rule": "This is a Portfolio delivery workflow only. It does not share state, logic, or recipient data with the District Grading & Evidence tool.",
+  "purpose": "Teacher-approved, privacy-preserving weekly email delivery of current Portfolio student reports from the canonical private Portfolio Drive. Contact import, report preparation, and message-note preparation are Portfolio-state operations; actual email sending is always an explicit teacher action in a teacher-owned Google Apps Script web app.",
+  "separation_rule": "This is a Portfolio delivery workflow only. It does not share state, logic, recipient data, or message-note state with the District Grading & Evidence tool.",
   "privacy_rules": [
-    "Never write student names, student email addresses, guardian email addresses, report PDFs, or send logs to GitHub.",
-    "Never put student identity, evidence, status, or recipient data into a public URL or QR code.",
-    "All contact sources, normalized contacts, recipient maps, report PDFs, and send logs remain inside the canonical private Portfolio Drive root.",
+    "Never write student names, student email addresses, guardian email addresses, student-specific teacher notes, report PDFs, or send logs to GitHub.",
+    "Never put student identity, evidence, status, recipient data, or student-specific notes into a public URL or QR code.",
+    "All contact sources, normalized contacts, recipient maps, report PDFs, teacher message notes, and send logs remain inside the canonical private Portfolio Drive root.",
+    "Dashboard links may contain only a non-sensitive course hint. The server still resolves and validates the course against the private Portfolio root.",
     "The sender web app must be restricted to the teacher account and must fail closed when the active account cannot be verified."
   ],
   "drive_state": {
@@ -17,20 +18,14 @@
     "unit_recipient_file": "02 Portfolio Data/email_recipients_current.csv",
     "unit_contact_review_file": "02 Portfolio Data/email_contact_review.csv",
     "unit_delivery_manifest": "02 Portfolio Data/email_delivery_manifest.csv",
+    "unit_message_notes": "02 Portfolio Data/email_message_notes.csv",
     "unit_send_log": "02 Portfolio Data/email_send_log.csv",
     "unit_delivery_pdf_folder": "03 Student Packets/Email Delivery"
   },
   "contact_import": {
-    "accepted_source_types": [
-      "xlsx",
-      "csv"
-    ],
+    "accepted_source_types": ["xlsx", "csv"],
     "source_classification": "setup/support file; never student evidence",
-    "xlsx_required_headers": [
-      "LastFirst",
-      "Student Email",
-      "Guardian Email"
-    ],
+    "xlsx_required_headers": ["LastFirst", "Student Email", "Guardian Email"],
     "xlsx_sheet_rule": "Read every worksheet containing all three required headers. Do not infer course period from worksheet name. The same student may legitimately appear on more than one worksheet.",
     "student_identity_rule": "Normalize duplicate source rows by exact school student email first. When the same student email appears on multiple sheets, duplicate identical contact data may be collapsed. Conflicting names or materially different guardian sets require review; do not silently choose or union conflicting records.",
     "guardian_parse_rule": "Split guardian addresses on comma or semicolon, trim whitespace, discard empty tokens, validate email syntax, and deduplicate case-insensitively while preserving the first trimmed spelling.",
@@ -49,24 +44,12 @@
     "setup_only_rule": "The teacher may run Portfolio contact setup without new student evidence. That operation updates only private contact-directory/import history and safely resolvable Unit recipient files; it does not change evidence ledgers/statuses/PowerSchool state or imply a new report run."
   },
   "contact_directory_columns": [
-    "contact_key",
-    "student_name_source",
-    "student_email",
-    "guardian_emails",
-    "source_file_sha256",
-    "source_sheets",
-    "contact_status",
-    "verified_at"
+    "contact_key", "student_name_source", "student_email", "guardian_emails",
+    "source_file_sha256", "source_sheets", "contact_status", "verified_at"
   ],
   "recipient_file_columns": [
-    "student_key",
-    "student_name",
-    "period",
-    "student_email",
-    "guardian_emails",
-    "contact_status",
-    "contact_source_sha256",
-    "verified_at"
+    "student_key", "student_name", "period", "student_email", "guardian_emails",
+    "contact_status", "contact_source_sha256", "verified_at"
   ],
   "guardian_storage_rule": "guardian_emails is a pipe-delimited list of already-trimmed, case-insensitively deduplicated addresses. A blank list is allowed only as a warning state, never as an invented address.",
   "recipient_statuses": {
@@ -81,30 +64,23 @@
     "content_rule": "The individual PDF is exactly the student's same two report pages, with no extra cover page and no other student's content."
   },
   "delivery_manifest_columns": [
-    "student_key",
-    "student_name",
-    "period",
-    "course",
-    "unit",
-    "report_number",
-    "report_date",
-    "pdf_file_id",
-    "pdf_file_name",
-    "pdf_sha256"
+    "student_key", "student_name", "period", "course", "unit", "report_number",
+    "report_date", "pdf_file_id", "pdf_file_name", "pdf_sha256"
   ],
+  "message_notes": {
+    "file": "02 Portfolio Data/email_message_notes.csv",
+    "columns": ["scope", "student_key", "note", "include_this_week", "updated_at"],
+    "max_note_length": 1000,
+    "weekly_rule": "The optional WEEKLY row stores a Unit-level teacher note used for the current weekly communication, such as an upcoming assessment, Crewtime/help reminder, or a temporary explanation that there is not yet enough evidence for a fair letter grade. Blank means no weekly note block is included.",
+    "student_rule": "Optional STUDENT rows are keyed only by exact student_key. The note text persists privately as a reusable note bank. Student names are not duplicated into this note file.",
+    "include_rule": "A student note is inserted into an email only when include_this_week is true and the note text is nonblank. Successful LIVE delivery automatically resets include_this_week to false for that student while preserving the note text. Failed/unsent students keep their current include state.",
+    "preview_rule": "The preflight table must visibly show the weekly note and each active student-specific note. Send Test to Me must use the exact same note content that a live send would use.",
+    "digest_rule": "The exact weekly note and active per-student notes are part of the preview digest. Editing notes after preflight invalidates the old preview and requires a fresh preflight before test or live sending.",
+    "privacy_rule": "Message notes are private Portfolio communication state, not curriculum content or student evidence. They never belong in GitHub, public dashboards, URLs, or QR codes."
+  },
   "send_log_columns": [
-    "send_id",
-    "timestamp",
-    "mode",
-    "course",
-    "unit",
-    "report_number",
-    "student_key",
-    "report_sha256",
-    "to_email",
-    "bcc_emails",
-    "status",
-    "error"
+    "send_id", "timestamp", "mode", "course", "unit", "report_number", "student_key",
+    "report_sha256", "to_email", "bcc_emails", "status", "error"
   ],
   "sender": {
     "implementation": "Teacher-owned Google Apps Script web app",
@@ -113,21 +89,27 @@
       "Tools/portfolio_email_delivery/Index.html",
       "Tools/portfolio_email_delivery/appsscript.json"
     ],
-    "required_script_properties": [
-      "PORTFOLIO_ROOT_FOLDER_ID",
-      "TEACHER_EMAIL",
-      "TEACHER_DISPLAY_NAME"
-    ],
+    "required_script_properties": ["PORTFOLIO_ROOT_FOLDER_ID", "TEACHER_EMAIL", "TEACHER_DISPLAY_NAME"],
     "authorization_rule": "The active Google account must exactly match TEACHER_EMAIL. Blank or different active-account identity fails closed.",
     "deployment_rule": "Deploy under the teacher's school Google Workspace account, execute as the teacher, and restrict access to the teacher/most restrictive school-admin-supported setting. Never deploy as public/anonymous.",
-    "preflight_rule": "Before live sending, join email_recipients_current.csv to email_delivery_manifest.csv by exact student_key; verify exactly one current report per selected student; verify each Drive file is inside the exact Email Delivery folder; recompute each PDF SHA-256; validate recipients; display all warnings/errors; compute a digest of the exact previewed send state.",
-    "digest_rule": "Live send recomputes preflight after acquiring a script lock. If recipients, report hashes, report IDs, report numbers, or selected scope changed, the preview digest no longer matches and sending is blocked until the teacher previews again.",
+    "course_discovery_rule": "The sender discovers course folders and unit N folders from the canonical private Portfolio root. The same sender is used for Algebra 1, Physics, AP Calculus, STEM, and future courses once their private Portfolio course/unit state is initialized.",
+    "dashboard_hint_rule": "A teacher dashboard may append ?course={URL_ENCODED_COURSE} to the web-app URL. The hint only preselects an existing private Portfolio course. If the hinted course is not initialized, the app must show that state and must not silently switch to a different course.",
+    "preflight_rule": "Before live sending, join email_recipients_current.csv to email_delivery_manifest.csv by exact student_key; verify exactly one current report per selected student; verify each Drive file is inside the exact Email Delivery folder; recompute each PDF SHA-256; validate recipients; display all warnings/errors and active message notes; compute a digest of the exact previewed send state.",
+    "digest_rule": "Live send recomputes preflight after acquiring a script lock. If recipients, report hashes, report IDs, report numbers, selected scope, weekly note, or active student notes changed, the preview digest no longer matches and sending is blocked until the teacher previews again.",
     "student_to_rule": "Place the student's valid school email in To.",
     "guardian_rule": "Place that student's deduplicated guardian emails in BCC. Never place guardian addresses in To or CC and never combine multiple students/families in one message.",
     "subject_pattern": "{COURSE} Unit {UNIT} Portfolio Progress Report - {STUDENT_NAME}",
-    "body_pattern": "Hello,\n\nAttached is {STUDENT_FIRST_NAME}'s current {COURSE} Unit {UNIT} Portfolio progress report. It summarizes the current body of evidence, next targets, and practice guidance. This report may update as new evidence is added.\n\n- {TEACHER_DISPLAY_NAME}",
-    "subject_privacy_rule": "Do not place grades, status codes, mastery labels, I Can results, or guardian names in the subject line.",
-    "test_send_rule": "Send Test to Me sends one selected student's report only to TEACHER_EMAIL with a [TEST] subject prefix. It never sends to the student or guardians and does not count as a live delivery.",
+    "body_rule": "Centralize the family-facing wording in buildBody_(). The standard message explains the approximately weekly report cadence, growth-over-time evidence model, one-current-Unit-grade PowerSchool model, and the five fixed Next labels. The optional weekly note and optional active student note are inserted as clearly labeled blocks. The exact wording may be revised after teacher/family feedback without changing recipient or safety logic.",
+    "next_key": [
+      {"label": "Needs first check", "meaning": "We do not yet have usable evidence for this skill."},
+      {"label": "Practice + check soon", "meaning": "More practice or support is needed before another independent check."},
+      {"label": "Needs another independent check", "meaning": "There is already convincing evidence, but another independent demonstration is needed to confirm mastery."},
+      {"label": "Secure", "meaning": "Current evidence supports mastery of this skill."},
+      {"label": "Extension", "meaning": "The skill is secure and the student is ready to apply it in a new or more challenging situation."}
+    ],
+    "subject_privacy_rule": "Do not place grades, status codes, mastery labels, I Can results, guardian names, or message-note content in the subject line.",
+    "test_send_rule": "Send Test to Me sends one selected student's exact current report and exact current message-note content only to TEACHER_EMAIL with a [TEST] subject prefix. It never sends to the student or guardians and does not count as a live delivery.",
+    "weekly_teacher_approval_rule": "Weekly is a preparation/communication cadence, not an unattended schedule. Portfolio may prepare fresh reports and preserve draft notes, but every live send still requires teacher review, a fresh passing preflight, optional teacher-only test, explicit confirmation, and a manual Send Reports action.",
     "live_send_rule": "Live sending requires a fresh passing preflight and explicit teacher confirmation in the web app.",
     "quota_rule": "Count all To + BCC recipients and compare with MailApp.getRemainingDailyQuota(). If remaining quota is insufficient for the entire currently sendable selection, block before sending any live messages.",
     "duplicate_send_rule": "A successful LIVE log row for the same student_key + report_sha256 makes that exact report ALREADY_SENT and it is skipped on later runs. Failed rows may be retried after a fresh preflight.",
@@ -142,13 +124,16 @@
       "invalid guardian email token",
       "missing report",
       "multiple reports for the same selected student_key",
+      "missing Email Delivery folder when a report file must be verified",
       "report file not inside the exact Email Delivery folder",
       "report SHA-256 mismatch",
-      "preview digest mismatch",
+      "malformed or duplicate message-note rows",
+      "preview digest mismatch, including message-note changes",
       "insufficient MailApp recipient quota"
     ],
     "warning_conditions": [
-      "no guardian email; student-only delivery remains sendable after teacher review"
+      "no guardian email; student-only delivery remains sendable after teacher review",
+      "post-send student-note include reset failed after successful delivery; the send remains successful and the teacher is warned to clear the include flag manually"
     ]
   }
 }
