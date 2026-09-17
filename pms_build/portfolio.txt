@@ -2,7 +2,7 @@ PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT DRIVE WORKFLOW
 ===========================================================
 STATUS: CURRENT
 JOB: portfolio
-REVISION: 2026-09-16 v3.1 - LARGE-PRINT TWO-PAGE STUDENT REPORT + PRACTICE BUILDER QR
+REVISION: 2026-09-17 v3.2 - PRIVATE CONTACT DIRECTORY + EMAIL-READY INDIVIDUAL REPORTS
 
 ROLE
 ----
@@ -25,10 +25,10 @@ Read in this order:
 6. current course Portfolio policy declared by the Framework manifest
 7. declared evidence source map/lineage file for the attached source, when one exists
 8. this PM
-9. Tools/MANIFEST.json -> Portfolio template contract + student/teacher templates + CSS
+9. Tools/MANIFEST.json -> Portfolio template contract + student/teacher templates + CSS + Portfolio email-delivery contract when present
 10. current downstream-ready Unit Family Bank manifest/index/family records
 11. prior private Portfolio Drive state
-12. new request evidence/support/setup files
+12. new request evidence/support/setup files, including an explicitly supplied contact workbook/CSV when email contacts are being configured
 
 COURSE POLICY RESOLUTION - HARD
 - If the Framework manifest declares `current_portfolio_policy`, read that exact file.
@@ -56,16 +56,25 @@ HARD ROUTING RULE:
 6. Resolve/create `unit N` inside that course child.
 7. If the exact root ID cannot be accessed, STOP with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE`.
 
-Canonical path:
+Canonical course/unit path:
   ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
-with exactly:
+with exactly these five Portfolio-owned Unit folders:
   01 Evidence Inbox/
   02 Portfolio Data/
   03 Student Packets/
   04 Class & Intervention Summaries/
   05 PowerSchool Exports/
 
-Create missing Unit/five folders on first run. Preserve raw/history. Replace stale current PDFs/CSVs/current-state files.
+The canonical root may also contain the Portfolio-owned private contact directory:
+  00 Contact Directory/
+    Source Imports/
+    contact_directory.csv
+    contact_import_history.csv
+This root-level directory is shared only to reuse verified student/guardian contacts across the teacher's Portfolio courses. It is private state, never a GitHub artifact.
+
+Within each Unit, `03 Student Packets/Email Delivery/` is the private individual-report folder used by the separate teacher-approved email sender. It is nested inside the existing Student Packets folder; do not create a sixth Portfolio Unit folder.
+
+Create missing Unit/five folders on first run. Create `00 Contact Directory` only when a contact import is explicitly supplied or prior verified contact state already exists. Create `03 Student Packets/Email Delivery` when preparing current reports. Preserve raw/history. Replace stale current PDFs/CSVs/current-state files as declared below.
 
 FIRST RUN:
 If `02 Portfolio Data/student_registry.csv` is absent, require a current PowerSchool template/export attachment. Build the registry from that explicit roster source; never infer roster from submissions. If missing: `PORTFOLIO_REGISTRY_REQUIRED`.
@@ -77,6 +86,12 @@ Later runs use the stored registry + stored PowerSchool template/schema.
 Before declaring success, save each newly attached STUDENT EVIDENCE file unchanged into `01 Evidence Inbox` with a defensible normalized name and `_RAW` suffix. Record SHA-256. Do not double-count a source hash already in evidence_ledger.csv.
 
 Files explicitly marked supporting/source-map/key are teacher references, not student evidence. Do not count them as student submissions or copy them into the raw student-evidence ledger as evidence events.
+
+EMAIL CONTACT SETUP FILES:
+- An explicitly supplied student/guardian contact workbook or CSV is a private SETUP/SUPPORT source, never student evidence.
+- Resolve `Tools/MANIFEST.json -> portfolio_email_delivery_contract` before importing contacts.
+- Preserve the raw contact source unchanged in `00 Contact Directory/Source Imports` and record SHA-256/import history. Do not place contact sources in `01 Evidence Inbox`.
+- Never place a contact workbook, normalized contact file, student/guardian address, or contact-review output in GitHub or a GitHub Transfer package.
 
 Use the course policy's current source terminology when a source type is known. Preserve an original/legacy basename when needed for defensible matching.
 
@@ -150,7 +165,50 @@ For Physics Unit 1, follow `frameworks/Physics/PORTFOLIO_POLICY.json`: MG demons
 - run_manifest.json
 - stored PowerSchool template(s) + schema
 
+When Portfolio email contacts have been configured, also maintain:
+- email_recipients_current.csv
+- email_contact_review.csv when unresolved contact rows exist
+- email_delivery_manifest.csv after current student reports are written
+- email_send_log.csv when/after the separate Apps Script sender has sent or tested messages (sender-owned append-only log; Portfolio must preserve it)
+
 Newest-source summary rows use source-level I Can judgments after required within-source aggregation.
+
+===========================================================
+8A. EMAIL CONTACT IMPORT / RECIPIENT RESOLUTION - PRIVATE SETUP
+===========================================================
+This section runs only when a new contact source is explicitly supplied OR when prior contact state already exists and current roster recipients must be refreshed. It never changes evidence judgments.
+
+Resolve the exact current `portfolio_email_delivery_contract` from Tools/MANIFEST.json.
+
+CURRENT IT WORKBOOK SHAPE:
+- The supported XLSX source may contain multiple class worksheets.
+- A usable worksheet has exact headers `LastFirst`, `Student Email`, and `Guardian Email`.
+- Read all worksheets with those headers. Do NOT infer period/course identity from a worksheet name. A student can legitimately occur on multiple worksheets.
+
+NORMALIZATION - HARD:
+1. Preserve the source unchanged in `00 Contact Directory/Source Imports`; record SHA-256 and import timestamp.
+2. Trim student email. Split guardian addresses on comma OR semicolon, trim, discard blanks, validate, and deduplicate case-insensitively while preserving the first trimmed spelling.
+3. Collapse duplicate identical rows for the same exact school student email across worksheets.
+4. If the same school student email has conflicting student names or materially different guardian sets, mark REVIEW; do not silently choose or union the conflict.
+5. Never construct an email address from a student's name/username pattern.
+
+ROSTER MATCH - HARD:
+- student_registry.csv remains the Unit roster/identity authority.
+- Match contact records in this order: exact existing student email when already known; otherwise exact normalized first+last name within the current roster when unique; otherwise teacher review.
+- Row position/order is never a persistent identity key. Do not fuzzy-guess an ambiguous name.
+- Store normalized reusable contacts in root `00 Contact Directory/contact_directory.csv`.
+- Write current Unit recipient resolution to `02 Portfolio Data/email_recipients_current.csv`, keyed by exact student_key.
+- Write unresolved/conflicting mappings to `02 Portfolio Data/email_contact_review.csv`.
+- Recipient status is exactly READY, WARNING_NO_GUARDIAN, or REVIEW as defined by the email-delivery contract.
+
+A normal Portfolio evidence/report run may still PASS when contacts are not configured; email readiness is optional and must never block evidence persistence. But if a contact import was explicitly requested, do not claim that import succeeded while REVIEW conflicts are silently unresolved.
+
+CONTACT-SETUP-ONLY MODE:
+- When the teacher explicitly requests only email-contact setup/import and supplies an approved contact source, this PM may run without new student evidence.
+- Resolve the canonical root, preserve/import the contact source, and refresh recipient mappings for existing Unit student registries that can be resolved safely.
+- Do not append evidence_ledger.csv, change I Can/MG/Unit status, regenerate PowerSchool scores, or pretend an evidence run occurred.
+- Existing reports may remain untouched. If current individual report manifests already exist, the separate sender can use them after recipient resolution; otherwise a later normal Portfolio report run will create them.
+- Verify contact-directory persistence and every refreshed Unit recipient file before reporting the setup-only operation complete.
 
 ===========================================================
 9. STUDENT PACKET - TEMPLATE FIDELITY HARD
@@ -158,6 +216,15 @@ Newest-source summary rows use source-level I Can judgments after required withi
 Resolve Tools/MANIFEST.json -> Portfolio template contract/student template/CSS. The registered HTML is a CANONICAL SHELL, not an example.
 
 Exactly 2 content pages/student; one PDF per period; student bookmarks. No third tracker page. Because each student is exactly two pages, combined class PDFs are duplex-safe by construction.
+
+EMAIL-READY INDIVIDUAL COPY - HARD:
+- In addition to each normal period packet, write one separate PDF per rostered student to `03 Student Packets/Email Delivery/`.
+- The individual PDF is exactly that student's same two canonical report pages; never include another student's page and never add a cover page.
+- Identity comes from student_key in state, not from filename parsing.
+- After the Drive file is written, record exact Drive file ID, filename, report number/date, and SHA-256 in `02 Portfolio Data/email_delivery_manifest.csv`.
+- If contacts are not configured, still create the individual PDFs/manifest so email delivery can be enabled later without re-rendering a different report.
+- Current individual report files may replace stale current delivery copies, but historical send evidence remains in email_send_log.csv.
+
 Do not paraphrase fixed headings/table/card architecture.
 
 LARGE-PRINT RULE:
@@ -262,18 +329,40 @@ Family A/B/C remains Bank/question-family evidence architecture for curriculum g
 Preserve stored template shape and non-score fields. Change only accepted Score/status fields. Produce current CSV per period every successful run and save in `05 PowerSchool Exports`; return them as individual downloadable artifacts. Current official status replaces prior status.
 
 ===========================================================
-13. DELIVERY - HARD PORTFOLIO EXCEPTION
+13. EMAIL READINESS / SENDING BOUNDARY - HARD
 ===========================================================
-Successful delivery:
+Portfolio prepares private send-ready state; the normal Portfolio evidence run does NOT automatically email anyone.
+
+Portfolio-owned preparation:
+- optional verified contact import + email_recipients_current.csv;
+- one exact two-page individual report PDF per student;
+- email_delivery_manifest.csv with exact student_key -> Drive file ID + SHA-256;
+- preserve email_send_log.csv written by the sender.
+
+Actual sending is owned by the separate teacher-controlled Apps Script declared by `portfolio_email_delivery_contract`:
+- teacher runs preflight;
+- student email is To; that student's guardian addresses are BCC;
+- one student/family per message;
+- test send goes only to the teacher;
+- live send requires explicit teacher approval;
+- sender verifies report hash/path, recipient mapping, daily quota, duplicate-send state, and preview digest before live mail.
+
+Never email automatically merely because a Portfolio run completed. Never expose guardian addresses across families.
+
+===========================================================
+14. DELIVERY - HARD PORTFOLIO EXCEPTION
+===========================================================
+Successful normal Portfolio delivery:
 - update canonical private Drive state under exact root ID 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o and exact course child;
 - return each class Student Packets PDF individually;
 - return Teacher Summary PDF individually;
 - return current PowerSchool CSV(s) individually.
+The individual email-delivery PDFs and recipient/send state remain private Drive state and are not separately returned unless the teacher explicitly requests them.
 Do NOT return a GitHub Transfer ZIP for these Portfolio outputs.
 Do NOT create/store standalone report HTML in Drive.
 
 ===========================================================
-14. QA / STOP
+15. QA / STOP
 ===========================================================
 Before PASS verify:
 1 exact Drive root ID and exact course child used;
@@ -292,8 +381,11 @@ Before PASS verify:
 14 newest-source teacher cards use one needs-evidence list and no invented buckets;
 15 longitudinal sort uses full history/fixed categories;
 16 PowerSchool CSVs preserve template shape;
-17 no student data written to GitHub; no report HTML stored in Drive;
-18 outputs returned individually, not as transfer ZIP.
+17 each rostered student has exactly one current two-page individual report in `03 Student Packets/Email Delivery`, and email_delivery_manifest.csv maps student_key to that exact Drive file ID/SHA-256 with no duplicate student_key;
+18 when contacts are configured, email_recipients_current.csv is keyed by student_key, guardian addresses are deduplicated, REVIEW conflicts remain explicit, and no matching relied on persistent row position/fuzzy guessing;
+19 email contact sources/state/send logs remain private Drive data and no actual sending occurred unless separately and explicitly teacher-approved in the email sender;
+20 no student data written to GitHub; no report HTML stored in Drive;
+21 outputs returned individually, not as transfer ZIP.
 
 If a check fails, repair that concrete defect before delivery. When all pass, stop.
 
