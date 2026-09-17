@@ -1,5 +1,5 @@
 {
-  "schema": "algebra-quick-check-template-contract/1.1",
+  "schema": "algebra-quick-check-template-contract/1.2",
   "status": "CURRENT",
   "course": "Algebra 1",
   "purpose": "Lock the teacher-approved Quick Check selector/build/print presentation while allowing question content to vary by approved I Can/family selection.",
@@ -60,7 +60,9 @@
     "fit_feedback": "Show free-space or overflow indicator for each of the eight pages, labeled A1,A2,B1,B2,C1,C2,D1,D2.",
     "reset": true,
     "print_button": "Print A-D (8 pages)",
-    "persistence": "Browser localStorage may retain teacher geometry choices for that HTML."
+    "persistence": "Browser localStorage may retain teacher geometry choices for that HTML.",
+    "screen_position": "On normal desktop widths, controls use a fixed/sticky LEFT sidebar so the page preview begins near the top of the viewport instead of being pushed downward. Narrow screens may stack controls above the preview.",
+    "visible_layout_version": "Show a small teacher-facing layout version label in the control panel (for example, Layout v1.2) and store the same version in HTML metadata so screenshots/current files can be identified quickly."
   },
   "versioning": {
     "same_evidence_architecture": true,
@@ -106,6 +108,8 @@
     "graphs are photocopy-safe",
     "screen controls are absent from print",
     "graph size and workspace are independently adjustable from overall problem height when applicable",
-    "source map remains deterministic after scramble"
+    "source map remains deterministic after scramble",
+    "desktop screen controls sit in a left sidebar so a page preview can begin near the top of the viewport",
+    "teacher-facing control panel visibly identifies the layout version and HTML metadata carries the same version"
   ]
 }
