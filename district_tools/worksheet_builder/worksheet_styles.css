@@ -1,2 +1,76 @@
+:root{
+  --ink:#151922;
+  --muted:#5f6876;
+  --rule:#bfc5cc;
+  --grid:#aaaaaa;
+  --axis:#222222;
+  --workspace-height:.62in;
+  --graph-width:3in;
+  --column-gap:.34in;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;background:#fff}
+body{font-size:10.5pt}
+.layout-controls{
+  position:sticky;top:0;z-index:20;background:#eef4f8;border:1px solid #c9d5df;
+  padding:10px 12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12px
+}
+.layout-controls label{font-weight:800}
+.layout-controls input[type=range]{width:100%}
+.layout-controls input[type=number]{width:68px}
+.layout-controls button{cursor:pointer}
+.worksheet{
+  width:8.5in;min-height:11in;margin:.18in auto;background:#fff;
+  padding:.55in .55in .58in
+}
+.sheet-header{display:flex;justify-content:space-between;gap:.25in;align-items:end;border-bottom:1.2pt solid #32373d;padding-bottom:.08in;margin-bottom:.18in}
+.sheet-header h1{font-size:16pt;margin:0}
+.student-fields{font-size:10pt;white-space:nowrap}
+.directions{font-size:10pt;margin:.08in 0 .16in;line-height:1.25}
+.question-grid{columns:2;column-gap:var(--column-gap);column-rule:1pt solid #c7cbd0}
+.problem{break-inside:avoid-column;page-break-inside:avoid;margin:0 0 .18in;padding:0 0 .08in;font-size:10.5pt;line-height:1.30}
+.problem .num{font-weight:800}
+/* MathJax's default inline enlargement is intentionally neutralized so numbers,
+   variables, and expressions sit at the same visual scale as surrounding prose. */
+mjx-container{font-size:100%!important}
+mjx-container[display="true"]{margin:.22em 0!important}
+.workspace{height:var(--workspace-height);min-height:.22in}
+.graph-wrap,.diagram-wrap{display:flex;justify-content:center;align-items:center;margin:.08in auto;width:min(100%,var(--graph-width));max-width:100%}
+.graph-wrap svg,.graph-wrap img,.diagram-wrap svg,.diagram-wrap img{display:block;width:100%;max-width:100%;height:auto}
+.graph .grid{stroke:var(--grid);stroke-width:.6pt}
+.graph .axis,.graph .axis-arrow{stroke:var(--axis);stroke-width:1.8pt}
+.graph .relation{stroke-width:2pt}
+.graph .major-tick{stroke-width:1.2pt}
+.answer-key .workspace{display:none}
+.answer{font-weight:800}
+.page-break{break-before:page;page-break-before:always}
 
-:root{--ink:#151922;--muted:#5f6876;--rule:#bfc5cc;--grid:#aaaaaa;--axis:#222222;--workspace-scale:1;--graph-scale:1;--base-workspace:.62in;--base-graph-width:3.0in;--column-gap:.32in}*{box-sizing:border-box}html,body{margin:0;padding:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;background:#fff}.layout-controls{position:sticky;top:0;z-index:20;background:#eef4f8;border-bottom:1px solid #c9d5df;padding:10px 14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12px}.layout-controls label{font-weight:800}.layout-controls input[type=number]{width:64px}.worksheet{width:8.5in;min-height:11in;margin:.18in auto;background:#fff;padding:.38in .42in .45in}.sheet-header{display:flex;justify-content:space-between;gap:.25in;align-items:end;border-bottom:1.2pt solid #32373d;padding-bottom:.08in;margin-bottom:.18in}.sheet-header h1{font-size:16pt;margin:0}.student-fields{font-size:10pt;white-space:nowrap}.directions{font-size:10pt;margin:.08in 0 .16in;line-height:1.25}.question-grid{columns:2;column-gap:var(--column-gap);column-rule:1pt solid #c7cbd0}.problem{break-inside:avoid-column;page-break-inside:avoid;margin:0 0 .18in;padding:0 0 .08in;font-size:10.2pt;line-height:1.28}.problem .num{font-weight:800}.workspace{height:calc(var(--base-workspace) * var(--workspace-scale));min-height:.22in}.graph-wrap,.diagram-wrap{display:flex;justify-content:center;align-items:center;margin:.08in auto}.graph-wrap svg,.graph-wrap img,.diagram-wrap svg,.diagram-wrap img{max-width:min(100%,calc(var(--base-graph-width) * var(--graph-scale)));height:auto}.graph .grid{stroke:var(--grid);stroke-width:.6pt}.graph .axis,.graph .axis-arrow{stroke:var(--axis);stroke-width:1.8pt}.graph .relation{stroke-width:2pt}.graph .major-tick{stroke-width:1.2pt}.answer-key .workspace{display:none}.answer{font-weight:800}.page-break{break-before:page;page-break-before:always}@media print{.layout-controls{display:none!important}.worksheet{margin:0;width:auto;min-height:auto;padding:.32in .38in .4in}@page{size:Letter portrait;margin:0}.question-grid{columns:2}}@media(max-width:900px){.worksheet{width:auto;margin:0}.question-grid{columns:1}.layout-controls{position:relative}}
+/* Desktop preview: controls stay on the left so the teacher can watch the page change. */
+@media screen and (min-width:1100px){
+  body:has(.layout-controls){padding-left:236px}
+  .layout-controls{
+    position:fixed;left:14px;top:14px;width:208px;max-height:calc(100vh - 28px);overflow:auto;
+    flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;
+    box-shadow:0 4px 14px rgba(0,0,0,.12)
+  }
+  .layout-controls>*{width:100%}
+  .layout-controls label{display:block}
+}
+
+@media print{
+  body{padding-left:0!important;background:#fff}
+  .layout-controls{display:none!important}
+  .worksheet{margin:0;width:auto;min-height:auto;padding:0}
+  .question-grid{columns:2}
+  @page{size:Letter portrait;margin:.55in}
+}
+
+@media(max-width:1099px){
+  body{padding-left:0}
+  .worksheet{width:auto;max-width:8.5in}
+  .layout-controls{position:relative}
+}
+@media(max-width:760px){
+  .worksheet{margin:0;padding:.35in}
+  .question-grid{columns:1}
+}

@@ -2,20 +2,23 @@
 # ~graph_tool_v14.py — AUTHORITATIVE GRAPH ENTRYPOINT
 # =============================================================================
 #
-# v14 preserves v13 line-weight styling and makes standard Cartesian exit
-# arrows visibly render on BOTH ends of each axis. It also ensures horizontal
-# curves that continue through the left/right edges receive visible curve
-# arrows on both ends. Other curve exit arrows remain inherited from v13.
+# v14 keeps the v13/v12 behavior chain, preserves the v14 two-ended axis/curve
+# exit-arrow fixes, and restores the teacher-approved 2026-09-18 full-size
+# Cartesian print weights:
+#   grid:             0.6 pt  #aaaaaa
+#   axes/arrows:      1.8 pt  #222222
+#   plotted relation: 2.0 pt
+#   major ticks:      1.2 pt
+#   curve exit arrow: 1.5 pt
 #
-# Context/modeling graphs remain domain-aware: their axes are not forced to
-# extend into directions excluded by the modeled domain.
-#
+# Compact multi-panel graph types keep v13's proportional lighter styling.
 # Do not manually override graph styling in generation blocks.
 # =============================================================================
 
 from pathlib import Path
 import importlib.util
 import os
+from matplotlib.colors import to_hex
 
 
 def _find_v13():
@@ -68,11 +71,63 @@ _STANDARD_MIN = -10
 _STANDARD_MAX = 10
 _STANDARD_VIEW_PAD = 0.8
 _STANDARD_ARROW_LENGTH = 0.45
-_STANDARD_ARROW_WIDTH = 1.2
+_STANDARD_CURVE_ARROW_WIDTH = 1.5
+
+_PRINT_GRID_WIDTH = 0.6
+_PRINT_AXIS_WIDTH = 1.8
+_PRINT_CURVE_WIDTH = 2.0
+_PRINT_MAJOR_TICK_WIDTH = 1.2
+_PRINT_MINOR_TICK_WIDTH = 0.8
+
+
+def _restore_full_size_print_weights(ax):
+    """Undo v13 thinning for a full-size Cartesian graph only."""
+    for line in list(ax.get_xgridlines()) + list(ax.get_ygridlines()):
+        line.set_linewidth(_PRINT_GRID_WIDTH)
+        try:
+            line.set_color('#aaaaaa')
+        except Exception:
+            pass
+
+    for spine_name in ('left', 'bottom'):
+        spine = ax.spines.get(spine_name)
+        if spine is not None and spine.get_visible():
+            spine.set_linewidth(_PRINT_AXIS_WIDTH)
+            spine.set_color('#222222')
+
+    for line in ax.lines:
+        try:
+            color = to_hex(line.get_color()).lower()
+            width = float(line.get_linewidth())
+        except Exception:
+            continue
+        if color == '#aaaaaa':
+            line.set_linewidth(_PRINT_GRID_WIDTH)
+        elif color == '#222222' and width <= 1.8:
+            line.set_linewidth(_PRINT_AXIS_WIDTH)
+        elif width >= 1.45:
+            line.set_linewidth(_PRINT_CURVE_WIDTH)
+
+    # Restore annotation arrows. Axis arrows are #222222; relation arrows use
+    # the relation color and retain the v12 1.5 pt weight.
+    for child in ax.get_children():
+        arrow_patch = getattr(child, 'arrow_patch', None)
+        if arrow_patch is None:
+            continue
+        try:
+            color = to_hex(arrow_patch.get_edgecolor()).lower()
+            arrow_patch.set_linewidth(
+                _PRINT_AXIS_WIDTH if color == '#222222' else _STANDARD_CURVE_ARROW_WIDTH
+            )
+        except Exception:
+            pass
+
+    ax.tick_params(which='major', width=_PRINT_MAJOR_TICK_WIDTH)
+    ax.tick_params(which='minor', width=_PRINT_MINOR_TICK_WIDTH)
 
 
 def _reveal_standard_exit_arrows(ax):
-    """Leave the v13 graph unchanged except for enough viewport to show exits."""
+    """Leave the graph unchanged except for enough viewport to show exits."""
     ax.set_xlim(_STANDARD_MIN - _STANDARD_VIEW_PAD, _STANDARD_MAX + _STANDARD_VIEW_PAD)
     ax.set_ylim(_STANDARD_MIN - _STANDARD_VIEW_PAD, _STANDARD_MAX + _STANDARD_VIEW_PAD)
 
@@ -99,14 +154,14 @@ def _add_horizontal_curve_exit_arrows(ax, functions):
                 xytext=(x_edge, y_edge),
                 arrowprops=dict(
                     arrowstyle='-|>', color=color,
-                    lw=_STANDARD_ARROW_WIDTH, mutation_scale=12
+                    lw=_STANDARD_CURVE_ARROW_WIDTH, mutation_scale=12
                 ),
                 annotation_clip=False,
             )
 
 
 def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title='', xlabel='x', ylabel='y'):
-    """Standard Cartesian appearance on a custom two-sided window."""
+    """Full-size Cartesian appearance on a custom two-sided window."""
     x_range = xmax - xmin
     y_range = ymax - ymin
     x_step = _nice_grid_step(x_range, max_lines=16)
@@ -119,9 +174,9 @@ def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title='', xlabel='x
     ax.set_ylim(ymin - y_pad, ymax + y_pad)
 
     for xt in x_ticks:
-        ax.plot([xt, xt], [ymin, ymax], color='#aaaaaa', linewidth=0.4, zorder=0)
+        ax.plot([xt, xt], [ymin, ymax], color='#aaaaaa', linewidth=_PRINT_GRID_WIDTH, zorder=0)
     for yt in y_ticks:
-        ax.plot([xmin, xmax], [yt, yt], color='#aaaaaa', linewidth=0.4, zorder=0)
+        ax.plot([xmin, xmax], [yt, yt], color='#aaaaaa', linewidth=_PRINT_GRID_WIDTH, zorder=0)
 
     arrow_L = min(x_step, y_step) * 0.45
     for fn in functions:
@@ -135,7 +190,7 @@ def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title='', xlabel='x
             segments = np.split(inds, np.where(np.diff(inds) > 5)[0] + 1)
             for seg in segments:
                 if len(seg) > 1:
-                    ax.plot(x[seg], y[seg], color=color, linewidth=1.5, label=label, zorder=3)
+                    ax.plot(x[seg], y[seg], color=color, linewidth=_PRINT_CURVE_WIDTH, label=label, zorder=3)
                     label = None
 
         for x_edge, direction in ((xmin, -1.0), (xmax, 1.0)):
@@ -152,7 +207,7 @@ def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title='', xlabel='x
                 dx_d, dy_d, mag = direction, 0.0, 1.0
             dx_d /= mag; dy_d /= mag
             ax.annotate('', xy=(x_edge + dx_d*arrow_L, y_edge + dy_d*arrow_L), xytext=(x_edge, y_edge),
-                        arrowprops=dict(arrowstyle='-|>', color=color, lw=1.2, mutation_scale=12),
+                        arrowprops=dict(arrowstyle='-|>', color=color, lw=_STANDARD_CURVE_ARROW_WIDTH, mutation_scale=12),
                         annotation_clip=False)
 
         for edge_y, direction in ((ymin, -1.0), (ymax, 1.0)):
@@ -172,25 +227,23 @@ def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title='', xlabel='x
                 dy_d = direction; dx_d = dy_d / slope
                 mag = np.hypot(dx_d, dy_d); dx_d /= mag; dy_d /= mag
                 ax.annotate('', xy=(xr + dx_d*arrow_L, edge_y + dy_d*arrow_L), xytext=(xr, edge_y),
-                            arrowprops=dict(arrowstyle='-|>', color=color, lw=1.2, mutation_scale=12),
+                            arrowprops=dict(arrowstyle='-|>', color=color, lw=_STANDARD_CURVE_ARROW_WIDTH, mutation_scale=12),
                             annotation_clip=False)
 
-    # Axes and arrows on both ends whenever that axis is in the window.
-    tri = dict(arrowstyle='-|>', color='#222222', lw=1.2, mutation_scale=13)
+    tri = dict(arrowstyle='-|>', color='#222222', lw=_PRINT_AXIS_WIDTH, mutation_scale=13)
     if ymin <= 0 <= ymax:
-        ax.plot([xmin, xmax], [0, 0], color='#222222', linewidth=1.2, zorder=2)
+        ax.plot([xmin, xmax], [0, 0], color='#222222', linewidth=_PRINT_AXIS_WIDTH, zorder=2)
         ax.annotate('', xy=(xmax + x_pad*0.8, 0), xytext=(xmax, 0), arrowprops=tri, annotation_clip=False)
         ax.annotate('', xy=(xmin - x_pad*0.8, 0), xytext=(xmin, 0), arrowprops=tri, annotation_clip=False)
         ax.text(xmax + x_pad*0.62, y_step*0.22, xlabel, fontsize=12, fontweight='bold',
                 fontfamily='Times New Roman', ha='center', va='bottom')
     if xmin <= 0 <= xmax:
-        ax.plot([0, 0], [ymin, ymax], color='#222222', linewidth=1.2, zorder=2)
+        ax.plot([0, 0], [ymin, ymax], color='#222222', linewidth=_PRINT_AXIS_WIDTH, zorder=2)
         ax.annotate('', xy=(0, ymax + y_pad*0.8), xytext=(0, ymax), arrowprops=tri, annotation_clip=False)
         ax.annotate('', xy=(0, ymin - y_pad*0.8), xytext=(0, ymin), arrowprops=tri, annotation_clip=False)
         ax.text(x_step*0.20, ymax + y_pad*0.62, ylabel, fontsize=12, fontweight='bold',
                 fontfamily='Times New Roman', ha='left', va='center')
 
-    # Keep numeric labels light and sparse.
     x_lab_every = _label_every(len(x_ticks)); y_lab_every = _label_every(len(y_ticks))
     ax.set_xticks([t for i,t in enumerate(x_ticks) if i % x_lab_every == 0])
     ax.set_yticks([t for i,t in enumerate(y_ticks) if i % y_lab_every == 0])
@@ -198,7 +251,7 @@ def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title='', xlabel='x
                        fontfamily='Times New Roman', fontsize=9)
     ax.set_yticklabels([_fmt(t) for i,t in enumerate(y_ticks) if i % y_lab_every == 0],
                        fontfamily='Times New Roman', fontsize=9)
-    ax.tick_params(which='major', length=3, width=0.8, color='#444444')
+    ax.tick_params(which='major', length=3, width=_PRINT_MAJOR_TICK_WIDTH, color='#444444')
     for spine in ax.spines.values():
         spine.set_visible(False)
     key_points = _find_key_points(functions, xmin, xmax, ymin, ymax)
@@ -208,12 +261,24 @@ def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title='', xlabel='x
 
 
 _v13_make_standard_graph = _v13_module.make_standard_graph
+_v13_make_context_graph = _v13_module.make_context_graph
 
 
 def make_standard_graph(ax, functions, title=''):
     result = _v13_make_standard_graph(ax, functions, title=title)
+    _restore_full_size_print_weights(ax)
     _add_horizontal_curve_exit_arrows(ax, functions)
     _reveal_standard_exit_arrows(ax)
+    return result
+
+
+def make_context_graph(ax, functions, xmin, xmax, ymin, ymax,
+                       xlabel='x', ylabel='y', title=''):
+    result = _v13_make_context_graph(
+        ax, functions, xmin, xmax, ymin, ymax,
+        xlabel=xlabel, ylabel=ylabel, title=title
+    )
+    _restore_full_size_print_weights(ax)
     return result
 
 
