@@ -1,5 +1,5 @@
 {
-  "schema": "algebra-quick-check-template-contract/1.2",
+  "schema": "algebra-quick-check-template-contract/1.3",
   "status": "CURRENT",
   "course": "Algebra 1",
   "purpose": "Lock the teacher-approved Quick Check selector/build/print presentation while allowing question content to vary by approved I Can/family selection.",
@@ -30,7 +30,25 @@
     "workspace": "Plain white space; no repeated ruled workspace lines.",
     "separation": "Use compact typography and simple divider rules rather than decorative boxes.",
     "paper_use": "Avoid large unused bottom areas; use page space efficiently without crowding.",
-    "graphs": "Grid and axes must photocopy clearly. Template CSS may override graph-tool line weights to a darker/heavier print-safe treatment."
+    "graphs": "Use the teacher-approved Algebra Cartesian print line-weight standard below. Do not darken or thicken graph lines with Quick Check CSS or ad hoc SVG styling.",
+    "graph_print_standard": {
+      "scope": "Full-size Cartesian coordinate graphs used in Quick Checks.",
+      "grid": {
+        "color": "#aaaaaa",
+        "linewidth_pt": 0.6
+      },
+      "axes_and_axis_arrows": {
+        "color": "#222222",
+        "linewidth_pt": 1.8
+      },
+      "plotted_relation": {
+        "linewidth_pt": 2.0
+      },
+      "major_ticks": {
+        "linewidth_pt": 1.2
+      },
+      "rule": "These are the teacher-approved printed darkness from the 2026-09-18 Quick Check 1.1 repair. Preserve these weights. Do not apply CSS stroke-width overrides or redraw the graph at heavier weights. Resize the finished graph through layout geometry only. Compact multi-panel graph-tool types may retain their built-in proportional weights."
+    }
   },
   "screen_only_layout_controls": {
     "required": true,
@@ -105,7 +123,7 @@
     "no shaded problem cards and no ruled workspace lines",
     "exact I Can code + statement visible for every problem",
     "MathJax used for math",
-    "graphs are photocopy-safe",
+    "full-size Cartesian graphs use the approved print weights: 0.6 pt grid, 1.8 pt axes/arrows, 2.0 pt plotted relation, 1.2 pt major ticks; no CSS/ad hoc thickness override",
     "screen controls are absent from print",
     "graph size and workspace are independently adjustable from overall problem height when applicable",
     "source map remains deterministic after scramble",
