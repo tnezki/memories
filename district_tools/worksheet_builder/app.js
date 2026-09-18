@@ -1,7 +1,7 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
-  const TOOL_VERSION = "0.1.1-pilot";
+  const TOOL_VERSION = "0.1.2-pilot";
   const REQUEST_SCHEMA = "district-math-worksheet-builder-request/0.1";
   const CONTRACT_VERSION = "district-math-worksheet-builder/0.1-pilot";
   const SHARED_STANDARD_VERSION = "district-response-build-standard/1.0";
@@ -157,6 +157,18 @@
   }
 
   async function loadText(path){const r=await fetch(path,{cache:"no-store"});if(!r.ok)throw new Error(`Could not load ${path} (HTTP ${r.status})`);return await r.text();}
+  async function loadGitHubRepoText(repo,path){
+    const encodedPath=path.split("/").map(part=>encodeURIComponent(part)).join("/");
+    const url=`https://api.github.com/repos/${repo}/contents/${encodedPath}`;
+    const r=await fetch(url,{cache:"no-store",headers:{Accept:"application/vnd.github+json"}});
+    if(!r.ok)throw new Error(`Could not load GitHub source ${path} (HTTP ${r.status})`);
+    const data=await r.json();
+    if(data.type!=="file" || !data.content)throw new Error(`GitHub source ${path} was not returned as a file.`);
+    const binary=atob(String(data.content).replace(/\s/g,""));
+    const bytes=new Uint8Array(binary.length);
+    for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+    return new TextDecoder("utf-8").decode(bytes);
+  }
   async function sha256Hex(value){const digest=await crypto.subtle.digest("SHA-256",enc.encode(String(value)));return [...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,"0")).join("");}
 
   async function buildZip(){
@@ -170,9 +182,9 @@
         loadText("question_structure_catalog.json"),
         loadText("dashboard_styles.css"),
         loadText("worksheet_styles.css"),
-        loadText("../../Tools/~graph_tool_v12.py"),
-        loadText("../../Tools/~graph_tool_v13.py"),
-        loadText("../../Tools/~graph_tool_v14.py")
+        loadGitHubRepoText("tnezki/memories","Tools/~graph_tool_v12.py"),
+        loadGitHubRepoText("tnezki/memories","Tools/~graph_tool_v13.py"),
+        loadGitHubRepoText("tnezki/memories","Tools/~graph_tool_v14.py")
       ]);
       const [dashHash,workHash]=await Promise.all([sha256Hex(dashboardCss),sha256Hex(worksheetCss)]);
       const count=Number($("questionCount").value), versions=Number($("versions").value);
