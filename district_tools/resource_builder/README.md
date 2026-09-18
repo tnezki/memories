@@ -23,9 +23,9 @@ The first ten profiles are based on recurring resource types from the district's
 ## Teacher flow
 
 1. Select the resource type.
-2. Enter resource name, subject/course, unit/topic, and at least one I Can statement / learning target.
-3. Optionally add teacher, grade level, context, time/length, reading/access level, standards/framework, source files, and special directions.
-4. Select design priorities such as real-world application, accessibility, engagement, student choice, reasoning, scaffolds, or extension.
+2. Enter resource name, subject/course, and at least one I Can statement / learning target. Unit/topic is optional.
+3. Optionally add teacher, grade level, unit/topic, context, time/length, reading/access level, standards/framework, source files, and special directions.
+4. Select learning-emphasis priorities such as practice skills/procedures, vocabulary, conceptual understanding, reasoning/problem solving, application/transfer, reading, writing, or review/retention, plus design priorities such as real-world application, accessibility, engagement, student choice, scaffolds, or extension.
 5. Use the resource-specific controls that appear for the selected profile.
 6. Click **Build Request ZIP**.
 7. Upload the request ZIP to ChatGPT. No separate build prompt is required.
@@ -37,7 +37,7 @@ This tool follows the district **tool capsule + registry + shared contract** pat
 
 - `resource_profiles.json` owns the profile catalog and most resource-specific controls. This makes it possible to add or revise resource types without redesigning the entire interface.
 - `RESOURCE_BUILDER_CONTRACT.md` owns the cross-profile resource rules and profile-specific build expectations.
-- `../_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md` owns MathJax, accurate graphing, diagrams/visuals, conflict precedence, locked CSS, PDF/native-file QA, and package integrity.
+- `DISTRICT_RESPONSE_BUILD_STANDARD.md` is a local snapshot of the shared district standard packaged by this tool. Keeping the runtime copy inside the tool capsule prevents GitHub Pages path/caching failures while preserving the same shared MathJax, graphing, diagram/visual, conflict, CSS, PDF/native-file QA, and package-integrity rules.
 - `dashboard_styles.css` and `resource_styles.css` are exact locked response style snapshots. Every request records their SHA-256 hashes.
 - `app.js` is browser-side only and creates ZIPs with no third-party ZIP dependency.
 

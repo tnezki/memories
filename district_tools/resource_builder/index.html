@@ -27,7 +27,7 @@
 <div class="row-3">
   <div><label for="subjectCourse">Subject / course <span class="required">*</span></label><input id="subjectCourse" type="text" placeholder="Example: Physics"></div>
   <div><label for="gradeLevel">Grade level <span class="small">(optional)</span></label><input id="gradeLevel" type="text" placeholder="Example: Grade 10"></div>
-  <div><label for="unitTopic">Unit / topic <span class="required">*</span></label><input id="unitTopic" type="text" placeholder="Example: Newton's Laws"></div>
+  <div><label for="unitTopic">Unit / topic <span class="small">(optional)</span></label><input id="unitTopic" type="text" placeholder="Example: Newton's Laws"></div>
 </div>
 <div class="row">
   <div><label for="timeLength">Time / length constraint <span class="small">(optional)</span></label><input id="timeLength" type="text" placeholder="Example: 45 minutes, 2 pages"></div>
@@ -44,15 +44,32 @@
 
 <h3 class="section-title">Design priorities</h3>
 <p class="small"><b>Accuracy is always required.</b> Check the priorities you especially want emphasized.</p>
-<div id="priorityChoices" class="checks">
-  <label class="check"><input type="checkbox" value="real_world_application" checked><span>Real-world application</span></label>
-  <label class="check"><input type="checkbox" value="inclusion_accessibility" checked><span>Inclusion / accessibility</span></label>
-  <label class="check"><input type="checkbox" value="growth_oriented_language"><span>Growth-oriented language</span></label>
-  <label class="check"><input type="checkbox" value="engagement" checked><span>Engagement</span></label>
-  <label class="check"><input type="checkbox" value="student_choice_agency"><span>Student choice / agency</span></label>
-  <label class="check"><input type="checkbox" value="reasoning_over_recall"><span>Reasoning over recall</span></label>
-  <label class="check"><input type="checkbox" value="scaffolds"><span>Scaffolds / supports</span></label>
-  <label class="check"><input type="checkbox" value="extension_challenge"><span>Extension / challenge</span></label>
+<div id="priorityChoices">
+  <div class="priority-group">
+    <div class="priority-title">Learning emphasis</div>
+    <div class="checks">
+      <label class="check"><input type="checkbox" value="practice_skills_procedures"><span>Practice skills / procedures</span></label>
+      <label class="check"><input type="checkbox" value="vocabulary_academic_language"><span>Vocabulary / academic language</span></label>
+      <label class="check"><input type="checkbox" value="conceptual_understanding"><span>Conceptual understanding</span></label>
+      <label class="check"><input type="checkbox" value="reasoning_problem_solving"><span>Reasoning / problem solving</span></label>
+      <label class="check"><input type="checkbox" value="application_transfer"><span>Application / transfer</span></label>
+      <label class="check"><input type="checkbox" value="reading_comprehension"><span>Reading / comprehension</span></label>
+      <label class="check"><input type="checkbox" value="writing_explanation"><span>Writing / explanation</span></label>
+      <label class="check"><input type="checkbox" value="review_retention"><span>Review / retention</span></label>
+    </div>
+  </div>
+  <div class="priority-group">
+    <div class="priority-title">Design approach</div>
+    <div class="checks">
+      <label class="check"><input type="checkbox" value="real_world_application" checked><span>Real-world application</span></label>
+      <label class="check"><input type="checkbox" value="inclusion_accessibility" checked><span>Inclusion / accessibility</span></label>
+      <label class="check"><input type="checkbox" value="growth_oriented_language"><span>Growth-oriented language</span></label>
+      <label class="check"><input type="checkbox" value="engagement" checked><span>Engagement</span></label>
+      <label class="check"><input type="checkbox" value="student_choice_agency"><span>Student choice / agency</span></label>
+      <label class="check"><input type="checkbox" value="scaffolds"><span>Scaffolds / supports</span></label>
+      <label class="check"><input type="checkbox" value="extension_challenge"><span>Extension / challenge</span></label>
+    </div>
+  </div>
 </div>
 
 <h3 class="section-title">Resource-specific options</h3>

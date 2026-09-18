@@ -1,9 +1,9 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
-  const REQUEST_SCHEMA = "district-resource-builder-request/0.1-pilot";
-  const TOOL_VERSION = "district-resource-builder/0.1-pilot";
-  const CONTRACT_VERSION = "district-resource-builder/0.1-pilot";
+  const REQUEST_SCHEMA = "district-resource-builder-request/0.2-pilot";
+  const TOOL_VERSION = "district-resource-builder/0.2-pilot";
+  const CONTRACT_VERSION = "district-resource-builder/0.2-pilot";
   const SHARED_STANDARD_VERSION = "district-response-build-standard/1.0";
   const DASHBOARD_STYLE_VERSION = "district-resource-dashboard-style/0.1-pilot";
   const RESOURCE_STYLE_VERSION = "district-resource-print-style/0.1-pilot";
@@ -152,7 +152,6 @@
     const missing = [];
     if (!$("resourceName").value.trim()) missing.push("resource name");
     if (!$("subjectCourse").value.trim()) missing.push("subject/course");
-    if (!$("unitTopic").value.trim()) missing.push("unit/topic");
     if (!getTargets().length) missing.push("at least one learning target");
     if (missing.length) { setStatus(`Add ${missing.join(", ")}.`, "warn"); return false; }
     setStatus(`Ready to build a ${currentProfile.label} request with ${getTargets().length} target${getTargets().length === 1 ? "" : "s"}${sourceInput.files.length ? ` and ${sourceInput.files.length} source file${sourceInput.files.length === 1 ? "" : "s"}` : ""}.`, "good");
@@ -180,7 +179,7 @@
 
       const [contractText, sharedText, dashboardCss, resourceCss] = await Promise.all([
         loadText("RESOURCE_BUILDER_CONTRACT.md"),
-        loadText("../_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md"),
+        loadText("DISTRICT_RESPONSE_BUILD_STANDARD.md"),
         loadText("dashboard_styles.css"),
         loadText("resource_styles.css")
       ]);
@@ -191,7 +190,7 @@
         tool_version: TOOL_VERSION,
         created_at: new Date().toISOString(),
         contracts: {resource_builder:CONTRACT_VERSION,shared_standard:SHARED_STANDARD_VERSION},
-        resource: {name:$("resourceName").value.trim(),profile_id:currentProfile.id,profile_label:currentProfile.label,unit_topic:$("unitTopic").value.trim()},
+        resource: {name:$("resourceName").value.trim(),profile_id:currentProfile.id,profile_label:currentProfile.label,unit_topic:valueOrNull("unitTopic")},
         teacher: {name:valueOrNull("teacherName"),subject_course:$("subjectCourse").value.trim(),grade_level:valueOrNull("gradeLevel")},
         learning_targets: getTargets(),
         context: valueOrNull("context"),
@@ -242,7 +241,7 @@
     const targets = request.learning_targets.map((t,i) => `${i+1}. ${t}`).join("\n");
     const priorities = request.design_priorities.length ? request.design_priorities.join(", ") : "No extra priorities selected beyond accuracy and the profile contract.";
     const sources = request.source_files.length ? `${request.source_files.length} source file(s) are included under sources/.` : "No source files were attached.";
-    return `# District Resource Builder Request - Pilot\n\n## Run automatically\nBuild the complete classroom resource from this request ZIP and return exactly ONE response ZIP. No additional teacher prompt is required.\n\nResource: ${request.resource.name}\nType: ${request.resource.profile_label}\nSubject/course: ${request.teacher.subject_course}\nGrade level: ${request.teacher.grade_level || "Not specified"}\nUnit/topic: ${request.resource.unit_topic}\nTime/length: ${request.time_length_constraint || "Not specified"}\nReading/access level: ${request.target_reading_access_level || "Not specified"}\nStandards/framework: ${request.standards_framework || "Not specified"}\nDesign priorities: ${priorities}\n${sources}\n\n## Learning targets\n${targets}\n\n## Context\n${request.context || "No additional context provided."}\n\n## Structured profile options\n\n\`\`\`json\n${JSON.stringify(request.profile_options,null,2)}\n\`\`\`\n\n## Teacher notes\n${request.teacher_notes || "No additional teacher notes provided."}\n\n## Required contracts\nFollow BOTH response_contract/RESOURCE_BUILDER_CONTRACT.md and response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md. The selected profile snapshot is response_contract/SELECTED_PROFILE.json. Structured selections in request.json are authoritative over conflicting free-form notes.\n\n## Required output files\n${request.resolved_outputs.required_files.map((p) => `- ${p}`).join("\n")}\n\nFor custom_resource with a wildcard primary output, resolve the wildcard to the practical file extension required by the selected/best-fit format and record the choice in data/qa.json.\n\nCopy the two locked CSS files byte-for-byte to the response assets and verify their SHA-256 hashes in QA. Use MathJax, accurate grapher output, and real diagrams/visuals whenever the contracts require them. Open and visually inspect all required PDFs/native artifacts before delivery.\n\nReturn only the completed response ZIP. The final user-facing line must be exactly:\n\n${request.delivery.required_final_line}\n`;
+    return `# District Resource Builder Request - Pilot\n\n## Run automatically\nBuild the complete classroom resource from this request ZIP and return exactly ONE response ZIP. No additional teacher prompt is required.\n\nResource: ${request.resource.name}\nType: ${request.resource.profile_label}\nSubject/course: ${request.teacher.subject_course}\nGrade level: ${request.teacher.grade_level || "Not specified"}\nUnit/topic: ${request.resource.unit_topic || "Not specified"}\nTime/length: ${request.time_length_constraint || "Not specified"}\nReading/access level: ${request.target_reading_access_level || "Not specified"}\nStandards/framework: ${request.standards_framework || "Not specified"}\nDesign priorities: ${priorities}\n${sources}\n\n## Learning targets\n${targets}\n\n## Context\n${request.context || "No additional context provided."}\n\n## Structured profile options\n\n\`\`\`json\n${JSON.stringify(request.profile_options,null,2)}\n\`\`\`\n\n## Teacher notes\n${request.teacher_notes || "No additional teacher notes provided."}\n\n## Required contracts\nFollow BOTH response_contract/RESOURCE_BUILDER_CONTRACT.md and response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md. The selected profile snapshot is response_contract/SELECTED_PROFILE.json. Structured selections in request.json are authoritative over conflicting free-form notes.\n\n## Required output files\n${request.resolved_outputs.required_files.map((p) => `- ${p}`).join("\n")}\n\nFor custom_resource with a wildcard primary output, resolve the wildcard to the practical file extension required by the selected/best-fit format and record the choice in data/qa.json.\n\nCopy the two locked CSS files byte-for-byte to the response assets and verify their SHA-256 hashes in QA. Use MathJax, accurate grapher output, and real diagrams/visuals whenever the contracts require them. Open and visually inspect all required PDFs/native artifacts before delivery.\n\nReturn only the completed response ZIP. The final user-facing line must be exactly:\n\n${request.delivery.required_final_line}\n`;
   }
 
   function clearForm() {

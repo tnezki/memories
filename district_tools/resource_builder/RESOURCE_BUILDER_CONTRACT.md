@@ -1,7 +1,7 @@
 # District Resource Builder Contract
 
 STATUS: REQUIRED
-VERSION: district-resource-builder/0.1-pilot
+VERSION: district-resource-builder/0.2-pilot
 
 This contract is executable. It turns one structured teacher request into one finished classroom resource package. It replaces the old workflow of copying and editing long prompt templates by hand.
 
@@ -22,7 +22,7 @@ Apply the shared district authority order. In this tool, the following structure
 
 1. selected resource profile;
 2. resolved output files;
-3. teacher grade level / subject / unit / target(s);
+3. teacher grade level / subject / optional unit-topic / target(s);
 4. resource-specific controls;
 5. selected design priorities;
 6. time / length / access constraints.
@@ -44,9 +44,12 @@ Across every profile:
 
 ## 4. Design priorities
 
-The request may include priorities such as real-world application, inclusion/accessibility, growth-oriented language, engagement, student choice/agency, reasoning, scaffolds, and extension/challenge.
+The request may include learning-emphasis priorities such as practice skills/procedures, vocabulary/academic language, conceptual understanding, reasoning/problem solving, application/transfer, reading/comprehension, writing/explanation, and review/retention, plus design priorities such as real-world application, inclusion/accessibility, growth-oriented language, engagement, student choice/agency, scaffolds, and extension/challenge.
 
 - Use selected priorities where they naturally support the target and profile.
+- A practice-skills selection should increase purposeful procedural/skill rehearsal without turning the resource into filler.
+- A vocabulary selection should deliberately practice meaning, usage, recognition, and/or application of relevant academic language rather than only copying definitions.
+- Conceptual, reasoning, application, reading, and writing priorities should change the evidence students are asked to produce, not merely add labels.
 - Do not force a superficial real-world context into every item.
 - Do not use growth-mindset language as decoration; keep it concise and authentic.
 - Student choice should preserve common evidence expectations.
@@ -255,7 +258,7 @@ PASS is not allowed with unresolved conflicts, missing required files, mismatche
 
 It should show:
 
-1. resource name, subject/course, grade level, and unit/topic;
+1. resource name, subject/course, grade level, and unit/topic when provided;
 2. one prominent button/card for each primary resource output;
 3. a separate Teacher Materials section only when teacher outputs exist;
 4. a small completed-QA status/link;
