@@ -1,0 +1,211 @@
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const enc = new TextEncoder();
+  const TOOL_VERSION = "0.1-pilot";
+  const REQUEST_SCHEMA = "district-math-worksheet-builder-request/0.1";
+  const CONTRACT_VERSION = "district-math-worksheet-builder/0.1-pilot";
+  const SHARED_STANDARD_VERSION = "district-response-build-standard/1.0";
+  const DASHBOARD_STYLE_VERSION = "worksheet-builder-dashboard/0.1";
+  const WORKSHEET_STYLE_VERSION = "worksheet-builder-student/0.1";
+
+  const COURSE_LIST = ["Grade 6 Math","Grade 7 Math","Grade 8 Math","Pre-Algebra","Algebra 1","Geometry","Algebra 2","Precalculus","Calculus"];
+  const DEFAULT_GENERIC = [
+    {id:"GEN_DIRECT_FLUENCY",category:"Fluency",label:"Direct Skill Practice",summary:"Short, parameterized practice focused on one procedure or fact pattern."},
+    {id:"GEN_MULTI_REP",category:"Conceptual",label:"Multiple Representation",summary:"Connect two representations such as equation, table, graph, diagram, or context."},
+    {id:"GEN_VISUAL",category:"Visual",label:"Diagram / Graph / Model",summary:"Use a quantitatively accurate visual as part of the evidence."},
+    {id:"GEN_ERROR",category:"Reasoning",label:"Error Analysis",summary:"Diagnose and correct a plausible student error."},
+    {id:"GEN_CONTEXT",category:"Application",label:"Context / Transfer",summary:"Apply the selected skill in a concise original context."},
+    {id:"GEN_MULTIPART",category:"Scaffold",label:"Multi-Part Scaffold",summary:"Sequence a small set of linked prompts that build toward a final response."}
+  ];
+
+  let catalog = null;
+  let families = [];
+  const familyState = new Map();
+
+  function escHtml(value){return String(value??"").replace(/[&<>"']/g,(ch)=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
+  function escAttr(value){return escHtml(value);}
+
+  async function init(){
+    COURSE_LIST.forEach(course => { const o=document.createElement("option"); o.value=course; o.textContent=course; if(course==="Grade 7 Math")o.selected=true; $("course").appendChild(o); });
+    bindEvents();
+    try{
+      const response = await fetch("question_structure_catalog.json",{cache:"no-store"});
+      if(!response.ok)throw new Error(`HTTP ${response.status}`);
+      catalog = await response.json();
+    }catch(error){
+      console.warn("Catalog fetch failed; using generic fallback.",error);
+      catalog = {generic_families:DEFAULT_GENERIC,pilot_topic:{families:[]}};
+    }
+    loadFamiliesForSelection(true);
+  }
+
+  function bindEvents(){
+    $("course").addEventListener("change",()=>{ if($("course").value!=="Grade 7 Math"){ $("topic").value="custom"; } loadFamiliesForSelection(true); refresh(); });
+    $("topic").addEventListener("change",()=>{ $("customTopic").disabled=$("topic").value!=="custom"; loadFamiliesForSelection(true); refresh(); });
+    $("customTopic").addEventListener("input",refresh);
+    $("title").addEventListener("input",refresh);
+    $("target").addEventListener("input",refresh);
+    $("questionCount").addEventListener("change",refresh);
+    $("mode").addEventListener("change",()=>{renderFamilies();$("customCount").disabled=$("mode").value!=="custom_mix";refresh();});
+    $("versions").addEventListener("change",refresh);
+    document.querySelectorAll('input[name="difficulty"]').forEach(el=>el.addEventListener("change",refresh));
+    $("numberDomains").addEventListener("change",refresh);
+    $("twoColumn").addEventListener("change",refresh);
+    $("answerKey").addEventListener("change",refresh);
+    $("customEnabled").addEventListener("change",()=>{ $("customDescription").disabled=!$("customEnabled").checked; refresh(); });
+    $("customCount").addEventListener("input",refresh);
+    $("customDescription").addEventListener("input",refresh);
+    linkSlider("workspaceRange","workspaceNumber");
+    linkSlider("graphRange","graphNumber");
+    $("teacherNotes").addEventListener("input",refresh);
+    $("resetBtn").addEventListener("click",reset);
+    $("buildBtn").addEventListener("click",buildZip);
+  }
+
+  function linkSlider(rangeId,numberId){
+    const r=$(rangeId),n=$(numberId);
+    r.addEventListener("input",()=>{n.value=r.value;refresh();});
+    n.addEventListener("input",()=>{let v=Number(n.value); if(Number.isFinite(v)){v=Math.max(Number(r.min),Math.min(Number(r.max),v));r.value=String(v);} refresh();});
+  }
+
+  function pilotActive(){ return $("course").value==="Grade 7 Math" && $("topic").value==="ratios"; }
+
+  function loadFamiliesForSelection(resetState=false){
+    const source = pilotActive() ? (catalog?.pilot_topic?.families || []) : (catalog?.generic_families || DEFAULT_GENERIC);
+    families = source.map(x=>({...x}));
+    if(resetState){ familyState.clear(); families.forEach(f=>familyState.set(f.id,{enabled:true,count:0})); }
+    renderFamilies();
+  }
+
+  function renderFamilies(){
+    const mount=$("familyMount"); mount.innerHTML="";
+    const customMix=$("mode").value==="custom_mix";
+    families.forEach(f=>{
+      const state=familyState.get(f.id) || {enabled:true,count:0}; familyState.set(f.id,state);
+      const div=document.createElement("label"); div.className="family"+(state.enabled?" selected":"");
+      const tags=[]; if(f.category)tags.push(f.category); (f.representations||[]).slice(0,2).forEach(x=>tags.push(x));
+      div.innerHTML=`<input type="checkbox" data-family-toggle="${escAttr(f.id)}" ${state.enabled?"checked":""}><div><h4>${escHtml(f.label)}</h4><div>${tags.map(t=>`<span class="tag">${escHtml(t)}</span>`).join("")}</div><p>${escHtml(f.summary||"")}</p></div><input class="family-count" data-family-count="${escAttr(f.id)}" type="number" min="0" max="30" value="${state.count||0}" ${customMix?"":"disabled"} title="Count for Custom Mix">`;
+      mount.appendChild(div);
+    });
+    mount.querySelectorAll("[data-family-toggle]").forEach(el=>el.addEventListener("change",e=>{const id=e.target.dataset.familyToggle;const st=familyState.get(id);st.enabled=e.target.checked;e.target.closest(".family").classList.toggle("selected",st.enabled);refresh();}));
+    mount.querySelectorAll("[data-family-count]").forEach(el=>el.addEventListener("input",e=>{const st=familyState.get(e.target.dataset.familyCount);st.count=Math.max(0,Number(e.target.value)||0);refresh();}));
+  }
+
+  function selectedFamilies(){
+    return families.filter(f=>familyState.get(f.id)?.enabled).map(f=>({...f,requested_count:$("mode").value==="custom_mix"?(familyState.get(f.id)?.count||0):null}));
+  }
+  function numberDomains(){return [...$("numberDomains").querySelectorAll('input[type="checkbox"]:checked')].map(x=>x.value);}
+  function difficulty(){return document.querySelector('input[name="difficulty"]:checked')?.value || "balanced";}
+  function topicName(){return $("topic").value==="ratios"?"Ratios & Proportional Relationships":$("customTopic").value.trim();}
+
+  function validate(){
+    const problems=[];
+    if(!$("title").value.trim())problems.push("worksheet title");
+    if(!topicName())problems.push("topic");
+    const selected=selectedFamilies();
+    if(!selected.length && !$("customEnabled").checked)problems.push("at least one question structure");
+    if($("customEnabled").checked && !$("customDescription").value.trim())problems.push("custom structure description");
+    if(!numberDomains().length)problems.push("at least one number type");
+    if($("mode").value==="custom_mix"){
+      const sum=selected.reduce((a,f)=>a+(f.requested_count||0),0) + ($("customEnabled").checked ? (Number($("customCount").value)||0) : 0);
+      if(sum!==Number($("questionCount").value))problems.push(`Custom Mix counts must total ${$("questionCount").value} (currently ${sum})`);
+    }
+    return problems;
+  }
+
+  function refresh(){
+    const selected=selectedFamilies();
+    const custom=$("customEnabled").checked;
+    const q=Number($("questionCount").value);
+    const summary=$("summary");
+    summary.innerHTML=`<div><b>Course / topic</b><span>${escHtml($("course").value)} · ${escHtml(topicName()||"Add a topic")}</span></div><div><b>Worksheet mix</b><span>${q} questions · ${escHtml($("mode").selectedOptions[0].textContent)} · ${escHtml(difficulty().replaceAll("_"," "))}</span></div><div><b>Structures</b><span>${selected.length} selected${custom?" + custom":""}</span></div><div><b>Layout</b><span>${$("twoColumn").checked?"2 columns":"1 column"} · workspace ${$("workspaceNumber").value}% · graphs ${$("graphNumber").value}%</span></div>`;
+    const errors=validate();
+    $("buildBtn").disabled=errors.length>0;
+    if(errors.length){$("status").className="status warn";$("status").textContent="Add/fix: "+errors.join("; ")+".";}
+    else{$("status").className="status good";$("status").textContent=`Ready to package ${q} questions across ${$("versions").value} version${$("versions").value==="1"?"":"s"}.`;}
+  }
+
+  function reset(){
+    $("course").value="Grade 7 Math"; $("topic").value="ratios"; $("customTopic").value=""; $("customTopic").disabled=true;
+    $("title").value="Ratios & Proportional Relationships Practice"; $("target").value=""; $("questionCount").value="20"; $("mode").value="mixed"; $("versions").value="4";
+    document.querySelector('input[name="difficulty"][value="balanced"]').checked=true;
+    $("numberDomains").querySelectorAll('input[type="checkbox"]').forEach(x=>x.checked=["whole_numbers","fractions"].includes(x.value));
+    $("twoColumn").checked=true; $("answerKey").checked=true; $("workspaceRange").value=$("workspaceNumber").value="100"; $("graphRange").value=$("graphNumber").value="100";
+    $("customEnabled").checked=false; $("customDescription").value=""; $("customDescription").disabled=true; $("customCount").value="0"; $("customCount").disabled=true; $("teacherNotes").value="";
+    loadFamiliesForSelection(true); refresh();
+  }
+
+  async function loadText(path){const r=await fetch(path,{cache:"no-store"});if(!r.ok)throw new Error(`Could not load ${path} (HTTP ${r.status})`);return await r.text();}
+  async function sha256Hex(value){const digest=await crypto.subtle.digest("SHA-256",enc.encode(String(value)));return [...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,"0")).join("");}
+
+  async function buildZip(){
+    const errors=validate(); if(errors.length)return;
+    $("buildBtn").disabled=true; $("status").className="status"; $("status").textContent="Packaging self-contained worksheet request…";
+    try{
+      const selected=selectedFamilies();
+      const [contract,shared,catalogText,dashboardCss,worksheetCss,g12,g13,g14] = await Promise.all([
+        loadText("WORKSHEET_BUILDER_CONTRACT.md"),
+        loadText("../_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md"),
+        loadText("question_structure_catalog.json"),
+        loadText("dashboard_styles.css"),
+        loadText("worksheet_styles.css"),
+        loadText("../../Tools/~graph_tool_v12.py"),
+        loadText("../../Tools/~graph_tool_v13.py"),
+        loadText("../../Tools/~graph_tool_v14.py")
+      ]);
+      const [dashHash,workHash]=await Promise.all([sha256Hex(dashboardCss),sha256Hex(worksheetCss)]);
+      const count=Number($("questionCount").value), versions=Number($("versions").value);
+      const request={
+        schema:REQUEST_SCHEMA,tool_version:TOOL_VERSION,created_at:new Date().toISOString(),
+        contracts:{worksheet_builder:CONTRACT_VERSION,shared_standard:SHARED_STANDARD_VERSION},
+        worksheet:{title:$("title").value.trim(),course:$("course").value,topic:topicName(),learning_target:$("target").value.trim()||null,question_count_per_version:count,practice_mode:$("mode").value,difficulty_profile:difficulty(),number_domains:numberDomains(),version_count:versions,answer_key:$("answerKey").checked},
+        question_structures:{catalog_schema:catalog?.schema||"pilot-fallback",selected_families:selected,custom_enabled:$("customEnabled").checked,custom_description:$("customEnabled").checked?$("customDescription").value.trim():null,custom_requested_count:($("customEnabled").checked && $("mode").value==="custom_mix")?(Number($("customCount").value)||0):null},
+        layout:{page_size:"US Letter portrait",two_column:$("twoColumn").checked,workspace_scale_percent:Number($("workspaceNumber").value),graph_scale_percent:Number($("graphNumber").value),workspace_control_range_percent:[60,180],graph_control_range_percent:[70,160],independent_controls:true},
+        teacher_notes:$("teacherNotes").value.trim()||null,
+        locked_styles:{dashboard:{version:DASHBOARD_STYLE_VERSION,request_path:"response_contract/dashboard_styles.css",response_path:"assets/dashboard_styles.css",sha256:dashHash},worksheet:{version:WORKSHEET_STYLE_VERSION,request_path:"response_contract/worksheet_styles.css",response_path:"assets/worksheet_styles.css",sha256:workHash}},
+        graph_tools:{entrypoint:"response_contract/graph_tool/~graph_tool_v14.py",dependencies:["response_contract/graph_tool/~graph_tool_v13.py","response_contract/graph_tool/~graph_tool_v12.py"],cartesian_print_standard:{grid:{color:"#aaaaaa",linewidth_pt:0.6},axes_arrows:{color:"#222222",linewidth_pt:1.8},relation:{linewidth_pt:2.0},major_ticks:{linewidth_pt:1.2}}},
+        resolved_outputs:{required_files:["CLICK_ME.html","assets/dashboard_styles.css","assets/worksheet_styles.css","worksheet/worksheet.html","worksheet/worksheet.pdf","data/request.json","data/qa.json",...($("answerKey").checked?["teacher/answer_key.html","teacher/answer_key.pdf"]:[])]},
+        authority_note:"Structured teacher choices in request.json outrank free-form notes. Reference descriptions define structure only; all authored problems must be original."
+      };
+      const entries=[
+        {name:"REQUEST_READ_ME_FIRST.md",data:enc.encode(buildInstructions(request))},
+        {name:"request.json",data:enc.encode(JSON.stringify(request,null,2))},
+        {name:"response_contract/WORKSHEET_BUILDER_CONTRACT.md",data:enc.encode(contract)},
+        {name:"response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md",data:enc.encode(shared)},
+        {name:"response_contract/QUESTION_STRUCTURE_CATALOG.json",data:enc.encode(catalogText)},
+        {name:"response_contract/dashboard_styles.css",data:enc.encode(dashboardCss)},
+        {name:"response_contract/worksheet_styles.css",data:enc.encode(worksheetCss)},
+        {name:"response_contract/DASHBOARD_STYLE_SHA256.txt",data:enc.encode(dashHash+"\n")},
+        {name:"response_contract/WORKSHEET_STYLE_SHA256.txt",data:enc.encode(workHash+"\n")},
+        {name:"response_contract/graph_tool/~graph_tool_v12.py",data:enc.encode(g12)},
+        {name:"response_contract/graph_tool/~graph_tool_v13.py",data:enc.encode(g13)},
+        {name:"response_contract/graph_tool/~graph_tool_v14.py",data:enc.encode(g14)}
+      ];
+      const blob=makeZip(entries); const name=`math_worksheet_request_${slug(request.worksheet.course)}_${slug(request.worksheet.topic)}_${dateStamp()}.zip`; downloadBlob(blob,name);
+      $("status").className="status good"; $("status").textContent=`Request ready: ${name}`;
+    }catch(error){console.error(error);$("status").className="status bad";$("status").textContent="Could not package request: "+(error.message||error);}
+    finally{$("buildBtn").disabled=false;refresh();}
+  }
+
+  function buildInstructions(req){
+    const fam=req.question_structures.selected_families.map(f=>`- ${f.id}: ${f.label}${f.requested_count!=null?` (count ${f.requested_count})`:""} — ${f.summary}`).join("\n");
+    return `# Math Worksheet Builder Request — Pilot\n\n## Run automatically\nBuild the complete worksheet package from this ZIP. No additional teacher prompt is required. Return exactly ONE response ZIP.\n\n## Teacher request\n- Course: ${req.worksheet.course}\n- Topic: ${req.worksheet.topic}\n- Title: ${req.worksheet.title}\n- Learning target/focus: ${req.worksheet.learning_target||"Not specified"}\n- Questions per version: ${req.worksheet.question_count_per_version}\n- Practice mode: ${req.worksheet.practice_mode}\n- Difficulty profile: ${req.worksheet.difficulty_profile}\n- Number domains: ${req.worksheet.number_domains.join(", ")}\n- Versions: ${req.worksheet.version_count}\n- Answer key: ${req.worksheet.answer_key?"Yes":"No"}\n- Student layout: ${req.layout.two_column?"two columns":"one column"}\n- Initial workspace scale: ${req.layout.workspace_scale_percent}%\n- Initial graph/diagram scale: ${req.layout.graph_scale_percent}%\n\n## Selected question structures\n${fam||"No catalog families selected."}\n${req.question_structures.custom_enabled?`\n### Teacher custom structure\n${req.question_structures.custom_description}${req.question_structures.custom_requested_count!=null?`\nRequested count in Custom Mix: ${req.question_structures.custom_requested_count}`:""}\n`:""}\n## Teacher notes\n${req.teacher_notes||"No additional notes."}\n\n## Required authority\nFollow BOTH response_contract/WORKSHEET_BUILDER_CONTRACT.md and response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md. Use response_contract/QUESTION_STRUCTURE_CATALOG.json only as structural guidance. All student questions, values, contexts, diagrams, and answer choices must be original.\n\nThe authoritative graph entrypoint is packaged at response_contract/graph_tool/~graph_tool_v14.py with v13 and v12 beside it. Use it for supported Cartesian graph needs. Preserve the locked Cartesian print weights in request.json.\n\nCopy both locked CSS files byte-for-byte to the response assets and verify their hashes in QA. The student worksheet HTML must keep independent workspace and graph/diagram scaling controls available before print.\n\n## Required files\n${req.resolved_outputs.required_files.map(p=>`- ${p}`).join("\n")}\n\nOpen and visually inspect all required PDFs. Return only the completed response ZIP.`;
+  }
+
+  function slug(value){return String(value||"worksheet").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,44)||"worksheet";}
+  function dateStamp(){const d=new Date();return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;}
+  function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+
+  function makeZip(entries){
+    const localParts=[],centralParts=[];let offset=0,count=0;
+    for(const entry of entries){const nameBytes=enc.encode(entry.name.replace(/\\/g,"/"));const data=entry.data instanceof Uint8Array?entry.data:new Uint8Array(entry.data);const crc=crc32(data);const {time,date}=dosTimeDate(new Date());
+      const local=new Uint8Array(30+nameBytes.length),lv=new DataView(local.buffer);lv.setUint32(0,0x04034b50,true);lv.setUint16(4,20,true);lv.setUint16(6,0x0800,true);lv.setUint16(8,0,true);lv.setUint16(10,time,true);lv.setUint16(12,date,true);lv.setUint32(14,crc,true);lv.setUint32(18,data.length,true);lv.setUint32(22,data.length,true);lv.setUint16(26,nameBytes.length,true);lv.setUint16(28,0,true);local.set(nameBytes,30);localParts.push(local,data);
+      const central=new Uint8Array(46+nameBytes.length),cv=new DataView(central.buffer);cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);cv.setUint16(12,time,true);cv.setUint16(14,date,true);cv.setUint32(16,crc,true);cv.setUint32(20,data.length,true);cv.setUint32(24,data.length,true);cv.setUint16(28,nameBytes.length,true);cv.setUint16(30,0,true);cv.setUint16(32,0,true);cv.setUint16(34,0,true);cv.setUint16(36,0,true);cv.setUint32(38,0,true);cv.setUint32(42,offset,true);central.set(nameBytes,46);centralParts.push(central);offset+=local.length+data.length;count++;}
+    const centralSize=centralParts.reduce((s,p)=>s+p.length,0),end=new Uint8Array(22),ev=new DataView(end.buffer);ev.setUint32(0,0x06054b50,true);ev.setUint16(4,0,true);ev.setUint16(6,0,true);ev.setUint16(8,count,true);ev.setUint16(10,count,true);ev.setUint32(12,centralSize,true);ev.setUint32(16,offset,true);ev.setUint16(20,0,true);return new Blob([...localParts,...centralParts,end],{type:"application/zip"});
+  }
+  function dosTimeDate(d){const year=Math.max(1980,d.getFullYear());return {time:(d.getHours()<<11)|(d.getMinutes()<<5)|Math.floor(d.getSeconds()/2),date:((year-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate()};}
+  const crcTable=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xedb88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+  function crc32(bytes){let crc=0xffffffff;for(const b of bytes)crc=crcTable[(crc^b)&0xff]^(crc>>>8);return (crc^0xffffffff)>>>0;}
+
+  init();
+})();

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Worksheet Builder — Pilot</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><div class="wrap"><h1>Math Worksheet Builder</h1><p>Build original printable math practice from reusable question structures. The pilot starts with Grade 7 ratios and proportional relationships and is designed to expand from Grade 6 through Calculus.</p></div></header>
+<main class="stack">
+<section class="card stack">
+  <div><h2 class="section-title">1. Worksheet setup</h2><div class="note"><b>Pilot:</b> Grade 7 Ratios & Proportional Relationships has the full structure catalog. Other courses can be selected now with a custom topic and the generic structure set while the catalog expands.</div></div>
+  <div class="grid3">
+    <div class="field"><label for="course">Course</label><select id="course"></select></div>
+    <div class="field"><label for="topic">Topic</label><select id="topic"><option value="ratios">Ratios & Proportional Relationships</option><option value="custom">Custom topic</option></select></div>
+    <div class="field"><label for="customTopic">Custom topic (when needed)</label><input id="customTopic" placeholder="e.g., Solving two-step equations" disabled></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label for="title">Worksheet title</label><input id="title" value="Ratios & Proportional Relationships Practice"></div>
+    <div class="field"><label for="target">Learning target / focus (optional)</label><input id="target" placeholder="e.g., I can solve proportional relationship problems using multiple representations."></div>
+  </div>
+</section>
+
+<section class="card stack">
+  <h2 class="section-title">2. Practice design</h2>
+  <div class="grid3">
+    <div class="field"><label for="questionCount">Questions</label><select id="questionCount"><option>10</option><option>15</option><option selected>20</option><option>25</option><option>30</option></select></div>
+    <div class="field"><label for="mode">Practice mode</label><select id="mode"><option value="mixed" selected>Mixed — fluency + conceptual + application</option><option value="fluency">Fluency</option><option value="conceptual">Conceptual / visual</option><option value="custom_mix">Custom mix — enter family counts</option></select></div>
+    <div class="field"><label for="versions">Versions</label><select id="versions"><option value="1">1 version</option><option value="2">2 versions</option><option value="4" selected>4 versions (A-D)</option></select></div>
+  </div>
+  <div>
+    <div class="label">Difficulty profile</div>
+    <div class="segment" id="difficultyPresets">
+      <label><input type="radio" name="difficulty" value="intro_heavy">Intro-heavy</label>
+      <label><input type="radio" name="difficulty" value="balanced" checked>Balanced</label>
+      <label><input type="radio" name="difficulty" value="mastery_heavy">Mastery-heavy</label>
+    </div>
+  </div>
+  <div>
+    <div class="label">Allowed number types</div>
+    <div class="segment" id="numberDomains">
+      <label><input type="checkbox" value="whole_numbers" checked>Whole numbers</label>
+      <label><input type="checkbox" value="integers_negatives">Integers / negatives</label>
+      <label><input type="checkbox" value="fractions" checked>Fractions</label>
+      <label><input type="checkbox" value="decimals">Decimals</label>
+    </div>
+  </div>
+</section>
+
+<section class="card stack">
+  <div><h2 class="section-title">3. Question structures</h2><div class="muted small">Select the structures you want available. In Mixed/Fluency/Conceptual modes, the builder allocates counts automatically. Custom Mix uses the count boxes.</div></div>
+  <div id="familyMount" class="family-grid"></div>
+  <div class="custom-box">
+    <div class="row"><label class="row"><input type="checkbox" id="customEnabled"><b>Add a custom question structure</b></label><label class="small muted">Custom Mix count <input id="customCount" class="family-count" type="number" min="0" max="30" value="0" disabled></label></div>
+    <textarea id="customDescription" placeholder="Describe the question type, representation, or pattern you want. Example: Show two ratio tables; one is proportional and one is not. Students choose which one and explain why." disabled></textarea>
+    <div class="small muted">Custom descriptions may change the question architecture, but they must stay inside the selected course/topic/learning focus.</div>
+  </div>
+</section>
+
+<section class="card stack">
+  <h2 class="section-title">4. Student layout</h2>
+  <div class="row"><label><input id="twoColumn" type="checkbox" checked> <b>Two-column student pages</b></label><label><input id="answerKey" type="checkbox" checked> Include answer key</label></div>
+  <div class="controls">
+    <div class="control"><div class="control-head"><strong>Workspace scale</strong><span class="small muted">student writing room</span></div><div class="slider-row"><input id="workspaceRange" type="range" min="60" max="180" step="5" value="100"><input id="workspaceNumber" type="number" min="60" max="180" step="5" value="100"></div></div>
+    <div class="control"><div class="control-head"><strong>Graph / diagram scale</strong><span class="small muted">independent of workspace</span></div><div class="slider-row"><input id="graphRange" type="range" min="70" max="160" step="5" value="100"><input id="graphNumber" type="number" min="70" max="160" step="5" value="100"></div></div>
+  </div>
+  <div class="small muted">The finished worksheet HTML keeps these controls available so you can resize workspace and graphs before printing. The values here set the initial defaults.</div>
+</section>
+
+<section class="card stack">
+  <h2 class="section-title">5. Request summary</h2>
+  <div class="summary" id="summary"></div>
+  <div class="field"><label for="teacherNotes">Optional teacher notes</label><textarea id="teacherNotes" placeholder="Examples: avoid calculator-heavy numbers, keep contexts short, make the first four questions very approachable, include one challenge problem at the end."></textarea></div>
+  <div class="actions"><div id="status" class="status">Loading question structures…</div><div class="row"><button id="resetBtn" class="button secondary" type="button">Reset</button><button id="buildBtn" class="button" type="button" disabled>Download Worksheet Request ZIP</button></div></div>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

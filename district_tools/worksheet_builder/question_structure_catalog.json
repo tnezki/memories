@@ -1,0 +1,325 @@
+{
+  "schema": "math-worksheet-question-structure-catalog/0.1-pilot",
+  "status": "PILOT",
+  "reference_model": {
+    "purpose": "Describe reusable question architectures inspired by common free math worksheet patterns and teacher-supplied examples without copying source questions or layouts verbatim.",
+    "source_principles": [
+      "Kuta-style fluency: narrow skill focus, many parameterized variations, clean printable density, straightforward progression.",
+      "DeltaMath-style conceptual structure: diagrams, multiple representations, scaffolded multi-part reasoning, contextual application, tables, grids, and double number lines.",
+      "Teacher-owned output standard: original questions, two-column print by default, accurate MathJax, deterministic visuals, adjustable workspace and graph/diagram scale."
+    ],
+    "copyright_rule": "Use source materials only to infer structure, representation, pacing, and difficulty. Do not reproduce source wording, names, numbers, diagrams, or answer choices."
+  },
+  "courses": [
+    "Grade 6 Math",
+    "Grade 7 Math",
+    "Grade 8 Math",
+    "Pre-Algebra",
+    "Algebra 1",
+    "Geometry",
+    "Algebra 2",
+    "Precalculus",
+    "Calculus"
+  ],
+  "pilot_topic": {
+    "course": "Grade 7 Math",
+    "topic": "Ratios & Proportional Relationships",
+    "families": [
+      {
+        "id": "RATIO_FLUENCY_EQUIVALENT",
+        "category": "Fluency",
+        "label": "Equivalent Ratio / Multiplicative Comparison",
+        "summary": "Move between two quantities with a multiplicative factor and express the factor as a whole number or simplified fraction.",
+        "representations": [
+          "numeric"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "intro",
+          "standard"
+        ]
+      },
+      {
+        "id": "RATIO_FLUENCY_SIMPLIFY",
+        "category": "Fluency",
+        "label": "Simplify Ratios",
+        "summary": "Simplify part-to-part or part-to-whole ratios from numeric quantities.",
+        "representations": [
+          "numeric",
+          "short context"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "intro",
+          "standard"
+        ]
+      },
+      {
+        "id": "RATIO_FLUENCY_UNIT_RATE",
+        "category": "Fluency",
+        "label": "Unit Rate / Scale to One",
+        "summary": "Use division to move to a unit rate or one-unit benchmark, then scale to a target value.",
+        "representations": [
+          "numeric",
+          "short context"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "intro",
+          "standard"
+        ]
+      },
+      {
+        "id": "RATIO_VISUAL_SCALED_FIGURES",
+        "category": "Visual & Conceptual",
+        "label": "Scaled Figures \u2014 Find Scale Factor",
+        "summary": "Compare two original geometric figures with labeled side lengths and determine the scale factor.",
+        "representations": [
+          "diagram"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "intro",
+          "standard"
+        ],
+        "visual": "deterministic geometry diagram"
+      },
+      {
+        "id": "RATIO_VISUAL_CORRESPONDING_SIDE",
+        "category": "Visual & Conceptual",
+        "label": "Scaled / Rotated Figures \u2014 Corresponding Side",
+        "summary": "Identify corresponding sides between scaled figures that may be translated or rotated, then reason about scale factor.",
+        "representations": [
+          "grid diagram"
+        ],
+        "response_modes": [
+          "constructed",
+          "selected response"
+        ],
+        "difficulty": [
+          "standard",
+          "mastery"
+        ],
+        "visual": "coordinate/grid polygon diagram"
+      },
+      {
+        "id": "RATIO_VISUAL_DILATION_GRID",
+        "category": "Visual & Conceptual",
+        "label": "Dilation on a Coordinate Grid",
+        "summary": "Plot or complete a dilation when a scale factor and part of the image/preimage are supplied.",
+        "representations": [
+          "coordinate grid"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "standard",
+          "mastery"
+        ],
+        "visual": "coordinate grid"
+      },
+      {
+        "id": "RATIO_VISUAL_SHAPE_COUNTS",
+        "category": "Visual & Conceptual",
+        "label": "Ratio from a Shape Diagram",
+        "summary": "Count categories of repeated shapes, write an unsimplified ratio, then simplify or interpret the ratio.",
+        "representations": [
+          "shape array"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "intro",
+          "standard"
+        ],
+        "visual": "simple vector shape array"
+      },
+      {
+        "id": "RATIO_REP_DOUBLE_NUMBER_LINE",
+        "category": "Representation & Scaffold",
+        "label": "Double Number Line",
+        "summary": "Represent two proportional quantities on aligned number lines and solve for a missing value.",
+        "representations": [
+          "double number line"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "intro",
+          "standard",
+          "mastery"
+        ],
+        "visual": "double number line"
+      },
+      {
+        "id": "RATIO_REP_RATIO_TABLE",
+        "category": "Representation & Scaffold",
+        "label": "Ratio Table \u2014 Complete or Choose",
+        "summary": "Complete a proportional ratio table or identify which table preserves the given ratio.",
+        "representations": [
+          "table"
+        ],
+        "response_modes": [
+          "constructed",
+          "selected response"
+        ],
+        "difficulty": [
+          "intro",
+          "standard"
+        ]
+      },
+      {
+        "id": "RATIO_REP_MULTI_TABLE",
+        "category": "Representation & Scaffold",
+        "label": "Multi-Row Proportional Table",
+        "summary": "Use a recipe or mixture table with several related quantities, including fractional values, to complete missing entries.",
+        "representations": [
+          "table",
+          "context"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "mastery"
+        ],
+        "visual": "structured table"
+      },
+      {
+        "id": "RATIO_CONTEXT_MIXTURE_COMPARE",
+        "category": "Context & Application",
+        "label": "Compare Mixtures / Concentrations",
+        "summary": "Compare two mixtures or recipes by reasoning about ratios, concentration, or unit rates.",
+        "representations": [
+          "context"
+        ],
+        "response_modes": [
+          "selected response",
+          "constructed"
+        ],
+        "difficulty": [
+          "standard",
+          "mastery"
+        ]
+      },
+      {
+        "id": "RATIO_CONTEXT_SCALE_DRAWING",
+        "category": "Context & Application",
+        "label": "Scale Drawing \u2014 Actual Measure",
+        "summary": "Use a stated drawing scale to determine an actual length, perimeter, area, or travel distance.",
+        "representations": [
+          "diagram",
+          "context"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "standard",
+          "mastery"
+        ],
+        "visual": "measurement diagram"
+      },
+      {
+        "id": "RATIO_CONTEXT_RECIPE_SCALE",
+        "category": "Context & Application",
+        "label": "Recipe / Batch Scaling",
+        "summary": "Scale a recipe or batch from a known serving amount to a new amount and solve for one or more ingredients.",
+        "representations": [
+          "context",
+          "table"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "standard",
+          "mastery"
+        ]
+      },
+      {
+        "id": "RATIO_CONTEXT_PART_WHOLE",
+        "category": "Context & Application",
+        "label": "Part-to-Part / Part-to-Whole / Multi-Part Ratio",
+        "summary": "Write and interpret multiple ratios from the same context, including part-to-whole fractions or multi-part ratios.",
+        "representations": [
+          "context"
+        ],
+        "response_modes": [
+          "constructed"
+        ],
+        "difficulty": [
+          "standard",
+          "mastery"
+        ]
+      },
+      {
+        "id": "RATIO_REASON_ERROR_ANALYSIS",
+        "category": "Reasoning",
+        "label": "Error Analysis / Explain the Ratio Reasoning",
+        "summary": "Diagnose a plausible ratio, scale-factor, or proportional-reasoning error and correct it.",
+        "representations": [
+          "worked claim",
+          "numeric",
+          "visual optional"
+        ],
+        "response_modes": [
+          "constructed explanation"
+        ],
+        "difficulty": [
+          "standard",
+          "mastery"
+        ]
+      }
+    ]
+  },
+  "generic_families": [
+    {
+      "id": "GEN_DIRECT_FLUENCY",
+      "category": "Fluency",
+      "label": "Direct Skill Practice",
+      "summary": "Short, parameterized practice focused on one procedure or fact pattern."
+    },
+    {
+      "id": "GEN_MULTI_REP",
+      "category": "Conceptual",
+      "label": "Multiple Representation",
+      "summary": "Ask students to connect two representations such as equation/table/graph/diagram/context."
+    },
+    {
+      "id": "GEN_VISUAL",
+      "category": "Visual",
+      "label": "Diagram / Graph / Model",
+      "summary": "Use a quantitatively accurate visual as part of the evidence."
+    },
+    {
+      "id": "GEN_ERROR",
+      "category": "Reasoning",
+      "label": "Error Analysis",
+      "summary": "Diagnose and correct a plausible student error."
+    },
+    {
+      "id": "GEN_CONTEXT",
+      "category": "Application",
+      "label": "Context / Transfer",
+      "summary": "Apply the selected skill in a concise original context."
+    },
+    {
+      "id": "GEN_MULTIPART",
+      "category": "Scaffold",
+      "label": "Multi-Part Scaffold",
+      "summary": "Sequence a small set of linked prompts that build toward a final response."
+    }
+  ]
+}

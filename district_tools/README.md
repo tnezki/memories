@@ -25,7 +25,7 @@ The first district tools independently exposed the same recurring build lessons:
 - Structured teacher choices need a clear precedence order so free-form notes do not create hidden contradictions.
 - Every request should be self-contained and every response should have one obvious `CLICK_ME.html` entry point.
 
-Those stable behaviors are now captured in `_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md` for new/adopting tools.
+Those stable behaviors are captured in `_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md` for new/adopting tools.
 
 ## Scope
 
@@ -33,9 +33,10 @@ Those stable behaviors are now captured in `_shared/DISTRICT_RESPONSE_BUILD_STAN
 
 ## Current tools
 
-- Grading & Evidence Control Panel - pilot. It already carries its own mature Math/visual/QA contract; migrate it to the shared standard deliberately during a future grading-tool revision rather than destabilizing a working pilot.
-- Tiered Task Tool - pilot. It packages the shared response-build standard plus its Tiered Task-specific contract and locked CSS.
-- District Resource Builder - pilot. It uses a profile registry to generate worksheets, differentiated resources, extensions, formative assessments, rubrics, lesson outlines, presentations, stations, unit outlines, Blooket sets, and custom resources while inheriting the shared response-build standard.
+- Grading & Evidence Control Panel - pilot.
+- Tiered Task Tool - pilot.
+- District Resource Builder - pilot.
+- Math Worksheet Builder - pilot. The initial catalog pilots Grade 7 Ratios & Proportional Relationships, while the schema and UI are designed to expand from Grade 6 through Calculus. It supports fluency/conceptual/mixed practice, teacher-selected question structures, original problem generation, two-column student print, and independent workspace/graph scaling.
 
 ## Request-builder convention
 
@@ -51,4 +52,4 @@ A district request builder should:
 
 ## Generic profile -> specialized tool
 
-Use the Resource Builder for broadly useful, configurable classroom artifact types. When one profile develops enough specialized pedagogy, UI, output structure, or recurring teacher workflow, promote it into its own tool capsule rather than making the generic builder increasingly complex. Tiered Task is the current example of a specialized tool.
+Use the Resource Builder for broadly useful, configurable classroom artifact types. When one profile develops enough specialized pedagogy, UI, output structure, or recurring teacher workflow, promote it into its own tool capsule rather than making the generic builder increasingly complex. Tiered Task and Math Worksheet Builder are specialized examples.
