@@ -26,6 +26,49 @@ A target reading/access level changes wording and accessibility but may not lowe
 
 Product choices are controlled by teacher checkboxes. The intellectual evidence stays constant across product formats.
 
+## Hardened response-build rules
+
+Tiered Task requests package two executable contracts:
+
+- `TIERED_TASK_GENERATION_CONTRACT.md` - the tool-specific DOK/task-card requirements;
+- `DISTRICT_RESPONSE_BUILD_STANDARD.md` - the shared district rules for MathJax, accurate graphs, diagrams/visuals, locked CSS, conflict handling, PDFs, relative links, and QA.
+
+The shared standard is copied into every request ZIP, so a later build does not depend on remembering another chat or retrieving a live repository file.
+
+### MathJax
+
+- Mathematical expressions use valid TeX/MathJax rather than improvised italic HTML.
+- PDF generation happens only after MathJax finishes typesetting.
+- Raw TeX, clipped equations, or missing symbols fail QA.
+
+### Graphs
+
+- A required mathematical graph is generated with a dedicated grapher when available, otherwise by a deterministic accurate plotting method.
+- Mathematical graphs are not fabricated with a generative image model.
+- Required axes, scale, labels, units, and relationships are checked.
+
+### Diagrams and visuals
+
+- If a prompt depends on a diagram/figure/setup, the real visual must be present.
+- When drawing the diagram is itself the assessed skill, the response does not give away the completed answer; it may provide a neutral setup sketch/grid when useful.
+- Generated graphs live under `assets/graphs/`; other instructional visuals live under `assets/visuals/`.
+
+### Locked CSS
+
+The current classroom layout was validated with the Physics Newton's Laws pilot and is intentionally preserved.
+
+- The student card remains one readable letter-landscape page.
+- The dashboard/teacher guide keep the existing restrained district blue/navy visual language.
+- The request includes exact CSS snapshots, versions, and SHA-256 hashes.
+- The response must copy those CSS files byte-for-byte and record the expected/actual hashes in QA.
+- If content does not fit, the builder improves wording/layout within the contract instead of silently replacing the CSS or shrinking text until it is unreadable.
+
+## Conflict policy
+
+The request package now has an explicit authority order so later runs do not improvise when instructions disagree. HARD response/build rules come first, then structured teacher choices in `request.json`, then tool defaults, teacher notes, source files, and finally model inference. Resolved and unresolved conflicts are recorded in `data/qa.json`.
+
+This is especially important for product selections, work/research modes, source requirements, one-page layout, math/visual rendering, and locked CSS.
+
 ## Response package
 
 The requested response contains:
@@ -35,11 +78,19 @@ The requested response contains:
 - a Teacher Guide / Evidence Guide in HTML/PDF;
 - locked response CSS;
 - graph/visual assets when required;
-- `data/request.json` and `data/qa.json`.
+- `data/request.json` and completed `data/qa.json`.
+
+`CLICK_ME.html` keeps the four prominent student/teacher resource links and also exposes the completed QA record without turning QA into a competing primary action.
+
+## Required delivery line
+
+The user-facing response that returns the completed ZIP ends with exactly:
+
+> Unzip it and open **`CLICK_ME.html`**. The student card is one landscape page with DOK 1-4, and the package includes the teacher evidence guide plus completed QA.
 
 ## District-tools organization
 
-This tool follows the district **tool capsule** pattern: it owns its own UI, request schema, response contract, CSS, and README. `../tool_registry.json` controls how it appears on the district landing page. That keeps future pilots easy to add without forcing existing tools to share implementation code prematurely.
+This tool follows the district **tool capsule + shared contract** pattern. It owns its own UI, request schema, Tiered Task contract, locked CSS, and browser-side ZIP builder. Cross-tool quality rules live in `../_shared/`, but runtime JavaScript/CSS are not shared across tools. That keeps future tools consistent without allowing a change in one pilot to unexpectedly break another.
 
 ## Privacy
 
