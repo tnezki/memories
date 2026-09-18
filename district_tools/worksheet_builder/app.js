@@ -1,7 +1,7 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
-  const TOOL_VERSION = "0.1-pilot";
+  const TOOL_VERSION = "0.1.1-pilot";
   const REQUEST_SCHEMA = "district-math-worksheet-builder-request/0.1";
   const CONTRACT_VERSION = "district-math-worksheet-builder/0.1-pilot";
   const SHARED_STANDARD_VERSION = "district-response-build-standard/1.0";
@@ -21,6 +21,7 @@
   let catalog = null;
   let families = [];
   const familyState = new Map();
+  let preparedDownloadUrl = null;
 
   function escHtml(value){return String(value??"").replace(/[&<>"']/g,(ch)=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
   function escAttr(value){return escHtml(value);}
@@ -113,7 +114,27 @@
     return problems;
   }
 
+  function clearPreparedDownload(){
+    if(preparedDownloadUrl){ URL.revokeObjectURL(preparedDownloadUrl); preparedDownloadUrl=null; }
+    const ready=$("downloadReady"), link=$("downloadLink"), filename=$("downloadFilename");
+    if(ready) ready.hidden=true;
+    if(link){ link.removeAttribute("href"); link.removeAttribute("download"); link.textContent="Download Request ZIP"; }
+    if(filename) filename.textContent="";
+  }
+
+  function prepareDownload(blob,filename){
+    clearPreparedDownload();
+    preparedDownloadUrl=URL.createObjectURL(blob);
+    const ready=$("downloadReady"), link=$("downloadLink"), filenameEl=$("downloadFilename");
+    link.href=preparedDownloadUrl;
+    link.download=filename;
+    link.textContent="Download Request ZIP";
+    filenameEl.textContent=filename;
+    ready.hidden=false;
+  }
+
   function refresh(){
+    clearPreparedDownload();
     const selected=selectedFamilies();
     const custom=$("customEnabled").checked;
     const q=Number($("questionCount").value);
@@ -181,10 +202,12 @@
         {name:"response_contract/graph_tool/~graph_tool_v13.py",data:enc.encode(g13)},
         {name:"response_contract/graph_tool/~graph_tool_v14.py",data:enc.encode(g14)}
       ];
-      const blob=makeZip(entries); const name=`math_worksheet_request_${slug(request.worksheet.course)}_${slug(request.worksheet.topic)}_${dateStamp()}.zip`; downloadBlob(blob,name);
-      $("status").className="status good"; $("status").textContent=`Request ready: ${name}`;
-    }catch(error){console.error(error);$("status").className="status bad";$("status").textContent="Could not package request: "+(error.message||error);}
-    finally{$("buildBtn").disabled=false;refresh();}
+      const blob=makeZip(entries); const name=`math_worksheet_request_${slug(request.worksheet.course)}_${slug(request.worksheet.topic)}_${dateStamp()}.zip`;
+      prepareDownload(blob,name);
+      $("status").className="status good";
+      $("status").textContent="Request package is ready. Click Download Request ZIP below to save it.";
+    }catch(error){console.error(error);clearPreparedDownload();$("status").className="status bad";$("status").textContent="Could not package request: "+(error.message||error);}
+    finally{$("buildBtn").disabled=validate().length>0;}
   }
 
   function buildInstructions(req){
@@ -194,8 +217,6 @@
 
   function slug(value){return String(value||"worksheet").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,44)||"worksheet";}
   function dateStamp(){const d=new Date();return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;}
-  function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
-
   function makeZip(entries){
     const localParts=[],centralParts=[];let offset=0,count=0;
     for(const entry of entries){const nameBytes=enc.encode(entry.name.replace(/\\/g,"/"));const data=entry.data instanceof Uint8Array?entry.data:new Uint8Array(entry.data);const crc=crc32(data);const {time,date}=dosTimeDate(new Date());
@@ -207,5 +228,6 @@
   const crcTable=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xedb88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
   function crc32(bytes){let crc=0xffffffff;for(const b of bytes)crc=crcTable[(crc^b)&0xff]^(crc>>>8);return (crc^0xffffffff)>>>0;}
 
+  window.addEventListener("beforeunload",()=>{ if(preparedDownloadUrl) URL.revokeObjectURL(preparedDownloadUrl); });
   init();
 })();

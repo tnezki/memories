@@ -72,7 +72,11 @@
   <h2 class="section-title">5. Request summary</h2>
   <div class="summary" id="summary"></div>
   <div class="field"><label for="teacherNotes">Optional teacher notes</label><textarea id="teacherNotes" placeholder="Examples: avoid calculator-heavy numbers, keep contexts short, make the first four questions very approachable, include one challenge problem at the end."></textarea></div>
-  <div class="actions"><div id="status" class="status">Loading question structures…</div><div class="row"><button id="resetBtn" class="button secondary" type="button">Reset</button><button id="buildBtn" class="button" type="button" disabled>Download Worksheet Request ZIP</button></div></div>
+  <div class="actions"><div id="status" class="status">Loading question structures…</div><div class="row"><button id="resetBtn" class="button secondary" type="button">Reset</button><button id="buildBtn" class="button" type="button" disabled>Create Worksheet Request ZIP</button></div></div>
+  <div id="downloadReady" class="note" hidden>
+    <div class="row"><div><b>Request ZIP is ready.</b><div class="small">File: <code id="downloadFilename"></code></div></div><a id="downloadLink" class="button" href="#">Download Request ZIP</a></div>
+    <div class="small" style="margin-top:8px">The second click is a direct browser download. Chrome should show it in the Downloads tray/history immediately.</div>
+  </div>
 </section>
 </main>
 <script src="app.js"></script>
