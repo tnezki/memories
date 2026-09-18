@@ -35,6 +35,7 @@ Those stable behaviors are now captured in `_shared/DISTRICT_RESPONSE_BUILD_STAN
 
 - Grading & Evidence Control Panel - pilot. It already carries its own mature Math/visual/QA contract; migrate it to the shared standard deliberately during a future grading-tool revision rather than destabilizing a working pilot.
 - Tiered Task Tool - pilot. It packages the shared response-build standard plus its Tiered Task-specific contract and locked CSS.
+- District Resource Builder - pilot. It uses a profile registry to generate worksheets, differentiated resources, extensions, formative assessments, rubrics, lesson outlines, presentations, stations, unit outlines, Blooket sets, and custom resources while inheriting the shared response-build standard.
 
 ## Request-builder convention
 
@@ -47,3 +48,7 @@ A district request builder should:
 5. Keep output styling/contracts versioned inside the owning tool folder and copy locked CSS exactly into the response.
 6. Fail clearly when required teacher inputs are missing instead of silently inventing them.
 7. Record conflicts, rendering checks, link checks, CSS hashes, and PDF QA in the response's QA record.
+
+## Generic profile -> specialized tool
+
+Use the Resource Builder for broadly useful, configurable classroom artifact types. When one profile develops enough specialized pedagogy, UI, output structure, or recurring teacher workflow, promote it into its own tool capsule rather than making the generic builder increasingly complex. Tiered Task is the current example of a specialized tool.

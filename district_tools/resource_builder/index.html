@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>District Resource Builder</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><div class="wrap"><h1>District Resource Builder <span style="font-size:13px;opacity:.8">PILOT</span></h1><p>Choose a classroom resource, enter the learning target and constraints, attach source material if useful, and build one self-contained request ZIP.</p></div></header>
+<main>
+<a class="back" href="../">&larr; District Tools</a>
+<div class="grid">
+<section class="card">
+<h2>Build a classroom resource</h2>
+<p class="small">The technical build rules are handled for you: MathJax, graphs, diagrams, locked styling, PDFs, links, conflict handling, and completed QA.</p>
+
+<label for="resourceType">Resource type <span class="required">*</span></label>
+<select id="resourceType"></select>
+<div id="profileSummary" class="profile-box"></div>
+
+<h3 class="section-title">Common information</h3>
+<div class="row">
+  <div><label for="resourceName">Resource name <span class="required">*</span></label><input id="resourceName" type="text" placeholder="Example: Newton's Laws Review"></div>
+  <div><label for="teacherName">Teacher <span class="small">(optional)</span></label><input id="teacherName" type="text" placeholder="Teacher name"></div>
+</div>
+<div class="row-3">
+  <div><label for="subjectCourse">Subject / course <span class="required">*</span></label><input id="subjectCourse" type="text" placeholder="Example: Physics"></div>
+  <div><label for="gradeLevel">Grade level <span class="small">(optional)</span></label><input id="gradeLevel" type="text" placeholder="Example: Grade 10"></div>
+  <div><label for="unitTopic">Unit / topic <span class="required">*</span></label><input id="unitTopic" type="text" placeholder="Example: Newton's Laws"></div>
+</div>
+<div class="row">
+  <div><label for="timeLength">Time / length constraint <span class="small">(optional)</span></label><input id="timeLength" type="text" placeholder="Example: 45 minutes, 2 pages"></div>
+  <div><label for="readingLevel">Target reading / access level <span class="small">(optional)</span></label><input id="readingLevel" type="text" placeholder="Example: Grade 7 reading level"></div>
+</div>
+<label for="context">Context / what students already know <span class="small">(optional)</span></label>
+<textarea id="context" placeholder="What have students learned? Where does this fit in the unit?"></textarea>
+<label for="standards">Standards / framework <span class="small">(optional)</span></label>
+<input id="standards" type="text" placeholder="Example: NGSS HS-PS2-1, local standard, course framework">
+
+<h3 class="section-title">Learning targets</h3>
+<p class="small">Enter 1-4 I Can statements or learning objectives. At least one is required.</p>
+<div id="targetInputs"></div>
+
+<h3 class="section-title">Design priorities</h3>
+<p class="small"><b>Accuracy is always required.</b> Check the priorities you especially want emphasized.</p>
+<div id="priorityChoices" class="checks">
+  <label class="check"><input type="checkbox" value="real_world_application" checked><span>Real-world application</span></label>
+  <label class="check"><input type="checkbox" value="inclusion_accessibility" checked><span>Inclusion / accessibility</span></label>
+  <label class="check"><input type="checkbox" value="growth_oriented_language"><span>Growth-oriented language</span></label>
+  <label class="check"><input type="checkbox" value="engagement" checked><span>Engagement</span></label>
+  <label class="check"><input type="checkbox" value="student_choice_agency"><span>Student choice / agency</span></label>
+  <label class="check"><input type="checkbox" value="reasoning_over_recall"><span>Reasoning over recall</span></label>
+  <label class="check"><input type="checkbox" value="scaffolds"><span>Scaffolds / supports</span></label>
+  <label class="check"><input type="checkbox" value="extension_challenge"><span>Extension / challenge</span></label>
+</div>
+
+<h3 class="section-title">Resource-specific options</h3>
+<div id="profileControls" class="profile-box profile-controls"></div>
+
+<h3 class="section-title">Supporting source files</h3>
+<div class="drop"><input id="sourceFiles" type="file" multiple><div class="small" style="margin-top:7px">Optional: task, reading, textbook excerpt, standards, rubric, vocabulary, examples, data, images, or other context.</div><ul id="sourceList" class="file-list"></ul></div>
+
+<label for="teacherNotes">Special directions / what to avoid <span class="small">(optional)</span></label>
+<textarea id="teacherNotes" placeholder="Example: Do not use vocabulary we have not learned yet. Keep examples algebra-based. No internet research for students."></textarea>
+
+<div id="buildStatus" class="status warn">Add the required fields and at least one learning target.</div>
+<div class="actions"><button id="buildZip" type="button">Build Request ZIP</button><button id="clearForm" class="secondary" type="button">Clear</button></div>
+</section>
+
+<aside class="card">
+<span class="pill">Pilot</span>
+<h2 style="margin-top:10px">What happens next?</h2>
+<div class="step"><div class="step-num">1</div><p>Choose the resource and complete only the teacher-facing controls that matter.</p></div>
+<div class="step"><div class="step-num">2</div><p>Download the request ZIP and upload it to ChatGPT. The ZIP contains the full build instructions; no separate prompt is needed.</p></div>
+<div class="step"><div class="step-num">3</div><p>Receive one response ZIP. Unzip it and open <code>CLICK_ME.html</code> to reach the finished resource, teacher materials, and QA.</p></div>
+<div class="divider"></div>
+<h3>Built-in safeguards</h3>
+<p class="small">The request carries the district response standard plus the selected resource profile. It requires accurate MathJax, real graphs/diagrams when needed, locked CSS, finished PDFs/native files, conflict handling, and visual QA.</p>
+<div class="divider"></div>
+<p class="privacy"><b>Files:</b> selected files are packaged locally in your browser. This page does not upload them by itself. Follow district policy for any protected or student data you later send to an AI service.</p>
+</aside>
+</div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

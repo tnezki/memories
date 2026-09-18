@@ -1,0 +1,194 @@
+{
+  "schema": "district-resource-profile-registry/0.1-pilot",
+  "updated": "2026-09-17",
+  "profiles": [
+    {
+      "id": "worksheet_practice",
+      "label": "Worksheet / Practice",
+      "summary": "Create a focused student practice resource with a clear progression, usable workspace, and an optional answer key.",
+      "controls": [
+        {"id":"page_count","label":"Target length","type":"select","default":"2_pages","options":[["1_page","1 page"],["2_pages","2 pages"],["3_pages","3 pages"],["flexible","Flexible"]]},
+        {"id":"question_count","label":"Approximate number of questions","type":"number","default":12,"min":3,"max":40},
+        {"id":"progression","label":"Practice progression","type":"select","default":"balanced","options":[["balanced","Balanced: review to application"],["foundational","Mostly foundational practice"],["application","Mostly application / transfer"],["mixed_challenge","Mixed practice with challenge"]]},
+        {"id":"answer_key","label":"Include a complete answer key","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "Every problem must align to the submitted learning target(s).",
+        "Use meaningful progression rather than filler or repeated busywork.",
+        "Provide enough workspace for the actual response demands.",
+        "When an answer key is requested, it must match the final student version exactly."
+      ]
+    },
+    {
+      "id": "differentiated_worksheet",
+      "label": "Differentiated Worksheet",
+      "summary": "Create aligned versions that preserve the same core learning target while varying support, complexity, or access.",
+      "controls": [
+        {"id":"version_count","label":"Number of versions","type":"select","default":"2","options":[["2","2 versions"],["3","3 versions"]]},
+        {"id":"differentiation_basis","label":"Main differentiation focus","type":"select","default":"mixed","options":[["mixed","Mixed support + complexity"],["scaffolding","Scaffolding / support"],["readiness","Readiness / cognitive complexity"],["reading_access","Reading / language access"]]},
+        {"id":"page_count","label":"Target length per version","type":"select","default":"2_pages","options":[["1_page","1 page"],["2_pages","2 pages"],["flexible","Flexible"]]},
+        {"id":"answer_key","label":"Include a complete answer key","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "All versions must stay anchored to the same essential learning target(s).",
+        "Do not turn the supported version into trivial work or the advanced version into unrelated content.",
+        "Use neutral student-facing labels such as Version A, Version B, and Version C unless the teacher explicitly requests other labels.",
+        "Teacher notes must explain the instructional differences among versions."
+      ]
+    },
+    {
+      "id": "extension_activity",
+      "label": "Extension Activity",
+      "summary": "Create meaningful transfer, application, synthesis, or design work for students ready to go beyond routine practice.",
+      "controls": [
+        {"id":"duration","label":"Target duration","type":"text","default":"15 minutes","placeholder":"Example: 15 minutes"},
+        {"id":"use_student_work","label":"Build from students' current/previous work when source material supports it","type":"checkbox","default":false},
+        {"id":"collaboration","label":"Student grouping","type":"select","default":"teacher_choice","options":[["individual","Individual"],["partners","Partners"],["small_group","Small group"],["teacher_choice","Teacher choice"]]},
+        {"id":"teacher_guide","label":"Include teacher facilitation / evidence notes","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "Extension means transfer, synthesis, design, comparison, investigation, or deeper reasoning—not simply more of the same questions.",
+        "Use prior student work only when it is actually included or clearly described.",
+        "Keep the activity realistically completable within the stated time or flag the mismatch in the teacher guide."
+      ]
+    },
+    {
+      "id": "formative_assessment",
+      "label": "Formative Assessment",
+      "summary": "Create a diagnostic check that reveals what students understand, where reasoning breaks down, and what to teach next.",
+      "controls": [
+        {"id":"question_count","label":"Number of questions","type":"number","default":10,"min":3,"max":30},
+        {"id":"response_mix","label":"Response format","type":"select","default":"mixed","options":[["mixed","Mixed selected + constructed response"],["selected","Mostly selected response"],["constructed","Mostly constructed response"]]},
+        {"id":"diagnostic_balance","label":"Emphasis","type":"select","default":"balanced","options":[["balanced","Balanced procedural / conceptual / application"],["conceptual","Conceptual reasoning heavy"],["procedural","Procedure / skill heavy"],["application","Application / transfer heavy"]]},
+        {"id":"answer_key","label":"Include answer key","type":"checkbox","default":true},
+        {"id":"misconception_notes","label":"Include likely misconception / next-step notes","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "The assessment should diagnose thinking, not merely produce a score.",
+        "Use plausible distractors or prompts tied to likely reasoning errors when appropriate.",
+        "When misconception notes are requested, connect them to specific items and actionable next steps."
+      ]
+    },
+    {
+      "id": "rubric",
+      "label": "Rubric",
+      "summary": "Create an observable, growth-oriented scoring tool aligned to the actual task and evidence students are expected to produce.",
+      "controls": [
+        {"id":"rubric_type","label":"Rubric type","type":"select","default":"analytic","options":[["analytic","Analytic rubric"],["single_point","Single-point rubric"]]},
+        {"id":"performance_levels","label":"Performance levels","type":"select","default":"4","options":[["3","3 levels"],["4","4 levels"],["5","5 levels"]]},
+        {"id":"criteria_count","label":"Approximate number of criteria","type":"number","default":4,"min":2,"max":8},
+        {"id":"self_assessment","label":"Include a student self-assessment area","type":"checkbox","default":true},
+        {"id":"student_friendly","label":"Use student-friendly language","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "Criteria and descriptors must be specific and observable, not vague adjectives alone.",
+        "Reward reasoning, evidence, iteration, revision, or process when those matter to the submitted task.",
+        "Do not invent criteria unrelated to the learning target or uploaded assignment."
+      ]
+    },
+    {
+      "id": "lesson_outline",
+      "label": "Lesson Plan / Lesson Outline",
+      "summary": "Create a realistic lesson sequence with clear targets, timing, checks for understanding, and ready-to-use teacher moves.",
+      "controls": [
+        {"id":"class_minutes","label":"Class length in minutes","type":"number","default":50,"min":15,"max":180},
+        {"id":"detail_level","label":"Planning detail","type":"select","default":"one_page","options":[["one_page","Concise / about one page"],["detailed","Detailed lesson plan"]]},
+        {"id":"include_hook","label":"Include hook / launch","type":"checkbox","default":true},
+        {"id":"include_closure","label":"Include closure / exit check","type":"checkbox","default":true},
+        {"id":"include_materials","label":"Include materials / preparation list","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "Total planned time must be realistic for the stated class period.",
+        "Include at least one meaningful check for understanding unless the teacher explicitly disables it in notes.",
+        "Prefer active student thinking over lecture-heavy filler."
+      ]
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation / Lesson Slides",
+      "summary": "Create a classroom-ready slide deck with readable design, instructional visuals, and optional speaker notes and formative checks.",
+      "controls": [
+        {"id":"slide_count","label":"Approximate slide count","type":"number","default":12,"min":5,"max":40},
+        {"id":"speaker_notes","label":"Include speaker notes","type":"checkbox","default":true},
+        {"id":"formative_checks","label":"Embedded formative checks","type":"number","default":2,"min":0,"max":8},
+        {"id":"student_handout","label":"Also include a concise student handout / notes page","type":"checkbox","default":false},
+        {"id":"presentation_style","label":"Presentation emphasis","type":"select","default":"visual_concise","options":[["visual_concise","Visual + concise"],["teacher_guided","Teacher-guided explanation"],["discussion","Discussion / inquiry heavy"]]}
+      ],
+      "rules": [
+        "Use a readable 16:9 presentation with strong contrast and restrained district navy/blue styling.",
+        "Do not shrink body text to fit excessive content; split ideas across slides instead.",
+        "Use real diagrams, graphs, images, or tables when they materially support understanding.",
+        "Speaker notes, when requested, must match the final slide sequence and not describe slides that do not exist."
+      ]
+    },
+    {
+      "id": "stations",
+      "label": "Stations",
+      "summary": "Create a set of student stations with clear directions, realistic materials, print-ready pages, and an optional answer key.",
+      "controls": [
+        {"id":"station_count","label":"Number of stations","type":"number","default":5,"min":3,"max":10},
+        {"id":"minutes_per_station","label":"Minutes per station","type":"number","default":10,"min":3,"max":30},
+        {"id":"one_page_each","label":"Keep each station to one student page when practical","type":"checkbox","default":true},
+        {"id":"answer_key","label":"Include answer key / teacher solutions","type":"checkbox","default":true},
+        {"id":"materials_limit","label":"Materials","type":"select","default":"common","options":[["common","Common classroom materials only"],["no_special","No special materials"],["teacher_supplied","Teacher will supply listed materials"]]}
+      ],
+      "rules": [
+        "Each station needs a distinct purpose and should contribute to the same target set rather than repeat identical questions.",
+        "Materials must match the teacher selection and be clearly listed.",
+        "If one-page-per-station is selected, verify the actual PDF pages rather than assuming CSS fit."
+      ]
+    },
+    {
+      "id": "unit_outline",
+      "label": "Curriculum / Unit Outline",
+      "summary": "Create a coherent multi-day or multi-week unit map with pacing, learning progression, assessment checkpoints, and differentiation opportunities.",
+      "controls": [
+        {"id":"weeks","label":"Number of weeks","type":"number","default":3,"min":1,"max":18},
+        {"id":"meetings_per_week","label":"Meetings per week","type":"number","default":5,"min":1,"max":7},
+        {"id":"minutes_per_class","label":"Minutes per class","type":"number","default":45,"min":20,"max":180},
+        {"id":"formative_assessments","label":"Include formative assessment checkpoints","type":"checkbox","default":true},
+        {"id":"summative_assessment","label":"Include a summative assessment / performance task","type":"checkbox","default":true},
+        {"id":"hands_on","label":"Include hands-on / applied experiences when appropriate","type":"checkbox","default":true},
+        {"id":"differentiation","label":"Include differentiation checkpoints","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "Build a coherent learning progression rather than a list of disconnected daily activities.",
+        "Keep pacing realistic for the stated calendar.",
+        "Connect assessments to the learning targets and identify where evidence is gathered."
+      ]
+    },
+    {
+      "id": "blooket_review",
+      "label": "Blooket Review",
+      "summary": "Create a Blooket-ready CSV review set with strict import formatting and a separate teacher answer reference.",
+      "controls": [
+        {"id":"question_count","label":"Number of questions","type":"number","default":30,"min":10,"max":80},
+        {"id":"time_limit","label":"Time limit per question (seconds)","type":"number","default":30,"min":5,"max":300},
+        {"id":"question_mix","label":"Question mix","type":"select","default":"balanced","options":[["balanced","Balanced recall / concept / application"],["vocabulary","Vocabulary heavy"],["conceptual","Conceptual heavy"],["application","Application / calculation heavy"]]},
+        {"id":"calculation_questions","label":"Include calculation questions when appropriate to the subject","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "The CSV itself must contain only import data—no markdown, explanations, or commentary.",
+        "Use the exact Blooket column order defined in the Resource Builder contract.",
+        "Correct Answer(s) must use numeric answer positions only.",
+        "Use plain text in the CSV; move rich math explanations to the teacher answer reference."
+      ]
+    },
+    {
+      "id": "custom_resource",
+      "label": "Other / Custom Resource",
+      "summary": "Create a teacher-defined classroom resource while still inheriting the district build, rendering, styling, conflict, and QA standards.",
+      "controls": [
+        {"id":"output_format","label":"Preferred output format","type":"select","default":"best_fit","options":[["best_fit","Choose the best fit"],["html_pdf","HTML + PDF"],["docx","DOCX"],["pptx","PPTX"],["csv","CSV"]]},
+        {"id":"audience","label":"Primary audience","type":"select","default":"both","options":[["student","Student-facing"],["teacher","Teacher-facing"],["both","Both"]]},
+        {"id":"desired_length","label":"Desired length / size","type":"text","default":"","placeholder":"Example: 2 pages, 15 slides, 20 questions"},
+        {"id":"teacher_support","label":"Include a brief teacher guide when useful","type":"checkbox","default":true}
+      ],
+      "rules": [
+        "Use the teacher's description and constraints to define the resource without silently inventing a different artifact type.",
+        "If best-fit format is selected, choose a practical classroom format and record the choice in QA.",
+        "Apply all shared district math, graph, visual, CSS, PDF, link, and conflict rules that are relevant to the chosen format."
+      ]
+    }
+  ]
+}
