@@ -1,23 +1,14 @@
 {
-  "schema": "algebra-quick-check-template-contract/1.3",
+  "schema": "algebra-quick-check-template-contract/1.4",
   "status": "CURRENT",
   "course": "Algebra 1",
-  "purpose": "Lock the teacher-approved Quick Check selector/build/print presentation while allowing question content to vary by approved I Can/family selection.",
+  "purpose": "Lock the teacher-approved Quick Check selector/build/print presentation while allowing question content to vary by approved I Can and either Bank-family or teacher-Custom selection.",
   "artifact": {
     "one_quick_check_per_section": true,
-    "versions": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
+    "versions": ["A", "B", "C", "D"],
     "student_pages_per_version": 2,
     "total_pdf_pages": 8,
-    "approved_files": [
-      "quick_N_S.html",
-      "quick_N_S.pdf",
-      "quick_N_S.json"
-    ]
+    "approved_files": ["quick_N_S.html", "quick_N_S.pdf", "quick_N_S.json"]
   },
   "student_print": {
     "page_size": "US Letter portrait",
@@ -33,89 +24,83 @@
     "graphs": "Use the teacher-approved Algebra Cartesian print line-weight standard below. Do not darken or thicken graph lines with Quick Check CSS or ad hoc SVG styling.",
     "graph_print_standard": {
       "scope": "Full-size Cartesian coordinate graphs used in Quick Checks.",
-      "grid": {
-        "color": "#aaaaaa",
-        "linewidth_pt": 0.6
-      },
-      "axes_and_axis_arrows": {
-        "color": "#222222",
-        "linewidth_pt": 1.8
-      },
-      "plotted_relation": {
-        "linewidth_pt": 2.0
-      },
-      "major_ticks": {
-        "linewidth_pt": 1.2
-      },
+      "grid": {"color": "#aaaaaa", "linewidth_pt": 0.6},
+      "axes_and_axis_arrows": {"color": "#222222", "linewidth_pt": 1.8},
+      "plotted_relation": {"linewidth_pt": 2.0},
+      "major_ticks": {"linewidth_pt": 1.2},
       "rule": "These are the teacher-approved printed darkness from the 2026-09-18 Quick Check 1.1 repair. Preserve these weights. Do not apply CSS stroke-width overrides or redraw the graph at heavier weights. Resize the finished graph through layout geometry only. Compact multi-panel graph-tool types may retain their built-in proportional weights."
     }
+  },
+  "selector": {
+    "four_question_slots": true,
+    "bank_family_choices_per_slot": 3,
+    "custom_question_option": {
+      "required": true,
+      "position": "fourth choice after Bank Families A-C",
+      "label": "Custom / Describe my own question type",
+      "interaction": "Selecting Custom reveals a slot-local multiline text field.",
+      "validation": "The build request cannot be packaged while a selected Custom description is blank.",
+      "target_rule": "Custom changes the question architecture only. The selected I Can and slot role remain fixed.",
+      "request_fields": {
+        "selection_mode": "custom",
+        "family_label": "CUSTOM",
+        "family_name": "Teacher Custom Question Type",
+        "custom_question_description": "teacher text exactly as entered"
+      }
+    },
+    "bank_family_request_mode": "bank_family",
+    "single_choice_rule": "Exactly one of Family A, Family B, Family C, or Custom may be selected for each slot.",
+    "optional_teacher_note": true,
+    "approved_links": "Active section shows direct HTML and PDF links when approved files exist."
   },
   "screen_only_layout_controls": {
     "required": true,
     "hide_when_printing": true,
-    "page_split": {
-      "label": "Problems on page 1",
-      "allowed": [
-        1,
-        2,
-        3
-      ],
-      "meaning": "remaining problems print on page 2"
-    },
-    "per_problem_height": {
-      "control": "slider plus exact numeric input in inches",
-      "scope": "source problem/evidence architecture; same height follows that problem across scrambled versions"
-    },
-    "per_problem_graph_size": {
-      "control": "slider plus exact numeric input; percentage of available problem width is acceptable",
-      "scope": "when a source problem contains a graph, graph size is adjustable independently for that source problem and follows it across scrambled versions"
-    },
-    "per_problem_workspace": {
-      "control": "slider plus exact numeric input in inches",
-      "scope": "writable workspace is adjustable independently for that source problem and follows it across scrambled versions"
-    },
+    "page_split": {"label": "Problems on page 1", "allowed": [1, 2, 3], "meaning": "remaining problems print on page 2"},
+    "per_problem_height": {"control": "slider plus exact numeric input in inches", "scope": "source problem/evidence architecture; same height follows that problem across scrambled versions"},
+    "per_problem_graph_size": {"control": "slider plus exact numeric input; percentage of available problem width is acceptable", "scope": "when a source problem contains a graph, graph size is adjustable independently for that source problem and follows it across scrambled versions"},
+    "per_problem_workspace": {"control": "slider plus exact numeric input in inches", "scope": "writable workspace is adjustable independently for that source problem and follows it across scrambled versions"},
     "independent_geometry_rule": "Changing graph size must not automatically force workspace to grow, and changing workspace must not automatically force graph size to grow. Overall problem height remains independently adjustable; fit/overflow feedback must reveal incompatible combinations rather than silently clipping content.",
     "fit_feedback": "Show free-space or overflow indicator for each of the eight pages, labeled A1,A2,B1,B2,C1,C2,D1,D2.",
     "reset": true,
     "print_button": "Print A-D (8 pages)",
     "persistence": "Browser localStorage may retain teacher geometry choices for that HTML.",
     "screen_position": "On normal desktop widths, controls use a fixed/sticky LEFT sidebar so the page preview begins near the top of the viewport instead of being pushed downward. Narrow screens may stack controls above the preview.",
-    "visible_layout_version": "Show a small teacher-facing layout version label in the control panel (for example, Layout v1.2) and store the same version in HTML metadata so screenshots/current files can be identified quickly."
+    "visible_layout_version": "Show a small teacher-facing layout version label in the control panel and store the same version in HTML metadata."
   },
   "versioning": {
     "same_evidence_architecture": true,
-    "allowed": [
-      "simple number/value swaps",
-      "deterministic question-order scramble",
-      "answer-choice scramble when applicable"
-    ],
-    "forbidden": [
-      "new I Can between versions",
-      "new evidence job between versions",
-      "difficulty drift",
-      "inventing materially different parallel questions merely for anti-copying"
-    ],
-    "question_number_authority": "Printed question number is not evidence authority; lineage JSON maps each printed position back to the source slot/I Can/family."
+    "custom_architecture_rule": "When selection_mode is custom, custom_question_description is the architecture authority and must remain the same across Versions A-D except for allowed simple surface/value changes.",
+    "allowed": ["simple number/value swaps", "deterministic question-order scramble", "answer-choice scramble when applicable"],
+    "forbidden": ["new I Can between versions", "new evidence job between versions", "difficulty drift", "changing a teacher-approved Custom architecture", "inventing materially different parallel questions merely for anti-copying"],
+    "question_number_authority": "Printed question number is not evidence authority; lineage JSON maps each printed position back to the source slot/I Can/selection."
   },
   "builder": {
     "unit_page_pattern": "quick_check____htq5855/quickN/quick_N.html",
     "four_slots": true,
-    "candidate_source": "current Unit Bank family architecture",
+    "candidate_source": "current Unit Bank family architecture or teacher Custom question architecture",
     "optional_teacher_note": true,
     "approved_links": "Active section shows direct HTML and PDF links when approved files exist.",
-    "request_schema": "algebra-quick-check-build-request/1.1"
+    "request_schema": "algebra-quick-check-build-request/1.2",
+    "legacy_request_schema_accepted": "algebra-quick-check-build-request/1.1"
+  },
+  "source_map": {
+    "required_selection_fields": ["selection_mode"],
+    "bank_family_fields": ["family_label", "family_name", "evidence_job"],
+    "custom_fields": ["family_label=CUSTOM", "family_name=Teacher Custom Question Type", "custom_question_description"]
   },
   "delivery": {
     "contract": "Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt",
     "schema_version": 2,
-    "required_root": [
-      "TRANSFER_MANIFEST.json",
-      "payload/"
-    ],
+    "required_root": ["TRANSFER_MANIFEST.json", "payload/"],
     "package_type": "github_transfer",
     "v1_fallback_forbidden": true
   },
   "qa": [
+    "selector shows Bank Families A-C plus a fourth Custom choice for every question slot",
+    "Custom reveals a multiline description field and blocks packaging when blank",
+    "Custom remains bound to the selected I Can and slot role",
+    "request schema 1.2 records selection_mode and custom_question_description",
     "one HTML, one 8-page student PDF, one JSON source map only in approved artifact set",
     "no teacher answer-key pages inside the 8-page student PDF",
     "all eight default pages fit with print tolerance",

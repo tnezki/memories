@@ -4,7 +4,7 @@ STATUS: CURRENT
 STEP: 7
 JOB: exit
 DISPLAY NAME: Build Quick Checks
-REVISION: 2026-09-18 v5.3
+REVISION: 2026-09-18 v5.4
 
 ROLE
 ----
@@ -18,7 +18,7 @@ If the request does NOT contain teacher_approved_question_architectures, build o
 The selector is the normal teacher entry point for section Quick Checks.
 
 B. UNIT QUICK CHECK SELECTOR REQUEST
-If the request schema is algebra-quick-check-build-request/1.1 and contains four teacher-approved question architectures, build exactly ONE approved section Quick Check from those selections. Do not reopen selection unless the request is invalid.
+If the request schema is algebra-quick-check-build-request/1.2 and contains four teacher-approved question architectures, build exactly ONE approved section Quick Check from those selections. Legacy 1.1 requests remain readable for compatibility. Do not reopen selection unless the request is invalid.
 
 SOURCE BOUNDARY
 ---------------
@@ -39,7 +39,7 @@ READ ORDER
 
 CORE RULE
 ---------
-The curriculum predicts the evidence slots; live Portfolio need may guide reassessment; the selector exposes eligible choices; the teacher approves the actual four question architectures. Teacher approval in the selector request is final.
+The curriculum predicts the evidence slots; live Portfolio need may guide reassessment; the selector exposes eligible choices; the teacher approves the actual four question architectures. Teacher approval in the selector request is final. A teacher may approve either a Bank family architecture or a Custom teacher-described architecture for a slot.
 
 SLOT PATTERNS
 -------------
@@ -53,8 +53,13 @@ UNIT SELECTOR / CONTROL PAGE - HARD
 -----------------------------------
 - one section tab/button per section;
 - four question slots;
-- each slot shows exact I Can code + exact statement and Bank-derived family possibilities;
-- teacher selects one possibility per slot;
+- each slot shows exact I Can code + exact statement and three Bank-derived family possibilities;
+- each slot also shows a FOURTH choice labeled Custom / Describe my own question type;
+- selecting Custom reveals a teacher text box inside that slot;
+- a Custom selection is not valid until the teacher enters a nonblank description;
+- Custom remains bound to the selected I Can and slot role; it does not authorize changing the target I Can;
+- selecting one option deselects the other choices for that slot;
+- the request records selection_mode = bank_family or custom. Custom also records custom_question_description;
 - an optional build-note textarea sits beside/near the request action and is packaged into the request;
 - active section shows direct Approved HTML and Approved PDF links beside the section buttons when those files exist;
 - request pins current system/course commits and explicitly names this PM, the Quick Check template contract, and LOCAL_REPO_TRANSFER_CONTRACT;
@@ -62,11 +67,17 @@ UNIT SELECTOR / CONTROL PAGE - HARD
 
 QUESTION AUTHORING
 ------------------
-Use the teacher-selected Bank family as the evidence architecture. Author a fresh instance. Preserve the selected I Can, family/evidence job, representation/reasoning demand, and difficulty. A teacher build note may fine-tune surface/layout/value choices but may not silently change those invariants.
+BANK FAMILY SELECTION
+Use the teacher-selected Bank family as the evidence architecture. Author a fresh instance. Preserve the selected I Can, family/evidence job, representation/reasoning demand, and difficulty.
+
+CUSTOM SELECTION
+When selection_mode is custom, the teacher's custom_question_description is the architecture authority for that slot. Author a fresh question matching that description while preserving the selected I Can and slot role. Do not silently replace the Custom request with a Bank family merely because a similar family exists. If the Custom description conflicts with the selected I Can, fail closed and explain the conflict instead of guessing.
+
+A teacher build note may fine-tune surface/layout/value choices but may not silently change the selected I Can or approved question architecture.
 
 VERSIONS - HARD
 ---------------
-Create four versions A-D from the same four approved source questions. Normal variation is only:
+Create four versions A-D from the same four approved source questions. This applies equally to Bank-family and Custom source questions. Normal variation is only:
 - simple number/value swaps;
 - deterministic question-order scramble;
 - answer-choice scramble when applicable.
@@ -99,7 +110,7 @@ Store exactly these together under:
 
 1. quick_N_S.html - canonical adjustable/reprint source
 2. quick_N_S.pdf  - single 8-page student PDF generated from a fit default layout
-3. quick_N_S.json - exact lineage/source map: version, printed position, source slot, I Can code + exact text, family, evidence job, values, answer, and any deliberate aggregation/multi-target behavior
+3. quick_N_S.json - exact lineage/source map: version, printed position, source slot, I Can code + exact text, selection_mode, family when applicable, custom_question_description when applicable, evidence job, values, answer, and any deliberate aggregation/multi-target behavior
 
 SOURCE MAP RULE
 ---------------
@@ -117,8 +128,12 @@ TRANSFER_MANIFEST.json must use schema_version: 2 and package_type: "github_tran
 
 QA
 --
+- selector offers Bank Family A, B, C, plus a fourth Custom choice in every slot;
+- Custom reveals a description field and cannot package until its description is nonblank;
+- request records selection_mode and custom_question_description correctly;
+- Custom stays bound to the selected I Can and slot role;
 - exact teacher-selected four architectures;
-- same I Can/evidence jobs across versions;
+- same I Can/evidence jobs or teacher-approved Custom architecture across versions;
 - only allowed simple version changes;
 - exact visible I Can code + statement;
 - MathJax; no shaded cards; no ruled workspace; no repeated page-2 header;
