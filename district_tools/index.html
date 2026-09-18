@@ -5,30 +5,65 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>District Tools</title>
 <style>
-:root{--bg:#f4f6f8;--card:#fff;--ink:#18202a;--muted:#667085;--line:#d8dee7;--accent:#285a86;--shadow:0 10px 28px rgba(18,34,50,.07)}
+:root{--bg:#f4f6f8;--card:#fff;--ink:#18202a;--muted:#667085;--line:#d8dee7;--accent:#285a86;--accent-dark:#193b5a;--soft:#eef4fa;--shadow:0 10px 28px rgba(18,34,50,.07)}
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-header{background:linear-gradient(135deg,#193b5a,#2b628f);color:#fff;padding:34px 30px}
-header h1{margin:0;font-size:30px} header p{margin:7px 0 0;opacity:.9}
-main{max-width:980px;margin:28px auto 60px;padding:0 18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px}
-.card h2{margin-top:0}.small{color:var(--muted);line-height:1.55}
-a.button{display:inline-block;margin-top:12px;padding:11px 16px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:800}
-.badge{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#eef4fa;color:#285a86;border:1px solid #c7d8e9;border-radius:999px;padding:5px 9px}
+header{background:linear-gradient(135deg,#193b5a,#2b628f);color:#fff;padding:38px 30px}
+header .wrap{max-width:1080px;margin:0 auto} header h1{margin:0;font-size:32px} header p{margin:8px 0 0;opacity:.92;max-width:760px;line-height:1.5}
+main{max-width:1080px;margin:28px auto 64px;padding:0 18px}.intro{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:24px}.intro p{margin:0;color:var(--muted);line-height:1.55}
+.category{margin:28px 0}.category-head{display:flex;gap:14px;align-items:end;justify-content:space-between;margin-bottom:12px}.category h2{margin:0;font-size:23px}.category .desc{color:var(--muted);margin:5px 0 0;line-height:1.45}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;min-height:235px}.card h3{margin:10px 0 7px;font-size:21px}.card p{color:var(--muted);line-height:1.55;margin:0 0 18px}.meta{display:flex;gap:7px;flex-wrap:wrap}.badge{display:inline-block;font-size:11px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;background:var(--soft);color:var(--accent);border:1px solid #c7d8e9;border-radius:999px;padding:5px 9px}.badge.scope{background:#f7f7f8;color:#4b5563;border-color:#dadde2}.button{display:inline-block;margin-top:auto;align-self:flex-start;padding:11px 16px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:800}.button:hover{background:var(--accent-dark)}.empty{color:var(--muted);font-style:italic}.error{border-left:4px solid #9b2c2c;background:#fff5f5;padding:13px 15px;border-radius:10px;color:#742a2a}
+@media(max-width:640px){header{padding:30px 20px}.category-head{display:block}.card{min-height:0}}
 </style>
 </head>
 <body>
 <header>
-  <h1>District Tools</h1>
-  <p>Simple teacher tools for evidence, feedback, and instructional planning.</p>
+  <div class="wrap">
+    <h1>District Tools</h1>
+    <p>Simple teacher-facing tools that package enough instructions and contracts to produce ready-to-use resources without requiring a separate build prompt.</p>
+  </div>
 </header>
 <main>
-  <section class="card">
-    <span class="badge">Pilot</span>
-    <h2>Grading &amp; Evidence Control Panel</h2>
-    <p class="small">Package student evidence, an optional rubric, and optional teacher notes into one request ZIP for ChatGPT. The requested response is one teacher-friendly ZIP with individual student reports, class analysis, and print-ready common plus individualized follow-up practice.</p>
-    <a class="button" href="grading_control_panel/">Open Grading Control Panel</a>
+  <section class="intro">
+    <p><b>Growing collection:</b> tools are grouped by purpose. Each tool remains self-contained so new pilots can be added without making existing tools depend on one another.</p>
   </section>
+  <div id="toolMount"><p class="empty">Loading tools...</p></div>
 </main>
+<script>
+const FALLBACK_REGISTRY={
+  schema:"district-tool-registry/1.0",
+  categories:[
+    {id:"assessment-evidence",title:"Assessment & Evidence",description:"Tools that analyze student evidence, organize feedback, and generate instructional follow-up."},
+    {id:"planning-extension",title:"Planning & Extension",description:"Tools that turn teacher learning targets and constraints into ready-to-use instructional resources."}
+  ],
+  tools:[
+    {id:"grading-evidence",title:"Grading & Evidence Control Panel",href:"grading_control_panel/",category:"assessment-evidence",status:"pilot",scope:"district",summary:"Package student evidence, an optional rubric, roster, and teacher notes into one self-contained request ZIP for analysis, reports, practice, and stations."},
+    {id:"tiered-task",title:"Tiered Task Tool",href:"tiered_task_tool/",category:"planning-extension",status:"pilot",scope:"district",summary:"Build one research-informed DOK 1-4 extension task card from 1-4 I Can statements, teacher constraints, optional resources, and selected student product choices."}
+  ]
+};
+
+function esc(value){return String(value??"").replace(/[&<>\"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#39;"}[ch]));}
+function render(registry){
+  const mount=document.getElementById("toolMount");
+  const categories=Array.isArray(registry.categories)?registry.categories:[];
+  const tools=Array.isArray(registry.tools)?registry.tools:[];
+  mount.innerHTML=categories.map(category=>{
+    const items=tools.filter(tool=>tool.category===category.id);
+    if(!items.length)return "";
+    return `<section class="category"><div class="category-head"><div><h2>${esc(category.title)}</h2><p class="desc">${esc(category.description||"")}</p></div></div><div class="grid">${items.map(tool=>`<article class="card"><div class="meta"><span class="badge">${esc(tool.status||"active")}</span><span class="badge scope">${esc(tool.scope||"district")}</span></div><h3>${esc(tool.title)}</h3><p>${esc(tool.summary||"")}</p><a class="button" href="${esc(tool.href)}">Open Tool</a></article>`).join("")}</div></section>`;
+  }).join("") || `<p class="empty">No tools are currently registered.</p>`;
+}
+
+(async()=>{
+  try{
+    const response=await fetch("tool_registry.json",{cache:"no-store"});
+    if(!response.ok)throw new Error(`HTTP ${response.status}`);
+    render(await response.json());
+  }catch(error){
+    console.warn("Using embedded registry fallback.",error);
+    render(FALLBACK_REGISTRY);
+  }
+})();
+</script>
 </body>
 </html>

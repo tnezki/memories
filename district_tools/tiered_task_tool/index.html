@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiered Task Tool</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="pill">Pilot</span>
+    <h1>Tiered Task Tool</h1>
+    <p>Build one DOK 1-4 extension task card from your learning targets, teacher constraints, optional resources, and allowed student product choices.</p>
+  </div>
+</header>
+<main>
+  <a class="back" href="../">&larr; District Tools</a>
+  <div class="grid">
+    <section class="card">
+      <h2>Build a Tiered Task request</h2>
+      <p class="small">Required fields stay intentionally small. The request ZIP carries the full DOK, reading-access, product-choice, layout, and QA contract to ChatGPT.</p>
+
+      <div class="row">
+        <div>
+          <label for="taskName">Assignment / task name <span class="required">*</span></label>
+          <input id="taskName" type="text" placeholder="Example: Ecosystems Extension Task">
+        </div>
+        <div>
+          <label for="subjectCourse">Subject / course <span class="required">*</span></label>
+          <input id="subjectCourse" type="text" placeholder="Example: Grade 7 Science, Algebra 1, US History">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="unitTopic">Unit / topic <span class="required">*</span></label>
+          <input id="unitTopic" type="text" placeholder="Example: Disease & Pathogens">
+        </div>
+        <div>
+          <label for="teacherName">Teacher <span class="small">(optional)</span></label>
+          <input id="teacherName" type="text" placeholder="Teacher name">
+        </div>
+      </div>
+
+      <div class="row three">
+        <div>
+          <label for="gradeLevel">Grade level <span class="small">(optional)</span></label>
+          <input id="gradeLevel" type="text" placeholder="Example: 8, 9-10, HS">
+        </div>
+        <div>
+          <label for="readingLevel">Target reading/access level <span class="small">(optional)</span></label>
+          <input id="readingLevel" type="text" placeholder="Example: Grade 6">
+        </div>
+        <div>
+          <label for="timeAvailable">Time available <span class="small">(optional)</span></label>
+          <input id="timeAvailable" type="text" placeholder="Example: 45 min + homework">
+        </div>
+      </div>
+      <p class="small">Reading/access level changes wording, chunking, and vocabulary support only. The generated task must keep the same academic target and DOK demand.</p>
+
+      <label>I Can statements / learning targets <span class="required">*</span></label>
+      <p class="small">Enter 1-4 statements. The tool creates one integrated card, not one card per statement.</p>
+      <div class="ican-grid">
+        <div><label for="ican1">I Can 1 <span class="required">*</span></label><input id="ican1" type="text" placeholder="I can..."></div>
+        <div><label for="ican2">I Can 2 <span class="small">(optional)</span></label><input id="ican2" type="text" placeholder="I can..."></div>
+        <div><label for="ican3">I Can 3 <span class="small">(optional)</span></label><input id="ican3" type="text" placeholder="I can..."></div>
+        <div><label for="ican4">I Can 4 <span class="small">(optional)</span></label><input id="ican4" type="text" placeholder="I can..."></div>
+      </div>
+
+      <label for="sourceFiles">Supporting resources <span class="small">(optional)</span></label>
+      <div class="drop">
+        <input id="sourceFiles" type="file" multiple>
+        <div class="small" style="margin-top:7px">Attach a reading, assignment, dataset, image, rubric, existing handout, or other resource the generated card should use or respect.</div>
+        <ul id="sourceList" class="file-list"></ul>
+      </div>
+
+      <label>Allowed student product types <span class="required">*</span></label>
+      <p class="small">Leave many checked for student choice, or uncheck options to limit the choices. The response must not add products you did not allow.</p>
+      <div class="choices" id="productChoices">
+        <label class="choice"><input type="checkbox" value="Written response" checked><span><b>Written response</b><small>Paragraph, explanation, report, or similar writing.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Slides / presentation" checked><span><b>Slides / presentation</b><small>Google Slides or another presentation format.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Video" checked><span><b>Video</b><small>Recorded explanation, demonstration, or presentation.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Audio / podcast" checked><span><b>Audio / podcast</b><small>Recorded audio response or mini-podcast.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Graphic organizer / diagram" checked><span><b>Graphic organizer / diagram</b><small>Concept map, Venn diagram, process diagram, or organizer.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Poster / infographic / visual" checked><span><b>Poster / infographic / visual</b><small>Visual communication with required academic evidence.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Model / demonstration" checked><span><b>Model / demonstration</b><small>Physical/digital model or live demonstration with explanation.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Discussion / debate" checked><span><b>Discussion / debate</b><small>Structured spoken defense, critique, or discussion.</small></span></label>
+        <label class="choice"><input type="checkbox" value="Teacher-approved alternative"><span><b>Teacher-approved alternative</b><small>Allows a student-proposed product after teacher approval.</small></span></label>
+      </div>
+      <label for="customProduct">Additional allowed product <span class="small">(optional)</span></label>
+      <input id="customProduct" type="text" placeholder="Example: Build a simple prototype">
+
+      <div class="row">
+        <div>
+          <label for="useCase">Intended use</label>
+          <select id="useCase">
+            <option value="extension_after_mastery" selected>Extension after demonstrated mastery</option>
+            <option value="enrichment_challenge">Enrichment / challenge</option>
+          </select>
+        </div>
+        <div>
+          <label for="workMode">Work mode <span class="small">(optional)</span></label>
+          <select id="workMode">
+            <option value="teacher_choice" selected>Teacher choice / not specified</option>
+            <option value="individual">Individual</option>
+            <option value="partner">Partners</option>
+            <option value="small_group">Small group</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="researchPolicy">Research / internet policy <span class="small">(optional)</span></label>
+      <select id="researchPolicy">
+        <option value="teacher_choice" selected>Teacher choice / not specified</option>
+        <option value="allowed">Internet/research allowed</option>
+        <option value="not_allowed">No internet/research</option>
+        <option value="provided_sources_only">Use only provided sources/resources</option>
+      </select>
+
+      <label for="teacherNotes">Teacher directions / constraints <span class="small">(optional)</span></label>
+      <textarea id="teacherNotes" placeholder="Examples: Use only the attached article. Keep the DOK 4 task to a two-day project. Students may work with a partner. Avoid essays. Include a graph students must interpret."></textarea>
+
+      <div id="buildStatus" class="status warn">Add the required fields, at least one I Can statement, and at least one product type.</div>
+      <div class="actions">
+        <button id="buildZip" type="button">Build Request ZIP</button>
+        <button id="clearForm" class="secondary" type="button">Clear</button>
+      </div>
+    </section>
+
+    <aside class="card">
+      <h2>What happens next?</h2>
+      <div class="step"><div class="step-num">1</div><p>Complete this form and download one request ZIP.</p></div>
+      <div class="step"><div class="step-num">2</div><p>Upload the ZIP to ChatGPT. The packaged contract is the complete build request, so no separate PM prompt is needed.</p></div>
+      <div class="step"><div class="step-num">3</div><p>ChatGPT returns one response ZIP. Unzip it and open <code>CLICK_ME.html</code>.</p></div>
+
+      <div class="divider"></div>
+      <h3>The response should contain</h3>
+      <ul class="checks">
+        <li>One student Tiered Task Card.</li>
+        <li>DOK 1, 2, 3, and 4 tasks on that same card.</li>
+        <li>A Teacher Guide / Evidence Guide.</li>
+        <li>HTML + PDF versions linked from <code>CLICK_ME.html</code>.</li>
+        <li>A QA record checking DOK, reading access, product choices, layout, links, math/visuals, and PDFs.</li>
+      </ul>
+
+      <div class="divider"></div>
+      <div class="note"><b>DOK is not “easy to hard.”</b><br>The response contract requires a real change in cognitive complexity. DOK 4 must involve genuine extended thinking rather than simply more questions.</div>
+
+      <div class="divider"></div>
+      <p class="privacy"><b>Selected files:</b> this page reads them locally in your browser only to create the request ZIP. It does not upload them by itself. Follow district policy for any protected information you later upload to an AI service.</p>
+    </aside>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
