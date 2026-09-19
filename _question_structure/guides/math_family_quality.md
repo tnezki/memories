@@ -27,6 +27,13 @@ When a geometry figure communicates segment or angle relationships, use standard
 - use drawn vector strokes that remain legible at print size;
 - omit redundant markings unless they are part of the evidence or givens.
 
+### Canonical Cartesian graph rendering — HARD
+Every Cartesian coordinate plane used in a generated student worksheet or answer key must come from the current registered graph tool. A blank construction grid is still a Cartesian graph; for answer-neutral student graphing tasks use v14 `make_window_graph(ax, [], xmin, xmax, ymin, ymax, ...)` with an empty relation list.
+
+Do not hand-build Cartesian axes/grids with inline SVG, CSS, canvas, or a browser JavaScript renderer in a finished worksheet/key. Browser code may geometrically resize the graph-tool SVG asset, but it may not redraw the coordinate plane or substitute a different style.
+
+If a supported Cartesian graph cannot be produced by the registered graph tool, fail closed instead of inventing a fallback.
+
 ## 4. Student / solution visual separation — HARD
 The student representation must be answer-neutral. For a construction family, the student gets givens plus a blank construction surface; the answer key gets the completed construction. Never reveal a requested boundary line, inequality shading, transformed image, tangent line, secant line, solution curve, Riemann rectangles, plotted image, or similar answer object in the student view unless it is explicitly part of the given information.
 
@@ -36,7 +43,7 @@ Canonical new high-school family contracts carry `visual_policy.student_view`, `
 Canonical preview sources are registered by `catalogs/math_family_library_manifest.json`. Every active newly added high-school family has an original curated specimen. A final registered repair source may intentionally override earlier preview specimens when testing exposes a student/solution visual defect; the override must remain answer-neutral and is canonical through the manifest. Preview specimens demonstrate architecture only; generated worksheet items use new legal parameters and may not clone preview wording/values.
 
 ## 6. Coverage gate
-An active course is quality-complete only when every mapped family resolves to a canonical contract and a curated preview, and every required representation has an implemented deterministic renderer or explicit inline specimen. Otherwise show **Preview pending quality review** rather than inventing a fallback.
+An active course is quality-complete only when every mapped family resolves to a canonical contract and a curated preview, and every required representation has an implemented deterministic renderer or explicit inline specimen. For Cartesian representations, the deterministic renderer is the registered graph tool, not a generic browser coordinate-grid fallback. Otherwise show **Preview pending quality review** rather than inventing a fallback.
 
 ## 7. Concision
 Prefer direct mathematical language. Do not append filler such as “Use the representation shown and complete the requested response.”

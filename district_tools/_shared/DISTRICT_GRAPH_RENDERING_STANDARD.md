@@ -2,7 +2,8 @@
 
 STATUS: REQUIRED FOR DISTRICT TOOLS THAT GENERATE MATHEMATICAL GRAPHS
 VERSION: district-graph-rendering-standard/1.0
-DATE: 2026-09-18
+DATE: 2026-09-19
+REVISION: 2026-09-19.1
 
 This standard keeps mathematical graphs consistent across district tools and prevents each request builder from inventing its own graph renderer or print darkness.
 
@@ -31,6 +32,39 @@ Do not replace a supported graph with:
 - an improvised plotting style copied from an old artifact.
 
 A deterministic custom SVG/HTML representation is appropriate only when it is not owned by the graph tool, such as a ratio table, double number line, simple shape array, scale drawing, or exact non-Cartesian instructional diagram.
+
+
+
+## 2A. Blank Cartesian construction surfaces are graph-tool output — HARD
+
+A blank coordinate plane is still a mathematical graph and is owned by the registered graph tool.
+
+For student tasks such as **graph an equation**, **graph an inequality**, **plot a relation**, **draw a transformed image**, or any other construction-on-axes task, generate the student surface with the registered tool rather than drawing a second browser/SVG grid.
+
+With the current v14 entrypoint, the canonical blank-window pattern is:
+
+```python
+fig, ax = plt.subplots(...)
+graph_tool.make_window_graph(
+    ax,
+    [],          # no plotted relation in the student view
+    xmin, xmax,
+    ymin, ymax,
+    title="",
+    xlabel="x",
+    ylabel="y",
+)
+fig.savefig(..., format="svg", bbox_inches="tight")
+```
+
+Passing an empty `functions` list intentionally produces the same v14 grid, axes, arrows, tick treatment, labels, typography, spacing, and approved print weights without revealing the relation the student is supposed to construct.
+
+For the answer key, use the same bounds/scale and the graph tool again with the completed mathematical relation or construction overlay.
+
+**Do not** hand-build a Cartesian student grid with inline SVG, CSS, HTML canvas, or a tool-specific JavaScript renderer when the registered graph tool can produce it.
+
+A browser may resize the completed SVG asset geometrically. It may not redraw the axes/grid in a different style.
+
 
 ## 3. Teacher-approved Cartesian print weights - HARD
 
@@ -71,4 +105,5 @@ If graph construction is the assessed skill, provide only the needed blank axes/
 - Prefer crisp SVG when practical; PNG is acceptable when appropriate.
 - Store generated graph assets under the tool's graph asset folder, normally `assets/graphs/`.
 - Record the graph tool/entrypoint used and an accuracy check in `data/qa.json`.
-- PASS is not allowed when a required supported graph bypasses the registered graph tool, is mathematically inaccurate, or uses the wrong full-size Cartesian print weights.
+- For every Cartesian graph asset, record its renderer as the registered graph tool. For a student construction surface, also record that the asset was generated as an answer-neutral blank window (empty relation list).
+- PASS is not allowed when a required supported graph bypasses the registered graph tool, is mathematically inaccurate, uses the wrong full-size Cartesian print weights, or uses an improvised SVG/CSS/canvas coordinate plane.
