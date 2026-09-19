@@ -1,4 +1,4 @@
-# Question Structure Core — v1.2
+# Question Structure Core — v1.4
 
 ## 1. Plan before prose
 The question ecosystem is designed before individual prompts are written.
@@ -18,7 +18,17 @@ Required sequence:
 The map is executable design. A builder may not attach a structure/representation/response-mode label and then author a materially different task.
 
 ## 2. Wording profiles
-These are sentence architectures, never quotas.
+These are sentence architectures, never quotas. For math worksheets, quick checks, and routine practice, **Direct / Concise is the default** unless context is mathematically functional.
+
+### Direct / Concise
+Ask the mathematical action with the minimum prose needed for accuracy. Render the equation, table, graph, diagram, model, or number line rather than describing it in extra sentences.
+
+Examples of shape only:
+- `Solve for x: ...`
+- `Find the scale factor from Figure A to Figure B.`
+- `Use the graph to find the constant of proportionality.`
+
+Keep units, conditions, and context that affect the mathematics. Remove decorative names, backstories, and repeated instructions that do not change the model, operation, inference, units, or interpretation.
 
 ### Standard
 Givens/situation first; action/question last.
@@ -88,7 +98,7 @@ Good parallel variation may change one or more of:
 - response mode
 - context when context changes the evidence naturally
 - numerical values and units when procedure/fluency is the point
-- sentence profile (Standard/Inverted/Context-rich) as a secondary variation
+- sentence profile (Direct/Concise, Standard, Inverted, or Context-rich) as a secondary variation
 
 Weak variation changes only:
 - a person's name
@@ -100,16 +110,30 @@ Weak variation changes only:
 
 For procedural fluency, numeric parallels may be legitimate. For conceptual/secure evidence, stronger semantic variation is required.
 
+## 6A. Canonical reusable families — HARD
+For systems that expose a canonical family registry, the selected family is an executable generator contract rather than a topic label or loose example.
+
+Before authoring an item:
+1. resolve the exact canonical `question_family_id`;
+2. read its evidence job and student action;
+3. honor its allowed response and representation modes;
+4. instantiate only valid parameters/constraints;
+5. use its answer rule and render route;
+6. preserve its declared parallel invariants.
+
+Do not author a vaguely related prompt first and attach the family ID afterward. A teacher-facing skill label, topic name, summary sentence, or source example is not a substitute for the family contract. If the family cannot be instantiated validly, fail closed or use an explicitly teacher-defined custom structure rather than silently substituting a different family.
+
+For canonical math families, course/grade maps are browsing maps only. One family may legitimately appear in several course maps; do not clone the definition merely to give it a different grade label. Derived tool catalogs may package family definitions for runtime use, but they do not become independent authorities.
+
 ## 7. Representation planning
 Before authoring, decide whether the target is best evidenced through:
-- direct text/equation
-- diagram/FBD/vector/model
+- direct text/equation- diagram/FBD/vector/model
 - graph
 - table/data set
 - image/phenomenon
 - multiple representations with a real translation job
 
-Use the current canonical course-authoring tool when it supports the evidence cleanly. Do not force a graph or diagram merely to increase variety. Conversely, do not describe an imaginary representation in prose when the evidence job is interpretation/critique of that representation.
+Use the current canonical course-authoring tool when it supports the evidence cleanlr. Do not force a graph or diagram merely to increase variety. Conversely, do not describe an imaginary representation in prose when the evidence job is interpretation/critique of that representation.
 
 A representation label is not evidence. The finished student task must actually render the representation in a readable form and require the student to use it.
 
@@ -153,6 +177,7 @@ Reject or repair:
 - DOK/Bloom used as generation targets
 - version/question numbers embedded into family IDs to hide parallelism
 - contexts or extra measurements that do not affect the model/inference/calculation
+- decorative or repeated prose that can be removed without changing the mathematics/evidence demand
 - a `selected_response` item with no visible answer choices
 - a data-table item rendered as pipe-delimited/plain-text rows instead of a semantic HTML table
 - a graph item rendered with an improvised graph when a registered canonical graph tool supports the job

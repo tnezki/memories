@@ -1,30 +1,43 @@
-# Math Worksheet Builder — Pilot
+# Math Worksheet Builder — Family-Contract Pilot
 
-District teacher tool for building self-contained worksheet requests from reusable math question families.
+District teacher tool for building self-contained worksheet requests from reusable canonical math question families.
 
-## Current pilot coverage
+## Current active coverage
 - Lower Elementary Math
 - Grade 4 Math
 - Grade 5 Math
-- Grade 7 Math — Ratios & Proportional Relationships
-- other listed courses may use generic/custom families until their catalogs are added
+- Grade 6 Math
+- Grade 7 Math
+- Grade 8 Math
+
+Algebra 1, Geometry, Algebra 2, Precalculus, and Calculus are intentionally held as future course maps until their teacher reference sets are incorporated. Do not infer that the current middle-school catalog is a complete secondary-math catalog.
 
 ## Workflow
 1. Check one or more grade/course filters.
 2. Choose 1-4 parallel versions, a broad difficulty profile, two-column vs one-column pages, and whether to include the answer key.
 3. Browse topic cards or search across the selected grade levels.
-4. Use the magnifying-glass **Preview** control beneath a skill's quantity counter to open a complete representative student problem. Visual families include their representative graph, table, model, or figure in the preview.
-5. Check exact question structures. Every checked structure starts at **1 question**; use the `− / +` controls to change its quantity.
-6. The worksheet question count is derived automatically from the selected blueprint. There is no separate question-count, practice-mode, builder-layout-slider, request-summary, or teacher-notes section.
+4. Use the magnifying-glass **Preview** control to inspect a representative complete problem for a family.
+5. Check exact question families. Every checked family starts at **1 question**; use the `− / +` controls to change its quantity.
+6. Use **+ Add another custom question structure** for teacher-defined structures that are not yet in the canonical library.
 7. Review the **Selected questions** tray, then click **Create Worksheet Request ZIP**; the ZIP downloads immediately.
 8. Upload that request ZIP to ChatGPT. It runs automatically and returns one response ZIP.
 9. Unzip the response and open `CLICK_ME.html`.
 
 The finished `CLICK_ME.html` exposes only the adjustable worksheet and optional answer key. Internal QA stays hidden.
 
-The finished adjustable worksheet keeps per-version/per-problem controls. Workspace can be collapsed to **0%** or expanded through **1200%**, allowing a selected problem to grow to approximately a full printable page when needed. Graph/diagram sizing remains independently adjustable.
+The finished adjustable worksheet keeps per-version/per-problem controls. Workspace can be collapsed to **0%** or expanded through **1200%**. Graph/diagram sizing remains independently adjustable.
 
-## Canonical question design
-The request packages the current `_question_structure/QUESTION_STRUCTURE_CORE.md`, `_question_structure/catalogs/math_worksheet_generator_bank.json`, and `_question_structure/guides/parallel_family_rules.md`. Teacher-supplied reference worksheets are used only to infer original generator structures; source questions are never copied into the bank.
+## Canonical math-family architecture
+The active system separates three jobs:
 
-The selected-family list is the authoritative worksheet blueprint. For parallel forms, every version preserves each selected family's I Can/evidence architecture and requested quantity while varying legitimate parameters.
+1. `_question_structure/catalogs/math_question_family_registry.json` — one canonical definition per reusable mathematical task family.
+2. `_question_structure/catalogs/math_course_family_maps.json` — maps those families into grade/course and topic browsing locations without duplicating the family definition.
+3. `_question_structure/catalogs/math_worksheet_generator_bank.json` and this tool's `question_structure_catalog.json` — generated compatibility/browse files, not independent authorities.
+
+Each canonical family locks the evidence job, student action, allowed response/representation modes, concise prompt architecture, validity rules, answer rule, render route, parallel invariants/variation, and QA gates.
+
+`direct_concise` is the default worksheet wording profile. Functional context remains when it changes the mathematics or the interpretation; decorative context does not.
+
+Teacher-supplied and external worksheet references are used only to infer useful task structures, representations, parameter properties, and coverage. Source questions are never stored or copied into the family registry.
+
+Run `python Tools/build_math_question_catalogs.py` from the `memories` repo root after changing the canonical registry or course maps. The script validates references and regenerates the derived worksheet catalogs.

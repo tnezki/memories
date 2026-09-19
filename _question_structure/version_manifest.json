@@ -1,29 +1,43 @@
 {
   "package": "_question_structure",
-  "version": "1.4",
+  "version": "2.0",
   "created": "2026-08-27",
-  "updated": "2026-09-18",
-  "purpose": "Dedicated question-design/structure authority with plan-first JSON workflow, executable render/completion gates, hard evidence-response-representation alignment, parallel-family rules, and a canonical math worksheet generator bank.",
+  "updated": "2026-09-19",
+  "purpose": "Dedicated question-design authority with plan-first workflow, executable evidence/response/representation gates, canonical reusable math family contracts, separate course maps, concise wording defaults, and parallel-family rules.",
   "source_basis": [
-    "teacher-authored variety rules from 2026-08-27",
-    "Question_Structure_and_Visual_Toolkit_v1_7 structure library/catalog",
-    "2026-08-29 Bank-v2 pilot QA: selected-response, table, graph, diagram, and representation execution hardening",
-    "2026-08-29 Unit 1 Bank Map regression: fit-before-category allocation, evidence/response alignment, and concrete diagram-route enforcement",
-    "2026-09-08 AP Calculus build request: optional topic/source/practice/calculator/provenance metadata",
-    "2026-09-18 District Math Worksheet Builder: Lower Elementary, Grade 4, and Grade 5 teacher-supplied topic inventories and parallel forms establish reusable generator-family and parallel-form rules"
+    "teacher-authored question variety and evidence rules",
+    "teacher-supplied Lower Elementary through Grade 8 parallel math forms and topic inventories used as structural references only",
+    "external free worksheet catalogs reviewed for topic/property coverage only; source questions are not stored",
+    "2026-09-19 family-contract architecture: canonical family registry + course maps + derived worksheet catalogs"
   ],
-  "authority_note": "Core/workflow/catalog files in this package override conflicting question-authoring guidance in older combined toolkits; visual assets remain owned by the visual toolkit/course Framework. The math worksheet generator bank is a specialized catalog subordinate to QUESTION_STRUCTURE_CORE.md. Teacher-supplied examples inform structure only and are not stored as source question banks.",
-  "file_count": 22,
+  "authority_note": "Core/workflow/family registry/course maps override conflicting question-authoring guidance in older combined toolkits. Legacy universal/stem libraries remain reference menus only. The math worksheet generator bank is a derived compatibility aggregate, not a second source of truth.",
+  "math_family_count": 165,
+  "active_math_courses": [
+    "Lower Elementary Math",
+    "Grade 4 Math",
+    "Grade 5 Math",
+    "Grade 6 Math",
+    "Grade 7 Math",
+    "Grade 8 Math"
+  ],
+  "future_math_courses": [
+    "Algebra 1",
+    "Geometry",
+    "Algebra 2",
+    "Precalculus",
+    "Calculus"
+  ],
+  "file_count": 26,
   "files": [
     {
       "path": "QUESTION_STRUCTURE_CORE.md",
-      "bytes": 12763,
-      "sha256": "d18137dcb7c86d07265942e5c28c4a49d1b83ed3f04af13f0a279bcb0f46b4b0"
+      "bytes": 14800,
+      "sha256": "76eb2351c9f57f25cbc4191ad29b7c6054242d2e5dbb9b96a80038d0d17af2e1"
     },
     {
       "path": "README_FIRST.md",
-      "bytes": 2577,
-      "sha256": "99093d6f068e6d7071ed6635287aa1bd2ef1fcf0da776736e3deb1134ef4f09a"
+      "bytes": 4513,
+      "sha256": "425227edba3cfd39aae318437540a35e9b0c7a5e3daf7e8670ddd18279a757e8"
     },
     {
       "path": "catalogs/destination_design_patterns.json",
@@ -42,8 +56,8 @@
     },
     {
       "path": "catalogs/math_worksheet_generator_bank.json",
-      "bytes": 82605,
-      "sha256": "c4ba1f514c581bed67c8c69a5985671483853687b7b4b2b10b2559b37c02e2c3"
+      "bytes": 584704,
+      "sha256": "e066d73c6688f97e272160093e55618cc33b2af716a5cdff484c9f777c7bfaa0"
     },
     {
       "path": "catalogs/structure_extensions.json",
@@ -92,8 +106,8 @@
     },
     {
       "path": "guides/parallel_family_rules.md",
-      "bytes": 2511,
-      "sha256": "c28b3b6e197990f2c226848b81ad9438efa86f7e77908415375701b0231642f8"
+      "bytes": 1796,
+      "sha256": "c13d9b4a1f93bd9157fce75cfa19644963693fc885a8128b9729c97e5d74993b"
     },
     {
       "path": "guides/question_metadata.md",
@@ -112,8 +126,8 @@
     },
     {
       "path": "guides/wording_profiles.md",
-      "bytes": 507,
-      "sha256": "a2402b61a7dfe31a5f59db22f8f4ed97b226001f8967ae1aa0b4178ba92ee280"
+      "bytes": 1618,
+      "sha256": "f3f01f1623c9b0fad94a71e5f7e26c71a03ee726f951a873ae6519e808ab3901"
     },
     {
       "path": "library/Question_Starter_Stem_Library_v1.md",
@@ -124,6 +138,26 @@
       "path": "library/Universal_Question_Structure_Library_v2.md",
       "bytes": 210460,
       "sha256": "37b6390f8b001e963756396e97d6ac9612bf567992abd7e8d4be5ff359e53721"
+    },
+    {
+      "path": "catalogs/math_question_family_registry.json",
+      "bytes": 414612,
+      "sha256": "cd3907b52bae4dbcf063b0aaa1be06b7df7710cd572c4d85edd3a18615e38132"
+    },
+    {
+      "path": "catalogs/math_course_family_maps.json",
+      "bytes": 16429,
+      "sha256": "95262198390963a922f2d435dbfb290bc129af8d3937934286ffe6b2b804060b"
+    },
+    {
+      "path": "contracts/math_question_family_schema.json",
+      "bytes": 4536,
+      "sha256": "a701a6615fab48b9ff1dc6d665d9014a0d98515a311845763b468072707d5f1c"
+    },
+    {
+      "path": "guides/math_family_architecture.md",
+      "bytes": 2788,
+      "sha256": "bd7bb9d5793b619711cc6da2c1209353ada965dbd9aa00ec04e8b085610265cb"
     }
   ]
 }

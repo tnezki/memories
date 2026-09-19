@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Math Question Family Registry",
+  "type": "object",
+  "required": [
+    "schema",
+    "default_wording_profile",
+    "families"
+  ],
+  "properties": {
+    "schema": {
+      "const": "math-question-family-registry/1.0"
+    },
+    "default_wording_profile": {
+      "const": "direct_concise"
+    },
+    "families": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/family"
+      },
+      "minItems": 1
+    }
+  },
+  "$defs": {
+    "family": {
+      "type": "object",
+      "required": [
+        "family_id",
+        "status",
+        "domain",
+        "label",
+        "evidence_job",
+        "student_action",
+        "default_wording_profile",
+        "response_modes",
+        "representation_modes",
+        "generator",
+        "quality_gates",
+        "source_basis"
+      ],
+      "properties": {
+        "family_id": {
+          "type": "string",
+          "pattern": "^[A-Z0-9_]+$"
+        },
+        "status": {
+          "enum": [
+            "approved",
+            "pilot",
+            "deprecated"
+          ]
+        },
+        "domain": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "evidence_job": {
+          "type": "string"
+        },
+        "student_action": {
+          "type": "string"
+        },
+        "default_wording_profile": {
+          "enum": [
+            "direct_concise",
+            "standard",
+            "inverted",
+            "context_rich"
+          ]
+        },
+        "response_modes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "representation_modes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "generator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "prompt_pattern",
+            "parameter_names",
+            "property_controls",
+            "validity_constraints",
+            "answer_rule",
+            "parallel_invariants",
+            "parallel_variation",
+            "difficulty_policy",
+            "workspace_default",
+            "render_route"
+          ],
+          "properties": {
+            "prompt_pattern": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parameter_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "property_controls": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "validity_constraints": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "answer_rule": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parallel_invariants": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "parallel_variation": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "difficulty_policy": {
+              "type": "string",
+              "minLength": 1
+            },
+            "workspace_default": {
+              "type": "string"
+            },
+            "render_route": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "quality_gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_basis": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "quality_status": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "allowed_wording_profiles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "direct_concise",
+              "standard",
+              "inverted",
+              "context_rich"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
