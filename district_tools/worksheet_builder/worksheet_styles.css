@@ -30,8 +30,7 @@ body{font-size:10.5pt}
   width:8.5in;min-height:11in;margin:.18in auto;background:#fff;
   padding:.55in .55in .58in
 }
-/* Future worksheet responses paginate each version into real page fragments.
-   Keeping this as an additive class preserves older single-canvas responses. */
+/* Real page fragments. New worksheet responses paginate each version into these. */
 .worksheet-page{
   width:var(--page-width);height:var(--page-height);min-height:var(--page-height);
   padding:var(--page-margin);overflow:hidden;position:relative
@@ -41,8 +40,14 @@ body{font-size:10.5pt}
 .student-fields{font-size:10pt;white-space:nowrap}
 .directions{font-size:10pt;margin:.08in 0 .16in;line-height:1.25}
 .question-grid{column-gap:var(--column-gap);column-rule:1pt solid #c7cbd0}
+/* Legacy multi-column support. New responses should paginate into explicit
+   .page-columns/.page-column containers so screen and print packing are deterministic. */
 .worksheet.two-column .question-grid,.worksheet:not(.one-column) .question-grid{column-count:2}
 .worksheet.one-column .question-grid{column-count:1;column-rule:0}
+.page-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:var(--column-gap);align-items:start}
+.worksheet.one-column .page-columns{grid-template-columns:minmax(0,1fr)}
+.page-column{min-width:0;align-self:start}
+.page-column>.problem:last-child{margin-bottom:0}
 .problem{
   --problem-workspace-height:var(--workspace-height);
   --problem-graph-width:var(--graph-width);
@@ -52,7 +57,7 @@ body{font-size:10.5pt}
 .problem .num{font-weight:800}
 mjx-container{font-size:100%!important}
 mjx-container[display="true"]{margin:.22em 0!important}
-.workspace{height:var(--problem-workspace-height);min-height:0}
+.workspace{height:var(--problem-workspace-height);min-height:0;margin:0;padding:0;overflow:hidden}
 .graph-wrap,.diagram-wrap{
   display:flex;justify-content:center;align-items:center;margin:.08in auto;
   width:min(100%,var(--problem-graph-width));max-width:100%
@@ -102,18 +107,23 @@ mjx-container[display="true"]{margin:.22em 0!important}
   .worksheet{margin:0;padding:.35in}
   .worksheet-page{margin:.18in auto}
   .question-grid{column-count:1!important;column-rule:0!important}
+  .page-columns{grid-template-columns:minmax(0,1fr)!important}
 }
 
 @media print{
   body{padding-left:0!important;background:#fff}
   .layout-controls{display:none!important}
   .worksheet{margin:0;width:auto;min-height:auto;padding:0}
+  /* @page margin is zero so the .worksheet-page itself is exactly the physical
+     8.5 x 11 page. The .55in internal padding is the actual print margin. This
+     keeps screen page boundaries and print page boundaries identical. */
   .worksheet-page{
-    height:var(--printable-height);min-height:var(--printable-height);overflow:hidden;
+    width:var(--page-width);height:var(--page-height);min-height:var(--page-height);
+    padding:var(--page-margin);overflow:hidden;
     break-after:page;page-break-after:always;border:0;box-shadow:none
   }
   .worksheet-version .worksheet-page:last-child{break-after:auto;page-break-after:auto}
   .worksheet.two-column .question-grid,.worksheet:not(.one-column) .question-grid{column-count:2!important}
   .worksheet.one-column .question-grid{column-count:1!important;column-rule:0!important}
-  @page{size:Letter portrait;margin:.55in}
+  @page{size:Letter portrait;margin:0}
 }

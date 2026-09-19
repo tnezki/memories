@@ -12,6 +12,12 @@ Before an item may render: all placeholders are resolved; enough information is 
 ## 3. Visual semantics gate
 A visually attractive but semantically wrong figure is a failure. Systems show the actual relations; mapping families show mappings; regression families show data/model or residuals; algebra tiles show correct signed/degree tiles; nonvisual algebra does not receive decorative graphs.
 
+### Fraction multiplication area-model standard — HARD
+For `FRAC_MULT_AREA_MODEL`, represent `a/b × c/d` with exactly `b` equal strips in one direction and `d` equal strips in the other (or the transposed orientation), for exactly `b × d` cells. Shade `a` strips for one factor and `c` strips for the other, with a distinct overlap. Do not subdivide those cells again or create a dense micro-grid. A `2/3 × 3/5` example is a 3-by-5 model. Use print-safe contrast and choose legal values that keep cells readable.
+
+### Money-model standard — HARD
+For `MONEY_TOTAL`, render recognizable original/cartoon currency rather than denomination text inside generic pills. Bills use bill-like proportions, inner framing, corner denomination numerals, and a simple center seal/portrait cue. Coins use circular rims, readable denomination cues, and differentiated relative diameters; when using US denominations, use the real size ordering (quarter largest; nickel; penny; dime smallest). Visual recognition must work in grayscale printing and must not depend on color.
+
 ### Conventional geometry marking — HARD
 When a geometry figure communicates segment or angle relationships, use standard mathematical notation:
 - congruent segments use short perpendicular tick strokes; the same tick count means the same congruence class;
@@ -39,3 +45,6 @@ Prefer direct mathematical language. Do not append filler such as “Use the rep
 Each generated worksheet slot has three solved candidates from the exact same family. Refresh may change legal values/context/visual parameters and family-authorized morphology/representation variants only; it may not drift to a neighboring skill. When richer legal variation exists, the pool should not be three trivial number swaps. Pure number variation is appropriate when procedural fluency is the intended evidence. The matching answer key follows the active candidate state.
 
 Teacher-defined custom slots are also authored as three solved candidates at build time. The offline response package does not manufacture additional AI-authored custom questions after build time.
+
+## 9. Page-use quality for generated worksheet responses — HARD
+Workspace is an adjustable response area, not a hidden page reservation. When workspace size, visual size, candidate content, MathJax height, or version changes, the owning worksheet renderer must repaginate from the actual rendered heights. At 0% workspace, there is no residual minimum workspace height. Avoidable large blank regions or extra pages caused by stale previous measurements are a FAIL.
