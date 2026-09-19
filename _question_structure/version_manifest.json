@@ -1,16 +1,16 @@
 {
   "package": "_question_structure",
-  "version": "2.1",
+  "version": "2.2",
   "created": "2026-08-27",
   "updated": "2026-09-19",
-  "purpose": "Dedicated question-design authority with modular canonical math-family contracts, course maps, curated previews, concise wording, parallel forms, and same-family refresh candidates.",
+  "purpose": "Dedicated question-design authority with modular canonical math-family contracts, course maps, curated previews, concise wording, answer-neutral student visuals, parallel forms, and same-family refresh candidates.",
   "source_basis": [
     "teacher-authored question variety/evidence rules",
-    "teacher-supplied Lower Elementary through Algebra 1 parallel math forms and topic inventories used as structural references only",
-    "Kuta Software free Algebra 1 catalog reviewed for topic/property coverage only; source questions are not stored"
+    "teacher-supplied Lower Elementary through Calculus parallel math forms and topic inventories used as structural references only",
+    "Kuta Software free course catalogs reviewed for topic/property coverage only; source questions are not stored"
   ],
   "authority_note": "Resolve canonical math family sources/course maps through catalogs/math_family_library_manifest.json. Legacy universal/stem libraries remain reference menus only.",
-  "math_family_count": 260,
+  "math_family_count": 390,
   "active_math_courses": [
     "Lower Elementary Math",
     "Grade 4 Math",
@@ -18,27 +18,37 @@
     "Grade 6 Math",
     "Grade 7 Math",
     "Grade 8 Math",
-    "Algebra 1"
-  ],
-  "future_math_courses": [
+    "Algebra 1",
     "Geometry",
     "Algebra 2",
     "Precalculus",
     "Calculus"
   ],
+  "future_math_courses": [],
   "math_library_manifest": "catalogs/math_family_library_manifest.json",
   "canonical_math_sources": [
     "catalogs/math_question_family_registry.json",
-    "catalogs/math_question_families_algebra1.json"
+    "catalogs/math_question_families_algebra1.json",
+    "catalogs/math_question_families_geometry.json",
+    "catalogs/math_question_families_advanced.json",
+    "catalogs/math_question_families_calculus.json"
   ],
   "canonical_course_maps": [
     "catalogs/math_course_family_maps.json",
-    "catalogs/math_course_family_map_algebra1.json"
+    "catalogs/math_course_family_map_algebra1.json",
+    "catalogs/math_course_family_map_geometry.json",
+    "catalogs/math_course_family_map_algebra2.json",
+    "catalogs/math_course_family_map_precalculus.json",
+    "catalogs/math_course_family_map_calculus.json"
   ],
   "preview_sources": [
     "catalogs/math_family_preview_specimens.json",
     "catalogs/math_family_preview_specimens_le7.json",
-    "catalogs/math_family_preview_specimens_alg1.json"
+    "catalogs/math_family_preview_specimens_alg1.json",
+    "catalogs/math_family_preview_specimens_geometry.json",
+    "catalogs/math_family_preview_specimens_advanced.json",
+    "catalogs/math_family_preview_specimens_calculus.json",
+    "catalogs/math_family_preview_repairs.json"
   ],
-  "note": "Other v2.0 support catalogs, contracts, examples, guides, and legacy libraries remain unchanged and in force unless superseded by README_FIRST.md or the math family library manifest."
+  "note": "Math family library now spans Lower Elementary through Calculus. Shared families are referenced by ID rather than cloned; every active new high-school family has a curated preview specimen."
 }

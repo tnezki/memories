@@ -1,0 +1,1815 @@
+{
+  "schema": "math-question-family-registry/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "authority": "Canonical Geometry-specific family extension; composed through math_family_library_manifest.json.",
+  "source_use_rule": "References inform architecture only; source questions are not stored.",
+  "default_wording_profile": "direct_concise",
+  "families": [
+    {
+      "family_id": "GEO_NOTATION_NAME",
+      "status": "current",
+      "domain": "geometry language",
+      "category": "Conceptual & Procedure",
+      "label": "Name Segments, Rays, Lines & Angles",
+      "evidence_job": "Name a geometric object correctly from a diagram.",
+      "student_action": "Name a geometric object correctly from a diagram.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Name the indicated {object_type}.",
+        "parameter_names": [
+          "object_type"
+        ],
+        "property_controls": [
+          "object_type",
+          "label_pattern"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_PLANE_RELATIONS",
+      "status": "current",
+      "domain": "geometry language",
+      "category": "Conceptual & Procedure",
+      "label": "Lines & Planes in Space",
+      "evidence_job": "Identify parallel, perpendicular, skew, or coplanar relationships in a 3D diagram.",
+      "student_action": "Identify parallel, perpendicular, skew, or coplanar relationships in a 3D diagram.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "3D diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "State the relationship between the indicated lines or planes.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_DIAGRAM_MARKINGS",
+      "status": "current",
+      "domain": "geometry language",
+      "category": "Conceptual & Procedure",
+      "label": "Interpret Geometric Markings",
+      "evidence_job": "Use congruence, midpoint, bisector, parallel, and right-angle markings as givens.",
+      "student_action": "Use congruence, midpoint, bisector, parallel, and right-angle markings as givens.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "marked diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "List the statement(s) guaranteed by the markings.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_SEGMENT_RELATION",
+      "status": "current",
+      "domain": "segments",
+      "category": "Conceptual & Procedure",
+      "label": "Segment Addition & Ratios",
+      "evidence_job": "Find missing segment lengths using addition, subtraction, or a given ratio.",
+      "student_action": "Find missing segment lengths using addition, subtraction, or a given ratio.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "segment diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the missing segment length.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_ANGLE_RELATIONSHIPS",
+      "status": "current",
+      "domain": "angles",
+      "category": "Conceptual & Procedure",
+      "label": "Angle Relationships",
+      "evidence_job": "Use vertical, adjacent, complementary, supplementary, and linear-pair relationships.",
+      "student_action": "Use vertical, adjacent, complementary, supplementary, and linear-pair relationships.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "angle diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the missing angle measure.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_TRANSVERSAL",
+      "status": "current",
+      "domain": "angles",
+      "category": "Conceptual & Procedure",
+      "label": "Parallel Lines & Transversals",
+      "evidence_job": "Use parallel-line angle relationships, including algebraic angle expressions.",
+      "student_action": "Use parallel-line angle relationships, including algebraic angle expressions.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "transversal diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested angle or variable.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_POLYGON_ANGLE",
+      "status": "current",
+      "domain": "polygons",
+      "category": "Conceptual & Procedure",
+      "label": "Triangle & Polygon Angle Sums",
+      "evidence_job": "Use interior/exterior angle sums to determine missing measures.",
+      "student_action": "Use interior/exterior angle sums to determine missing measures.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "polygon diagram",
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested interior or exterior angle.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_CONSTRUCTION_BASIC",
+      "status": "current",
+      "domain": "constructions",
+      "category": "Visual & Construction",
+      "label": "Compass & Straightedge Construction",
+      "evidence_job": "Construct a standard geometric object from given points, segments, lines, or angles.",
+      "student_action": "Construct a standard geometric object from given points, segments, lines, or angles.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_graph"
+      ],
+      "representation_modes": [
+        "construction diagram"
+      ],
+      "visual_policy": {
+        "student_view": "blank_construction_surface",
+        "solution_view": "completed_solution",
+        "construction_assessed": true,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Construct the requested object.",
+        "parameter_names": [],
+        "property_controls": [
+          "construction_type",
+          "given_configuration"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "large",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_TRANSFORM_CONSTRUCT",
+      "status": "current",
+      "domain": "transformations",
+      "category": "Visual & Construction",
+      "label": "Construct a Transformation",
+      "evidence_job": "Construct a translation, reflection, rotation, or dilation from givens.",
+      "student_action": "Construct a translation, reflection, rotation, or dilation from givens.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_graph"
+      ],
+      "representation_modes": [
+        "coordinate graph",
+        "figure"
+      ],
+      "visual_policy": {
+        "student_view": "blank_construction_surface",
+        "solution_view": "completed_solution",
+        "construction_assessed": true,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Draw the image under the stated transformation.",
+        "parameter_names": [],
+        "property_controls": [
+          "transformation_type",
+          "coordinate_range",
+          "scale_factor"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "large",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_CONGRUENCE_CRITERIA",
+      "status": "current",
+      "domain": "congruence",
+      "category": "Conceptual & Procedure",
+      "label": "Triangle Congruence Criteria",
+      "evidence_job": "Determine whether SSS, SAS, ASA, AAS, or HL proves two triangles congruent.",
+      "student_action": "Determine whether SSS, SAS, ASA, AAS, or HL proves two triangles congruent.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "marked triangles"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "State the congruence criterion, or explain why none applies.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_PROOF_TRIANGLE",
+      "status": "current",
+      "domain": "proof",
+      "category": "Reasoning",
+      "label": "Triangle Proof Structure",
+      "evidence_job": "Complete or justify a short proof using definitions, angle relationships, and triangle congruence.",
+      "student_action": "Complete or justify a short proof using definitions, angle relationships, and triangle congruence.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_explanation"
+      ],
+      "representation_modes": [
+        "proof diagram",
+        "two-column proof"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Complete the proof.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_SIMILARITY",
+      "status": "current",
+      "domain": "similarity",
+      "category": "Conceptual & Procedure",
+      "label": "Triangle Similarity Criteria",
+      "evidence_job": "Determine and use AA, SAS, or SSS similarity.",
+      "student_action": "Determine and use AA, SAS, or SSS similarity.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_explanation"
+      ],
+      "representation_modes": [
+        "triangles"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Determine whether the triangles are similar and justify.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_SIMILAR_PROPORTIONS",
+      "status": "current",
+      "domain": "similarity",
+      "category": "Conceptual & Procedure",
+      "label": "Similar-Figure Proportions",
+      "evidence_job": "Use corresponding side ratios in similar figures to find a missing length.",
+      "student_action": "Use corresponding side ratios in similar figures to find a missing length.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "similar figures"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the missing corresponding length.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_SPECIAL_RIGHT",
+      "status": "current",
+      "domain": "right triangles",
+      "category": "Conceptual & Procedure",
+      "label": "Special Right Triangles",
+      "evidence_job": "Use 45-45-90 or 30-60-90 relationships for exact side lengths.",
+      "student_action": "Use 45-45-90 or 30-60-90 relationships for exact side lengths.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "right triangle"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the exact missing side length.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_geometry_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_COORD_SHAPE",
+      "status": "current",
+      "domain": "coordinate geometry",
+      "category": "Conceptual & Procedure",
+      "label": "Classify a Figure from Coordinates",
+      "evidence_job": "Use slopes, distances, and midpoints to classify a triangle or quadrilateral.",
+      "student_action": "Use slopes, distances, and midpoints to classify a triangle or quadrilateral.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_explanation"
+      ],
+      "representation_modes": [
+        "coordinate graph"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Classify the figure and justify with coordinate evidence.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_COORD_PROOF",
+      "status": "current",
+      "domain": "coordinate geometry",
+      "category": "Conceptual & Procedure",
+      "label": "Coordinate Proof",
+      "evidence_job": "Prove a geometric relationship using slope, distance, or midpoint calculations.",
+      "student_action": "Prove a geometric relationship using slope, distance, or midpoint calculations.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_explanation"
+      ],
+      "representation_modes": [
+        "coordinate graph"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Prove the stated relationship using coordinates.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_CIRCLE_ARCS_ANGLES",
+      "status": "current",
+      "domain": "circles",
+      "category": "Conceptual & Procedure",
+      "label": "Circle Arc & Angle Relationships",
+      "evidence_job": "Use central, inscribed, chord, tangent, or secant angle relationships.",
+      "student_action": "Use central, inscribed, chord, tangent, or secant angle relationships.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "circle diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested arc or angle measure.",
+        "parameter_names": [],
+        "property_controls": [
+          "relationship_type",
+          "angle_range",
+          "arc_range"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_circle_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_CIRCLE_POWER",
+      "status": "current",
+      "domain": "circles",
+      "category": "Conceptual & Procedure",
+      "label": "Chords, Secants & Tangents",
+      "evidence_job": "Use segment-product relationships created by intersecting chords, secants, or tangents.",
+      "student_action": "Use segment-product relationships created by intersecting chords, secants, or tangents.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "circle diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the missing segment length.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_circle_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_CIRCLE_EQ",
+      "status": "current",
+      "domain": "coordinate geometry",
+      "category": "Conceptual & Procedure",
+      "label": "Equation of a Circle",
+      "evidence_job": "Write or interpret a circle equation from center, radius, graph, or general form.",
+      "student_action": "Write or interpret a circle equation from center, radius, graph, or general form.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "coordinate graph",
+        "equation"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Write the circle equation or identify its center and radius.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_SECTOR_ARC",
+      "status": "current",
+      "domain": "circles",
+      "category": "Conceptual & Procedure",
+      "label": "Arc Length & Sector Area",
+      "evidence_job": "Use central angle and radius to find arc length or sector area in degrees or radians.",
+      "student_action": "Use central angle and radius to find arc length or sector area in degrees or radians.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "circle diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested arc length or sector area.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_circle_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_SOLID_NET",
+      "status": "current",
+      "domain": "solids",
+      "category": "Conceptual & Procedure",
+      "label": "Nets of Solids",
+      "evidence_job": "Identify a solid from a net or reason about faces from a net.",
+      "student_action": "Identify a solid from a net or reason about faces from a net.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "net diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Identify the solid or requested face relationship.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_solid_net"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_CROSS_SECTION",
+      "status": "current",
+      "domain": "solids",
+      "category": "Conceptual & Procedure",
+      "label": "Cross Sections of Solids",
+      "evidence_job": "Identify the two-dimensional shape produced by a plane cutting a solid.",
+      "student_action": "Identify the two-dimensional shape produced by a plane cutting a solid.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "3D solid diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Identify the cross section.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_solid_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_SCALE_SOLID",
+      "status": "current",
+      "domain": "solids",
+      "category": "Conceptual & Procedure",
+      "label": "Scaled Solids",
+      "evidence_job": "Relate scale factor to surface-area and volume scale factors.",
+      "student_action": "Relate scale factor to surface-area and volume scale factors.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "solids"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested scale factor or measure.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_solid_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_VOLUME_MIXED",
+      "status": "current",
+      "domain": "measurement",
+      "category": "Conceptual & Procedure",
+      "label": "Volume of Prisms, Pyramids, Cylinders, Cones & Spheres",
+      "evidence_job": "Find volume from dimensions, including mixed and oblique solids when appropriate.",
+      "student_action": "Find volume from dimensions, including mixed and oblique solids when appropriate.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "solid diagram"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the volume.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_solid_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "GEO_DENSITY_CONTEXT",
+      "status": "current",
+      "domain": "measurement",
+      "category": "Conceptual & Procedure",
+      "label": "Volume, Density & Units",
+      "evidence_job": "Combine volume, density, and unit conversions in a functional context.",
+      "student_action": "Combine volume, density, and unit conversions in a functional context.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "diagram",
+        "context"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested quantity with units.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "deterministic_solid_diagram"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    }
+  ]
+}

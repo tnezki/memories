@@ -1,0 +1,128 @@
+{
+  "schema": "math-family-preview-specimens/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "purpose": "Answer-neutral construction-preview repairs for existing Algebra 1 families. This source is loaded after earlier preview sources and intentionally overrides matching family IDs.",
+  "specimens": {
+    "INEQ_TWO_VAR_GRAPH": {
+      "prompt_html": "Graph: <b>\\(y&lt;-\\frac{1}{2}x+2\\)</b>.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          6
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "Dashed boundary y=\u2212(1/2)x+2; shade below the line.",
+      "quality_status": "curated_repair_2026-09-19"
+    },
+    "SYSTEM_INEQ_GRAPH": {
+      "prompt_html": "Graph the system: <b>\\(y\\ge x-1\\)</b> and <b>\\(y&lt;-2x+4\\)</b>. Shade the solution region.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          6
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "Solid y=x\u22121; dashed y=\u22122x+4; shade the overlap satisfying both.",
+      "quality_status": "curated_repair_2026-09-19"
+    },
+    "LINE_GRAPH_SLOPE_INTERCEPT": {
+      "prompt_html": "Graph <b>\\(y=2x-3\\)</b>.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          6
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "Line with slope 2 and y-intercept \u22123.",
+      "quality_status": "curated_repair_2026-09-19"
+    },
+    "LINE_GRAPH_STANDARD": {
+      "prompt_html": "Graph <b>\\(2x+3y=6\\)</b>.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          6
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "Line through (3,0) and (0,2).",
+      "quality_status": "curated_repair_2026-09-19"
+    },
+    "LINE_ABS_VALUE_GRAPH": {
+      "prompt_html": "Graph <b>\\(y=|x-2|-1\\)</b>.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -6,
+          8,
+          -6,
+          8
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "V-shape with vertex (2,\u22121), slopes \u22121 and 1.",
+      "quality_status": "curated_repair_2026-09-19"
+    },
+    "EXP_FUNC_GRAPH": {
+      "prompt_html": "Graph <b>\\(y=2^x-1\\)</b> and state its horizontal asymptote.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -5,
+          5,
+          -3,
+          10
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "Increasing exponential through (0,0); asymptote y=\u22121.",
+      "quality_status": "curated_repair_2026-09-19"
+    },
+    "QUAD_INEQUALITY_GRAPH": {
+      "prompt_html": "Graph the solution set of <b>\\(y\\ge x^2-4\\)</b>.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          8
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "Solid parabola y=x\u00b2\u22124; shade on/above the parabola.",
+      "quality_status": "curated_repair_2026-09-19"
+    },
+    "SYSTEM_NONLINEAR_GRAPH": {
+      "prompt_html": "Graph <b>\\(y=x^2-1\\)</b> and <b>\\(y=2x+2\\)</b>. Use the graph to find the intersection points.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -5,
+          6,
+          -5,
+          10
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "Intersections (\u22121,0) and (3,8).",
+      "quality_status": "curated_repair_2026-09-19"
+    }
+  }
+}

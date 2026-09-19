@@ -1,0 +1,680 @@
+{
+  "schema": "math-family-preview-specimens/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "specimens": {
+    "ADV_FUNC_TRANSFORM_DOMAIN_RANGE": {
+      "prompt_html": "The domain of f is [−4,7] and the range is [2,9]. Let g(x)=−2f(x−3)+5. Find the domain and range of g.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "Domain [−1,10]; Range [−13,1].",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_FUNC_TRANSFORM_TABLE": {
+      "prompt_html": "The table gives f(−2)=7, f(1)=−4, f(5)=9. If g(x)=2f(x−3)+1, find g(4).",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "f(x)"
+        ],
+        "rows": [
+          [
+            -2,
+            7
+          ],
+          [
+            1,
+            -4
+          ],
+          [
+            5,
+            9
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "−7",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_FUNC_COMPOSE": {
+      "prompt_html": "Let f(x)=2x−3 and g(x)=x²+1. Find (g∘f)(2).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_FUNC_INVERSE_GENERAL": {
+      "prompt_html": "Find the inverse of f(x)=3x−8.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "f⁻¹(x)=(x+8)/3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_FUNC_DOMAIN_ALG": {
+      "prompt_html": "Find the domain of f(x)=√(2x−6)/(x−5).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "[3,5)∪(5,∞)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_FUNC_EXTREMA_CONCAVITY": {
+      "prompt_html": "The graph has a local maximum at x=−2 and a local minimum at x=3. State the x-values of the relative extrema.",
+      "visual": {
+        "type": "piecewise_graph",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          6
+        ],
+        "points": [
+          [
+            -5,
+            -2
+          ],
+          [
+            -2,
+            4
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            -3
+          ],
+          [
+            5,
+            2
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "−2 and 3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_FUNC_EVEN_ODD": {
+      "prompt_html": "Classify f(x)=x⁵−4x³.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "odd",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_AROC_SECANT": {
+      "prompt_html": "For f(x)=x²−3x, find the average rate of change from x=1 to x=5.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_AROC_APPROX_CONCAVITY": {
+      "prompt_html": "A function is concave up on [0,4]. A secant line through the endpoints is used to estimate f(2). Is the estimate above or below f(2)?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Above; an overestimate.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "ADV_DIFFERENCE_QUOTIENT": {
+      "prompt_html": "For f(x)=2x²−x, simplify [f(x+h)−f(x)]/h.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "4x+2h−1",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLY_END_BEHAVIOR_ADV": {
+      "prompt_html": "State the end behavior of f(x)=−3x⁵+2x²−1.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "As x→−∞, f(x)→∞; as x→∞, f(x)→−∞.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLY_ROOTS_GRAPH_ADV": {
+      "prompt_html": "A polynomial crosses the x-axis at x=−3 and x=2 and touches at x=5. List its real zeros.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "−3, 2, 5",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLY_MULTIPLICITY_ADV": {
+      "prompt_html": "A polynomial touches the x-axis and turns around at x=4. Is the multiplicity at x=4 odd or even?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "even",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLY_SYNTHETIC_DIV_ADV": {
+      "prompt_html": "Divide 2x³−3x²+4x−5 by x−2.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2x²+x+6 with remainder 7",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLY_REMAINDER_FACTOR_ADV": {
+      "prompt_html": "Is x−3 a factor of P(x)=x³−4x²−x+12?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "Yes; P(3)=0.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLY_INEQUALITY_ADV": {
+      "prompt_html": "Solve (x−2)(x+1)≤0.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "[−1,2]",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "RATIONAL_ASYMPTOTES_ADV": {
+      "prompt_html": "For f(x)=(x+2)/[(x−3)(x+1)], find the vertical asymptotes.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x=3 and x=−1",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "RATIONAL_GRAPH_FEATURES_ADV": {
+      "prompt_html": "For f(x)=1/(x−2)+3, state the vertical and horizontal asymptotes.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x=2; y=3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "RAD_FRACTIONAL_EXP_ADV": {
+      "prompt_html": "Rewrite x^(3/2) in radical form.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x√x",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "EXP_GRAPH_TABLE_DR_ADV": {
+      "prompt_html": "Complete a table for y=2^x at x=−2,−1,0,1,2, then graph the function on the blank axes.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -4,
+          4,
+          -1,
+          9
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "1/4, 1/2, 1, 2, 4; domain all real; range y>0.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "EXP_LOG_CONVERT_ADV": {
+      "prompt_html": "Rewrite 3⁴=81 in logarithmic form.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "log₃81=4",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "LOG_EXPAND_CONDENSE_ADV": {
+      "prompt_html": "Expand log_b(x²y/√z).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2log_b x + log_b y − (1/2)log_b z",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "EXP_SOLVE_ADV": {
+      "prompt_html": "Solve 3^(2x−1)=27.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x=2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "LOG_SOLVE_ADV": {
+      "prompt_html": "Solve log₂(x−1)=4.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x=17",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "SEQ_COMMON_DIFF_RATIO_ADV": {
+      "prompt_html": "Classify 6, 18, 54, … and find the common ratio.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "geometric; r=3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "SEQ_EXPLICIT_ADV": {
+      "prompt_html": "Write an explicit formula for 11, 7, 3, −1, …",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "a_n=11−4(n−1)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "SEQ_RECURSIVE_ADV": {
+      "prompt_html": "Given a₁=5 and a_n=2a_{n−1}−1, find a₄.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "33",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "SERIES_FINITE_GEOM_ADV": {
+      "prompt_html": "Find the sum of the first 6 terms of 3+6+12+…",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "189",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "SERIES_INFINITE_GEOM_ADV": {
+      "prompt_html": "Find the sum 12+6+3+…",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "24",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "COMPLEX_ARITH_ADV": {
+      "prompt_html": "Simplify (3−2i)(4+i).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "14−5i",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "COMPLEX_MOD_ARG_ADV": {
+      "prompt_html": "Find |−3+4i|.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "5",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "COMPLEX_RECT_POLAR_ADV": {
+      "prompt_html": "Write 1+i in polar form with 0≤θ<2π.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "√2(cos(π/4)+i sin(π/4))",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "COMPLEX_POLAR_MULT_DIV_ADV": {
+      "prompt_html": "Multiply 2(cos30°+i sin30°) by 3(cos40°+i sin40°).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "6(cos70°+i sin70°)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "COMPLEX_DEMOIVRE_ADV": {
+      "prompt_html": "[2(cos30°+i sin30°)]³",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "8(cos90°+i sin90°)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "COMPLEX_NTH_ROOTS_ADV": {
+      "prompt_html": "Find the square roots of 16(cos0+i sin0).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "4(cos0+i sin0), 4(cosπ+i sinπ)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CONIC_IDENTIFY_ADV": {
+      "prompt_html": "Identify the conic: 9x²+4y²=36.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "ellipse",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CONIC_FEATURES_ADV": {
+      "prompt_html": "For (x−2)²/25+(y+1)²/9=1, find the center and vertices on the major axis.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "Center (2,−1); vertices (−3,−1), (7,−1).",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CONIC_WRITE_EQ_ADV": {
+      "prompt_html": "Write the equation of the circle centered at (−2,3) with radius 4.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(x+2)²+(y−3)²=16",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CONIC_GRAPH_ADV": {
+      "prompt_html": "Graph (x−1)²/16+(y+2)²/9=1 on the blank axes.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          -7,
+          9,
+          -8,
+          5
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "ellipse centered (1,−2), horizontal semi-axis 4, vertical semi-axis 3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "REG_NONLINEAR_ADV": {
+      "prompt_html": "Fit a quadratic model to the data, then predict y when x=5.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "y"
+        ],
+        "rows": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            13
+          ],
+          [
+            3,
+            24
+          ],
+          [
+            4,
+            39
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "Use calculator regression; prediction must match generated data/model.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "NORMAL_MODEL_ADV": {
+      "prompt_html": "A normal distribution has mean 70 and standard deviation 8. Find the z-score for x=86.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CI_INFERENCE_ADV": {
+      "prompt_html": "A sample proportion is 0.42 with margin of error 0.05. Give the confidence interval.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(0.37, 0.47)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "SYSTEM_3_VAR_ADV": {
+      "prompt_html": "Solve: x+y+z=6, x−y+z=2, x+y−z=0.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(1,2,3)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "SYSTEM_QUAD_LINE_ADV": {
+      "prompt_html": "Solve y=x² and y=2x+3.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(−1,1), (3,9)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_COTERMINAL_REFERENCE_ADV": {
+      "prompt_html": "For θ=13π/6, find a coterminal angle in [0,2π) and the reference angle.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "π/6; reference angle π/6",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_UNIT_CIRCLE_EXACT_ADV": {
+      "prompt_html": "Find the exact value of sin(2π/3).<svg class=\"preview-svg\" viewBox=\"0 0 440 390\" aria-label=\"unit circle\"><line x1=\"35\" y1=\"190\" x2=\"405\" y2=\"190\" stroke=\"#222\" stroke-width=\"2\"/><line x1=\"220\" y1=\"20\" x2=\"220\" y2=\"365\" stroke=\"#222\" stroke-width=\"2\"/><circle cx=\"220\" cy=\"190\" r=\"125\" fill=\"none\" stroke=\"#222\" stroke-width=\"2\"/><line x1=\"220\" y1=\"190\" x2=\"157.5\" y2=\"81.7\" stroke=\"#245f8d\" stroke-width=\"3\"/><circle cx=\"157.5\" cy=\"81.7\" r=\"5\" fill=\"#245f8d\"/><text x=\"165.5\" y=\"73.7\" font-size=\"16\">P</text></svg>",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "√3/2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_POINT_RATIO_ADV": {
+      "prompt_html": "The terminal side passes through (−3,4). Find cos θ.",
+      "visual": {
+        "type": "points_grid",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          6
+        ],
+        "points": [
+          [
+            -3,
+            4,
+            "P"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "−3/5",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_PERIODIC_FEATURES_GRAPH_ADV": {
+      "prompt_html": "A sinusoid has maximum 5 and minimum −1. Find its amplitude and midline.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "Amplitude 3; midline y=2.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_PERIODIC_TABLE_ADV": {
+      "prompt_html": "The values 4,−2,4,−2,4 repeat at consecutive integer x-values. Find the period.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "0",
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "rows": [
+          [
+            "f(x)",
+            4,
+            -2,
+            4,
+            -2,
+            4
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_WRITE_SINUSOID_ADV": {
+      "prompt_html": "Write a cosine function with amplitude 3, midline y=2, and period 4π.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "y=3cos(x/2)+2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_IDENTITY_ADV": {
+      "prompt_html": "Simplify (1−sin²x)/cos x.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "cos x",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_SOLVE_EQ_ADV": {
+      "prompt_html": "Solve 2sin x=1 for 0≤x<2π.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "π/6, 5π/6",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "TRIG_LAW_SINES_COS_ADV": {
+      "prompt_html": "In △ABC, a=8, b=11, C=52°. Find c to the nearest tenth.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "8.7",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLAR_COORD_CONVERT_ADV": {
+      "prompt_html": "Convert (r,θ)=(4,π/3) to rectangular coordinates.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(2, 2√3)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "POLAR_GRAPH_ADV": {
+      "prompt_html": "Sketch r=2+2cosθ for 0≤θ≤2π.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_graph",
+      "answer_key": "cardioid opening right",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "VECTOR_COMPONENTS_ADV": {
+      "prompt_html": "Find the component form of the vector from A(−2,3) to B(5,−1).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "⟨7,−4⟩",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "VECTOR_COMBINE_ADV": {
+      "prompt_html": "Let u=⟨2,−1⟩ and v=⟨−3,4⟩. Find 2u−v.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "⟨7,−6⟩",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "VECTOR_MAG_DIR_ADV": {
+      "prompt_html": "Find the magnitude of ⟨6,8⟩.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "10",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "MATRIX_BASIC_OPS_ADV": {
+      "prompt_html": "Compute [[1,2],[3,4]] + [[5,−1],[0,2]].",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "[[6,1],[3,6]]",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "MATRIX_MULT_ADV": {
+      "prompt_html": "Compute [[1,2],[0,3]][[4],[5]].",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "[[14],[15]]",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "MATRIX_INVERSE_DET_ADV": {
+      "prompt_html": "Find det([[3,1],[5,2]]).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "1",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "OPTIMIZATION_PRECALC_ADV": {
+      "prompt_html": "A rectangle has perimeter 40. What dimensions maximize its area?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "10 by 10",
+      "quality_status": "curated_hs_2026-09-19"
+    }
+  }
+}

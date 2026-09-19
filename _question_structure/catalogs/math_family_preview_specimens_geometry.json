@@ -1,0 +1,323 @@
+{
+  "schema": "math-family-preview-specimens/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "specimens": {
+    "GEO_NOTATION_NAME": {
+      "prompt_html": "Name the segment with endpoints <b>A</b> and <b>B</b> in two ways.",
+      "visual": {
+        "type": "angle_named",
+        "left": "A",
+        "vertex": "B",
+        "right": "C"
+      },
+      "response": "constructed_work",
+      "answer_key": "\\overline{AB}, \\overline{BA}",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_PLANE_RELATIONS": {
+      "prompt_html": "In a right rectangular prism, edge <b>AB</b> is horizontal and edge <b>BC</b> is vertical. What is their relationship?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "perpendicular",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_DIAGRAM_MARKINGS": {
+      "prompt_html": "A diagram marks <b>AM ≅ MB</b>. What does this tell you about M?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "M is the midpoint of AB.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_SEGMENT_RELATION": {
+      "prompt_html": "Point B lies between A and C. If AB = 7 and AC = 19, find BC.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "12",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_ANGLE_RELATIONSHIPS": {
+      "prompt_html": "Two angles form a linear pair. One angle measures 68°. Find the other angle.",
+      "visual": {
+        "type": "linear_pair",
+        "known": 68,
+        "unknown": "x°"
+      },
+      "response": "constructed_work",
+      "answer_key": "112°",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_TRANSVERSAL": {
+      "prompt_html": "Parallel lines are cut by a transversal. Corresponding angles measure <b>3x+5</b> and <b>80</b> degrees. Find x.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "25",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_POLYGON_ANGLE": {
+      "prompt_html": "The interior angles of a triangle are 52°, 61°, and x°. Find x.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "67°",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_CONSTRUCTION_BASIC": {
+      "prompt_html": "Construct the perpendicular bisector of segment AB.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_graph",
+      "answer_key": "A line perpendicular to AB through its midpoint.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_TRANSFORM_CONSTRUCT": {
+      "prompt_html": "Triangle ABC has vertices A(−3,1), B(−1,4), C(2,1). Rotate it 90° counterclockwise about the origin. Draw A′B′C′.",
+      "visual": {
+        "type": "polygon_grid",
+        "bounds": [
+          -6,
+          6,
+          -6,
+          6
+        ],
+        "points": [
+          [
+            -3,
+            1
+          ],
+          [
+            -1,
+            4
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "labels": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "A′(−1,−3), B′(−4,−1), C′(−1,2)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_CONGRUENCE_CRITERIA": {
+      "prompt_html": "Two right triangles have congruent hypotenuses and one pair of congruent legs. Which theorem proves them congruent?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "HL",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_PROOF_TRIANGLE": {
+      "prompt_html": "Given M is the midpoint of AB and CM ⟂ AB, explain why △AMC ≅ △BMC.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "AM ≅ MB, ∠AMC and ∠BMC are right angles, CM ≅ CM; SAS.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_SIMILARITY": {
+      "prompt_html": "Two triangles have angle measures 42°, 71°, 67° and 42°, 67°, 71°. Are they similar? Justify.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Yes, AA.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_SIMILAR_PROPORTIONS": {
+      "prompt_html": "Similar triangles have corresponding sides 6 and 9. A side corresponding to 10 has length x. Find x.",
+      "visual": {
+        "type": "scaled_triangles",
+        "a_sides": [
+          6,
+          10
+        ],
+        "b_sides": [
+          9,
+          "x"
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "15",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_SPECIAL_RIGHT": {
+      "prompt_html": "A 45-45-90 triangle has a leg of length 7. Find the hypotenuse.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "7√2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_COORD_SHAPE": {
+      "prompt_html": "A(0,0), B(4,0), C(4,3), D(0,3). Classify ABCD and give coordinate evidence.",
+      "visual": {
+        "type": "polygon_grid",
+        "bounds": [
+          -1,
+          6,
+          -1,
+          5
+        ],
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            4,
+            3
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Rectangle; adjacent sides are perpendicular and opposite sides are parallel/equal.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_COORD_PROOF": {
+      "prompt_html": "Show that A(−2,1), B(2,5), C(6,1) form an isosceles triangle.",
+      "visual": {
+        "type": "points_grid",
+        "bounds": [
+          -4,
+          8,
+          -1,
+          7
+        ],
+        "points": [
+          [
+            -2,
+            1,
+            "A"
+          ],
+          [
+            2,
+            5,
+            "B"
+          ],
+          [
+            6,
+            1,
+            "C"
+          ]
+        ]
+      },
+      "response": "constructed_explanation",
+      "answer_key": "AB = BC = √32.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_CIRCLE_ARCS_ANGLES": {
+      "prompt_html": "A central angle intercepts an arc measuring 126°. Find the central angle.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "126°",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_CIRCLE_POWER": {
+      "prompt_html": "Two chords intersect inside a circle. Their segment lengths are 3 and 8 on one chord, and 4 and x on the other. Find x.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "6",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_CIRCLE_EQ": {
+      "prompt_html": "Write the equation of the circle with center (3,−2) and radius 5.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(x−3)^2+(y+2)^2=25",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_SECTOR_ARC": {
+      "prompt_html": "A circle has radius 9 and central angle 80°. Find the arc length in terms of π.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "4π",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_SOLID_NET": {
+      "prompt_html": "A net consists of two congruent triangles and three rectangles. What solid does it form?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "triangular prism",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_CROSS_SECTION": {
+      "prompt_html": "A plane cuts a right circular cylinder perpendicular to its axis. What is the cross section?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "circle",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_SCALE_SOLID": {
+      "prompt_html": "Two similar solids have linear scale factor 3. What is the volume scale factor?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "27",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_VOLUME_MIXED": {
+      "prompt_html": "Find the volume of a cylinder with radius 4 and height 9. Give an exact answer.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "144π",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "GEO_DENSITY_CONTEXT": {
+      "prompt_html": "A metal prism has volume 120 cm³ and mass 936 g. Find its density.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "7.8 g/cm³",
+      "quality_status": "curated_hs_2026-09-19"
+    }
+  }
+}

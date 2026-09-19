@@ -1,0 +1,426 @@
+{
+  "schema": "math-family-preview-specimens/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "specimens": {
+    "CALC_LIMIT_TABLE": {
+      "prompt_html": "Use the table to estimate lim_{x→2} f(x).",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "1.9",
+          "1.99",
+          "2.01",
+          "2.1"
+        ],
+        "rows": [
+          [
+            "f(x)",
+            4.7,
+            4.97,
+            5.03,
+            5.3
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "5",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_LIMIT_GRAPH": {
+      "prompt_html": "From the graph, lim_{x→1} f(x)=? The curve approaches y=3 from both sides while f(1)=−1.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_LIMIT_ALG": {
+      "prompt_html": "Evaluate lim_{x→3} (x²−9)/(x−3).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "6",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_LIMIT_INFINITY": {
+      "prompt_html": "Evaluate lim_{x→∞} (5x²−1)/(2x²+3).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "5/2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_CONTINUITY_CLASSIFY": {
+      "prompt_html": "A function has lim_{x→2}f(x)=5 but f(2)=1. Is f continuous at x=2?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "No; removable discontinuity if redefined to 5.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_DERIV_DEFINITION": {
+      "prompt_html": "Use the limit definition to find f′(x) for f(x)=x².",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2x",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_DERIV_RULES": {
+      "prompt_html": "Differentiate f(x)=4x³−5x+ln x.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "12x²−5+1/x",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_PRODUCT_QUOTIENT": {
+      "prompt_html": "Differentiate y=(x²+1)e^x.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "e^x(x²+2x+1)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_CHAIN_RULE": {
+      "prompt_html": "Differentiate y=(3x²−1)^5.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "30x(3x²−1)^4",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_IMPLICIT_DERIV": {
+      "prompt_html": "For x²+y²=25, find dy/dx.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "−x/y",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_TANGENT_LINE": {
+      "prompt_html": "Find the tangent line to f(x)=x² at x=2.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "y=4x−4",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_DERIV_GRAPH_REL": {
+      "prompt_html": "If f′ changes from positive to negative at x=3, what occurs for f at x=3?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "a local maximum",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_MVT": {
+      "prompt_html": "For f(x)=x² on [1,4], find c guaranteed by MVT.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "c=5/2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_CRITICAL_EXTREMA": {
+      "prompt_html": "Find the absolute extrema of f(x)=x³−3x on [−2,2].",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "Max 2 at x=−1 and x=2; min −2 at x=−2 and x=1.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_FIRST_DERIV_TEST": {
+      "prompt_html": "f′ is positive for x<1 and negative for x>1. Classify x=1.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "local maximum",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_SECOND_DERIV_TEST": {
+      "prompt_html": "If f''(x)=6x, where is f concave up?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(0,∞)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_OPTIMIZATION": {
+      "prompt_html": "A rectangle has perimeter 40. Use calculus to maximize its area.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "10 by 10; maximum area 100",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_RELATED_RATES": {
+      "prompt_html": "A circle’s radius increases at 2 cm/s. How fast is area increasing when r=5 cm?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "20π cm²/s",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_PARTICLE_MOTION": {
+      "prompt_html": "s(t)=t³−6t²+9t. Find v(2).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "−3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_LINEARIZATION": {
+      "prompt_html": "Use linearization at x=4 to approximate √4.1.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2.025",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_RIEMANN_TABLE": {
+      "prompt_html": "Use a left Riemann sum on [0,6] with subintervals [0,2],[2,5],[5,6].",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "0",
+          "2",
+          "5",
+          "6"
+        ],
+        "rows": [
+          [
+            "f(x)",
+            3,
+            4,
+            2,
+            1
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "22",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_RIEMANN_GRAPH": {
+      "prompt_html": "The function is increasing. A right-endpoint Riemann sum is used. Is it an overestimate or underestimate?<svg class=\"preview-svg\" viewBox=\"0 0 520 330\" aria-label=\"Riemann rectangles\"><line x1=\"45\" y1=\"280\" x2=\"490\" y2=\"280\" stroke=\"#222\" stroke-width=\"2\"/><line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"295\" stroke=\"#222\" stroke-width=\"2\"/><path d=\"M60 245 C145 220 210 165 300 105 C365 65 430 50 480 42\" fill=\"none\" stroke=\"#245f8d\" stroke-width=\"3\"/><rect x=\"60\" y=\"215\" width=\"100\" height=\"65\" fill=\"rgba(80,120,160,.18)\" stroke=\"#555\"/><rect x=\"160\" y=\"165\" width=\"100\" height=\"115\" fill=\"rgba(80,120,160,.18)\" stroke=\"#555\"/><rect x=\"260\" y=\"105\" width=\"100\" height=\"175\" fill=\"rgba(80,120,160,.18)\" stroke=\"#555\"/><rect x=\"360\" y=\"62\" width=\"100\" height=\"218\" fill=\"rgba(80,120,160,.18)\" stroke=\"#555\"/></svg>",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "overestimate",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_INTEGRAL_GEOM": {
+      "prompt_html": "On [0,2] the graph forms a triangle above the x-axis with base 2 and height 4. Find ∫₀² f(x)dx.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "4",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_INTEGRAL_PROPERTIES": {
+      "prompt_html": "Given ∫₀³f=5 and ∫₃⁷f=−2, find ∫₀⁷ 4f(x)dx.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "12",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_FTC": {
+      "prompt_html": "If F(x)=∫₁ˣ (t²+1)dt, find F′(x).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x²+1",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_ANTIDERIV": {
+      "prompt_html": "Evaluate ∫(6x²−4)dx.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2x³−4x+C",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_U_SUB": {
+      "prompt_html": "Evaluate ∫2x cos(x²) dx.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "sin(x²)+C",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_AREA_BETWEEN": {
+      "prompt_html": "Find the area between y=x and y=x² on [0,1].",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "1/6",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_VOLUME_REV": {
+      "prompt_html": "Rotate y=x on 0≤x≤2 about the x-axis. Find the volume.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "8π/3",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_VOLUME_CROSS": {
+      "prompt_html": "A solid has base 0≤x≤3 under y=2x and square cross sections perpendicular to the x-axis. Find the volume.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "36",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_DIFFEQ_SLOPE_FIELD": {
+      "prompt_html": "Sketch a solution curve through (0,1) on the given slope field.<svg class=\"preview-svg\" viewBox=\"0 0 440 340\" aria-label=\"slope field\"><line x1=\"58\" y1=\"53\" x2=\"82\" y2=\"47\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"58\" y1=\"95\" x2=\"82\" y2=\"85\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"58\" y1=\"137\" x2=\"82\" y2=\"123\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"58\" y1=\"179\" x2=\"82\" y2=\"161\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"58\" y1=\"221\" x2=\"82\" y2=\"199\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"58\" y1=\"263\" x2=\"82\" y2=\"237\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"58\" y1=\"305\" x2=\"82\" y2=\"275\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"108\" y1=\"50\" x2=\"132\" y2=\"50\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"108\" y1=\"92\" x2=\"132\" y2=\"88\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"108\" y1=\"134\" x2=\"132\" y2=\"126\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"108\" y1=\"176\" x2=\"132\" y2=\"164\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"108\" y1=\"218\" x2=\"132\" y2=\"202\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"108\" y1=\"260\" x2=\"132\" y2=\"240\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"108\" y1=\"302\" x2=\"132\" y2=\"278\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"158\" y1=\"47\" x2=\"182\" y2=\"53\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"158\" y1=\"89\" x2=\"182\" y2=\"91\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"158\" y1=\"131\" x2=\"182\" y2=\"129\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"158\" y1=\"173\" x2=\"182\" y2=\"167\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"158\" y1=\"215\" x2=\"182\" y2=\"205\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"158\" y1=\"257\" x2=\"182\" y2=\"243\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"158\" y1=\"299\" x2=\"182\" y2=\"281\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"208\" y1=\"44\" x2=\"232\" y2=\"56\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"208\" y1=\"86\" x2=\"232\" y2=\"94\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"208\" y1=\"128\" x2=\"232\" y2=\"132\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"208\" y1=\"170\" x2=\"232\" y2=\"170\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"208\" y1=\"212\" x2=\"232\" y2=\"208\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"208\" y1=\"254\" x2=\"232\" y2=\"246\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"208\" y1=\"296\" x2=\"232\" y2=\"284\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"258\" y1=\"41\" x2=\"282\" y2=\"59\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"258\" y1=\"83\" x2=\"282\" y2=\"97\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"258\" y1=\"125\" x2=\"282\" y2=\"135\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"258\" y1=\"167\" x2=\"282\" y2=\"173\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"258\" y1=\"209\" x2=\"282\" y2=\"211\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"258\" y1=\"251\" x2=\"282\" y2=\"249\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"258\" y1=\"293\" x2=\"282\" y2=\"287\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"308\" y1=\"38\" x2=\"332\" y2=\"62\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"308\" y1=\"80\" x2=\"332\" y2=\"100\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"308\" y1=\"122\" x2=\"332\" y2=\"138\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"308\" y1=\"164\" x2=\"332\" y2=\"176\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"308\" y1=\"206\" x2=\"332\" y2=\"214\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"308\" y1=\"248\" x2=\"332\" y2=\"252\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"308\" y1=\"290\" x2=\"332\" y2=\"290\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"358\" y1=\"35\" x2=\"382\" y2=\"65\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"358\" y1=\"77\" x2=\"382\" y2=\"103\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"358\" y1=\"119\" x2=\"382\" y2=\"141\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"358\" y1=\"161\" x2=\"382\" y2=\"179\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"358\" y1=\"203\" x2=\"382\" y2=\"217\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"358\" y1=\"245\" x2=\"382\" y2=\"255\" stroke=\"#555\" stroke-width=\"1.5\"/><line x1=\"358\" y1=\"287\" x2=\"382\" y2=\"293\" stroke=\"#555\" stroke-width=\"1.5\"/></svg>",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_graph",
+      "answer_key": "A curve tangent to the field at every point through (0,1).",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_DIFFEQ_SEPARABLE": {
+      "prompt_html": "Solve dy/dx=3xy with y(0)=2.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "y=2e^(3x²/2)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_EULER": {
+      "prompt_html": "For dy/dx=x+y, y(0)=1, use one step of size 0.1 to estimate y(0.1).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "1.1",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_INT_PARTS": {
+      "prompt_html": "Evaluate ∫x e^x dx.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "xe^x−e^x+C",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_IMPROPER": {
+      "prompt_html": "Evaluate ∫₁^∞ 1/x² dx.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "1",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_PARTIAL_FRACTIONS": {
+      "prompt_html": "Decompose 1/[(x−1)(x+2)] into partial fractions.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "(1/3)/(x−1) − (1/3)/(x+2)",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_PARAMETRIC_DERIV": {
+      "prompt_html": "x=t²+1, y=t³−t. Find dy/dx at t=1.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "1",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_POLAR_AREA": {
+      "prompt_html": "Find the area enclosed by r=2 for 0≤θ≤π.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "2π",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_SERIES_CONVERGENCE": {
+      "prompt_html": "Does Σ_{n=1}^∞ (1/3)^n converge? If so, find the sum.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "Yes; 1/2",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_SERIES_TEST": {
+      "prompt_html": "Determine whether Σ 1/n² converges and name a test.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Converges; p-series with p=2.",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_SERIES_ERROR": {
+      "prompt_html": "For an alternating series with decreasing terms, the first omitted term has magnitude 0.004. Bound the error.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "≤0.004",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_TAYLOR": {
+      "prompt_html": "Write the Maclaurin polynomial through x⁴ for e^x.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "1+x+x²/2+x³/6+x⁴/24",
+      "quality_status": "curated_hs_2026-09-19"
+    },
+    "CALC_POWER_SERIES": {
+      "prompt_html": "Find the radius of convergence of Σ (x−2)^n/5^n.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "5",
+      "quality_status": "curated_hs_2026-09-19"
+    }
+  }
+}

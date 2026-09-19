@@ -1,0 +1,3108 @@
+{
+  "schema": "math-question-family-registry/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "authority": "Canonical Calculus family extension; composed through math_family_library_manifest.json.",
+  "source_use_rule": "References inform architecture only; source questions are not stored.",
+  "default_wording_profile": "direct_concise",
+  "families": [
+    {
+      "family_id": "CALC_LIMIT_TABLE",
+      "status": "current",
+      "domain": "limits",
+      "category": "Conceptual & Procedure",
+      "label": "Limit from a Table",
+      "evidence_job": "Determine one-sided/two-sided/infinite limits from numerical behavior in a table.",
+      "student_action": "Determine one-sided/two-sided/infinite limits from numerical behavior in a table.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "table"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested limit from the table.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "semantic_table"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_LIMIT_GRAPH",
+      "status": "current",
+      "domain": "limits",
+      "category": "Conceptual & Procedure",
+      "label": "Limit from a Graph",
+      "evidence_job": "Determine one-sided/two-sided limits and function values from a graph.",
+      "student_action": "Determine one-sided/two-sided limits and function values from a graph.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "function graph"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested limit or function value.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_LIMIT_ALG",
+      "status": "current",
+      "domain": "limits",
+      "category": "Conceptual & Procedure",
+      "label": "Evaluate an Algebraic Limit",
+      "evidence_job": "Evaluate limits using direct substitution, factoring, rationalizing, trig limits, or algebraic simplification.",
+      "student_action": "Evaluate limits using direct substitution, factoring, rationalizing, trig limits, or algebraic simplification.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Evaluate the limit.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_LIMIT_INFINITY",
+      "status": "current",
+      "domain": "limits",
+      "category": "Conceptual & Procedure",
+      "label": "Limits at Infinity / Infinite Limits",
+      "evidence_job": "Analyze end behavior or vertical asymptote behavior with limits.",
+      "student_action": "Analyze end behavior or vertical asymptote behavior with limits.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Evaluate the limit.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_CONTINUITY_CLASSIFY",
+      "status": "current",
+      "domain": "limits",
+      "category": "Conceptual & Procedure",
+      "label": "Continuity & Discontinuities",
+      "evidence_job": "Determine continuity or classify removable, jump, or infinite discontinuities.",
+      "student_action": "Determine continuity or classify removable, jump, or infinite discontinuities.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Determine/classify continuity at the stated point.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_DERIV_DEFINITION",
+      "status": "current",
+      "domain": "derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Derivative from the Limit Definition",
+      "evidence_job": "Use a difference quotient limit to find a derivative.",
+      "student_action": "Use a difference quotient limit to find a derivative.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the derivative using the definition.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_DERIV_RULES",
+      "status": "current",
+      "domain": "derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Basic Derivative Rules",
+      "evidence_job": "Differentiate algebraic, exponential, logarithmic, or basic trigonometric functions.",
+      "student_action": "Differentiate algebraic, exponential, logarithmic, or basic trigonometric functions.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the derivative.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_PRODUCT_QUOTIENT",
+      "status": "current",
+      "domain": "derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Product & Quotient Rules",
+      "evidence_job": "Differentiate products and quotients.",
+      "student_action": "Differentiate products and quotients.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the derivative.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_CHAIN_RULE",
+      "status": "current",
+      "domain": "derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Chain Rule",
+      "evidence_job": "Differentiate compositions using the chain rule, possibly combined with other rules.",
+      "student_action": "Differentiate compositions using the chain rule, possibly combined with other rules.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the derivative.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_IMPLICIT_DERIV",
+      "status": "current",
+      "domain": "derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Implicit Differentiation",
+      "evidence_job": "Differentiate an implicit relation and solve for dy/dx.",
+      "student_action": "Differentiate an implicit relation and solve for dy/dx.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find dy/dx.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_TANGENT_LINE",
+      "status": "current",
+      "domain": "derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Tangent Line",
+      "evidence_job": "Find a tangent-line slope/equation from a function, graph, or derivative.",
+      "student_action": "Find a tangent-line slope/equation from a function, graph, or derivative.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "function rule",
+        "graph"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the tangent line.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_DERIV_GRAPH_REL",
+      "status": "current",
+      "domain": "derivatives",
+      "category": "Visual & Reasoning",
+      "label": "Graphs of f, f′, and f″",
+      "evidence_job": "Relate signs/zeros/extrema/concavity among a function and its derivatives.",
+      "student_action": "Relate signs/zeros/extrema/concavity among a function and its derivatives.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "function graphs"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Answer the requested relationship question.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_MVT",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Mean Value Theorem",
+      "evidence_job": "Verify hypotheses and find point(s) satisfying the Mean Value Theorem.",
+      "student_action": "Verify hypotheses and find point(s) satisfying the Mean Value Theorem.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the MVT point(s) or state why the theorem does not apply.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_CRITICAL_EXTREMA",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Critical Points & Absolute Extrema",
+      "evidence_job": "Find critical points and determine relative/absolute extrema on an interval.",
+      "student_action": "Find critical points and determine relative/absolute extrema on an interval.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested extrema.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_FIRST_DERIV_TEST",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "First Derivative Test",
+      "evidence_job": "Use the sign of f′ to classify critical points and monotonicity.",
+      "student_action": "Use the sign of f′ to classify critical points and monotonicity.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Use f′ to classify the critical point(s).",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_SECOND_DERIV_TEST",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Second Derivative / Concavity Test",
+      "evidence_job": "Use f″ for concavity, inflection, or critical-point classification.",
+      "student_action": "Use f″ for concavity, inflection, or critical-point classification.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested concavity or classification.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_OPTIMIZATION",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Calculus Optimization",
+      "evidence_job": "Build and optimize a differentiable model under constraints.",
+      "student_action": "Build and optimize a differentiable model under constraints.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the maximizing/minimizing dimensions or value.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_RELATED_RATES",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Related Rates",
+      "evidence_job": "Differentiate a relation with respect to time and solve for an unknown rate.",
+      "student_action": "Differentiate a relation with respect to time and solve for an unknown rate.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested rate with units.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_PARTICLE_MOTION",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Particle Motion",
+      "evidence_job": "Use position/velocity/acceleration to answer motion questions.",
+      "student_action": "Use position/velocity/acceleration to answer motion questions.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested motion quantity or interval.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_LINEARIZATION",
+      "status": "current",
+      "domain": "applications of derivatives",
+      "category": "Conceptual & Procedure",
+      "label": "Linearization / Local Approximation",
+      "evidence_job": "Use a tangent-line approximation near a convenient point.",
+      "student_action": "Use a tangent-line approximation near a convenient point.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Approximate the requested value.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_RIEMANN_TABLE",
+      "status": "current",
+      "domain": "integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Riemann Sum from a Table",
+      "evidence_job": "Compute left/right/midpoint/trapezoidal approximations from tabular data.",
+      "student_action": "Compute left/right/midpoint/trapezoidal approximations from tabular data.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "table"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the specified approximation.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "semantic_table"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_RIEMANN_GRAPH",
+      "status": "current",
+      "domain": "integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Riemann Sum / Approximation from a Graph",
+      "evidence_job": "Interpret or compute a graphical Riemann approximation and over/under behavior.",
+      "student_action": "Interpret or compute a graphical Riemann approximation and over/under behavior.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "function graph",
+        "rectangles"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find or classify the Riemann approximation.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_INTEGRAL_GEOM",
+      "status": "current",
+      "domain": "integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Definite Integral from Geometric Area",
+      "evidence_job": "Evaluate a definite integral using signed geometric areas from a graph.",
+      "student_action": "Evaluate a definite integral using signed geometric areas from a graph.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "piecewise graph"
+      ],
+      "visual_policy": {
+        "student_view": "complete_given_representation",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Evaluate the definite integral.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "registered_cartesian_graph"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_INTEGRAL_PROPERTIES",
+      "status": "current",
+      "domain": "integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Properties of Definite Integrals",
+      "evidence_job": "Use additivity, reversal, and constant multiples to combine known integrals.",
+      "student_action": "Use additivity, reversal, and constant multiples to combine known integrals.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Evaluate the requested integral from the given integral values.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_FTC",
+      "status": "current",
+      "domain": "integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Fundamental Theorem of Calculus",
+      "evidence_job": "Differentiate accumulation functions or evaluate integrals via antiderivatives.",
+      "student_action": "Differentiate accumulation functions or evaluate integrals via antiderivatives.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Apply the Fundamental Theorem of Calculus.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_ANTIDERIV",
+      "status": "current",
+      "domain": "integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Antiderivatives & Indefinite Integrals",
+      "evidence_job": "Find general antiderivatives and include the constant of integration.",
+      "student_action": "Find general antiderivatives and include the constant of integration.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the indefinite integral.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_U_SUB",
+      "status": "current",
+      "domain": "integration techniques",
+      "category": "Conceptual & Procedure",
+      "label": "u-Substitution",
+      "evidence_job": "Recognize and execute a substitution to evaluate an integral.",
+      "student_action": "Recognize and execute a substitution to evaluate an integral.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Evaluate the integral using substitution.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_AREA_BETWEEN",
+      "status": "current",
+      "domain": "applications of integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Area Between Curves",
+      "evidence_job": "Set up and evaluate area between curves or between a curve and an axis.",
+      "student_action": "Set up and evaluate area between curves or between a curve and an axis.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the area.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_VOLUME_REV",
+      "status": "current",
+      "domain": "applications of integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Volume of Revolution",
+      "evidence_job": "Set up and evaluate disk/washer/shell volume integrals.",
+      "student_action": "Set up and evaluate disk/washer/shell volume integrals.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the volume.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_VOLUME_CROSS",
+      "status": "current",
+      "domain": "applications of integrals",
+      "category": "Conceptual & Procedure",
+      "label": "Volume with Known Cross Sections",
+      "evidence_job": "Use base regions and cross-sectional area formulas to find volume.",
+      "student_action": "Use base regions and cross-sectional area formulas to find volume.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Set up/evaluate the volume integral.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_DIFFEQ_SLOPE_FIELD",
+      "status": "current",
+      "domain": "differential equations",
+      "category": "Visual & Construction",
+      "label": "Slope Fields & Solution Curves",
+      "evidence_job": "Interpret or construct a slope field and match/draw solution curves.",
+      "student_action": "Interpret or construct a slope field and match/draw solution curves.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_graph"
+      ],
+      "representation_modes": [
+        "slope field"
+      ],
+      "visual_policy": {
+        "student_view": "blank_construction_surface",
+        "solution_view": "completed_solution",
+        "construction_assessed": true,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Interpret or draw the requested solution behavior.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "large",
+        "render_route": "deterministic_slope_field"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_DIFFEQ_SEPARABLE",
+      "status": "current",
+      "domain": "differential equations",
+      "category": "Conceptual & Procedure",
+      "label": "Separable Differential Equations",
+      "evidence_job": "Solve a separable differential equation with or without an initial condition.",
+      "student_action": "Solve a separable differential equation with or without an initial condition.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Solve the differential equation.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_EULER",
+      "status": "current",
+      "domain": "differential equations",
+      "category": "Conceptual & Procedure",
+      "label": "Euler’s Method",
+      "evidence_job": "Approximate a solution value using Euler’s method.",
+      "student_action": "Approximate a solution value using Euler’s method.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Use Euler’s method to approximate the requested value.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_INT_PARTS",
+      "status": "current",
+      "domain": "integration techniques",
+      "category": "Conceptual & Procedure",
+      "label": "Integration by Parts",
+      "evidence_job": "Evaluate integrals using integration by parts, including tabular form when appropriate.",
+      "student_action": "Evaluate integrals using integration by parts, including tabular form when appropriate.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Evaluate the integral.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_IMPROPER",
+      "status": "current",
+      "domain": "integration techniques",
+      "category": "Conceptual & Procedure",
+      "label": "Improper Integrals",
+      "evidence_job": "Evaluate or determine convergence of integrals with infinite bounds or discontinuities.",
+      "student_action": "Evaluate or determine convergence of integrals with infinite bounds or discontinuities.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Evaluate or state divergence.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_PARTIAL_FRACTIONS",
+      "status": "current",
+      "domain": "integration techniques",
+      "category": "Conceptual & Procedure",
+      "label": "Partial Fractions & Integration",
+      "evidence_job": "Decompose rational functions and integrate using partial fractions.",
+      "student_action": "Decompose rational functions and integrate using partial fractions.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Decompose or evaluate the integral.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_PARAMETRIC_DERIV",
+      "status": "current",
+      "domain": "parametric calculus",
+      "category": "Conceptual & Procedure",
+      "label": "Parametric Derivatives & Tangents",
+      "evidence_job": "Find dy/dx, d²y/dx², tangent lines, or arc length for parametric curves.",
+      "student_action": "Find dy/dx, d²y/dx², tangent lines, or arc length for parametric curves.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested parametric derivative or tangent information.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_POLAR_AREA",
+      "status": "current",
+      "domain": "polar calculus",
+      "category": "Conceptual & Procedure",
+      "label": "Polar Derivatives & Area",
+      "evidence_job": "Find polar area, tangent slope, or extrema using polar calculus.",
+      "student_action": "Find polar area, tangent slope, or extrema using polar calculus.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested polar-calculus quantity.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_SERIES_CONVERGENCE",
+      "status": "current",
+      "domain": "series",
+      "category": "Conceptual & Procedure",
+      "label": "Sequence / Series Convergence",
+      "evidence_job": "Determine whether a sequence or series converges and identify its limit/sum when appropriate.",
+      "student_action": "Determine whether a sequence or series converges and identify its limit/sum when appropriate.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Determine convergence and give limit/sum if requested.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_SERIES_TEST",
+      "status": "current",
+      "domain": "series",
+      "category": "Conceptual & Procedure",
+      "label": "Convergence Tests",
+      "evidence_job": "Select and apply comparison, integral, ratio, alternating, or p-series tests.",
+      "student_action": "Select and apply comparison, integral, ratio, alternating, or p-series tests.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed_explanation"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Determine convergence and justify with an appropriate test.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_SERIES_ERROR",
+      "status": "current",
+      "domain": "series",
+      "category": "Conceptual & Procedure",
+      "label": "Series Error Bounds",
+      "evidence_job": "Use alternating-series or Taylor/Lagrange error bounds.",
+      "student_action": "Use alternating-series or Taylor/Lagrange error bounds.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find/bound the approximation error.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_TAYLOR",
+      "status": "current",
+      "domain": "series",
+      "category": "Conceptual & Procedure",
+      "label": "Taylor / Maclaurin Polynomials",
+      "evidence_job": "Write, manipulate, compose, or interpret Taylor/Maclaurin polynomials and coefficients.",
+      "student_action": "Write, manipulate, compose, or interpret Taylor/Maclaurin polynomials and coefficients.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested Taylor polynomial/coefficient/derivative.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    },
+    {
+      "family_id": "CALC_POWER_SERIES",
+      "status": "current",
+      "domain": "series",
+      "category": "Conceptual & Procedure",
+      "label": "Power Series & Interval of Convergence",
+      "evidence_job": "Manipulate geometric/power series and determine radius/interval of convergence.",
+      "student_action": "Manipulate geometric/power series and determine radius/interval of convergence.",
+      "default_wording_profile": "direct_concise",
+      "allowed_wording_profiles": [
+        "direct_concise",
+        "standard"
+      ],
+      "response_modes": [
+        "constructed"
+      ],
+      "representation_modes": [
+        "expression"
+      ],
+      "visual_policy": {
+        "student_view": "givens_only",
+        "solution_view": "same_givens_plus_answer",
+        "construction_assessed": false,
+        "answer_neutral_student_visual": true,
+        "rule": "Student-facing visuals contain only givens. Any completed construction, shaded region, tangent/secant overlay, transformed image, solution curve, or answer annotation belongs only in the solution view unless it is explicitly given data."
+      },
+      "generator": {
+        "prompt_pattern": "Find the requested series, radius, or interval.",
+        "parameter_names": [],
+        "property_controls": [
+          "number_domain",
+          "difficulty_band",
+          "answer_form"
+        ],
+        "validity_constraints": [
+          "Instantiate concrete values so the requested mathematics has a well-defined answer at the selected difficulty.",
+          "All displayed values, tables, graphs, diagrams, and equations must be mutually consistent.",
+          "Use original values and wording; do not clone source examples."
+        ],
+        "answer_rule": "Independently solve the instantiated problem and verify the response against every displayed representation.",
+        "parallel_invariants": [
+          "evidence_job",
+          "student_action",
+          "response_mode",
+          "representation_role",
+          "difficulty_band"
+        ],
+        "parallel_variation": [
+          "numeric values",
+          "legal coefficients/parameters",
+          "functional context",
+          "diagram/data values",
+          "answer-choice order"
+        ],
+        "difficulty_policy": "Difficulty changes legal parameter complexity, algebraic load, or cueing inside this family; it may not change the evidence job.",
+        "workspace_default": "standard",
+        "render_route": "html_mathjax"
+      },
+      "quality_gates": [
+        "Prompt is direct and mathematically complete.",
+        "No metadata prose or filler directions are used as student wording.",
+        "Any required representation is mathematically accurate and answer-neutral.",
+        "If construction is assessed, the student visual does not reveal the completed construction.",
+        "The final item and every refresh candidate are independently solved and answer-checked."
+      ],
+      "source_basis": [
+        "teacher_parallel_forms_high_school",
+        "teacher_topic_inventory",
+        "Kuta_free_catalog_coverage_review"
+      ],
+      "quality_status": "family_contract_and_curated_preview_locked; generated instances still require solve/render QA"
+    }
+  ]
+}
