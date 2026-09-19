@@ -1,0 +1,97 @@
+{
+  "schema": "math-refresh-groups/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "purpose": "Curated semantic neighborhoods for the worksheet New Question control. These groups authorize close alternate question families without allowing random drift across a worksheet.",
+  "default_policy": {
+    "candidate_count_per_slot": 3,
+    "candidate_1": "initial_blueprint_family",
+    "when_seed_has_group": "candidates_2_3_follow_group_rules",
+    "when_seed_has_no_group": "candidates_2_3_stay_in_exact_seed_family",
+    "worksheet_wide_selected_family_pool_is_not_a_refresh_pool": true,
+    "preserve_broad_student_action": true,
+    "preserve_approximate_difficulty": true,
+    "answer_check_every_candidate": true
+  },
+  "groups": [
+    {
+      "group_id": "quadratic_factoring",
+      "label": "Factor Quadratic Expressions",
+      "intent": "Factor a quadratic or special quadratic polynomial completely. The student action remains factoring an expression, not solving an equation or expanding a product.",
+      "seed_family_ids": [
+        "POLY_FACTOR_QUAD",
+        "POLY_FACTOR_SPECIAL"
+      ],
+      "allowed_family_ids": [
+        "POLY_FACTOR_QUAD",
+        "POLY_FACTOR_SPECIAL"
+      ],
+      "candidate_design": {
+        "POLY_FACTOR_QUAD": [
+          {
+            "candidate": "alternate_1",
+            "family_id": "POLY_FACTOR_QUAD",
+            "requirements": [
+              "Use a visibly different legal factor structure from Candidate 1.",
+              "If Candidate 1 has leading coefficient a = 1, prefer a factorable a != 1 trinomial.",
+              "If Candidate 1 has a != 1, prefer a monic or GCF-then-factor quadratic when appropriate.",
+              "Use integer factors/roots and require complete factoring."
+            ]
+          },
+          {
+            "candidate": "alternate_2",
+            "family_id": "POLY_FACTOR_SPECIAL",
+            "requirements": [
+              "Use a quadratic special case: difference of squares or perfect-square trinomial.",
+              "Ask to factor completely.",
+              "Choose a different special pattern from any already visible candidate when possible."
+            ]
+          }
+        ],
+        "POLY_FACTOR_SPECIAL": [
+          {
+            "candidate": "alternate_1",
+            "family_id": "POLY_FACTOR_SPECIAL",
+            "requirements": [
+              "Use a different special pattern from Candidate 1 when possible: difference of squares versus perfect-square trinomial.",
+              "Ask to factor completely."
+            ]
+          },
+          {
+            "candidate": "alternate_2",
+            "family_id": "POLY_FACTOR_QUAD",
+            "requirements": [
+              "Use a standard factorable quadratic trinomial.",
+              "Prefer leading coefficient a != 1 when it provides useful variety.",
+              "Use integer factors/roots and require complete factoring."
+            ]
+          }
+        ]
+      },
+      "forbidden_drift": [
+        "balancing or solving linear equations",
+        "solving a quadratic equation",
+        "zero-product-property solve prompts",
+        "exponent rules",
+        "expanding special products",
+        "graphing quadratics or polynomials",
+        "matching graphs to equations",
+        "unrelated polynomial operations"
+      ],
+      "qa_examples": {
+        "good": [
+          "Factor x^2 + 7x + 12.",
+          "Factor 6x^2 + 11x + 3.",
+          "Factor completely: 9x^2 - 25.",
+          "Factor completely: x^2 + 10x + 25."
+        ],
+        "bad": [
+          "Solve 6x - 5 = 3x + 16.",
+          "Simplify x^7 * x^3 / x^4.",
+          "Expand (x + 5)^2.",
+          "Solve x^2 - 7x + 12 = 0."
+        ]
+      }
+    }
+  ]
+}

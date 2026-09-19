@@ -65,10 +65,13 @@
     "catalogs/math_family_preview_specimens_calculus.json",
     "catalogs/math_family_preview_repairs.json"
   ],
+  "refresh_group_sources": [
+    "catalogs/math_refresh_groups.json"
+  ],
   "compatibility_aggregates": [
     {
       "path": "catalogs/math_worksheet_generator_bank.json",
-      "coverage": "Derived compatibility aggregate; district worksheet builder composes all registered extensions at runtime."
+      "coverage": "Derived compatibility aggregate; canonical extensions remain authoritative through the family-library manifest."
     }
   ],
   "active_courses": [

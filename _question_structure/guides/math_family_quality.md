@@ -42,11 +42,15 @@ An active course is quality-complete only when every mapped family resolves to a
 Prefer direct mathematical language. Do not append filler such as “Use the representation shown and complete the requested response.”
 
 ## 8. Refresh quality
-Each generated worksheet slot has three solved candidates. Candidate 1 is the exact initial blueprint family. Candidates 2–3 come from the worksheet's **teacher-selected family pool** and may use a different selected family. Refresh may never introduce an unselected family.
+Each generated worksheet slot has three solved candidates. Candidate 1 is the exact initial blueprint family. Candidates 2–3 follow the seed family's curated refresh neighborhood in `catalogs/math_refresh_groups.json`; if no group exists, they remain in the exact same family.
 
-When multiple families are selected, prefer meaningful cross-family variety for at least one alternate when the replacement can remain approximately comparable in difficulty. The original exact family counts govern initial generation only; teacher refresh actions may change the visible family distribution. Every candidate must independently satisfy its own canonical family contract and answer-neutral visual policy. The matching answer key follows the active candidate state, including family changes.
+Refresh is about **same instructional intent**, not random worksheet variety. Never use the entire worksheet's selected-family list as the alternate pool. A group-authorized neighbor family is permitted only when the group explicitly preserves the same broad student action and evidence intent.
 
-Teacher-defined custom structures may participate in the selected pool and are authored as solved candidates at build time. The offline response package does not manufacture additional AI-authored custom questions after build time.
+For `POLY_FACTOR_QUAD`, useful refresh variety includes monic trinomials, non-monic `a ≠ 1` trinomials, GCF-then-factor cases when appropriate, and a group-authorized special quadratic factorization. Balancing equations, exponent rules, solving equations, expanding products, and graphing are not valid refreshes for a factoring prompt.
+
+The original exact family counts govern initial generation. Every candidate must independently satisfy its own canonical family contract and answer-neutral visual policy. The matching answer key follows the active candidate state.
+
+Teacher-defined custom structures use the teacher description as their refresh neighborhood and are authored as solved candidates at build time. The offline response package does not manufacture additional AI-authored custom questions after build time.
 
 ## 9. Page-use quality for generated worksheet responses — HARD
 Workspace is an adjustable response area, not a hidden page reservation. When workspace size, visual size, candidate content, MathJax height, or version changes, the owning worksheet renderer must repaginate from the actual rendered heights. At 0% workspace, there is no residual minimum workspace height. Avoidable large blank regions or extra pages caused by stale previous measurements are a FAIL.

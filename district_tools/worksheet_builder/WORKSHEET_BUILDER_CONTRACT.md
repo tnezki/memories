@@ -1,8 +1,8 @@
 # Math Worksheet Builder Contract
 
 STATUS: PILOT
-VERSION: district-math-worksheet-builder/0.9-pilot
-REVISION: 2026-09-19.9
+VERSION: district-math-worksheet-builder/1.0-pilot
+REVISION: 2026-09-19.10
 
 This tool builds original printable math practice from teacher-selected canonical question families. It must not reproduce source worksheet wording, numbers, names, diagrams, choices, or source-specific layouts.
 
@@ -47,31 +47,34 @@ Difficulty changes legal parameters/cuing inside the selected family, not the ev
 ### Initial worksheet blueprint
 Across versions, the **initial displayed worksheet** preserves the exact teacher-selected family counts, slot sequence, and approximate difficulty. Version B/C/D remain parallel to Version A slot-for-slot at initial load: each slot starts in the family assigned by the exact selected blueprint and varies only contract-authorized parameters.
 
-### ↻ New Question behavior — selected-family pool
-The finished worksheet places **↻ New Question** below Problem selection. This is a teacher editing control, not a second enforcement of the initial blueprint.
+### ↻ New Question behavior — curated refresh neighborhood
+The finished worksheet places **↻ New Question** below Problem selection. This is a teacher editing control for getting another question with the **same instructional intent**, not a random draw from every family selected elsewhere on the worksheet.
 
 For every Version + Problem slot, author and independently solve **3 original candidates total**:
 1. Candidate 1 is the slot's original blueprint family.
-2. Candidates 2–3 are drawn from the **teacher-selected family pool for this worksheet**. They may use a different selected family than Candidate 1.
-3. If more than one catalog family was selected, at least one refresh candidate SHOULD come from a different selected family whenever a valid, approximately comparable item can be authored.
-4. A refresh candidate may **never** come from an unselected catalog family.
-5. The refresh pool is not weighted by original requested counts unless the request explicitly says otherwise.
+2. Resolve Candidate 1 in `MATH_REFRESH_GROUPS.json`.
+3. If it belongs to a curated refresh group, Candidates 2–3 must follow that group's allowed family IDs and candidate-design rules.
+4. If it belongs to no curated refresh group, Candidates 2–3 stay in the **exact same family** and vary meaningful legal morphology/parameters when available.
+5. Never use the worksheet-wide selected-family pool as the refresh pool merely because those families happen to appear on the same worksheet.
 
-Refreshing changes only the selected slot, cycles embedded candidates before repeating, preserves that slot's workspace/visual sizing, and immediately repaginates. Because refresh is an explicit teacher edit, the visible worksheet is allowed to drift from the original exact family-count distribution after one or more refreshes. The original counts govern **initial generation**, not the teacher-edited post-refresh state.
+A curated refresh group may authorize a closely related neighboring family even when that neighboring family was not separately selected as an initial worksheet slot. Group membership is therefore a semantic authorization, not an instruction to rebalance the worksheet. The group must preserve the same broad skill intent and must explicitly exclude neighboring operations that change what the student is being asked to do.
+
+Refreshing changes only the selected slot, cycles embedded candidates before repeating, preserves that slot's workspace/visual sizing, and immediately repaginates. The original family counts govern **initial generation**. A teacher refresh may change the exact family ID only when the slot's curated refresh group explicitly permits that neighboring family.
 
 Each refresh candidate must:
-- belong to one of the selected family IDs (or a teacher-selected custom structure when custom structures are present);
-- remain inside the worksheet's selected grade/course scope;
+- remain inside the seed slot's curated refresh group, or the exact seed family when no group exists;
+- remain inside the appropriate grade/course scope;
 - stay approximately comparable in overall difficulty to the slot it replaces;
 - satisfy its own canonical family contract, including response mode, visual policy, validity constraints, and answer rule;
+- preserve the seed slot's broad student action (for example, **factor** remains factor; it must not become solve, expand, graph, balance, or apply exponent rules);
 - be independently solved and answer-checked;
 - use an accurate, answer-neutral student visual when its family requires one.
 
-The control label remains **↻ New Question**. Do not label it "same family" or otherwise imply that refresh is locked to Candidate 1's family.
+The control label remains **↻ New Question**.
 
-Teacher-defined custom structures may participate in the selected refresh pool as teacher-selected structures. Their alternate candidates are authored at response-build time from the custom description. The finished offline worksheet does not invent a brand-new AI-authored custom problem after the response package has been built. A truly new custom problem beyond the embedded pool requires a new request/build (or a future explicitly connected AI service); do not expose a dead or misleading AI button in the offline worksheet.
+Teacher-defined custom structures use their own custom description as the refresh neighborhood and receive three build-time candidates. The finished offline worksheet does not invent a brand-new AI-authored custom problem after the response package has been built. A truly new custom problem beyond the embedded pool requires a new request/build (or a future explicitly connected AI service); do not expose a dead or misleading AI button in the offline worksheet.
 
-When an answer key is requested, **Open matching answer key** carries the active candidate-state map so the key matches the exact refreshed questions, including family changes.
+When an answer key is requested, **Open matching answer key** carries the active candidate-state map so the key matches the exact refreshed questions, including any explicitly authorized neighbor-family change.
 
 ## 11. Student layout, true page view, and type — HARD
 Use locked `worksheet_styles.css` byte-for-byte. US Letter portrait. Honor one/two columns in screen and print. Adjustable screen shows real `.worksheet-page` US Letter fragments with the exact page boundaries browser Print will use.
@@ -161,8 +164,8 @@ Expose only **Open adjustable worksheet** and **Open answer key** when requested
 Return one response ZIP containing `CLICK_ME.html`, locked assets, adjustable worksheet HTML, optional answer key HTML, `data/request.json`, and `data/qa.json`. Adjustable HTML + browser Print is canonical.
 
 ## 17. QA — HARD
-Verify exact initial counts; family conformity; originality; direct wording; parallel equivalence at initial load; 3 candidates per slot; candidate correctness; selected-family-pool refresh variety; no unselected-family refresh candidates; refresh isolation/cycle/persistence; matching key state; screen/print page geometry; deterministic repagination after every layout/content mutation; version-wide workspace 0/100/300%; per-problem workspace 0/100/500/1200%; no stale page assignments at 0%; no avoidable large blank regions; graph scaling; MathJax; graph weights; fraction-area model denominator geometry; recognizable money-model rendering; conventional geometry marks; deterministic visual accuracy; fraction-bar notation; and student/solution visual separation.
+Verify exact initial counts; family conformity; originality; direct wording; parallel equivalence at initial load; 3 candidates per slot; candidate correctness; curated-refresh-neighborhood variety; no worksheet-wide random-family refresh; refresh isolation/cycle/persistence; matching key state; screen/print page geometry; deterministic repagination after every layout/content mutation; version-wide workspace 0/100/300%; per-problem workspace 0/100/500/1200%; no stale page assignments at 0%; no avoidable large blank regions; graph scaling; MathJax; graph weights; fraction-area model denominator geometry; recognizable money-model rendering; conventional geometry marks; deterministic visual accuracy; fraction-bar notation; and student/solution visual separation.
 
 Required pagination spot check: after setting **All workspaces in this version = 0%**, capture the active version's screen page count and browser Print page count and confirm they agree. Confirm that compact remaining questions repack upward/leftward and that the version does not preserve pages solely from its previous workspace heights.
 
-Overall PASS is forbidden if any initial item drifts from its assigned blueprint family, required visual is wrong/missing/unreadable, a student construction view reveals the answer, refresh uses an unselected family or leaves the selected course scope or becomes materially mismatched in difficulty, answers disagree, sizing controls fail, page view and print disagree, content clips, stale pagination leaves avoidable extra pages, a fraction multiplication model uses incorrect/dense subdivisions, money is represented by unrecognizable placeholder shapes, symbolic division uses unjustified `÷`/slash, geometry marks are ambiguous, or the answer key mismatches.
+Overall PASS is forbidden if any initial item drifts from its assigned blueprint family, required visual is wrong/missing/unreadable, a student construction view reveals the answer, refresh leaves its curated refresh neighborhood, changes the broad student action, leaves the appropriate course scope, or becomes materially mismatched in difficulty, answers disagree, sizing controls fail, page view and print disagree, content clips, stale pagination leaves avoidable extra pages, a fraction multiplication model uses incorrect/dense subdivisions, money is represented by unrecognizable placeholder shapes, symbolic division uses unjustified `÷`/slash, geometry marks are ambiguous, or the answer key mismatches.

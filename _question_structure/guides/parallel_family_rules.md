@@ -27,38 +27,46 @@ May vary when valid:
 A parallel FAIL occurs when a new version changes operation, reasoning demand, representation requirement, recognition-vs-construction demand, or difficulty band.
 
 ## Refreshable worksheet alternates
-A refreshable worksheet alternate is a teacher-selectable replacement for one worksheet slot after the initial exact blueprint has been generated.
+A refreshable worksheet alternate is a teacher-selectable replacement for one worksheet slot after the initial exact blueprint has been generated. Its purpose is **another question with the same instructional intent**.
 
-For the District Math Worksheet Builder:
+For the District Math Worksheet Builder, resolve refresh behavior through `catalogs/math_refresh_groups.json`:
 - Candidate 1 keeps the slot's original blueprint family.
-- Candidates 2–3 are drawn from the **teacher-selected family pool** for that worksheet.
-- A refresh candidate may use a different selected family than Candidate 1.
-- A refresh candidate may never use an unselected catalog family.
-- If more than one family was selected, at least one refresh candidate should use a different selected family whenever a valid approximately comparable question can be authored.
-- Original family counts govern the initial worksheet only; after teacher refreshes, the visible family-count distribution may change.
+- If Candidate 1 belongs to a curated refresh group, Candidates 2–3 come only from the family IDs and morphologies authorized by that group.
+- If Candidate 1 belongs to no refresh group, Candidates 2–3 remain in the exact same family.
+- Do **not** use all families selected elsewhere on the worksheet as the refresh pool.
+- A refresh group may explicitly authorize a close neighbor family even if that family was not separately selected for the initial worksheet. This is a semantic permission for refresh, not a change to the initial blueprint.
 
-For every refresh candidate, keep invariant at the worksheet level:
-- selected grade/course scope;
-- approximate overall difficulty/computational load for the slot;
+For every refresh candidate, keep invariant at the instructional-intent level:
+- the broad student action (factor stays factor; solve stays solve; graph stays graph; compare stays compare);
+- appropriate grade/course scope;
+- approximate overall difficulty/computational load;
 - originality and answer correctness;
-- family-contract validity for whichever selected family is used;
+- family-contract validity for whichever group-authorized family is used;
 - answer-neutral student visual policy.
 
-Within each candidate, obey that candidate family's own evidence job, student action, response mode, representation role, validity constraints, answer rule, legal variation axes, and visual policy.
-
 A refresh alternate FAIL occurs when:
-- it comes from a family the teacher did not select;
-- it leaves the selected grade/course scope;
+- it leaves the seed family's curated refresh group;
+- it changes the broad student action or evidence intent;
 - it is materially easier/harder than the slot it replaces without teacher intent;
 - it violates its own family contract;
 - its required representation is missing/wrong or answer-revealing;
 - it duplicates another candidate's effective prompt/parameters without a good procedural-fluency reason.
 
-A canonical visible slot uses a three-candidate pool by default: initial blueprint candidate + two refresh alternates. The teacher may cycle those candidates before printing. Hidden candidates do not count toward the initial visible question total. Teacher-defined custom structures may participate in the selected pool and use build-time authored alternates from the teacher description.
+A canonical visible slot uses a three-candidate pool by default: initial blueprint candidate + two refresh alternates. The teacher may cycle those candidates before printing. Hidden candidates do not count toward the initial visible question total.
+
+### Quadratic factoring example
+For seed family `POLY_FACTOR_QUAD`, the curated `quadratic_factoring` group intentionally supports variation such as:
+- a standard monic factorable trinomial;
+- a factorable trinomial with leading coefficient `a ≠ 1` and integer factors;
+- a special quadratic factorization through `POLY_FACTOR_SPECIAL`, such as difference of squares or a perfect-square trinomial.
+
+It explicitly does **not** authorize balancing/linear-equation items, exponent-rule items, solving a quadratic equation, expanding special products, or graphing a quadratic. Those change the requested student action.
+
+Teacher-defined custom structures use the teacher's custom description as their invariant refresh neighborhood and receive three build-time candidates.
 
 The finished worksheet is offline/self-contained. It may cycle only the embedded candidate pool; authoring an additional AI-generated custom candidate after build time requires a new build or an explicitly connected future AI service.
 
-When the worksheet has an answer key, the active refresh-candidate state must be transferable to the key so the displayed/printed key matches the exact refreshed worksheet, including any family change.
+When the worksheet has an answer key, the active refresh-candidate state must be transferable to the key so the displayed/printed key matches the exact refreshed worksheet.
 
 ## Secure parallels
 For secure assessment items, version/order/noun/number swaps alone are not sufficient. Use a new evidence stimulus while preserving the target and appropriate family.
