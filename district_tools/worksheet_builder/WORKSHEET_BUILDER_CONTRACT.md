@@ -2,7 +2,7 @@
 
 STATUS: PILOT
 VERSION: district-math-worksheet-builder/0.6-pilot
-REVISION: 2026-09-19.3
+REVISION: 2026-09-19.4
 
 This tool builds original printable math practice from teacher-selected canonical question families. It must not reproduce source worksheet wording, numbers, names, diagrams, choices, or source-specific layouts.
 
@@ -39,11 +39,36 @@ For every generated Version + Problem slot, author and independently solve **3 o
 
 When an answer key is requested, provide **Open matching answer key** from the worksheet controls. It carries the active candidate-state map so the key matches refreshed questions. Opening the answer key from `CLICK_ME.html` without state shows the initial candidate set.
 
-## 10. Student layout and type — HARD
+## 10. Student layout, true page view, and type — HARD
 Use locked `worksheet_styles.css` byte-for-byte. US Letter portrait; `@page` margin 0.55 in; honor one/two-column selection in screen and print. Keep directions short and MathJax at surrounding-text size.
+
+### True page view
+The adjustable worksheet screen MUST show actual US Letter page boundaries rather than one continuous white canvas.
+
+- Each printed sheet is represented by one `.worksheet.worksheet-page` element with a 1:1 screen page frame.
+- Put page elements inside a version container such as `.worksheet-version[data-version="A"]`; do not use one infinitely growing `.worksheet` element for a multi-page version.
+- On desktop screen, every page frame is exactly 8.5 in × 11 in with the same 0.55 in content margins used for print, a visible neutral gap between pages, and no content drawn across the page edge.
+- In print, each `.worksheet-page` is one page fragment and must end with an explicit page break except the final page of the selected version.
+- Page boundaries shown on screen MUST be the same boundaries used by browser Print. A dashed line or decorative page-break marker that does not control print pagination does not satisfy this rule.
+- Keep a problem intact within a column/page whenever possible. If an enlarged workspace or visual no longer fits, move the whole problem to the next column/page or give it its own page; never clip it to preserve the old page count.
+- Repaginate the active version after initial MathJax/typesetting, after **↻ New Question**, after workspace or graph/diagram sizing changes, after reset, and after any other action that changes measured problem height.
+- Hidden candidates and hidden versions may not affect pagination.
+- The screen page count and printed page count for the selected version must agree.
+
+### Division notation default
+For symbolic math, ordinary division is rendered with a fraction bar by default.
+
+- Prefer MathJax `\frac{numerator}{denominator}` (or the equivalent display form) when one algebraic/numeric expression is divided by another.
+- Example: author `\frac{t^7\cdot t^3}{t^4}` rather than `t^7\cdot t^3 \div t^4`.
+- Do not use the Unicode division sign `÷` or a slash `/` merely as a compact substitute for a fraction in symbolic algebra, exponent rules, rational expressions, equations, scientific notation, or similar families.
+- `÷` remains allowed only when the family explicitly teaches/assesses the division symbol or an elementary-operation representation where that notation is mathematically intentional.
+- Conventional unit/rate notation such as `m/s` may use a slash when the slash is part of the unit convention rather than the operation being assessed.
+- Apply the same notation rule to worksheet prompts, refresh candidates, worked solutions, and answer keys.
 
 ## 11. Per-problem layout controls — HARD
 Finished `worksheet/worksheet.html` has a screen-only left rail on desktop: Version; Problem; ↻ New Question + candidate status; Workspace 0–1200%; Graph/diagram 70–160%; Reset selected problem; optional Open matching answer key; Print. Workspace/visual settings are stored per exact version/problem and persist when candidate changes. A moving slider with no rendered change is FAIL.
+
+The layout controls and repagination system are coupled: any control that changes the selected problem's height must immediately recompute page assignment before print. Changing one problem may change later page breaks in that version, but it may not change another problem's stored workspace/visual setting.
 
 ## 12. Graphs and visuals — HARD
 Follow packaged district response/graph standards and the authoritative graph tool for supported Cartesian graphs. Full-size print weights: grid 0.6 pt #aaaaaa; axes/arrows 1.8 pt #222222; relation 2.0 pt; major ticks 1.2 pt; relation exit arrows 1.5 pt when used. Deterministic SVG/HTML is appropriate for non-Cartesian instructional models when mathematically exact. Do not reveal answer visuals when construction itself is assessed.
@@ -58,4 +83,15 @@ Expose only **Open adjustable worksheet** and **Open answer key** (when requeste
 Return one response ZIP containing `CLICK_ME.html`, locked assets, adjustable worksheet HTML, optional answer key HTML, `data/request.json`, and `data/qa.json`. Adjustable HTML + browser Print is canonical.
 
 ## 16. QA — HARD
-Verify exact selected counts, family conformity, source originality, direct wording, parallel equivalence, 3 candidates per slot, candidate answer correctness, refresh isolation/cycle/persistence, matching answer-key state transfer, print columns/margins, workspace 0/100/500/1200%, graph scaling/isolation, MathJax, graph line weights, deterministic visual accuracy, answer-key alignment, and screen/print rendering. Overall PASS is forbidden if any item drifts from its family, a required visual is wrong/missing, refresh swaps family/difficulty, candidate answers disagree, sizing controls fail, print layout collapses, or the answer key mismatches.
+Verify exact selected counts, family conformity, source originality, direct wording, parallel equivalence, 3 candidates per slot, candidate answer correctness, refresh isolation/cycle/persistence, matching answer-key state transfer, print columns/margins, workspace 0/100/500/1200%, graph scaling/isolation, MathJax, graph line weights, deterministic visual accuracy, answer-key alignment, and screen/print rendering.
+
+Also verify:
+- every visible page is a real `.worksheet-page` print fragment, not a decorative marker;
+- page frames are 8.5 in × 11 in on desktop screen with the locked 0.55 in margins;
+- screen and print page boundaries/page counts agree for each version;
+- no problem, graph, diagram, or workspace crosses/clips at a page bottom;
+- repagination succeeds after refresh, workspace changes, graph/diagram changes, and reset;
+- hidden candidates do not create pages or blank space;
+- symbolic division uses a fraction bar by default and no stray `÷`/slash substitution remains unless the exact family/notation exception permits it.
+
+Overall PASS is forbidden if any item drifts from its family, a required visual is wrong/missing, refresh swaps family/difficulty, candidate answers disagree, sizing controls fail, print layout collapses, page-view boundaries disagree with printed boundaries, content clips at a page edge, symbolic division is rendered with an unjustified `÷`/slash instead of a fraction bar, or the answer key mismatches.

@@ -20,6 +20,11 @@ The Algebra 1 set was inferred from the teacher-supplied parallel DeltaMath form
 ## Quality rule
 A family name/summary is metadata, not student wording. Every generated item must be a concrete, independently solved instance of its exact canonical family. Curated previews show complete representative problems with the correct graph/model/table/diagram. If no reviewed specimen exists, Preview fails closed.
 
+## Worksheet display standards
+Finished adjustable worksheets now use **true page view** on desktop: each visible white sheet is a real US Letter print page, with the same 0.55 in margins and page boundaries that browser Print will use. Refreshing a problem or changing its workspace/graph size must repaginate the version so the screen page breaks stay aligned with print.
+
+For symbolic math, division defaults to a **stacked fraction bar**. The division sign `÷` is reserved for families where that symbol itself is intentional (for example, elementary division notation). Algebraic expressions, exponent rules, rational expressions, and similar work should use MathJax fractions instead of `÷` or an operation slash.
+
 ## Workflow
 1. Choose one or more grade/course filters.
 2. Choose 1–4 parallel versions, difficulty, one/two columns, and optional answer key.
@@ -27,5 +32,6 @@ A family name/summary is metadata, not student wording. Every generated item mus
 4. Select exact families and quantities.
 5. Create the request ZIP; upload it to ChatGPT; open the returned `CLICK_ME.html`.
 6. In the adjustable worksheet, use per-problem workspace/visual controls and **↻ New Question** to cycle same-family alternatives before printing.
+7. The page frames in the worksheet view are the actual page breaks used for print.
 
 The request ZIP receives a compatibility generator bank merged at runtime from the canonical base library plus Algebra 1 extension, so selected Algebra 1 families travel with their complete generator contracts.

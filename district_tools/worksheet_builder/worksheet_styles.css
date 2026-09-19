@@ -7,6 +7,10 @@
   --workspace-height:.62in;
   --graph-width:3in;
   --column-gap:.34in;
+  --page-width:8.5in;
+  --page-height:11in;
+  --page-margin:.55in;
+  --printable-height:9.9in;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;background:#fff}
@@ -25,6 +29,12 @@ body{font-size:10.5pt}
 .worksheet{
   width:8.5in;min-height:11in;margin:.18in auto;background:#fff;
   padding:.55in .55in .58in
+}
+/* Future worksheet responses paginate each version into real page fragments.
+   Keeping this as an additive class preserves older single-canvas responses. */
+.worksheet-page{
+  width:var(--page-width);height:var(--page-height);min-height:var(--page-height);
+  padding:var(--page-margin);overflow:hidden;position:relative
 }
 .sheet-header{display:flex;justify-content:space-between;gap:.25in;align-items:end;border-bottom:1.2pt solid #32373d;padding-bottom:.08in;margin-bottom:.18in}
 .sheet-header h1{font-size:16pt;margin:0}
@@ -56,6 +66,19 @@ mjx-container[display="true"]{margin:.22em 0!important}
 .answer{font-weight:800}
 .page-break{break-before:page;page-break-before:always}
 
+@media screen{
+  html,body{background:#e8edf1}
+  .worksheet-version{display:block;width:100%}
+  .worksheet-page{
+    margin:.24in auto;background:#fff;border:1px solid #d3d8de;
+    box-shadow:0 4px 18px rgba(20,28,36,.14)
+  }
+  .worksheet-page::after{
+    content:"Page " attr(data-page);position:absolute;right:.18in;bottom:.13in;
+    font-size:9px;line-height:1;color:#8a939e;letter-spacing:.02em
+  }
+}
+
 @media screen and (min-width:1100px){
   body:has(.layout-controls){padding-left:252px}
   .layout-controls{
@@ -72,10 +95,12 @@ mjx-container[display="true"]{margin:.22em 0!important}
 @media screen and (max-width:1099px){
   body{padding-left:0}
   .worksheet{width:auto;max-width:8.5in}
+  .worksheet-page{height:auto;min-height:11in}
   .layout-controls{position:relative}
 }
 @media screen and (max-width:760px){
   .worksheet{margin:0;padding:.35in}
+  .worksheet-page{margin:.18in auto}
   .question-grid{column-count:1!important;column-rule:0!important}
 }
 
@@ -83,6 +108,11 @@ mjx-container[display="true"]{margin:.22em 0!important}
   body{padding-left:0!important;background:#fff}
   .layout-controls{display:none!important}
   .worksheet{margin:0;width:auto;min-height:auto;padding:0}
+  .worksheet-page{
+    height:var(--printable-height);min-height:var(--printable-height);overflow:hidden;
+    break-after:page;page-break-after:always;border:0;box-shadow:none
+  }
+  .worksheet-version .worksheet-page:last-child{break-after:auto;page-break-after:auto}
   .worksheet.two-column .question-grid,.worksheet:not(.one-column) .question-grid{column-count:2!important}
   .worksheet.one-column .question-grid{column-count:1!important;column-rule:0!important}
   @page{size:Letter portrait;margin:.55in}
