@@ -18,7 +18,10 @@ body{font-size:10.5pt}
 .layout-controls label{font-weight:800}
 .layout-controls input[type=range]{width:100%}
 .layout-controls input[type=number]{width:68px}
+.layout-controls select{width:100%;padding:6px 7px;border:1px solid #aeb8c4;border-radius:5px;background:#fff;font:inherit}
 .layout-controls button{cursor:pointer}
+.layout-controls .control-group{display:grid;gap:4px}
+.layout-controls .selection-note{font-size:11px;color:var(--muted);line-height:1.25}
 .worksheet{
   width:8.5in;min-height:11in;margin:.18in auto;background:#fff;
   padding:.55in .55in .58in
@@ -27,15 +30,23 @@ body{font-size:10.5pt}
 .sheet-header h1{font-size:16pt;margin:0}
 .student-fields{font-size:10pt;white-space:nowrap}
 .directions{font-size:10pt;margin:.08in 0 .16in;line-height:1.25}
-.question-grid{columns:2;column-gap:var(--column-gap);column-rule:1pt solid #c7cbd0}
-.problem{break-inside:avoid-column;page-break-inside:avoid;margin:0 0 .18in;padding:0 0 .08in;font-size:10.5pt;line-height:1.30}
+.question-grid{column-gap:var(--column-gap);column-rule:1pt solid #c7cbd0}
+.worksheet.two-column .question-grid,.worksheet:not(.one-column) .question-grid{column-count:2}
+.worksheet.one-column .question-grid{column-count:1;column-rule:0}
+.problem{
+  --problem-workspace-height:var(--workspace-height);
+  --problem-graph-width:var(--graph-width);
+  break-inside:avoid-column;page-break-inside:avoid;margin:0 0 .18in;padding:0 0 .08in;
+  font-size:10.5pt;line-height:1.30
+}
 .problem .num{font-weight:800}
-/* MathJax's default inline enlargement is intentionally neutralized so numbers,
-   variables, and expressions sit at the same visual scale as surrounding prose. */
 mjx-container{font-size:100%!important}
 mjx-container[display="true"]{margin:.22em 0!important}
-.workspace{height:var(--workspace-height);min-height:.22in}
-.graph-wrap,.diagram-wrap{display:flex;justify-content:center;align-items:center;margin:.08in auto;width:min(100%,var(--graph-width));max-width:100%}
+.workspace{height:var(--problem-workspace-height);min-height:.22in}
+.graph-wrap,.diagram-wrap{
+  display:flex;justify-content:center;align-items:center;margin:.08in auto;
+  width:min(100%,var(--problem-graph-width));max-width:100%
+}
 .graph-wrap svg,.graph-wrap img,.diagram-wrap svg,.diagram-wrap img{display:block;width:100%;max-width:100%;height:auto}
 .graph .grid{stroke:var(--grid);stroke-width:.6pt}
 .graph .axis,.graph .axis-arrow{stroke:var(--axis);stroke-width:1.8pt}
@@ -45,11 +56,10 @@ mjx-container[display="true"]{margin:.22em 0!important}
 .answer{font-weight:800}
 .page-break{break-before:page;page-break-before:always}
 
-/* Desktop preview: controls stay on the left so the teacher can watch the page change. */
 @media screen and (min-width:1100px){
-  body:has(.layout-controls){padding-left:236px}
+  body:has(.layout-controls){padding-left:252px}
   .layout-controls{
-    position:fixed;left:14px;top:14px;width:208px;max-height:calc(100vh - 28px);overflow:auto;
+    position:fixed;left:14px;top:14px;width:224px;max-height:calc(100vh - 28px);overflow:auto;
     flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;
     box-shadow:0 4px 14px rgba(0,0,0,.12)
   }
@@ -57,20 +67,23 @@ mjx-container[display="true"]{margin:.22em 0!important}
   .layout-controls label{display:block}
 }
 
-@media print{
-  body{padding-left:0!important;background:#fff}
-  .layout-controls{display:none!important}
-  .worksheet{margin:0;width:auto;min-height:auto;padding:0}
-  .question-grid{columns:2}
-  @page{size:Letter portrait;margin:.55in}
-}
-
-@media(max-width:1099px){
+/* Narrow-screen preview may collapse to one column. Screen-only is deliberate so
+   this rule can never override the requested print column count. */
+@media screen and (max-width:1099px){
   body{padding-left:0}
   .worksheet{width:auto;max-width:8.5in}
   .layout-controls{position:relative}
 }
-@media(max-width:760px){
+@media screen and (max-width:760px){
   .worksheet{margin:0;padding:.35in}
-  .question-grid{columns:1}
+  .question-grid{column-count:1!important;column-rule:0!important}
+}
+
+@media print{
+  body{padding-left:0!important;background:#fff}
+  .layout-controls{display:none!important}
+  .worksheet{margin:0;width:auto;min-height:auto;padding:0}
+  .worksheet.two-column .question-grid,.worksheet:not(.one-column) .question-grid{column-count:2!important}
+  .worksheet.one-column .question-grid{column-count:1!important;column-rule:0!important}
+  @page{size:Letter portrait;margin:.55in}
 }

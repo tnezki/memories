@@ -1,10 +1,10 @@
 # Math Worksheet Builder Contract
 
 STATUS: PILOT
-VERSION: district-math-worksheet-builder/0.1-pilot
-REVISION: 2026-09-18.2
+VERSION: district-math-worksheet-builder/0.2-pilot
+REVISION: 2026-09-18.3
 
-This tool builds original printable math practice from teacher-selected question structures. It intentionally combines two useful design traditions: clean parameterized fluency practice and conceptually varied visual/multi-representation practice. It must not reproduce copyrighted worksheet questions, wording, names, numbers, diagrams, or answer choices from reference sources.
+This tool builds original printable math practice from teacher-selected question structures. It combines clean parameterized fluency practice with conceptual, visual, application, and multi-representation practice. It must not reproduce copyrighted worksheet questions, wording, names, numbers, diagrams, or answer choices from reference sources.
 
 ## 1. Core purpose - HARD
 
@@ -48,71 +48,109 @@ Respect the teacher-selected domains: whole numbers, integers/negatives, fractio
 Use `assets/worksheet_styles.css` byte-for-byte as the base stylesheet.
 
 - US Letter portrait.
-- Preserve the locked `@page` margin of 0.55 in. Do not replace it with zero-margin printing or compensate with tiny page padding.
-- Two student columns by default, matching the teacher preference for dense-but-readable math practice.
+- Preserve the locked `@page` margin of 0.55 in.
+- Honor `request.json -> layout.two_column` in both SCREEN and PRINT. A two-column worksheet must remain two columns when the Print button/browser print dialog opens.
 - A visual-heavy item may span both columns only when one-column placement would make the visual unreadable; record any span exception in QA.
 - Keep directions short.
 - Give each problem enough white space to work without turning the sheet into oversized cards.
 - Do not use decorative shaded problem cards.
 - Use MathJax for mathematical notation, but do not wrap ordinary prose numerals in MathJax when plain text is sufficient.
-- Inline MathJax MUST remain at the same visual font size as surrounding prose. Do not allow the MathJax default enlargement to make values, variables, fractions, or labels visibly larger than the sentence containing them.
+- Inline MathJax MUST remain at the same visual font size as surrounding prose.
 - Do not add per-question inline font-size overrides. The locked worksheet stylesheet owns student typography.
 
-## 6. Adjustable workspace and graph/diagram scale - HARD
+### Print-column regression rule
 
-The finished `worksheet/worksheet.html` MUST include screen-only layout controls with all of the following behavior:
+Responsive screen rules must be scoped with `@media screen`. A narrow-screen one-column fallback must never override the requested print column count. Before PASS, open print preview from the worksheet's Print button and verify the requested column count on the printed pages.
 
-- Workspace scale slider + exact percent input. Range 60%-180%.
-- Graph/diagram scale slider + exact percent input. Range 70%-160%.
-- Reset button.
-- Print button.
-- The two controls are independent: changing graph size must not silently change workspace height and vice versa.
-- Persist the teacher's selected values in browser `localStorage` for that worksheet when practical.
-- Show a small live page/overflow warning when the browser can detect obvious overflow; never silently clip content.
-- The request's `layout.workspace_scale_percent` and `layout.graph_scale_percent` are the initial values.
-- On desktop screens the controls belong in a fixed/sticky LEFT rail so the teacher can see the worksheet change while moving a slider. On narrower screens they may return to a top bar.
+## 6. Per-version / per-problem layout controls - HARD
 
-### Required implementation rule
+The finished `worksheet/worksheet.html` MUST include screen-only layout controls in the left rail on desktop. These controls edit ONE exact problem at a time.
 
-Do NOT implement scaling as CSS multiplication such as:
+Required controls:
 
-`height: calc(var(--base-workspace) * var(--workspace-scale))`
+1. **Version** dropdown: A-D, limited to the versions that exist.
+2. **Problem** dropdown: 1 through the requested problem count.
+3. **Workspace scale** slider + exact percent input, range 60%-180%.
+4. **Graph/diagram scale** slider + exact percent input, range 70%-160%.
+5. **Reset selected problem** button.
+6. **Print** button.
 
-or
+The controls must make the selected target obvious, for example `Version A · Problem 7`.
 
-`width: calc(var(--base-graph-width) * var(--graph-scale))`.
+### Required DOM identity
 
-Those expressions are not a reliable cross-browser mechanism for multiplying CSS dimensions by a unitless custom property and can leave a slider that moves without changing the worksheet.
+Every version and problem must be addressable without depending on visible text:
 
-Instead, the locked CSS exposes final dimension variables:
+- each version root has `class="worksheet"` and `data-version="A"` (or B/C/D);
+- each problem has `class="problem"` and `data-problem="1"` through the final problem number.
 
-- `--workspace-height` (default `.62in`)
-- `--graph-width` (default `3in`)
+The worksheet may also include internal stable IDs, but the two data attributes above are required.
 
-The worksheet JavaScript MUST calculate and write the actual dimensions whenever either slider or numeric input changes. Use these baselines unless a later contract explicitly changes them:
+### Workspace behavior
 
-- `workspaceHeightIn = 0.62 * workspacePercent / 100`
-- `graphWidthIn = 3.00 * graphPercent / 100`
+Every problem must contain a usable response/workspace surface unless the problem's required response structure already supplies the writing/drawing surface. A plain direct-response item should not omit its workspace merely because the default height is small.
 
-Then set, for example:
+The selected problem owns its own final workspace dimension. The locked CSS uses:
 
-`document.documentElement.style.setProperty('--workspace-height', workspaceHeightIn.toFixed(3) + 'in')`
+- global default: `--workspace-height: .62in`;
+- problem override: `--problem-workspace-height`.
 
-`document.documentElement.style.setProperty('--graph-width', graphWidthIn.toFixed(3) + 'in')`
+The worksheet JavaScript must calculate:
 
-Apply the values on initial load, on every `input` event, after Reset, and after restoring saved values. The visible worksheet must change immediately without reloading.
+`workspaceHeightIn = 0.62 * workspacePercent / 100`
 
-Before declaring QA PASS, exercise both controls at two non-default values (for example 80% and 140%) and verify that the rendered dimensions actually change while the other dimension remains unchanged.
+and set `--problem-workspace-height` on the selected `.problem` element only.
+
+Changing Version A / Problem 3 must not change Version A / Problem 4 or Version B / Problem 3.
+
+### Graph/diagram behavior
+
+The selected problem owns its own final graph/diagram width. The locked CSS uses:
+
+- global default: `--graph-width: 3in`;
+- problem override: `--problem-graph-width`.
+
+The worksheet JavaScript must calculate:
+
+`graphWidthIn = 3.00 * graphPercent / 100`
+
+and set `--problem-graph-width` on the selected `.problem` element only.
+
+If the selected problem has no graph or diagram, disable the graph controls and show a short neutral note such as `No graph/diagram in this problem.` Do not apply the graph change to some other problem.
+
+### Initial values and persistence
+
+- `request.json -> layout.workspace_scale_percent` and `layout.graph_scale_percent` are the INITIAL defaults for every problem.
+- After first render, each version/problem may diverge independently.
+- Persist per-version/per-problem values in `localStorage` when practical. Keys must include both version and problem number.
+- On Version/Problem dropdown change, load that problem's current values into the controls without changing the page.
+- Reset affects the selected problem only and returns it to the request defaults.
+- Workspace and graph controls remain independent.
+
+### Functional QA
+
+Before PASS, test at least:
+
+- Version A / Problem 1 workspace at 80%;
+- a different problem workspace at 140%;
+- one problem with a graph at two graph sizes;
+- switch versions and prove the other version retains its own values;
+- prove workspace changes do not change graph width and graph changes do not change workspace height.
+
+A slider that moves while the rendered problem does not change is a FAIL.
 
 ## 7. Graphs and quantitative visuals - HARD
 
-Follow the packaged shared district response standard.
+Follow BOTH:
 
-For every Cartesian graph type supported by the packaged graph tool, the builder MUST use the packaged authoritative entrypoint:
+- `response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md`
+- `response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md`
+
+For every Cartesian graph type supported by the packaged graph tool, use the packaged authoritative entrypoint:
 
 `response_contract/graph_tool/~graph_tool_v14.py`
 
-with v13 and v12 staged beside it. Do not replace a supported Cartesian graph with hand-drawn SVG, improvised HTML axes, or ad hoc plotting code merely because that is quicker. A custom deterministic SVG/HTML visual is appropriate only for a representation the graph tool does not own, such as ratio tables, double number lines, simple shape arrays, scale drawings, and exact geometric polygons.
+with v13 and v12 staged beside it. Do not replace a supported Cartesian graph with hand-drawn SVG, improvised HTML axes, or ad hoc plotting code merely because that is quicker.
 
 Full-size Cartesian print weights are locked to the teacher-approved 2026-09-18 standard:
 - grid: 0.6 pt, `#aaaaaa`
@@ -121,7 +159,7 @@ Full-size Cartesian print weights are locked to the teacher-approved 2026-09-18 
 - major ticks: 1.2 pt
 - relation exit arrows: 1.5 pt when used
 
-These are the approved printed darkness from the Quick Check repair. Do not apply ad hoc CSS thickness overrides that change graph-tool output. Resize the completed graph through layout geometry only. Compact multi-panel graph-tool types may retain their built-in proportional weights.
+Resize the completed graph through layout geometry only. Compact multi-panel graph-tool types may retain their built-in proportional weights.
 
 For deterministic non-Cartesian visuals such as ratio tables, double number lines, simple shape arrays, scale drawings, and geometric polygons, clean SVG/HTML is appropriate when mathematically exact. Do not use generative imagery for quantitative diagrams.
 
@@ -136,9 +174,28 @@ Create the number of versions requested: 1, 2, or 4.
 
 ## 9. Answer key - HARD
 
-When requested, create `teacher/answer_key.html` and `teacher/answer_key.pdf` matching the exact student versions and order. Answers must be concise but include required reasoning for explanation items. Visual answers must be mathematically accurate.
+When requested, create `teacher/answer_key.html` matching the exact student versions and order. Answers must be concise but include required reasoning for explanation items. Visual answers must be mathematically accurate. The answer key must have clean browser-print behavior; a separate answer-key PDF is not required.
 
-## 10. Response package - HARD
+## 10. Teacher dashboard / CLICK_ME - HARD
+
+The dashboard exists to make the teacher workflow obvious, not to expose implementation files.
+
+`CLICK_ME.html` must contain only the classroom-use actions below:
+
+1. **Open adjustable worksheet** -> `worksheet/worksheet.html`
+2. **Open answer key** -> `teacher/answer_key.html` when an answer key was requested
+
+Do NOT show buttons/links for:
+- worksheet PDF;
+- answer-key PDF;
+- `data/qa.json`;
+- `data/request.json`;
+- CSS/contracts/graph assets;
+- duplicate HTML/PDF versions of the same resource.
+
+QA still exists internally and must PASS. It is simply not part of the normal teacher-facing dashboard.
+
+## 11. Response package - HARD
 
 Return ONE response ZIP with:
 
@@ -151,37 +208,40 @@ assets/
   visuals/       (when used)
 worksheet/
   worksheet.html
-  worksheet.pdf
 teacher/
   answer_key.html   (when requested)
-  answer_key.pdf    (when requested)
 data/
   request.json
   qa.json
 ```
 
-`CLICK_ME.html` is the teacher entry point and links to the worksheet HTML/PDF, answer key when requested, and QA.
+No worksheet PDF or answer-key PDF is required. The adjustable HTML + browser Print button is the canonical printable worksheet source.
 
-`worksheet.pdf` may contain all requested versions sequentially. Start each version on a new page. Do not mix versions within a page.
+## 12. QA - HARD
 
-## 11. QA - HARD
+In addition to shared district QA requirements, record:
 
-In addition to the shared district QA requirements, record:
 - requested vs actual question count per version;
 - selected family IDs and actual counts;
 - difficulty distribution;
-- two-column layout used and any span exceptions;
+- requested column count preserved in screen and print preview;
 - locked 0.55 in print margin preserved;
-- initial workspace and graph scale values;
-- controls present, located in the left rail on desktop, and print-hidden;
-- workspace control functional test with before/after computed dimension;
-- graph control functional test with before/after computed dimension;
-- independence test showing workspace changes do not change graph width and graph changes do not change workspace height;
+- every version root has the correct `data-version`;
+- every problem has the correct `data-problem`;
+- every plain direct-response problem has a usable workspace surface;
+- Version and Problem dropdowns list the exact available targets;
+- selected-problem workspace functional test;
+- selected-problem graph functional test;
+- cross-problem isolation test;
+- cross-version isolation test;
+- workspace/graph independence test;
+- graph control disables cleanly when the selected problem has no visual;
 - MathJax inline-size normalization checked against surrounding prose;
 - graph-tool entrypoint used for every supported Cartesian graph;
 - graph line-weight compliance;
 - answer-key alignment;
+- CLICK_ME exposes only the adjustable worksheet and optional answer key;
 - no source-text copying detected in the authored problems;
-- all required PDFs visually checked.
+- screen and print modes visually checked.
 
-Overall PASS is not allowed if the question count is wrong, a required visual is missing, a graph is inaccurate, a supported Cartesian graph bypasses the packaged graph tool, either layout control is nonfunctional, inline math is visibly oversized, the answer key disagrees, print margins are smaller than the locked value, or print layout clips.
+Overall PASS is not allowed if the question count is wrong, a required visual is missing, a graph is inaccurate, a supported Cartesian graph bypasses the packaged graph tool, a selected-problem control changes the wrong problem, a layout control is nonfunctional, inline math is visibly oversized, the answer key disagrees, print margins are smaller than the locked value, requested two-column print collapses to one column, or print layout clips.

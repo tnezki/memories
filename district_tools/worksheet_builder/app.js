@@ -1,12 +1,12 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
-  const TOOL_VERSION = "0.1.2-pilot";
+  const TOOL_VERSION = "0.1.3-pilot";
   const REQUEST_SCHEMA = "district-math-worksheet-builder-request/0.1";
-  const CONTRACT_VERSION = "district-math-worksheet-builder/0.1-pilot";
+  const CONTRACT_VERSION = "district-math-worksheet-builder/0.2-pilot";
   const SHARED_STANDARD_VERSION = "district-response-build-standard/1.0";
   const DASHBOARD_STYLE_VERSION = "worksheet-builder-dashboard/0.1";
-  const WORKSHEET_STYLE_VERSION = "worksheet-builder-student/0.1";
+  const WORKSHEET_STYLE_VERSION = "worksheet-builder-student/0.2";
 
   const COURSE_LIST = ["Grade 6 Math","Grade 7 Math","Grade 8 Math","Pre-Algebra","Algebra 1","Geometry","Algebra 2","Precalculus","Calculus"];
   const DEFAULT_GENERIC = [
@@ -124,13 +124,15 @@
 
   function prepareDownload(blob,filename){
     clearPreparedDownload();
-    preparedDownloadUrl=URL.createObjectURL(blob);
-    const ready=$("downloadReady"), link=$("downloadLink"), filenameEl=$("downloadFilename");
-    link.href=preparedDownloadUrl;
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement("a");
+    link.href=url;
     link.download=filename;
-    link.textContent="Download Request ZIP";
-    filenameEl.textContent=filename;
-    ready.hidden=false;
+    link.style.display="none";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(()=>URL.revokeObjectURL(url),1500);
   }
 
   function refresh(){
@@ -176,9 +178,10 @@
     $("buildBtn").disabled=true; $("status").className="status"; $("status").textContent="Packaging self-contained worksheet request…";
     try{
       const selected=selectedFamilies();
-      const [contract,shared,catalogText,dashboardCss,worksheetCss,g12,g13,g14] = await Promise.all([
+      const [contract,shared,graphStandard,catalogText,dashboardCss,worksheetCss,g12,g13,g14] = await Promise.all([
         loadText("WORKSHEET_BUILDER_CONTRACT.md"),
         loadText("../_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md"),
+        loadText("../_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md"),
         loadText("question_structure_catalog.json"),
         loadText("dashboard_styles.css"),
         loadText("worksheet_styles.css"),
@@ -190,14 +193,14 @@
       const count=Number($("questionCount").value), versions=Number($("versions").value);
       const request={
         schema:REQUEST_SCHEMA,tool_version:TOOL_VERSION,created_at:new Date().toISOString(),
-        contracts:{worksheet_builder:CONTRACT_VERSION,shared_standard:SHARED_STANDARD_VERSION},
+        contracts:{worksheet_builder:CONTRACT_VERSION,shared_standard:SHARED_STANDARD_VERSION,graph_rendering_standard:"district-graph-rendering-standard/1.0"},
         worksheet:{title:$("title").value.trim(),course:$("course").value,topic:topicName(),learning_target:$("target").value.trim()||null,question_count_per_version:count,practice_mode:$("mode").value,difficulty_profile:difficulty(),number_domains:numberDomains(),version_count:versions,answer_key:$("answerKey").checked},
         question_structures:{catalog_schema:catalog?.schema||"pilot-fallback",selected_families:selected,custom_enabled:$("customEnabled").checked,custom_description:$("customEnabled").checked?$("customDescription").value.trim():null,custom_requested_count:($("customEnabled").checked && $("mode").value==="custom_mix")?(Number($("customCount").value)||0):null},
         layout:{page_size:"US Letter portrait",two_column:$("twoColumn").checked,workspace_scale_percent:Number($("workspaceNumber").value),graph_scale_percent:Number($("graphNumber").value),workspace_control_range_percent:[60,180],graph_control_range_percent:[70,160],independent_controls:true},
         teacher_notes:$("teacherNotes").value.trim()||null,
         locked_styles:{dashboard:{version:DASHBOARD_STYLE_VERSION,request_path:"response_contract/dashboard_styles.css",response_path:"assets/dashboard_styles.css",sha256:dashHash},worksheet:{version:WORKSHEET_STYLE_VERSION,request_path:"response_contract/worksheet_styles.css",response_path:"assets/worksheet_styles.css",sha256:workHash}},
         graph_tools:{entrypoint:"response_contract/graph_tool/~graph_tool_v14.py",dependencies:["response_contract/graph_tool/~graph_tool_v13.py","response_contract/graph_tool/~graph_tool_v12.py"],cartesian_print_standard:{grid:{color:"#aaaaaa",linewidth_pt:0.6},axes_arrows:{color:"#222222",linewidth_pt:1.8},relation:{linewidth_pt:2.0},major_ticks:{linewidth_pt:1.2}}},
-        resolved_outputs:{required_files:["CLICK_ME.html","assets/dashboard_styles.css","assets/worksheet_styles.css","worksheet/worksheet.html","worksheet/worksheet.pdf","data/request.json","data/qa.json",...($("answerKey").checked?["teacher/answer_key.html","teacher/answer_key.pdf"]:[])]},
+        resolved_outputs:{required_files:["CLICK_ME.html","assets/dashboard_styles.css","assets/worksheet_styles.css","worksheet/worksheet.html","data/request.json","data/qa.json",...($("answerKey").checked?["teacher/answer_key.html"]:[])]},
         authority_note:"Structured teacher choices in request.json outrank free-form notes. Reference descriptions define structure only; all authored problems must be original."
       };
       const entries=[
@@ -205,6 +208,7 @@
         {name:"request.json",data:enc.encode(JSON.stringify(request,null,2))},
         {name:"response_contract/WORKSHEET_BUILDER_CONTRACT.md",data:enc.encode(contract)},
         {name:"response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md",data:enc.encode(shared)},
+        {name:"response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md",data:enc.encode(graphStandard)},
         {name:"response_contract/QUESTION_STRUCTURE_CATALOG.json",data:enc.encode(catalogText)},
         {name:"response_contract/dashboard_styles.css",data:enc.encode(dashboardCss)},
         {name:"response_contract/worksheet_styles.css",data:enc.encode(worksheetCss)},
@@ -217,14 +221,14 @@
       const blob=makeZip(entries); const name=`math_worksheet_request_${slug(request.worksheet.course)}_${slug(request.worksheet.topic)}_${dateStamp()}.zip`;
       prepareDownload(blob,name);
       $("status").className="status good";
-      $("status").textContent="Request package is ready. Click Download Request ZIP below to save it.";
+      $("status").textContent="Request package created. Download started.";
     }catch(error){console.error(error);clearPreparedDownload();$("status").className="status bad";$("status").textContent="Could not package request: "+(error.message||error);}
     finally{$("buildBtn").disabled=validate().length>0;}
   }
 
   function buildInstructions(req){
     const fam=req.question_structures.selected_families.map(f=>`- ${f.id}: ${f.label}${f.requested_count!=null?` (count ${f.requested_count})`:""} — ${f.summary}`).join("\n");
-    return `# Math Worksheet Builder Request — Pilot\n\n## Run automatically\nBuild the complete worksheet package from this ZIP. No additional teacher prompt is required. Return exactly ONE response ZIP.\n\n## Teacher request\n- Course: ${req.worksheet.course}\n- Topic: ${req.worksheet.topic}\n- Title: ${req.worksheet.title}\n- Learning target/focus: ${req.worksheet.learning_target||"Not specified"}\n- Questions per version: ${req.worksheet.question_count_per_version}\n- Practice mode: ${req.worksheet.practice_mode}\n- Difficulty profile: ${req.worksheet.difficulty_profile}\n- Number domains: ${req.worksheet.number_domains.join(", ")}\n- Versions: ${req.worksheet.version_count}\n- Answer key: ${req.worksheet.answer_key?"Yes":"No"}\n- Student layout: ${req.layout.two_column?"two columns":"one column"}\n- Initial workspace scale: ${req.layout.workspace_scale_percent}%\n- Initial graph/diagram scale: ${req.layout.graph_scale_percent}%\n\n## Selected question structures\n${fam||"No catalog families selected."}\n${req.question_structures.custom_enabled?`\n### Teacher custom structure\n${req.question_structures.custom_description}${req.question_structures.custom_requested_count!=null?`\nRequested count in Custom Mix: ${req.question_structures.custom_requested_count}`:""}\n`:""}\n## Teacher notes\n${req.teacher_notes||"No additional notes."}\n\n## Required authority\nFollow BOTH response_contract/WORKSHEET_BUILDER_CONTRACT.md and response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md. Use response_contract/QUESTION_STRUCTURE_CATALOG.json only as structural guidance. All student questions, values, contexts, diagrams, and answer choices must be original.\n\nThe authoritative graph entrypoint is packaged at response_contract/graph_tool/~graph_tool_v14.py with v13 and v12 beside it. Use it for supported Cartesian graph needs. Preserve the locked Cartesian print weights in request.json.\n\nCopy both locked CSS files byte-for-byte to the response assets and verify their hashes in QA. The student worksheet HTML must keep independent workspace and graph/diagram scaling controls available before print.\n\n## Required files\n${req.resolved_outputs.required_files.map(p=>`- ${p}`).join("\n")}\n\nOpen and visually inspect all required PDFs. Return only the completed response ZIP.`;
+    return `# Math Worksheet Builder Request — Pilot\n\n## Run automatically\nBuild the complete worksheet package from this ZIP. No additional teacher prompt is required. Return exactly ONE response ZIP.\n\n## Teacher request\n- Course: ${req.worksheet.course}\n- Topic: ${req.worksheet.topic}\n- Title: ${req.worksheet.title}\n- Learning target/focus: ${req.worksheet.learning_target||"Not specified"}\n- Questions per version: ${req.worksheet.question_count_per_version}\n- Practice mode: ${req.worksheet.practice_mode}\n- Difficulty profile: ${req.worksheet.difficulty_profile}\n- Number domains: ${req.worksheet.number_domains.join(", ")}\n- Versions: ${req.worksheet.version_count}\n- Answer key: ${req.worksheet.answer_key?"Yes":"No"}\n- Student layout: ${req.layout.two_column?"two columns":"one column"}\n- Initial workspace scale: ${req.layout.workspace_scale_percent}%\n- Initial graph/diagram scale: ${req.layout.graph_scale_percent}%\n\n## Selected question structures\n${fam||"No catalog families selected."}\n${req.question_structures.custom_enabled?`\n### Teacher custom structure\n${req.question_structures.custom_description}${req.question_structures.custom_requested_count!=null?`\nRequested count in Custom Mix: ${req.question_structures.custom_requested_count}`:""}\n`:""}\n## Teacher notes\n${req.teacher_notes||"No additional notes."}\n\n## Required authority\nFollow response_contract/WORKSHEET_BUILDER_CONTRACT.md, response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md, and response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md. Use response_contract/QUESTION_STRUCTURE_CATALOG.json only as structural guidance. All student questions, values, contexts, diagrams, and answer choices must be original.\n\nThe authoritative graph entrypoint is packaged at response_contract/graph_tool/~graph_tool_v14.py with v13 and v12 beside it. Use it for supported Cartesian graph needs. Preserve the locked Cartesian print weights in request.json.\n\nCopy both locked CSS files byte-for-byte to the response assets and verify their hashes in QA. The student worksheet HTML must keep independent workspace and graph/diagram scaling controls available before print.\n\n## Required files\n${req.resolved_outputs.required_files.map(p=>`- ${p}`).join("\n")}\n\nVisually inspect the adjustable worksheet and answer key in screen and print modes. Return only the completed response ZIP.`;
   }
 
   function slug(value){return String(value||"worksheet").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,44)||"worksheet";}
