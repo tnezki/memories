@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Grading & Evidence Control Panel</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=20260919a">
 </head>
 <body>
 <header>
   <div class="wrap">
-    <h1>Grading &amp; Evidence Control Panel <span style="font-size:13px;opacity:.78">PILOT</span></h1>
+    <h1>Grading &amp; Evidence Control Panel <span class="pilot">PILOT</span></h1>
     <p>Package student evidence for ChatGPT and request individual feedback, class patterns, and print-ready follow-up practice.</p>
   </div>
 </header>
@@ -18,67 +18,55 @@
   <div class="grid">
     <section class="card">
       <h2>Build a grading request</h2>
-      <p class="small">Only student evidence is required. A roster, rubric, and teacher notes are optional.</p>
+      <p class="small">Only student evidence is required. The assignment title will be detected from the uploaded work. A roster, rubric, grade/subject, teacher name, and notes are optional.</p>
 
       <div class="row">
         <div>
           <label for="className">Class / group name <span class="required">*</span></label>
-          <input id="className" type="text" placeholder="Example: 7th Grade Science - Hour 2">
+          <input id="className" type="text" placeholder="Example: Algebra 1 - Hour 2">
         </div>
-        <div>
-          <label for="assignmentName">Assignment / evidence set <span class="required">*</span></label>
-          <input id="assignmentName" type="text" placeholder="Example: Ecosystems CER">
-        </div>
-      </div>
-      <div class="row">
         <div>
           <label for="gradeSubject">Grade / subject <span class="small">(optional)</span></label>
-          <input id="gradeSubject" type="text" placeholder="Example: Grade 2 Reading, Algebra 1, HS Art">
+          <input id="gradeSubject" type="text" placeholder="Example: Grade 7 Math, Algebra 1, HS Art">
         </div>
-        <div>
-          <label for="teacherName">Teacher name <span class="small">(optional)</span></label>
-          <input id="teacherName" type="text" placeholder="Your name">
-        </div>
+      </div>
+      <div class="single-field">
+        <label for="teacherName">Teacher name <span class="small">(optional)</span></label>
+        <input id="teacherName" type="text" placeholder="Your name">
       </div>
 
       <label for="evidenceFiles">1. Student evidence <span class="required">*</span></label>
       <div class="drop">
         <input id="evidenceFiles" type="file" multiple>
-        <div class="small" style="margin-top:7px"><b>Best results:</b> one file per student with the student's name in the filename. Combined class scans are also okay when student names are visible in the work.</div>
+        <div class="small upload-help"><b>Best results:</b> one file per student with the student's name in the filename. Combined class scans are also okay when student names are visible in the work.</div>
         <ul id="evidenceList" class="file-list"></ul>
       </div>
 
       <label for="rosterFiles">2. Class roster <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rosterFiles" type="file" multiple>
-        <div class="small" style="margin-top:7px"><b>Strongly recommended for combined handwritten class scans.</b> CSV, spreadsheet, PDF, document, or text rosters are fine. The roster is used only to match names, identify unmatched/missing evidence, and preserve class order.</div>
+        <div class="small upload-help"><b>Strongly recommended for combined handwritten class scans.</b> The roster is used only to match names, identify unmatched/missing evidence, and preserve class order.</div>
         <ul id="rosterList" class="file-list"></ul>
       </div>
 
       <label for="rubricFiles">3. Rubric / scoring guide <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rubricFiles" type="file" multiple>
-        <div class="small" style="margin-top:7px">A rubric or scoring guide gives the analysis explicit criteria. It can also control the optional grade/score when selected below.</div>
+        <div class="small upload-help">A rubric or scoring guide gives the analysis explicit criteria and can control the optional grade/score below.</div>
         <ul id="rubricList" class="file-list"></ul>
       </div>
 
-      <label>4. Evidence rating</label>
-      <div class="status good" style="margin-top:0">
-        <b>Convincing / Limited / Incorrect / Not Observed</b><br>
-        <span class="small" style="color:inherit">Every student report uses this evidence language. Not Observed means there is not enough usable evidence; it is not the same as Incorrect.</span>
-      </div>
-
-      <label for="gradeOutput">5. Optional grade / score</label>
-      <select id="gradeOutput" style="width:100%;font:inherit;border:1px solid #cbd4df;border-radius:10px;padding:11px 12px;background:#fff;color:#18202a">
+      <label for="gradeOutput">4. Optional grade / score</label>
+      <select id="gradeOutput">
         <option value="none" selected>No separate grade / score</option>
         <option value="rubric">Use the supplied rubric / scoring guide</option>
         <option value="recommend">Recommend a grade from the evidence</option>
       </select>
-      <div class="small" style="margin-top:7px"><b>This choice is authoritative.</b> The evidence rating still appears either way. If you choose rubric scoring, attach the rubric above. If you choose a recommended grade, ChatGPT may make a teacher-review recommendation from the submitted evidence and any grading directions you add below.</div>
+      <div class="small field-help"><b>This choice is authoritative.</b> Student reports still use the district evidence-rating language. If you choose rubric scoring, attach the rubric above.</div>
 
-      <label for="teacherNotes">6. Teacher notes <span class="small">(optional)</span></label>
+      <label for="teacherNotes">5. Teacher notes <span class="small">(optional)</span></label>
       <textarea id="teacherNotes" placeholder="Add anything ChatGPT should know about this evidence set."></textarea>
-      <div class="small" style="margin-top:7px"><b>Useful hints you can add:</b> click any idea to place it in your notes, then edit it as needed.</div>
+      <div class="small field-help"><b>Useful hints:</b> click any idea to place it in your notes, then edit it as needed.</div>
       <div class="chips" id="noteHints">
         <button type="button" class="chip" data-note="Give specific positive feedback on what the student demonstrated. Then clearly identify what is incorrect, incomplete, or needs revision and state what the student needs to fix.">Positive + clear fixes</button>
         <button type="button" class="chip" data-note="Focus on reasoning more than small arithmetic or spelling errors.">Focus on reasoning</button>
@@ -95,27 +83,21 @@
         <button type="button" class="chip" data-note="Flag unreadable scans, uncertain names, or ambiguous responses instead of guessing what the student wrote.">Flag unclear scans</button>
       </div>
 
-      <div id="buildStatus" class="status warn">Add the required fields and at least one evidence file.</div>
+      <div id="buildStatus" class="status warn">Add a class/group name and at least one evidence file.</div>
       <div class="actions">
         <button id="buildZip" type="button">Build Request ZIP</button>
         <button id="clearForm" class="secondary" type="button">Clear</button>
       </div>
     </section>
 
-    <aside class="card">
+    <aside class="card next-card">
       <h2>What happens next?</h2>
       <div class="step"><div class="step-num">1</div><p>Complete this form and download the request ZIP.</p></div>
-      <div class="step"><div class="step-num">2</div><p>Upload that ZIP to ChatGPT. The packaged request tells ChatGPT what to do, so processing begins from the uploaded request.</p></div>
-      <div class="step"><div class="step-num">3</div><p>ChatGPT should return one response ZIP. Unzip it and open <code>CLICK_ME.html</code>.</p></div>
-      <div class="divider"></div>
-      <h3>The response requests</h3>
-      <p class="small">Individual student reports, class-wide patterns, recommended groupings, common and individualized practice, plus a six-station review/extension set with answer key.</p>
-      <div class="status good"><b>Teacher review stays central.</b> The package asks ChatGPT to show its evidence basis and flag uncertainty rather than silently guessing.</div>
-      <div class="divider"></div>
-      <p class="privacy"><b>Student data:</b> this page processes selected files in your browser to make the ZIP; it does not upload them by itself. Upload/use student evidence only in ways allowed by your district's student-data and AI policies.</p>
+      <div class="step"><div class="step-num">2</div><p>Upload that ZIP to ChatGPT. The package contains the build contract, so no separate prompt is needed.</p></div>
+      <div class="step"><div class="step-num">3</div><p>ChatGPT returns one response ZIP. Unzip it and open <code>CLICK_ME.html</code>.</p></div>
     </aside>
   </div>
 </main>
-<script src="app.js"></script>
+<script src="app.js?v=20260919a"></script>
 </body>
 </html>
