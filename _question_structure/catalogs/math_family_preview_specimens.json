@@ -1,0 +1,658 @@
+{
+  "schema": "math-family-preview-specimens/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "scope_note": "Curated, solved representative morphology specimens. These are previews/QA exemplars, not source questions and not templates to copy verbatim into generated worksheets.",
+  "policy": {
+    "no_fallback_invention": "If a family has no curated specimen, the teacher preview must say preview pending quality review rather than inventing a generic question or visual.",
+    "student_prompt_rule": "Evidence-job, student-action, summary, and category metadata are never student-facing prompt text.",
+    "visual_rule": "A preview visual must be family-specific: systems show two lines, transformation families show source and image figures, slope/equation families show the required line, and nonvisual algebra families do not receive decorative graphs."
+  },
+  "specimens": {
+    "TRANSFORM_SEQUENCE": {
+      "prompt_html": "Describe one sequence of transformations that maps triangle <b>ABC</b> onto triangle <b>A′B′C′</b>.",
+      "visual": {
+        "type": "two_polygons_grid",
+        "a": [
+          [
+            -4,
+            1
+          ],
+          [
+            -2,
+            3
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        "b": [
+          [
+            3,
+            -2
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            -2
+          ]
+        ],
+        "labels_a": [
+          "A",
+          "B",
+          "C"
+        ],
+        "labels_b": [
+          "A′",
+          "B′",
+          "C′"
+        ],
+        "bounds": [
+          -6,
+          6,
+          -5,
+          5
+        ]
+      },
+      "response": "constructed_explanation",
+      "answer_key": "One valid sequence: reflect triangle ABC across the y-axis, then translate it 1 unit left and 3 units down."
+    },
+    "CONGRUENCE_RIGID_REASON": {
+      "prompt_html": "Are triangles <b>ABC</b> and <b>A′B′C′</b> congruent? Justify your answer by naming a rigid transformation that maps one onto the other.",
+      "visual": {
+        "type": "two_polygons_grid",
+        "a": [
+          [
+            -4,
+            -1
+          ],
+          [
+            -2,
+            2
+          ],
+          [
+            0,
+            -1
+          ]
+        ],
+        "b": [
+          [
+            1,
+            -1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            5,
+            -1
+          ]
+        ],
+        "labels_a": [
+          "A",
+          "B",
+          "C"
+        ],
+        "labels_b": [
+          "A′",
+          "B′",
+          "C′"
+        ],
+        "bounds": [
+          -6,
+          6,
+          -4,
+          4
+        ]
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Yes. A translation 5 units to the right maps ABC onto A′B′C′."
+    },
+    "CORRESPONDING_PARTS": {
+      "prompt_html": "Triangle <b>ABC</b> is mapped onto triangle <b>A′B′C′</b>. Which side corresponds to <b>BC</b>?",
+      "visual": {
+        "type": "two_polygons_grid",
+        "a": [
+          [
+            -4,
+            0
+          ],
+          [
+            -2,
+            3
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "b": [
+          [
+            1,
+            -2
+          ],
+          [
+            4,
+            -2
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "labels_a": [
+          "A",
+          "B",
+          "C"
+        ],
+        "labels_b": [
+          "A′",
+          "B′",
+          "C′"
+        ],
+        "bounds": [
+          -6,
+          6,
+          -4,
+          5
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "B′C′"
+    },
+    "DILATION_GRID": {
+      "prompt_html": "Dilate triangle <b>ABC</b> about the origin by a scale factor of <b>2</b>. Plot <b>A′B′C′</b> and list its coordinates.",
+      "visual": {
+        "type": "polygon_grid",
+        "points": [
+          [
+            -2,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "labels": [
+          "A",
+          "B",
+          "C"
+        ],
+        "bounds": [
+          -6,
+          6,
+          -5,
+          7
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "A′(−4,2), B′(0,6), C′(4,2)."
+    },
+    "SCALE_FACTOR_FIGURES": {
+      "prompt_html": "The triangles are scaled copies. Find the scale factor from Figure A to Figure B.",
+      "visual": {
+        "type": "scaled_triangles",
+        "a_sides": [
+          6,
+          9
+        ],
+        "b_sides": [
+          10,
+          15
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "5/3"
+    },
+    "EXP_RULES": {
+      "prompt_html": "Simplify: <b>x<sup>3</sup> · x<sup>5</sup> ÷ x<sup>2</sup></b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "x^6"
+    },
+    "EXP_ZERO_NEGATIVE": {
+      "prompt_html": "Rewrite <b>2<sup>−3</sup></b> using only positive exponents.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "1/2^3 = 1/8"
+    },
+    "SCI_CONVERT": {
+      "prompt_html": "Write <b>0.000072</b> in scientific notation.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "7.2 × 10^−5"
+    },
+    "SCI_OPERATIONS": {
+      "prompt_html": "Evaluate <b>(3 × 10<sup>4</sup>)(2 × 10<sup>−7</sup>)</b>. Write the answer in scientific notation.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "6 × 10^−3"
+    },
+    "EQ_MULTI_STEP": {
+      "prompt_html": "Solve for <b>x</b>: <b>3(2x − 5) + 4 = 25</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x = 6"
+    },
+    "EQ_VARIABLE_BOTH_SIDES": {
+      "prompt_html": "Solve for <b>x</b>: <b>5x − 7 = 2x + 8</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x = 5"
+    },
+    "EQ_NUMBER_SOLUTIONS": {
+      "prompt_html": "How many solutions does <b>4(2x + 3) = 8x + 12</b> have? Justify briefly.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Infinitely many solutions; both sides simplify to 8x + 12."
+    },
+    "EQ_CONTEXT_WRITE_SOLVE": {
+      "prompt_html": "A bike rental costs <b>$12</b> plus <b>$7 per hour</b>. The total charge is <b>$47</b>. Write and solve an equation to find the number of hours rented.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "12 + 7h = 47; h = 5."
+    },
+    "INEQ_SOLVE_GRAPH": {
+      "prompt_html": "Solve <b>−2x + 5 &gt; 11</b>, then graph the solution set.",
+      "visual": {
+        "type": "blank_number_line",
+        "min": -8,
+        "max": 8
+      },
+      "response": "constructed_graph",
+      "answer_key": "x < −3; open circle at −3 and shade left."
+    },
+    "FUNC_PROP_GRAPH_K": {
+      "prompt_html": "The graph shows a proportional relationship. Find the constant of proportionality <b>k</b> in <b>y = kx</b>.",
+      "visual": {
+        "type": "line_graph",
+        "bounds": [
+          -1,
+          6,
+          -1,
+          12
+        ],
+        "lines": [
+          {
+            "m": 2,
+            "b": 0
+          }
+        ],
+        "points": [
+          [
+            2,
+            4
+          ],
+          [
+            4,
+            8
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "k = 2"
+    },
+    "FUNC_LINEAR_TABLE": {
+      "prompt_html": "The table represents a linear relationship. Complete the missing value and write the rule in the form <b>y = mx + b</b>.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "−1",
+          "0",
+          "1",
+          "2"
+        ],
+        "rows": [
+          [
+            "y",
+            "−1",
+            "1",
+            "3",
+            "?"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "5; y = 2x + 1."
+    },
+    "FUNC_GRAPH_STORY": {
+      "prompt_html": "The graph shows distance from home over time. During which time interval is the person stopped?",
+      "visual": {
+        "type": "piecewise_graph",
+        "bounds": [
+          0,
+          8,
+          0,
+          10
+        ],
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            2
+          ]
+        ],
+        "x_label": "time",
+        "y_label": "distance"
+      },
+      "response": "constructed_short",
+      "answer_key": "From time 2 to time 5."
+    },
+    "FUNC_PIECEWISE_CONTEXT_GRAPH": {
+      "prompt_html": "A hiker walks away from camp at a steady rate for <b>2 hours</b>, rests for <b>1 hour</b>, then walks back toward camp at a steady rate for <b>2 hours</b>. Sketch a graph of distance from camp versus time.",
+      "visual": {
+        "type": "blank_axes",
+        "bounds": [
+          0,
+          6,
+          0,
+          10
+        ],
+        "x_label": "time (h)",
+        "y_label": "distance from camp"
+      },
+      "response": "constructed_graph",
+      "answer_key": "Increasing line from 0–2 h, horizontal from 2–3 h, then decreasing line from 3–5 h."
+    },
+    "FUNC_LINEAR_NONLINEAR": {
+      "prompt_html": "The table shows a relationship between <b>x</b> and <b>y</b>. Is the relationship linear or nonlinear? Explain using the rate of change.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "rows": [
+          [
+            "y",
+            "1",
+            "4",
+            "9",
+            "16"
+          ]
+        ]
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Nonlinear; the first differences are not constant."
+    },
+    "SLOPE_FROM_GRAPH": {
+      "prompt_html": "Find the slope of the line shown.",
+      "visual": {
+        "type": "line_graph",
+        "bounds": [
+          -5,
+          5,
+          -5,
+          6
+        ],
+        "lines": [
+          {
+            "m": 1.5,
+            "b": 1
+          }
+        ],
+        "points": [
+          [
+            -2,
+            -2
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "3/2"
+    },
+    "LINE_EQ_FROM_REP": {
+      "prompt_html": "Write an equation in the form <b>y = mx + b</b> for the line shown.",
+      "visual": {
+        "type": "line_graph",
+        "bounds": [
+          -5,
+          5,
+          -5,
+          8
+        ],
+        "lines": [
+          {
+            "m": 2,
+            "b": -1
+          }
+        ],
+        "points": [
+          [
+            0,
+            -1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "y = 2x − 1"
+    },
+    "SYSTEM_GRAPH_SOLUTION": {
+      "prompt_html": "Use the graph to find the solution of the system.",
+      "visual": {
+        "type": "line_graph",
+        "bounds": [
+          -2,
+          7,
+          -2,
+          8
+        ],
+        "lines": [
+          {
+            "m": 1,
+            "b": 1,
+            "label": "y = x + 1"
+          },
+          {
+            "m": -1,
+            "b": 5,
+            "label": "y = −x + 5"
+          }
+        ],
+        "points": [
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "(2, 3)"
+    },
+    "PYTH_FIND_SIDE": {
+      "prompt_html": "Find the missing side length of the right triangle.",
+      "visual": {
+        "type": "right_triangle",
+        "legs": [
+          6,
+          8
+        ],
+        "hypotenuse": "?"
+      },
+      "response": "constructed_work",
+      "answer_key": "10"
+    },
+    "PYTH_CONVERSE": {
+      "prompt_html": "Do side lengths <b>7, 24, and 25</b> form a right triangle? Justify numerically.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Yes; 7^2 + 24^2 = 25^2."
+    },
+    "DISTANCE_COORD": {
+      "prompt_html": "Find the distance between <b>A(−2, 1)</b> and <b>B(4, 9)</b>.",
+      "visual": {
+        "type": "points_grid",
+        "bounds": [
+          -5,
+          7,
+          -2,
+          11
+        ],
+        "points": [
+          [
+            -2,
+            1,
+            "A"
+          ],
+          [
+            4,
+            9,
+            "B"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "10"
+    },
+    "GEO_ANGLE_NAME": {
+      "prompt_html": "Name the marked angle in two valid ways.",
+      "visual": {
+        "type": "angle_named",
+        "vertex": "B",
+        "left": "A",
+        "right": "C"
+      },
+      "response": "constructed_short",
+      "answer_key": "∠ABC and ∠CBA"
+    },
+    "GEO_ANGLE_MEASURE": {
+      "prompt_html": "The angles form a linear pair. Find the measure of the marked angle <b>x</b>.",
+      "visual": {
+        "type": "linear_pair",
+        "known": 128,
+        "unknown": "x"
+      },
+      "response": "constructed_work",
+      "answer_key": "52°"
+    },
+    "DATA_HISTOGRAM_READ": {
+      "prompt_html": "Use the histogram. How many observations are in the interval <b>10–14</b>?",
+      "visual": {
+        "type": "histogram",
+        "bins": [
+          "0–4",
+          "5–9",
+          "10–14",
+          "15–19"
+        ],
+        "counts": [
+          2,
+          5,
+          7,
+          3
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "7"
+    },
+    "DATA_CENTER_SPREAD": {
+      "prompt_html": "For the data set <b>4, 5, 7, 7, 8, 11</b>, find the <b>median</b> and <b>range</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "Median = 7; range = 7."
+    },
+    "DATA_COMPARE_DISTRIBUTIONS": {
+      "prompt_html": "Compare the two dot plots. Which group has the greater median? Which group has the greater spread?",
+      "visual": {
+        "type": "two_dotplots",
+        "a": [
+          2,
+          3,
+          3,
+          4,
+          4,
+          4,
+          5
+        ],
+        "b": [
+          1,
+          2,
+          4,
+          4,
+          6,
+          7,
+          7
+        ]
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Both medians are 4; Group B has greater spread."
+    },
+    "DATA_TABLE_PROB": {
+      "prompt_html": "A spinner was tested 40 times. Use the table to find the experimental probability of landing on <b>blue</b>.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Color",
+          "Red",
+          "Blue",
+          "Green",
+          "Yellow"
+        ],
+        "rows": [
+          [
+            "Frequency",
+            "8",
+            "14",
+            "10",
+            "8"
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "14/40 = 7/20"
+    }
+  }
+}
