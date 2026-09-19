@@ -1,18 +1,9 @@
 {
-  "schema": "math-worksheet-question-structure-catalog/0.2-pilot",
+  "schema": "math-worksheet-generator-bank/0.1",
   "status": "PILOT",
   "updated": "2026-09-18",
-  "canonical_generator_bank": "_question_structure/catalogs/math_worksheet_generator_bank.json",
-  "reference_model": {
-    "purpose": "Browse original reusable math question architectures by course and topic. Teacher-supplied worksheet samples inform structure only; student questions are authored originally.",
-    "source_principles": [
-      "Lower Elementary, Grade 4, and Grade 5 pilot families were abstracted from teacher-supplied topic inventories and parallel worksheet samples.",
-      "Parallel forms preserve the same learning/evidence architecture while changing values, contexts, names, answer-choice order, and exact visual instantiation as appropriate.",
-      "Grade 7 ratios retain the earlier Kuta/Delta-inspired pilot families.",
-      "The teacher-facing topic filter is separate from the generator family bank so one family can support multiple browsable skills without cloning source questions."
-    ],
-    "copyright_rule": "Use source materials only to infer skill scope, structure, representation, pacing, and difficulty. Do not reproduce source wording, names, numbers, answer choices, or diagrams."
-  },
+  "authority": "Subordinate to _question_structure/QUESTION_STRUCTURE_CORE.md; this bank specializes the universal structure rules for the District Math Worksheet Builder.",
+  "source_use_rule": "Use source materials only to infer skill scope, structure, representation, pacing, and difficulty. Do not reproduce source wording, names, numbers, answer choices, or diagrams.",
   "parallel_form_policy": {
     "invariant": "Same I Can / learning target, evidence job, question-family architecture, response mode, and intended representation role.",
     "may_vary": [
@@ -32,6 +23,13 @@
       "difficulty band"
     ],
     "supported_version_count": "1-4 in the current worksheet UI; generator-family design is not intrinsically limited to four."
+  },
+  "generator_rules": {
+    "family_first": "Choose a family from the resolved course/topic before writing prose.",
+    "parameterize": "Instantiate original values/contexts under family constraints; never retrieve or lightly rewrite a source item.",
+    "parallel_forms": "For A/B/C/D forms, preserve family/evidence/difficulty distribution slot-for-slot unless the teacher explicitly requests reordering. Vary parameters and surface contexts without changing the I Can.",
+    "visuals": "Quantitative visuals must be deterministic and mathematically accurate. Use the registered Cartesian graph tool for supported coordinate graphs.",
+    "qa": "Solve every instantiated item independently and verify answer/visual alignment."
   },
   "courses": [
     {
@@ -2507,104 +2505,6 @@
             }
           ]
         }
-      ]
-    }
-  ],
-  "generic_families": [
-    {
-      "id": "GEN_DIRECT_FLUENCY",
-      "category": "Fluency",
-      "label": "Direct Skill Practice",
-      "summary": "Short, parameterized practice focused on one procedure or fact pattern.",
-      "representations": [
-        "numeric"
-      ],
-      "response_modes": [
-        "constructed"
-      ],
-      "difficulty": [
-        "intro",
-        "standard"
-      ]
-    },
-    {
-      "id": "GEN_MULTI_REP",
-      "category": "Conceptual",
-      "label": "Multiple Representation",
-      "summary": "Connect two representations such as equation, table, graph, diagram, or context.",
-      "representations": [
-        "multiple representations"
-      ],
-      "response_modes": [
-        "constructed"
-      ],
-      "difficulty": [
-        "intro",
-        "standard"
-      ]
-    },
-    {
-      "id": "GEN_VISUAL",
-      "category": "Visual",
-      "label": "Diagram / Graph / Model",
-      "summary": "Use a quantitatively accurate visual as part of the evidence.",
-      "representations": [
-        "visual"
-      ],
-      "response_modes": [
-        "constructed"
-      ],
-      "difficulty": [
-        "intro",
-        "standard"
-      ]
-    },
-    {
-      "id": "GEN_ERROR",
-      "category": "Reasoning",
-      "label": "Error Analysis",
-      "summary": "Diagnose and correct a plausible student error.",
-      "representations": [
-        "worked claim"
-      ],
-      "response_modes": [
-        "constructed explanation"
-      ],
-      "difficulty": [
-        "intro",
-        "standard"
-      ]
-    },
-    {
-      "id": "GEN_CONTEXT",
-      "category": "Application",
-      "label": "Context / Transfer",
-      "summary": "Apply the selected skill in a concise original context.",
-      "representations": [
-        "context"
-      ],
-      "response_modes": [
-        "constructed"
-      ],
-      "difficulty": [
-        "intro",
-        "standard"
-      ]
-    },
-    {
-      "id": "GEN_MULTIPART",
-      "category": "Scaffold",
-      "label": "Multi-Part Scaffold",
-      "summary": "Sequence linked prompts that build toward a final response.",
-      "representations": [
-        "mixed"
-      ],
-      "response_modes": [
-        "constructed"
-      ],
-      "difficulty": [
-        "intro",
-        "standard"
       ]
     }
   ]

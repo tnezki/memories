@@ -1,31 +1,24 @@
 # Math Worksheet Builder — Pilot
 
-Cross-course district tool for generating original math worksheets from reusable question structures.
+District teacher tool for building self-contained worksheet requests from reusable math question families.
 
-## Pilot scope
+## Current pilot coverage
+- Lower Elementary Math
+- Grade 4 Math
+- Grade 5 Math
+- Grade 7 Math — Ratios & Proportional Relationships
+- other listed courses may use a custom topic + generic families until their catalogs are added
 
-The architecture supports Grade 6 Math through Calculus. The initial authored catalog is intentionally narrow: **Grade 7 Ratios & Proportional Relationships**. This lets the teacher test the workflow before the topic catalog is expanded.
+## Workflow
+1. Choose course and topic.
+2. Search/select question structures.
+3. Choose question count, practice profile, number domains, and 1-4 parallel versions.
+4. Set initial workspace and graph/diagram scale.
+5. Click **Create Worksheet Request ZIP**; the ZIP downloads immediately.
+6. Upload that request ZIP to ChatGPT. It runs automatically and returns one response ZIP.
+7. Unzip the response and open `CLICK_ME.html`.
 
-The pilot combines:
+The finished `CLICK_ME.html` exposes only the adjustable worksheet and optional answer key. Internal QA stays hidden.
 
-- fluency-oriented parameterized practice;
-- visual/conceptual structures such as scale drawings, dilations, tables, double number lines, and diagrams;
-- configurable Intro / Standard / Mastery balance;
-- one, two, or four parallel versions;
-- two-column student print by default;
-- independent workspace and graph/diagram scaling in the finished HTML;
-- optional custom teacher-described question structures.
-
-## Source philosophy
-
-Public/free worksheet collections and teacher-supplied examples are used to identify broad question architectures and presentation patterns. The builder contract requires original wording, values, contexts, diagrams, and answer choices. The reference catalog does not store copied source questions.
-
-## Request flow
-
-1. Open `index.html`.
-2. Choose course/topic and worksheet settings.
-3. Select question families or add a custom family.
-4. Set workspace and graph/diagram scale defaults.
-5. Download the request ZIP.
-6. Upload the request ZIP to ChatGPT; no extra prompt is required.
-7. The response returns one ZIP with `CLICK_ME.html`, printable worksheet/PDF, optional answer key, and QA.
+## Canonical question design
+The request packages the current `_question_structure/QUESTION_STRUCTURE_CORE.md`, `_question_structure/catalogs/math_worksheet_generator_bank.json`, and `_question_structure/guides/parallel_family_rules.md`. Teacher-supplied reference worksheets are used only to infer original generator structures; source questions are never copied into the bank.

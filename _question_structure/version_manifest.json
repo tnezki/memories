@@ -1,18 +1,19 @@
 {
   "package": "_question_structure",
-  "version": "1.3",
+  "version": "1.4",
   "created": "2026-08-27",
-  "updated": "2026-09-08",
-  "purpose": "Dedicated question-design/structure authority with plan-first JSON workflow, executable render/completion gates, hard evidence-response-representation alignment, and optional traceable question metadata/provenance.",
+  "updated": "2026-09-18",
+  "purpose": "Dedicated question-design/structure authority with plan-first JSON workflow, executable render/completion gates, hard evidence-response-representation alignment, parallel-family rules, and a canonical math worksheet generator bank.",
   "source_basis": [
     "teacher-authored variety rules from 2026-08-27",
     "Question_Structure_and_Visual_Toolkit_v1_7 structure library/catalog",
     "2026-08-29 Bank-v2 pilot QA: selected-response, table, graph, diagram, and representation execution hardening",
     "2026-08-29 Unit 1 Bank Map regression: fit-before-category allocation, evidence/response alignment, and concrete diagram-route enforcement",
-    "2026-09-08 AP Calculus build request: add optional topic/source/practice/calculator/provenance metadata without changing the executable evidence chain"
+    "2026-09-08 AP Calculus build request: optional topic/source/practice/calculator/provenance metadata",
+    "2026-09-18 District Math Worksheet Builder: Lower Elementary, Grade 4, and Grade 5 teacher-supplied topic inventories and parallel forms establish reusable generator-family and parallel-form rules"
   ],
-  "authority_note": "Core/workflow/catalog files in this package override conflicting question-authoring guidance in older combined toolkits; visual assets remain owned by the visual toolkit/course Framework. Structure/response/representation/tool fields are executable acceptance criteria, not descriptive metadata. Category labels never justify a task that does not fit the target. Metadata is descriptive/provenance support and never substitutes for the executable evidence-response-representation chain.",
-  "file_count": 21,
+  "authority_note": "Core/workflow/catalog files in this package override conflicting question-authoring guidance in older combined toolkits; visual assets remain owned by the visual toolkit/course Framework. The math worksheet generator bank is a specialized catalog subordinate to QUESTION_STRUCTURE_CORE.md. Teacher-supplied examples inform structure only and are not stored as source question banks.",
+  "file_count": 22,
   "files": [
     {
       "path": "QUESTION_STRUCTURE_CORE.md",
@@ -40,6 +41,11 @@
       "sha256": "2dc3016d891676a69efbd015275632e882a93590e9ce2f449465276668f1cf5b"
     },
     {
+      "path": "catalogs/math_worksheet_generator_bank.json",
+      "bytes": 82605,
+      "sha256": "c4ba1f514c581bed67c8c69a5985671483853687b7b4b2b10b2559b37c02e2c3"
+    },
+    {
       "path": "catalogs/structure_extensions.json",
       "bytes": 3526,
       "sha256": "f195063eefc8c2fce0c5b62ca4dde894c02c6509cdb308832eb8232d32c2dd4b"
@@ -62,12 +68,12 @@
     {
       "path": "examples/math_examples.md",
       "bytes": 591,
-      "sha256": "50ff40faa758eb2d19efd140f532a27540fb248cd5b06b39f87c3af19af9213d"
+      "sha256": "50ff40faa758eb2d19efd140f532a27540fb248cd5b06b39f87c3af19af9213"
     },
     {
       "path": "examples/physics_examples.md",
       "bytes": 1570,
-      "sha256": "be6ffe48f74efffcd2ff09956ef1de69baa22755c5e05f4931e2e70e7a91a6d8"
+      "sha256": "be6ffe48f74ef6eaf3fe5a91f657fd866de2778142c04942717d67f24f897dc3"
     },
     {
       "path": "examples/question_design_map_example.json",
@@ -77,7 +83,7 @@
     {
       "path": "guides/destination_patterns.md",
       "bytes": 1514,
-      "sha256": "be09e8fa30cfe4a4bcb924d2e39bfda57c10bb4e88eec6e225f29d498682329d"
+      "sha256": "be09e8fa30fce4a4bcb924d2e39bfda57c10bb4e88eec6e225f29d498682329d"
     },
     {
       "path": "guides/multistep_patterns.md",
@@ -86,8 +92,8 @@
     },
     {
       "path": "guides/parallel_family_rules.md",
-      "bytes": 950,
-      "sha256": "ffe5593fdafb2d1e8150af368e5d7e35b65a0b2c7e11625dda449179de16c083"
+      "bytes": 2511,
+      "sha256": "c28b3b6e197990f2c226848b81ad9438efa86f7e77908415375701b0231642f8"
     },
     {
       "path": "guides/question_metadata.md",
