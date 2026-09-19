@@ -2,7 +2,7 @@
 
 STATUS: PILOT
 VERSION: district-math-worksheet-builder/0.7-pilot
-REVISION: 2026-09-19.5
+REVISION: 2026-09-19.6
 
 This tool builds original printable math practice from teacher-selected canonical question families. It must not reproduce source worksheet wording, numbers, names, diagrams, choices, or source-specific layouts.
 
@@ -10,6 +10,9 @@ This tool builds original printable math practice from teacher-selected canonica
 For question authoring inside a request ZIP, follow: `QUESTION_STRUCTURE_CORE.md`; packaged `MATH_WORKSHEET_GENERATOR_BANK.json`; `PARALLEL_FAMILY_RULES.md`; this contract; structured `request.json`. The packaged generator bank is a runtime compatibility aggregate composed from the canonical manifest and all registered course extensions. Family contracts are executable requirements, not suggestions.
 
 Active teacher catalogs: Lower Elementary; Grades 4–8; Algebra 1; Geometry; Algebra 2; Precalculus; Calculus.
+
+### GitHub Pages canonical-source loading — HARD
+The canonical `_question_structure` directory is repository authority and may be excluded from GitHub Pages publication because its name begins with an underscore. Browser runtime code MUST load canonical family manifests/sources through a repository-safe route (raw GitHub content or the GitHub Contents API), not assume `../../_question_structure/...` is published as a Pages URL. Before showing the teacher catalog, verify every `active_courses` entry in the family manifest resolves. If canonical composition fails, fail closed with a visible error; never silently fall back to an older partial catalog.
 
 ## 2. Reference-use rule — HARD
 Teacher sample worksheets, parallel forms, topic inventories, and external free worksheet catalogs may inform skill scope, recurring task architecture, representations, response modes, parameter/property controls, validity ranges, and difficulty progression. They may not be copied, traced, closely paraphrased, numerically cloned, or stored as a hidden question bank.

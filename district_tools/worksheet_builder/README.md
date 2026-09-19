@@ -6,7 +6,7 @@ District teacher tool for building self-contained worksheet requests from reusab
 Lower Elementary Math; Grades 4–8; Algebra 1; Geometry; Algebra 2; Precalculus; Calculus.
 
 ## Canonical family architecture
-The builder resolves `../../_question_structure/catalogs/math_family_library_manifest.json` at runtime. It composes every registered family source, course map, and preview source, so new course extensions no longer require a separate hand-maintained district-tool catalog or course-specific JavaScript mirror.
+The builder resolves the canonical `_question_structure/catalogs/math_family_library_manifest.json` at runtime and composes every registered family source, course map, and preview source. Because GitHub Pages can omit underscore-prefixed repository folders, the browser loader uses raw GitHub content with the GitHub Contents API as a fallback instead of assuming `_question_structure` is published as a Pages path. If the full active-course manifest cannot be resolved, the tool fails closed with a visible error rather than silently showing an older partial catalog.
 
 This expansion adds 130 new high-school family contracts across Geometry, shared Algebra 2/Precalculus structures, and Calculus, while reusing existing base/Algebra 1 families when the student action/evidence architecture is genuinely the same.
 
