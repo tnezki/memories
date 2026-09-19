@@ -1,143 +1,95 @@
 (() => {
-  const magnifier = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.8 15.8 21 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-  let catalogIndex = new Map();
-  let specimenIndex = {};
-  let observer = null;
-  const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const magnifier='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.8 15.8 21 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  let catalogIndex=new Map(), specimenIndex={}, observer=null;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
+  async function loadJson(path){try{const r=await fetch(path,{cache:'no-store'});return r.ok?await r.json():{};}catch{return {};}}
   async function loadData(){
     try{
-      const [catalogRes,specRes]=await Promise.all([
-        fetch('question_structure_catalog.json',{cache:'no-store'}),
-        fetch('family_preview_specimens.json',{cache:'no-store'})
+      const [catalog,base,le7]=await Promise.all([
+        loadJson('question_structure_catalog.json'),
+        loadJson('family_preview_specimens.json'),
+        loadJson('family_preview_specimens_le7.json')
       ]);
-      if(catalogRes.ok){
-        const catalog=await catalogRes.json();
-        const map=new Map();
-        for(const course of (catalog.courses||[])) for(const topic of (course.topics||[])) for(const family of (topic.families||[])) map.set(family.id,{...family,course:course.name,topic:topic.label});
-        catalogIndex=map;
-      }
-      if(specRes.ok){ const data=await specRes.json(); specimenIndex=data.specimens||{}; }
-    }catch(error){ console.warn('Preview data unavailable',error); }
+      const map=new Map();
+      for(const course of (catalog.courses||[]))for(const topic of (course.topics||[]))for(const family of (topic.families||[]))map.set(family.id,{...family,course:course.name,topic:topic.label});
+      catalogIndex=map;
+      specimenIndex={...(base.specimens||{}),...(le7.specimens||{})};
+    }catch(error){console.warn('Preview data unavailable',error);}
   }
 
   function svgFrame(inner,w=620,h=400){return `<svg class="preview-svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="Representative question figure">${inner}</svg>`;}
   function line(x1,y1,x2,y2,cls=''){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cls}"/>`;}
   function text(x,y,s,cls=''){return `<text x="${x}" y="${y}" class="${cls}">${esc(s)}</text>`;}
+  function rectEl(x,y,w,h,cls=''){return `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${cls}"/>`;}
+  function circleEl(cx,cy,r,cls=''){return `<circle cx="${cx}" cy="${cy}" r="${r}" class="${cls}"/>`;}
 
-  function graphTransform(bounds,w=620,h=410,pad=42){
-    const [xmin,xmax,ymin,ymax]=bounds; const sx=(w-2*pad)/(xmax-xmin), sy=(h-2*pad)/(ymax-ymin);
-    return {w,h,pad,x:v=>pad+(v-xmin)*sx,y:v=>h-pad-(v-ymin)*sy,xmin,xmax,ymin,ymax};
-  }
-  function gridBase(bounds,w=620,h=410){
-    const T=graphTransform(bounds,w,h), parts=[];
-    for(let x=Math.ceil(T.xmin);x<=Math.floor(T.xmax);x++) parts.push(line(T.x(x),T.y(T.ymin),T.x(x),T.y(T.ymax),x===0?'axisline':'gridline'));
-    for(let y=Math.ceil(T.ymin);y<=Math.floor(T.ymax);y++) parts.push(line(T.x(T.xmin),T.y(y),T.x(T.xmax),T.y(y),y===0?'axisline':'gridline'));
-    return {T,parts};
-  }
-  function polygonMarkup(points,labels,T,cls='figureline'){
-    const pts=points.map(([x,y])=>`${T.x(x)},${T.y(y)}`).join(' '); let out=`<polygon points="${pts}" class="${cls}"/>`;
-    points.forEach(([x,y],i)=>{ if(labels?.[i]) out+=text(T.x(x)+7,T.y(y)-8,labels[i],'labeltxt'); }); return out;
-  }
+  function graphTransform(bounds,w=620,h=410,pad=42){const [xmin,xmax,ymin,ymax]=bounds,sx=(w-2*pad)/(xmax-xmin),sy=(h-2*pad)/(ymax-ymin);return {w,h,pad,x:v=>pad+(v-xmin)*sx,y:v=>h-pad-(v-ymin)*sy,xmin,xmax,ymin,ymax};}
+  function gridBase(bounds,w=620,h=410){const T=graphTransform(bounds,w,h),parts=[];for(let x=Math.ceil(T.xmin);x<=Math.floor(T.xmax);x++)parts.push(line(T.x(x),T.y(T.ymin),T.x(x),T.y(T.ymax),x===0?'axisline':'gridline'));for(let y=Math.ceil(T.ymin);y<=Math.floor(T.ymax);y++)parts.push(line(T.x(T.xmin),T.y(y),T.x(T.xmax),T.y(y),y===0?'axisline':'gridline'));return {T,parts};}
+  function polygonMarkup(points,labels,T,cls='figureline'){const pts=points.map(([x,y])=>`${T.x(x)},${T.y(y)}`).join(' ');let out=`<polygon points="${pts}" class="${cls}"/>`;points.forEach(([x,y],i)=>{if(labels?.[i])out+=text(T.x(x)+7,T.y(y)-8,labels[i],'labeltxt');});return out;}
+
+  function renderNumberLine(v){const min=v.min,max=v.max,w=620,y=100,left=45,right=575,step=(right-left)/(max-min);let g=line(left,y,right,y,'axisline');for(let n=min;n<=max;n++){const x=left+(n-min)*step;g+=line(x,y-8,x,y+8,'tickline');if((max-min)<=20||n%2===0)g+=text(x-8,y+30,n,'smalltxt');}for(const p of (v.points||[])){const x=left+(p-min)*step;g+=circleEl(x,y,7,'pointfill');}if(v.open_point!=null){const x=left+(v.open_point-min)*step;g+=circleEl(x,y,8,'openpoint');}if(v.closed_point!=null){const x=left+(v.closed_point-min)*step;g+=circleEl(x,y,8,'pointfill');}if(v.shade){const x0=v.shade==='right'?(v.closed_point??v.open_point):min,x1=v.shade==='left'?(v.closed_point??v.open_point):max;g+=line(left+(x0-min)*step,y,left+(x1-min)*step,y,'shadeline');}return svgFrame(g,620,150);}
+  function renderOpenLine(v){const jumps=v.jumps||[],vals=[v.start];let cur=v.start;for(const j of jumps){cur+=j;vals.push(cur);}const min=Math.min(...vals),max=Math.max(...vals),left=70,right=550,y=165,scale=(right-left)/Math.max(1,max-min);let g=line(left,y,right,y,'axisline');const X=n=>left+(n-min)*scale;vals.forEach(n=>{g+=line(X(n),y-8,X(n),y+8,'tickline')+text(X(n)-12,y+30,String(Number.isInteger(n)?n:n.toFixed(2).replace(/0+$/,'').replace(/\.$/,'')),'smalltxt');});for(let i=0;i<jumps.length;i++){const x1=X(vals[i]),x2=X(vals[i+1]),cx=(x1+x2)/2,arcH=48+8*(i%2);g+=`<path d="M ${x1} ${y-8} Q ${cx} ${y-arcH} ${x2} ${y-8}" class="arc"/>`+text(cx-12,y-arcH-6,`${jumps[i]>=0?'+':''}${jumps[i]}`,'smalltxt');}return svgFrame(g,620,220);}
+  function baseTenBlocks(h,t,o){let g='';let x=35;for(let k=0;k<h;k++){g+=rectEl(x,35,86,86,'hundred');for(let i=1;i<10;i++){g+=line(x+i*8.6,35,x+i*8.6,121,'thin')+line(x,35+i*8.6,x+86,35+i*8.6,'thin');}x+=98;}x+=12;for(let k=0;k<t;k++){g+=rectEl(x+k*24,35,14,86,'ten');for(let i=1;i<10;i++)g+=line(x+k*24,35+i*8.6,x+k*24+14,35+i*8.6,'thin');}const onesX=35,onesY=150;for(let k=0;k<o;k++)g+=rectEl(onesX+(k%10)*24,onesY+Math.floor(k/10)*24,16,16,'one');return svgFrame(g,620,230);}
+
   function renderVisual(v){
-    if(!v || v.type==='none') return '';
-    if(v.type==='two_polygons_grid'){
-      const {T,parts}=gridBase(v.bounds); parts.push(polygonMarkup(v.a,v.labels_a,T,'figureline')); parts.push(polygonMarkup(v.b,v.labels_b,T,'figureline2')); return svgFrame(parts.join(''));
-    }
-    if(v.type==='polygon_grid'){
-      const {T,parts}=gridBase(v.bounds); parts.push(polygonMarkup(v.points,v.labels,T,'figureline')); return svgFrame(parts.join(''));
-    }
-    if(v.type==='points_grid'){
-      const {T,parts}=gridBase(v.bounds); for(const [x,y,label] of v.points){parts.push(`<circle cx="${T.x(x)}" cy="${T.y(y)}" r="6" class="pointfill"/>`);parts.push(text(T.x(x)+8,T.y(y)-8,label,'labeltxt'));} return svgFrame(parts.join(''));
-    }
-    if(v.type==='line_graph'){
-      const {T,parts}=gridBase(v.bounds); for(const L of v.lines||[]){const x1=T.xmin,x2=T.xmax,y1=L.m*x1+L.b,y2=L.m*x2+L.b;parts.push(line(T.x(x1),T.y(y1),T.x(x2),T.y(y2),'relationline')); if(L.label)parts.push(text(T.x(x2)-125,T.y(y2)-8,L.label,'smalltxt'));} for(const p of v.points||[])parts.push(`<circle cx="${T.x(p[0])}" cy="${T.y(p[1])}" r="5" class="pointfill"/>`);return svgFrame(parts.join(''));
-    }
-    if(v.type==='piecewise_graph'){
-      const {T,parts}=gridBase(v.bounds); const pts=v.points.map(([x,y])=>`${T.x(x)},${T.y(y)}`).join(' ');parts.push(`<polyline points="${pts}" class="relationline"/>`); v.points.forEach(([x,y])=>parts.push(`<circle cx="${T.x(x)}" cy="${T.y(y)}" r="5" class="pointfill"/>`)); parts.push(text(500,388,v.x_label||'x','smalltxt'));parts.push(text(48,24,v.y_label||'y','smalltxt'));return svgFrame(parts.join(''));
-    }
-    if(v.type==='blank_axes'){
-      const {parts}=gridBase(v.bounds);parts.push(text(500,388,v.x_label||'x','smalltxt'));parts.push(text(48,24,v.y_label||'y','smalltxt'));return svgFrame(parts.join(''));
-    }
-    if(v.type==='blank_number_line'){
-      const min=v.min,max=v.max,w=620,y=100,left=45,right=575,step=(right-left)/(max-min); let g=line(left,y,right,y,'axisline');
-      for(let n=min;n<=max;n++){const x=left+(n-min)*step;g+=line(x,y-9,x,y+9,'tickline'); if(n%2===0)g+=text(x-8,y+32,n,'smalltxt');} return svgFrame(g,620,150);
-    }
-    if(v.type==='table'){
-      let html='<table class="preview-table"><tr>'+v.headers.map(x=>`<th>${esc(x)}</th>`).join('')+'</tr>'; for(const row of v.rows)html+='<tr>'+row.map((x,i)=>i===0?`<th>${esc(x)}</th>`:`<td>${esc(x)}</td>`).join('')+'</tr>'; return html+'</table>';
-    }
-    if(v.type==='scaled_triangles'){
-      return svgFrame('<polygon points="80,315 180,115 280,315" class="figureline"/><polygon points="365,315 515,15 600,315" class="figureline"/>'+text(155,345,String(v.a_sides[0]),'labeltxt')+text(85,205,String(v.a_sides[1]),'labeltxt')+text(470,345,String(v.b_sides[0]),'labeltxt')+text(375,165,String(v.b_sides[1]),'labeltxt')+text(125,80,'Figure A','labeltxt')+text(445,28,'Figure B','labeltxt'),640,370);
-    }
-    if(v.type==='right_triangle'){
-      return svgFrame('<polygon points="145,320 145,90 455,320" class="figureline"/><rect x="145" y="290" width="30" height="30" class="rightmark"/>'+text(105,210,String(v.legs[0]),'labeltxt')+text(285,350,String(v.legs[1]),'labeltxt')+text(320,190,String(v.hypotenuse),'labeltxt'),600,380);
-    }
-    if(v.type==='angle_named'){
-      return svgFrame(line(300,250,130,90,'axisline')+line(300,250,500,105,'axisline')+text(110,82,v.left,'labeltxt')+text(288,278,v.vertex,'labeltxt')+text(510,100,v.right,'labeltxt'),620,330);
-    }
-    if(v.type==='linear_pair'){
-      return svgFrame(line(90,235,540,235,'axisline')+line(315,235,405,70,'axisline')+'<path d="M257 235 A58 58 0 0 1 286 184" class="arc"/><path d="M346 184 A58 58 0 0 1 373 235" class="arc"/>'+text(205,185,String(v.known)+'°','labeltxt')+text(390,185,String(v.unknown),'labeltxt'),620,310);
-    }
-    if(v.type==='histogram'){
-      const max=Math.max(...v.counts), baseY=315, left=90, bw=105, scale=210/max; let g=line(left,baseY,565,baseY,'axisline')+line(left,baseY,left,60,'axisline');
-      v.counts.forEach((c,i)=>{const h=c*scale,x=left+i*bw+8;g+=`<rect x="${x}" y="${baseY-h}" width="${bw-16}" height="${h}" class="histbar"/>`+text(x+8,baseY+28,v.bins[i],'smalltxt')+text(x+35,baseY-h-8,String(c),'smalltxt');});return svgFrame(g,640,370);
-    }
-    if(v.type==='two_dotplots'){
-      function plot(vals,y0,label){const min=Math.min(...v.a,...v.b),max=Math.max(...v.a,...v.b),left=90,right=550,step=(right-left)/(max-min);let g=text(25,y0+6,label,'labeltxt')+line(left,y0,right,y0,'axisline');const counts={};vals.forEach(n=>counts[n]=(counts[n]||0)+1);for(let n=min;n<=max;n++){const x=left+(n-min)*step;g+=line(x,y0-7,x,y0+7,'tickline')+text(x-5,y0+27,n,'smalltxt');for(let k=0;k<(counts[n]||0);k++)g+=`<circle cx="${x}" cy="${y0-20-k*23}" r="6" class="pointfill"/>`;}return g;}return svgFrame(plot(v.a,165,'A')+plot(v.b,350,'B'),640,400);
-    }
-    return '';
+    if(!v||v.type==='none'||v==='none')return '';
+    if(v.type==='two_polygons_grid'){const {T,parts}=gridBase(v.bounds);parts.push(polygonMarkup(v.a,v.labels_a,T,'figureline'));parts.push(polygonMarkup(v.b,v.labels_b,T,'figureline2'));return svgFrame(parts.join(''));}
+    if(v.type==='polygon_grid'){const {T,parts}=gridBase(v.bounds);parts.push(polygonMarkup(v.points,v.labels,T,'figureline'));return svgFrame(parts.join(''));}
+    if(v.type==='points_grid'){const {T,parts}=gridBase(v.bounds);for(const [x,y,label] of v.points){parts.push(circleEl(T.x(x),T.y(y),6,'pointfill'));parts.push(text(T.x(x)+8,T.y(y)-8,label,'labeltxt'));}return svgFrame(parts.join(''));}
+    if(v.type==='line_graph'){const {T,parts}=gridBase(v.bounds);for(const L of v.lines||[]){const x1=T.xmin,x2=T.xmax,y1=L.m*x1+L.b,y2=L.m*x2+L.b;parts.push(line(T.x(x1),T.y(y1),T.x(x2),T.y(y2),'relationline'));if(L.label)parts.push(text(T.x(x2)-125,T.y(y2)-8,L.label,'smalltxt'));}for(const p of v.points||[])parts.push(circleEl(T.x(p[0]),T.y(p[1]),5,'pointfill'));return svgFrame(parts.join(''));}
+    if(v.type==='piecewise_graph'){const {T,parts}=gridBase(v.bounds);const pts=v.points.map(([x,y])=>`${T.x(x)},${T.y(y)}`).join(' ');parts.push(`<polyline points="${pts}" class="relationline"/>`);v.points.forEach(([x,y])=>parts.push(circleEl(T.x(x),T.y(y),5,'pointfill')));parts.push(text(500,388,v.x_label||'x','smalltxt'));parts.push(text(48,24,v.y_label||'y','smalltxt'));return svgFrame(parts.join(''));}
+    if(v.type==='blank_axes'){const {parts}=gridBase(v.bounds);parts.push(text(500,388,v.x_label||'x','smalltxt'));parts.push(text(48,24,v.y_label||'y','smalltxt'));return svgFrame(parts.join(''));}
+    if(v.type==='blank_number_line'||v.type==='number_line')return renderNumberLine(v);
+    if(v.type==='open_number_line'||v.type==='open_number_line_decimal')return renderOpenLine(v);
+    if(v.type==='number_line_missing'){const labels=v.labels,w=620,left=60,right=560,y=105,step=(right-left)/(labels.length-1);let g=line(left,y,right,y,'axisline');labels.forEach((n,i)=>{const x=left+i*step;g+=line(x,y-8,x,y+8,'tickline')+text(x-14,y+32,n==null?'?':String(n),'smalltxt');});return svgFrame(g,620,155);}
+    if(v.type==='table'){let html='<table class="preview-table"><tr>'+v.headers.map(x=>`<th>${esc(x)}</th>`).join('')+'</tr>';for(const row of v.rows)html+='<tr>'+row.map((x,i)=>i===0?`<th>${esc(x)}</th>`:`<td>${esc(x)}</td>`).join('')+'</tr>';return html+'</table>';}
+    if(v.type==='base_ten')return baseTenBlocks(v.hundreds||0,v.tens||0,v.ones||0);
+    if(['base_ten_add','base_ten_sub','base_ten_mult','base_ten_div'].includes(v.type)){const op={base_ten_add:'+',base_ten_sub:'−',base_ten_mult:'×',base_ten_div:'÷'}[v.type],a=v.a??v.dividend,b=v.b??v.divisor;return `<div class="preview-model-caption"><b>${a} ${op} ${b}</b></div>`+baseTenBlocks(Math.floor(a/100),Math.floor((a%100)/10),a%10);}
+    if(v.type==='grouped_objects'){let html='<div class="group-model">';for(const n of v.groups)html+=`<div class="group-box">${Array.from({length:n},()=>'<span class="group-dot"></span>').join('')}</div>`;return html+'</div>';}
+    if(v.type==='grid_10x10'){let html='<div class="hundred-chart">';for(let i=0;i<100;i++)html+=`<span class="hundred-cell ${i<v.shaded?'mark':''}"></span>`;return html+'</div>';}
+    if(v.type==='vertical_algorithm')return `<pre class="preview-algorithm">  ${esc(v.a)}\n${v.operation==='subtract'?'−':v.operation==='multiply'?'×':'+'} ${esc(v.b)}\n────────\n</pre>`;
+    if(v.type==='long_division')return `<pre class="preview-algorithm">      ______\n${esc(v.divisor)} ) ${esc(v.dividend)}</pre>`;
+    if(v.type==='fraction_area'){let html='<div class="fraction-area">';for(let i=0;i<v.parts;i++)html+=`<span class="frac-cell ${i<v.shaded?'shade':''}"></span>`;return html+'</div>';}
+    if(v.type==='set_model'){let html='<div class="set-model">';for(let i=0;i<v.total;i++)html+=`<span class="set-dot ${i<v.marked?'shade':''}"></span>`;return html+'</div>';}
+    if(v.type==='fraction_number_line'){const den=v.denominator||4,min=v.min||0,max=v.max||2,w=620,left=55,right=565,y=100,total=(max-min)*den,step=(right-left)/total;let g=line(left,y,right,y,'axisline');for(let i=0;i<=total;i++){const x=left+i*step;g+=line(x,y-8,x,y+8,'tickline');if(i%den===0)g+=text(x-6,y+30,String(min+i/den),'smalltxt');}for(const p of v.points||[]){const x=left+(p-min)/(max-min)*(right-left);g+=circleEl(x,y,7,'pointfill');}return svgFrame(g,620,150);}
+    if(v.type==='pattern_blocks')return svgFrame('<polygon points="180,70 250,30 320,70 320,150 250,190 180,150" class="fractionshape"/>'+`<polygon points="360,150 410,65 460,150" class="fractionshape2"/>`+text(185,225,`${v.hexagons||0} whole + ${v.triangles||0} triangle`,'smalltxt'),620,250);
+    if(v.type==='fraction_equivalence')return `<div class="fraction-pair">${renderVisual({type:'fraction_area',parts:v.a[0],shaded:v.a[1]})}${renderVisual({type:'fraction_area',parts:v.b[0],shaded:v.b[1]})}</div>`;
+    if(v.type==='fraction_compare')return `<div class="fraction-pair">${renderVisual({type:'fraction_area',parts:v.left[0],shaded:v.left[1]})}<div class="compare-symbol">?</div>${renderVisual({type:'fraction_area',parts:v.right[0],shaded:v.right[1]})}</div>`;
+    if(v.type==='fraction_product_area'){let html=`<div class="product-grid" style="grid-template-columns:repeat(${v.cols},42px)">`;for(let r=0;r<v.rows;r++)for(let c=0;c<v.cols;c++){const a=c<v.shade_x,b=r<v.shade_y;html+=`<span class="product-cell ${a?'shade-x':''} ${b?'shade-y':''} ${a&&b?'overlap':''}"></span>`;}return html+'</div>';}
+    if(v.type==='fraction_strip_groups'){let html='<div class="fraction-strip">';for(let w=0;w<v.wholes;w++)for(let p=0;p<v.parts_per_whole;p++)html+='<span></span>';return html+'</div>';}
+    if(v.type==='fraction_strip_partition')return `<div class="fraction-strip"><span class="shade"></span><span></span></div><div class="partition-caption">Split the shaded 1/2 into ${v.groups} equal shares.</div>`;
+    if(v.type==='area_model_mult')return `<div class="area-model"><div>${v.a_tens}×${v.b_tens}</div><div>${v.a_tens}×${v.b_ones}</div><div>${v.a_ones}×${v.b_tens}</div><div>${v.a_ones}×${v.b_ones}</div></div>`;
+    if(v.type==='strip_model'){const n=v.parts.length;return `<div class="strip-whole">Total ${v.total}</div><div class="strip-parts" style="grid-template-columns:repeat(${n},1fr)">${v.parts.map(x=>`<span>${x==null?'?':x}</span>`).join('')}</div>`;}
+    if(v.type==='factor_arrays'){let html='<div class="factor-arrays">';for(const pair of [[1,24],[2,12],[3,8],[4,6]])html+=`<div class="array-card">${pair[0]} × ${pair[1]}</div>`;return html+'</div>';}
+    if(v.type==='clock'){const cx=310,cy=150,r=105,minuteAngle=(v.minute/60)*2*Math.PI-Math.PI/2,hourAngle=((v.hour%12+v.minute/60)/12)*2*Math.PI-Math.PI/2;let g=circleEl(cx,cy,r,'clockface');for(let i=0;i<12;i++){const a=i/12*2*Math.PI-Math.PI/2,x1=cx+Math.cos(a)*(r-8),y1=cy+Math.sin(a)*(r-8),x2=cx+Math.cos(a)*(r-20),y2=cy+Math.sin(a)*(r-20);g+=line(x1,y1,x2,y2,'tickline');}g+=line(cx,cy,cx+Math.cos(hourAngle)*60,cy+Math.sin(hourAngle)*60,'clockhand')+line(cx,cy,cx+Math.cos(minuteAngle)*88,cy+Math.sin(minuteAngle)*88,'clockhand')+circleEl(cx,cy,5,'pointfill');return svgFrame(g,620,310);}
+    if(v.type==='ruler'){const left=70,right=550,y=130,max=v.max||4,step=(right-left)/(max*8);let g=line(left,y,right,y,'axisline');for(let i=0;i<=max*8;i++){const x=left+i*step,h=i%8===0?32:i%4===0?24:i%2===0?18:12;g+=line(x,y,x,y-h,'tickline');if(i%8===0)g+=text(x-5,y+28,String(i/8),'smalltxt');}const end=left+(v.length/max)*(right-left);g+=line(left,y-55,end,y-55,'measureline')+line(left,y-63,left,y-47,'measureline')+line(end,y-63,end,y-47,'measureline');return svgFrame(g,620,185);}
+    if(v.type==='money_model')return `<div class="money-model">${(v.bills||[]).map(x=>`<span class="bill">$${x}</span>`).join('')}${(v.coins||[]).map(x=>`<span class="coin">${x}¢</span>`).join('')}</div>`;
+    if(v.type==='rectangle')return svgFrame(rectEl(160,70,300,180,'figureline')+text(280,275,`${v.label_w}`,'labeltxt')+text(105,170,`${v.label_h}`,'labeltxt'),620,320);
+    if(v.type==='quadrilateral')return svgFrame('<polygon points="170,80 450,80 450,250 170,250" class="figureline"/>'+text(260,300,'marked right angles','smalltxt'),620,330);
+    if(v.type==='rect_prism')return svgFrame('<polygon points="170,105 390,105 475,165 255,165" class="figureline"/><polygon points="170,105 170,250 255,310 255,165" class="figureline"/><polygon points="255,165 475,165 475,310 255,310" class="figureline"/>'+text(335,340,`${v.l}`,'labeltxt')+text(455,235,`${v.h}`,'labeltxt')+text(195,145,`${v.w}`,'labeltxt'),620,370);
+    if(v.type==='circle')return svgFrame(circleEl(310,165,105,'figureline')+line(310,165,415,165,'measureline')+text(350,150,`${v.radius} cm`,'labeltxt'),620,330);
+    if(v.type==='dotplot'||v.type==='blank_dotplot'){const vals=v.values||[],min=v.min??Math.min(...vals),max=v.max??Math.max(...vals),left=90,right=550,y=210,step=(right-left)/(max-min||1),counts={};vals.forEach(n=>counts[n]=(counts[n]||0)+1);let g=line(left,y,right,y,'axisline');for(let n=min;n<=max;n++){const x=left+(n-min)*step;g+=line(x,y-7,x,y+7,'tickline')+text(x-5,y+28,n,'smalltxt');if(v.type==='dotplot')for(let k=0;k<(counts[n]||0);k++)g+=circleEl(x,y-20-k*23,6,'pointfill');}return svgFrame(g,620,260);}
+    if(v.type==='stem_leaf_blank')return `<table class="preview-table"><tr><th>Stem</th><th>Leaf</th></tr>${v.stems.map(s=>`<tr><th>${s}</th><td>________________</td></tr>`).join('')}</table>`;
+    if(v.type==='probability_tiles'||v.type==='ratio_shapes'){const total=v.total??((v.triangles||0)+(v.circles||0)),marked=v.marked??v.triangles;let html='<div class="set-model">';for(let i=0;i<total;i++){const cls=i<marked?'shade':'';html+=`<span class="${v.type==='ratio_shapes'?(i<marked?'tri-shape':'set-dot'):'set-dot'} ${cls}"></span>`;}return html+'</div>';}
+    if(v.type==='spinner'){const cx=310,cy=150,r=105;let g=circleEl(cx,cy,r,'figureline');for(let i=0;i<v.sections;i++){const a=i/v.sections*2*Math.PI-Math.PI/2;g+=line(cx,cy,cx+Math.cos(a)*r,cy+Math.sin(a)*r,'tickline');}return svgFrame(g,620,310);}
+    if(v.type==='double_number_line'){const left=80,right=560,y1=90,y2=175,n=v.top.length,step=(right-left)/(n-1);let g=line(left,y1,right,y1,'axisline')+line(left,y2,right,y2,'axisline')+text(15,y1+5,v.top_label||'','smalltxt')+text(15,y2+5,v.bottom_label||'','smalltxt');for(let i=0;i<n;i++){const x=left+i*step;g+=line(x,y1-8,x,y1+8,'tickline')+line(x,y2-8,x,y2+8,'tickline')+text(x-8,y1-20,v.top[i]==null?'?':String(v.top[i]),'smalltxt')+text(x-8,y2+32,v.bottom[i]==null?'?':String(v.bottom[i]),'smalltxt');}return svgFrame(g,620,235);}
+    if(v.type==='scale_bar')return svgFrame(line(120,150,500,150,'measureline')+line(120,135,120,165,'measureline')+line(500,135,500,165,'measureline')+text(245,125,`${v.drawing} cm on map`,'labeltxt')+text(220,205,`1 cm = ${v.factor} km`,'labeltxt'),620,250);
+    if(v.type==='balance_model'){const cx=310,y=115;let g=line(cx,75,cx,245,'axisline')+line(145,y,475,y,'axisline')+line(155,y,130,245,'thin')+line(465,y,490,245,'thin')+line(80,245,205,245,'measureline')+line(415,245,540,245,'measureline');for(let i=0;i<v.left_bags;i++)g+=rectEl(95+i*44,205,34,30,'bag');for(let i=0;i<v.left_units;i++)g+=circleEl(105+i*28,188,9,'unit');for(let i=0;i<v.right_bags;i++)g+=rectEl(430+i*44,205,34,30,'bag');for(let i=0;i<v.right_units;i++)g+=circleEl(430+(i%6)*18,190-Math.floor(i/6)*20,7,'unit');return svgFrame(g,620,300);}
+    if(v.type==='scaled_triangles')return svgFrame('<polygon points="80,315 180,115 280,315" class="figureline"/><polygon points="365,315 515,15 600,315" class="figureline"/>'+text(155,345,String(v.a_sides[0]),'labeltxt')+text(85,205,String(v.a_sides[1]),'labeltxt')+text(470,345,String(v.b_sides[0]),'labeltxt')+text(375,165,String(v.b_sides[1]),'labeltxt')+text(125,80,'Figure A','labeltxt')+text(445,28,'Figure B','labeltxt'),640,370);
+    if(v.type==='right_triangle')return svgFrame('<polygon points="145,320 145,90 455,320" class="figureline"/><rect x="145" y="290" width="30" height="30" class="rightmark"/>'+text(105,210,String(v.legs[0]),'labeltxt')+text(285,350,String(v.legs[1]),'labeltxt')+text(320,190,String(v.hypotenuse),'labeltxt'),600,380);
+    if(v.type==='angle_named')return svgFrame(line(300,250,130,90,'axisline')+line(300,250,500,105,'axisline')+text(110,82,v.left,'labeltxt')+text(288,278,v.vertex,'labeltxt')+text(510,100,v.right,'labeltxt'),620,330);
+    if(v.type==='linear_pair')return svgFrame(line(90,235,540,235,'axisline')+line(315,235,405,70,'axisline')+'<path d="M257 235 A58 58 0 0 1 286 184" class="arc"/><path d="M346 184 A58 58 0 0 1 373 235" class="arc"/>'+text(205,185,String(v.known)+'°','labeltxt')+text(390,185,String(v.unknown),'labeltxt'),620,310);
+    if(v.type==='histogram'){const max=Math.max(...v.counts),baseY=315,left=90,bw=105,scale=210/max;let g=line(left,baseY,565,baseY,'axisline')+line(left,baseY,left,60,'axisline');v.counts.forEach((c,i)=>{const h=c*scale,x=left+i*bw+8;g+=rectEl(x,baseY-h,bw-16,h,'histbar')+text(x+8,baseY+28,v.bins[i],'smalltxt')+text(x+35,baseY-h-8,String(c),'smalltxt');});return svgFrame(g,640,370);}
+    if(v.type==='two_dotplots'){function plot(vals,y0,label){const min=Math.min(...v.a,...v.b),max=Math.max(...v.a,...v.b),left=90,right=550,step=(right-left)/(max-min);let g=text(25,y0+6,label,'labeltxt')+line(left,y0,right,y0,'axisline'),counts={};vals.forEach(n=>counts[n]=(counts[n]||0)+1);for(let n=min;n<=max;n++){const x=left+(n-min)*step;g+=line(x,y0-7,x,y0+7,'tickline')+text(x-5,y0+27,n,'smalltxt');for(let k=0;k<(counts[n]||0);k++)g+=circleEl(x,y0-20-k*23,6,'pointfill');}return g;}return svgFrame(plot(v.a,165,'A')+plot(v.b,350,'B'),640,400);}
+    return '<div class="preview-unsupported">Preview visual renderer missing for this family.</div>';
   }
 
-  function responseHtml(kind){
-    if(kind==='constructed_explanation') return '<div class="preview-response-lines"><span></span><span></span><span></span></div>';
-    if(kind==='constructed_graph') return '<div class="preview-workspace preview-workspace-tall"></div>';
-    if(kind==='constructed_work') return '<div class="preview-answer-line">Answer: ____________________________________</div><div class="preview-workspace"></div>';
-    return '<div class="preview-answer-line">Answer: ____________________________________________</div>';
-  }
-
-  function ensureModal(){
-    if(document.getElementById('questionPreviewOverlay')) return;
-    const overlay=document.createElement('div'); overlay.id='questionPreviewOverlay'; overlay.className='preview-overlay'; overlay.setAttribute('aria-hidden','true');
-    overlay.innerHTML=`<section class="preview-modal" role="dialog" aria-modal="true" aria-labelledby="questionPreviewTitle"><div class="preview-modal-head"><div><div class="preview-kicker" id="questionPreviewKicker">Question structure preview</div><h2 id="questionPreviewTitle">Preview</h2></div><button class="preview-close" type="button" aria-label="Close preview">×</button></div><div class="preview-modal-body"><p class="preview-note" id="questionPreviewNote">Curated representative problem — generated worksheets must preserve this family architecture while using new values/context.</p><div class="preview-paper" id="questionPreviewPaper"><div class="preview-problem"><strong>1.</strong><span id="questionPreviewPrompt"></span></div><div id="questionPreviewVisual" class="preview-visual"></div><div id="questionPreviewResponseBlock"></div></div><div class="preview-meta-grid"><div><b>Grade / topic</b><span id="questionPreviewScope"></span></div><div><b>Representation</b><span id="questionPreviewRepresentation"></span></div><div><b>Response</b><span id="questionPreviewResponse"></span></div></div></div></section>`;
-    document.body.appendChild(overlay);
-    overlay.querySelector('.preview-close').addEventListener('click',closePreview);
-    overlay.addEventListener('click',e=>{if(e.target===overlay)closePreview();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closePreview();});
-  }
-
-  function openPreview(id){
-    ensureModal(); const meta=catalogIndex.get(id)||{}, spec=specimenIndex[id];
-    document.getElementById('questionPreviewTitle').textContent=meta.label||id;
-    document.getElementById('questionPreviewKicker').textContent=meta.category||'Question structure preview';
-    const paper=document.getElementById('questionPreviewPaper');
-    if(!spec){
-      document.getElementById('questionPreviewNote').textContent='This family does not yet have a curated preview specimen. It is intentionally not previewed with an invented generic question.';
-      document.getElementById('questionPreviewPrompt').innerHTML='<b>Preview pending quality review.</b>';
-      document.getElementById('questionPreviewVisual').innerHTML='';
-      document.getElementById('questionPreviewVisual').hidden=true;
-      document.getElementById('questionPreviewResponseBlock').innerHTML='';
-      paper.classList.add('preview-pending');
-    }else{
-      paper.classList.remove('preview-pending');
-      document.getElementById('questionPreviewNote').textContent='Curated representative problem — generated worksheets must preserve this family architecture while using new values/context.';
-      document.getElementById('questionPreviewPrompt').innerHTML=spec.prompt_html;
-      const visual=renderVisual(spec.visual), visualEl=document.getElementById('questionPreviewVisual'); visualEl.innerHTML=visual; visualEl.hidden=!visual;
-      document.getElementById('questionPreviewResponseBlock').innerHTML=responseHtml(spec.response);
-    }
-    document.getElementById('questionPreviewScope').textContent=[meta.course,meta.topic].filter(Boolean).join(' · ')||'Selected math skill';
-    document.getElementById('questionPreviewRepresentation').textContent=(meta.representations||['none']).join(', ');
-    document.getElementById('questionPreviewResponse').textContent=(meta.response_modes||['constructed']).join(', ');
-    const overlay=document.getElementById('questionPreviewOverlay'); overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); overlay.querySelector('.preview-close').focus();
-  }
+  function responseHtml(kind){if(kind==='constructed_explanation')return '<div class="preview-response-lines"><span></span><span></span><span></span></div>';if(kind==='constructed_graph')return '<div class="preview-workspace preview-workspace-tall"></div>';if(kind==='constructed_work')return '<div class="preview-answer-line">Answer: ____________________________________</div><div class="preview-workspace"></div>';return '<div class="preview-answer-line">Answer: ____________________________________________</div>';}
+  function ensureModal(){if(document.getElementById('questionPreviewOverlay'))return;const overlay=document.createElement('div');overlay.id='questionPreviewOverlay';overlay.className='preview-overlay';overlay.setAttribute('aria-hidden','true');overlay.innerHTML=`<section class="preview-modal" role="dialog" aria-modal="true" aria-labelledby="questionPreviewTitle"><div class="preview-modal-head"><div><div class="preview-kicker" id="questionPreviewKicker">Question structure preview</div><h2 id="questionPreviewTitle">Preview</h2></div><button class="preview-close" type="button" aria-label="Close preview">×</button></div><div class="preview-modal-body"><p class="preview-note" id="questionPreviewNote">Curated representative problem — generated worksheets must preserve this family architecture while using new values/context.</p><div class="preview-paper" id="questionPreviewPaper"><div class="preview-problem"><strong>1.</strong><span id="questionPreviewPrompt"></span></div><div id="questionPreviewVisual" class="preview-visual"></div><div id="questionPreviewResponseBlock"></div></div><div class="preview-meta-grid"><div><b>Grade / topic</b><span id="questionPreviewScope"></span></div><div><b>Representation</b><span id="questionPreviewRepresentation"></span></div><div><b>Response</b><span id="questionPreviewResponse"></span></div></div></div></section>`;document.body.appendChild(overlay);overlay.querySelector('.preview-close').addEventListener('click',closePreview);overlay.addEventListener('click',e=>{if(e.target===overlay)closePreview();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closePreview();});}
+  function openPreview(id){ensureModal();const meta=catalogIndex.get(id)||{},spec=specimenIndex[id];document.getElementById('questionPreviewTitle').textContent=meta.label||id;document.getElementById('questionPreviewKicker').textContent=meta.category||'Question structure preview';const paper=document.getElementById('questionPreviewPaper');if(!spec){document.getElementById('questionPreviewNote').textContent='This family does not yet have a curated preview specimen. It is intentionally not previewed with an invented generic question.';document.getElementById('questionPreviewPrompt').innerHTML='<b>Preview pending quality review.</b>';document.getElementById('questionPreviewVisual').innerHTML='';document.getElementById('questionPreviewVisual').hidden=true;document.getElementById('questionPreviewResponseBlock').innerHTML='';paper.classList.add('preview-pending');}else{paper.classList.remove('preview-pending');document.getElementById('questionPreviewNote').textContent='Curated representative problem — generated worksheets must preserve this family architecture while using new values/context.';document.getElementById('questionPreviewPrompt').innerHTML=spec.prompt_html;const visual=renderVisual(spec.visual),visualEl=document.getElementById('questionPreviewVisual');visualEl.innerHTML=visual;visualEl.hidden=!visual;document.getElementById('questionPreviewResponseBlock').innerHTML=responseHtml(spec.response);}document.getElementById('questionPreviewScope').textContent=[meta.course,meta.topic].filter(Boolean).join(' · ')||'Selected math skill';document.getElementById('questionPreviewRepresentation').textContent=(meta.representations||['none']).join(', ');document.getElementById('questionPreviewResponse').textContent=(meta.response_modes||['constructed']).join(', ');const overlay=document.getElementById('questionPreviewOverlay');overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');overlay.querySelector('.preview-close').focus();}
   function closePreview(){const overlay=document.getElementById('questionPreviewOverlay');if(!overlay)return;overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');}
-
-  function decorate(){
-    document.querySelectorAll('.skill-row').forEach(row=>{
-      if(row.querySelector('[data-preview-family]'))return; const id=row.dataset.familyId;if(!id)return; const qty=row.querySelector(':scope > .qty');if(!qty)return;
-      const stack=document.createElement('div');stack.className='preview-control-stack';qty.replaceWith(stack);stack.appendChild(qty);
-      const button=document.createElement('button');button.type='button';button.className='preview-btn';button.dataset.previewFamily=id;button.innerHTML=`${magnifier}<span>Preview</span>`;button.title='Preview this question family';button.setAttribute('aria-label','Preview this question family');stack.appendChild(button);
-    });
-  }
+  function decorate(){document.querySelectorAll('.skill-row').forEach(row=>{if(row.querySelector('[data-preview-family]'))return;const id=row.dataset.familyId;if(!id)return;const qty=row.querySelector(':scope > .qty');if(!qty)return;const stack=document.createElement('div');stack.className='preview-control-stack';qty.replaceWith(stack);stack.appendChild(qty);const button=document.createElement('button');button.type='button';button.className='preview-btn';button.dataset.previewFamily=id;button.innerHTML=`${magnifier}<span>Preview</span>`;button.title='Preview this question family';button.setAttribute('aria-label','Preview this question family');stack.appendChild(button);});}
   document.addEventListener('click',e=>{const button=e.target.closest('[data-preview-family]');if(button)openPreview(button.dataset.previewFamily);});
   document.addEventListener('DOMContentLoaded',async()=>{await loadData();ensureModal();decorate();const mount=document.getElementById('familyMount');if(mount){observer=new MutationObserver(decorate);observer.observe(mount,{childList:true,subtree:true});}});
 })();

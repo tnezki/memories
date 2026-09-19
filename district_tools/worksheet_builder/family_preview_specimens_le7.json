@@ -1,0 +1,1558 @@
+{
+  "schema": "math-family-preview-specimens-supplement/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-18",
+  "scope_note": "Curated representative previews for the active Lower Elementary through Grade 7 family set. This supplement is merged with the canonical Grade 8 preview specimen file at runtime. Each specimen is a QA exemplar, not source wording to copy verbatim into generated worksheets.",
+  "policy": {
+    "no_generic_fallback": true,
+    "all_specimens_have_solved_answer": true,
+    "visuals_are_family_specific": true,
+    "student_prompt_is_concrete_not_metadata": true
+  },
+  "specimens": {
+    "COORD_DISTANCE_AXIS_ALIGNED": {
+      "prompt_html": "Find the distance between <b>A(−3, 2)</b> and <b>B(5, 2)</b>.",
+      "visual": {
+        "type": "points_grid",
+        "bounds": [
+          -5,
+          7,
+          -2,
+          5
+        ],
+        "points": [
+          [
+            -3,
+            2,
+            "A"
+          ],
+          [
+            5,
+            2,
+            "B"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "8 units"
+    },
+    "COORD_PLOT_POINT": {
+      "prompt_html": "Plot <b>P(4, 3)</b> on the coordinate plane.",
+      "visual": {
+        "type": "points_grid",
+        "bounds": [
+          0,
+          6,
+          0,
+          6
+        ],
+        "points": [
+          [
+            4,
+            3,
+            "P"
+          ]
+        ]
+      },
+      "response": "constructed_graph",
+      "answer_key": "P at (4,3)"
+    },
+    "DATA_FREQUENCY_TABLE": {
+      "prompt_html": "Complete the frequency table for the data <b>2, 2, 3, 4, 4, 4, 5</b>.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Value",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "rows": [
+          [
+            "Frequency",
+            "?",
+            "?",
+            "?",
+            "?"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "2→2, 3→1, 4→3, 5→1"
+    },
+    "DATA_GRAPH_TABLE_MATCH": {
+      "prompt_html": "Which table matches the graph of <b>y = 2x</b>?",
+      "visual": {
+        "type": "line_graph",
+        "bounds": [
+          0,
+          4,
+          0,
+          8
+        ],
+        "lines": [
+          {
+            "m": 2,
+            "b": 0
+          }
+        ],
+        "points": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            6
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "x: 1,2,3; y: 2,4,6"
+    },
+    "DATA_LINE_PLOT_CREATE": {
+      "prompt_html": "Create a dot plot for the data: <b>2, 3, 3, 4, 5, 5, 5, 6</b>.",
+      "visual": {
+        "type": "blank_dotplot",
+        "min": 2,
+        "max": 6
+      },
+      "response": "constructed_graph",
+      "answer_key": "Dots: 2(1), 3(2), 4(1), 5(3), 6(1)"
+    },
+    "DATA_LINE_PLOT_READ": {
+      "prompt_html": "Use the dot plot. What is the <b>mode</b>?",
+      "visual": {
+        "type": "dotplot",
+        "values": [
+          2,
+          3,
+          3,
+          4,
+          5,
+          5,
+          5,
+          6
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "5"
+    },
+    "DATA_PLOT_MATCH": {
+      "prompt_html": "Which dot plot represents the data <b>1, 2, 2, 3, 5</b>?",
+      "visual": {
+        "type": "dotplot",
+        "values": [
+          1,
+          2,
+          2,
+          3,
+          5
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "The plot with counts 1:1, 2:2, 3:1, 4:0, 5:1"
+    },
+    "DATA_STEM_LEAF": {
+      "prompt_html": "Create a stem-and-leaf plot for <b>22, 24, 27, 31, 31, 35, 38</b>.",
+      "visual": {
+        "type": "stem_leaf_blank",
+        "stems": [
+          2,
+          3
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "2 | 2 4 7; 3 | 1 1 5 8"
+    },
+    "DEC_ADD_SUB": {
+      "prompt_html": "Evaluate <b>18.45 − 7.892</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "10.558"
+    },
+    "DEC_COMPARE": {
+      "prompt_html": "Compare <b>5.308</b> and <b>5.38</b>. Write <b>&lt;, &gt;, or =</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "5.308 < 5.38"
+    },
+    "DEC_DIV": {
+      "prompt_html": "Divide: <b>57.6 ÷ 4</b>.",
+      "visual": {
+        "type": "long_division",
+        "dividend": "57.6",
+        "divisor": "4"
+      },
+      "response": "constructed_work",
+      "answer_key": "14.4"
+    },
+    "DEC_MULT": {
+      "prompt_html": "Multiply: <b>6.4 × 0.7</b>.",
+      "visual": {
+        "type": "vertical_algorithm",
+        "operation": "multiply",
+        "a": "6.4",
+        "b": "0.7"
+      },
+      "response": "constructed_work",
+      "answer_key": "4.48"
+    },
+    "DEC_OPEN_NL": {
+      "prompt_html": "Use the open number line to find <b>3.6 + 1.75</b>.",
+      "visual": {
+        "type": "open_number_line_decimal",
+        "start": 3.6,
+        "jumps": [
+          1,
+          0.7,
+          0.05
+        ],
+        "end": 5.35
+      },
+      "response": "constructed_work",
+      "answer_key": "5.35"
+    },
+    "DEC_PLACE_VALUE": {
+      "prompt_html": "What value does the digit <b>7</b> represent in <b>42.376</b>?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "0.07"
+    },
+    "DEC_ROUND": {
+      "prompt_html": "Round <b>8.746</b> to the nearest <b>tenth</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "8.7"
+    },
+    "EQ_BALANCE_MODEL": {
+      "prompt_html": "The balance is level. Each bag has the same mass. Find the value of one bag.",
+      "visual": {
+        "type": "balance_model",
+        "left_bags": 2,
+        "left_units": 3,
+        "right_bags": 0,
+        "right_units": 11
+      },
+      "response": "constructed_work",
+      "answer_key": "x = 4"
+    },
+    "EQ_ONE_STEP": {
+      "prompt_html": "Solve for <b>x</b>: <b>x/6 = 7</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x = 42"
+    },
+    "EQ_STRIP_DIAGRAM": {
+      "prompt_html": "Use the strip diagram to find <b>x</b>.",
+      "visual": {
+        "type": "strip_model",
+        "total": 54,
+        "parts": [
+          18,
+          18,
+          null
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "x = 18"
+    },
+    "EQ_TWO_STEP": {
+      "prompt_html": "Solve for <b>x</b>: <b>3x + 7 = 25</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x = 6"
+    },
+    "EXPR_EQUIVALENT_DISTRIB": {
+      "prompt_html": "Write an equivalent expression for <b>4(3x − 5)</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "12x − 20"
+    },
+    "EXPR_EVALUATE_NUMERIC": {
+      "prompt_html": "Evaluate: <b>4 + 3(8 − 5)²</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "31"
+    },
+    "EXPR_EVALUATE_VAR": {
+      "prompt_html": "Evaluate <b>3x² − 2y</b> when <b>x = 4</b> and <b>y = 5</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "38"
+    },
+    "EXPR_GCF_FACTOR": {
+      "prompt_html": "Factor <b>18x + 24</b> using the GCF.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "6(3x + 4)"
+    },
+    "EXPR_PROPERTY_IDENTIFY": {
+      "prompt_html": "Which property is shown by <b>7(4 + 3) = 7·4 + 7·3</b>?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "Distributive Property"
+    },
+    "EXPR_WRITE_NUMERIC": {
+      "prompt_html": "Write a numerical expression for: <b>subtract 7 from the product of 6 and 9</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "6 × 9 − 7"
+    },
+    "FRAC_ADD_SUB_LIKE": {
+      "prompt_html": "Evaluate <b>3/8 + 2/8</b>. Simplify.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "5/8"
+    },
+    "FRAC_ADD_SUB_UNLIKE": {
+      "prompt_html": "Evaluate <b>2/3 + 3/8</b>. Simplify.",
+      "visual": "none",
+      "response": "constructed_work",
+      "answer_key": "25/24 = 1 1/24"
+    },
+    "FRAC_AREA_READ": {
+      "prompt_html": "What fraction of the model is shaded?",
+      "visual": {
+        "type": "fraction_area",
+        "parts": 4,
+        "shaded": 3,
+        "rows": 1
+      },
+      "response": "constructed_short",
+      "answer_key": "3/4"
+    },
+    "FRAC_COMPARE_NUMERIC": {
+      "prompt_html": "Compare <b>5/8</b> and <b>3/4</b>. Write <b>&lt;, &gt;, or =</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "5/8 < 3/4"
+    },
+    "FRAC_COMPARE_VISUAL": {
+      "prompt_html": "Compare the two fractions shown. Write <b>&lt;, &gt;, or =</b>.",
+      "visual": {
+        "type": "fraction_compare",
+        "left": [
+          3,
+          2
+        ],
+        "right": [
+          4,
+          3
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "2/3 < 3/4"
+    },
+    "FRAC_DIV_UNIT_BY_WHOLE": {
+      "prompt_html": "Find <b>1/2 ÷ 3</b>.",
+      "visual": {
+        "type": "fraction_strip_partition",
+        "numerator": 1,
+        "denominator": 2,
+        "groups": 3
+      },
+      "response": "constructed_work",
+      "answer_key": "1/6"
+    },
+    "FRAC_DIV_WHOLE_BY_UNIT": {
+      "prompt_html": "Find <b>3 ÷ 1/4</b>. Explain what the quotient counts.",
+      "visual": {
+        "type": "fraction_strip_groups",
+        "wholes": 3,
+        "parts_per_whole": 4
+      },
+      "response": "constructed_explanation",
+      "answer_key": "12 groups of 1/4"
+    },
+    "FRAC_EQUIVALENT_MODEL": {
+      "prompt_html": "Use the models to complete: <b>3/4 = ?/8</b>.",
+      "visual": {
+        "type": "fraction_equivalence",
+        "a": [
+          4,
+          3
+        ],
+        "b": [
+          8,
+          6
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "6/8"
+    },
+    "FRAC_EQUIVALENT_NUMERIC": {
+      "prompt_html": "Find the missing value: <b>3/5 = 12/□</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "20"
+    },
+    "FRAC_FAIR_SHARE": {
+      "prompt_html": "Share <b>3 pizzas</b> equally among <b>4 students</b>. How much pizza does each student receive?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "3/4 pizza"
+    },
+    "FRAC_FIND_WHOLE": {
+      "prompt_html": "<b>3/4</b> of a number is <b>27</b>. Find the whole.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "36"
+    },
+    "FRAC_MAGNITUDE": {
+      "prompt_html": "Without multiplying first, decide whether <b>7 × 3/5</b> is greater than, less than, or equal to 7. Then find the product.",
+      "visual": "none",
+      "response": "constructed_explanation",
+      "answer_key": "Less than 7; 21/5 = 4 1/5"
+    },
+    "FRAC_MIXED_ADD_SUB": {
+      "prompt_html": "Find <b>3 1/4 − 1 2/3</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "1 7/12"
+    },
+    "FRAC_MIXED_IMPROPER_CONVERT": {
+      "prompt_html": "Convert <b>11/4</b> to a mixed number.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "2 3/4"
+    },
+    "FRAC_MULT_AREA_MODEL": {
+      "prompt_html": "Use the area model to find <b>2/3 × 3/4</b>.",
+      "visual": {
+        "type": "fraction_product_area",
+        "cols": 3,
+        "rows": 4,
+        "shade_x": 2,
+        "shade_y": 3
+      },
+      "response": "constructed_short",
+      "answer_key": "1/2"
+    },
+    "FRAC_NL_PLACE": {
+      "prompt_html": "Place <b>5/4</b> on the number line.",
+      "visual": {
+        "type": "fraction_number_line",
+        "min": 0,
+        "max": 2,
+        "denominator": 4,
+        "points": [
+          1.25
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "1 1/4"
+    },
+    "FRAC_PART_WHOLE_RATIO_TABLE": {
+      "prompt_html": "The table shows that <b>3/5</b> of a group is <b>18</b>. Find the whole group.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Fraction of whole",
+          "Amount"
+        ],
+        "rows": [
+          [
+            "3/5",
+            "18"
+          ],
+          [
+            "1/5",
+            "?"
+          ],
+          [
+            "5/5",
+            "?"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "30"
+    },
+    "FRAC_PATTERN_BLOCK_MIXED": {
+      "prompt_html": "If one hexagon represents <b>1 whole</b>, what number is represented by one hexagon and one triangle?",
+      "visual": {
+        "type": "pattern_blocks",
+        "hexagons": 1,
+        "triangles": 1
+      },
+      "response": "constructed_short",
+      "answer_key": "1 1/6"
+    },
+    "FRAC_RECIPE_SCALE": {
+      "prompt_html": "A recipe uses <b>2/3 cup</b> of oats per batch. How many cups are needed for <b>3 batches</b>?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "2 cups"
+    },
+    "FRAC_SET_READ": {
+      "prompt_html": "What fraction of the circles are shaded?",
+      "visual": {
+        "type": "set_model",
+        "total": 8,
+        "marked": 3,
+        "shape": "circle"
+      },
+      "response": "constructed_short",
+      "answer_key": "3/8"
+    },
+    "FRAC_SIMPLIFY": {
+      "prompt_html": "Simplify <b>18/24</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "3/4"
+    },
+    "FRAC_WHOLE_MULT": {
+      "prompt_html": "Find <b>4 × 3/5</b>. Simplify.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "12/5 = 2 2/5"
+    },
+    "GEO_CIRCLE_CIRC_AREA": {
+      "prompt_html": "Find the area of a circle with radius <b>6 cm</b>. Give an exact answer in terms of π.",
+      "visual": {
+        "type": "circle",
+        "radius": 6,
+        "measure": "radius"
+      },
+      "response": "constructed_work",
+      "answer_key": "36π cm²"
+    },
+    "GEO_CLASSIFY_QUAD": {
+      "prompt_html": "Classify the quadrilateral using the marked properties.",
+      "visual": {
+        "type": "quadrilateral",
+        "kind": "rectangle"
+      },
+      "response": "constructed_short",
+      "answer_key": "Rectangle"
+    },
+    "GEO_RECT_AREA_PERIM": {
+      "prompt_html": "A rectangle is <b>8 cm</b> long and <b>5 cm</b> wide. Find its <b>perimeter</b>.",
+      "visual": {
+        "type": "rectangle",
+        "width": 8,
+        "height": 5,
+        "label_w": "8",
+        "label_h": "5"
+      },
+      "response": "constructed_work",
+      "answer_key": "26 cm"
+    },
+    "GEO_SURFACE_AREA": {
+      "prompt_html": "Find the surface area of the rectangular prism.",
+      "visual": {
+        "type": "rect_prism",
+        "l": 6,
+        "w": 4,
+        "h": 5
+      },
+      "response": "constructed_work",
+      "answer_key": "148 cm²"
+    },
+    "GEO_VOLUME_PRISM": {
+      "prompt_html": "Find the volume of the rectangular prism.",
+      "visual": {
+        "type": "rect_prism",
+        "l": 6,
+        "w": 4,
+        "h": 5
+      },
+      "response": "constructed_work",
+      "answer_key": "120 cm³"
+    },
+    "INEQ_GRAPH_MATCH": {
+      "prompt_html": "Which graph matches <b>x ≥ 2</b>?",
+      "visual": {
+        "type": "number_line",
+        "min": -4,
+        "max": 8,
+        "points": [],
+        "open_point": null,
+        "closed_point": 2,
+        "shade": "right",
+        "labels": {}
+      },
+      "response": "constructed_short",
+      "answer_key": "Closed circle at 2, shade right"
+    },
+    "INEQ_SELECT_VALUES": {
+      "prompt_html": "Select all values that satisfy <b>2x − 1 &lt; 7</b>: <b>−1, 0, 3, 4, 5</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "−1, 0, 3"
+    },
+    "MEAS_CLOCK_READ": {
+      "prompt_html": "What time is shown?",
+      "visual": {
+        "type": "clock",
+        "hour": 3,
+        "minute": 25
+      },
+      "response": "constructed_short",
+      "answer_key": "3:25"
+    },
+    "MEAS_CONVERT": {
+      "prompt_html": "Convert <b>24 feet</b> to yards.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "8 yards"
+    },
+    "MEAS_CONVERT_MULTI_STEP": {
+      "prompt_html": "Convert <b>2.5 miles</b> to feet. Use 1 mile = 5,280 feet.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "13,200 feet"
+    },
+    "MEAS_CONVERT_RATIO_TABLE": {
+      "prompt_html": "Use the table to convert <b>15 feet</b> to inches.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Feet",
+          "1",
+          "5",
+          "15"
+        ],
+        "rows": [
+          [
+            "Inches",
+            "12",
+            "60",
+            "?"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "180 inches"
+    },
+    "MEAS_REASONABLE_UNIT": {
+      "prompt_html": "Choose the most reasonable unit to measure the length of a classroom.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "meters"
+    },
+    "MEAS_RULER_READ": {
+      "prompt_html": "What length is shown by the segment?",
+      "visual": {
+        "type": "ruler",
+        "length": 3.375,
+        "max": 4
+      },
+      "response": "constructed_short",
+      "answer_key": "3 3/8 inches"
+    },
+    "MONEY_BUDGET": {
+      "prompt_html": "The monthly income is <b>$4,200</b>. Find the missing “Other” amount so the budget balances.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Category",
+          "Amount"
+        ],
+        "rows": [
+          [
+            "Rent",
+            "$1,450"
+          ],
+          [
+            "Food",
+            "$900"
+          ],
+          [
+            "Savings",
+            "$1,250"
+          ],
+          [
+            "Other",
+            "?"
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "$600"
+    },
+    "MONEY_CHANGE": {
+      "prompt_html": "A toy costs <b>$13.65</b>. You pay with <b>$20.00</b>. How much change should you receive?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "$6.35"
+    },
+    "MONEY_DECIMAL_CONTEXT": {
+      "prompt_html": "A notebook costs <b>$4.75</b> and a pen costs <b>$1.89</b>. What is the total cost?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "$6.64"
+    },
+    "MONEY_FIXED_VARIABLE": {
+      "prompt_html": "Which expense is usually fixed: <b>rent</b> or <b>groceries</b>?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "Rent"
+    },
+    "MONEY_GROSS_NET": {
+      "prompt_html": "A worker earns <b>$860</b> before deductions and takes home <b>$684</b>. Find the total deductions.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "$176"
+    },
+    "MONEY_PAYMENT_METHODS": {
+      "prompt_html": "Which statement is an advantage of using a debit card?",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Payment method",
+          "Useful feature"
+        ],
+        "rows": [
+          [
+            "Cash",
+            "No account needed"
+          ],
+          [
+            "Debit card",
+            "Uses checking account"
+          ],
+          [
+            "Credit card",
+            "Borrows up to a limit"
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "It can pay directly from a bank account without carrying cash"
+    },
+    "MONEY_PROFIT_SAVINGS": {
+      "prompt_html": "A student earns <b>$72</b> and spends <b>$45</b>. How much can be saved?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "$27"
+    },
+    "MONEY_TAX_TYPES": {
+      "prompt_html": "A homeowner pays a yearly tax based on the value of a house. What type of tax is this?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "Property tax"
+    },
+    "MONEY_TOTAL": {
+      "prompt_html": "Find the total value shown.",
+      "visual": {
+        "type": "money_model",
+        "bills": [
+          1,
+          1,
+          1
+        ],
+        "coins": [
+          25,
+          25,
+          10,
+          5,
+          1,
+          1
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "$3.67"
+    },
+    "NUM_ABS_DISTANCE": {
+      "prompt_html": "Find the distance from zero and evaluate <b>|−7|</b>.",
+      "visual": {
+        "type": "number_line",
+        "min": -8,
+        "max": 8,
+        "points": [
+          -7,
+          0
+        ],
+        "open_point": null,
+        "closed_point": null,
+        "shade": null,
+        "labels": {}
+      },
+      "response": "constructed_work",
+      "answer_key": "7"
+    },
+    "NUM_ADD_ALGORITHM": {
+      "prompt_html": "Add: <b>468 + 357</b>.",
+      "visual": {
+        "type": "vertical_algorithm",
+        "operation": "add",
+        "a": "468",
+        "b": "357"
+      },
+      "response": "constructed_work",
+      "answer_key": "825"
+    },
+    "NUM_ADD_DIRECT": {
+      "prompt_html": "Find <b>47 + 38</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "85"
+    },
+    "NUM_ADD_MISSING": {
+      "prompt_html": "Find the missing number: <b>36 + □ = 82</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "46"
+    },
+    "NUM_ADD_OPEN_NL": {
+      "prompt_html": "Use the open number line to find <b>46 + 27</b>.",
+      "visual": {
+        "type": "open_number_line",
+        "start": 46,
+        "jumps": [
+          20,
+          7
+        ],
+        "end": 73
+      },
+      "response": "constructed_work",
+      "answer_key": "73"
+    },
+    "NUM_BASETEN_ADD_REGROUP": {
+      "prompt_html": "Use base-ten blocks to find <b>178 + 146</b>. Regroup when needed.",
+      "visual": {
+        "type": "base_ten_add",
+        "a": 178,
+        "b": 146
+      },
+      "response": "constructed_work",
+      "answer_key": "324"
+    },
+    "NUM_BASETEN_BUILD": {
+      "prompt_html": "Draw or describe a base-ten model for <b>326</b>.",
+      "visual": {
+        "type": "base_ten",
+        "hundreds": 3,
+        "tens": 2,
+        "ones": 6
+      },
+      "response": "constructed_work",
+      "answer_key": "3 hundreds, 2 tens, 6 ones"
+    },
+    "NUM_BASETEN_DIV_GUIDED": {
+      "prompt_html": "Use base-ten blocks to share <b>84</b> equally among <b>4</b> groups. How many are in each group?",
+      "visual": {
+        "type": "base_ten_div",
+        "dividend": 84,
+        "divisor": 4
+      },
+      "response": "constructed_work",
+      "answer_key": "21"
+    },
+    "NUM_BASETEN_MULT_GUIDED": {
+      "prompt_html": "Use the base-ten model to find <b>23 × 4</b>.",
+      "visual": {
+        "type": "base_ten_mult",
+        "a": 23,
+        "b": 4
+      },
+      "response": "constructed_work",
+      "answer_key": "92"
+    },
+    "NUM_BASETEN_READ": {
+      "prompt_html": "Write the number represented by the base-ten blocks.",
+      "visual": {
+        "type": "base_ten",
+        "hundreds": 2,
+        "tens": 4,
+        "ones": 3
+      },
+      "response": "constructed_short",
+      "answer_key": "243"
+    },
+    "NUM_BASETEN_SUB_REGROUP": {
+      "prompt_html": "Use base-ten blocks to find <b>302 − 157</b>. Regroup when needed.",
+      "visual": {
+        "type": "base_ten_sub",
+        "a": 302,
+        "b": 157
+      },
+      "response": "constructed_work",
+      "answer_key": "145"
+    },
+    "NUM_COMMON_FACTORS": {
+      "prompt_html": "Find all common factors of <b>18</b> and <b>30</b>. Circle the greatest common factor.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "1,2,3,6; GCF = 6"
+    },
+    "NUM_DIVISIBILITY": {
+      "prompt_html": "Which of these numbers are divisible by <b>3</b>: <b>126, 145, 231, 508</b>?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "126 and 231"
+    },
+    "NUM_EXPANDED_STANDARD": {
+      "prompt_html": "Write <b>50,000 + 3,000 + 400 + 20 + 7</b> in standard form.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "53,427"
+    },
+    "NUM_FACTORS_VISUAL": {
+      "prompt_html": "Use the arrays to list all factor pairs of <b>24</b>. Then list all factors of 24.",
+      "visual": {
+        "type": "factor_arrays",
+        "number": 24
+      },
+      "response": "constructed_work",
+      "answer_key": "1,2,3,4,6,8,12,24"
+    },
+    "NUM_GRID_10X10": {
+      "prompt_html": "The grid has <b>100</b> small squares. How many squares are shaded?",
+      "visual": {
+        "type": "grid_10x10",
+        "shaded": 37
+      },
+      "response": "constructed_short",
+      "answer_key": "37"
+    },
+    "NUM_GROUPED_COUNT": {
+      "prompt_html": "Each large group contains <b>10</b> dots. How many dots are shown in all?",
+      "visual": {
+        "type": "grouped_objects",
+        "groups": [
+          10,
+          10,
+          10,
+          4
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "34"
+    },
+    "NUM_INTEGER_NL": {
+      "prompt_html": "Place <b>−4</b> on the number line.",
+      "visual": {
+        "type": "number_line",
+        "min": -8,
+        "max": 8,
+        "points": [
+          -4
+        ],
+        "open_point": null,
+        "closed_point": null,
+        "shade": null,
+        "labels": {}
+      },
+      "response": "constructed_short",
+      "answer_key": "−4"
+    },
+    "NUM_INTEGER_OPERATION_NL": {
+      "prompt_html": "Use the number line to evaluate <b>−3 + 7</b>.",
+      "visual": {
+        "type": "number_line",
+        "min": -8,
+        "max": 8,
+        "points": [
+          -3,
+          4
+        ],
+        "open_point": null,
+        "closed_point": null,
+        "shade": null,
+        "labels": {}
+      },
+      "response": "constructed_work",
+      "answer_key": "4"
+    },
+    "NUM_NL_MISSING_LABEL": {
+      "prompt_html": "Fill in the missing labels on the number line.",
+      "visual": {
+        "type": "number_line_missing",
+        "labels": [
+          10,
+          20,
+          null,
+          40,
+          null,
+          60
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "30 and 50"
+    },
+    "NUM_NL_PLACE": {
+      "prompt_html": "Place <b>68</b> on the number line.",
+      "visual": {
+        "type": "number_line",
+        "min": 60,
+        "max": 70,
+        "points": [
+          68
+        ],
+        "open_point": null,
+        "closed_point": null,
+        "shade": null,
+        "labels": {}
+      },
+      "response": "constructed_short",
+      "answer_key": "68"
+    },
+    "NUM_PLACE_VALUE_DIGIT": {
+      "prompt_html": "What value does the digit <b>6</b> represent in <b>46,281</b>?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "6,000"
+    },
+    "NUM_PRIME_COMPOSITE": {
+      "prompt_html": "Is <b>37</b> prime or composite? Explain briefly.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Prime; its only positive factors are 1 and 37"
+    },
+    "NUM_RATIONAL_CONVERT": {
+      "prompt_html": "Convert <b>0.375</b> to a fraction in simplest form.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "3/8"
+    },
+    "NUM_RATIONAL_OPERATION": {
+      "prompt_html": "Evaluate <b>−3/4 + 5/6</b>. Simplify.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "1/12"
+    },
+    "NUM_ROUND": {
+      "prompt_html": "Round <b>347</b> to the nearest <b>ten</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "350"
+    },
+    "NUM_SUB_ALGORITHM": {
+      "prompt_html": "Subtract: <b>503 − 278</b>.",
+      "visual": {
+        "type": "vertical_algorithm",
+        "operation": "subtract",
+        "a": "503",
+        "b": "278"
+      },
+      "response": "constructed_work",
+      "answer_key": "225"
+    },
+    "NUM_SUB_DIRECT": {
+      "prompt_html": "Find <b>92 − 47</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "45"
+    },
+    "NUM_SUB_MISSING": {
+      "prompt_html": "Find the missing number: <b>73 − □ = 28</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "45"
+    },
+    "NUM_SUB_OPEN_NL": {
+      "prompt_html": "Use the open number line to find <b>83 − 46</b>.",
+      "visual": {
+        "type": "open_number_line",
+        "start": 46,
+        "jumps": [
+          4,
+          30,
+          3
+        ],
+        "end": 83
+      },
+      "response": "constructed_work",
+      "answer_key": "37"
+    },
+    "NUM_WORDS_STANDARD": {
+      "prompt_html": "Write <b>forty-two thousand, six hundred five</b> in standard form.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "42,605"
+    },
+    "PATTERN_GRAPH_TABLE_RULE": {
+      "prompt_html": "Which rule matches the table?",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "x",
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "rows": [
+          [
+            "y",
+            "1",
+            "3",
+            "5",
+            "7"
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "y = 2x + 1"
+    },
+    "PATTERN_INPUT_OUTPUT": {
+      "prompt_html": "Find the rule and complete the missing output.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Input x",
+          "1",
+          "3",
+          "5"
+        ],
+        "rows": [
+          [
+            "Output y",
+            "5",
+            "11",
+            "?"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "y = 3x + 2; output 17"
+    },
+    "PATTERN_RULE": {
+      "prompt_html": "The pattern is <b>5, 9, 13, 17, …</b>. Write the rule and the next two terms.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "Add 4; 21, 25"
+    },
+    "PERCENT_CHANGE": {
+      "prompt_html": "A price changes from <b>$80</b> to <b>$92</b>. Find the percent change.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "15% increase"
+    },
+    "PERCENT_ERROR": {
+      "prompt_html": "A measurement is <b>48 cm</b>; the actual length is <b>50 cm</b>. Find the percent error.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "4%"
+    },
+    "PERCENT_FIND_PART": {
+      "prompt_html": "Find <b>35%</b> of <b>80</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "28"
+    },
+    "PERCENT_MULTIPLIER": {
+      "prompt_html": "What multiplier represents a <b>15% decrease</b>?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "0.85"
+    },
+    "PERCENT_MULTI_STEP": {
+      "prompt_html": "A <b>$120</b> jacket is discounted <b>25%</b>, then <b>6%</b> sales tax is applied. Find the final price.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "$95.40"
+    },
+    "PROB_DEPENDENT": {
+      "prompt_html": "A bag has <b>3 red</b> and <b>2 blue</b> marbles. Two marbles are drawn without replacement. Find P(red then blue).",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "3/5 × 2/4 = 3/10"
+    },
+    "PROB_EXPERIMENTAL_THEORETICAL": {
+      "prompt_html": "A fair spinner has 4 equal colors. Blue appeared <b>14 times in 40 spins</b>. Find the experimental and theoretical probabilities of blue.",
+      "visual": {
+        "type": "spinner",
+        "sections": 4,
+        "highlight": 1
+      },
+      "response": "constructed_work",
+      "answer_key": "Experimental 14/40=7/20; theoretical 1/4"
+    },
+    "PROB_LANGUAGE": {
+      "prompt_html": "A standard number cube is rolled. How would you describe the chance of rolling a number less than 7?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "Certain"
+    },
+    "PROB_SIMPLE_MODEL": {
+      "prompt_html": "Four of the ten equally likely tiles are shaded. What is the probability of selecting a shaded tile?",
+      "visual": {
+        "type": "probability_tiles",
+        "total": 10,
+        "marked": 4
+      },
+      "response": "constructed_short",
+      "answer_key": "4/10 = 2/5"
+    },
+    "PROP_GRAPH_CONSTANT": {
+      "prompt_html": "The graph shows a proportional relationship. Find the constant of proportionality <b>k</b>.",
+      "visual": {
+        "type": "line_graph",
+        "bounds": [
+          0,
+          5,
+          0,
+          15
+        ],
+        "lines": [
+          {
+            "m": 3,
+            "b": 0
+          }
+        ],
+        "points": [
+          [
+            2,
+            6
+          ],
+          [
+            4,
+            12
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "k = 3"
+    },
+    "PROP_SOLVE": {
+      "prompt_html": "Solve the proportion: <b>6/15 = 14/x</b>.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "x = 35"
+    },
+    "RATIO_DOUBLE_NUMBER_LINE": {
+      "prompt_html": "Use the double number line to find the missing value.",
+      "visual": {
+        "type": "double_number_line",
+        "top": [
+          0,
+          3,
+          6,
+          9
+        ],
+        "bottom": [
+          0,
+          8,
+          16,
+          null
+        ],
+        "top_label": "boxes",
+        "bottom_label": "items"
+      },
+      "response": "constructed_work",
+      "answer_key": "24"
+    },
+    "RATIO_EQUIVALENT": {
+      "prompt_html": "Find a ratio equivalent to <b>5:8</b> by multiplying both terms by 4.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "20:32"
+    },
+    "RATIO_ERROR_ANALYSIS": {
+      "prompt_html": "A student says <b>4:6</b> is equivalent to <b>8:18</b> because both terms increased. Identify the error and correct the ratio.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Both terms must be multiplied by the same factor; 4:6 ×2 = 8:12"
+    },
+    "RATIO_LANGUAGE_TABLE": {
+      "prompt_html": "Use the table to complete: “There are ___ blue tiles for every ___ red tiles.”",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Color",
+          "Red",
+          "Blue"
+        ],
+        "rows": [
+          [
+            "Count",
+            "4",
+            "7"
+          ]
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "7 blue for every 4 red"
+    },
+    "RATIO_MIX_COMPARE": {
+      "prompt_html": "Mixture A uses <b>3 cups concentrate for 8 cups water</b>. Mixture B uses <b>4 cups concentrate for 12 cups water</b>. Which mixture is more concentrated?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "Mixture A"
+    },
+    "RATIO_TABLE_COMPLETE": {
+      "prompt_html": "Complete the ratio table.",
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Boxes",
+          "2",
+          "5",
+          "8"
+        ],
+        "rows": [
+          [
+            "Markers",
+            "6",
+            "15",
+            "?"
+          ]
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "24"
+    },
+    "RATIO_THREE_PART": {
+      "prompt_html": "A mix contains <b>2 red, 3 blue, and 5 green</b> tiles. Write the ratio red:blue:green.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "2:3:5"
+    },
+    "RATIO_UNIT_RATE": {
+      "prompt_html": "A cyclist travels <b>27 miles in 3 hours</b>. Find the unit rate.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "9 miles per hour"
+    },
+    "RATIO_VISUAL_COUNTS": {
+      "prompt_html": "Write the ratio of <b>triangles to circles</b>. Simplify.",
+      "visual": {
+        "type": "ratio_shapes",
+        "triangles": 8,
+        "circles": 10
+      },
+      "response": "constructed_short",
+      "answer_key": "8:10 = 4:5"
+    },
+    "SCALE_CORRESPONDING_SIDE": {
+      "prompt_html": "The figures are scaled copies. Side AB = <b>6</b> corresponds to A′B′ = <b>15</b>. Find the scale factor from the first figure to the second.",
+      "visual": {
+        "type": "scaled_triangles",
+        "a_sides": [
+          6,
+          8
+        ],
+        "b_sides": [
+          15,
+          20
+        ]
+      },
+      "response": "constructed_short",
+      "answer_key": "5/2"
+    },
+    "SCALE_DRAWING_DISTANCE_AREA": {
+      "prompt_html": "A map uses a scale of <b>1 cm : 4 km</b>. Two towns are <b>7.5 cm</b> apart on the map. What is the actual distance?",
+      "visual": {
+        "type": "scale_bar",
+        "drawing": 7.5,
+        "factor": 4
+      },
+      "response": "constructed_work",
+      "answer_key": "30 km"
+    },
+    "WHOLE_DIV_ALGORITHM": {
+      "prompt_html": "Divide: <b>1,248 ÷ 24</b>.",
+      "visual": {
+        "type": "long_division",
+        "dividend": "1248",
+        "divisor": "24"
+      },
+      "response": "constructed_work",
+      "answer_key": "52"
+    },
+    "WHOLE_MULTI_STEP_CONTEXT": {
+      "prompt_html": "A library has <b>6 shelves</b> with <b>48 books</b> on each shelf. It lends out <b>75 books</b>. How many books remain?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "213"
+    },
+    "WHOLE_MULT_ALGORITHM": {
+      "prompt_html": "Multiply: <b>326 × 47</b>.",
+      "visual": {
+        "type": "vertical_algorithm",
+        "operation": "multiply",
+        "a": "326",
+        "b": "47"
+      },
+      "response": "constructed_work",
+      "answer_key": "15,322"
+    },
+    "WHOLE_MULT_AREA_MODEL": {
+      "prompt_html": "Use the area model to find <b>23 × 14</b>.",
+      "visual": {
+        "type": "area_model_mult",
+        "a_tens": 20,
+        "a_ones": 3,
+        "b_tens": 10,
+        "b_ones": 4
+      },
+      "response": "constructed_work",
+      "answer_key": "322"
+    },
+    "WHOLE_MULT_COMPARE": {
+      "prompt_html": "Mia has <b>6</b> stickers. Leo has <b>4 times as many</b>. How many stickers does Leo have?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "24"
+    },
+    "WHOLE_REMAINDER_CONTEXT": {
+      "prompt_html": "<b>157 students</b> ride buses that hold <b>24 students</b> each. How many buses are needed?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_explanation",
+      "answer_key": "7 buses"
+    },
+    "WHOLE_STRIP_CONTEXT": {
+      "prompt_html": "A class collected <b>84 cans</b>. Three equal groups collected the same number. Use the strip diagram to find each group.",
+      "visual": {
+        "type": "strip_model",
+        "total": 84,
+        "parts": [
+          null,
+          null,
+          null
+        ]
+      },
+      "response": "constructed_work",
+      "answer_key": "28"
+    },
+    "WHOLE_WORD_CHOOSE_OPERATION": {
+      "prompt_html": "A school has <b>8 boxes</b> with <b>24 markers</b> in each box. Which operation finds the total number of markers?",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_short",
+      "answer_key": "Multiplication"
+    },
+    "WHOLE_WORD_EQUATION": {
+      "prompt_html": "A theater sold <b>18 adult tickets</b> and some student tickets for a total of <b>53 tickets</b>. Write and solve an equation for the number of student tickets.",
+      "visual": {
+        "type": "none"
+      },
+      "response": "constructed_work",
+      "answer_key": "18 + s = 53; s = 35"
+    }
+  }
+}
