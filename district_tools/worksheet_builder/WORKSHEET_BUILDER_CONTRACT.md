@@ -1,8 +1,8 @@
 # Math Worksheet Builder Contract
 
 STATUS: PILOT
-VERSION: district-math-worksheet-builder/0.5-pilot
-REVISION: 2026-09-19.1
+VERSION: district-math-worksheet-builder/0.6-pilot
+REVISION: 2026-09-19.2
 
 This tool builds original printable math practice from teacher-selected canonical question families. It must not reproduce copyrighted worksheet questions, wording, names, numbers, diagrams, answer choices, or source-specific layouts from reference sources.
 
@@ -85,14 +85,14 @@ The worksheet has no independent target question-count control. `question_count_
 Each checked catalog family defaults to `requested_count = 1`. The teacher may increase or decrease that family's quantity before creating the request ZIP.
 
 For every selected family:
-- generate exactly `requested_count` items per version;
+- generate exactly `requested_count` visible problem slots per version;
 - preserve the selected family identity and evidence job;
 - do not auto-balance, substitute another family, or reallocate counts based on a generic practice mode;
 - do not silently change number domain, response mode, or representation simply to create variety.
 
 Repeatable teacher custom structures also have exact counts. A custom structure remains teacher-defined unless it genuinely resolves to an existing canonical family; do not manufacture a canonical family ID for it.
 
-The total questions per version equals the sum of all selected catalog-family counts plus all custom-entry counts.
+The visible question count per version equals the sum of all selected catalog-family counts plus all custom-entry counts. Hidden refresh alternates defined in Section 12 do NOT increase the visible question count.
 
 ## 6. Multi-grade / multi-topic selection — HARD
 
@@ -168,14 +168,19 @@ The finished `worksheet/worksheet.html` must include screen-only controls in a l
 
 1. Version dropdown limited to generated versions.
 2. Problem dropdown 1..N.
-3. Workspace slider + exact percent input, **0%-1200%**.
-4. Graph/diagram slider + exact percent input, 70%-160%.
-5. Reset selected problem.
-6. Print.
+3. **Refresh / New Question** control for the selected problem, using a refresh-arrow icon (`↻` or equivalent) and an accessible label.
+4. Small screen-only variant status, for example `Question 1 of 3`.
+5. Workspace slider + exact percent input, **0%-1200%**.
+6. Graph/diagram slider + exact percent input, 70%-160%.
+7. Reset selected problem layout.
+8. **Open matching answer key** when an answer key exists.
+9. Print.
+
+Place the Refresh / New Question control directly below the Problem selector so the teacher can change the selected question while watching the worksheet.
 
 Each worksheet root uses `class="worksheet" data-version="A"` etc. Each problem uses `class="problem" data-problem="1"` etc.
 
-Workspace and graph dimensions are stored per exact version/problem. Changing A3 must not alter A4 or B3. Persist values in localStorage when practical. Disable graph controls when the selected problem has no visual.
+Workspace and graph dimensions are stored per exact version/problem slot. Changing A3 must not alter A4 or B3. Persist layout values in localStorage when practical. Disable graph controls when the selected problem has no visual.
 
 The workspace default remains `--workspace-height: .62in`. The selected problem's workspace height is calculated as:
 
@@ -186,10 +191,58 @@ and written to `--problem-workspace-height` on that selected problem only.
 - `0%` must collapse workspace completely; do not impose a positive CSS `min-height`.
 - The upper range must be high enough for one selected problem to expand to approximately a full printable page when desired. The locked range is 0%-1200%.
 - Large workspace values may naturally push the selected problem to its own page/column; do not clip the workspace to preserve compact pagination.
+- Refreshing a question must preserve that slot's current workspace and graph/diagram scale settings.
+- Reset selected problem resets layout sizing only; it does not silently change the active question variant.
 
 A slider that moves while the rendered problem does not change is a FAIL.
 
-## 12. Graphs and quantitative visuals — HARD
+## 12. Refreshable question variants — HARD
+
+The finished adjustable worksheet must allow the teacher to refresh the currently selected problem and see a new legitimate instance from the SAME family.
+
+### Candidate pool
+For every canonical family slot in every generated worksheet version:
+- pre-generate exactly **3 complete candidate instances**: the initial visible instance plus 2 refresh alternates;
+- candidate 1 is the default visible question;
+- candidates 2 and 3 remain hidden until selected by the refresh control;
+- hidden candidates do not count as additional worksheet questions;
+- the response package remains fully self-contained and must not call an online generator when Refresh is clicked.
+
+For custom teacher-defined structures, create the same 3-candidate pool only when the custom description provides enough information to create legitimate parallels. Otherwise disable Refresh for that custom slot and show a brief screen-only message such as `Refresh unavailable for this custom question`.
+
+### Same-family lock
+All candidates for one slot MUST preserve:
+- the same `question_family_id`;
+- the same evidence job and student action;
+- the same response mode;
+- the same representation role and render semantics;
+- the same approximate difficulty / computational load;
+- the same family-specific validity constraints and answer rule.
+
+Only contract-authorized variation is allowed: values, coordinates, data, model counts, legal orientation, functional context, or answer-choice order as appropriate. Refresh must never substitute a different family merely because it is nearby in the same topic.
+
+The three candidates must be meaningfully distinct. Exact prompt/value duplicates are a FAIL.
+
+### Refresh behavior
+- Refresh affects only the currently selected Version + Problem slot.
+- Cycle through the 3 candidates without repeating until all have been shown; after candidate 3, the next refresh may cycle to candidate 1.
+- The displayed variant status updates immediately.
+- MathJax, graph/diagram rendering, workspace, and answer-neutrality must remain correct after every swap.
+- Only the active candidate may appear in screen flow and print flow; hidden candidates must not create blank space, extra pages, duplicate numbering, or print output.
+- Preserve the active candidate map in a compact URL fragment or equivalent deterministic self-contained state so a browser reload can restore the chosen question variants without relying solely on `file://` localStorage behavior.
+
+### Matching answer key state
+When `answer_key = true`:
+- `teacher/answer_key.html` must contain the answers for all pre-generated candidates;
+- the worksheet left rail must expose **Open matching answer key**;
+- that control passes the current compact candidate-state map in the answer-key URL fragment/query;
+- the answer key reads that state and displays/prints the exact active candidate answer for every worksheet slot;
+- opening the answer key directly from `CLICK_ME.html` with no candidate state defaults to candidate 1 for every slot;
+- the matching answer key must remain complete for explanation/visual-response items.
+
+This state-transfer mechanism is required so refreshing one problem can never make the printed answer key silently disagree with the worksheet.
+
+## 13. Graphs and quantitative visuals — HARD
 
 Follow `DISTRICT_RESPONSE_BUILD_STANDARD.md` and `DISTRICT_GRAPH_RENDERING_STANDARD.md`. Use the packaged authoritative Cartesian graph tool for supported coordinate graphs. Full-size Cartesian print weights remain:
 - grid 0.6 pt `#aaaaaa`
@@ -200,11 +253,11 @@ Follow `DISTRICT_RESPONSE_BUILD_STANDARD.md` and `DISTRICT_GRAPH_RENDERING_STAND
 
 For deterministic non-Cartesian visuals—base-ten blocks, fraction area models, clocks, rulers, strip/tape diagrams, balance models, tables, open number lines, dot/line plots, simple geometry—clean SVG/HTML is appropriate when mathematically exact and answer-neutral.
 
-## 13. Answer key — HARD
+## 14. Answer key — HARD
 
-When requested, create `teacher/answer_key.html` matching exact student versions and order. Answers must include the reasoning required by explanation items and accurate visual answers. No separate answer-key PDF is required.
+When requested, create `teacher/answer_key.html` matching exact student versions, order, and active refresh candidates. Answers must include the reasoning required by explanation items and accurate visual answers. No separate answer-key PDF is required.
 
-## 14. CLICK_ME — HARD
+## 15. CLICK_ME — HARD
 
 `CLICK_ME.html` contains only:
 1. **Open adjustable worksheet** -> `worksheet/worksheet.html`
@@ -212,28 +265,38 @@ When requested, create `teacher/answer_key.html` matching exact student versions
 
 Do not expose PDFs, QA, request JSON, CSS, contracts, or graph assets to the teacher dashboard. QA still exists internally.
 
-## 15. Response package — HARD
+## 16. Response package — HARD
 
 Return one response ZIP containing `CLICK_ME.html`, locked assets, `worksheet/worksheet.html`, optional `teacher/answer_key.html`, `data/request.json`, and `data/qa.json`. No worksheet PDF is required; adjustable HTML + browser Print is canonical.
 
-## 16. QA — HARD
+The alternate candidate pool may be embedded in `worksheet/worksheet.html` and `teacher/answer_key.html` or stored in a local relative data/asset file. It must remain inside the response ZIP and work offline.
+
+## 17. QA — HARD
 
 Record at minimum:
-- derived requested question count vs actual question count per version;
-- every selected canonical family ID and exact requested/actual count;
-- family-contract conformity for every item: evidence job, student action, response mode, representation, validity constraints, and answer rule;
+- derived requested visible question count vs actual visible question count per version;
+- every selected canonical family ID and exact requested/actual visible count;
+- family-contract conformity for every visible item and every refresh candidate: evidence job, student action, response mode, representation, validity constraints, and answer rule;
+- exactly 3 candidates for each refreshable canonical slot;
+- refresh-candidate uniqueness check;
 - selected course/topic metadata preserved;
-- no unselected family substituted into the worksheet;
-- family architecture preserved across parallel forms;
+- no unselected family substituted into the worksheet or refresh pool;
+- family architecture preserved across parallel forms and refresh candidates;
 - direct/concise wording check and decorative-prose check;
-- difficulty distribution consistent across versions and valid for each family;
+- difficulty distribution consistent across versions and refresh candidates and valid for each family;
 - original source-copying check;
 - requested column count preserved in print;
 - 0.55 in print margin preserved;
 - per-version/per-problem DOM identity;
 - workspace tests at 0%, 100%, at least 500%, and the full-page-capable upper range;
 - functional selected-problem graph test;
-- cross-problem and cross-version isolation;
+- cross-problem and cross-version layout isolation;
+- refresh isolation: refreshing A3 changes A3 only;
+- refresh preserves the selected slot's workspace and graph/diagram sizing;
+- refresh cycles through candidates and updates variant status;
+- hidden candidates do not appear in print or affect pagination;
+- candidate-state URL fragment/query restores after reload;
+- matching-answer-key state reproduces the exact active candidate for every slot;
 - large workspace does not clip and may move the problem to a new page/column;
 - MathJax size normalization;
 - graph-tool and line-weight compliance;
@@ -242,4 +305,4 @@ Record at minimum:
 - CLICK_ME exposes only classroom-use actions;
 - screen and print visual checks.
 
-Overall PASS is not allowed if the actual question count differs from the selected blueprint, a selected family's count is wrong, a final item drifts from its family contract, an unselected family is substituted, a required visual is inaccurate/missing, parallel forms drift to different evidence jobs, decorative prose obscures a simple task, a layout control changes the wrong problem, workspace cannot collapse to 0%, large workspace clips, requested two-column print collapses, inline math is visibly oversized, or the answer key disagrees.
+Overall PASS is not allowed if the actual visible question count differs from the selected blueprint, a selected family's count is wrong, a final item or refresh candidate drifts from its family contract, an unselected family is substituted, a required visual is inaccurate/missing, parallel forms or refresh candidates drift to different evidence jobs, decorative prose obscures a simple task, a layout control changes the wrong problem, Refresh changes the wrong slot, Refresh loses the slot's sizing, workspace cannot collapse to 0%, large workspace clips, hidden alternates print, requested two-column print collapses, inline math is visibly oversized, or the matching answer key disagrees with the active refreshed worksheet.

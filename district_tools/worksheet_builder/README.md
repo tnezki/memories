@@ -38,4 +38,19 @@ Preview specimens demonstrate architecture only; generated worksheets use new le
 8. Upload that request ZIP to ChatGPT; it runs automatically and returns one response ZIP.
 9. Open `CLICK_ME.html`.
 
-The finished worksheet retains per-version/per-problem workspace and visual sizing controls and uses the registered graph tool/print standards where applicable.
+## Finished worksheet controls
+The adjustable worksheet keeps controls for the exact Version + Problem slot:
+- Version and Problem selectors;
+- **↻ New Question** directly below the Problem selector;
+- a small `Question 1 of 3` status;
+- 0%–1200% workspace sizing;
+- graph/diagram sizing;
+- reset selected-problem layout;
+- matching answer key when requested;
+- print.
+
+Each canonical problem slot contains three original, solved candidates from the same family: the initial question plus two alternates. Refresh cycles only that selected slot and preserves its workspace/visual sizing. It never swaps to another family.
+
+The active candidate map is carried in self-contained page state so reloads can restore it. When an answer key is requested, **Open matching answer key** transfers that same state so the key always matches any questions the teacher refreshed before printing.
+
+The finished worksheet uses the registered graph tool/print standards where applicable.
