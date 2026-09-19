@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Math Worksheet Builder — Pilot</title>
-<link rel="stylesheet" href="styles.css?v=20260918g">
-<link rel="stylesheet" href="preview.css?v=20260918a">
+<link rel="stylesheet" href="styles.css?v=20260918h">
+<link rel="stylesheet" href="preview.css?v=20260918b">
 </head>
 <body>
 <header><div class="wrap"><h1>Math Worksheet Builder</h1><p>Build original printable math practice from reusable question structures. Select skills across grade levels, set the quantity of each, and generate parallel versions from the same evidence blueprint.</p></div></header>
 <main class="stack">
 <section class="card stack">
-  <div><h2 class="section-title">1. Worksheet setup</h2><div class="note"><b>Multi-grade pilot:</b> choose one or more grade/course filters. You can mix Lower Elementary, Grade 4, Grade 5, Grade 7 ratios, and any later catalog expansions in one worksheet request.</div></div>
+  <div><h2 class="section-title">1. Worksheet setup</h2><div class="note"><b>Multi-grade pilot:</b> choose one or more grade/course filters. You can mix Lower Elementary, Grade 4, Grade 5, Grade 7 ratios, and later catalog expansions in one worksheet request.</div></div>
   <div>
     <div class="label">Grade / course filters</div>
     <div id="courseFilters" class="course-filter-grid"></div>
@@ -35,11 +35,15 @@
       </div>
     </div>
   </div>
+  <div class="practice-options">
+    <label class="option-check"><input id="twoColumn" type="checkbox" checked> <b>Two-column student pages</b></label>
+    <label class="option-check"><input id="answerKey" type="checkbox" checked> Include answer key</label>
+  </div>
   <div class="small muted">Question count is derived from the exact structures you select below. Each checked skill starts at 1 question; use − / + to change that skill's quantity.</div>
 </section>
 
 <section class="card stack">
-  <div><h2 class="section-title">3. Question structures</h2><div class="muted small">Search across all selected grade levels. Topics are shown as cards; each checked skill contributes one question by default.</div></div>
+  <div><h2 class="section-title">3. Question structures</h2><div class="muted small">Search across all selected grade levels. Topics are shown as cards; each checked skill contributes one question by default. Use the magnifying glass to see a complete representative problem, including its graph, table, model, or figure when the family uses one.</div></div>
   <div class="structure-tools">
     <div class="field grow"><label for="structureSearch">Search topics or skills</label><input id="structureSearch" placeholder="e.g., number line, base ten, factors, fraction division, budget"></div>
     <div class="structure-actions"><button id="selectVisible" class="button secondary compact" type="button">Select visible</button><button id="clearVisible" class="button secondary compact" type="button">Clear visible</button><span id="structureCount" class="small muted"></span></div>
@@ -56,23 +60,7 @@
 <section class="card stack selected-panel">
   <div class="row spread"><div><h2 class="section-title">4. Selected questions</h2><div class="small muted">This is the exact worksheet blueprint. Remove or change quantities here without hunting through the topic cards.</div></div><div id="selectedTotal" class="selected-total">0 questions</div></div>
   <div id="selectedTray" class="selected-tray"><div class="empty-state">Select at least one skill above.</div></div>
-</section>
-
-<section class="card stack">
-  <h2 class="section-title">5. Student layout</h2>
-  <div class="row"><label><input id="twoColumn" type="checkbox" checked> <b>Two-column student pages</b></label><label><input id="answerKey" type="checkbox" checked> Include answer key</label></div>
-  <div class="controls">
-    <div class="control"><div class="control-head"><strong>Workspace scale</strong><span class="small muted">initial writing room</span></div><div class="slider-row"><input id="workspaceRange" type="range" min="60" max="180" step="5" value="100"><input id="workspaceNumber" type="number" min="60" max="180" step="5" value="100"></div></div>
-    <div class="control"><div class="control-head"><strong>Graph / diagram scale</strong><span class="small muted">initial visual size</span></div><div class="slider-row"><input id="graphRange" type="range" min="70" max="160" step="5" value="100"><input id="graphNumber" type="number" min="70" max="160" step="5" value="100"></div></div>
-  </div>
-  <div class="small muted">The finished worksheet keeps per-version/per-problem controls so you can resize one exact problem before printing.</div>
-</section>
-
-<section class="card stack">
-  <h2 class="section-title">6. Request summary</h2>
-  <div class="summary" id="summary"></div>
-  <div class="field"><label for="teacherNotes">Optional teacher notes</label><textarea id="teacherNotes" placeholder="Examples: avoid calculator-heavy numbers, keep contexts short, make the first questions approachable, include one challenge at the end."></textarea></div>
-  <div class="actions"><div id="status" class="status">Loading question structures…</div><div class="row"><button id="resetBtn" class="button secondary" type="button">Reset</button><button id="buildBtn" class="button" type="button" disabled>Create Worksheet Request ZIP</button></div></div>
+  <div class="build-actions"><div id="status" class="status">Loading question structures…</div><div class="row"><button id="resetBtn" class="button secondary" type="button">Reset</button><button id="buildBtn" class="button" type="button" disabled>Create Worksheet Request ZIP</button></div></div>
 </section>
 </main>
 
@@ -80,6 +68,6 @@
 <script>
 (() => {const nativeFetch=window.fetch.bind(window);const publishedContractMap=new Map([[new URL("WORKSHEET_BUILDER_CONTRACT.md",document.baseURI).pathname,"district_tools/worksheet_builder/WORKSHEET_BUILDER_CONTRACT.md"],[new URL("../_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md",document.baseURI).pathname,"district_tools/_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md"],[new URL("../_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md",document.baseURI).pathname,"district_tools/_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md"]]);async function fetchRepoTextAsResponse(repoPath,init){const encodedPath=repoPath.split("/").map(part=>encodeURIComponent(part)).join("/"),apiUrl=`https://api.github.com/repos/tnezki/memories/contents/${encodedPath}`,headers=new Headers(init&&init.headers?init.headers:undefined);headers.set("Accept","application/vnd.github+json");const apiResponse=await nativeFetch(apiUrl,{...(init||{}),headers,cache:"no-store"});if(!apiResponse.ok)return apiResponse;const data=await apiResponse.json();if(data.type!=="file"||!data.content)return new Response(`GitHub source ${repoPath} was not returned as a file.`,{status:502});const binary=atob(String(data.content).replace(/\s/g,"")),bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);const text=new TextDecoder("utf-8").decode(bytes);return new Response(text,{status:200,headers:{"Content-Type":"text/plain; charset=utf-8","Cache-Control":"no-store"}});}window.fetch=async(input,init)=>{const rawUrl=typeof input==="string"?input:input.url,resolved=new URL(rawUrl,document.baseURI),repoPath=resolved.origin===location.origin?publishedContractMap.get(resolved.pathname):null;if(!repoPath)return nativeFetch(input,init);try{return await fetchRepoTextAsResponse(repoPath,init);}catch(error){console.error("Contract bridge failed",error);return new Response(`Could not load GitHub source ${repoPath}.`,{status:502});}};})();
 </script>
-<script src="app.js?v=20260918g"></script>
-<script src="preview.js?v=20260918a"></script>
+<script src="app.js?v=20260918h"></script>
+<script src="preview.js?v=20260918b"></script>
 </body></html>

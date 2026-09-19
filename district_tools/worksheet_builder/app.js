@@ -1,12 +1,16 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
-  const TOOL_VERSION = "0.3.0-pilot";
-  const REQUEST_SCHEMA = "district-math-worksheet-builder-request/0.3";
-  const CONTRACT_VERSION = "district-math-worksheet-builder/0.4-pilot";
+  const TOOL_VERSION = "0.4.0-pilot";
+  const REQUEST_SCHEMA = "district-math-worksheet-builder-request/0.4";
+  const CONTRACT_VERSION = "district-math-worksheet-builder/0.5-pilot";
   const SHARED_STANDARD_VERSION = "district-response-build-standard/1.0";
   const DASHBOARD_STYLE_VERSION = "worksheet-builder-dashboard/0.1";
-  const WORKSHEET_STYLE_VERSION = "worksheet-builder-student/0.2";
+  const WORKSHEET_STYLE_VERSION = "worksheet-builder-student/0.3";
+  const WORKSPACE_DEFAULT_PERCENT = 100;
+  const WORKSPACE_RANGE_PERCENT = [0,1200];
+  const GRAPH_DEFAULT_PERCENT = 100;
+  const GRAPH_RANGE_PERCENT = [70,160];
 
   let catalog = null;
   const familyState = new Map();
@@ -77,21 +81,17 @@
     });
     $("customDescription").addEventListener("input",refresh);
     $("customCount").addEventListener("input",()=>{clampCustom();refresh();});
-    $("customMinus").addEventListener("click",()=>{setCustomCount(Number($("customCount").value)-1);});
-    $("customPlus").addEventListener("click",()=>{setCustomCount(Number($("customCount").value)+1);});
-    $("teacherNotes").addEventListener("input",refresh);
+    $("customMinus").addEventListener("click",()=>setCustomCount(Number($("customCount").value)-1));
+    $("customPlus").addEventListener("click",()=>setCustomCount(Number($("customCount").value)+1));
     $("structureSearch").addEventListener("input",renderFamilies);
     $("selectVisible").addEventListener("click",()=>setVisible(true));
     $("clearVisible").addEventListener("click",()=>setVisible(false));
-    linkSlider("workspaceRange","workspaceNumber");
-    linkSlider("graphRange","graphNumber");
     $("resetBtn").addEventListener("click",reset);
     $("buildBtn").addEventListener("click",buildZip);
   }
 
   function clampCustom(){let n=Math.round(Number($("customCount").value)||1);n=Math.max(1,Math.min(10,n));$("customCount").value=String(n);}
   function setCustomCount(value){$("customCount").value=String(Math.max(1,Math.min(10,Math.round(value||1))));refresh();}
-  function linkSlider(rangeId,numberId){const r=$(rangeId),n=$(numberId);r.addEventListener("input",()=>{n.value=r.value;refresh();});n.addEventListener("input",()=>{let v=Number(n.value);if(Number.isFinite(v)){v=Math.max(Number(r.min),Math.min(Number(r.max),v));r.value=String(v);}refresh();});}
 
   function familyMatches(meta,q){
     if(!q)return true;
@@ -166,9 +166,7 @@
   function adjustFamilyCount(id,delta){const st=familyState.get(id)||{enabled:true,count:1};st.enabled=true;st.count=Math.max(1,Math.min(10,(st.count||1)+delta));familyState.set(id,st);renderFamilies();refresh();}
   function removeFamily(id){const st=familyState.get(id);if(st){st.enabled=false;familyState.set(id,st);}renderFamilies();refresh();}
 
-  function selectedFamilies(){
-    return [...familyMeta.values()].filter(meta=>familyState.get(meta.id)?.enabled).map(meta=>({...meta,requested_count:familyState.get(meta.id)?.count||1}));
-  }
+  function selectedFamilies(){return [...familyMeta.values()].filter(meta=>familyState.get(meta.id)?.enabled).map(meta=>({...meta,requested_count:familyState.get(meta.id)?.count||1}));}
   function derivedQuestionCount(){return selectedFamilies().reduce((sum,f)=>sum+(f.requested_count||1),0)+($("customEnabled").checked?(Number($("customCount").value)||1):0);}
 
   function renderSelectedTray(){
@@ -194,7 +192,7 @@
     tray.querySelectorAll("[data-remove]").forEach(el=>el.addEventListener("click",()=>removeFamily(el.dataset.remove)));
     tray.querySelector("[data-custom-tray-minus]")?.addEventListener("click",()=>setCustomCount(Number($("customCount").value)-1));
     tray.querySelector("[data-custom-tray-plus]")?.addEventListener("click",()=>setCustomCount(Number($("customCount").value)+1));
-    tray.querySelector("[data-custom-tray-count]")?.addEventListener("input",e=>{setCustomCount(Number(e.target.value));});
+    tray.querySelector("[data-custom-tray-count]")?.addEventListener("input",e=>setCustomCount(Number(e.target.value)));
     tray.querySelector("[data-remove-custom]")?.addEventListener("click",()=>{$("customEnabled").checked=false;$("customDescription").disabled=true;$("customCount").disabled=true;$("customMinus").disabled=true;$("customPlus").disabled=true;renderSelectedTray();refresh();});
   }
 
@@ -216,8 +214,7 @@
 
   function refresh(){
     renderSelectedTray();
-    const selected=selectedFamilies(),q=derivedQuestionCount(),scope=selectedCourseScope();
-    $("summary").innerHTML=`<div><b>Grade/course scope</b><span>${escHtml(scope.length?scope.join(", "):"Select skills")}</span></div><div><b>Questions</b><span>${q} per version · exact selected blueprint</span></div><div><b>Structures</b><span>${selected.length} catalog skill${selected.length===1?"":"s"}${$("customEnabled").checked?" + custom":""}</span></div><div><b>Layout</b><span>${$("twoColumn").checked?"2 columns":"1 column"} · workspace ${$("workspaceNumber").value}% · visuals ${$("graphNumber").value}%</span></div>`;
+    const q=derivedQuestionCount();
     const errors=validate();$("buildBtn").disabled=errors.length>0;
     if(errors.length){$("status").className="status warn";$("status").textContent="Add/fix: "+errors.join("; ")+".";}
     else{$("status").className="status good";$("status").textContent=`Ready to package ${q} exact question${q===1?"":"s"} across ${$("versions").value} version${$("versions").value==="1"?"":"s"}.`;}
@@ -227,9 +224,9 @@
     $("courseFilters").querySelectorAll('input[type="checkbox"]').forEach(x=>x.checked=x.value==="Grade 5 Math");
     for(const st of familyState.values()){st.enabled=false;st.count=1;}
     $("title").value="Math Practice";$("target").value="";$("versions").value="3";document.querySelector('input[name="difficulty"][value="balanced"]').checked=true;
-    $("twoColumn").checked=true;$("answerKey").checked=true;$("workspaceRange").value=$("workspaceNumber").value="100";$("graphRange").value=$("graphNumber").value="100";
+    $("twoColumn").checked=true;$("answerKey").checked=true;
     $("customEnabled").checked=false;$("customDescription").value="";$("customDescription").disabled=true;$("customCount").value="1";$("customCount").disabled=true;$("customMinus").disabled=true;$("customPlus").disabled=true;
-    $("teacherNotes").value="";$("structureSearch").value="";renderFamilies();refresh();
+    $("structureSearch").value="";renderFamilies();refresh();
   }
 
   function prepareDownload(blob,filename){const url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download=filename;link.style.display="none";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
@@ -251,8 +248,7 @@
         contracts:{worksheet_builder:CONTRACT_VERSION,shared_standard:SHARED_STANDARD_VERSION,graph_rendering_standard:"district-graph-rendering-standard/1.0",question_structure_core:"current GitHub authority",generator_bank:"math-worksheet-generator-bank/0.1"},
         worksheet:{title:$("title").value.trim(),grade_course_scope:scope,learning_target:$("target").value.trim()||null,question_count_per_version:count,selection_model:"explicit_family_counts",difficulty_profile:difficulty(),version_count:versions,version_labels:["A","B","C","D"].slice(0,versions),answer_key:$("answerKey").checked},
         question_structures:{catalog_schema:catalog?.schema||"catalog-unavailable",selected_families:selected,parallel_form_policy:catalog?.parallel_form_policy||null,custom_enabled:$("customEnabled").checked,custom_course_scope:$("customEnabled").checked?browseCourses():[],custom_description:$("customEnabled").checked?$("customDescription").value.trim():null,custom_requested_count:$("customEnabled").checked?(Number($("customCount").value)||1):0},
-        layout:{page_size:"US Letter portrait",two_column:$("twoColumn").checked,workspace_scale_percent:Number($("workspaceNumber").value),graph_scale_percent:Number($("graphNumber").value),workspace_control_range_percent:[60,180],graph_control_range_percent:[70,160],independent_controls:true},
-        teacher_notes:$("teacherNotes").value.trim()||null,
+        layout:{page_size:"US Letter portrait",two_column:$("twoColumn").checked,workspace_scale_percent:WORKSPACE_DEFAULT_PERCENT,graph_scale_percent:GRAPH_DEFAULT_PERCENT,workspace_control_range_percent:WORKSPACE_RANGE_PERCENT,graph_control_range_percent:GRAPH_RANGE_PERCENT,independent_controls:true,full_page_workspace_capable:true},
         locked_styles:{dashboard:{version:DASHBOARD_STYLE_VERSION,request_path:"response_contract/dashboard_styles.css",response_path:"assets/dashboard_styles.css",sha256:dashHash},worksheet:{version:WORKSHEET_STYLE_VERSION,request_path:"response_contract/worksheet_styles.css",response_path:"assets/worksheet_styles.css",sha256:workHash}},
         graph_tools:{entrypoint:"response_contract/graph_tool/~graph_tool_v14.py",dependencies:["response_contract/graph_tool/~graph_tool_v13.py","response_contract/graph_tool/~graph_tool_v12.py"],cartesian_print_standard:{grid:{color:"#aaaaaa",linewidth_pt:0.6},axes_arrows:{color:"#222222",linewidth_pt:1.8},relation:{linewidth_pt:2.0},major_ticks:{linewidth_pt:1.2}}},
         resolved_outputs:{required_files:["CLICK_ME.html","assets/dashboard_styles.css","assets/worksheet_styles.css","worksheet/worksheet.html","data/request.json","data/qa.json",...($("answerKey").checked?["teacher/answer_key.html"]:[])]},
@@ -268,7 +264,7 @@
 
   function buildInstructions(req){
     const fam=req.question_structures.selected_families.map(f=>`- ${f.course} > ${f.topic} > ${f.id}: ${f.label} — ${f.requested_count} question${f.requested_count===1?"":"s"} per version — ${f.summary}`).join("\n");
-    return `# Math Worksheet Builder Request — Pilot\n\n## Run automatically\nBuild the complete worksheet package from this ZIP. No additional teacher prompt is required. Return exactly ONE response ZIP.\n\n## Teacher request\n- Grade/course scope: ${req.worksheet.grade_course_scope.join(", ")}\n- Title: ${req.worksheet.title}\n- Learning target/focus: ${req.worksheet.learning_target||"Not specified"}\n- Questions per version: ${req.worksheet.question_count_per_version}\n- Selection model: exact selected family counts\n- Difficulty profile: ${req.worksheet.difficulty_profile}\n- Versions: ${req.worksheet.version_count} (${req.worksheet.version_labels.join(", ")})\n- Answer key: ${req.worksheet.answer_key?"Yes":"No"}\n- Student layout: ${req.layout.two_column?"two columns":"one column"}\n- Initial workspace scale: ${req.layout.workspace_scale_percent}%\n- Initial graph/diagram scale: ${req.layout.graph_scale_percent}%\n\n## Exact selected question blueprint\n${fam||"No catalog families selected."}\n${req.question_structures.custom_enabled?`\n### Teacher custom structure\nScope: ${req.question_structures.custom_course_scope.join(", ")||"Use the worksheet scope"}\nCount per version: ${req.question_structures.custom_requested_count}\n${req.question_structures.custom_description}\n`:""}\n## Teacher notes\n${req.teacher_notes||"No additional notes."}\n\n## Required authority\nFollow response_contract/QUESTION_STRUCTURE_CORE.md first for universal authoring behavior, then response_contract/MATH_WORKSHEET_GENERATOR_BANK.json and response_contract/PARALLEL_FAMILY_RULES.md for worksheet-family and parallel-form behavior, plus the worksheet and district response contracts. Use response_contract/QUESTION_STRUCTURE_CATALOG.json as the teacher-selection snapshot. All student questions, values, contexts, diagrams, and answer choices must be original.\n\nThe selected family counts are exact. Do not auto-balance, substitute, or reallocate categories. If a selected family requests 3, produce 3 legitimate instances of that family per version.\n\nFor parallel versions, preserve the same I Can/evidence family, family sequence, requested count, and difficulty slot-for-slot while varying legitimate original parameters and surface context.\n\nThe authoritative graph entrypoint is packaged at response_contract/graph_tool/~graph_tool_v14.py with v13 and v12 beside it. Use it for supported Cartesian graph needs and preserve the locked Cartesian print weights in request.json.\n\nCopy both locked CSS files byte-for-byte to the response assets and verify their hashes in QA. The student worksheet HTML must keep per-version/per-problem workspace and graph/diagram scaling controls available before print.\n\n## Required files\n${req.resolved_outputs.required_files.map(p=>`- ${p}`).join("\n")}\n\nVisually inspect the adjustable worksheet and answer key in screen and print modes. Return only the completed response ZIP.`;
+    return `# Math Worksheet Builder Request — Pilot\n\n## Run automatically\nBuild the complete worksheet package from this ZIP. No additional teacher prompt is required. Return exactly ONE response ZIP.\n\n## Teacher request\n- Grade/course scope: ${req.worksheet.grade_course_scope.join(", ")}\n- Title: ${req.worksheet.title}\n- Learning target/focus: ${req.worksheet.learning_target||"Not specified"}\n- Questions per version: ${req.worksheet.question_count_per_version}\n- Selection model: exact selected family counts\n- Difficulty profile: ${req.worksheet.difficulty_profile}\n- Versions: ${req.worksheet.version_count} (${req.worksheet.version_labels.join(", ")})\n- Answer key: ${req.worksheet.answer_key?"Yes":"No"}\n- Student layout: ${req.layout.two_column?"two columns":"one column"}\n- Initial workspace scale: ${req.layout.workspace_scale_percent}%\n- Workspace adjustment range in the finished worksheet: ${req.layout.workspace_control_range_percent[0]}%–${req.layout.workspace_control_range_percent[1]}%\n- Initial graph/diagram scale: ${req.layout.graph_scale_percent}%\n\n## Exact selected question blueprint\n${fam||"No catalog families selected."}\n${req.question_structures.custom_enabled?`\n### Teacher custom structure\nScope: ${req.question_structures.custom_course_scope.join(", ")||"Use the worksheet scope"}\nCount per version: ${req.question_structures.custom_requested_count}\n${req.question_structures.custom_description}\n`:""}\n## Required authority\nFollow response_contract/QUESTION_STRUCTURE_CORE.md first for universal authoring behavior, then response_contract/MATH_WORKSHEET_GENERATOR_BANK.json and response_contract/PARALLEL_FAMILY_RULES.md for worksheet-family and parallel-form behavior, plus the worksheet and district response contracts. Use response_contract/QUESTION_STRUCTURE_CATALOG.json as the teacher-selection snapshot. All student questions, values, contexts, diagrams, and answer choices must be original.\n\nThe selected family counts are exact. Do not auto-balance, substitute, or reallocate categories. If a selected family requests 3, produce 3 legitimate instances of that family per version.\n\nFor parallel versions, preserve the same I Can/evidence family, family sequence, requested count, and difficulty slot-for-slot while varying legitimate original parameters and surface context.\n\nThe authoritative graph entrypoint is packaged at response_contract/graph_tool/~graph_tool_v14.py with v13 and v12 beside it. Use it for supported Cartesian graph needs and preserve the locked Cartesian print weights in request.json.\n\nCopy both locked CSS files byte-for-byte to the response assets and verify their hashes in QA. The student worksheet HTML must keep per-version/per-problem workspace and graph/diagram scaling controls available before print. Workspace must be adjustable from 0% through 1200% so a teacher can collapse it completely or expand one problem to approximately a full printable page.\n\n## Required files\n${req.resolved_outputs.required_files.map(p=>`- ${p}`).join("\n")}\n\nVisually inspect the adjustable worksheet and answer key in screen and print modes. Return only the completed response ZIP.`;
   }
 
   function slug(value){return String(value||"worksheet").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,44)||"worksheet";}

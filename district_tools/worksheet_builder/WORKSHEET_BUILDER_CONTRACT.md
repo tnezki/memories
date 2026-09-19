@@ -1,8 +1,8 @@
 # Math Worksheet Builder Contract
 
 STATUS: PILOT
-VERSION: district-math-worksheet-builder/0.4-pilot
-REVISION: 2026-09-18.5
+VERSION: district-math-worksheet-builder/0.5-pilot
+REVISION: 2026-09-18.6
 
 This tool builds original printable math practice from teacher-selected question structures. It must not reproduce copyrighted worksheet questions, wording, names, numbers, diagrams, or answer choices from reference sources.
 
@@ -57,7 +57,26 @@ A request may contain families from more than one grade/course and more than one
 - The optional learning-target field is advisory; it does not override explicit selected families.
 - Grade/course browse filters are not themselves question selections. Hidden/unfiltered selected families remain part of the blueprint until explicitly removed.
 
-## 5. Difficulty profile — HARD
+## 5. Builder UI and previews — HARD
+
+The teacher-facing builder is intentionally compact.
+
+- Section 1: worksheet setup and grade/course filters.
+- Section 2: versions, broad difficulty, **Two-column student pages**, and **Include answer key**.
+- Section 3: browse/search question structures, exact per-family quantities, and custom structure entry.
+- Section 4: exact selected-question tray plus Reset and **Create Worksheet Request ZIP**.
+- Do not reintroduce separate builder sections for student-layout sliders, request summary, or teacher notes.
+- The request ZIP downloads directly from the Create button; no second download button is required.
+
+Every catalog skill row must expose a magnifying-glass Preview control. The preview is a teacher-facing structural sample only and must:
+- show a complete representative student problem, not merely a stem description;
+- render the representative graph, table, diagram, model, algorithm, or figure whenever that family uses one;
+- include representative answer choices or response space appropriate to the family's response mode;
+- preserve the family's actual evidence/representation architecture;
+- use original preview values/context and never reproduce source questions;
+- remain clearly labeled representative so the teacher knows the generated worksheet will use new parameters.
+
+## 6. Difficulty profile — HARD
 
 The broad difficulty profile guides parameter choices inside each selected family; it does not authorize replacing the family.
 
@@ -67,7 +86,7 @@ The broad difficulty profile guides parameter choices inside each selected famil
 
 Do not make mastery merely larger numbers. Respect each family's own allowed difficulty and number-domain constraints from the generator bank.
 
-## 6. Parallel forms — HARD
+## 7. Parallel forms — HARD
 
 When `version_count > 1`, generate legitimate parallel forms.
 
@@ -83,7 +102,7 @@ Vary original parameters such as values, names, surface contexts, exact visual v
 
 The current UI supports 1, 2, 3, or 4 forms. Family definitions are not intrinsically limited to four.
 
-## 7. Student layout, print geometry, and type — HARD
+## 8. Student layout, print geometry, and type — HARD
 
 Use `assets/worksheet_styles.css` byte-for-byte as the base stylesheet.
 
@@ -92,18 +111,18 @@ Use `assets/worksheet_styles.css` byte-for-byte as the base stylesheet.
 - Honor `layout.two_column` in SCREEN and PRINT.
 - A visual-heavy item may span both columns only when needed for readability; record the exception in QA.
 - Keep directions short.
-- Give each problem enough workspace without oversized cards.
+- Give each problem enough workspace without oversized cards by default.
 - Use MathJax for mathematical notation, but ordinary prose numerals may remain plain text.
 - Inline MathJax stays at surrounding-text size.
 - Responsive one-column screen rules must be inside `@media screen` and may not collapse two-column print.
 
-## 8. Per-version / per-problem layout controls — HARD
+## 9. Per-version / per-problem layout controls — HARD
 
 The finished `worksheet/worksheet.html` must include screen-only controls in a left rail on desktop:
 
 1. Version dropdown limited to generated versions.
 2. Problem dropdown 1..N.
-3. Workspace slider + exact percent input, 60%-180%.
+3. Workspace slider + exact percent input, **0%-1200%**.
 4. Graph/diagram slider + exact percent input, 70%-160%.
 5. Reset selected problem.
 6. Print.
@@ -112,9 +131,19 @@ Each worksheet root uses `class="worksheet" data-version="A"` etc. Each problem 
 
 Workspace and graph dimensions are stored per exact version/problem. Changing A3 must not alter A4 or B3. Persist values in localStorage when practical. Disable graph controls when the selected problem has no visual.
 
+The workspace default remains `--workspace-height: .62in`. The selected problem's workspace height is calculated as:
+
+`workspaceHeightIn = 0.62 * workspacePercent / 100`
+
+and written to `--problem-workspace-height` on that selected problem only.
+
+- `0%` must collapse workspace completely; do not impose a positive CSS `min-height`.
+- The upper range must be high enough for one selected problem to expand to approximately a full printable page when desired. The locked range is 0%-1200%.
+- Large workspace values may naturally push the selected problem to its own page/column; do not clip the workspace to preserve compact pagination.
+
 A slider that moves while the rendered problem does not change is a FAIL.
 
-## 9. Graphs and quantitative visuals — HARD
+## 10. Graphs and quantitative visuals — HARD
 
 Follow `DISTRICT_RESPONSE_BUILD_STANDARD.md` and `DISTRICT_GRAPH_RENDERING_STANDARD.md`. Use the packaged authoritative Cartesian graph tool for supported coordinate graphs. Full-size Cartesian print weights remain:
 - grid 0.6 pt `#aaaaaa`
@@ -125,11 +154,11 @@ Follow `DISTRICT_RESPONSE_BUILD_STANDARD.md` and `DISTRICT_GRAPH_RENDERING_STAND
 
 For deterministic non-Cartesian visuals—base-ten blocks, fraction area models, pattern-block-style models, clocks, rulers, strip/tape diagrams, tables, open number lines, hundred charts, dot/line plots, simple geometry—clean SVG/HTML is appropriate when mathematically exact and answer-neutral.
 
-## 10. Answer key — HARD
+## 11. Answer key — HARD
 
 When requested, create `teacher/answer_key.html` matching exact student versions and order. Answers must include the reasoning required by explanation items and accurate visual answers. No separate answer-key PDF is required.
 
-## 11. CLICK_ME — HARD
+## 12. CLICK_ME — HARD
 
 `CLICK_ME.html` contains only:
 1. **Open adjustable worksheet** -> `worksheet/worksheet.html`
@@ -137,11 +166,11 @@ When requested, create `teacher/answer_key.html` matching exact student versions
 
 Do not expose PDFs, QA, request JSON, CSS, contracts, or graph assets to the teacher dashboard. QA still exists internally.
 
-## 12. Response package — HARD
+## 13. Response package — HARD
 
 Return one response ZIP containing `CLICK_ME.html`, locked assets, `worksheet/worksheet.html`, optional `teacher/answer_key.html`, `data/request.json`, and `data/qa.json`. No worksheet PDF is required; adjustable HTML + browser Print is canonical.
 
-## 13. QA — HARD
+## 14. QA — HARD
 
 Record at minimum:
 - derived requested question count vs actual question count per version;
@@ -154,8 +183,10 @@ Record at minimum:
 - requested column count preserved in print;
 - 0.55 in print margin preserved;
 - per-version/per-problem DOM identity;
-- functional selected-problem workspace and graph tests;
+- workspace tests at 0%, 100%, at least 500%, and the full-page-capable upper range;
+- functional selected-problem graph test;
 - cross-problem and cross-version isolation;
+- large workspace does not clip and may move the problem to a new page/column;
 - MathJax size normalization;
 - graph-tool and line-weight compliance;
 - deterministic visual accuracy;
@@ -163,4 +194,4 @@ Record at minimum:
 - CLICK_ME exposes only classroom-use actions;
 - screen and print visual checks.
 
-Overall PASS is not allowed if the actual question count differs from the derived selected blueprint, a selected family's count is wrong, an unselected family is substituted, a required visual is inaccurate/missing, parallel forms drift to different evidence jobs, a layout control changes the wrong problem, requested two-column print collapses, inline math is visibly oversized, or the answer key disagrees.
+Overall PASS is not allowed if the actual question count differs from the derived selected blueprint, a selected family's count is wrong, an unselected family is substituted, a required visual is inaccurate/missing, parallel forms drift to different evidence jobs, a layout control changes the wrong problem, workspace cannot collapse to 0%, large workspace clips, requested two-column print collapses, inline math is visibly oversized, or the answer key disagrees.
