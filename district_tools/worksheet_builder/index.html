@@ -73,7 +73,7 @@
   <div class="summary" id="summary"></div>
   <div class="field"><label for="teacherNotes">Optional teacher notes</label><textarea id="teacherNotes" placeholder="Examples: avoid calculator-heavy numbers, keep contexts short, make the first four questions very approachable, include one challenge problem at the end."></textarea></div>
   <div class="actions"><div id="status" class="status">Loading question structures…</div><div class="row"><button id="resetBtn" class="button secondary" type="button">Reset</button><button id="buildBtn" class="button" type="button" disabled>Create Worksheet Request ZIP</button></div></div>
-  <div id="downloadReady" class="note" hidden>
+  <div id="downloadReady" class="note" hidden style="display:none!important">
     <div class="row"><div><b>Request ZIP is ready.</b><div class="small">File: <code id="downloadFilename"></code></div></div><a id="downloadLink" class="button" href="#">Download Request ZIP</a></div>
     <div class="small" style="margin-top:8px">The second click is a direct browser download. Chrome should show it in the Downloads tray/history immediately.</div>
   </div>
@@ -125,6 +125,37 @@
       return new Response(`Could not load GitHub source ${repoPath}.`, { status: 502 });
     }
   };
+})();
+</script>
+<script>
+(() => {
+  const button = document.getElementById("buildBtn");
+  const link = document.getElementById("downloadLink");
+  const status = document.getElementById("status");
+  if (!button || !link) return;
+
+  button.addEventListener("click", () => {
+    let downloaded = false;
+    let observer = null;
+    const tryDownload = () => {
+      if (downloaded) return;
+      const href = link.getAttribute("href");
+      const filename = link.getAttribute("download");
+      if (!href || href === "#" || !filename) return;
+      downloaded = true;
+      if (observer) observer.disconnect();
+      link.click();
+      if (status) {
+        status.className = "status good";
+        status.textContent = "Request package created. Download started.";
+      }
+    };
+
+    observer = new MutationObserver(tryDownload);
+    observer.observe(link, {attributes:true, attributeFilter:["href","download"]});
+    tryDownload();
+    window.setTimeout(() => observer && observer.disconnect(), 20000);
+  }, true);
 })();
 </script>
 <script src="app.js?v=20260918b"></script>
