@@ -1,0 +1,55 @@
+{
+  "schema": "math-family-library-manifest/1.0",
+  "status": "CURRENT",
+  "updated": "2026-09-19",
+  "authority": "The canonical math family library is the union of the sources below. Family IDs are globally unique; course maps reference IDs and never clone family contracts.",
+  "family_sources": [
+    {
+      "path": "catalogs/math_question_family_registry.json",
+      "role": "base_registry",
+      "coverage": "Lower Elementary through Grade 8 shared/base families"
+    },
+    {
+      "path": "catalogs/math_question_families_algebra1.json",
+      "role": "course_extension",
+      "coverage": "Algebra 1-specific families"
+    }
+  ],
+  "course_map_sources": [
+    {
+      "path": "catalogs/math_course_family_maps.json",
+      "coverage": "Lower Elementary through Grade 8"
+    },
+    {
+      "path": "catalogs/math_course_family_map_algebra1.json",
+      "coverage": "Algebra 1"
+    }
+  ],
+  "preview_sources": [
+    "catalogs/math_family_preview_specimens.json",
+    "catalogs/math_family_preview_specimens_le7.json",
+    "catalogs/math_family_preview_specimens_alg1.json"
+  ],
+  "compatibility_aggregates": [
+    {
+      "path": "catalogs/math_worksheet_generator_bank.json",
+      "coverage": "Base compatibility aggregate; district worksheet builder composes Algebra 1 extension contracts into the packaged request-time aggregate."
+    }
+  ],
+  "active_courses": [
+    "Lower Elementary Math",
+    "Grade 4 Math",
+    "Grade 5 Math",
+    "Grade 6 Math",
+    "Grade 7 Math",
+    "Grade 8 Math",
+    "Algebra 1"
+  ],
+  "future_course_extensions": [
+    "Geometry",
+    "Algebra 2",
+    "Precalculus",
+    "Calculus"
+  ],
+  "source_use_rule": "External catalogs and teacher samples inform family architecture and property coverage only; no source questions are stored."
+}

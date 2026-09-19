@@ -1,163 +1,44 @@
 {
   "package": "_question_structure",
-  "version": "2.0",
+  "version": "2.1",
   "created": "2026-08-27",
   "updated": "2026-09-19",
-  "purpose": "Dedicated question-design authority with plan-first workflow, executable evidence/response/representation gates, canonical reusable math family contracts, separate course maps, concise wording defaults, and parallel-family rules.",
+  "purpose": "Dedicated question-design authority with modular canonical math-family contracts, course maps, curated previews, concise wording, parallel forms, and same-family refresh candidates.",
   "source_basis": [
-    "teacher-authored question variety and evidence rules",
-    "teacher-supplied Lower Elementary through Grade 8 parallel math forms and topic inventories used as structural references only",
-    "external free worksheet catalogs reviewed for topic/property coverage only; source questions are not stored",
-    "2026-09-19 family-contract architecture: canonical family registry + course maps + derived worksheet catalogs"
+    "teacher-authored question variety/evidence rules",
+    "teacher-supplied Lower Elementary through Algebra 1 parallel math forms and topic inventories used as structural references only",
+    "Kuta Software free Algebra 1 catalog reviewed for topic/property coverage only; source questions are not stored"
   ],
-  "authority_note": "Core/workflow/family registry/course maps override conflicting question-authoring guidance in older combined toolkits. Legacy universal/stem libraries remain reference menus only. The math worksheet generator bank is a derived compatibility aggregate, not a second source of truth.",
-  "math_family_count": 165,
+  "authority_note": "Resolve canonical math family sources/course maps through catalogs/math_family_library_manifest.json. Legacy universal/stem libraries remain reference menus only.",
+  "math_family_count": 260,
   "active_math_courses": [
     "Lower Elementary Math",
     "Grade 4 Math",
     "Grade 5 Math",
     "Grade 6 Math",
     "Grade 7 Math",
-    "Grade 8 Math"
+    "Grade 8 Math",
+    "Algebra 1"
   ],
   "future_math_courses": [
-    "Algebra 1",
     "Geometry",
     "Algebra 2",
     "Precalculus",
     "Calculus"
   ],
-  "file_count": 26,
-  "files": [
-    {
-      "path": "QUESTION_STRUCTURE_CORE.md",
-      "bytes": 14800,
-      "sha256": "76eb2351c9f57f25cbc4191ad29b7c6054242d2e5dbb9b96a80038d0d17af2e1"
-    },
-    {
-      "path": "README_FIRST.md",
-      "bytes": 4513,
-      "sha256": "425227edba3cfd39aae318437540a35e9b0c7a5e3daf7e8670ddd18279a757e8"
-    },
-    {
-      "path": "catalogs/destination_design_patterns.json",
-      "bytes": 3414,
-      "sha256": "01926e6b4094f2d16b9391e2284093d1a0e7627980b8d71952f452dd5fddf802"
-    },
-    {
-      "path": "catalogs/legacy_question_structure_index.csv",
-      "bytes": 91616,
-      "sha256": "00e43656dbabe1c968b7c4c75a5802f89c7c0edfbbc5e6db026008eb728591de"
-    },
-    {
-      "path": "catalogs/legacy_question_structure_index.json",
-      "bytes": 212197,
-      "sha256": "2dc3016d891676a69efbd015275632e882a93590e9ce2f449465276668f1cf5b"
-    },
-    {
-      "path": "catalogs/math_worksheet_generator_bank.json",
-      "bytes": 584704,
-      "sha256": "e066d73c6688f97e272160093e55618cc33b2af716a5cdff484c9f777c7bfaa0"
-    },
-    {
-      "path": "catalogs/structure_extensions.json",
-      "bytes": 3526,
-      "sha256": "f195063eefc8c2fce0c5b62ca4dde894c02c6509cdb308832eb8232d32c2dd4b"
-    },
-    {
-      "path": "catalogs/variation_axes.json",
-      "bytes": 1960,
-      "sha256": "e6ad4124389e98a989863443febe7c84bf2ff65b9f7ee45ed3bd0d413b91dc68"
-    },
-    {
-      "path": "contracts/question_design_schema.json",
-      "bytes": 7069,
-      "sha256": "51c905d4ab3c0993d83f9d91bb18a9c7022b8db1905ed90aff3ce4e402febabd"
-    },
-    {
-      "path": "contracts/question_design_workflow.json",
-      "bytes": 1200,
-      "sha256": "a03bed18cf7eafe862d30362f594cb7d83ac943133592794054a12b2ef7ff514"
-    },
-    {
-      "path": "examples/math_examples.md",
-      "bytes": 591,
-      "sha256": "50ff40faa758eb2d19efd140f532a27540fb248cd5b06b39f87c3af19af9213"
-    },
-    {
-      "path": "examples/physics_examples.md",
-      "bytes": 1570,
-      "sha256": "be6ffe48f74ef6eaf3fe5a91f657fd866de2778142c04942717d67f24f897dc3"
-    },
-    {
-      "path": "examples/question_design_map_example.json",
-      "bytes": 7909,
-      "sha256": "7f48c7c7386e6f7f2624359530b2fd16680cf50d72c30796c44392a39d4bd094"
-    },
-    {
-      "path": "guides/destination_patterns.md",
-      "bytes": 1514,
-      "sha256": "be09e8fa30fce4a4bcb924d2e39bfda57c10bb4e88eec6e225f29d498682329d"
-    },
-    {
-      "path": "guides/multistep_patterns.md",
-      "bytes": 879,
-      "sha256": "d7af36396581b2353fd3006b7b2ee295c6d4bdf90862598f7d2cce3eb3ad3d01"
-    },
-    {
-      "path": "guides/parallel_family_rules.md",
-      "bytes": 1796,
-      "sha256": "c13d9b4a1f93bd9157fce75cfa19644963693fc885a8128b9729c97e5d74993b"
-    },
-    {
-      "path": "guides/question_metadata.md",
-      "bytes": 1283,
-      "sha256": "755c6ad5996f2c97313c449fb0b67d4f79f3434fec7765ba8f71a2d58c81d54b"
-    },
-    {
-      "path": "guides/representation_selection.md",
-      "bytes": 654,
-      "sha256": "a0cb9ac84eb25a91f657fd866de2778142c04942717d67f64e4b38f8c06dcae8"
-    },
-    {
-      "path": "guides/vocabulary_patterns.md",
-      "bytes": 470,
-      "sha256": "a630bc943c6fb13c5d786989f8253574a10879bd3c37103eea687783f073ac08"
-    },
-    {
-      "path": "guides/wording_profiles.md",
-      "bytes": 1618,
-      "sha256": "f3f01f1623c9b0fad94a71e5f7e26c71a03ee726f951a873ae6519e808ab3901"
-    },
-    {
-      "path": "library/Question_Starter_Stem_Library_v1.md",
-      "bytes": 15994,
-      "sha256": "baf7abfa5b8ebf2711c7f207e2664e431be60d7cfb8e35b3781f68589c377323"
-    },
-    {
-      "path": "library/Universal_Question_Structure_Library_v2.md",
-      "bytes": 210460,
-      "sha256": "37b6390f8b001e963756396e97d6ac9612bf567992abd7e8d4be5ff359e53721"
-    },
-    {
-      "path": "catalogs/math_question_family_registry.json",
-      "bytes": 414612,
-      "sha256": "cd3907b52bae4dbcf063b0aaa1be06b7df7710cd572c4d85edd3a18615e38132"
-    },
-    {
-      "path": "catalogs/math_course_family_maps.json",
-      "bytes": 16429,
-      "sha256": "95262198390963a922f2d435dbfb290bc129af8d3937934286ffe6b2b804060b"
-    },
-    {
-      "path": "contracts/math_question_family_schema.json",
-      "bytes": 4536,
-      "sha256": "a701a6615fab48b9ff1dc6d665d9014a0d98515a311845763b468072707d5f1c"
-    },
-    {
-      "path": "guides/math_family_architecture.md",
-      "bytes": 2788,
-      "sha256": "bd7bb9d5793b619711cc6da2c1209353ada965dbd9aa00ec04e8b085610265cb"
-    }
-  ]
+  "math_library_manifest": "catalogs/math_family_library_manifest.json",
+  "canonical_math_sources": [
+    "catalogs/math_question_family_registry.json",
+    "catalogs/math_question_families_algebra1.json"
+  ],
+  "canonical_course_maps": [
+    "catalogs/math_course_family_maps.json",
+    "catalogs/math_course_family_map_algebra1.json"
+  ],
+  "preview_sources": [
+    "catalogs/math_family_preview_specimens.json",
+    "catalogs/math_family_preview_specimens_le7.json",
+    "catalogs/math_family_preview_specimens_alg1.json"
+  ],
+  "note": "Other v2.0 support catalogs, contracts, examples, guides, and legacy libraries remain unchanged and in force unless superseded by README_FIRST.md or the math family library manifest."
 }
