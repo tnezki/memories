@@ -12,13 +12,14 @@ District teacher tool for building self-contained worksheet requests from reusab
 ## Workflow
 1. Check one or more grade/course filters.
 2. Browse topic cards or search across the selected grade levels.
-3. Check exact question structures. Every checked structure starts at **1 question**; use the `− / +` controls to change its quantity.
-4. The worksheet question count is derived automatically from the selected blueprint. There is no separate question-count or practice-mode control.
-5. Choose 1-4 parallel versions and a broad difficulty profile.
-6. Set initial workspace and graph/diagram scale.
-7. Click **Create Worksheet Request ZIP**; the ZIP downloads immediately.
-8. Upload that request ZIP to ChatGPT. It runs automatically and returns one response ZIP.
-9. Unzip the response and open `CLICK_ME.html`.
+3. Use the **Preview** magnifying-glass button beneath a skill's quantity control to open a representative question-structure preview before selecting it. The preview is illustrative only; generated values, context, and parallel-version parameters remain original.
+4. Check exact question structures. Every checked structure starts at **1 question**; use the `− / +` controls to change its quantity.
+5. The worksheet question count is derived automatically from the selected blueprint. There is no separate question-count or practice-mode control.
+6. Choose 1-4 parallel versions and a broad difficulty profile.
+7. Set initial workspace and graph/diagram scale.
+8. Click **Create Worksheet Request ZIP**; the ZIP downloads immediately.
+9. Upload that request ZIP to ChatGPT. It runs automatically and returns one response ZIP.
+10. Unzip the response and open `CLICK_ME.html`.
 
 The finished `CLICK_ME.html` exposes only the adjustable worksheet and optional answer key. Internal QA stays hidden.
 

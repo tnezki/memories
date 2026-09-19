@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Math Worksheet Builder — Pilot</title>
 <link rel="stylesheet" href="styles.css?v=20260918g">
+<link rel="stylesheet" href="preview.css?v=20260918a">
 </head>
 <body>
 <header><div class="wrap"><h1>Math Worksheet Builder</h1><p>Build original printable math practice from reusable question structures. Select skills across grade levels, set the quantity of each, and generate parallel versions from the same evidence blueprint.</p></div></header>
@@ -80,4 +81,5 @@
 (() => {const nativeFetch=window.fetch.bind(window);const publishedContractMap=new Map([[new URL("WORKSHEET_BUILDER_CONTRACT.md",document.baseURI).pathname,"district_tools/worksheet_builder/WORKSHEET_BUILDER_CONTRACT.md"],[new URL("../_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md",document.baseURI).pathname,"district_tools/_shared/DISTRICT_RESPONSE_BUILD_STANDARD.md"],[new URL("../_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md",document.baseURI).pathname,"district_tools/_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md"]]);async function fetchRepoTextAsResponse(repoPath,init){const encodedPath=repoPath.split("/").map(part=>encodeURIComponent(part)).join("/"),apiUrl=`https://api.github.com/repos/tnezki/memories/contents/${encodedPath}`,headers=new Headers(init&&init.headers?init.headers:undefined);headers.set("Accept","application/vnd.github+json");const apiResponse=await nativeFetch(apiUrl,{...(init||{}),headers,cache:"no-store"});if(!apiResponse.ok)return apiResponse;const data=await apiResponse.json();if(data.type!=="file"||!data.content)return new Response(`GitHub source ${repoPath} was not returned as a file.`,{status:502});const binary=atob(String(data.content).replace(/\s/g,"")),bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);const text=new TextDecoder("utf-8").decode(bytes);return new Response(text,{status:200,headers:{"Content-Type":"text/plain; charset=utf-8","Cache-Control":"no-store"}});}window.fetch=async(input,init)=>{const rawUrl=typeof input==="string"?input:input.url,resolved=new URL(rawUrl,document.baseURI),repoPath=resolved.origin===location.origin?publishedContractMap.get(resolved.pathname):null;if(!repoPath)return nativeFetch(input,init);try{return await fetchRepoTextAsResponse(repoPath,init);}catch(error){console.error("Contract bridge failed",error);return new Response(`Could not load GitHub source ${repoPath}.`,{status:502});}};})();
 </script>
 <script src="app.js?v=20260918g"></script>
+<script src="preview.js?v=20260918a"></script>
 </body></html>
