@@ -38,7 +38,9 @@ For a refresh pool, keep invariant:
 - approximate difficulty and computational load;
 - validity constraints and answer rule.
 
-Refresh candidates may vary only along the family's legal variation axes. Values, coordinates, data, model counts, functional surface context, legal orientation, and answer-choice order may change when the family permits them.
+Refresh candidates may vary only along the family's legal variation axes. Values, coordinates, data, model counts, functional surface context, legal orientation, answer-choice order, and family-authorized morphology/representation variants may change when the family permits them.
+
+A refresh pool should feel like **three legitimate new questions from the same family**, not one question mechanically re-skinned three times. When more than one legal morphology or representation path exists, use meaningful variation across the pool while holding evidence and difficulty invariant. Pure number swaps are sufficient only for families whose explicit evidence job is numerical/procedural fluency.
 
 A refresh alternate FAIL occurs when:
 - it changes to another family;
@@ -49,7 +51,9 @@ A refresh alternate FAIL occurs when:
 - its difficulty meaningfully drifts;
 - it duplicates another candidate's effective prompt/parameters.
 
-For the District Math Worksheet Builder, a canonical visible slot uses a three-candidate pool by default: initial candidate + two refresh alternates. The teacher may cycle those candidates before printing. Hidden candidates do not count toward the teacher-selected visible question total.
+For the District Math Worksheet Builder, a canonical visible slot uses a three-candidate pool by default: initial candidate + two refresh alternates. The teacher may cycle those candidates before printing. Hidden candidates do not count toward the teacher-selected visible question total. Teacher-defined custom slots follow the same three-candidate rule, using the teacher's custom description as the invariant authoring constraint.
+
+The finished worksheet is offline/self-contained. It may cycle only the embedded candidate pool; authoring an additional AI-generated custom candidate after build time requires a new build or an explicitly connected future AI service.
 
 When the worksheet has an answer key, the active refresh-candidate state must be transferable to the key so the displayed/printed key matches the exact refreshed worksheet.
 

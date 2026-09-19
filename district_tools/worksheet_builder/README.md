@@ -20,7 +20,7 @@ Construction families explicitly separate student givens from completed answers.
 A family name/summary is metadata, not student wording. Every generated item must be a concrete, independently solved instance of its exact canonical family. Curated previews show complete representative problems. If a family ever lacks a reviewed specimen, Preview fails closed.
 
 ## Worksheet display standards
-Finished adjustable worksheets use true US Letter page view, same screen/print breaks, per-problem workspace/visual sizing, three same-family refresh candidates, matching answer-key state, and fraction-bar division by default for symbolic algebra.
+Finished adjustable worksheets use true US Letter page view, same screen/print breaks, a **version-wide workspace slider (0–300%)** for collapsing/expanding all workspaces in one version, per-problem workspace/visual sizing, three same-family refresh candidates, matching answer-key state, and fraction-bar division by default for symbolic algebra.
 
 ## Workflow
 1. Choose one or more course filters.
@@ -28,4 +28,10 @@ Finished adjustable worksheets use true US Letter page view, same screen/print b
 3. Browse/search family cards and inspect previews.
 4. Select exact families and quantities.
 5. Create the request ZIP; upload it to ChatGPT; open returned `CLICK_ME.html`.
-6. In the adjustable worksheet, resize exact problems or use **↻ New Question** to cycle same-family alternatives before printing.
+6. In the adjustable worksheet, use **All workspaces in this version** to collapse or expand every workspace in the active version, resize exact problems individually as needed, or use **↻ New Question** to cycle genuinely new same-family alternatives before printing.
+
+## Refresh and custom behavior
+**↻ New Question** stays in the exact selected family. It is not allowed to jump to a neighboring family, and when a family supports meaningful legal variation the candidate pool should vary more than just the numbers. Teacher-defined custom structures also receive three pre-generated candidates. A truly new AI-authored custom question after the response ZIP has already been built would require another AI/build call, so the offline worksheet does not pretend to generate one.
+
+## Geometry notation
+Geometry figures use standard notation: perpendicular tick strokes for congruent segments, arrowhead/chevron marks for parallel segments, and square right-angle markers. Star/asterisk/X-like glyphs are not valid substitutes.
