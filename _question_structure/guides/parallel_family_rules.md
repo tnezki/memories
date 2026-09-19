@@ -27,35 +27,38 @@ May vary when valid:
 A parallel FAIL occurs when a new version changes operation, reasoning demand, representation requirement, recognition-vs-construction demand, or difficulty band.
 
 ## Refreshable worksheet alternates
-A refreshable worksheet alternate is another legitimate parallel instance of the SAME family occupying the SAME worksheet slot. It is not a new family, new topic, or extra visible question.
+A refreshable worksheet alternate is a teacher-selectable replacement for one worksheet slot after the initial exact blueprint has been generated.
 
-For a refresh pool, keep invariant:
-- `question_family_id`;
-- learning target / I Can and evidence job;
-- student action;
-- response mode;
-- representation role and visual semantics;
-- approximate difficulty and computational load;
-- validity constraints and answer rule.
+For the District Math Worksheet Builder:
+- Candidate 1 keeps the slot's original blueprint family.
+- Candidates 2–3 are drawn from the **teacher-selected family pool** for that worksheet.
+- A refresh candidate may use a different selected family than Candidate 1.
+- A refresh candidate may never use an unselected catalog family.
+- If more than one family was selected, at least one refresh candidate should use a different selected family whenever a valid approximately comparable question can be authored.
+- Original family counts govern the initial worksheet only; after teacher refreshes, the visible family-count distribution may change.
 
-Refresh candidates may vary only along the family's legal variation axes. Values, coordinates, data, model counts, functional surface context, legal orientation, answer-choice order, and family-authorized morphology/representation variants may change when the family permits them.
+For every refresh candidate, keep invariant at the worksheet level:
+- selected grade/course scope;
+- approximate overall difficulty/computational load for the slot;
+- originality and answer correctness;
+- family-contract validity for whichever selected family is used;
+- answer-neutral student visual policy.
 
-A refresh pool should feel like **three legitimate new questions from the same family**, not one question mechanically re-skinned three times. When more than one legal morphology or representation path exists, use meaningful variation across the pool while holding evidence and difficulty invariant. Pure number swaps are sufficient only for families whose explicit evidence job is numerical/procedural fluency.
+Within each candidate, obey that candidate family's own evidence job, student action, response mode, representation role, validity constraints, answer rule, legal variation axes, and visual policy.
 
 A refresh alternate FAIL occurs when:
-- it changes to another family;
-- it changes the operation or reasoning demand;
-- it changes recognition to construction or vice versa;
-- it drops/adds a required representation;
-- its visual is semantically different from the family requirement;
-- its difficulty meaningfully drifts;
-- it duplicates another candidate's effective prompt/parameters.
+- it comes from a family the teacher did not select;
+- it leaves the selected grade/course scope;
+- it is materially easier/harder than the slot it replaces without teacher intent;
+- it violates its own family contract;
+- its required representation is missing/wrong or answer-revealing;
+- it duplicates another candidate's effective prompt/parameters without a good procedural-fluency reason.
 
-For the District Math Worksheet Builder, a canonical visible slot uses a three-candidate pool by default: initial candidate + two refresh alternates. The teacher may cycle those candidates before printing. Hidden candidates do not count toward the teacher-selected visible question total. Teacher-defined custom slots follow the same three-candidate rule, using the teacher's custom description as the invariant authoring constraint.
+A canonical visible slot uses a three-candidate pool by default: initial blueprint candidate + two refresh alternates. The teacher may cycle those candidates before printing. Hidden candidates do not count toward the initial visible question total. Teacher-defined custom structures may participate in the selected pool and use build-time authored alternates from the teacher description.
 
 The finished worksheet is offline/self-contained. It may cycle only the embedded candidate pool; authoring an additional AI-generated custom candidate after build time requires a new build or an explicitly connected future AI service.
 
-When the worksheet has an answer key, the active refresh-candidate state must be transferable to the key so the displayed/printed key matches the exact refreshed worksheet.
+When the worksheet has an answer key, the active refresh-candidate state must be transferable to the key so the displayed/printed key matches the exact refreshed worksheet, including any family change.
 
 ## Secure parallels
 For secure assessment items, version/order/noun/number swaps alone are not sufficient. Use a new evidence stimulus while preserving the target and appropriate family.

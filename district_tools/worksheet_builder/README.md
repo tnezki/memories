@@ -20,7 +20,7 @@ Construction families explicitly separate student givens from completed answers.
 A family name/summary is metadata, not student wording. Every generated item must be a concrete, independently solved instance of its exact canonical family. Curated previews show complete representative problems. If a family ever lacks a reviewed specimen, Preview fails closed.
 
 ## Worksheet display standards
-Finished adjustable worksheets use true US Letter page view, the same 8.5 × 11 screen/print page boxes, 0.55 in internal print margins, a **version-wide workspace slider (0–300%)**, per-problem workspace/visual sizing, three same-family refresh candidates, matching answer-key state, and fraction-bar division by default for symbolic algebra.
+Finished adjustable worksheets use true US Letter page view, the same 8.5 × 11 screen/print page boxes, 0.55 in internal print margins, a **version-wide workspace slider (0–300%)**, per-problem workspace/visual sizing, three selected-family-pool refresh candidates, matching answer-key state, and fraction-bar division by default for symbolic algebra.
 
 Pagination is content-driven, not question-count-driven. Any workspace/visual/refresh/MathJax change causes the active version to be repaginated from scratch using the actual rendered problem heights. At 0% workspace, no old workspace height or old page assignment may remain reserved. New two-column responses use explicit page-column containers so screen page breaks and browser Print page breaks stay aligned.
 
@@ -35,7 +35,9 @@ Pagination is content-driven, not question-count-driven. Any workspace/visual/re
 3. Browse/search family cards and inspect previews.
 4. Select exact families and quantities.
 5. Create the request ZIP; upload it to ChatGPT; open returned `CLICK_ME.html`.
-6. In the adjustable worksheet, use **All workspaces in this version** to collapse or expand every workspace in the active version, resize exact problems individually as needed, or use **↻ New Question** to cycle genuinely new same-family alternatives before printing.
+6. In the adjustable worksheet, use **All workspaces in this version** to collapse or expand every workspace in the active version, resize exact problems individually as needed, or use **↻ New Question** to replace the selected slot with another pre-generated question drawn from the worksheet's selected family pool.
 
 ## Refresh and custom behavior
-**↻ New Question** stays in the exact selected family. It is not allowed to jump to a neighboring family, and when a family supports meaningful legal variation the candidate pool should vary more than just the numbers. Teacher-defined custom structures also receive three pre-generated candidates. A truly new AI-authored custom question after the response ZIP has already been built would require another AI/build call, so the offline worksheet does not pretend to generate one.
+The exact selected family counts control the **initial worksheet**. **↻ New Question** is a teacher edit after generation: it changes only the selected slot and cycles through embedded candidates drawn from the worksheet's **selected family pool**. It may switch that slot to another family the teacher selected, but it may never introduce an unselected family. When multiple families were selected, the refresh pool should include cross-family variety when comparable difficulty permits.
+
+Teacher-defined custom structures may participate in the selected pool and receive pre-generated candidates. A truly new AI-authored custom question after the response ZIP has already been built would require another AI/build call, so the offline worksheet does not pretend to generate one.
