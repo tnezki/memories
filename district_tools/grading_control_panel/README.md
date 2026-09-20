@@ -89,24 +89,21 @@ The printable student artifact is **Student Worksheet**. The HTML teaching view 
 
 ## Question / Solution Set
 
-Only **Set 1** is generated. Set 1 is the mathematical question set and is reused across delivery formats.
+Only **Set 1** is generated. The Set 1 landing page is the **Activity Options** page itself, modeled directly on `algebra/activities/u1_1_act1/u1_1_act1.html`. Do not insert a separate card-menu page before it.
 
-Required choices:
+The Activity Options page contains:
 
-- **Presentation** — one question at a time with compact browser use.
-- **Print Presentation** — exactly two large Set 1 questions per letter page, scaled to fit, **top-aligned** in each half-page, no answers/moves.
-- **Review All Questions** — compact zero-workspace QA view.
-- **Student Set** — normal worksheet layout, small header, all Set 1 questions, and natural page flow rather than fixed question-page forcing that leaves large blank areas.
-- **Teacher Guide** — matching answers plus concise teacher/discourse moves.
-- **Classroom Structures** — existing Algebra-style participation routines using the same Set 1.
+- **Projection / Whiteboard Options** — Whiteboard Indy, Whiteboard Partners, Rally Coach, Speed Dating Math, Showdown, Think / Trade / Agree, Round Table, Mathematical Hot Seat, and Rally Coach II. Each routine links to its directions section on the same page and uses the same Set 1 Questions & Solutions deck.
+- **Printable Handouts** — Stations, **Find Someone Who**, and **Cut-Apart Question Cards**.
+- **Teacher / Print Utilities** — Print Presentation, Review All Questions, and Teacher Guide.
 
-The Classroom Structures page closely follows the existing Algebra `u1_2_act1` **Activity Options** architecture, adapted to **one Set 1 only**. Projection / Whiteboard routines reuse the Set 1 Presentation. Printable Handouts list the already-generated **Stations**, **Find Someone Who**, and the added **Cut-Apart Question Cards**. Do not include Tarsia or Blooket.
+There is **no standalone Presentation card**, no separate Classroom Structures menu page, no Set 2, no Tarsia, and no Blooket. The projection deck follows the Algebra questions/solutions pattern: a large question page followed by its large solution page, repeated through the complete Set 1. Print Presentation remains the separate top-aligned two-up student-facing print format.
 
-**Find Someone Who is not a card layout.** It uses the established Algebra-style vertically stacked problem blocks with Partner signature, Work / reasoning, and workspace. The separate Cut-Apart Question Cards deck supports Quiz-Quiz-Trade, Fan-N-Pick, and other appropriate card routines.
+**Find Someone Who is not a card layout.** It uses the uploaded gold response's **Student Set** look as its visual base: compact two-column worksheet flow, with a partner signature line and adjustable workspace added to each problem. A screen-only left control rail follows the Worksheet Builder pattern for all-workspace size, selected problem, per-problem workspace, graph/diagram size, Reset, and Print.
 
-Every Set 1 artifact must include the complete Set 1 across enough pages/cards. No structure may silently stop at six or eight questions.
+The separate **Cut-Apart Question Cards** deck keeps the uploaded gold-run card layout unchanged and supports Quiz-Quiz-Trade, Fan-N-Pick, and other appropriate card routines.
 
-Redundant Print buttons are omitted when browser print already produces the intended layout.
+Every Set 1 artifact must include the complete Set 1 across enough pages/cards. No structure may silently stop at six or eight questions. Redundant Print buttons are omitted when browser print already produces the intended layout.
 
 ## Duplex-safe student printing
 
@@ -139,3 +136,12 @@ The control panel reads selected files in the browser and packages them locally 
 ## Implementation note
 
 The builder uses a small built-in ZIP writer (STORE/no compression), loads locked CSS files into each request ZIP, and includes embedded fallbacks for local/offline operation.
+
+
+## Gold response layout lock (2026-09-20)
+
+The uploaded Precalculus Circuit Training response is now the visual baseline. `response_styles.css` is frozen at SHA-256 `59d49d36e4d660a0c6a3bb80254eac0867cfb50d86561cbc664c495f0eefa8df` after adding only the approved Activity Options / Questions & Solutions / Find Someone Who controls. Future response runs must not invent a new layout for stable pages. `RESPONSE_LAYOUT_LOCK.md` is packaged into every request and is a HARD contract.
+
+Set 1 now follows the Algebra `u1_1_act1` architecture directly: `question_set/index.html` is Activity Options with one Set 1, projection structures link to one Algebra-style Questions & Solutions deck, Printable Handouts are Stations / Find Someone Who / Cut-Apart Question Cards, and Teacher/Print Utilities expose Print Presentation / Review All / Teacher Guide. There is no standalone Presentation card, no Set 2, no Tarsia, and no Blooket.
+
+Find Someone Who uses the approved Student Set worksheet look with partner signatures and Worksheet Builder-style left controls for workspace and graph sizing. Cut-Apart Cards remain visually unchanged.

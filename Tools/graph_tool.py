@@ -3,7 +3,7 @@
 # =============================================================================
 #
 # STATUS: AUTHORITATIVE
-# VERSION: district-graph-tool/1.0-unified
+# VERSION: district-graph-tool/1.1-unified
 # DATE: 2026-09-20
 #
 # This file consolidates the formerly layered v12 -> v13 -> v14 graph tools.
@@ -13,7 +13,7 @@
 #
 # Teacher-approved full-size Cartesian print weights:
 #   grid:             0.6 pt  #aaaaaa
-#   axes/arrows:      1.8 pt  #222222
+#   axes:             1.8 pt  #222222
 #   plotted relation: 2.0 pt
 #   major ticks:      1.2 pt
 #   curve exit arrow: 1.5 pt
@@ -311,20 +311,25 @@ def make_standard_graph(ax, functions, title=""):
     return ax
 
 
-def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title="", xlabel="x", ylabel="y"):
-    """Canonical full-size Cartesian graph on any two-sided window.
+def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title="", xlabel="", ylabel=""):
+    """Canonical worksheet/Quick-Check Cartesian window.
 
-    Passing an empty functions list intentionally creates an answer-neutral
-    blank construction surface with the exact district graph styling.
+    Passing an empty functions list creates an answer-neutral construction grid.
+    The bounded-grid geometry intentionally matches the established classroom
+    worksheet style: straight axes, labels near the axes, and no oversized
+    decorative arrowheads on blank construction surfaces.
     """
     x_range = xmax - xmin
     y_range = ymax - ymin
-    x_step = _nice_grid_step(x_range, max_lines=16)
-    y_step = _nice_grid_step(y_range, max_lines=16)
+    x_step = _nice_grid_step(x_range, max_lines=18)
+    y_step = _nice_grid_step(y_range, max_lines=18)
     x_ticks = np.arange(np.ceil(xmin / x_step) * x_step, xmax + x_step * 0.01, x_step)
     y_ticks = np.arange(np.ceil(ymin / y_step) * y_step, ymax + y_step * 0.01, y_step)
-    x_pad = x_step * 0.55
-    y_pad = y_step * 0.55
+
+    # Reserve modest outside room only for tick/axis labels. The grid itself
+    # stays bounded exactly to the mathematical window.
+    x_pad = max(x_step * 0.70, x_range * 0.035)
+    y_pad = max(y_step * 0.70, y_range * 0.035)
     ax.set_xlim(xmin - x_pad, xmax + x_pad)
     ax.set_ylim(ymin - y_pad, ymax + y_pad)
 
@@ -340,39 +345,73 @@ def make_window_graph(ax, functions, xmin, xmax, ymin, ymax, title="", xlabel="x
         for seg in segments:
             ax.plot(x[seg], y[seg], color=fn["color"], linewidth=CURVE_WIDTH, label=label, zorder=3)
             label = None
-        _curve_exit_arrows(ax, fn["expr"], fn["deriv"], fn["color"], xmin, xmax, ymin, ymax,
-                           arrow_length=arrow_length)
+        _curve_exit_arrows(
+            ax, fn["expr"], fn["deriv"], fn["color"], xmin, xmax, ymin, ymax,
+            arrow_length=arrow_length,
+        )
 
-    tri = dict(arrowstyle="-|>", color=AXIS_COLOR, lw=AXIS_WIDTH, mutation_scale=13)
+    x_axis_y = 0.0 if ymin <= 0 <= ymax else ymin
+    y_axis_x = 0.0 if xmin <= 0 <= xmax else xmin
     if ymin <= 0 <= ymax:
         ax.plot([xmin, xmax], [0, 0], color=AXIS_COLOR, linewidth=AXIS_WIDTH, zorder=2)
-        ax.annotate("", xy=(xmax + x_pad * 0.8, 0), xytext=(xmax, 0), arrowprops=tri, annotation_clip=False)
-        ax.annotate("", xy=(xmin - x_pad * 0.8, 0), xytext=(xmin, 0), arrowprops=tri, annotation_clip=False)
-        ax.text(xmax + x_pad * 0.62, y_step * 0.22, xlabel, fontsize=12, fontweight="bold",
-                fontfamily="Times New Roman", ha="center", va="bottom")
     if xmin <= 0 <= xmax:
         ax.plot([0, 0], [ymin, ymax], color=AXIS_COLOR, linewidth=AXIS_WIDTH, zorder=2)
-        ax.annotate("", xy=(0, ymax + y_pad * 0.8), xytext=(0, ymax), arrowprops=tri, annotation_clip=False)
-        ax.annotate("", xy=(0, ymin - y_pad * 0.8), xytext=(0, ymin), arrowprops=tri, annotation_clip=False)
-        ax.text(x_step * 0.20, ymax + y_pad * 0.62, ylabel, fontsize=12, fontweight="bold",
-                fontfamily="Times New Roman", ha="left", va="center")
 
-    x_lab_every = _label_every(len(x_ticks))
-    y_lab_every = _label_every(len(y_ticks))
-    x_labeled = [t for i, t in enumerate(x_ticks) if i % x_lab_every == 0]
-    y_labeled = [t for i, t in enumerate(y_ticks) if i % y_lab_every == 0]
-    ax.set_xticks(x_labeled)
-    ax.set_yticks(y_labeled)
-    ax.set_xticklabels([_fmt(t) for t in x_labeled], fontfamily="Times New Roman", fontsize=9)
-    ax.set_yticklabels([_fmt(t) for t in y_labeled], fontfamily="Times New Roman", fontsize=9)
-    ax.tick_params(which="major", length=3, width=MAJOR_TICK_WIDTH, color="#444444")
+    # Worksheet-style labels live next to the axes rather than on the outer
+    # figure frame. Keep no more than roughly seven labels per axis.
+    def label_every(n):
+        if n <= 9:
+            return 1
+        if n <= 15:
+            return 2
+        if n <= 22:
+            return 3
+        return 4
+
+    x_every = label_every(len(x_ticks))
+    y_every = label_every(len(y_ticks))
+    x_offset = max(x_range * 0.015, x_step * 0.20)
+    y_offset = max(y_range * 0.025, y_step * 0.25)
+
+    for i, xt in enumerate(x_ticks):
+        if i % x_every != 0 or abs(float(xt)) < 1e-10:
+            continue
+        ax.text(
+            xt, x_axis_y - y_offset, _fmt(float(xt)),
+            ha="center", va="top", fontsize=9.2,
+            fontfamily="Arial", color="#252b33", zorder=5,
+        )
+    for i, yt in enumerate(y_ticks):
+        if i % y_every != 0 or abs(float(yt)) < 1e-10:
+            continue
+        ax.text(
+            y_axis_x - x_offset, yt, _fmt(float(yt)),
+            ha="right", va="center", fontsize=9.2,
+            fontfamily="Arial", color="#252b33", zorder=5,
+        )
+
+    if xlabel and ymin <= 0 <= ymax:
+        ax.text(
+            xmax + x_pad * 0.28, x_axis_y + y_offset * 0.25, xlabel,
+            fontsize=9.5, fontweight="bold", fontfamily="Arial",
+            ha="left", va="bottom", color=AXIS_COLOR,
+        )
+    if ylabel and xmin <= 0 <= xmax:
+        ax.text(
+            y_axis_x + x_offset * 0.35, ymax + y_pad * 0.28, ylabel,
+            fontsize=9.5, fontweight="bold", fontfamily="Arial",
+            ha="left", va="bottom", color=AXIS_COLOR,
+        )
+
+    ax.set_xticks([])
+    ax.set_yticks([])
     for spine in ax.spines.values():
         spine.set_visible(False)
+
     key_points = _find_key_points(functions, xmin, xmax, ymin, ymax)
     _draw_legend(ax, functions, key_points, xmin, xmax, ymin, ymax)
-    ax.set_title(title, fontfamily="Times New Roman", fontsize=12, pad=8)
+    ax.set_title(title, fontfamily="Arial", fontsize=12, pad=8)
     return ax
-
 
 def make_context_graph(ax, functions, xmin, xmax, ymin, ymax, xlabel="x", ylabel="y", title=""):
     x_range = xmax - xmin

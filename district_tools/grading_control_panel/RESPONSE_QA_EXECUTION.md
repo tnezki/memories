@@ -1,7 +1,7 @@
 # Grading Response QA Execution Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-response-qa-execution/1.0  
+VERSION: district-grading-response-qa-execution/1.1  
 DATE: 2026-09-20
 
 ## Purpose
@@ -19,9 +19,11 @@ Before expensive visual rendering, run inexpensive checks across the full packag
 - required files and folders exist;
 - local links resolve;
 - request/analysis/QA JSON parses;
-- locked CSS bytes/version match the packaged contract;
+- locked CSS bytes/version/SHA-256 match the packaged contract and `RESPONSE_LAYOUT_LOCK.md`;
 - MathJax source has no obvious raw/unclosed delimiters;
 - Set 1 counts and reuse mappings match across all views;
+- Activity Options structure matches the one-set Algebra u1_1 architecture;
+- Find Someone Who left-rail controls exist and the generic old Set 1 card menu is absent;
 - Review vs Extension labels exist where required;
 - graph provenance records name the packaged registered graph tool;
 - expected graph assets exist;
@@ -32,7 +34,10 @@ Before expensive visual rendering, run inexpensive checks across the full packag
 
 Fix programmatic failures before broad visual QA.
 
-## 4. Targeted visual QA
+## 4. Gold-shell check before rendering
+Confirm unchanged gold surfaces still use the locked class hierarchy. Do not redesign or rerender a stable page just to explore a different layout. Only the approved exceptions in `RESPONSE_LAYOUT_LOCK.md` may change structure.
+
+## 5. Targeted visual QA
 Visually render the pages that are most likely to reveal layout/math problems:
 
 - every page containing a mathematical graph or nontrivial diagram;
@@ -46,7 +51,7 @@ Visually render the pages that are most likely to reveal layout/math problems:
 
 Locked CSS/templates that already pass do not require every near-duplicate student page to be rerendered just because the student's text differs.
 
-## 5. Correction loop — only changed artifacts
+## 6. Correction loop — only changed artifacts
 If QA finds a defect, regenerate and rerender:
 
 1. the artifact that changed;
@@ -55,13 +60,13 @@ If QA finds a defect, regenerate and rerender:
 
 Do **not** rerender unrelated stable artifacts or the entire package after a local fix.
 
-## 6. Graph QA remains strict
+## 7. Graph QA remains strict
 Graph pages are never skipped merely because the layout template is trusted. Every supported Cartesian graph must record the packaged registered graph tool as renderer. Visually inspect graph-heavy pages for readability and mathematical accuracy.
 
-## 7. Duplex QA
+## 8. Duplex QA
 Verify duplex pairing programmatically for every student segment. Visually inspect representative transition points and any segment whose page count changed after a correction. Do not rerender every unchanged report/practice page only to reconfirm the same blank-back template.
 
-## 8. QA record
+## 9. QA record
 `data/qa.json` should record:
 
 - programmatic checks run;

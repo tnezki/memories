@@ -79,3 +79,68 @@ a{color:var(--accent-dark)}
   .print-presentation-wrap{max-width:none;padding:0}.print-presentation-page{page:presentation2up;width:auto;height:10.5in;min-height:10.5in;margin:0;border:0;box-shadow:none;padding:0;gap:.14in}.print-slide{height:5.18in;border-radius:0}.print-slide .slide-question{font-size:20pt}
   .student-set-grid{gap:6px 12px}.student-question{padding:6px 1px 8px}.teacher-guide-grid{gap:7px}
 }
+
+/* ========================================================================== */
+/* GOLD LAYOUT LOCK ADDITIONS - 2026-09-20                                   */
+/* Existing response/report/dashboard rules above are the frozen baseline.   */
+/* These additions only implement the approved Set 1 activity/worksheet      */
+/* changes. Do not redesign unrelated response surfaces.                     */
+/* ========================================================================== */
+
+/* Algebra-style Activity Options / projectable direction pages */
+.activity-options-wrap{max-width:980px;margin:0 auto;padding:0}
+.activity-page{min-height:9.3in;page-break-after:always;break-after:page;border:2px solid var(--ink);padding:16px 18px;display:flex;flex-direction:column;background:#fff;margin:14px auto;max-width:980px}
+.activity-page:last-child{page-break-after:auto;break-after:auto}
+.dir-header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid var(--accent-dark);padding-bottom:8px;margin-bottom:16px;gap:16px}
+.act-eyebrow{font-size:12pt;font-weight:800;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.act-title{font-size:18pt;font-weight:900;color:var(--accent-dark);margin:0 0 4px;line-height:1.1}
+.act-subtitle{font-size:14pt;font-weight:700;color:var(--ink)}
+.act-meta{font-size:11.5pt;text-align:right;line-height:1.5;flex-shrink:0}
+.dir-body{display:flex;gap:.5in;flex:1;align-items:flex-start;padding-top:4px}
+.dir-text{flex:1.5;font-size:12pt;line-height:1.55}
+.dir-row{margin-bottom:12px}
+.dir-label{font-weight:900;color:var(--accent-dark);display:block;margin-bottom:4px;font-size:12pt;text-transform:uppercase;letter-spacing:.04em}
+.dir-text ol,.dir-text ul{margin:4px 0 4px 22px}.dir-text li{margin-bottom:5px}
+.dir-goal{margin-top:14px;font-style:italic;color:var(--muted);font-size:11.5pt}
+.looks-like{flex:1;display:flex;flex-direction:column;gap:12px;min-width:2.5in;flex-shrink:0}
+.looks-good{background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:12px 14px}
+.looks-bad{background:#fff1f2;border:1.5px solid #fca5a5;border-radius:8px;padding:12px 14px}
+.looks-header{font-size:11pt;font-weight:900;margin-bottom:8px}.looks-good .looks-header{color:#15803d}.looks-bad .looks-header{color:#b91c1c}
+.looks-good ul,.looks-bad ul{margin-left:18px;font-size:11pt;line-height:1.5}.looks-good li,.looks-bad li{margin-bottom:5px}
+.activity-utility-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.activity-utility-list a{font-weight:800}
+
+/* Algebra-style Set 1 Questions & Solutions projection deck */
+.projection-deck{max-width:980px;margin:0 auto;padding:0}
+.projection-deck .activity-page{margin:14px auto}
+.prob-head{display:flex;justify-content:space-between;align-items:center;border:1.5px solid #86efac;border-bottom:2px solid #15803d;border-radius:5px;padding:8px 10px;margin-bottom:12px;font-size:12pt;font-weight:800;color:#333;background:#f0fdf4}
+.solution-page .prob-head{background:#fff1f2;border-color:#fca5a5;border-bottom-color:#b91c1c}
+.prob-q{font-size:16pt;margin:0 0 14px;line-height:1.35}.prob-q .graph-frame,.prob-q .visual-block{margin:12px auto}.prob-q img,.prob-q svg{max-width:5.69in;max-height:4.5in;width:auto;height:auto;object-fit:contain}
+.projection-work{flex:1;background:#fff;min-height:3.5in;margin-top:8px}
+.solution{font-size:16pt;margin:12px 0 8px;padding-top:10px;border-top:2px solid var(--ink);line-height:1.35}.solution b{color:var(--accent-dark)}
+
+/* Worksheet Builder-style screen controls for Set 1 student handouts */
+.layout-controls{position:sticky;top:0;z-index:20;background:#eef4f8;border:1px solid #c9d5df;padding:10px 12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12px}
+.layout-controls label{font-weight:800}.layout-controls input[type=range]{width:100%}.layout-controls input[type=number]{width:76px}.layout-controls select{width:100%;padding:6px 7px;border:1px solid #aeb8c4;border-radius:5px;background:#fff;font:inherit}.layout-controls button{cursor:pointer}.layout-controls .control-group{display:grid;gap:4px}.layout-controls .selection-note{font-size:11px;color:var(--muted);line-height:1.25}
+.adjustable-set-sheet{--workspace-height:1.1in;--graph-width:100%}
+.adjustable-set-sheet .student-question{--problem-workspace-height:var(--workspace-height);--problem-graph-width:var(--graph-width)}
+.adjustable-set-sheet .student-question .workspace{height:var(--problem-workspace-height);min-height:0;overflow:hidden;margin-top:7px}
+.adjustable-set-sheet .student-question .graph-frame,.adjustable-set-sheet .student-question .visual-block{width:min(100%,var(--problem-graph-width));max-width:100%;margin:7px auto}
+.adjustable-set-sheet .student-question .graph-frame img,.adjustable-set-sheet .student-question .graph-frame svg,.adjustable-set-sheet .student-question .visual-block img,.adjustable-set-sheet .student-question .visual-block svg{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+.find-someone-student-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 14px}
+.find-someone-student-grid .student-question{border-top:1px solid #dce2e9;padding:8px 2px 10px;break-inside:auto;page-break-inside:auto}
+.find-someone-student-grid .partner-signature{font-size:11px;font-weight:800;color:#333;margin:8px 0 5px;padding-bottom:4px;border-bottom:1px solid #aaa}
+.find-someone-student-grid .workspace-label{font-size:10.5px;font-weight:800;color:#555;margin-top:5px}
+.find-someone-directions{font-size:12px;color:#444;margin:0 0 10px}
+
+@media screen and (min-width:1100px){
+  body.adjustable-handout-page{padding-left:252px}
+  body.adjustable-handout-page .layout-controls{position:fixed;left:14px;top:14px;width:224px;max-height:calc(100vh - 28px);overflow:auto;flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  body.adjustable-handout-page .layout-controls>*{width:100%}
+  body.adjustable-handout-page .layout-controls label{display:block}
+}
+@media screen and (max-width:1099px){body.adjustable-handout-page{padding-left:0}.layout-controls{position:relative}}
+@media(max-width:700px){.dir-body{display:block}.looks-like{min-width:0;margin-top:14px}.find-someone-student-grid{grid-template-columns:1fr}}
+@media print{
+  .layout-controls{display:none!important}body.adjustable-handout-page{padding-left:0!important}
+  .activity-page{margin:0;min-height:9.3in}.projection-deck .activity-page{margin:0}
+}

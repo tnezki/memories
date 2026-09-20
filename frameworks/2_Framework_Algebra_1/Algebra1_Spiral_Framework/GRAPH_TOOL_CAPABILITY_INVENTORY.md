@@ -12,7 +12,7 @@ Production rule: resolve the canonical tool through the registry, copy the one s
 | Type | Function | Best uses / notable options |
 |---|---|---|
 | Standard coordinate plane | `make_standard_graph` | Algebra graphs on the standard -10 to 10 plane; parent functions, transformations, intersections, multiple functions, legends, exit arrows. |
-| Custom / blank Cartesian window | `make_window_graph` | Canonical custom two-sided Cartesian window. Pass an empty function list for a blank student construction grid with the same approved style. |
+| Custom / blank Cartesian window | `make_window_graph` | Canonical custom two-sided Cartesian window. Pass an empty function list for a blank student construction grid using the Worksheet Builder / Quick Check bounded-grid geometry and approved print weights. |
 | Context / modeling graph | `make_context_graph` | Real-world/modeling graphs with custom axis ranges and axis labels; useful when quantities/units matter. |
 | Number line | `make_number_line` / `make_number_line_blank` | Inequalities, absolute-value solutions, domain/range; open/closed endpoints, intervals/rays, and blank student number lines. |
 | 2x2 graph grid | `make_2x2_grid` | Compare four graphs/examples in a compact grid. |

@@ -1,7 +1,7 @@
 # District Graph Rendering Standard
 
 STATUS: REQUIRED FOR DISTRICT TOOLS THAT GENERATE MATHEMATICAL GRAPHS  
-VERSION: district-graph-rendering-standard/1.1  
+VERSION: district-graph-rendering-standard/1.2  
 DATE: 2026-09-20
 
 This standard keeps mathematical graphs consistent across district tools and prevents each request builder, course, or artifact from inventing its own graph renderer or print darkness.
@@ -61,13 +61,13 @@ graph_tool.make_window_graph(
     xmin, xmax,
     ymin, ymax,
     title="",
-    xlabel="x",
-    ylabel="y",
+    xlabel="",      # ordinary classroom grid: no decorative axis letters
+    ylabel="",
 )
 fig.savefig(..., format="svg", bbox_inches="tight")
 ```
 
-Passing an empty `functions` list intentionally produces the same canonical grid, axes, arrows, tick treatment, labels, typography, spacing, and approved print weights without revealing the relation the student is supposed to construct.
+Passing an empty `functions` list intentionally produces the same canonical grid, axes, tick-label placement, typography, spacing, and approved print weights without revealing the relation the student is supposed to construct.
 
 For the answer key, use the same bounds/scale and the graph tool again with the completed mathematical relation or construction overlay.
 
@@ -78,7 +78,7 @@ A browser may resize the completed SVG asset geometrically. It may not redraw th
 For full-size Cartesian graphs, preserve the teacher-approved 2026-09-18 printed line-weight standard:
 
 - grid: **0.6 pt**, `#aaaaaa`
-- axes and axis arrows: **1.8 pt**, `#222222`
+- axes: **1.8 pt**, `#222222`
 - plotted relation: **2.0 pt**
 - major ticks: **1.2 pt**
 - relation exit arrows: **1.5 pt** when used
@@ -86,6 +86,22 @@ For full-size Cartesian graphs, preserve the teacher-approved 2026-09-18 printed
 Compact multi-panel graph types retain the canonical graph tool's proportional lighter styling.
 
 Do not thicken or thin these through tool-specific CSS or ad hoc SVG overrides.
+
+
+## 5A. Worksheet / Quick-Check Cartesian visual geometry - HARD
+
+For blank Cartesian construction windows and ordinary classroom coordinate planes, match the established Worksheet Builder / Quick Check visual language:
+
+- the grid is a clean bounded rectangle;
+- x- and y-axes are dark straight lines through zero when zero is in range;
+- do **not** use oversized decorative arrowheads on the four ends of a blank construction grid;
+- place numeric tick labels along/adjacent to the axes rather than around the distant outside frame;
+- omit a crowded duplicate `0` at the origin when both axes cross there;
+- use small `x` / `y` labels only when they add clarity; for an ordinary blank student grid, omit them;
+- keep graph bounds/scale mathematically faithful to the task;
+- preserve the approved 0.6 / 1.8 / 2.0 / 1.2 pt print weights.
+
+This geometry is part of the canonical visual standard, not an optional per-tool restyle. Relation exit arrows may still be used where mathematically useful; the prohibition above is about decorative axis-end arrows on blank/student construction grids.
 
 ## 6. Resize geometry, not stroke weights - HARD
 

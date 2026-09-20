@@ -2,25 +2,466 @@
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
 
-  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.5";
+  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.6";
   const STATION_STYLE_VERSION = "district-grading-station-style/1.0";
   const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.5";
-  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.2";
-  const RESPONSE_QA_VERSION = "district-grading-response-qa-execution/1.0";
-  const GRAPH_RENDERING_STANDARD_VERSION = "district-graph-rendering-standard/1.1";
+  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.3";
+  const RESPONSE_QA_VERSION = "district-grading-response-qa-execution/1.1";
+  const GRAPH_RENDERING_STANDARD_VERSION = "district-graph-rendering-standard/1.2";
+  const RESPONSE_LAYOUT_LOCK_VERSION = "district-grading-response-layout-lock/1.0";
+  const RESPONSE_STYLE_SHA256 = "59d49d36e4d660a0c6a3bb80254eac0867cfb50d86561cbc664c495f0eefa8df";
   const REQUEST_SCHEMA = "district-grading-request/1.1-pilot";
 
-  const RESPONSE_CSS_FALLBACK = String.raw`:root{--ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;--accent:#365f82;--accent-dark:#284b68;--success:#176b46;--warn:#8a5a00;--shadow:0 8px 24px rgba(20,34,50,.06)}*{box-sizing:border-box}html{background:#fff;color:var(--ink)}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.5}a{color:var(--accent-dark)}.wrap{max-width:1180px;margin:0 auto;padding:20px}.hero{background:var(--hero);border:1px solid var(--line);border-radius:20px;padding:24px 28px;margin:10px 0 20px}.hero h1{margin:0;font-size:36px}.quick-actions,.inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 15px;border-radius:10px;border:1px solid #9fb4c8;background:#fff;color:var(--accent);font-weight:800;text-decoration:none}.btn.primary{background:var(--accent);color:#fff}.section{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.grid,.student-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}.card-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.question-review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px}.question-review-card{border:1px solid var(--line);border-radius:10px;padding:10px}.question-source{font-size:11px;text-transform:uppercase;font-weight:800;color:var(--muted)}.question-review-card details{margin-top:6px;border-top:1px solid #e3e7ed;padding-top:5px}.question-review-card summary{cursor:pointer;font-weight:800}.teacher-move,.discourse-move,.answer-box{font-size:12px;background:var(--soft);border-radius:7px;padding:7px;margin-top:5px}.presentation-shell{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}.presentation-head{padding:9px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.presentation-question{display:flex;align-items:center;justify-content:center;padding:14px 22px;min-height:0;overflow:auto}.presentation-card{width:min(1100px,96vw);font-size:clamp(22px,2.4vw,38px)}.presentation-nav{background:#fff;border-top:1px solid var(--line);padding:9px 14px;display:flex;justify-content:space-between;gap:8px}.report-page,.practice-page,.packet-page{max-width:8in;margin:0 auto}.feedback-box,.practice-block{border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0}.duplex-blank-page{display:none}.math-display{margin:10px 0}.visual-block img,.graph-frame img{display:block;max-width:100%;height:auto;margin:0 auto}.set-head,.activity-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;border-bottom:1.5px solid var(--line);padding:0 0 8px;margin:0 0 12px}.set-head h1,.activity-head h1{font-size:23px;margin:0}.set-head p,.activity-head p{margin:2px 0 0;font-size:12px;color:var(--muted)}.student-set-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}.student-question{border-top:1px solid #dce2e9;padding:9px 2px;break-inside:auto;page-break-inside:auto}.teacher-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:10px}.teacher-question{border:1px solid var(--line);border-radius:10px;padding:11px;break-inside:avoid}.print-presentation-page{width:8in;min-height:10in;margin:0 auto 18px;padding:0;background:#fff;display:grid;grid-template-rows:1fr 1fr;gap:.16in;break-after:page}.print-slide{border:1.5px solid #9ca8b5;border-radius:10px;padding:.18in .22in;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;break-inside:avoid}.print-slide .slide-number{font-size:11px;font-weight:800;color:var(--muted);margin-bottom:4px}.print-slide .slide-question{font-size:clamp(18px,2.1vw,28px);line-height:1.25}.print-slide img,.print-slide svg{max-height:3.25in;max-width:100%;object-fit:contain}.structure-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px}.structure-card{border:1px solid var(--line);border-radius:10px;padding:11px}.structure-card h3{margin:0 0 3px;font-size:16px}.structure-card p{margin:3px 0;color:var(--muted);font-size:12px}.structure-directions{max-width:900px;margin:0 auto}.structure-directions .direction-row{display:grid;grid-template-columns:135px 1fr;gap:12px;padding:8px 0;border-top:1px solid #e1e5ea}.cut-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cut-card{border:1.4px dashed #777;border-radius:7px;padding:10px;min-height:150px;break-inside:avoid}.find-someone-sheet{display:block}.find-someone-box{border:1.4px solid #222;border-left:8px solid var(--accent-dark);border-radius:0;padding:10px 12px;margin:0 0 12px;break-inside:avoid}.find-someone-box .signature-line{font-size:12px;font-weight:800;margin:8px 0 6px;padding-bottom:5px;border-bottom:1px solid #bbb}.find-someone-box .workspace{min-height:1.15in;border:1px dashed #999;margin-top:4px}.partner-line{margin-top:10px;border-bottom:1px solid #555;height:20px}.worksheet-section-label{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.055em;padding:7px 10px;margin:14px 0 8px;border-left:5px solid var(--accent-dark);background:#f1f5f8}.worksheet-section-label.extension{border-left-color:#667085;background:#f6f6f7}.screen-page{max-width:8.5in;min-height:11in;margin:14px auto;background:#fff;border:1px solid #cfd7e2;box-shadow:0 3px 18px rgba(20,34,50,.08);padding:.45in}.page-break{break-before:page;page-break-before:always}@media(max-width:700px){.student-set-grid,.cut-card-grid{grid-template-columns:1fr}.screen-page{min-height:0;margin:0;border:0;box-shadow:none;padding:14px}.structure-directions .direction-row{grid-template-columns:1fr;gap:2px}}@media print{@page{size:letter;margin:.48in}@page presentation2up{size:letter portrait;margin:.25in}body{font-size:11pt;background:#fff}.quick-actions,.no-print,.screen-only,.presentation-nav{display:none!important}.duplex-blank-page{display:block;height:9.9in;min-height:9.9in;break-after:page;page-break-after:always}.card,.practice-block,.feedback-box,.question-review-card,.teacher-question,.cut-card,.find-someone-box{break-inside:avoid}.screen-page{max-width:none;min-height:0;margin:0;border:0;box-shadow:none;padding:0}.print-presentation-page{page:presentation2up;width:auto;height:10.5in;min-height:10.5in;margin:0;gap:.14in}.print-slide{height:5.18in}.student-set-grid{gap:7px 12px}.presentation-shell{display:block;height:auto;overflow:visible}.presentation-question{display:block;padding:0}.presentation-card{font-size:12pt;width:auto}}`;
+  const RESPONSE_CSS_FALLBACK = String.raw`:root{
+  --ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;
+  --accent:#365f82;--accent-dark:#284b68;--success:#176b46;--warn:#8a5a00;--shadow:0 8px 24px rgba(20,34,50,.06)
+}
+*{box-sizing:border-box}
+html{background:#fff;color:var(--ink)}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.5}
+a{color:var(--accent-dark)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px}
+.hero{background:var(--hero);border:1px solid var(--line);border-radius:20px;padding:24px 28px;margin:10px 0 20px}
+.eyebrow{margin:0 0 2px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);font-size:13px}
+.hero h1{margin:0;font-size:36px;line-height:1.08;letter-spacing:-.02em}
+.subtitle{margin:8px 0 0;font-size:18px;color:var(--ink)}
+.quick-actions,.inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 15px;border-radius:10px;border:1px solid #9fb4c8;background:#fff;color:var(--accent);font-weight:800;text-decoration:none;font-size:15px}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.small-btn{min-height:36px;padding:6px 10px;font-size:13px}.btn:hover{filter:brightness(.98)}
+.section{margin:18px 0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.section h2{margin:0 0 5px;font-size:23px;line-height:1.2}.section-intro{margin:0 0 14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.student-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:10px}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;color:var(--muted)}.card a{font-weight:800;text-decoration:none}
+.card-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.card-links a{display:inline-block;padding:5px 8px;border-radius:7px;background:var(--soft);border:1px solid var(--line)}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}.stat{border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:12px}.stat strong{display:block;font-size:26px;line-height:1.05}.stat span{color:var(--muted);font-size:13px}
+.notice{border-left:4px solid var(--accent);background:var(--soft);border-radius:9px;padding:10px 12px;margin:12px 0}.notice.warn{border-left-color:var(--warn)}.notice.good{border-left-color:var(--success)}
+
+/* Student reports and individual practice */
+.report-page,.practice-page,.packet-page{max-width:8in;margin:0 auto;padding:.1in 0;color:#111}.report-head{border-bottom:2px solid #cfd7e2;padding-bottom:10px;margin-bottom:15px}.report-head .eyebrow{font-size:11px}.report-head h1{font-size:28px;margin:0}.report-meta{color:#555;margin-top:4px}.report-section{margin:15px 0}.report-section h2{font-size:18px;margin:0 0 6px}.report-section p,.report-section li{font-size:14.5px}ul.clean{margin:6px 0 0;padding-left:20px}ul.clean li{margin:4px 0}.feedback-box{border:1px solid #d8dee7;border-radius:10px;padding:12px 14px;margin:10px 0;background:#fafbfc}.practice-block{border:1px solid #cfd7e2;border-radius:10px;padding:12px;margin:12px 0;break-inside:avoid}.practice-block h2,.practice-block h3{margin-top:0}.name-line{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid #bfc8d3;padding-bottom:7px;margin-bottom:12px;font-weight:700}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}th,td{border:1px solid #d6dde6;padding:7px 8px;text-align:left;vertical-align:top}th{background:#f3f6f9}.small{font-size:13px;color:var(--muted)}.page-break{break-before:page;page-break-before:always}.duplex-blank-page{display:none}.no-print{display:block}
+
+/* Compact teacher review of generated questions */
+.review-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px}.question-review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px}.question-review-card{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;break-inside:avoid}.question-review-card h3{font-size:14.5px;margin:0 0 4px}.question-source{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--muted);margin-bottom:5px}.question-body{font-size:13.5px;line-height:1.32}.question-review-card .visual-block,.question-review-card .graph-frame{margin:7px 0}.question-review-card .visual-block img,.question-review-card .graph-frame img{max-height:165px;object-fit:contain}.question-review-card details{margin-top:6px;border-top:1px solid #e3e7ed;padding-top:5px}.question-review-card summary{cursor:pointer;font-weight:800;color:var(--accent-dark);font-size:11.5px}.teacher-move,.discourse-move,.answer-box{font-size:11.5px;line-height:1.35;background:var(--soft);border-radius:7px;padding:7px;margin-top:5px}.teacher-move strong,.discourse-move strong,.answer-box strong{display:block;margin-bottom:2px}
+
+/* Set 1 shared compact headers */
+.set-head,.activity-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;border-bottom:1.5px solid var(--line);padding:0 0 8px;margin:0 0 12px}.set-head h1,.activity-head h1{font-size:23px;line-height:1.1;margin:0}.set-head p,.activity-head p{font-size:12px;color:var(--muted);margin:3px 0 0}.set-meta{font-size:12px;color:var(--muted);text-align:right}
+
+/* One-question-at-a-time Set 1 teacher presentation */
+.presentation-shell{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;overflow:hidden}.presentation-head{padding:9px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.presentation-head h1{font-size:20px;margin:0}.presentation-question{display:flex;align-items:center;justify-content:center;padding:14px 22px;min-height:0;overflow:auto}.presentation-card{width:min(1100px,96vw);font-size:clamp(22px,2.4vw,38px);line-height:1.3}.presentation-card .visual-block img,.presentation-card .graph-frame img{max-height:50vh;object-fit:contain}.presentation-nav{background:#fff;border-top:1px solid var(--line);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.presentation-nav .nav-group{display:flex;gap:7px;align-items:center}.presentation-meta{font-size:12px;color:var(--muted)}
+
+/* Print Presentation: true page preview, two questions per letter page */
+.print-presentation-wrap{max-width:8.5in;margin:0 auto;padding:14px 0}.print-presentation-page{width:8in;height:10in;margin:0 auto 18px;background:#fff;border:1px solid #cfd7e2;box-shadow:0 3px 18px rgba(20,34,50,.08);padding:.12in;display:grid;grid-template-rows:1fr 1fr;gap:.14in;break-after:page;page-break-after:always}.print-slide{border:1.4px solid #98a5b3;border-radius:9px;padding:.17in .20in;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;break-inside:avoid}.print-slide .slide-number{font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:4px}.print-slide .slide-question{font-size:clamp(18px,2.1vw,28px);line-height:1.24}.print-slide .math-display{margin:7px 0}.print-slide .visual-block,.print-slide .graph-frame{margin:6px auto}.print-slide img,.print-slide svg,.print-slide .graph-image{max-height:3.25in;max-width:100%;width:auto;object-fit:contain}
+
+/* Common worksheet Review / Extension labels */
+.worksheet-section-label{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.055em;padding:7px 10px;margin:14px 0 8px;border-left:5px solid var(--accent-dark);background:#f1f5f8}.worksheet-section-label.extension{border-left-color:#667085;background:#f6f6f7}
+
+/* Student Set */
+.student-set{max-width:8in;margin:0 auto}.student-set-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 14px}.student-question{border-top:1px solid #dce2e9;padding:8px 2px 10px;break-inside:auto;page-break-inside:auto}.student-question h3{font-size:14px;margin:0 0 5px}.student-question .question-body{font-size:13.5px}.student-question .visual-block,.student-question .graph-frame{margin:7px auto}.student-question img,.student-question svg{max-height:2.7in}
+.workspace{min-height:var(--workspace-height,1.1in);border-bottom:1px solid #e0e4e9;margin-top:7px}
+
+/* Teacher Guide */
+.teacher-guide{max-width:9.5in;margin:0 auto}.teacher-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:9px}.teacher-question{border:1px solid var(--line);border-radius:10px;padding:10px;break-inside:avoid;page-break-inside:avoid}.teacher-question h3{font-size:14.5px;margin:0 0 5px}.teacher-question .question-body{font-size:13.5px}.teacher-question .guide-answer{background:#f5f8fb;border-left:3px solid var(--accent);padding:7px 8px;margin-top:7px;font-size:12.5px}.teacher-question .guide-move{font-size:11.5px;margin-top:5px;color:#39475a}
+
+/* Classroom structure menu + projectable directions */
+.structure-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:9px}.structure-card{border:1px solid var(--line);border-radius:10px;padding:11px}.structure-card h3{margin:0 0 3px;font-size:16px}.structure-card p{font-size:12px;color:var(--muted);margin:3px 0}.structure-directions{max-width:900px;margin:0 auto}.direction-row{display:grid;grid-template-columns:135px 1fr;gap:12px;padding:8px 0;border-top:1px solid #e1e5ea}.direction-label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--muted)}.direction-goal{background:#f4f7fa;border-left:4px solid var(--accent);padding:9px 11px;border-radius:7px;margin-top:8px}
+
+/* Printable structure transforms */
+.cut-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cut-card{border:1.4px dashed #777;border-radius:7px;padding:10px;min-height:150px;break-inside:avoid;page-break-inside:avoid}.cut-card .card-number{font-size:10px;font-weight:800;color:#666}.find-someone-sheet{display:block}.find-someone-box{border:1.4px solid #222;border-left:8px solid var(--accent-dark);border-radius:0;padding:10px 12px;margin:0 0 12px;min-height:0;break-inside:avoid;page-break-inside:avoid}.find-someone-box .signature-line{font-size:12px;font-weight:800;color:#333;margin:8px 0 6px;padding-bottom:5px;border-bottom:1px solid #bbb}.find-someone-box .workspace-label{font-size:11px;font-weight:800;color:#444;margin-top:6px}.find-someone-box .workspace{min-height:1.15in;border:1px dashed #999;margin-top:4px}.find-someone-intro{font-size:12px;color:#444;margin:0 0 10px}.partner-line{margin-top:10px;border-bottom:1px solid #555;height:20px}.role-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)}
+
+/* Screen preview for page-bound artifacts */
+.screen-page{max-width:8.5in;min-height:11in;margin:14px auto;background:#fff;border:1px solid #cfd7e2;box-shadow:0 3px 18px rgba(20,34,50,.08);padding:.45in}
+
+.math-inline{white-space:nowrap}.math-display{margin:10px 0;overflow-x:auto;overflow-y:hidden;padding:3px 0}.visual-block{margin:13px 0;break-inside:avoid;page-break-inside:avoid}.visual-block img,.graph-frame img,.graph-image,.instructional-visual{display:block;max-width:100%;height:auto;margin:0 auto}.graph-frame{margin:13px auto;padding:8px;border:1px solid #d6dde6;border-radius:10px;background:#fff;break-inside:avoid;page-break-inside:avoid}.figure-caption{margin:5px auto 0;max-width:92%;font-size:11.5px;line-height:1.3;color:#5d687b;text-align:center}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+
+@media(max-width:700px){
+  .wrap{padding:12px}.hero{padding:20px 17px;border-radius:16px}.hero h1{font-size:30px}.subtitle{font-size:16px}.btn{width:100%}.section{padding:15px}.presentation-question{padding:12px}.student-set-grid,.cut-card-grid{grid-template-columns:1fr}.teacher-guide-grid{grid-template-columns:1fr}.direction-row{grid-template-columns:1fr;gap:2px}.screen-page{min-height:0;margin:0;border:0;box-shadow:none;padding:14px}.print-presentation-page{width:100%;height:auto;min-height:0;box-shadow:none}.print-slide{min-height:42vh}
+}
+
+@media print{
+  @page{size:letter;margin:.48in}
+  @page presentation2up{size:letter portrait;margin:.25in}
+  body{font-size:11pt;background:#fff}
+  .wrap{max-width:none;padding:0}.hero,.section{box-shadow:none}.no-print,.quick-actions,.screen-only,.presentation-nav{display:none!important}
+  .report-page,.practice-page,.packet-page,.student-set,.teacher-guide{max-width:none;padding:0}
+  a{color:#000;text-decoration:none}.page-break{break-before:page;page-break-before:always}
+  .duplex-blank-page{display:block;height:9.9in;min-height:9.9in;background:#fff;border:0;margin:0;padding:0;break-after:page;page-break-after:always}
+  .practice-block,.feedback-box,.card,.stat,.math-display,.visual-block,.graph-frame,mjx-container,.question-review-card,.teacher-question,.cut-card,.find-someone-box{break-inside:avoid;page-break-inside:avoid}
+  .presentation-shell{display:block;height:auto;overflow:visible}.presentation-question{display:block;min-height:0;padding:0}.presentation-card{width:auto;font-size:12pt}
+  .screen-page{max-width:none;min-height:0;margin:0;border:0;box-shadow:none;padding:0}
+  .print-presentation-wrap{max-width:none;padding:0}.print-presentation-page{page:presentation2up;width:auto;height:10.5in;min-height:10.5in;margin:0;border:0;box-shadow:none;padding:0;gap:.14in}.print-slide{height:5.18in;border-radius:0}.print-slide .slide-question{font-size:20pt}
+  .student-set-grid{gap:6px 12px}.student-question{padding:6px 1px 8px}.teacher-guide-grid{gap:7px}
+}
+
+/* ========================================================================== */
+/* GOLD LAYOUT LOCK ADDITIONS - 2026-09-20                                   */
+/* Existing response/report/dashboard rules above are the frozen baseline.   */
+/* These additions only implement the approved Set 1 activity/worksheet      */
+/* changes. Do not redesign unrelated response surfaces.                     */
+/* ========================================================================== */
+
+/* Algebra-style Activity Options / projectable direction pages */
+.activity-options-wrap{max-width:980px;margin:0 auto;padding:0}
+.activity-page{min-height:9.3in;page-break-after:always;break-after:page;border:2px solid var(--ink);padding:16px 18px;display:flex;flex-direction:column;background:#fff;margin:14px auto;max-width:980px}
+.activity-page:last-child{page-break-after:auto;break-after:auto}
+.dir-header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid var(--accent-dark);padding-bottom:8px;margin-bottom:16px;gap:16px}
+.act-eyebrow{font-size:12pt;font-weight:800;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.act-title{font-size:18pt;font-weight:900;color:var(--accent-dark);margin:0 0 4px;line-height:1.1}
+.act-subtitle{font-size:14pt;font-weight:700;color:var(--ink)}
+.act-meta{font-size:11.5pt;text-align:right;line-height:1.5;flex-shrink:0}
+.dir-body{display:flex;gap:.5in;flex:1;align-items:flex-start;padding-top:4px}
+.dir-text{flex:1.5;font-size:12pt;line-height:1.55}
+.dir-row{margin-bottom:12px}
+.dir-label{font-weight:900;color:var(--accent-dark);display:block;margin-bottom:4px;font-size:12pt;text-transform:uppercase;letter-spacing:.04em}
+.dir-text ol,.dir-text ul{margin:4px 0 4px 22px}.dir-text li{margin-bottom:5px}
+.dir-goal{margin-top:14px;font-style:italic;color:var(--muted);font-size:11.5pt}
+.looks-like{flex:1;display:flex;flex-direction:column;gap:12px;min-width:2.5in;flex-shrink:0}
+.looks-good{background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:12px 14px}
+.looks-bad{background:#fff1f2;border:1.5px solid #fca5a5;border-radius:8px;padding:12px 14px}
+.looks-header{font-size:11pt;font-weight:900;margin-bottom:8px}.looks-good .looks-header{color:#15803d}.looks-bad .looks-header{color:#b91c1c}
+.looks-good ul,.looks-bad ul{margin-left:18px;font-size:11pt;line-height:1.5}.looks-good li,.looks-bad li{margin-bottom:5px}
+.activity-utility-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.activity-utility-list a{font-weight:800}
+
+/* Algebra-style Set 1 Questions & Solutions projection deck */
+.projection-deck{max-width:980px;margin:0 auto;padding:0}
+.projection-deck .activity-page{margin:14px auto}
+.prob-head{display:flex;justify-content:space-between;align-items:center;border:1.5px solid #86efac;border-bottom:2px solid #15803d;border-radius:5px;padding:8px 10px;margin-bottom:12px;font-size:12pt;font-weight:800;color:#333;background:#f0fdf4}
+.solution-page .prob-head{background:#fff1f2;border-color:#fca5a5;border-bottom-color:#b91c1c}
+.prob-q{font-size:16pt;margin:0 0 14px;line-height:1.35}.prob-q .graph-frame,.prob-q .visual-block{margin:12px auto}.prob-q img,.prob-q svg{max-width:5.69in;max-height:4.5in;width:auto;height:auto;object-fit:contain}
+.projection-work{flex:1;background:#fff;min-height:3.5in;margin-top:8px}
+.solution{font-size:16pt;margin:12px 0 8px;padding-top:10px;border-top:2px solid var(--ink);line-height:1.35}.solution b{color:var(--accent-dark)}
+
+/* Worksheet Builder-style screen controls for Set 1 student handouts */
+.layout-controls{position:sticky;top:0;z-index:20;background:#eef4f8;border:1px solid #c9d5df;padding:10px 12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12px}
+.layout-controls label{font-weight:800}.layout-controls input[type=range]{width:100%}.layout-controls input[type=number]{width:76px}.layout-controls select{width:100%;padding:6px 7px;border:1px solid #aeb8c4;border-radius:5px;background:#fff;font:inherit}.layout-controls button{cursor:pointer}.layout-controls .control-group{display:grid;gap:4px}.layout-controls .selection-note{font-size:11px;color:var(--muted);line-height:1.25}
+.adjustable-set-sheet{--workspace-height:1.1in;--graph-width:100%}
+.adjustable-set-sheet .student-question{--problem-workspace-height:var(--workspace-height);--problem-graph-width:var(--graph-width)}
+.adjustable-set-sheet .student-question .workspace{height:var(--problem-workspace-height);min-height:0;overflow:hidden;margin-top:7px}
+.adjustable-set-sheet .student-question .graph-frame,.adjustable-set-sheet .student-question .visual-block{width:min(100%,var(--problem-graph-width));max-width:100%;margin:7px auto}
+.adjustable-set-sheet .student-question .graph-frame img,.adjustable-set-sheet .student-question .graph-frame svg,.adjustable-set-sheet .student-question .visual-block img,.adjustable-set-sheet .student-question .visual-block svg{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+.find-someone-student-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 14px}
+.find-someone-student-grid .student-question{border-top:1px solid #dce2e9;padding:8px 2px 10px;break-inside:auto;page-break-inside:auto}
+.find-someone-student-grid .partner-signature{font-size:11px;font-weight:800;color:#333;margin:8px 0 5px;padding-bottom:4px;border-bottom:1px solid #aaa}
+.find-someone-student-grid .workspace-label{font-size:10.5px;font-weight:800;color:#555;margin-top:5px}
+.find-someone-directions{font-size:12px;color:#444;margin:0 0 10px}
+
+@media screen and (min-width:1100px){
+  body.adjustable-handout-page{padding-left:252px}
+  body.adjustable-handout-page .layout-controls{position:fixed;left:14px;top:14px;width:224px;max-height:calc(100vh - 28px);overflow:auto;flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  body.adjustable-handout-page .layout-controls>*{width:100%}
+  body.adjustable-handout-page .layout-controls label{display:block}
+}
+@media screen and (max-width:1099px){body.adjustable-handout-page{padding-left:0}.layout-controls{position:relative}}
+@media(max-width:700px){.dir-body{display:block}.looks-like{min-width:0;margin-top:14px}.find-someone-student-grid{grid-template-columns:1fr}}
+@media print{
+  .layout-controls{display:none!important}body.adjustable-handout-page{padding-left:0!important}
+  .activity-page{margin:0;min-height:9.3in}.projection-deck .activity-page{margin:0}
+}
+`;
 
   const STATION_CSS_FALLBACK = String.raw`@page{size:letter landscape;margin:0}:root{--navy:#00003d;--page-w:11in;--page-h:8.5in}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#e8e8e8}.page{width:var(--page-w);height:var(--page-h);margin:0 auto .25in;background:#fff;padding:.32in .42in .24in;display:flex;flex-direction:column;overflow:hidden;page-break-after:always}.header{background:var(--navy);color:#fff;font-size:21pt;font-weight:800;padding:.11in .20in;margin-bottom:.12in}.station-grid{display:grid;grid-template-columns:1fr 1fr;gap:.10in .13in}.station-problem{border:1.2px solid #222;border-radius:5px;padding:.08in;font-size:10.2pt;break-inside:avoid}.figure img,.figure svg{display:block;max-width:100%;max-height:1.9in;height:auto;margin:0 auto}.page-footer{margin-top:auto;font-size:7.5pt}.station-index{width:11in;min-height:8.5in;margin:0 auto;background:#fff;padding:.45in}@media print{body{background:#fff}.page{margin:0}.station-index{display:none}}`;
 
   const COMMON_PRACTICE_FALLBACK = String.raw`# Common Course Practice & Question Review Guide
 
-STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS
-VERSION: district-grading-common-practice/1.2
+STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
+VERSION: district-grading-common-practice/1.3  
 DATE: 2026-09-20
 
-Use one approved class-level Set 1 question pool. Do not create Set 2. Common Worksheet must visibly label Review and Extension / Transfer. Print Presentation uses exactly two large top-aligned question panels per page. Student Set flows naturally and must not waste pages by forcing whole question/workspace blocks onto new pages. Classroom Structures should closely mirror the established Algebra u1_2 Activity Options architecture with one Set 1 only: Projection / Whiteboard Options plus Printable Handouts. Printable handouts are the existing Stations link, Find Someone Who, and the added Cut-Apart Question Cards. Do not include Tarsia or Blooket. Find Someone Who uses vertically stacked problem blocks with partner signature and work/reasoning space; it is not a cut-card grid. Cut-Apart Question Cards remain a separate reusable card deck for Quiz-Quiz-Trade, Fan-N-Pick, and similar card routines.`;
+This guide controls Common Course Practice and Set 1 delivery. If older request wording conflicts with this file, this file controls. \`RESPONSE_LAYOUT_LOCK.md\` controls visual continuity.
+
+## 1. One approved class-level question pool
+Build one coherent class-level pool from the strongest common instructional needs plus justified extension targets. Reuse approved questions across Common Worksheet / Review + Extension, Stations when appropriate, Set 1, projection pages, review pages, and participation structures.
+
+Do not manufacture unrelated extra questions just because multiple delivery formats exist. When a question is reused, the mathematics, answer, graph/diagram, and difficulty remain identical.
+
+## 2. Common Worksheet / Review + Extension
+Keep the current gold worksheet/teacher-guide layout. The student worksheet visibly separates:
+
+- **Review** — observed common needs, unfinished understanding, or prerequisites.
+- **Extension / Transfer** — application/transfer for students already showing Convincing evidence or a justified class-wide extension target.
+
+Use clear labels on the worksheet. Keep the header compact. Teacher-facing HTML is named **Teacher Guide**, not merely HTML. Do not add redundant print buttons when browser print already gives the intended product.
+
+## 3. Set 1 is the one mathematical set
+Create exactly one class-level **Set 1**. Do not create Set 2.
+
+Set 1 is reused by:
+
+- Set 1 Questions & Solutions projection deck;
+- Print Presentation;
+- Review All Questions;
+- Teacher Guide;
+- Find Someone Who;
+- Cut-Apart Question Cards;
+- projection/whiteboard participation structures.
+
+There is no fixed Set 1 size. Every Set 1 artifact uses the entire set unless it is intentionally paginating/cards the same complete set.
+
+## 4. \`print/question_set/index.html\` = Activity Options page
+The old six-card Set 1 menu is retired. \`index.html\` itself must closely mirror the structure and hierarchy of:
+
+\`algebra/activities/u1_1_act1/u1_1_act1.html\`
+
+Adaptations for this grading tool:
+
+- one Set 1 only;
+- no Set 2;
+- no Tarsia;
+- no Blooket;
+- do not invent unrelated activity types;
+- add **Cut-Apart Question Cards** under Printable Handouts;
+- use the current gold response colors/typography from locked \`styles.css\` rather than introducing a new theme.
+
+The Activity Options page contains the projectable direction sections in the same HTML page using internal anchors, just like the Algebra activity page. Do not create a second \`structures/index.html\` card menu or a separate \`directions.html\` maze.
+
+### Projection / Whiteboard Options
+List these routines as simple linked rows/list items. Each routine name links to its directions anchor and its **Set 1** link points to the same \`presentation.html\` Questions & Solutions deck:
+
+- Whiteboard Indy
+- Whiteboard Partners
+- Rally Coach
+- Speed Dating Math
+- Showdown
+- Think, Trade, Agree
+- Round Table
+- Mathematical Hot Seat
+- Rally Coach II
+
+No standalone **Presentation / Open Presentation** card belongs on the Activity Options page.
+
+### Printable Handouts
+List:
+
+- **Stations** — link to the already-generated Stations product;
+- **Find Someone Who** — link to \`structures/find_someone_who.html\`;
+- **Cut-Apart Question Cards** — link to \`structures/cut_apart_cards.html\`.
+
+The card deck remains visually unchanged from the current gold run.
+
+### Teacher / Print Utilities
+Keep direct utility links available without turning them into the old card menu:
+
+- **Print Presentation** — two-up student-question printout;
+- **Review All Questions** — compact teacher QA;
+- **Teacher Guide** — answers/moves.
+
+## 5. Set 1 Questions & Solutions projection deck
+\`presentation.html\` is no longer the compact Back/Next shell from the previous run.
+
+Build it like the Algebra \`u1_1_set1_questions_solutions.html\` pattern:
+
+- one large **Question** page for Set 1 Problem 1;
+- immediately followed by one large **Solution** page for Problem 1;
+- repeat Question then Solution for every Set 1 problem;
+- large projectable math/figures;
+- question page has useful white space for board discussion;
+- solution page repeats the prompt and gives the concise solution plus teacher/discourse move only when useful;
+- use the locked \`.activity-page\`, \`.prob-head\`, \`.prob-q\`, \`.projection-work\`, and \`.solution\` classes;
+- no Back/Next shell, no question counter bar, no giant empty browser page created only to imitate printing.
+
+Every projection/whiteboard structure reuses this same deck.
+
+## 6. Print Presentation - keep the current gold two-up format
+Create \`print_presentation.html\` + PDF from the exact Set 1 questions.
+
+- Letter portrait;
+- exactly two large question panels per physical page;
+- top-align each question within its half-page panel;
+- no answers/moves/workspace;
+- all Set 1 questions;
+- final lower half may be blank when the set count is odd.
+
+Do not redesign the current approved two-up panel styling.
+
+## 7. Review All Questions - keep current gold layout
+\`review_all.html\` remains the compact zero-workspace teacher QA view of all Set 1 questions with required visuals and collapsible Answer / Teacher Move / Student Discourse Move.
+
+## 8. Find Someone Who = Student Set worksheet look + signatures
+The separate generic Student Set is no longer a teacher-facing Activity Options choice. Use the **current gold Student Set visual layout** as the base for Find Someone Who.
+
+\`structures/find_someone_who.html\` requirements:
+
+- compact Set 1 worksheet header;
+- current two-column \`.student-set-grid\` / \`.student-question\` look;
+- all Set 1 questions in natural flow;
+- each problem adds a compact **Partner signature** line;
+- each problem keeps useful workspace;
+- required graph/diagram remains readable;
+- no cut-card boxes;
+- no giant activity title block;
+- browser print is the canonical handout.
+
+### Screen-only left controls - match Worksheet Builder
+Add the Worksheet Builder-style left rail on wide screens. Use this order:
+
+1. **All workspaces in this sheet** — 0-300%, default 100%;
+2. **Problem** selector;
+3. **Workspace** — 0-1200% for the selected problem;
+4. **Graph / diagram** — 70-160% for the selected problem when a visual exists;
+5. **Reset**;
+6. **Print**.
+
+There is no Version control and no New Question button because this is one fixed Set 1.
+
+Controls are screen-only and disappear in print. Workspace and graph size are independent. Resizing changes geometry only; graph stroke weights never change. Preserve current problem order and mathematics.
+
+If a generic \`student_set.html\` is retained internally for compatibility, do not expose it as a primary Activity Options link and do not give it a second competing visual design.
+
+## 9. Teacher Guide - keep current gold layout
+Keep the current compact Teacher Guide styling/order. It follows Set 1 and provides concise answer/solution plus brief teacher/discourse moves where useful.
+
+## 10. Activity direction sections - mirror Algebra u1_1
+The Activity Options HTML includes one direction section per routine using the Algebra hierarchy:
+
+- compact eyebrow/title/subtitle;
+- **Structure**;
+- **Setup**;
+- concise ordered **Directions**;
+- **Goal**;
+- one **Set 1** link;
+- right-side **Looks Like Success / Doesn't Look Like** boxes.
+
+Use these established routine meanings:
+
+### Whiteboard Indy
+Structure: Individual independent practice. Setup: each student has a whiteboard/marker. Directions: notes welcome; try something first; write large/clearly; use partners for reasoning not copying; revise mistakes. Goal: individual accountability + low-stakes entry.
+
+### Whiteboard Partners
+Structure: fast partner practice. Setup: one board/marker per pair. Directions: both engaged; alternate writer; explain before erasing; resolve disagreements with evidence. Goal: engagement + quick feedback.
+
+### Rally Coach
+Structure: partner explanation + alternating roles. Setup: shared workspace. Directions: A explains/B records; coach with questions not answers; switch each problem; both verify. Goal: verbal reasoning + procedural accuracy.
+
+### Speed Dating Math
+Structure: independent attempt -> timed partner comparison -> rotation. Goal: repeated explanation + strategy comparison.
+
+### Showdown
+Structure: individual think -> simultaneous reveal -> team check. Goal: individual accountability + team feedback.
+
+### Think, Trade, Agree
+Structure: individual think -> trade explanations -> clarifying question -> justified agreement/disagreement. Goal: evidence-based comparison.
+
+### Round Table
+Structure: team rotation of written reasoning. Goal: visible collaborative reasoning.
+
+### Mathematical Hot Seat
+Structure: describe -> reason -> reveal. Goal: mathematical language + listening.
+
+### Rally Coach II
+Structure: solve -> coach -> restate -> switch. Goal: metacognition + partner coaching.
+
+Use the same concise success/non-example language pattern as the Algebra activity page. Do not invent new rule systems.
+
+## 11. Cut-Apart Question Cards - LOCKED
+The current card artifact is approved. Keep it visually and structurally unchanged except for the actual Set 1 content/required visual.
+
+- one task per card;
+- dashed cut lines;
+- complete Set 1 across enough cards/pages;
+- no answer on question side;
+- supports Quiz-Quiz-Trade and Fan-N-Pick.
+
+Do not use the cards for Find Someone Who.
+
+## 12. Global Review All Questions - teacher QA
+Keep the current gold \`class/review_all_questions.html\` layout. Show all generated follow-up questions from Common Worksheet, Stations, Set 1, and Individual Practice with zero workspace and collapsible teacher information.
+
+## 13. Stations remain unchanged
+Exactly four review stations plus two extension stations, 4-6 questions each, separate answer key, locked station CSS. Do not redesign.
+
+## 14. Math, graphs, and visuals
+All products inherit the packaged Math / Graph / Visual QA contract and District Graph Rendering Standard.
+
+- supported Cartesian graphs, including blank grids, use the packaged canonical graph tool;
+- use the same graph asset wherever a question is reused;
+- prefer SVG for adjustable student handouts;
+- graph size controls scale the asset geometry, not its stroke weights;
+- record graph tool entrypoint + asset in \`data/qa.json\`;
+- student construction visuals remain answer-neutral.
+
+## 15. Gold layout lock
+Follow \`response_contract/RESPONSE_LAYOUT_LOCK.md\` as a HARD contract. Copy \`styles.css\` byte-for-byte. Apart from the explicitly approved Set 1 changes in that lock, do not restyle the response package.
+
+## 16. QA requirements
+Before delivery verify:
+
+- one Set 1 only / no Set 2;
+- every Set 1 delivery uses the full set;
+- Common Worksheet visibly labels Review and Extension / Transfer;
+- \`question_set/index.html\` is the Algebra-style Activity Options page, not the old six-card menu;
+- no standalone Presentation card;
+- every projection routine's Set 1 link points to the same Questions & Solutions deck;
+- projection deck alternates Question then Solution for every problem;
+- Print Presentation remains exactly two top-aligned questions per physical page;
+- Find Someone Who uses the current Student Set look, partner signatures, useful workspace, and the left control rail;
+- controls work at all-workspace 0/100/300%, per-problem workspace 0/100/500/1200%, graph 70/100/160%;
+- Cut-Apart Cards match the gold layout;
+- no Tarsia or Blooket;
+- no separate structures card menu/directions maze;
+- graph style/provenance pass the canonical standard;
+- locked CSS hash matches;
+- links resolve and \`data/qa.json\` has no unresolved failure.
+`;
+
+  const RESPONSE_LAYOUT_LOCK_FALLBACK = String.raw`# Grading Response Gold Layout Lock
+
+STATUS: HARD / REQUIRED  
+VERSION: district-grading-response-layout-lock/1.0  
+DATE: 2026-09-20  
+LOCKED CSS SHA-256: \`59d49d36e4d660a0c6a3bb80254eac0867cfb50d86561cbc664c495f0eefa8df\`
+
+## Purpose
+The 2026-09-20 Precalculus Circuit Training grading response is the visual baseline for this tool. Future grading runs must preserve that response system instead of inventing a new layout on each run.
+
+\`response_contract/styles.css\` is the canonical response stylesheet. The response must copy it byte-for-byte to \`assets/styles.css\`; \`data/qa.json\` must record the SHA-256 above and PASS only when it matches.
+
+## Stable surfaces - DO NOT REDESIGN
+Keep the current gold layout/markup hierarchy for all of these unless a later teacher-approved contract explicitly changes one:
+
+- \`CLICK_ME.html\`
+- individual student reports
+- class overview
+- individual practice packets
+- combined report/practice print documents
+- Common Worksheet / Review + Extension
+- Common Worksheet Teacher Guide
+- Stations and station answer key
+- Review All Questions pages
+- Set 1 Teacher Guide
+- Print Presentation two-up pages
+- Cut-Apart Question Cards
+
+Do not change hero sizes, card shapes, button treatment, typography hierarchy, spacing system, report boxes, dashboard organization, station styling, or card-deck styling simply because another layout seems cleaner.
+
+## Approved Set 1 exceptions in this revision
+Only these Set 1 surfaces intentionally differ from the previous run:
+
+1. \`print/question_set/index.html\` becomes the Algebra-style **Activity Options** page modeled on \`algebra/activities/u1_1_act1/u1_1_act1.html\`, adapted to one Set 1.
+2. \`presentation.html\` becomes the Algebra-style **Set 1 Questions & Solutions** projection deck (question page followed by solution page), not the prior Back/Next presentation shell.
+3. **Find Someone Who** adopts the current Student Set worksheet look: compact two-column problem flow, with a partner signature line and workspace added to each problem.
+4. Find Someone Who gets the Worksheet Builder-style screen-only left control rail for workspace and graph/diagram size.
+5. Cartesian construction graphs use the current canonical district graph tool and the worksheet/Quick-Check coordinate visual rules in the District Graph Rendering Standard.
+
+Everything else remains visually frozen.
+
+## HTML/CSS discipline
+- Do not add page-local \`<style>\` blocks that restyle shared gold classes.
+- Do not invent alternate dashboard/card/page systems.
+- Use the class structures named by \`COMMON_PRACTICE_GUIDE.md\` and this lock.
+- Content may change from one evidence set to another; the shell/layout does not.
+- If content is longer, solve it with natural pagination/content fitting, not a new design language.
+- Graph/workspace controls may set CSS custom properties or inline values needed for sizing; they may not restyle the page.
+
+## QA
+Before delivery, verify:
+
+- \`assets/styles.css\` exactly matches packaged \`response_contract/styles.css\` and SHA-256 \`59d49d36e4d660a0c6a3bb80254eac0867cfb50d86561cbc664c495f0eefa8df\`;
+- every stable surface above still uses the gold class hierarchy;
+- only the five approved exceptions changed layout;
+- Cut-Apart Cards remain visually unchanged from the gold run;
+- no unapproved page-local CSS overrides the gold stylesheet.
+`;
 
   const MATH_VISUAL_QA_CONTRACT = String.raw`# Math, Graph, Visual, and Station QA Contract
 
@@ -284,34 +725,35 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
               create_set_2: false,
               complete_set_reuse_required: true,
               reuse_class_level_question_pool: true,
-              presentation: true,
+              activity_options_index: true,
+              activity_options_reference: "algebra/activities/u1_1_act1/u1_1_act1.html",
+              activity_options_one_set_only: true,
+              projection_questions_solutions: true,
+              standalone_presentation_card: false,
               print_presentation_two_up: true,
               compact_review_all: true,
-              student_set: true,
+              generic_student_set_primary_link: false,
+              find_someone_who_uses_student_set_layout: true,
+              find_someone_who_left_controls: true,
               teacher_guide: true,
               redundant_print_buttons_forbidden: true,
-              classroom_structures: {
-                projection: [
-                  "Whiteboard Indy",
-                  "Whiteboard Partners",
-                  "RallyCoach",
-                  "Speed Dating Math",
-                  "Showdown",
-                  "Think, Trade, Agree",
-                  "Round Table",
-                  "Mathematical Hot Seat",
-                  "Rally Coach II"
-                ],
-                printable: [
-                  "Find Someone Who",
-                  "Cut-Apart Question Cards"
-                ],
-                card_artifact_supports: ["Quiz-Quiz-Trade", "Fan-N-Pick"],
-                activity_options_reference: "algebra/activities/u1_2_act1/u1_2_act1.html",
-                activity_options_one_set_only: true,
-                printable_options: ["Stations", "Find Someone Who", "Cut-Apart Question Cards"],
-                prohibited_optional_links: ["Tarsia", "Blooket"]
-              }
+              projection_structures: [
+                "Whiteboard Indy",
+                "Whiteboard Partners",
+                "Rally Coach",
+                "Speed Dating Math",
+                "Showdown",
+                "Think, Trade, Agree",
+                "Round Table",
+                "Mathematical Hot Seat",
+                "Rally Coach II"
+              ],
+              printable_options: ["Stations", "Find Someone Who", "Cut-Apart Question Cards"],
+              teacher_print_utilities: ["Print Presentation", "Review All Questions", "Teacher Guide"],
+              card_artifact_supports: ["Quiz-Quiz-Trade", "Fan-N-Pick"],
+              prohibited_optional_links: ["Tarsia", "Blooket"],
+              separate_structures_index_forbidden: true,
+              separate_directions_page_forbidden: true
             }
           },
           review_all_questions: {
@@ -350,14 +792,26 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         }
       };
 
-      const [responseCss, stationCss, commonPracticeGuide, responseQaGuide, graphRenderingStandard, graphBundle] = await Promise.all([
+      const [responseCss, stationCss, commonPracticeGuide, responseQaGuide, responseLayoutLock, graphRenderingStandard, graphBundle] = await Promise.all([
         loadTextFile("response_styles.css", RESPONSE_CSS_FALLBACK),
         loadTextFile("station_styles.css", STATION_CSS_FALLBACK),
         loadTextFile("COMMON_PRACTICE_GUIDE.md", COMMON_PRACTICE_FALLBACK),
         loadTextFile("RESPONSE_QA_EXECUTION.md", RESPONSE_QA_FALLBACK),
+        loadTextFile("RESPONSE_LAYOUT_LOCK.md", RESPONSE_LAYOUT_LOCK_FALLBACK),
         loadTextFile("../_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md", GRAPH_STANDARD_FALLBACK),
         loadGraphToolBundle()
       ]);
+      const responseStyleSha256 = await sha256Hex(responseCss);
+      if (responseStyleSha256 !== RESPONSE_STYLE_SHA256) {
+        throw new Error(`Locked response_styles.css hash mismatch. Expected ${RESPONSE_STYLE_SHA256}, got ${responseStyleSha256}.`);
+      }
+      request.response_layout_lock = {
+        version: RESPONSE_LAYOUT_LOCK_VERSION,
+        response_style_version: RESPONSE_STYLE_VERSION,
+        response_style_sha256: responseStyleSha256,
+        gold_baseline_date: "2026-09-20",
+        stable_surfaces_must_not_restyle: true
+      };
       request.graph_rendering = {
         standard_version: GRAPH_RENDERING_STANDARD_VERSION,
         source_manifest: "response_contract/graph_tool/MANIFEST.json",
@@ -378,6 +832,9 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         { name: "teacher_exceptions_context.txt", data: enc.encode(teacherNotes || "No teacher exceptions or additional context were provided.") },
         { name: "response_contract/styles.css", data: enc.encode(responseCss) },
         { name: "response_contract/STYLE_VERSION.txt", data: enc.encode(RESPONSE_STYLE_VERSION + "\n") },
+        { name: "response_contract/STYLE_SHA256.txt", data: enc.encode(responseStyleSha256 + "\n") },
+        { name: "response_contract/RESPONSE_LAYOUT_LOCK.md", data: enc.encode(responseLayoutLock) },
+        { name: "response_contract/RESPONSE_LAYOUT_LOCK_VERSION.txt", data: enc.encode(RESPONSE_LAYOUT_LOCK_VERSION + "\n") },
         { name: "response_contract/stations.css", data: enc.encode(stationCss) },
         { name: "response_contract/STATION_STYLE_VERSION.txt", data: enc.encode(STATION_STYLE_VERSION + "\n") },
         { name: "response_contract/MATH_VISUAL_QA.md", data: enc.encode(MATH_VISUAL_QA_CONTRACT) },
@@ -434,7 +891,7 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
 `## Evidence and identity rules\n` +
 `Judge only from submitted evidence, rubric if present, roster for identity/order only, and teacher exceptions/context. Do not research students or use prior personal/student records. If a roster student has no identifiable work, use Not Observed/no evidence rather than Incorrect.\n\n` +
 `## Locked styling and shared contracts\n` +
-`Copy response_contract/styles.css exactly to assets/styles.css and response_contract/stations.css exactly to assets/stations.css. Follow response_contract/MATH_VISUAL_QA.md, response_contract/COMMON_PRACTICE_GUIDE.md, response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md, and response_contract/RESPONSE_QA_EXECUTION.md as executable HARD contracts. If older wording elsewhere in this request conflicts with COMMON_PRACTICE_GUIDE.md about Common Course Practice or Question / Solution Set layout, COMMON_PRACTICE_GUIDE.md controls.\n\n` +
+`Copy response_contract/styles.css exactly to assets/styles.css and verify its SHA against response_contract/STYLE_SHA256.txt. Copy response_contract/stations.css exactly to assets/stations.css. Follow response_contract/RESPONSE_LAYOUT_LOCK.md, response_contract/MATH_VISUAL_QA.md, response_contract/COMMON_PRACTICE_GUIDE.md, response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md, and response_contract/RESPONSE_QA_EXECUTION.md as executable HARD contracts. Do not restyle stable gold surfaces. If older wording elsewhere in this request conflicts with COMMON_PRACTICE_GUIDE.md about Common Course Practice or Question / Solution Set layout, COMMON_PRACTICE_GUIDE.md controls.\n\n` +
 `## Required response ZIP structure\n` +
 `~~~text\n` +
 `CLICK_ME.html\n` +
@@ -448,7 +905,7 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
 `  individualized/\n    <one HTML practice packet per student>\n` +
 `  individual_practice_packets.pdf\n` +
 `  stations/\n    index.html\n    stations.html\n    stations.pdf\n    answer_key.html\n    answer_key.pdf\n` +
-`  question_set/\n    index.html\n    presentation.html\n    print_presentation.html\n    print_presentation.pdf\n    review_all.html\n    student_set.html\n    student_set.pdf\n    teacher_guide.html\n    structures/\n      index.html\n      directions.html\n      find_someone_who.html\n      cut_apart_cards.html\n` +
+`  question_set/\n    index.html                      # Activity Options + direction sections\n    presentation.html               # Set 1 Questions & Solutions projection deck\n    print_presentation.html\n    print_presentation.pdf\n    review_all.html\n    teacher_guide.html\n    structures/\n      find_someone_who.html          # adjustable Student-Set-style handout\n      cut_apart_cards.html\n` +
 `data/\n  analysis.json\n  qa.json\n  request.json\n` +
 `~~~\n\n` +
 `All navigation, CSS, graph assets, and visual assets must use local relative links. PDFs must be finished printable files, not placeholders.\n\n` +
@@ -466,22 +923,28 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
 `Create one compact class-wide student worksheet based on actual common needs, with targeted review and justified extension. On the student worksheet itself, visibly label the two sections **Review** and **Extension / Transfer** so students and teachers can tell which questions serve which purpose. The student-facing printable artifact is Student Worksheet. The HTML page that includes answers, teacher moves, and discourse moves is Teacher Guide. Do not call the teacher-facing HTML merely "HTML" and do not expose redundant Print buttons when browser print already produces the same intended layout.\n\n` +
 `## Stations\n` +
 `Create exactly four review stations plus two extension stations, 4-6 questions per station, with a complete separate answer key. Preserve the existing locked stations style. Do not redesign stations in this pass.\n\n` +
-`## Question / Solution Set - SET 1 ONLY\n` +
-`Set 1 is the mathematical question set; delivery formats reuse it. Create no Set 2. The set length is determined by the evidence and instructional purpose; no fixed number such as 8 or 14 is implied. Every Set 1 delivery artifact must include the entire Set 1 unless it intentionally paginates/cards the complete set across multiple sheets.\n` +
-`Required Set 1 menu: Presentation; Print Presentation; Review All Questions; Student Set; Teacher Guide; Classroom Structures. Do not show separate Print Student Set or Print Teacher Guide buttons when browser print already produces the intended print layout.\n\n` +
-`### Presentation\n` +
-`Use one question at a time. Keep the top header compact and let the question/visual fill the useful browser area. Provide Back / Next and a visible question counter. Teacher-only answer/move toggles may be present. Do not emulate a full printed page on screen and do not force long blank scrolling.\n\n` +
-`### Print Presentation - REQUIRED\n` +
-`Create a dedicated print_presentation.html + PDF containing the exact Set 1 questions, exactly TWO large question panels per letter page, stacked and scaled to fit each half-page. TOP-ALIGN the question content within each half-page panel; do not vertically center it. Include all required graphs/figures. No answers, teacher moves, discourse moves, or large unused workspace. If Set 1 has an odd count, the final lower half may be blank. The screen view should visually show the real printed page boundaries.\n\n` +
-`### Review All Questions\n` +
-`Compact zero-workspace teacher QA view showing every Set 1 question with required visuals. Each item can reveal Answer, Teacher Move, and Student Discourse Move. Keep vertical waste low so the teacher can scan quality quickly.\n\n` +
-`### Student Set\n` +
-`Normal worksheet-style layout with a small header, all Set 1 questions, no projected classroom directions, sensible question spacing/workspace, and natural print pagination. Do not preassign question counts to pages or force an entire question + workspace block onto a new page when that wastes large blank areas. Keep prompt/required figure together when practical, but let workspace flow/split as needed. Do not use a giant activity title block.\n\n` +
-`### Teacher Guide\n` +
-`Match the Student Set questions and order. Include concise answers/solutions plus brief teacher and discourse moves where useful. A browser-print layout is sufficient unless a materially different dedicated print artifact is required.\n\n` +
-`### Classroom Structures\n` +
-`Make structures/index.html closely mirror the established Algebra u1_2_act1 Activity Options page, adapted to ONE Set 1 only. Use grouped **Projection / Whiteboard Options** and **Printable Handouts**. Projection structures (Whiteboard Indy, Whiteboard Partners, RallyCoach, Speed Dating Math, Showdown, Think-Trade-Agree, Round Table, Mathematical Hot Seat, Rally Coach II) link to the same Set 1 Presentation; do not generate duplicate question pages. Printable Handouts list: existing Stations, Find Someone Who, and the added Cut-Apart Question Cards. Do NOT include Tarsia or Blooket. Find Someone Who must look like the dedicated Algebra Find Someone Who handout: vertically stacked bordered problem blocks with Partner signature, Work / reasoning, and useful workspace; it is not a card grid. Cut-Apart Question Cards are a separate complete Set 1 deck and may be reused for Quiz-Quiz-Trade and Fan-N-Pick. Keep structure headers compact.\n\n` +
-`## Review All Questions - teacher QA across all products\n` +
+`## Question / Solution Set - SET 1 ONLY
+` +
+`Set 1 is the one approved mathematical set. Create no Set 2. Follow response_contract/COMMON_PRACTICE_GUIDE.md and RESPONSE_LAYOUT_LOCK.md exactly. question_set/index.html is the Algebra u1_1-style Activity Options page itself, with internal direction anchors; do not recreate the old six-card menu and do not create a second structures/index.html or directions.html.
+
+` +
+`### Activity Options / projection
+` +
+`List the nine approved projection/whiteboard routines in the Algebra activity format. Each routine name links to its directions anchor and each Set 1 link points to the same presentation.html. Do not show a standalone Presentation/Open Presentation card. presentation.html is an Algebra-style Question page then Solution page sequence for every Set 1 problem, not the prior Back/Next shell.
+
+` +
+`### Printable / utilities
+` +
+`Printable Handouts are Stations, Find Someone Who, and Cut-Apart Question Cards. Find Someone Who uses the current Student Set two-column worksheet look with partner signature + workspace and the Worksheet Builder-style screen-only left rail (All workspaces, Problem, Workspace, Graph/diagram, Reset, Print). Cut-Apart Cards keep the current approved layout. Teacher/Print Utilities are Print Presentation, Review All Questions, and Teacher Guide. No Tarsia or Blooket.
+
+` +
+`### Print Presentation
+` +
+`Keep the approved two-up gold layout: exactly two top-aligned questions per Letter page, no answers/moves/workspace.
+
+` +
+`## Review All Questions - teacher QA across all products
+` +
 `Create class/review_all_questions.html and link it from CLICK_ME. Show ALL generated follow-up questions from Common Worksheet, Stations, Set 1, and Individual Practice by student. Use zero workspace, compact cards/rows, required visuals, tiny source/purpose labels, and collapsible Answer / Teacher Move / Student Discourse Move. Reused common questions may be labeled as reused instead of visually duplicated.\n\n` +
 `## Math, graph, and visual rendering - HARD\n` +
 `Follow response_contract/MATH_VISUAL_QA.md and response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md. The request packages the current registered graph tool under response_contract/graph_tool/. For every supported Cartesian graph, including blank student grids, execute that packaged entrypoint directly. Do not substitute hand-built SVG/CSS/canvas or another plotting style just because it looks similar. Record renderer entrypoint + graph asset path for every Cartesian graph in data/qa.json. Apply these rules to every common/individual artifact.\n\n` +
@@ -496,12 +959,13 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
 `- Common Worksheet exposes Student Worksheet + Teacher Guide.\n` +
 `- Stations remain four review + two extension with complete key.\n` +
 `- Exactly one Question / Solution Set exists and every Set 1 artifact includes the full set.\n` +
+`- question_set/index.html is the Algebra u1_1-style Activity Options page; the old six-card Set 1 menu is absent.\n` +
+`- No standalone Presentation card; projection routines reuse one Question/Solution deck.\n` +
+`- Find Someone Who uses the gold Student Set worksheet look + partner signatures + left layout controls.\n` +
+`- Cut-Apart Cards remain visually unchanged from the gold run.\n` +
+`- assets/styles.css SHA matches the packaged gold lock.\n` +
 `- Common Worksheet visibly labels Review and Extension / Transfer.\n` +
 `- Print Presentation is present, exactly two questions per printed page, and top-aligned within each half-page.\n` +
-`- Student Set uses natural flow without wasteful fixed page breaks.\n` +
-`- Activity Options uses one Set 1, includes Cards, links to Stations/Find Someone Who, and omits Tarsia/Blooket.\n` +
-`- Find Someone Who uses its dedicated signature/workspace worksheet layout, not cut cards.\n` +
-`- Student Set and structure pages use compact headers.\n` +
 `- No redundant Print buttons are shown when browser print is equivalent.\n` +
 `- Review All pages are compact, zero-workspace, and complete.\n` +
 `- MathJax, graphs, and visuals are rendered and checked.\n` +
@@ -585,6 +1049,12 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
       console.warn(`Using embedded fallback for ${filename}.`, error);
     }
     return fallback;
+  }
+
+
+  async function sha256Hex(value) {
+    const digest = await crypto.subtle.digest("SHA-256", enc.encode(String(value)));
+    return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
   }
 
   function fileManifest(file, packagedPath) {
