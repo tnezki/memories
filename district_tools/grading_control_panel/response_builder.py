@@ -141,8 +141,8 @@ def practice_source(data, student=None, set1=None, visual_prefix="../../"):
         if set1 is not None and section!=last_section:
             blocks.append(f'<div class="runtime-flow-block worksheet-section-label{(" extension" if section and section.lower().startswith("extension") else "")}">{esc(section or "Review")}</div>'); last_section=section
         label=q.get("label")
-        title=(str(i)+'.') if set1 is not None else ((str(i)+'. '+str(label)) if label else str(i)+'.')
-        blocks.append(f'<div class="runtime-flow-block practice-block" data-problem="{esc(q.get("id") or ("Q"+str(i)))}" style="--base-workspace:{esc(q.get("workspace") or "1.05in")}"><h3>{esc(title)} {raw(q.get("prompt"))}</h3>{visual_html(q,visual_prefix)}<div class="workspace"></div></div>')
+        label_text=f"{i}. {label}" if label else f"{i}."
+        blocks.append(f'<div class="runtime-flow-block practice-block" data-problem="{esc(q.get("id") or ("Q"+str(i)))}" style="--base-workspace:{esc(q.get("workspace") or "1.05in")}"><div class="question-source">{esc(label_text)}</div><h3>{raw(q.get("prompt"))}</h3>{visual_html(q,visual_prefix)}<div class="workspace"></div></div>')
     return header+''.join(blocks)
 
 
