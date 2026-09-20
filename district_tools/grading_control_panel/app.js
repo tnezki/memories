@@ -1148,6 +1148,24 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         ...graphEntries
       );
 
+      // Fail closed if any deterministic renderer/runtime file is absent from the request package.
+      // This prevents a grading run from having to fetch repository files or recreate locked layouts.
+      const requiredDeterministicEntries = [
+        "response_contract/response_builder.py",
+        "response_contract/RESPONSE_BUILDER_VERSION.txt",
+        "response_contract/RESPONSE_DATA_SCHEMA.md",
+        "response_contract/RESPONSE_DATA_VERSION.txt",
+        "response_contract/runtime.css",
+        "response_contract/runtime.js",
+        "response_contract/styles.css",
+        "response_contract/stations.css"
+      ];
+      const packagedEntryNames = new Set(entries.map((entry) => entry.name));
+      const missingDeterministicEntries = requiredDeterministicEntries.filter((name) => !packagedEntryNames.has(name));
+      if (missingDeterministicEntries.length) {
+        throw new Error(`Request package is missing deterministic renderer files: ${missingDeterministicEntries.join(", ")}`);
+      }
+
       const zipBlob = makeZip(entries);
       const filename = `grading_request_${slug(className)}_${dateStamp()}.zip`;
       downloadBlob(zipBlob, filename);
