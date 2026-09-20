@@ -1,7 +1,7 @@
 # Common Course Practice & Question Review Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-common-practice/1.5  
+VERSION: district-grading-common-practice/1.6  
 DATE: 2026-09-20
 
 This guide controls Common Course Practice and Set 1 delivery. If older request wording conflicts with this file, this file controls. `RESPONSE_LAYOUT_LOCK.md` controls visual continuity. `response_builder.py` is now the only layout author.
@@ -162,7 +162,7 @@ Find Someone Who does not own a separate worksheet file. Its participation direc
 
 - top half = the question, top-aligned;
 - bottom half = **Answer**, **Teacher move**, and **Student discourse move**, top-aligned;
-- use the same rounded panel treatment and typography as the approved two-up Print Presentation;
+- use the locked rounded-panel presentation treatment and typography;
 - no Back/Next shell;
 - no alternating separate Question and Solution pages;
 - all Set 1 problems, one physical page per problem.
@@ -178,16 +178,19 @@ Add a Worksheet Builder-style screen-only left rail:
 
 Show true Letter-size page boundaries on screen. Slider changes must update the preview immediately. Graph controls resize geometry only; stroke weights remain canonical. The answer/moves region starts in the lower half and must not drift into the question half.
 
-## 9. Print Presentation - student-facing two-up
-Keep the current approved two-up layout:
+## 9. Print Presentation - one problem per Letter page
+`print_presentation.html` uses the same locked presentation template as the classroom Set 1 view:
 
-- Letter portrait;
-- exactly two large **questions** per physical page;
-- each question top-aligned within its half-page panel;
-- no answers/moves/workspace;
-- all Set 1 questions;
-- lower half may be blank when the set count is odd;
-- browser-print HTML is canonical; do not generate a duplicate PDF.
+- exactly one Set 1 problem per Letter page;
+- question and any visual in the **top half**;
+- **Answer + Teacher move + Student discourse move** in the **bottom half**;
+- both halves top-aligned;
+- screen-only left controls: **All question spacing**, **Problem**, **Question spacing / workspace**, **Graph / diagram**, **Reset**, **Print**;
+- real Letter page boundaries on screen;
+- slider changes update the preview immediately;
+- browser Print uses the same page fragments shown on screen.
+
+This is a locked template populated from the already-validated Set 1 objects. Do not create a separate two-up question-only version.
 
 ## 10. Cut-Apart Question Cards - LOCKED
 The current card artifact is approved and remains visually unchanged except for the actual Set 1 content/required visual.
@@ -199,7 +202,7 @@ The current card artifact is approved and remains visually unchanged except for 
 - shared by the four card-based structures above.
 
 ## 11. Stations - GOLD / HTML ONLY
-Keep the current Stations landing page and station/answer-key layouts.
+Keep the exact approved Stations landing page, student-station pages, station cards, and answer-key markup. These are literal mad-lib templates: only titles, station labels, prompts, answers, visuals, and counts may be injected. Do not regenerate station HTML structure or CSS.
 
 - exactly four review stations plus two extension stations;
 - 4-6 questions each;
@@ -261,7 +264,7 @@ Before delivery verify:
 - Speed Dating and Hot Seat use those exact names;
 - all four card structures have full directions sections and use the one Cut-Apart deck;
 - Set 1 presentation has question top half + answer/moves bottom half, with left controls and true page preview;
-- Print Presentation remains two top-aligned questions per page;
+- Print Presentation uses one Letter page per problem with question top half and answer/moves bottom half, with live controls and page preview;
 - Cut-Apart Cards match the current gold layout;
 - Stations expose HTML only, no generated station PDFs;
 - combined reports/practice quick actions open HTML, not generated PDFs;

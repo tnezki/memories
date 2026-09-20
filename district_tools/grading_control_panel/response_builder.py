@@ -8,7 +8,7 @@ from __future__ import annotations
 import argparse, hashlib, html, json, re, shutil
 from pathlib import Path
 
-BUILDER_VERSION = "district-grading-response-builder/1.0"
+BUILDER_VERSION = "district-grading-response-builder/1.1"
 RATING_LABELS = ("Convincing", "Limited", "Incorrect", "Not Observed")
 
 
@@ -185,31 +185,63 @@ def combined_reports(data):
     return h+f'<body class="runtime-preview"><div class="no-print" style="max-width:8.5in;margin:12px auto"><button class="btn primary" onclick="window.print()">Print</button></div><div id="runtimePageStack" class="runtime-page-stack"></div><div id="runtimeFlowSource" class="runtime-flow-source" data-duplex="true">{"".join(pages)}</div></body></html>'
 
 
+def station_head(title):
+    """Locked gold station shell: global response CSS + exact station CSS, no page-local styling."""
+    return head(title, "../../assets/styles.css").replace(
+        "</head>", '<link rel="stylesheet" href="../../assets/stations.css"></head>'
+    )
+
+
 def station_index(data):
     cards=[]
-    for i,s in enumerate(data["stations"],1): cards.append(f'<div class="station-card"><h2>{esc(s.get("type") or "Review")} Station {esc(s.get("number") or i)}</h2><p>{esc(s.get("title") or "")}</p></div>')
-    h=head("Stations Index","../../assets/stations.css")
-    return h+f'<body><main class="station-index"><h1>Stations</h1><p>{esc(data["assignment_title"])}</p><p>Four review stations plus two extension stations, 4-6 questions each.</p><div class="buttons"><a class="primary" href="stations.html">Open Student Stations</a><a href="answer_key.html">Open Answer Key</a></div><div class="station-list">{"".join(cards)}</div></main></body></html>'
+    for idx,s in enumerate(data["stations"],1):
+        station_type=s.get("type") or ("Review" if idx<=4 else "Extension")
+        number=s.get("number") or idx
+        title=s.get("title") or ""
+        qcount=len(s.get("questions") or [])
+        cards.append(
+            f'<div class="station-card"><h2>{esc(station_type)} Station {esc(number)} - {esc(title)}</h2>'
+            f'<p>{esc(station_type)} · {qcount} questions</p></div>'
+        )
+    return station_head("Stations")+f'''<body><div class="station-index"><h1>Stations</h1><p>{esc(data["assignment_title"])} · four review stations plus two extension stations.</p><div class="buttons"><a class="primary" href="stations.html">Open Student Stations</a><a href="answer_key.html">Open Answer Key</a><a href="../../CLICK_ME.html">Back to Dashboard</a></div><div class="station-list">{"".join(cards)}</div></div></body></html>'''
 
 
 def stations_doc(data,key=False):
     parts=[]
+    total=len(data["stations"])
     for idx,s in enumerate(data["stations"],1):
-        t=s.get("type") or ("Review" if idx<=4 else "Extension")
-        n=s.get("number") or (idx if idx<=4 else idx-4)
-        title=f'{t} Station {n} - {s.get("title") or ""}'
+        station_type=s.get("type") or ("Review" if idx<=4 else "Extension")
+        number=s.get("number") or idx
+        station_title=s.get("title") or ""
+        full_title=f'{station_type} Station {number} - {station_title}'
         qs=[]
         for j,q in enumerate(s.get("questions",[]),1):
             if key:
-                qs.append(f'<div class="solution-item"><h3>Question {j}</h3><div class="question">{raw(q.get("prompt"))}</div>{visual_html(q,"../../")}<p><strong>Answer:</strong> {raw(q.get("answer"))}</p></div>')
+                qs.append(
+                    f'<div class="solution-item"><h3>Question {j}</h3>'
+                    f'<div class="question">{raw(q.get("prompt"))}</div>{visual_html(q,"../../")}'
+                    f'<p><strong>Answer:</strong> {raw(q.get("answer"))}</p></div>'
+                )
             else:
-                qs.append(f'<div class="problem"><div class="problem-number">Question {j}</div><div class="question">{raw(q.get("prompt"))}</div>{visual_html(q,"../../")}<div class="workspace"></div></div>')
-        body=''.join(qs)
-        if key: body=f'<div class="solution-list">{body}</div>'
-        else: body=f'<div class="problems">{body}</div>'
-        parts.append(f'<section class="page"><div class="header small">{esc(title)}{(" - Answer Key" if key else "")}</div>{body}<div class="page-footer"><span>{esc(data["assignment_title"])}</span><span>{"Teacher Key" if key else "Station " + str(n)}</span></div></section>')
-    h=head("Stations Answer Key" if key else "Student Stations","../../assets/stations.css")
-    return h+f'<body>{"".join(parts)}</body></html>'
+                qs.append(
+                    f'<div class="station-problem"><div class="label">Question {j}</div>'
+                    f'<div class="question">{raw(q.get("prompt"))}</div>{visual_html(q,"../../")}</div>'
+                )
+        if key:
+            body=f'<div class="solution-list">{"".join(qs)}</div>'
+            header=f'<div class="header small">{esc(full_title)} - Answer Key</div>'
+            middle=''
+            footer='Teacher Key'
+        else:
+            body=f'<div class="station-grid">{"".join(qs)}</div>'
+            header=f'<div class="header">{esc(full_title)}</div>'
+            middle=f'<div class="copy-note">Station {idx} of {total}</div>'
+            footer=esc(station_type)
+        parts.append(
+            f'<section class="page">{header}{middle}{body}'
+            f'<div class="page-footer"><span>{esc(data["assignment_title"])}</span><span>{footer}</span></div></section>'
+        )
+    return station_head("Stations Answer Key" if key else "Stations")+f'<body>{"".join(parts)}</body></html>'
 
 
 BASE_DIRECTIONS = {
@@ -245,26 +277,20 @@ def activity_options(data):
     return h+f'''<body><div class="activity-options-wrap"><section class="activity-page" id="activity-options"><div class="dir-header"><div><div class="act-eyebrow">{esc(data['class_name'])}</div><h1 class="act-title">Activity Options</h1><div class="act-subtitle">{esc(data['assignment_title'])}</div></div><div class="act-meta">One shared Set 1<br>{len(data['set1'])} questions</div></div><div class="dir-text"><div class="dir-row"><span class="dir-label">Teacher / Print Utilities</span><ul><li><a href="print_presentation.html"><strong>Print Presentation</strong></a></li><li><a href="../common_review_extension/teacher_guide.html"><strong>Teacher Guide</strong></a></li></ul></div><p><strong>Set 1 focus:</strong> {esc(data.get('set1_focus') or '')}</p><div class="dir-row"><span class="dir-label">Classroom Participation Structures</span><div><div class="activity-group"><div class="activity-group-title">Shared Prompt / Partner Structures</div><div class="activity-material">Uses the Set 1 classroom presentation</div><ul>{shared_rows}</ul></div><div class="activity-group"><div class="activity-group-title">Card-Based Structures</div><div class="activity-material">Uses the one Cut-Apart Question Cards deck</div><ul>{card_rows}</ul></div></div></div><div class="dir-row"><span class="dir-label">Printable Handouts</span><ul><li><strong>Stations</strong> — <a href="../stations/index.html">Open Stations</a></li><li><strong>Find Someone Who</strong> — <a href="../common_review_extension/student_worksheet.html">Set 1</a></li><li><strong>Cut-Apart Question Cards</strong> — <a href="structures/cut_apart_cards.html">Set 1</a></li></ul></div></div></section>{''.join(pages)}</div></body></html>'''
 
 
-def set_presentation(data):
+def set_presentation(data, title="Set 1 Classroom Presentation"):
     options=''.join(f'<option value="{esc(q.get("id") or ("Q"+str(i)))}">{esc(q.get("id") or ("Q"+str(i)))}</option>' for i,q in enumerate(data["set1"],1))
     pages=[]
     for i,q in enumerate(data["set1"],1):
         qid=q.get("id") or f"Q{i}"
         pages.append(f'<section class="runtime-letter-page runtime-set-page" data-problem="{esc(qid)}"><div class="runtime-set-half runtime-set-question"><div class="set-label">Set 1 - Question {i}</div><div class="set-prompt">{raw(q["prompt"])}</div>{visual_html(q,"../../")}<div class="runtime-question-space"></div></div><div class="runtime-set-half runtime-set-teacher"><div class="set-label">Teacher support</div><div class="guide-answer"><strong>Answer:</strong> {raw(q["answer"])}</div><div class="guide-move"><strong>Teacher move:</strong> {esc(q.get("teacher_move") or "")}</div><div class="guide-move"><strong>Student discourse move:</strong> {esc(q.get("discourse_move") or "")}</div></div><div class="runtime-page-number">Page {i}</div></section>')
     controls=rail(True).replace('All workspaces','All question spacing').replace('>Workspace<','>Question spacing / workspace<').replace('<select id="runtimeProblem"><option value="all">All</option></select>',f'<select id="runtimeProblem"><option value="all">All</option>{options}</select>')
-    h=head("Set 1 Classroom Presentation","../../assets/styles.css","../../assets/runtime.css","../../assets/runtime.js")
+    h=head(title,"../../assets/styles.css","../../assets/runtime.css","../../assets/runtime.js")
     return h+f'<body class="runtime-preview runtime-with-controls">{controls}<div id="runtimeSetStack" class="runtime-page-stack">{"".join(pages)}</div></body></html>'
 
 
 def print_presentation(data):
-    chunks=[]; qs=data["set1"]
-    for p in range(0,len(qs),2):
-        slides=[]
-        for j,q in enumerate(qs[p:p+2],p+1): slides.append(f'<div class="print-slide"><div class="slide-number">Set 1 · Question {j}</div><div class="slide-question">{raw(q["prompt"])}</div>{visual_html(q,"../../")}</div>')
-        if len(slides)==1: slides.append('<div class="print-slide"></div>')
-        chunks.append(f'<div class="print-presentation-page">{"".join(slides)}</div>')
-    h=head("Print Presentation","../../assets/styles.css")
-    return h+f'<body><div class="print-presentation-wrap">{"".join(chunks)}</div></body></html>'
+    # Same locked shell as the classroom view: question top half, answer/moves bottom half, live controls.
+    return set_presentation(data, "Print Presentation")
 
 
 def cut_cards(data):
@@ -296,7 +322,7 @@ def build(data, request_root:Path, out:Path):
     ddir=out/"data"; ddir.mkdir(exist_ok=True); write(ddir/"response_data.json",json.dumps(data,indent=2,ensure_ascii=False))
     rq=request_root/"request.json"
     if rq.exists(): shutil.copy2(rq,ddir/"request.json")
-    checks={"builder_version":BUILDER_VERSION,"status":"PASS","set1_count":len(data["set1"]),"student_count":len(data["students"]),"station_count":len(data["stations"]),"styles_sha256":sha256(out/"assets/styles.css"),"runtime_css_sha256":sha256(out/"assets/runtime.css"),"runtime_js_sha256":sha256(out/"assets/runtime.js"),"forbidden_generated_pdfs":[],"duplicate_review_pages":[],"generated_html_count":len(list(out.rglob("*.html")))}
+    checks={"builder_version":BUILDER_VERSION,"status":"PASS","set1_count":len(data["set1"]),"student_count":len(data["students"]),"station_count":len(data["stations"]),"styles_sha256":sha256(out/"assets/styles.css"),"stations_css_sha256":sha256(out/"assets/stations.css"),"runtime_css_sha256":sha256(out/"assets/runtime.css"),"runtime_js_sha256":sha256(out/"assets/runtime.js"),"forbidden_generated_pdfs":[],"duplicate_review_pages":[],"generated_html_count":len(list(out.rglob("*.html")))}
     write(ddir/"template_qa.json",json.dumps(checks,indent=2))
 
 

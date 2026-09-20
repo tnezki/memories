@@ -1,7 +1,7 @@
 # Grading Response Gold Layout Lock
 
 STATUS: HARD / REQUIRED  
-VERSION: district-grading-response-layout-lock/1.2  
+VERSION: district-grading-response-layout-lock/1.3  
 DATE: 2026-09-20  
 LOCKED CSS SHA-256: `2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad`
 
@@ -21,7 +21,7 @@ Keep the current gold layout/markup hierarchy for these unless a later teacher-a
 - Common Worksheet visual language;
 - Common Worksheet Teacher Guide;
 - Stations landing page, student stations, and station answer key;
-- Print Presentation two-up question panels;
+- Print Presentation one-problem Letter-page shell;
 - Cut-Apart Question Cards.
 
 Do not change hero sizes, card shapes, typography hierarchy, border/radius system, dashboard student-card grid, class-summary cards, report boxes, station styling, or cut-card styling because another design seems cleaner.
@@ -38,7 +38,7 @@ These changes are intentional and are now part of the gold system:
 7. **Speed Dating Math** is renamed **Speed Dating** and **Mathematical Hot Seat** is renamed **Hot Seat**.
 8. Card-based structures are Quiz-Quiz-Trade, Fan-N-Pick, Mix-Pair-Share with Cards, and Inside-Outside Circle with Cards. They all reuse the one locked Cut-Apart Question Cards deck.
 9. Set 1 classroom presentation uses the approved rounded-panel visual language with one Letter page per problem: question in the top half, Answer + Teacher move + Student discourse move in the bottom half. It gains left layout controls and real page previews.
-10. Print Presentation remains the approved two-up, top-aligned, question-only format.
+10. Print Presentation uses the same locked one-problem Letter template as the classroom Set 1 view: question top half; Answer + Teacher move + Student discourse move bottom half; live spacing/graph controls; true page preview.
 11. Combined Individual Practice gains true Letter page previews, spacing/workspace controls, graph/diagram controls, and deterministic repagination. Combined Student Reports gains true page previews and browser Print without a duplicate PDF.
 12. Stations keep their current look but expose HTML Student Stations + HTML Answer Key only.
 13. Supported Cartesian graphs use the current canonical district graph tool and District Graph Rendering Standard; no page-local CSS may restyle graph strokes away from the standard.
@@ -71,4 +71,4 @@ Before delivery verify:
 ## Literal-template enforcement - HARD
 The prior CSS-only lock was insufficient because a run could change HTML while keeping the stylesheet. That path is retired. The deterministic renderer is now the literal shell authority for CLICK_ME, Class Data, student reports, individual practice, Common Worksheet, Teacher Guide, Stations, Activity Options/directions, Set 1 presentation, Print Presentation, cut cards, and combined print documents. Generated HTML must not be manually edited after rendering.
 
-Class Data uses the approved `Precalc Class Data`/Evidence Analyzed/Major Strengths/Top Actionable Patterns/Suggested Instructional Groupings hierarchy. Stations uses the long-standing approved station markup. Activity directions are fixed per structure.
+Class Data uses the approved `Precalc Class Data`/Evidence Analyzed/Major Strengths/Top Actionable Patterns/Suggested Instructional Groupings hierarchy. Stations uses the long-standing approved station markup and exact locked station CSS as a literal mad-lib shell. Only data fields are injected; structure/classes/CSS are not regenerated. Activity directions are fixed per structure.

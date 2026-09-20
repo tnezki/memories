@@ -31,6 +31,8 @@ The grading model now does only the variable work: read/grade evidence, create t
 
 The Common Worksheet and Individual Practice previews use one shared deterministic runtime: real Letter sheets, natural question flow, live workspace repagination, actual problem selection, and print output matching the preview.
 
+The request also packages `evidence_review.py` and `response_qa.py`. The first owns repeatable PDF/image rendering and contact-sheet preparation; the second owns repeatable file/link/hash/policy QA. Grading runs should not write new mechanical scripts or fetch these utilities from GitHub/web.
+
 ## Gold response layout
 
 The tested 2026-09-20 Precalculus Circuit Training response is the visual baseline. Stable dashboard/report/class/worksheet/teacher-guide/station/card surfaces are locked. The current locked response CSS SHA-256 is:
@@ -142,11 +144,11 @@ Every structure gets its own Algebra-style directions section on the Activity Op
 
 It uses the same rounded-panel visual language as the approved Print Presentation and adds screen-only spacing/graph controls with true page previews.
 
-`print_presentation.html` remains the separate student-facing two-up format: two top-aligned questions per Letter page, no answers/moves/workspace.
+`print_presentation.html` now uses the same locked one-problem Letter template as the classroom Set 1 view: question in the top half; Answer + Teacher move + Student discourse move in the bottom half; live spacing/graph controls; preview equals Print.
 
 ## Stations
 
-Stations remain four review stations plus two extension stations with a separate answer key and the existing locked visual style. Only the redundant station PDFs are removed.
+Stations remain four review stations plus two extension stations with a separate answer key. Their approved HTML structure and station CSS are literal mad-lib templates: the renderer only drops in station titles, questions, answers, visuals, and counts. The redundant station PDFs stay removed.
 
 ## Graphs
 
@@ -156,11 +158,15 @@ Every request ZIP packages the current District Graph Rendering Standard and exa
 
 The response build now follows a locked-template fast path:
 
+- packaged `evidence_review.py` handles page rendering/contact sheets once;
+- packaged `response_qa.py` handles repeatable mechanical QA once;
+
 - full student-evidence review remains required;
 - canonical questions/answers/moves/visuals are generated and validated once;
 - locked templates are populated like mad-lib shells rather than redesigned or revalidated from scratch;
 - programmatic checks run before visual rendering;
-- every graph/diagram page plus representative/outlier template pages are visually checked;
+- visual QA is bounded to graphs/diagrams and actual overflow/content outliers;
+- slider QA uses one default, one mid, and one max smoke test instead of an exhaustive matrix;
 - local corrections rerender only the changed artifact and direct dependents;
 - generated duplicate PDFs are not created;
 - `data/qa.json` records build-phase timings so slow runs can be diagnosed.

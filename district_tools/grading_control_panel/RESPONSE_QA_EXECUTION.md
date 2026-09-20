@@ -1,7 +1,7 @@
 # Grading Response QA Execution Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-response-qa-execution/1.3  
+VERSION: district-grading-response-qa-execution/1.5  
 DATE: 2026-09-20
 
 ## Purpose
@@ -24,6 +24,8 @@ These timings are diagnostic and must not change grading quality.
 
 ## 2. Evidence review is never reduced
 Visually inspect scanned handwriting, diagrams, multi-page packets, and ambiguous evidence as needed to grade accurately. Do not use a speed shortcut to skip student evidence review or infer unreadable work.
+
+For PDF/image evidence, use packaged `evidence_review.py` once to render pages/contact sheets. Do not write a new PIL/PDF rendering script when the packaged helper can do the mechanical preparation. The helper does not OCR, grade, or infer student identity.
 
 ## 3. Generate canonical content once
 Build one canonical data object for each student report, each individual-practice question, each class-level Set 1 question, each answer, each teacher move, each discourse move, and each generated visual.
@@ -51,6 +53,8 @@ Do **not** generate duplicate PDFs for:
 The submitted/scanned student-work archive may remain PDF because preserving the source evidence is a different function.
 
 ## 6. Programmatic checks first
+Run packaged `response_qa.py` once after the deterministic renderer. It owns repeatable file/link/hash/policy checks. Do not recreate these checks with ad-hoc Python/shell unless the packaged utility itself reports an unsupported case.
+
 Before expensive visual rendering, verify:
 
 - required files/folders exist;
@@ -63,7 +67,7 @@ Before expensive visual rendering, verify:
 - Find Someone Who points to the same Common Worksheet HTML;
 - Activity Options structure/names/material links match the contract;
 - Set 1 classroom presentation has one problem per Letter page with question top half and answer/moves bottom half;
-- Print Presentation has exactly two questions per Letter page;
+- Print Presentation has exactly one Set 1 problem per Letter page with question top half and Answer + Teacher move + Student discourse move bottom half, and includes the locked runtime controls;
 - adjustable pages contain the required left-rail controls and explicit Letter page containers;
 - duplex HTML page-count logic is internally consistent;
 - graph provenance records the packaged registered graph tool;
@@ -72,37 +76,24 @@ Before expensive visual rendering, verify:
 
 Fix programmatic failures before broad visual QA.
 
-## 7. Targeted visual QA
-Visually inspect:
+## 7. Bounded visual QA
+Locked templates are not visually re-audited page by page. Inspect only:
 
-- every page containing a mathematical graph or nontrivial diagram;
-- first page and at least one later representative/outlier page of each distinct locked template;
-- actual page-break transitions in Common Worksheet and combined Individual Practice;
-- first and last Set 1 classroom-presentation pages plus graph-heavy pages;
-- first and last Print Presentation pages plus graph-heavy pages;
-- Cut-Apart Cards first page plus any card with a large figure;
-- Stations first, representative middle, and final page;
-- representative duplex student transitions for combined reports/practice;
-- any page flagged by programmatic checks or overflow detection.
+- every generated graph or nontrivial diagram;
+- any page explicitly flagged for overflow/pagination risk;
+- at most one representative page for a distinct locked template when dynamic content length creates a real risk.
 
-Do not rerender every stable report/practice page only because text differs.
+Do not capture first/middle/last screenshots of every stable product merely because it exists. A hash-locked shell that passed mechanical QA is trusted.
 
 ## 8. Adjustable-page QA
-For each adjustable HTML type, spot check the required controls at meaningful values.
+Use a bounded smoke test, not an exhaustive slider matrix. For one representative adjustable worksheet/practice surface and the Set 1 presentation/Print Presentation shared shell:
 
-For Common Worksheet and combined Individual Practice:
+- verify the default state;
+- make one meaningful mid-range change;
+- make one maximum-range change;
+- confirm pagination/control behavior changes as expected.
 
-- All workspaces: 0%, 100%, 300%;
-- selected-problem Workspace: 0%, 100%, 500%, 1200%;
-- Graph/diagram when present: 70%, 100%, 160%.
-
-For Set 1 classroom presentation:
-
-- All question spacing: minimum/default/maximum;
-- selected-problem Question spacing/workspace: minimum/default/maximum;
-- Graph/diagram when present: 70%, 100%, 160%.
-
-After each mutation, confirm screen pagination updates and browser Print uses the same physical page boundaries. A slider that moves but does not change layout is a failure.
+Do not test 0/100/300/500/1200 separately for every page or problem. Browser subpixel overflow of **4 px or less** is tolerance, not a correction loop. A slider that moves but does not change layout remains a failure.
 
 ## 9. Duplex HTML QA
 For combined reports and combined Individual Practice, determine each student's rendered physical page count from the explicit page containers. If odd, add exactly one truly blank page before the next student. Verify representative student-to-student transitions and record content pages, blank backs, and physical pages in `data/qa.json`.
@@ -143,6 +134,11 @@ PASS is forbidden with unresolved failures.
 - Common Worksheet and Individual Practice use `assets/runtime.js` and `assets/runtime.css`.
 - A workspace slider changes workspace height while problems continue to flow inside true Letter pages.
 - The Problem selector contains the actual problem IDs, not only an `All` placeholder.
-- Class Data, Stations, dashboard cards, Teacher Guide, and cut cards come from the renderer and cannot drift between runs.
+- Class Data, Stations, dashboard cards, Teacher Guide, and cut cards come from literal renderer templates and cannot drift between runs. Stations must also match the packaged station CSS hash.
 - Activity directions are structure-specific static builder content, not newly generated generic directions.
 - Set 1 items cannot render unless `verification.passed=true`.
+## 13. Fast mechanical-tool budget - HARD
+Once `response_data.json` is complete, the deterministic builder + packaged mechanical QA + bounded visual outlier QA should normally finish in **under 90 seconds** for a small-class run. If that stage exceeds 90 seconds, record `SLOW_MECHANICAL_PATH` in `data/qa.json`; do not respond by expanding QA or rerunning stable templates.
+
+All required renderer/runtime/evidence/QA utilities must come from the request ZIP. Do not search GitHub or the public web for a missing dependency. Missing packaged tooling is a request-packaging failure and should fail closed.
+
