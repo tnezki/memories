@@ -2,19 +2,23 @@
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
 
-  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.3";
+  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.4";
   const STATION_STYLE_VERSION = "district-grading-station-style/1.0";
   const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.4";
-  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.0";
-  const REQUEST_SCHEMA = "district-grading-request/0.8-pilot";
+  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.1";
+  const REQUEST_SCHEMA = "district-grading-request/0.9-pilot";
 
-  const RESPONSE_CSS_FALLBACK = String.raw`:root{--ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;--accent:#365f82;--accent-dark:#284b68;--success:#176b46;--warn:#8a5a00;--shadow:0 8px 24px rgba(20,34,50,.06)}*{box-sizing:border-box}html{background:#fff;color:var(--ink)}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.5}a{color:var(--accent-dark)}.wrap{max-width:1180px;margin:0 auto;padding:20px}.hero{background:var(--hero);border:1px solid var(--line);border-radius:24px;padding:32px 36px;margin:10px 0 24px}.hero h1{margin:0;font-size:42px}.quick-actions,.inline-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:11px 18px;border-radius:12px;border:1px solid #9fb4c8;background:#fff;color:var(--accent);font-weight:800;text-decoration:none}.btn.primary{background:var(--accent);color:#fff}.section{margin:22px 0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}.grid,.student-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}.card-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.question-review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:10px}.question-review-card{border:1px solid var(--line);border-radius:12px;padding:12px}.question-source{font-size:11px;text-transform:uppercase;font-weight:800;color:var(--muted)}.question-review-card details{margin-top:7px;border-top:1px solid #e3e7ed;padding-top:6px}.question-review-card summary{cursor:pointer;font-weight:800}.teacher-move,.discourse-move,.answer-box{font-size:12px;background:var(--soft);border-radius:8px;padding:8px;margin-top:6px}.presentation-shell{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto}.presentation-head{padding:14px 20px;border-bottom:1px solid var(--line)}.presentation-question{display:flex;align-items:center;justify-content:center;padding:26px;min-height:calc(100vh - 150px)}.presentation-card{width:min(1050px,96vw);font-size:clamp(22px,2.5vw,38px)}.presentation-nav{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 18px;display:flex;justify-content:space-between;gap:10px}.report-page,.practice-page,.packet-page{max-width:8in;margin:0 auto}.feedback-box,.practice-block{border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}.duplex-blank-page{display:none}.math-display{margin:12px 0}.visual-block img,.graph-frame img{display:block;max-width:100%;height:auto;margin:0 auto}@media print{@page{size:letter;margin:.55in}.quick-actions,.no-print,.screen-only,.presentation-nav{display:none!important}.duplex-blank-page{display:block;height:9.9in;min-height:9.9in;break-after:page;page-break-after:always}.card,.practice-block,.feedback-box,.question-review-card{break-inside:avoid}}`;
+  const RESPONSE_CSS_FALLBACK = String.raw`:root{--ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;--accent:#365f82;--accent-dark:#284b68;--success:#176b46;--warn:#8a5a00;--shadow:0 8px 24px rgba(20,34,50,.06)}*{box-sizing:border-box}html{background:#fff;color:var(--ink)}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.5}a{color:var(--accent-dark)}.wrap{max-width:1180px;margin:0 auto;padding:20px}.hero{background:var(--hero);border:1px solid var(--line);border-radius:20px;padding:24px 28px;margin:10px 0 20px}.hero h1{margin:0;font-size:36px}.quick-actions,.inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 15px;border-radius:10px;border:1px solid #9fb4c8;background:#fff;color:var(--accent);font-weight:800;text-decoration:none}.btn.primary{background:var(--accent);color:#fff}.section{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.grid,.student-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}.card-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.question-review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px}.question-review-card{border:1px solid var(--line);border-radius:10px;padding:10px}.question-source{font-size:11px;text-transform:uppercase;font-weight:800;color:var(--muted)}.question-review-card details{margin-top:6px;border-top:1px solid #e3e7ed;padding-top:5px}.question-review-card summary{cursor:pointer;font-weight:800}.teacher-move,.discourse-move,.answer-box{font-size:12px;background:var(--soft);border-radius:7px;padding:7px;margin-top:5px}.presentation-shell{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}.presentation-head{padding:9px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.presentation-question{display:flex;align-items:center;justify-content:center;padding:14px 22px;min-height:0;overflow:auto}.presentation-card{width:min(1100px,96vw);font-size:clamp(22px,2.4vw,38px)}.presentation-nav{background:#fff;border-top:1px solid var(--line);padding:9px 14px;display:flex;justify-content:space-between;gap:8px}.report-page,.practice-page,.packet-page{max-width:8in;margin:0 auto}.feedback-box,.practice-block{border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0}.duplex-blank-page{display:none}.math-display{margin:10px 0}.visual-block img,.graph-frame img{display:block;max-width:100%;height:auto;margin:0 auto}.set-head,.activity-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;border-bottom:1.5px solid var(--line);padding:0 0 8px;margin:0 0 12px}.set-head h1,.activity-head h1{font-size:23px;margin:0}.set-head p,.activity-head p{margin:2px 0 0;font-size:12px;color:var(--muted)}.student-set-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}.student-question{border-top:1px solid #dce2e9;padding:9px 2px;break-inside:avoid}.teacher-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:10px}.teacher-question{border:1px solid var(--line);border-radius:10px;padding:11px;break-inside:avoid}.print-presentation-page{width:8in;min-height:10in;margin:0 auto 18px;padding:0;background:#fff;display:grid;grid-template-rows:1fr 1fr;gap:.16in;break-after:page}.print-slide{border:1.5px solid #9ca8b5;border-radius:10px;padding:.18in .22in;display:flex;flex-direction:column;justify-content:center;overflow:hidden;break-inside:avoid}.print-slide .slide-number{font-size:11px;font-weight:800;color:var(--muted);margin-bottom:4px}.print-slide .slide-question{font-size:clamp(18px,2.1vw,28px);line-height:1.25}.print-slide img,.print-slide svg{max-height:3.25in;max-width:100%;object-fit:contain}.structure-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px}.structure-card{border:1px solid var(--line);border-radius:10px;padding:11px}.structure-card h3{margin:0 0 3px;font-size:16px}.structure-card p{margin:3px 0;color:var(--muted);font-size:12px}.structure-directions{max-width:900px;margin:0 auto}.structure-directions .direction-row{display:grid;grid-template-columns:135px 1fr;gap:12px;padding:8px 0;border-top:1px solid #e1e5ea}.cut-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cut-card{border:1.4px dashed #777;border-radius:7px;padding:10px;min-height:150px;break-inside:avoid}.find-someone-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.find-someone-box{border:1px solid #777;border-radius:7px;padding:10px;min-height:145px;break-inside:avoid}.partner-line{margin-top:10px;border-bottom:1px solid #555;height:20px}.screen-page{max-width:8.5in;min-height:11in;margin:14px auto;background:#fff;border:1px solid #cfd7e2;box-shadow:0 3px 18px rgba(20,34,50,.08);padding:.45in}.page-break{break-before:page;page-break-before:always}@media(max-width:700px){.student-set-grid,.cut-card-grid,.find-someone-grid{grid-template-columns:1fr}.screen-page{min-height:0;margin:0;border:0;box-shadow:none;padding:14px}.structure-directions .direction-row{grid-template-columns:1fr;gap:2px}}@media print{@page{size:letter;margin:.48in}@page presentation2up{size:letter portrait;margin:.25in}body{font-size:11pt;background:#fff}.quick-actions,.no-print,.screen-only,.presentation-nav{display:none!important}.duplex-blank-page{display:block;height:9.9in;min-height:9.9in;break-after:page;page-break-after:always}.card,.practice-block,.feedback-box,.question-review-card,.student-question,.teacher-question,.cut-card,.find-someone-box{break-inside:avoid}.screen-page{max-width:none;min-height:0;margin:0;border:0;box-shadow:none;padding:0}.print-presentation-page{page:presentation2up;width:auto;height:10.5in;min-height:10.5in;margin:0;gap:.14in}.print-slide{height:5.18in}.student-set-grid{gap:7px 12px}.presentation-shell{display:block;height:auto;overflow:visible}.presentation-question{display:block;padding:0}.presentation-card{font-size:12pt;width:auto}}`;
 
   const STATION_CSS_FALLBACK = String.raw`@page{size:letter landscape;margin:0}:root{--navy:#00003d;--page-w:11in;--page-h:8.5in}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#e8e8e8}.page{width:var(--page-w);height:var(--page-h);margin:0 auto .25in;background:#fff;padding:.32in .42in .24in;display:flex;flex-direction:column;overflow:hidden;page-break-after:always}.header{background:var(--navy);color:#fff;font-size:21pt;font-weight:800;padding:.11in .20in;margin-bottom:.12in}.station-grid{display:grid;grid-template-columns:1fr 1fr;gap:.10in .13in}.station-problem{border:1.2px solid #222;border-radius:5px;padding:.08in;font-size:10.2pt;break-inside:avoid}.figure img,.figure svg{display:block;max-width:100%;max-height:1.9in;height:auto;margin:0 auto}.page-footer{margin-top:auto;font-size:7.5pt}.station-index{width:11in;min-height:8.5in;margin:0 auto;background:#fff;padding:.45in}@media print{body{background:#fff}.page{margin:0}.station-index{display:none}}`;
 
   const COMMON_PRACTICE_FALLBACK = String.raw`# Common Course Practice & Question Review Guide
 
-Use one approved class-level question pool across the Common Worksheet / Review + Extension, Stations when appropriate, Question / Solution Set, presentation mode, Review All Questions, and cooperative layouts. Create one Question / Solution Set only. Required question-set views: presentation, compact review-all, printable student set, and solutions. Review All Questions must show all common and individual follow-up questions with zero student workspace and collapsible Answer, Teacher Move, and Student Discourse Move. Cooperative templates reuse the same questions: Standard, Find Someone Who, Quiz-Quiz-Trade, RallyCoach / PairCoach, Showdown, and Fan-N-Pick. Write original concise directions; do not copy proprietary published wording.`;
+STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS
+VERSION: district-grading-common-practice/1.1
+DATE: 2026-09-20
+
+Use one approved class-level Set 1 question pool across the Question / Solution Set delivery formats. Do not create Set 2. Presentation, Print Presentation, Review All, Student Set, Teacher Guide, Find Someone Who, and Cut-Apart Question Cards all reuse the complete Set 1. Projection structures reuse the same presentation rather than creating duplicate question files. Student Set uses a compact worksheet header and contains all Set 1 questions. Print Presentation contains exactly two large question panels per printed letter page, scaled to fit, with no answers or teacher/discourse moves. Review All is compact and zero-workspace. Common Worksheet / Review + Extension exposes a printable Student Worksheet and an HTML Teacher Guide; do not label the teacher guide as a generic HTML version. Remove redundant Print buttons when browser print already produces the intended layout. Cooperative directions should follow the established Algebra activity pattern: concise structure, setup, directions, and goal.`;
 
   const MATH_VISUAL_QA_CONTRACT = String.raw`# Math, Graph, Visual, and Station QA Contract
 
@@ -26,6 +30,7 @@ VERSION: district-grading-math-visual-qa/1.4
 - Preferred delimiters are \\( ... \\) inline and \\[ ... \\] display.
 - Generate PDFs only after MathJax has finished typesetting.
 - Raw TeX, missing symbols, or clipped math is a failure.
+- Prefer fraction-bar notation for symbolic division when that is the natural mathematical form.
 
 ## Graphs - HARD
 - If text asks for, refers to, or depends on a graph, create the actual mathematically accurate graph.
@@ -96,12 +101,17 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
   function refreshStatus() {
     const className = $("className").value.trim();
     const count = evidenceInput.files.length;
-    if (!className || !count) {
-      setStatus("Add a class/group name and at least one evidence file.", "warn");
+    const gradeMode = gradeOutputInput.value;
+    if (!className || !count || !gradeMode) {
+      const missing = [];
+      if (!className) missing.push("a class/group name");
+      if (!count) missing.push("at least one evidence file");
+      if (!gradeMode) missing.push("a Step 4 grade/score handling choice");
+      setStatus(`Add ${joinList(missing)}.`, "warn");
       return false;
     }
-    if (gradeOutputInput.value === "rubric" && !rubricInput.files.length) {
-      setStatus("Optional grade/score is set to rubric scoring, but no rubric/scoring guide is attached.", "bad");
+    if (gradeMode === "rubric" && !rubricInput.files.length) {
+      setStatus("Grade/score handling is set to use the rubric, but no rubric/scoring guide is attached.", "bad");
       return false;
     }
     const rosterNote = rosterInput.files.length
@@ -109,6 +119,12 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
       : " If this is one combined handwritten class scan, adding a roster is strongly recommended.";
     setStatus(`Ready to package ${count} evidence file${count === 1 ? "" : "s"}. The assignment title will be detected from the evidence.${rosterNote}`, "good");
     return true;
+  }
+
+  function joinList(items) {
+    if (items.length <= 1) return items[0] || "the required information";
+    if (items.length === 2) return `${items[0]} and ${items[1]}`;
+    return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
   }
 
   function setStatus(message, kind) {
@@ -123,7 +139,7 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
     evidenceInput.value = "";
     rosterInput.value = "";
     rubricInput.value = "";
-    gradeOutputInput.value = "none";
+    gradeOutputInput.value = "";
     notesInput.value = "";
     $("evidenceList").innerHTML = "";
     $("rosterList").innerHTML = "";
@@ -199,11 +215,24 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
           required_on_each_student_report: true,
           labels: ["Convincing", "Limited", "Incorrect", "Not Observed"]
         },
+        grading_defaults: {
+          areas_of_strength_and_improvement: true,
+          credit_reasoning_and_partial_understanding: true,
+          formative_evidence_emphasis: true,
+          allow_multiple_valid_methods: true,
+          ignore_writing_mechanics_unless_requested: true,
+          de_emphasize_minor_arithmetic_notation_unless_requested: true,
+          missing_is_not_incorrect: true,
+          concise_feedback: true,
+          extend_convincing_students: true,
+          flag_unclear_scans_instead_of_guessing: true
+        },
         grade_output: {
           mode: gradeMode,
+          required_teacher_selection: true,
           policy: gradePolicy(gradeMode, rubricManifest.length > 0)
         },
-        teacher_notes_present: Boolean(teacherNotes),
+        teacher_exceptions_present: Boolean(teacherNotes),
         evidence_files: evidenceManifest,
         roster_files: rosterManifest,
         rubric_files: rubricManifest,
@@ -216,7 +245,12 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
           recommended_groupings: true,
           scanned_student_work_pdf: `scanned_work/${scannedWorkFilename}`,
           common_course_practice: {
-            common_review_extension: true,
+            common_review_extension: {
+              enabled: true,
+              printable_student_worksheet: true,
+              teacher_guide_html: true,
+              teacher_guide_includes_answers_and_moves: true
+            },
             stations: {
               review_stations: 4,
               extension_stations: 2,
@@ -226,20 +260,35 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
               locked_style: STATION_STYLE_VERSION
             },
             question_solution_set: {
+              set_name: "Set 1",
               count: 1,
+              create_set_2: false,
+              complete_set_reuse_required: true,
               reuse_class_level_question_pool: true,
-              presentation_mode: true,
-              compact_review_all_mode: true,
-              printable_student_set: true,
-              matching_solutions: true,
-              classroom_structures: [
-                "Standard",
-                "Find Someone Who",
-                "Quiz-Quiz-Trade",
-                "RallyCoach / PairCoach",
-                "Showdown",
-                "Fan-N-Pick"
-              ]
+              presentation: true,
+              print_presentation_two_up: true,
+              compact_review_all: true,
+              student_set: true,
+              teacher_guide: true,
+              redundant_print_buttons_forbidden: true,
+              classroom_structures: {
+                projection: [
+                  "Whiteboard Indy",
+                  "Whiteboard Partners",
+                  "RallyCoach",
+                  "Speed Dating Math",
+                  "Showdown",
+                  "Think, Trade, Agree",
+                  "Round Table",
+                  "Mathematical Hot Seat",
+                  "Rally Coach II"
+                ],
+                printable: [
+                  "Find Someone Who",
+                  "Cut-Apart Question Cards"
+                ],
+                card_artifact_supports: ["Quiz-Quiz-Trade", "Fan-N-Pick"]
+              }
             }
           },
           review_all_questions: {
@@ -269,6 +318,11 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
             "Individual Student Reports & Practice",
             "Class Data",
             "Common Course Practice"
+          ],
+          common_course_practice_cards: [
+            "Common Worksheet / Review + Extension",
+            "Stations",
+            "Question / Solution Set"
           ]
         }
       };
@@ -283,7 +337,7 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
       entries.unshift(
         { name: "REQUEST_READ_ME_FIRST.md", data: enc.encode(requestInstructions) },
         { name: "request.json", data: enc.encode(JSON.stringify(request, null, 2)) },
-        { name: "teacher_notes.txt", data: enc.encode(teacherNotes || "No teacher notes were provided.") },
+        { name: "teacher_exceptions_context.txt", data: enc.encode(teacherNotes || "No teacher exceptions or additional context were provided.") },
         { name: "response_contract/styles.css", data: enc.encode(responseCss) },
         { name: "response_contract/STYLE_VERSION.txt", data: enc.encode(RESPONSE_STYLE_VERSION + "\n") },
         { name: "response_contract/stations.css", data: enc.encode(stationCss) },
@@ -318,41 +372,25 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
 
     return `# District Grading & Evidence Request - Pilot\n\n` +
 `## Task\n` +
-`Analyze the student evidence in this ZIP and return exactly ONE response ZIP. This packaged request is the complete build contract; no additional teacher prompt is required. The teacher should only need to unzip the response and open CLICK_ME.html.\n\n` +
+`Analyze the student evidence in this ZIP and return exactly ONE response ZIP. This package is the complete build contract; no separate teacher prompt is required. The teacher should only need to unzip the response and open CLICK_ME.html.\n\n` +
 `Class / group: ${request.teacher.class_or_group}\n` +
 `Grade / subject: ${request.teacher.grade_subject || "Not provided; infer only when reasonably clear from the evidence."}\n` +
 `${rubricLine}\n${rosterLine}\n\n` +
-`Teacher notes:\n${teacherNotes || "No additional notes provided."}\n\n` +
+`Teacher exceptions / context:\n${teacherNotes || "No exceptions or additional context provided."}\n\n` +
 `## Detect the assignment / evidence title - REQUIRED\n` +
-`The teacher intentionally did NOT type an assignment name. Determine a concise, useful title from the submitted evidence. Use this priority order:\n` +
-`1. A visible title printed on the scanned/uploaded assignment or evidence.\n` +
-`2. The title of the supplied rubric/scoring guide when it clearly names the evidence task.\n` +
-`3. Meaningful evidence filenames.\n` +
-`4. A concise title you create from the actual skill/content demonstrated by the evidence (examples: "Solving Right Triangles", "Newton's Laws CER", "Fraction Multiplication Models").\n` +
-`5. Use **Student Evidence Review** only as a last resort when the evidence does not support a more informative title.\n` +
-`Do not guess an unrelated unit or standard. Save the chosen title and its basis in data/analysis.json and use it consistently in reports, practice, PDFs, and CLICK_ME.\n\n` +
+`The teacher intentionally did NOT type an assignment name. Determine a concise, useful title from the submitted evidence in this order: visible title on student work; rubric/scoring-guide title; meaningful filenames; concise title inferred from the actual skill/content; Student Evidence Review only as a last resort. Save the title and its basis in data/analysis.json and use it consistently.\n\n` +
 `## Evidence rating - REQUIRED\n` +
-`Every student report must include exactly one evidence rating: Convincing, Limited, Incorrect, or Not Observed.\n` +
-`- Convincing: the submitted evidence clearly and sufficiently demonstrates the target.\n` +
-`- Limited: meaningful correct evidence is present, but incomplete, inconsistent, or insufficient.\n` +
-`- Incorrect: the student attempted the target and the evidence demonstrates a substantive incorrect idea, method, or conclusion.\n` +
-`- Not Observed: there is not enough usable evidence to judge the target. Blank, omitted, missing, or unreadable work belongs here rather than being automatically called Incorrect.\n` +
-`The rating legend may appear in teacher outputs where useful; it does not need to appear on every student page.\n\n` +
-`## Optional grade / score - AUTHORITATIVE\n` +
+`Every student report must use exactly one evidence rating: Convincing, Limited, Incorrect, or Not Observed. Convincing = clear/sufficient evidence. Limited = meaningful correct evidence but incomplete/inconsistent/insufficient. Incorrect = attempted evidence demonstrates a substantive incorrect idea/method/conclusion. Not Observed = insufficient usable evidence, including blank, omitted, missing, or unreadable work. Missing is not Incorrect.\n\n` +
+`## Grade / score handling - REQUIRED AND AUTHORITATIVE\n` +
 `Selected mode: ${gradeMode}\n${request.grade_output.policy}\n` +
-`The selected mode outranks free-form teacher notes if they conflict. Record any conflict in data/qa.json and continue.\n\n` +
-`## Feedback policy\n` +
-`- Give specific positive feedback grounded in what the student actually demonstrated.\n` +
-`- Clearly identify what is incorrect, incomplete, or needs revision and what the student should fix.\n` +
-`- Keep feedback concise and prioritize the highest-leverage next steps.\n` +
-`- For Convincing evidence, favor extension, transfer, or application over unnecessary repetition.\n` +
-`- Flag uncertainty instead of guessing handwriting, identity, or missing evidence.\n\n` +
+`This teacher selection outranks free-form notes if they conflict. Record any conflict in data/qa.json and continue.\n\n` +
+`## Default grading behavior - AUTOMATIC\n` +
+`These are system defaults, not optional teacher requests: list Areas of Strength and Areas for Improvement; highlight and credit reasoning; treat all evidence as formative; allow multiple valid methods/solution paths; focus on mathematical/scientific reasoning rather than writing mechanics unless the teacher explicitly opts in; de-emphasize minor arithmetic/notation slips unless the teacher explicitly says to count them; credit partial understanding; do not equate missing with incorrect; keep feedback concise; give Convincing students extension/transfer; and flag unclear scans/uncertainty instead of guessing. Teacher exceptions/context may override only the specific item named.\n\n` +
+`Exception semantics: "Ignore a question" means do not use that question as evidence. "Feedback only / don't grade" means review and comment on the question but do not let it affect the grade/score recommendation.\n\n` +
 `## Evidence and identity rules\n` +
-`- Judge work only from submitted evidence, rubric if present, roster for identity/order only, and teacher notes.\n` +
-`- Do not research students or use prior personal/student records.\n` +
-`- If a roster student has no identifiable work, use Not Observed/no evidence rather than Incorrect.\n\n` +
+`Judge only from submitted evidence, rubric if present, roster for identity/order only, and teacher exceptions/context. Do not research students or use prior personal/student records. If a roster student has no identifiable work, use Not Observed/no evidence rather than Incorrect.\n\n` +
 `## Locked styling and shared contracts\n` +
-`Copy response_contract/styles.css exactly to assets/styles.css. Copy response_contract/stations.css exactly to assets/stations.css. Follow response_contract/MATH_VISUAL_QA.md and response_contract/COMMON_PRACTICE_GUIDE.md as executable contracts.\n\n` +
+`Copy response_contract/styles.css exactly to assets/styles.css and response_contract/stations.css exactly to assets/stations.css. Follow response_contract/MATH_VISUAL_QA.md and response_contract/COMMON_PRACTICE_GUIDE.md as executable HARD contracts. If older wording elsewhere in this request conflicts with COMMON_PRACTICE_GUIDE.md about Common Course Practice or Question / Solution Set layout, COMMON_PRACTICE_GUIDE.md controls.\n\n` +
 `## Required response ZIP structure\n` +
 `~~~text\n` +
 `CLICK_ME.html\n` +
@@ -362,73 +400,63 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
 `class/\n  class_overview.html\n  review_all_questions.html\n` +
 `print/\n` +
 `  all_student_reports.html\n  all_student_reports.pdf\n` +
-`  common_review_extension_packet.html\n  common_review_extension_packet.pdf\n` +
+`  common_review_extension/\n    student_worksheet.html\n    student_worksheet.pdf\n    teacher_guide.html\n` +
 `  individualized/\n    <one HTML practice packet per student>\n` +
 `  individual_practice_packets.pdf\n` +
 `  stations/\n    index.html\n    stations.html\n    stations.pdf\n    answer_key.html\n    answer_key.pdf\n` +
-`  question_set/\n    index.html\n    presentation.html\n    review_all.html\n    student_set.html\n    student_set.pdf\n    solutions.html\n    solutions.pdf\n    structures/\n      index.html\n      find_someone_who.html\n      quiz_quiz_trade.html\n      rallycoach.html\n      showdown.html\n      fan_n_pick.html\n` +
+`  question_set/\n    index.html\n    presentation.html\n    print_presentation.html\n    print_presentation.pdf\n    review_all.html\n    student_set.html\n    student_set.pdf\n    teacher_guide.html\n    structures/\n      index.html\n      directions.html\n      find_someone_who.html\n      cut_apart_cards.html\n` +
 `data/\n  analysis.json\n  qa.json\n  request.json\n` +
 `~~~\n\n` +
 `All navigation, CSS, graph assets, and visual assets must use local relative links. PDFs must be finished printable files, not placeholders.\n\n` +
 `## Scanned student work archive\n` +
-`Create ${scannedPath}. Preserve submitted student work exactly; combine readable scan/image pages into one teacher-friendly PDF when needed. Do not rewrite or clean up student answers.\n\n` +
-`## CLICK_ME.html layout - HARD\n` +
-`1. Hero/header with class, detected evidence title, and grade/subject.\n` +
-`2. ONE top quick-action row with exactly: **Print All Student Reports**, **Print All Individual Practice**, **View Scanned Student Work**.\n` +
-`3. **Individual Student Reports & Practice**. Each student card has exactly two direct links: **Open Report** and **Individual Practice**. Do not create a duplicate Individual Student Practice section lower on the dashboard.\n` +
-`4. **Class Data**.\n` +
-`5. **Common Course Practice** with three primary cards: **Common Worksheet / Review + Extension**, **Stations**, **Question / Solution Set**.\n` +
-`6. In the Common Course Practice heading/intro, add a visible teacher-only **Review All Questions** link to class/review_all_questions.html.\n` +
-`Do not use the heading "Print Options" and do not repeat the three top quick actions lower on the page.\n\n` +
-`## Individual student reports and practice\n` +
-`Each report includes student name/label; detected evidence title; Evidence Rating; optional grade/score only according to selected mode; specific positive feedback; the most important incorrect/incomplete/revision need; evidence references when feasible; 1-3 clear next steps; and uncertainty when needed.\n` +
-`Create one individual practice packet per identified student. Target highest-leverage next steps; for Convincing students use extension/transfer rather than remediation.\n` +
-`Create print/all_student_reports.html + PDF and print/individual_practice_packets.pdf in roster/identified order.\n\n` +
-`## Duplex pairing for student documents - HARD\n` +
-`For both combined reports and combined individual practice, each student's segment must occupy an even number of physical pages. If final content count is odd, append exactly one intentionally blank page before the next student. Verify the actual PDF sequence after creation and record before/after page counts in data/qa.json.\n\n` +
+`Create ${scannedPath}. Preserve submitted work exactly; combine readable scan/image pages into one teacher-friendly PDF when needed. Do not rewrite or clean up student answers.\n\n` +
+`## CLICK_ME.html layout - LOCKED\n` +
+`Keep the current simple dashboard hierarchy. 1) Hero/header with class, detected evidence title, grade/subject. 2) One quick-action row with exactly Print All Student Reports, Print All Individual Practice, View Scanned Student Work. 3) Individual Student Reports & Practice; each student card has Open Report and Individual Practice. 4) Class Data. 5) Common Course Practice with exactly three primary cards: Common Worksheet / Review + Extension, Stations, Question / Solution Set. Add a teacher-only Review All Questions link near the Common Course Practice heading. Do not create duplicate individual-practice or quick-action sections.\n\n` +
+`## Individual reports and practice\n` +
+`Each report includes student name/label; detected evidence title; Evidence Rating; optional grade/score only according to selected mode; specific strengths; highest-leverage improvement; evidence references when feasible; 1-3 next steps; and uncertainty when needed. Create one individual practice packet per student. For Convincing students favor extension/transfer. Create combined duplex-safe reports and practice PDFs in roster/identified order.\n\n` +
+`## Duplex pairing - HARD\n` +
+`For combined reports and combined individual practice, every student's segment must occupy an even number of physical pages. If final content count is odd, append exactly one intentionally blank page before the next student. Verify actual PDF page order and record before/after counts in data/qa.json.\n\n` +
 `## Class analysis\n` +
 `Include evidence sets analyzed, major strengths, top actionable errors/unfinished understandings, reliable pattern counts/percentages, suggested instructional groupings, Convincing students ready for extension, and evidence/identity limitations.\n\n` +
-`## Common Course Practice\n` +
-`Build one coherent class-level question pool from actual common needs plus justified extension targets. Reuse these approved questions across the following delivery formats rather than generating separate unrelated banks.\n\n` +
-`### Common Worksheet / Review + Extension\n` +
-`Create one compact class-wide worksheet based on actual common needs, with concise support, targeted practice, and extension when justified. Provide HTML and PDF. It may also serve as the source layout for Find Someone Who.\n\n` +
-`### Stations\n` +
-`Create six stations under print/stations/: four review stations and two extension stations. Each has 4-6 questions. If fewer than four distinct misconceptions exist, use consolidation/prerequisite/transfer tied to observed needs rather than inventing a misconception. Use assets/stations.css exactly and create a complete separate answer key.\n\n` +
-`### Question / Solution Set - ONE SET ONLY\n` +
-`Create exactly one class-level question/solution set. Reuse strong questions from the class-level pool/stations/common worksheet whenever appropriate; do not make a third independent bank merely to fill the set.\n` +
-`Required views:\n` +
-`- print/question_set/presentation.html: one-question-at-a-time teacher presentation that fills the usable browser viewport, with Back, Next, question counter, Show Answer, Teacher Move, and Student Discourse Move. Avoid full print-page blank vertical space and long scrolling between questions.\n` +
-`- print/question_set/review_all.html: compact zero-workspace scan of the one set.\n` +
-`- student_set.html/PDF and solutions.html/PDF.\n` +
-`- structures/index.html exposes Standard, Find Someone Who, Quiz-Quiz-Trade, RallyCoach / PairCoach, Showdown, and Fan-N-Pick. These layouts reuse the SAME approved questions; they do not trigger new question generation. Follow COMMON_PRACTICE_GUIDE.md for original concise directions and templates.\n\n` +
-`## Review All Questions - REQUIRED TEACHER QA VIEW\n` +
-`Create class/review_all_questions.html and link it from CLICK_ME. This is a compact no-workspace review of ALL generated follow-up questions, grouped by Common Worksheet, Stations, Question/Solution Set, and Individual Practice by student.\n` +
-`Each question card must include:\n` +
-`- compact prompt plus required graph/figure/model;\n` +
-`- tiny teacher-only source/purpose label;\n` +
-`- collapsible **Show Answer**;\n` +
-`- collapsible **Teacher Move**;\n` +
-`- collapsible **Student Discourse Move**.\n` +
-`Keep moves short and useful. The page exists so a teacher can quickly judge question quality before printing. Reused questions may be labeled as reused rather than repeated unnecessarily in common sections.\n\n` +
+`## Common Worksheet / Review + Extension\n` +
+`Create one compact class-wide student worksheet based on actual common needs, with targeted review and justified extension. The student-facing printable artifact is Student Worksheet. The HTML page that includes answers, teacher moves, and discourse moves is Teacher Guide. Do not call the teacher-facing HTML merely "HTML" and do not expose redundant Print buttons when browser print already produces the same intended layout.\n\n` +
+`## Stations\n` +
+`Create exactly four review stations plus two extension stations, 4-6 questions per station, with a complete separate answer key. Preserve the existing locked stations style. Do not redesign stations in this pass.\n\n` +
+`## Question / Solution Set - SET 1 ONLY\n` +
+`Set 1 is the mathematical question set; delivery formats reuse it. Create no Set 2. The set length is determined by the evidence and instructional purpose; no fixed number such as 8 or 14 is implied. Every Set 1 delivery artifact must include the entire Set 1 unless it intentionally paginates/cards the complete set across multiple sheets.\n` +
+`Required Set 1 menu: Presentation; Print Presentation; Review All Questions; Student Set; Teacher Guide; Classroom Structures. Do not show separate Print Student Set or Print Teacher Guide buttons when browser print already produces the intended print layout.\n\n` +
+`### Presentation\n` +
+`Use one question at a time. Keep the top header compact and let the question/visual fill the useful browser area. Provide Back / Next and a visible question counter. Teacher-only answer/move toggles may be present. Do not emulate a full printed page on screen and do not force long blank scrolling.\n\n` +
+`### Print Presentation - REQUIRED\n` +
+`Create a dedicated print_presentation.html + PDF containing the exact Set 1 questions, exactly TWO large question panels per letter page, stacked and scaled to fit each half-page. Include all required graphs/figures. No answers, teacher moves, discourse moves, or large unused workspace. If Set 1 has an odd count, the final lower half may be blank. The screen view should visually show the real printed page boundaries.\n\n` +
+`### Review All Questions\n` +
+`Compact zero-workspace teacher QA view showing every Set 1 question with required visuals. Each item can reveal Answer, Teacher Move, and Student Discourse Move. Keep vertical waste low so the teacher can scan quality quickly.\n\n` +
+`### Student Set\n` +
+`Normal worksheet-style layout with a small header, all Set 1 questions, no projected classroom directions, sensible question spacing/workspace, and true print pagination. Do not use a giant activity title block.\n\n` +
+`### Teacher Guide\n` +
+`Match the Student Set questions and order. Include concise answers/solutions plus brief teacher and discourse moves where useful. A browser-print layout is sufficient unless a materially different dedicated print artifact is required.\n\n` +
+`### Classroom Structures\n` +
+`Reuse the established Algebra activity idea: the mathematics stays Set 1 and the participation structure changes. Projection structures (Whiteboard Indy, Whiteboard Partners, RallyCoach, Speed Dating Math, Showdown, Think-Trade-Agree, Round Table, Mathematical Hot Seat, Rally Coach II) use concise projectable directions and link to the same Set 1 Presentation; do not generate duplicate question pages. Printable structures are Find Someone Who and Cut-Apart Question Cards. Find Someone Who must include the complete Set 1 across as many pages as needed. Cut-Apart Question Cards must include the complete Set 1 and may be reused for Quiz-Quiz-Trade and Fan-N-Pick. Keep structure headers compact.\n\n` +
+`## Review All Questions - teacher QA across all products\n` +
+`Create class/review_all_questions.html and link it from CLICK_ME. Show ALL generated follow-up questions from Common Worksheet, Stations, Set 1, and Individual Practice by student. Use zero workspace, compact cards/rows, required visuals, tiny source/purpose labels, and collapsible Answer / Teacher Move / Student Discourse Move. Reused common questions may be labeled as reused instead of visually duplicated.\n\n` +
 `## Math, graph, and visual rendering - HARD\n` +
-`Follow response_contract/MATH_VISUAL_QA.md. Math must be rendered with MathJax and visually checked. Any required graph must be mathematically accurate and actually embedded. Any referenced image/diagram/figure must exist. Apply the same requirement to stations, common practice, question sets, Review All Questions, and individual practice.\n\n` +
+`Follow response_contract/MATH_VISUAL_QA.md. Math must be rendered with MathJax and visually checked. Required graphs/figures/models must actually exist and be accurate. Use the registered canonical graph tool for supported Cartesian graphs, including blank student grids. Apply these rules to every common/individual artifact.\n\n` +
 `## data/analysis.json\n` +
-`Include detected evidence title plus title basis; student identifiers; evidence mapping; evidence ratings; optional grade results; roster matching; strengths; needs; class patterns; groupings; common-practice targets; individual-practice targets; station targets; question-set pool/source mapping; and uncertainty flags. Copy request.json into data/request.json.\n\n` +
+`Include detected evidence title plus basis; student identifiers; evidence mapping; evidence ratings; optional grade results; roster matching; strengths; needs; class patterns; groupings; common-practice targets; individual-practice targets; station targets; Set 1 question/source mapping; and uncertainty flags. Copy request.json into data/request.json.\n\n` +
 `## Final QA before delivery\n` +
-`- assets/styles.css and assets/stations.css match the packaged contracts.\n` +
-`- A concise evidence title was detected using the required priority; Student Evidence Review is used only when necessary.\n` +
-`- CLICK_ME top row has exactly the three required quick actions.\n` +
-`- Individual Student Reports & Practice has both links on each student card and there is no duplicate individual-practice section.\n` +
-`- Common Course Practice contains the three required primary choices plus Review All Questions.\n` +
-`- Review All Questions contains every generated follow-up question, zero workspace, and Answer/Teacher Move/Student Discourse Move controls.\n` +
-`- Exactly one Question / Solution Set exists; its presentation view advances question-by-question without page-sized blank screen gaps.\n` +
-`- Cooperative structure layouts reuse the approved question pool rather than inventing new questions.\n` +
-`- Exactly four review stations and two extension stations exist; answer key covers every station item.\n` +
+`- Required locked CSS/contracts are used.\n` +
+`- Detected title follows the required priority.\n` +
+`- CLICK_ME retains the locked three-part hierarchy and quick actions.\n` +
+`- Common Worksheet exposes Student Worksheet + Teacher Guide.\n` +
+`- Stations remain four review + two extension with complete key.\n` +
+`- Exactly one Question / Solution Set exists and every Set 1 artifact includes the full set.\n` +
+`- Print Presentation is present and verified at exactly two questions per printed page.\n` +
+`- Student Set and structure pages use compact headers.\n` +
+`- No redundant Print buttons are shown when browser print is equivalent.\n` +
+`- Review All pages are compact, zero-workspace, and complete.\n` +
 `- MathJax, graphs, and visuals are rendered and checked.\n` +
-`- Combined student reports and individual-practice PDFs are duplex-safe and verified.\n` +
-`- Scanned-work PDF, report PDF, individual-practice PDF, common worksheet PDF, station PDF/key, and question-set PDF/solutions all exist and open.\n` +
-`- All relative links resolve after unzip.\n` +
-`- data/qa.json reports PASS with no unresolved failures.\n\n` +
+`- Combined student PDFs are duplex-safe and verified.\n` +
+`- All relative links resolve after unzip and data/qa.json reports PASS with no unresolved failures.\n\n` +
 `Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open CLICK_ME.html.\n`;
   }
 
@@ -436,8 +464,8 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
     if (mode === "rubric") return "Return the evidence rating and the score/grade defined by the supplied rubric or scoring guide. Do not invent a different scale.";
     if (mode === "recommend") {
       return rubricPresent
-        ? "Return the evidence rating and a teacher-review grade recommendation. Use the supplied rubric/scale when it applies; otherwise explain the evidence basis briefly."
-        : "Return the evidence rating and a clear teacher-review grade recommendation from the submitted evidence. For objective item-based work, points/percent correct may be used. For open-ended work, use evidence-based professional judgment and label the result as a recommendation, not a final grade.";
+        ? "Return the evidence rating and a teacher-review grade/score recommendation. Use the supplied rubric/scale when it applies; otherwise explain the evidence basis briefly."
+        : "Return the evidence rating and a clear teacher-review grade/score recommendation from the submitted evidence. For objective item-based work, points/percent correct may be used. For open-ended work, use evidence-based professional judgment and label the result as a recommendation, not a final grade.";
     }
     return "Return the evidence rating only. Do not add a separate numeric, percentage, point, or letter grade.";
   }
@@ -492,26 +520,75 @@ Create data/qa.json including evidence-rating checks, MathJax checks, graph/visu
   function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1500);
   }
 
   function makeZip(entries) {
-    const localParts = [], centralParts = [];
-    let offset = 0, count = 0;
+    const localParts = [];
+    const centralParts = [];
+    let offset = 0;
+    let count = 0;
     for (const entry of entries) {
       const nameBytes = enc.encode(entry.name.replace(/\\/g, "/"));
       const data = entry.data instanceof Uint8Array ? entry.data : new Uint8Array(entry.data);
-      const crc = crc32(data); const { time, date } = dosTimeDate(new Date());
-      const local = new Uint8Array(30 + nameBytes.length); const lv = new DataView(local.buffer);
-      lv.setUint32(0, 0x04034b50, true); lv.setUint16(4, 20, true); lv.setUint16(6, 0x0800, true); lv.setUint16(8, 0, true); lv.setUint16(10, time, true); lv.setUint16(12, date, true); lv.setUint32(14, crc, true); lv.setUint32(18, data.length, true); lv.setUint32(22, data.length, true); lv.setUint16(26, nameBytes.length, true); lv.setUint16(28, 0, true); local.set(nameBytes, 30); localParts.push(local, data);
-      const central = new Uint8Array(46 + nameBytes.length); const cv = new DataView(central.buffer);
-      cv.setUint32(0, 0x02014b50, true); cv.setUint16(4, 20, true); cv.setUint16(6, 20, true); cv.setUint16(8, 0x0800, true); cv.setUint16(10, 0, true); cv.setUint16(12, time, true); cv.setUint16(14, date, true); cv.setUint32(16, crc, true); cv.setUint32(20, data.length, true); cv.setUint32(24, data.length, true); cv.setUint16(28, nameBytes.length, true); cv.setUint16(30, 0, true); cv.setUint16(32, 0, true); cv.setUint16(34, 0, true); cv.setUint16(36, 0, true); cv.setUint32(38, 0, true); cv.setUint32(42, offset, true); central.set(nameBytes, 46); centralParts.push(central);
-      offset += local.length + data.length; count += 1;
+      const crc = crc32(data);
+      const { time, date } = dosTimeDate(new Date());
+      const local = new Uint8Array(30 + nameBytes.length);
+      const lv = new DataView(local.buffer);
+      lv.setUint32(0, 0x04034b50, true);
+      lv.setUint16(4, 20, true);
+      lv.setUint16(6, 0x0800, true);
+      lv.setUint16(8, 0, true);
+      lv.setUint16(10, time, true);
+      lv.setUint16(12, date, true);
+      lv.setUint32(14, crc, true);
+      lv.setUint32(18, data.length, true);
+      lv.setUint32(22, data.length, true);
+      lv.setUint16(26, nameBytes.length, true);
+      lv.setUint16(28, 0, true);
+      local.set(nameBytes, 30);
+      localParts.push(local, data);
+
+      const central = new Uint8Array(46 + nameBytes.length);
+      const cv = new DataView(central.buffer);
+      cv.setUint32(0, 0x02014b50, true);
+      cv.setUint16(4, 20, true);
+      cv.setUint16(6, 20, true);
+      cv.setUint16(8, 0x0800, true);
+      cv.setUint16(10, 0, true);
+      cv.setUint16(12, time, true);
+      cv.setUint16(14, date, true);
+      cv.setUint32(16, crc, true);
+      cv.setUint32(20, data.length, true);
+      cv.setUint32(24, data.length, true);
+      cv.setUint16(28, nameBytes.length, true);
+      cv.setUint16(30, 0, true);
+      cv.setUint16(32, 0, true);
+      cv.setUint16(34, 0, true);
+      cv.setUint16(36, 0, true);
+      cv.setUint32(38, 0, true);
+      cv.setUint32(42, offset, true);
+      central.set(nameBytes, 46);
+      centralParts.push(central);
+      offset += local.length + data.length;
+      count += 1;
     }
     const centralSize = centralParts.reduce((sum, part) => sum + part.length, 0);
-    const end = new Uint8Array(22); const ev = new DataView(end.buffer);
-    ev.setUint32(0, 0x06054b50, true); ev.setUint16(4, 0, true); ev.setUint16(6, 0, true); ev.setUint16(8, count, true); ev.setUint16(10, count, true); ev.setUint32(12, centralSize, true); ev.setUint32(16, offset, true); ev.setUint16(20, 0, true);
+    const end = new Uint8Array(22);
+    const ev = new DataView(end.buffer);
+    ev.setUint32(0, 0x06054b50, true);
+    ev.setUint16(4, 0, true);
+    ev.setUint16(6, 0, true);
+    ev.setUint16(8, count, true);
+    ev.setUint16(10, count, true);
+    ev.setUint32(12, centralSize, true);
+    ev.setUint32(16, offset, true);
+    ev.setUint16(20, 0, true);
     return new Blob([...localParts, ...centralParts, end], { type: "application/zip" });
   }
 

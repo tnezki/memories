@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Grading & Evidence Control Panel</title>
-<link rel="stylesheet" href="styles.css?v=20260919a">
+<title>Grading &amp; Evidence Control Panel</title>
+<link rel="stylesheet" href="styles.css?v=20260920a">
 </head>
 <body>
 <header>
@@ -18,7 +18,7 @@
   <div class="grid">
     <section class="card">
       <h2>Build a grading request</h2>
-      <p class="small">Only student evidence is required. The assignment title will be detected from the uploaded work. A roster, rubric, grade/subject, teacher name, and notes are optional.</p>
+      <p class="small">Student evidence, a class/group name, and a grade/score handling choice are required. The assignment title is detected from the uploaded work.</p>
 
       <div class="row">
         <div>
@@ -52,38 +52,32 @@
       <label for="rubricFiles">3. Rubric / scoring guide <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rubricFiles" type="file" multiple>
-        <div class="small upload-help">A rubric or scoring guide gives the analysis explicit criteria and can control the optional grade/score below.</div>
+        <div class="small upload-help">A rubric or scoring guide gives the analysis explicit criteria and can control the required grade/score handling choice below.</div>
         <ul id="rubricList" class="file-list"></ul>
       </div>
 
-      <label for="gradeOutput">4. Optional grade / score</label>
-      <select id="gradeOutput">
-        <option value="none" selected>No separate grade / score</option>
+      <label for="gradeOutput">4. Grade / score handling <span class="required">*</span></label>
+      <select id="gradeOutput" required>
+        <option value="" selected disabled>Choose one...</option>
+        <option value="none">No separate grade / score</option>
         <option value="rubric">Use the supplied rubric / scoring guide</option>
-        <option value="recommend">Recommend a grade from the evidence</option>
+        <option value="recommend">Recommend a grade / score from the evidence</option>
       </select>
       <div class="small field-help"><b>This choice is authoritative.</b> Student reports still use the district evidence-rating language. If you choose rubric scoring, attach the rubric above.</div>
 
-      <label for="teacherNotes">5. Teacher notes <span class="small">(optional)</span></label>
-      <textarea id="teacherNotes" placeholder="Add anything ChatGPT should know about this evidence set."></textarea>
-      <div class="small field-help"><b>Useful hints:</b> click any idea to place it in your notes, then edit it as needed.</div>
+      <label for="teacherNotes">5. Optional teacher exceptions / context</label>
+      <textarea id="teacherNotes" placeholder="Only add exceptions or context that changes how this evidence should be interpreted."></textarea>
+      <div class="small field-help">Normal feedback rules are already built in. Use these only when this evidence set needs an exception.</div>
       <div class="chips" id="noteHints">
-        <button type="button" class="chip" data-note="Give specific positive feedback on what the student demonstrated. Then clearly identify what is incorrect, incomplete, or needs revision and state what the student needs to fix.">Positive + clear fixes</button>
-        <button type="button" class="chip" data-note="Focus on reasoning more than small arithmetic or spelling errors.">Focus on reasoning</button>
-        <button type="button" class="chip" data-note="This is formative; prioritize feedback and next steps over the grade or score.">Formative emphasis</button>
-        <button type="button" class="chip" data-note="Ignore Question 7 when judging student understanding.">Ignore a question</button>
-        <button type="button" class="chip" data-note="Students worked in pairs, so do not treat shared language as evidence of copying.">Students worked in pairs</button>
-        <button type="button" class="chip" data-note="Accept multiple valid solution methods when the evidence supports the thinking.">Allow multiple methods</button>
-        <button type="button" class="chip" data-note="Pay special attention to vocabulary, explanation, and use of evidence.">Focus on explanation</button>
-        <button type="button" class="chip" data-note="Do not lower the academic evaluation for spelling or grammar unless writing mechanics are part of the target or rubric.">Ignore writing mechanics</button>
-        <button type="button" class="chip" data-note="Credit partial understanding when the work shows a correct idea even if the final answer is incomplete or incorrect.">Look for partial understanding</button>
-        <button type="button" class="chip" data-note="Treat blank or missing responses as Not Observed, not automatically as Incorrect.">Missing is not incorrect</button>
-        <button type="button" class="chip" data-note="Keep each student's feedback concise and prioritize only the highest-leverage next steps.">Keep feedback concise</button>
-        <button type="button" class="chip" data-note="For students whose evidence is Convincing, prioritize extension, transfer, or application instead of extra repetition.">Extend convincing students</button>
-        <button type="button" class="chip" data-note="Flag unreadable scans, uncertain names, or ambiguous responses instead of guessing what the student wrote.">Flag unclear scans</button>
+        <button type="button" class="chip" data-note="Ignore Question __ when judging student understanding. Do not use it as evidence.">Ignore a question</button>
+        <button type="button" class="chip" data-note="Count grammar and writing mechanics as part of the evaluation for this evidence set.">Count grammar &amp; writing mechanics</button>
+        <button type="button" class="chip" data-note="Count minor arithmetic or notation errors when judging this evidence set.">Count minor arithmetic / notation errors</button>
+        <button type="button" class="chip" data-note="Require shown work or reasoning as evidence for this task, even when the final answer is correct.">Require shown work / reasoning</button>
+        <button type="button" class="chip" data-note="Treat Question __ as feedback only. Review it and comment, but do not let it affect the grade/score recommendation.">Feedback only / don't grade</button>
+        <button type="button" class="chip" data-note="Treat Question __ as extension or bonus evidence. Comment on it, but do not penalize a student for missing or incomplete extension work.">Treat as extension / bonus</button>
       </div>
 
-      <div id="buildStatus" class="status warn">Add a class/group name and at least one evidence file.</div>
+      <div id="buildStatus" class="status warn">Add a class/group name, at least one evidence file, and choose Step 4.</div>
       <div class="actions">
         <button id="buildZip" type="button">Build Request ZIP</button>
         <button id="clearForm" class="secondary" type="button">Clear</button>
@@ -98,6 +92,6 @@
     </aside>
   </div>
 </main>
-<script src="app.js?v=20260919a"></script>
+<script src="app.js?v=20260920a"></script>
 </body>
 </html>

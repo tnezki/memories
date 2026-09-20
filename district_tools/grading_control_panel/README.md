@@ -8,29 +8,58 @@ This district-wide pilot packages student evidence into a self-contained grading
 2. Upload student evidence (required).
 3. Upload a class roster (optional, strongly recommended for combined handwritten class scans).
 4. Upload a rubric/scoring guide (optional).
-5. Choose whether to also return a separate grade/score: none, use the supplied rubric/scoring guide, or recommend a grade from the evidence.
-6. Add teacher notes (optional).
+5. Make the required **Grade / score handling** choice: no separate grade/score, use the supplied rubric/scoring guide, or recommend a grade/score from the evidence.
+6. Add only teacher exceptions/context when needed.
 7. Click **Build Request ZIP**.
 8. Upload the ZIP to ChatGPT. The package is the complete task contract.
 9. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
 
-The control panel no longer asks the teacher to type an assignment/evidence-set name. The response build detects a concise title from the evidence in this order: visible title on submitted work; rubric/scoring-guide title; meaningful filenames; content/skill inference. **Student Evidence Review** is the last-resort fallback only.
+The control panel does not ask the teacher to type an assignment/evidence-set name. The response detects a concise title from the evidence in this order: visible title on submitted work; rubric/scoring-guide title; meaningful filenames; content/skill inference; **Student Evidence Review** only as the last resort.
 
-## Evidence rating behavior
+## Required grade/score choice
 
-Every student report still uses the fixed evidence labels **Convincing / Limited / Incorrect / Not Observed**. The builder no longer spends screen space explaining those labels; the response package carries the definitions and can show the legend in teacher outputs where useful.
+Step 4 is intentionally required. The teacher must choose one authoritative mode before the request ZIP can be built:
 
-## Optional grade/score
-
-The teacher selects one authoritative mode:
-
-- **No separate grade / score** (default)
+- **No separate grade / score**
 - **Use the supplied rubric / scoring guide**
-- **Recommend a grade from the evidence**
+- **Recommend a grade / score from the evidence**
 
 The evidence rating remains independent from the optional grade/score.
 
+## Automatic grading behavior
+
+The following are built-in defaults rather than teacher-facing buttons:
+
+- list Areas of Strength and Areas for Improvement;
+- highlight and credit reasoning;
+- treat all evidence as formative;
+- allow multiple valid methods/solution paths;
+- ignore grammar/spelling/writing mechanics unless specifically requested;
+- de-emphasize minor arithmetic/notation slips unless specifically requested;
+- credit partial understanding;
+- missing is not incorrect;
+- keep feedback concise;
+- extend students showing Convincing evidence;
+- flag unclear scans or uncertainty instead of guessing.
+
+The optional exceptions/context area is for unusual cases only. Its quick buttons are:
+
+- Ignore a question
+- Count grammar & writing mechanics
+- Count minor arithmetic / notation errors
+- Require shown work / reasoning
+- Feedback only / don't grade
+- Treat as extension / bonus
+
+**Ignore a question** means do not use it as evidence. **Feedback only / don't grade** means review/comment on it but do not let it affect the grade/score recommendation.
+
+## Evidence rating behavior
+
+Every student report uses the fixed evidence labels **Convincing / Limited / Incorrect / Not Observed**. Blank, missing, omitted, or unreadable evidence is **Not Observed**, not automatically Incorrect.
+
 ## CLICK_ME dashboard
+
+The response dashboard organization is intentionally simple and should remain stable.
 
 Top quick actions:
 
@@ -41,7 +70,7 @@ Top quick actions:
 Main sections:
 
 ### Individual Student Reports & Practice
-Each student card includes both **Open Report** and **Individual Practice**. There is no duplicate individual-practice section later on the page.
+Each student card includes **Open Report** and **Individual Practice**. There is no duplicate individual-practice section later on the page.
 
 ### Class Data
 Class patterns, strengths, needs, groupings, and evidence limitations.
@@ -53,21 +82,30 @@ Three instructional products:
 - **Stations**
 - **Question / Solution Set**
 
-A separate **Review All Questions** teacher-QA link shows every generated follow-up question in a compact no-workspace view, grouped by source. Each item can reveal its answer, a brief teacher move, and a brief student discourse move.
+A separate **Review All Questions** teacher-QA link shows every generated follow-up question in a compact no-workspace view.
+
+## Common Worksheet / Review + Extension
+
+The printable student artifact is **Student Worksheet**. The HTML teaching view with answers and discourse/teacher moves is labeled **Teacher Guide**, not merely HTML.
 
 ## Question / Solution Set
 
-Only one class-level set is generated. It reuses the strongest approved class-level questions rather than manufacturing a separate bank.
+Only **Set 1** is generated. Set 1 is the mathematical question set and is reused across delivery formats.
 
-Required views:
+Required choices:
 
-- one-question-at-a-time presentation mode with Back/Next;
-- compact Review All view;
-- printable student set;
-- matching solutions;
-- optional classroom-structure layouts using the same questions.
+- **Presentation** — one question at a time with compact browser use.
+- **Print Presentation** — exactly two large Set 1 questions per letter page, scaled to fit, no answers/moves.
+- **Review All Questions** — compact zero-workspace QA view.
+- **Student Set** — normal worksheet layout, small header, all Set 1 questions.
+- **Teacher Guide** — matching answers plus concise teacher/discourse moves.
+- **Classroom Structures** — existing Algebra-style participation routines using the same Set 1.
 
-The current classroom-structure menu is intentionally small: **Standard, Find Someone Who, Quiz-Quiz-Trade, RallyCoach / PairCoach, Showdown, Fan-N-Pick**. These are layout/direction templates, not new question-generation jobs. Detailed requirements live in `COMMON_PRACTICE_GUIDE.md`, which is packaged into every request.
+Projection structures reuse the Set 1 Presentation. Printable transformations are primarily **Find Someone Who** and one reusable **Cut-Apart Question Cards** deck; the card deck can support Quiz-Quiz-Trade and Fan-N-Pick.
+
+Every Set 1 artifact must include the complete Set 1 across enough pages/cards. No structure may silently stop at six or eight questions.
+
+Redundant Print buttons are omitted when browser print already produces the intended layout.
 
 ## Duplex-safe student printing
 
@@ -75,11 +113,11 @@ Combined student reports and combined individual-practice PDFs are duplex-safe: 
 
 ## Stations
 
-Stations remain four review stations plus two extension stations with a separate answer key and the existing locked station style.
+Stations remain four review stations plus two extension stations with a separate answer key and the existing locked station style. This upgrade does not redesign them.
 
 ## Math, graphs, and visuals
 
-MathJax, graph, diagram, and visual requirements remain hard QA requirements. Required visuals must exist and be mathematically accurate; they may not be replaced by prose placeholders.
+MathJax, graph, diagram, and visual requirements remain hard QA requirements. Required visuals must exist and be mathematically accurate; they may not be replaced by prose placeholders. Supported Cartesian graphs use the registered canonical graph tool.
 
 ## Privacy / data handling
 
