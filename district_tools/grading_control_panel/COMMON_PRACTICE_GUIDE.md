@@ -1,7 +1,7 @@
 # Common Course Practice & Question Review Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-common-practice/1.1  
+VERSION: district-grading-common-practice/1.2  
 DATE: 2026-09-20
 
 This guide is the controlling contract for Common Course Practice and Question / Solution Set layout. If older request wording conflicts with this file, this file controls.
@@ -16,6 +16,13 @@ This product has two teacher-facing links:
 
 - **Student Worksheet** — the printable student version.
 - **Teacher Guide** — the HTML teaching view with answers/solutions, concise teacher moves, and concise student discourse moves.
+
+The student worksheet must visibly separate the two purposes:
+
+- **Review** — questions tied to observed common needs, unfinished understanding, or prerequisites.
+- **Extension / Transfer** — questions for application, transfer, or students already showing Convincing evidence.
+
+Use clear section labels on the student worksheet itself. Do not leave review and extension as an unlabeled mixed list. If the evidence does not justify an extension item, keep the section label and state that no class-wide extension was generated rather than disguising review as extension.
 
 Do not label the Teacher Guide merely “HTML.” If browser print already gives the intended worksheet print layout, do not add a second redundant Print button.
 
@@ -35,7 +42,7 @@ Set 1 is not a delivery format. It is the approved mathematical question set. Th
 - Cut-Apart Question Cards
 - projection participation structures
 
-There is no fixed Set 1 size such as 8 or 14. The number is determined by the evidence and instructional purpose.
+There is no fixed Set 1 size such as 8, 12, or 14. The number is determined by the evidence and instructional purpose.
 
 **Completeness rule:** every Set 1 artifact must use the entire Set 1 unless the structure intentionally paginates/cards the complete set across multiple pages. Never silently show only the first 6 or 8 questions.
 
@@ -74,6 +81,7 @@ Print rules:
 
 - letter-size portrait pages;
 - **exactly two large question panels per physical page**, stacked vertically;
+- each question is **top-aligned within its half-page panel**, never vertically centered;
 - scale each question and required graph/figure to fit its half-page cleanly;
 - no answers;
 - no teacher moves;
@@ -99,7 +107,7 @@ Use a dense responsive grid/list. Each item includes:
 
 The purpose is to judge question quality quickly, not to simulate a worksheet.
 
-## 8. Student Set
+## 8. Student Set — natural worksheet flow
 `student_set.html` is the student worksheet version of Set 1.
 
 Rules:
@@ -110,7 +118,10 @@ Rules:
 - no projected participation directions;
 - sensible question spacing/workspace;
 - required figures/graphs remain readable;
-- true page breaks that match print intent;
+- questions flow naturally down the page and continue onto the next page as needed;
+- **do not force one question, one row, or a fixed question group to a new page merely to keep the entire question/workspace block together**;
+- keep the prompt and required visual together when practical, but allow workspace to continue or split rather than wasting most of a page;
+- page breaks should reflect actual content height, not a preassigned question count;
 - avoid a giant title block.
 
 If the browser-print version already produces the intended student handout, do not add a redundant print-only button. A generated PDF may still exist as a file for reliability without becoming a duplicate dashboard button.
@@ -124,13 +135,22 @@ If the browser-print version already produces the intended student handout, do n
 
 Keep it compact enough for practical teacher use. Do not turn every question into a page-long lesson plan.
 
-## 10. Classroom Structures — reuse Set 1
-The classroom structure system follows the existing Algebra activity architecture. The mathematics stays the same; only the participation routine changes.
+## 10. Classroom Structures — mirror the Algebra Activity Options architecture
+The classroom-structure page should look and behave almost exactly like the established Algebra activity architecture in `algebra/activities/u1_2_act1/u1_2_act1.html`, adapted for this grading tool.
 
-### A. Projection structures
-Projection structures do **not** get duplicate question artifacts. They provide concise projectable directions and use the same Set 1 Presentation.
+Important adaptations:
 
-Use these established routines and direction patterns:
+- **one Set 1 only** — no Set 2 column/links;
+- keep the familiar **Activity Options** organization;
+- projection/whiteboard routines point to the same Set 1 Presentation;
+- printable handouts point to the existing Stations product, Find Someone Who, or the new Cut-Apart Question Cards as appropriate;
+- **add Cut-Apart Question Cards** as a printable option even though the original Algebra activity page did not have it;
+- **do not include Tarsia**;
+- **do not include Blooket**;
+- do not invent extra activity types merely to fill the page.
+
+### A. Projection / Whiteboard Options
+Use these established routines and direction patterns. Each routine links to the same Set 1 Presentation rather than creating another question file.
 
 #### Whiteboard Indy
 - **Structure:** Individual independent practice
@@ -144,7 +164,7 @@ Use these established routines and direction patterns:
 - **Directions:** Both students stay engaged. Alternate who writes. Explain before erasing. Resolve disagreements with evidence.
 - **Goal:** Engagement + quick feedback
 
-#### RallyCoach
+#### Rally Coach
 - **Structure:** Partner explanation + alternating roles
 - **Setup:** Partners share a workspace; one explains while one records.
 - **Directions:** Partner A explains and Partner B records. Coach with questions, not answers. Switch roles after each problem. Both partners verify the final response.
@@ -186,39 +206,40 @@ Use these established routines and direction patterns:
 - **Directions:** Solver works aloud. Coach asks questions only. Solver restates the completed reasoning. Switch roles for the next problem.
 - **Goal:** Metacognition + partner coaching
 
-### B. Printable structures
-Only structures that genuinely need a transformed physical artifact receive one.
+### B. Printable Handouts
+The Activity Options page lists these printable choices without duplicating their mathematics:
 
-#### Find Someone Who
-Use the complete Set 1 across as many pages as needed.
+- **Stations** — link to the already-generated Stations product; do not regenerate stations inside Set 1.
+- **Find Someone Who** — use the dedicated Find Someone Who layout below.
+- **Cut-Apart Question Cards** — one reusable complete Set 1 card deck.
 
-- grid of question boxes;
-- each box has one Set 1 task and a partner/signature line;
-- small activity-style header;
-- directions: attempt a problem first, find a partner, compare reasoning, sign only when both can explain, use different partners across the page;
-- do not truncate Set 1 to fit one page.
+#### Find Someone Who — dedicated handout, not cards
+Match the established Algebra `u1_2_set1_find_someone_who.html` pattern closely.
+
+- portrait worksheet pages;
+- small title and concise intro;
+- one vertically stacked bordered problem block at a time, not a 2x2 cut-card grid;
+- each problem block contains the Set 1 task, **Partner signature** line, **Work / reasoning** label, and useful workspace;
+- use roughly four ordinary problems per page when they fit, fewer when a graph/figure needs more room;
+- continue across as many pages as needed so the full Set 1 is included;
+- use the same canonical graph assets when a problem includes a graph;
+- do not reuse the Cut-Apart Card layout for Find Someone Who.
 
 #### Cut-Apart Question Cards
 Create one reusable complete Set 1 card deck.
 
 - one Set 1 task per card;
-- compact cut lines;
+- compact dashed cut lines;
 - readable mathematical figures;
 - question side contains no answer;
 - matching answer/coaching information lives in the Teacher Guide.
 
-This one card artifact supports **Quiz-Quiz-Trade**, **Fan-N-Pick**, and other card-based routines. Do not create separate duplicate card decks for each routine.
+The card deck supports **Quiz-Quiz-Trade**, **Fan-N-Pick**, and other appropriate card-based routines. Do not create separate duplicate card decks for each routine.
 
 ## 11. Structure page design
-Use a compact activity-style header, not a giant title block. A structure direction page should emphasize:
+Use the same overall visual hierarchy as the Algebra `u1_2_act1` Activity Options page: activity title, brief explanation that mathematics is reused while participation format changes, grouped **Projection / Whiteboard Options** and **Printable Handouts**, then concise linked directions pages/sections.
 
-- structure;
-- setup;
-- concise directions;
-- goal;
-- direct link to Set 1 Presentation or the printable artifact.
-
-Do not create a maze of nearly identical files.
+Do not add Tarsia, Blooket, Set 2, or unrelated optional links.
 
 ## 12. Global Review All Questions — teacher QA
 Create `class/review_all_questions.html` and link it from CLICK_ME under Common Course Practice.
@@ -243,9 +264,17 @@ Rules:
 Stations continue as four review stations plus two extension stations with 4-6 questions each, separate answer key, and the locked station CSS. Do not redesign the established station product during this upgrade.
 
 ## 14. Math, graphs, and visuals
-All Common Course Practice products inherit the packaged Math / Graph / Visual QA contract.
+All Common Course Practice products inherit the packaged Math / Graph / Visual QA contract **and the packaged District Graph Rendering Standard**.
 
-Required visuals must exist and be mathematically accurate. Supported Cartesian graphs, including blank student construction grids, use the registered canonical graph tool. Student construction visuals must not reveal the completed answer.
+For every supported Cartesian graph, including blank student construction grids:
+
+- use the packaged registered graph tool directly;
+- do not draw a visually similar substitute in browser SVG/CSS/canvas;
+- use the exact same graph asset wherever that question is reused;
+- record the graph tool entrypoint and graph asset in `data/qa.json`;
+- a graph that merely “looks okay” but bypasses the registered graph tool is a QA failure.
+
+Student construction visuals must not reveal the completed answer.
 
 ## 15. QA requirements
 Before delivery, verify:
@@ -253,11 +282,14 @@ Before delivery, verify:
 - one Set 1 only;
 - no Set 2;
 - every Set 1 view uses the full Set 1;
-- Print Presentation has exactly two questions per physical page;
-- Student Set and structure headers are compact;
-- Review All pages use zero workspace and show every expected question;
-- Find Someone Who and Cut-Apart Cards include the complete Set 1 across enough pages/cards;
+- Common Worksheet visibly labels Review and Extension / Transfer;
+- Print Presentation has exactly two questions per physical page and both are top-aligned within their half-page panels;
+- Student Set flows naturally without wasteful forced page breaks;
+- Activity Options mirrors the Algebra u1_2 architecture with one set only, adds Cards, and omits Tarsia/Blooket;
+- Find Someone Who uses its dedicated vertically stacked signature/workspace layout and is not rendered as cut cards;
+- Cut-Apart Cards include the complete Set 1 across enough cards/pages;
 - redundant print buttons are absent when browser print is equivalent;
 - all links resolve after unzip;
 - MathJax and required graphs/figures render correctly;
-- `data/qa.json` records these checks and may not report PASS with an unresolved failure.
+- every supported Cartesian graph records provenance from the packaged registered graph tool;
+- `data/qa.json` may not report PASS with an unresolved failure.
