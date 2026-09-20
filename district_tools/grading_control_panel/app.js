@@ -521,7 +521,7 @@ Use the registered graph tool for every supported Cartesian graph, including bla
   }
 
   async function loadGraphToolBundle() {
-    const manifestText = await loadTextFile("../../Tools/MANIFEST.json", "");
+    const manifestText = await loadCanonicalRepoText("Tools/MANIFEST.json");
     if (!manifestText) throw new Error("Could not load the canonical Tools/MANIFEST.json graph registry.");
     let manifest;
     try { manifest = JSON.parse(manifestText); } catch (error) { throw new Error("Canonical Tools/MANIFEST.json is not valid JSON."); }
@@ -537,8 +537,7 @@ Use the registered graph tool for every supported Cartesian graph, including bla
       const path = queue.shift();
       if (!path || seen.has(path)) continue;
       seen.add(path);
-      const repoUrl = `../../${String(path).replace(/^\/+/, "")}`;
-      const content = await loadTextFile(repoUrl, "");
+      const content = await loadCanonicalRepoText(path);
       if (!content) throw new Error(`Could not load canonical graph dependency: ${path}`);
       files[path] = content;
       for (const match of content.matchAll(/~graph_tool_v\d+\.py/g)) {
@@ -547,6 +546,48 @@ Use the registered graph tool for every supported Cartesian graph, including bla
       }
     }
     return { manifestText, entrypoint, files };
+  }
+
+  async function loadCanonicalRepoText(repoPath) {
+    const cleanPath = String(repoPath || "").replace(/^\/+/, "");
+    if (!cleanPath) return "";
+
+    // First try the GitHub Pages copy. This is fastest for ordinary files, but
+    // Pages/Jekyll may omit source filenames such as ~graph_tool_v14.py.
+    const pagesRelative = `../../${cleanPath}`;
+    const pagesText = await loadTextFile(pagesRelative, "");
+    if (pagesText) return pagesText;
+
+    // Fall back to GitHub raw content so canonical files excluded by Pages are
+    // still resolved from the repository named by Tools/MANIFEST.json.
+    const encodedPath = cleanPath.split("/").map(encodeURIComponent).join("/");
+    const rawUrl = `https://raw.githubusercontent.com/tnezki/memories/main/${encodedPath}`;
+    try {
+      const response = await fetch(rawUrl, { cache: "no-store" });
+      if (response.ok) return await response.text();
+    } catch (error) {
+      console.warn(`Raw GitHub fetch failed for ${cleanPath}.`, error);
+    }
+
+    // Final browser-safe fallback: GitHub Contents API. Keep this read-only.
+    const apiUrl = `https://api.github.com/repos/tnezki/memories/contents/${encodedPath}?ref=main`;
+    try {
+      const response = await fetch(apiUrl, {
+        cache: "no-store",
+        headers: { Accept: "application/vnd.github+json" }
+      });
+      if (response.ok) {
+        const payload = await response.json();
+        if (payload && payload.encoding === "base64" && payload.content) {
+          const binary = atob(String(payload.content).replace(/\s/g, ""));
+          const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+          return new TextDecoder().decode(bytes);
+        }
+      }
+    } catch (error) {
+      console.warn(`GitHub Contents API fetch failed for ${cleanPath}.`, error);
+    }
+    return "";
   }
 
   async function loadTextFile(filename, fallback) {
