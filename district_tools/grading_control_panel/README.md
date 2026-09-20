@@ -25,6 +25,12 @@ The teacher must choose one authoritative mode:
 
 Every student report still uses **Convincing / Limited / Incorrect / Not Observed**.
 
+## Deterministic response build
+
+The grading model now does only the variable work: read/grade evidence, create the small canonical follow-up set, and write `response_data.json`. Packaged `response_builder.py` renders all approved pages. This prevents Class Data, Stations, Activities, worksheets, and print behavior from drifting between runs and keeps fast-model runs useful.
+
+The Common Worksheet and Individual Practice previews use one shared deterministic runtime: real Letter sheets, natural question flow, live workspace repagination, actual problem selection, and print output matching the preview.
+
 ## Gold response layout
 
 The tested 2026-09-20 Precalculus Circuit Training response is the visual baseline. Stable dashboard/report/class/worksheet/teacher-guide/station/card surfaces are locked. The current locked response CSS SHA-256 is:

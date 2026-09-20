@@ -1,14 +1,14 @@
 # Grading Response Gold Layout Lock
 
 STATUS: HARD / REQUIRED  
-VERSION: district-grading-response-layout-lock/1.1  
+VERSION: district-grading-response-layout-lock/1.2  
 DATE: 2026-09-20  
 LOCKED CSS SHA-256: `2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad`
 
 ## Purpose
 The tested 2026-09-20 Precalculus Circuit Training grading response is the visual baseline for this tool. Future runs preserve that response system instead of inventing a new layout on each run.
 
-`response_contract/styles.css` is the canonical response stylesheet. The response copies it byte-for-byte to `assets/styles.css`; `data/qa.json` records the expected/actual SHA and PASS only when they match.
+`response_contract/styles.css` remains the canonical visual stylesheet. Stable HTML is now generated only by packaged `response_builder.py`; the model may not reconstruct these pages. `runtime.css` and `runtime.js` own only page-preview/pagination/control behavior.
 
 ## Stable surfaces - DO NOT REDESIGN
 Keep the current gold layout/markup hierarchy for these unless a later teacher-approved contract explicitly changes one:
@@ -66,3 +66,9 @@ Before delivery verify:
 - Find Someone Who resolves to the Common Worksheet;
 - Cut-Apart Cards are unchanged visually;
 - no unapproved page-local CSS overrides the gold stylesheet.
+
+
+## Literal-template enforcement - HARD
+The prior CSS-only lock was insufficient because a run could change HTML while keeping the stylesheet. That path is retired. The deterministic renderer is now the literal shell authority for CLICK_ME, Class Data, student reports, individual practice, Common Worksheet, Teacher Guide, Stations, Activity Options/directions, Set 1 presentation, Print Presentation, cut cards, and combined print documents. Generated HTML must not be manually edited after rendering.
+
+Class Data uses the approved `Precalc Class Data`/Evidence Analyzed/Major Strengths/Top Actionable Patterns/Suggested Instructional Groupings hierarchy. Stations uses the long-standing approved station markup. Activity directions are fixed per structure.

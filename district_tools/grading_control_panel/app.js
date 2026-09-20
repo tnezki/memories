@@ -5,12 +5,14 @@
   const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.7";
   const STATION_STYLE_VERSION = "district-grading-station-style/1.0";
   const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.6";
-  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.4";
-  const RESPONSE_QA_VERSION = "district-grading-response-qa-execution/1.2";
+  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.5";
+  const RESPONSE_QA_VERSION = "district-grading-response-qa-execution/1.3";
   const GRAPH_RENDERING_STANDARD_VERSION = "district-graph-rendering-standard/1.2";
-  const RESPONSE_LAYOUT_LOCK_VERSION = "district-grading-response-layout-lock/1.1";
+  const RESPONSE_LAYOUT_LOCK_VERSION = "district-grading-response-layout-lock/1.2";
   const RESPONSE_STYLE_SHA256 = "2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad";
-  const REQUEST_SCHEMA = "district-grading-request/1.2-pilot";
+  const RESPONSE_DATA_VERSION = "district-grading-response-data/1.0";
+  const RESPONSE_BUILDER_VERSION = "district-grading-response-builder/1.0";
+  const REQUEST_SCHEMA = "district-grading-request/1.3-pilot";
 
   const RESPONSE_CSS_FALLBACK = String.raw`:root{
   --ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;
@@ -1059,16 +1061,26 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         }
       };
 
-      const [responseCss, stationCss, commonPracticeGuide, responseQaGuide, responseLayoutLock, graphRenderingStandard, graphBundle] = await Promise.all([
+      const [responseCss, stationCss, commonPracticeGuide, responseQaGuide, responseLayoutLock, graphRenderingStandard, responseBuilder, responseDataSchema, responseRuntimeCss, responseRuntimeJs, graphBundle] = await Promise.all([
         loadTextFile("response_styles.css", RESPONSE_CSS_FALLBACK),
         loadTextFile("station_styles.css", STATION_CSS_FALLBACK),
         loadTextFile("COMMON_PRACTICE_GUIDE.md", COMMON_PRACTICE_FALLBACK),
         loadTextFile("RESPONSE_QA_EXECUTION.md", RESPONSE_QA_FALLBACK),
         loadTextFile("RESPONSE_LAYOUT_LOCK.md", RESPONSE_LAYOUT_LOCK_FALLBACK),
         loadTextFile("../_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md", GRAPH_STANDARD_FALLBACK),
+        loadTextFile("response_builder.py", ""),
+        loadTextFile("RESPONSE_DATA_SCHEMA.md", ""),
+        loadTextFile("response_runtime.css", ""),
+        loadTextFile("response_runtime.js", ""),
         loadGraphToolBundle()
       ]);
+      if (!responseBuilder || !responseDataSchema || !responseRuntimeCss || !responseRuntimeJs) {
+        throw new Error("Deterministic grading response builder/runtime files could not be loaded.");
+      }
       const responseStyleSha256 = await sha256Hex(responseCss);
+      const responseRuntimeCssSha256 = await sha256Hex(responseRuntimeCss);
+      const responseRuntimeJsSha256 = await sha256Hex(responseRuntimeJs);
+      const responseBuilderSha256 = await sha256Hex(responseBuilder);
       if (responseStyleSha256 !== RESPONSE_STYLE_SHA256) {
         throw new Error(`Locked response_styles.css hash mismatch. Expected ${RESPONSE_STYLE_SHA256}, got ${responseStyleSha256}.`);
       }
@@ -1080,6 +1092,18 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         stable_surfaces_must_not_restyle: true,
         html_first_printing: true,
         true_letter_page_preview_required_for_adjustable_html: true
+      };
+      request.deterministic_response_renderer = {
+        response_data_version: RESPONSE_DATA_VERSION,
+        builder_version: RESPONSE_BUILDER_VERSION,
+        builder: "response_contract/response_builder.py",
+        data_schema: "response_contract/RESPONSE_DATA_SCHEMA.md",
+        runtime_css: "response_contract/runtime.css",
+        runtime_css_sha256: responseRuntimeCssSha256,
+        runtime_js: "response_contract/runtime.js",
+        runtime_js_sha256: responseRuntimeJsSha256,
+        builder_sha256: responseBuilderSha256,
+        html_authoring_by_model_forbidden: true
       };
       request.graph_rendering = {
         standard_version: GRAPH_RENDERING_STANDARD_VERSION,
@@ -1114,6 +1138,12 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         { name: "response_contract/RESPONSE_QA_VERSION.txt", data: enc.encode(RESPONSE_QA_VERSION + "\n") },
         { name: "response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md", data: enc.encode(graphRenderingStandard) },
         { name: "response_contract/GRAPH_RENDERING_STANDARD_VERSION.txt", data: enc.encode(GRAPH_RENDERING_STANDARD_VERSION + "\n") },
+        { name: "response_contract/response_builder.py", data: enc.encode(responseBuilder) },
+        { name: "response_contract/RESPONSE_BUILDER_VERSION.txt", data: enc.encode(RESPONSE_BUILDER_VERSION + "\n") },
+        { name: "response_contract/RESPONSE_DATA_SCHEMA.md", data: enc.encode(responseDataSchema) },
+        { name: "response_contract/RESPONSE_DATA_VERSION.txt", data: enc.encode(RESPONSE_DATA_VERSION + "\n") },
+        { name: "response_contract/runtime.css", data: enc.encode(responseRuntimeCss) },
+        { name: "response_contract/runtime.js", data: enc.encode(responseRuntimeJs) },
         { name: "response_contract/graph_tool/MANIFEST.json", data: enc.encode(graphBundle.manifestText) },
         ...graphEntries
       );
@@ -1133,41 +1163,22 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
   function buildInstructions(request, teacherNotes) {
     const rosterLine = request.roster_files.length
       ? "A roster is included under roster/. Use it only to resolve student identity, identify missing/unmatched evidence, and preserve roster order."
-      : "No roster is included. Make one reasonable identity pass; if a handwritten name remains unreadable, assign a stable label such as Student 01, preserve the evidence/page mapping, flag the uncertainty, and continue rather than stalling the run.";
+      : "No roster is included. Make one reasonable identity pass; if a handwritten name remains unreadable, use a stable Student 01-style label, flag the uncertainty, and continue.";
     const rubricLine = request.rubric_files.length
       ? "A rubric/scoring guide is included under rubric/. Use it where it clearly applies."
       : "No rubric/scoring guide is included.";
-    const scannedPath = request.requested_outputs.scanned_student_work_pdf;
-    const gradeMode = request.grade_output.mode;
-
-    return `# District Grading & Evidence Request - Pilot\n\n` +
-`## Task\nAnalyze the student evidence in this ZIP and return exactly ONE response ZIP. This package is the complete build contract; no separate teacher prompt is required. The teacher should only need to unzip the response and open CLICK_ME.html.\n\n` +
-`Class / group: ${request.teacher.class_or_group}\n` +
-`Grade / subject: ${request.teacher.grade_subject || "Not provided; infer only when reasonably clear from the evidence."}\n` +
-`${rubricLine}\n${rosterLine}\n\n` +
-`Teacher exceptions / context:\n${teacherNotes || "No exceptions or additional context provided."}\n\n` +
-`## Detect the assignment / evidence title - REQUIRED\nDetermine a concise title from the submitted evidence in this order: visible title on student work; rubric/scoring-guide title; meaningful filenames; concise title inferred from actual skill/content; Student Evidence Review only as a last resort. Save the title and its basis in data/analysis.json and use it consistently.\n\n` +
-`## Evidence rating - REQUIRED\nEvery student report uses exactly one evidence rating: Convincing, Limited, Incorrect, or Not Observed. Missing/blank/omitted/unreadable evidence is Not Observed, not Incorrect.\n\n` +
-`## Grade / score handling - REQUIRED AND AUTHORITATIVE\nSelected mode: ${gradeMode}\n${request.grade_output.policy}\nThis teacher selection outranks free-form notes if they conflict. Record any conflict in data/qa.json and continue.\n\n` +
-`## Default grading behavior - AUTOMATIC\nList Areas of Strength and Areas for Improvement; credit reasoning and partial understanding; treat evidence as formative; allow multiple valid methods; ignore writing mechanics unless requested; de-emphasize minor arithmetic/notation slips unless requested; missing is not incorrect; keep feedback concise; extend Convincing students; flag unclear scans rather than guessing.\n\n` +
-`## Required contracts\nCopy response_contract/styles.css exactly to assets/styles.css and verify its SHA against response_contract/STYLE_SHA256.txt. Copy response_contract/stations.css exactly to assets/stations.css. Follow RESPONSE_LAYOUT_LOCK.md, COMMON_PRACTICE_GUIDE.md, MATH_VISUAL_QA.md, DISTRICT_GRAPH_RENDERING_STANDARD.md, and RESPONSE_QA_EXECUTION.md as executable HARD contracts. If older wording conflicts, COMMON_PRACTICE_GUIDE.md and RESPONSE_LAYOUT_LOCK.md control layout/delivery.\n\n` +
-`## Required response package\n~~~\nCLICK_ME.html\nassets/\n  styles.css\n  stations.css\n  mathjax/\n  graphs/\n  visuals/\nclass/\n  class_overview.html\nstudents/\n  <one HTML report per student>\nprint/\n  all_student_reports.html\n  all_individual_practice.html\n  individualized/\n    <one HTML practice packet per student>\n  common_review_extension/\n    student_worksheet.html\n    teacher_guide.html\n  stations/\n    index.html\n    stations.html\n    answer_key.html\n  question_set/\n    index.html\n    presentation.html\n    print_presentation.html\n    structures/\n      cut_apart_cards.html\nscanned_work/\n  ${scannedPath.split('/').pop()}\ndata/\n  analysis.json\n  qa.json\n  request.json\n~~~\nDo not add duplicate generated classroom PDFs. HTML + browser Print is canonical. The preserved scanned-work PDF is allowed because it is source evidence.\n\n` +
-`## CLICK_ME.html - GOLD LOCK\nKeep the current tested dashboard. Quick actions are exactly Print All Student Reports (combined HTML), Print All Individual Practice (combined HTML), and View Scanned Student Work. Keep the approved Individual Student Reports & Practice card grid and Class Data layout unchanged. Common Course Practice has exactly Common Worksheet / Review + Extension, Stations, and Question / Solution Set. Do not add a separate Review All Questions link.\n\n` +
-`## Combined HTML printing / duplex\nCombined Student Reports and Combined Individual Practice use explicit Letter-size page containers whose screen boundaries match browser Print. Every student's segment consumes an even number of physical pages; when rendered content is odd, insert exactly one truly blank page before the next student. Record content pages, blank backs, and physical pages in data/qa.json. Do not generate PDFs to verify this.\n\nCombined Individual Practice uses the Worksheet Builder-style left rail: All workspaces, Problem, Workspace, Graph/diagram when present, Reset, Print. Changes repaginate immediately. Combined Student Reports show true page previews and browser Print; question-workspace sliders are not required for report-only content.\n\n` +
-`## Common Worksheet / Review + Extension - GOLD\nKeep the approved two-column layout and visible Review / Extension / Transfer labels. Add the same Worksheet Builder-style left rail and true Letter page preview. Use natural deterministic pagination; no wasteful forced question page breaks. This exact student_worksheet.html is also the Find Someone Who handout. Do not create a separate find_someone_who.html.\n\n` +
-`## Teacher Guide - SINGLE REVIEW AUTHORITY\nKeep the approved Teacher Guide - Common Worksheet two-column layout with question, answer, teacher move, and student discourse move. This file is the teacher review for the same shared Set 1 questions. Do not create class/review_all_questions.html, question_set/review_all.html, or a duplicate question_set/teacher_guide.html. Links that need teacher review point to print/common_review_extension/teacher_guide.html.\n\n` +
-`## Stations - GOLD / HTML ONLY\nKeep the approved Stations landing page and station/key layouts. Create exactly four review stations plus two extension stations, 4-6 questions each. Landing-page buttons are Open Student Stations and Open Answer Key only. Do not generate Station PDFs.\n\n` +
-`## Question / Solution Set - SET 1 ONLY\nCreate one Set 1 and validate/solve each shared question once. Reuse the exact prompt/answer/visual/moves across all Set 1 delivery views.\n\n` +
-`### Activity Options\nquestion_set/index.html is the Algebra u1_1-style Activity Options page itself. Put Teacher / Print Utilities and the Set 1 focus at the TOP. Utilities are Print Presentation and Teacher Guide only. Then show Classroom Participation Structures with two subgroups.\n\nShared Prompt / Partner Structures: Whiteboard Indy; Whiteboard Partners; Rally Coach; Speed Dating; Showdown; Think, Trade, Agree; Round Table; Hot Seat; Rally Coach II.\n\nCard-Based Structures: Quiz-Quiz-Trade; Fan-N-Pick; Mix-Pair-Share with Cards; Inside-Outside Circle with Cards. All card structures reuse the one Cut-Apart Question Cards deck.\n\nCreate a corresponding Algebra-style directions section for every structure using Structure, Setup, ordered Directions, Goal, material link, Looks Like Success, and Doesn't Look Like. No Set 2, Tarsia, or Blooket.\n\n` +
-`### Printable Handouts\nStations -> Stations product. Find Someone Who -> ../common_review_extension/student_worksheet.html. Cut-Apart Question Cards -> structures/cut_apart_cards.html. Do not create a separate Find Someone Who worksheet. Keep the current approved cut-card visual layout unchanged.\n\n` +
-`### Set 1 classroom presentation\npresentation.html uses one physical Letter page per Set 1 problem, using the approved rounded-panel visual language: question TOP HALF and Answer + Teacher move + Student discourse move BOTTOM HALF. Both halves are top-aligned. Add screen-only left controls: All question spacing, Problem, Question spacing/workspace, Graph/diagram when present, Reset, Print. Show real Letter page boundaries and update preview immediately when controls change. No Back/Next shell and no separate alternating question/solution pages.\n\n` +
-`### Print Presentation\nprint_presentation.html stays the approved student-facing two-up format: exactly two top-aligned questions per Letter page, all Set 1 questions, no answers/moves/workspace. HTML only; no PDF duplicate.\n\n` +
-`## Math, graph, and visual rendering - HARD\nFollow MATH_VISUAL_QA.md and DISTRICT_GRAPH_RENDERING_STANDARD.md. For every supported Cartesian graph, including blank student grids, execute the packaged registered graph tool directly. Reuse the exact same graph asset anywhere the same shared question appears. Record renderer entrypoint + asset path in data/qa.json.\n\n` +
-`## Fast locked-template execution - REQUIRED\nTreat approved pages as prebuilt mad-lib templates. Generate canonical content once; inject it into locked shells. Programmatically verify hashes/links/counts first. Visually inspect every graph/diagram page and representative/outlier pages for each distinct template. After a local fix, rerender only the changed artifact and direct dependents. Record build-phase timings in data/qa.json. Do not repeatedly render or re-solve the same Set 1 content across delivery formats.\n\n` +
-`## Final QA\n- Locked styles hash matches.\n- Dashboard/student-card/class overview gold layouts remain unchanged.\n- Combined report/practice quick actions open HTML and remain duplex-safe.\n- Common Worksheet has true page previews + spacing controls and doubles as Find Someone Who.\n- Teacher Guide is the only shared teacher review; duplicate Review All pages are absent.\n- Activity Options utilities are at top; Classroom Participation Structures contains both subgroups and all directions.\n- Speed Dating and Hot Seat use those exact names.\n- Set 1 presentation is question top half / answer+moves bottom half with controls/page preview.\n- Print Presentation remains two top-aligned questions per page.\n- Cut-Apart Cards remain visually unchanged.\n- Stations are HTML only and retain the gold layout.\n- No duplicate generated classroom PDFs exist.\n- MathJax/graphs/visuals and all local links pass.\n- data/qa.json reports phase timings and no unresolved failures.\n\n` +
-`Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open CLICK_ME.html.\n`;
+    return `# District Grading & Evidence Request - Deterministic Build\n\n` +
+`## Task\nGrade the submitted evidence and return exactly ONE completed response ZIP. The grading/content decisions are your work; response layout is NOT. The packaged deterministic renderer owns every stable HTML surface.\n\n` +
+`Class / group: ${request.teacher.class_or_group}\nGrade / subject: ${request.teacher.grade_subject || "not provided"}\n${rosterLine}\n${rubricLine}\nTeacher exceptions: ${teacherNotes || "none"}\n\n` +
+`## Required execution order - HARD\n1. Review and grade the student evidence once.\n2. Create concise canonical data for student reports/practice, class findings, one Set 1 question pool, and six stations.\n3. Independently solve/check every Set 1 question once. In response_data.json every Set 1 item must include verification.passed=true plus a short method.\n4. Write response_data.json using response_contract/RESPONSE_DATA_SCHEMA.md.\n5. Generate required graph/diagram assets once, using the packaged graph tool where applicable, and reference those same assets from response_data.json.\n6. Run: python response_contract/response_builder.py --data response_data.json --request-root . --out RESPONSE\n7. Do NOT rewrite or restyle builder-generated HTML. Do NOT add page-local CSS.\n8. Add data/analysis.json and data/qa.json to RESPONSE. Preserve RESPONSE/data/template_qa.json from the deterministic renderer.\n9. Zip RESPONSE and return that one ZIP.\n\n` +
+`## Why this is locked\nThe teacher has already approved the dashboard, Class Data, reports, Common Worksheet, Teacher Guide, Stations, cut cards, Activity Options/directions, Set 1 presentation, sliders, page previews, and print behavior. They are literal templates now. A grading run must never redesign them.\n\n` +
+`## Canonical content reuse\nAuthor a small Set 1 once. The deterministic renderer reuses the exact same prompt/answer/teacher move/discourse move across Common Worksheet, Teacher Guide, classroom presentation, Print Presentation, Find Someone Who (same worksheet), and Cut-Apart Cards. Do not author separate versions for each structure.\n\n` +
+`## Practice pagination\nThe renderer owns true Letter-size white page previews. Questions flow naturally within pages; workspace sliders resize workspace and repaginate. A problem is NOT a page. The Print button prints the same preview pages. Combined student practice/reports remain duplex-safe.\n\n` +
+`## Activities\nThe renderer owns the complete structure-specific directions. Do not regenerate generic directions. Card structures use the single Cut-Apart Question Cards deck. Find Someone Who links to the Common Worksheet.\n\n` +
+`## Grade / score handling\n${request.grade_output.policy}\nEvery student report still uses exactly one evidence rating: Convincing, Limited, Incorrect, or Not Observed. Missing/unreadable evidence is Not Observed, not Incorrect.\n\n` +
+`## Speed / QA\nDo not visually re-audit locked HTML or CSS. Validate evidence and generated content, run the deterministic renderer, verify its template_qa.json PASS, inspect only graph/diagram or true overflow outliers, and package. Record real elapsed timings in data/qa.json. A normal small-class run should not spend minutes rebuilding HTML.\n\n` +
+`Return only the completed response ZIP with a short note to unzip it and open CLICK_ME.html.\n`;
   }
-
 
   function gradePolicy(mode, rubricPresent) {
     if (mode === "rubric") return "Return the evidence rating and the score/grade defined by the supplied rubric or scoring guide. Do not invent a different scale.";

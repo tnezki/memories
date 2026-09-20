@@ -1,10 +1,14 @@
 # Common Course Practice & Question Review Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-common-practice/1.4  
+VERSION: district-grading-common-practice/1.5  
 DATE: 2026-09-20
 
-This guide controls Common Course Practice and Set 1 delivery. If older request wording conflicts with this file, this file controls. `RESPONSE_LAYOUT_LOCK.md` controls visual continuity.
+This guide controls Common Course Practice and Set 1 delivery. If older request wording conflicts with this file, this file controls. `RESPONSE_LAYOUT_LOCK.md` controls visual continuity. `response_builder.py` is now the only layout author.
+
+
+## 0. Deterministic rendering - HARD
+The grading model does not hand-author HTML. It grades evidence, writes one canonical `response_data.json`, verifies the small shared question set once, then runs packaged `response_contract/response_builder.py`. The builder owns all stable HTML shells, page-preview controls, pagination, Activity directions, Stations markup, and shared-question reuse. Do not alter builder-generated HTML after rendering.
 
 ## 1. One approved class-level question pool - HARD
 Build one coherent class-level question pool from the strongest common instructional needs plus justified extension/transfer targets. Author, solve, and validate each question exactly once. Reuse the same approved question object across every delivery format.

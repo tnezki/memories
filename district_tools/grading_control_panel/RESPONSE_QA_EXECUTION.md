@@ -1,7 +1,7 @@
 # Grading Response QA Execution Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-response-qa-execution/1.2  
+VERSION: district-grading-response-qa-execution/1.3  
 DATE: 2026-09-20
 
 ## Purpose
@@ -30,15 +30,8 @@ Build one canonical data object for each student report, each individual-practic
 
 Solve/check a Set 1 question once. Reuse the validated object in Common Worksheet, Teacher Guide, Set 1 presentation, Print Presentation, Find Someone Who/Common Worksheet, and Cut-Apart Cards. Do not independently re-solve or revalidate identical mathematics simply because it appears in another delivery template.
 
-## 4. Locked-template fast path - HARD
-If a response surface uses the packaged locked CSS/template contract and the CSS SHA matches:
-
-1. verify the hash and required DOM/class structure programmatically;
-2. inject the current run's data into the approved shell;
-3. visually inspect representative/outlier pages plus every graph/diagram page;
-4. do not perform exhaustive template-design QA on every near-identical page.
-
-A locked template is a mad-lib shell, not an invitation to redesign the page every run.
+## 4. Deterministic-renderer fast path - HARD
+The packaged `response_builder.py` owns stable HTML. The run writes canonical `response_data.json`, runs the builder once, and preserves `data/template_qa.json`. PASS is forbidden if the builder fails. Do not hand-author, restyle, or visually re-audit stable shells. Visually inspect only generated graphs/diagrams and actual overflow/pagination outliers. A local content correction reruns only the deterministic builder, not the evidence review.
 
 ## 5. HTML is canonical for generated print products
 Generated classroom/teacher products are HTML + browser Print unless the request explicitly requires a PDF.
@@ -142,3 +135,14 @@ Do not automatically rerender the entire response after a local correction.
 - failures.
 
 PASS is forbidden with unresolved failures.
+
+
+## Deterministic functional checks - REQUIRED
+- `data/template_qa.json` exists and reports PASS.
+- No generated page contains page-local `<style>` blocks.
+- Common Worksheet and Individual Practice use `assets/runtime.js` and `assets/runtime.css`.
+- A workspace slider changes workspace height while problems continue to flow inside true Letter pages.
+- The Problem selector contains the actual problem IDs, not only an `All` placeholder.
+- Class Data, Stations, dashboard cards, Teacher Guide, and cut cards come from the renderer and cannot drift between runs.
+- Activity directions are structure-specific static builder content, not newly generated generic directions.
+- Set 1 items cannot render unless `verification.passed=true`.
