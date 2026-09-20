@@ -4,21 +4,20 @@ This district-wide pilot packages student evidence into a self-contained grading
 
 ## Teacher flow
 
-1. Enter a class/group name. Grade/subject and teacher name are optional.
-2. Upload student evidence (required).
-3. Upload a class roster (optional, strongly recommended for combined handwritten class scans).
-4. Upload a rubric/scoring guide (optional).
-5. Make the required **Grade / score handling** choice: no separate grade/score, use the supplied rubric/scoring guide, or recommend a grade/score from the evidence.
-6. Add only teacher exceptions/context when needed.
-7. Click **Build Request ZIP**.
-8. Upload the ZIP to ChatGPT. The package is the complete task contract.
-9. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
+1. Enter a class/group name and optional Grade / subject.
+2. Make the required **Grade / score handling** choice immediately after Grade / subject.
+3. Add teacher name if desired.
+4. Upload student evidence (required), then an optional roster and rubric/scoring guide.
+5. Add only teacher exceptions/context when needed.
+6. Click **Build Request ZIP**.
+7. Upload the ZIP to ChatGPT. The package is the complete task contract.
+8. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
 
 The control panel does not ask the teacher to type an assignment/evidence-set name. The response detects a concise title from the evidence in this order: visible title on submitted work; rubric/scoring-guide title; meaningful filenames; content/skill inference; **Student Evidence Review** only as the last resort.
 
 ## Required grade/score choice
 
-Step 4 is intentionally required. The teacher must choose one authoritative mode before the request ZIP can be built:
+Grade / score handling is intentionally required. The teacher must choose one authoritative mode before the request ZIP can be built:
 
 - **No separate grade / score**
 - **Use the supplied rubric / scoring guide**
@@ -119,7 +118,7 @@ Stations remain four review stations plus two extension stations with a separate
 
 ## Math, graphs, and visuals
 
-MathJax, graph, diagram, and visual requirements remain hard QA requirements. Required visuals must exist and be mathematically accurate; they may not be replaced by prose placeholders. Each request ZIP now packages the current **District Graph Rendering Standard** plus the graph entrypoint resolved from `Tools/MANIFEST.json` and its required graph-tool dependencies. Supported Cartesian graphs must be created with that packaged registered graph tool, including blank student construction grids; a hand-built SVG/CSS/canvas graph that merely resembles the style is a QA failure. Graph provenance is recorded in `data/qa.json`.
+MathJax, graph, diagram, and visual requirements remain hard QA requirements. Required visuals must exist and be mathematically accurate; they may not be replaced by prose placeholders. Each request ZIP packages the current **District Graph Rendering Standard** plus exactly one self-contained graph runtime resolved from `Tools/MANIFEST.json`. The current canonical runtime is `Tools/graph_tool.py`; versioned v12/v13/v14 files are no longer packaged as an active dependency chain. Supported Cartesian graphs must be created with the packaged registered graph tool, including blank student construction grids; a hand-built SVG/CSS/canvas graph that merely resembles the style is a QA failure. Graph provenance is recorded in `data/qa.json`.
 
 ## Faster QA execution
 

@@ -7,8 +7,8 @@
   const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.5";
   const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.2";
   const RESPONSE_QA_VERSION = "district-grading-response-qa-execution/1.0";
-  const GRAPH_RENDERING_STANDARD_VERSION = "district-graph-rendering-standard/1.0";
-  const REQUEST_SCHEMA = "district-grading-request/1.0-pilot";
+  const GRAPH_RENDERING_STANDARD_VERSION = "district-graph-rendering-standard/1.1";
+  const REQUEST_SCHEMA = "district-grading-request/1.1-pilot";
 
   const RESPONSE_CSS_FALLBACK = String.raw`:root{--ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;--accent:#365f82;--accent-dark:#284b68;--success:#176b46;--warn:#8a5a00;--shadow:0 8px 24px rgba(20,34,50,.06)}*{box-sizing:border-box}html{background:#fff;color:var(--ink)}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.5}a{color:var(--accent-dark)}.wrap{max-width:1180px;margin:0 auto;padding:20px}.hero{background:var(--hero);border:1px solid var(--line);border-radius:20px;padding:24px 28px;margin:10px 0 20px}.hero h1{margin:0;font-size:36px}.quick-actions,.inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 15px;border-radius:10px;border:1px solid #9fb4c8;background:#fff;color:var(--accent);font-weight:800;text-decoration:none}.btn.primary{background:var(--accent);color:#fff}.section{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.grid,.student-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}.card-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.question-review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px}.question-review-card{border:1px solid var(--line);border-radius:10px;padding:10px}.question-source{font-size:11px;text-transform:uppercase;font-weight:800;color:var(--muted)}.question-review-card details{margin-top:6px;border-top:1px solid #e3e7ed;padding-top:5px}.question-review-card summary{cursor:pointer;font-weight:800}.teacher-move,.discourse-move,.answer-box{font-size:12px;background:var(--soft);border-radius:7px;padding:7px;margin-top:5px}.presentation-shell{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}.presentation-head{padding:9px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.presentation-question{display:flex;align-items:center;justify-content:center;padding:14px 22px;min-height:0;overflow:auto}.presentation-card{width:min(1100px,96vw);font-size:clamp(22px,2.4vw,38px)}.presentation-nav{background:#fff;border-top:1px solid var(--line);padding:9px 14px;display:flex;justify-content:space-between;gap:8px}.report-page,.practice-page,.packet-page{max-width:8in;margin:0 auto}.feedback-box,.practice-block{border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0}.duplex-blank-page{display:none}.math-display{margin:10px 0}.visual-block img,.graph-frame img{display:block;max-width:100%;height:auto;margin:0 auto}.set-head,.activity-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;border-bottom:1.5px solid var(--line);padding:0 0 8px;margin:0 0 12px}.set-head h1,.activity-head h1{font-size:23px;margin:0}.set-head p,.activity-head p{margin:2px 0 0;font-size:12px;color:var(--muted)}.student-set-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}.student-question{border-top:1px solid #dce2e9;padding:9px 2px;break-inside:auto;page-break-inside:auto}.teacher-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:10px}.teacher-question{border:1px solid var(--line);border-radius:10px;padding:11px;break-inside:avoid}.print-presentation-page{width:8in;min-height:10in;margin:0 auto 18px;padding:0;background:#fff;display:grid;grid-template-rows:1fr 1fr;gap:.16in;break-after:page}.print-slide{border:1.5px solid #9ca8b5;border-radius:10px;padding:.18in .22in;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;break-inside:avoid}.print-slide .slide-number{font-size:11px;font-weight:800;color:var(--muted);margin-bottom:4px}.print-slide .slide-question{font-size:clamp(18px,2.1vw,28px);line-height:1.25}.print-slide img,.print-slide svg{max-height:3.25in;max-width:100%;object-fit:contain}.structure-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px}.structure-card{border:1px solid var(--line);border-radius:10px;padding:11px}.structure-card h3{margin:0 0 3px;font-size:16px}.structure-card p{margin:3px 0;color:var(--muted);font-size:12px}.structure-directions{max-width:900px;margin:0 auto}.structure-directions .direction-row{display:grid;grid-template-columns:135px 1fr;gap:12px;padding:8px 0;border-top:1px solid #e1e5ea}.cut-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cut-card{border:1.4px dashed #777;border-radius:7px;padding:10px;min-height:150px;break-inside:avoid}.find-someone-sheet{display:block}.find-someone-box{border:1.4px solid #222;border-left:8px solid var(--accent-dark);border-radius:0;padding:10px 12px;margin:0 0 12px;break-inside:avoid}.find-someone-box .signature-line{font-size:12px;font-weight:800;margin:8px 0 6px;padding-bottom:5px;border-bottom:1px solid #bbb}.find-someone-box .workspace{min-height:1.15in;border:1px dashed #999;margin-top:4px}.partner-line{margin-top:10px;border-bottom:1px solid #555;height:20px}.worksheet-section-label{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.055em;padding:7px 10px;margin:14px 0 8px;border-left:5px solid var(--accent-dark);background:#f1f5f8}.worksheet-section-label.extension{border-left-color:#667085;background:#f6f6f7}.screen-page{max-width:8.5in;min-height:11in;margin:14px auto;background:#fff;border:1px solid #cfd7e2;box-shadow:0 3px 18px rgba(20,34,50,.08);padding:.45in}.page-break{break-before:page;page-break-before:always}@media(max-width:700px){.student-set-grid,.cut-card-grid{grid-template-columns:1fr}.screen-page{min-height:0;margin:0;border:0;box-shadow:none;padding:14px}.structure-directions .direction-row{grid-template-columns:1fr;gap:2px}}@media print{@page{size:letter;margin:.48in}@page presentation2up{size:letter portrait;margin:.25in}body{font-size:11pt;background:#fff}.quick-actions,.no-print,.screen-only,.presentation-nav{display:none!important}.duplex-blank-page{display:block;height:9.9in;min-height:9.9in;break-after:page;page-break-after:always}.card,.practice-block,.feedback-box,.question-review-card,.teacher-question,.cut-card,.find-someone-box{break-inside:avoid}.screen-page{max-width:none;min-height:0;margin:0;border:0;box-shadow:none;padding:0}.print-presentation-page{page:presentation2up;width:auto;height:10.5in;min-height:10.5in;margin:0;gap:.14in}.print-slide{height:5.18in}.student-set-grid{gap:7px 12px}.presentation-shell{display:block;height:auto;overflow:visible}.presentation-question{display:block;padding:0}.presentation-card{font-size:12pt;width:auto}}`;
 
@@ -70,9 +70,9 @@ Run programmatic checks first, then targeted visual QA. Preserve full evidence r
 
   const GRAPH_STANDARD_FALLBACK = String.raw`# District Graph Rendering Standard
 
-VERSION: district-graph-rendering-standard/1.0
+VERSION: district-graph-rendering-standard/1.1
 
-Use the registered graph tool for every supported Cartesian graph, including blank construction grids. Do not replace it with hand-built SVG/CSS/canvas. Preserve approved print weights and record graph-tool provenance in data/qa.json.`;
+Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json -> tools.graph_tool and package only that runtime. Use it for every supported Cartesian graph, including blank construction grids. Do not replace it with hand-built SVG/CSS/canvas. Preserve approved print weights and record graph-tool provenance in data/qa.json.`;
 
   const evidenceInput = $("evidenceFiles");
   const rosterInput = $("rosterFiles");
@@ -122,7 +122,7 @@ Use the registered graph tool for every supported Cartesian graph, including bla
       const missing = [];
       if (!className) missing.push("a class/group name");
       if (!count) missing.push("at least one evidence file");
-      if (!gradeMode) missing.push("a Step 4 grade/score handling choice");
+      if (!gradeMode) missing.push("a grade/score handling choice");
       setStatus(`Add ${joinList(missing)}.`, "warn");
       return false;
     }
@@ -526,34 +526,20 @@ Use the registered graph tool for every supported Cartesian graph, including bla
     let manifest;
     try { manifest = JSON.parse(manifestText); } catch (error) { throw new Error("Canonical Tools/MANIFEST.json is not valid JSON."); }
     const entrypoint = manifest?.tools?.graph_tool;
-    const base = manifest?.tools?.graph_tool_base;
     if (!entrypoint) throw new Error("Tools/MANIFEST.json does not declare tools.graph_tool.");
 
-    const queue = [entrypoint];
-    if (base) queue.push(base);
-    const files = {};
-    const seen = new Set();
-    while (queue.length) {
-      const path = queue.shift();
-      if (!path || seen.has(path)) continue;
-      seen.add(path);
-      const content = await loadCanonicalRepoText(path);
-      if (!content) throw new Error(`Could not load canonical graph dependency: ${path}`);
-      files[path] = content;
-      for (const match of content.matchAll(/~graph_tool_v\d+\.py/g)) {
-        const dep = `Tools/${match[0]}`;
-        if (!seen.has(dep)) queue.push(dep);
-      }
-    }
-    return { manifestText, entrypoint, files };
+    // The canonical graph runtime is intentionally self-contained. Request ZIPs
+    // package exactly one current graph tool rather than a version dependency chain.
+    const content = await loadCanonicalRepoText(entrypoint);
+    if (!content) throw new Error(`Could not load canonical graph tool: ${entrypoint}`);
+    return { manifestText, entrypoint, files: { [entrypoint]: content } };
   }
 
   async function loadCanonicalRepoText(repoPath) {
     const cleanPath = String(repoPath || "").replace(/^\/+/, "");
     if (!cleanPath) return "";
 
-    // First try the GitHub Pages copy. This is fastest for ordinary files, but
-    // Pages/Jekyll may omit source filenames such as ~graph_tool_v14.py.
+    // Try the GitHub Pages copy first; the canonical graph runtime uses an ordinary Pages-safe filename.
     const pagesRelative = `../../${cleanPath}`;
     const pagesText = await loadTextFile(pagesRelative, "");
     if (pagesText) return pagesText;

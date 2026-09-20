@@ -30,6 +30,16 @@
           <input id="gradeSubject" type="text" placeholder="Example: Grade 7 Math, Algebra 1, HS Art">
         </div>
       </div>
+
+      <label for="gradeOutput">Grade / score handling <span class="required">*</span></label>
+      <select id="gradeOutput" required>
+        <option value="" selected disabled>Choose one...</option>
+        <option value="none">No separate grade / score</option>
+        <option value="rubric">Use the supplied rubric / scoring guide</option>
+        <option value="recommend">Recommend a grade / score from the evidence</option>
+      </select>
+      <div class="small field-help"><b>This choice is authoritative.</b> Student reports still use the district evidence-rating language. If you choose rubric scoring, attach the rubric below.</div>
+
       <div class="single-field">
         <label for="teacherName">Teacher name <span class="small">(optional)</span></label>
         <input id="teacherName" type="text" placeholder="Your name">
@@ -52,20 +62,11 @@
       <label for="rubricFiles">3. Rubric / scoring guide <span class="small">(optional)</span></label>
       <div class="drop">
         <input id="rubricFiles" type="file" multiple>
-        <div class="small upload-help">A rubric or scoring guide gives the analysis explicit criteria and can control the required grade/score handling choice below.</div>
+        <div class="small upload-help">A rubric or scoring guide gives the analysis explicit criteria and can inform the required grade/score handling choice above.</div>
         <ul id="rubricList" class="file-list"></ul>
       </div>
 
-      <label for="gradeOutput">4. Grade / score handling <span class="required">*</span></label>
-      <select id="gradeOutput" required>
-        <option value="" selected disabled>Choose one...</option>
-        <option value="none">No separate grade / score</option>
-        <option value="rubric">Use the supplied rubric / scoring guide</option>
-        <option value="recommend">Recommend a grade / score from the evidence</option>
-      </select>
-      <div class="small field-help"><b>This choice is authoritative.</b> Student reports still use the district evidence-rating language. If you choose rubric scoring, attach the rubric above.</div>
-
-      <label for="teacherNotes">5. Optional teacher exceptions / context</label>
+      <label for="teacherNotes">Optional teacher exceptions / context</label>
       <textarea id="teacherNotes" placeholder="Only add exceptions or context that changes how this evidence should be interpreted."></textarea>
       <div class="small field-help">Normal feedback rules are already built in. Use these only when this evidence set needs an exception.</div>
       <div class="chips" id="noteHints">
@@ -77,7 +78,7 @@
         <button type="button" class="chip" data-note="Treat Question __ as extension or bonus evidence. Comment on it, but do not penalize a student for missing or incomplete extension work.">Treat as extension / bonus</button>
       </div>
 
-      <div id="buildStatus" class="status warn">Add a class/group name, at least one evidence file, and choose Step 4.</div>
+      <div id="buildStatus" class="status warn">Add a class/group name, at least one evidence file, and choose grade/score handling.</div>
       <div class="actions">
         <button id="buildZip" type="button">Build Request ZIP</button>
         <button id="clearForm" class="secondary" type="button">Clear</button>
@@ -92,6 +93,6 @@
     </aside>
   </div>
 </main>
-<script src="app.js?v=20260920c"></script>
+<script src="app.js?v=20260920d"></script>
 </body>
 </html>
