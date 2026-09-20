@@ -144,3 +144,88 @@ a{color:var(--accent-dark)}
   .layout-controls{display:none!important}body.adjustable-handout-page{padding-left:0!important}
   .activity-page{margin:0;min-height:9.3in}.projection-deck .activity-page{margin:0}
 }
+
+/* ========================================================================== */
+/* GOLD LOCK FUNCTIONAL ADDITIONS - 2026-09-20 FINAL REVIEW PASS             */
+/* Preserves the tested response design while adding true page previews,      */
+/* adjustable spacing controls, HTML-first printing, and the approved Set 1   */
+/* question-top / teacher-bottom presentation layout.                         */
+/* ========================================================================== */
+
+/* True Letter page fragments shared by adjustable printable HTML. */
+.adjustable-print-root{--page-width:8.5in;--page-height:11in;--page-margin:.48in;--usable-height:10.04in;--question-space:1.05in;--visual-width:100%;background:#e8edf1;min-height:100vh}
+.adjustable-page-stack{width:100%;padding:1px 0 18px}
+.letter-preview-page{page:adjustableLetter;width:var(--page-width);height:var(--page-height);min-height:var(--page-height);margin:.22in auto;background:#fff;padding:var(--page-margin);overflow:hidden;position:relative;break-after:page;page-break-after:always;border:1px solid #d3d8de;box-shadow:0 4px 18px rgba(20,28,36,.14)}
+.letter-preview-page:last-child{break-after:auto;page-break-after:auto}
+.letter-preview-page::after{content:"Page " attr(data-page);position:absolute;right:.18in;bottom:.13in;font-size:9px;line-height:1;color:#8a939e;letter-spacing:.02em}
+.blank-duplex-page{background:#fff}
+.blank-duplex-page>*{display:none!important}
+
+/* Left rail: same interaction language as Worksheet Builder. */
+.adjustable-print-root .layout-controls{background:#eef4f8;border:1px solid #c9d5df}
+.layout-controls .control-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.layout-controls button{border:1px solid #8da0b3;background:#fff;color:var(--accent-dark);font-weight:800;border-radius:6px;padding:7px 9px}
+.layout-controls button.primary-control{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark)}
+.layout-controls output{font-weight:800;color:var(--accent-dark)}
+.layout-controls .control-value-row{display:grid;grid-template-columns:1fr 62px;gap:6px;align-items:center}
+.layout-controls .control-value-row input[type=number]{width:62px}
+
+/* Adjustable question/workspace geometry used by Common Worksheet and practice. */
+.adjustable-question{--problem-workspace-height:var(--question-space);--problem-visual-width:var(--visual-width)}
+.adjustable-question .workspace,.adjustable-question .workarea{height:var(--problem-workspace-height);min-height:0;overflow:hidden}
+.adjustable-question .visual-block,.adjustable-question .graph-frame{width:min(100%,var(--problem-visual-width));max-width:100%;margin-left:auto;margin-right:auto}
+.adjustable-question .visual-block img,.adjustable-question .visual-block svg,.adjustable-question .graph-frame img,.adjustable-question .graph-frame svg{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+
+/* Combined printable report/practice HTML. */
+.combined-student-document{width:100%}
+.student-segment{display:contents}
+.combined-report-page .report-page,.combined-practice-page .practice-page{max-width:none;margin:0;padding:0}
+.combined-report-page .report-page{height:100%}
+.combined-practice-page .practice-page{height:100%}
+
+/* Set 1 teacher classroom pages: question top half, teacher support bottom half. */
+.set-classroom-page{page:adjustableLetter;width:8.5in;height:11in;min-height:11in;margin:.22in auto;background:#fff;padding:.25in;display:grid;grid-template-rows:1fr 1fr;gap:.14in;overflow:hidden;position:relative;border:1px solid #d3d8de;box-shadow:0 4px 18px rgba(20,28,36,.14);break-after:page;page-break-after:always}
+.set-classroom-page:last-child{break-after:auto;page-break-after:auto}
+.set-classroom-page::after{content:"Page " attr(data-page);position:absolute;right:.16in;bottom:.10in;font-size:9px;color:#8a939e}
+.set-half{border:1.4px solid #98a5b3;border-radius:9px;padding:.18in .21in;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start}
+.set-question-half{--problem-question-space:.9in;--problem-visual-width:100%}
+.set-question-half .set-label,.set-teacher-half .set-label{font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:4px}
+.set-question-half .set-prompt{font-size:20pt;line-height:1.24}
+.set-question-half .question-space{height:var(--problem-question-space);min-height:0;overflow:hidden}
+.set-question-half .visual-block,.set-question-half .graph-frame{width:min(100%,var(--problem-visual-width));max-width:100%;margin:7px auto}
+.set-question-half img,.set-question-half svg{display:block;width:100%;max-width:100%;height:auto;max-height:3.0in;object-fit:contain;margin:0 auto}
+.set-teacher-half{font-size:13.5pt;line-height:1.35}
+.set-teacher-half .guide-answer{background:#f5f8fb;border-left:3px solid var(--accent);padding:8px 10px;margin:4px 0 10px}
+.set-teacher-half .guide-move{margin:7px 0;color:#39475a}
+.set-teacher-half .guide-move strong{color:var(--ink)}
+
+/* Activity Options group headings/material cues without changing the gold shell. */
+.activity-group{margin:10px 0 16px}
+.activity-group-title{font-size:11.5pt;font-weight:900;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.04em;margin:0 0 5px}
+.activity-material{font-size:10.5pt;color:var(--muted);font-weight:700}
+
+@media screen and (min-width:1100px){
+  body.adjustable-print-root{padding-left:252px}
+  body.adjustable-print-root .layout-controls{position:fixed;left:14px;top:14px;width:224px;max-height:calc(100vh - 28px);overflow:auto;flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  body.adjustable-print-root .layout-controls>*{width:100%}
+  body.adjustable-print-root .layout-controls label{display:block}
+}
+@media screen and (max-width:1099px){
+  body.adjustable-print-root{padding-left:0}
+  body.adjustable-print-root .layout-controls{position:relative}
+}
+@media screen and (max-width:760px){
+  .letter-preview-page,.set-classroom-page{width:100%;height:auto;min-height:11in;margin:.16in auto;box-shadow:none}
+  .set-question-half .set-prompt{font-size:16pt}
+}
+
+@media print{
+  @page adjustableLetter{size:Letter portrait;margin:0}
+  body.adjustable-print-root{padding-left:0!important;background:#fff}
+  .adjustable-print-root .layout-controls{display:none!important}
+  .adjustable-page-stack{padding:0}
+  .letter-preview-page{width:8.5in;height:11in;min-height:11in;margin:0;border:0;box-shadow:none;padding:.48in;overflow:hidden}
+  .letter-preview-page::after{display:none}
+  .set-classroom-page{width:8.5in;height:11in;min-height:11in;margin:0;border:0;box-shadow:none;padding:.25in;overflow:hidden}
+  .set-classroom-page::after{display:none}
+}

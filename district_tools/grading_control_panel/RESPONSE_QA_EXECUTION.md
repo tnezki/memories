@@ -1,79 +1,144 @@
 # Grading Response QA Execution Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-response-qa-execution/1.1  
+VERSION: district-grading-response-qa-execution/1.2  
 DATE: 2026-09-20
 
 ## Purpose
-Keep response QA rigorous without turning every six-student grading run into a full-package rerender loop. This guide changes QA execution order, not quality requirements.
+Keep grading/evidence QA rigorous while avoiding repeated work on locked templates and duplicate delivery formats. Student evidence still receives full review. The speed gains come from validating generated content once, trusting hash-locked shells, using HTML as the canonical print surface, and rerendering only what changes.
 
-## 1. Evidence review is not reduced
-Student evidence still receives the visual/semantic inspection needed to grade it accurately. Scanned handwriting, diagrams, and ambiguous pages must be inspected as needed. Do not use this guide to skip evidence review.
+## 1. Record phase timings - REQUIRED
+Record elapsed seconds in `data/qa.json` for at least:
 
-## 2. Build once before visual QA
-Generate the complete response package in one coherent pass whenever possible. Do not repeatedly render intermediate drafts of unchanged artifacts.
+- evidence review;
+- grading/analysis;
+- question/practice content generation;
+- graph/visual generation;
+- HTML/template assembly;
+- programmatic QA;
+- visual QA;
+- correction/rerender work;
+- total response build time.
 
-## 3. Programmatic checks first
-Before expensive visual rendering, run inexpensive checks across the full package:
+These timings are diagnostic and must not change grading quality.
 
-- required files and folders exist;
+## 2. Evidence review is never reduced
+Visually inspect scanned handwriting, diagrams, multi-page packets, and ambiguous evidence as needed to grade accurately. Do not use a speed shortcut to skip student evidence review or infer unreadable work.
+
+## 3. Generate canonical content once
+Build one canonical data object for each student report, each individual-practice question, each class-level Set 1 question, each answer, each teacher move, each discourse move, and each generated visual.
+
+Solve/check a Set 1 question once. Reuse the validated object in Common Worksheet, Teacher Guide, Set 1 presentation, Print Presentation, Find Someone Who/Common Worksheet, and Cut-Apart Cards. Do not independently re-solve or revalidate identical mathematics simply because it appears in another delivery template.
+
+## 4. Locked-template fast path - HARD
+If a response surface uses the packaged locked CSS/template contract and the CSS SHA matches:
+
+1. verify the hash and required DOM/class structure programmatically;
+2. inject the current run's data into the approved shell;
+3. visually inspect representative/outlier pages plus every graph/diagram page;
+4. do not perform exhaustive template-design QA on every near-identical page.
+
+A locked template is a mad-lib shell, not an invitation to redesign the page every run.
+
+## 5. HTML is canonical for generated print products
+Generated classroom/teacher products are HTML + browser Print unless the request explicitly requires a PDF.
+
+Do **not** generate duplicate PDFs for:
+
+- combined student reports;
+- combined individual practice;
+- Common Worksheet;
+- Stations student pages;
+- Stations answer key;
+- Set 1 classroom presentation;
+- Print Presentation;
+- Teacher Guide;
+- Cut-Apart Cards.
+
+The submitted/scanned student-work archive may remain PDF because preserving the source evidence is a different function.
+
+## 6. Programmatic checks first
+Before expensive visual rendering, verify:
+
+- required files/folders exist;
 - local links resolve;
 - request/analysis/QA JSON parses;
-- locked CSS bytes/version/SHA-256 match the packaged contract and `RESPONSE_LAYOUT_LOCK.md`;
-- MathJax source has no obvious raw/unclosed delimiters;
-- Set 1 counts and reuse mappings match across all views;
-- Activity Options structure matches the one-set Algebra u1_1 architecture;
-- Find Someone Who left-rail controls exist and the generic old Set 1 card menu is absent;
-- Review vs Extension labels exist where required;
-- graph provenance records name the packaged registered graph tool;
-- expected graph assets exist;
-- duplex page-count logic is internally consistent;
-- PDF files open and report plausible page counts;
-- Print Presentation count implies exactly two Set 1 questions per page;
-- Student Set does not contain deliberate fixed-question page breaks unless content truly requires them.
+- locked CSS bytes/version/SHA match;
+- MathJax loaders are present on math pages;
+- canonical shared question IDs/counts match across reused views;
+- duplicate Review All/Set 1 teacher-guide files are absent;
+- Find Someone Who points to the same Common Worksheet HTML;
+- Activity Options structure/names/material links match the contract;
+- Set 1 classroom presentation has one problem per Letter page with question top half and answer/moves bottom half;
+- Print Presentation has exactly two questions per Letter page;
+- adjustable pages contain the required left-rail controls and explicit Letter page containers;
+- duplex HTML page-count logic is internally consistent;
+- graph provenance records the packaged registered graph tool;
+- expected graph/visual assets exist;
+- no prohibited generated classroom PDFs are present.
 
 Fix programmatic failures before broad visual QA.
 
-## 4. Gold-shell check before rendering
-Confirm unchanged gold surfaces still use the locked class hierarchy. Do not redesign or rerender a stable page just to explore a different layout. Only the approved exceptions in `RESPONSE_LAYOUT_LOCK.md` may change structure.
-
-## 5. Targeted visual QA
-Visually render the pages that are most likely to reveal layout/math problems:
+## 7. Targeted visual QA
+Visually inspect:
 
 - every page containing a mathematical graph or nontrivial diagram;
-- first page and one later representative page of each distinct output template;
-- Print Presentation first page plus any page containing an oversized figure;
-- Student Set pages around actual page breaks;
-- Find Someone Who first page plus any graph-heavy page;
+- first page and at least one later representative/outlier page of each distinct locked template;
+- actual page-break transitions in Common Worksheet and combined Individual Practice;
+- first and last Set 1 classroom-presentation pages plus graph-heavy pages;
+- first and last Print Presentation pages plus graph-heavy pages;
 - Cut-Apart Cards first page plus any card with a large figure;
-- Station/student/practice/report pages that are layout outliers by content length or page count;
-- any page flagged by programmatic checks.
+- Stations first, representative middle, and final page;
+- representative duplex student transitions for combined reports/practice;
+- any page flagged by programmatic checks or overflow detection.
 
-Locked CSS/templates that already pass do not require every near-duplicate student page to be rerendered just because the student's text differs.
+Do not rerender every stable report/practice page only because text differs.
 
-## 6. Correction loop — only changed artifacts
-If QA finds a defect, regenerate and rerender:
+## 8. Adjustable-page QA
+For each adjustable HTML type, spot check the required controls at meaningful values.
+
+For Common Worksheet and combined Individual Practice:
+
+- All workspaces: 0%, 100%, 300%;
+- selected-problem Workspace: 0%, 100%, 500%, 1200%;
+- Graph/diagram when present: 70%, 100%, 160%.
+
+For Set 1 classroom presentation:
+
+- All question spacing: minimum/default/maximum;
+- selected-problem Question spacing/workspace: minimum/default/maximum;
+- Graph/diagram when present: 70%, 100%, 160%.
+
+After each mutation, confirm screen pagination updates and browser Print uses the same physical page boundaries. A slider that moves but does not change layout is a failure.
+
+## 9. Duplex HTML QA
+For combined reports and combined Individual Practice, determine each student's rendered physical page count from the explicit page containers. If odd, add exactly one truly blank page before the next student. Verify representative student-to-student transitions and record content pages, blank backs, and physical pages in `data/qa.json`.
+
+Do not generate a PDF merely to prove duplex pairing.
+
+## 10. Graph QA remains strict
+Every supported Cartesian graph is generated by the packaged registered graph tool. Graph pages are always visually checked for mathematical accuracy, labels, readability, and the canonical district style. Reused questions reuse the same graph asset.
+
+## 11. Correction loop - changed artifacts only
+If QA finds a defect, regenerate/rerender only:
 
 1. the artifact that changed;
-2. any combined PDF or index directly dependent on it;
-3. any page specifically affected by the same systemic rule.
+2. direct HTML/index dependents;
+3. pages affected by the same systemic rule.
 
-Do **not** rerender unrelated stable artifacts or the entire package after a local fix.
+Do not automatically rerender the entire response after a local correction.
 
-## 7. Graph QA remains strict
-Graph pages are never skipped merely because the layout template is trusted. Every supported Cartesian graph must record the packaged registered graph tool as renderer. Visually inspect graph-heavy pages for readability and mathematical accuracy.
+## 12. Required QA record
+`data/qa.json` records:
 
-## 8. Duplex QA
-Verify duplex pairing programmatically for every student segment. Visually inspect representative transition points and any segment whose page count changed after a correction. Do not rerender every unchanged report/practice page only to reconfirm the same blank-back template.
+- phase timings;
+- programmatic checks;
+- visual-QA coverage;
+- graph provenance;
+- adjustable-control checks;
+- duplex HTML page counts;
+- changed artifacts rerendered;
+- explicit note that unchanged locked templates were not redundantly rerendered;
+- failures.
 
-## 9. QA record
-`data/qa.json` should record:
-
-- programmatic checks run;
-- pages/artifacts visually rendered;
-- graph provenance checks;
-- changed artifacts rerendered after fixes;
-- dependent combined PDFs rerendered;
-- explicit note that unchanged stable artifacts were not redundantly rerendered.
-
-PASS still requires no unresolved failures.
+PASS is forbidden with unresolved failures.

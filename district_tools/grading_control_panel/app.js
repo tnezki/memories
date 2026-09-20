@@ -2,15 +2,15 @@
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
 
-  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.6";
+  const RESPONSE_STYLE_VERSION = "district-grading-response-style/1.7";
   const STATION_STYLE_VERSION = "district-grading-station-style/1.0";
-  const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.5";
-  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.3";
-  const RESPONSE_QA_VERSION = "district-grading-response-qa-execution/1.1";
+  const MATH_VISUAL_QA_VERSION = "district-grading-math-visual-qa/1.6";
+  const COMMON_PRACTICE_VERSION = "district-grading-common-practice/1.4";
+  const RESPONSE_QA_VERSION = "district-grading-response-qa-execution/1.2";
   const GRAPH_RENDERING_STANDARD_VERSION = "district-graph-rendering-standard/1.2";
-  const RESPONSE_LAYOUT_LOCK_VERSION = "district-grading-response-layout-lock/1.0";
-  const RESPONSE_STYLE_SHA256 = "59d49d36e4d660a0c6a3bb80254eac0867cfb50d86561cbc664c495f0eefa8df";
-  const REQUEST_SCHEMA = "district-grading-request/1.1-pilot";
+  const RESPONSE_LAYOUT_LOCK_VERSION = "district-grading-response-layout-lock/1.1";
+  const RESPONSE_STYLE_SHA256 = "2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad";
+  const REQUEST_SCHEMA = "district-grading-request/1.2-pilot";
 
   const RESPONSE_CSS_FALLBACK = String.raw`:root{
   --ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;
@@ -158,6 +158,91 @@ a{color:var(--accent-dark)}
   .layout-controls{display:none!important}body.adjustable-handout-page{padding-left:0!important}
   .activity-page{margin:0;min-height:9.3in}.projection-deck .activity-page{margin:0}
 }
+
+/* ========================================================================== */
+/* GOLD LOCK FUNCTIONAL ADDITIONS - 2026-09-20 FINAL REVIEW PASS             */
+/* Preserves the tested response design while adding true page previews,      */
+/* adjustable spacing controls, HTML-first printing, and the approved Set 1   */
+/* question-top / teacher-bottom presentation layout.                         */
+/* ========================================================================== */
+
+/* True Letter page fragments shared by adjustable printable HTML. */
+.adjustable-print-root{--page-width:8.5in;--page-height:11in;--page-margin:.48in;--usable-height:10.04in;--question-space:1.05in;--visual-width:100%;background:#e8edf1;min-height:100vh}
+.adjustable-page-stack{width:100%;padding:1px 0 18px}
+.letter-preview-page{page:adjustableLetter;width:var(--page-width);height:var(--page-height);min-height:var(--page-height);margin:.22in auto;background:#fff;padding:var(--page-margin);overflow:hidden;position:relative;break-after:page;page-break-after:always;border:1px solid #d3d8de;box-shadow:0 4px 18px rgba(20,28,36,.14)}
+.letter-preview-page:last-child{break-after:auto;page-break-after:auto}
+.letter-preview-page::after{content:"Page " attr(data-page);position:absolute;right:.18in;bottom:.13in;font-size:9px;line-height:1;color:#8a939e;letter-spacing:.02em}
+.blank-duplex-page{background:#fff}
+.blank-duplex-page>*{display:none!important}
+
+/* Left rail: same interaction language as Worksheet Builder. */
+.adjustable-print-root .layout-controls{background:#eef4f8;border:1px solid #c9d5df}
+.layout-controls .control-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.layout-controls button{border:1px solid #8da0b3;background:#fff;color:var(--accent-dark);font-weight:800;border-radius:6px;padding:7px 9px}
+.layout-controls button.primary-control{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark)}
+.layout-controls output{font-weight:800;color:var(--accent-dark)}
+.layout-controls .control-value-row{display:grid;grid-template-columns:1fr 62px;gap:6px;align-items:center}
+.layout-controls .control-value-row input[type=number]{width:62px}
+
+/* Adjustable question/workspace geometry used by Common Worksheet and practice. */
+.adjustable-question{--problem-workspace-height:var(--question-space);--problem-visual-width:var(--visual-width)}
+.adjustable-question .workspace,.adjustable-question .workarea{height:var(--problem-workspace-height);min-height:0;overflow:hidden}
+.adjustable-question .visual-block,.adjustable-question .graph-frame{width:min(100%,var(--problem-visual-width));max-width:100%;margin-left:auto;margin-right:auto}
+.adjustable-question .visual-block img,.adjustable-question .visual-block svg,.adjustable-question .graph-frame img,.adjustable-question .graph-frame svg{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+
+/* Combined printable report/practice HTML. */
+.combined-student-document{width:100%}
+.student-segment{display:contents}
+.combined-report-page .report-page,.combined-practice-page .practice-page{max-width:none;margin:0;padding:0}
+.combined-report-page .report-page{height:100%}
+.combined-practice-page .practice-page{height:100%}
+
+/* Set 1 teacher classroom pages: question top half, teacher support bottom half. */
+.set-classroom-page{page:adjustableLetter;width:8.5in;height:11in;min-height:11in;margin:.22in auto;background:#fff;padding:.25in;display:grid;grid-template-rows:1fr 1fr;gap:.14in;overflow:hidden;position:relative;border:1px solid #d3d8de;box-shadow:0 4px 18px rgba(20,28,36,.14);break-after:page;page-break-after:always}
+.set-classroom-page:last-child{break-after:auto;page-break-after:auto}
+.set-classroom-page::after{content:"Page " attr(data-page);position:absolute;right:.16in;bottom:.10in;font-size:9px;color:#8a939e}
+.set-half{border:1.4px solid #98a5b3;border-radius:9px;padding:.18in .21in;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start}
+.set-question-half{--problem-question-space:.9in;--problem-visual-width:100%}
+.set-question-half .set-label,.set-teacher-half .set-label{font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:4px}
+.set-question-half .set-prompt{font-size:20pt;line-height:1.24}
+.set-question-half .question-space{height:var(--problem-question-space);min-height:0;overflow:hidden}
+.set-question-half .visual-block,.set-question-half .graph-frame{width:min(100%,var(--problem-visual-width));max-width:100%;margin:7px auto}
+.set-question-half img,.set-question-half svg{display:block;width:100%;max-width:100%;height:auto;max-height:3.0in;object-fit:contain;margin:0 auto}
+.set-teacher-half{font-size:13.5pt;line-height:1.35}
+.set-teacher-half .guide-answer{background:#f5f8fb;border-left:3px solid var(--accent);padding:8px 10px;margin:4px 0 10px}
+.set-teacher-half .guide-move{margin:7px 0;color:#39475a}
+.set-teacher-half .guide-move strong{color:var(--ink)}
+
+/* Activity Options group headings/material cues without changing the gold shell. */
+.activity-group{margin:10px 0 16px}
+.activity-group-title{font-size:11.5pt;font-weight:900;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.04em;margin:0 0 5px}
+.activity-material{font-size:10.5pt;color:var(--muted);font-weight:700}
+
+@media screen and (min-width:1100px){
+  body.adjustable-print-root{padding-left:252px}
+  body.adjustable-print-root .layout-controls{position:fixed;left:14px;top:14px;width:224px;max-height:calc(100vh - 28px);overflow:auto;flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  body.adjustable-print-root .layout-controls>*{width:100%}
+  body.adjustable-print-root .layout-controls label{display:block}
+}
+@media screen and (max-width:1099px){
+  body.adjustable-print-root{padding-left:0}
+  body.adjustable-print-root .layout-controls{position:relative}
+}
+@media screen and (max-width:760px){
+  .letter-preview-page,.set-classroom-page{width:100%;height:auto;min-height:11in;margin:.16in auto;box-shadow:none}
+  .set-question-half .set-prompt{font-size:16pt}
+}
+
+@media print{
+  @page adjustableLetter{size:Letter portrait;margin:0}
+  body.adjustable-print-root{padding-left:0!important;background:#fff}
+  .adjustable-print-root .layout-controls{display:none!important}
+  .adjustable-page-stack{padding:0}
+  .letter-preview-page{width:8.5in;height:11in;min-height:11in;margin:0;border:0;box-shadow:none;padding:.48in;overflow:hidden}
+  .letter-preview-page::after{display:none}
+  .set-classroom-page{width:8.5in;height:11in;min-height:11in;margin:0;border:0;box-shadow:none;padding:.25in;overflow:hidden}
+  .set-classroom-page::after{display:none}
+}
 `;
 
   const STATION_CSS_FALLBACK = String.raw`@page{size:letter landscape;margin:0}:root{--navy:#00003d;--page-w:11in;--page-h:8.5in}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#e8e8e8}.page{width:var(--page-w);height:var(--page-h);margin:0 auto .25in;background:#fff;padding:.32in .42in .24in;display:flex;flex-direction:column;overflow:hidden;page-break-after:always}.header{background:var(--navy);color:#fff;font-size:21pt;font-weight:800;padding:.11in .20in;margin-bottom:.12in}.station-grid{display:grid;grid-template-columns:1fr 1fr;gap:.10in .13in}.station-problem{border:1.2px solid #222;border-radius:5px;padding:.08in;font-size:10.2pt;break-inside:avoid}.figure img,.figure svg{display:block;max-width:100%;max-height:1.9in;height:auto;margin:0 auto}.page-footer{margin-top:auto;font-size:7.5pt}.station-index{width:11in;min-height:8.5in;margin:0 auto;background:#fff;padding:.45in}@media print{body{background:#fff}.page{margin:0}.station-index{display:none}}`;
@@ -165,240 +250,267 @@ a{color:var(--accent-dark)}
   const COMMON_PRACTICE_FALLBACK = String.raw`# Common Course Practice & Question Review Guide
 
 STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
-VERSION: district-grading-common-practice/1.3  
+VERSION: district-grading-common-practice/1.4  
 DATE: 2026-09-20
 
 This guide controls Common Course Practice and Set 1 delivery. If older request wording conflicts with this file, this file controls. \`RESPONSE_LAYOUT_LOCK.md\` controls visual continuity.
 
-## 1. One approved class-level question pool
-Build one coherent class-level pool from the strongest common instructional needs plus justified extension targets. Reuse approved questions across Common Worksheet / Review + Extension, Stations when appropriate, Set 1, projection pages, review pages, and participation structures.
+## 1. One approved class-level question pool - HARD
+Build one coherent class-level question pool from the strongest common instructional needs plus justified extension/transfer targets. Author, solve, and validate each question exactly once. Reuse the same approved question object across every delivery format.
 
-Do not manufacture unrelated extra questions just because multiple delivery formats exist. When a question is reused, the mathematics, answer, graph/diagram, and difficulty remain identical.
+When a question is reused, its prompt, answer, graph/diagram asset, difficulty, teacher move, and student discourse move remain identical. Delivery templates may change presentation only. Do not re-author, re-solve, or independently re-grade the same Set 1 question for each view.
 
-## 2. Common Worksheet / Review + Extension
-Keep the current gold worksheet/teacher-guide layout. The student worksheet visibly separates:
+## 2. Common Worksheet / Review + Extension - GOLD
+Keep the current approved two-column Common Worksheet layout.
 
-- **Review** — observed common needs, unfinished understanding, or prerequisites.
-- **Extension / Transfer** — application/transfer for students already showing Convincing evidence or a justified class-wide extension target.
+The student worksheet visibly separates:
 
-Use clear labels on the worksheet. Keep the header compact. Teacher-facing HTML is named **Teacher Guide**, not merely HTML. Do not add redundant print buttons when browser print already gives the intended product.
+- **Review** - observed common needs, unfinished understanding, or prerequisites.
+- **Extension / Transfer** - application/transfer for students already showing Convincing evidence or a justified class-wide extension target.
 
-## 3. Set 1 is the one mathematical set
+Required behavior:
+
+- compact header with Name / Date;
+- natural two-column question flow;
+- no forced wasteful question-per-page breaks;
+- browser-print HTML is canonical; do not generate a duplicate PDF;
+- use real Letter-size screen page previews whose boundaries match browser Print;
+- add the Worksheet Builder-style screen-only left control rail in this order: **All workspaces**, **Problem**, **Workspace**, **Graph / diagram** when applicable, **Reset**, **Print**;
+- changing workspace or graph size repaginates immediately and visibly;
+- controls disappear in print.
+
+The same \`student_worksheet.html\` is also the student handout used for **Find Someone Who**. Do not create a second Find Someone Who worksheet with a different title or layout.
+
+## 3. Teacher Guide - one teacher review authority
+\`print/common_review_extension/teacher_guide.html\` is the single teacher-facing review for the shared Common Worksheet / Set 1 questions.
+
+Keep the current approved two-column Teacher Guide layout:
+
+- question number + Review or Extension / Transfer purpose;
+- exact prompt;
+- concise **Answer**;
+- concise **Teacher move**;
+- concise **Student discourse move**.
+
+Do not generate duplicate compact Review All pages or a second Set 1 teacher guide containing the same information. Links that formerly opened those duplicates should point to this Teacher Guide.
+
+## 4. Set 1 is the one mathematical set
 Create exactly one class-level **Set 1**. Do not create Set 2.
 
-Set 1 is reused by:
+Set 1 is the same question pool used by:
 
-- Set 1 Questions & Solutions projection deck;
-- Print Presentation;
-- Review All Questions;
+- Common Worksheet;
 - Teacher Guide;
-- Find Someone Who;
+- Set 1 classroom presentation;
+- Print Presentation;
+- Find Someone Who, via the Common Worksheet;
 - Cut-Apart Question Cards;
-- projection/whiteboard participation structures.
+- classroom participation structures.
 
-There is no fixed Set 1 size. Every Set 1 artifact uses the entire set unless it is intentionally paginating/cards the same complete set.
+There is no fixed Set 1 size. Every Set 1 delivery uses the full approved set unless a station intentionally selects a separate station-specific subset.
 
-## 4. \`print/question_set/index.html\` = Activity Options page
-The old six-card Set 1 menu is retired. \`index.html\` itself must closely mirror the structure and hierarchy of:
+## 5. \`print/question_set/index.html\` = Activity Options page
+The Set 1 landing page itself is the Activity Options page, closely following the structure and hierarchy of:
 
 \`algebra/activities/u1_1_act1/u1_1_act1.html\`
 
-Adaptations for this grading tool:
+Use the locked district response colors/typography. Do not insert a six-card menu before it and do not create a second structures index/directions maze.
 
-- one Set 1 only;
-- no Set 2;
-- no Tarsia;
-- no Blooket;
-- do not invent unrelated activity types;
-- add **Cut-Apart Question Cards** under Printable Handouts;
-- use the current gold response colors/typography from locked \`styles.css\` rather than introducing a new theme.
+At the **top of the page**, before the participation structures, show:
 
-The Activity Options page contains the projectable direction sections in the same HTML page using internal anchors, just like the Algebra activity page. Do not create a second \`structures/index.html\` card menu or a separate \`directions.html\` maze.
+### Teacher / Print Utilities
 
-### Projection / Whiteboard Options
-List these routines as simple linked rows/list items. Each routine name links to its directions anchor and its **Set 1** link points to the same \`presentation.html\` Questions & Solutions deck:
+- **Print Presentation** -> \`print_presentation.html\`
+- **Teacher Guide** -> \`../common_review_extension/teacher_guide.html\`
+
+Also show the concise **Set 1 focus** line in this top utility area.
+
+Do not include a Review All Questions utility; the approved Teacher Guide replaces it.
+
+## 6. Classroom Participation Structures
+Rename the old **Projection / Whiteboard Options** section to **Classroom Participation Structures** so the tool works beyond math classes.
+
+Organize the choices into these two subgroups.
+
+### Shared Prompt / Partner Structures
+Each structure links to its directions section on the same page. Its Set 1/material link points to \`presentation.html\` unless noted otherwise.
 
 - Whiteboard Indy
 - Whiteboard Partners
 - Rally Coach
-- Speed Dating Math
+- **Speed Dating**
 - Showdown
 - Think, Trade, Agree
 - Round Table
-- Mathematical Hot Seat
+- **Hot Seat**
 - Rally Coach II
 
-No standalone **Presentation / Open Presentation** card belongs on the Activity Options page.
+### Card-Based Structures
+These use the single shared \`structures/cut_apart_cards.html\` deck. Do not create new card sets.
 
-### Printable Handouts
-List:
+- **Quiz-Quiz-Trade**
+- **Fan-N-Pick**
+- **Mix-Pair-Share with Cards**
+- **Inside-Outside Circle with Cards**
 
-- **Stations** — link to the already-generated Stations product;
-- **Find Someone Who** — link to \`structures/find_someone_who.html\`;
-- **Cut-Apart Question Cards** — link to \`structures/cut_apart_cards.html\`.
-
-The card deck remains visually unchanged from the current gold run.
-
-### Teacher / Print Utilities
-Keep direct utility links available without turning them into the old card menu:
-
-- **Print Presentation** — two-up student-question printout;
-- **Review All Questions** — compact teacher QA;
-- **Teacher Guide** — answers/moves.
-
-## 5. Set 1 Questions & Solutions projection deck
-\`presentation.html\` is no longer the compact Back/Next shell from the previous run.
-
-Build it like the Algebra \`u1_1_set1_questions_solutions.html\` pattern:
-
-- one large **Question** page for Set 1 Problem 1;
-- immediately followed by one large **Solution** page for Problem 1;
-- repeat Question then Solution for every Set 1 problem;
-- large projectable math/figures;
-- question page has useful white space for board discussion;
-- solution page repeats the prompt and gives the concise solution plus teacher/discourse move only when useful;
-- use the locked \`.activity-page\`, \`.prob-head\`, \`.prob-q\`, \`.projection-work\`, and \`.solution\` classes;
-- no Back/Next shell, no question counter bar, no giant empty browser page created only to imitate printing.
-
-Every projection/whiteboard structure reuses this same deck.
-
-## 6. Print Presentation - keep the current gold two-up format
-Create \`print_presentation.html\` + PDF from the exact Set 1 questions.
-
-- Letter portrait;
-- exactly two large question panels per physical page;
-- top-align each question within its half-page panel;
-- no answers/moves/workspace;
-- all Set 1 questions;
-- final lower half may be blank when the set count is odd.
-
-Do not redesign the current approved two-up panel styling.
-
-## 7. Review All Questions - keep current gold layout
-\`review_all.html\` remains the compact zero-workspace teacher QA view of all Set 1 questions with required visuals and collapsible Answer / Teacher Move / Student Discourse Move.
-
-## 8. Find Someone Who = Student Set worksheet look + signatures
-The separate generic Student Set is no longer a teacher-facing Activity Options choice. Use the **current gold Student Set visual layout** as the base for Find Someone Who.
-
-\`structures/find_someone_who.html\` requirements:
-
-- compact Set 1 worksheet header;
-- current two-column \`.student-set-grid\` / \`.student-question\` look;
-- all Set 1 questions in natural flow;
-- each problem adds a compact **Partner signature** line;
-- each problem keeps useful workspace;
-- required graph/diagram remains readable;
-- no cut-card boxes;
-- no giant activity title block;
-- browser print is the canonical handout.
-
-### Screen-only left controls - match Worksheet Builder
-Add the Worksheet Builder-style left rail on wide screens. Use this order:
-
-1. **All workspaces in this sheet** — 0-300%, default 100%;
-2. **Problem** selector;
-3. **Workspace** — 0-1200% for the selected problem;
-4. **Graph / diagram** — 70-160% for the selected problem when a visual exists;
-5. **Reset**;
-6. **Print**.
-
-There is no Version control and no New Question button because this is one fixed Set 1.
-
-Controls are screen-only and disappear in print. Workspace and graph size are independent. Resizing changes geometry only; graph stroke weights never change. Preserve current problem order and mathematics.
-
-If a generic \`student_set.html\` is retained internally for compatibility, do not expose it as a primary Activity Options link and do not give it a second competing visual design.
-
-## 9. Teacher Guide - keep current gold layout
-Keep the current compact Teacher Guide styling/order. It follows Set 1 and provides concise answer/solution plus brief teacher/discourse moves where useful.
-
-## 10. Activity direction sections - mirror Algebra u1_1
-The Activity Options HTML includes one direction section per routine using the Algebra hierarchy:
+For every structure, include a corresponding directions section below using the same approved Algebra activity hierarchy:
 
 - compact eyebrow/title/subtitle;
 - **Structure**;
 - **Setup**;
 - concise ordered **Directions**;
 - **Goal**;
-- one **Set 1** link;
+- a clear Set 1 / Cards material link;
 - right-side **Looks Like Success / Doesn't Look Like** boxes.
 
-Use these established routine meanings:
+These sections are locked templates populated with the current assignment title/focus; they are not newly designed each run.
 
-### Whiteboard Indy
-Structure: Individual independent practice. Setup: each student has a whiteboard/marker. Directions: notes welcome; try something first; write large/clearly; use partners for reasoning not copying; revise mistakes. Goal: individual accountability + low-stakes entry.
+### Established directions
 
-### Whiteboard Partners
-Structure: fast partner practice. Setup: one board/marker per pair. Directions: both engaged; alternate writer; explain before erasing; resolve disagreements with evidence. Goal: engagement + quick feedback.
+**Whiteboard Indy** - individual independent practice; each student has a board/marker; notes welcome; try first; write large/clearly; partners support reasoning rather than copying; revise mistakes. Goal: individual accountability + low-stakes entry.
 
-### Rally Coach
-Structure: partner explanation + alternating roles. Setup: shared workspace. Directions: A explains/B records; coach with questions not answers; switch each problem; both verify. Goal: verbal reasoning + procedural accuracy.
+**Whiteboard Partners** - fast partner practice; one board/marker per pair; both engaged; alternate writer; explain before erasing; resolve disagreements with evidence. Goal: engagement + quick feedback.
 
-### Speed Dating Math
-Structure: independent attempt -> timed partner comparison -> rotation. Goal: repeated explanation + strategy comparison.
+**Rally Coach** - partner explanation + alternating roles; one explains while one records; coach with questions not answers; switch each problem; both verify. Goal: verbal reasoning + procedural accuracy.
 
-### Showdown
-Structure: individual think -> simultaneous reveal -> team check. Goal: individual accountability + team feedback.
+**Speed Dating** - independent attempt -> timed partner comparison -> rotation; share a strategy and carry one useful idea forward. Goal: repeated explanation + strategy comparison.
 
-### Think, Trade, Agree
-Structure: individual think -> trade explanations -> clarifying question -> justified agreement/disagreement. Goal: evidence-based comparison.
+**Showdown** - individual think -> simultaneous reveal -> team check. Goal: individual accountability + team feedback.
 
-### Round Table
-Structure: team rotation of written reasoning. Goal: visible collaborative reasoning.
+**Think, Trade, Agree** - individual think -> trade explanations -> clarifying question -> justified agreement/disagreement. Goal: evidence-based comparison.
 
-### Mathematical Hot Seat
-Structure: describe -> reason -> reveal. Goal: mathematical language + listening.
+**Round Table** - team rotation of written reasoning; read prior work before adding; team checks the complete response. Goal: visible collaborative reasoning.
 
-### Rally Coach II
-Structure: solve -> coach -> restate -> switch. Goal: metacognition + partner coaching.
+**Hot Seat** - describe -> reason -> reveal; use precise subject-specific language without simply giving the final response. Goal: academic language + listening.
 
-Use the same concise success/non-example language pattern as the Algebra activity page. Do not invent new rule systems.
+**Rally Coach II** - solve -> coach -> restate -> switch. Goal: metacognition + partner coaching.
 
-## 11. Cut-Apart Question Cards - LOCKED
-The current card artifact is approved. Keep it visually and structurally unchanged except for the actual Set 1 content/required visual.
+**Quiz-Quiz-Trade** - each student receives one card; pair; Partner A quizzes Partner B; A coaches/checks; switch roles; trade cards; find a new partner. Goal: repeated retrieval + peer explanation.
+
+**Fan-N-Pick** - teams of four rotate roles: Fan, Pick, Answer, Coach/Check; rotate roles after each card. Goal: equal participation + structured peer feedback.
+
+**Mix-Pair-Share with Cards** - students mix; pair on signal; use one partner's card as the prompt; each responds/explains; trade or retain cards as directed; mix again. Goal: rapid partner variety + retrieval.
+
+**Inside-Outside Circle with Cards** - paired inner/outer circles respond to a card; partners explain/check; one circle rotates on signal; repeat with the new partner/card. Goal: repeated explanation + broad peer interaction.
+
+## 7. Printable Handouts
+List exactly:
+
+- **Stations** - link to the existing Stations product;
+- **Find Someone Who** - link directly to \`../common_review_extension/student_worksheet.html\`;
+- **Cut-Apart Question Cards** - link to \`structures/cut_apart_cards.html\`.
+
+Find Someone Who does not own a separate worksheet file. Its participation directions live on the Activity Options page; the student uses the same Common Worksheet.
+
+## 8. Set 1 classroom presentation - gold half-page question/answer layout
+\`print/question_set/presentation.html\` uses the current approved Print Presentation visual language, but with **one Set 1 problem per Letter page**:
+
+- top half = the question, top-aligned;
+- bottom half = **Answer**, **Teacher move**, and **Student discourse move**, top-aligned;
+- use the same rounded panel treatment and typography as the approved two-up Print Presentation;
+- no Back/Next shell;
+- no alternating separate Question and Solution pages;
+- all Set 1 problems, one physical page per problem.
+
+Add a Worksheet Builder-style screen-only left rail:
+
+1. **All question spacing** - applies to the current Set 1 pages without changing mathematics;
+2. **Problem** selector;
+3. **Question spacing / workspace** for the selected problem;
+4. **Graph / diagram** size when applicable;
+5. **Reset**;
+6. **Print**.
+
+Show true Letter-size page boundaries on screen. Slider changes must update the preview immediately. Graph controls resize geometry only; stroke weights remain canonical. The answer/moves region starts in the lower half and must not drift into the question half.
+
+## 9. Print Presentation - student-facing two-up
+Keep the current approved two-up layout:
+
+- Letter portrait;
+- exactly two large **questions** per physical page;
+- each question top-aligned within its half-page panel;
+- no answers/moves/workspace;
+- all Set 1 questions;
+- lower half may be blank when the set count is odd;
+- browser-print HTML is canonical; do not generate a duplicate PDF.
+
+## 10. Cut-Apart Question Cards - LOCKED
+The current card artifact is approved and remains visually unchanged except for the actual Set 1 content/required visual.
 
 - one task per card;
 - dashed cut lines;
-- complete Set 1 across enough cards/pages;
-- no answer on question side;
-- supports Quiz-Quiz-Trade and Fan-N-Pick.
+- complete Set 1 across enough pages/cards;
+- no answer on the question side;
+- shared by the four card-based structures above.
 
-Do not use the cards for Find Someone Who.
+## 11. Stations - GOLD / HTML ONLY
+Keep the current Stations landing page and station/answer-key layouts.
 
-## 12. Global Review All Questions - teacher QA
-Keep the current gold \`class/review_all_questions.html\` layout. Show all generated follow-up questions from Common Worksheet, Stations, Set 1, and Individual Practice with zero workspace and collapsible teacher information.
+- exactly four review stations plus two extension stations;
+- 4-6 questions each;
+- separate answer key;
+- \`Open Student Stations\` and \`Open Answer Key\` HTML links only;
+- do not generate Student PDF or Answer Key PDF duplicates.
 
-## 13. Stations remain unchanged
-Exactly four review stations plus two extension stations, 4-6 questions each, separate answer key, locked station CSS. Do not redesign.
+## 12. Combined student printing - HTML first
+Top dashboard quick actions use printable HTML:
+
+- **Print All Student Reports** -> combined printable HTML;
+- **Print All Individual Practice** -> combined printable HTML;
+- **View Scanned Student Work** -> preserved submitted scan/PDF.
+
+Do not generate duplicate combined report/practice PDFs.
+
+Combined printable HTML remains duplex-safe: each student's segment occupies an even number of physical browser-print pages. Insert one truly blank page only when a student's rendered segment is odd so the next student begins on a sheet front.
+
+### Combined Individual Practice controls
+Use true Letter-size page previews plus the left rail: **All workspaces**, **Problem**, **Workspace**, **Graph / diagram** when applicable, **Reset**, **Print**. Changing controls repaginates immediately.
+
+### Combined Student Reports
+Show true Letter-size page previews and a screen-only Print control. Question-workspace sliders are not required when the report itself contains no adjustable question workspace.
+
+## 13. Adjustable HTML page geometry - HARD
+For adjustable student/practice/set HTML:
+
+- screen preview shows real 8.5 x 11 in page fragments on the gray background;
+- browser Print uses the same page fragments and boundaries;
+- use explicit page containers and deterministic repagination after MathJax, workspace changes, graph/diagram changes, or content changes;
+- avoid stale page assignments and avoidable large blank regions;
+- never clip content merely to preserve an old page count;
+- screen page count and browser Print page count must agree.
 
 ## 14. Math, graphs, and visuals
 All products inherit the packaged Math / Graph / Visual QA contract and District Graph Rendering Standard.
 
 - supported Cartesian graphs, including blank grids, use the packaged canonical graph tool;
-- use the same graph asset wherever a question is reused;
-- prefer SVG for adjustable student handouts;
-- graph size controls scale the asset geometry, not its stroke weights;
-- record graph tool entrypoint + asset in \`data/qa.json\`;
+- reuse the exact same graph asset anywhere a question is reused;
+- prefer SVG assets for adjustable HTML;
+- graph size controls scale geometry, not stroke weights;
+- record graph tool entrypoint + asset path in \`data/qa.json\`;
 - student construction visuals remain answer-neutral.
 
 ## 15. Gold layout lock
-Follow \`response_contract/RESPONSE_LAYOUT_LOCK.md\` as a HARD contract. Copy \`styles.css\` byte-for-byte. Apart from the explicitly approved Set 1 changes in that lock, do not restyle the response package.
+Follow \`response_contract/RESPONSE_LAYOUT_LOCK.md\` as a HARD contract. Copy \`styles.css\` byte-for-byte. The current tested response remains the visual baseline everywhere except for the explicitly approved changes in that lock.
 
 ## 16. QA requirements
 Before delivery verify:
 
 - one Set 1 only / no Set 2;
-- every Set 1 delivery uses the full set;
+- shared question objects are solved/validated once and reused, not regenerated per view;
 - Common Worksheet visibly labels Review and Extension / Transfer;
-- \`question_set/index.html\` is the Algebra-style Activity Options page, not the old six-card menu;
-- no standalone Presentation card;
-- every projection routine's Set 1 link points to the same Questions & Solutions deck;
-- projection deck alternates Question then Solution for every problem;
-- Print Presentation remains exactly two top-aligned questions per physical page;
-- Find Someone Who uses the current Student Set look, partner signatures, useful workspace, and the left control rail;
-- controls work at all-workspace 0/100/300%, per-problem workspace 0/100/500/1200%, graph 70/100/160%;
-- Cut-Apart Cards match the gold layout;
+- Common Worksheet has left controls and real Letter page previews;
+- Find Someone Who links to that exact Common Worksheet file;
+- Teacher Guide is the one teacher review authority; no duplicate Review All pages;
+- Activity Options begins with Teacher / Print Utilities and Set 1 focus;
+- Classroom Participation Structures contains both Shared Prompt / Partner and Card-Based subgroups;
+- Speed Dating and Hot Seat use those exact names;
+- all four card structures have full directions sections and use the one Cut-Apart deck;
+- Set 1 presentation has question top half + answer/moves bottom half, with left controls and true page preview;
+- Print Presentation remains two top-aligned questions per page;
+- Cut-Apart Cards match the current gold layout;
+- Stations expose HTML only, no generated station PDFs;
+- combined reports/practice quick actions open HTML, not generated PDFs;
 - no Tarsia or Blooket;
-- no separate structures card menu/directions maze;
 - graph style/provenance pass the canonical standard;
 - locked CSS hash matches;
 - links resolve and \`data/qa.json\` has no unresolved failure.
@@ -407,73 +519,89 @@ Before delivery verify:
   const RESPONSE_LAYOUT_LOCK_FALLBACK = String.raw`# Grading Response Gold Layout Lock
 
 STATUS: HARD / REQUIRED  
-VERSION: district-grading-response-layout-lock/1.0  
+VERSION: district-grading-response-layout-lock/1.1  
 DATE: 2026-09-20  
-LOCKED CSS SHA-256: \`59d49d36e4d660a0c6a3bb80254eac0867cfb50d86561cbc664c495f0eefa8df\`
+LOCKED CSS SHA-256: \`2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad\`
 
 ## Purpose
-The 2026-09-20 Precalculus Circuit Training grading response is the visual baseline for this tool. Future grading runs must preserve that response system instead of inventing a new layout on each run.
+The tested 2026-09-20 Precalculus Circuit Training grading response is the visual baseline for this tool. Future runs preserve that response system instead of inventing a new layout on each run.
 
-\`response_contract/styles.css\` is the canonical response stylesheet. The response must copy it byte-for-byte to \`assets/styles.css\`; \`data/qa.json\` must record the SHA-256 above and PASS only when it matches.
+\`response_contract/styles.css\` is the canonical response stylesheet. The response copies it byte-for-byte to \`assets/styles.css\`; \`data/qa.json\` records the expected/actual SHA and PASS only when they match.
 
 ## Stable surfaces - DO NOT REDESIGN
-Keep the current gold layout/markup hierarchy for all of these unless a later teacher-approved contract explicitly changes one:
+Keep the current gold layout/markup hierarchy for these unless a later teacher-approved contract explicitly changes one:
 
-- \`CLICK_ME.html\`
-- individual student reports
-- class overview
-- individual practice packets
-- combined report/practice print documents
-- Common Worksheet / Review + Extension
-- Common Worksheet Teacher Guide
-- Stations and station answer key
-- Review All Questions pages
-- Set 1 Teacher Guide
-- Print Presentation two-up pages
-- Cut-Apart Question Cards
+- \`CLICK_ME.html\` overall dashboard hierarchy and button treatment;
+- **Individual Student Reports & Practice** dashboard section;
+- individual student report pages;
+- **Class Data** / class overview page;
+- individual practice question styling;
+- Common Worksheet visual language;
+- Common Worksheet Teacher Guide;
+- Stations landing page, student stations, and station answer key;
+- Print Presentation two-up question panels;
+- Cut-Apart Question Cards.
 
-Do not change hero sizes, card shapes, button treatment, typography hierarchy, spacing system, report boxes, dashboard organization, station styling, or card-deck styling simply because another layout seems cleaner.
+Do not change hero sizes, card shapes, typography hierarchy, border/radius system, dashboard student-card grid, class-summary cards, report boxes, station styling, or cut-card styling because another design seems cleaner.
 
-## Approved Set 1 exceptions in this revision
-Only these Set 1 surfaces intentionally differ from the previous run:
+## Approved functional/layout changes in this revision
+These changes are intentional and are now part of the gold system:
 
-1. \`print/question_set/index.html\` becomes the Algebra-style **Activity Options** page modeled on \`algebra/activities/u1_1_act1/u1_1_act1.html\`, adapted to one Set 1.
-2. \`presentation.html\` becomes the Algebra-style **Set 1 Questions & Solutions** projection deck (question page followed by solution page), not the prior Back/Next presentation shell.
-3. **Find Someone Who** adopts the current Student Set worksheet look: compact two-column problem flow, with a partner signature line and workspace added to each problem.
-4. Find Someone Who gets the Worksheet Builder-style screen-only left control rail for workspace and graph/diagram size.
-5. Cartesian construction graphs use the current canonical district graph tool and the worksheet/Quick-Check coordinate visual rules in the District Graph Rendering Standard.
-
-Everything else remains visually frozen.
+1. Top quick actions **Print All Student Reports** and **Print All Individual Practice** open combined printable HTML rather than generated PDFs. **View Scanned Student Work** remains the preserved scan/PDF.
+2. Generated classroom/teacher print products are HTML-first. Duplicate generated PDFs are removed unless explicitly requested.
+3. Common Worksheet keeps its current visual design but gains Worksheet Builder-style left controls plus true Letter-size screen page previews and deterministic repagination.
+4. Find Someone Who links to the exact Common Worksheet HTML; it does not own a separately titled/restyled worksheet.
+5. \`print/common_review_extension/teacher_guide.html\` is the one approved teacher review layout for the shared Common Worksheet / Set 1 questions. Duplicate Review All pages and duplicate Set 1 teacher guides are removed.
+6. The Activity Options page begins with **Teacher / Print Utilities** and the Set 1 focus line, then **Classroom Participation Structures** with Shared Prompt / Partner and Card-Based subgroups.
+7. **Speed Dating Math** is renamed **Speed Dating** and **Mathematical Hot Seat** is renamed **Hot Seat**.
+8. Card-based structures are Quiz-Quiz-Trade, Fan-N-Pick, Mix-Pair-Share with Cards, and Inside-Outside Circle with Cards. They all reuse the one locked Cut-Apart Question Cards deck.
+9. Set 1 classroom presentation uses the approved rounded-panel visual language with one Letter page per problem: question in the top half, Answer + Teacher move + Student discourse move in the bottom half. It gains left layout controls and real page previews.
+10. Print Presentation remains the approved two-up, top-aligned, question-only format.
+11. Combined Individual Practice gains true Letter page previews, spacing/workspace controls, graph/diagram controls, and deterministic repagination. Combined Student Reports gains true page previews and browser Print without a duplicate PDF.
+12. Stations keep their current look but expose HTML Student Stations + HTML Answer Key only.
+13. Supported Cartesian graphs use the current canonical district graph tool and District Graph Rendering Standard; no page-local CSS may restyle graph strokes away from the standard.
 
 ## HTML/CSS discipline
+- Existing baseline CSS remains unchanged except for appended/targeted classes needed for the approved controls/page-preview/set-half layout above.
 - Do not add page-local \`<style>\` blocks that restyle shared gold classes.
 - Do not invent alternate dashboard/card/page systems.
-- Use the class structures named by \`COMMON_PRACTICE_GUIDE.md\` and this lock.
-- Content may change from one evidence set to another; the shell/layout does not.
-- If content is longer, solve it with natural pagination/content fitting, not a new design language.
-- Graph/workspace controls may set CSS custom properties or inline values needed for sizing; they may not restyle the page.
+- Content may change from run to run; the shell/layout does not.
+- Longer content is handled with natural deterministic pagination, not a new design language.
+- Workspace/spacing/graph controls may set CSS custom properties or inline values needed for sizing; they may not restyle the page.
+- Cut-Apart Cards remain visually unchanged.
+
+## Locked page-preview behavior
+Adjustable HTML uses explicit 8.5 x 11 in page containers on screen and print. Screen shows white pages against the gray preview background with visible boundaries. Browser Print uses those same page containers. Controls are screen-only and disappear in print.
 
 ## QA
-Before delivery, verify:
+Before delivery verify:
 
-- \`assets/styles.css\` exactly matches packaged \`response_contract/styles.css\` and SHA-256 \`59d49d36e4d660a0c6a3bb80254eac0867cfb50d86561cbc664c495f0eefa8df\`;
-- every stable surface above still uses the gold class hierarchy;
-- only the five approved exceptions changed layout;
-- Cut-Apart Cards remain visually unchanged from the gold run;
+- \`assets/styles.css\` exactly matches packaged \`response_contract/styles.css\` and SHA-256 \`2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad\`;
+- every stable surface still uses the gold class hierarchy;
+- only the approved changes above alter structure;
+- duplicate Review All pages are absent;
+- generated duplicate classroom PDFs are absent;
+- Find Someone Who resolves to the Common Worksheet;
+- Cut-Apart Cards are unchanged visually;
 - no unapproved page-local CSS overrides the gold stylesheet.
 `;
 
   const MATH_VISUAL_QA_CONTRACT = String.raw`# Math, Graph, Visual, and Station QA Contract
 
 STATUS: REQUIRED
-VERSION: district-grading-math-visual-qa/1.5
+VERSION: district-grading-math-visual-qa/1.6
 
 ## Math rendering - HARD
 - Use valid TeX and MathJax whenever mathematical notation is appropriate.
 - Preferred delimiters are \\( ... \\) inline and \\[ ... \\] display.
-- Generate PDFs only after MathJax has finished typesetting.
+- HTML is the canonical generated print surface. Ensure MathJax finishes typesetting before final pagination/print QA.
 - Raw TeX, missing symbols, or clipped math is a failure.
 - Prefer fraction-bar notation for symbolic division when that is the natural mathematical form.
+
+## HTML-first print rule - HARD
+- Do not generate duplicate PDFs for generated reports, practice, Common Worksheet, Stations, Set 1 presentation, Print Presentation, Teacher Guide, or Cut-Apart Cards when the HTML already provides the canonical browser-print product.
+- The preserved/scanned student-work archive may remain PDF because it is source evidence, not a duplicated generated classroom artifact.
+- Adjustable print HTML must show true Letter-size page boundaries on screen and use the same boundaries in browser Print.
 
 ## Graphs - HARD
 - If text asks for, refers to, or depends on a graph, create the actual mathematically accurate graph.
@@ -495,19 +623,159 @@ Every student report uses exactly one of these labels: Convincing, Limited, Inco
 - Not Observed: there is not enough usable evidence to judge the target, including blank, omitted, missing, or unreadable work. Not Observed is not Incorrect.
 
 ## Duplex student-document pairing - HARD
-- Applies to combined student reports and combined individual-practice documents.
-- Every student's segment must occupy an EVEN number of physical pages.
-- If a student's final content page count is odd, append exactly one intentionally blank page before the next student.
-- Verify actual PDF page order after creation and record before/after counts in data/qa.json.
+- Applies to combined student reports and combined individual-practice HTML.
+- Every student's segment must occupy an EVEN number of physical browser-print pages.
+- If a student's final rendered content page count is odd, append exactly one intentionally blank Letter page before the next student.
+- Verify explicit page-container order and record content pages, blank backs, and physical pages in data/qa.json. Do not generate a PDF merely to prove duplex pairing.
 
 ## Required QA record
-Create data/qa.json including evidence-rating checks, MathJax checks, graph/visual checks, duplex before/after page counts, links, PDF validation, question-review coverage, and failures. PASS is forbidden with unresolved failures.`;
+Create data/qa.json including evidence-rating checks, MathJax checks, graph/visual checks, adjustable-page checks, duplex HTML before/after page counts, links, locked-style hash, phase timings, and failures. PASS is forbidden with unresolved failures.`;
 
   const RESPONSE_QA_FALLBACK = String.raw`# Grading Response QA Execution Guide
 
-VERSION: district-grading-response-qa-execution/1.0
+STATUS: REQUIRED FOR GRADING & EVIDENCE RESPONSE BUILDS  
+VERSION: district-grading-response-qa-execution/1.2  
+DATE: 2026-09-20
 
-Run programmatic checks first, then targeted visual QA. Preserve full evidence review. Visually render every graph/diagram page and representative pages for each stable template. After a local correction, rerender only the changed artifact and direct dependents, not the entire already-stable package. Record QA coverage in data/qa.json.`;
+## Purpose
+Keep grading/evidence QA rigorous while avoiding repeated work on locked templates and duplicate delivery formats. Student evidence still receives full review. The speed gains come from validating generated content once, trusting hash-locked shells, using HTML as the canonical print surface, and rerendering only what changes.
+
+## 1. Record phase timings - REQUIRED
+Record elapsed seconds in \`data/qa.json\` for at least:
+
+- evidence review;
+- grading/analysis;
+- question/practice content generation;
+- graph/visual generation;
+- HTML/template assembly;
+- programmatic QA;
+- visual QA;
+- correction/rerender work;
+- total response build time.
+
+These timings are diagnostic and must not change grading quality.
+
+## 2. Evidence review is never reduced
+Visually inspect scanned handwriting, diagrams, multi-page packets, and ambiguous evidence as needed to grade accurately. Do not use a speed shortcut to skip student evidence review or infer unreadable work.
+
+## 3. Generate canonical content once
+Build one canonical data object for each student report, each individual-practice question, each class-level Set 1 question, each answer, each teacher move, each discourse move, and each generated visual.
+
+Solve/check a Set 1 question once. Reuse the validated object in Common Worksheet, Teacher Guide, Set 1 presentation, Print Presentation, Find Someone Who/Common Worksheet, and Cut-Apart Cards. Do not independently re-solve or revalidate identical mathematics simply because it appears in another delivery template.
+
+## 4. Locked-template fast path - HARD
+If a response surface uses the packaged locked CSS/template contract and the CSS SHA matches:
+
+1. verify the hash and required DOM/class structure programmatically;
+2. inject the current run's data into the approved shell;
+3. visually inspect representative/outlier pages plus every graph/diagram page;
+4. do not perform exhaustive template-design QA on every near-identical page.
+
+A locked template is a mad-lib shell, not an invitation to redesign the page every run.
+
+## 5. HTML is canonical for generated print products
+Generated classroom/teacher products are HTML + browser Print unless the request explicitly requires a PDF.
+
+Do **not** generate duplicate PDFs for:
+
+- combined student reports;
+- combined individual practice;
+- Common Worksheet;
+- Stations student pages;
+- Stations answer key;
+- Set 1 classroom presentation;
+- Print Presentation;
+- Teacher Guide;
+- Cut-Apart Cards.
+
+The submitted/scanned student-work archive may remain PDF because preserving the source evidence is a different function.
+
+## 6. Programmatic checks first
+Before expensive visual rendering, verify:
+
+- required files/folders exist;
+- local links resolve;
+- request/analysis/QA JSON parses;
+- locked CSS bytes/version/SHA match;
+- MathJax loaders are present on math pages;
+- canonical shared question IDs/counts match across reused views;
+- duplicate Review All/Set 1 teacher-guide files are absent;
+- Find Someone Who points to the same Common Worksheet HTML;
+- Activity Options structure/names/material links match the contract;
+- Set 1 classroom presentation has one problem per Letter page with question top half and answer/moves bottom half;
+- Print Presentation has exactly two questions per Letter page;
+- adjustable pages contain the required left-rail controls and explicit Letter page containers;
+- duplex HTML page-count logic is internally consistent;
+- graph provenance records the packaged registered graph tool;
+- expected graph/visual assets exist;
+- no prohibited generated classroom PDFs are present.
+
+Fix programmatic failures before broad visual QA.
+
+## 7. Targeted visual QA
+Visually inspect:
+
+- every page containing a mathematical graph or nontrivial diagram;
+- first page and at least one later representative/outlier page of each distinct locked template;
+- actual page-break transitions in Common Worksheet and combined Individual Practice;
+- first and last Set 1 classroom-presentation pages plus graph-heavy pages;
+- first and last Print Presentation pages plus graph-heavy pages;
+- Cut-Apart Cards first page plus any card with a large figure;
+- Stations first, representative middle, and final page;
+- representative duplex student transitions for combined reports/practice;
+- any page flagged by programmatic checks or overflow detection.
+
+Do not rerender every stable report/practice page only because text differs.
+
+## 8. Adjustable-page QA
+For each adjustable HTML type, spot check the required controls at meaningful values.
+
+For Common Worksheet and combined Individual Practice:
+
+- All workspaces: 0%, 100%, 300%;
+- selected-problem Workspace: 0%, 100%, 500%, 1200%;
+- Graph/diagram when present: 70%, 100%, 160%.
+
+For Set 1 classroom presentation:
+
+- All question spacing: minimum/default/maximum;
+- selected-problem Question spacing/workspace: minimum/default/maximum;
+- Graph/diagram when present: 70%, 100%, 160%.
+
+After each mutation, confirm screen pagination updates and browser Print uses the same physical page boundaries. A slider that moves but does not change layout is a failure.
+
+## 9. Duplex HTML QA
+For combined reports and combined Individual Practice, determine each student's rendered physical page count from the explicit page containers. If odd, add exactly one truly blank page before the next student. Verify representative student-to-student transitions and record content pages, blank backs, and physical pages in \`data/qa.json\`.
+
+Do not generate a PDF merely to prove duplex pairing.
+
+## 10. Graph QA remains strict
+Every supported Cartesian graph is generated by the packaged registered graph tool. Graph pages are always visually checked for mathematical accuracy, labels, readability, and the canonical district style. Reused questions reuse the same graph asset.
+
+## 11. Correction loop - changed artifacts only
+If QA finds a defect, regenerate/rerender only:
+
+1. the artifact that changed;
+2. direct HTML/index dependents;
+3. pages affected by the same systemic rule.
+
+Do not automatically rerender the entire response after a local correction.
+
+## 12. Required QA record
+\`data/qa.json\` records:
+
+- phase timings;
+- programmatic checks;
+- visual-QA coverage;
+- graph provenance;
+- adjustable-control checks;
+- duplex HTML page counts;
+- changed artifacts rerendered;
+- explicit note that unchanged locked templates were not redundantly rerendered;
+- failures.
+
+PASS is forbidden with unresolved failures.
+`;
 
   const GRAPH_STANDARD_FALLBACK = String.raw`# District Graph Rendering Standard
 
@@ -697,19 +965,29 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         rubric_files: rubricManifest,
         requested_outputs: {
           student_reports: true,
-          combined_student_reports_pdf: true,
+          combined_student_reports_html: true,
           individual_practice: true,
-          combined_individual_practice_pdf: true,
+          combined_individual_practice_html: true,
           class_analysis: true,
           recommended_groupings: true,
           scanned_student_work_pdf: `scanned_work/${scannedWorkFilename}`,
+          generated_print_policy: {
+            canonical_format: "HTML + browser Print",
+            duplicate_generated_pdfs_forbidden: true,
+            source_scan_pdf_allowed: true
+          },
           common_course_practice: {
             common_review_extension: {
               enabled: true,
               printable_student_worksheet: true,
+              visible_student_sections: ["Review", "Extension / Transfer"],
+              true_letter_page_preview: true,
+              deterministic_repagination: true,
+              left_controls: ["All workspaces", "Problem", "Workspace", "Graph / diagram", "Reset", "Print"],
               teacher_guide_html: true,
+              teacher_guide_is_single_review_authority: true,
               teacher_guide_includes_answers_and_moves: true,
-              visible_student_sections: ["Review", "Extension / Transfer"]
+              find_someone_who_reuses_exact_student_worksheet: true
             },
             stations: {
               review_stations: 4,
@@ -717,6 +995,8 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
               questions_per_station_min: 4,
               questions_per_station_max: 6,
               separate_answer_key: true,
+              html_only: true,
+              generated_pdfs: false,
               locked_style: STATION_STYLE_VERSION
             },
             question_solution_set: {
@@ -725,52 +1005,39 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
               create_set_2: false,
               complete_set_reuse_required: true,
               reuse_class_level_question_pool: true,
+              solve_validate_shared_questions_once: true,
               activity_options_index: true,
               activity_options_reference: "algebra/activities/u1_1_act1/u1_1_act1.html",
-              activity_options_one_set_only: true,
-              projection_questions_solutions: true,
-              standalone_presentation_card: false,
+              teacher_print_utilities_first: true,
+              teacher_print_utilities: ["Print Presentation", "Teacher Guide"],
+              teacher_guide_target: "../common_review_extension/teacher_guide.html",
+              classroom_participation_heading: "Classroom Participation Structures",
+              shared_prompt_partner_structures: ["Whiteboard Indy", "Whiteboard Partners", "Rally Coach", "Speed Dating", "Showdown", "Think, Trade, Agree", "Round Table", "Hot Seat", "Rally Coach II"],
+              card_based_structures: ["Quiz-Quiz-Trade", "Fan-N-Pick", "Mix-Pair-Share with Cards", "Inside-Outside Circle with Cards"],
+              card_based_structures_use_one_shared_deck: true,
+              presentation_layout: "one Letter page per problem; question top half; Answer + Teacher move + Student discourse move bottom half",
+              presentation_true_letter_page_preview: true,
+              presentation_left_controls: ["All question spacing", "Problem", "Question spacing / workspace", "Graph / diagram", "Reset", "Print"],
               print_presentation_two_up: true,
-              compact_review_all: true,
-              generic_student_set_primary_link: false,
-              find_someone_who_uses_student_set_layout: true,
-              find_someone_who_left_controls: true,
-              teacher_guide: true,
-              redundant_print_buttons_forbidden: true,
-              projection_structures: [
-                "Whiteboard Indy",
-                "Whiteboard Partners",
-                "Rally Coach",
-                "Speed Dating Math",
-                "Showdown",
-                "Think, Trade, Agree",
-                "Round Table",
-                "Mathematical Hot Seat",
-                "Rally Coach II"
-              ],
+              print_presentation_generated_pdf: false,
+              review_all_duplicate_forbidden: true,
+              duplicate_set_teacher_guide_forbidden: true,
+              find_someone_who_target: "../common_review_extension/student_worksheet.html",
+              cut_apart_cards_locked: true,
               printable_options: ["Stations", "Find Someone Who", "Cut-Apart Question Cards"],
-              teacher_print_utilities: ["Print Presentation", "Review All Questions", "Teacher Guide"],
-              card_artifact_supports: ["Quiz-Quiz-Trade", "Fan-N-Pick"],
               prohibited_optional_links: ["Tarsia", "Blooket"],
               separate_structures_index_forbidden: true,
               separate_directions_page_forbidden: true
             }
           },
           review_all_questions: {
-            enabled: true,
-            include_common_review: true,
-            include_stations: true,
-            include_question_solution_set: true,
-            include_individual_practice: true,
-            zero_workspace: true,
-            show_answer: true,
-            teacher_move: true,
-            student_discourse_move: true
+            enabled: false,
+            reason: "The approved Common Worksheet Teacher Guide is the single teacher-review authority."
           },
           duplex_pairing: {
-            combined_student_reports: true,
-            combined_individual_practice: true,
-            rule: "Each student's segment must occupy an even number of physical pages. After final rendering, add one intentionally blank page only when that student's page count is odd so the next student starts on a sheet front."
+            combined_student_reports_html: true,
+            combined_individual_practice_html: true,
+            rule: "Each student's explicit Letter-page segment must occupy an even number of physical browser-print pages. Add one truly blank page only when the rendered segment is odd so the next student starts on a sheet front."
           }
         },
         click_me: {
@@ -810,7 +1077,9 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
         response_style_version: RESPONSE_STYLE_VERSION,
         response_style_sha256: responseStyleSha256,
         gold_baseline_date: "2026-09-20",
-        stable_surfaces_must_not_restyle: true
+        stable_surfaces_must_not_restyle: true,
+        html_first_printing: true,
+        true_letter_page_preview_required_for_adjustable_html: true
       };
       request.graph_rendering = {
         standard_version: GRAPH_RENDERING_STANDARD_VERSION,
@@ -872,107 +1141,33 @@ Resolve the one self-contained canonical graph runtime from Tools/MANIFEST.json 
     const gradeMode = request.grade_output.mode;
 
     return `# District Grading & Evidence Request - Pilot\n\n` +
-`## Task\n` +
-`Analyze the student evidence in this ZIP and return exactly ONE response ZIP. This package is the complete build contract; no separate teacher prompt is required. The teacher should only need to unzip the response and open CLICK_ME.html.\n\n` +
+`## Task\nAnalyze the student evidence in this ZIP and return exactly ONE response ZIP. This package is the complete build contract; no separate teacher prompt is required. The teacher should only need to unzip the response and open CLICK_ME.html.\n\n` +
 `Class / group: ${request.teacher.class_or_group}\n` +
 `Grade / subject: ${request.teacher.grade_subject || "Not provided; infer only when reasonably clear from the evidence."}\n` +
 `${rubricLine}\n${rosterLine}\n\n` +
 `Teacher exceptions / context:\n${teacherNotes || "No exceptions or additional context provided."}\n\n` +
-`## Detect the assignment / evidence title - REQUIRED\n` +
-`The teacher intentionally did NOT type an assignment name. Determine a concise, useful title from the submitted evidence in this order: visible title on student work; rubric/scoring-guide title; meaningful filenames; concise title inferred from the actual skill/content; Student Evidence Review only as a last resort. Save the title and its basis in data/analysis.json and use it consistently.\n\n` +
-`## Evidence rating - REQUIRED\n` +
-`Every student report must use exactly one evidence rating: Convincing, Limited, Incorrect, or Not Observed. Convincing = clear/sufficient evidence. Limited = meaningful correct evidence but incomplete/inconsistent/insufficient. Incorrect = attempted evidence demonstrates a substantive incorrect idea/method/conclusion. Not Observed = insufficient usable evidence, including blank, omitted, missing, or unreadable work. Missing is not Incorrect.\n\n` +
-`## Grade / score handling - REQUIRED AND AUTHORITATIVE\n` +
-`Selected mode: ${gradeMode}\n${request.grade_output.policy}\n` +
-`This teacher selection outranks free-form notes if they conflict. Record any conflict in data/qa.json and continue.\n\n` +
-`## Default grading behavior - AUTOMATIC\n` +
-`These are system defaults, not optional teacher requests: list Areas of Strength and Areas for Improvement; highlight and credit reasoning; treat all evidence as formative; allow multiple valid methods/solution paths; focus on mathematical/scientific reasoning rather than writing mechanics unless the teacher explicitly opts in; de-emphasize minor arithmetic/notation slips unless the teacher explicitly says to count them; credit partial understanding; do not equate missing with incorrect; keep feedback concise; give Convincing students extension/transfer; and flag unclear scans/uncertainty instead of guessing. Teacher exceptions/context may override only the specific item named.\n\n` +
-`Exception semantics: "Ignore a question" means do not use that question as evidence. "Feedback only / don't grade" means review and comment on the question but do not let it affect the grade/score recommendation.\n\n` +
-`## Evidence and identity rules\n` +
-`Judge only from submitted evidence, rubric if present, roster for identity/order only, and teacher exceptions/context. Do not research students or use prior personal/student records. If a roster student has no identifiable work, use Not Observed/no evidence rather than Incorrect.\n\n` +
-`## Locked styling and shared contracts\n` +
-`Copy response_contract/styles.css exactly to assets/styles.css and verify its SHA against response_contract/STYLE_SHA256.txt. Copy response_contract/stations.css exactly to assets/stations.css. Follow response_contract/RESPONSE_LAYOUT_LOCK.md, response_contract/MATH_VISUAL_QA.md, response_contract/COMMON_PRACTICE_GUIDE.md, response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md, and response_contract/RESPONSE_QA_EXECUTION.md as executable HARD contracts. Do not restyle stable gold surfaces. If older wording elsewhere in this request conflicts with COMMON_PRACTICE_GUIDE.md about Common Course Practice or Question / Solution Set layout, COMMON_PRACTICE_GUIDE.md controls.\n\n` +
-`## Required response ZIP structure\n` +
-`~~~text\n` +
-`CLICK_ME.html\n` +
-`assets/\n  styles.css\n  stations.css\n  graphs/\n  visuals/\n` +
-`scanned_work/\n  ${scannedPath.split('/').pop()}\n` +
-`students/\n  <one report HTML per identified student>\n` +
-`class/\n  class_overview.html\n  review_all_questions.html\n` +
-`print/\n` +
-`  all_student_reports.html\n  all_student_reports.pdf\n` +
-`  common_review_extension/\n    student_worksheet.html\n    student_worksheet.pdf\n    teacher_guide.html\n` +
-`  individualized/\n    <one HTML practice packet per student>\n` +
-`  individual_practice_packets.pdf\n` +
-`  stations/\n    index.html\n    stations.html\n    stations.pdf\n    answer_key.html\n    answer_key.pdf\n` +
-`  question_set/\n    index.html                      # Activity Options + direction sections\n    presentation.html               # Set 1 Questions & Solutions projection deck\n    print_presentation.html\n    print_presentation.pdf\n    review_all.html\n    teacher_guide.html\n    structures/\n      find_someone_who.html          # adjustable Student-Set-style handout\n      cut_apart_cards.html\n` +
-`data/\n  analysis.json\n  qa.json\n  request.json\n` +
-`~~~\n\n` +
-`All navigation, CSS, graph assets, and visual assets must use local relative links. PDFs must be finished printable files, not placeholders.\n\n` +
-`## Scanned student work archive\n` +
-`Create ${scannedPath}. Preserve submitted work exactly; combine readable scan/image pages into one teacher-friendly PDF when needed. Do not rewrite or clean up student answers.\n\n` +
-`## CLICK_ME.html layout - LOCKED\n` +
-`Keep the current simple dashboard hierarchy. 1) Hero/header with class, detected evidence title, grade/subject. 2) One quick-action row with exactly Print All Student Reports, Print All Individual Practice, View Scanned Student Work. 3) Individual Student Reports & Practice; each student card has Open Report and Individual Practice. 4) Class Data. 5) Common Course Practice with exactly three primary cards: Common Worksheet / Review + Extension, Stations, Question / Solution Set. Add a teacher-only Review All Questions link near the Common Course Practice heading. Do not create duplicate individual-practice or quick-action sections.\n\n` +
-`## Individual reports and practice\n` +
-`Each report includes student name/label; detected evidence title; Evidence Rating; optional grade/score only according to selected mode; specific strengths; highest-leverage improvement; evidence references when feasible; 1-3 next steps; and uncertainty when needed. Create one individual practice packet per student. For Convincing students favor extension/transfer. Create combined duplex-safe reports and practice PDFs in roster/identified order.\n\n` +
-`## Duplex pairing - HARD\n` +
-`For combined reports and combined individual practice, every student's segment must occupy an even number of physical pages. If final content count is odd, append exactly one intentionally blank page before the next student. Verify actual PDF page order and record before/after counts in data/qa.json.\n\n` +
-`## Class analysis\n` +
-`Include evidence sets analyzed, major strengths, top actionable errors/unfinished understandings, reliable pattern counts/percentages, suggested instructional groupings, Convincing students ready for extension, and evidence/identity limitations.\n\n` +
-`## Common Worksheet / Review + Extension\n` +
-`Create one compact class-wide student worksheet based on actual common needs, with targeted review and justified extension. On the student worksheet itself, visibly label the two sections **Review** and **Extension / Transfer** so students and teachers can tell which questions serve which purpose. The student-facing printable artifact is Student Worksheet. The HTML page that includes answers, teacher moves, and discourse moves is Teacher Guide. Do not call the teacher-facing HTML merely "HTML" and do not expose redundant Print buttons when browser print already produces the same intended layout.\n\n` +
-`## Stations\n` +
-`Create exactly four review stations plus two extension stations, 4-6 questions per station, with a complete separate answer key. Preserve the existing locked stations style. Do not redesign stations in this pass.\n\n` +
-`## Question / Solution Set - SET 1 ONLY
-` +
-`Set 1 is the one approved mathematical set. Create no Set 2. Follow response_contract/COMMON_PRACTICE_GUIDE.md and RESPONSE_LAYOUT_LOCK.md exactly. question_set/index.html is the Algebra u1_1-style Activity Options page itself, with internal direction anchors; do not recreate the old six-card menu and do not create a second structures/index.html or directions.html.
-
-` +
-`### Activity Options / projection
-` +
-`List the nine approved projection/whiteboard routines in the Algebra activity format. Each routine name links to its directions anchor and each Set 1 link points to the same presentation.html. Do not show a standalone Presentation/Open Presentation card. presentation.html is an Algebra-style Question page then Solution page sequence for every Set 1 problem, not the prior Back/Next shell.
-
-` +
-`### Printable / utilities
-` +
-`Printable Handouts are Stations, Find Someone Who, and Cut-Apart Question Cards. Find Someone Who uses the current Student Set two-column worksheet look with partner signature + workspace and the Worksheet Builder-style screen-only left rail (All workspaces, Problem, Workspace, Graph/diagram, Reset, Print). Cut-Apart Cards keep the current approved layout. Teacher/Print Utilities are Print Presentation, Review All Questions, and Teacher Guide. No Tarsia or Blooket.
-
-` +
-`### Print Presentation
-` +
-`Keep the approved two-up gold layout: exactly two top-aligned questions per Letter page, no answers/moves/workspace.
-
-` +
-`## Review All Questions - teacher QA across all products
-` +
-`Create class/review_all_questions.html and link it from CLICK_ME. Show ALL generated follow-up questions from Common Worksheet, Stations, Set 1, and Individual Practice by student. Use zero workspace, compact cards/rows, required visuals, tiny source/purpose labels, and collapsible Answer / Teacher Move / Student Discourse Move. Reused common questions may be labeled as reused instead of visually duplicated.\n\n` +
-`## Math, graph, and visual rendering - HARD\n` +
-`Follow response_contract/MATH_VISUAL_QA.md and response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md. The request packages the current registered graph tool under response_contract/graph_tool/. For every supported Cartesian graph, including blank student grids, execute that packaged entrypoint directly. Do not substitute hand-built SVG/CSS/canvas or another plotting style just because it looks similar. Record renderer entrypoint + graph asset path for every Cartesian graph in data/qa.json. Apply these rules to every common/individual artifact.\n\n` +
-`## data/analysis.json\n` +
-`Include detected evidence title plus basis; student identifiers; evidence mapping; evidence ratings; optional grade results; roster matching; strengths; needs; class patterns; groupings; common-practice targets; individual-practice targets; station targets; Set 1 question/source mapping; and uncertainty flags. Copy request.json into data/request.json.\n\n` +
-`## QA execution order - REQUIRED\n` +
-`Follow response_contract/RESPONSE_QA_EXECUTION.md. Preserve full evidence review, but do programmatic package checks before expensive visual rendering. Visually render every graph/diagram page plus representative/outlier pages for each stable template. After a local fix, rerender only the changed artifact and direct dependents; do not automatically rerender the entire already-stable package. Record visual-QA coverage in data/qa.json.\n\n` +
-`## Final QA before delivery\n` +
-`- Required locked CSS/contracts are used.\n` +
-`- Detected title follows the required priority.\n` +
-`- CLICK_ME retains the locked three-part hierarchy and quick actions.\n` +
-`- Common Worksheet exposes Student Worksheet + Teacher Guide.\n` +
-`- Stations remain four review + two extension with complete key.\n` +
-`- Exactly one Question / Solution Set exists and every Set 1 artifact includes the full set.\n` +
-`- question_set/index.html is the Algebra u1_1-style Activity Options page; the old six-card Set 1 menu is absent.\n` +
-`- No standalone Presentation card; projection routines reuse one Question/Solution deck.\n` +
-`- Find Someone Who uses the gold Student Set worksheet look + partner signatures + left layout controls.\n` +
-`- Cut-Apart Cards remain visually unchanged from the gold run.\n` +
-`- assets/styles.css SHA matches the packaged gold lock.\n` +
-`- Common Worksheet visibly labels Review and Extension / Transfer.\n` +
-`- Print Presentation is present, exactly two questions per printed page, and top-aligned within each half-page.\n` +
-`- No redundant Print buttons are shown when browser print is equivalent.\n` +
-`- Review All pages are compact, zero-workspace, and complete.\n` +
-`- MathJax, graphs, and visuals are rendered and checked.\n` +
-`- Combined student PDFs are duplex-safe and verified.\n` +
-`- All relative links resolve after unzip and data/qa.json reports PASS with no unresolved failures.\n\n` +
+`## Detect the assignment / evidence title - REQUIRED\nDetermine a concise title from the submitted evidence in this order: visible title on student work; rubric/scoring-guide title; meaningful filenames; concise title inferred from actual skill/content; Student Evidence Review only as a last resort. Save the title and its basis in data/analysis.json and use it consistently.\n\n` +
+`## Evidence rating - REQUIRED\nEvery student report uses exactly one evidence rating: Convincing, Limited, Incorrect, or Not Observed. Missing/blank/omitted/unreadable evidence is Not Observed, not Incorrect.\n\n` +
+`## Grade / score handling - REQUIRED AND AUTHORITATIVE\nSelected mode: ${gradeMode}\n${request.grade_output.policy}\nThis teacher selection outranks free-form notes if they conflict. Record any conflict in data/qa.json and continue.\n\n` +
+`## Default grading behavior - AUTOMATIC\nList Areas of Strength and Areas for Improvement; credit reasoning and partial understanding; treat evidence as formative; allow multiple valid methods; ignore writing mechanics unless requested; de-emphasize minor arithmetic/notation slips unless requested; missing is not incorrect; keep feedback concise; extend Convincing students; flag unclear scans rather than guessing.\n\n` +
+`## Required contracts\nCopy response_contract/styles.css exactly to assets/styles.css and verify its SHA against response_contract/STYLE_SHA256.txt. Copy response_contract/stations.css exactly to assets/stations.css. Follow RESPONSE_LAYOUT_LOCK.md, COMMON_PRACTICE_GUIDE.md, MATH_VISUAL_QA.md, DISTRICT_GRAPH_RENDERING_STANDARD.md, and RESPONSE_QA_EXECUTION.md as executable HARD contracts. If older wording conflicts, COMMON_PRACTICE_GUIDE.md and RESPONSE_LAYOUT_LOCK.md control layout/delivery.\n\n` +
+`## Required response package\n~~~\nCLICK_ME.html\nassets/\n  styles.css\n  stations.css\n  mathjax/\n  graphs/\n  visuals/\nclass/\n  class_overview.html\nstudents/\n  <one HTML report per student>\nprint/\n  all_student_reports.html\n  all_individual_practice.html\n  individualized/\n    <one HTML practice packet per student>\n  common_review_extension/\n    student_worksheet.html\n    teacher_guide.html\n  stations/\n    index.html\n    stations.html\n    answer_key.html\n  question_set/\n    index.html\n    presentation.html\n    print_presentation.html\n    structures/\n      cut_apart_cards.html\nscanned_work/\n  ${scannedPath.split('/').pop()}\ndata/\n  analysis.json\n  qa.json\n  request.json\n~~~\nDo not add duplicate generated classroom PDFs. HTML + browser Print is canonical. The preserved scanned-work PDF is allowed because it is source evidence.\n\n` +
+`## CLICK_ME.html - GOLD LOCK\nKeep the current tested dashboard. Quick actions are exactly Print All Student Reports (combined HTML), Print All Individual Practice (combined HTML), and View Scanned Student Work. Keep the approved Individual Student Reports & Practice card grid and Class Data layout unchanged. Common Course Practice has exactly Common Worksheet / Review + Extension, Stations, and Question / Solution Set. Do not add a separate Review All Questions link.\n\n` +
+`## Combined HTML printing / duplex\nCombined Student Reports and Combined Individual Practice use explicit Letter-size page containers whose screen boundaries match browser Print. Every student's segment consumes an even number of physical pages; when rendered content is odd, insert exactly one truly blank page before the next student. Record content pages, blank backs, and physical pages in data/qa.json. Do not generate PDFs to verify this.\n\nCombined Individual Practice uses the Worksheet Builder-style left rail: All workspaces, Problem, Workspace, Graph/diagram when present, Reset, Print. Changes repaginate immediately. Combined Student Reports show true page previews and browser Print; question-workspace sliders are not required for report-only content.\n\n` +
+`## Common Worksheet / Review + Extension - GOLD\nKeep the approved two-column layout and visible Review / Extension / Transfer labels. Add the same Worksheet Builder-style left rail and true Letter page preview. Use natural deterministic pagination; no wasteful forced question page breaks. This exact student_worksheet.html is also the Find Someone Who handout. Do not create a separate find_someone_who.html.\n\n` +
+`## Teacher Guide - SINGLE REVIEW AUTHORITY\nKeep the approved Teacher Guide - Common Worksheet two-column layout with question, answer, teacher move, and student discourse move. This file is the teacher review for the same shared Set 1 questions. Do not create class/review_all_questions.html, question_set/review_all.html, or a duplicate question_set/teacher_guide.html. Links that need teacher review point to print/common_review_extension/teacher_guide.html.\n\n` +
+`## Stations - GOLD / HTML ONLY\nKeep the approved Stations landing page and station/key layouts. Create exactly four review stations plus two extension stations, 4-6 questions each. Landing-page buttons are Open Student Stations and Open Answer Key only. Do not generate Station PDFs.\n\n` +
+`## Question / Solution Set - SET 1 ONLY\nCreate one Set 1 and validate/solve each shared question once. Reuse the exact prompt/answer/visual/moves across all Set 1 delivery views.\n\n` +
+`### Activity Options\nquestion_set/index.html is the Algebra u1_1-style Activity Options page itself. Put Teacher / Print Utilities and the Set 1 focus at the TOP. Utilities are Print Presentation and Teacher Guide only. Then show Classroom Participation Structures with two subgroups.\n\nShared Prompt / Partner Structures: Whiteboard Indy; Whiteboard Partners; Rally Coach; Speed Dating; Showdown; Think, Trade, Agree; Round Table; Hot Seat; Rally Coach II.\n\nCard-Based Structures: Quiz-Quiz-Trade; Fan-N-Pick; Mix-Pair-Share with Cards; Inside-Outside Circle with Cards. All card structures reuse the one Cut-Apart Question Cards deck.\n\nCreate a corresponding Algebra-style directions section for every structure using Structure, Setup, ordered Directions, Goal, material link, Looks Like Success, and Doesn't Look Like. No Set 2, Tarsia, or Blooket.\n\n` +
+`### Printable Handouts\nStations -> Stations product. Find Someone Who -> ../common_review_extension/student_worksheet.html. Cut-Apart Question Cards -> structures/cut_apart_cards.html. Do not create a separate Find Someone Who worksheet. Keep the current approved cut-card visual layout unchanged.\n\n` +
+`### Set 1 classroom presentation\npresentation.html uses one physical Letter page per Set 1 problem, using the approved rounded-panel visual language: question TOP HALF and Answer + Teacher move + Student discourse move BOTTOM HALF. Both halves are top-aligned. Add screen-only left controls: All question spacing, Problem, Question spacing/workspace, Graph/diagram when present, Reset, Print. Show real Letter page boundaries and update preview immediately when controls change. No Back/Next shell and no separate alternating question/solution pages.\n\n` +
+`### Print Presentation\nprint_presentation.html stays the approved student-facing two-up format: exactly two top-aligned questions per Letter page, all Set 1 questions, no answers/moves/workspace. HTML only; no PDF duplicate.\n\n` +
+`## Math, graph, and visual rendering - HARD\nFollow MATH_VISUAL_QA.md and DISTRICT_GRAPH_RENDERING_STANDARD.md. For every supported Cartesian graph, including blank student grids, execute the packaged registered graph tool directly. Reuse the exact same graph asset anywhere the same shared question appears. Record renderer entrypoint + asset path in data/qa.json.\n\n` +
+`## Fast locked-template execution - REQUIRED\nTreat approved pages as prebuilt mad-lib templates. Generate canonical content once; inject it into locked shells. Programmatically verify hashes/links/counts first. Visually inspect every graph/diagram page and representative/outlier pages for each distinct template. After a local fix, rerender only the changed artifact and direct dependents. Record build-phase timings in data/qa.json. Do not repeatedly render or re-solve the same Set 1 content across delivery formats.\n\n` +
+`## Final QA\n- Locked styles hash matches.\n- Dashboard/student-card/class overview gold layouts remain unchanged.\n- Combined report/practice quick actions open HTML and remain duplex-safe.\n- Common Worksheet has true page previews + spacing controls and doubles as Find Someone Who.\n- Teacher Guide is the only shared teacher review; duplicate Review All pages are absent.\n- Activity Options utilities are at top; Classroom Participation Structures contains both subgroups and all directions.\n- Speed Dating and Hot Seat use those exact names.\n- Set 1 presentation is question top half / answer+moves bottom half with controls/page preview.\n- Print Presentation remains two top-aligned questions per page.\n- Cut-Apart Cards remain visually unchanged.\n- Stations are HTML only and retain the gold layout.\n- No duplicate generated classroom PDFs exist.\n- MathJax/graphs/visuals and all local links pass.\n- data/qa.json reports phase timings and no unresolved failures.\n\n` +
 `Return only the single completed response ZIP as the authoritative artifact, with a short note telling the teacher to unzip it and open CLICK_ME.html.\n`;
   }
+
 
   function gradePolicy(mode, rubricPresent) {
     if (mode === "rubric") return "Return the evidence rating and the score/grade defined by the supplied rubric or scoring guide. Do not invent a different scale.";
