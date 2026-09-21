@@ -1,7 +1,7 @@
 # District Resource Builder Contract
 
 STATUS: REQUIRED
-VERSION: district-resource-builder/0.3-pilot
+VERSION: district-resource-builder/0.4-pilot
 DATE: 2026-09-20
 
 This contract turns one structured teacher request into one finished classroom resource package. It is intentionally teacher-simple and implementation-heavy: the teacher supplies instructional intent; the request ZIP carries the engineering rules and repeatable tools.
@@ -13,6 +13,10 @@ This contract turns one structured teacher request into one finished classroom r
 - Produce a finished classroom-ready artifact, not a prompt or placeholder.
 - Return exactly one response ZIP with `CLICK_ME.html` as the teacher entry point.
 - Do not ask the teacher to restate information already present in the request.
+
+## 1A. Learning-target entry - HARD
+
+The teacher interface uses one multiline I Can / learning-target field. Recommend **1-4 targets**, but do not impose a maximum. Each nonblank line is a separate target after removing ordinary bullet/number prefixes. More than four targets are valid when they belong to one coherent instructional set; do not discard or merge them merely to reach four.
 
 ## 2. Grade level is instructional data - HARD
 

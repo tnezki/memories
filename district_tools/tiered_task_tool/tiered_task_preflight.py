@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse, hashlib, json
 from pathlib import Path
 
-VERSION = "district-tiered-task-preflight/1.0"
+VERSION = "district-tiered-task-preflight/1.1"
 
 
 def sha256(path: Path) -> str:
@@ -32,6 +32,7 @@ def main() -> int:
         "response_contract/TIERED_TASK_GENERATION_CONTRACT.md",
         "response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md",
         "response_contract/TIERED_TASK_BUILD_EXECUTION.md",
+        "response_contract/TIERED_TASK_LAYOUT_LOCK.md",
         "response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md",
         "response_contract/task_card_styles.css",
         "response_contract/guide_styles.css",
@@ -60,6 +61,14 @@ def main() -> int:
     ok = all(required_fields.values())
     checks["required_instructional_fields"] = {"status":"PASS" if ok else "FAIL", **required_fields}
     if not ok: failures.append("required_instructional_fields")
+
+    lock_meta = request.get("layout_lock") or {}
+    lock_path = root / str(lock_meta.get("path") or "")
+    lock_expected = lock_meta.get("sha256")
+    lock_actual = sha256(lock_path) if lock_path.exists() else None
+    lock_ok = bool(lock_expected and lock_actual == lock_expected)
+    checks["layout_lock"] = {"status":"PASS" if lock_ok else "FAIL", "expected":lock_expected, "actual":lock_actual}
+    if not lock_ok: failures.append("layout_lock")
 
     for key in ("task_card","guide"):
         meta = (request.get("locked_styles") or {}).get(key) or {}

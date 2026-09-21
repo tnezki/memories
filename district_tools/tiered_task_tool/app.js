@@ -2,15 +2,16 @@
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
 
-  const REQUEST_SCHEMA = "district-tiered-task-request/0.3-pilot";
-  const TOOL_VERSION = "district-tiered-task-tool/0.3-pilot";
-  const CONTRACT_VERSION = "district-tiered-task-generation/0.3-pilot";
+  const REQUEST_SCHEMA = "district-tiered-task-request/0.4-pilot";
+  const TOOL_VERSION = "district-tiered-task-tool/0.4-pilot";
+  const CONTRACT_VERSION = "district-tiered-task-generation/0.4-pilot";
   const SHARED_STANDARD_VERSION = "district-response-build-standard/1.1";
-  const EXECUTION_VERSION = "district-tiered-task-build-execution/1.0";
-  const PREFLIGHT_VERSION = "district-tiered-task-preflight/1.0";
+  const EXECUTION_VERSION = "district-tiered-task-build-execution/1.1";
+  const PREFLIGHT_VERSION = "district-tiered-task-preflight/1.1";
   const FINALIZE_VERSION = "district-tiered-task-finalize/1.0";
   const QA_VERSION = "district-tiered-task-mechanical-qa/1.0";
   const GRAPH_RENDERING_STANDARD_VERSION = "district-graph-rendering-standard/1.2";
+  const LAYOUT_LOCK_VERSION = "district-tiered-task-layout-lock/1.0";
   const TASK_CARD_STYLE_VERSION = "district-tiered-task-card-style/0.2-pilot";
   const GUIDE_STYLE_VERSION = "district-tiered-task-guide-style/0.2-pilot";
   const REQUIRED_DELIVERY_LINE = "Unzip it and open **`CLICK_ME.html`**. The student card is one landscape page with DOK 1-4, and the package includes the teacher evidence guide plus completed QA.";
@@ -21,7 +22,7 @@
   const productInputs = [...document.querySelectorAll('#productChoices input[type="checkbox"]')];
 
   sourceInput.addEventListener("change", () => { renderFiles(sourceInput.files, $("sourceList")); refreshStatus(); });
-  ["taskName","subjectCourse","gradeLevel","ican1","ican2","ican3","ican4","customProduct","readingLevel","timeAvailable","teacherNotes","teacherName"].forEach((id) => {
+  ["taskName","subjectCourse","gradeLevel","icanStatements","customProduct","readingLevel","timeAvailable","teacherNotes","teacherName"].forEach((id) => {
     $(id).addEventListener("input", refreshStatus);
   });
   productInputs.forEach((input) => input.addEventListener("change", refreshStatus));
@@ -30,7 +31,17 @@
   refreshStatus();
 
   function getICans() {
-    return [1,2,3,4].map((n) => $(`ican${n}`).value.trim()).filter(Boolean);
+    const seen = new Set();
+    return String($("icanStatements").value || "")
+      .split(/\r?\n/)
+      .map((line) => line.trim().replace(/^(?:[-*•▪◦‣]+|\d+[.)])\s*/, "").trim())
+      .filter(Boolean)
+      .filter((target) => {
+        const key = target.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
   }
 
   function getProducts() {
@@ -70,26 +81,27 @@
         entries.push({name:path, data:new Uint8Array(await file.arrayBuffer())});
       }
 
-      const [contractText, sharedText, executionText, taskCss, guideCss, preflightPy, finalizePy, qaPy, graphStandard, manifestText] = await Promise.all([
-        loadText("TIERED_TASK_GENERATION_CONTRACT.md?v=20260920c"),
-        loadText("DISTRICT_RESPONSE_BUILD_STANDARD.md?v=20260920c"),
-        loadText("TIERED_TASK_BUILD_EXECUTION.md?v=20260920c"),
-        loadText("task_card_styles.css?v=20260920c"),
-        loadText("guide_styles.css?v=20260920c"),
-        loadText("tiered_task_preflight.py?v=20260920c"),
-        loadText("tiered_task_finalize.py?v=20260920c"),
-        loadText("tiered_task_qa.py?v=20260920c"),
-        loadText("DISTRICT_GRAPH_RENDERING_STANDARD.md?v=20260920c"),
-        loadText("../../Tools/MANIFEST.json?v=20260920c")
+      const [contractText, sharedText, executionText, layoutLockText, taskCss, guideCss, preflightPy, finalizePy, qaPy, graphStandard, manifestText] = await Promise.all([
+        loadText("TIERED_TASK_GENERATION_CONTRACT.md?v=20260920d"),
+        loadText("DISTRICT_RESPONSE_BUILD_STANDARD.md?v=20260920d"),
+        loadText("TIERED_TASK_BUILD_EXECUTION.md?v=20260920d"),
+        loadText("TIERED_TASK_LAYOUT_LOCK.md?v=20260920d"),
+        loadText("task_card_styles.css?v=20260920d"),
+        loadText("guide_styles.css?v=20260920d"),
+        loadText("tiered_task_preflight.py?v=20260920d"),
+        loadText("tiered_task_finalize.py?v=20260920d"),
+        loadText("tiered_task_qa.py?v=20260920d"),
+        loadText("DISTRICT_GRAPH_RENDERING_STANDARD.md?v=20260920d"),
+        loadText("../../Tools/MANIFEST.json?v=20260920d")
       ]);
       let graphManifest;
       try { graphManifest = JSON.parse(manifestText); } catch { throw new Error("Tools/MANIFEST.json is not valid JSON."); }
       const graphEntrypoint = graphManifest?.tools?.graph_tool;
       if (!graphEntrypoint) throw new Error("Tools/MANIFEST.json does not declare tools.graph_tool.");
-      const graphTool = await loadText(`../../${graphEntrypoint}?v=20260920c`);
+      const graphTool = await loadText(`../../${graphEntrypoint}?v=20260920d`);
 
-      const [taskHash, guideHash, preflightHash, finalizeHash, qaHash, graphHash] = await Promise.all([
-        sha256Hex(taskCss), sha256Hex(guideCss), sha256Hex(preflightPy), sha256Hex(finalizePy), sha256Hex(qaPy), sha256Hex(graphTool)
+      const [layoutLockHash, taskHash, guideHash, preflightHash, finalizeHash, qaHash, graphHash] = await Promise.all([
+        sha256Hex(layoutLockText), sha256Hex(taskCss), sha256Hex(guideCss), sha256Hex(preflightPy), sha256Hex(finalizePy), sha256Hex(qaPy), sha256Hex(graphTool)
       ]);
 
       const request = {
@@ -100,7 +112,8 @@
           tiered_task: CONTRACT_VERSION,
           shared_standard: SHARED_STANDARD_VERSION,
           execution: EXECUTION_VERSION,
-          graph_rendering: GRAPH_RENDERING_STANDARD_VERSION
+          graph_rendering: GRAPH_RENDERING_STANDARD_VERSION,
+          layout_lock: LAYOUT_LOCK_VERSION
         },
         teacher: {
           name: valueOrNull("teacherName"),
@@ -143,6 +156,7 @@
           task_card:{version:TASK_CARD_STYLE_VERSION, request_path:"response_contract/task_card_styles.css", response_path:"assets/task_card_styles.css", sha256:taskHash},
           guide:{version:GUIDE_STYLE_VERSION, request_path:"response_contract/guide_styles.css", response_path:"assets/guide_styles.css", sha256:guideHash}
         },
+        layout_lock: {version:LAYOUT_LOCK_VERSION, path:"response_contract/TIERED_TASK_LAYOUT_LOCK.md", sha256:layoutLockHash},
         deterministic_tools: {
           preflight:{version:PREFLIGHT_VERSION, path:"response_contract/tiered_task_preflight.py", sha256:preflightHash},
           finalize:{version:FINALIZE_VERSION, path:"response_contract/tiered_task_finalize.py", sha256:finalizeHash},
@@ -171,6 +185,7 @@
         {name:"response_contract/TIERED_TASK_GENERATION_CONTRACT.md", data:enc.encode(contractText)},
         {name:"response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md", data:enc.encode(sharedText)},
         {name:"response_contract/TIERED_TASK_BUILD_EXECUTION.md", data:enc.encode(executionText)},
+        {name:"response_contract/TIERED_TASK_LAYOUT_LOCK.md", data:enc.encode(layoutLockText)},
         {name:"response_contract/task_card_styles.css", data:enc.encode(taskCss)},
         {name:"response_contract/guide_styles.css", data:enc.encode(guideCss)},
         {name:"response_contract/tiered_task_preflight.py", data:enc.encode(preflightPy)},
@@ -182,6 +197,7 @@
         {name:"response_contract/CONTRACT_VERSION.txt", data:enc.encode(CONTRACT_VERSION+"\n")},
         {name:"response_contract/SHARED_STANDARD_VERSION.txt", data:enc.encode(SHARED_STANDARD_VERSION+"\n")},
         {name:"response_contract/EXECUTION_VERSION.txt", data:enc.encode(EXECUTION_VERSION+"\n")},
+        {name:"response_contract/LAYOUT_LOCK_SHA256.txt", data:enc.encode(layoutLockHash+"\n")},
         {name:"response_contract/TASK_CARD_STYLE_SHA256.txt", data:enc.encode(taskHash+"\n")},
         {name:"response_contract/GUIDE_STYLE_SHA256.txt", data:enc.encode(guideHash+"\n")}
       );
@@ -201,11 +217,11 @@
   function buildInstructions(request) {
     const targets = request.i_can_statements.map((t,i) => `${i+1}. ${t}`).join("\n");
     const sources = request.source_files.length ? `${request.source_files.length} supporting source file(s) are included under sources/. Treat all listed files as available supporting sources.` : "No supporting source files were attached.";
-    return `# District Tiered Task Request - Deterministic Pilot\n\n## Run automatically\nBuild the complete Tiered Task response from this request ZIP and return exactly ONE response ZIP. No additional teacher prompt is required.\n\nTask: ${request.task.name}\nSubject/course: ${request.teacher.subject_course}\nGrade level: ${request.teacher.grade_level}\nIntended use: ${request.task.intended_use}\nTime available: ${request.task.time_available || "Not specified"}\nReading/access level: ${request.task.target_reading_access_level || "Not specified"}\nWork mode: ${request.task.work_mode}\nResearch policy: ${request.task.research_policy}\nAllowed products: ${request.product_choices.allowed.join(", ")}\n${sources}\n\n## Learning targets\n${targets}\n\n## Grade-level interpretation - HARD\nUse the explicit grade level together with the I Can statements to set appropriate rigor, representations, number choices, vocabulary, reading load, expected reasoning, and scaffolding. Do not infer rigor from the wording of an I Can statement alone.\n\n## Teacher directions / constraints\n${request.teacher_notes || "No additional teacher directions were provided."}\n\n## Required execution order\n1. Run \`python response_contract/tiered_task_preflight.py --request-root . --out work/tiered_task_preflight.json\`. If it fails, stop and report the packaging error; do not search GitHub/web for missing core dependencies.\n2. Read the request and relevant supporting source files once. ChatGPT owns instructional judgment, DOK design, and the small amount of new content.\n3. Create one integrated DOK 1-4 card and one matching Teacher Guide. Use the packaged graph tool for supported Cartesian graph work and the graph standard for all graph output.\n4. Create the required HTML/PDF outputs using the locked CSS. Do not invent a new visual system.\n5. Run \`python response_contract/tiered_task_finalize.py --request-root . --response RESPONSE\` to copy locked assets/request metadata and generate CLICK_ME.html.\n6. Run \`python response_contract/tiered_task_qa.py --request-root . --response RESPONSE --out RESPONSE/data/mechanical_qa.json\`. Fix only reported failures; do not restart unrelated content work.\n7. Complete bounded content/visual QA and write RESPONSE/data/qa.json. Mechanical checks are not repeated manually.\n8. Zip RESPONSE and return that one response ZIP.\n\n## Required contracts\nFollow response_contract/TIERED_TASK_GENERATION_CONTRACT.md, response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md, response_contract/TIERED_TASK_BUILD_EXECUTION.md, and response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md.\n\nReturn only the completed response ZIP. The final user-facing line must be exactly:\n\n${request.delivery.required_final_line}\n`;
+    return `# District Tiered Task Request - Deterministic Pilot\n\n## Run automatically\nBuild the complete Tiered Task response from this request ZIP and return exactly ONE response ZIP. No additional teacher prompt is required.\n\nTask: ${request.task.name}\nSubject/course: ${request.teacher.subject_course}\nGrade level: ${request.teacher.grade_level}\nIntended use: ${request.task.intended_use}\nTime available: ${request.task.time_available || "Not specified"}\nReading/access level: ${request.task.target_reading_access_level || "Not specified"}\nWork mode: ${request.task.work_mode}\nResearch policy: ${request.task.research_policy}\nAllowed products: ${request.product_choices.allowed.join(", ")}\n${sources}\n\n## Learning targets\n${targets}\n\n## Grade-level interpretation - HARD\nUse the explicit grade level together with the I Can statements to set appropriate rigor, representations, number choices, vocabulary, reading load, expected reasoning, and scaffolding. Do not infer rigor from the wording of an I Can statement alone.\n\n## Teacher directions / constraints\n${request.teacher_notes || "No additional teacher directions were provided."}\n\n## Required execution order\n1. Run \`python response_contract/tiered_task_preflight.py --request-root . --out work/tiered_task_preflight.json\`. If it fails, stop and report the packaging error; do not search GitHub/web for missing core dependencies.\n2. Read the request and relevant supporting source files once. ChatGPT owns instructional judgment, DOK design, and the small amount of new content.\n3. Create one integrated DOK 1-4 card and one matching Teacher Guide. Use the packaged graph tool for supported Cartesian graph work and the graph standard for all graph output.\n4. Create the required HTML/PDF outputs using the locked CSS. Do not invent a new visual system.\n5. Run \`python response_contract/tiered_task_finalize.py --request-root . --response RESPONSE\` to copy locked assets/request metadata and generate CLICK_ME.html.\n6. Run \`python response_contract/tiered_task_qa.py --request-root . --response RESPONSE --out RESPONSE/data/mechanical_qa.json\`. Fix only reported failures; do not restart unrelated content work.\n7. Complete bounded content/visual QA and write RESPONSE/data/qa.json. Mechanical checks are not repeated manually.\n8. Zip RESPONSE and return that one response ZIP.\n\n## Required contracts\nFollow response_contract/TIERED_TASK_GENERATION_CONTRACT.md, response_contract/DISTRICT_RESPONSE_BUILD_STANDARD.md, response_contract/TIERED_TASK_BUILD_EXECUTION.md, response_contract/TIERED_TASK_LAYOUT_LOCK.md, and response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md.\n\nReturn only the completed response ZIP. The final user-facing line must be exactly:\n\n${request.delivery.required_final_line}\n`;
   }
 
   function clearForm() {
-    ["taskName","teacherName","subjectCourse","gradeLevel","readingLevel","timeAvailable","ican1","ican2","ican3","ican4","customProduct","teacherNotes"].forEach((id) => { $(id).value = ""; });
+    ["taskName","teacherName","subjectCourse","gradeLevel","readingLevel","timeAvailable","icanStatements","customProduct","teacherNotes"].forEach((id) => { $(id).value = ""; });
     $("useCase").value = "extension_after_mastery";
     $("workMode").value = "teacher_choice";
     $("researchPolicy").value = "teacher_choice";

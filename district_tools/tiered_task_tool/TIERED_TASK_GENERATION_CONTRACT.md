@@ -1,14 +1,18 @@
 # Tiered Task Generation Contract
 
 STATUS: REQUIRED
-VERSION: district-tiered-task-generation/0.3-pilot
+VERSION: district-tiered-task-generation/0.4-pilot
 DATE: 2026-09-20
 
 This contract defines how one teacher request becomes one integrated student Tiered Task Card plus one Teacher Guide / Evidence Guide. It works with `DISTRICT_RESPONSE_BUILD_STANDARD.md`, `TIERED_TASK_BUILD_EXECUTION.md`, and `DISTRICT_GRAPH_RENDERING_STANDARD.md`.
 
 ## 1. Purpose - HARD
 
-Create a ready-to-use extension/enrichment task that increases **cognitive complexity** from DOK 1 through DOK 4 while staying anchored to the teacher's 1-4 I Can statements. This is not an easy/medium/hard/hardest worksheet and it is not four separate task cards.
+Create a ready-to-use extension/enrichment task that increases **cognitive complexity** from DOK 1 through DOK 4 while staying anchored to the teacher's submitted I Can statements (1-4 recommended; more permitted when coherent). This is not an easy/medium/hard/hardest worksheet and it is not four separate task cards.
+
+## 1A. I Can statement set - HARD
+
+The teacher interface uses one multiline I Can / learning-target field. Recommend **1-4 statements**, but do not enforce a maximum. Treat each nonblank line as a separate target after removing ordinary bullet/number prefixes. If the teacher supplies more than four coherent targets, preserve them all and integrate them into the single card; do not discard, merge, or arbitrarily select four merely because 1-4 is the recommendation.
 
 ## 2. Grade level is instructional data - HARD
 

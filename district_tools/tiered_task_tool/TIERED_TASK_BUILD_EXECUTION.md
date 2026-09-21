@@ -1,7 +1,7 @@
 # Tiered Task Build Execution Contract
 
 STATUS: HARD
-VERSION: district-tiered-task-build-execution/1.0
+VERSION: district-tiered-task-build-execution/1.1
 DATE: 2026-09-20
 
 ## Division of labor
@@ -13,7 +13,7 @@ ChatGPT owns only the variable instructional work:
 3. author the small amount of new student/teacher content;
 4. check content accuracy and DOK/alignment quality.
 
-Packaged deterministic tools own repeatable mechanics: request preflight, dependency/hash checks, locked CSS copying, dashboard generation, required-file/link checks, PDF signatures/page-count checks, and graph dependency verification.
+Packaged deterministic tools own repeatable mechanics: request preflight, dependency/hash checks, layout-lock verification, locked CSS copying, dashboard generation, required-file/link checks, PDF signatures/page-count checks, and graph dependency verification.
 
 ## Required run order
 
@@ -29,7 +29,7 @@ Packaged deterministic tools own repeatable mechanics: request preflight, depend
 
 ## No recreation/search rule
 
-Do not write new scripts for jobs already owned by the packaged utilities. Do not fetch the contracts, locked CSS, graph tool, graph standard, or QA utilities from GitHub/the web during the response run. Missing packaged dependencies are a request-package defect and must fail closed.
+Do not write new scripts for jobs already owned by the packaged utilities. Do not fetch the contracts, layout lock, locked CSS, graph tool, graph standard, or QA utilities from GitHub/the web during the response run. Missing packaged dependencies are a request-package defect and must fail closed.
 
 ## Grade-level rule
 

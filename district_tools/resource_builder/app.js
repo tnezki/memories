@@ -1,9 +1,9 @@
 (() => {
   const $ = (id) => document.getElementById(id);
   const enc = new TextEncoder();
-  const REQUEST_SCHEMA = "district-resource-builder-request/0.4-pilot";
-  const TOOL_VERSION = "district-resource-builder/0.4-pilot";
-  const CONTRACT_VERSION = "district-resource-builder/0.3-pilot";
+  const REQUEST_SCHEMA = "district-resource-builder-request/0.5-pilot";
+  const TOOL_VERSION = "district-resource-builder/0.5-pilot";
+  const CONTRACT_VERSION = "district-resource-builder/0.4-pilot";
   const SHARED_STANDARD_VERSION = "district-response-build-standard/1.1";
   const EXECUTION_VERSION = "district-resource-build-execution/1.0";
   const PREFLIGHT_VERSION = "district-resource-preflight/1.0";
@@ -23,10 +23,9 @@
   init();
 
   async function init() {
-    renderTargetInputs();
     bindCommonEvents();
     try {
-      const response = await fetch("resource_profiles.json?v=20260920b", { cache: "no-store" });
+      const response = await fetch("resource_profiles.json?v=20260920d", { cache: "no-store" });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       profiles = data.profiles || [];
@@ -41,15 +40,8 @@
     }
   }
 
-  function renderTargetInputs() {
-    $("targetInputs").innerHTML = [1,2,3,4].map((n) => `<div class="target-row"><div class="target-num">${n}</div><input id="target${n}" type="text" placeholder="${n === 1 ? "I can..." : "Optional additional target"}"></div>`).join("");
-  }
-
   function bindCommonEvents() {
-    ["resourceName","teacherName","subjectCourse","gradeLevel","timeLength","readingLevel","context","standards","teacherNotes"].forEach((id) => $(id).addEventListener("input", refreshStatus));
-    document.addEventListener("input", (e) => {
-      if (e.target && /^target[1-4]$/.test(e.target.id || "")) refreshStatus();
-    });
+    ["resourceName","teacherName","subjectCourse","gradeLevel","learningTargets","timeLength","readingLevel","context","standards","teacherNotes"].forEach((id) => $(id).addEventListener("input", refreshStatus));
     document.querySelectorAll('#priorityChoices input[type="checkbox"]').forEach((el) => el.addEventListener("change", refreshStatus));
     sourceInput.addEventListener("change", () => { renderFiles(sourceInput.files, $("sourceList")); refreshStatus(); });
     $("clearForm").addEventListener("click", clearForm);
@@ -91,8 +83,22 @@
     });
   }
 
+  function parseLearningTargets(value) {
+    const seen = new Set();
+    return String(value || "")
+      .split(/\r?\n/)
+      .map((line) => line.trim().replace(/^(?:[-*•▪◦‣]+|\d+[.)])\s*/, "").trim())
+      .filter(Boolean)
+      .filter((target) => {
+        const key = target.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+  }
+
   function getTargets() {
-    return [1,2,3,4].map((n) => $(`target${n}`).value.trim()).filter(Boolean);
+    return parseLearningTargets($("learningTargets").value);
   }
 
   function getPriorities() {
@@ -179,21 +185,21 @@
       outputs.required_files=["CLICK_ME.html","assets/dashboard_styles.css","assets/resource_styles.css","data/request.json","data/qa.json",...outputs.primary,...outputs.teacher];
 
       const [contractText,sharedText,executionText,dashboardCss,resourceCss,preflightPy,finalizePy,qaPy,graphStandard,manifestText] = await Promise.all([
-        loadText("RESOURCE_BUILDER_CONTRACT.md?v=20260920b"),
-        loadText("DISTRICT_RESPONSE_BUILD_STANDARD.md?v=20260920b"),
-        loadText("RESOURCE_BUILD_EXECUTION.md?v=20260920b"),
-        loadText("dashboard_styles.css?v=20260920b"),
-        loadText("resource_styles.css?v=20260920b"),
-        loadText("resource_preflight.py?v=20260920b"),
-        loadText("resource_finalize.py?v=20260920b"),
-        loadText("resource_qa.py?v=20260920b"),
-        loadText("DISTRICT_GRAPH_RENDERING_STANDARD.md?v=20260920c"),
-        loadText("../../Tools/MANIFEST.json?v=20260920b")
+        loadText("RESOURCE_BUILDER_CONTRACT.md?v=20260920d"),
+        loadText("DISTRICT_RESPONSE_BUILD_STANDARD.md?v=20260920d"),
+        loadText("RESOURCE_BUILD_EXECUTION.md?v=20260920d"),
+        loadText("dashboard_styles.css?v=20260920d"),
+        loadText("resource_styles.css?v=20260920d"),
+        loadText("resource_preflight.py?v=20260920d"),
+        loadText("resource_finalize.py?v=20260920d"),
+        loadText("resource_qa.py?v=20260920d"),
+        loadText("DISTRICT_GRAPH_RENDERING_STANDARD.md?v=20260920d"),
+        loadText("../../Tools/MANIFEST.json?v=20260920d")
       ]);
       let graphManifest; try { graphManifest=JSON.parse(manifestText); } catch { throw new Error("Tools/MANIFEST.json is not valid JSON."); }
       const graphEntrypoint=graphManifest?.tools?.graph_tool;
       if (!graphEntrypoint) throw new Error("Tools/MANIFEST.json does not declare tools.graph_tool.");
-      const graphTool=await loadText(`../../${graphEntrypoint}?v=20260920b`);
+      const graphTool=await loadText(`../../${graphEntrypoint}?v=20260920d`);
 
       const [dashboardHash,resourceHash,preflightHash,finalizeHash,qaHash,graphHash] = await Promise.all([
         sha256Hex(dashboardCss),sha256Hex(resourceCss),sha256Hex(preflightPy),sha256Hex(finalizePy),sha256Hex(qaPy),sha256Hex(graphTool)
@@ -271,8 +277,7 @@
   }
 
   function clearForm() {
-    ["resourceName","teacherName","subjectCourse","gradeLevel","timeLength","readingLevel","context","standards","teacherNotes"].forEach((id)=>$(id).value="");
-    [1,2,3,4].forEach((n)=>$(`target${n}`).value="");
+    ["resourceName","teacherName","subjectCourse","gradeLevel","learningTargets","timeLength","readingLevel","context","standards","teacherNotes"].forEach((id)=>$(id).value="");
     sourceInput.value=""; $("sourceList").innerHTML="";
     document.querySelectorAll('#priorityChoices input[type="checkbox"]').forEach((el)=>{el.checked=false;});
     $("advancedOptions").open=false;

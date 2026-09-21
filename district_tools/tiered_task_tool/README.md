@@ -4,7 +4,7 @@ A district-wide request builder for one integrated DOK 1-4 Tiered Task Card plus
 
 ## Teacher flow
 
-1. Enter the assignment/task name, subject/course, **grade level**, and at least one I Can statement.
+1. Enter the assignment/task name, subject/course, **grade level**, and I Can statements / learning targets in one multiline field.
 2. Optionally attach **multiple supporting resources**.
 3. Open **Advanced options** only when you need to change reading/access level, time, intended use, allowed product types, work mode, research policy, or teacher constraints.
 4. Click **Build Request ZIP**.
@@ -12,6 +12,14 @@ A district-wide request builder for one integrated DOK 1-4 Tiered Task Card plus
 6. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
 
 `Unit / topic` is no longer a teacher field. Task name + subject/course + grade level + I Can statements provide the primary context.
+
+## I Can statement entry
+
+Use one multiline field. **Recommend 1-4 I Can statements, but allow more.** Teachers can enter one target per line or paste a bulleted/numbered list. The browser removes common bullet/number prefixes, ignores blanks, and stores every distinct target separately in `request.json`. More than four targets are valid when they form one coherent target set; they still feed one integrated Tiered Task card.
+
+## Locked Tiered Task layout
+
+The current student-card and Teacher Guide appearance is the gold layout. `TIERED_TASK_LAYOUT_LOCK.md` is packaged with every request, while the exact `task_card_styles.css` and `guide_styles.css` bytes are hash-locked in `request.json`. Response runs may fill the templates with new content, but may not redesign the card/guide, substitute CSS, or silently alter page geometry.
 
 ## Grade level stays visible
 

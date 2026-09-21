@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Tiered Task Tool</title>
-<link rel="stylesheet" href="styles.css?v=20260920c">
+<link rel="stylesheet" href="styles.css?v=20260920d">
 </head>
 <body>
 <header>
@@ -46,14 +46,9 @@
         </div>
       </div>
 
-      <label>I Can statements / learning targets <span class="required">*</span></label>
-      <p class="small">Enter 1-4 statements. Grade level and these targets set the rigor. The tool creates one integrated card, not one card per statement.</p>
-      <div class="ican-grid">
-        <div><label for="ican1">I Can 1 <span class="required">*</span></label><input id="ican1" type="text" placeholder="I can..."></div>
-        <div><label for="ican2">I Can 2 <span class="small">(optional)</span></label><input id="ican2" type="text" placeholder="I can..."></div>
-        <div><label for="ican3">I Can 3 <span class="small">(optional)</span></label><input id="ican3" type="text" placeholder="I can..."></div>
-        <div><label for="ican4">I Can 4 <span class="small">(optional)</span></label><input id="ican4" type="text" placeholder="I can..."></div>
-      </div>
+      <label for="icanStatements">I Can statements / learning targets <span class="required">*</span></label>
+      <p class="small"><b>Recommended: 1-4.</b> More are allowed when the targets belong together. Enter one per line or paste a bulleted list. Grade level and these targets set the rigor. The tool still creates one integrated card, not one card per statement.</p>
+      <textarea id="icanStatements" rows="7" placeholder="I can...&#10;I can...&#10;I can..."></textarea>
 
       <label for="sourceFiles">Supporting resources <span class="small">(optional)</span></label>
       <div class="drop">
@@ -144,6 +139,6 @@
     </aside>
   </div>
 </main>
-<script src="app.js?v=20260920c"></script>
+<script src="app.js?v=20260920d"></script>
 </body>
 </html>

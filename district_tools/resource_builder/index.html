@@ -7,10 +7,10 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>District Resource Builder</title>
-<link rel="stylesheet" href="styles.css?v=20260920b">
+<link rel="stylesheet" href="styles.css?v=20260920d">
 </head>
 <body>
-<header><div class="wrap"><h1>District Resource Builder <span style="font-size:13px;opacity:.8">PILOT</span></h1><p>Choose a classroom resource, enter the learning target, attach any useful source material, and build one self-contained request ZIP.</p></div></header>
+<header><div class="wrap"><h1>District Resource Builder <span style="font-size:13px;opacity:.8">PILOT</span></h1><p>Choose a classroom resource, enter the learning targets, attach any useful source material, and build one self-contained request ZIP.</p></div></header>
 <main>
 <a class="back" href="../">&larr; District Tools</a>
 <div class="grid">
@@ -32,9 +32,9 @@
   <div><label for="gradeLevel">Grade level <span class="required">*</span></label><input id="gradeLevel" type="text" placeholder="Example: Grade 2, Grade 8, 11-12"></div>
 </div>
 
-<h3 class="section-title">Learning targets</h3>
-<p class="small">Enter 1-4 I Can statements or learning objectives. Grade level is used with these targets to set the appropriate rigor, representations, directions, and reading load.</p>
-<div id="targetInputs"></div>
+<h3 class="section-title">I Can statements / learning targets</h3>
+<p class="small"><b>Recommended: 1-4.</b> More are allowed when the targets belong together. Enter one per line or paste a bulleted list. Grade level is used with these targets to set the appropriate rigor, representations, directions, and reading load.</p>
+<textarea id="learningTargets" rows="6" placeholder="I can...&#10;I can...&#10;I can..."></textarea>
 
 <h3 class="section-title">Resource-specific options</h3>
 <div id="profileControls" class="profile-box profile-controls"></div>
@@ -104,6 +104,6 @@
 </aside>
 </div>
 </main>
-<script src="app.js?v=20260920c"></script>
+<script src="app.js?v=20260920d"></script>
 </body>
 </html>

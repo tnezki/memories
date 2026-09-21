@@ -5,13 +5,17 @@ A district-wide request builder that turns a small set of teacher inputs into on
 ## Teacher flow
 
 1. Select the resource type.
-2. Enter resource name, subject/course, **grade level**, and at least one learning target.
+2. Enter resource name, subject/course, **grade level**, and the I Can statements / learning targets in one multiline field.
 3. Set the visible resource-specific options.
 4. Optionally attach **multiple supporting source files**.
 5. Open **Advanced options** only when you need extra constraints, context, standards, reading/access targets, design emphasis, or special directions.
 6. Click **Build Request ZIP**.
 7. Upload that ZIP to ChatGPT. No separate build prompt is required.
 8. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
+
+## I Can statement entry
+
+Use one multiline field for I Can statements / learning targets. **Recommend 1-4, but do not enforce a maximum.** Teachers may paste a bulleted list or enter one target per line; the browser removes common bullet/number prefixes and stores each nonblank target separately in `request.json`. More than four targets are valid when they form one coherent instructional set.
 
 ## Why grade level stays visible
 
