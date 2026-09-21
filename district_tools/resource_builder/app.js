@@ -187,7 +187,7 @@
         loadText("resource_preflight.py?v=20260920b"),
         loadText("resource_finalize.py?v=20260920b"),
         loadText("resource_qa.py?v=20260920b"),
-        loadText("../_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md?v=20260920b"),
+        loadText("DISTRICT_GRAPH_RENDERING_STANDARD.md?v=20260920c"),
         loadText("../../Tools/MANIFEST.json?v=20260920b")
       ]);
       let graphManifest; try { graphManifest=JSON.parse(manifestText); } catch { throw new Error("Tools/MANIFEST.json is not valid JSON."); }
