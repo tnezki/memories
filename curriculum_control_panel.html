@@ -21,16 +21,24 @@ button{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:75
 .tabs{display:flex;gap:8px;margin-bottom:20px}.tab{background:#edf1f5;color:#304154}.tab.active{background:var(--accent);color:#fff}
 .section{display:none}.section.active{display:block}
 label{display:block;font-size:13px;font-weight:800;margin:13px 0 6px}
-select,input[type=text],input[type=date],textarea,input[type=file]{width:100%;font:inherit}
-select,input[type=text],input[type=date],textarea{border:1px solid #cbd4df;border-radius:10px;padding:10px 11px;background:#fff}
+select,input[type=text],input[type=url],input[type=date],textarea,input[type=file]{width:100%;font:inherit}
+select,input[type=text],input[type=url],input[type=date],textarea{border:1px solid #cbd4df;border-radius:10px;padding:10px 11px;background:#fff}
 textarea{min-height:82px;resize:vertical}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:680px){.row{grid-template-columns:1fr}}
 .status{border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13px;background:#f7f8f9;border:1px solid var(--line)}
 .status.good{background:#eefbf4;border-color:#b8e4ca;color:#125f3e}.status.warn{background:#fff8e8;border-color:#efdaa6;color:#7c4900}.status.bad{background:#fff1f0;border-color:#f4c1bd;color:#912018}
 .drop{border:1.5px dashed #acb8c6;border-radius:12px;padding:14px;background:#fafbfc}.divider{height:1px;background:#e6eaf0;margin:18px 0}.actions{display:flex;gap:9px;margin-top:16px}.policy{margin-top:14px;padding:11px 12px;border:1px solid #b8e4ca;border-radius:10px;background:#eefbf4;color:#125f3e;font-size:13px;font-weight:750}
 .directionGrid{display:grid;grid-template-columns:1fr;gap:4px}.directionCard{border:1px solid #dfe5ec;border-radius:12px;background:#fafbfc;padding:12px;margin-top:10px}.directionCard label{margin-top:0}.directionCard textarea{background:#fff}
-.modeChecks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px}.modeCheck{display:flex;align-items:center;gap:8px;border:1px solid #dfe5ec;border-radius:10px;padding:10px 12px;background:#fafbfc;font-weight:750}.modeCheck input{width:auto}.dateGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}@media(max-width:680px){.modeChecks,.dateGrid{grid-template-columns:1fr}}
+.modeChecks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:8px}.modeCheck{display:flex;align-items:center;gap:8px;border:1px solid #dfe5ec;border-radius:10px;padding:10px 12px;background:#fafbfc;font-weight:750}.modeCheck input{width:auto}
+.dateGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.scheduleGrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+.scheduleCard{border:1px solid #dfe5ec;border-radius:12px;background:#fafbfc;padding:13px}
+.scheduleCard h4{margin:0 0 6px;font-size:15px}
+.scheduleCard label{margin-top:9px}
+.scheduleSourceNote{margin-top:7px}
+.linklike{color:var(--accent);font-weight:800}
 .hidden{display:none!important}
+@media(max-width:680px){.modeChecks,.dateGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -86,15 +94,18 @@ textarea{min-height:82px;resize:vertical}
       </div>
 
       <div id="subPlanFields" class="hidden">
-        <div class="status good"><b>Sub Plans pilot:</b> the request uses the current Google Drive Monday/non-Monday templates, MMHS Daily Schedules, and Seating Chart. Check the plan type(s) you want, then add directions by hour. Crewtime and Prep also have boxes and fall back to the normal defaults when left blank.</div>
+        <div class="status good"><b>Sub Plans:</b> tell the system what students should accomplish during each hour. These boxes are lesson intent, not finished substitute prose. The build may use current Philosophy, Frameworks, Question Structure, course resources, and registered tools to create the directions and supporting materials the substitute actually needs.</div>
+
         <label>Plans to build</label>
         <div class="modeChecks">
-          <label class="modeCheck"><input id="subPlanMonday" type="checkbox" checked> Monday</label>
+          <label class="modeCheck"><input id="subPlanMonday" type="checkbox"> Monday</label>
           <label class="modeCheck"><input id="subPlanRegular" type="checkbox"> Non-Monday</label>
+          <label class="modeCheck"><input id="subPlanOther" type="checkbox"> Other</label>
           <label class="modeCheck"><input id="subPlanEmergency" type="checkbox"> Emergencies</label>
         </div>
+
         <div class="dateGrid">
-          <div id="subPlanMondayDateWrap">
+          <div id="subPlanMondayDateWrap" class="hidden">
             <label>Monday date</label>
             <input id="subPlanMondayDate" type="date">
           </div>
@@ -103,21 +114,104 @@ textarea{min-height:82px;resize:vertical}
             <input id="subPlanRegularDate" type="date">
           </div>
         </div>
-        <div id="subPlanModeHelp" class="status warn">Check one or more plan types. Dated plans save to date-named Google Drive folders; Emergencies stay reusable in the Emergency folder.</div>
+
+        <div id="subPlanOtherMetaWrap" class="hidden">
+          <div class="row">
+            <div>
+              <label>Other plan label</label>
+              <input id="subPlanOtherLabel" type="text" placeholder="Example: Assembly Day, Testing Day, Half Day">
+            </div>
+            <div>
+              <label>Other plan date</label>
+              <input id="subPlanOtherDate" type="date">
+            </div>
+          </div>
+        </div>
+
+        <div id="subPlanModeHelp" class="status warn">Check at least one plan type.</div>
+
+        <div id="subPlanScheduleSection" class="hidden">
+          <div class="divider"></div>
+          <h3>Bell schedule for each dated plan</h3>
+          <div class="small">Plan type and bell schedule are separate. A Non-Monday plan can use a special assembly schedule. Standard choices use the current MMHS Daily Schedules document in the Sub Plans profile; special schedules require the exact source link for that day.</div>
+
+          <div class="scheduleGrid">
+            <div id="subPlanMondayScheduleWrap" class="scheduleCard hidden">
+              <h4>Monday plan schedule</h4>
+              <label>Schedule</label>
+              <select id="subPlanMondayScheduleType">
+                <option value="standard_monday">Standard Monday Schedule</option>
+                <option value="standard_tuesday_friday">Standard Tuesday-Friday Schedule</option>
+                <option value="special">Special / Alternate Schedule</option>
+              </select>
+              <div id="subPlanMondayStandardNote" class="status good scheduleSourceNote">Uses the current MMHS Daily Schedules source from PROFILE.json.</div>
+              <div id="subPlanMondaySpecialFields" class="hidden">
+                <label>Special schedule name</label>
+                <input id="subPlanMondayScheduleName" type="text" placeholder="Example: Pep Assembly Schedule">
+                <label>Special schedule source link <span class="small">(required)</span></label>
+                <input id="subPlanMondayScheduleUrl" type="url" placeholder="Paste the Google Doc/Drive or other exact schedule link">
+                <label>Schedule file <span class="small">(optional)</span></label>
+                <div class="drop"><input id="subPlanMondayScheduleFile" type="file"></div>
+              </div>
+            </div>
+
+            <div id="subPlanRegularScheduleWrap" class="scheduleCard hidden">
+              <h4>Non-Monday plan schedule</h4>
+              <label>Schedule</label>
+              <select id="subPlanRegularScheduleType">
+                <option value="standard_tuesday_friday">Standard Tuesday-Friday Schedule</option>
+                <option value="standard_monday">Standard Monday Schedule</option>
+                <option value="special">Special / Alternate Schedule</option>
+              </select>
+              <div id="subPlanRegularStandardNote" class="status good scheduleSourceNote">Uses the current MMHS Daily Schedules source from PROFILE.json.</div>
+              <div id="subPlanRegularSpecialFields" class="hidden">
+                <label>Special schedule name</label>
+                <input id="subPlanRegularScheduleName" type="text" placeholder="Example: Special Assembly Schedule">
+                <label>Special schedule source link <span class="small">(required)</span></label>
+                <input id="subPlanRegularScheduleUrl" type="url" placeholder="Paste the Google Doc/Drive or other exact schedule link">
+                <label>Schedule file <span class="small">(optional)</span></label>
+                <div class="drop"><input id="subPlanRegularScheduleFile" type="file"></div>
+              </div>
+            </div>
+
+            <div id="subPlanOtherScheduleWrap" class="scheduleCard hidden">
+              <h4>Other plan schedule</h4>
+              <label>Schedule</label>
+              <select id="subPlanOtherScheduleType">
+                <option value="special">Special / Alternate Schedule</option>
+                <option value="standard_tuesday_friday">Standard Tuesday-Friday Schedule</option>
+                <option value="standard_monday">Standard Monday Schedule</option>
+              </select>
+              <div id="subPlanOtherStandardNote" class="status good scheduleSourceNote hidden">Uses the current MMHS Daily Schedules source from PROFILE.json.</div>
+              <div id="subPlanOtherSpecialFields">
+                <label>Special schedule name</label>
+                <input id="subPlanOtherScheduleName" type="text" placeholder="Example: Testing Schedule">
+                <label>Special schedule source link <span class="small">(required)</span></label>
+                <input id="subPlanOtherScheduleUrl" type="url" placeholder="Paste the Google Doc/Drive or other exact schedule link">
+                <label>Schedule file <span class="small">(optional)</span></label>
+                <div class="drop"><input id="subPlanOtherScheduleFile" type="file"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <h3>What should students accomplish?</h3>
+        <div class="small">Use shorthand if you want. The build should turn your intent into clear substitute directions and create/select supporting materials when the current curriculum authorities provide enough information to do so safely.</div>
 
         <div class="directionGrid">
-          <div class="directionCard"><label>1st Hour — STEM</label><textarea id="subPlanP1" placeholder="Type rough class directions. Grammar and sentence flow will be cleaned up without changing your intent."></textarea></div>
-          <div class="directionCard"><label>2nd Hour — Physics</label><textarea id="subPlanP2"></textarea></div>
-          <div class="directionCard"><label>3rd Hour — Algebra 1</label><textarea id="subPlanP3"></textarea></div>
+          <div class="directionCard"><label>1st Hour — STEM</label><textarea id="subPlanP1" placeholder="Describe the student outcome, activity, unfinished work, or resource you want used. Example: Finish the design challenge reflection, then independent extension work for the rest of class."></textarea></div>
+          <div class="directionCard"><label>2nd Hour — Physics</label><textarea id="subPlanP2" placeholder="Example: Finish Newton's Laws notes, then independent force practice for about 25 minutes."></textarea></div>
+          <div class="directionCard"><label>3rd Hour — Algebra 1</label><textarea id="subPlanP3" placeholder="Example: Review solving equations. They need independent practice and an early-finisher option."></textarea></div>
           <div class="directionCard"><label>Crewtime <span class="small">(optional; blank uses the normal quiet-work direction)</span></label><textarea id="subPlanCrew"></textarea></div>
-          <div class="directionCard"><label>4th Hour — AP Calculus</label><textarea id="subPlanP4"></textarea></div>
+          <div class="directionCard"><label>4th Hour — AP Calculus</label><textarea id="subPlanP4" placeholder="Describe what students should learn, finish, practice, or submit during the hour."></textarea></div>
           <div class="directionCard"><label>5th Hour — Prep <span class="small">(optional)</span></label><textarea id="subPlanP5"></textarea></div>
-          <div class="directionCard"><label>6th Hour — Algebra 1</label><textarea id="subPlanP6"></textarea></div>
+          <div class="directionCard"><label>6th Hour — Algebra 1</label><textarea id="subPlanP6" placeholder="Describe what students should learn, finish, practice, or submit during the hour."></textarea></div>
         </div>
 
         <label>Files the substitute may need <span class="small">(optional)</span></label>
-        <div class="drop"><input id="subPlanAdditional" type="file" multiple><div class="small" style="margin-top:5px">Attach only run-specific materials. The pilot will place needed files and generated materials in the same Google Drive package folder.</div></div>
-        <label>Additional note <span class="small">(optional)</span></label><textarea id="subPlanNote" placeholder="Use only for something that does not belong in one class direction box."></textarea>
+        <div class="drop"><input id="subPlanAdditional" type="file" multiple><div class="small" style="margin-top:5px">Attach only run-specific materials. Needed files and generated materials belong in the same Google Drive package folder.</div></div>
+        <label>Additional note <span class="small">(optional)</span></label><textarea id="subPlanNote" placeholder="Use only for something that does not belong in one class intent box."></textarea>
       </div>
 
       <div class="actions"><button id="saveGeneral">Save Request ZIP</button></div>
@@ -126,7 +220,7 @@ textarea{min-height:82px;resize:vertical}
 </div>
 </main>
 <script>
-const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.5";
+const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.6";
 const COURSES={"Algebra 1":{folder:"algebra",repo:"tnezki/algebra",slug:"algebra_1",units:8},"AP Calculus AB":{folder:"calculus",repo:"tnezki/calculus",slug:"ap_calculus_ab",units:8},"Physics":{folder:"physics",repo:"tnezki/physics",slug:"physics",units:8}};
 
 // The canonical control panel is intentionally a build factory, not a maintenance console.
@@ -220,17 +314,32 @@ function refreshGeneral(){
   $("subPlanFields").classList.toggle("hidden",!isSub);
   if(isSub)refreshSubPlanMode();
 }
+function refreshScheduleCard(prefix){
+  const type=$(prefix+"ScheduleType").value;
+  const special=type==="special";
+  $(prefix+"SpecialFields").classList.toggle("hidden",!special);
+  $(prefix+"StandardNote").classList.toggle("hidden",special);
+}
 function refreshSubPlanMode(){
-  const monday=$("subPlanMonday").checked,regular=$("subPlanRegular").checked,emergency=$("subPlanEmergency").checked;
+  const monday=$("subPlanMonday").checked,regular=$("subPlanRegular").checked,other=$("subPlanOther").checked,emergency=$("subPlanEmergency").checked;
   $("subPlanMondayDateWrap").classList.toggle("hidden",!monday);
   $("subPlanRegularDateWrap").classList.toggle("hidden",!regular);
+  $("subPlanOtherMetaWrap").classList.toggle("hidden",!other);
+  $("subPlanScheduleSection").classList.toggle("hidden",!(monday||regular||other));
+  $("subPlanMondayScheduleWrap").classList.toggle("hidden",!monday);
+  $("subPlanRegularScheduleWrap").classList.toggle("hidden",!regular);
+  $("subPlanOtherScheduleWrap").classList.toggle("hidden",!other);
   if(!monday)$("subPlanMondayDate").value="";
   if(!regular)$("subPlanRegularDate").value="";
-  const selected=[monday?"Monday":null,regular?"Non-Monday":null,emergency?"Emergencies":null].filter(Boolean);
+  if(!other){$("subPlanOtherDate").value="";$("subPlanOtherLabel").value=""}
+  const selected=[monday?"Monday":null,regular?"Non-Monday":null,other?"Other":null,emergency?"Emergencies":null].filter(Boolean);
   const help=selected.length
-    ?`Selected: ${selected.join(", ")}. The same hourly directions are used for each selected plan type; you can add Crewtime and Prep notes when needed.`
+    ?`Selected: ${selected.join(", ")}. Dated/Other plans each use the schedule selected below; Emergency keeps the two standard reusable schedules.`
     :"Check at least one plan type.";
   setStatus("subPlanModeHelp",help,selected.length?"good":"warn");
+  refreshScheduleCard("subPlanMonday");
+  refreshScheduleCard("subPlanRegular");
+  refreshScheduleCard("subPlanOther");
 }
 
 function outputSpec(p){const map={exit:"Quick Checks"};return[{id:p?.key||"output",label:map[p?.key]||p?.label||"Requested output",kind:"canonical"}]}
@@ -243,6 +352,10 @@ function requestText(m){
   if(m.course)s+=`COURSE: ${m.course}\nUNIT: ${m.unit}\n`;
   s+=`JOB: ${m.workflow_label}\nPM: ${m.pm_entrypoint}\nSYSTEM: ${m.system_repo}@${m.system_commit}\nSYSTEM MANIFEST: ${m.system_manifest}\n`;
   if(m.course_repo)s+=`COURSE REPO: ${m.course_repo}@${m.course_commit}\n`;
+  if(m.project_course_pins){
+    s+="PROJECT COURSE PINS:\n";
+    for(const [name,pin] of Object.entries(m.project_course_pins))s+=`- ${name}: ${pin.repo}@${pin.commit}\n`;
+  }
   s+=`OUTPUTS: ${m.selected_outputs.map(x=>x.label).join('; ')}\nDELIVERY: ${m.delivery}\nSOURCE POLICY: ${m.runtime.source_policy}\nWEB SEARCH ALLOWED: NO\nPRIOR CHAT CONTEXT ALLOWED: NO\nFILE LIBRARY RECOVERY ALLOWED: NO\n`;
   if(m.runtime.google_drive_allowed)s+="GOOGLE DRIVE: AUTHORIZED BY SELECTED PM FOR DECLARED SOURCES/DESTINATIONS\n";
   if(m.teacher_inputs.note)s+=`TEACHER NOTE: ${m.teacher_inputs.note}\n`;
@@ -251,7 +364,18 @@ function requestText(m){
     s+=`\nSUB PLAN TYPES: ${sp.plan_types.join(", ")}\n`;
     if(sp.dates.monday)s+=`MONDAY DATE: ${sp.dates.monday}\n`;
     if(sp.dates.non_monday)s+=`NON-MONDAY DATE: ${sp.dates.non_monday}\n`;
+    if(sp.dates.other)s+=`OTHER DATE: ${sp.dates.other}\n`;
+    if(sp.other_label)s+=`OTHER LABEL: ${sp.other_label}\n`;
     if(sp.plan_types.includes("emergency"))s+="EMERGENCY DATE: NONE\n";
+    s+="SCHEDULE SOURCES:\n";
+    for(const [mode,src] of Object.entries(sp.schedule_sources||{})){
+      s+=`- ${mode}: ${src.mode}`;
+      if(src.name)s+=` | ${src.name}`;
+      if(src.url)s+=` | ${src.url}`;
+      if(src.file_name)s+=` | file=${src.file_name}`;
+      s+="\n";
+    }
+    s+="LESSON INTENT BY HOUR:\n";
     for(const d of sp.hour_directions)s+=`${d.label}: ${d.text||"[use profile/template default]"}\n`;
   }
   s+="\nEXECUTION\nUse the pinned commits. Read SYSTEM_MANIFEST.json first, including declared Philosophy, runtime, and local-transfer amendments/contracts, then the selected PM and only required authorities/resources.\n\nOUTPUT CONTRACT\n";
@@ -273,13 +397,32 @@ function safeSlug(s){return String(s||"request").toLowerCase().replace(/[^a-z0-9
 
 async function saveBuild(){try{const p=buildSelected(),course=$("buildCourse").value,unit=Number($("buildUnit").value),files=[...$("buildAdditional").files];if(!p)return;const m=await manifestBase("BUILD",course,unit,p,outputSpec(p),$("buildNote").value.trim(),files.map(f=>f.name)),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
 
+function specialSchedule(prefix,modeKey){
+  const type=$(prefix+"ScheduleType").value;
+  if(type!=="special")return{mode:type,profile_source:"drive.daily_schedule"};
+  const name=$(prefix+"ScheduleName").value.trim(),url=$(prefix+"ScheduleUrl").value.trim(),file=$(prefix+"ScheduleFile").files[0]||null;
+  if(!url)throw Error(`Paste the special schedule source link for ${modeKey}.`);
+  try{const u=new URL(url);if(!["http:","https:"].includes(u.protocol))throw 0}catch{throw Error(`Use a valid http/https schedule link for ${modeKey}.`)}
+  return{mode:"special",name:name||"Special / Alternate Schedule",url,file_name:file?file.name:null};
+}
+
 async function saveSubPlan(p){
-  const monday=$("subPlanMonday").checked,regular=$("subPlanRegular").checked,emergency=$("subPlanEmergency").checked;
-  const types=[monday?"monday":null,regular?"non_monday":null,emergency?"emergency":null].filter(Boolean);
-  if(!types.length){alert("Check Monday, Non-Monday, Emergencies, or any combination of them.");return}
-  const mondayDate=monday?$("subPlanMondayDate").value:null,regularDate=regular?$("subPlanRegularDate").value:null;
+  const monday=$("subPlanMonday").checked,regular=$("subPlanRegular").checked,other=$("subPlanOther").checked,emergency=$("subPlanEmergency").checked;
+  const types=[monday?"monday":null,regular?"non_monday":null,other?"other":null,emergency?"emergency":null].filter(Boolean);
+  if(!types.length){alert("Check Monday, Non-Monday, Other, Emergencies, or any combination of them.");return}
+  const mondayDate=monday?$("subPlanMondayDate").value:null,regularDate=regular?$("subPlanRegularDate").value:null,otherDate=other?$("subPlanOtherDate").value:null,otherLabel=other?$("subPlanOtherLabel").value.trim():"";
   if(monday&&!mondayDate){alert("Choose the Monday date.");return}
   if(regular&&!regularDate){alert("Choose the Non-Monday date.");return}
+  if(other&&!otherDate){alert("Choose the Other plan date.");return}
+  if(other&&!otherLabel){alert("Add a label for the Other plan.");return}
+
+  let scheduleSources={};
+  try{
+    if(monday)scheduleSources.monday=specialSchedule("subPlanMonday","Monday");
+    if(regular)scheduleSources.non_monday=specialSchedule("subPlanRegular","Non-Monday");
+    if(other)scheduleSources.other=specialSchedule("subPlanOther","Other");
+  }catch(e){alert(e.message);return}
+
   const directions=[
     {key:"period_1",label:"1st Hour - STEM",text:$("subPlanP1").value.trim()},
     {key:"period_2",label:"2nd Hour - Physics",text:$("subPlanP2").value.trim()},
@@ -291,18 +434,39 @@ async function saveSubPlan(p){
   ];
   const required=directions.filter(x=>["period_1","period_2","period_3","period_4","period_6"].includes(x.key));
   const missing=required.filter(x=>!x.text).map(x=>x.label);
-  if(missing.length){alert("Add directions for: "+missing.join(", "));return}
+  if(missing.length){alert("Add lesson intent for: "+missing.join(", "));return}
+
   const files=[...$("subPlanAdditional").files],note=$("subPlanNote").value.trim();
+  const scheduleFiles=[];
+  if(monday&&$("subPlanMondayScheduleType").value==="special"&&$("subPlanMondayScheduleFile").files[0])scheduleFiles.push({mode:"monday",file:$("subPlanMondayScheduleFile").files[0]});
+  if(regular&&$("subPlanRegularScheduleType").value==="special"&&$("subPlanRegularScheduleFile").files[0])scheduleFiles.push({mode:"non_monday",file:$("subPlanRegularScheduleFile").files[0]});
+  if(other&&$("subPlanOtherScheduleType").value==="special"&&$("subPlanOtherScheduleFile").files[0])scheduleFiles.push({mode:"other",file:$("subPlanOtherScheduleFile").files[0]});
+
   const m=await manifestBase("GENERAL",null,null,p,generalOutputSpec(p),note,files.map(f=>f.name));
   m.course_repo=null;
   m.runtime.source_policy="PINNED_PROJECT_AND_AUTHORIZED_GOOGLE_DRIVE";
   m.runtime.google_drive_allowed=true;
   m.runtime.google_drive_write_allowed=true;
   m.runtime.local_repo_transfer_required_for_known_destination=false;
-  m.teacher_inputs.sub_plan={plan_types:types,dates:{monday:mondayDate,non_monday:regularDate},hour_directions:directions,additional_note:note,additional_files:files.map(f=>f.name)};
+  m.project_course_pins={
+    "Physics":{repo:COURSES["Physics"].repo,commit:await resolveCommit(COURSES["Physics"].repo)},
+    "Algebra 1":{repo:COURSES["Algebra 1"].repo,commit:await resolveCommit(COURSES["Algebra 1"].repo)},
+    "AP Calculus AB":{repo:COURSES["AP Calculus AB"].repo,commit:await resolveCommit(COURSES["AP Calculus AB"].repo)}
+  };
+  m.teacher_inputs.sub_plan={
+    plan_types:types,
+    dates:{monday:mondayDate,non_monday:regularDate,other:otherDate},
+    other_label:otherLabel||null,
+    schedule_sources:scheduleSources,
+    hour_directions:directions,
+    additional_note:note,
+    additional_files:files.map(f=>f.name),
+    schedule_files:scheduleFiles.map(x=>({mode:x.mode,file_name:x.file.name}))
+  };
   const enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];
   await addFiles(entries,files,"inputs/additional/");
-  const suffix=[mondayDate,regularDate,emergency?"emergency":null].filter(Boolean).join("_");
+  for(const x of scheduleFiles)await addFiles(entries,[x.file],`inputs/schedules/${x.mode}/`);
+  const suffix=[mondayDate,regularDate,otherDate,emergency?"emergency":null].filter(Boolean).join("_");
   await writeRequest(await makeZip(entries),`general_sub_plans_${safeSlug(suffix)}_REQUEST.zip`);
 }
 
@@ -319,7 +483,11 @@ $("buildJob").onchange=refreshBuild;
 $("generalJob").onchange=refreshGeneral;
 $("subPlanMonday").onchange=refreshSubPlanMode;
 $("subPlanRegular").onchange=refreshSubPlanMode;
+$("subPlanOther").onchange=refreshSubPlanMode;
 $("subPlanEmergency").onchange=refreshSubPlanMode;
+$("subPlanMondayScheduleType").onchange=()=>refreshScheduleCard("subPlanMonday");
+$("subPlanRegularScheduleType").onchange=()=>refreshScheduleCard("subPlanRegular");
+$("subPlanOtherScheduleType").onchange=()=>refreshScheduleCard("subPlanOther");
 (async()=>{initCourses();await restoreRoot();await restoreRequest();await discoverMenus()})();
 </script>
 </body>

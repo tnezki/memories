@@ -1,5 +1,5 @@
 {
-  "schema": "sub-plans-profile/0.2",
+  "schema": "sub-plans-profile/0.3",
   "status": "pilot",
   "teacher": "Troy Nezki",
   "school_year": "2026-27",
@@ -28,6 +28,40 @@
       "id": "1HH2hu6U2rCBLZMFKaJL40MuEAjk5_l6zsBCVoUkL2P4",
       "title": "Seating Chart",
       "url": "https://docs.google.com/document/d/1HH2hu6U2rCBLZMFKaJL40MuEAjk5_l6zsBCVoUkL2P4"
+    }
+  },
+  "curriculum_authority": {
+    "system_manifest": "SYSTEM_MANIFEST.json",
+    "philosophy_role": "philosophy",
+    "framework_manifest": "frameworks/MANIFEST.json",
+    "question_structure_role": "question_structure",
+    "tools_manifest": "Tools/MANIFEST.json",
+    "course_routes": {
+      "period_1": {
+        "course": "STEM",
+        "framework": null,
+        "repo_pin_key": null
+      },
+      "period_2": {
+        "course": "Physics",
+        "framework": "Physics",
+        "repo_pin_key": "Physics"
+      },
+      "period_3": {
+        "course": "Algebra 1",
+        "framework": "Algebra 1",
+        "repo_pin_key": "Algebra 1"
+      },
+      "period_4": {
+        "course": "AP Calculus AB",
+        "framework": "AP Calculus AB",
+        "repo_pin_key": "AP Calculus AB"
+      },
+      "period_6": {
+        "course": "Algebra 1",
+        "framework": "Algebra 1",
+        "repo_pin_key": "Algebra 1"
+      }
     }
   },
   "directions": [
@@ -86,6 +120,24 @@
     "period_5": "Prep",
     "period_6_note": "I team teach this hour with a special education teacher."
   },
+  "schedule_source_modes": {
+    "standard_monday": {
+      "label": "Standard Monday Schedule",
+      "authority": "drive.daily_schedule",
+      "times_from": "schedules.monday"
+    },
+    "standard_tuesday_friday": {
+      "label": "Standard Tuesday-Friday Schedule",
+      "authority": "drive.daily_schedule",
+      "times_from": "schedules.tuesday_friday"
+    },
+    "special": {
+      "label": "Special / Alternate Schedule",
+      "teacher_url_required": true,
+      "teacher_file_optional": true,
+      "fail_closed_if_unreadable": true
+    }
+  },
   "schedules": {
     "monday": {
       "period_1": "8:55 - 9:38",
@@ -108,6 +160,12 @@
       "period_6": "1:46 - 2:40"
     }
   },
+  "other_mode": {
+    "requires_label": true,
+    "requires_date": true,
+    "default_schedule_mode": "special",
+    "destination_folder_name": "YYYY-MM-DD"
+  },
   "destinations": {
     "dated_folder_name": "YYYY-MM-DD",
     "emergency_folder_name": "Emergency",
@@ -115,7 +173,8 @@
   },
   "style": {
     "direction_tone": "brief, practical, substitute-facing",
-    "cleanup": "correct grammar/spelling and improve clarity without changing instructional intent",
+    "teacher_input_semantics": "lesson intent / desired student outcome, not finished substitute prose",
+    "cleanup": "turn teacher shorthand into complete directions without changing instructional intent",
     "stable_sections": [
       "In Case of Emergency",
       "Discipline",
