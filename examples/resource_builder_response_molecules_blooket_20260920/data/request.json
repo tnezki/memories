@@ -1,0 +1,164 @@
+{
+  "schema": "district-resource-builder-request/0.4-pilot",
+  "tool_version": "district-resource-builder/0.4-pilot",
+  "created_at": "2026-09-21T00:41:55.533Z",
+  "contracts": {
+    "resource_builder": "district-resource-builder/0.3-pilot",
+    "shared_standard": "district-response-build-standard/1.1",
+    "execution": "district-resource-build-execution/1.0",
+    "graph_rendering": "district-graph-rendering-standard/1.2"
+  },
+  "resource": {
+    "name": "Molecules blooket",
+    "profile_id": "blooket_review",
+    "profile_label": "Blooket Review"
+  },
+  "teacher": {
+    "name": null,
+    "subject_course": "7th Grade Science",
+    "grade_level": "7"
+  },
+  "learning_targets": [
+    "I can make and draw a model of molecules showing the composition before and after a chemical change as well as what happens when temperature changes."
+  ],
+  "context": null,
+  "standards_framework": null,
+  "time_length_constraint": null,
+  "target_reading_access_level": null,
+  "design_priorities": [],
+  "profile_options": {
+    "question_count": 30,
+    "time_limit": 30,
+    "question_mix": "balanced",
+    "calculation_questions": true
+  },
+  "profile_snapshot": {
+    "id": "blooket_review",
+    "label": "Blooket Review",
+    "summary": "Create a Blooket-ready CSV review set with strict import formatting and a separate teacher answer reference.",
+    "controls": [
+      {
+        "id": "question_count",
+        "label": "Number of questions",
+        "type": "number",
+        "default": 30,
+        "min": 10,
+        "max": 80
+      },
+      {
+        "id": "time_limit",
+        "label": "Time limit per question (seconds)",
+        "type": "number",
+        "default": 30,
+        "min": 5,
+        "max": 300
+      },
+      {
+        "id": "question_mix",
+        "label": "Question mix",
+        "type": "select",
+        "default": "balanced",
+        "options": [
+          [
+            "balanced",
+            "Balanced recall / concept / application"
+          ],
+          [
+            "vocabulary",
+            "Vocabulary heavy"
+          ],
+          [
+            "conceptual",
+            "Conceptual heavy"
+          ],
+          [
+            "application",
+            "Application / calculation heavy"
+          ]
+        ]
+      },
+      {
+        "id": "calculation_questions",
+        "label": "Include calculation questions when appropriate to the subject",
+        "type": "checkbox",
+        "default": true
+      }
+    ],
+    "rules": [
+      "The CSV itself must contain only import data—no markdown, explanations, or commentary.",
+      "Use the exact Blooket column order defined in the Resource Builder contract.",
+      "Correct Answer(s) must use numeric answer positions only.",
+      "Use plain text in the CSV; move rich math explanations to the teacher answer reference."
+    ]
+  },
+  "teacher_notes": null,
+  "source_files": [],
+  "resolved_outputs": {
+    "primary": [
+      "resource/blooket_import.csv"
+    ],
+    "teacher": [
+      "teacher/answer_key.html",
+      "teacher/answer_key.pdf"
+    ],
+    "required_files": [
+      "CLICK_ME.html",
+      "assets/dashboard_styles.css",
+      "assets/resource_styles.css",
+      "data/request.json",
+      "data/qa.json",
+      "resource/blooket_import.csv",
+      "teacher/answer_key.html",
+      "teacher/answer_key.pdf"
+    ]
+  },
+  "locked_styles": {
+    "dashboard": {
+      "version": "district-resource-dashboard-style/0.1-pilot",
+      "request_path": "response_contract/dashboard_styles.css",
+      "response_path": "assets/dashboard_styles.css",
+      "sha256": "29539c511c769a0e6c7644b4a975f32f2ca167ab8514f9135a9d61e91a704f82"
+    },
+    "resource": {
+      "version": "district-resource-print-style/0.1-pilot",
+      "request_path": "response_contract/resource_styles.css",
+      "response_path": "assets/resource_styles.css",
+      "sha256": "93ec179e171341ecca857f35ec1c6b268d1fd3cb0809b711e4275f16287f89e4"
+    }
+  },
+  "deterministic_tools": {
+    "preflight": {
+      "version": "district-resource-preflight/1.0",
+      "path": "response_contract/resource_preflight.py",
+      "sha256": "6499d393836ca77c0a819316c5087693a6119777292edf4b1c8c67a1effa51ac"
+    },
+    "finalize": {
+      "version": "district-resource-finalize/1.0",
+      "path": "response_contract/resource_finalize.py",
+      "sha256": "f66b9ee152f9a792af137329e0b49f23198f676832630304815a1e149c1296b2"
+    },
+    "qa": {
+      "version": "district-resource-mechanical-qa/1.0",
+      "path": "response_contract/resource_qa.py",
+      "sha256": "3cfa1c5fedd5d4244274f5f6b6a630121567778392a49bb75015020d192aa579"
+    }
+  },
+  "graph_rendering": {
+    "standard_version": "district-graph-rendering-standard/1.2",
+    "manifest": "response_contract/graph_tool/MANIFEST.json",
+    "entrypoint": "Tools/graph_tool.py",
+    "packaged_entrypoint": "response_contract/graph_tool/graph_tool.py",
+    "sha256": "a90a2e01552a940aec579a09d41cf6d5ae11fb2e59efe2a0bc286dfefea52e25"
+  },
+  "baseline_requirements": {
+    "accuracy": true,
+    "clarity": true,
+    "accessibility": true,
+    "grade_appropriate": true,
+    "design_priorities_are_optional_emphasis": true
+  },
+  "authority_note": "Structured resource/profile choices, grade level, and learning targets outrank conflicting free-form notes. Advanced design priorities are optional emphasis only.",
+  "delivery": {
+    "required_final_line": "Unzip it and open **`CLICK_ME.html`**. The package includes the finished classroom resource, any requested teacher materials, and completed QA."
+  }
+}

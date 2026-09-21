@@ -1,0 +1,38 @@
+{
+  "overall_status": "PASS",
+  "resource_name": "Intro Molecules",
+  "profile": "Presentation / Lesson Slides",
+  "contract_versions": {
+    "resource_builder": "district-resource-builder/0.3-pilot",
+    "shared_standard": "district-response-build-standard/1.1",
+    "execution": "district-resource-build-execution/1.0",
+    "graph_rendering": "district-graph-rendering-standard/1.2"
+  },
+  "tool_versions": {
+    "preflight": "district-resource-preflight/1.0",
+    "finalize": "district-resource-finalize/1.0",
+    "mechanical_qa": "district-resource-mechanical-qa/1.0"
+  },
+  "conflicts": [],
+  "required_file_status": "PASS",
+  "locked_style_hashes": "PASS",
+  "mechanical_qa": {
+    "status": "PASS",
+    "path": "data/mechanical_qa.json"
+  },
+  "content_accuracy_checks": [
+    "Grade 7 learning target was addressed through molecule model reading, chemical-change before/after atom counts, and temperature-change motion/spacing models.",
+    "Chemical change framing uses atom rearrangement and conservation of atom counts; it does not require formal equation balancing.",
+    "Temperature-change framing distinguishes faster/slower molecular motion and spacing from molecule composition changes.",
+    "Content checked against OpenStax chemistry background and ACS Middle School Chemistry molecule motion lesson framing."
+  ],
+  "mathjax_status": "PASS - no MathJax-required notation used; chemical formulas are rendered as plain text/subscript-style notation in native outputs.",
+  "graph_visual_status": "PASS - no Cartesian graph required; instructional molecule diagrams are present and reused across outputs.",
+  "native_pdf_visual_checks": {
+    "presentation_pptx": "PASS - rendered with slides_test overflow check; 12-slide montage inspected.",
+    "presentation_pdf": "PASS - converted from PPTX and rendered/inspected as 12 pages.",
+    "student_handout_pdf": "PASS - rendered/inspected as 3 pages after correcting diagram image scaling.",
+    "speaker_notes_pdf": "PASS - rendered/inspected as 2 pages."
+  },
+  "unresolved_failures": []
+}

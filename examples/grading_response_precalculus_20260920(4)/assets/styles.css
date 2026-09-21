@@ -1,0 +1,231 @@
+:root{
+  --ink:#172033;--muted:#5d687b;--line:#d5dde8;--soft:#f4f7fa;--panel:#fff;--hero:#eef3f8;
+  --accent:#365f82;--accent-dark:#284b68;--success:#176b46;--warn:#8a5a00;--shadow:0 8px 24px rgba(20,34,50,.06)
+}
+*{box-sizing:border-box}
+html{background:#fff;color:var(--ink)}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.5}
+a{color:var(--accent-dark)}
+.wrap{max-width:1180px;margin:0 auto;padding:20px}
+.hero{background:var(--hero);border:1px solid var(--line);border-radius:20px;padding:24px 28px;margin:10px 0 20px}
+.eyebrow{margin:0 0 2px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);font-size:13px}
+.hero h1{margin:0;font-size:36px;line-height:1.08;letter-spacing:-.02em}
+.subtitle{margin:8px 0 0;font-size:18px;color:var(--ink)}
+.quick-actions,.inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 15px;border-radius:10px;border:1px solid #9fb4c8;background:#fff;color:var(--accent);font-weight:800;text-decoration:none;font-size:15px}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.small-btn{min-height:36px;padding:6px 10px;font-size:13px}.btn:hover{filter:brightness(.98)}
+.section{margin:18px 0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.section h2{margin:0 0 5px;font-size:23px;line-height:1.2}.section-intro{margin:0 0 14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.student-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:10px}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}.card h3{margin:0 0 4px;font-size:17px}.card p{margin:4px 0;color:var(--muted)}.card a{font-weight:800;text-decoration:none}
+.card-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.card-links a{display:inline-block;padding:5px 8px;border-radius:7px;background:var(--soft);border:1px solid var(--line)}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}.stat{border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:12px}.stat strong{display:block;font-size:26px;line-height:1.05}.stat span{color:var(--muted);font-size:13px}
+.notice{border-left:4px solid var(--accent);background:var(--soft);border-radius:9px;padding:10px 12px;margin:12px 0}.notice.warn{border-left-color:var(--warn)}.notice.good{border-left-color:var(--success)}
+
+/* Student reports and individual practice */
+.report-page,.practice-page,.packet-page{max-width:8in;margin:0 auto;padding:.1in 0;color:#111}.report-head{border-bottom:2px solid #cfd7e2;padding-bottom:10px;margin-bottom:15px}.report-head .eyebrow{font-size:11px}.report-head h1{font-size:28px;margin:0}.report-meta{color:#555;margin-top:4px}.report-section{margin:15px 0}.report-section h2{font-size:18px;margin:0 0 6px}.report-section p,.report-section li{font-size:14.5px}ul.clean{margin:6px 0 0;padding-left:20px}ul.clean li{margin:4px 0}.feedback-box{border:1px solid #d8dee7;border-radius:10px;padding:12px 14px;margin:10px 0;background:#fafbfc}.practice-block{border:1px solid #cfd7e2;border-radius:10px;padding:12px;margin:12px 0;break-inside:avoid}.practice-block h2,.practice-block h3{margin-top:0}.name-line{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid #bfc8d3;padding-bottom:7px;margin-bottom:12px;font-weight:700}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}th,td{border:1px solid #d6dde6;padding:7px 8px;text-align:left;vertical-align:top}th{background:#f3f6f9}.small{font-size:13px;color:var(--muted)}.page-break{break-before:page;page-break-before:always}.duplex-blank-page{display:none}.no-print{display:block}
+
+/* Compact teacher review of generated questions */
+.review-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px}.question-review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px}.question-review-card{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;break-inside:avoid}.question-review-card h3{font-size:14.5px;margin:0 0 4px}.question-source{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--muted);margin-bottom:5px}.question-body{font-size:13.5px;line-height:1.32}.question-review-card .visual-block,.question-review-card .graph-frame{margin:7px 0}.question-review-card .visual-block img,.question-review-card .graph-frame img{max-height:165px;object-fit:contain}.question-review-card details{margin-top:6px;border-top:1px solid #e3e7ed;padding-top:5px}.question-review-card summary{cursor:pointer;font-weight:800;color:var(--accent-dark);font-size:11.5px}.teacher-move,.discourse-move,.answer-box{font-size:11.5px;line-height:1.35;background:var(--soft);border-radius:7px;padding:7px;margin-top:5px}.teacher-move strong,.discourse-move strong,.answer-box strong{display:block;margin-bottom:2px}
+
+/* Set 1 shared compact headers */
+.set-head,.activity-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;border-bottom:1.5px solid var(--line);padding:0 0 8px;margin:0 0 12px}.set-head h1,.activity-head h1{font-size:23px;line-height:1.1;margin:0}.set-head p,.activity-head p{font-size:12px;color:var(--muted);margin:3px 0 0}.set-meta{font-size:12px;color:var(--muted);text-align:right}
+
+/* One-question-at-a-time Set 1 teacher presentation */
+.presentation-shell{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;overflow:hidden}.presentation-head{padding:9px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.presentation-head h1{font-size:20px;margin:0}.presentation-question{display:flex;align-items:center;justify-content:center;padding:14px 22px;min-height:0;overflow:auto}.presentation-card{width:min(1100px,96vw);font-size:clamp(22px,2.4vw,38px);line-height:1.3}.presentation-card .visual-block img,.presentation-card .graph-frame img{max-height:50vh;object-fit:contain}.presentation-nav{background:#fff;border-top:1px solid var(--line);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.presentation-nav .nav-group{display:flex;gap:7px;align-items:center}.presentation-meta{font-size:12px;color:var(--muted)}
+
+/* Print Presentation: true page preview, two questions per letter page */
+.print-presentation-wrap{max-width:8.5in;margin:0 auto;padding:14px 0}.print-presentation-page{width:8in;height:10in;margin:0 auto 18px;background:#fff;border:1px solid #cfd7e2;box-shadow:0 3px 18px rgba(20,34,50,.08);padding:.12in;display:grid;grid-template-rows:1fr 1fr;gap:.14in;break-after:page;page-break-after:always}.print-slide{border:1.4px solid #98a5b3;border-radius:9px;padding:.17in .20in;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;break-inside:avoid}.print-slide .slide-number{font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:4px}.print-slide .slide-question{font-size:clamp(18px,2.1vw,28px);line-height:1.24}.print-slide .math-display{margin:7px 0}.print-slide .visual-block,.print-slide .graph-frame{margin:6px auto}.print-slide img,.print-slide svg,.print-slide .graph-image{max-height:3.25in;max-width:100%;width:auto;object-fit:contain}
+
+/* Common worksheet Review / Extension labels */
+.worksheet-section-label{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.055em;padding:7px 10px;margin:14px 0 8px;border-left:5px solid var(--accent-dark);background:#f1f5f8}.worksheet-section-label.extension{border-left-color:#667085;background:#f6f6f7}
+
+/* Student Set */
+.student-set{max-width:8in;margin:0 auto}.student-set-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 14px}.student-question{border-top:1px solid #dce2e9;padding:8px 2px 10px;break-inside:auto;page-break-inside:auto}.student-question h3{font-size:14px;margin:0 0 5px}.student-question .question-body{font-size:13.5px}.student-question .visual-block,.student-question .graph-frame{margin:7px auto}.student-question img,.student-question svg{max-height:2.7in}
+.workspace{min-height:var(--workspace-height,1.1in);border-bottom:1px solid #e0e4e9;margin-top:7px}
+
+/* Teacher Guide */
+.teacher-guide{max-width:9.5in;margin:0 auto}.teacher-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:9px}.teacher-question{border:1px solid var(--line);border-radius:10px;padding:10px;break-inside:avoid;page-break-inside:avoid}.teacher-question h3{font-size:14.5px;margin:0 0 5px}.teacher-question .question-body{font-size:13.5px}.teacher-question .guide-answer{background:#f5f8fb;border-left:3px solid var(--accent);padding:7px 8px;margin-top:7px;font-size:12.5px}.teacher-question .guide-move{font-size:11.5px;margin-top:5px;color:#39475a}
+
+/* Classroom structure menu + projectable directions */
+.structure-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:9px}.structure-card{border:1px solid var(--line);border-radius:10px;padding:11px}.structure-card h3{margin:0 0 3px;font-size:16px}.structure-card p{font-size:12px;color:var(--muted);margin:3px 0}.structure-directions{max-width:900px;margin:0 auto}.direction-row{display:grid;grid-template-columns:135px 1fr;gap:12px;padding:8px 0;border-top:1px solid #e1e5ea}.direction-label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:var(--muted)}.direction-goal{background:#f4f7fa;border-left:4px solid var(--accent);padding:9px 11px;border-radius:7px;margin-top:8px}
+
+/* Printable structure transforms */
+.cut-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cut-card{border:1.4px dashed #777;border-radius:7px;padding:10px;min-height:150px;break-inside:avoid;page-break-inside:avoid}.cut-card .card-number{font-size:10px;font-weight:800;color:#666}.find-someone-sheet{display:block}.find-someone-box{border:1.4px solid #222;border-left:8px solid var(--accent-dark);border-radius:0;padding:10px 12px;margin:0 0 12px;min-height:0;break-inside:avoid;page-break-inside:avoid}.find-someone-box .signature-line{font-size:12px;font-weight:800;color:#333;margin:8px 0 6px;padding-bottom:5px;border-bottom:1px solid #bbb}.find-someone-box .workspace-label{font-size:11px;font-weight:800;color:#444;margin-top:6px}.find-someone-box .workspace{min-height:1.15in;border:1px dashed #999;margin-top:4px}.find-someone-intro{font-size:12px;color:#444;margin:0 0 10px}.partner-line{margin-top:10px;border-bottom:1px solid #555;height:20px}.role-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)}
+
+/* Screen preview for page-bound artifacts */
+.screen-page{max-width:8.5in;min-height:11in;margin:14px auto;background:#fff;border:1px solid #cfd7e2;box-shadow:0 3px 18px rgba(20,34,50,.08);padding:.45in}
+
+.math-inline{white-space:nowrap}.math-display{margin:10px 0;overflow-x:auto;overflow-y:hidden;padding:3px 0}.visual-block{margin:13px 0;break-inside:avoid;page-break-inside:avoid}.visual-block img,.graph-frame img,.graph-image,.instructional-visual{display:block;max-width:100%;height:auto;margin:0 auto}.graph-frame{margin:13px auto;padding:8px;border:1px solid #d6dde6;border-radius:10px;background:#fff;break-inside:avoid;page-break-inside:avoid}.figure-caption{margin:5px auto 0;max-width:92%;font-size:11.5px;line-height:1.3;color:#5d687b;text-align:center}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}
+
+@media(max-width:700px){
+  .wrap{padding:12px}.hero{padding:20px 17px;border-radius:16px}.hero h1{font-size:30px}.subtitle{font-size:16px}.btn{width:100%}.section{padding:15px}.presentation-question{padding:12px}.student-set-grid,.cut-card-grid{grid-template-columns:1fr}.teacher-guide-grid{grid-template-columns:1fr}.direction-row{grid-template-columns:1fr;gap:2px}.screen-page{min-height:0;margin:0;border:0;box-shadow:none;padding:14px}.print-presentation-page{width:100%;height:auto;min-height:0;box-shadow:none}.print-slide{min-height:42vh}
+}
+
+@media print{
+  @page{size:letter;margin:.48in}
+  @page presentation2up{size:letter portrait;margin:.25in}
+  body{font-size:11pt;background:#fff}
+  .wrap{max-width:none;padding:0}.hero,.section{box-shadow:none}.no-print,.quick-actions,.screen-only,.presentation-nav{display:none!important}
+  .report-page,.practice-page,.packet-page,.student-set,.teacher-guide{max-width:none;padding:0}
+  a{color:#000;text-decoration:none}.page-break{break-before:page;page-break-before:always}
+  .duplex-blank-page{display:block;height:9.9in;min-height:9.9in;background:#fff;border:0;margin:0;padding:0;break-after:page;page-break-after:always}
+  .practice-block,.feedback-box,.card,.stat,.math-display,.visual-block,.graph-frame,mjx-container,.question-review-card,.teacher-question,.cut-card,.find-someone-box{break-inside:avoid;page-break-inside:avoid}
+  .presentation-shell{display:block;height:auto;overflow:visible}.presentation-question{display:block;min-height:0;padding:0}.presentation-card{width:auto;font-size:12pt}
+  .screen-page{max-width:none;min-height:0;margin:0;border:0;box-shadow:none;padding:0}
+  .print-presentation-wrap{max-width:none;padding:0}.print-presentation-page{page:presentation2up;width:auto;height:10.5in;min-height:10.5in;margin:0;border:0;box-shadow:none;padding:0;gap:.14in}.print-slide{height:5.18in;border-radius:0}.print-slide .slide-question{font-size:20pt}
+  .student-set-grid{gap:6px 12px}.student-question{padding:6px 1px 8px}.teacher-guide-grid{gap:7px}
+}
+
+/* ========================================================================== */
+/* GOLD LAYOUT LOCK ADDITIONS - 2026-09-20                                   */
+/* Existing response/report/dashboard rules above are the frozen baseline.   */
+/* These additions only implement the approved Set 1 activity/worksheet      */
+/* changes. Do not redesign unrelated response surfaces.                     */
+/* ========================================================================== */
+
+/* Algebra-style Activity Options / projectable direction pages */
+.activity-options-wrap{max-width:980px;margin:0 auto;padding:0}
+.activity-page{min-height:9.3in;page-break-after:always;break-after:page;border:2px solid var(--ink);padding:16px 18px;display:flex;flex-direction:column;background:#fff;margin:14px auto;max-width:980px}
+.activity-page:last-child{page-break-after:auto;break-after:auto}
+.dir-header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid var(--accent-dark);padding-bottom:8px;margin-bottom:16px;gap:16px}
+.act-eyebrow{font-size:12pt;font-weight:800;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.act-title{font-size:18pt;font-weight:900;color:var(--accent-dark);margin:0 0 4px;line-height:1.1}
+.act-subtitle{font-size:14pt;font-weight:700;color:var(--ink)}
+.act-meta{font-size:11.5pt;text-align:right;line-height:1.5;flex-shrink:0}
+.dir-body{display:flex;gap:.5in;flex:1;align-items:flex-start;padding-top:4px}
+.dir-text{flex:1.5;font-size:12pt;line-height:1.55}
+.dir-row{margin-bottom:12px}
+.dir-label{font-weight:900;color:var(--accent-dark);display:block;margin-bottom:4px;font-size:12pt;text-transform:uppercase;letter-spacing:.04em}
+.dir-text ol,.dir-text ul{margin:4px 0 4px 22px}.dir-text li{margin-bottom:5px}
+.dir-goal{margin-top:14px;font-style:italic;color:var(--muted);font-size:11.5pt}
+.looks-like{flex:1;display:flex;flex-direction:column;gap:12px;min-width:2.5in;flex-shrink:0}
+.looks-good{background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:12px 14px}
+.looks-bad{background:#fff1f2;border:1.5px solid #fca5a5;border-radius:8px;padding:12px 14px}
+.looks-header{font-size:11pt;font-weight:900;margin-bottom:8px}.looks-good .looks-header{color:#15803d}.looks-bad .looks-header{color:#b91c1c}
+.looks-good ul,.looks-bad ul{margin-left:18px;font-size:11pt;line-height:1.5}.looks-good li,.looks-bad li{margin-bottom:5px}
+.activity-utility-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.activity-utility-list a{font-weight:800}
+
+/* Algebra-style Set 1 Questions & Solutions projection deck */
+.projection-deck{max-width:980px;margin:0 auto;padding:0}
+.projection-deck .activity-page{margin:14px auto}
+.prob-head{display:flex;justify-content:space-between;align-items:center;border:1.5px solid #86efac;border-bottom:2px solid #15803d;border-radius:5px;padding:8px 10px;margin-bottom:12px;font-size:12pt;font-weight:800;color:#333;background:#f0fdf4}
+.solution-page .prob-head{background:#fff1f2;border-color:#fca5a5;border-bottom-color:#b91c1c}
+.prob-q{font-size:16pt;margin:0 0 14px;line-height:1.35}.prob-q .graph-frame,.prob-q .visual-block{margin:12px auto}.prob-q img,.prob-q svg{max-width:5.69in;max-height:4.5in;width:auto;height:auto;object-fit:contain}
+.projection-work{flex:1;background:#fff;min-height:3.5in;margin-top:8px}
+.solution{font-size:16pt;margin:12px 0 8px;padding-top:10px;border-top:2px solid var(--ink);line-height:1.35}.solution b{color:var(--accent-dark)}
+
+/* Worksheet Builder-style screen controls for Set 1 student handouts */
+.layout-controls{position:sticky;top:0;z-index:20;background:#eef4f8;border:1px solid #c9d5df;padding:10px 12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:12px}
+.layout-controls label{font-weight:800}.layout-controls input[type=range]{width:100%}.layout-controls input[type=number]{width:76px}.layout-controls select{width:100%;padding:6px 7px;border:1px solid #aeb8c4;border-radius:5px;background:#fff;font:inherit}.layout-controls button{cursor:pointer}.layout-controls .control-group{display:grid;gap:4px}.layout-controls .selection-note{font-size:11px;color:var(--muted);line-height:1.25}
+.adjustable-set-sheet{--workspace-height:1.1in;--graph-width:100%}
+.adjustable-set-sheet .student-question{--problem-workspace-height:var(--workspace-height);--problem-graph-width:var(--graph-width)}
+.adjustable-set-sheet .student-question .workspace{height:var(--problem-workspace-height);min-height:0;overflow:hidden;margin-top:7px}
+.adjustable-set-sheet .student-question .graph-frame,.adjustable-set-sheet .student-question .visual-block{width:min(100%,var(--problem-graph-width));max-width:100%;margin:7px auto}
+.adjustable-set-sheet .student-question .graph-frame img,.adjustable-set-sheet .student-question .graph-frame svg,.adjustable-set-sheet .student-question .visual-block img,.adjustable-set-sheet .student-question .visual-block svg{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+.find-someone-student-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 14px}
+.find-someone-student-grid .student-question{border-top:1px solid #dce2e9;padding:8px 2px 10px;break-inside:auto;page-break-inside:auto}
+.find-someone-student-grid .partner-signature{font-size:11px;font-weight:800;color:#333;margin:8px 0 5px;padding-bottom:4px;border-bottom:1px solid #aaa}
+.find-someone-student-grid .workspace-label{font-size:10.5px;font-weight:800;color:#555;margin-top:5px}
+.find-someone-directions{font-size:12px;color:#444;margin:0 0 10px}
+
+@media screen and (min-width:1100px){
+  body.adjustable-handout-page{padding-left:252px}
+  body.adjustable-handout-page .layout-controls{position:fixed;left:14px;top:14px;width:224px;max-height:calc(100vh - 28px);overflow:auto;flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  body.adjustable-handout-page .layout-controls>*{width:100%}
+  body.adjustable-handout-page .layout-controls label{display:block}
+}
+@media screen and (max-width:1099px){body.adjustable-handout-page{padding-left:0}.layout-controls{position:relative}}
+@media(max-width:700px){.dir-body{display:block}.looks-like{min-width:0;margin-top:14px}.find-someone-student-grid{grid-template-columns:1fr}}
+@media print{
+  .layout-controls{display:none!important}body.adjustable-handout-page{padding-left:0!important}
+  .activity-page{margin:0;min-height:9.3in}.projection-deck .activity-page{margin:0}
+}
+
+/* ========================================================================== */
+/* GOLD LOCK FUNCTIONAL ADDITIONS - 2026-09-20 FINAL REVIEW PASS             */
+/* Preserves the tested response design while adding true page previews,      */
+/* adjustable spacing controls, HTML-first printing, and the approved Set 1   */
+/* question-top / teacher-bottom presentation layout.                         */
+/* ========================================================================== */
+
+/* True Letter page fragments shared by adjustable printable HTML. */
+.adjustable-print-root{--page-width:8.5in;--page-height:11in;--page-margin:.48in;--usable-height:10.04in;--question-space:1.05in;--visual-width:100%;background:#e8edf1;min-height:100vh}
+.adjustable-page-stack{width:100%;padding:1px 0 18px}
+.letter-preview-page{page:adjustableLetter;width:var(--page-width);height:var(--page-height);min-height:var(--page-height);margin:.22in auto;background:#fff;padding:var(--page-margin);overflow:hidden;position:relative;break-after:page;page-break-after:always;border:1px solid #d3d8de;box-shadow:0 4px 18px rgba(20,28,36,.14)}
+.letter-preview-page:last-child{break-after:auto;page-break-after:auto}
+.letter-preview-page::after{content:"Page " attr(data-page);position:absolute;right:.18in;bottom:.13in;font-size:9px;line-height:1;color:#8a939e;letter-spacing:.02em}
+.blank-duplex-page{background:#fff}
+.blank-duplex-page>*{display:none!important}
+
+/* Left rail: same interaction language as Worksheet Builder. */
+.adjustable-print-root .layout-controls{background:#eef4f8;border:1px solid #c9d5df}
+.layout-controls .control-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.layout-controls button{border:1px solid #8da0b3;background:#fff;color:var(--accent-dark);font-weight:800;border-radius:6px;padding:7px 9px}
+.layout-controls button.primary-control{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark)}
+.layout-controls output{font-weight:800;color:var(--accent-dark)}
+.layout-controls .control-value-row{display:grid;grid-template-columns:1fr 62px;gap:6px;align-items:center}
+.layout-controls .control-value-row input[type=number]{width:62px}
+
+/* Adjustable question/workspace geometry used by Common Worksheet and practice. */
+.adjustable-question{--problem-workspace-height:var(--question-space);--problem-visual-width:var(--visual-width)}
+.adjustable-question .workspace,.adjustable-question .workarea{height:var(--problem-workspace-height);min-height:0;overflow:hidden}
+.adjustable-question .visual-block,.adjustable-question .graph-frame{width:min(100%,var(--problem-visual-width));max-width:100%;margin-left:auto;margin-right:auto}
+.adjustable-question .visual-block img,.adjustable-question .visual-block svg,.adjustable-question .graph-frame img,.adjustable-question .graph-frame svg{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+
+/* Combined printable report/practice HTML. */
+.combined-student-document{width:100%}
+.student-segment{display:contents}
+.combined-report-page .report-page,.combined-practice-page .practice-page{max-width:none;margin:0;padding:0}
+.combined-report-page .report-page{height:100%}
+.combined-practice-page .practice-page{height:100%}
+
+/* Set 1 teacher classroom pages: question top half, teacher support bottom half. */
+.set-classroom-page{page:adjustableLetter;width:8.5in;height:11in;min-height:11in;margin:.22in auto;background:#fff;padding:.25in;display:grid;grid-template-rows:1fr 1fr;gap:.14in;overflow:hidden;position:relative;border:1px solid #d3d8de;box-shadow:0 4px 18px rgba(20,28,36,.14);break-after:page;page-break-after:always}
+.set-classroom-page:last-child{break-after:auto;page-break-after:auto}
+.set-classroom-page::after{content:"Page " attr(data-page);position:absolute;right:.16in;bottom:.10in;font-size:9px;color:#8a939e}
+.set-half{border:1.4px solid #98a5b3;border-radius:9px;padding:.18in .21in;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start}
+.set-question-half{--problem-question-space:.9in;--problem-visual-width:100%}
+.set-question-half .set-label,.set-teacher-half .set-label{font-size:10.5px;font-weight:800;color:var(--muted);margin-bottom:4px}
+.set-question-half .set-prompt{font-size:20pt;line-height:1.24}
+.set-question-half .question-space{height:var(--problem-question-space);min-height:0;overflow:hidden}
+.set-question-half .visual-block,.set-question-half .graph-frame{width:min(100%,var(--problem-visual-width));max-width:100%;margin:7px auto}
+.set-question-half img,.set-question-half svg{display:block;width:100%;max-width:100%;height:auto;max-height:3.0in;object-fit:contain;margin:0 auto}
+.set-teacher-half{font-size:13.5pt;line-height:1.35}
+.set-teacher-half .guide-answer{background:#f5f8fb;border-left:3px solid var(--accent);padding:8px 10px;margin:4px 0 10px}
+.set-teacher-half .guide-move{margin:7px 0;color:#39475a}
+.set-teacher-half .guide-move strong{color:var(--ink)}
+
+/* Activity Options group headings/material cues without changing the gold shell. */
+.activity-group{margin:10px 0 16px}
+.activity-group-title{font-size:11.5pt;font-weight:900;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.04em;margin:0 0 5px}
+.activity-material{font-size:10.5pt;color:var(--muted);font-weight:700}
+
+@media screen and (min-width:1100px){
+  body.adjustable-print-root{padding-left:252px}
+  body.adjustable-print-root .layout-controls{position:fixed;left:14px;top:14px;width:224px;max-height:calc(100vh - 28px);overflow:auto;flex-direction:column;align-items:stretch;gap:10px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  body.adjustable-print-root .layout-controls>*{width:100%}
+  body.adjustable-print-root .layout-controls label{display:block}
+}
+@media screen and (max-width:1099px){
+  body.adjustable-print-root{padding-left:0}
+  body.adjustable-print-root .layout-controls{position:relative}
+}
+@media screen and (max-width:760px){
+  .letter-preview-page,.set-classroom-page{width:100%;height:auto;min-height:11in;margin:.16in auto;box-shadow:none}
+  .set-question-half .set-prompt{font-size:16pt}
+}
+
+@media print{
+  @page adjustableLetter{size:Letter portrait;margin:0}
+  body.adjustable-print-root{padding-left:0!important;background:#fff}
+  .adjustable-print-root .layout-controls{display:none!important}
+  .adjustable-page-stack{padding:0}
+  .letter-preview-page{width:8.5in;height:11in;min-height:11in;margin:0;border:0;box-shadow:none;padding:.48in;overflow:hidden}
+  .letter-preview-page::after{display:none}
+  .set-classroom-page{width:8.5in;height:11in;min-height:11in;margin:0;border:0;box-shadow:none;padding:.25in;overflow:hidden}
+  .set-classroom-page::after{display:none}
+}

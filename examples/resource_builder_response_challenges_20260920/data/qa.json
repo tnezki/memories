@@ -1,0 +1,73 @@
+{
+  "overall_status": "PASS",
+  "resource": "Challenges",
+  "profile": "Stations",
+  "contract_versions": {
+    "resource_builder": "district-resource-builder/0.3-pilot",
+    "shared_standard": "district-response-build-standard/1.1",
+    "execution": "district-resource-build-execution/1.0",
+    "graph_rendering": "district-graph-rendering-standard/1.2",
+    "preflight": "district-resource-preflight/1.0",
+    "finalize": "district-resource-finalize/1.0",
+    "mechanical_qa": "district-resource-mechanical-qa/1.0"
+  },
+  "conflicts": [],
+  "content_accuracy": {
+    "status": "PASS",
+    "checks": [
+      "Six distinct stations align to the stated learning target.",
+      "Grade 5 reading load, vocabulary, directions, and expected written reasoning were checked for fit.",
+      "Each station has a distinct purpose rather than repeating the same question structure.",
+      "All materials are common classroom materials.",
+      "Teacher guide and answer key match the final student station content.",
+      "Station 2 sequencing key was corrected during QA to match the passage order: observe, record, reinforce, retest.",
+      "Station 6 requires a 3-4 sentence evidence-based explanation using at least two story details."
+    ]
+  },
+  "mathjax": {
+    "status": "NOT_APPLICABLE",
+    "reason": "No mathematical notation appears in this resource."
+  },
+  "graphs_and_visuals": {
+    "status": "NOT_APPLICABLE",
+    "graph_count": 0,
+    "reason": "The selected literacy station tasks do not require graphs or instructional diagrams."
+  },
+  "pdf_visual_qa": {
+    "status": "PASS",
+    "renderer": "WeasyPrint; verified with district PDF render workflow",
+    "student_pdf": {
+      "path": "resource/stations.pdf",
+      "pages": 6,
+      "page_size": "Letter portrait",
+      "one_station_per_page": true,
+      "inspected_pages": "1-6",
+      "result": "No clipping, overlap, broken glyphs, or unintended spill pages."
+    },
+    "teacher_guide_pdf": {
+      "path": "teacher/station_guide.pdf",
+      "pages": 2,
+      "page_size": "Letter portrait",
+      "inspected_pages": "1-2",
+      "result": "Clean layout with readable tables and no clipping or overlap."
+    },
+    "answer_key_pdf": {
+      "path": "teacher/answer_key.pdf",
+      "pages": 2,
+      "page_size": "Letter portrait",
+      "inspected_pages": "1-2 after sequencing correction",
+      "result": "Clean layout with readable tables and no clipping or overlap."
+    }
+  },
+  "mechanical_qa": {
+    "status": "PASS",
+    "path": "data/mechanical_qa.json"
+  },
+  "required_files": {
+    "status": "PASS"
+  },
+  "locked_style_hashes": {
+    "status": "PASS"
+  },
+  "unresolved_failures": []
+}

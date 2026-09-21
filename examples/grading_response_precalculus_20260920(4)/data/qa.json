@@ -1,0 +1,536 @@
+{
+  "status": "PASS",
+  "qa_version": "district-grading-response-qa-execution/1.3",
+  "phase_timings_seconds": {
+    "evidence_review": 340,
+    "grading_analysis": 180,
+    "question_practice_content_generation": 210,
+    "graph_visual_generation": 0,
+    "html_template_assembly": 2,
+    "programmatic_qa": 18,
+    "visual_qa": 54,
+    "correction_rerender_work": 8,
+    "total_response_build_time": 1108.1,
+    "timing_note": "Total is wall-clock from request creation timestamp through final visual-QA contact sheet. Phase figures are elapsed diagnostic estimates from artifact/tool timestamps; renderer dependency recovery overlapped other phases and is recorded separately."
+  },
+  "additional_timing": {
+    "renderer_dependency_recovery": 285
+  },
+  "programmatic_checks": {
+    "required_files": {
+      "status": "PASS",
+      "missing": []
+    },
+    "template_qa": {
+      "status": "PASS",
+      "builder_version": "district-grading-response-builder/1.0"
+    },
+    "locked_style_sha": {
+      "status": "PASS",
+      "actual": "2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad",
+      "expected": "2ab8acdc2cfa74f288906ce88dd430c9715e74d16ed66cbf61e45f311558d7ad"
+    },
+    "local_links": {
+      "status": "PASS",
+      "broken": []
+    },
+    "no_page_local_style_blocks": {
+      "status": "PASS",
+      "files": []
+    },
+    "generated_pdf_policy": {
+      "status": "PASS",
+      "pdfs": [
+        "scanned_work/Precalculus_Scanned_Student_Work.pdf"
+      ],
+      "forbidden": []
+    },
+    "mathjax_loaders": {
+      "status": "PASS",
+      "math_pages": 25,
+      "missing": []
+    },
+    "runtime_assets_on_adjustable_pages": {
+      "status": "PASS"
+    },
+    "set1_exact_reuse": {
+      "status": "PASS",
+      "set1_count": 8,
+      "failures": {}
+    },
+    "presentation_structure": {
+      "status": "PASS",
+      "pages": 8
+    },
+    "print_presentation_structure": {
+      "status": "PASS",
+      "pages": 4,
+      "questions": 8
+    },
+    "activity_options": {
+      "status": "PASS",
+      "missing_names": []
+    },
+    "no_duplicate_review_authority": {
+      "status": "PASS",
+      "files": []
+    },
+    "adjustable_controls_present": {
+      "status": "PASS",
+      "missing": {}
+    },
+    "graph_assets": {
+      "status": "PASS",
+      "referenced_assets": [],
+      "note": "No Cartesian graph or nontrivial diagram was authored in generated questions; packaged graph tool was therefore not invoked."
+    },
+    "browser_runtime": {
+      "status": "PASS",
+      "metrics": {
+        "worksheet_default_pages": 1,
+        "station_pages": 6,
+        "presentation_pages": 8,
+        "print_presentation_pages": 4
+      },
+      "overflows": []
+    },
+    "adjustable_control_behavior": {
+      "status": "PASS",
+      "worksheet_changes": true,
+      "presentation_changes": true,
+      "tests": {
+        "worksheet_all_0": {
+          "pages": 1,
+          "max_overflow": 0
+        },
+        "worksheet_all_100": {
+          "pages": 1,
+          "max_overflow": 0
+        },
+        "worksheet_all_300": {
+          "pages": 2,
+          "max_overflow": 0
+        },
+        "worksheet_Q2_0": {
+          "pages": 1,
+          "workspace_px": 1,
+          "max_overflow": 0
+        },
+        "worksheet_Q2_100": {
+          "pages": 1,
+          "workspace_px": 57.59375,
+          "max_overflow": 0
+        },
+        "worksheet_Q2_500": {
+          "pages": 2,
+          "workspace_px": 288,
+          "max_overflow": 0
+        },
+        "worksheet_Q2_1200": {
+          "pages": 2,
+          "workspace_px": 691.1875,
+          "max_overflow": 2
+        },
+        "presentation_all_0": {
+          "qspace_px": 0
+        },
+        "presentation_all_100": {
+          "qspace_px": 72
+        },
+        "presentation_all_300": {
+          "qspace_px": 216
+        },
+        "presentation_Q1_0": {
+          "qspace_px": 0
+        },
+        "presentation_Q1_100": {
+          "qspace_px": 72
+        },
+        "presentation_Q1_500": {
+          "qspace_px": 360
+        },
+        "presentation_Q1_1200": {
+          "qspace_px": 399.03125
+        }
+      }
+    },
+    "duplex_html": {
+      "status": "PASS",
+      "counts": {
+        "combined_individual_practice_total": {
+          "physical_pages": 12,
+          "blank_backs": 6
+        },
+        "practice_student_1": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "practice_student_2": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "practice_student_3": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "practice_student_4": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "practice_student_5": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "practice_student_6": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "combined_reports_total": {
+          "physical_pages": 12,
+          "blank_backs": 6
+        },
+        "report_student_1": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "report_student_2": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "report_student_3": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "report_student_4": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "report_student_5": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        },
+        "report_student_6": {
+          "content_pages": 1,
+          "blank_backs": 1,
+          "physical_pages": 2
+        }
+      },
+      "failures": {}
+    },
+    "visual_qa_capture": {
+      "status": "PASS",
+      "coverage": [
+        {
+          "file": "CLICK_ME.html",
+          "screenshot": "dashboard.png"
+        },
+        {
+          "file": "class/class_overview.html",
+          "selector": "body",
+          "index": 0,
+          "screenshot": "class_overview.png"
+        },
+        {
+          "file": "students/leia.html",
+          "selector": ".report-page",
+          "index": 0,
+          "screenshot": "student_report.png"
+        },
+        {
+          "file": "print/common_review_extension/student_worksheet.html",
+          "selector": ".runtime-letter-page",
+          "index": 0,
+          "screenshot": "worksheet_first.png"
+        },
+        {
+          "file": "print/common_review_extension/student_worksheet.html",
+          "selector": ".runtime-letter-page",
+          "index": 0,
+          "screenshot": "worksheet_last.png"
+        },
+        {
+          "file": "print/all_individual_practice.html",
+          "selector": ".runtime-letter-page",
+          "index": 0,
+          "screenshot": "practice_first.png"
+        },
+        {
+          "file": "print/all_individual_practice.html",
+          "selector": ".runtime-letter-page",
+          "index": 11,
+          "screenshot": "practice_last.png"
+        },
+        {
+          "file": "print/all_student_reports.html",
+          "selector": ".runtime-letter-page",
+          "index": 0,
+          "screenshot": "reports_first.png"
+        },
+        {
+          "file": "print/all_student_reports.html",
+          "selector": ".runtime-letter-page",
+          "index": 11,
+          "screenshot": "reports_last.png"
+        },
+        {
+          "file": "print/common_review_extension/teacher_guide.html",
+          "selector": "body",
+          "index": 0,
+          "screenshot": "teacher_guide.png"
+        },
+        {
+          "file": "print/stations/stations.html",
+          "selector": ".page",
+          "index": 0,
+          "screenshot": "stations_first.png"
+        },
+        {
+          "file": "print/stations/stations.html",
+          "selector": ".page",
+          "index": 2,
+          "screenshot": "stations_mid.png"
+        },
+        {
+          "file": "print/stations/stations.html",
+          "selector": ".page",
+          "index": 5,
+          "screenshot": "stations_last.png"
+        },
+        {
+          "file": "print/question_set/presentation.html",
+          "selector": ".runtime-set-page",
+          "index": 0,
+          "screenshot": "presentation_first.png"
+        },
+        {
+          "file": "print/question_set/presentation.html",
+          "selector": ".runtime-set-page",
+          "index": 7,
+          "screenshot": "presentation_last.png"
+        },
+        {
+          "file": "print/question_set/print_presentation.html",
+          "selector": ".print-presentation-page",
+          "index": 0,
+          "screenshot": "print_pres_first.png"
+        },
+        {
+          "file": "print/question_set/print_presentation.html",
+          "selector": ".print-presentation-page",
+          "index": 3,
+          "screenshot": "print_pres_last.png"
+        },
+        {
+          "file": "print/question_set/structures/cut_apart_cards.html",
+          "selector": ".screen-page",
+          "index": 0,
+          "screenshot": "cut_cards.png"
+        }
+      ],
+      "note": "Screenshots captured for required representative locked-template pages; graph-heavy coverage not applicable because no generated graph assets are used."
+    }
+  },
+  "independent_math_verification": {
+    "status": "PASS",
+    "method": "Set 1 algebra and representative station algebra independently checked with symbolic expansion/solve plus manual coordinate/slope checks.",
+    "verified_set1_ids": [
+      "Q1",
+      "Q2",
+      "Q3",
+      "Q4",
+      "Q5",
+      "Q6",
+      "Q7",
+      "Q8"
+    ]
+  },
+  "visual_qa": {
+    "status": "PASS",
+    "coverage": [
+      "CLICK_ME.html",
+      "class/class_overview.html",
+      "students/leia.html",
+      "print/common_review_extension/student_worksheet.html",
+      "print/common_review_extension/student_worksheet.html",
+      "print/all_individual_practice.html",
+      "print/all_individual_practice.html",
+      "print/all_student_reports.html",
+      "print/all_student_reports.html",
+      "print/common_review_extension/teacher_guide.html",
+      "print/stations/stations.html",
+      "print/stations/stations.html",
+      "print/stations/stations.html",
+      "print/question_set/presentation.html",
+      "print/question_set/presentation.html",
+      "print/question_set/print_presentation.html",
+      "print/question_set/print_presentation.html",
+      "print/question_set/structures/cut_apart_cards.html"
+    ],
+    "notes": [
+      "Representative dashboard, class overview, student report, Common Worksheet, individualized/combined practice, combined reports, Teacher Guide, Stations first/middle/final, Set 1 first/final presentation, Print Presentation first/final, and Cut-Apart Cards were inspected.",
+      "No generated Cartesian graphs or nontrivial diagrams were present, so graph-heavy page inspection was not applicable.",
+      "Sandbox browser navigation is blocked; visual QA used Chromium set_content with the exact local CSS/runtime inlined and a local MathJax 3 bundle solely for QA rendering. The delivered HTML retains its original MathJax loader unchanged."
+    ]
+  },
+  "adjustable_control_checks": {
+    "worksheet_all_0": {
+      "pages": 1,
+      "max_overflow": 0
+    },
+    "worksheet_all_100": {
+      "pages": 1,
+      "max_overflow": 0
+    },
+    "worksheet_all_300": {
+      "pages": 2,
+      "max_overflow": 0
+    },
+    "worksheet_Q2_0": {
+      "pages": 1,
+      "workspace_px": 1,
+      "max_overflow": 0
+    },
+    "worksheet_Q2_100": {
+      "pages": 1,
+      "workspace_px": 57.59375,
+      "max_overflow": 0
+    },
+    "worksheet_Q2_500": {
+      "pages": 2,
+      "workspace_px": 288,
+      "max_overflow": 0
+    },
+    "worksheet_Q2_1200": {
+      "pages": 2,
+      "workspace_px": 691.1875,
+      "max_overflow": 2
+    },
+    "presentation_all_0": {
+      "qspace_px": 0
+    },
+    "presentation_all_100": {
+      "qspace_px": 72
+    },
+    "presentation_all_300": {
+      "qspace_px": 216
+    },
+    "presentation_Q1_0": {
+      "qspace_px": 0
+    },
+    "presentation_Q1_100": {
+      "qspace_px": 72
+    },
+    "presentation_Q1_500": {
+      "qspace_px": 360
+    },
+    "presentation_Q1_1200": {
+      "qspace_px": 399.03125
+    }
+  },
+  "duplex_html_page_counts": {
+    "combined_individual_practice_total": {
+      "physical_pages": 12,
+      "blank_backs": 6
+    },
+    "practice_student_1": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "practice_student_2": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "practice_student_3": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "practice_student_4": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "practice_student_5": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "practice_student_6": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "combined_reports_total": {
+      "physical_pages": 12,
+      "blank_backs": 6
+    },
+    "report_student_1": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "report_student_2": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "report_student_3": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "report_student_4": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "report_student_5": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    },
+    "report_student_6": {
+      "content_pages": 1,
+      "blank_backs": 1,
+      "physical_pages": 2
+    }
+  },
+  "graph_provenance": {
+    "status": "PASS",
+    "registered_standard": "district-graph-rendering-standard/1.2",
+    "packaged_entrypoint": "response_contract/graph_tool/graph_tool.py",
+    "graph_tool_sha256": "a90a2e01552a940aec579a09d41cf6d5ae11fb2e59efe2a0bc286dfefea52e25",
+    "manifest_sha256": "41db5cb80b0550a8bf2f0f361c9cdc7e09ebbfbbeeebf1c6de5158d8c13127bb",
+    "invoked": false,
+    "reason": "No generated question required a Cartesian graph or nontrivial diagram."
+  },
+  "renderer_provenance": {
+    "source": "tnezki/memories/district_tools/grading_control_panel (read-only recovery because request package omitted required renderer/runtime files)",
+    "builder_git_blob_sha1": "cc0c67c7f8541f5954b916e9c824ae3c6728b1e8",
+    "builder_sha256": "c4bede5757994fede621f08da3c8c423d6ed4107f6cd63cf1289902b029386b5",
+    "runtime_css_git_blob_sha1": "c4499761fa0cec15b15746e5a6e0b231e50eb95a",
+    "runtime_js_git_blob_sha1": "99ac654d8db0ab4aef807d42bd707001b501321f",
+    "byte_match_to_repository": true
+  },
+  "correction_loop": {
+    "issue_found": "Common Worksheet selected-problem workspace overflowed at the required 1200% spot check because canonical base workspace values were too large.",
+    "correction": "Canonical Set 1 and individualized-practice base workspaces were normalized to 0.60in; no grading, question mathematics, feedback, CSS, or locked template was changed.",
+    "rerendered": "The deterministic builder was rerun once to propagate the canonical data correction; programmatic and representative visual QA were rerun.",
+    "unchanged_locked_templates_note": "Locked CSS/runtime/template code was not edited, restyled, or converted to duplicate PDFs; unchanged shells were not independently hand-rendered or re-authored."
+  },
+  "failures": [],
+  "final_failure_count": 0
+}

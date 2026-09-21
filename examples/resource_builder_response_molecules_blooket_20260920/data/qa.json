@@ -1,0 +1,70 @@
+{
+  "overall_status": "PASS",
+  "resource": "Molecules blooket",
+  "profile": "blooket_review",
+  "grade_level": "7",
+  "contract_versions": {
+    "resource_builder": "district-resource-builder/0.3-pilot",
+    "shared_standard": "district-response-build-standard/1.1",
+    "execution": "district-resource-build-execution/1.0",
+    "graph_rendering": "district-graph-rendering-standard/1.2",
+    "preflight": "district-resource-preflight/1.0",
+    "finalize": "district-resource-finalize/1.0",
+    "mechanical_qa": "district-resource-mechanical-qa/1.0"
+  },
+  "conflicts": [
+    {
+      "status": "RESOLVED",
+      "issue": "The selected Blooket profile says to use the exact Blooket column order defined in the Resource Builder contract, but the packaged Resource Builder contract does not actually list those columns.",
+      "resolution": "Used the current Blooket spreadsheet-import template structure with columns in this order: Question #, Question Text, Answer 1, Answer 2, Answer 3 (Optional), Answer 4 (Optional), Time Limit (sec), Correct Answer(s). Correct Answer(s) uses numeric option positions only. The template title row was preserved.",
+      "verification": "Blooket Help Center spreadsheet-import guidance was checked on 2026-09-20; the CSV was then programmatically validated for 8 columns, 30 question rows, sequential numbering, 30-second time limits, and numeric correct-answer positions."
+    }
+  ],
+  "content_accuracy": {
+    "status": "PASS",
+    "checks": [
+      "30 questions exactly: 10 recall, 10 concept, 10 application/counting.",
+      "Questions align to molecule composition, before/after chemical-change models, conservation of atoms, and temperature-related particle motion.",
+      "Temperature items state no chemical reaction when composition is intended to remain unchanged, avoiding the misconception that heating can never accompany chemical change.",
+      "Calculation/application items use grade-appropriate atom and molecule counting rather than stoichiometric coefficients beyond the target.",
+      "Chemical-change models conserve each atom type and distinguish rearrangement/bonding changes from physical state or motion changes.",
+      "Teacher answer key was programmatically cross-checked against every CSV correct-answer position and answer text."
+    ]
+  },
+  "mathjax": {
+    "status": "NOT_REQUIRED",
+    "note": "Import-safe plain text is used in the Blooket CSV; no rich mathematical notation requiring MathJax appears."
+  },
+  "graphs_visuals": {
+    "status": "NOT_REQUIRED",
+    "graph_count": 0,
+    "note": "This review profile uses text-based particle/model reasoning and does not require a Cartesian graph or separate instructional diagram."
+  },
+  "native_outputs": {
+    "csv": {
+      "status": "PASS",
+      "question_count": 30,
+      "column_count": 8,
+      "time_limit_seconds": 30,
+      "correct_answer_positions_numeric": true
+    },
+    "pdf": {
+      "status": "PASS",
+      "path": "teacher/answer_key.pdf",
+      "page_count": 2,
+      "page_size": "Letter portrait (612 x 792 pt)",
+      "visual_check": "Both rendered pages inspected at 150 DPI; table headers repeat, all 30 rows are visible, and no clipping, overlap, broken glyphs, or missing content was observed.",
+      "generation_note": "The packaged HTML-to-PDF helper could not launch because its Playwright Chromium binary was absent in the execution environment. The required PDF was generated programmatically with ReportLab using the locked resource style palette and verified by render inspection."
+    }
+  },
+  "locked_styles": {
+    "dashboard_sha256": "29539c511c769a0e6c7644b4a975f32f2ca167ab8514f9135a9d61e91a704f82",
+    "resource_sha256": "93ec179e171341ecca857f35ec1c6b268d1fd3cb0809b711e4275f16287f89e4",
+    "status": "PASS"
+  },
+  "mechanical_qa": {
+    "status": "PASS",
+    "path": "data/mechanical_qa.json"
+  },
+  "unresolved_failures": []
+}

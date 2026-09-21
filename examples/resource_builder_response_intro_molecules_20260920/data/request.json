@@ -1,0 +1,173 @@
+{
+  "schema": "district-resource-builder-request/0.4-pilot",
+  "tool_version": "district-resource-builder/0.4-pilot",
+  "created_at": "2026-09-21T00:33:17.727Z",
+  "contracts": {
+    "resource_builder": "district-resource-builder/0.3-pilot",
+    "shared_standard": "district-response-build-standard/1.1",
+    "execution": "district-resource-build-execution/1.0",
+    "graph_rendering": "district-graph-rendering-standard/1.2"
+  },
+  "resource": {
+    "name": "Intro Molecules",
+    "profile_id": "presentation",
+    "profile_label": "Presentation / Lesson Slides"
+  },
+  "teacher": {
+    "name": null,
+    "subject_course": "7th Grade Science",
+    "grade_level": "7"
+  },
+  "learning_targets": [
+    "I can make and draw a model of molecules showing the composition before and after a chemical change as well as what happens when temperature changes."
+  ],
+  "context": null,
+  "standards_framework": null,
+  "time_length_constraint": null,
+  "target_reading_access_level": null,
+  "design_priorities": [],
+  "profile_options": {
+    "slide_count": 12,
+    "speaker_notes": true,
+    "formative_checks": 2,
+    "student_handout": true,
+    "presentation_style": "visual_concise"
+  },
+  "profile_snapshot": {
+    "id": "presentation",
+    "label": "Presentation / Lesson Slides",
+    "summary": "Create a classroom-ready slide deck with readable design, instructional visuals, and optional speaker notes and formative checks.",
+    "controls": [
+      {
+        "id": "slide_count",
+        "label": "Approximate slide count",
+        "type": "number",
+        "default": 12,
+        "min": 5,
+        "max": 40
+      },
+      {
+        "id": "speaker_notes",
+        "label": "Include speaker notes",
+        "type": "checkbox",
+        "default": true
+      },
+      {
+        "id": "formative_checks",
+        "label": "Embedded formative checks",
+        "type": "number",
+        "default": 2,
+        "min": 0,
+        "max": 8
+      },
+      {
+        "id": "student_handout",
+        "label": "Also include a concise student handout / notes page",
+        "type": "checkbox",
+        "default": false
+      },
+      {
+        "id": "presentation_style",
+        "label": "Presentation emphasis",
+        "type": "select",
+        "default": "visual_concise",
+        "options": [
+          [
+            "visual_concise",
+            "Visual + concise"
+          ],
+          [
+            "teacher_guided",
+            "Teacher-guided explanation"
+          ],
+          [
+            "discussion",
+            "Discussion / inquiry heavy"
+          ]
+        ]
+      }
+    ],
+    "rules": [
+      "Use a readable 16:9 presentation with strong contrast and restrained district navy/blue styling.",
+      "Do not shrink body text to fit excessive content; split ideas across slides instead.",
+      "Use real diagrams, graphs, images, or tables when they materially support understanding.",
+      "Speaker notes, when requested, must match the final slide sequence and not describe slides that do not exist."
+    ]
+  },
+  "teacher_notes": null,
+  "source_files": [],
+  "resolved_outputs": {
+    "primary": [
+      "resource/presentation.pptx",
+      "resource/presentation.pdf",
+      "resource/student_handout.html",
+      "resource/student_handout.pdf"
+    ],
+    "teacher": [
+      "teacher/speaker_notes.html",
+      "teacher/speaker_notes.pdf"
+    ],
+    "required_files": [
+      "CLICK_ME.html",
+      "assets/dashboard_styles.css",
+      "assets/resource_styles.css",
+      "data/request.json",
+      "data/qa.json",
+      "resource/presentation.pptx",
+      "resource/presentation.pdf",
+      "resource/student_handout.html",
+      "resource/student_handout.pdf",
+      "teacher/speaker_notes.html",
+      "teacher/speaker_notes.pdf"
+    ]
+  },
+  "locked_styles": {
+    "dashboard": {
+      "version": "district-resource-dashboard-style/0.1-pilot",
+      "request_path": "response_contract/dashboard_styles.css",
+      "response_path": "assets/dashboard_styles.css",
+      "sha256": "29539c511c769a0e6c7644b4a975f32f2ca167ab8514f9135a9d61e91a704f82"
+    },
+    "resource": {
+      "version": "district-resource-print-style/0.1-pilot",
+      "request_path": "response_contract/resource_styles.css",
+      "response_path": "assets/resource_styles.css",
+      "sha256": "93ec179e171341ecca857f35ec1c6b268d1fd3cb0809b711e4275f16287f89e4"
+    }
+  },
+  "deterministic_tools": {
+    "preflight": {
+      "version": "district-resource-preflight/1.0",
+      "path": "response_contract/resource_preflight.py",
+      "sha256": "6499d393836ca77c0a819316c5087693a6119777292edf4b1c8c67a1effa51ac"
+    },
+    "finalize": {
+      "version": "district-resource-finalize/1.0",
+      "path": "response_contract/resource_finalize.py",
+      "sha256": "f66b9ee152f9a792af137329e0b49f23198f676832630304815a1e149c1296b2"
+    },
+    "qa": {
+      "version": "district-resource-mechanical-qa/1.0",
+      "path": "response_contract/resource_qa.py",
+      "sha256": "3cfa1c5fedd5d4244274f5f6b6a630121567778392a49bb75015020d192aa579"
+    }
+  },
+  "graph_rendering": {
+    "standard_version": "district-graph-rendering-standard/1.2",
+    "manifest": "response_contract/graph_tool/MANIFEST.json",
+    "entrypoint": "Tools/graph_tool.py",
+    "packaged_entrypoint": "response_contract/graph_tool/graph_tool.py",
+    "sha256": "a90a2e01552a940aec579a09d41cf6d5ae11fb2e59efe2a0bc286dfefea52e25"
+  },
+  "baseline_requirements": {
+    "accuracy": true,
+    "clarity": true,
+    "accessibility": true,
+    "grade_appropriate": true,
+    "design_priorities_are_optional_emphasis": true
+  },
+  "authority_note": "Structured resource/profile choices, grade level, and learning targets outrank conflicting free-form notes. Advanced design priorities are optional emphasis only.",
+  "delivery": {
+    "required_final_line": "Unzip it and open **`CLICK_ME.html`**. The package includes the finished classroom resource, any requested teacher materials, and completed QA."
+  }
+}
