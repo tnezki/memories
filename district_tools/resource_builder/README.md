@@ -2,9 +2,68 @@
 
 A district-wide request builder that turns a small set of teacher inputs into one self-contained request ZIP for a finished classroom resource.
 
-This pilot replaces the old workflow of copying long starter prompts and manually editing technical instructions. Teachers choose what they want to build; the tool packages the resource profile, teacher choices, source files, district response-build standard, locked CSS, and QA requirements automatically.
+## Teacher flow
 
-## Pilot resource profiles
+1. Select the resource type.
+2. Enter resource name, subject/course, **grade level**, and at least one learning target.
+3. Set the visible resource-specific options.
+4. Optionally attach **multiple supporting source files**.
+5. Open **Advanced options** only when you need extra constraints, context, standards, reading/access targets, design emphasis, or special directions.
+6. Click **Build Request ZIP**.
+7. Upload that ZIP to ChatGPT. No separate build prompt is required.
+8. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
+
+## Why grade level stays visible
+
+Grade level is required because the same learning target can imply very different work at different grades. The build contract requires grade level to influence rigor, representations, number choices, vocabulary, reading load, explanation expectations, and scaffolding.
+
+## Advanced options
+
+Advanced options are optional refinements, not baseline quality switches. Accuracy, clarity, accessibility, and grade appropriateness are always required.
+
+The former Design Approach defaults are no longer pre-checked. Selecting a box now means **emphasize this beyond the baseline**.
+
+Advanced contains:
+
+- time / length constraint;
+- target reading / access level;
+- prior-learning context;
+- standards / framework;
+- learning-emphasis priorities;
+- design-approach priorities;
+- special directions / what to avoid.
+
+`Unit / topic` has been removed from the teacher form. Resource name + subject/course + grade level + learning targets provide the primary context; additional placement/context can be supplied under Advanced when it actually matters.
+
+## Multiple source files
+
+The source picker supports multiple files. Every selected file is packaged under `sources/` and listed in `request.json`. The response contract tells the build to treat all listed files as available supporting sources rather than assuming a single source.
+
+## Deterministic build architecture
+
+The model should spend its effort on instructional judgment and new content. Repeatable mechanics are packaged in the request:
+
+- `resource_preflight.py` verifies contracts, hashes, sources, locked styles, and graph dependencies before content work begins.
+- `resource_finalize.py` copies locked CSS/request metadata and creates the standard `CLICK_ME.html` dashboard.
+- `resource_qa.py` performs repeatable file/link/hash/PDF/graph-provenance QA.
+- the canonical graph runtime is resolved from `Tools/MANIFEST.json` and packaged into the request.
+- `DISTRICT_GRAPH_RENDERING_STANDARD.md` controls graph geometry/style/provenance.
+- `RESOURCE_BUILD_EXECUTION.md` prevents recreation of mechanical scripts and repeated QA work.
+
+Missing packaged core dependencies fail closed. A response run should not search GitHub/the web for the renderer, graph tool, CSS, contracts, or QA utilities.
+
+## Locked response styles
+
+The request carries exact snapshots of:
+
+- `dashboard_styles.css`
+- `resource_styles.css`
+
+Their SHA-256 hashes are recorded in `request.json`. The deterministic finalizer copies them byte-for-byte into the finished response.
+
+## Resource profiles
+
+Current profiles:
 
 1. Worksheet / Practice
 2. Differentiated Worksheet
@@ -18,61 +77,4 @@ This pilot replaces the old workflow of copying long starter prompts and manuall
 10. Blooket Review
 11. Other / Custom Resource
 
-The first ten profiles are based on recurring resource types from the district's January 2026 AI starter-prompt collection, but the old prompt engineering and technical formatting instructions have been moved behind the interface.
-
-## Teacher flow
-
-1. Select the resource type.
-2. Enter resource name, subject/course, and at least one I Can statement / learning target. Unit/topic is optional.
-3. Optionally add teacher, grade level, unit/topic, context, time/length, reading/access level, standards/framework, source files, and special directions.
-4. Select learning-emphasis priorities such as practice skills/procedures, vocabulary, conceptual understanding, reasoning/problem solving, application/transfer, reading, writing, or review/retention, plus design priorities such as real-world application, accessibility, engagement, student choice, scaffolds, or extension.
-5. Use the resource-specific controls that appear for the selected profile.
-6. Click **Build Request ZIP**.
-7. Upload the request ZIP to ChatGPT. No separate build prompt is required.
-8. ChatGPT returns one response ZIP. Unzip it and open `CLICK_ME.html`.
-
-## Architecture
-
-This tool follows the district **tool capsule + registry + shared contract** pattern.
-
-- `resource_profiles.json` owns the profile catalog and most resource-specific controls. This makes it possible to add or revise resource types without redesigning the entire interface.
-- `RESOURCE_BUILDER_CONTRACT.md` owns the cross-profile resource rules and profile-specific build expectations.
-- `DISTRICT_RESPONSE_BUILD_STANDARD.md` is a local snapshot of the shared district standard packaged by this tool. Keeping the runtime copy inside the tool capsule prevents GitHub Pages path/caching failures while preserving the same shared MathJax, graphing, diagram/visual, conflict, CSS, PDF/native-file QA, and package-integrity rules.
-- `dashboard_styles.css` and `resource_styles.css` are exact locked response style snapshots. Every request records their SHA-256 hashes.
-- `app.js` is browser-side only and creates ZIPs with no third-party ZIP dependency.
-
-## Teacher intent vs. artifact engineering
-
-The teacher interface asks for instructional decisions, not implementation details. Teachers should not need to specify MathJax CDN rules, graph-generation methods, CSS classes, print rendering rules, link structures, or QA fields. Those belong in the packaged contracts.
-
-## Output pattern
-
-Every response uses `CLICK_ME.html` as the teacher entry point and returns the resolved profile outputs plus teacher materials when requested and a completed `data/qa.json` record.
-
-Typical package shape:
-
-```text
-CLICK_ME.html
-assets/
-  dashboard_styles.css
-  resource_styles.css
-  graphs/
-  visuals/
-resource/
-  <finished classroom resource files>
-teacher/
-  <answer key / guide / notes when applicable>
-data/
-  request.json
-  qa.json
-```
-
-Native resource types keep their natural format. For example, Presentation creates PPTX/PDF, while Blooket creates the strict import CSV plus a teacher answer reference.
-
-## Expansion rule
-
-Use the generic Resource Builder while a resource type is still broadly useful and configurable. If one profile develops enough specialized workflow, pedagogy, or output architecture, promote it into its own district tool rather than overloading the generic builder. The Tiered Task Tool is the model for that promotion path.
-
-## Privacy
-
-Selected files are read in the browser and packaged locally. The page does not upload files by itself. Teachers remain responsible for district policy when uploading protected or student data to an AI service.
+`resource_profiles.json` owns the profile catalog and resource-specific controls so individual profiles can evolve without crowding the teacher-facing form.

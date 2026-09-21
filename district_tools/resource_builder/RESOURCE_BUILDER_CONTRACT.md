@@ -1,275 +1,141 @@
 # District Resource Builder Contract
 
 STATUS: REQUIRED
-VERSION: district-resource-builder/0.2-pilot
+VERSION: district-resource-builder/0.3-pilot
+DATE: 2026-09-20
 
-This contract is executable. It turns one structured teacher request into one finished classroom resource package. It replaces the old workflow of copying and editing long prompt templates by hand.
-
-This tool also packages `DISTRICT_RESPONSE_BUILD_STANDARD.md`. Follow both contracts. The shared district standard governs MathJax, graph accuracy, diagrams/visuals, locked CSS, PDF QA, relative links, package integrity, conflict precedence, and the completed QA record. This contract adds the content and output rules specific to the Resource Builder.
+This contract turns one structured teacher request into one finished classroom resource package. It is intentionally teacher-simple and implementation-heavy: the teacher supplies instructional intent; the request ZIP carries the engineering rules and repeatable tools.
 
 ## 1. Core purpose - HARD
 
-- Build the resource type selected in `request.json`.
-- Treat the selected resource profile and structured controls as authoritative.
-- Produce a finished, classroom-ready artifact rather than a prompt, outline placeholder, or list of suggestions unless the selected profile itself is an outline/planning resource.
-- Use the teacher's 1-4 I Can statements / learning targets as the primary academic anchor.
-- Use attached source files only for content they actually support. Do not invent quotations, data, standards, examples, task details, or student information that are not present.
-- Keep teacher-facing implementation complexity out of the final resource package.
+- Build the resource profile selected in `request.json`.
+- Use the teacher's learning target(s), explicit grade level, subject/course, and profile-specific options as the primary instructional authority.
+- Produce a finished classroom-ready artifact, not a prompt or placeholder.
+- Return exactly one response ZIP with `CLICK_ME.html` as the teacher entry point.
+- Do not ask the teacher to restate information already present in the request.
 
-## 2. Authority and conflict rules - HARD
+## 2. Grade level is instructional data - HARD
 
-Apply the shared district authority order. In this tool, the following structured choices are especially authoritative:
+Grade level is required because identical target wording can imply very different rigor across grades.
 
-1. selected resource profile;
-2. resolved output files;
-3. teacher grade level / subject / optional unit-topic / target(s);
-4. resource-specific controls;
-5. selected design priorities;
-6. time / length / access constraints.
+Use grade level together with the learning target(s) to set:
 
-Free-form teacher notes may refine these choices but may not silently change the selected resource type, required outputs, locked CSS, or required QA. If notes conflict with a structured choice, follow the structured choice and record the conflict in `data/qa.json`.
+- number choices and computational complexity;
+- representation type and abstraction level;
+- expected reasoning and explanation length;
+- vocabulary and direction complexity;
+- reading load;
+- amount and type of scaffolding;
+- independence expected from students;
+- what counts as appropriate application or transfer.
 
-## 3. Common instructional rules - HARD
+Do not infer grade-level rigor from the wording of an I Can statement alone.
 
-Across every profile:
+## 3. Baseline quality vs. optional Advanced emphasis
+
+Accuracy, clarity, age/grade appropriateness, accessibility, readable directions, and alignment are baseline requirements even when no Advanced checkbox is selected.
+
+`design_priorities` contains only optional emphases selected under Advanced Options. An unchecked box does not mean "avoid this" and does not weaken baseline quality.
+
+Examples:
+
+- `real_world_application` means emphasize authentic application where natural; never force a fake context.
+- `inclusion_accessibility` means add extra access attention beyond the baseline, not that baseline accessibility was optional.
+- `engagement` means prioritize active/interesting participation without adding decorative gimmicks.
+- `scaffolds` means intentionally add supports without lowering the target.
+- `extension_challenge` means deepen transfer/synthesis, not merely add more repetition.
+
+## 4. Authority and conflicts - HARD
+
+Use this order when instructions conflict:
+
+1. safety/platform/file-integrity requirements;
+2. packaged HARD contracts;
+3. resource profile and resolved outputs;
+4. grade level + subject/course + learning targets;
+5. profile-specific controls;
+6. optional Advanced fields and selected design priorities;
+7. free-form teacher notes;
+8. source files for the content they actually contain;
+9. model inference.
+
+Record material conflicts in `data/qa.json`. Do not silently discard a higher authority.
+
+## 5. Supporting source files - HARD
+
+The teacher may attach zero, one, or many source files. Treat every `request.source_files[]` entry as an available supporting source.
+
+- Read all files that materially affect the requested resource.
+- Preserve source terminology, framing, data, and examples when relevant.
+- Do not invent missing quotations, measurements, standards, or source facts.
+- Do not assume the first file is the only source.
+- Do not search the web merely because a packaged/source dependency is missing. Missing core package files are a packaging failure.
+- External research is allowed only when the teacher explicitly requests it or the selected profile clearly requires current outside information; distinguish it from source-provided content.
+
+## 6. Common instructional rules - HARD
 
 - Align every major component to at least one submitted learning target.
-- Make the resource age/grade appropriate using the supplied context.
-- A target reading/access level may simplify wording, chunking, vocabulary support, and directions, but it may not reduce the intended academic target or reasoning demand.
-- Accuracy is always required even if the teacher does not select it as a design priority.
-- Do not create filler merely to reach a requested page, slide, station, or question count.
-- If the requested amount of content cannot fit legibly in the requested length, preserve readability and record the adjustment rather than shrinking text into an unusable artifact.
-- When multiple student versions are created, keep the core learning target coherent across versions.
-- Teacher answer keys, evidence guides, notes, and speaker notes must match the exact final student-facing artifact after any layout edits.
+- Avoid filler used only to hit a page/question count.
+- Preserve readability instead of shrinking text to force a requested length.
+- When multiple student versions are created, keep the essential target coherent.
+- Answer keys/teacher guides must match the final student artifact exactly.
+- When the assessed skill is creating a graph/diagram, do not reveal the answer in the student scaffold.
+- Use concise labels separately from the actual prompt when both appear; do not run a skill/type label directly into the problem sentence.
 
-## 4. Design priorities
+## 7. MathJax - HARD
 
-The request may include learning-emphasis priorities such as practice skills/procedures, vocabulary/academic language, conceptual understanding, reasoning/problem solving, application/transfer, reading/comprehension, writing/explanation, and review/retention, plus design priorities such as real-world application, inclusion/accessibility, growth-oriented language, engagement, student choice/agency, scaffolds, and extension/challenge.
+Use valid MathJax/TeX for mathematical notation. Do not fake math with Unicode lookalikes or improvised HTML. Verify rendered symbols, fractions, radicals, exponents, vectors, inequalities, and units. Final print/native output must not expose raw TeX.
 
-- Use selected priorities where they naturally support the target and profile.
-- A practice-skills selection should increase purposeful procedural/skill rehearsal without turning the resource into filler.
-- A vocabulary selection should deliberately practice meaning, usage, recognition, and/or application of relevant academic language rather than only copying definitions.
-- Conceptual, reasoning, application, reading, and writing priorities should change the evidence students are asked to produce, not merely add labels.
-- Do not force a superficial real-world context into every item.
-- Do not use growth-mindset language as decoration; keep it concise and authentic.
-- Student choice should preserve common evidence expectations.
-- Scaffolds should reduce access barriers without automatically reducing the academic goal.
-- Extension should emphasize transfer, synthesis, investigation, design, or deeper reasoning rather than extra repetition.
+## 8. Graphs - HARD
 
-## 5. Source files
+Follow `response_contract/DISTRICT_GRAPH_RENDERING_STANDARD.md`.
 
-Source files may include assignments, textbook excerpts, vocabulary, standards, readings, rubrics, examples, data, images, or other teacher materials.
+For supported Cartesian graphs and blank student grids:
 
-- Ground the resource in source content when the teacher clearly supplied it for that purpose.
-- Preserve source terminology and framing when relevant.
-- Do not silently correct or replace source content with outside material unless the teacher explicitly requested research or verification.
-- Do not copy long copyrighted passages into a new student resource when a short excerpt, reference, summary, or teacher-provided file is sufficient.
-- If a task depends on an attached reading, image, table, graph, or other source, ensure students can access that source in the returned package or clearly identify the included source file.
+- execute the packaged canonical graph tool directly;
+- use `request.graph_rendering.packaged_entrypoint`;
+- generate each distinct graph once and reuse the asset;
+- prefer SVG where practical;
+- do not use a generative image model for quantitatively accurate graphs;
+- record renderer entrypoint and graph asset paths in `data/graph_provenance.json` when graphs are created.
 
-## 6. Locked response styling - HARD
+## 9. Diagrams and instructional visuals
 
-The request includes exact snapshots and hashes for:
+Use real diagrams when the task depends on spatial/structural information. Prefer clean SVG/line art for geometry, force setups, circuits, labeled structures, arrows, tables, timelines, and process diagrams. Decorative images do not replace instructional visuals.
 
-- `response_contract/dashboard_styles.css`
-- `response_contract/resource_styles.css`
+## 10. Locked styling - HARD
 
-Copy them byte-for-byte to:
+The response must use the packaged locked styles:
 
-- `assets/dashboard_styles.css`
-- `assets/resource_styles.css`
+- `response_contract/dashboard_styles.css` -> `assets/dashboard_styles.css`
+- `response_contract/resource_styles.css` -> `assets/resource_styles.css`
 
-Use `dashboard_styles.css` for `CLICK_ME.html` and teacher-facing guide/reference pages unless a profile requires a native artifact format such as PPTX or CSV.
+Do not invent a separate visual system or page-local CSS. The deterministic finalizer copies these exact files. Profile-specific structure may vary, but it uses the locked visual language.
 
-Use `resource_styles.css` for print-ready HTML/PDF student resources, rubrics, lesson outlines, stations, unit outlines, answer keys, and other compatible documents.
+## 11. Repeatable mechanics - HARD
 
-Do not silently redesign a resource because an uploaded source uses another style. Native PPTX outputs should use a restrained district navy/blue/white visual language with strong contrast and readable sizing. CSV output is exempt from CSS but remains subject to structure and QA.
+Mechanical work belongs to the packaged utilities:
 
-## 7. Response package - HARD
+- `resource_preflight.py` verifies request integrity, sources, contracts, hashes, and graph dependencies.
+- `resource_finalize.py` copies locked assets/request metadata and creates the standard `CLICK_ME.html` dashboard.
+- `resource_qa.py` checks required outputs, local links, locked-style hashes, file integrity, PDF signatures, and graph provenance.
 
-Return exactly ONE response ZIP.
+Do not rewrite equivalent ad-hoc Python/shell scripts during a normal run. Do not manually repeat checks already reported by these tools.
 
-Base structure:
+## 12. Output and QA
 
-```text
-CLICK_ME.html
-assets/
-  dashboard_styles.css
-  resource_styles.css
-  graphs/       (when needed)
-  visuals/      (when needed)
-resource/
-  <resolved profile outputs>
-teacher/
-  <resolved teacher outputs when applicable>
-data/
-  request.json
-  qa.json
-```
+Create every file in `request.resolved_outputs.required_files`, resolving the Custom Resource wildcard to a real file when needed.
 
-- Create every path listed in `request.json -> resolved_outputs.required_files`.
-- Do not create fake links to optional outputs that were not requested.
-- `CLICK_ME.html` must prominently link to every finished primary classroom resource, then teacher materials, then a small completed-QA link.
-- Copy the packaged `request.json` to `data/request.json`.
-- Use local relative links only.
+`data/qa.json` must record:
 
-## 8. Profile rules - HARD
+- overall PASS/FAIL;
+- contract/tool versions;
+- conflicts;
+- content accuracy checks;
+- MathJax status when math appears;
+- graph/visual status;
+- mechanical QA result/path;
+- PDF/native visual checks where required;
+- unresolved failures.
 
-The selected profile snapshot is packaged in `response_contract/SELECTED_PROFILE.json`. Follow its `rules` plus the requirements below.
-
-### Worksheet / Practice
-
-- Build a coherent practice progression tied to the targets.
-- Match approximate question count and target length without sacrificing readability.
-- Use answer space that matches the response type.
-- When requested, provide a complete answer key that matches the final student version.
-
-### Differentiated Worksheet
-
-- Create exactly the requested number of versions.
-- Use neutral student-facing labels by default: Version A, Version B, Version C.
-- Preserve the same essential targets while varying scaffolding, access, or complexity according to the selected differentiation basis.
-- Include teacher differentiation notes describing what changed and why.
-
-### Extension Activity
-
-- Extension must go beyond routine repetition through transfer, comparison, synthesis, design, investigation, modeling, critique, or application.
-- If the teacher asks to use student work, only do so when the relevant work/context is actually supplied.
-- Respect the target duration; if authentic work requires longer, state that clearly in the teacher guide.
-
-### Formative Assessment
-
-- Diagnose student thinking, not merely right/wrong performance.
-- Use the selected response mix and diagnostic balance.
-- When requested, include item-level answer/exemplar guidance and likely misconception/next-step notes.
-- Distractors must be plausible and content-based, not silly throwaways.
-
-### Rubric
-
-- Criteria must be observable and aligned to the actual task/target.
-- Descriptors must distinguish levels with concrete evidence rather than vague words alone.
-- For single-point rubrics, use a clear proficiency target with space for evidence above/below expectations.
-- Include student self-assessment space when selected.
-
-### Lesson Plan / Lesson Outline
-
-- Timing must add up realistically to the class period.
-- Include teacher actions, student actions, and checks for understanding at a level appropriate to the requested detail.
-- If a hook, closure, or materials list is selected, include it explicitly.
-- Avoid lecture-heavy filler when students can actively process, discuss, practice, investigate, or apply.
-
-### Presentation / Lesson Slides
-
-- Create a finished 16:9 PPTX at `resource/presentation.pptx` and a PDF rendering at `resource/presentation.pdf`.
-- Use readable slide design: concise text, strong contrast, meaningful whitespace, and no tiny body text.
-- Include the requested number of embedded formative checks.
-- When speaker notes are selected, include them in the PPTX and create the requested teacher notes files. Notes must correspond to the final slide sequence.
-- When a student handout is selected, create the resolved handout files.
-- Use real diagrams/graphs/visuals when instruction depends on them.
-
-### Stations
-
-- Create exactly the requested number of distinct stations.
-- Keep each station purposefully different while aligned to the same target set.
-- Respect materials restrictions.
-- When one-page-per-station is selected, verify actual PDF page boundaries.
-- Include answer key/teacher solutions when selected.
-
-### Curriculum / Unit Outline
-
-- Build a coherent progression across the requested number of weeks and meetings.
-- Include pacing, lesson focus, evidence/assessment points, and major resources/experiences.
-- Include the selected formative, summative, hands-on, and differentiation elements when appropriate.
-- Do not overfill the calendar; leave realistic room for instruction, practice, feedback, and revision.
-
-### Blooket Review
-
-Create `resource/blooket_import.csv` using exactly this two-row header structure:
-
-```csv
-Blooket Import Template,,,,,,,
-Question #,Question Text,Answer 1,Answer 2,Answer 3 (Optional),Answer 4 (Optional),Time Limit (sec) (Max: 300 seconds),Correct Answer(s) (Only include Answer #)
-```
-
-CSV rules:
-
-- Question numbering starts at 1.
-- Use the requested question count.
-- Time Limit uses the structured teacher value for every question unless the profile is later revised to allow per-question timing.
-- Correct Answer(s) uses numeric answer positions only (1-4).
-- Keep CSV content plain text. Do not place Markdown, HTML, MathJax, commentary, or a teacher explanation inside the CSV.
-- Escape commas and quotation marks correctly according to CSV rules.
-- Do not add blank rows at the end.
-- Provide a separate teacher answer reference in HTML/PDF with richer explanations when required by `resolved_outputs`.
-
-### Other / Custom Resource
-
-- Follow the teacher's custom description and selected audience.
-- Use the selected preferred output format.
-- If `best_fit` is selected, choose a practical classroom format, record the decision in QA, and still provide all `resolved_outputs` required by the request.
-- Do not reinterpret the request as one of the named profiles unless doing so is necessary to create the requested resource; if you do, record that choice in QA.
-
-## 9. MathJax, graphs, diagrams, visuals - HARD
-
-Apply the packaged shared district standard throughout.
-
-Additional Resource Builder rules:
-
-- Math-rich HTML/PDF resources must use the shared MathJax workflow and be visually checked after typesetting.
-- Mathematical graphs must come from a dedicated grapher when available, otherwise a deterministic accurate plotting method. Do not fabricate quantitative graphs with an image model.
-- If a student prompt refers to a diagram, figure, map, circuit, force setup, geometric figure, table, coordinate grid, data display, timeline, or model, include the actual visual unless creating it is the assessed skill.
-- When creating the visual is the assessed skill, provide only the neutral scaffold needed (blank grid, setup sketch, unlabeled structure, etc.) without giving away the answer.
-- Save generated quantitative graphs under `assets/graphs/` and other instructional visuals under `assets/visuals/`.
-
-## 10. PDF and native-artifact QA - HARD
-
-- Open every required PDF and visually inspect it.
-- Check actual page size/orientation, page counts where constrained, clipping, overlap, blank pages, missing visuals, missing fonts, broken math, unreadable text, and incorrect page breaks.
-- Open native PPTX/DOCX/CSV files enough to verify that they are structurally valid and contain the intended content.
-- For PPTX, verify slide count, aspect ratio, speaker notes when requested, and that no required visual is missing.
-- For CSV, parse it as CSV and verify row count, column count, header rows, numbering, time limit values, and numeric correct-answer fields.
-
-## 11. Required QA record - HARD
-
-Create `data/qa.json` and include at least:
-
-- `overall_status` = PASS or FAIL;
-- `shared_standard_version`;
-- `resource_builder_contract_version`;
-- `selected_profile.id` and `selected_profile.label`;
-- `targets.submitted_count` and alignment result;
-- `conflicts` structure required by the shared standard;
-- `mathjax` structure required by the shared standard;
-- `graphs` structure required by the shared standard;
-- `visuals` structure required by the shared standard;
-- `locked_css.dashboard.expected_sha256`, `actual_sha256`, `matches`;
-- `locked_css.resource.expected_sha256`, `actual_sha256`, `matches`;
-- `required_files.expected`, `present`, `missing`;
-- `links.all_relative_links_resolve`;
-- `pdfs.rendered_and_visually_checked` and per-file checks;
-- `native_files` checks for PPTX/DOCX/CSV when applicable;
-- `profile_checks` for the selected profile's structured options;
-- `failures` array.
-
-PASS is not allowed with unresolved conflicts, missing required files, mismatched locked CSS, raw TeX, missing/inaccurate graphs, missing referenced visuals, broken links, placeholder artifacts, clipped/unreadable PDFs, malformed CSV, invalid native files, or profile-specific requirements that were not followed.
-
-## 12. CLICK_ME dashboard - HARD
-
-`CLICK_ME.html` is the only teacher entry point.
-
-It should show:
-
-1. resource name, subject/course, grade level, and unit/topic when provided;
-2. one prominent button/card for each primary resource output;
-3. a separate Teacher Materials section only when teacher outputs exist;
-4. a small completed-QA status/link;
-5. no implementation-contract text unless a problem needs teacher review.
-
-Keep the dashboard simple enough that another district teacher can unzip the response and immediately know what to open or print.
-
-## 13. Delivery - HARD
-
-Return only the single completed response ZIP as the authoritative artifact.
-
-The final user-facing line must be exactly:
-
-Unzip it and open **`CLICK_ME.html`**. The package includes the finished classroom resource, any requested teacher materials, and completed QA.
+PASS is forbidden with an unresolved required-output, accuracy, graph, visual, or package-integrity failure.
