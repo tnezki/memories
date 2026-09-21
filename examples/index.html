@@ -57,30 +57,17 @@
 </section>
 
 <section class="section">
-  <div class="section-head"><div><h2>Tiered Task</h2></div><p>The Grade 7 Health example will appear here automatically after its response folder is added to this examples directory.</p></div>
-  <div id="tieredExamples" class="grid"><article class="card coming"><span class="status">Coming next</span><h3>Grade 7 Health Tiered Task</h3><p>One landscape DOK 1-4 student card plus the Teacher / Evidence Guide.</p></article></div>
+  <div class="section-head"><div><h2>Tiered Task</h2></div><p>One integrated DOK 1-4 student card plus a Teacher / Evidence Guide built from a coherent set of learning targets.</p></div>
+  <div class="grid">
+    <article class="card">
+      <div class="tag">7th Grade Health</div><h3>Teen Safety</h3><p>Six connected Health learning targets combined into one Tiered Task with DOK 1-4 progression and broad student product choice.</p>
+      <div class="subactions"><a class="text-link" href="tiered_task_response_teen_safety_20260920(1)%202/student/task_card.html">Student task card</a><a class="text-link" href="tiered_task_response_teen_safety_20260920(1)%202/teacher/teacher_guide.html">Teacher / Evidence Guide</a></div>
+      <div class="actions"><a class="btn primary" href="tiered_task_response_teen_safety_20260920(1)%202/CLICK_ME.html">Open example</a><a class="btn" href="tiered_task_response_teen_safety_20260920(1).zip">Download ZIP</a></div>
+    </article>
+  </div>
 </section>
 
 <div class="footer">District AI Tools example gallery. Open an example to inspect the exact teacher-facing output.</div>
 </div>
-<script>
-(async()=>{
-  const mount=document.getElementById('tieredExamples');
-  try{
-    const r=await fetch('https://api.github.com/repos/tnezki/memories/contents/examples',{cache:'no-store'});
-    if(!r.ok)return;
-    const items=await r.json();
-    const dirs=items.filter(x=>x.type==='dir' && /^tiered_task_response/i.test(x.name));
-    if(!dirs.length)return;
-    mount.innerHTML='';
-    dirs.forEach(d=>{
-      const label=d.name.replace(/^tiered_task_response[_-]?/i,'').replace(/[_-]+/g,' ').replace(/\b\w/g,m=>m.toUpperCase()) || 'Tiered Task Example';
-      const card=document.createElement('article');card.className='card';
-      card.innerHTML=`<div class="tag">Tiered Task</div><h3>${label}</h3><p>Open the student DOK 1-4 card and Teacher / Evidence Guide.</p><div class="actions"><a class="btn primary" href="${encodeURI(d.name)}/CLICK_ME.html">Open example</a></div>`;
-      mount.appendChild(card);
-    });
-  }catch(e){/* Static fallback remains visible. */}
-})();
-</script>
 </body>
 </html>
