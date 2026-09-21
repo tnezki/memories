@@ -132,72 +132,16 @@ textarea{min-height:82px;resize:vertical}
 
         <div id="subPlanScheduleSection" class="hidden">
           <div class="divider"></div>
-          <h3>Bell schedule for each dated plan</h3>
-          <div class="small">Plan type and bell schedule are separate. A Non-Monday plan can use a special assembly schedule. Standard choices use the current MMHS Daily Schedules document in the Sub Plans profile; special schedules require the exact source link for that day.</div>
-
-          <div class="scheduleGrid">
-            <div id="subPlanMondayScheduleWrap" class="scheduleCard hidden">
-              <h4>Monday plan schedule</h4>
-              <label>Schedule</label>
-              <select id="subPlanMondayScheduleType">
-                <option value="standard_monday">Standard Monday Schedule</option>
-                <option value="standard_tuesday_friday">Standard Tuesday-Friday Schedule</option>
-                <option value="special">Special / Alternate Schedule</option>
-              </select>
-              <div id="subPlanMondayStandardNote" class="status good scheduleSourceNote">Uses the current MMHS Daily Schedules source from PROFILE.json.</div>
-              <div id="subPlanMondaySpecialFields" class="hidden">
-                <label>Special schedule name</label>
-                <input id="subPlanMondayScheduleName" type="text" placeholder="Example: Pep Assembly Schedule">
-                <label>Special schedule source link <span class="small">(required)</span></label>
-                <input id="subPlanMondayScheduleUrl" type="url" placeholder="Paste the Google Doc/Drive or other exact schedule link">
-                <label>Schedule file <span class="small">(optional)</span></label>
-                <div class="drop"><input id="subPlanMondayScheduleFile" type="file"></div>
-              </div>
-            </div>
-
-            <div id="subPlanRegularScheduleWrap" class="scheduleCard hidden">
-              <h4>Non-Monday plan schedule</h4>
-              <label>Schedule</label>
-              <select id="subPlanRegularScheduleType">
-                <option value="standard_tuesday_friday">Standard Tuesday-Friday Schedule</option>
-                <option value="standard_monday">Standard Monday Schedule</option>
-                <option value="special">Special / Alternate Schedule</option>
-              </select>
-              <div id="subPlanRegularStandardNote" class="status good scheduleSourceNote">Uses the current MMHS Daily Schedules source from PROFILE.json.</div>
-              <div id="subPlanRegularSpecialFields" class="hidden">
-                <label>Special schedule name</label>
-                <input id="subPlanRegularScheduleName" type="text" placeholder="Example: Special Assembly Schedule">
-                <label>Special schedule source link <span class="small">(required)</span></label>
-                <input id="subPlanRegularScheduleUrl" type="url" placeholder="Paste the Google Doc/Drive or other exact schedule link">
-                <label>Schedule file <span class="small">(optional)</span></label>
-                <div class="drop"><input id="subPlanRegularScheduleFile" type="file"></div>
-              </div>
-            </div>
-
-            <div id="subPlanOtherScheduleWrap" class="scheduleCard hidden">
-              <h4>Other plan schedule</h4>
-              <label>Schedule</label>
-              <select id="subPlanOtherScheduleType">
-                <option value="special">Special / Alternate Schedule</option>
-                <option value="standard_tuesday_friday">Standard Tuesday-Friday Schedule</option>
-                <option value="standard_monday">Standard Monday Schedule</option>
-              </select>
-              <div id="subPlanOtherStandardNote" class="status good scheduleSourceNote hidden">Uses the current MMHS Daily Schedules source from PROFILE.json.</div>
-              <div id="subPlanOtherSpecialFields">
-                <label>Special schedule name</label>
-                <input id="subPlanOtherScheduleName" type="text" placeholder="Example: Testing Schedule">
-                <label>Special schedule source link <span class="small">(required)</span></label>
-                <input id="subPlanOtherScheduleUrl" type="url" placeholder="Paste the Google Doc/Drive or other exact schedule link">
-                <label>Schedule file <span class="small">(optional)</span></label>
-                <div class="drop"><input id="subPlanOtherScheduleFile" type="file"></div>
-              </div>
-            </div>
-          </div>
+          <h3>Schedule for the day</h3>
+          <div class="small">Normally leave this blank. Monday and Non-Monday plans use the current standard MMHS schedule automatically. If the day uses an assembly, testing, half-day, delayed-start, or other alternate schedule, paste the single source link here. The build will match the selected plan date to the correct high-school schedule in that source.</div>
+          <label>Alternate schedule link <span class="small">(optional)</span></label>
+          <input id="subPlanAlternateScheduleUrl" type="url" placeholder="Paste the Alternate Assembly Schedules / special schedule link">
+          <div class="status good scheduleSourceNote"><b>Blank = standard schedule.</b> A pasted link becomes the schedule authority for the selected dated plan(s); the build must resolve the exact date before using alternate bell times.</div>
         </div>
 
         <div class="divider"></div>
         <h3>What should students accomplish?</h3>
-        <div class="small">Use shorthand if you want. The build should turn your intent into clear substitute directions and create/select supporting materials when the current curriculum authorities provide enough information to do so safely.</div>
+        <div class="small">Use shorthand if you want. The build should turn your intent into clear substitute directions and create/select supporting materials when the current curriculum authorities provide enough information to do so safely. If you supplied an alternate schedule link, you may leave a class blank when that class does not meet; the build will verify that against the dated schedule.</div>
 
         <div class="directionGrid">
           <div class="directionCard"><label>1st Hour — STEM</label><textarea id="subPlanP1" placeholder="Describe the student outcome, activity, unfinished work, or resource you want used. Example: Finish the design challenge reflection, then independent extension work for the rest of class."></textarea></div>
@@ -220,7 +164,7 @@ textarea{min-height:82px;resize:vertical}
 </div>
 </main>
 <script>
-const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.6";
+const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.7";
 const COURSES={"Algebra 1":{folder:"algebra",repo:"tnezki/algebra",slug:"algebra_1",units:8},"AP Calculus AB":{folder:"calculus",repo:"tnezki/calculus",slug:"ap_calculus_ab",units:8},"Physics":{folder:"physics",repo:"tnezki/physics",slug:"physics",units:8}};
 
 // The canonical control panel is intentionally a build factory, not a maintenance console.
@@ -314,32 +258,21 @@ function refreshGeneral(){
   $("subPlanFields").classList.toggle("hidden",!isSub);
   if(isSub)refreshSubPlanMode();
 }
-function refreshScheduleCard(prefix){
-  const type=$(prefix+"ScheduleType").value;
-  const special=type==="special";
-  $(prefix+"SpecialFields").classList.toggle("hidden",!special);
-  $(prefix+"StandardNote").classList.toggle("hidden",special);
-}
 function refreshSubPlanMode(){
   const monday=$("subPlanMonday").checked,regular=$("subPlanRegular").checked,other=$("subPlanOther").checked,emergency=$("subPlanEmergency").checked;
   $("subPlanMondayDateWrap").classList.toggle("hidden",!monday);
   $("subPlanRegularDateWrap").classList.toggle("hidden",!regular);
   $("subPlanOtherMetaWrap").classList.toggle("hidden",!other);
   $("subPlanScheduleSection").classList.toggle("hidden",!(monday||regular||other));
-  $("subPlanMondayScheduleWrap").classList.toggle("hidden",!monday);
-  $("subPlanRegularScheduleWrap").classList.toggle("hidden",!regular);
-  $("subPlanOtherScheduleWrap").classList.toggle("hidden",!other);
+  if(!(monday||regular||other))$("subPlanAlternateScheduleUrl").value="";
   if(!monday)$("subPlanMondayDate").value="";
   if(!regular)$("subPlanRegularDate").value="";
   if(!other){$("subPlanOtherDate").value="";$("subPlanOtherLabel").value=""}
   const selected=[monday?"Monday":null,regular?"Non-Monday":null,other?"Other":null,emergency?"Emergencies":null].filter(Boolean);
   const help=selected.length
-    ?`Selected: ${selected.join(", ")}. Dated/Other plans each use the schedule selected below; Emergency keeps the two standard reusable schedules.`
+    ?`Selected: ${selected.join(", ")}. Standard bell times are automatic. Paste one alternate-schedule link below only when the selected dated plan(s) use a special schedule.`
     :"Check at least one plan type.";
   setStatus("subPlanModeHelp",help,selected.length?"good":"warn");
-  refreshScheduleCard("subPlanMonday");
-  refreshScheduleCard("subPlanRegular");
-  refreshScheduleCard("subPlanOther");
 }
 
 function outputSpec(p){const map={exit:"Quick Checks"};return[{id:p?.key||"output",label:map[p?.key]||p?.label||"Requested output",kind:"canonical"}]}
@@ -367,14 +300,8 @@ function requestText(m){
     if(sp.dates.other)s+=`OTHER DATE: ${sp.dates.other}\n`;
     if(sp.other_label)s+=`OTHER LABEL: ${sp.other_label}\n`;
     if(sp.plan_types.includes("emergency"))s+="EMERGENCY DATE: NONE\n";
-    s+="SCHEDULE SOURCES:\n";
-    for(const [mode,src] of Object.entries(sp.schedule_sources||{})){
-      s+=`- ${mode}: ${src.mode}`;
-      if(src.name)s+=` | ${src.name}`;
-      if(src.url)s+=` | ${src.url}`;
-      if(src.file_name)s+=` | file=${src.file_name}`;
-      s+="\n";
-    }
+    if(sp.alternate_schedule_url)s+=`ALTERNATE SCHEDULE SOURCE: ${sp.alternate_schedule_url}\n`;
+    else s+="ALTERNATE SCHEDULE SOURCE: NONE - use standard schedule for each dated plan\n";
     s+="LESSON INTENT BY HOUR:\n";
     for(const d of sp.hour_directions)s+=`${d.label}: ${d.text||"[use profile/template default]"}\n`;
   }
@@ -397,15 +324,6 @@ function safeSlug(s){return String(s||"request").toLowerCase().replace(/[^a-z0-9
 
 async function saveBuild(){try{const p=buildSelected(),course=$("buildCourse").value,unit=Number($("buildUnit").value),files=[...$("buildAdditional").files];if(!p)return;const m=await manifestBase("BUILD",course,unit,p,outputSpec(p),$("buildNote").value.trim(),files.map(f=>f.name)),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
 
-function specialSchedule(prefix,modeKey){
-  const type=$(prefix+"ScheduleType").value;
-  if(type!=="special")return{mode:type,profile_source:"drive.daily_schedule"};
-  const name=$(prefix+"ScheduleName").value.trim(),url=$(prefix+"ScheduleUrl").value.trim(),file=$(prefix+"ScheduleFile").files[0]||null;
-  if(!url)throw Error(`Paste the special schedule source link for ${modeKey}.`);
-  try{const u=new URL(url);if(!["http:","https:"].includes(u.protocol))throw 0}catch{throw Error(`Use a valid http/https schedule link for ${modeKey}.`)}
-  return{mode:"special",name:name||"Special / Alternate Schedule",url,file_name:file?file.name:null};
-}
-
 async function saveSubPlan(p){
   const monday=$("subPlanMonday").checked,regular=$("subPlanRegular").checked,other=$("subPlanOther").checked,emergency=$("subPlanEmergency").checked;
   const types=[monday?"monday":null,regular?"non_monday":null,other?"other":null,emergency?"emergency":null].filter(Boolean);
@@ -416,12 +334,16 @@ async function saveSubPlan(p){
   if(other&&!otherDate){alert("Choose the Other plan date.");return}
   if(other&&!otherLabel){alert("Add a label for the Other plan.");return}
 
-  let scheduleSources={};
-  try{
-    if(monday)scheduleSources.monday=specialSchedule("subPlanMonday","Monday");
-    if(regular)scheduleSources.non_monday=specialSchedule("subPlanRegular","Non-Monday");
-    if(other)scheduleSources.other=specialSchedule("subPlanOther","Other");
-  }catch(e){alert(e.message);return}
+  const alternateScheduleUrl=$("subPlanAlternateScheduleUrl").value.trim();
+  if(alternateScheduleUrl){
+    try{
+      const u=new URL(alternateScheduleUrl);
+      if(!["http:","https:"].includes(u.protocol))throw 0;
+    }catch{
+      alert("Use a valid http/https link for the alternate schedule.");
+      return;
+    }
+  }
 
   const directions=[
     {key:"period_1",label:"1st Hour - STEM",text:$("subPlanP1").value.trim()},
@@ -432,16 +354,13 @@ async function saveSubPlan(p){
     {key:"period_5",label:"5th Hour - Prep",text:$("subPlanP5").value.trim()},
     {key:"period_6",label:"6th Hour - Algebra 1",text:$("subPlanP6").value.trim()}
   ];
-  const required=directions.filter(x=>["period_1","period_2","period_3","period_4","period_6"].includes(x.key));
-  const missing=required.filter(x=>!x.text).map(x=>x.label);
-  if(missing.length){alert("Add lesson intent for: "+missing.join(", "));return}
+  if(!alternateScheduleUrl){
+    const required=directions.filter(x=>["period_1","period_2","period_3","period_4","period_6"].includes(x.key));
+    const missing=required.filter(x=>!x.text).map(x=>x.label);
+    if(missing.length){alert("Add lesson intent for: "+missing.join(", "));return}
+  }
 
   const files=[...$("subPlanAdditional").files],note=$("subPlanNote").value.trim();
-  const scheduleFiles=[];
-  if(monday&&$("subPlanMondayScheduleType").value==="special"&&$("subPlanMondayScheduleFile").files[0])scheduleFiles.push({mode:"monday",file:$("subPlanMondayScheduleFile").files[0]});
-  if(regular&&$("subPlanRegularScheduleType").value==="special"&&$("subPlanRegularScheduleFile").files[0])scheduleFiles.push({mode:"non_monday",file:$("subPlanRegularScheduleFile").files[0]});
-  if(other&&$("subPlanOtherScheduleType").value==="special"&&$("subPlanOtherScheduleFile").files[0])scheduleFiles.push({mode:"other",file:$("subPlanOtherScheduleFile").files[0]});
-
   const m=await manifestBase("GENERAL",null,null,p,generalOutputSpec(p),note,files.map(f=>f.name));
   m.course_repo=null;
   m.runtime.source_policy="PINNED_PROJECT_AND_AUTHORIZED_GOOGLE_DRIVE";
@@ -457,15 +376,16 @@ async function saveSubPlan(p){
     plan_types:types,
     dates:{monday:mondayDate,non_monday:regularDate,other:otherDate},
     other_label:otherLabel||null,
-    schedule_sources:scheduleSources,
+    alternate_schedule_url:alternateScheduleUrl||null,
+    schedule_resolution:alternateScheduleUrl
+      ?"match each selected dated plan to its exact date in the linked alternate schedule source; fail closed if a selected date cannot be resolved"
+      :"use the normal profile schedule for each dated plan",
     hour_directions:directions,
     additional_note:note,
-    additional_files:files.map(f=>f.name),
-    schedule_files:scheduleFiles.map(x=>({mode:x.mode,file_name:x.file.name}))
+    additional_files:files.map(f=>f.name)
   };
   const enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];
   await addFiles(entries,files,"inputs/additional/");
-  for(const x of scheduleFiles)await addFiles(entries,[x.file],`inputs/schedules/${x.mode}/`);
   const suffix=[mondayDate,regularDate,otherDate,emergency?"emergency":null].filter(Boolean).join("_");
   await writeRequest(await makeZip(entries),`general_sub_plans_${safeSlug(suffix)}_REQUEST.zip`);
 }
@@ -485,9 +405,6 @@ $("subPlanMonday").onchange=refreshSubPlanMode;
 $("subPlanRegular").onchange=refreshSubPlanMode;
 $("subPlanOther").onchange=refreshSubPlanMode;
 $("subPlanEmergency").onchange=refreshSubPlanMode;
-$("subPlanMondayScheduleType").onchange=()=>refreshScheduleCard("subPlanMonday");
-$("subPlanRegularScheduleType").onchange=()=>refreshScheduleCard("subPlanRegular");
-$("subPlanOtherScheduleType").onchange=()=>refreshScheduleCard("subPlanOther");
 (async()=>{initCourses();await restoreRoot();await restoreRequest();await discoverMenus()})();
 </script>
 </body>

@@ -1,5 +1,5 @@
 {
-  "schema": "sub-plans-profile/0.3",
+  "schema": "sub-plans-profile/0.4",
   "status": "pilot",
   "teacher": "Troy Nezki",
   "school_year": "2026-27",
@@ -70,21 +70,24 @@
       "label": "1st Hour",
       "period": 1,
       "course": "STEM",
-      "required": true
+      "required": false,
+      "required_when_scheduled": true
     },
     {
       "key": "period_2",
       "label": "2nd Hour",
       "period": 2,
       "course": "Physics",
-      "required": true
+      "required": false,
+      "required_when_scheduled": true
     },
     {
       "key": "period_3",
       "label": "3rd Hour",
       "period": 3,
       "course": "Algebra 1",
-      "required": true
+      "required": false,
+      "required_when_scheduled": true
     },
     {
       "key": "crewtime",
@@ -97,7 +100,8 @@
       "label": "4th Hour",
       "period": 4,
       "course": "AP Calculus",
-      "required": true
+      "required": false,
+      "required_when_scheduled": true
     },
     {
       "key": "period_5",
@@ -112,31 +116,14 @@
       "label": "6th Hour",
       "period": 6,
       "course": "Algebra 1",
-      "required": true
+      "required": false,
+      "required_when_scheduled": true
     }
   ],
   "automatic_blocks": {
     "crewtime": "Students should work quietly on schoolwork.",
     "period_5": "Prep",
     "period_6_note": "I team teach this hour with a special education teacher."
-  },
-  "schedule_source_modes": {
-    "standard_monday": {
-      "label": "Standard Monday Schedule",
-      "authority": "drive.daily_schedule",
-      "times_from": "schedules.monday"
-    },
-    "standard_tuesday_friday": {
-      "label": "Standard Tuesday-Friday Schedule",
-      "authority": "drive.daily_schedule",
-      "times_from": "schedules.tuesday_friday"
-    },
-    "special": {
-      "label": "Special / Alternate Schedule",
-      "teacher_url_required": true,
-      "teacher_file_optional": true,
-      "fail_closed_if_unreadable": true
-    }
   },
   "schedules": {
     "monday": {
@@ -163,7 +150,7 @@
   "other_mode": {
     "requires_label": true,
     "requires_date": true,
-    "default_schedule_mode": "special",
+    "default_schedule_mode": "weekday_normal_unless_alternate_link_provided",
     "destination_folder_name": "YYYY-MM-DD"
   },
   "destinations": {
@@ -182,6 +169,19 @@
       "Passes",
       "Phone Policy",
       "Phone Numbers"
-    ]
+    ],
+    "alternate_schedule_blank_class_rule": "A blank instructional field is allowed only when the resolved alternate schedule shows that class does not meet."
+  },
+  "alternate_schedule_override": {
+    "teacher_url_optional": true,
+    "blank_behavior": "use normal profile schedule for each dated plan",
+    "provided_behavior": "match each selected plan by exact date in the linked source and use the applicable high-school schedule",
+    "multiple_dates_allowed_in_one_source": true,
+    "separate_schedule_name_not_required": true,
+    "separate_schedule_upload_not_required": true,
+    "fail_closed_if_link_unreadable": true,
+    "fail_closed_if_selected_date_missing": true,
+    "fail_closed_if_high_school_schedule_ambiguous": true,
+    "do_not_invent_missing_periods": true
   }
 }

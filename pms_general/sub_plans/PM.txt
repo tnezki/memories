@@ -1,4 +1,4 @@
-SUB PLANS — PILOT WORKING PM v0.3
+SUB PLANS — PILOT WORKING PM v0.4
 ================================
 STATUS: PILOT / WORKING — test and revise from real sub-plan runs.
 
@@ -54,7 +54,7 @@ The request manifest supplies:
 - dates.non_monday: YYYY-MM-DD when Non-Monday is selected; otherwise null
 - dates.other: YYYY-MM-DD when Other is selected; otherwise null
 - other_label: required when Other is selected
-- schedule_sources: schedule routing for each selected dated/other plan
+- alternate_schedule_url: optional single exact link to a dated alternate-schedule source
 - hourly lesson-intent fields for:
   1st Hour — STEM
   2nd Hour — Physics
@@ -65,7 +65,6 @@ The request manifest supplies:
   6th Hour — Algebra 1
 - optional additional note
 - optional attached run-specific materials
-- optional dedicated uploaded schedule file(s)
 - pinned course repositories when provided by the request builder
 
 At least one plan type must be selected.
@@ -76,7 +75,7 @@ If Non-Monday is selected and dates.non_monday is missing, fail closed and ask f
 If Other is selected, dates.other and other_label are required.
 Emergency mode MUST NOT place a calendar date in the plan heading.
 
-The five instructional-class fields (1st, 2nd, 3rd, 4th, 6th) are expected to contain teacher lesson intent. Crewtime and 5th-hour Prep are optional override fields: when blank, use the stable PROFILE/template default for that block.
+On a normal schedule, the five instructional-class fields (1st, 2nd, 3rd, 4th, 6th) are expected to contain teacher lesson intent. When an alternate schedule link is supplied, a class field may be blank if that class does not meet on the resolved dated schedule. After resolving the schedule, fail closed only when an instructional class DOES meet but its teacher intent is missing. Crewtime and 5th-hour Prep are optional override fields: when blank, use the stable PROFILE/template default for that block.
 
 LESSON-INTENT INTERPRETATION — HARD
 -----------------------------------
@@ -87,7 +86,7 @@ The teacher may provide shorthand such as:
 - "review solving equations; independent practice plus an early-finisher option"
 - "students need to complete yesterday's activity and submit in Canvas"
 
-For each class:
+For each class that actually meets on the resolved schedule:
 1. Determine the intended student outcome and approximate flow.
 2. Use current curriculum authorities/resources only as needed.
 3. Decide whether the substitute needs an existing resource, a newly generated simple resource, or only clear directions.
@@ -98,23 +97,21 @@ For each class:
 
 SCHEDULE AUTHORITY — HARD
 -------------------------
-Plan type and bell schedule are separate decisions.
+Normal bell times are automatic. The teacher should not have to choose a schedule type, name a special schedule, or upload a second schedule file.
 
-For every selected Monday, Non-Monday, or Other plan, schedule_sources must resolve one of:
-- standard_monday
-- standard_tuesday_friday
-- special
-
-STANDARD SCHEDULE
-- standard_monday uses PROFILE.json Monday times and verifies them against the declared MMHS Daily Schedules document.
-- standard_tuesday_friday uses PROFILE.json Tuesday-Friday times and verifies them against the declared MMHS Daily Schedules document.
-
-SPECIAL / ALTERNATE SCHEDULE
-- A special schedule requires a teacher-provided schedule source URL in the request.
-- A dedicated uploaded schedule file may also be supplied.
-- Read the supplied schedule authority, extract the actual bell times, and use those times throughout the finished plan.
-- Examples include assembly, testing, delayed-start, half-day, pep assembly, or other alternate schedules.
-- Do NOT fall back to normal times if the special schedule cannot be resolved. Fail closed and identify the missing schedule authority.
+For every selected dated plan:
+- If alternate_schedule_url is blank, use the normal schedule from PROFILE.json:
+  - Monday plan -> schedules.monday
+  - Non-Monday plan -> schedules.tuesday_friday
+  - Other plan -> choose the normal schedule that matches the actual weekday when one exists; otherwise fail closed.
+- If alternate_schedule_url is present, that linked source becomes the schedule authority for the selected dated plan(s).
+- Read the linked schedule source and match EACH selected plan by exact calendar date.
+- Use the high-school / 9th-12th-grade schedule when the source contains separate grade-band schedules.
+- Extract the actual blocks and bell times from the dated schedule. Do not assume every normal class period still exists.
+- If a normal class block is absent from the alternate schedule, do not invent a time for it. Mark/route that hour according to the actual schedule and preserve the teacher's lesson intent for reuse only if appropriate.
+- If the linked source contains multiple dated schedules, select the one matching the requested date; do not ask the teacher to identify the schedule name separately.
+- If a provided alternate schedule link cannot be opened, does not contain the selected date, or is ambiguous about the applicable high-school schedule, fail closed and identify the schedule problem.
+- Do NOT silently fall back to normal bell times when the teacher supplied an alternate schedule link.
 
 EMERGENCY
 - Emergency output maintains the standard Monday and standard Tuesday-Friday reusable versions unless the teacher explicitly requests a different emergency behavior.
@@ -123,12 +120,12 @@ EMERGENCY
 SOURCE / STYLE AUTHORITY
 ------------------------
 Use sources in this order:
-1. Teacher's current lesson-intent inputs, selected plan types/dates/schedules, current run note, and run-specific attachments.
+1. Teacher's current lesson-intent inputs, selected plan types/dates, optional alternate-schedule link, current run note, and run-specific attachments.
 2. PROFILE.json for stable workflow facts and exact Drive resource IDs.
 3. Current Curriculum Philosophy / relevant current course Framework / Question Structure / minimum applicable build or shared PMs.
 4. Current pinned course repository resources when a teacher prompt refers to existing course material or when a current resource is the best fit.
 5. Current native Google Doc template for the selected plan structure.
-6. Current schedule authority selected for that output.
+6. Resolved schedule authority: the exact-date entry from the teacher-provided alternate schedule link when present, otherwise the normal PROFILE schedule.
 7. Current Seating Chart document.
 8. Recent completed plans in the Sub Plans root folder only when needed to resolve a style question not already settled by the templates/profile.
 
@@ -153,14 +150,14 @@ Execute every selected plan type in the same run using the same hourly lesson in
 MONDAY
 - Require dates.monday.
 - Use the current Monday template as the native structural/style base.
-- Use the Monday-selected schedule source, which may be standard or special.
+- Use the resolved schedule authority: exact-date alternate schedule when a link is supplied; otherwise the normal Monday schedule.
 - Create/reuse a child folder named exactly with the Monday ISO date: YYYY-MM-DD.
 - The plan heading includes the resolved Monday date.
 
 NON-MONDAY
 - Require dates.non_monday.
 - Use the current Non-Monday template as the native structural/style base unless the teacher explicitly routes another structure.
-- Use the Non-Monday-selected schedule source, which may be standard or special.
+- Use the resolved schedule authority: exact-date alternate schedule when a link is supplied; otherwise the normal Tuesday-Friday schedule.
 - Create/reuse a child folder named exactly with the Non-Monday ISO date: YYYY-MM-DD.
 - The plan heading includes the resolved weekday/date.
 
@@ -168,7 +165,7 @@ OTHER
 - Require dates.other and other_label.
 - Other is a dated one-off plan type for a day that should not be forced into the Monday / Non-Monday labels.
 - Use the closest suitable native template structure unless the teacher explicitly provides a different structural source.
-- Use the Other-selected schedule source. The default expectation is a special/alternate schedule.
+- Use the exact-date alternate schedule when a link is supplied. If no link is supplied, use the normal schedule matching the actual weekday when resolvable.
 - Create/reuse a child folder named exactly with the Other ISO date: YYYY-MM-DD.
 - The plan heading includes the resolved date and teacher-entered other_label.
 
@@ -211,7 +208,6 @@ After interpreting the lesson intent, determine what materials the substitute an
 
 Create, reuse, or place supporting materials only when justified by the teacher's intent:
 - If the teacher attaches a run-specific file, place a copy in the resolved destination folder and reference its exact name in the appropriate class direction when useful.
-- If the teacher provides a dedicated alternate-schedule file, use it as a schedule authority and keep it with the package when useful.
 - If an appropriate current course resource already exists and the teacher's prompt points to it, prefer that current resource over inventing a duplicate.
 - If the teacher gives enough intent/content to create a simple printed handout, directions sheet, independent practice, extension, or reference page, create a polished student-facing Google Doc or appropriate generated artifact in the destination folder.
 - When generating math/science questions or graphs, use the current Question Structure and registered tools rather than improvised incompatible formats.
@@ -224,7 +220,6 @@ The resolved destination folder should contain everything generated or copied fo
 - finished sub-plan document(s);
 - Seating Chart - Current;
 - every run-specific attached file that the substitute needs;
-- every schedule file that belongs with the package;
 - every supporting handout/material generated by this PM.
 
 Do not create an extra GitHub transfer ZIP for the sub-plan run itself. This is a private Google Drive output workflow.
@@ -234,9 +229,11 @@ FINAL QA
 Before completion verify:
 - every selected plan type was built and unselected modes were not built;
 - correct date/header behavior for Monday, Non-Monday, Other, and Emergency;
-- every dated/Other output used its explicitly selected schedule authority;
-- special schedule times were extracted from the teacher-provided source and normal times were not silently substituted;
-- all five instructional-class lesson-intent inputs were interpreted and represented in the correct class blocks;
+- every dated/Other output used the correct schedule authority;
+- when an alternate schedule link was supplied, the exact requested date and high-school schedule were resolved from that linked source;
+- alternate schedules preserved the actual blocks/times from the source and did not invent normal-period times for blocks that do not occur;
+- every instructional class that actually meets has teacher intent and is represented in the correct class block;
+- classes omitted by the alternate schedule were not assigned invented bell times or fabricated lesson directions;
 - Crewtime and Prep use teacher overrides when supplied and stable defaults when blank;
 - relevant curriculum authorities were used only when needed and teacher intent was not changed;
 - supporting materials needed for successful independent work are present;
