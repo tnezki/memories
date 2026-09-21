@@ -130,24 +130,53 @@ function saveMessageNotes(request) {
   return getMessageNotes(course, unit, selectedPeriod);
 }
 
-function runPreflight(course, unit, period) {
+function savePreflightStudentNote(course, unit, studentKey, note) {
   assertAuthorized_();
-  return buildPreflight_(course, unit, period || PORTFOLIO_EMAIL.ALL_PERIODS, true);
+  const state = getUnitState_(course, unit);
+  const recipients = readCsvObjects_(requireSingleFile_(state.dataFolder, PORTFOLIO_EMAIL.RECIPIENT_FILE));
+  const key = String(studentKey || '').trim();
+  const matches = recipients.rows.filter(r => String(r.student_key || '').trim() === key);
+  if (!key || matches.length !== 1) {
+    throw new Error('This student is not a unique current recipient. The custom note was not changed.');
+  }
+
+  const notes = readMessageNotes_(state.dataFolder);
+  const saved = notes.students.get(key) || { note: '', includeThisWeek: false, updatedAt: '' };
+  const submitted = safeNote_(note);
+  const now = new Date().toISOString();
+  if (submitted) {
+    notes.students.set(key, { note: submitted, includeThisWeek: true, updatedAt: now });
+  } else {
+    notes.students.set(key, { note: saved.note || '', includeThisWeek: false, updatedAt: now });
+  }
+  writeMessageNotes_(state.dataFolder, notes);
+  const current = notes.students.get(key);
+  return {
+    studentKey: key,
+    note: current.includeThisWeek ? current.note : '',
+    savedNote: current.note || '',
+    includeThisWeek: !!current.includeThisWeek
+  };
+}
+
+function runPreflight(course, unit, period, excludedStudentKeys) {
+  assertAuthorized_();
+  return buildPreflight_(course, unit, period || PORTFOLIO_EMAIL.ALL_PERIODS, true, excludedStudentKeys || []);
 }
 
 function sendTestToMe(request) {
   const cfg = getConfig_();
   assertAuthorized_();
   request = request || {};
-  const pf = buildPreflight_(request.course, request.unit, request.period || PORTFOLIO_EMAIL.ALL_PERIODS, true);
+  const pf = buildPreflight_(request.course, request.unit, request.period || PORTFOLIO_EMAIL.ALL_PERIODS, true, request.excludedStudentKeys || []);
   if (!request.digest || request.digest !== pf.digest) {
     throw new Error('Preview changed. Run Preflight again before sending a test.');
   }
   if (pf.blockingCount > 0) {
-    throw new Error('Preflight has blocking errors. Fix them before sending a test.');
+    throw new Error('Preflight has blocking errors. Fix them or explicitly exclude those rows before sending a test.');
   }
-  const row = pf.rows.find(r => r.studentKey === request.studentKey && r.sendable && !r.alreadySent);
-  if (!row) throw new Error('Choose a currently sendable student for the test.');
+  const row = pf.rows.find(r => r.included && r.studentKey === request.studentKey && r.sendable && !r.alreadySent);
+  if (!row) throw new Error('Choose a currently included, sendable student for the test.');
   if (MailApp.getRemainingDailyQuota() < 1) throw new Error('No MailApp recipient quota remains for a test email.');
 
   const file = getVerifiedReportFile_(row, getUnitState_(request.course, request.unit));
@@ -171,15 +200,15 @@ function sendLiveReports(request) {
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(30000)) throw new Error('Another send is already running. Wait a moment and try again.');
   try {
-    const pf = buildPreflight_(request.course, request.unit, request.period || PORTFOLIO_EMAIL.ALL_PERIODS, true);
+    const pf = buildPreflight_(request.course, request.unit, request.period || PORTFOLIO_EMAIL.ALL_PERIODS, true, request.excludedStudentKeys || []);
     if (!request.digest || request.digest !== pf.digest) {
       throw new Error('Preview changed after you reviewed it. Run Preflight again before sending.');
     }
     if (pf.blockingCount > 0) {
-      throw new Error('Preflight has blocking errors. No live reports were sent.');
+      throw new Error('Preflight has blocking errors in included rows. No live reports were sent.');
     }
-    const sendRows = pf.rows.filter(r => r.sendable && !r.alreadySent);
-    if (!sendRows.length) throw new Error('There are no unsent reports in this selection.');
+    const sendRows = pf.rows.filter(r => r.included && r.sendable && !r.alreadySent);
+    if (!sendRows.length) throw new Error('There are no unsent included reports in this selection.');
     const quota = MailApp.getRemainingDailyQuota();
     if (quota < pf.recipientCountToSend) {
       throw new Error('Insufficient daily email recipient quota. Need ' + pf.recipientCountToSend + ', remaining ' + quota + '. No live reports were sent.');
@@ -217,7 +246,7 @@ function sendLiveReports(request) {
       try {
         markStudentNotesSent_(state.dataFolder, sentStudentKeys);
       } catch (err) {
-        noteResetWarning = 'Reports were sent, but the Include this week checkboxes could not be reset automatically: ' + safeError_(err);
+        noteResetWarning = 'Reports were sent, but the custom-note include flags could not be reset automatically: ' + safeError_(err);
       }
     }
 
@@ -234,7 +263,7 @@ function sendLiveReports(request) {
   }
 }
 
-function buildPreflight_(course, unit, period, verifyFiles) {
+function buildPreflight_(course, unit, period, verifyFiles, excludedStudentKeys) {
   const state = getUnitState_(course, unit);
   const recipientCsv = readCsvObjects_(requireSingleFile_(state.dataFolder, PORTFOLIO_EMAIL.RECIPIENT_FILE));
   const manifestCsv = readCsvObjects_(requireSingleFile_(state.dataFolder, PORTFOLIO_EMAIL.MANIFEST_FILE));
@@ -250,6 +279,8 @@ function buildPreflight_(course, unit, period, verifyFiles) {
   const messageNotes = readMessageNotes_(state.dataFolder);
   const weeklyNote = messageNotes.weeklyNote || '';
   const selectedPeriod = period || PORTFOLIO_EMAIL.ALL_PERIODS;
+  const excludedSet = new Set((Array.isArray(excludedStudentKeys) ? excludedStudentKeys : [])
+    .map(x => String(x || '').trim()).filter(Boolean));
   const recipients = recipientCsv.rows.filter(r => selectedPeriod === PORTFOLIO_EMAIL.ALL_PERIODS || String(r.period || '').trim() === selectedPeriod);
   if (!recipients.length) throw new Error('No recipient rows match the selected period.');
   const manifests = manifestCsv.rows.filter(r => selectedPeriod === PORTFOLIO_EMAIL.ALL_PERIODS || String(r.period || '').trim() === selectedPeriod);
@@ -264,6 +295,7 @@ function buildPreflight_(course, unit, period, verifyFiles) {
   const rows = [];
   recipients.forEach(rec => {
     const key = String(rec.student_key || '').trim();
+    const included = !excludedSet.has(key);
     const issues = [];
     const warnings = [];
     const studentEmail = normalizeEmail_(rec.student_email);
@@ -320,6 +352,7 @@ function buildPreflight_(course, unit, period, verifyFiles) {
       reportSha256: reportHash,
       weeklyNote: weeklyNote,
       studentNote: studentNote,
+      included: included,
       issues: issues,
       warnings: warnings,
       alreadySent: alreadySent,
@@ -327,15 +360,16 @@ function buildPreflight_(course, unit, period, verifyFiles) {
       status: ''
     };
 
-    if (!issues.length && verifyFiles && man) {
+    if (included && !issues.length && verifyFiles && man) {
       try {
         getVerifiedReportFile_(row, state);
       } catch (err) {
         issues.push(safeError_(err));
       }
     }
-    row.sendable = issues.length === 0;
-    if (issues.length) row.status = 'BLOCKED';
+    row.sendable = included && issues.length === 0;
+    if (!included) row.status = 'EXCLUDED';
+    else if (issues.length) row.status = 'BLOCKED';
     else if (alreadySent) row.status = 'ALREADY_SENT';
     else if (warnings.length) row.status = 'WARNING';
     else row.status = 'READY';
@@ -346,6 +380,7 @@ function buildPreflight_(course, unit, period, verifyFiles) {
   manifests.forEach(m => {
     const key = String(m.student_key || '').trim();
     if (key && !recipientKeys.has(key)) {
+      const included = !excludedSet.has(key);
       rows.push({
         course: String(course),
         unit: String(unit),
@@ -356,18 +391,19 @@ function buildPreflight_(course, unit, period, verifyFiles) {
         reportNumber: String(m.report_number || '').trim(), reportDate: String(m.report_date || '').trim(),
         reportFileId: String(m.pdf_file_id || '').trim(), reportFileName: String(m.pdf_file_name || '').trim(),
         reportSha256: String(m.pdf_sha256 || '').trim().toLowerCase(),
-        weeklyNote: weeklyNote, studentNote: '',
+        weeklyNote: weeklyNote, studentNote: '', included: included,
         issues: ['Report exists without a matching current recipient row'], warnings: [],
-        alreadySent: false, sendable: false, status: 'BLOCKED'
+        alreadySent: false, sendable: false, status: included ? 'BLOCKED' : 'EXCLUDED'
       });
     }
   });
 
   rows.sort((a, b) => naturalCompare_(a.period, b.period) || a.studentName.localeCompare(b.studentName));
-  const blockingCount = rows.filter(r => r.issues.length).length;
-  const warningCount = rows.filter(r => !r.issues.length && r.warnings.length && !r.alreadySent).length;
-  const alreadySentCount = rows.filter(r => r.alreadySent && !r.issues.length).length;
-  const sendRows = rows.filter(r => r.sendable && !r.alreadySent);
+  const blockingCount = rows.filter(r => r.included && r.issues.length).length;
+  const warningCount = rows.filter(r => r.included && !r.issues.length && r.warnings.length && !r.alreadySent).length;
+  const alreadySentCount = rows.filter(r => r.included && r.alreadySent && !r.issues.length).length;
+  const excludedCount = rows.filter(r => !r.included).length;
+  const sendRows = rows.filter(r => r.included && r.sendable && !r.alreadySent);
   const recipientCountToSend = sendRows.reduce((n, r) => n + 1 + r.guardianEmails.length, 0);
   const digest = digestPreview_(course, unit, selectedPeriod, rows, weeklyNote);
 
@@ -379,6 +415,8 @@ function buildPreflight_(course, unit, period, verifyFiles) {
     blockingCount: blockingCount,
     warningCount: warningCount,
     alreadySentCount: alreadySentCount,
+    excludedCount: excludedCount,
+    excludedStudentKeys: rows.filter(r => !r.included).map(r => r.studentKey),
     sendableMessageCount: sendRows.length,
     recipientCountToSend: recipientCountToSend,
     remainingRecipientQuota: MailApp.getRemainingDailyQuota(),
@@ -439,9 +477,17 @@ function buildBody_(row, teacherDisplayName) {
     '',
     'Attached is ' + first + "'s current " + row.course + ' Unit ' + row.unit + ' Portfolio Progress Report. You can expect an updated Portfolio report about once each week as new evidence is collected.',
     '',
-    'This Portfolio is designed to show growth over time, not to collect or average scores from individual assignments. Assessments, checks, classwork, and other evidence update the current picture of what a student knows and can do. As students learn more and provide stronger evidence, their Portfolio status can improve.',
+    'How the report works: the unit is organized into Mastery Goals and I Cans. The report shows the current evidence picture for each skill, what the student has demonstrated, and what kind of evidence or practice is useful next.',
     '',
-    'PowerSchool will show one current grade for each unit once there is enough evidence to make that grade meaningful and fair. Individual assessments and checks are not entered as separate grades to be averaged together; they provide evidence that updates the current Unit grade.',
+    'How grading works: grades are based on the current body of evidence, not an average of assignment percentages. Checks, classwork, reassessments, and other evidence update the current picture. Newer or stronger evidence can improve a grade as learning grows.'
+  ];
+  if (String(row.course || '').trim().toLowerCase() === 'algebra 1') {
+    lines.push(
+      '',
+      'In Algebra 1, we are currently testing four current Mastery Goal grades - one for each of the four major goals in the unit. Each Mastery Goal grade is updated from the I Can evidence inside that goal. During this pilot, PowerSchool still uses the existing single current Unit assignment while we test whether the four-goal view is more useful.'
+    );
+  }
+  lines.push(
     '',
     'What "Next" means:',
     '- Needs first check - We do not yet have usable evidence for this skill.',
@@ -449,7 +495,7 @@ function buildBody_(row, teacherDisplayName) {
     '- Needs another independent check - There is already convincing evidence, but another independent demonstration is needed to confirm mastery.',
     '- Secure - Current evidence supports mastery of this skill.',
     '- Extension - The skill is secure and the student is ready to apply it in a new or more challenging situation.'
-  ];
+  );
   if (row.weeklyNote) {
     lines.push('', "This week's note:", row.weeklyNote);
   }
@@ -458,7 +504,7 @@ function buildBody_(row, teacherDisplayName) {
   }
   lines.push(
     '',
-    'These "Next" statements are next steps, not grades. The report will continue to change as ' + first + ' learns, practices, and provides new evidence.',
+    'The "Next" statements are next steps, not assignment grades. The report can change as ' + first + ' learns, practices, and provides new evidence.',
     '',
     '- ' + teacherDisplayName
   );
@@ -475,6 +521,7 @@ function digestPreview_(course, unit, period, rows, weeklyNote) {
     reportFileId: r.reportFileId,
     reportSha256: r.reportSha256,
     studentNote: r.studentNote || '',
+    included: !!r.included,
     issues: r.issues,
     warnings: r.warnings,
     alreadySent: r.alreadySent

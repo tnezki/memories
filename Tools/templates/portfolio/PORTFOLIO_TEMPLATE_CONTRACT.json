@@ -1,8 +1,8 @@
 {
-  "schema": "portfolio-template-contract/1.4",
+  "schema": "portfolio-template-contract/1.5",
   "status": "CURRENT",
-  "purpose": "Teacher-approved recurring Portfolio visual AND wording contract. Data changes; recurring report structure/labels do not drift between runs. Course policy supplies course-specific counts, rollup, terminology, and Practice Builder routing.",
-  "fidelity_rule": "The HTML templates are canonical shells, not examples. Preserve fixed text exactly except declared tokens/loops. Do not synonymize headings, teacher categories, table columns, card anatomy, or report organization from run to run.",
+  "purpose": "Teacher-approved recurring Portfolio visual AND wording contract. Data changes; recurring report structure/labels do not drift between runs. Course policy supplies course-specific counts, rollup, terminology, Mastery Goal grade behavior, and Practice Builder routing.",
+  "fidelity_rule": "The HTML templates are canonical shells, not examples. Preserve fixed text exactly except declared tokens/loops. Do not synonymize headings, teacher categories, table columns, card anatomy, grading explanation, or report organization from run to run.",
   "student_packet": {
     "template": "Tools/templates/portfolio/student_packet_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
@@ -22,6 +22,14 @@
       "Recent evidence - {LATEST_EVIDENCE_LABEL}",
       "Your Practice"
     ],
+    "snapshot_rule": "Keep the existing Unit status summary, MG demonstrated count, approved current-picture text, and MG chips. When the current course policy declares Mastery Goal grades, every MG chip shows that goal's current grade so the single Unit status is not the only grade-like information families see.",
+    "grading_explanation": "Each Mastery Goal has a current evidence grade. New evidence can improve it. Individual checks are evidence, not scores averaged together.",
+    "mastery_goal_grade_display": {
+      "authority": "The current course Portfolio policy owns whether a Mastery Goal grade model is active and owns its exact scale/rules.",
+      "when_active": "MG_CHIPS_HTML shows every Mastery Goal code plus its current grade. Every Mastery Goal card shows that goal's current grade and secure-I-Can count without removing the exact MG title/description or any I Can row.",
+      "unit_rollup_rule": "Keep the existing overall Unit status as a compact summary during the pilot, but do not let it be the only grade-like result shown. The four Mastery Goal grades are displayed alongside the Unit summary.",
+      "evidence_rule": "A Mastery Goal grade is a current body-of-evidence result derived from current I Can states according to the course policy; never average assignment percentages to manufacture it."
+    },
     "mastery_goal_distribution": {
       "default": "2 + 2 across the two pages when the Unit has four Mastery Goals",
       "allowed_fit_adjustments": [
@@ -60,7 +68,8 @@
       "free-form alternate feedback architecture",
       "code-only I Can labels in human-facing output",
       "Student Bank QR on the student Portfolio report"
-    ]
+    ],
+    "grading_explanation_rule": "When a course policy activates Mastery Goal grades, include a concise plain-language explanation in the approved current-picture text or other already-declared data slot; do not invent a new recurring report section unless the canonical HTML template is intentionally redesigned."
   },
   "student_feedback_frames": {
     "current_picture": "Use a short factual body-of-evidence snapshot. On an early first-source run, explicitly say that one evidence source can provide strong first evidence but does not establish mastery by itself.",
