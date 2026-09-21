@@ -1,0 +1,96 @@
+{
+  "schema": "district-tiered-task-qa/0.4-pilot",
+  "status": "PASS",
+  "versions": {
+    "tiered_task": "district-tiered-task-generation/0.4-pilot",
+    "shared_standard": "district-response-build-standard/1.1",
+    "execution": "district-tiered-task-build-execution/1.1",
+    "layout_lock": "district-tiered-task-layout-lock/1.0",
+    "mechanical_qa": "district-tiered-task-mechanical-qa/1.0"
+  },
+  "conflicts": [],
+  "checks": {
+    "one_integrated_student_card": {
+      "status": "PASS",
+      "count": 1
+    },
+    "dok_levels": {
+      "status": "PASS",
+      "count": 4,
+      "levels": [
+        "DOK 1",
+        "DOK 2",
+        "DOK 3",
+        "DOK 4"
+      ]
+    },
+    "dok4_authentic_extended_thinking": {
+      "status": "PASS",
+      "evidence": "Students design a school safety plan, anticipate a barrier, obtain feedback, revise, and defend the final plan."
+    },
+    "learning_target_alignment": {
+      "status": "PASS",
+      "note": "All six submitted I Can statements are represented across the integrated progression."
+    },
+    "teacher_guide_exact_student_tasks": {
+      "status": "PASS"
+    },
+    "grade_level_and_access": {
+      "status": "PASS",
+      "note": "Grade 7 wording and reasoning demand used; no separate access level was supplied."
+    },
+    "allowed_products_only": {
+      "status": "PASS",
+      "count": 8
+    },
+    "product_neutral_evidence": {
+      "status": "PASS"
+    },
+    "safety_sensitive_facilitation": {
+      "status": "PASS",
+      "note": "No personal disclosure is required; real concerns are directed to trusted adults and school procedures."
+    },
+    "taxonomy_uncertainty_resolved": {
+      "status": "PASS",
+      "note": "The request did not define the four abuse categories, so the task uses the class-taught four-type framework rather than inventing a taxonomy."
+    },
+    "graphs_math_visuals": {
+      "status": "PASS",
+      "graphs_required": false,
+      "math_required": false,
+      "instructional_visuals_required": false
+    },
+    "locked_styles": {
+      "status": "PASS",
+      "task_card_sha256_expected": "0136ff3b5e1297a7fea3836725938e738e89ccb912c231b293b7995854515e35",
+      "task_card_sha256_actual": "0136ff3b5e1297a7fea3836725938e738e89ccb912c231b293b7995854515e35",
+      "guide_sha256_expected": "eefc89fd69a7379443d795f63b8737be66faa776b1ba2ce0e615d05c6884a515",
+      "guide_sha256_actual": "eefc89fd69a7379443d795f63b8737be66faa776b1ba2ce0e615d05c6884a515"
+    },
+    "student_pdf": {
+      "status": "PASS",
+      "page_count": 1,
+      "page_size_points": [
+        792,
+        612
+      ],
+      "orientation": "letter landscape",
+      "visual_inspection": "PASS - no clipping, overlap, or unreadable content"
+    },
+    "teacher_pdf": {
+      "status": "PASS",
+      "page_count": 6,
+      "page_size_points": [
+        612,
+        792
+      ],
+      "orientation": "letter portrait",
+      "visual_inspection": "PASS - all content-bearing pages readable; no clipping or missing assets"
+    },
+    "mechanical_qa": {
+      "status": "PASS",
+      "file": "data/mechanical_qa.json"
+    }
+  },
+  "unresolved_failures": []
+}

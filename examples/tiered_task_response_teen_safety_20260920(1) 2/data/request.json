@@ -1,0 +1,118 @@
+{
+  "schema": "district-tiered-task-request/0.4-pilot",
+  "tool_version": "district-tiered-task-tool/0.4-pilot",
+  "created_at": "2026-09-21T01:31:18.889Z",
+  "contracts": {
+    "tiered_task": "district-tiered-task-generation/0.4-pilot",
+    "shared_standard": "district-response-build-standard/1.1",
+    "execution": "district-tiered-task-build-execution/1.1",
+    "graph_rendering": "district-graph-rendering-standard/1.2",
+    "layout_lock": "district-tiered-task-layout-lock/1.0"
+  },
+  "teacher": {
+    "name": null,
+    "subject_course": "7th Grade Health",
+    "grade_level": "7"
+  },
+  "task": {
+    "name": "Teen Safety",
+    "intended_use": "extension_after_mastery",
+    "target_reading_access_level": null,
+    "time_available": null,
+    "work_mode": "teacher_choice",
+    "research_policy": "teacher_choice"
+  },
+  "i_can_statements": [
+    "I can identify the 4 types of abuse",
+    "I can identify a safe adult",
+    "I can identify characteristics of healthy vs. unhealthy relationships",
+    "I can explain how violence affects individuals, families, and communities",
+    "I can identify ways to keep myself safe and avoid dangerous or violent situations",
+    "I can analyze the effects of social media, the risks it poses to teens, and describe ways I can improve the culture at my school"
+  ],
+  "product_choices": {
+    "allowed": [
+      "Written response",
+      "Slides / presentation",
+      "Video",
+      "Audio / podcast",
+      "Graphic organizer / diagram",
+      "Poster / infographic / visual",
+      "Model / demonstration",
+      "Discussion / debate"
+    ],
+    "rule": "Only these product types may appear on the student task card. The academic evidence standard must remain constant across product formats."
+  },
+  "teacher_notes": null,
+  "source_files": [],
+  "dok_progression": {
+    "DOK1": "Recall and Reproduction",
+    "DOK2": "Skills and Concepts",
+    "DOK3": "Strategic Thinking",
+    "DOK4": "Extended Thinking",
+    "rule": "DOK is cognitive complexity, not difficulty or verb matching. DOK 4 must be genuine extended thinking, not DOK 3 with more work."
+  },
+  "requested_outputs": {
+    "integrated_task_cards": 1,
+    "student_task_card_html": "student/task_card.html",
+    "student_task_card_pdf": "student/task_card.pdf",
+    "teacher_guide_html": "teacher/teacher_guide.html",
+    "teacher_guide_pdf": "teacher/teacher_guide.pdf",
+    "click_me": "CLICK_ME.html",
+    "qa_record": "data/qa.json",
+    "request_copy": "data/request.json"
+  },
+  "locked_styles": {
+    "task_card": {
+      "version": "district-tiered-task-card-style/0.2-pilot",
+      "request_path": "response_contract/task_card_styles.css",
+      "response_path": "assets/task_card_styles.css",
+      "sha256": "0136ff3b5e1297a7fea3836725938e738e89ccb912c231b293b7995854515e35"
+    },
+    "guide": {
+      "version": "district-tiered-task-guide-style/0.2-pilot",
+      "request_path": "response_contract/guide_styles.css",
+      "response_path": "assets/guide_styles.css",
+      "sha256": "eefc89fd69a7379443d795f63b8737be66faa776b1ba2ce0e615d05c6884a515"
+    }
+  },
+  "layout_lock": {
+    "version": "district-tiered-task-layout-lock/1.0",
+    "path": "response_contract/TIERED_TASK_LAYOUT_LOCK.md",
+    "sha256": "c7aabed731c0235f464ece7b3f3fdeb8c7de834f917a4accbd3071c46d1576d1"
+  },
+  "deterministic_tools": {
+    "preflight": {
+      "version": "district-tiered-task-preflight/1.1",
+      "path": "response_contract/tiered_task_preflight.py",
+      "sha256": "abe6591ee839244eb57a87b9996dd7d5cb41e613c0c1fb81234d485ec9de4f47"
+    },
+    "finalize": {
+      "version": "district-tiered-task-finalize/1.0",
+      "path": "response_contract/tiered_task_finalize.py",
+      "sha256": "3ab106a078c7ded73a35ab6d0108e702833827323ae359dfeb2822348c19b1b8"
+    },
+    "qa": {
+      "version": "district-tiered-task-mechanical-qa/1.0",
+      "path": "response_contract/tiered_task_qa.py",
+      "sha256": "19a0a7ba3294f7417059daeb96b88d96d9d15801788c1f3712e0cd7f458638fe"
+    }
+  },
+  "graph_rendering": {
+    "standard_version": "district-graph-rendering-standard/1.2",
+    "manifest": "response_contract/graph_tool/MANIFEST.json",
+    "entrypoint": "Tools/graph_tool.py",
+    "packaged_entrypoint": "response_contract/graph_tool/graph_tool.py",
+    "sha256": "a90a2e01552a940aec579a09d41cf6d5ae11fb2e59efe2a0bc286dfefea52e25"
+  },
+  "baseline_requirements": {
+    "accuracy": true,
+    "accessibility": true,
+    "grade_appropriate": true,
+    "one_integrated_card": true,
+    "broad_product_choice_is_default": true
+  },
+  "delivery": {
+    "required_final_line": "Unzip it and open **`CLICK_ME.html`**. The student card is one landscape page with DOK 1-4, and the package includes the teacher evidence guide plus completed QA."
+  }
+}
