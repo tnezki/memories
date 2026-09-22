@@ -95,7 +95,7 @@ textarea{min-height:82px;resize:vertical}
       </div>
 
       <div id="subPlanFields" class="hidden">
-        <div class="status good"><b>Sub Plans:</b> builds one self-contained print-center ZIP using the locked Sub Plan gold standard. Enter the current section and any special notes. Physics and AP Calculus target about 10 minutes less than class; Algebra 1 targets about 15 minutes less and prioritizes the most recent classwide evidence needs before a short current-section check. 3rd and 6th Hour Algebra 1 share one handout.</div>
+        <div class="status good"><b>Sub Plans:</b> builds one self-contained print-center ZIP using the locked Sub Plan gold standard. Enter the current section and any special notes. Academic handouts are sized for the full scheduled class period, with a deliberate mix of recent/already-covered evidence, current-section work, and challenge/extension. Algebra 1 prioritizes the most recent classwide evidence needs before a short current-section check. 3rd and 6th Hour Algebra 1 share one handout.</div>
 
         <label>Plans to build</label>
         <div class="modeChecks">
@@ -207,7 +207,7 @@ textarea{min-height:82px;resize:vertical}
 </div>
 </main>
 <script>
-const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.9";
+const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.10";
 const COURSES={"Algebra 1":{folder:"algebra",repo:"tnezki/algebra",slug:"algebra_1",units:8},"AP Calculus AB":{folder:"calculus",repo:"tnezki/calculus",slug:"ap_calculus_ab",units:8},"Physics":{folder:"physics",repo:"tnezki/physics",slug:"physics",units:8}};
 
 // The canonical control panel is intentionally a build factory, not a maintenance console.
@@ -356,7 +356,7 @@ function requestText(m){
     if(sp.plan_types.includes("emergency"))s+="EMERGENCY DATE: NONE\n";
     if(sp.alternate_schedule_url)s+=`ALTERNATE SCHEDULE SOURCE: ${sp.alternate_schedule_url}\n`;
     else s+="ALTERNATE SCHEDULE SOURCE: NONE - use standard schedule for each dated plan\n";
-    s+="\nACADEMIC HANDOUT MODEL: common class handout, not individually personalized. Physics and AP Calculus target scheduled class length minus 10 minutes; Algebra 1 targets scheduled class length minus 15 minutes. Estimate from real task demand, not raw question count.\n";
+    s+="\nACADEMIC HANDOUT MODEL: common class handout, not individually personalized. Build enough meaningful work for the full resolved class period. Use recent/already-covered evidence, current-section work, and challenge/extension. Estimate from real task demand, not raw question count; quick one-step items count as brief tasks.\n";
     s+="GOLD STANDARD: pms_general/sub_plans/gold_standard/ - reuse the approved shell/controls/print structure; replace all stale run-specific content.\n";
     s+=`STEM MODE: ${sp.classes.stem.mode}\n`;
     if(sp.classes.stem.mode==="current_challenge")s+=`STEM CHALLENGE DIRECTIONS: ${sp.classes.stem.challenge_directions}\n`;
@@ -440,7 +440,7 @@ async function saveSubPlan(p){
   m.teacher_inputs.sub_plan={
     gold_standard_path:"pms_general/sub_plans/gold_standard/",
     gold_standard_contract:"pms_general/sub_plans/gold_standard/GOLD_STANDARD.md",
-    time_budget_minutes_less_than_scheduled_period:{physics:10,algebra_1:15,ap_calculus:10},
+    time_budget_rule:"fill_full_resolved_class_period_with_meaningful_work_and_extension",
     evidence_routing:{algebra_1:"prioritize current classwide misses / recent assessed I-cans, then short current-section check",physics:"current section + current evidence; Section 1.3 uses the locked resultant/investigation mix",ap_calculus:"current Notes/Practice/textbook/source materials; do not invent section I-cans"},
     plan_types:types,
     dates:{monday:mondayDate,non_monday:regularDate,other:otherDate},

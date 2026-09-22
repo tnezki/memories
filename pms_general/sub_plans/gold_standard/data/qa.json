@@ -1,5 +1,5 @@
 {
-  "schema": "sub-plan-handout-gold-standard-qa/0.4",
+  "schema": "sub-plan-handout-gold-standard-qa/0.5",
   "status": "GOLD_STANDARD_CONTRACT",
   "checks": {
     "authority_hierarchy_required": true,
@@ -26,15 +26,16 @@
     "physics_u1_3_typical_total_problem_range": "10-12 unless equivalent task complexity justifies another count",
     "algebra_recent_evidence_priority": true,
     "calculus_current_notes_practice_source_priority": true,
-    "answers_in_substitute_bundle_only": true
+    "answers_in_substitute_bundle_only": true,
+    "selected_visual_slider_min_percent": 0,
+    "full_scheduled_period_sizing_required": true,
+    "fixed_minute_subtraction_rule": false
   },
   "time_budget": {
-    "Physics": "resolved class length - 10 minutes",
-    "Algebra 1": "resolved class length - 15 minutes",
-    "AP Calculus AB": "resolved class length - 10 minutes",
+    "rule": "Use the full resolved scheduled class period for Physics, Algebra 1, and AP Calculus AB; no fixed-minute subtraction.",
     "quick_one_step_max_estimated_minutes": 0.5,
-    "maximum_allowed_under_target_minutes": 3,
-    "student_page_may_display_time_budget": false
+    "student_page_may_display_time_budget": false,
+    "challenge_extension_expected": true
   },
   "runtime_smoke_tests": [
     "select Q2, move Workspace: Q2 workspace changes and Q1/Q3 stored workspace values do not",
@@ -49,7 +50,7 @@
   },
   "fail_conditions": [
     "student-visible work-time target or timing arithmetic",
-    "time map more than 3 minutes below target",
+    "handout is clearly too short for the full resolved class period",
     "missing recent/current/challenge evidence lane",
     "Physics 1.3 reduced to a light seven-question sheet",
     "selected visual control changes more than the selected problem",

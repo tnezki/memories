@@ -1,6 +1,6 @@
-SUB PLANS — GOLD STANDARD PRINT-CENTER PM v0.8
+SUB PLANS — GOLD STANDARD PRINT-CENTER PM v0.9
 ================================================
-STATUS: PILOT / WORKING — gold-standard format and execution gates locked for live testing.
+STATUS: PILOT / WORKING — gold-standard format and hard execution rules locked for live testing.
 
 PURPOSE
 -------
@@ -36,7 +36,7 @@ Use the request's pinned commits. Read and obey in this order:
 2. SYSTEM_MANIFEST.json -> current Curriculum Philosophy;
 3. current universal Question Structure authority;
 4. current course Framework and exact relevant Unit/section assessment architecture;
-5. this PM + sibling PROFILE.json + sibling BUILD_GATES.json;
+5. this PM + sibling PROFILE.json;
 6. gold-standard shell files under pms_general/sub_plans/gold_standard/;
 7. current validated course Banks, notes, practices, textbook/source materials, investigations, and registered Tools needed for the actual content.
 
@@ -54,9 +54,6 @@ Copy these shell files byte-for-byte unless the teacher explicitly reopens them:
 
 The gold-standard example content is NOT current-source authority. Never copy stale dates, questions, answers, schedules, seating placeholders, or section labels into a new run.
 
-BUILD GATES — HARD
-------------------
-Read and enforce pms_general/sub_plans/BUILD_GATES.json. A build that violates a gate is FAIL and must not be packaged as PASS.
 
 PLAN / SCHEDULE ROUTING
 -----------------------
@@ -87,7 +84,7 @@ Every student handout includes:
 - course and current section;
 - concise current section focus;
 - concise recent evidence/review focus when useful;
-- enough real work for the time target;
+- enough meaningful work for the full scheduled class period;
 - under EVERY question:
   ☐ Knew how to do it   ☐ Had to ask for help   ☐ Had to look it up
 - standing direction in substance:
@@ -95,22 +92,19 @@ Every student handout includes:
 
 STUDENT-VISIBILITY RULE — HARD
 ------------------------------
-The time-budget calculation is INTERNAL/TEACHER-FACING QA only. Do NOT display "Work-time target," class-length arithmetic, timing formulas, source IDs, authoring notes, Question Structure IDs, or QA metadata on a student handout.
+Class-period sizing is INTERNAL/TEACHER-FACING QA only. Do NOT display "Work-time target," class-length arithmetic, timing formulas, source IDs, authoring notes, Question Structure IDs, or QA metadata on a student handout.
 
-TIME BUDGET — HARD
-------------------
-Use the actual resolved class length.
-- Physics: target approximately class length MINUS 10 minutes.
-- AP Calculus AB: target approximately class length MINUS 10 minutes.
-- Algebra 1: target approximately class length MINUS 15 minutes.
+CLASS-PERIOD SIZING — HARD
+--------------------------
+Use the actual resolved class length, but do NOT subtract a fixed number of minutes. Build a robust handout suitable for the FULL scheduled class period. The sheet should contain enough meaningful work that students remain productively engaged for the period, with later challenge/extension work available for faster students.
 
 Before rendering, create an item-level time map in data/source_map.json or data/qa.json. Each problem receives a conservative estimated student-work time based on the actual task. Very short one-step questions count as no more than 0.5 minute each unless there is a genuine explanation/representation demand.
 
-FAIL timing QA when:
-- total estimated work is more than 3 minutes below the target; or
-- the build reaches the target only by pretending 10-second questions are multi-minute tasks.
+FAIL sizing QA when:
+- the core + challenge/extension work is clearly too short for the resolved class period; or
+- the build appears long enough only because 10-second questions are treated as multi-minute tasks.
 
-Extension/challenge work may push the total beyond the target; students are not expected to finish every extension item.
+Challenge/extension is intentionally part of the full-period design. Some students may not finish every challenge item.
 
 EVIDENCE MIX — HARD
 -------------------
@@ -139,8 +133,8 @@ For Section 1.3 specifically, the approved GOLD-STANDARD SHAPE is intentional an
 - only 2-3 quick same/opposite/net-force review items total;
 - THREE two-vector NON-PARALLEL resultant problems using the current U1.3 investigation grid/vector format;
 - TWO three-vector resultant investigation problems;
-- additional prior-MG/current-section/challenge evidence as needed so the full sheet actually reaches the resolved time target;
-- typical total is about 10-12 meaningful problems for a ~34-44 minute target, depending on the actual schedule and task complexity.
+- additional prior-MG/current-section/challenge evidence as needed so the full sheet is appropriate for the full resolved class period;
+- typical total is about 10-12 meaningful problems or more when task complexity is light; use actual task demand and the resolved class period rather than a fixed count.
 
 Students draw each resultant on the SAME grid and report magnitude plus direction either as an angle measured from +x or a valid compass description. Do not replace the vector investigation format with a generic function graph.
 
@@ -184,6 +178,7 @@ Each academic page uses the gold-standard runtime:
 - Problem selector chooses one question;
 - selected Workspace changes ONLY the selected question;
 - Graph / diagram changes ONLY the selected question's visual when a question is selected;
+- the selected Graph / diagram slider starts at 0% and preserves the page's configured upper bound;
 - when Problem = All, the selected-question Workspace and Graph/diagram controls are disabled;
 - Reset restores all question workspace/visual values to 100%;
 - Print prints the currently repaginated Letter pages.
@@ -214,7 +209,7 @@ Before delivery verify ALL of the following:
 - print bundle order;
 - current seating charts embedded locally;
 - no student-visible work-time target/timing arithmetic;
-- item-level time map meets the real target;
+- item-level time map supports a full-period workload without inflating trivial items;
 - three-lane evidence mix exists for every academic handout;
 - Physics U1.3 shape matches the locked special case and is not reduced to a 7-question/light sheet;
 - questions trace to allowed non-secure sources / controlled parallels;

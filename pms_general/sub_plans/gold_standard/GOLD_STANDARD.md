@@ -1,4 +1,4 @@
-SUB PLAN PRINT CENTER — GOLD STANDARD v1.1
+SUB PLAN PRINT CENTER — GOLD STANDARD v1.2
 ==========================================
 
 STATUS
@@ -38,6 +38,7 @@ The controls do NOT use multiplicative global x individual scaling.
 - Problem selector chooses one problem.
 - Workspace changes ONLY the selected problem.
 - Graph / diagram changes ONLY the selected problem's graph/diagram.
+- The selected Graph / diagram slider begins at 0%; keep the configured upper bound from the page/template (gold-standard sample = 160%).
 - When Problem = All, the selected Workspace and Graph/diagram controls are disabled.
 - Choosing Q5 loads Q5's stored workspace and visual values into the controls.
 - Reset returns every problem's workspace and visual values to 100%.
@@ -45,7 +46,7 @@ The controls do NOT use multiplicative global x individual scaling.
 
 STUDENT PAGE RULE — HARD
 ------------------------
-The resolved time target is internal build/QA information only. Do NOT show a Work-time target, class-length calculation, authoring formula, source ID, Question Structure ID, or QA metadata on a student worksheet.
+Class-period sizing is internal build/QA information only. Do NOT show a Work-time target, class-length calculation, authoring formula, source ID, Question Structure ID, or QA metadata on a student worksheet.
 
 CONTENT-ROUTING FLOOR
 ---------------------
@@ -62,16 +63,14 @@ The approved sample's shape is a floor for quality, not stale content to copy:
 - only 2-3 quick same/opposite/net-force items;
 - exactly 3 two-vector NON-PARALLEL resultant grid problems;
 - exactly 2 three-vector investigation-style resultant problems;
-- enough additional aligned prior/current/challenge work to meet the actual time target;
-- typical total about 10-12 meaningful problems depending on class length and complexity.
+- enough additional aligned prior/current/challenge work to fill the scheduled class period;
+- typical total about 10-12 meaningful problems or more when tasks are brief; actual task demand controls.
 
 Students draw resultants on the same grid and report magnitude plus direction as an angle from +x or a valid compass form.
 
-TIMING
-------
-- Physics = scheduled class length minus about 10 minutes.
-- AP Calculus AB = scheduled class length minus about 10 minutes.
-- Algebra 1 = scheduled class length minus about 15 minutes.
+CLASS-PERIOD SIZING
+-------------------
+Do not subtract fixed minutes by course. Size Physics, Algebra 1, and AP Calculus for the FULL resolved scheduled class period. Include enough meaningful core work plus challenge/extension that faster students still have productive work available.
 
 Estimate actual student work time item-by-item. A 10-second one-step item is not a multi-minute task. The item-level time map belongs in QA/source-map data, not on the student page.
 
@@ -85,4 +84,4 @@ MATH / GRAPH QA
 
 QA
 --
-Future builds must enforce sibling ../BUILD_GATES.json. A package is not PASS when timing, evidence mix, slider isolation, MathJax, graph provenance, or student-visibility gates fail.
+A package is not PASS when class-period sizing, evidence mix, slider isolation, MathJax, graph provenance, or student-visibility rules fail.

@@ -1,5 +1,5 @@
 {
-  "schema": "sub-plans-profile/0.7",
+  "schema": "sub-plans-profile/0.8",
   "status": "pilot_gold_standard_locked",
   "teacher": "Troy Nezki",
   "school_year": "2026-27",
@@ -229,13 +229,9 @@
     ],
     "secure_summative_items_allowed": false,
     "workspace_required": true,
-    "time_budget_minutes_less_than_scheduled_period_by_course": {
-      "Physics": 10,
-      "Algebra 1": 15,
-      "AP Calculus AB": 10
-    },
-    "time_estimation_rule": "Estimate from actual task demand, not question count; very short one-step items count as brief tasks.",
-    "shell": "gold_standard_madlib"
+    "time_estimation_rule": "Estimate from actual task demand, not question count; very short one-step items count as brief tasks and cannot be used to inflate workload.",
+    "shell": "gold_standard_madlib",
+    "time_budget_rule": "Use the full resolved scheduled class period; do not subtract fixed minutes. Build enough meaningful work plus challenge/extension to keep students productively engaged."
   },
   "mastery_goal_resolution": {
     "priority": [
@@ -313,7 +309,10 @@
         "graph_or_diagram",
         "reset",
         "print"
-      ]
+      ],
+      "selected_visual_slider_min_percent": 0,
+      "selected_visual_slider_upper_bound": "preserve configured page maximum (gold-standard sample = 160%)",
+      "selected_visual_is_problem_specific": true
     }
   },
   "gold_standard": {
@@ -334,7 +333,7 @@
     ],
     "source_map": "pms_general/sub_plans/gold_standard/data/source_map.json",
     "qa_example": "pms_general/sub_plans/gold_standard/data/qa.json",
-    "rule": "Reuse shell/behavior; never copy stale run-specific dates, sections, schedule, seating placeholders, questions, or answers."
+    "rule": "Reuse shell/behavior; never copy stale run-specific dates, sections, schedule, seating placeholders, questions, answers, or deprecated fixed-minute timing rules."
   },
   "delivery": {
     "mode": "self_contained_zip",
@@ -367,18 +366,17 @@
         "current investigation/source materials",
         "controlled parallels"
       ],
-      "time_budget_minutes_less_than_period": 10,
       "section_1.3_special_case": {
         "quick_collinear_items": "small number only",
         "two_vector_nonparallel_grid_problems": 3,
         "three_vector_investigation_finishers": 2,
         "grid_source": "current investigations/u1_3_investigation visual format",
         "student_result": "draw resultant on same grid; report magnitude and direction as angle from +x or valid compass form"
-      }
+      },
+      "time_budget_rule": "full resolved scheduled class period; no fixed-minute subtraction"
     },
     "Algebra 1": {
       "primary_purpose": "targeted review/evidence based on most recent classwide misses",
-      "time_budget_minutes_less_than_period": 15,
       "evidence_priority": [
         "authorized current portfolio/evidence state",
         "current Framework/Assessment Plan",
@@ -389,10 +387,10 @@
         "current_section_percent": "15-25"
       },
       "current_section_rule": "short check only when a stronger recent classwide evidence need is established",
-      "graph_rule": "Use registered graph_tool/current district graph standard for graph-scale/intercept work."
+      "graph_rule": "Use registered graph_tool/current district graph standard for graph-scale/intercept work.",
+      "time_budget_rule": "full resolved scheduled class period; no fixed-minute subtraction"
     },
     "AP Calculus AB": {
-      "time_budget_minutes_less_than_period": 10,
       "do_not_invent_section_i_cans": true,
       "primary_content_sources": [
         "current Notes",
@@ -400,7 +398,8 @@
         "current textbook/source materials",
         "approved Calculus Question Structure families for controlled parallels"
       ],
-      "graph_rule": "Use registered graph_tool/current AP Calculus graph conventions."
+      "graph_rule": "Use registered graph_tool/current AP Calculus graph conventions.",
+      "time_budget_rule": "full resolved scheduled class period; no fixed-minute subtraction"
     }
   }
 }

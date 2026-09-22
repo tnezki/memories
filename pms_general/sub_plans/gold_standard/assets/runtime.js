@@ -116,7 +116,9 @@
   }
 
   function bind(){
-    const source=$('runtimeFlowSource');if(!source)return;populate(source);syncSelection();
+    const source=$('runtimeFlowSource');if(!source)return;
+    if($('runtimeVisual'))$('runtimeVisual').min='0';
+    populate(source);syncSelection();
     $('runtimeAll')?.addEventListener('input',()=>{setAllWorkspaces();updateOutputs();repaginate()});
     $('runtimeProblem')?.addEventListener('change',()=>{syncSelection();repaginate()});
     $('runtimeOne')?.addEventListener('input',()=>{applySelectedWorkspace();updateOutputs();repaginate()});
