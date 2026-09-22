@@ -1,392 +1,343 @@
-PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT DRIVE WORKFLOW
-===========================================================
+PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT PRIVATE DRIVE WORKFLOW
+====================================================================
 STATUS: CURRENT
 JOB: portfolio
-REVISION: 2026-09-17 v3.2 - PRIVATE CONTACT DIRECTORY + EMAIL-READY INDIVIDUAL REPORTS
+REVISION: 2026-09-22 v4.0 - MASTERY-GOAL GRADES + INTERVENTION LANES + ROSTER/SUPPORT MAINTENANCE
 
 ROLE
 ----
-Ingest newly supplied student evidence, preserve raw evidence in the private Portfolio Drive, update the longitudinal body of evidence, regenerate current student/teacher PDFs from the canonical templates without wording/layout drift, and produce current PowerSchool import CSVs.
+Ingest newly supplied student evidence, preserve raw evidence in the canonical private Portfolio Drive, update the longitudinal body of evidence, maintain the current roster and private student-support context when explicitly supplied, regenerate current student/teacher reports from canonical templates, and produce one PowerSchool CSV per Mastery Goal.
 
-THIS IS NOT A GITHUB-TRANSFER OUTPUT JOB.
-Normal Portfolio delivery is persistent private Google Drive state PLUS individual downloadable PDFs/CSVs. Never package student Portfolio outputs as a GitHub Transfer ZIP. Never write student data to GitHub.
+This is never a GitHub student-data job. Student evidence, rosters, IEP/504/support documents, Portfolio state, PDFs, CSVs, contacts, and names remain private.
 
 ===========================================================
 0. SOURCE / AUTHORITY READ ORDER - HARD
 ===========================================================
-Use only current request/current teacher instruction, request attachments, exact pinned project GitHub authorities, and current private Portfolio Drive state. No public web; no prior-chat/memory/File-Library recovery.
+Use only the current request/current teacher instruction, request attachments, exact pinned project GitHub authorities, and current private Portfolio Drive state. No public web; no prior-chat/memory/File-Library recovery.
 
 Read in this order:
 1. SYSTEM_MANIFEST.json
-2. Curriculum_Philosophy.txt AND every declared philosophy_amendment
-3. SYSTEM_RUNTIME_CONTRACT.txt AND every declared runtime/local-transfer amendment
+2. Curriculum_Philosophy.txt and every declared philosophy amendment
+3. SYSTEM_RUNTIME_CONTRACT.txt and every declared runtime/local-transfer amendment
 4. current Course Framework MANIFEST.json and stable Framework front door
-5. exact selected Unit Assessment Plan + current Unit learning map/override
+5. exact selected Unit Assessment Plan + current Unit learning map/override when declared
 6. current course Portfolio policy declared by the Framework manifest
 7. declared evidence source map/lineage file for the attached source, when one exists
 8. this PM
-9. Tools/MANIFEST.json -> Portfolio template contract + student/teacher templates + CSS + Portfolio email-delivery contract when present
-10. current downstream-ready Unit Family Bank manifest/index/family records
+9. Tools/MANIFEST.json -> Portfolio template contract + student/teacher templates + CSS
+10. current downstream-ready Unit Bank when the course policy requires Bank-assisted practice routing
 11. prior private Portfolio Drive state
-12. new request evidence/support/setup files, including an explicitly supplied contact workbook/CSV when email contacts are being configured
+12. new request evidence/support/roster/student-support files
 
-COURSE POLICY RESOLUTION - HARD
-- If the Framework manifest declares `current_portfolio_policy`, read that exact file.
-- Algebra compatibility: if no `current_portfolio_policy` exists but `current_portfolio_quick_check_policy` does, use that exact policy.
-- The exact Unit Assessment Plan owns learning content.
-- The course Portfolio policy owns statuses, rollup, evidence-source mechanics, student practice routes, and any course-specific terminology.
-- Registered Portfolio templates own recurring report structure/fixed wording.
-- This PM owns execution.
-
-Fail closed if the selected Unit is not declared Portfolio-ready by the current Framework manifest/policy or if its required current Family Bank is unavailable/downstream-not-ready.
+Course policy owns I Can status, Mastery Goal grade rules, demonstrated thresholds, practice routing, and Unit readiness. The exact Unit Assessment Plan owns learning content. Registered Portfolio templates own recurring report structure. This PM owns execution.
 
 ===========================================================
-1. DRIVE STATE - CANONICAL ROOT HARD
+1. CANONICAL DRIVE STATE
 ===========================================================
-The exact Portfolio root is declared by SYSTEM_RUNTIME_PORTFOLIO_AMENDMENT.txt:
-  title: ____Portfolio_Data
+Open the exact canonical root first:
+  ____Portfolio_Data
   folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
 
-HARD ROUTING RULE:
-1. Fetch/open that exact root by folder ID first.
-2. Do NOT globally search Drive for a same-named root when that ID is available.
-3. Do NOT create another top-level `____Portfolio_Data` folder.
-4. Ignore same-named Portfolio roots elsewhere.
-5. Resolve the exact course child from the course policy/request (for current Physics use `Physics`; for Algebra use `Algebra 1`). Create it only INSIDE the canonical root if absent.
-6. Resolve/create `unit N` inside that course child.
-7. If the exact root ID cannot be accessed, STOP with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE`.
-
-Canonical course/unit path:
-  ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
-with exactly these five Portfolio-owned Unit folders:
+Then resolve/create:
+  <Course>/unit N/
+with Portfolio-owned folders:
   01 Evidence Inbox/
   02 Portfolio Data/
   03 Student Packets/
   04 Class & Intervention Summaries/
   05 PowerSchool Exports/
 
-The canonical root may also contain the Portfolio-owned private contact directory:
-  00 Contact Directory/
-    Source Imports/
-    contact_directory.csv
-    contact_import_history.csv
-This root-level directory is shared only to reuse verified student/guardian contacts across the teacher's Portfolio courses. It is private state, never a GitHub artifact.
+Preserve any course-authorized siblings such as 06 Checkpoints.
 
-Within each Unit, `03 Student Packets/Email Delivery/` is the private individual-report folder used by the separate teacher-approved email sender. It is nested inside the existing Student Packets folder; do not create a sixth Portfolio Unit folder.
+Within 02 Portfolio Data, Portfolio may maintain:
+  Student Support/
+    Source Files/
+    student_support_current.csv
+    student_support_review.csv
+    student_support_import_history.csv
 
-Create missing Unit/five folders on first run. Create `00 Contact Directory` only when a contact import is explicitly supplied or prior verified contact state already exists. Create `03 Student Packets/Email Delivery` when preparing current reports. Preserve raw/history. Replace stale current PDFs/CSVs/current-state files as declared below.
-
-FIRST RUN:
-If `02 Portfolio Data/student_registry.csv` is absent, require a current PowerSchool template/export attachment. Build the registry from that explicit roster source; never infer roster from submissions. If missing: `PORTFOLIO_REGISTRY_REQUIRED`.
-Later runs use the stored registry + stored PowerSchool template/schema.
+Never create a second top-level Portfolio root. If the canonical root cannot be accessed, stop with PORTFOLIO_DRIVE_ROOT_UNAVAILABLE.
 
 ===========================================================
-2. RAW EVIDENCE / SUPPORT FILES
+2. RUN MODES
 ===========================================================
-Before declaring success, save each newly attached STUDENT EVIDENCE file unchanged into `01 Evidence Inbox` with a defensible normalized name and `_RAW` suffix. Record SHA-256. Do not double-count a source hash already in evidence_ledger.csv.
+A request may contain one or more operations in the same run:
 
-Files explicitly marked supporting/source-map/key are teacher references, not student evidence. Do not count them as student submissions or copy them into the raw student-evidence ledger as evidence events.
+A. EVIDENCE UPDATE
+- One or more student evidence files are supplied.
+- Preserve raw evidence, judge/update evidence state, grades, reports, and PowerSchool exports.
 
-EMAIL CONTACT SETUP FILES:
-- An explicitly supplied student/guardian contact workbook or CSV is a private SETUP/SUPPORT source, never student evidence.
-- Resolve `Tools/MANIFEST.json -> portfolio_email_delivery_contract` before importing contacts.
-- Preserve the raw contact source unchanged in `00 Contact Directory/Source Imports` and record SHA-256/import history. Do not place contact sources in `01 Evidence Inbox`.
-- Never place a contact workbook, normalized contact file, student/guardian address, or contact-review output in GitHub or a GitHub Transfer package.
+B. ROSTER UPDATE
+- Runs only when roster_update_requested=true.
+- A current PowerSchool roster/template CSV is explicitly supplied.
+- Compare the supplied roster to the stored registry before applying changes.
+- Student Num is the durable identity key when present.
+- Added students become active. Students absent from the new roster become inactive; never delete their historical evidence.
+- Exact existing student numbers reconnect to prior history, including returning students.
+- Name changes on the same student number update the current display name without creating a new student.
+- Ambiguous/duplicate/malformed identity rows go to review_queue.csv; do not guess.
+- A normal evidence run with roster_update_requested=false reuses the stored roster and requires NO roster upload.
 
-Use the course policy's current source terminology when a source type is known. Preserve an original/legacy basename when needed for defensible matching.
+C. STUDENT SUPPORT UPDATE
+- Runs when one or more files are explicitly classified as student_support_files.
+- Accepted examples include IEP, 504, accommodation plan, case-manager accommodation summary, or another teacher-authorized support document.
+- These are private support/setup sources, never student evidence.
+- Preserve each source unchanged under 02 Portfolio Data/Student Support/Source Files with SHA-256/import timestamp.
+- Match to the current registry using exact Student Num when available, otherwise unique exact normalized student name; unresolved identity goes to student_support_review.csv. Never fuzzy-guess.
+- Extract only classroom/assessment information needed to apply the student's documented support accurately. Do NOT transcribe diagnoses, medical history, family details, disability narrative, or unrelated sensitive content into normalized Portfolio state.
+- student_support_current.csv should contain only actionable support fields such as student_key, source hash/date, accommodation/modification label, concise operational description, applies_to, and review/expiration metadata when explicitly present.
+- Approved accommodations do not lower the learning standard or evidence status of a valid demonstration. Use the support state to interpret conditions of administration and to honor required access supports.
+- A support-only run may occur with no new student evidence and must not alter evidence_ledger.csv, I Can status, Mastery Goal grades, or PowerSchool grades.
+
+FIRST RUN / RESET
+If 02 Portfolio Data/student_registry.csv is absent, a current PowerSchool roster/template CSV is required. Build the registry from that explicit source; never infer the roster from submissions.
 
 ===========================================================
-3. SEGMENT / IDENTIFY
+3. RAW EVIDENCE / SUPPORT CLASSIFICATION
 ===========================================================
-Use student_registry.csv as identity authority. For multi-student scan PDFs, establish packet/page boundaries, match explicit identity to registry, preserve page references, keep rostered non-submitters in state, and route ambiguous identity to review_queue.csv rather than guessing.
+STUDENT EVIDENCE:
+- Save each newly attached student evidence file unchanged into 01 Evidence Inbox with a normalized basename and _RAW suffix.
+- Record SHA-256. Do not double-count a source hash already in evidence_ledger.csv.
+
+TEACHER SUPPORTING FILES:
+- Answer keys, source maps, task sheets, rubrics, and teacher references are supporting files, not student evidence.
+
+STUDENT SUPPORT DOCUMENTS:
+- IEP/504/accommodation sources are private support state and belong only under 02 Portfolio Data/Student Support.
+- They are never copied to 01 Evidence Inbox, GitHub, public URLs, reports, or PowerSchool exports.
 
 ===========================================================
-4. MAP CLEAN TASK BEFORE JUDGING RESPONSE - HARD
+4. SEGMENT / IDENTIFY / MAP BEFORE JUDGING
 ===========================================================
+Use student_registry.csv as current identity authority. For multi-student scans, establish packet/page boundaries and match explicit identity to registry. Keep active rostered non-submitters in state. Route ambiguous identity to review_queue.csv.
+
 Establish:
-  clean prompt/task -> declared source map/lineage when available -> exact I Can(s) -> MG -> evidence job -> student response.
+  clean prompt/task -> source map/lineage when available -> exact I Can(s) -> MG -> evidence job -> student response.
 
-Use exact code + full I Can statement together in human-facing output.
-Never infer current learning from retired derivative indexes when the Framework manifest declares a Unit override.
-
-A single task MAY yield separate judgments for multiple I Cans only when the task genuinely provides separately judgeable evidence for each. These target judgments still share one source opportunity unless independence is explicitly defensible.
-Repeated prompts for the same I Can on one source are NOT independent opportunities. Follow source-level aggregation rules from the course policy/source map when present.
+A single task may yield separate judgments for multiple I Cans only when it genuinely provides separately judgeable evidence for each. Repeated prompts on one source do not automatically create independent opportunities.
 
 ===========================================================
-5. INTERNAL EVIDENCE STRENGTH
+5. INTERNAL EVIDENCE STRENGTH / CURRENT I CAN STATUS
 ===========================================================
-Use exactly UNUSABLE / LIMITED / PARTIAL / CONVINCING / STRONG_TRANSFER.
+Use exactly:
+  UNUSABLE / LIMITED / PARTIAL / CONVINCING / STRONG_TRANSFER
 
-CONVINCING: substantially demonstrates target; minor slip may remain if understanding is still clear.
-PARTIAL: meaningful correct target thinking is visible, but incomplete/inconsistent or one significant error prevents a complete demonstration.
-LIMITED: some target-relevant work exists, but major error/misconception means little valid demonstration.
-UNUSABLE: blank/irrelevant/unreadable/no defensible target judgment.
-STRONG_TRANSFER: convincing plus meaningful transfer/connection/critique/modeling/less-routine application.
+Current I Can proficiency normally uses:
+  NO_EVIDENCE / DEVELOPING / MASTERED / TRANSFER
+unless the current course policy says otherwise.
 
-Judge only what the task asks. Do not convert to points.
+A single routine CONVINCING demonstration normally remains Developing. Mastered normally requires at least two independent convincing demonstrations unless current course policy says otherwise.
 
-===========================================================
-6. OPPORTUNITY / LONGITUDINAL LEDGER
-===========================================================
-Persist evidence_ledger.csv append-only. Minimum event/source fields: stable event ID, student key, source hash/date/type/label, page/task ID, question lineage when known, MG, I Can, evidence role, opportunity_id, independent_opportunity, strength, concise note, review flag.
-
-Multiple mapped judgments from the same source do not create multiple independent opportunities for one I Can merely because they appear as separate prompts/rows.
-
-===========================================================
-7. CURRENT STATUS / COURSE ROLLUP
-===========================================================
-Resolve exact I Can statuses, mastery rule, MG demonstrated rule, Unit scale, and next-action vocabulary from the CURRENT COURSE PORTFOLIO POLICY. Do not hard-code Algebra's fixed 2-of-4 MG rule into another course.
-
-The current shared status model is normally:
-○ No Evidence
-◐ Developing
-● Mastered
-★ Transfer
-but the course policy is authoritative.
-
-A single routine CONVINCING demonstration normally remains Developing. Mastered normally requires at least two independent convincing demonstrations unless the current course policy says otherwise.
-Status and next action are separate.
-
-For Physics Unit 1, follow `frameworks/Physics/PORTFOLIO_POLICY.json`: MG demonstrated threshold is half of the exact I Cans in that MG, rounded up; Unit scale remains I/C/B/A/A+ across the four MGs.
+Status and next action are separate. Persist the fixed action state from the template contract:
+  NEEDS_FIRST_CHECK
+  PRACTICE_AND_CHECK
+  NEEDS_ANOTHER_DEMONSTRATION
+  SECURE
+  EXTENSION
 
 ===========================================================
-8. PERSISTENT DATA FILES
+6. MASTERY GOAL GRADES - HARD
 ===========================================================
-`02 Portfolio Data` must contain coherent current versions of:
-- student_registry.csv
+The official grade model is now Mastery-Goal based. There is NO overall Unit letter grade in the student report or PowerSchool export.
+
+For every current Mastery Goal, persist:
+- mg_code
+- assessed boolean
+- secure_i_can_count
+- i_can_count
+- demonstrated boolean
+- grade_code
+- grade_label
+- transfer flag/reason when applicable
+
+NOT ASSESSED:
+If a Mastery Goal has no usable evidence on any of its I Cans, assessed=false and the family-facing display is exactly `Not assessed`. Do not manufacture Grade I from absence of evidence. Its PowerSchool Score cell remains blank.
+
+ASSESSED:
+Once usable evidence exists in the goal, calculate the current Mastery Goal grade from current I Can states using the exact course policy. New evidence replaces the current grade; do not average attempts or assignment percentages.
+
+The report may still state how many Unit Mastery Goals are demonstrated (for example, `1 of 4 Unit Mastery Goals demonstrated.`). That is a learning-progress count, not a Unit grade.
+
+===========================================================
+7. PERSISTENT DATA FILES
+===========================================================
+02 Portfolio Data must contain coherent current versions of:
+- student_registry.csv (active/inactive state preserved)
 - evidence_ledger.csv (append-only)
-- i_can_status_current.csv (include current status plus student_action_code and student_action_label)
+- i_can_status_current.csv
 - mastery_goal_status_current.csv
-- unit_status_current.csv
+- unit_status_current.csv (progress counts only; no official Unit grade)
 - class_i_can_summary.csv
 - intervention_groups.csv
 - review_queue.csv
 - run_history.csv (append-only)
 - run_manifest.json
-- stored PowerSchool template(s) + schema
+- stored PowerSchool roster/template/schema needed to reproduce exports
 
-When Portfolio email contacts have been configured, also maintain:
-- email_recipients_current.csv
-- email_contact_review.csv when unresolved contact rows exist
-- email_delivery_manifest.csv after current student reports are written
-- email_send_log.csv when/after the separate Apps Script sender has sent or tested messages (sender-owned append-only log; Portfolio must preserve it)
+When student support has been configured, also maintain:
+- Student Support/Source Files/*
+- Student Support/student_support_current.csv
+- Student Support/student_support_review.csv when needed
+- Student Support/student_support_import_history.csv
 
-Newest-source summary rows use source-level I Can judgments after required within-source aggregation.
-
-===========================================================
-8A. EMAIL CONTACT IMPORT / RECIPIENT RESOLUTION - PRIVATE SETUP
-===========================================================
-This section runs only when a new contact source is explicitly supplied OR when prior contact state already exists and current roster recipients must be refreshed. It never changes evidence judgments.
-
-Resolve the exact current `portfolio_email_delivery_contract` from Tools/MANIFEST.json.
-
-CURRENT IT WORKBOOK SHAPE:
-- The supported XLSX source may contain multiple class worksheets.
-- A usable worksheet has exact headers `LastFirst`, `Student Email`, and `Guardian Email`.
-- Read all worksheets with those headers. Do NOT infer period/course identity from a worksheet name. A student can legitimately occur on multiple worksheets.
-
-NORMALIZATION - HARD:
-1. Preserve the source unchanged in `00 Contact Directory/Source Imports`; record SHA-256 and import timestamp.
-2. Trim student email. Split guardian addresses on comma OR semicolon, trim, discard blanks, validate, and deduplicate case-insensitively while preserving the first trimmed spelling.
-3. Collapse duplicate identical rows for the same exact school student email across worksheets.
-4. If the same school student email has conflicting student names or materially different guardian sets, mark REVIEW; do not silently choose or union the conflict.
-5. Never construct an email address from a student's name/username pattern.
-
-ROSTER MATCH - HARD:
-- student_registry.csv remains the Unit roster/identity authority.
-- Match contact records in this order: exact existing student email when already known; otherwise exact normalized first+last name within the current roster when unique; otherwise teacher review.
-- Row position/order is never a persistent identity key. Do not fuzzy-guess an ambiguous name.
-- Store normalized reusable contacts in root `00 Contact Directory/contact_directory.csv`.
-- Write current Unit recipient resolution to `02 Portfolio Data/email_recipients_current.csv`, keyed by exact student_key.
-- Write unresolved/conflicting mappings to `02 Portfolio Data/email_contact_review.csv`.
-- Recipient status is exactly READY, WARNING_NO_GUARDIAN, or REVIEW as defined by the email-delivery contract.
-
-A normal Portfolio evidence/report run may still PASS when contacts are not configured; email readiness is optional and must never block evidence persistence. But if a contact import was explicitly requested, do not claim that import succeeded while REVIEW conflicts are silently unresolved.
-
-CONTACT-SETUP-ONLY MODE:
-- When the teacher explicitly requests only email-contact setup/import and supplies an approved contact source, this PM may run without new student evidence.
-- Resolve the canonical root, preserve/import the contact source, and refresh recipient mappings for existing Unit student registries that can be resolved safely.
-- Do not append evidence_ledger.csv, change I Can/MG/Unit status, regenerate PowerSchool scores, or pretend an evidence run occurred.
-- Existing reports may remain untouched. If current individual report manifests already exist, the separate sender can use them after recipient resolution; otherwise a later normal Portfolio report run will create them.
-- Verify contact-directory persistence and every refreshed Unit recipient file before reporting the setup-only operation complete.
+Preserve current contact/email state when present; do not overwrite it accidentally.
 
 ===========================================================
-9. STUDENT PACKET - TEMPLATE FIDELITY HARD
+8. INTERVENTION ROUTING - THREE TEACHER LANES
 ===========================================================
-Resolve Tools/MANIFEST.json -> Portfolio template contract/student template/CSS. The registered HTML is a CANONICAL SHELL, not an example.
+The teacher report is intervention-first. Translate longitudinal evidence into exactly three lanes:
 
-Exactly 2 content pages/student; one PDF per period; student bookmarks. No third tracker page. Because each student is exactly two pages, combined class PDFs are duplex-safe by construction.
+WHOLE CLASS
+- Use only when current evidence supports a genuinely broad shared instructional need suitable for normal class time.
+- Do not recommend whole-class reteach from raw frequency alone, from No Evidence, or merely because many students have different problems on one I Can.
+- Identify the shared target(s), shared misconception/pattern, affected students/count, and concise instructional need.
+- If evidence does not support a classwide intervention, say no whole-class intervention is recommended and do not create a separate Whole Class page.
 
-EMAIL-READY INDIVIDUAL COPY - HARD:
-- In addition to each normal period packet, write one separate PDF per rostered student to `03 Student Packets/Email Delivery/`.
-- The individual PDF is exactly that student's same two canonical report pages; never include another student's page and never add a cover page.
-- Identity comes from student_key in state, not from filename parsing.
-- After the Drive file is written, record exact Drive file ID, filename, report number/date, and SHA-256 in `02 Portfolio Data/email_delivery_manifest.csv`.
-- If contacts are not configured, still create the individual PDFs/manifest so email delivery can be enabled later without re-rendering a different report.
-- Current individual report files may replace stale current delivery copies, but historical send evidence remains in email_send_log.csv.
+PRIORITY DAY GROUP
+- Teacher-led Crewtime reteach groups.
+- Group students only when at least two students share the SAME current substantial-gap bundle of 2-4 exact I Cans.
+- The bundle is the grouping key. Example: students needing IC01+IC02 belong together; students needing IC01+IC02+IC03 are a different group.
+- Never create a Priority Day Group from a single shared I Can alone.
+- Never place `Brief guided practice` language on the teacher report.
+- Each group card shows the exact I Can code + full statement for every bundle target, student names, evidence-backed shared need/misconception, and concise teacher move.
+- Students with 3-4 substantial gaps who do not share an exact bundle with another student remain inside the Priority Day lane as compact teacher-review rows; do not invent a fourth intervention lane.
 
-Do not paraphrase fixed headings/table/card architecture.
+PULL IN STUDENTS
+- Student-centered, not I-Can-centered.
+- Use for students with 1-2 current small/actionable gaps that fit short individualized help and personalized practice while the teacher circulates among 3-4 students.
+- Show student name, exact 1-2 I Can targets, and concise practice/check need.
+- Do not group these students under a shared I Can heading.
 
-LARGE-PRINT RULE:
-- Use the enlarged student typography owned by the canonical CSS.
-- The redesign starts near twice the former student-report font baseline.
-- Render/inspect the actual PDF. If one area does not fit, first change the Mastery Goal split between pages (2+2 default, then 1+3 or 3+1) before reducing type.
-- Never shrink the whole report back to the prior small-print scale merely to preserve a preferred split.
-- No clipping, overlap, or content loss is allowed.
+Students who only need another independent demonstration and do not need practice/reteach stay out of all three intervention lanes; show them only in the detailed evidence appendix/reference state.
+
+===========================================================
+9. STUDENT REPORT - CANONICAL TWO-PAGE SHELL
+===========================================================
+Resolve the registered Portfolio student template/CSS. Exactly 2 content pages per active student; combined period PDFs remain duplex-safe.
 
 PAGE 1 fixed structure:
-Current Progress Report
-Essential Standard
-Your current picture
-Unit Evidence Picture
+- Current Progress Report
+- Essential Standard
+- Your current picture
+- Unit Evidence Picture
 
-Keep the compact current-progress summary at the top: Unit status, MG demonstrated count, approved current-picture text, and MG chips.
-Below it, show the first portion of the current Mastery Goal cards using exact current I Can status/action data.
+CURRENT PICTURE:
+- NO large Unit-grade box.
+- Exact lead pattern: `{MG_DEMONSTRATED_COUNT} of {MG_TOTAL} Unit Mastery Goals demonstrated.`
+- Show all Mastery Goal chips with `Grade X` only when assessed; otherwise `Not assessed`.
+- Include the approved explanation that Mastery Goal grades are current evidence, not averages, and can improve with new evidence.
 
 PAGE 2 fixed structure:
-Unit Evidence Picture
-Recent evidence - <latest evidence label>
-Your Practice
+- Unit Evidence Picture
+- Recent evidence - <latest evidence label>
+- Your Practice
 
-Show every remaining Mastery Goal card, then the Recent evidence table, then the Practice Builder QR block.
+MASTERY GOAL CARDS:
+- Exact MG code/title and exact I Can code/full statement.
+- Every I Can row has status marker and one compact Next action label.
+- MG headers/cards use matched layout geometry so neighboring cards do not look accidentally misaligned because one title wraps.
 
-MASTERY GOAL DISTRIBUTION:
-- For a four-MG Unit, begin with 2 MG cards on page 1 and 2 on page 2.
-- If rendered card heights/readability require it, 1+3 or 3+1 is explicitly allowed.
-- All current MGs must appear exactly once across the two pages.
-- Never omit an I Can to make the layout fit.
-
-CURRENT-PICTURE LANGUAGE:
-- Use a short factual body-of-evidence snapshot.
-- On an early first-source run, explicitly say one evidence source can give strong first evidence but does not establish mastery by itself.
-
-I CAN CARDS:
-- Print exact MG code/title and exact I Can code/full statement.
-- Every I Can row has its status marker plus one compact `Next:` action label from the template contract.
-- No code-only human labels.
-
-RECENT EVIDENCE:
-Columns remain:
-I Can | Target | Evidence | What this showed
-Use enlarged report type from the canonical CSS.
-
-PRACTICE BUILDER QR - HARD:
-- The printed student-report QR opens the current COURSE Student Practice Builder, NOT the Student Bank.
-- Resolve the exact Practice Builder URL pattern from the current course Portfolio policy.
-- URL contains only Unit + exact selected I Can ID, normally `?unit={unit}&ican={i_can_id}`.
-- The Practice Builder must therefore open with that exact I Can already checked.
-- Never put student name, student ID, period, evidence text, status, or other student-specific state in the URL/QR.
-- Show the selected exact I Can code + full statement beside the QR.
-
-SELECTED PRACTICE I CAN:
-- Prefer a current `PRACTICE_AND_CHECK` I Can when evidence shows a demonstrated gap/incomplete understanding.
-- Do not choose a `NEEDS_FIRST_CHECK` I Can merely because it lacks evidence when a demonstrated practice need exists.
-- If multiple PRACTICE_AND_CHECK targets exist, use the normal next-target priorities in section 11.
-- If none exist, use the normal next-target rule so the QR still opens a meaningful selected target.
-
-STATUS MARKERS:
-- No Evidence = empty outlined circle
-- Developing = LEFT HALF filled navy
-- Mastered = fully filled navy
-- Transfer = navy star
-QA the rendered PDF.
+YOUR PRACTICE:
+- Do NOT preselect an I Can in the Practice Builder.
+- QR and clickable link open the current course Practice Builder with Unit only; no student identity/state and no `ican` query value.
+- Text: `Scan or click to open the Practice Builder and select the following I Can statements for more practice:`
+- List every current focus I Can selected from demonstrated practice need; show exact code + full statement.
+- If the course has no current Practice Builder, list focus I Cans and clearly state the Practice Builder is not yet available; never fabricate a route.
 
 ===========================================================
-10. TEACHER SUMMARY - TEMPLATE FIDELITY HARD
+10. TEACHER REPORT - INTERVENTION-FIRST
 ===========================================================
-One landscape PDF using canonical teacher template/CSS.
+One landscape PDF using the canonical teacher template/CSS.
 
-LATEST-EVIDENCE PAGES:
-- Combined page first, then period pages when useful.
-- Use the canonical I Can card layout. If the newest source contains more I Cans than fit one page, continue onto additional pages rather than dropping targets.
-- Card header shows exact I Can code + full statement and source evidence counts.
-- Each card body uses ONE category only: `Students needing stronger or additional evidence`.
-- Combined card groups names by period header in period order; individual period pages do not repeat period on every name.
-- Names = first name + last initial, compact columns as fit allows.
+PAGE 1 - CLASS OVERVIEW
+- Current active roster count and evidence scope.
+- The three intervention lanes: Whole Class, Priority Day Group, Pull In Students.
+- Major Strengths.
+- Top Actionable Patterns.
+- Keep the page fast to scan. Do not include roster-upload instructions or PowerSchool workflow explanations on this page.
 
-FINAL PAGE(S):
-Title: `Combined <Course> - Portfolio Evidence Sort`
-Use full longitudinal state and fixed categories:
-- Reteach / targeted practice
-- Brief guided practice
-- Ready for another independent demonstration
-- No evidence / absent
-- Review flags
-If more current I Cans require cards than fit one page, continue the canonical layout across additional pages.
+WHOLE CLASS PAGE
+- Generate only when the Whole Class lane is active.
 
-===========================================================
-11. NEXT TARGET / PRACTICE ROUTING
-===========================================================
-Choose from full current evidence, not just the last wrong answer. Prefer a target blocking MG demonstration, close to mastery and needing another opportunity, or showing a clear misconception.
+PRIORITY DAY GROUP PAGE(S)
+- One or more large group cards.
+- Group by exact same 2-4-I-Can substantial-gap bundle.
+- Never use single-I-Can groups as the core grouping rule.
 
-For the printed Practice Builder QR, demonstrated practice need has priority: select a `PRACTICE_AND_CHECK` target before a no-evidence-only `NEEDS_FIRST_CHECK` target when such a demonstrated need exists.
+PULL IN STUDENTS PAGE(S)
+- Student-centered 1-2 gap rows/cards.
+- Organize by student, never by I Can.
 
-Family A/B/C remains Bank/question-family evidence architecture for curriculum generation and teacher reasoning. The student Practice Builder does not expose family controls, and the Portfolio report no longer routes the student through a Student Bank family anchor.
+DETAILED EVIDENCE APPENDIX
+- Reference only, after intervention pages.
+- Use large cards with no clipped names. Continue across additional pages as needed rather than forcing a 2x2 fixed-height page.
+- Exact I Can code + full statement, current status counts, current evidence/opportunity metadata, and concise evidence-routing lists may be shown.
+- Do not expose the phrase `Brief guided practice` in the main intervention pages.
 
 ===========================================================
-12. POWERSCHOOL
+11. POWERSCHOOL - FOUR MASTERY GOAL EXPORTS
 ===========================================================
-Preserve stored template shape and non-score fields. Change only accepted Score/status fields. Produce current CSV per period every successful run and save in `05 PowerSchool Exports`; return them as individual downloadable artifacts. Current official status replaces prior status.
+Produce one current PowerSchool CSV per Mastery Goal per period on every successful evidence run.
+
+Current expected assignment naming pattern:
+  Unit {UNIT} Mastery Goal 1
+  Unit {UNIT} Mastery Goal 2
+  Unit {UNIT} Mastery Goal 3
+  Unit {UNIT} Mastery Goal 4
+
+Use the stored PowerSchool template/export shape as the schema authority. Preserve teacher/class/due date/points/score type and roster fields unless an explicit current roster update changed them. Populate Score with the current MG grade code only when that MG is assessed; leave Score blank for Not assessed.
+
+Do not create or export an overall Unit grade CSV.
+
+Save current MG CSVs in 05 PowerSchool Exports and return them as individual downloadable artifacts alongside the student and teacher PDFs.
 
 ===========================================================
-13. EMAIL READINESS / SENDING BOUNDARY - HARD
+12. REPORT / EMAIL STATE
 ===========================================================
-Portfolio prepares private send-ready state; the normal Portfolio evidence run does NOT automatically email anyone.
+Continue producing the normal period Student Packet PDF(s), one Teacher Summary PDF, and one separate exact two-page individual PDF per active student in 03 Student Packets/Email Delivery so the existing teacher-controlled email workflow remains functional.
 
-Portfolio-owned preparation:
-- optional verified contact import + email_recipients_current.csv;
-- one exact two-page individual report PDF per student;
-- email_delivery_manifest.csv with exact student_key -> Drive file ID + SHA-256;
-- preserve email_send_log.csv written by the sender.
+Inactive students are excluded from current report packets, current PowerSchool exports, intervention lanes, and current email recipient/report manifests, but their historical evidence and send logs remain preserved.
 
-Actual sending is owned by the separate teacher-controlled Apps Script declared by `portfolio_email_delivery_contract`:
-- teacher runs preflight;
-- student email is To; that student's guardian addresses are BCC;
-- one student/family per message;
-- test send goes only to the teacher;
-- live send requires explicit teacher approval;
-- sender verifies report hash/path, recipient mapping, daily quota, duplicate-send state, and preview digest before live mail.
-
-Never email automatically merely because a Portfolio run completed. Never expose guardian addresses across families.
+Normal Portfolio runs never send email automatically.
 
 ===========================================================
-14. DELIVERY - HARD PORTFOLIO EXCEPTION
+13. DELIVERY
 ===========================================================
-Successful normal Portfolio delivery:
-- update canonical private Drive state under exact root ID 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o and exact course child;
-- return each class Student Packets PDF individually;
-- return Teacher Summary PDF individually;
-- return current PowerSchool CSV(s) individually.
-The individual email-delivery PDFs and recipient/send state remain private Drive state and are not separately returned unless the teacher explicitly requests them.
-Do NOT return a GitHub Transfer ZIP for these Portfolio outputs.
-Do NOT create/store standalone report HTML in Drive.
+Successful normal evidence delivery:
+- update canonical private Drive state;
+- return each current class Student Packet PDF individually;
+- return current Teacher Summary PDF individually;
+- return current PowerSchool CSVs for MG01-MG04 individually.
+
+Roster-only or support-only operations may complete without regenerating evidence reports/grades when no evidence state changed.
+
+Do NOT return a GitHub Transfer ZIP for student Portfolio outputs. Do NOT write student Portfolio data to GitHub.
 
 ===========================================================
-15. QA / STOP
+14. QA / STOP
 ===========================================================
 Before PASS verify:
-1 exact Drive root ID and exact course child used;
-2 raw student evidence preserved/hash recorded; supporting files not miscounted as evidence;
-3 registry includes all rostered students, including non-submitters;
-4 clean-task mapping precedes response judgment and current Unit override/learning map is honored;
-5 source map/lineage used when declared; no same-source independence inflation;
-6 ledger/history append preserved;
-7 current statuses/MG rollups/Unit rollup match current course policy;
-8 exactly 2 student pages per student + bookmarks; combined student PDFs are duplex-safe;
-9 every human-facing I Can shows code + full exact statement;
-10 student report fixed headings/table/card/Practice Builder architecture match the current template contract;
-11 rendered status markers visibly distinguish all four states;
-12 all Mastery Goals/I Cans appear exactly once across the two student pages with no clipping/overlap; use 2+2, 1+3, or 3+1 as rendered fit requires;
-13 printed QR resolves the exact current COURSE Practice Builder and opens with the selected exact I Can checked; it is not a Student Bank QR and contains no student identity/state;
-14 newest-source teacher cards use one needs-evidence list and no invented buckets;
-15 longitudinal sort uses full history/fixed categories;
-16 PowerSchool CSVs preserve template shape;
-17 each rostered student has exactly one current two-page individual report in `03 Student Packets/Email Delivery`, and email_delivery_manifest.csv maps student_key to that exact Drive file ID/SHA-256 with no duplicate student_key;
-18 when contacts are configured, email_recipients_current.csv is keyed by student_key, guardian addresses are deduplicated, REVIEW conflicts remain explicit, and no matching relied on persistent row position/fuzzy guessing;
-19 email contact sources/state/send logs remain private Drive data and no actual sending occurred unless separately and explicitly teacher-approved in the email sender;
-20 no student data written to GitHub; no report HTML stored in Drive;
-21 outputs returned individually, not as transfer ZIP.
+1 exact canonical Drive root/course/unit used;
+2 raw evidence/support files routed to the correct private locations;
+3 normal runs reused the stored roster unless roster_update_requested=true;
+4 roster updates used Student Num as durable key when present and inactivated rather than deleted former students;
+5 student-support normalization contains only actionable accommodations/modifications and excludes unrelated sensitive narrative;
+6 evidence mapping preceded response judgment and source independence was not inflated;
+7 ledger/history append state preserved;
+8 four current MG grades follow current course policy, with no Unit letter grade;
+9 completely unassessed MGs display Not assessed and have blank PowerSchool Score;
+10 student report is exactly two pages/student and contains all current MGs/I Cans exactly once;
+11 current-picture lead says `Unit Mastery Goals` and there is no large Unit-grade box;
+12 Practice Builder link/QR does not preselect an I Can and contains no student identity/state;
+13 teacher Class Overview uses exactly Whole Class / Priority Day Group / Pull In Students;
+14 Priority Day Groups use exact shared 2-4-I-Can substantial-gap bundles, never single-I-Can grouping as the primary rule;
+15 Pull In Students is student-centered with 1-2 gaps;
+16 detailed appendix has no clipped names; continue pages as needed;
+17 four PowerSchool MG CSVs per period exist and no overall Unit-grade CSV was produced;
+18 inactive students are absent from current reports/exports but historical state remains;
+19 current individual two-page email-delivery reports/manifests remain coherent for active students;
+20 no student/support data was written to GitHub.
 
-If a check fails, repair that concrete defect before delivery. When all pass, stop.
+If any check fails, repair that concrete defect before delivery. When all pass, stop.
 
 END - PORTFOLIO / ASSESS NEW EVIDENCE

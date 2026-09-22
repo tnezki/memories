@@ -1,129 +1,77 @@
 SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY / DRIVE ROUTING
 ============================================================
 STATUS: CURRENT
-SCOPE: Job 18 Portfolio only.
-REVISION: 2026-09-17 - PRIVATE CONTACT DIRECTORY + EMAIL-READY REPORT STATE
+SCOPE: Portfolio workflow only.
+REVISION: 2026-09-22 - ROSTER + STUDENT SUPPORT STATE / MG GRADE EXPORTS
 
-This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt Section 11 and fixes the canonical private Drive destination and completion gate for Portfolio state.
-
-Portfolio / Assess New Evidence is a private state-and-report workflow, not a repository artifact build. Even though it is selected from the Control Panel Build tab and the request pins a course repository for curriculum authority, its canonical outputs do NOT have a repository destination.
+Portfolio is a private state-and-report workflow, not a repository artifact build. Student evidence, rosters, IEP/504/support files, Portfolio state, PDFs, CSVs, contacts, and names must never be written to GitHub.
 
 CANONICAL PORTFOLIO DRIVE ROOT - HARD
 -------------------------------------
-Use this exact Google Drive folder as the one and only Portfolio root:
-
+Use exactly:
   title: ____Portfolio_Data
   folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
 
-For workflow/job = portfolio:
-- fetch/open the canonical root by the exact folder ID above BEFORE resolving any course/unit folder;
-- NEVER discover the Portfolio root by global name search when the canonical ID is available;
-- NEVER create another top-level folder named `____Portfolio_Data`;
-- ignore same-named Portfolio roots anywhere else in Drive;
-- under the canonical root, resolve the exact `<Course>` child; create that course child only inside the canonical root when it is genuinely absent;
-- under that canonical course folder, resolve/create `unit N` and the five Portfolio-owned subfolders listed below;
-- preserve any current course-authorized sibling workflow folders, including `06 Checkpoints`; do not delete or overwrite them during a Portfolio run;
-- if the exact canonical root ID cannot be accessed, FAIL CLOSED with `PORTFOLIO_DRIVE_ROOT_UNAVAILABLE` rather than creating or selecting a substitute root.
-
-The canonical private state path is therefore:
-  ____Portfolio_Data [1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o] / <Course> / unit N /
-
-Portfolio-owned Unit subfolders:
+Resolve the exact <Course>/unit N below that root. Preserve/create exactly these Portfolio-owned Unit folders:
   01 Evidence Inbox/
   02 Portfolio Data/
   03 Student Packets/
   04 Class & Intervention Summaries/
   05 PowerSchool Exports/
 
-Course-authorized sibling workflow folder:
-  06 Checkpoints/   (created/owned by the personalized Checkpoint workflow; Portfolio preserves it)
+Preserve course-authorized siblings such as 06 Checkpoints.
 
-PRIVATE CONTACT DIRECTORY - ROOT LEVEL
---------------------------------------
-When Portfolio email contacts are configured, the canonical root may also contain:
+02 Portfolio Data may contain the private nested support area:
+  Student Support/Source Files/
+  Student Support/student_support_current.csv
+  Student Support/student_support_review.csv
+  Student Support/student_support_import_history.csv
 
-  00 Contact Directory/
-    Source Imports/
-    contact_directory.csv
-    contact_import_history.csv
+Roster and support state are private. Never expose them in public repository files or URLs.
 
-Rules:
-- `00 Contact Directory` is Portfolio-owned PRIVATE state shared only so verified contacts can be reused across the teacher's Portfolio courses/Units.
-- Contact sources and normalized contact data are support/setup state, never student evidence.
-- Preserve each explicitly imported contact workbook/CSV unchanged in `Source Imports` with a recorded SHA-256/import timestamp.
-- Never write contact source files, names, student emails, guardian emails, contact mappings, or send logs to GitHub.
-- The five Portfolio-owned Unit subfolders remain exactly the five listed above; do not create an email folder as a sixth Unit sibling.
+ROSTER PERSISTENCE
+------------------
+The stored student_registry.csv is reused on ordinary Portfolio runs. A new roster CSV is required only on first run/reset or when the request explicitly sets roster_update_requested=true.
 
-EMAIL DELIVERY STATE - NESTED INSIDE EXISTING UNIT FOLDERS
-----------------------------------------------------------
-For current report preparation, Portfolio may create/use:
+When roster update is requested, compare old/new by durable Student Num when present. Add new active students; mark departed students inactive; preserve all historical evidence. Do not infer deletions from missing submissions.
 
-  03 Student Packets/Email Delivery/
+STUDENT SUPPORT PERSISTENCE
+---------------------------
+Explicit student-support documents are setup/support sources, not evidence. Preserve raw source bytes only under 02 Portfolio Data/Student Support/Source Files and normalize only actionable classroom/assessment supports. Do not normalize unrelated diagnosis, medical, family, or narrative details.
 
-This folder contains one current individual two-page PDF per rostered student. The normal period packet(s) remain directly in `03 Student Packets` as before.
+Support-only operations are permitted without new evidence and must not change evidence status or grades.
 
-`02 Portfolio Data` may additionally contain:
-- email_recipients_current.csv
-- email_contact_review.csv
-- email_delivery_manifest.csv
-- email_send_log.csv (append-only sender-owned audit state; Portfolio preserves it)
+DRIVE PERSISTENCE IS A COMPLETION GATE
+-------------------------------------
+A normal evidence run is not complete until the canonical Drive state has been written and verified.
 
-The email sender is a separate explicit teacher action. A normal Portfolio run prepares email-ready private state but MUST NOT automatically send mail merely because reports were generated.
+Required normal evidence-run persistence:
+1. raw student evidence -> 01 Evidence Inbox;
+2. longitudinal/current data -> 02 Portfolio Data;
+3. current class Student Packet PDFs -> 03 Student Packets;
+4. one current exact two-page individual report per active student -> 03 Student Packets/Email Delivery;
+5. current teacher intervention summary -> 04 Class & Intervention Summaries;
+6. current PowerSchool MG CSVs -> 05 PowerSchool Exports.
 
-DRIVE PERSISTENCE IS A COMPLETION GATE - HARD
----------------------------------------------
-A Portfolio run is NOT complete merely because PDFs/CSVs were generated or downloadable artifacts were returned. Persistent Google Drive state is part of the required result.
+POWERSCHOOL OUTPUT
+------------------
+The official grading export is now one CSV per Mastery Goal per period. No overall Unit-grade CSV is produced. A completely unassessed Mastery Goal has blank Score cells, not an invented I.
 
-CONTACT-SETUP-ONLY EXCEPTION:
-When the teacher explicitly requests only contact import/setup and supplies a contact source, no new evidence or report generation is required. In that mode: resolve the exact root; preserve/import the contact source into `00 Contact Directory`; refresh only safely resolvable existing Unit recipient files; do not touch evidence/status/PowerSchool state; verify every contact/recipient write; then stop. Do not apply the normal evidence-run requirement for a newly supplied Evidence Inbox file or newly rendered reports to this setup-only operation.
+CURRENT REPORTING
+-----------------
+The student report has no large Unit-grade box. It may state the number of Unit Mastery Goals demonstrated and shows each MG's current grade or Not assessed.
 
-Required execution order for a normal evidence/report run:
-1. Resolve the exact canonical Drive root/course/unit tree.
-2. If a contact setup source is explicitly supplied, preserve/import it through the current Portfolio email-delivery contract into `00 Contact Directory`; never place it in Evidence Inbox.
-3. Preserve the new raw student evidence in `01 Evidence Inbox`.
-4. Write/update all required longitudinal/current-state files in `02 Portfolio Data`, preserving sender-owned email_send_log.csv when present.
-5. Write the current class Student Packet PDFs in `03 Student Packets`.
-6. Write one current exact two-page individual report PDF per rostered student in `03 Student Packets/Email Delivery` and write/refresh email_delivery_manifest.csv with exact student_key -> Drive file ID + SHA-256.
-7. When contact state exists, write/refresh email_recipients_current.csv and explicit email_contact_review.csv as required.
-8. Write the current Teacher Summary PDF in `04 Class & Intervention Summaries`.
-9. Write the current PowerSchool CSV(s) in `05 PowerSchool Exports`.
-10. RE-READ/LIST the exact canonical unit folder and each Portfolio-owned subfolder and verify the expected current files are present before reporting PASS or delivering the run as complete.
-11. If `06 Checkpoints` exists, preserve it untouched except when the current Portfolio evidence source is a Checkpoint and the course policy requires reading that run's private source map for lineage.
+The teacher report is intervention-first and uses exactly these main lanes:
+- Whole Class
+- Priority Day Group
+- Pull In Students
 
-The post-write verification must confirm, at minimum:
-- the exact canonical root ID was used;
-- all five Portfolio-owned Unit subfolders exist under the selected canonical unit folder;
-- the newly supplied raw student evidence exists in `01 Evidence Inbox`;
-- `02 Portfolio Data` contains the required persistent state set for the run, including the current registry/ledger/status/history/manifest files required by the Portfolio PM;
-- current Student Packet PDF(s) exist in `03 Student Packets`;
-- exactly one current individual two-page email-delivery report exists per rostered student in `03 Student Packets/Email Delivery`, and email_delivery_manifest.csv maps exact student_key to exact Drive file ID/SHA-256 without duplicate student_key;
-- when contact state is configured, email_recipients_current.csv is current and unresolved/conflicting contact rows remain explicit rather than guessed;
-- the current Teacher Summary PDF exists in `04 Class & Intervention Summaries`;
-- current PowerSchool CSV(s) exist in `05 PowerSchool Exports`;
-- any existing `06 Checkpoints` sibling was not deleted or repurposed.
-
-Contact configuration is optional for an ordinary evidence/report run. Missing contact state does not make the Portfolio evidence run fail. Individual delivery PDFs/manifest are still prepared so later email setup does not require a different report render. If a contact import was explicitly requested, do not claim that contact import succeeded while unresolved REVIEW conflicts were silently ignored.
-
-If any required Drive write, replacement, or verification fails:
-- do NOT claim the Portfolio run completed successfully;
-- do NOT treat the downloadable files alone as a successful run;
-- repair the failed Drive persistence step in the same run when possible;
-- otherwise stop with `PORTFOLIO_DRIVE_PERSISTENCE_FAILED` and identify the missing/unverified destination.
-
-The final response for a successful Portfolio run must explicitly confirm that canonical Drive persistence was verified, in addition to returning the downloadable artifacts.
-
-Canonical persistent data may remain as CSV/JSON/PDF/XLSX files stored in Drive. Native Google Docs/Sheets are not required unless a later policy explicitly calls for them. The hard requirement is that the canonical Drive files actually exist and are verified before completion.
+Priority Day Groups are exact shared 2-4-I-Can substantial-gap bundles. Pull In Students is student-centered for 1-2 small gaps.
 
 DELIVERY
 --------
-- new raw evidence and longitudinal data remain in that private Drive tree;
-- normal returned artifacts are individual class Student Packet PDFs, one Teacher Summary PDF, and current PowerSchool CSV(s);
-- individual email-delivery PDFs, contact state, recipient maps, and send logs remain private Drive state and are not normally returned;
-- downloadable artifacts are secondary to the required canonical Drive persistence gate above;
-- DO NOT wrap Portfolio/student data in a GitHub Transfer ZIP;
-- DO NOT write Portfolio/student data to GitHub;
-- the local repository transfer contract applies only when a separate request explicitly changes canonical repository code/templates/policies.
+Normal returned artifacts remain individual class Student Packet PDFs, one Teacher Summary PDF, and current MG PowerSchool CSVs. Do not wrap student Portfolio outputs in a github_transfer package.
 
-The Control Panel request manifest should declare delivery = portfolio_drive_and_individual_artifacts and local_repo_transfer_required_for_known_destination = false for Job 18.
+A github_transfer ZIP is appropriate only for a separate repository-code/template/policy change such as this runtime amendment itself, and such a transfer must contain no student-specific Portfolio data.
 
 All other SYSTEM_RUNTIME_CONTRACT rules remain in force.

@@ -1,0 +1,74 @@
+{
+  "schema": "ap-calculus-portfolio-policy/1.0",
+  "status": "CURRENT",
+  "course": "AP Calculus AB",
+  "portfolio_drive_course_folder": "AP Calculus AB",
+  "purpose": "Enable the shared Portfolio state/report architecture for AP Calculus AB while exact Unit Assessment Plans own learning content. Unit 1 evidence/report grading is authority-ready; course Practice Builder routing is not yet available.",
+  "i_can_statuses": [
+    {
+      "code": "NO_EVIDENCE",
+      "symbol": "open_circle",
+      "label": "No Evidence"
+    },
+    {
+      "code": "DEVELOPING",
+      "symbol": "half_circle",
+      "label": "Developing"
+    },
+    {
+      "code": "MASTERED",
+      "symbol": "filled_circle",
+      "label": "Mastered"
+    },
+    {
+      "code": "TRANSFER",
+      "symbol": "star",
+      "label": "Transfer"
+    }
+  ],
+  "mastered_default_rule": {
+    "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities, unless a rich artifact supplies genuinely independent evidence.",
+    "accommodations": "Approved accommodations do not lower the evidence status of a valid demonstration."
+  },
+  "mastery_goal_rule": {
+    "general_rule": "A Mastery Goal is demonstrated when at least half of its exact I Cans, rounded up, are Mastered or Transfer."
+  },
+  "mastery_goal_grade_model": {
+    "status": "CURRENT_OFFICIAL",
+    "not_assessed_rule": "No usable evidence anywhere in the goal -> Not assessed and blank PowerSchool Score.",
+    "general_scale_rule": "Let n be exact I Can count and t=ceil(n/2). If assessed: I for secure<t; C for secure=t; B for t<secure<n; A for secure=n; A+ for secure=n plus meaningful transfer evidence in the goal.",
+    "unit_grade_rule": "No overall Unit letter grade is reported or exported."
+  },
+  "powerschool": {
+    "output_rule": "Produce one CSV per Mastery Goal per period; no Unit-grade CSV.",
+    "assignment_name_pattern": "Unit {unit} Mastery Goal {mg_number}",
+    "not_assessed_score": "blank"
+  },
+  "student_practice_link": {
+    "practice_builder": null,
+    "practice_builder_url_pattern": null,
+    "missing_builder_rule": "List focus I Cans on the student report but do not fabricate a QR/link. Calculus Practice Builder requires a later course-repo build."
+  },
+  "intervention_routing": {
+    "lanes": [
+      "Whole Class",
+      "Priority Day Group",
+      "Pull In Students"
+    ],
+    "priority_day_group": "At least two students sharing the exact same substantial-gap bundle of 2-4 I Cans.",
+    "pull_in_students": "Student-centered 1-2 small/actionable gaps."
+  },
+  "report_fidelity": {
+    "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json"
+  },
+  "unit_readiness": {
+    "1": {
+      "status": "CURRENT_FOR_EVIDENCE_AND_REPORTS",
+      "assessment_plan": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2/assessment_plans/unit1_assessment_plan/unit1_assessment_plan.html",
+      "practice_builder_status": "NOT_YET_BUILT",
+      "note": "Exact Unit 1 Mastery Goals and I Can statements are derived from the current Assessment Plan; report focus list is available but no Practice Builder QR/link is emitted.",
+      "learning_map": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2/curriculum/unit1_portfolio_learning_map.json"
+    },
+    "2-8": "ASSESSMENT_PLAN_EXISTS_BUT_PORTFOLIO_MAPPING_NOT_YET_VERIFIED; roster/support maintenance allowed, evidence grading fails closed until deliberately verified."
+  }
+}

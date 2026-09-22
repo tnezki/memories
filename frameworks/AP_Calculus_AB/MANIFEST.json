@@ -1,8 +1,26 @@
 {
-  "schema": "curriculum-framework-manifest/1.0",
+  "schema": "curriculum-framework-manifest/1.1",
   "course": "AP Calculus AB",
   "entrypoint": "frameworks/AP_Calculus_AB/FRAMEWORK.txt",
   "resource_root": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2",
   "storage": "expanded",
-  "note": "FRAMEWORK.txt is the stable authority front door. resource_root preserves the current large supporting tree without mass-moving assets."
+  "assessment_plan_pattern": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2/assessment_plans/unitN_assessment_plan/unitN_assessment_plan.html",
+  "current_portfolio_policy": "frameworks/AP_Calculus_AB/PORTFOLIO_POLICY.json",
+  "portfolio_template_contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
+  "portfolio_runtime": {
+    "status": "CURRENT_FOR_UNIT1_EVIDENCE_AND_REPORTS",
+    "pm": "pms_build/portfolio.txt",
+    "policy": "frameworks/AP_Calculus_AB/PORTFOLIO_POLICY.json",
+    "private_drive_course_folder": "AP Calculus AB",
+    "unit_overrides": {
+      "1": {
+        "status": "CURRENT_FOR_EVIDENCE_AND_REPORTS",
+        "assessment_plan": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2/assessment_plans/unit1_assessment_plan/unit1_assessment_plan.html",
+        "practice_builder": null,
+        "learning_map": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2/curriculum/unit1_portfolio_learning_map.json"
+      }
+    },
+    "maintenance_rule": "Roster and student-support maintenance may run for any selected Unit with an initialized private registry; evidence grading for Unit 2-8 fails closed until deliberately verified."
+  },
+  "note": "FRAMEWORK.txt remains the stable course authority front door. Exact Unit Assessment Plans own learning/evidence scope; shared Portfolio policy/template own current report/grading mechanics."
 }

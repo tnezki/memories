@@ -1,12 +1,48 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>{{COURSE}} Portfolio Teacher Summary</title><link rel="stylesheet" href="portfolio.css"><style>@page{size:Letter landscape;margin:0}</style></head><body>
-<!-- CANONICAL TEACHER SHELL. The card anatomy and labels are fixed; fill data slots only. Continue with additional canonical pages when the selected source or current Unit has more I Can cards than fit one page. -->
-<section class="teacher-page"><div class="top-rule"></div><h1>Combined {{COURSE}} - I Can Summary</h1><div class="sub">{{COMBINED_STUDENT_COUNT}} students - {{LATEST_SOURCE_LABEL}} - evidence snapshot</div><div class="tgrid">{{LATEST_COMBINED_ICAN_CARDS_HTML}}</div><div class="footer"><span>Current evidence shown in the approved I Can analysis view.</span><span>{{LATEST_SOURCE_LABEL}}</span></div></section>
-{{PERIOD_LATEST_PAGES_HTML}}
-<section class="teacher-page"><div class="top-rule"></div><h1>Combined {{COURSE}} - Portfolio Evidence Sort</h1><div class="sub">{{COMBINED_SCOPE}} - current body of evidence - designed to update after every evidence upload</div><div class="sortkey"><b>Why this page exists:</b> the earlier pages describe the newest evidence event. This page sorts from the <b>full Portfolio history</b>. <b>Reteach</b> = substantial gap/misconception; <b>Brief guided practice</b> = partial idea; <b>Ready for another independent demonstration</b> = convincing evidence exists but the I Can is not yet Mastered; <b>No evidence</b> = first usable opportunity needed; <b>Review flag</b> = later evidence conflicts with established mastery or evidence independence/identity is ambiguous.</div><div class="sortgrid">{{LONGITUDINAL_ICAN_SORT_CARDS_HTML}}</div><div class="footer"><span>This is the longitudinal sorting page for intervention and reassessment planning.</span><span>Uses current Portfolio state, not just the latest evidence source.</span></div></section>
-<!-- Latest-source I Can card contract:
-  header: exact I Can code + full statement; stats with bold "Convincing first evidence: n/N (p%)" then Partial/Limited/Unusable/No submission.
-  body: ONE label exactly "Students needing stronger or additional evidence" then period headers + compact names. No other name buckets.
-Period-page cards use the same anatomy but need no period subheader in each card.
-Longitudinal cards: current ○/◐/●/★ counts; independent opportunities + latest source/date; exact five fixed categories. Do not add period suffixes after every name.
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{COURSE}} Portfolio Teacher Summary</title>
+<link rel="stylesheet" href="portfolio.css">
+<style>@page{size:Letter landscape;margin:0}</style>
+</head>
+<body>
+<!-- CANONICAL INTERVENTION-FIRST TEACHER SHELL. Main lanes are fixed: Whole Class / Priority Day Group / Pull In Students. -->
+<section class="teacher-page overview-page">
+  <div class="top-rule"></div>
+  <div class="eyebrow">{{COURSE}} · Unit {{UNIT_NUMBER}} Portfolio</div>
+  <h1>Class Overview</h1>
+  <p class="sub">Quick decisions first. Detailed I Can evidence is in the appendix.</p>
+  <div class="summary-strip">{{OVERVIEW_STATS_HTML}}</div>
+  <div class="lanes">{{INTERVENTION_LANES_HTML}}</div>
+  <div class="overview-grid">
+    <div class="panel"><h2>Major Strengths</h2>{{MAJOR_STRENGTHS_HTML}}</div>
+    <div class="panel"><h2>Top Actionable Patterns</h2>{{TOP_ACTIONABLE_PATTERNS_HTML}}</div>
+  </div>
+  <div class="footer"><span>Intervention-first teacher view</span><span>Latest evidence: {{LATEST_EVIDENCE_LABEL}} · {{LATEST_EVIDENCE_DATE}}</span></div>
+</section>
+
+{{WHOLE_CLASS_PAGE_HTML}}
+{{PRIORITY_DAY_PAGES_HTML}}
+{{PULL_IN_PAGES_HTML}}
+{{DETAILED_EVIDENCE_APPENDIX_PAGES_HTML}}
+
+<!--
+Priority Day contract:
+- exact same substantial-gap bundle of 2-4 I Cans is the grouping key;
+- never build the primary group from one I Can alone;
+- show exact code + full statement for every bundle target;
+- no `Brief guided practice` label.
+
+Pull In contract:
+- organize by student;
+- 1-2 small/actionable gaps;
+- exact I Can target(s) + concise practice/check need.
+
+Appendix contract:
+- reference only;
+- large cards, continue pages as needed;
+- never clip or hide names.
 -->
-</body></html>
+</body>
+</html>

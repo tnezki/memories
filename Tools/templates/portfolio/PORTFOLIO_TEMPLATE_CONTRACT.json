@@ -1,15 +1,14 @@
 {
-  "schema": "portfolio-template-contract/1.5",
+  "schema": "portfolio-template-contract/2.0",
   "status": "CURRENT",
-  "purpose": "Teacher-approved recurring Portfolio visual AND wording contract. Data changes; recurring report structure/labels do not drift between runs. Course policy supplies course-specific counts, rollup, terminology, Mastery Goal grade behavior, and Practice Builder routing.",
-  "fidelity_rule": "The HTML templates are canonical shells, not examples. Preserve fixed text exactly except declared tokens/loops. Do not synonymize headings, teacher categories, table columns, card anatomy, grading explanation, or report organization from run to run.",
+  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student report is locked to the approved two-page MG-grade design; teacher report is intervention-first with exactly three main lanes.",
+  "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, lane names, table/card anatomy, and grading explanation. Data changes; recurring structure does not drift.",
   "student_packet": {
     "template": "Tools/templates/portfolio/student_packet_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
     "page_size": "US Letter portrait",
     "pages_per_student": 2,
-    "duplex_rule": "Every student consumes exactly two content pages. Combined class PDFs therefore remain duplex-safe with one student per physical sheet.",
-    "font_rule": "Use the enlarged student-report typography in the canonical CSS. The redesign starts near twice the prior student-report baseline; actual rendered fit may reduce individual sizes only as needed to preserve exactly two pages without clipping or shrinking back to the old small-print scale.",
+    "duplex_rule": "Every active student consumes exactly two content pages.",
     "page_1_title": "Current Progress Report",
     "page_1_fixed_sections": [
       "Essential Standard",
@@ -17,132 +16,76 @@
       "Unit Evidence Picture"
     ],
     "page_2_title": "Unit Evidence Picture",
-    "page_2_subtitle_pattern": "All {MG_TOTAL} Mastery Goals and all {ICAN_TOTAL} I Cans · continued",
     "page_2_fixed_sections": [
       "Recent evidence - {LATEST_EVIDENCE_LABEL}",
       "Your Practice"
     ],
-    "snapshot_rule": "Keep the existing Unit status summary, MG demonstrated count, approved current-picture text, and MG chips. When the current course policy declares Mastery Goal grades, every MG chip shows that goal's current grade so the single Unit status is not the only grade-like information families see.",
-    "grading_explanation": "Each Mastery Goal has a current evidence grade. New evidence can improve it. Individual checks are evidence, not scores averaged together.",
+    "unit_grade_rule": "Do not display an overall Unit letter grade or large Unit-grade box.",
+    "snapshot_lead_pattern": "{MG_DEMONSTRATED_COUNT} of {MG_TOTAL} Unit Mastery Goals demonstrated.",
+    "grading_explanation": "Mastery Goal grades are current evidence, not averages, and can improve with new evidence.",
     "mastery_goal_grade_display": {
-      "authority": "The current course Portfolio policy owns whether a Mastery Goal grade model is active and owns its exact scale/rules.",
-      "when_active": "MG_CHIPS_HTML shows every Mastery Goal code plus its current grade. Every Mastery Goal card shows that goal's current grade and secure-I-Can count without removing the exact MG title/description or any I Can row.",
-      "unit_rollup_rule": "Keep the existing overall Unit status as a compact summary during the pilot, but do not let it be the only grade-like result shown. The four Mastery Goal grades are displayed alongside the Unit summary.",
-      "evidence_rule": "A Mastery Goal grade is a current body-of-evidence result derived from current I Can states according to the course policy; never average assignment percentages to manufacture it."
+      "assessed": "Display `Grade {GRADE_CODE}` plus the course-policy label where space allows.",
+      "not_assessed": "Display exactly `Not assessed`; never convert absence of evidence into Grade I.",
+      "card_rule": "Every MG card shows exact MG title/description, current grade display, secure-I-Can count, and every I Can row."
     },
     "mastery_goal_distribution": {
-      "default": "2 + 2 across the two pages when the Unit has four Mastery Goals",
+      "default": "2 + 2 for a four-MG Unit",
       "allowed_fit_adjustments": [
         "1 + 3",
         "3 + 1"
       ],
-      "rule": "Choose the distribution by rendered readability/fit. Every current Mastery Goal appears exactly once across the two pages. Do not reduce type to the old scale merely to force 2 + 2."
+      "rule": "Every MG appears exactly once. Rendered readability controls the split."
     },
-    "page_2_i_can_row": "Each I Can row shows the status marker, canonical I Can code + full exact statement, and one compact Next: action label from student_action_states.",
-    "recent_evidence_columns": [
-      "I Can",
-      "Target",
-      "Evidence",
-      "What this showed"
-    ],
-    "recent_evidence_labels_allowed": [
-      "Convincing",
-      "Partial",
-      "Limited",
-      "Unusable",
-      "No evidence"
-    ],
     "practice_box": {
       "title": "Your Practice",
-      "printed_qr_target": "The current course Student Practice Builder, never the Student Bank.",
-      "display": "Show the exact selected practice I Can code + full statement beside the QR.",
-      "preselection": "The QR URL includes unit and exact I Can ID so the Practice Builder opens with that I Can already checked.",
-      "selection_priority": "Prefer a current PRACTICE_AND_CHECK target supported by demonstrated need. Do not prioritize a NEEDS_FIRST_CHECK I Can merely because it has no evidence when a demonstrated practice need exists. If no PRACTICE_AND_CHECK target exists, use the normal current next-target selection rule."
-    },
-    "forbidden": [
-      "third progress-tracker page",
-      "invented remediation questions",
-      "ad hoc reflection prompts",
-      "row-by-row redundant status words when the status marker already communicates status",
-      "renaming Unit Evidence Picture to Evidence Detail",
-      "free-form alternate feedback architecture",
-      "code-only I Can labels in human-facing output",
-      "Student Bank QR on the student Portfolio report"
-    ],
-    "grading_explanation_rule": "When a course policy activates Mastery Goal grades, include a concise plain-language explanation in the approved current-picture text or other already-declared data slot; do not invent a new recurring report section unless the canonical HTML template is intentionally redesigned."
-  },
-  "student_feedback_frames": {
-    "current_picture": "Use a short factual body-of-evidence snapshot. On an early first-source run, explicitly say that one evidence source can provide strong first evidence but does not establish mastery by itself.",
-    "strength": "Compatibility frame retained for existing Portfolio logic: evidence-grounded sentences begin with You showed... or You also... and name the exact demonstrated skill. The current student packet no longer prints the former What you are showing panel.",
-    "family_A_note": "Compatibility note retained for Bank/evidence architecture; the current student packet routes practice through the Practice Builder instead of a Student Bank family QR.",
-    "family_B_note": "Compatibility note retained for Bank/evidence architecture; the current student packet routes practice through the Practice Builder instead of a Student Bank family QR.",
-    "family_C_note": "Compatibility note retained for Bank/evidence architecture; the current student packet routes practice through the Practice Builder instead of a Student Bank family QR.",
-    "target_reason_rule": "Compatibility rule retained for current next-target selection logic; the simplified student packet does not print the former Why this is next panel.",
-    "target_next_step_rule": "Compatibility rule retained for current next-target selection logic; the simplified student packet does not print the former Next step panel."
+      "instruction": "Scan or click to open the Practice Builder and select the following I Can statements for more practice:",
+      "preselection": "Do not preselect an I Can. The Practice Builder URL contains Unit only.",
+      "focus_list": "List every selected current practice-focus I Can as exact code + full statement.",
+      "privacy_rule": "No student identity, evidence, grade, or status in the URL/QR.",
+      "missing_builder_rule": "When the current course has no approved Practice Builder route, show the focus list without fabricating a link."
+    }
   },
   "teacher_summary": {
     "template": "Tools/templates/portfolio/teacher_summary_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
     "page_size": "US Letter landscape",
-    "latest_combined_title_pattern": "Combined {COURSE} - I Can Summary",
-    "latest_subtitle_pattern": "{STUDENT_COUNT} students - {SOURCE_LABEL} - evidence snapshot",
-    "latest_card_primary_stat": "Convincing first evidence",
-    "latest_card_body_label": "Students needing stronger or additional evidence",
-    "latest_card_rule": "One needs-evidence list only. Do not invent separate name buckets for convincing/partial/limited/unusable on latest-source pages.",
-    "period_rule": "Combined page groups current periods in course order. Individual period pages omit repeated period suffixes after names.",
-    "name_format": "First name + last initial; bulleted; compact columns as fit allows; never append period after every name.",
-    "longitudinal_title_pattern": "Combined {COURSE} - Portfolio Evidence Sort",
-    "longitudinal_categories": [
-      "Reteach / targeted practice",
-      "Brief guided practice",
-      "Ready for another independent demonstration",
-      "No evidence / absent",
-      "Review flags"
+    "page_1_title": "Class Overview",
+    "main_lanes": [
+      "Whole Class",
+      "Priority Day Group",
+      "Pull In Students"
     ],
-    "longitudinal_rule": "Use full evidence ledger/current status, not only newest source. Preserve current status counts, independent opportunity count, latest source/date, and Review flags. Continue across additional canonical pages when more I Can cards exist than fit one page."
-  },
-  "practice_builder_link": {
-    "route_authority": "Current course Portfolio policy owns the exact Practice Builder URL pattern.",
-    "required_query_fields": [
-      "unit",
-      "exact selected I Can ID"
-    ],
-    "query_pattern": "?unit={unit}&ican={i_can_id}",
-    "privacy_rule": "Do not place student name, student ID, period, evidence details, or other student identity/state in the URL or QR.",
-    "cross_course_guard": "Never use a hard-coded Algebra URL when the current course is Physics or another course."
+    "class_overview": "Show quick lane counts/decisions first, then Major Strengths and Top Actionable Patterns. Do not put roster-upload or PowerSchool workflow instructions on the page.",
+    "whole_class": {
+      "rule": "Use only for a genuinely shared classwide instructional need. If none, state that on Class Overview and omit a separate Whole Class page."
+    },
+    "priority_day_group": {
+      "rule": "Group only students sharing the exact same current substantial-gap bundle of 2-4 I Cans. A single shared I Can is not enough. Each group shows all bundle I Cans with exact code + full statement, student list, shared misconception/need, and concise teacher move.",
+      "forbidden_label": "Brief guided practice"
+    },
+    "pull_in_students": {
+      "rule": "Student-centered list for 1-2 current small/actionable gaps. Show each student with exact I Can target(s) and concise personalized practice/check need. Never organize this page under I Can headings."
+    },
+    "appendix": {
+      "rule": "Detailed I Can evidence is reference material after intervention pages. Use large cards and continue pages as needed; never clip or hide names."
+    }
   },
   "student_action_states": {
     "NEEDS_FIRST_CHECK": {
-      "page_2_label": "Needs first check",
-      "when": "No usable evidence exists for the I Can."
+      "label": "Needs first check"
     },
     "PRACTICE_AND_CHECK": {
-      "page_2_label": "Practice + check soon",
-      "when": "The I Can is Developing and the current body of evidence does not yet contain one convincing independent demonstration, or the newest usable evidence shows a clear gap that should be repaired before another independent check."
+      "label": "Practice + check soon"
     },
     "NEEDS_ANOTHER_DEMONSTRATION": {
-      "page_2_label": "Needs another independent check",
-      "when": "The I Can is Developing and already has one convincing independent demonstration but has not yet met the normal Mastered rule."
+      "label": "Needs another independent check"
     },
     "SECURE": {
-      "page_2_label": "Secure",
-      "when": "The I Can is Mastered."
+      "label": "Secure"
     },
     "EXTENSION": {
-      "page_2_label": "Extension",
-      "when": "The I Can is Transfer, or routine nearby targets are secure and the selected next move is legitimate transfer/extension."
+      "label": "Extension"
     }
   },
-  "student_action_rule": "Status and next action are separate. Use only the declared student_action_states labels. Page 2/mastery-goal cards show the compact action label for every I Can. Do not invent alternate action vocabulary.",
-  "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in teacher/student-facing output.",
-  "bank_practice_link": {
-    "route_authority": "Current course Portfolio policy continues to own Student Bank/family routes for Bank/evidence architecture. The current student Portfolio report does not print a Student Bank QR.",
-    "required_path_fields": [
-      "Mastery Goal code/title",
-      "I Can code/full exact statement",
-      "family ID/label/name"
-    ],
-    "stable_anchor_rule": "Family anchor remains canonical family_id; I Can and MG anchors remain canonical IDs.",
-    "cross_course_guard": "Never use a hard-coded Algebra URL when the current course is Physics or another course."
-  }
+  "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in human-facing output."
 }
