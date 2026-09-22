@@ -1,63 +1,60 @@
 {
-  "schema": "sub-plan-handout-mockup-qa/0.3",
-  "status": "MOCKUP_FORMAT_REVIEW",
+  "schema": "sub-plan-handout-gold-standard-qa/0.4",
+  "status": "GOLD_STANDARD_CONTRACT",
   "checks": {
-    "philosophy_question_structure_framework_tool_hierarchy_applied": true,
-    "shared_madlib_css": true,
+    "authority_hierarchy_required": true,
+    "philosophy_question_structure_framework_pm_tools_order": true,
+    "shared_madlib_css_locked": true,
     "true_letter_page_preview": true,
-    "live_repaginates_on_workspace_change": true,
+    "live_repagination": true,
+    "selected_workspace_isolated_to_selected_problem": true,
+    "selected_visual_isolated_to_selected_problem": true,
+    "selected_controls_disabled_when_problem_all": true,
+    "student_time_target_visible": false,
+    "three_lane_evidence_map_required": true,
+    "item_level_time_map_required": true,
     "mathjax_local_svg": true,
-    "raw_html_superscript_math_removed": true,
-    "physics_uses_current_bank_families": true,
-    "physics_investigation_finish_added": true,
-    "physics_three_two_vector_nonparallel_problems": true,
-    "physics_one_dimensional_force_problems_reduced_to_three": true,
-    "algebra_uses_current_bank_families": true,
-    "algebra_priority_review_u1_mg01_scale_and_intercepts": true,
-    "algebra_current_section_reduced_to_short_check": true,
-    "calculus_uses_current_notes_practice_and_approved_structures": true,
-    "fake_calc_i_can_codes": false,
-    "cartesian_graphs_use_canonical_graph_tool_make_window_graph": true,
-    "student_source_metadata_hidden": true,
-    "answer_keys_in_first_bundle_only": true,
-    "time_budget_rule": "Physics and AP Calculus = class length minus 10 minutes; Algebra 1 = class length minus 15 minutes"
+    "mathjax_registered_finalizer_required": true,
+    "mathjax_visual_check_after_typeset_required": true,
+    "raw_tex_visible_count_required": 0,
+    "malformed_authoring_math_visible_count_required": 0,
+    "cartesian_graphs_use_registered_graph_tool": true,
+    "cartesian_graphs_follow_district_standard": true,
+    "physics_u1_3_three_two_vector_nonparallel_problems": true,
+    "physics_u1_3_two_three_vector_investigation_finishers": true,
+    "physics_u1_3_quick_collinear_max": 3,
+    "physics_u1_3_typical_total_problem_range": "10-12 unless equivalent task complexity justifies another count",
+    "algebra_recent_evidence_priority": true,
+    "calculus_current_notes_practice_source_priority": true,
+    "answers_in_substitute_bundle_only": true
   },
-  "graph_provenance": {
-    "canonical_entrypoint": "tnezki/memories:Tools/graph_tool.py::make_window_graph",
-    "assets": [
-      "assets/graphs/calc_removable.svg",
-      "assets/graphs/calc_jump.svg",
-      "assets/graphs/calc_ivt.svg",
-      "assets/graphs/alg_scale_distance.svg",
-      "assets/graphs/alg_scale_water.svg",
-      "assets/graphs/alg_scale_third.svg",
-      "assets/graphs/alg_intercepts_a.svg",
-      "assets/graphs/alg_intercepts_b.svg",
-      "assets/graphs/alg_context_cost.svg",
-      "assets/graphs/alg_context_tank.svg"
-    ]
-  },
-  "vector_grid_note": "Physics resultant grids are non-Cartesian instructional vector diagrams adapted from the current U1.3 investigation visual format; district graph-tool ownership applies to mathematical Cartesian graphs, not these vector-diagram grids.",
-  "css_lock_candidate": [
-    "assets/worksheet_styles.css",
-    "assets/sub_handout_madlib.css",
-    "templates/student_handout_madlib.html"
-  ],
   "time_budget": {
-    "rule": {
-      "Physics": "class length - 10 min",
-      "AP Calculus AB": "class length - 10 min",
-      "Algebra 1": "class length - 15 min"
-    },
-    "standard_54_minute_reference": {
-      "Physics_target_minutes": 44,
-      "AP_Calculus_target_minutes": 44,
-      "Algebra_1_target_minutes": 39
-    },
-    "mockup_estimated_ranges": {
-      "Physics": "41-46 min",
-      "AP_Calculus_AB": "42-48 min",
-      "Algebra_1": "36-42 min"
-    }
-  }
+    "Physics": "resolved class length - 10 minutes",
+    "Algebra 1": "resolved class length - 15 minutes",
+    "AP Calculus AB": "resolved class length - 10 minutes",
+    "quick_one_step_max_estimated_minutes": 0.5,
+    "maximum_allowed_under_target_minutes": 3,
+    "student_page_may_display_time_budget": false
+  },
+  "runtime_smoke_tests": [
+    "select Q2, move Workspace: Q2 workspace changes and Q1/Q3 stored workspace values do not",
+    "select Q2, move Graph/diagram: Q2 visual changes and Q1/Q3 stored visual values do not",
+    "select All: selected Workspace and Graph/diagram sliders are disabled",
+    "Reset: every problem workspace and visual returns to 100 percent"
+  ],
+  "graph_provenance": {
+    "canonical_entrypoint": "Tools/MANIFEST.json -> tools.graph_tool",
+    "district_standard": "district_tools/_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md",
+    "required_per_asset_accuracy_check": true
+  },
+  "fail_conditions": [
+    "student-visible work-time target or timing arithmetic",
+    "time map more than 3 minutes below target",
+    "missing recent/current/challenge evidence lane",
+    "Physics 1.3 reduced to a light seven-question sheet",
+    "selected visual control changes more than the selected problem",
+    "visible raw or malformed MathJax",
+    "Cartesian graph bypasses registered graph tool",
+    "broken local relative link"
+  ]
 }

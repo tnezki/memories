@@ -1,5 +1,5 @@
-SUB PLAN PRINT CENTER — GOLD STANDARD v2
-========================================
+SUB PLAN PRINT CENTER — GOLD STANDARD v1.1
+==========================================
 
 STATUS
 ------
@@ -7,7 +7,7 @@ Teacher-approved reference for Sub Plans output structure, student-handout CSS, 
 
 REFERENCE RUN
 -------------
-This folder is the approved 2026-09-22 mockup/test case. Its DATE, SECTIONS, QUESTIONS, ANSWERS, SCHEDULE, STEM CHALLENGE, and SEATING PLACEHOLDERS are examples only. Never copy them into a new run unless they are independently current and supported.
+This folder is an approved mockup/test case. Its DATE, SECTIONS, QUESTIONS, ANSWERS, SCHEDULE, STEM CHALLENGE, and SEATING PLACEHOLDERS are examples only. Never copy them into a new run unless independently current and supported.
 
 LOCKED / REUSE
 --------------
@@ -22,44 +22,67 @@ Preserve these structural behaviors:
 - print_bundle.html order is hour-by-hour -> General Procedures & Extensions -> seating charts -> STEM challenge/access -> answer keys;
 - each academic handout is its own HTML page;
 - screen preview shows real white Letter pages;
-- workspace/visual sliders repaginate live so page breaks are visible before printing;
-- student questions use the same clean navy/white rounded-card visual language;
+- live repagination makes page breaks visible before printing;
+- student questions use the clean navy/white rounded-card language;
 - every student problem has the three support checkboxes;
-- answers/evidence mappings are only in the substitute bundle at the end;
+- answers/evidence mappings appear only in the substitute bundle at the end;
 - MathJax is local SVG output using canonical delimiters;
 - Cartesian graphs use the registered graph_tool/current district graph standard;
-- Physics U1.3 resultant grids follow the current U1.3 Investigation visual format rather than a generic Cartesian-function graph style.
+- Physics U1.3 resultant grids follow the current U1.3 Investigation visual format.
 
-SLIDER BEHAVIOR — HARD
+SLIDER CONTRACT — HARD
 ----------------------
-The workspace controls are direct stored values, NOT nested multipliers.
+The controls do NOT use multiplicative global x individual scaling.
 
-- `All workspaces` directly sets every problem's workspace to the chosen percentage.
-- `Problem` chooses one problem for local editing.
-- `Workspace` changes ONLY the selected problem.
-- When `Problem = All`, the individual `Workspace` slider is disabled and its output displays an em dash.
-- Selecting Q1, Q2, etc. loads that problem's currently stored workspace percentage into the individual slider.
-- Changing one problem may move later problems to different pages because the document repaginates, but it must NOT change any other problem's workspace height.
-- Reset restores every problem workspace to 100%, returns the selector to All, and disables the individual workspace slider again.
-- The current `Graph / diagram` slider remains a global visual-size control for this gold-standard version.
+- All workspaces directly sets every problem workspace to the chosen value.
+- Problem selector chooses one problem.
+- Workspace changes ONLY the selected problem.
+- Graph / diagram changes ONLY the selected problem's graph/diagram.
+- When Problem = All, the selected Workspace and Graph/diagram controls are disabled.
+- Choosing Q5 loads Q5's stored workspace and visual values into the controls.
+- Reset returns every problem's workspace and visual values to 100%.
+- Resizing one problem may change page flow, but it must not change another problem's stored workspace or visual size.
 
-A future runtime must not restore the old behavior `effective workspace = global multiplier × selected multiplier`; that interaction was rejected because the individual control appeared to change all questions and made 100% ambiguous after a global adjustment.
+STUDENT PAGE RULE — HARD
+------------------------
+The resolved time target is internal build/QA information only. Do NOT show a Work-time target, class-length calculation, authoring formula, source ID, Question Structure ID, or QA metadata on a student worksheet.
 
-CONTENT-ROUTING EXAMPLE
------------------------
-The included source map documents why the approved sample worked:
-- Physics: validated Section 1.3 bank families plus teacher-directed non-parallel/resultant investigation work; only a few very short collinear problems; three 2-vector non-parallel grid tasks; two 3-vector investigation finishers.
-- Algebra 1: classwide recent evidence priority (MG1 graph scale/intercepts) dominates the sheet; current Section 1.2 appears only as a short check at the end.
-- AP Calculus: current Notes/Practice 2.3 Continuity + approved Calculus structures; no invented section-level I Can layer.
+CONTENT-ROUTING FLOOR
+---------------------
+Every academic handout must map and include:
+1. recent/already-covered mastery or I-can evidence worth revisiting;
+2. current section evidence;
+3. challenge/extension work.
 
-TIMING EXAMPLE
---------------
+Use the current Philosophy -> Question Structure -> Framework -> PM -> current sources/tool hierarchy. Do not collapse a sub-day handout into a few easy current questions merely because they are quick to generate.
+
+PHYSICS 1.3 REFERENCE SHAPE
+---------------------------
+The approved sample's shape is a floor for quality, not stale content to copy:
+- only 2-3 quick same/opposite/net-force items;
+- exactly 3 two-vector NON-PARALLEL resultant grid problems;
+- exactly 2 three-vector investigation-style resultant problems;
+- enough additional aligned prior/current/challenge work to meet the actual time target;
+- typical total about 10-12 meaningful problems depending on class length and complexity.
+
+Students draw resultants on the same grid and report magnitude plus direction as an angle from +x or a valid compass form.
+
+TIMING
+------
 - Physics = scheduled class length minus about 10 minutes.
 - AP Calculus AB = scheduled class length minus about 10 minutes.
 - Algebra 1 = scheduled class length minus about 15 minutes.
 
-Use actual task demand to estimate time. A 10-second one-step problem is not a multi-minute task.
+Estimate actual student work time item-by-item. A 10-second one-step item is not a multi-minute task. The item-level time map belongs in QA/source-map data, not on the student page.
+
+MATH / GRAPH QA
+---------------
+- local MathJax SVG only; canonical \( ... \) / \[ ... \] delimiters;
+- run the registered MathJax finalizer/audit and visually inspect after typeset;
+- zero visible raw/malformed math;
+- every Cartesian graph records Tools/MANIFEST.json -> tools.graph_tool provenance and passes the District Graph Rendering Standard;
+- Physics vector grids are non-Cartesian instructional diagrams and use the current U1.3 investigation language.
 
 QA
 --
-Future builds should match the shell/quality level of this folder while replacing every stale run-specific fact with current authority. See data/qa.json and data/source_map.json for the exemplar's traceability.
+Future builds must enforce sibling ../BUILD_GATES.json. A package is not PASS when timing, evidence mix, slider isolation, MathJax, graph provenance, or student-visibility gates fail.

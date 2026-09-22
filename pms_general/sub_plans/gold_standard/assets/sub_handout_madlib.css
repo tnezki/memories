@@ -1,6 +1,6 @@
 /*
-  SUB HANDOUT MADLIB SHELL — FORMAT CANDIDATE v0.1
-  Purpose: one reusable student handout surface for Sub Plans.
+  SUB HANDOUT MADLIB SHELL — GOLD STANDARD v0.2
+  Purpose: reusable student handout surface for Sub Plans.
   Geometry/controls come from the District Worksheet Builder page contract.
   Visual language follows the course Practice CSS: clean navy hierarchy,
   rounded problem cards, blank workspaces, direct student-facing language.
@@ -39,6 +39,7 @@
   margin:0 0 .115in;padding:8px 10px 7px;background:var(--bg);
   border:1.5px solid #72879a;border-radius:9px;display:flex;flex-direction:column
 }
+.problem.runtime-selected-problem{outline:3px solid rgba(40,90,134,.22);outline-offset:2px}
 .problem-head{display:flex;gap:7px;align-items:flex-start}
 .qnum{
   flex:0 0 auto;display:grid;place-items:center;min-width:22px;height:22px;border-radius:50%;
@@ -59,9 +60,12 @@
 .graph-wrap img,.diagram-wrap img{background:#fff}
 .vector-diagram{max-width:4.7in}
 .page-continuation{font-size:8.5pt;color:var(--muted);font-weight:800;border-bottom:1px solid #d9dee4;padding-bottom:4px;margin-bottom:7px}
+.time-note{display:none!important}
+.layout-controls input:disabled,.layout-controls select:disabled{opacity:.45;cursor:not-allowed}
 @media print{
   .problem{border-color:#66798b}
   .directions,.info-box,.section-divider{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .problem.runtime-selected-problem{outline:none}
 }
 
 /* MathJax + source rendering lock for the Sub Handout madlib shell. */
@@ -87,5 +91,3 @@ mjx-container[display="true"]{margin:.18em 0!important}
 .investigation-grid .vlabel{font:700 15px Arial,sans-serif;fill:#17232c;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
 .section-divider.investigation{border-left-color:#1f5f8b;background:#eef5fa;color:#244f78}
 .scale-note{font-weight:800;color:#244f78;white-space:nowrap}
-.time-note{margin:7px 0 8px;padding:6px 9px;border:1px solid #c8d6e2;border-radius:7px;background:#f7fafc;color:#3d4b58;font-size:10pt}
-.time-note strong{color:var(--navy)}

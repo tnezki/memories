@@ -1,16 +1,16 @@
-SUB PLANS — GOLD STANDARD PRINT-CENTER PM v0.7
+SUB PLANS — GOLD STANDARD PRINT-CENTER PM v0.8
 ================================================
-STATUS: PILOT / WORKING — gold-standard format locked for live testing.
+STATUS: PILOT / WORKING — gold-standard format and execution gates locked for live testing.
 
 PURPOSE
 -------
-Create one self-contained substitute-plan ZIP from minimal teacher input. The normal academic sub day is useful evidence/review work, not generic filler. STEM continues the current design challenge or uses a teacher-selected alternate engineering-design activity.
+Create one self-contained substitute-plan ZIP from minimal teacher input. Academic sub days are useful review/evidence days, not generic filler. STEM continues the current design challenge or uses a teacher-selected alternate engineering-design activity.
 
 DELIVERY — HARD
 ---------------
-Return ONE self-contained ZIP. Do NOT create or update a Google Drive destination folder for the finished package.
+Return ONE self-contained ZIP. Do NOT write the finished output to Google Drive.
 
-The ZIP root must contain:
+ZIP root:
 - index.html
 - print_bundle.html
 - physics.html
@@ -21,109 +21,81 @@ The ZIP root must contain:
 - data/qa.json
 - optional stem_alternate/... when Alternate STEM is selected
 
-index.html is the teacher entry point and has exactly four primary actions:
+index.html has exactly four primary actions:
 1. Print Substitute Bundle
 2. Physics Worksheet
 3. Algebra 1 Worksheet
 4. AP Calculus Worksheet
 
-Google Drive is read-only for this workflow and is used only for declared live source material such as the seating chart, alternate schedule source, and authorized current evidence/portfolio context when available. Do not write the output back to Drive.
-
-GOLD STANDARD — HARD
---------------------
-Read sibling folder:
-  pms_general/sub_plans/gold_standard/
-
-Read GOLD_STANDARD.md first, then inspect:
-- index.html
-- print_bundle.html
-- physics.html
-- algebra1.html
-- ap_calculus.html
-- assets/sub_handout_madlib.css
-- assets/worksheet_styles.css
-- assets/runtime.js
-- templates/student_handout_madlib.html
-- data/source_map.json
-- data/qa.json
-
-The gold standard owns the approved Sub Plan print-center structure, student-handout visual language, live Letter-page preview, page-break behavior, slider behavior, MathJax setup, print navigation, bundle order, and level of finish.
-
-FORMAT LOCK:
-- Copy assets/sub_handout_madlib.css, assets/worksheet_styles.css, and assets/runtime.js byte-for-byte into the finished package unless a teacher-requested change explicitly reopens the shell.
-- Preserve the same four-button index architecture.
-- Preserve visible white Letter pages and live repagination when workspace/visual sliders change.
-- Preserve the local MathJax SVG workflow and canonical delimiters \( ... \) / \[ ... \].
-- Do not copy stale dates, section numbers, questions, answers, schedules, seating placeholders, or class-specific content from the gold standard. It is a format/content-routing exemplar, not a source of current facts.
+Google Drive is read-only for declared live sources such as seating charts, alternate schedules, and authorized evidence/portfolio state.
 
 AUTHORITY / READ ORDER — HARD
 -----------------------------
-Use the request's pinned commits. Resolve authority in this order:
+Use the request's pinned commits. Read and obey in this order:
 1. current teacher instruction in the request;
 2. SYSTEM_MANIFEST.json -> current Curriculum Philosophy;
 3. current universal Question Structure authority;
 4. current course Framework and exact relevant Unit/section assessment architecture;
-5. this PM + sibling PROFILE.json;
-6. gold-standard shell files named above for rendering/packaging behavior;
-7. current validated course Banks, notes, practices, textbook/source material, investigations, and registered Tools needed for the actual content.
+5. this PM + sibling PROFILE.json + sibling BUILD_GATES.json;
+6. gold-standard shell files under pms_general/sub_plans/gold_standard/;
+7. current validated course Banks, notes, practices, textbook/source materials, investigations, and registered Tools needed for the actual content.
 
 Do not use prior chats, saved/personal memory, unrelated File Library material, or stale outputs as authority.
 
-INPUT CONTRACT
---------------
-The request may supply:
-- plan_types: monday | non_monday | other | emergency, independently selectable;
-- dates for Monday / Non-Monday / Other;
-- other_label when Other is selected;
-- optional alternate_schedule_url;
-- STEM mode and matching inputs;
-- Physics current section, notes, avoid list;
-- Algebra 1 current section, notes, avoid list; applies to BOTH 3rd and 6th Hour;
-- AP Calculus current section, notes, avoid list;
-- optional Crewtime / Prep overrides;
-- optional daily custom note;
-- optional attached run-specific files.
+GOLD STANDARD — HARD
+--------------------
+Read sibling folder pms_general/sub_plans/gold_standard/ and GOLD_STANDARD.md first. The gold standard owns the approved print-center structure, visual language, Letter-page preview, slider behavior, MathJax setup, print navigation, bundle order, and quality floor.
 
-For a dated plan, Physics, Algebra 1, and AP Calculus current sections are required.
+Copy these shell files byte-for-byte unless the teacher explicitly reopens them:
+- assets/sub_handout_madlib.css
+- assets/worksheet_styles.css
+- assets/runtime.js
+- assets/mathjax/tex-svg-full.js
+
+The gold-standard example content is NOT current-source authority. Never copy stale dates, questions, answers, schedules, seating placeholders, or section labels into a new run.
+
+BUILD GATES — HARD
+------------------
+Read and enforce pms_general/sub_plans/BUILD_GATES.json. A build that violates a gate is FAIL and must not be packaged as PASS.
 
 PLAN / SCHEDULE ROUTING
 -----------------------
 Plan type and bell schedule are separate.
-- Monday with no alternate link -> PROFILE Monday schedule.
-- Non-Monday with no alternate link -> PROFILE Tuesday-Friday schedule.
-- Other with no alternate link -> normal schedule matching the actual weekday when resolvable.
-- Any dated plan with alternate_schedule_url -> read that one source and match the exact requested calendar date. If grade bands are separated, use the high-school / 9th-12th-grade schedule.
-- Never silently fall back to normal times when an alternate link was supplied.
+- Monday + no alternate link -> PROFILE Monday schedule.
+- Non-Monday + no alternate link -> PROFILE Tuesday-Friday schedule.
+- Other + no alternate link -> normal schedule for the actual weekday when resolvable.
+- Any dated plan + alternate_schedule_url -> read that source and match the exact requested date. When grade bands are separated, use the high-school / 9th-12th-grade schedule.
+- Never silently fall back to normal times when an alternate source was supplied.
 - Never invent missing periods or times.
 - Emergency remains reusable/date-free unless explicitly changed.
 
 SUBSTITUTE PRINT BUNDLE — HARD
 ------------------------------
-The first print button opens print_bundle.html. Its pages must be in this order:
-1. hour-by-hour day directions + resolved bell schedule;
+print_bundle.html pages must be ordered:
+1. hour-by-hour directions + resolved bell schedule;
 2. General Procedures & Extensions;
 3. current seating charts;
-4. STEM current-challenge directions, or concise access directions for Alternate STEM;
-5. answer keys / evidence mapping at the END, grouped by Physics, Algebra 1, and AP Calculus.
-
-Do not move the General Procedures page behind seating charts or STEM directions.
-
-General Procedures & Extensions must include the stable PROFILE procedures plus the established emergency, discipline, attendance, phone-policy, and school-extension/contact information supported by current source/template authority.
+4. STEM current-challenge directions or Alternate STEM access directions;
+5. answer keys / evidence mapping at the END, grouped by Physics, Algebra 1, AP Calculus.
 
 ACADEMIC HANDOUTS — COMMON RULES
 --------------------------------
-Create ONE common class handout for each academic course; do not individualize by student. 3rd and 6th Hour Algebra 1 use the SAME handout.
+Create ONE common handout per academic course. 3rd and 6th Hour Algebra 1 share the SAME handout.
 
-Every handout includes:
+Every student handout includes:
 - Name / Date / Hour;
 - course and current section;
-- current section focus;
-- recent evidence / source focus when applicable;
-- enough problems/workspace for the time target;
-- directly under EVERY problem:
+- concise current section focus;
+- concise recent evidence/review focus when useful;
+- enough real work for the time target;
+- under EVERY question:
   ☐ Knew how to do it   ☐ Had to ask for help   ☐ Had to look it up
 - standing direction in substance:
   "Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio."
+
+STUDENT-VISIBILITY RULE — HARD
+------------------------------
+The time-budget calculation is INTERNAL/TEACHER-FACING QA only. Do NOT display "Work-time target," class-length arithmetic, timing formulas, source IDs, authoring notes, Question Structure IDs, or QA metadata on a student handout.
 
 TIME BUDGET — HARD
 ------------------
@@ -132,91 +104,91 @@ Use the actual resolved class length.
 - AP Calculus AB: target approximately class length MINUS 10 minutes.
 - Algebra 1: target approximately class length MINUS 15 minutes.
 
-Estimate time from actual task demand, not raw question count. Very short one-step questions cannot be counted as multi-minute tasks merely to hit a total. The later extension/challenge portion may be unfinished by some students.
+Before rendering, create an item-level time map in data/source_map.json or data/qa.json. Each problem receives a conservative estimated student-work time based on the actual task. Very short one-step questions count as no more than 0.5 minute each unless there is a genuine explanation/representation demand.
+
+FAIL timing QA when:
+- total estimated work is more than 3 minutes below the target; or
+- the build reaches the target only by pretending 10-second questions are multi-minute tasks.
+
+Extension/challenge work may push the total beyond the target; students are not expected to finish every extension item.
+
+EVIDENCE MIX — HARD
+-------------------
+Before writing questions, map THREE lanes for every academic handout:
+A. RECENT / ALREADY-COVERED EVIDENCE: previously assessed Mastery Goal / I-can work that is still useful to revisit, prioritizing documented classwide misses when available;
+B. CURRENT SECTION: exact current-section I-cans/evidence jobs or, for AP Calculus when no section-level I-can layer exists, the exact current Notes/Practice/textbook topic work;
+C. CHALLENGE / EXTENSION: stronger transfer, representation, reasoning, or application work that remains aligned to material students can reasonably attempt.
+
+Do not allow one lane to disappear merely because another lane is easier to generate. The map must name the source/evidence job for each item before authoring.
 
 QUESTION / EVIDENCE SOURCING — HARD
 -----------------------------------
-Before writing questions, map the handout's evidence jobs and intended time.
-
 Priority:
 1. current validated NON-SECURE Bank/practice/question material;
 2. controlled parallel variation of validated material;
 3. current notes/practice/textbook/investigation material when that course uses those as the best source;
 4. brand-new authored questions only when needed.
 
-Never expose secure Summative items.
-Use current Question Structure for authored/parallel items unless the course Framework explicitly exempts the task.
+Never expose secure Summative items. Use current Question Structure for authored/parallel items unless the course Framework explicitly exempts the task.
+
+PHYSICS — HARD
+--------------
+Use current Physics Framework, exact section architecture, validated non-secure Physics Bank/practice, and current investigation/source materials. Follow the Framework's map-first rule and favor real physical meaning and representations over repetitive plug-and-chug.
+
+For Section 1.3 specifically, the approved GOLD-STANDARD SHAPE is intentional and may not collapse to a tiny worksheet:
+- only 2-3 quick same/opposite/net-force review items total;
+- THREE two-vector NON-PARALLEL resultant problems using the current U1.3 investigation grid/vector format;
+- TWO three-vector resultant investigation problems;
+- additional prior-MG/current-section/challenge evidence as needed so the full sheet actually reaches the resolved time target;
+- typical total is about 10-12 meaningful problems for a ~34-44 minute target, depending on the actual schedule and task complexity.
+
+Students draw each resultant on the SAME grid and report magnitude plus direction either as an angle measured from +x or a valid compass description. Do not replace the vector investigation format with a generic function graph.
+
+ALGEBRA 1 — HARD
+----------------
+Use current authorized portfolio/evidence state FIRST to identify the most recently assessed Mastery Goal/I-cans most students still need. The sub handout is primarily a targeted review/evidence opportunity, not a bulk current-section worksheet.
+
+When a clear recent weak goal exists, default roughly 75-85% of the useful work to that review/evidence need and 15-25% to a short current-section check. Use actual Algebra Bank families and approved representations. When the need is graph scale/intercepts, use the MG1 scale/intercept families and registered graph_tool-generated graphs.
+
+AP CALCULUS AB — HARD
+---------------------
+Do not invent section-level I Can statements when the course has not established them. Resolve the current topic from current course materials. Use current Notes, Practice, and/or textbook/source material as primary content sources, then approved Calculus Question Structure families for controlled parallels. Preserve AP notation, theorem hypotheses, justification expectations, calculator appropriateness, and graph conventions.
 
 REGISTERED REPRESENTATIONS — HARD
 ---------------------------------
-If a task requires a mathematical Cartesian graph, resolve the registered graph_tool through Tools/MANIFEST.json and use it. Do not hand-draw substitute Cartesian graphs in browser SVG/CSS.
+If a task requires a Cartesian graph, resolve Tools/MANIFEST.json -> tools.graph_tool and use it directly. Do not hand-build Cartesian axes/grids in browser SVG/CSS when the registered tool owns the representation.
 
-Use the current District Graph Rendering Standard and graph_tool output. Student-facing graphs must be answer-neutral when the student is expected to infer/construct something.
+Every Cartesian graph in data/source_map.json / data/qa.json must record:
+- renderer path = current registered graph tool;
+- graph type / bounds / scale;
+- answer-neutrality result where relevant;
+- accuracy visual check.
 
-Physics vector/investigation grids are instructional diagrams rather than ordinary Cartesian function graphs. For Physics Section 1.3 resultants, use the current U1.3 Investigation's grid/vector visual language as the source format. Do not replace it with an unrelated custom diagram style.
+Physics U1.3 vector grids are non-Cartesian instructional diagrams and use the current U1.3 Investigation visual language.
 
 MATHJAX — HARD
 --------------
-Use the current registered MathJax/finalization rules and the gold-standard local MathJax SVG setup. Use canonical delimiters \( ... \) and \[ ... \]. Run the current math finalizer/audit on all generated HTML with math. Raw TeX, broken fractions/exponents, clipped math, or browser-text approximations fail QA.
+Use local MathJax SVG and canonical delimiters \( ... \) and \[ ... \]. Run the current registered math finalizer/audit on every generated HTML file containing math.
 
-COURSE ROUTING
---------------
-PHYSICS
-- Use the current Physics Framework, exact current section architecture, current validated non-secure Physics Bank/practice, and current investigation/source materials.
-- Favor physical meaning and representations over repetitive plug-and-chug.
-- For Section 1.3 specifically, the current gold-standard mix is intentional: only a small number of quick collinear/same-opposite force questions; THREE two-vector non-parallel resultant problems using the current investigation grid format; and TWO three-vector resultant investigation problems at the end. Students draw the resultant on the same grid and report magnitude plus direction either as an angle measured from +x or a valid compass description such as NW.
-- Do not overfill the sheet with 10-second same/opposite-force calculations.
+PASS is forbidden when:
+- raw TeX is visible;
+- formulas are clipped;
+- browser-text approximations replace proper math;
+- authoring shorthand/timing expressions render as malformed math;
+- the final HTML has not been visually inspected after MathJax typesets.
 
-ALGEBRA 1
-- Use current authorized portfolio/evidence state FIRST to identify the most recently assessed Mastery Goal/I-cans most students still need.
-- The sub handout is primarily a targeted REVIEW/EVIDENCE opportunity, not a current-section worksheet.
-- Default balance when current evidence clearly identifies a weak recent goal: approximately 75-85% targeted missed/review evidence and only 15-25% short current-section check. Do not flood the sheet with current-section questions.
-- Use the Algebra Bank families and approved representations. If the missed evidence is graph scale/intercepts, use the actual MG1 scale/intercept families and registered graph_tool-generated graphs, as demonstrated by the gold standard.
-- If current evidence does not identify a defensible classwide priority, fall back to the Framework/Assessment Plan rather than guessing.
+STUDENT HANDOUT PRINT CONTROLS — HARD
+-------------------------------------
+Each academic page uses the gold-standard runtime:
+- All workspaces sets all question workspace sizes directly;
+- Problem selector chooses one question;
+- selected Workspace changes ONLY the selected question;
+- Graph / diagram changes ONLY the selected question's visual when a question is selected;
+- when Problem = All, the selected-question Workspace and Graph/diagram controls are disabled;
+- Reset restores all question workspace/visual values to 100%;
+- Print prints the currently repaginated Letter pages.
 
-AP CALCULUS AB
-- Do not invent section-level I Can statements when the course has not established them.
-- Resolve the current section/topic from current course materials.
-- Use current Notes, Practice, and/or textbook/source materials as primary content sources, then use approved Calculus Question Structure families to author controlled parallel practice when needed.
-- Preserve AP notation, theorem hypotheses, justification expectations, calculator/non-calculator appropriateness, and registered graph-tool rendering from the AP Calculus Framework.
-
-MASTERY / EVIDENCE RESOLUTION
------------------------------
-Resolve in this order:
-1. current authorized portfolio/evidence state when available;
-2. current course Framework + exact section/Unit evidence architecture;
-3. current non-secure assessment/bank evidence relevant to that section.
-
-For Algebra, recent classwide misses may legitimately take priority over the current section because the purpose of the sub day is useful evidence/review. For Physics/Calculus, current section work normally remains the main route unless the evidence state or teacher note says otherwise.
-
-STEM
-----
-CURRENT CHALLENGE:
-- Substitute-facing direction: students are working on their current challenge; a copy of the challenge is included; students know what to do.
-- Include the teacher-pasted Canvas/current challenge directions in print_bundle.html.
-- Do not create a second worksheet just to fill time.
-
-ALTERNATE ACTIVITY:
-- Use the teacher's engineering-design focus.
-- May produce a poster, flyer, video, written paper/essay, one-page how-to guide, infographic, mini-presentation, or another fit-for-purpose product.
-- When system_choose is selected, choose the product that best fits the learning job.
-- Web research is permitted ONLY if the request explicitly authorizes it for STEM Alternate.
-- Package the alternate as a self-contained hostable folder/ZIP inside the main response package or as a clearly linked nested ZIP.
-- Student direction: complete and save the work; teacher will give submission directions tomorrow.
-
-STUDENT HANDOUT PRINT CENTER — HARD
------------------------------------
-Physics, Algebra 1, and AP Calculus each open as a separate HTML page from index.html.
-
-Each page must preserve the gold-standard live print controls:
-- All workspaces slider;
-- Problem selector;
-- selected problem Workspace slider;
-- Graph / diagram slider;
-- Reset;
-- Print.
-
-The screen preview must show actual white Letter pages and repaginate live so page breaks are visible before printing. Answers never appear on student pages.
+Changing one question may move later questions to another page, but it must not alter any other question's stored workspace or visual size.
 
 STABLE GENERAL PROCEDURES
 -------------------------
@@ -227,37 +199,38 @@ Include:
 - Pass tablet is up front; silver power button on the side; turn on, open Chrome, use PikMyKid button in the middle; students enter their own passes.
 - Only one student may be out of the room at a time.
 
-Preserve supported emergency, discipline, attendance, phone-policy, contact information, and the 6th-hour team-teaching note. The pass procedure above overrides stale conflicting pass wording.
+Preserve supported emergency, discipline, attendance, phone-policy, contact information, and 6th-hour team-teaching note.
 
-CUSTOM NOTES / AVOID
---------------------
-- Course custom notes add substitute/class context.
-- Daily custom note applies across the day.
-- Do not include / avoid is a hard content boundary.
-- Do not infer sensitive student details beyond current teacher input.
+STEM
+----
+CURRENT CHALLENGE: include the teacher-pasted challenge directions; students continue the current challenge and know the routine.
+
+ALTERNATE ACTIVITY: use the teacher's engineering-design focus. Suitable products include poster, flyer, video, written paper/essay, one-page how-to guide, infographic, mini-presentation, or another best-fit product. Web research is permitted only when the request explicitly authorizes it for STEM Alternate.
 
 QA — HARD
 ---------
-Before delivery verify:
-- correct plan/date/schedule authority;
-- alternate schedule resolves exact date when supplied;
-- print bundle order exactly matches this PM;
-- seating charts are current and embedded locally in the self-contained package;
-- Physics/AP Calc target class length -10; Algebra target -15;
-- problem count/time estimate reflects actual task demand;
-- Algebra uses current evidence priority rather than defaulting to current-section bulk practice;
+Before delivery verify ALL of the following:
+- exact schedule/date authority;
+- print bundle order;
+- current seating charts embedded locally;
+- no student-visible work-time target/timing arithmetic;
+- item-level time map meets the real target;
+- three-lane evidence mix exists for every academic handout;
+- Physics U1.3 shape matches the locked special case and is not reduced to a 7-question/light sheet;
 - questions trace to allowed non-secure sources / controlled parallels;
-- all Cartesian graphs use registered graph_tool and current graph standard;
-- Physics U1.3 investigation grids use the current investigation visual format;
-- MathJax finalization passes with zero visible raw TeX;
-- every question has the three support checkboxes;
+- every Cartesian graph uses the registered graph tool and current district graph standard;
+- MathJax finalization + visual inspection pass;
+- every question has all three support checkboxes;
 - 3rd/6th Algebra share one handout;
-- keys/evidence mapping are only at end of print_bundle.html;
+- keys/evidence mapping appear only at the end of print_bundle.html;
 - index has exactly four primary actions;
-- live page preview/sliders work and visibly repaginate;
+- selected-question workspace changes only that question;
+- selected-question graph/diagram size changes only that question;
 - all relative links resolve locally;
-- no stale gold-standard date, schedule, seating placeholder, section, or answer leaks into current output.
+- no stale gold-standard content leaks into the current output.
+
+If any HARD QA gate fails, data/qa.json overall_status must be FAIL and the package must not be represented as finished.
 
 OUTPUT
 ------
-Return the ONE self-contained Sub Plan Print Center ZIP. The teacher should be able to unzip it, open index.html, print the first bundle, then independently adjust/print Physics, Algebra 1, and AP Calculus handouts.
+Return ONE self-contained Sub Plan Print Center ZIP. The teacher should be able to unzip it, open index.html, print the first bundle, then independently adjust/print Physics, Algebra 1, and AP Calculus handouts.
