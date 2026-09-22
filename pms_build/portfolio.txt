@@ -2,13 +2,13 @@ PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT PRIVATE DRIVE WORKFLOW
 ====================================================================
 STATUS: CURRENT
 JOB: portfolio
-REVISION: 2026-09-22 v4.0 - MASTERY-GOAL GRADES + INTERVENTION LANES + ROSTER/SUPPORT MAINTENANCE
+REVISION: 2026-09-22 v4.1 - 01/02 AUTOMATED STATE + HTML/CSV RESULTS ZIP
 
 ROLE
 ----
-Ingest newly supplied student evidence, preserve raw evidence in the canonical private Portfolio Drive, update the longitudinal body of evidence, maintain the current roster and private student-support context when explicitly supplied, regenerate current student/teacher reports from canonical templates, and produce one PowerSchool CSV per Mastery Goal.
+Ingest newly supplied student evidence, preserve raw evidence in the canonical private Portfolio Drive, update the longitudinal body of evidence, maintain the current roster and private student-support context when explicitly supplied, and when requested generate print-ready student/teacher HTML plus one PowerSchool CSV per Mastery Goal in one downloadable results ZIP.
 
-This is never a GitHub student-data job. Student evidence, rosters, IEP/504/support documents, Portfolio state, PDFs, CSVs, contacts, and names remain private.
+This is never a GitHub student-data job. Student evidence, rosters, IEP/504/support documents, Portfolio state, report HTML, locally printed PDFs, CSVs, contacts, and names remain private.
 
 ===========================================================
 0. SOURCE / AUTHORITY READ ORDER - HARD
@@ -40,14 +40,17 @@ Open the exact canonical root first:
 
 Then resolve/create:
   <Course>/unit N/
-with Portfolio-owned folders:
+
+AUTOMATED WRITE DESTINATIONS - HARD:
   01 Evidence Inbox/
   02 Portfolio Data/
+
+HUMAN-FACING MANUAL DESTINATIONS - PRESERVE, DO NOT AUTO-WRITE:
   03 Student Packets/
   04 Class & Intervention Summaries/
   05 PowerSchool Exports/
 
-Preserve any course-authorized siblings such as 06 Checkpoints.
+On first Unit initialization, create 03-05 only when missing so the established Drive organization exists. On all runs, preserve their contents unchanged. Preserve any course-authorized siblings such as 06 Checkpoints.
 
 Within 02 Portfolio Data, Portfolio may maintain:
   Student Support/
@@ -88,6 +91,12 @@ C. STUDENT SUPPORT UPDATE
 - student_support_current.csv should contain only actionable support fields such as student_key, source hash/date, accommodation/modification label, concise operational description, applies_to, and review/expiration metadata when explicitly present.
 - Approved accommodations do not lower the learning standard or evidence status of a valid demonstration. Use the support state to interpret conditions of administration and to honor required access supports.
 - A support-only run may occur with no new student evidence and must not alter evidence_ledger.csv, I Can status, Mastery Goal grades, or PowerSchool grades.
+
+D. REPORT REFRESH
+- Evidence updates refresh reports automatically.
+- Roster/support-only runs refresh reports only when refresh_reports_requested=true.
+- Report refresh reads the updated current Portfolio state but does not manufacture new evidence or alter grades solely because reports were requested.
+- A report refresh returns HTML/CSV results in one downloadable ZIP; it does not write generated artifacts to Drive folders 03-05.
 
 FIRST RUN / RESET
 If 02 Portfolio Data/student_registry.csv is absent, a current PowerSchool roster/template CSV is required. Build the registry from that explicit source; never infer the roster from submissions.
@@ -213,7 +222,7 @@ Students who only need another independent demonstration and do not need practic
 ===========================================================
 9. STUDENT REPORT - CANONICAL TWO-PAGE SHELL
 ===========================================================
-Resolve the registered Portfolio student template/CSS. Exactly 2 content pages per active student; combined period PDFs remain duplex-safe.
+Resolve the registered Portfolio student template/CSS. Render print-ready HTML. Exactly 2 print pages per active student; combined period HTML must remain duplex-safe when printed to PDF by the teacher.
 
 PAGE 1 fixed structure:
 - Current Progress Report
@@ -247,7 +256,7 @@ YOUR PRACTICE:
 ===========================================================
 10. TEACHER REPORT - INTERVENTION-FIRST
 ===========================================================
-One landscape PDF using the canonical teacher template/CSS.
+One print-ready landscape HTML teacher report using the canonical teacher template/CSS. Do not generate a PDF in the normal Portfolio run.
 
 PAGE 1 - CLASS OVERVIEW
 - Current active roster count and evidence scope.
@@ -289,27 +298,48 @@ Use the stored PowerSchool template/export shape as the schema authority. Preser
 
 Do not create or export an overall Unit grade CSV.
 
-Save current MG CSVs in 05 PowerSchool Exports and return them as individual downloadable artifacts alongside the student and teacher PDFs.
+Place current MG CSVs only in the returned results ZIP under powerschool/. Do not write or replace files in 05 PowerSchool Exports; the teacher may upload them manually.
 
 ===========================================================
-12. REPORT / EMAIL STATE
+12. REPORT STORAGE / EMAIL BOUNDARY
 ===========================================================
-Continue producing the normal period Student Packet PDF(s), one Teacher Summary PDF, and one separate exact two-page individual PDF per active student in 03 Student Packets/Email Delivery so the existing teacher-controlled email workflow remains functional.
+Normal Portfolio runs do NOT write generated reports or grade exports into Drive folders 03-05.
 
-Inactive students are excluded from current report packets, current PowerSchool exports, intervention lanes, and current email recipient/report manifests, but their historical evidence and send logs remain preserved.
+Preserve existing contents of:
+- 03 Student Packets
+- 04 Class & Intervention Summaries
+- 05 PowerSchool Exports
+- 03 Student Packets/Email Delivery when it exists
+- existing email recipient/manifest/send-log state in 02 Portfolio Data
 
-Normal Portfolio runs never send email automatically.
+Normal Portfolio runs do NOT generate individual email-delivery PDFs and do NOT refresh email_delivery_manifest.csv. Email preparation is a separate explicit workflow after the teacher has printed/saved and manually uploaded the desired PDFs.
+
+Inactive students are excluded from current generated HTML, current PowerSchool CSVs, and intervention lanes, but historical evidence and existing send logs remain preserved.
 
 ===========================================================
-13. DELIVERY
+13. DELIVERY - ONE RESULTS ZIP
 ===========================================================
-Successful normal evidence delivery:
-- update canonical private Drive state;
-- return each current class Student Packet PDF individually;
-- return current Teacher Summary PDF individually;
-- return current PowerSchool CSVs for MG01-MG04 individually.
+Automated Drive writes are limited to 01 Evidence Inbox and 02 Portfolio Data.
 
-Roster-only or support-only operations may complete without regenerating evidence reports/grades when no evidence state changed.
+When refresh_reports_requested=true, return exactly ONE private Portfolio results ZIP containing current outputs. Use a clear structure such as:
+  student_reports/
+    <period packet and/or individual student HTML reports>
+  teacher_report/
+    teacher_summary.html
+  powerschool/
+    <period>_MG01.csv
+    <period>_MG02.csv
+    <period>_MG03.csv
+    <period>_MG04.csv
+
+HTML-first rules:
+- Do not generate PDFs during the normal Portfolio run.
+- Student HTML must preserve the approved exactly-two-print-page student report.
+- Teacher HTML must preserve the approved intervention-first report.
+- Include all CSS needed for reliable local browser printing inside the ZIP (embedded or relative assets).
+- The teacher prints/saves PDFs locally and manually uploads final PDFs/CSVs to folders 03-05.
+
+Roster-only or support-only operations with refresh_reports_requested=false may complete with Drive-state confirmation only and no results ZIP.
 
 Do NOT return a GitHub Transfer ZIP for student Portfolio outputs. Do NOT write student Portfolio data to GitHub.
 
@@ -318,26 +348,25 @@ Do NOT return a GitHub Transfer ZIP for student Portfolio outputs. Do NOT write 
 ===========================================================
 Before PASS verify:
 1 exact canonical Drive root/course/unit used;
-2 raw evidence/support files routed to the correct private locations;
-3 normal runs reused the stored roster unless roster_update_requested=true;
-4 roster updates used Student Num as durable key when present and inactivated rather than deleted former students;
-5 student-support normalization contains only actionable accommodations/modifications and excludes unrelated sensitive narrative;
-6 evidence mapping preceded response judgment and source independence was not inflated;
-7 ledger/history append state preserved;
-8 four current MG grades follow current course policy, with no Unit letter grade;
-9 completely unassessed MGs display Not assessed and have blank PowerSchool Score;
-10 student report is exactly two pages/student and contains all current MGs/I Cans exactly once;
-11 current-picture lead says `Unit Mastery Goals` and there is no large Unit-grade box;
-12 Practice Builder link/QR does not preselect an I Can and contains no student identity/state;
-13 teacher Class Overview uses exactly Whole Class / Priority Day Group / Pull In Students;
-14 Priority Day Groups use exact shared 2-4-I-Can substantial-gap bundles, never single-I-Can grouping as the primary rule;
-15 Pull In Students is student-centered with 1-2 gaps;
-16 detailed appendix has no clipped names; continue pages as needed;
-17 four PowerSchool MG CSVs per period exist and no overall Unit-grade CSV was produced;
-18 inactive students are absent from current reports/exports but historical state remains;
-19 current individual two-page email-delivery reports/manifests remain coherent for active students;
-20 no student/support data was written to GitHub.
-
-If any check fails, repair that concrete defect before delivery. When all pass, stop.
-
-END - PORTFOLIO / ASSESS NEW EVIDENCE
+2 automated Drive writes occurred only in 01 Evidence Inbox and/or 02 Portfolio Data as required by the operation;
+3 folders 03-05 and any existing Email Delivery contents were preserved and not automatically rewritten;
+4 raw evidence/support files routed to the correct private locations;
+5 normal runs reused the stored roster unless roster_update_requested=true;
+6 roster updates used Student Num as durable key when present and inactivated rather than deleted former students;
+7 student-support normalization contains only actionable accommodations/modifications and excludes unrelated sensitive narrative;
+8 evidence mapping preceded response judgment and source independence was not inflated;
+9 ledger/history append state preserved;
+10 four current MG grades follow current course policy, with no Unit letter grade;
+11 completely unassessed MGs display Not assessed and have blank PowerSchool Score;
+12 when reports are refreshed, student report HTML prints as exactly two pages/student and contains all current MGs/I Cans exactly once;
+13 current-picture lead says `Unit Mastery Goals` and there is no large Unit-grade box;
+14 Practice Builder link/QR does not preselect an I Can and contains no student identity/state;
+15 teacher Class Overview uses exactly Whole Class / Priority Day Group / Pull In Students;
+16 Priority Day Groups use exact shared 2-4-I-Can substantial-gap bundles, never single-I-Can grouping as the primary rule;
+17 Pull In Students is student-centered with 1-2 gaps;
+18 detailed appendix has no clipped names; continue print pages as needed;
+19 when reports are refreshed, four PowerSchool MG CSVs per period exist in the results ZIP and no overall Unit-grade CSV was produced;
+20 inactive students are absent from current generated reports/exports but historical state remains;
+21 no PDF generation occurred in the normal Portfolio run;
+22 no generated report/CSV artifacts were automatically written to 03-05;
+23 no student/support data was written to GitHub.
