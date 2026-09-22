@@ -1,4 +1,4 @@
-SUB PLAN PRINT CENTER — GOLD STANDARD v1
+SUB PLAN PRINT CENTER — GOLD STANDARD v2
 ========================================
 
 STATUS
@@ -29,6 +29,21 @@ Preserve these structural behaviors:
 - MathJax is local SVG output using canonical delimiters;
 - Cartesian graphs use the registered graph_tool/current district graph standard;
 - Physics U1.3 resultant grids follow the current U1.3 Investigation visual format rather than a generic Cartesian-function graph style.
+
+SLIDER BEHAVIOR — HARD
+----------------------
+The workspace controls are direct stored values, NOT nested multipliers.
+
+- `All workspaces` directly sets every problem's workspace to the chosen percentage.
+- `Problem` chooses one problem for local editing.
+- `Workspace` changes ONLY the selected problem.
+- When `Problem = All`, the individual `Workspace` slider is disabled and its output displays an em dash.
+- Selecting Q1, Q2, etc. loads that problem's currently stored workspace percentage into the individual slider.
+- Changing one problem may move later problems to different pages because the document repaginates, but it must NOT change any other problem's workspace height.
+- Reset restores every problem workspace to 100%, returns the selector to All, and disables the individual workspace slider again.
+- The current `Graph / diagram` slider remains a global visual-size control for this gold-standard version.
+
+A future runtime must not restore the old behavior `effective workspace = global multiplier × selected multiplier`; that interaction was rejected because the individual control appeared to change all questions and made 100% ambiguous after a global adjustment.
 
 CONTENT-ROUTING EXAMPLE
 -----------------------
