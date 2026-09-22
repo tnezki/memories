@@ -1,9 +1,9 @@
 {
-  "schema": "ap-calculus-portfolio-policy/1.0",
+  "schema": "ap-calculus-portfolio-policy/1.1",
   "status": "CURRENT",
   "course": "AP Calculus AB",
   "portfolio_drive_course_folder": "AP Calculus AB",
-  "purpose": "Enable the shared Portfolio state/report architecture for AP Calculus AB while exact Unit Assessment Plans own learning content. Unit 1 evidence/report grading is authority-ready; course Practice Builder routing is not yet available.",
+  "purpose": "Shared Portfolio state/report architecture for AP Calculus AB. Exact Unit Assessment Plans own learning content. Unit 1 is evidence/report ready; later units fail closed until mapped.",
   "i_can_statuses": [
     {
       "code": "NO_EVIDENCE",
@@ -35,7 +35,7 @@
   },
   "mastery_goal_grade_model": {
     "status": "CURRENT_OFFICIAL",
-    "not_assessed_rule": "No usable evidence anywhere in the goal -> Not assessed and blank PowerSchool Score.",
+    "not_assessed_rule": "No usable evidence anywhere in the goal -> Not assessed. Family meaning: this Mastery Goal has not been checked yet. PowerSchool Score is blank.",
     "general_scale_rule": "Let n be exact I Can count and t=ceil(n/2). If assessed: I for secure<t; C for secure=t; B for t<secure<n; A for secure=n; A+ for secure=n plus meaningful transfer evidence in the goal.",
     "unit_grade_rule": "No overall Unit letter grade is reported or exported."
   },
@@ -47,16 +47,36 @@
   "student_practice_link": {
     "practice_builder": null,
     "practice_builder_url_pattern": null,
-    "missing_builder_rule": "List focus I Cans on the student report but do not fabricate a QR/link. Calculus Practice Builder requires a later course-repo build."
+    "missing_builder_rule": "List focus I Cans on the student report but do not fabricate a QR/link."
   },
   "intervention_routing": {
     "lanes": [
       "Whole Class",
-      "Priority Day Group",
+      "Priority Day Groups",
       "Pull In Students"
     ],
-    "priority_day_group": "At least two students sharing the exact same substantial-gap bundle of 2-4 I Cans.",
-    "pull_in_students": "Student-centered 1-2 small/actionable gaps."
+    "priority_day_groups": {
+      "max_groups": 2,
+      "max_students_per_group": 15,
+      "ranking": "I-grade count, then Practice + check soon gap count, then evidence severity",
+      "plan": "Summarize the best common 20-minute Crewtime intervention for each selected group."
+    },
+    "pull_in_students": "One landscape page; student-centered 1-2 Practice + check soon gaps."
+  },
+  "private_results_archive": {
+    "folder": "02 Portfolio Data/Results Archives",
+    "dated_copy": true,
+    "latest_copy": "Latest Portfolio Results.zip"
+  },
+  "student_support_contacts": {
+    "file": "02 Portfolio Data/Student Support/student_support_contacts_current.csv",
+    "roles": [
+      "CASE_MANAGER",
+      "SPECIAL_ED_TEACHER",
+      "MATH_STUDY_SKILLS_TEACHER",
+      "SUPPORT_TEACHER"
+    ],
+    "rule": "Store explicit relationships only; do not infer email addresses."
   },
   "report_fidelity": {
     "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json"
@@ -66,9 +86,8 @@
       "status": "CURRENT_FOR_EVIDENCE_AND_REPORTS",
       "assessment_plan": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2/assessment_plans/unit1_assessment_plan/unit1_assessment_plan.html",
       "practice_builder_status": "NOT_YET_BUILT",
-      "note": "Exact Unit 1 Mastery Goals and I Can statements are derived from the current Assessment Plan; report focus list is available but no Practice Builder QR/link is emitted.",
       "learning_map": "frameworks/2_Framework_CALC/AP_Calculus_AB_Framework_v2/curriculum/unit1_portfolio_learning_map.json"
     },
-    "2-8": "ASSESSMENT_PLAN_EXISTS_BUT_PORTFOLIO_MAPPING_NOT_YET_VERIFIED; roster/support maintenance allowed, evidence grading fails closed until deliberately verified."
+    "2-8": "MAINTENANCE_ONLY_UNTIL_PORTFOLIO_MAPPING_VERIFIED"
   }
 }

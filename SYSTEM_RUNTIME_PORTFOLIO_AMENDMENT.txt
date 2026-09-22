@@ -2,7 +2,7 @@ SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY / DRIVE ROUTING
 ============================================================
 STATUS: CURRENT
 SCOPE: Portfolio workflow only.
-REVISION: 2026-09-22 - 01/02 AUTOMATED STATE + HTML/CSV OUTPUT ZIP
+REVISION: 2026-09-22 - PRIVATE RESULTS ARCHIVE + EMAIL HANDOFF
 
 Portfolio is a private state-and-report workflow, not a repository artifact build. Student evidence, rosters, IEP/504/support files, Portfolio state, report outputs, CSVs, contacts, and names must never be written to GitHub.
 
@@ -12,100 +12,67 @@ Use exactly:
   title: ____Portfolio_Data
   folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
 
-Resolve the exact <Course>/unit N below that root.
-
-Automated Portfolio state writes are limited to:
+Resolve the exact <Course>/unit N below that root. Standard Unit structure is:
   01 Evidence Inbox/
   02 Portfolio Data/
-
-Keep these existing human-facing folders available, but normal Portfolio runs MUST NOT automatically write, replace, or delete files in them:
   03 Student Packets/
   04 Class & Intervention Summaries/
   05 PowerSchool Exports/
+  06 Checkpoints/ when the course uses Checkpoints
 
-On first initialization, Portfolio may create missing 03-05 folders so the teacher's established Drive organization exists, but after that they are manual destinations. Preserve course-authorized siblings such as 06 Checkpoints.
+Automated Portfolio state writes are limited to 01 and 02. Folders 03-05 remain manual teacher-facing destinations. Preserve 06 and other course-authorized siblings.
 
-02 Portfolio Data may contain the private nested support area:
-  Student Support/Source Files/
-  Student Support/student_support_current.csv
-  Student Support/student_support_review.csv
-  Student Support/student_support_import_history.csv
+02 Portfolio Data may contain:
+  Results Archives/
+    <dated results ZIPs>
+    Latest Portfolio Results.zip
+  Student Support/
+    Source Files/
+    student_support_current.csv
+    student_support_contacts_current.csv
+    student_support_review.csv
+    student_support_import_history.csv
 
-Roster and support state are private. Never expose them in public repository files or URLs.
+ROSTER / SUPPORT
+----------------
+The stored student_registry.csv is reused on ordinary runs. A new roster is required only for first run/reset or explicit roster_update_requested=true. Durable Student Num reconnects history. Departed students become inactive rather than deleted.
 
-ROSTER PERSISTENCE
-------------------
-The stored student_registry.csv is reused on ordinary Portfolio runs. A new roster CSV is required only on first run/reset or when the request explicitly sets roster_update_requested=true.
+Student-support documents are private setup/support sources, never evidence. Preserve raw sources under Student Support/Source Files. Normalize accommodations/modifications into student_support_current.csv. Normalize explicit support-staff relationships separately into student_support_contacts_current.csv. A case manager, special education teacher, math study skills teacher, or other authorized support teacher may be recorded when explicitly present. Do not infer an email address from a name; exact verified staff-directory resolution is allowed.
 
-When roster update is requested, compare old/new by durable Student Num when present. Add new active students; mark departed students inactive; preserve all historical evidence. Do not infer deletions from missing submissions.
+Support-only runs do not change evidence or grades. Report refresh after support maintenance is allowed only when explicitly requested.
 
-STUDENT SUPPORT PERSISTENCE
----------------------------
-Explicit student-support documents are setup/support sources, not evidence. Preserve raw source bytes only under 02 Portfolio Data/Student Support/Source Files and normalize only actionable classroom/assessment supports. Do not normalize unrelated diagnosis, medical, family, or narrative details.
+REPORT / GRADE OUTPUT
+---------------------
+Official grading export is one current CSV per Mastery Goal per period; no overall Unit-grade CSV. Not assessed means the Mastery Goal has not been checked yet and therefore has blank PowerSchool Score. Needs first check means the individual I Can has not been checked yet.
 
-Support-only operations are permitted without new evidence and must not change evidence status or grades. If refresh_reports_requested=true, the updated support state may be used to regenerate the downloadable reports without changing the underlying evidence/grades.
-
-DRIVE PERSISTENCE IS A COMPLETION GATE
--------------------------------------
-A normal evidence/state run is not complete until the required canonical Drive state has been written and verified.
-
-Required persistence by operation:
-- new student evidence -> 01 Evidence Inbox;
-- longitudinal/current Portfolio state -> 02 Portfolio Data;
-- roster maintenance -> 02 Portfolio Data;
-- student-support source + normalized state -> 02 Portfolio Data/Student Support.
-
-HARD DELIVERY BOUNDARY:
-- do NOT write generated student reports to 03 Student Packets;
-- do NOT write generated teacher reports to 04 Class & Intervention Summaries;
-- do NOT write generated PowerSchool CSVs to 05 PowerSchool Exports;
-- do NOT generate or refresh 03 Student Packets/Email Delivery during a normal Portfolio run;
-- preserve any existing contents of 03-05 and existing email-delivery state untouched.
-
-POWERSCHOOL OUTPUT
-------------------
-The official grading export is one CSV per Mastery Goal per period. No overall Unit-grade CSV is produced. A completely unassessed Mastery Goal has blank Score cells, not an invented I.
-
-When current reports/exports are requested, place the MG CSVs in the returned results ZIP only. The teacher manually uploads them to 05 PowerSchool Exports if desired.
-
-CURRENT REPORTING
------------------
-The student report has no large Unit-grade box. It may state the number of Unit Mastery Goals demonstrated and shows each MG's current grade or Not assessed.
-
-The teacher report is intervention-first and uses exactly these main lanes:
+The locked teacher report uses exactly:
 - Whole Class
-- Priority Day Group
+- Priority Day Groups
 - Pull In Students
 
-Priority Day Groups are exact shared 2-4-I-Can substantial-gap bundles. Pull In Students is student-centered for 1-2 small gaps.
+Priority Day has at most 2 groups and at most 15 students per group. Rank eligible students by current I-grade count, then Practice + check soon gap count, then evidence severity. Summarize the best common 20-minute Crewtime intervention for each selected group. Pull In is one landscape page of students with 1-2 Practice + check soon gaps.
 
-REPORT GENERATION / DELIVERY
-----------------------------
-Portfolio report generation is HTML-first. Do not generate PDFs during a normal Portfolio run.
+RESULTS ZIP / CROSS-DEVICE ARCHIVE - HARD
+------------------------------------------
+A report-producing run builds one results ZIP with:
+  results_manifest.json
+  student_reports/class_student_packet.html
+  student_reports/individual/<stable-student-key>.html
+  teacher_report/teacher_summary.html
+  powerschool/<period>_MGxx.csv
 
-Evidence updates set refresh_reports_requested=true by default. Roster/support-only runs refresh reports only when the request explicitly asks for it.
+Do not generate PDFs during the normal Portfolio run. Individual student HTML must be self-contained enough for reliable offline printing and email-prep PDF conversion.
 
-When refresh_reports_requested=true, return ONE downloadable ZIP containing current print-ready outputs, for example:
-  student_reports/
-    <period packet and/or individual student HTML reports>
-  teacher_report/
-    teacher_summary.html
-  powerschool/
-    <period>_MG01.csv
-    <period>_MG02.csv
-    <period>_MG03.csv
-    <period>_MG04.csv
+After QA, persist the exact ZIP bytes twice under 02 Portfolio Data / Results Archives:
+1. an immutable dated filename;
+2. Latest Portfolio Results.zip, replacing the prior current copy.
 
-Student HTML must preserve the approved exactly-two-print-page student report. Teacher HTML must preserve the approved intervention-first report. The teacher is responsible for printing/saving PDFs locally and manually uploading finished PDFs/CSVs to folders 03-05.
-
-If refresh_reports_requested=false, a roster/support-only state update may complete without returning report/grade artifacts.
+Verify readback/hash. Return the exact same ZIP to the teacher in chat. This private archive solves cross-device availability without placing student data in GitHub.
 
 EMAIL BOUNDARY
 --------------
-Normal Portfolio evidence/state runs no longer generate individual email-delivery PDFs or refresh email_delivery_manifest.csv. Preserve existing email state. Preparing manually created PDFs for email delivery is a separate explicit workflow and is not part of this normal Portfolio run.
+Normal Portfolio runs do not generate Email Delivery PDFs and do not refresh email_delivery_manifest.csv. Email preparation is a separate explicit action in the email tool. That tool may read Latest Portfolio Results.zip, create verified email-ready PDFs in 03 Student Packets/Email Delivery, and refresh email_delivery_manifest.csv.
 
-DELIVERY
---------
-Student Portfolio outputs are never a github_transfer package. A github_transfer ZIP is appropriate only for a separate repository-code/template/policy change such as this runtime amendment itself, and such a transfer must contain no student-specific Portfolio data.
+The email tool may also send the student's report to verified support staff linked in student_support_contacts_current.csv. Do not share an entire report folder as a substitute for student-specific delivery.
 
 All other SYSTEM_RUNTIME_CONTRACT rules remain in force.

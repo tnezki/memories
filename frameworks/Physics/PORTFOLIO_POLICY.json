@@ -5,10 +5,26 @@
   "portfolio_drive_course_folder": "Physics",
   "purpose": "Own Physics Portfolio status, Mastery Goal grades, PowerSchool MG exports, intervention routing, evidence interpretation, practice routing, and recurring report fidelity while exact Unit Assessment Plans own learning content.",
   "i_can_statuses": [
-    {"code":"NO_EVIDENCE","symbol":"open_circle","label":"No Evidence"},
-    {"code":"DEVELOPING","symbol":"half_circle","label":"Developing"},
-    {"code":"MASTERED","symbol":"filled_circle","label":"Mastered"},
-    {"code":"TRANSFER","symbol":"star","label":"Transfer"}
+    {
+      "code": "NO_EVIDENCE",
+      "symbol": "open_circle",
+      "label": "No Evidence"
+    },
+    {
+      "code": "DEVELOPING",
+      "symbol": "half_circle",
+      "label": "Developing"
+    },
+    {
+      "code": "MASTERED",
+      "symbol": "filled_circle",
+      "label": "Mastered"
+    },
+    {
+      "code": "TRANSFER",
+      "symbol": "star",
+      "label": "Transfer"
+    }
   ],
   "mastered_default_rule": {
     "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities.",
@@ -18,7 +34,12 @@
   "mastery_goal_rule": {
     "general_rule": "A Mastery Goal is demonstrated when at least half of its exact I Cans, rounded up, are Mastered or Transfer.",
     "formula": "required_secure = ceil(i_can_count_in_goal / 2)",
-    "unit1_thresholds": {"U1-MG01":2,"U1-MG02":2,"U1-MG03":4,"U1-MG04":2}
+    "unit1_thresholds": {
+      "U1-MG01": 2,
+      "U1-MG02": 2,
+      "U1-MG03": 4,
+      "U1-MG04": 2
+    }
   },
   "mastery_goal_grade_model": {
     "status": "CURRENT_OFFICIAL",
@@ -43,7 +64,11 @@
     "privacy_rule": "No student identity/evidence in URL/QR."
   },
   "intervention_routing": {
-    "lanes": ["Whole Class", "Priority Day Groups", "Pull In Students"],
+    "lanes": [
+      "Whole Class",
+      "Priority Day Groups",
+      "Pull In Students"
+    ],
     "whole_class": {
       "max_targets": 1,
       "rule": "Only the highest-leverage genuinely broad shared instructional need supported by current evidence. Show target, affected Practice + check count, recurring evidence pattern, and concise teacher move."
@@ -70,11 +95,26 @@
   },
   "student_next_action": {
     "states": [
-      {"code":"NEEDS_FIRST_CHECK","label":"Needs first check"},
-      {"code":"PRACTICE_AND_CHECK","label":"Practice + check soon"},
-      {"code":"NEEDS_ANOTHER_DEMONSTRATION","label":"Needs another independent check"},
-      {"code":"SECURE","label":"Secure"},
-      {"code":"EXTENSION","label":"Extension"}
+      {
+        "code": "NEEDS_FIRST_CHECK",
+        "label": "Needs first check"
+      },
+      {
+        "code": "PRACTICE_AND_CHECK",
+        "label": "Practice + check soon"
+      },
+      {
+        "code": "NEEDS_ANOTHER_DEMONSTRATION",
+        "label": "Needs another independent check"
+      },
+      {
+        "code": "SECURE",
+        "label": "Secure"
+      },
+      {
+        "code": "EXTENSION",
+        "label": "Extension"
+      }
     ]
   },
   "unit_readiness": {
@@ -93,5 +133,21 @@
     "priority_day_groups": "Maximum two groups of fifteen. Rank by number of current I grades first, then practice-gap count and evidence severity. Exact shared I Can bundles are not required. Each group gets one evidence-backed 20-minute Crewtime plan.",
     "pull_in_students": "Exactly 1-2 PRACTICE_AND_CHECK gaps, student-centered, all current Pull In students on one page, global Practice + check soon banner, no repeated PLAN line.",
     "appendix": "No normal detailed evidence appendix; detailed longitudinal evidence remains in private Portfolio data."
+  },
+  "private_results_archive": {
+    "folder": "02 Portfolio Data/Results Archives",
+    "dated_copy": true,
+    "latest_copy": "Latest Portfolio Results.zip",
+    "rule": "Every report refresh persists the exact returned results ZIP as a dated archive and as the current Latest copy."
+  },
+  "student_support_contacts": {
+    "file": "02 Portfolio Data/Student Support/student_support_contacts_current.csv",
+    "roles": [
+      "CASE_MANAGER",
+      "SPECIAL_ED_TEACHER",
+      "MATH_STUDY_SKILLS_TEACHER",
+      "SUPPORT_TEACHER"
+    ],
+    "rule": "Store only explicit student-to-support-staff relationships from teacher-authorized support sources. Keep staff routing separate from accommodations. Do not infer email addresses."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-template-contract/2.1",
+  "schema": "portfolio-template-contract/2.2",
   "status": "CURRENT",
   "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student report remains locked to the approved two-page Mastery Goal grade design. Teacher report is locked to the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design.",
   "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, page purposes, card anatomy, lane names, grading explanation, Priority Day capacity/ranking, and the one-page Pull In design. Data changes; recurring structure does not drift.",
@@ -10,20 +10,30 @@
     "pages_per_student": 2,
     "duplex_rule": "Every active student consumes exactly two content pages.",
     "page_1_title": "Current Progress Report",
-    "page_1_fixed_sections": ["Essential Standard", "Your current picture", "Unit Evidence Picture"],
+    "page_1_fixed_sections": [
+      "Essential Standard",
+      "Your current picture",
+      "Unit Evidence Picture"
+    ],
     "page_2_title": "Unit Evidence Picture",
-    "page_2_fixed_sections": ["Recent evidence - {LATEST_EVIDENCE_LABEL}", "Your Practice"],
+    "page_2_fixed_sections": [
+      "Recent evidence - {LATEST_EVIDENCE_LABEL}",
+      "Your Practice"
+    ],
     "unit_grade_rule": "Do not display an overall Unit letter grade or large Unit-grade box.",
     "snapshot_lead_pattern": "{MG_DEMONSTRATED_COUNT} of {MG_TOTAL} Unit Mastery Goals demonstrated.",
     "grading_explanation": "Mastery Goal grades are current evidence, not averages, and can improve with new evidence.",
     "mastery_goal_grade_display": {
       "assessed": "Display `Grade {GRADE_CODE}` plus the course-policy label where space allows.",
-      "not_assessed": "Display exactly `Not assessed`; never convert absence of evidence into Grade I.",
+      "not_assessed": "Display exactly `Not assessed`; family-facing meaning: this Mastery Goal has not been checked yet. Do not describe an unsuccessful attempt as Not assessed.",
       "card_rule": "Every MG card shows exact MG title/description, current grade display, secure-I-Can count, and every I Can row."
     },
     "mastery_goal_distribution": {
       "default": "2 + 2 for a four-MG Unit",
-      "allowed_fit_adjustments": ["1 + 3", "3 + 1"],
+      "allowed_fit_adjustments": [
+        "1 + 3",
+        "3 + 1"
+      ],
       "rule": "Every MG appears exactly once. Rendered readability controls the split."
     },
     "practice_box": {
@@ -40,12 +50,27 @@
     "css": "Tools/templates/portfolio/portfolio.css",
     "page_size": "US Letter landscape",
     "normal_page_budget": "3 pages when no Whole Class intervention is active; 4 pages when Whole Class is active.",
-    "fixed_page_order": ["Class Overview", "Whole Class when active", "Priority Day Groups", "Pull In Students"],
-    "forbidden_normal_sections": ["Detailed Evidence Appendix", "Brief guided practice", "Planned Support Sequence", "Crewtime Quick Gaps", "Reassessment Queue"],
+    "fixed_page_order": [
+      "Class Overview",
+      "Whole Class when active",
+      "Priority Day Groups",
+      "Pull In Students"
+    ],
+    "forbidden_normal_sections": [
+      "Detailed Evidence Appendix",
+      "Brief guided practice",
+      "Planned Support Sequence",
+      "Crewtime Quick Gaps",
+      "Reassessment Queue"
+    ],
     "class_overview": {
       "title": "Class Overview",
       "rule": "Fast-to-scan action page. Show compact current-grade/evidence stats, Major strengths, Highest-leverage pattern, and the three lane summaries. Do not include roster-upload or PowerSchool workflow instructions.",
-      "lanes": ["Whole Class", "Priority Day Groups", "Pull In Students"]
+      "lanes": [
+        "Whole Class",
+        "Priority Day Groups",
+        "Pull In Students"
+      ]
     },
     "whole_class": {
       "page_title": "Whole Class",
@@ -83,11 +108,32 @@
     "detailed_evidence_rule": "Do not include a normal detailed I Can appendix in the recurring teacher report. Detailed longitudinal evidence remains in private Portfolio Data CSV/JSON state and may be produced separately only when the teacher explicitly requests it."
   },
   "student_action_states": {
-    "NEEDS_FIRST_CHECK": {"label": "Needs first check"},
-    "PRACTICE_AND_CHECK": {"label": "Practice + check soon"},
-    "NEEDS_ANOTHER_DEMONSTRATION": {"label": "Needs another independent check"},
-    "SECURE": {"label": "Secure"},
-    "EXTENSION": {"label": "Extension"}
+    "NEEDS_FIRST_CHECK": {
+      "label": "Needs first check",
+      "family_meaning": "We have not checked this skill yet."
+    },
+    "PRACTICE_AND_CHECK": {
+      "label": "Practice + check soon"
+    },
+    "NEEDS_ANOTHER_DEMONSTRATION": {
+      "label": "Needs another independent check"
+    },
+    "SECURE": {
+      "label": "Secure"
+    },
+    "EXTENSION": {
+      "label": "Extension"
+    }
   },
-  "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in human-facing output."
+  "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in human-facing output.",
+  "results_zip": {
+    "required": true,
+    "manifest": "results_manifest.json",
+    "individual_student_html_path": "student_reports/individual/<stable-student-key>.html",
+    "class_packet_path": "student_reports/class_student_packet.html",
+    "teacher_path": "teacher_report/teacher_summary.html",
+    "powerschool_path": "powerschool/",
+    "self_contained_html_rule": "Individual student HTML must contain the essential print CSS/markup needed for reliable offline browser and email-prep PDF conversion.",
+    "drive_archive_rule": "Persist a dated copy and byte-identical Latest Portfolio Results.zip under 02 Portfolio Data / Results Archives whenever reports are refreshed."
+  }
 }
