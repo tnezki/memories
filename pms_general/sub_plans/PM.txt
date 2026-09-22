@@ -1,248 +1,172 @@
-SUB PLANS — PILOT WORKING PM v0.4
-================================
-STATUS: PILOT / WORKING — test and revise from real sub-plan runs.
+SUB PLANS — EVIDENCE HANDOUT PM v0.5
+====================================
+STATUS: PILOT / WORKING — use for real sub days and revise from evidence.
 
 PURPOSE
 -------
-Create complete substitute-teacher package(s) from teacher-entered lesson intent while preserving Troy Nezki's established sub-plan style, the correct MMHS bell schedule for each selected plan, current seating chart, current curriculum authorities, and Google Drive organization.
-
-The teacher input boxes are NOT finished substitute directions. They are concise lesson-intent / outcome prompts. Use the current Curriculum Philosophy, course Frameworks, Question Structure, relevant build/shared PMs, registered tools, current course resources, and attached materials as appropriate to turn those prompts into a complete, accurate, substitute-ready day.
+Create complete substitute-teacher packages from minimal teacher input. For Physics, Algebra 1, and AP Calculus, the normal sub-day academic task is a class handout designed to produce useful portfolio evidence rather than simply occupy time. STEM uses either the current design challenge or a teacher-selected alternate engineering-design activity.
 
 THIS IS A GOOGLE DRIVE WORKFLOW — HARD
 --------------------------------------
-This GENERAL PM is explicitly authorized to read and write the Google Drive resources declared in sibling PROFILE.json and the run-specific destination folder it resolves beneath the declared Sub Plans root folder.
+This GENERAL PM is authorized to read/write the Google Drive resources declared in sibling PROFILE.json and the run-specific destination folder it resolves beneath the declared Sub Plans root folder. It may also use the exact pinned project repositories and authorities declared by the request.
 
-Do not use public web search. Do not recover content from prior chats, saved memory, or unrelated File Library items. The teacher's current request plus the pinned PM/PROFILE, pinned Curriculum Build authorities, declared course pins, and declared Google Drive resources are the authority for this job.
+Do not use prior chats, saved memory, unrelated File Library items, or stale outputs as authority. The current request, pinned project sources, this PM/PROFILE, declared Drive resources, and any exact teacher-provided alternate-schedule link are authoritative.
 
 REQUIRED SIBLING AUTHORITY
 --------------------------
-Read pms_general/sub_plans/PROFILE.json immediately after this PM. It owns:
-- Google Drive folder IDs and document IDs;
-- current course/hour labels;
-- normal Monday and Tuesday-Friday bell times;
-- stable Crewtime/Prep behavior;
-- destination naming rules;
-- source-template routing;
-- schedule-source behavior;
-- curriculum-authority routing by course.
-
-SYSTEM CURRICULUM AUTHORITIES — HARD
-------------------------------------
-Resolve the current authorities through SYSTEM_MANIFEST.json and the exact system commit pinned by the request.
-
-Use, when relevant:
-- Curriculum_Philosophy.txt;
-- frameworks/MANIFEST.json and the registered Framework for the course being planned;
-- _question_structure/QUESTION_STRUCTURE_CORE.md and its current manifest;
-- applicable pms_build / pms_shared authorities when generating a student-facing resource;
-- Tools/MANIFEST.json and registered deterministic tools when a graph, figure, MathJax-safe resource, or other deterministic artifact is needed.
-
-Course routing for this teacher:
-- 1st Hour — STEM: use teacher intent, attached sources, and any explicitly provided current STEM source. Do not silently substitute another course Framework when no STEM Framework is registered.
-- 2nd Hour — Physics: use the current Physics Framework and current pinned Physics repository when useful.
-- 3rd Hour — Algebra 1: use the current Algebra 1 Framework and current pinned Algebra repository when useful.
-- 4th Hour — AP Calculus: use the current AP Calculus AB Framework and current pinned Calculus repository when useful.
-- 6th Hour — Algebra 1: use the current Algebra 1 Framework and current pinned Algebra repository when useful.
-
-Do not launch a full curriculum rebuild merely because an authority exists. Use only the minimum relevant current authority needed to create or select what the substitute and students need for this absence.
+Read pms_general/sub_plans/PROFILE.json immediately after this PM. It owns Drive IDs, bell schedules, stable procedures, academic handout defaults, STEM modes, print-package rules, and course/hour grouping.
 
 INPUT CONTRACT
 --------------
-The request manifest supplies:
-- plan_types: one or more of monday | non_monday | other | emergency
-- dates.monday: YYYY-MM-DD when Monday is selected; otherwise null
-- dates.non_monday: YYYY-MM-DD when Non-Monday is selected; otherwise null
-- dates.other: YYYY-MM-DD when Other is selected; otherwise null
-- other_label: required when Other is selected
-- alternate_schedule_url: optional single exact link to a dated alternate-schedule source
-- hourly lesson-intent fields for:
-  1st Hour — STEM
-  2nd Hour — Physics
-  3rd Hour — Algebra 1
-  Crewtime
-  4th Hour — AP Calculus
-  5th Hour — Prep
-  6th Hour — Algebra 1
-- optional additional note
-- optional attached run-specific materials
-- pinned course repositories when provided by the request builder
+The request may supply:
+- plan_types: monday | non_monday | other | emergency, independently selectable;
+- required dates for Monday / Non-Monday / Other;
+- other_label when Other is selected;
+- optional alternate_schedule_url;
+- STEM mode and its matching inputs;
+- Physics current section, notes, and avoid list;
+- Algebra 1 current section, notes, and avoid list; these settings apply to BOTH 3rd and 6th Hour;
+- AP Calculus current section, notes, and avoid list;
+- optional Crewtime / Prep overrides;
+- optional daily custom note;
+- optional attached run-specific files.
 
-At least one plan type must be selected.
-Monday, Non-Monday, Other, and Emergencies are independent outputs and may be selected together.
+For a dated plan, Physics, Algebra 1, and AP Calculus current sections are required even when the teacher gives no further directions. Section values may be shorthand such as 1.3 or 2.4.
 
-If Monday is selected and dates.monday is missing, fail closed and ask for the Monday date.
-If Non-Monday is selected and dates.non_monday is missing, fail closed and ask for the Non-Monday date.
-If Other is selected, dates.other and other_label are required.
-Emergency mode MUST NOT place a calendar date in the plan heading.
-
-On a normal schedule, the five instructional-class fields (1st, 2nd, 3rd, 4th, 6th) are expected to contain teacher lesson intent. When an alternate schedule link is supplied, a class field may be blank if that class does not meet on the resolved dated schedule. After resolving the schedule, fail closed only when an instructional class DOES meet but its teacher intent is missing. Crewtime and 5th-hour Prep are optional override fields: when blank, use the stable PROFILE/template default for that block.
-
-LESSON-INTENT INTERPRETATION — HARD
------------------------------------
-Treat the instructional-class text boxes as teacher intent, NOT polished directions.
-
-The teacher may provide shorthand such as:
-- "finish Newton's Laws notes, then independent force practice for 25 minutes"
-- "review solving equations; independent practice plus an early-finisher option"
-- "students need to complete yesterday's activity and submit in Canvas"
-
-For each class that actually meets on the resolved schedule:
-1. Determine the intended student outcome and approximate flow.
-2. Use current curriculum authorities/resources only as needed.
-3. Decide whether the substitute needs an existing resource, a newly generated simple resource, or only clear directions.
-4. Build/select the minimum set of supporting materials needed for a successful independent class period.
-5. Write concise substitute-facing directions that clearly state what students should do, where materials are, what to submit, and what to do if finished early when that matters.
-6. Do not change the teacher's instructional intent or invent a new lesson objective.
-7. Do not invent missing content when the teacher's prompt is too vague to build safely. Surface the missing information instead.
-
-SCHEDULE AUTHORITY — HARD
--------------------------
-Normal bell times are automatic. The teacher should not have to choose a schedule type, name a special schedule, or upload a second schedule file.
-
-For every selected dated plan:
-- If alternate_schedule_url is blank, use the normal schedule from PROFILE.json:
-  - Monday plan -> schedules.monday
-  - Non-Monday plan -> schedules.tuesday_friday
-  - Other plan -> choose the normal schedule that matches the actual weekday when one exists; otherwise fail closed.
-- If alternate_schedule_url is present, that linked source becomes the schedule authority for the selected dated plan(s).
-- Read the linked schedule source and match EACH selected plan by exact calendar date.
-- Use the high-school / 9th-12th-grade schedule when the source contains separate grade-band schedules.
-- Extract the actual blocks and bell times from the dated schedule. Do not assume every normal class period still exists.
-- If a normal class block is absent from the alternate schedule, do not invent a time for it. Mark/route that hour according to the actual schedule and preserve the teacher's lesson intent for reuse only if appropriate.
-- If the linked source contains multiple dated schedules, select the one matching the requested date; do not ask the teacher to identify the schedule name separately.
-- If a provided alternate schedule link cannot be opened, does not contain the selected date, or is ambiguous about the applicable high-school schedule, fail closed and identify the schedule problem.
-- Do NOT silently fall back to normal bell times when the teacher supplied an alternate schedule link.
-
-EMERGENCY
-- Emergency output maintains the standard Monday and standard Tuesday-Friday reusable versions unless the teacher explicitly requests a different emergency behavior.
-- Emergency output has no calendar date in the heading.
-
-SOURCE / STYLE AUTHORITY
-------------------------
-Use sources in this order:
-1. Teacher's current lesson-intent inputs, selected plan types/dates, optional alternate-schedule link, current run note, and run-specific attachments.
-2. PROFILE.json for stable workflow facts and exact Drive resource IDs.
-3. Current Curriculum Philosophy / relevant current course Framework / Question Structure / minimum applicable build or shared PMs.
-4. Current pinned course repository resources when a teacher prompt refers to existing course material or when a current resource is the best fit.
-5. Current native Google Doc template for the selected plan structure.
-6. Resolved schedule authority: the exact-date entry from the teacher-provided alternate schedule link when present, otherwise the normal PROFILE schedule.
-7. Current Seating Chart document.
-8. Recent completed plans in the Sub Plans root folder only when needed to resolve a style question not already settled by the templates/profile.
-
-Do not silently carry stale course names, times, dates, assignments, links, or student-specific facts from old completed plans.
-
-WRITING STYLE — HARD
---------------------
-- Keep substitute directions concise, practical, and easy to scan.
-- Convert teacher shorthand into complete substitute-facing directions.
-- Preserve the teacher's instructional intent.
-- Do not add requirements, change rigor, or invent procedures.
-- Prefer one short paragraph or a few short steps per class unless the lesson genuinely requires more.
-- Explicitly identify generated/attached materials by exact filename/title when the substitute needs them.
-- Preserve the established stable substitute-information sections from the selected current template: emergency information, discipline, attendance, passes, phone policy, and contact information.
-- Preserve the established 6th-hour team-teaching note unless the teacher explicitly changes it.
-- Crewtime and 5th-hour Prep use teacher overrides when present; otherwise use stable PROFILE/template defaults.
-
-PLAN MODE ROUTING
------------------
-Execute every selected plan type in the same run using the same hourly lesson intent unless the current request explicitly says otherwise.
-
-MONDAY
-- Require dates.monday.
-- Use the current Monday template as the native structural/style base.
-- Use the resolved schedule authority: exact-date alternate schedule when a link is supplied; otherwise the normal Monday schedule.
-- Create/reuse a child folder named exactly with the Monday ISO date: YYYY-MM-DD.
-- The plan heading includes the resolved Monday date.
-
-NON-MONDAY
-- Require dates.non_monday.
-- Use the current Non-Monday template as the native structural/style base unless the teacher explicitly routes another structure.
-- Use the resolved schedule authority: exact-date alternate schedule when a link is supplied; otherwise the normal Tuesday-Friday schedule.
-- Create/reuse a child folder named exactly with the Non-Monday ISO date: YYYY-MM-DD.
-- The plan heading includes the resolved weekday/date.
-
-OTHER
-- Require dates.other and other_label.
-- Other is a dated one-off plan type for a day that should not be forced into the Monday / Non-Monday labels.
-- Use the closest suitable native template structure unless the teacher explicitly provides a different structural source.
-- Use the exact-date alternate schedule when a link is supplied. If no link is supplied, use the normal schedule matching the actual weekday when resolvable.
-- Create/reuse a child folder named exactly with the Other ISO date: YYYY-MM-DD.
-- The plan heading includes the resolved date and teacher-entered other_label.
-
-EMERGENCY
-- Do not put a date in either plan heading.
-- Create/reuse the child folder named Emergency beneath the Sub Plans root.
-- Maintain TWO reusable native plan documents in that folder:
-  1. Emergency Sub Plans - Monday
-  2. Emergency Sub Plans - Tuesday-Friday
-- The Monday copy uses standard Monday times/template structure; the Tuesday-Friday copy uses standard regular times/template structure.
-- Shared supporting materials are stored once in the Emergency folder and referenced by both plans when applicable.
-
-GOOGLE DOC CONSTRUCTION
+PLAN / SCHEDULE ROUTING
 -----------------------
-The current Monday and Non-Monday Google Docs are templates/references, so use a native copy-and-adapt route rather than rebuilding their structure from scratch.
+Plan type and bell schedule are separate.
+- Monday with no alternate link -> PROFILE Monday schedule.
+- Non-Monday with no alternate link -> PROFILE Tuesday-Friday schedule.
+- Other with no alternate link -> normal schedule matching the actual weekday when resolvable.
+- Any dated plan with alternate_schedule_url -> read that one source and match the exact requested calendar date. If separate grade bands appear, use the high-school / 9th-12th-grade schedule.
+- Never silently fall back to normal times when an alternate link was supplied.
+- Never invent missing periods or times.
+- Emergency remains reusable and date-free unless the teacher explicitly requests otherwise.
 
-For each plan document:
-1. Copy the correct current native template into the resolved destination folder, or update the existing exact-title pilot output on a rerun instead of creating duplicate copies.
-2. Preserve the template's overall ordering and stable substitute-information sections.
-3. Replace the date/header behavior according to the selected mode.
-4. Apply the resolved schedule authority and actual bell times.
-5. Replace the 1st, 2nd, 3rd, 4th, and 6th-hour blocks with the complete substitute-facing directions created from teacher lesson intent.
-6. For Crewtime and 5th-hour Prep, use teacher-entered override when present; otherwise preserve stable PROFILE/template default.
-7. Preserve Lunch and the stable 6th-hour team-teaching behavior unless explicitly changed.
-8. Reference every generated or attached material by exact name where useful.
-9. Read back the finished document before completion.
+ACADEMIC EVIDENCE HANDOUT MODEL — PHYSICS / ALGEBRA 1 / AP CALCULUS
+--------------------------------------------------------------------
+For every academic class that meets, create ONE common class handout, not individually customized student versions. 3rd and 6th Hour Algebra 1 use the SAME settings and SAME handout unless the teacher explicitly says otherwise.
 
-SEATING CHART
--------------
-A current copy/reference to the declared Seating Chart must be available inside every resolved destination folder so the substitute package is self-contained.
+The handout must include:
+- student name;
+- date;
+- course;
+- current section;
+- mastery goal(s) being evidenced;
+- original/current problems with enough workspace;
+- directly beneath EVERY question, these print-safe checkboxes:
+  ☐ Knew how to do it   ☐ Had to ask for help   ☐ Had to look it up
+- standing direction exactly in substance: "Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio."
 
-- For a new dated folder, copy the current Seating Chart into that folder with title "Seating Chart - Current".
-- For Emergency, maintain one current copy with that title in the Emergency folder.
-- On reruns, update/reuse the exact-title seating-chart copy rather than accumulating duplicates.
-- Do not alter seating assignments as part of this PM.
+Time budget:
+- Determine the actual scheduled class length from the resolved schedule.
+- Target the student work for approximately 15 minutes LESS than the available class period.
+- Do not force every student to reach the final extension items.
 
-MATERIAL CREATION
------------------
-After interpreting the lesson intent, determine what materials the substitute and students actually need.
+Question progression:
+1. quick accessible entry;
+2. current mastery evidence;
+3. one or more stronger transfer / application / extension-challenge items near the end.
+Lower-performing students may reasonably stop before the extension items; this is acceptable and informative evidence.
 
-Create, reuse, or place supporting materials only when justified by the teacher's intent:
-- If the teacher attaches a run-specific file, place a copy in the resolved destination folder and reference its exact name in the appropriate class direction when useful.
-- If an appropriate current course resource already exists and the teacher's prompt points to it, prefer that current resource over inventing a duplicate.
-- If the teacher gives enough intent/content to create a simple printed handout, directions sheet, independent practice, extension, or reference page, create a polished student-facing Google Doc or appropriate generated artifact in the destination folder.
-- When generating math/science questions or graphs, use the current Question Structure and registered tools rather than improvised incompatible formats.
-- If the direction points students to Canvas, Notability, an existing classroom resource, or another already-available item, do not invent a duplicate handout.
-- Never invent missing assignment content merely because a direction says "worksheet," "practice," or similar. If required material cannot be faithfully created from the request/current authorities, keep the plan accurate and surface the missing material instead of fabricating it.
+MASTERY-GOAL RESOLUTION
+-----------------------
+Resolve what to assess in this order:
+1. current established portfolio/evidence data for that course when available through the authorized current workflow/state;
+2. current section + relevant course Framework / learning ladder;
+3. current course assessment architecture / most recent non-secure assessment evidence tied to that section.
 
-PACKAGE COMPLETENESS
---------------------
-The resolved destination folder should contain everything generated or copied for that absence/emergency package:
-- finished sub-plan document(s);
+Use the most recently assessed mastery goals that remain relevant to the current section. Include prerequisite goals only when they materially support interpretation of the current evidence. Do not turn the handout into random cumulative review.
+
+QUESTION SOURCE PRIORITY — HARD
+-------------------------------
+Prefer reliability over novelty:
+1. existing validated NON-SECURE bank/practice/quick-check/question material aligned to the section/mastery goal;
+2. a parallel variation of validated material;
+3. a brand-new authored question only when needed.
+Never expose or recycle secure Summative prompts/keys as student practice. Use current Question Structure and registered graph/rendering tools where applicable.
+
+STEM
+----
+STEM is not an academic evidence worksheet by default.
+
+CURRENT CHALLENGE mode:
+- Substitute-facing direction should communicate: students are working on their current challenge; a copy of the challenge is included; students know what to do.
+- Teacher-pasted Canvas/current challenge directions are included in the printable substitute packet.
+- Do not manufacture a second worksheet merely to fill time.
+
+ALTERNATE ACTIVITY mode:
+- Use the teacher's engineering-design focus, such as research, testing, prototyping, redesign, evaluating results, or another part of the engineering design process.
+- Create a self-contained student resource suitable for independent work.
+- Possible student products include poster, flyer, video, written paper/essay, one-page how-to guide, infographic, mini-presentation, or another format that better fits the focus.
+- When product preference is system_choose, choose the format that best matches the learning task.
+- Include useful source links and/or short teacher-created background readings as appropriate. Web research is permitted ONLY when the current request/runtime explicitly authorizes it; otherwise use project-provided or teacher-provided sources and surface any missing-resource limitation.
+- Student submission wording: complete and save the work; the teacher will give directions tomorrow for how to submit it.
+- Return a self-contained ZIP for the Alternate STEM resource so the teacher can host it on GitHub and manually link it from the agenda.
+
+SUBSTITUTE PRINT SET — HARD
+---------------------------
+Create a first print set intended to be printed and stapled together. In order, include:
+1. substitute day directions / resolved bell schedule;
+2. seating chart(s);
+3. STEM current-challenge directions when Current Challenge mode is used, or concise access directions for the Alternate STEM resource when Alternate mode is used;
+4. stable general procedures / room information;
+5. academic handout answer keys and mastery-goal mapping at the END.
+
+The stable general-procedures/back-page content must include:
+- calculators are allowed;
+- pencils are in the supply area to the left of and behind the teacher's desk.
+Preserve the established emergency, discipline, attendance, passes, phone policy, contact information, and 6th-hour team-teaching note unless explicitly changed.
+
+STUDENT HANDOUT PRINT CENTER
+----------------------------
+Create a clear print page / print center for student handouts with one obvious control per course. It must:
+- provide Physics, Algebra 1, and AP Calculus student handouts;
+- make clear that Algebra 1 is used for both 3rd and 6th Hour;
+- support adjustable workspace/answer-area height using the same proven live-control behavior used by current curriculum print tools;
+- allow each class handout to be printed independently;
+- preserve readable question/graph sizing and print geometry;
+- keep answers/teacher keys out of student pages.
+
+CUSTOM NOTES / AVOID RULES
+--------------------------
+- Course custom notes may add class-specific substitute context.
+- The daily custom note is for information that applies across the day, including named student helpers or unusual room directions.
+- "Do not include / avoid" is a hard content boundary for that course's handout.
+- Do not invent or infer sensitive student information beyond what the teacher explicitly enters for the current run.
+
+GOOGLE DOC / DRIVE CONSTRUCTION
+-------------------------------
+Use the current Monday/Non-Monday native templates as structural/style references. Create/reuse the dated destination folder. Keep the package self-contained and avoid duplicate rerun outputs.
+
+The resolved destination should contain as applicable:
+- finished substitute plan / first print set;
 - Seating Chart - Current;
-- every run-specific attached file that the substitute needs;
-- every supporting handout/material generated by this PM.
-
-Do not create an extra GitHub transfer ZIP for the sub-plan run itself. This is a private Google Drive output workflow.
+- student handouts / print-center artifact;
+- attached run-specific files;
+- generated supporting materials;
+- STEM Alternate resource ZIP when selected.
 
 FINAL QA
 --------
 Before completion verify:
-- every selected plan type was built and unselected modes were not built;
-- correct date/header behavior for Monday, Non-Monday, Other, and Emergency;
-- every dated/Other output used the correct schedule authority;
-- when an alternate schedule link was supplied, the exact requested date and high-school schedule were resolved from that linked source;
-- alternate schedules preserved the actual blocks/times from the source and did not invent normal-period times for blocks that do not occur;
-- every instructional class that actually meets has teacher intent and is represented in the correct class block;
-- classes omitted by the alternate schedule were not assigned invented bell times or fabricated lesson directions;
-- Crewtime and Prep use teacher overrides when supplied and stable defaults when blank;
-- relevant curriculum authorities were used only when needed and teacher intent was not changed;
-- supporting materials needed for successful independent work are present;
-- stable substitute-information sections remain present;
-- seating chart copy/reference is present in the destination folder;
-- all required supporting materials are present and named clearly;
-- no stale assignment/date/class content leaked from prior plans;
-- no duplicate pilot output was unnecessarily created on rerun.
+- correct selected plan type(s), date(s), and schedule authority;
+- exact alternate-schedule date resolution when a link was supplied;
+- academic handout time target = scheduled period minus about 15 minutes;
+- current section shown on each academic handout;
+- mastery goals resolved with portfolio/evidence-first fallback logic;
+- question source priority followed and no secure item leakage;
+- question progression includes accessible entry -> mastery evidence -> extension/challenge;
+- every question has all three support-reflection checkboxes;
+- student direction includes collaboration, turn-in-to-substitute, and portfolio language;
+- 3rd/6th Algebra 1 share settings/handout;
+- STEM mode routed correctly;
+- stable procedures include calculators and pencil location;
+- answer keys/mastery mapping appear at the END of the substitute print set, not student handouts;
+- print center controls actually change workspace height and each handout prints independently;
+- no stale dates, assignments, student details, or schedule information leaked from prior plans.
 
 OUTPUT
 ------
-Return the Google Drive link for every destination folder created/updated in the run and a short list of files created/updated in each.
+Return the Google Drive link for every destination folder created/updated and a short list of files created/updated. Also surface the student-handout print center directly for teacher use. When STEM Alternate is selected, also return the self-contained STEM ZIP for hosting.

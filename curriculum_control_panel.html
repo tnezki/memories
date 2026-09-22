@@ -37,6 +37,7 @@ textarea{min-height:82px;resize:vertical}
 .scheduleCard label{margin-top:9px}
 .scheduleSourceNote{margin-top:7px}
 .linklike{color:var(--accent);font-weight:800}
+.courseSetup{border:1px solid #dfe5ec;border-radius:12px;background:#fafbfc;padding:14px;margin-top:12px}.courseSetup h4{margin:0 0 6px;font-size:16px}.courseSetup .small{line-height:1.45}.miniGrid{display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:end}.miniGrid label{margin-top:0}@media(max-width:680px){.miniGrid{grid-template-columns:1fr}}
 .hidden{display:none!important}
 @media(max-width:680px){.modeChecks,.dateGrid{grid-template-columns:1fr}}
 </style>
@@ -53,7 +54,7 @@ textarea{min-height:82px;resize:vertical}
     <p class="small">Choose the folder containing <b>memories/</b> and the course folders.</p>
     <button id="connectRoot">Connect Project Root</button>
     <div id="rootStatus" class="status warn">Not connected.</div>
-    <div id="requestStatus" class="status warn">Requests save to <span class="mono">Downloads/_github_transfers/requests/</span>.</div>
+    <div id="requestStatus" class="status warn">Requests use the saved request folder when available; otherwise the ZIP downloads normally to your browser Downloads.</div>
     <div class="divider"></div>
     <h3>Canonical GitHub</h3>
     <div class="small">System authority</div><div class="mono">tnezki/memories</div>
@@ -94,7 +95,7 @@ textarea{min-height:82px;resize:vertical}
       </div>
 
       <div id="subPlanFields" class="hidden">
-        <div class="status good"><b>Sub Plans:</b> tell the system what students should accomplish during each hour. These boxes are lesson intent, not finished substitute prose. The build may use current Philosophy, Frameworks, Question Structure, course resources, and registered tools to create the directions and supporting materials the substitute actually needs.</div>
+        <div class="status good"><b>Sub Plans:</b> academic classes use a common evidence-handout model. Enter the current section and any special notes; the build resolves recent mastery goals, selects/builds the handout, and creates the substitute/print materials. 3rd and 6th Hour Algebra 1 share the same settings and handout.</div>
 
         <label>Plans to build</label>
         <div class="modeChecks">
@@ -117,14 +118,8 @@ textarea{min-height:82px;resize:vertical}
 
         <div id="subPlanOtherMetaWrap" class="hidden">
           <div class="row">
-            <div>
-              <label>Other plan label</label>
-              <input id="subPlanOtherLabel" type="text" placeholder="Example: Assembly Day, Testing Day, Half Day">
-            </div>
-            <div>
-              <label>Other plan date</label>
-              <input id="subPlanOtherDate" type="date">
-            </div>
+            <div><label>Other plan label</label><input id="subPlanOtherLabel" type="text" placeholder="Example: Assembly Day, Testing Day, Half Day"></div>
+            <div><label>Other plan date</label><input id="subPlanOtherDate" type="date"></div>
           </div>
         </div>
 
@@ -133,38 +128,86 @@ textarea{min-height:82px;resize:vertical}
         <div id="subPlanScheduleSection" class="hidden">
           <div class="divider"></div>
           <h3>Schedule for the day</h3>
-          <div class="small">Normally leave this blank. Monday and Non-Monday plans use the current standard MMHS schedule automatically. If the day uses an assembly, testing, half-day, delayed-start, or other alternate schedule, paste the single source link here. The build will match the selected plan date to the correct high-school schedule in that source.</div>
+          <div class="small">Normally leave this blank. If the day uses an assembly, testing, half-day, delayed-start, or other alternate schedule, paste the one source link. The build matches the selected plan date to the correct high-school schedule in that source.</div>
           <label>Alternate schedule link <span class="small">(optional)</span></label>
           <input id="subPlanAlternateScheduleUrl" type="url" placeholder="Paste the Alternate Assembly Schedules / special schedule link">
-          <div class="status good scheduleSourceNote"><b>Blank = standard schedule.</b> A pasted link becomes the schedule authority for the selected dated plan(s); the build must resolve the exact date before using alternate bell times.</div>
+          <div class="status good scheduleSourceNote"><b>Blank = standard schedule.</b> A pasted link becomes the schedule authority for the selected dated plan(s).</div>
         </div>
 
         <div class="divider"></div>
-        <h3>What should students accomplish?</h3>
-        <div class="small">Use shorthand if you want. The build should turn your intent into clear substitute directions and create/select supporting materials when the current curriculum authorities provide enough information to do so safely. If you supplied an alternate schedule link, you may leave a class blank when that class does not meet; the build will verify that against the dated schedule.</div>
+        <h3>Class setup</h3>
+        <div class="small">For Physics, Algebra 1, and AP Calculus, the current section drives the handout. The build first uses current portfolio/evidence data when available to identify the most recently assessed mastery goals, then falls back to the section/framework and current assessment architecture. Existing validated question material is preferred over newly authored questions.</div>
 
-        <div class="directionGrid">
-          <div class="directionCard"><label>1st Hour — STEM</label><textarea id="subPlanP1" placeholder="Describe the student outcome, activity, unfinished work, or resource you want used. Example: Finish the design challenge reflection, then independent extension work for the rest of class."></textarea></div>
-          <div class="directionCard"><label>2nd Hour — Physics</label><textarea id="subPlanP2" placeholder="Example: Finish Newton's Laws notes, then independent force practice for about 25 minutes."></textarea></div>
-          <div class="directionCard"><label>3rd Hour — Algebra 1</label><textarea id="subPlanP3" placeholder="Example: Review solving equations. They need independent practice and an early-finisher option."></textarea></div>
-          <div class="directionCard"><label>Crewtime <span class="small">(optional; blank uses the normal quiet-work direction)</span></label><textarea id="subPlanCrew"></textarea></div>
-          <div class="directionCard"><label>4th Hour — AP Calculus</label><textarea id="subPlanP4" placeholder="Describe what students should learn, finish, practice, or submit during the hour."></textarea></div>
-          <div class="directionCard"><label>5th Hour — Prep <span class="small">(optional)</span></label><textarea id="subPlanP5"></textarea></div>
-          <div class="directionCard"><label>6th Hour — Algebra 1</label><textarea id="subPlanP6" placeholder="Describe what students should learn, finish, practice, or submit during the hour."></textarea></div>
+        <div class="courseSetup">
+          <h4>1st Hour — STEM</h4>
+          <div class="miniGrid">
+            <label>STEM plan<select id="subPlanStemMode"><option value="current_challenge">Current challenge</option><option value="alternate_activity">Alternate activity</option></select></label>
+            <div class="small">Current Challenge keeps students working on the challenge they already know. Alternate Activity creates a self-contained engineering-design resource you can host and link from the agenda.</div>
+          </div>
+          <div id="subPlanStemCurrentWrap">
+            <label>Current challenge directions</label>
+            <textarea id="subPlanStemChallenge" placeholder="Paste the current Canvas challenge directions here. These are included in the printable substitute packet."></textarea>
+          </div>
+          <div id="subPlanStemAlternateWrap" class="hidden">
+            <label>Engineering-design focus</label>
+            <input id="subPlanStemAlternateFocus" type="text" placeholder="Example: research, testing, prototyping, redesign, evaluating results">
+            <label>Preferred student product <span class="small">(optional)</span></label>
+            <select id="subPlanStemAlternateProduct">
+              <option value="system_choose">Let the system choose the best fit</option>
+              <option value="poster">Poster</option>
+              <option value="flyer">Flyer</option>
+              <option value="video">Video</option>
+              <option value="paper_essay">Written paper / essay</option>
+              <option value="how_to_guide">One-page how-to guide</option>
+              <option value="infographic">Infographic</option>
+              <option value="mini_presentation">Mini-presentation</option>
+            </select>
+          </div>
         </div>
 
-        <label>Files the substitute may need <span class="small">(optional)</span></label>
-        <div class="drop"><input id="subPlanAdditional" type="file" multiple><div class="small" style="margin-top:5px">Attach only run-specific materials. Needed files and generated materials belong in the same Google Drive package folder.</div></div>
-        <label>Additional note <span class="small">(optional)</span></label><textarea id="subPlanNote" placeholder="Use only for something that does not belong in one class intent box."></textarea>
-      </div>
+        <div class="courseSetup">
+          <h4>2nd Hour — Physics</h4>
+          <label>Current section</label><input id="subPlanPhysicsSection" type="text" placeholder="Example: 1.3">
+          <label>Custom notes <span class="small">(optional)</span></label><textarea id="subPlanPhysicsNotes" placeholder="Anything the substitute should know about this class or today's handout."></textarea>
+          <label>Do not include / avoid <span class="small">(optional)</span></label><textarea id="subPlanPhysicsAvoid" placeholder="Example: Do not use friction yet."></textarea>
+        </div>
 
+        <div class="courseSetup">
+          <h4>3rd + 6th Hour — Algebra 1</h4>
+          <div class="small">These hours automatically share the same section, mastery-goal logic, handout, notes, and avoid list.</div>
+          <label>Current section</label><input id="subPlanAlgebraSection" type="text" placeholder="Example: 1.3">
+          <label>Custom notes <span class="small">(optional)</span></label><textarea id="subPlanAlgebraNotes" placeholder="Example: A student at each table can help get the group started."></textarea>
+          <label>Do not include / avoid <span class="small">(optional)</span></label><textarea id="subPlanAlgebraAvoid" placeholder="Example: No systems yet."></textarea>
+        </div>
+
+        <div class="courseSetup">
+          <h4>4th Hour — AP Calculus</h4>
+          <label>Current section</label><input id="subPlanCalculusSection" type="text" placeholder="Example: 2.4">
+          <label>Custom notes <span class="small">(optional)</span></label><textarea id="subPlanCalculusNotes" placeholder="Anything the substitute should know about this class or today's handout."></textarea>
+          <label>Do not include / avoid <span class="small">(optional)</span></label><textarea id="subPlanCalculusAvoid" placeholder="Example: Do not use related rates yet."></textarea>
+        </div>
+
+        <div class="courseSetup">
+          <h4>Other blocks</h4>
+          <label>Crewtime <span class="small">(optional; blank uses the normal quiet-work direction)</span></label><textarea id="subPlanCrew"></textarea>
+          <label>5th Hour — Prep <span class="small">(optional)</span></label><textarea id="subPlanP5"></textarea>
+        </div>
+
+        <label>Daily custom notes <span class="small">(optional)</span></label>
+        <textarea id="subPlanNote" style="min-height:130px" placeholder="Use this for day-specific information such as a student who can help, unusual room directions, or anything that applies across classes."></textarea>
+
+        <label>Files the substitute may need <span class="small">(optional)</span></label>
+        <div class="drop"><input id="subPlanAdditional" type="file" multiple><div class="small" style="margin-top:5px">Attach only run-specific materials. Needed files and generated materials belong in the same package.</div></div>
+
+        <div class="status good"><b>Standing student direction:</b> Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio.</div>
+      </div>
       <div class="actions"><button id="saveGeneral">Save Request ZIP</button></div>
     </div>
   </section>
 </div>
 </main>
 <script>
-const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.7";
+const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.8";
 const COURSES={"Algebra 1":{folder:"algebra",repo:"tnezki/algebra",slug:"algebra_1",units:8},"AP Calculus AB":{folder:"calculus",repo:"tnezki/calculus",slug:"ap_calculus_ab",units:8},"Physics":{folder:"physics",repo:"tnezki/physics",slug:"physics",units:8}};
 
 // The canonical control panel is intentionally a build factory, not a maintenance console.
@@ -203,12 +246,18 @@ async function getDir(parent,name,create=false){try{return await parent.getDirec
 async function connectRoot(){if(!window.showDirectoryPicker){alert("Use current Chrome/Edge for folder access.");return}try{const h=await showDirectoryPicker({mode:"readwrite"}),m=await getDir(h,"memories");if(!m){setStatus("rootStatus","Selected folder does not contain memories/.","bad");return}rootHandle=h;await dbPut(ROOT_KEY,h);setStatus("rootStatus","Project root connected.","good");await restoreRequest()}catch(e){if(e.name!=="AbortError")setStatus("rootStatus","Could not connect: "+e.message,"bad")}}
 async function restoreRoot(){const h=await dbGet(ROOT_KEY);if(!h)return;try{const p=await h.queryPermission({mode:"readwrite"});if(p==="granted"&&await getDir(h,"memories")){rootHandle=h;setStatus("rootStatus","Project root restored.","good")}}catch{}}
 async function restoreRequest(){const h=await dbGet(REQUEST_KEY);if(!h)return;try{const p=await h.queryPermission({mode:"readwrite"});if(p==="granted"){requestHandle=h;setStatus("requestStatus","Ready: "+h.name+"/","good")}}catch{}}
+async function dbDelete(k){try{const db=await openDb();await new Promise((res,rej)=>{const tx=db.transaction(REQUEST_STORE,"readwrite");tx.objectStore(REQUEST_STORE).delete(k);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});db.close()}catch(e){console.warn(e)}}
 async function ensureRequestFolder(){
-  if(requestHandle){let p=await requestHandle.queryPermission({mode:"readwrite"});if(p!=="granted")p=await requestHandle.requestPermission({mode:"readwrite"});if(p==="granted")return true;requestHandle=null}
-  let h=await dbGet(REQUEST_KEY);
-  if(h){try{let p=await h.queryPermission({mode:"readwrite"});if(p!=="granted")p=await h.requestPermission({mode:"readwrite"});if(p==="granted"){if(h.name==="_github_transfers")h=await h.getDirectoryHandle("requests",{create:true});requestHandle=h;await dbPut(REQUEST_KEY,h);return true}}catch{}}
-  if(!window.showDirectoryPicker)return false;
-  try{let p=await showDirectoryPicker({mode:"readwrite",startIn:"downloads"});if(p.name==="_github_transfers")p=await p.getDirectoryHandle("requests",{create:true});requestHandle=p;await dbPut(REQUEST_KEY,p);return true}catch{return false}
+  if(requestHandle){
+    try{let p=await requestHandle.queryPermission({mode:"readwrite"});if(p!=="granted")p=await requestHandle.requestPermission({mode:"readwrite"});if(p==="granted")return true}catch{}
+    requestHandle=null;await dbDelete(REQUEST_KEY)
+  }
+  const h=await dbGet(REQUEST_KEY);
+  if(h){
+    try{let p=await h.queryPermission({mode:"readwrite"});if(p!=="granted")p=await h.requestPermission({mode:"readwrite"});if(p==="granted"){requestHandle=h;return true}}
+    catch{await dbDelete(REQUEST_KEY)}
+  }
+  return false;
 }
 
 async function githubJson(repo,path){const r=await fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref=main`,{headers:{Accept:"application/vnd.github.raw+json"}});if(!r.ok)throw Error(`${path} read failed: ${r.status}`);return await r.json()}
@@ -258,6 +307,11 @@ function refreshGeneral(){
   $("subPlanFields").classList.toggle("hidden",!isSub);
   if(isSub)refreshSubPlanMode();
 }
+function refreshStemMode(){
+  const alternate=$("subPlanStemMode")?.value==="alternate_activity";
+  $("subPlanStemCurrentWrap")?.classList.toggle("hidden",alternate);
+  $("subPlanStemAlternateWrap")?.classList.toggle("hidden",!alternate);
+}
 function refreshSubPlanMode(){
   const monday=$("subPlanMonday").checked,regular=$("subPlanRegular").checked,other=$("subPlanOther").checked,emergency=$("subPlanEmergency").checked;
   $("subPlanMondayDateWrap").classList.toggle("hidden",!monday);
@@ -280,7 +334,7 @@ function generalOutputSpec(p){return[{id:"general_output",label:p?.key==="sub_pl
 function runtimePolicy(){return{source_policy:"CLOSED_PROJECT_SOURCES_ONLY",web_search_allowed:false,web_fetch_allowed:false,public_web_fetch_allowed:false,external_research_allowed:false,project_github_direct_fetch_allowed:true,prior_chat_context_allowed:false,project_conversation_history_allowed:false,assistant_saved_memory_allowed:false,file_library_project_artifact_recovery_allowed:false,expanded_canonical_authorities:true,local_repo_transfer_required_for_known_destination:true,fail_closed:true}}
 async function manifestBase(mode,course,unit,job,outputs,note,attachments){const c=course?COURSES[course]:null,sys=await resolveCommit(SYSTEM_REPO),cc=c?await resolveCommit(c.repo):null;return{schema:REQUEST_SCHEMA,mode,course:course||null,unit:unit||null,target:null,workflow:job?.key||null,workflow_label:numberedLabel(job)||job?.label||null,pm_entrypoint:job?.entrypoint||job?.path||null,system_repo:SYSTEM_REPO,system_commit:sys,system_manifest:SYSTEM_MANIFEST,course_repo:c?.repo||null,course_commit:cc,selected_outputs:outputs,delivery:"auto",teacher_inputs:{note:note||"",additional_files:attachments},runtime:runtimePolicy()}}
 function requestText(m){
-  let s="CURRICULUM CONTROL PANEL REQUEST\n\nCONVERSATION ISOLATION - HARD\nIgnore prior chats, project history, saved/personal memory, prior assistant outputs, and stale uploads. Use only this request/current teacher instruction, request files, exact pinned project sources, and any private state explicitly authorized by the selected PM.\n\nNO PUBLIC WEB - HARD\nDo not use public web/search engines/outside curriculum. Direct reads of exact pinned project GitHub resources are allowed.\n\n";
+  let s="CURRICULUM CONTROL PANEL REQUEST\n\nCONVERSATION ISOLATION - HARD\nIgnore prior chats, project history, saved/personal memory, prior assistant outputs, and stale uploads. Use only this request/current teacher instruction, request files, exact pinned project sources, and any private state explicitly authorized by the selected PM.\n\nNO PUBLIC WEB - HARD\nDo not use public web/search engines/outside curriculum unless the selected PM explicitly authorizes research for a requested STEM alternate activity. Direct reads of exact pinned project GitHub resources are allowed.\n\n";
   s+=`MODE: ${m.mode}\n`;
   if(m.course)s+=`COURSE: ${m.course}\nUNIT: ${m.unit}\n`;
   s+=`JOB: ${m.workflow_label}\nPM: ${m.pm_entrypoint}\nSYSTEM: ${m.system_repo}@${m.system_commit}\nSYSTEM MANIFEST: ${m.system_manifest}\n`;
@@ -289,7 +343,7 @@ function requestText(m){
     s+="PROJECT COURSE PINS:\n";
     for(const [name,pin] of Object.entries(m.project_course_pins))s+=`- ${name}: ${pin.repo}@${pin.commit}\n`;
   }
-  s+=`OUTPUTS: ${m.selected_outputs.map(x=>x.label).join('; ')}\nDELIVERY: ${m.delivery}\nSOURCE POLICY: ${m.runtime.source_policy}\nWEB SEARCH ALLOWED: NO\nPRIOR CHAT CONTEXT ALLOWED: NO\nFILE LIBRARY RECOVERY ALLOWED: NO\n`;
+  s+=`OUTPUTS: ${m.selected_outputs.map(x=>x.label).join('; ')}\nDELIVERY: ${m.delivery}\nSOURCE POLICY: ${m.runtime.source_policy}\nWEB SEARCH ALLOWED: ${m.runtime.stem_alternate_web_research_allowed?"STEM ALTERNATE ONLY":"NO"}\nPRIOR CHAT CONTEXT ALLOWED: NO\nFILE LIBRARY RECOVERY ALLOWED: NO\n`;
   if(m.runtime.google_drive_allowed)s+="GOOGLE DRIVE: AUTHORIZED BY SELECTED PM FOR DECLARED SOURCES/DESTINATIONS\n";
   if(m.teacher_inputs.note)s+=`TEACHER NOTE: ${m.teacher_inputs.note}\n`;
   if(m.teacher_inputs.sub_plan){
@@ -302,8 +356,20 @@ function requestText(m){
     if(sp.plan_types.includes("emergency"))s+="EMERGENCY DATE: NONE\n";
     if(sp.alternate_schedule_url)s+=`ALTERNATE SCHEDULE SOURCE: ${sp.alternate_schedule_url}\n`;
     else s+="ALTERNATE SCHEDULE SOURCE: NONE - use standard schedule for each dated plan\n";
-    s+="LESSON INTENT BY HOUR:\n";
-    for(const d of sp.hour_directions)s+=`${d.label}: ${d.text||"[use profile/template default]"}\n`;
+    s+="\nACADEMIC HANDOUT MODEL: common class handout, not individually personalized; target work time is scheduled class length minus 15 minutes.\n";
+    s+=`STEM MODE: ${sp.classes.stem.mode}\n`;
+    if(sp.classes.stem.mode==="current_challenge")s+=`STEM CHALLENGE DIRECTIONS: ${sp.classes.stem.challenge_directions}\n`;
+    else{
+      s+=`STEM ALTERNATE FOCUS: ${sp.classes.stem.alternate_focus}\n`;
+      s+=`STEM PRODUCT PREFERENCE: ${sp.classes.stem.product_preference}\n`;
+    }
+    for(const [label,key] of [["PHYSICS","physics"],["ALGEBRA 1 (3RD + 6TH)","algebra_1"],["AP CALCULUS","ap_calculus"]]){
+      const c=sp.classes[key];
+      s+=`\n${label} SECTION: ${c.section||"[not supplied]"}\n${label} CUSTOM NOTES: ${c.custom_notes||"[none]"}\n${label} AVOID: ${c.avoid||"[none]"}\n`;
+    }
+    s+=`\nCREWTIME OVERRIDE: ${sp.crewtime_override||"[use profile default]"}\n`;
+    s+=`PREP OVERRIDE: ${sp.prep_override||"[use profile default]"}\n`;
+    if(sp.additional_note)s+=`DAILY CUSTOM NOTES: ${sp.additional_note}\n`;
   }
   s+="\nEXECUTION\nUse the pinned commits. Read SYSTEM_MANIFEST.json first, including declared Philosophy, runtime, and local-transfer amendments/contracts, then the selected PM and only required authorities/resources.\n\nOUTPUT CONTRACT\n";
   if(m.mode==="BUILD")s+="For a BUILD with a known canonical repository destination, return ONE local repository transfer ZIP under the current local_transfer_contract. Perform NO Git operations.\n";
@@ -319,7 +385,15 @@ function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&2
 function concat(ps){let n=ps.reduce((a,p)=>a+p.length,0),o=new Uint8Array(n),x=0;for(const p of ps){o.set(p,x);x+=p.length}return o}
 async function makeZip(entries){const enc=new TextEncoder(),locals=[],centrals=[];let off=0;for(const e of entries){const name=enc.encode(e.name),data=e.data instanceof Uint8Array?e.data:new Uint8Array(e.data),crc=crc32(data);const local=concat([u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data]);locals.push(local);const central=concat([u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off),name]);centrals.push(central);off+=local.length}const c=concat(centrals),end=concat([u32(0x06054b50),u16(0),u16(0),u16(entries.length),u16(entries.length),u32(c.length),u32(off),u16(0)]);return new Blob([...locals,c,end],{type:"application/zip"})}
 async function addFiles(entries,files,prefix){for(const f of files)entries.push({name:prefix+f.name,data:new Uint8Array(await f.arrayBuffer())})}
-async function writeRequest(blob,name){if(!(await ensureRequestFolder()))return;const h=await requestHandle.getFileHandle(name,{create:true}),w=await h.createWritable();await w.write(blob);await w.close();setStatus("requestStatus",`Saved: ${requestHandle.name}/${name}`,"good")}
+function browserDownload(blob,name){const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+async function writeRequest(blob,name){
+  if(await ensureRequestFolder()){
+    try{const h=await requestHandle.getFileHandle(name,{create:true}),w=await h.createWritable();await w.write(blob);await w.close();setStatus("requestStatus",`Saved: ${requestHandle.name}/${name}`,"good");return}
+    catch(e){if(e?.name!=="NotFoundError"&&e?.name!=="InvalidStateError")throw e;requestHandle=null;await dbDelete(REQUEST_KEY)}
+  }
+  browserDownload(blob,name);
+  setStatus("requestStatus",`Downloaded normally: ${name}. The previously saved request folder was unavailable.`,"good");
+}
 function safeSlug(s){return String(s||"request").toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"")}
 
 async function saveBuild(){try{const p=buildSelected(),course=$("buildCourse").value,unit=Number($("buildUnit").value),files=[...$("buildAdditional").files];if(!p)return;const m=await manifestBase("BUILD",course,unit,p,outputSpec(p),$("buildNote").value.trim(),files.map(f=>f.name)),enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,files,"inputs/additional/");await writeRequest(await makeZip(entries),`${COURSES[course].slug}_u${unit}_${safeSlug(p.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
@@ -335,30 +409,17 @@ async function saveSubPlan(p){
   if(other&&!otherLabel){alert("Add a label for the Other plan.");return}
 
   const alternateScheduleUrl=$("subPlanAlternateScheduleUrl").value.trim();
-  if(alternateScheduleUrl){
-    try{
-      const u=new URL(alternateScheduleUrl);
-      if(!["http:","https:"].includes(u.protocol))throw 0;
-    }catch{
-      alert("Use a valid http/https link for the alternate schedule.");
-      return;
-    }
-  }
+  if(alternateScheduleUrl){try{const u=new URL(alternateScheduleUrl);if(!["http:","https:"].includes(u.protocol))throw 0}catch{alert("Use a valid http/https link for the alternate schedule.");return}}
 
-  const directions=[
-    {key:"period_1",label:"1st Hour - STEM",text:$("subPlanP1").value.trim()},
-    {key:"period_2",label:"2nd Hour - Physics",text:$("subPlanP2").value.trim()},
-    {key:"period_3",label:"3rd Hour - Algebra 1",text:$("subPlanP3").value.trim()},
-    {key:"crewtime",label:"Crewtime",text:$("subPlanCrew").value.trim()},
-    {key:"period_4",label:"4th Hour - AP Calculus",text:$("subPlanP4").value.trim()},
-    {key:"period_5",label:"5th Hour - Prep",text:$("subPlanP5").value.trim()},
-    {key:"period_6",label:"6th Hour - Algebra 1",text:$("subPlanP6").value.trim()}
-  ];
-  if(!alternateScheduleUrl){
-    const required=directions.filter(x=>["period_1","period_2","period_3","period_4","period_6"].includes(x.key));
-    const missing=required.filter(x=>!x.text).map(x=>x.label);
-    if(missing.length){alert("Add lesson intent for: "+missing.join(", "));return}
-  }
+  const hasDated=monday||regular||other;
+  const stemMode=$("subPlanStemMode").value;
+  const stemChallenge=$("subPlanStemChallenge").value.trim();
+  const stemAlternateFocus=$("subPlanStemAlternateFocus").value.trim();
+  if(hasDated&&stemMode==="current_challenge"&&!stemChallenge){alert("Paste the current STEM challenge directions, or choose Alternate Activity.");return}
+  if(hasDated&&stemMode==="alternate_activity"&&!stemAlternateFocus){alert("Add the engineering-design focus for the STEM alternate activity.");return}
+
+  const physicsSection=$("subPlanPhysicsSection").value.trim(),algebraSection=$("subPlanAlgebraSection").value.trim(),calculusSection=$("subPlanCalculusSection").value.trim();
+  if(hasDated){const missing=[];if(!physicsSection)missing.push("Physics current section");if(!algebraSection)missing.push("Algebra 1 current section");if(!calculusSection)missing.push("AP Calculus current section");if(missing.length){alert("Add: "+missing.join(", "));return}}
 
   const files=[...$("subPlanAdditional").files],note=$("subPlanNote").value.trim();
   const m=await manifestBase("GENERAL",null,null,p,generalOutputSpec(p),note,files.map(f=>f.name));
@@ -367,6 +428,8 @@ async function saveSubPlan(p){
   m.runtime.google_drive_allowed=true;
   m.runtime.google_drive_write_allowed=true;
   m.runtime.local_repo_transfer_required_for_known_destination=false;
+  m.runtime.stem_alternate_web_research_allowed=stemMode==="alternate_activity";
+  if(stemMode==="alternate_activity"){m.runtime.web_search_allowed=true;m.runtime.web_fetch_allowed=true;m.runtime.public_web_fetch_allowed=true;m.runtime.external_research_allowed=true;m.runtime.web_scope="STEM_ALTERNATE_RESOURCE_RESEARCH_ONLY"}
   m.project_course_pins={
     "Physics":{repo:COURSES["Physics"].repo,commit:await resolveCommit(COURSES["Physics"].repo)},
     "Algebra 1":{repo:COURSES["Algebra 1"].repo,commit:await resolveCommit(COURSES["Algebra 1"].repo)},
@@ -377,10 +440,16 @@ async function saveSubPlan(p){
     dates:{monday:mondayDate,non_monday:regularDate,other:otherDate},
     other_label:otherLabel||null,
     alternate_schedule_url:alternateScheduleUrl||null,
-    schedule_resolution:alternateScheduleUrl
-      ?"match each selected dated plan to its exact date in the linked alternate schedule source; fail closed if a selected date cannot be resolved"
-      :"use the normal profile schedule for each dated plan",
-    hour_directions:directions,
+    schedule_resolution:alternateScheduleUrl?"match each selected dated plan to its exact date in the linked alternate schedule source; fail closed if a selected date cannot be resolved":"use the normal profile schedule for each dated plan",
+    handout_model:"academic_evidence_handouts",
+    classes:{
+      stem:{mode:stemMode,challenge_directions:stemChallenge,alternate_focus:stemAlternateFocus,product_preference:$("subPlanStemAlternateProduct").value},
+      physics:{section:physicsSection,custom_notes:$("subPlanPhysicsNotes").value.trim(),avoid:$("subPlanPhysicsAvoid").value.trim()},
+      algebra_1:{section:algebraSection,custom_notes:$("subPlanAlgebraNotes").value.trim(),avoid:$("subPlanAlgebraAvoid").value.trim(),applies_to:["period_3","period_6"]},
+      ap_calculus:{section:calculusSection,custom_notes:$("subPlanCalculusNotes").value.trim(),avoid:$("subPlanCalculusAvoid").value.trim()}
+    },
+    crewtime_override:$("subPlanCrew").value.trim(),
+    prep_override:$("subPlanP5").value.trim(),
     additional_note:note,
     additional_files:files.map(f=>f.name)
   };
@@ -389,7 +458,6 @@ async function saveSubPlan(p){
   const suffix=[mondayDate,regularDate,otherDate,emergency?"emergency":null].filter(Boolean).join("_");
   await writeRequest(await makeZip(entries),`general_sub_plans_${safeSlug(suffix)}_REQUEST.zip`);
 }
-
 async function saveGeneral(){try{const p=generalSelected();if(!p)return;if(p.key==="sub_plans"){await saveSubPlan(p);return}const a=[...$("generalPrimary").files],b=[...$("generalAdditional").files];if(!a.length){alert("Choose a General PM and at least one primary source file.");return}const files=[...a,...b],m=await manifestBase("GENERAL",null,null,p,generalOutputSpec(p),$("generalNote").value.trim(),files.map(f=>f.name));m.course_repo=null;const enc=new TextEncoder(),entries=[{name:"REQUEST.txt",data:enc.encode(requestText(m))},{name:"REQUEST_MANIFEST.json",data:enc.encode(JSON.stringify(m,null,2))}];await addFiles(entries,a,"inputs/primary/");await addFiles(entries,b,"inputs/additional/");await writeRequest(await makeZip(entries),`general_${safeSlug(p.key)}_REQUEST.zip`)}catch(e){alert("Request not saved: "+e.message)}}
 
 function tab(n){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===n));document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===n));updateCourseSide()}
@@ -405,6 +473,8 @@ $("subPlanMonday").onchange=refreshSubPlanMode;
 $("subPlanRegular").onchange=refreshSubPlanMode;
 $("subPlanOther").onchange=refreshSubPlanMode;
 $("subPlanEmergency").onchange=refreshSubPlanMode;
+$("subPlanStemMode").onchange=refreshStemMode;
+refreshStemMode();
 (async()=>{initCourses();await restoreRoot();await restoreRequest();await discoverMenus()})();
 </script>
 </body>
