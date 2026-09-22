@@ -95,7 +95,7 @@ textarea{min-height:82px;resize:vertical}
       </div>
 
       <div id="subPlanFields" class="hidden">
-        <div class="status good"><b>Sub Plans:</b> academic classes use a common evidence-handout model. Enter the current section and any special notes; the build resolves recent mastery goals, selects/builds the handout, and creates the substitute/print materials. 3rd and 6th Hour Algebra 1 share the same settings and handout.</div>
+        <div class="status good"><b>Sub Plans:</b> builds one self-contained print-center ZIP using the locked Sub Plan gold standard. Enter the current section and any special notes. Physics and AP Calculus target about 10 minutes less than class; Algebra 1 targets about 15 minutes less and prioritizes the most recent classwide evidence needs before a short current-section check. 3rd and 6th Hour Algebra 1 share one handout.</div>
 
         <label>Plans to build</label>
         <div class="modeChecks">
@@ -136,7 +136,7 @@ textarea{min-height:82px;resize:vertical}
 
         <div class="divider"></div>
         <h3>Class setup</h3>
-        <div class="small">For Physics, Algebra 1, and AP Calculus, the current section drives the handout. The build first uses current portfolio/evidence data when available to identify the most recently assessed mastery goals, then falls back to the section/framework and current assessment architecture. Existing validated question material is preferred over newly authored questions.</div>
+        <div class="small">The current section identifies the live course materials, but the handout is not automatically a current-section worksheet. The build reads current evidence first, then the Framework/assessment architecture. Algebra 1 especially uses the most recent classwide misses as the main review/evidence block, with only a short current-section check. Validated non-secure Bank/practice material is preferred over new authoring.</div>
 
         <div class="courseSetup">
           <h4>1st Hour — STEM</h4>
@@ -199,7 +199,7 @@ textarea{min-height:82px;resize:vertical}
         <label>Files the substitute may need <span class="small">(optional)</span></label>
         <div class="drop"><input id="subPlanAdditional" type="file" multiple><div class="small" style="margin-top:5px">Attach only run-specific materials. Needed files and generated materials belong in the same package.</div></div>
 
-        <div class="status good"><b>Standing student direction:</b> Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio.</div>
+        <div class="status good"><b>Standing student direction:</b> Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio.<br><br><b>Locked output:</b> self-contained ZIP with 4-button index, first-print substitute bundle, and separate Physics / Algebra 1 / AP Calculus handouts using the gold-standard Letter-page preview and sliders.</div>
       </div>
       <div class="actions"><button id="saveGeneral">Save Request ZIP</button></div>
     </div>
@@ -207,7 +207,7 @@ textarea{min-height:82px;resize:vertical}
 </div>
 </main>
 <script>
-const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.8";
+const SYSTEM_REPO="tnezki/memories",SYSTEM_MANIFEST="SYSTEM_MANIFEST.json",REQUEST_SCHEMA="curriculum-control-request/4.9";
 const COURSES={"Algebra 1":{folder:"algebra",repo:"tnezki/algebra",slug:"algebra_1",units:8},"AP Calculus AB":{folder:"calculus",repo:"tnezki/calculus",slug:"ap_calculus_ab",units:8},"Physics":{folder:"physics",repo:"tnezki/physics",slug:"physics",units:8}};
 
 // The canonical control panel is intentionally a build factory, not a maintenance console.
@@ -330,7 +330,7 @@ function refreshSubPlanMode(){
 }
 
 function outputSpec(p){const map={exit:"Quick Checks"};return[{id:p?.key||"output",label:map[p?.key]||p?.label||"Requested output",kind:"canonical"}]}
-function generalOutputSpec(p){return[{id:"general_output",label:p?.key==="sub_plans"?"Google Drive Sub Plan Package":p.label,kind:"canonical"}]}
+function generalOutputSpec(p){return[{id:"general_output",label:p?.key==="sub_plans"?"Self-Contained Sub Plan Print Center ZIP":p.label,kind:"canonical"}]}
 function runtimePolicy(){return{source_policy:"CLOSED_PROJECT_SOURCES_ONLY",web_search_allowed:false,web_fetch_allowed:false,public_web_fetch_allowed:false,external_research_allowed:false,project_github_direct_fetch_allowed:true,prior_chat_context_allowed:false,project_conversation_history_allowed:false,assistant_saved_memory_allowed:false,file_library_project_artifact_recovery_allowed:false,expanded_canonical_authorities:true,local_repo_transfer_required_for_known_destination:true,fail_closed:true}}
 async function manifestBase(mode,course,unit,job,outputs,note,attachments){const c=course?COURSES[course]:null,sys=await resolveCommit(SYSTEM_REPO),cc=c?await resolveCommit(c.repo):null;return{schema:REQUEST_SCHEMA,mode,course:course||null,unit:unit||null,target:null,workflow:job?.key||null,workflow_label:numberedLabel(job)||job?.label||null,pm_entrypoint:job?.entrypoint||job?.path||null,system_repo:SYSTEM_REPO,system_commit:sys,system_manifest:SYSTEM_MANIFEST,course_repo:c?.repo||null,course_commit:cc,selected_outputs:outputs,delivery:"auto",teacher_inputs:{note:note||"",additional_files:attachments},runtime:runtimePolicy()}}
 function requestText(m){
@@ -344,7 +344,7 @@ function requestText(m){
     for(const [name,pin] of Object.entries(m.project_course_pins))s+=`- ${name}: ${pin.repo}@${pin.commit}\n`;
   }
   s+=`OUTPUTS: ${m.selected_outputs.map(x=>x.label).join('; ')}\nDELIVERY: ${m.delivery}\nSOURCE POLICY: ${m.runtime.source_policy}\nWEB SEARCH ALLOWED: ${m.runtime.stem_alternate_web_research_allowed?"STEM ALTERNATE ONLY":"NO"}\nPRIOR CHAT CONTEXT ALLOWED: NO\nFILE LIBRARY RECOVERY ALLOWED: NO\n`;
-  if(m.runtime.google_drive_allowed)s+="GOOGLE DRIVE: AUTHORIZED BY SELECTED PM FOR DECLARED SOURCES/DESTINATIONS\n";
+  if(m.runtime.google_drive_allowed)s+=`GOOGLE DRIVE: ${m.runtime.google_drive_write_allowed?"AUTHORIZED FOR DECLARED SOURCES/DESTINATIONS":"READ ONLY FOR DECLARED LIVE SOURCES; DO NOT WRITE FINISHED OUTPUT"}\n`;
   if(m.teacher_inputs.note)s+=`TEACHER NOTE: ${m.teacher_inputs.note}\n`;
   if(m.teacher_inputs.sub_plan){
     const sp=m.teacher_inputs.sub_plan;
@@ -356,7 +356,8 @@ function requestText(m){
     if(sp.plan_types.includes("emergency"))s+="EMERGENCY DATE: NONE\n";
     if(sp.alternate_schedule_url)s+=`ALTERNATE SCHEDULE SOURCE: ${sp.alternate_schedule_url}\n`;
     else s+="ALTERNATE SCHEDULE SOURCE: NONE - use standard schedule for each dated plan\n";
-    s+="\nACADEMIC HANDOUT MODEL: common class handout, not individually personalized; target work time is scheduled class length minus 15 minutes.\n";
+    s+="\nACADEMIC HANDOUT MODEL: common class handout, not individually personalized. Physics and AP Calculus target scheduled class length minus 10 minutes; Algebra 1 targets scheduled class length minus 15 minutes. Estimate from real task demand, not raw question count.\n";
+    s+="GOLD STANDARD: pms_general/sub_plans/gold_standard/ - reuse the approved shell/controls/print structure; replace all stale run-specific content.\n";
     s+=`STEM MODE: ${sp.classes.stem.mode}\n`;
     if(sp.classes.stem.mode==="current_challenge")s+=`STEM CHALLENGE DIRECTIONS: ${sp.classes.stem.challenge_directions}\n`;
     else{
@@ -373,7 +374,7 @@ function requestText(m){
   }
   s+="\nEXECUTION\nUse the pinned commits. Read SYSTEM_MANIFEST.json first, including declared Philosophy, runtime, and local-transfer amendments/contracts, then the selected PM and only required authorities/resources.\n\nOUTPUT CONTRACT\n";
   if(m.mode==="BUILD")s+="For a BUILD with a known canonical repository destination, return ONE local repository transfer ZIP under the current local_transfer_contract. Perform NO Git operations.\n";
-  else if(m.workflow==="sub_plans")s+="This GENERAL job is a private Google Drive workflow. Follow the selected PM's Drive destination/output contract. Do not create a GitHub transfer ZIP for the sub-plan output itself. Perform NO Git operations.\n";
+  else if(m.workflow==="sub_plans")s+="This GENERAL job returns ONE self-contained Sub Plan Print Center ZIP. Use Google Drive only for authorized live source reads (for example schedule/seating/evidence), and do not write the finished output to Drive. Do not create a GitHub transfer ZIP for the sub-plan output itself. Perform NO Git operations.\n";
   else s+="For GENERAL jobs, use the selected PM's normal delivery. Perform NO Git operations.\n";
   return s;
 }
@@ -424,9 +425,9 @@ async function saveSubPlan(p){
   const files=[...$("subPlanAdditional").files],note=$("subPlanNote").value.trim();
   const m=await manifestBase("GENERAL",null,null,p,generalOutputSpec(p),note,files.map(f=>f.name));
   m.course_repo=null;
-  m.runtime.source_policy="PINNED_PROJECT_AND_AUTHORIZED_GOOGLE_DRIVE";
+  m.runtime.source_policy="PINNED_PROJECT_AND_AUTHORIZED_GOOGLE_DRIVE_READS";
   m.runtime.google_drive_allowed=true;
-  m.runtime.google_drive_write_allowed=true;
+  m.runtime.google_drive_write_allowed=false;
   m.runtime.local_repo_transfer_required_for_known_destination=false;
   m.runtime.stem_alternate_web_research_allowed=stemMode==="alternate_activity";
   if(stemMode==="alternate_activity"){m.runtime.web_search_allowed=true;m.runtime.web_fetch_allowed=true;m.runtime.public_web_fetch_allowed=true;m.runtime.external_research_allowed=true;m.runtime.web_scope="STEM_ALTERNATE_RESOURCE_RESEARCH_ONLY"}
@@ -435,7 +436,12 @@ async function saveSubPlan(p){
     "Algebra 1":{repo:COURSES["Algebra 1"].repo,commit:await resolveCommit(COURSES["Algebra 1"].repo)},
     "AP Calculus AB":{repo:COURSES["AP Calculus AB"].repo,commit:await resolveCommit(COURSES["AP Calculus AB"].repo)}
   };
+  m.delivery="self_contained_zip";
   m.teacher_inputs.sub_plan={
+    gold_standard_path:"pms_general/sub_plans/gold_standard/",
+    gold_standard_contract:"pms_general/sub_plans/gold_standard/GOLD_STANDARD.md",
+    time_budget_minutes_less_than_scheduled_period:{physics:10,algebra_1:15,ap_calculus:10},
+    evidence_routing:{algebra_1:"prioritize current classwide misses / recent assessed I-cans, then short current-section check",physics:"current section + current evidence; Section 1.3 uses the locked resultant/investigation mix",ap_calculus:"current Notes/Practice/textbook/source materials; do not invent section I-cans"},
     plan_types:types,
     dates:{monday:mondayDate,non_monday:regularDate,other:otherDate},
     other_label:otherLabel||null,

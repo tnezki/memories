@@ -1,13 +1,14 @@
 {
-  "schema": "sub-plans-profile/0.6",
-  "status": "pilot",
+  "schema": "sub-plans-profile/0.7",
+  "status": "pilot_gold_standard_locked",
   "teacher": "Troy Nezki",
   "school_year": "2026-27",
   "drive": {
     "sub_plans_root": {
       "id": "1_jDD22U36ND6IT7YbWpZJrFVo-5oS_EH",
       "title": "Sub Plans",
-      "url": "https://drive.google.com/drive/folders/1_jDD22U36ND6IT7YbWpZJrFVo-5oS_EH"
+      "url": "https://drive.google.com/drive/folders/1_jDD22U36ND6IT7YbWpZJrFVo-5oS_EH",
+      "role": "legacy/source reference only; finished output is not written here"
     },
     "monday_template": {
       "id": "1Fy1fRhQaSV0BR5DKo3lGVj2wwsl3bp-SFeRldyj4NgE",
@@ -28,7 +29,8 @@
       "id": "1HH2hu6U2rCBLZMFKaJL40MuEAjk5_l6zsBCVoUkL2P4",
       "title": "Seating Chart",
       "url": "https://docs.google.com/document/d/1HH2hu6U2rCBLZMFKaJL40MuEAjk5_l6zsBCVoUkL2P4"
-    }
+    },
+    "access_mode": "read_only_sources_for_self_contained_build"
   },
   "curriculum_authority": {
     "system_manifest": "SYSTEM_MANIFEST.json",
@@ -154,9 +156,9 @@
     "destination_folder_name": "YYYY-MM-DD"
   },
   "destinations": {
-    "dated_folder_name": "YYYY-MM-DD",
-    "emergency_folder_name": "Emergency",
-    "seating_chart_copy_title": "Seating Chart - Current"
+    "output_mode": "self_contained_zip",
+    "teacher_entrypoint": "index.html",
+    "drive_destination": null
   },
   "style": {
     "direction_tone": "brief, practical, substitute-facing",
@@ -201,14 +203,14 @@
       "AP Calculus AB"
     ],
     "individual_personalization": false,
-    "time_budget_minutes_less_than_scheduled_period": 15,
     "standing_direction": "Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio.",
     "required_header_fields": [
       "student_name",
       "date",
       "course",
       "section",
-      "mastery_goals"
+      "current_section_focus",
+      "recent_evidence_or_source_focus_when_applicable"
     ],
     "reflection_after_every_question": [
       "Knew how to do it",
@@ -226,16 +228,24 @@
       "brand_new_only_when_needed"
     ],
     "secure_summative_items_allowed": false,
-    "workspace_required": true
+    "workspace_required": true,
+    "time_budget_minutes_less_than_scheduled_period_by_course": {
+      "Physics": 10,
+      "Algebra 1": 15,
+      "AP Calculus AB": 10
+    },
+    "time_estimation_rule": "Estimate from actual task demand, not question count; very short one-step items count as brief tasks.",
+    "shell": "gold_standard_madlib"
   },
   "mastery_goal_resolution": {
     "priority": [
       "current_authorized_portfolio_or_evidence_state",
-      "current_section_and_framework",
-      "current_course_assessment_architecture"
+      "current_course_framework_and_exact_section_or_unit_evidence_architecture",
+      "current_nonsecure_bank_or_assessment_evidence"
     ],
-    "goal": "most_recently_assessed_mastery_goals_relevant_to_current_section",
-    "prerequisite_use": "only_when_materially_helpful"
+    "goal": "Use the strongest course-appropriate recent evidence target without inventing labels or I-cans that are not established.",
+    "prerequisite_use": "only_when_materially_helpful",
+    "algebra_special_rule": "When classwide recent misses are clear, prioritize those missed I-cans over bulk current-section practice."
   },
   "stem": {
     "modes": [
@@ -282,10 +292,10 @@
       "stapled_packet": true,
       "order": [
         "day_directions_and_schedule",
+        "general_procedures_and_extensions",
         "seating_charts",
         "stem_directions_or_access",
-        "general_procedures",
-        "answer_keys_and_mastery_mapping"
+        "answer_keys_and_evidence_mapping"
       ],
       "answer_keys_at_end": true
     },
@@ -293,7 +303,104 @@
       "required": true,
       "per_course_printing": true,
       "adjustable_workspace_height": true,
-      "student_answers_excluded": true
+      "student_answers_excluded": true,
+      "visible_letter_page_preview": true,
+      "live_repagination": true,
+      "gold_standard_controls": [
+        "all_workspaces",
+        "problem_selector",
+        "selected_workspace",
+        "graph_or_diagram",
+        "reset",
+        "print"
+      ]
+    }
+  },
+  "gold_standard": {
+    "path": "pms_general/sub_plans/gold_standard",
+    "contract": "pms_general/sub_plans/gold_standard/GOLD_STANDARD.md",
+    "locked_shell_files": [
+      "pms_general/sub_plans/gold_standard/assets/sub_handout_madlib.css",
+      "pms_general/sub_plans/gold_standard/assets/worksheet_styles.css",
+      "pms_general/sub_plans/gold_standard/assets/runtime.js",
+      "pms_general/sub_plans/gold_standard/assets/mathjax/tex-svg-full.js"
+    ],
+    "reference_pages": [
+      "pms_general/sub_plans/gold_standard/index.html",
+      "pms_general/sub_plans/gold_standard/print_bundle.html",
+      "pms_general/sub_plans/gold_standard/physics.html",
+      "pms_general/sub_plans/gold_standard/algebra1.html",
+      "pms_general/sub_plans/gold_standard/ap_calculus.html"
+    ],
+    "source_map": "pms_general/sub_plans/gold_standard/data/source_map.json",
+    "qa_example": "pms_general/sub_plans/gold_standard/data/qa.json",
+    "rule": "Reuse shell/behavior; never copy stale run-specific dates, sections, schedule, seating placeholders, questions, or answers."
+  },
+  "delivery": {
+    "mode": "self_contained_zip",
+    "google_drive_write": false,
+    "google_drive_read_roles": [
+      "current seating chart",
+      "alternate schedule source",
+      "authorized current evidence/portfolio context when available"
+    ],
+    "root_files": [
+      "index.html",
+      "print_bundle.html",
+      "physics.html",
+      "algebra1.html",
+      "ap_calculus.html"
+    ],
+    "teacher_entrypoint": "index.html",
+    "primary_actions": [
+      "Print Substitute Bundle",
+      "Physics Worksheet",
+      "Algebra 1 Worksheet",
+      "AP Calculus Worksheet"
+    ]
+  },
+  "course_handout_rules": {
+    "Physics": {
+      "primary_source_order": [
+        "current Physics Framework/Assessment Plan",
+        "current non-secure Bank/practice",
+        "current investigation/source materials",
+        "controlled parallels"
+      ],
+      "time_budget_minutes_less_than_period": 10,
+      "section_1.3_special_case": {
+        "quick_collinear_items": "small number only",
+        "two_vector_nonparallel_grid_problems": 3,
+        "three_vector_investigation_finishers": 2,
+        "grid_source": "current investigations/u1_3_investigation visual format",
+        "student_result": "draw resultant on same grid; report magnitude and direction as angle from +x or valid compass form"
+      }
+    },
+    "Algebra 1": {
+      "primary_purpose": "targeted review/evidence based on most recent classwide misses",
+      "time_budget_minutes_less_than_period": 15,
+      "evidence_priority": [
+        "authorized current portfolio/evidence state",
+        "current Framework/Assessment Plan",
+        "current non-secure Bank evidence"
+      ],
+      "default_balance_when_weak_recent_goal_is_clear": {
+        "targeted_review_percent": "75-85",
+        "current_section_percent": "15-25"
+      },
+      "current_section_rule": "short check only when a stronger recent classwide evidence need is established",
+      "graph_rule": "Use registered graph_tool/current district graph standard for graph-scale/intercept work."
+    },
+    "AP Calculus AB": {
+      "time_budget_minutes_less_than_period": 10,
+      "do_not_invent_section_i_cans": true,
+      "primary_content_sources": [
+        "current Notes",
+        "current Practice",
+        "current textbook/source materials",
+        "approved Calculus Question Structure families for controlled parallels"
+      ],
+      "graph_rule": "Use registered graph_tool/current AP Calculus graph conventions."
     }
   }
 }

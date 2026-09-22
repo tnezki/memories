@@ -1,37 +1,90 @@
-SUB PLANS — EVIDENCE HANDOUT PM v0.6
-====================================
-STATUS: PILOT / WORKING — use for real sub days and revise from evidence.
+SUB PLANS — GOLD STANDARD PRINT-CENTER PM v0.7
+================================================
+STATUS: PILOT / WORKING — gold-standard format locked for live testing.
 
 PURPOSE
 -------
-Create complete substitute-teacher packages from minimal teacher input. For Physics, Algebra 1, and AP Calculus, the normal sub-day academic task is a class handout designed to produce useful portfolio evidence rather than simply occupy time. STEM uses either the current design challenge or a teacher-selected alternate engineering-design activity.
+Create one self-contained substitute-plan ZIP from minimal teacher input. The normal academic sub day is useful evidence/review work, not generic filler. STEM continues the current design challenge or uses a teacher-selected alternate engineering-design activity.
 
-THIS IS A GOOGLE DRIVE WORKFLOW — HARD
---------------------------------------
-This GENERAL PM is authorized to read/write the Google Drive resources declared in sibling PROFILE.json and the run-specific destination folder it resolves beneath the declared Sub Plans root folder. It may also use the exact pinned project repositories and authorities declared by the request.
+DELIVERY — HARD
+---------------
+Return ONE self-contained ZIP. Do NOT create or update a Google Drive destination folder for the finished package.
 
-Do not use prior chats, saved memory, unrelated File Library items, or stale outputs as authority. The current request, pinned project sources, this PM/PROFILE, declared Drive resources, and any exact teacher-provided alternate-schedule link are authoritative.
+The ZIP root must contain:
+- index.html
+- print_bundle.html
+- physics.html
+- algebra1.html
+- ap_calculus.html
+- assets/...
+- data/source_map.json
+- data/qa.json
+- optional stem_alternate/... when Alternate STEM is selected
 
-REQUIRED SIBLING AUTHORITY
---------------------------
-Read pms_general/sub_plans/PROFILE.json immediately after this PM. It owns Drive IDs, bell schedules, stable procedures, academic handout defaults, STEM modes, print-package rules, and course/hour grouping.
+index.html is the teacher entry point and has exactly four primary actions:
+1. Print Substitute Bundle
+2. Physics Worksheet
+3. Algebra 1 Worksheet
+4. AP Calculus Worksheet
+
+Google Drive is read-only for this workflow and is used only for declared live source material such as the seating chart, alternate schedule source, and authorized current evidence/portfolio context when available. Do not write the output back to Drive.
+
+GOLD STANDARD — HARD
+--------------------
+Read sibling folder:
+  pms_general/sub_plans/gold_standard/
+
+Read GOLD_STANDARD.md first, then inspect:
+- index.html
+- print_bundle.html
+- physics.html
+- algebra1.html
+- ap_calculus.html
+- assets/sub_handout_madlib.css
+- assets/worksheet_styles.css
+- assets/runtime.js
+- templates/student_handout_madlib.html
+- data/source_map.json
+- data/qa.json
+
+The gold standard owns the approved Sub Plan print-center structure, student-handout visual language, live Letter-page preview, page-break behavior, slider behavior, MathJax setup, print navigation, bundle order, and level of finish.
+
+FORMAT LOCK:
+- Copy assets/sub_handout_madlib.css, assets/worksheet_styles.css, and assets/runtime.js byte-for-byte into the finished package unless a teacher-requested change explicitly reopens the shell.
+- Preserve the same four-button index architecture.
+- Preserve visible white Letter pages and live repagination when workspace/visual sliders change.
+- Preserve the local MathJax SVG workflow and canonical delimiters \( ... \) / \[ ... \].
+- Do not copy stale dates, section numbers, questions, answers, schedules, seating placeholders, or class-specific content from the gold standard. It is a format/content-routing exemplar, not a source of current facts.
+
+AUTHORITY / READ ORDER — HARD
+-----------------------------
+Use the request's pinned commits. Resolve authority in this order:
+1. current teacher instruction in the request;
+2. SYSTEM_MANIFEST.json -> current Curriculum Philosophy;
+3. current universal Question Structure authority;
+4. current course Framework and exact relevant Unit/section assessment architecture;
+5. this PM + sibling PROFILE.json;
+6. gold-standard shell files named above for rendering/packaging behavior;
+7. current validated course Banks, notes, practices, textbook/source material, investigations, and registered Tools needed for the actual content.
+
+Do not use prior chats, saved/personal memory, unrelated File Library material, or stale outputs as authority.
 
 INPUT CONTRACT
 --------------
 The request may supply:
 - plan_types: monday | non_monday | other | emergency, independently selectable;
-- required dates for Monday / Non-Monday / Other;
+- dates for Monday / Non-Monday / Other;
 - other_label when Other is selected;
 - optional alternate_schedule_url;
-- STEM mode and its matching inputs;
-- Physics current section, notes, and avoid list;
-- Algebra 1 current section, notes, and avoid list; these settings apply to BOTH 3rd and 6th Hour;
-- AP Calculus current section, notes, and avoid list;
+- STEM mode and matching inputs;
+- Physics current section, notes, avoid list;
+- Algebra 1 current section, notes, avoid list; applies to BOTH 3rd and 6th Hour;
+- AP Calculus current section, notes, avoid list;
 - optional Crewtime / Prep overrides;
 - optional daily custom note;
 - optional attached run-specific files.
 
-For a dated plan, Physics, Algebra 1, and AP Calculus current sections are required even when the teacher gives no further directions. Section values may be shorthand such as 1.3 or 2.4.
+For a dated plan, Physics, Algebra 1, and AP Calculus current sections are required.
 
 PLAN / SCHEDULE ROUTING
 -----------------------
@@ -39,137 +92,172 @@ Plan type and bell schedule are separate.
 - Monday with no alternate link -> PROFILE Monday schedule.
 - Non-Monday with no alternate link -> PROFILE Tuesday-Friday schedule.
 - Other with no alternate link -> normal schedule matching the actual weekday when resolvable.
-- Any dated plan with alternate_schedule_url -> read that one source and match the exact requested calendar date. If separate grade bands appear, use the high-school / 9th-12th-grade schedule.
+- Any dated plan with alternate_schedule_url -> read that one source and match the exact requested calendar date. If grade bands are separated, use the high-school / 9th-12th-grade schedule.
 - Never silently fall back to normal times when an alternate link was supplied.
 - Never invent missing periods or times.
-- Emergency remains reusable and date-free unless the teacher explicitly requests otherwise.
+- Emergency remains reusable/date-free unless explicitly changed.
 
-ACADEMIC EVIDENCE HANDOUT MODEL — PHYSICS / ALGEBRA 1 / AP CALCULUS
---------------------------------------------------------------------
-For every academic class that meets, create ONE common class handout, not individually customized student versions. 3rd and 6th Hour Algebra 1 use the SAME settings and SAME handout unless the teacher explicitly says otherwise.
+SUBSTITUTE PRINT BUNDLE — HARD
+------------------------------
+The first print button opens print_bundle.html. Its pages must be in this order:
+1. hour-by-hour day directions + resolved bell schedule;
+2. General Procedures & Extensions;
+3. current seating charts;
+4. STEM current-challenge directions, or concise access directions for Alternate STEM;
+5. answer keys / evidence mapping at the END, grouped by Physics, Algebra 1, and AP Calculus.
 
-The handout must include:
-- student name;
-- date;
-- course;
-- current section;
-- mastery goal(s) being evidenced;
-- original/current problems with enough workspace;
-- directly beneath EVERY question, these print-safe checkboxes:
+Do not move the General Procedures page behind seating charts or STEM directions.
+
+General Procedures & Extensions must include the stable PROFILE procedures plus the established emergency, discipline, attendance, phone-policy, and school-extension/contact information supported by current source/template authority.
+
+ACADEMIC HANDOUTS — COMMON RULES
+--------------------------------
+Create ONE common class handout for each academic course; do not individualize by student. 3rd and 6th Hour Algebra 1 use the SAME handout.
+
+Every handout includes:
+- Name / Date / Hour;
+- course and current section;
+- current section focus;
+- recent evidence / source focus when applicable;
+- enough problems/workspace for the time target;
+- directly under EVERY problem:
   ☐ Knew how to do it   ☐ Had to ask for help   ☐ Had to look it up
-- standing direction exactly in substance: "Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio."
+- standing direction in substance:
+  "Complete as much as you can during class. Turn in to the substitute. You are encouraged to work with your table. This will be used in your portfolio."
 
-Time budget:
-- Determine the actual scheduled class length from the resolved schedule.
-- Target the student work for approximately 15 minutes LESS than the available class period.
-- Do not force every student to reach the final extension items.
+TIME BUDGET — HARD
+------------------
+Use the actual resolved class length.
+- Physics: target approximately class length MINUS 10 minutes.
+- AP Calculus AB: target approximately class length MINUS 10 minutes.
+- Algebra 1: target approximately class length MINUS 15 minutes.
 
-Question progression:
-1. quick accessible entry;
-2. current mastery evidence;
-3. one or more stronger transfer / application / extension-challenge items near the end.
-Lower-performing students may reasonably stop before the extension items; this is acceptable and informative evidence.
+Estimate time from actual task demand, not raw question count. Very short one-step questions cannot be counted as multi-minute tasks merely to hit a total. The later extension/challenge portion may be unfinished by some students.
 
-MASTERY-GOAL RESOLUTION
------------------------
-Resolve what to assess in this order:
-1. current established portfolio/evidence data for that course when available through the authorized current workflow/state;
-2. current section + relevant course Framework / learning ladder;
-3. current course assessment architecture / most recent non-secure assessment evidence tied to that section.
+QUESTION / EVIDENCE SOURCING — HARD
+-----------------------------------
+Before writing questions, map the handout's evidence jobs and intended time.
 
-Use the most recently assessed mastery goals that remain relevant to the current section. Include prerequisite goals only when they materially support interpretation of the current evidence. Do not turn the handout into random cumulative review.
+Priority:
+1. current validated NON-SECURE Bank/practice/question material;
+2. controlled parallel variation of validated material;
+3. current notes/practice/textbook/investigation material when that course uses those as the best source;
+4. brand-new authored questions only when needed.
 
-QUESTION SOURCE PRIORITY — HARD
--------------------------------
-Prefer reliability over novelty:
-1. existing validated NON-SECURE bank/practice/quick-check/question material aligned to the section/mastery goal;
-2. a parallel variation of validated material;
-3. a brand-new authored question only when needed.
-Never expose or recycle secure Summative prompts/keys as student practice. Use current Question Structure and registered graph/rendering tools where applicable.
+Never expose secure Summative items.
+Use current Question Structure for authored/parallel items unless the course Framework explicitly exempts the task.
+
+REGISTERED REPRESENTATIONS — HARD
+---------------------------------
+If a task requires a mathematical Cartesian graph, resolve the registered graph_tool through Tools/MANIFEST.json and use it. Do not hand-draw substitute Cartesian graphs in browser SVG/CSS.
+
+Use the current District Graph Rendering Standard and graph_tool output. Student-facing graphs must be answer-neutral when the student is expected to infer/construct something.
+
+Physics vector/investigation grids are instructional diagrams rather than ordinary Cartesian function graphs. For Physics Section 1.3 resultants, use the current U1.3 Investigation's grid/vector visual language as the source format. Do not replace it with an unrelated custom diagram style.
+
+MATHJAX — HARD
+--------------
+Use the current registered MathJax/finalization rules and the gold-standard local MathJax SVG setup. Use canonical delimiters \( ... \) and \[ ... \]. Run the current math finalizer/audit on all generated HTML with math. Raw TeX, broken fractions/exponents, clipped math, or browser-text approximations fail QA.
+
+COURSE ROUTING
+--------------
+PHYSICS
+- Use the current Physics Framework, exact current section architecture, current validated non-secure Physics Bank/practice, and current investigation/source materials.
+- Favor physical meaning and representations over repetitive plug-and-chug.
+- For Section 1.3 specifically, the current gold-standard mix is intentional: only a small number of quick collinear/same-opposite force questions; THREE two-vector non-parallel resultant problems using the current investigation grid format; and TWO three-vector resultant investigation problems at the end. Students draw the resultant on the same grid and report magnitude plus direction either as an angle measured from +x or a valid compass description such as NW.
+- Do not overfill the sheet with 10-second same/opposite-force calculations.
+
+ALGEBRA 1
+- Use current authorized portfolio/evidence state FIRST to identify the most recently assessed Mastery Goal/I-cans most students still need.
+- The sub handout is primarily a targeted REVIEW/EVIDENCE opportunity, not a current-section worksheet.
+- Default balance when current evidence clearly identifies a weak recent goal: approximately 75-85% targeted missed/review evidence and only 15-25% short current-section check. Do not flood the sheet with current-section questions.
+- Use the Algebra Bank families and approved representations. If the missed evidence is graph scale/intercepts, use the actual MG1 scale/intercept families and registered graph_tool-generated graphs, as demonstrated by the gold standard.
+- If current evidence does not identify a defensible classwide priority, fall back to the Framework/Assessment Plan rather than guessing.
+
+AP CALCULUS AB
+- Do not invent section-level I Can statements when the course has not established them.
+- Resolve the current section/topic from current course materials.
+- Use current Notes, Practice, and/or textbook/source materials as primary content sources, then use approved Calculus Question Structure families to author controlled parallel practice when needed.
+- Preserve AP notation, theorem hypotheses, justification expectations, calculator/non-calculator appropriateness, and registered graph-tool rendering from the AP Calculus Framework.
+
+MASTERY / EVIDENCE RESOLUTION
+-----------------------------
+Resolve in this order:
+1. current authorized portfolio/evidence state when available;
+2. current course Framework + exact section/Unit evidence architecture;
+3. current non-secure assessment/bank evidence relevant to that section.
+
+For Algebra, recent classwide misses may legitimately take priority over the current section because the purpose of the sub day is useful evidence/review. For Physics/Calculus, current section work normally remains the main route unless the evidence state or teacher note says otherwise.
 
 STEM
 ----
-STEM is not an academic evidence worksheet by default.
+CURRENT CHALLENGE:
+- Substitute-facing direction: students are working on their current challenge; a copy of the challenge is included; students know what to do.
+- Include the teacher-pasted Canvas/current challenge directions in print_bundle.html.
+- Do not create a second worksheet just to fill time.
 
-CURRENT CHALLENGE mode:
-- Substitute-facing direction should communicate: students are working on their current challenge; a copy of the challenge is included; students know what to do.
-- Teacher-pasted Canvas/current challenge directions are included in the printable substitute packet.
-- Do not manufacture a second worksheet merely to fill time.
+ALTERNATE ACTIVITY:
+- Use the teacher's engineering-design focus.
+- May produce a poster, flyer, video, written paper/essay, one-page how-to guide, infographic, mini-presentation, or another fit-for-purpose product.
+- When system_choose is selected, choose the product that best fits the learning job.
+- Web research is permitted ONLY if the request explicitly authorizes it for STEM Alternate.
+- Package the alternate as a self-contained hostable folder/ZIP inside the main response package or as a clearly linked nested ZIP.
+- Student direction: complete and save the work; teacher will give submission directions tomorrow.
 
-ALTERNATE ACTIVITY mode:
-- Use the teacher's engineering-design focus, such as research, testing, prototyping, redesign, evaluating results, or another part of the engineering design process.
-- Create a self-contained student resource suitable for independent work.
-- Possible student products include poster, flyer, video, written paper/essay, one-page how-to guide, infographic, mini-presentation, or another format that better fits the focus.
-- When product preference is system_choose, choose the format that best matches the learning task.
-- Include useful source links and/or short teacher-created background readings as appropriate. Web research is permitted ONLY when the current request/runtime explicitly authorizes it; otherwise use project-provided or teacher-provided sources and surface any missing-resource limitation.
-- Student submission wording: complete and save the work; the teacher will give directions tomorrow for how to submit it.
-- Return a self-contained ZIP for the Alternate STEM resource so the teacher can host it on GitHub and manually link it from the agenda.
+STUDENT HANDOUT PRINT CENTER — HARD
+-----------------------------------
+Physics, Algebra 1, and AP Calculus each open as a separate HTML page from index.html.
 
-SUBSTITUTE PRINT SET — HARD
----------------------------
-Create a first print set intended to be printed and stapled together. In order, include:
-1. substitute day directions / resolved bell schedule;
-2. seating chart(s);
-3. STEM current-challenge directions when Current Challenge mode is used, or concise access directions for the Alternate STEM resource when Alternate mode is used;
-4. stable general procedures / room information;
-5. academic handout answer keys and mastery-goal mapping at the END.
+Each page must preserve the gold-standard live print controls:
+- All workspaces slider;
+- Problem selector;
+- selected problem Workspace slider;
+- Graph / diagram slider;
+- Reset;
+- Print.
 
-The stable general-procedures/back-page content must include:
-- calculators are allowed;
-- pencils are in the supply area to the left of and behind the teacher's desk;
-- students are welcome to use the iPad Crayons located up front;
-- student passes are created on the tablet up front: use the silver power button on the side to turn it on, open Chrome, then use the PikMyKid button in the middle; students enter their own passes;
-- only one student may be out of the room at a time.
-Preserve the established emergency, discipline, attendance, phone policy, contact information, and 6th-hour team-teaching note unless explicitly changed. The stable pass procedure above replaces any conflicting stale pass wording in older templates.
+The screen preview must show actual white Letter pages and repaginate live so page breaks are visible before printing. Answers never appear on student pages.
 
-STUDENT HANDOUT PRINT CENTER
-----------------------------
-Create a clear print page / print center for student handouts with one obvious control per course. It must:
-- provide Physics, Algebra 1, and AP Calculus student handouts;
-- make clear that Algebra 1 is used for both 3rd and 6th Hour;
-- support adjustable workspace/answer-area height using the same proven live-control behavior used by current curriculum print tools;
-- allow each class handout to be printed independently;
-- preserve readable question/graph sizing and print geometry;
-- keep answers/teacher keys out of student pages.
+STABLE GENERAL PROCEDURES
+-------------------------
+Include:
+- Calculators are allowed.
+- Pencils are in the supply area to the left of and behind the teacher's desk.
+- Students are welcome to use the iPad Crayons up front.
+- Pass tablet is up front; silver power button on the side; turn on, open Chrome, use PikMyKid button in the middle; students enter their own passes.
+- Only one student may be out of the room at a time.
 
-CUSTOM NOTES / AVOID RULES
---------------------------
-- Course custom notes may add class-specific substitute context.
-- The daily custom note is for information that applies across the day, including named student helpers or unusual room directions.
-- "Do not include / avoid" is a hard content boundary for that course's handout.
-- Do not invent or infer sensitive student information beyond what the teacher explicitly enters for the current run.
+Preserve supported emergency, discipline, attendance, phone-policy, contact information, and the 6th-hour team-teaching note. The pass procedure above overrides stale conflicting pass wording.
 
-GOOGLE DOC / DRIVE CONSTRUCTION
--------------------------------
-Use the current Monday/Non-Monday native templates as structural/style references. Create/reuse the dated destination folder. Keep the package self-contained and avoid duplicate rerun outputs.
+CUSTOM NOTES / AVOID
+--------------------
+- Course custom notes add substitute/class context.
+- Daily custom note applies across the day.
+- Do not include / avoid is a hard content boundary.
+- Do not infer sensitive student details beyond current teacher input.
 
-The resolved destination should contain as applicable:
-- finished substitute plan / first print set;
-- Seating Chart - Current;
-- student handouts / print-center artifact;
-- attached run-specific files;
-- generated supporting materials;
-- STEM Alternate resource ZIP when selected.
-
-FINAL QA
---------
-Before completion verify:
-- correct selected plan type(s), date(s), and schedule authority;
-- exact alternate-schedule date resolution when a link was supplied;
-- academic handout time target = scheduled period minus about 15 minutes;
-- current section shown on each academic handout;
-- mastery goals resolved with portfolio/evidence-first fallback logic;
-- question source priority followed and no secure item leakage;
-- question progression includes accessible entry -> mastery evidence -> extension/challenge;
-- every question has all three support-reflection checkboxes;
-- student direction includes collaboration, turn-in-to-substitute, and portfolio language;
-- 3rd/6th Algebra 1 share settings/handout;
-- STEM mode routed correctly;
-- stable procedures include calculators, pencil location, iPad Crayons, the PikMyKid tablet pass process, and one-student-out-at-a-time;
-- answer keys/mastery mapping appear at the END of the substitute print set, not student handouts;
-- print center controls actually change workspace height and each handout prints independently;
-- no stale dates, assignments, student details, or schedule information leaked from prior plans.
+QA — HARD
+---------
+Before delivery verify:
+- correct plan/date/schedule authority;
+- alternate schedule resolves exact date when supplied;
+- print bundle order exactly matches this PM;
+- seating charts are current and embedded locally in the self-contained package;
+- Physics/AP Calc target class length -10; Algebra target -15;
+- problem count/time estimate reflects actual task demand;
+- Algebra uses current evidence priority rather than defaulting to current-section bulk practice;
+- questions trace to allowed non-secure sources / controlled parallels;
+- all Cartesian graphs use registered graph_tool and current graph standard;
+- Physics U1.3 investigation grids use the current investigation visual format;
+- MathJax finalization passes with zero visible raw TeX;
+- every question has the three support checkboxes;
+- 3rd/6th Algebra share one handout;
+- keys/evidence mapping are only at end of print_bundle.html;
+- index has exactly four primary actions;
+- live page preview/sliders work and visibly repaginate;
+- all relative links resolve locally;
+- no stale gold-standard date, schedule, seating placeholder, section, or answer leaks into current output.
 
 OUTPUT
 ------
-Return the Google Drive link for every destination folder created/updated and a short list of files created/updated. Also surface the student-handout print center directly for teacher use. When STEM Alternate is selected, also return the self-contained STEM ZIP for hosting.
+Return the ONE self-contained Sub Plan Print Center ZIP. The teacher should be able to unzip it, open index.html, print the first bundle, then independently adjust/print Physics, Algebra 1, and AP Calculus handouts.

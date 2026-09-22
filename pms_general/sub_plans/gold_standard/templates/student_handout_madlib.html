@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{COURSE}} — {{SECTION}}</title>
+  <link rel="stylesheet" href="../assets/worksheet_styles.css">
+  <link rel="stylesheet" href="../assets/sub_handout_madlib.css">
+  <script>
+  window.MathJax={
+    tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true},
+    svg:{fontCache:"local"}
+  };
+  </script>
+  <script src="../assets/mathjax/tex-svg-full.js"></script>
+</head>
+<body>
+  {{LAYOUT_CONTROLS}}
+  <div id="runtimePageStack" class="page-stack"></div>
+  <main id="runtimeFlowSource" class="flow-source" data-title="{{COURSE}} — {{SECTION}}">
+    <header class="runtime-flow-header">
+      {{HEADER_HTML}}
+      {{FOCUS_HTML}}
+      {{DIRECTIONS_HTML}}
+    </header>
+    <div class="section-divider">Current Evidence & Practice</div>
+    {{CURRENT_QUESTION_CARDS_HTML}}
+    <div class="section-divider extension">Extension / Challenge — reach these if time allows</div>
+    {{EXTENSION_QUESTION_CARDS_HTML}}
+    {{OPTIONAL_COURSE_SPECIFIC_END_BLOCKS_HTML}}
+  </main>
+  <script src="../assets/runtime.js"></script>
+</body>
+</html>
