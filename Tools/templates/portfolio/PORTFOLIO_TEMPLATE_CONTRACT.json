@@ -1,8 +1,8 @@
 {
-  "schema": "portfolio-template-contract/2.0",
+  "schema": "portfolio-template-contract/2.1",
   "status": "CURRENT",
-  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student report is locked to the approved two-page MG-grade design; teacher report is intervention-first with exactly three main lanes.",
-  "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, lane names, table/card anatomy, and grading explanation. Data changes; recurring structure does not drift.",
+  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student report remains locked to the approved two-page Mastery Goal grade design. Teacher report is locked to the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design.",
+  "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, page purposes, card anatomy, lane names, grading explanation, Priority Day capacity/ranking, and the one-page Pull In design. Data changes; recurring structure does not drift.",
   "student_packet": {
     "template": "Tools/templates/portfolio/student_packet_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
@@ -10,16 +10,9 @@
     "pages_per_student": 2,
     "duplex_rule": "Every active student consumes exactly two content pages.",
     "page_1_title": "Current Progress Report",
-    "page_1_fixed_sections": [
-      "Essential Standard",
-      "Your current picture",
-      "Unit Evidence Picture"
-    ],
+    "page_1_fixed_sections": ["Essential Standard", "Your current picture", "Unit Evidence Picture"],
     "page_2_title": "Unit Evidence Picture",
-    "page_2_fixed_sections": [
-      "Recent evidence - {LATEST_EVIDENCE_LABEL}",
-      "Your Practice"
-    ],
+    "page_2_fixed_sections": ["Recent evidence - {LATEST_EVIDENCE_LABEL}", "Your Practice"],
     "unit_grade_rule": "Do not display an overall Unit letter grade or large Unit-grade box.",
     "snapshot_lead_pattern": "{MG_DEMONSTRATED_COUNT} of {MG_TOTAL} Unit Mastery Goals demonstrated.",
     "grading_explanation": "Mastery Goal grades are current evidence, not averages, and can improve with new evidence.",
@@ -30,10 +23,7 @@
     },
     "mastery_goal_distribution": {
       "default": "2 + 2 for a four-MG Unit",
-      "allowed_fit_adjustments": [
-        "1 + 3",
-        "3 + 1"
-      ],
+      "allowed_fit_adjustments": ["1 + 3", "3 + 1"],
       "rule": "Every MG appears exactly once. Rendered readability controls the split."
     },
     "practice_box": {
@@ -49,43 +39,55 @@
     "template": "Tools/templates/portfolio/teacher_summary_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
     "page_size": "US Letter landscape",
-    "page_1_title": "Class Overview",
-    "main_lanes": [
-      "Whole Class",
-      "Priority Day Group",
-      "Pull In Students"
-    ],
-    "class_overview": "Show quick lane counts/decisions first, then Major Strengths and Top Actionable Patterns. Do not put roster-upload or PowerSchool workflow instructions on the page.",
-    "whole_class": {
-      "rule": "Use only for a genuinely shared classwide instructional need. If none, state that on Class Overview and omit a separate Whole Class page."
+    "normal_page_budget": "3 pages when no Whole Class intervention is active; 4 pages when Whole Class is active.",
+    "fixed_page_order": ["Class Overview", "Whole Class when active", "Priority Day Groups", "Pull In Students"],
+    "forbidden_normal_sections": ["Detailed Evidence Appendix", "Brief guided practice", "Planned Support Sequence", "Crewtime Quick Gaps", "Reassessment Queue"],
+    "class_overview": {
+      "title": "Class Overview",
+      "rule": "Fast-to-scan action page. Show compact current-grade/evidence stats, Major strengths, Highest-leverage pattern, and the three lane summaries. Do not include roster-upload or PowerSchool workflow instructions.",
+      "lanes": ["Whole Class", "Priority Day Groups", "Pull In Students"]
     },
-    "priority_day_group": {
-      "rule": "Group only students sharing the exact same current substantial-gap bundle of 2-4 I Cans. A single shared I Can is not enough. Each group shows all bundle I Cans with exact code + full statement, student list, shared misconception/need, and concise teacher move.",
+    "whole_class": {
+      "page_title": "Whole Class",
+      "max_targets": 1,
+      "rule": "Use only for the highest-leverage genuinely shared instructional need. Show exact I Can code + full statement, affected current Practice + check count, recurring evidence-pattern summary, and one concise Teacher move. Include short Why this belongs in Whole Class and Keep the response short callouts. If no whole-class need is supported, omit the page and state that on Class Overview."
+    },
+    "priority_day_groups": {
+      "page_title": "Priority Day Groups",
+      "max_groups": 2,
+      "max_students_per_group": 15,
+      "purpose": "One weekly 20-minute Crewtime teacher-led intervention opportunity.",
+      "eligible_student_rule": "Active student has at least one current assessed Mastery Goal grade of I AND at least one current PRACTICE_AND_CHECK I Can. Students whose only next step is NEEDS_ANOTHER_DEMONSTRATION or NEEDS_FIRST_CHECK are not assigned a Priority Day seat.",
+      "ranking_rule": [
+        "Sort by count of current assessed Mastery Goal grades equal to I, descending.",
+        "Tie-break by count of current PRACTICE_AND_CHECK I Cans, descending.",
+        "Tie-break by current evidence severity across those practice targets, prioritizing UNUSABLE before LIMITED before PARTIAL.",
+        "Use stable student_key order only as the final deterministic tie-break."
+      ],
+      "assignment_rule": "Group 1 receives ranks 1-15. Group 2 receives ranks 16-30. Do not manufacture additional groups. If fewer than 30 eligible students exist, leave unused capacity empty. If more than 30 exist, show only a compact count of remaining eligible students waiting after Group 2; do not add a third group.",
+      "grouping_rule": "Exact shared I Can bundles are NOT required. Within each selected group, summarize the dominant overlapping I Can needs and evidence patterns, then propose the best common 20-minute intervention. A small alternate practice strip may be used for a few outlier targets during the same session.",
+      "card_rule": "Each group card shows priority rank, student count, target-frequency chips, compact student list with each student's PRACTICE_AND_CHECK I Can codes, evidence-backed group summary, and a 20-minute Crewtime plan with approximate time blocks.",
       "forbidden_label": "Brief guided practice"
     },
     "pull_in_students": {
-      "rule": "Student-centered list for 1-2 current small/actionable gaps. Show each student with exact I Can target(s) and concise personalized practice/check need. Never organize this page under I Can headings."
+      "page_title": "Pull In Students",
+      "page_count": 1,
+      "eligible_student_rule": "Active students with exactly 1-2 current PRACTICE_AND_CHECK I Can gaps.",
+      "rule": "Student-centered compact grid. Show student name, period, and exact one or two I Can code + full statement targets. Never organize under shared I Can headings.",
+      "banner_pattern": "ALL {PULL_IN_COUNT} STUDENTS: PRACTICE + CHECK SOON",
+      "banner_rule": "State the action once in the banner; do not repeat a PLAN label on every student card.",
+      "fit_rule": "Keep every Pull In student on one landscape page. Use three columns normally and four columns when needed; reduce repeated wording before reducing legibility.",
+      "overlap_rule": "Priority Day and Pull In are scheduling views, not mutually exclusive intervention identities. A student may appear in both when the student is selected for a weekly Priority Day seat and also has only 1-2 actionable gaps suitable for short pull-in practice.",
+      "exclusion_rule": "Students who only need another independent demonstration are intentionally kept out of this lane."
     },
-    "appendix": {
-      "rule": "Detailed I Can evidence is reference material after intervention pages. Use large cards and continue pages as needed; never clip or hide names."
-    }
+    "detailed_evidence_rule": "Do not include a normal detailed I Can appendix in the recurring teacher report. Detailed longitudinal evidence remains in private Portfolio Data CSV/JSON state and may be produced separately only when the teacher explicitly requests it."
   },
   "student_action_states": {
-    "NEEDS_FIRST_CHECK": {
-      "label": "Needs first check"
-    },
-    "PRACTICE_AND_CHECK": {
-      "label": "Practice + check soon"
-    },
-    "NEEDS_ANOTHER_DEMONSTRATION": {
-      "label": "Needs another independent check"
-    },
-    "SECURE": {
-      "label": "Secure"
-    },
-    "EXTENSION": {
-      "label": "Extension"
-    }
+    "NEEDS_FIRST_CHECK": {"label": "Needs first check"},
+    "PRACTICE_AND_CHECK": {"label": "Practice + check soon"},
+    "NEEDS_ANOTHER_DEMONSTRATION": {"label": "Needs another independent check"},
+    "SECURE": {"label": "Secure"},
+    "EXTENSION": {"label": "Extension"}
   },
   "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in human-facing output."
 }

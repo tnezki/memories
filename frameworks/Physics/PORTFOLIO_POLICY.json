@@ -1,30 +1,14 @@
 {
-  "schema": "physics-portfolio-policy/2.0",
+  "schema": "physics-portfolio-policy/2.1",
   "status": "CURRENT",
   "course": "Physics",
   "portfolio_drive_course_folder": "Physics",
   "purpose": "Own Physics Portfolio status, Mastery Goal grades, PowerSchool MG exports, intervention routing, evidence interpretation, practice routing, and recurring report fidelity while exact Unit Assessment Plans own learning content.",
   "i_can_statuses": [
-    {
-      "code": "NO_EVIDENCE",
-      "symbol": "open_circle",
-      "label": "No Evidence"
-    },
-    {
-      "code": "DEVELOPING",
-      "symbol": "half_circle",
-      "label": "Developing"
-    },
-    {
-      "code": "MASTERED",
-      "symbol": "filled_circle",
-      "label": "Mastered"
-    },
-    {
-      "code": "TRANSFER",
-      "symbol": "star",
-      "label": "Transfer"
-    }
+    {"code":"NO_EVIDENCE","symbol":"open_circle","label":"No Evidence"},
+    {"code":"DEVELOPING","symbol":"half_circle","label":"Developing"},
+    {"code":"MASTERED","symbol":"filled_circle","label":"Mastered"},
+    {"code":"TRANSFER","symbol":"star","label":"Transfer"}
   ],
   "mastered_default_rule": {
     "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities.",
@@ -34,12 +18,7 @@
   "mastery_goal_rule": {
     "general_rule": "A Mastery Goal is demonstrated when at least half of its exact I Cans, rounded up, are Mastered or Transfer.",
     "formula": "required_secure = ceil(i_can_count_in_goal / 2)",
-    "unit1_thresholds": {
-      "U1-MG01": 2,
-      "U1-MG02": 2,
-      "U1-MG03": 4,
-      "U1-MG04": 2
-    }
+    "unit1_thresholds": {"U1-MG01":2,"U1-MG02":2,"U1-MG03":4,"U1-MG04":2}
   },
   "mastery_goal_grade_model": {
     "status": "CURRENT_OFFICIAL",
@@ -64,42 +43,38 @@
     "privacy_rule": "No student identity/evidence in URL/QR."
   },
   "intervention_routing": {
-    "lanes": [
-      "Whole Class",
-      "Priority Day Group",
-      "Pull In Students"
-    ],
-    "whole_class": "Only a genuinely broad shared instructional need.",
-    "priority_day_group": "At least two students sharing the exact same current substantial-gap bundle of 2-4 I Cans; never a single-I-Can group as the primary grouping rule.",
-    "pull_in_students": "Student-centered 1-2 small/actionable gaps.",
-    "ready_for_recheck": "Keep out of intervention lanes when only another independent demonstration is needed."
+    "lanes": ["Whole Class", "Priority Day Groups", "Pull In Students"],
+    "whole_class": {
+      "max_targets": 1,
+      "rule": "Only the highest-leverage genuinely broad shared instructional need supported by current evidence. Show target, affected Practice + check count, recurring evidence pattern, and concise teacher move."
+    },
+    "priority_day_groups": {
+      "max_groups": 2,
+      "max_students_per_group": 15,
+      "eligible_student_rule": "Active student has at least one current assessed Mastery Goal grade I and at least one PRACTICE_AND_CHECK I Can.",
+      "ranking_rule": "Sort by number of current assessed MG grades I descending, then PRACTICE_AND_CHECK I Can count descending, then evidence severity (UNUSABLE before LIMITED before PARTIAL), then stable student_key.",
+      "assignment_rule": "Group 1 = ranks 1-15; Group 2 = ranks 16-30; never create Group 3.",
+      "plan_rule": "Exact shared I Can bundle matching is not required. Summarize dominant overlapping needs and recurring evidence patterns, then propose the best common 20-minute Crewtime intervention plus short alternate practice only for a few outlier targets."
+    },
+    "pull_in_students": {
+      "eligible_student_rule": "Exactly 1-2 current PRACTICE_AND_CHECK I Can gaps.",
+      "page_rule": "Student-centered one-page landscape grid. State Practice + check soon once in the banner; show name/period and exact target(s); no repeated PLAN label.",
+      "overlap_rule": "Priority Day and Pull In are scheduling views and may overlap."
+    },
+    "ready_for_recheck": "Keep out of intervention seats/lists when the only next step is another independent demonstration."
   },
   "report_fidelity": {
     "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
-    "human_learning_label_rule": "Always show code + full exact I Can statement."
+    "human_learning_label_rule": "Always show code + full exact I Can statement.",
+    "teacher_report_rule": "Normal teacher report is Class Overview; Whole Class when active; one Priority Day Groups page; one Pull In Students page. No normal detailed-evidence appendix."
   },
   "student_next_action": {
     "states": [
-      {
-        "code": "NEEDS_FIRST_CHECK",
-        "label": "Needs first check"
-      },
-      {
-        "code": "PRACTICE_AND_CHECK",
-        "label": "Practice + check soon"
-      },
-      {
-        "code": "NEEDS_ANOTHER_DEMONSTRATION",
-        "label": "Needs another independent check"
-      },
-      {
-        "code": "SECURE",
-        "label": "Secure"
-      },
-      {
-        "code": "EXTENSION",
-        "label": "Extension"
-      }
+      {"code":"NEEDS_FIRST_CHECK","label":"Needs first check"},
+      {"code":"PRACTICE_AND_CHECK","label":"Practice + check soon"},
+      {"code":"NEEDS_ANOTHER_DEMONSTRATION","label":"Needs another independent check"},
+      {"code":"SECURE","label":"Secure"},
+      {"code":"EXTENSION","label":"Extension"}
     ]
   },
   "unit_readiness": {
@@ -111,5 +86,12 @@
       "practice_builder": "practice_builder___p7r4x/student_practice_builder.html"
     },
     "2-8": "NOT_YET_MIGRATED_FOR_PORTFOLIO"
+  },
+  "teacher_summary": {
+    "normal_pages": "Class Overview; Whole Class when active; one Priority Day Groups page; one Pull In Students page.",
+    "whole_class": "At most one highest-leverage target with evidence-pattern summary and Teacher move.",
+    "priority_day_groups": "Maximum two groups of fifteen. Rank by number of current I grades first, then practice-gap count and evidence severity. Exact shared I Can bundles are not required. Each group gets one evidence-backed 20-minute Crewtime plan.",
+    "pull_in_students": "Exactly 1-2 PRACTICE_AND_CHECK gaps, student-centered, all current Pull In students on one page, global Practice + check soon banner, no repeated PLAN line.",
+    "appendix": "No normal detailed evidence appendix; detailed longitudinal evidence remains in private Portfolio data."
   }
 }
