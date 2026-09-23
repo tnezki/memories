@@ -11,7 +11,19 @@
     "schema": "portfolio-portable-state/1",
     "manifest": "STATE_MANIFEST.json",
     "state_prefix": "state/",
-    "required_manifest_fields": ["schema", "status", "course", "unit", "state_version", "state_id", "generated_at", "parent_state_sha256", "run_id", "source_mode", "files"],
+    "required_manifest_fields": [
+      "schema",
+      "status",
+      "course",
+      "unit",
+      "state_version",
+      "state_id",
+      "generated_at",
+      "parent_state_sha256",
+      "run_id",
+      "source_mode",
+      "files"
+    ],
     "required_core_files": [
       "state/student_registry.csv",
       "state/evidence_ledger.csv",
@@ -31,8 +43,9 @@
     "manifest": "results_manifest.json",
     "state_manifest_forbidden": true,
     "course_unit_match_required": true,
-    "installer_rule": "Before changing current state or results archives, the installer validates that any selected results ZIP contains results_manifest.json, is not a portable-state ZIP, and matches the selected state course and unit.",
-    "repair_rule": "At installer startup, any ZIP already under a Results Archives folder that is positively identified as a portfolio-portable-state/1 ZIP and does not contain results_manifest.json is removed as a misfiled state artifact. Other unknown ZIPs are preserved."
+    "installer_rule": "The installer supports updated-state + results, state-only, and results-only installs. Any selected results ZIP must contain results_manifest.json, must not be a portable-state ZIP, and must target the same course/unit as the selected state or the existing local current state.",
+    "repair_rule": "At installer startup, any ZIP already under a Results Archives folder that is positively identified as a portfolio-portable-state/1 ZIP and does not contain results_manifest.json is removed as a misfiled state artifact. Other unknown ZIPs are preserved.",
+    "report_refresh_only": "A valid current portable state may be used to refresh reports with no evidence, roster, or support changes. That run returns Portfolio_Results.zip and does not create or increment Portfolio_State_UPDATED.zip unless longitudinal state actually changes."
   },
   "local_layout": {
     "course_unit": "_portfolio_data/<Course>/unit N",
