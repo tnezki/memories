@@ -57,7 +57,7 @@ No additional OAuth scope or Script Property is needed for weekly/student messag
 ## Updating an existing deployment
 
 
-**Important:** applying the GitHub Transfer ZIP does not update the already-deployed Google Apps Script web app. After copying the new `Code.gs` and `Index.html`, deploy a **New version**. The current UI visibly shows **v2.4**. If the page does not show v2.4, do not send reports.
+**Important:** applying the GitHub Transfer ZIP does not update the already-deployed Google Apps Script web app. After copying the new `Code.gs` and `Index.html`, deploy a **New version**. The current UI visibly shows **v2.5**. If the page does not show v2.5, do not send reports.
 
 
 
@@ -123,7 +123,7 @@ The existing deployment URL and Script Properties can remain unchanged.
 
 
 
-A successful live send automatically unchecks **Include this week** for each successfully sent student note while preserving the note text in the private note bank. The weekly note stays in place until the teacher edits or clears it. Failed/unsent students keep their active student-note state.
+A successful live send deletes that student's custom note from private note state after the message is sent. The note is not preserved for later reuse. Test sends do not clear it. Failed, omitted, or unsent students keep their current note so the teacher does not lose work before a successful live send. The weekly note stays in place until the teacher edits or clears it.
 
 
 
@@ -264,7 +264,7 @@ The sender uses one message per student: the student is in **To** and that stude
 
 
 
-Student-specific message notes are private communication state. They are keyed by `student_key` in `02 Portfolio Data/email_message_notes.csv` and are never stored in GitHub, public dashboard URLs, QR codes, or public curriculum files.
+Student-specific custom notes are temporary private current-review state. A successful **Refresh Reports & Load Class** clears prior student custom-note rows so every Custom note field starts blank. After the teacher enters a note, **Save Changes & Recheck** temporarily stores the cleaned note only so the exact reviewed message can be tested or sent. Notes are never stored in GitHub, public dashboard URLs, QR codes, or public curriculum files.
 
 
 
@@ -297,6 +297,24 @@ A successful live send is logged privately. The same `student_key + report_sha25
 ## v2.4 review-table cleanup
 
 - The email screen no longer contains **Remove from class**. Roster changes belong to the Portfolio roster workflow; uncheck **Send** for a temporary omission.
-- The preflight table shows four read-only current Mastery Goal grade columns: **MG1, MG2, MG3, MG4**. Values come from `02 Portfolio Data/mastery_goal_status_current.csv`; the email tool does not calculate or alter grades.
+- The preflight table shows four compact read-only current Mastery Goal grade columns: **MG1, MG2, MG3, MG4**. Values come from `02 Portfolio Data/mastery_goal_status_current.csv`; the email tool does not calculate or alter grades. Unassessed goals display **NA** in this compact review table.
 - Long operations keep the spinner visible and state that the refresh/live send may take a few minutes. Keep the tab open until the status changes from working to complete.
-- Student custom notes remain private saved notes. Test sends do not clear them.
+- Student custom notes are temporary current-send state. Test sends do not clear them; a successful live send deletes the successfully sent student note entirely so it cannot reappear on a later report.
+
+
+## v2.6 blank custom-note review
+
+- Student custom notes are current-send-only communication state.
+- Tests leave the note in place so the teacher can continue testing the same message.
+- After a successful LIVE send for a student, that student note is deleted entirely rather than merely deactivated or preserved for reuse.
+- Failed, omitted, or unsent students retain their note until successfully sent or manually cleared.
+- The weekly/class note remains separate and continues until the teacher edits or clears it.
+
+## v2.6 blank custom-note review
+
+- **Custom note** remains visible for every student and is positioned immediately after the Student column.
+- Every successful **Refresh Reports & Load Class** starts a new review by clearing prior student custom notes, so every student field begins blank.
+- Entering or changing any custom note immediately disables both test and live-send controls. Click **Save Changes & Recheck** before either control can be used again.
+- **Save Changes & Recheck** cleans the note and temporarily stores the exact reviewed wording for the current test/live-send workflow.
+- Unassessed Mastery Goal grades display **NA** in the compact MG1-MG4 review columns.
+- The weekly/class note remains separate and continues until the teacher edits or clears it.

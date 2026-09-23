@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-email-delivery-contract/2.4",
+  "schema": "portfolio-email-delivery-contract/2.3",
   "status": "CURRENT",
   "purpose": "Teacher-authorized student-specific Portfolio report delivery using the private Drive archive; no grading or evidence decisions occur here.",
   "source": {
@@ -19,14 +19,14 @@
     "required": true,
     "student_include_checkbox": true,
     "report_column": false,
-    "custom_note_field": "empty optional field per student; saved privately only when entered",
+    "custom_note_field": "Visible blank optional field per student on every successful `Refresh Reports & Load Class`. A note is temporary current-review state only; it is cleaned/saved by `Save Changes & Recheck` so the exact reviewed note can be tested or sent.",
     "weekly_note": "optional class-wide note; never hardcode dates/events",
     "support_staff_default": "include active support staff with valid email addresses when available; display exact staff name, role, support class when present, and email in preflight",
     "blocked_rows": "may be excluded by teacher checkbox; excluded rows do not block the rest of the send",
     "left_checkbox": "Send checkbox appears left of student name; uncheck to omit this send only.",
-    "custom_note_polish": "Teacher-entered note fragments are cleaned deterministically and use the student first name instead of guessing gendered pronouns. Teacher reviews polished text before sending.",
+    "custom_note_polish": "Teacher-entered note fragments are cleaned deterministically and use the student first name instead of guessing gendered pronouns. A new successful `Refresh Reports & Load Class` clears all student custom-note rows so every student field starts blank.",
     "roster_action": "The email tool does not remove students from the class. Use the Portfolio roster-update workflow for roster changes; uncheck Send for a temporary omission.",
-    "mastery_goal_grade_columns": "Show four read-only columns MG1-MG4 from 02 Portfolio Data/mastery_goal_status_current.csv. Assessed goals show grade_code; unassessed goals show `Not assessed`; missing state shows an em dash and is never invented."
+    "mastery_goal_grade_columns": "Show four compact read-only columns MG1-MG4 from 02 Portfolio Data/mastery_goal_status_current.csv. Assessed goals show grade_code; unassessed goals show `NA` in this email-review table only; missing state shows an em dash and is never invented."
   },
   "recipients": {
     "to": "student email",
@@ -52,7 +52,8 @@
     "already_sent_hash_guard": true,
     "inactive_students_excluded": true,
     "live_send_explicit_label": true,
-    "live_send_count_confirmation": true
+    "live_send_count_confirmation": true,
+    "student_note_after_live_send": "Delete the successfully sent student custom-note row entirely. A new successful class refresh also clears all student custom-note rows so fields start blank."
   },
   "support_contact_schema": {
     "columns": [
@@ -82,11 +83,12 @@
     "edit_review": "Teacher edits include checkboxes, weekly note, and student custom notes, then clicks `Save Changes & Recheck`; notes are cleaned/saved and preflight reruns.",
     "busy_feedback": "Every multi-step action shows a visible spinner/progress message, states that a full refresh/live send may take a few minutes, asks the teacher to leave the tab open, and temporarily disables conflicting controls.",
     "test": "`Send Test to Me` sends only the selected student message/attachment to the teacher.",
-    "live_send_label": "The live button must dynamically say `LIVE SEND — EMAIL <student_count> STUDENTS NOW` when ready; never use an ambiguous label such as `Send Included Reports`.",
+    "live_send_label": "The live button must dynamically say `LIVE SEND \u2014 EMAIL <student_count> STUDENTS NOW` when ready; never use an ambiguous label such as `Send Included Reports`.",
     "live_send_warning": "Immediately above/below the live button, state that it sends real emails to every checked READY student and BCCs listed guardians/support staff.",
     "live_confirmation": "Before live send, show student-email count and total-recipient count and explicitly state `This is not a test.`",
-    "dirty_state": "Any recipient/note/support-staff change disables test/live send until `Save Changes & Recheck` succeeds.",
+    "dirty_state": "Any Send checkbox, weekly note, student custom note, or support-staff change immediately disables both test and live-send controls until `Save Changes & Recheck` succeeds.",
     "roster_removal": "No Remove from class control appears in the email interface. Roster maintenance belongs to the Portfolio roster workflow.",
-    "mastery_goal_scan": "Preflight table shows four compact read-only Mastery Goal grade columns (MG1-MG4) before recipient columns so the teacher can scan current grades while reviewing messages."
+    "mastery_goal_scan": "Preflight table shows four compact read-only Mastery Goal grade columns (MG1-MG4). Use `NA` for unassessed goals in this compact email-review table.",
+    "custom_note_position": "Keep the Custom note field visible immediately after Student so it remains easy to find even when the review table scrolls horizontally."
   }
 }
