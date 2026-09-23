@@ -1,0 +1,255 @@
+PORTFOLIO / ASSESS NEW EVIDENCE - PORTABLE LOCAL STATE WORKFLOW
+===================================================================
+STATUS: CURRENT
+JOB: portfolio
+REVISION: 2026-09-23 v5.0 - PORTABLE LOCAL STATE + FAST LOCKED-TEMPLATE EXECUTION
+
+PURPOSE
+-------
+Run the existing Portfolio evidence/grading/report workflow without a normal Google Drive dependency. The teacher keeps private longitudinal Portfolio state under a local `_portfolio_data` folder and transports that folder between computers by USB. Each request carries one small authoritative `Portfolio_State_CURRENT.zip` plus only the new evidence/support/roster files needed for the run.
+
+This PM is a STORAGE / DELIVERY / EXECUTION overlay on `pms_build/portfolio.txt`.
+
+HARD PRECEDENCE
+---------------
+1. Read `pms_build/portfolio.txt` for evidence interpretation, I Can status, Mastery Goal grades, intervention routing, report content, PowerSchool exports, privacy, and locked report templates.
+2. Read `Tools/portfolio_local_state/PORTFOLIO_LOCAL_STATE_CONTRACT.json`.
+3. Apply THIS PM last for state authority, storage, migration, execution speed, and delivery.
+4. Any Google Drive persistence/readback requirement in the base PM is superseded by this PM except during an explicit one-time migration request.
+5. Do not weaken grading, identity, privacy, template-fidelity, or report QA rules from the base PM.
+
+===========================================================
+0. NORMAL AUTHORITY / NO-DRIVE RULE - HARD
+===========================================================
+Normal portable-state runs use only:
+- the current request/current teacher instruction;
+- request attachments;
+- exact pinned project GitHub authorities;
+- the attached `inputs/current_state/Portfolio_State_CURRENT.zip`.
+
+Do NOT search Google Drive, list Drive folders, fetch Drive state, upload to Drive, or verify Drive persistence on a normal portable-state run.
+
+Google Drive is allowed ONLY when the request explicitly sets:
+  migrate_from_google_drive = true
+
+That migration is one-time input recovery only. Read the exact canonical private Portfolio state, convert it to the portable-state schema, and thereafter continue entirely from the returned portable state. Do not write the migrated/updated state back to Drive unless the teacher explicitly asks for a separate backup action.
+
+No public web. Student data is never written to GitHub.
+
+===========================================================
+1. PORTABLE STATE INPUT - HARD
+===========================================================
+Normal run input path:
+  inputs/current_state/Portfolio_State_CURRENT.zip
+
+The ZIP root must contain:
+  STATE_MANIFEST.json
+  state/
+
+`STATE_MANIFEST.json` schema:
+  portfolio-portable-state/1
+
+Required manifest fields:
+- schema
+- status = CURRENT
+- course
+- unit
+- state_version (positive integer)
+- state_id (stable nonempty run-generated id)
+- generated_at
+- parent_state_sha256 (null only for initial/migrated state)
+- run_id
+- source_mode
+- files[] with path + sha256 for every state file in the ZIP
+
+Before using state:
+1. SHA-256 the uploaded state ZIP and require exact match with `REQUEST_MANIFEST.json -> portable_state.input_state_sha256`.
+2. Validate manifest schema/status.
+3. Validate exact course and unit against the request.
+4. Verify each listed internal state file hash.
+5. Refuse malformed/cross-course/cross-unit state with `PORTFOLIO_STATE_INVALID`.
+
+The state ZIP is the sole prior-state authority for the run. Do not merge it with stale chat files, Library files, another ZIP, or Drive state.
+
+FIRST RUN / RESET:
+- No prior state ZIP is required.
+- A current roster/template source is required as in the base PM.
+- Output state_version = 1 and parent_state_sha256 = null.
+
+ONE-TIME DRIVE MIGRATION:
+- No prior state ZIP is required.
+- Read the existing canonical Drive Unit state once.
+- Preserve current evidence/history/roster/support state in portable form.
+- Output state_version = 1 and source_mode = `drive_migration`.
+- Do not require Drive on later runs.
+
+===========================================================
+2. STATE CONTENT - HARD
+===========================================================
+The portable ZIP contains WORKING LONGITUDINAL STATE, not the entire raw evidence archive.
+
+Required/current state belongs under `state/`, including when present:
+- student_registry.csv
+- evidence_ledger.csv
+- i_can_status_current.csv
+- mastery_goal_status_current.csv
+- unit_status_current.csv
+- class_i_can_summary.csv
+- intervention_groups.csv
+- review_queue.csv
+- run_history.csv
+- run_manifest.json
+- PowerSchool roster/template/schema files needed to reproduce exports
+- current student-support normalized state/review/import-history files
+- current email/contact state that is already part of Portfolio state and must be preserved
+
+Preserve additional legitimate state files from the parent state ZIP even when this PM does not name them, unless a current authority explicitly removes/replaces them.
+
+Historical raw scans/PDFs/images do NOT need to be copied into every state ZIP. The evidence ledger must retain durable source filename, SHA-256, date/label, mapping, and evidence judgment sufficient to maintain longitudinal status without re-uploading old raw evidence on every run.
+
+The teacher keeps original raw evidence privately under local `_portfolio_data/<Course>/unit N/01 Evidence Inbox/` (or another private archive chosen by the teacher). Re-read old raw evidence only when the teacher explicitly asks to reconsider it.
+
+===========================================================
+3. NEW EVIDENCE / DEDUPLICATION
+===========================================================
+Hash every newly supplied evidence file BEFORE expensive interpretation.
+
+If the exact source hash is already represented in `state/evidence_ledger.csv`:
+- do not create duplicate evidence events;
+- do not re-grade the same source by default;
+- use existing mapped/judged events unless the teacher explicitly requests re-evaluation;
+- continue directly to requested state/report refresh.
+
+For genuinely new evidence, follow the base PM's segmentation, identity, mapping, evidence-strength, independence, and grading rules exactly.
+
+===========================================================
+4. FAST LOCKED-TEMPLATE EXECUTION - HARD
+===========================================================
+The normal Portfolio run must be optimized for deterministic batch execution.
+
+A. READ ONCE
+- Fetch each exact pinned GitHub authority/template at most once per run unless a read failed.
+- Unpack/validate the current state ZIP once.
+- Do not repeatedly re-fetch, base64-decode, reconstruct, or re-hash the same canonical template files during one run.
+
+B. BATCH DETERMINISTIC WORK
+Use one programmatic local pipeline (prefer Python in the runtime) for deterministic work:
+- unpack state/request files;
+- SHA-256 evidence and state files;
+- update CSV/JSON longitudinal state;
+- recompute current I Can/MG/unit/class/intervention state;
+- generate all student HTML from the canonical locked template;
+- generate the locked teacher HTML;
+- generate all Mastery Goal PowerSchool CSVs;
+- run identity/count/link/template-provenance checks;
+- run `Tools/templates/portfolio/verify_portfolio_output.py` once on the completed results tree;
+- build `Portfolio_State_UPDATED.zip`;
+- build `Portfolio_Results.zip`;
+- compute final SHA-256 values.
+
+Do not perform those deterministic tasks as dozens of one-file conversational/tool steps when a batch script can do them safely.
+
+C. VISUAL / PAGINATION QA
+Normal output remains HTML; PDFs are not returned.
+- Do NOT render every student report to PDF just to prove the locked template again.
+- Programmatically check page-section counts and structural fit first.
+- Visually render only layout outliers: the densest student report(s), a representative normal student, and the teacher report.
+- If a structural/fit check identifies a specific outlier, render that outlier only.
+- Do not switch rendering engines repeatedly merely because one optional renderer is unavailable. Use one available renderer or fail the specific visual QA check clearly.
+
+D. SCANNED EVIDENCE
+For genuinely new scanned evidence, page-image interpretation may still be the expensive human/reasoning step. Batch page rendering/inspection sensibly. Do not OCR by default. Do not repeat completed mapping/judgment because later report generation needs a rerun.
+
+===========================================================
+5. OUTPUT STATE CHAIN - HARD
+===========================================================
+Every successful state-changing run returns:
+  Portfolio_State_UPDATED.zip
+
+Its `STATE_MANIFEST.json` must:
+- keep schema `portfolio-portable-state/1`;
+- set status CURRENT;
+- match exact course/unit;
+- increment parent state_version by exactly 1, or use 1 for first/migration state;
+- set parent_state_sha256 to the exact SHA-256 of the uploaded `Portfolio_State_CURRENT.zip` for normal runs;
+- set a new nonempty state_id and run_id;
+- record generated_at;
+- set source_mode to `portable_state`, `first_run`, or `drive_migration`;
+- list every internal state file with exact SHA-256.
+
+The next run must use the returned updated ZIP (installed locally as `Portfolio_State_CURRENT.zip`). This creates a verifiable parent-state chain and prevents silent stale-state merges.
+
+===========================================================
+6. RESULTS DELIVERY
+===========================================================
+When refresh_reports_requested=true, also return:
+  Portfolio_Results.zip
+
+Use the exact results contents and locked template requirements from the base PM:
+- results_manifest.json
+- individual student HTML
+- class student packet HTML
+- locked teacher report HTML
+- one current PowerSchool CSV per Mastery Goal per period
+- QA summary/provenance as currently required
+- no normal-run PDFs
+- no overall Unit-grade CSV
+
+Template fidelity remains HARD. Use the exact registered canonical templates/CSS and run the existing template validator before PASS.
+
+When refresh_reports_requested=false, `Portfolio_Results.zip` may be omitted; `Portfolio_State_UPDATED.zip` is still required for any successful state change.
+
+Do NOT wrap private Portfolio outputs in a GitHub Transfer ZIP.
+
+===========================================================
+7. LOCAL STORAGE HANDOFF
+===========================================================
+ChatGPT does not directly write the teacher's local `_portfolio_data` folder.
+
+The teacher/local installer owns final placement:
+  <GitHub root>/_portfolio_data/<Course>/unit N/
+    01 Evidence Inbox/
+    02 Portfolio Data/
+      Portfolio_State_CURRENT.zip
+      State Archives/
+      Results Archives/
+        Latest Portfolio Results.zip
+        <dated results ZIPs>
+    03 Student Packets/
+    04 Class & Intervention Summaries/
+    05 PowerSchool Exports/
+
+`Tools/portfolio_local_state/Install Portfolio Update.command` may be used to archive the previous current state, install the returned updated state as `Portfolio_State_CURRENT.zip`, and archive/latest-copy the returned results ZIP.
+
+The entire `_portfolio_data` folder is private and must NEVER be initialized as a Git repository or included in Git commits/transfers. The teacher may manually copy `_portfolio_data` to/from USB between computers.
+
+===========================================================
+8. SUPPORT CONTACTS
+===========================================================
+If support-contact routing is present in the portable state, preserve it. Do not infer staff email addresses or expand sensitive support information.
+
+A future dedicated shared-state file may centralize cross-course support routing. Until then, do not block ordinary Portfolio evidence/report runs merely because no support-contact rows exist.
+
+===========================================================
+9. PASS / FAIL
+===========================================================
+A normal portable-state Portfolio run may say PASS/Completed only when:
+- input state (when required) passed integrity/course/unit checks;
+- new evidence was deduplicated/mapped/judged correctly;
+- updated longitudinal state is coherent;
+- locked template fidelity validator passed when reports were refreshed;
+- required mechanical/limited visual QA passed;
+- `Portfolio_State_UPDATED.zip` was built and hash-verified;
+- `Portfolio_Results.zip` was built and hash-verified when requested.
+
+There is NO normal Google Drive persistence/readback requirement in portable-state mode.
+
+Failure codes include:
+- PORTFOLIO_STATE_REQUIRED
+- PORTFOLIO_STATE_INVALID
+- PORTFOLIO_STATE_COURSE_UNIT_MISMATCH
+- PORTFOLIO_STATE_CHAIN_ERROR
+- PORTFOLIO_TEMPLATE_DRIFT
+- PORTFOLIO_RESULTS_BUILD_FAILED
+
+END

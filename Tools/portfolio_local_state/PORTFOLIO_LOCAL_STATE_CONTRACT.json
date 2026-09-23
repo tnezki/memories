@@ -1,0 +1,58 @@
+{
+  "schema": "portfolio-local-state-contract/1.0",
+  "status": "CURRENT",
+  "root_name": "_portfolio_data",
+  "transport": "manual_usb_copy",
+  "normal_google_drive_dependency": false,
+  "current_state_filename": "Portfolio_State_CURRENT.zip",
+  "updated_state_filename": "Portfolio_State_UPDATED.zip",
+  "results_filename": "Portfolio_Results.zip",
+  "state_zip": {
+    "schema": "portfolio-portable-state/1",
+    "manifest": "STATE_MANIFEST.json",
+    "state_prefix": "state/",
+    "required_manifest_fields": ["schema", "status", "course", "unit", "state_version", "state_id", "generated_at", "parent_state_sha256", "run_id", "source_mode", "files"],
+    "required_core_files": [
+      "state/student_registry.csv",
+      "state/evidence_ledger.csv",
+      "state/i_can_status_current.csv",
+      "state/mastery_goal_status_current.csv",
+      "state/unit_status_current.csv",
+      "state/class_i_can_summary.csv",
+      "state/intervention_groups.csv",
+      "state/review_queue.csv",
+      "state/run_history.csv",
+      "state/run_manifest.json"
+    ],
+    "integrity": "Every files[] entry records path + sha256. The request records SHA-256 of the entire uploaded current-state ZIP. Output parent_state_sha256 equals that request hash on a normal run.",
+    "raw_evidence": "Historical raw evidence bytes are not carried in every state ZIP; durable source hashes/names/labels and judgments remain in evidence_ledger.csv."
+  },
+  "local_layout": {
+    "course_unit": "_portfolio_data/<Course>/unit N",
+    "evidence_inbox": "01 Evidence Inbox",
+    "portfolio_data": "02 Portfolio Data",
+    "state_archives": "02 Portfolio Data/State Archives",
+    "results_archives": "02 Portfolio Data/Results Archives",
+    "latest_results": "02 Portfolio Data/Results Archives/Latest Portfolio Results.zip",
+    "manual_student_packets": "03 Student Packets",
+    "manual_teacher_reports": "04 Class & Intervention Summaries",
+    "manual_powerschool": "05 PowerSchool Exports"
+  },
+  "migration": {
+    "mode": "one_time_drive_migration",
+    "normal_runs_after_migration": "Drive reads/writes are forbidden unless explicitly requested for backup/recovery.",
+    "first_portable_state_version": 1
+  },
+  "stale_state_protection": {
+    "course_unit_match_required": true,
+    "state_version_increment": 1,
+    "parent_zip_sha256_chain": true,
+    "installer_refuses_non_newer_state_by_default": true
+  },
+  "privacy": {
+    "student_data_private": true,
+    "never_git": true,
+    "never_github_transfer": true,
+    "usb_copy_allowed": true
+  }
+}
