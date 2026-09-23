@@ -1,4 +1,8 @@
-# Portfolio Email Delivery - Google Apps Script deployment
+﻿# Portfolio Email Delivery - Google Apps Script deployment
+
+
+
+
 
 
 
@@ -8,7 +12,15 @@ This web app sends already-prepared individual Portfolio PDFs from the private P
 
 
 
+
+
+
+
 ## One-time setup
+
+
+
+
 
 
 
@@ -29,19 +41,36 @@ This web app sends already-prepared individual Portfolio PDFs from the private P
 
 
 
+
+
+
+
 No additional OAuth scope or Script Property is needed for weekly/student message notes. Those notes are stored only in the private Unit Portfolio data folder.
+
+
+
+
 
 
 
 
 ## Updating an existing deployment
 
+
 **Important:** applying the GitHub Transfer ZIP does not update the already-deployed Google Apps Script web app. After copying the new `Code.gs` and `Index.html`, deploy a **New version**. The corrected UI visibly shows **v2.2**. If the page does not show v2.2, do not send reports.
 
 
 
 
+
+
+
+
 After replacing `Code.gs` and `Index.html` in the existing Apps Script project:
+
+
+
+
 
 
 
@@ -55,12 +84,24 @@ After replacing `Code.gs` and `Index.html` in the existing Apps Script project:
 
 
 
+
+
+
+
 The existing deployment URL and Script Properties can remain unchanged.
 
 
 
 
+
+
+
+
 ## Normal weekly use
+
+
+
+
 
 
 
@@ -78,7 +119,15 @@ The existing deployment URL and Script Properties can remain unchanged.
 
 
 
+
+
+
+
 A successful live send automatically unchecks **Include this week** for each successfully sent student note while preserving the note text in the private note bank. The weekly note stays in place until the teacher edits or clears it. Failed/unsent students keep their active student-note state.
+
+
+
+
 
 
 
@@ -88,12 +137,24 @@ Weekly is a communication cadence, **not an unattended automation**. The system 
 
 
 
+
+
+
+
 ## Family-facing message model
 
 
 
 
+
+
+
+
 The standard body is centralized in `buildBody_()` so wording can be revised without changing recipient/safety logic. It explains:
+
+
+
+
 
 
 
@@ -107,7 +168,15 @@ The standard body is centralized in `buildBody_()` so wording can be revised wit
 
 
 
+
+
+
+
 A temporary statement such as "At this point in the unit, there is not yet enough evidence to fairly assign a letter grade" belongs in the weekly note when it is currently true, rather than being permanently hard-coded into every future message.
+
+
+
+
 
 
 
@@ -117,7 +186,15 @@ A temporary statement such as "At this point in the unit, there is not yet enoug
 
 
 
+
+
+
+
 A Teacher Dashboard can link to the same sender and pass a non-sensitive course hint:
+
+
+
+
 
 
 
@@ -127,7 +204,15 @@ A Teacher Dashboard can link to the same sender and pass a non-sensitive course 
 
 
 
+
+
+
+
 `WEB_APP_URL?course=Physics`
+
+
+
+
 
 
 
@@ -137,19 +222,35 @@ The hint only preselects a course that already exists in the private Portfolio r
 
 
 
+
+
+
+
 ## Support-staff routing source
+
+
 
 
 The sender reads one course-agnostic private file at `____Portfolio_Data / 00 Contact Directory / student_support_contacts_current.csv`. Its exact columns are:
 
 
+
+
 `student_id,student_name,staff_name,staff_email,role,support_class,active`
+
+
 
 
 A student may have multiple rows. Roles are free text and may include Case Manager, Special Education Teacher, Study Skills Teacher, Academic Support Teacher, Resource Room Teacher, or future support roles. `support_class` may be any support/resource/study-skills course and may be blank. Only active rows with a valid staff email are eligible recipients. The sender matches this file to the selected course roster by student ID; the file does not contain disability, diagnosis, or accommodation narrative.
 
 
+
+
 ## Privacy and fail-closed behavior
+
+
+
+
 
 
 
@@ -159,7 +260,15 @@ The sender uses one message per student: the student is in **To** and that stude
 
 
 
+
+
+
+
 Student-specific message notes are private communication state. They are keyed by `student_key` in `02 Portfolio Data/email_message_notes.csv` and are never stored in GitHub, public dashboard URLs, QR codes, or public curriculum files.
+
+
+
+
 
 
 
@@ -169,12 +278,30 @@ Live sending is blocked for unresolved contact records, invalid student addresse
 
 
 
+
+
+
+
 A successful live send is logged privately. The same `student_key + report_sha256` is not sent again on a later click.
 
+
 ## v2.2 identity safety and roster actions
+
 
 - The sender blocks legacy/unverified delivery manifests. Click **Prepare / Refresh Email Reports** before sending.
 - Preflight has a Send checkbox to omit a student for the current send only.
 - **Remove from class** marks the student inactive in `student_registry.csv`; it does not delete historical evidence or send history.
 - Custom notes are cleaned before send. A fragment such as `hasn't been coming for help in crewtime` becomes `Chase hasn't been coming for help in crewtime.` The tool uses the student's first name rather than guessing a gendered pronoun.
 - The family message explicitly states that **I = In Progress and is not permanent**.
+## v2.3 streamlined live-send workflow
+
+The v2.3 UI removes the ambiguous multi-button setup flow.
+
+1. Click **Refresh Reports & Load Class**. This prepares identity-verified reports, loads saved notes, and runs preflight in one operation. A visible spinner/status message stays active while the operation runs.
+2. Review Send checkboxes, recipients, weekly note, and Custom note fields.
+3. After any edits, click **Save Changes & Recheck**. This cleans/saves notes and reruns preflight. Test/live-send actions remain disabled while changes are pending.
+4. Optionally choose one student and click **Send Test to Me**. This emails only the teacher.
+5. The only live-send control is the red button labeled **LIVE SEND — EMAIL <N> STUDENTS NOW**. The nearby warning states that this sends real emails immediately to every checked READY student and BCCs listed guardians/support staff.
+6. The final confirmation repeats the student-email count and total-recipient count and says **This is not a test.**
+
+If the deployed page does not visibly show **v2.3**, do not perform a live send.

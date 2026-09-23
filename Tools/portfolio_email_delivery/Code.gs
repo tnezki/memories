@@ -1,5 +1,5 @@
 const PORTFOLIO_EMAIL = Object.freeze({
-  APP_VERSION: '2.2',
+  APP_VERSION: '2.3',
   RECIPIENT_FILE: 'email_recipients_current.csv',
   REGISTRY_FILE: 'student_registry.csv',
   MANIFEST_FILE: 'email_delivery_manifest.csv',

@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-email-delivery-contract/2.2",
+  "schema": "portfolio-email-delivery-contract/2.3",
   "status": "CURRENT",
   "purpose": "Teacher-authorized student-specific Portfolio report delivery using the private Drive archive; no grading or evidence decisions occur here.",
   "source": {
@@ -49,7 +49,9 @@
     "test_to_teacher_only": true,
     "send_log_required": true,
     "already_sent_hash_guard": true,
-    "inactive_students_excluded": true
+    "inactive_students_excluded": true,
+    "live_send_explicit_label": true,
+    "live_send_count_confirmation": true
   },
   "support_contact_schema": {
     "columns": [
@@ -73,5 +75,15 @@
     "html_prepare": "Before HTML-to-PDF conversion, verify the individual HTML visibly contains the exact manifest student name.",
     "pdf_prepare": "A PDF path is accepted only when the results manifest explicitly marks identity_verified=true from a prior exact identity check.",
     "stale_manifest": "Legacy manifests without identity_verified are blocked and require Prepare / Refresh Email Reports."
+  },
+  "ui_workflow": {
+    "primary_refresh": "One button, `Refresh Reports & Load Class`, prepares identity-verified reports, loads notes, and runs preflight in one visible busy sequence.",
+    "edit_review": "Teacher edits include checkboxes, weekly note, and student custom notes, then clicks `Save Changes & Recheck`; notes are cleaned/saved and preflight reruns.",
+    "busy_feedback": "Every multi-step action shows a visible spinner/progress message and temporarily disables conflicting controls.",
+    "test": "`Send Test to Me` sends only the selected student message/attachment to the teacher.",
+    "live_send_label": "The live button must dynamically say `LIVE SEND — EMAIL <student_count> STUDENTS NOW` when ready; never use an ambiguous label such as `Send Included Reports`.",
+    "live_send_warning": "Immediately above/below the live button, state that it sends real emails to every checked READY student and BCCs listed guardians/support staff.",
+    "live_confirmation": "Before live send, show student-email count and total-recipient count and explicitly state `This is not a test.`",
+    "dirty_state": "Any recipient/note/support-staff change disables test/live send until `Save Changes & Recheck` succeeds."
   }
 }
