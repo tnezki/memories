@@ -17,9 +17,42 @@ end try
 OSA
 }
 
+repair_misfiled_state_results() {
+  local repaired=0
+  while IFS= read -r -d '' archive; do
+    if /usr/bin/python3 - "$archive" <<'PYCODE' >/dev/null 2>&1
+import json,sys,zipfile
+p=sys.argv[1]
+try:
+    with zipfile.ZipFile(p) as z:
+        names=set(z.namelist())
+        if 'STATE_MANIFEST.json' not in names:
+            raise SystemExit(1)
+        m=json.loads(z.read('STATE_MANIFEST.json'))
+        if m.get('schema')!='portfolio-portable-state/1':
+            raise SystemExit(1)
+        if 'results_manifest.json' in names:
+            raise SystemExit(1)
+except Exception:
+    raise SystemExit(1)
+PYCODE
+    then
+      echo "Repairing invalid Results Archive entry: $archive"
+      rm -f "$archive"
+      repaired=$((repaired + 1))
+    fi
+  done < <(find "$ROOT" -type f -path '*/02 Portfolio Data/Results Archives/*.zip' -print0 2>/dev/null || true)
+  if [ "$repaired" -gt 0 ]; then
+    echo "Removed $repaired portable-state ZIP(s) that had been mistakenly archived as results."
+    echo
+  fi
+}
+
+repair_misfiled_state_results
+
 STATE_ZIP="$(choose_file 'Choose Portfolio_State_UPDATED.zip')"
 if [ -z "$STATE_ZIP" ]; then
-  echo "No state ZIP selected. Nothing changed."
+  echo "No state ZIP selected. Nothing else changed."
   exit 0
 fi
 
@@ -40,6 +73,32 @@ print(f'{course}\t{unit}\t{ver}\t{sid}')
 PYCODE
 )"
 IFS=$'\t' read -r COURSE UNIT VERSION STATE_ID <<< "$META"
+
+RESULTS_ZIP="$(choose_file 'Choose Portfolio_Results.zip, or Cancel to skip results installation')"
+if [ -n "$RESULTS_ZIP" ]; then
+  /usr/bin/python3 - "$RESULTS_ZIP" "$COURSE" "$UNIT" <<'PYCODE'
+import json,sys,zipfile
+p,expected_course,expected_unit=sys.argv[1],sys.argv[2],int(sys.argv[3])
+try:
+    with zipfile.ZipFile(p) as z:
+        names=set(z.namelist())
+        if 'STATE_MANIFEST.json' in names:
+            raise SystemExit('REFUSED: selected results ZIP is a portable state ZIP, not Portfolio_Results.zip.')
+        if 'results_manifest.json' not in names:
+            raise SystemExit('REFUSED: selected results ZIP has no results_manifest.json.')
+        m=json.loads(z.read('results_manifest.json'))
+except zipfile.BadZipFile:
+    raise SystemExit('REFUSED: selected results file is not a valid ZIP.')
+except json.JSONDecodeError:
+    raise SystemExit('REFUSED: results_manifest.json is not valid JSON.')
+course=str(m.get('course','')).strip()
+try: unit=int(m.get('unit'))
+except: raise SystemExit('REFUSED: results manifest has invalid unit.')
+if course != expected_course or unit != expected_unit:
+    raise SystemExit(f'REFUSED: results are for {course or "UNKNOWN"} Unit {unit}, expected {expected_course} Unit {expected_unit}.')
+PYCODE
+fi
+
 TARGET="$ROOT/$COURSE/unit $UNIT"
 DATA="$TARGET/02 Portfolio Data"
 STATE_ARCH="$DATA/State Archives"
@@ -57,7 +116,7 @@ PYCODE
 )"
   if [ "$CURRENT_VERSION" -ge "$VERSION" ]; then
     echo "REFUSED: installed state version $CURRENT_VERSION is not older than incoming version $VERSION."
-    echo "Nothing was changed."
+    echo "Nothing was changed by this install."
     exit 1
   fi
 fi
@@ -78,7 +137,6 @@ fi
 echo "Installed $COURSE Unit $UNIT state v$VERSION"
 echo "Current state: $CURRENT"
 
-RESULTS_ZIP="$(choose_file 'Choose Portfolio_Results.zip, or Cancel to skip results installation')"
 if [ -n "$RESULTS_ZIP" ]; then
   R_HASH="$(shasum -a 256 "$RESULTS_ZIP" | awk '{print $1}')"
   cp -p "$RESULTS_ZIP" "$RESULT_ARCH/${STAMP}_Portfolio_Results.zip"
@@ -89,6 +147,8 @@ if [ -n "$RESULTS_ZIP" ]; then
     exit 1
   fi
   echo "Results archived and Latest Portfolio Results.zip updated."
+else
+  echo "No Portfolio results ZIP selected; results archive was not changed."
 fi
 
 echo

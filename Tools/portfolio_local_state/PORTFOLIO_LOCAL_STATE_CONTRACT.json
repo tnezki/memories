@@ -27,6 +27,13 @@
     "integrity": "Every files[] entry records path + sha256. The request records SHA-256 of the entire uploaded current-state ZIP. Output parent_state_sha256 equals that request hash on a normal run.",
     "raw_evidence": "Historical raw evidence bytes are not carried in every state ZIP; durable source hashes/names/labels and judgments remain in evidence_ledger.csv."
   },
+  "results_zip": {
+    "manifest": "results_manifest.json",
+    "state_manifest_forbidden": true,
+    "course_unit_match_required": true,
+    "installer_rule": "Before changing current state or results archives, the installer validates that any selected results ZIP contains results_manifest.json, is not a portable-state ZIP, and matches the selected state course and unit.",
+    "repair_rule": "At installer startup, any ZIP already under a Results Archives folder that is positively identified as a portfolio-portable-state/1 ZIP and does not contain results_manifest.json is removed as a misfiled state artifact. Other unknown ZIPs are preserved."
+  },
   "local_layout": {
     "course_unit": "_portfolio_data/<Course>/unit N",
     "evidence_inbox": "01 Evidence Inbox",
