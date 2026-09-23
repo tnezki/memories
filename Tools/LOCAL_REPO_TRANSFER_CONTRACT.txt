@@ -78,6 +78,16 @@ SAFETY
 - Ordinary ZIPs without TRANSFER_MANIFEST.json are ignored.
 - No Git command is allowed.
 
+EXECUTABLE COMMAND FILES - HARD
+-------------------------------
+- After every successful CREATE or REPLACE whose destination filename ends in `.command`, the
+  transfer helper must restore executable permission (`chmod +x`) on the installed destination.
+- ZIP extraction commonly removes Unix execute bits; a byte-identical `.command` file that is not
+  executable is not considered a successful macOS launcher installation.
+- SHA-256 verification remains byte-based. Restoring execute permission does not change the file
+  hash and must occur before the transfer is reported as applied.
+- Rollback continues to restore the backed-up file and its prior mode/metadata.
+
 CURRENT CANONICAL INSTALL CONVENTION
 ------------------------------------
 Bank Map / Step 3a:
