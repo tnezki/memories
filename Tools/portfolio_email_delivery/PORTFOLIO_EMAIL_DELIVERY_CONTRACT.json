@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-email-delivery-contract/2.3",
+  "schema": "portfolio-email-delivery-contract/2.4",
   "status": "CURRENT",
   "purpose": "Teacher-authorized student-specific Portfolio report delivery using the private Drive archive; no grading or evidence decisions occur here.",
   "source": {
@@ -24,8 +24,9 @@
     "support_staff_default": "include active support staff with valid email addresses when available; display exact staff name, role, support class when present, and email in preflight",
     "blocked_rows": "may be excluded by teacher checkbox; excluded rows do not block the rest of the send",
     "left_checkbox": "Send checkbox appears left of student name; uncheck to omit this send only.",
-    "class_action": "Remove from class explicitly marks student_registry.csv active=no while preserving evidence/history.",
-    "custom_note_polish": "Teacher-entered note fragments are cleaned deterministically and use the student first name instead of guessing gendered pronouns. Teacher reviews polished text before sending."
+    "custom_note_polish": "Teacher-entered note fragments are cleaned deterministically and use the student first name instead of guessing gendered pronouns. Teacher reviews polished text before sending.",
+    "roster_action": "The email tool does not remove students from the class. Use the Portfolio roster-update workflow for roster changes; uncheck Send for a temporary omission.",
+    "mastery_goal_grade_columns": "Show four read-only columns MG1-MG4 from 02 Portfolio Data/mastery_goal_status_current.csv. Assessed goals show grade_code; unassessed goals show `Not assessed`; missing state shows an em dash and is never invented."
   },
   "recipients": {
     "to": "student email",
@@ -74,16 +75,18 @@
     "hard_rule": "Never send an attachment unless the prepared manifest explicitly records identity_verified=true for that student and the manifest student_name exactly matches the current recipient roster row.",
     "html_prepare": "Before HTML-to-PDF conversion, verify the individual HTML visibly contains the exact manifest student name.",
     "pdf_prepare": "A PDF path is accepted only when the results manifest explicitly marks identity_verified=true from a prior exact identity check.",
-    "stale_manifest": "Legacy manifests without identity_verified are blocked and require Prepare / Refresh Email Reports."
+    "stale_manifest": "Legacy manifests without identity_verified are blocked and require `Refresh Reports & Load Class`."
   },
   "ui_workflow": {
     "primary_refresh": "One button, `Refresh Reports & Load Class`, prepares identity-verified reports, loads notes, and runs preflight in one visible busy sequence.",
     "edit_review": "Teacher edits include checkboxes, weekly note, and student custom notes, then clicks `Save Changes & Recheck`; notes are cleaned/saved and preflight reruns.",
-    "busy_feedback": "Every multi-step action shows a visible spinner/progress message and temporarily disables conflicting controls.",
+    "busy_feedback": "Every multi-step action shows a visible spinner/progress message, states that a full refresh/live send may take a few minutes, asks the teacher to leave the tab open, and temporarily disables conflicting controls.",
     "test": "`Send Test to Me` sends only the selected student message/attachment to the teacher.",
     "live_send_label": "The live button must dynamically say `LIVE SEND — EMAIL <student_count> STUDENTS NOW` when ready; never use an ambiguous label such as `Send Included Reports`.",
     "live_send_warning": "Immediately above/below the live button, state that it sends real emails to every checked READY student and BCCs listed guardians/support staff.",
     "live_confirmation": "Before live send, show student-email count and total-recipient count and explicitly state `This is not a test.`",
-    "dirty_state": "Any recipient/note/support-staff change disables test/live send until `Save Changes & Recheck` succeeds."
+    "dirty_state": "Any recipient/note/support-staff change disables test/live send until `Save Changes & Recheck` succeeds.",
+    "roster_removal": "No Remove from class control appears in the email interface. Roster maintenance belongs to the Portfolio roster workflow.",
+    "mastery_goal_scan": "Preflight table shows four compact read-only Mastery Goal grade columns (MG1-MG4) before recipient columns so the teacher can scan current grades while reviewing messages."
   }
 }

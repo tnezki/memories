@@ -1,4 +1,4 @@
-﻿# Portfolio Email Delivery - Google Apps Script deployment
+# Portfolio Email Delivery - Google Apps Script deployment
 
 
 
@@ -57,7 +57,7 @@ No additional OAuth scope or Script Property is needed for weekly/student messag
 ## Updating an existing deployment
 
 
-**Important:** applying the GitHub Transfer ZIP does not update the already-deployed Google Apps Script web app. After copying the new `Code.gs` and `Index.html`, deploy a **New version**. The corrected UI visibly shows **v2.2**. If the page does not show v2.2, do not send reports.
+**Important:** applying the GitHub Transfer ZIP does not update the already-deployed Google Apps Script web app. After copying the new `Code.gs` and `Index.html`, deploy a **New version**. The current UI visibly shows **v2.4**. If the page does not show v2.4, do not send reports.
 
 
 
@@ -106,15 +106,15 @@ The existing deployment URL and Script Properties can remain unchanged.
 
 
 
-1. Portfolio first refreshes the private results ZIP and recipient state. The email app prepares current PDFs from `Latest Portfolio Results.zip` when you click Prepare / Refresh Email Reports.
+1. Portfolio first refreshes the private results ZIP and recipient state. In the email app, click **Refresh Reports & Load Class**. This prepares current PDFs from `Latest Portfolio Results.zip`, loads saved notes, reads the four current Mastery Goal grades, and runs preflight in one sequence. A full refresh may take a few minutes; leave the tab open while the spinner is showing.
 2. Open the email web app directly or from a course Teacher Dashboard.
 3. Select Course -> Unit -> Period (or All periods).
 4. In **Message notes**:
    - optionally enter a weekly/Unit note for the class, such as an upcoming assessment or help reminder;
    - optionally enter persistent student-specific notes and check **Include this week** only for the students who should receive them.
-5. Click **Save + Run Preflight** and review every row, including the exact weekly and student notes that will be sent.
+5. After editing Send checkboxes or notes, click **Save Changes & Recheck**. Review every row, including MG1-MG4, recipients, and the exact notes that will be sent.
 6. Optionally choose a student and click **Send Test to Me**. The test goes only to the teacher and uses the exact attachment and message that student would receive.
-7. Check the confirmation box and click **Send Reports**.
+7. When satisfied, use the red **LIVE SEND — EMAIL N STUDENTS NOW** button. The confirmation states the student-email count and total recipient count and explicitly says that this is not a test. Live send may take a few minutes; leave the tab open until it finishes.
 
 
 
@@ -132,7 +132,7 @@ A successful live send automatically unchecks **Include this week** for each suc
 
 
 
-Weekly is a communication cadence, **not an unattended automation**. The system never performs a live weekly send on its own; each send still requires teacher preflight/review and an explicit Send Reports action.
+Weekly is a communication cadence, **not an unattended automation**. The system never performs a live weekly send on its own; each send still requires teacher review/recheck and the explicit red **LIVE SEND — EMAIL N STUDENTS NOW** action.
 
 
 
@@ -285,23 +285,18 @@ Live sending is blocked for unresolved contact records, invalid student addresse
 A successful live send is logged privately. The same `student_key + report_sha256` is not sent again on a later click.
 
 
-## v2.2 identity safety and roster actions
+## Identity safety and current roster behavior
 
-
-- The sender blocks legacy/unverified delivery manifests. Click **Prepare / Refresh Email Reports** before sending.
-- Preflight has a Send checkbox to omit a student for the current send only.
-- **Remove from class** marks the student inactive in `student_registry.csv`; it does not delete historical evidence or send history.
-- Custom notes are cleaned before send. A fragment such as `hasn't been coming for help in crewtime` becomes `Chase hasn't been coming for help in crewtime.` The tool uses the student's first name rather than guessing a gendered pronoun.
+- The sender blocks legacy/unverified delivery manifests. Click **Refresh Reports & Load Class** before sending.
+- Preflight has a **Send** checkbox to omit a student for the current send only.
+- The email tool does not change roster membership. Use the Portfolio roster-update workflow for permanent roster changes.
+- Custom notes are cleaned before send. A fragment such as `hasn't been coming for help in crewtime` becomes `Chase hasn't been coming for help in Crewtime.` The tool uses the student's first name rather than guessing a gendered pronoun.
 - The family message explicitly states that **I = In Progress and is not permanent**.
-## v2.3 streamlined live-send workflow
 
-The v2.3 UI removes the ambiguous multi-button setup flow.
 
-1. Click **Refresh Reports & Load Class**. This prepares identity-verified reports, loads saved notes, and runs preflight in one operation. A visible spinner/status message stays active while the operation runs.
-2. Review Send checkboxes, recipients, weekly note, and Custom note fields.
-3. After any edits, click **Save Changes & Recheck**. This cleans/saves notes and reruns preflight. Test/live-send actions remain disabled while changes are pending.
-4. Optionally choose one student and click **Send Test to Me**. This emails only the teacher.
-5. The only live-send control is the red button labeled **LIVE SEND — EMAIL <N> STUDENTS NOW**. The nearby warning states that this sends real emails immediately to every checked READY student and BCCs listed guardians/support staff.
-6. The final confirmation repeats the student-email count and total-recipient count and says **This is not a test.**
+## v2.4 review-table cleanup
 
-If the deployed page does not visibly show **v2.3**, do not perform a live send.
+- The email screen no longer contains **Remove from class**. Roster changes belong to the Portfolio roster workflow; uncheck **Send** for a temporary omission.
+- The preflight table shows four read-only current Mastery Goal grade columns: **MG1, MG2, MG3, MG4**. Values come from `02 Portfolio Data/mastery_goal_status_current.csv`; the email tool does not calculate or alter grades.
+- Long operations keep the spinner visible and state that the refresh/live send may take a few minutes. Keep the tab open until the status changes from working to complete.
+- Student custom notes remain private saved notes. Test sends do not clear them.
