@@ -2,7 +2,7 @@ PORTFOLIO / ASSESS NEW EVIDENCE - PERSISTENT PRIVATE DRIVE WORKFLOW
 ====================================================================
 STATUS: CURRENT
 JOB: portfolio
-REVISION: 2026-09-22 v4.4 - COURSE-AGNOSTIC SUPPORT CONTACT ROUTING
+REVISION: 2026-09-23 v4.5 - TEMPLATE FIDELITY + VERIFIED PRIVATE PERSISTENCE
 
 
 
@@ -598,6 +598,26 @@ Place current MG CSVs only in returned results ZIP under powerschool/. Do not wr
 
 
 ===========================================================
+11A. LOCKED REPORT RENDERER / TEMPLATE FIDELITY - HARD
+===========================================================
+The recurring Portfolio report presentation is not authored from scratch during a run. The registered canonical files at the exact pinned SYSTEM commit are the renderer authority:
+- Tools/templates/portfolio/student_packet_template.html
+- Tools/templates/portfolio/teacher_summary_template.html
+- Tools/templates/portfolio/portfolio.css
+- Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json
+
+For every report refresh:
+1. Fetch/read those exact files from the pinned SYSTEM commit before generating report HTML.
+2. Instantiate the canonical template tokens/loops only. Do not replace the shell with course-specific HTML, a new card system, a new color system, or newly invented CSS.
+3. Self-contained output is created by replacing the template stylesheet link with one `<style id="canonical-portfolio-css">` block containing the exact bytes of canonical `portfolio.css`. Preserve the template's own fixed inline `@page` style. Do not add a second visual stylesheet or substitute condensed run-specific CSS.
+4. Course content may change data/text only. Physics Units with more I Cans use the contract's allowed Mastery Goal distribution/fit rules; they do not get a separate visual design.
+5. Every individual student HTML and teacher HTML must include source-provenance meta tags for the template SHA-256 and canonical CSS SHA-256 used.
+6. `results_manifest.json` must include a `template_provenance` object naming the four canonical source paths, their SHA-256 values, the pinned SYSTEM commit, validator path, and `template_fidelity_status: "PASS"`.
+7. Run `Tools/templates/portfolio/verify_portfolio_output.py` against the completed results directory and the canonical template directory before the run can PASS. Include its PASS result in QA.
+
+If the canonical files cannot be read, if the validator is unavailable, or if the validator reports drift, stop report delivery with `PORTFOLIO_TEMPLATE_DRIFT`. Do not silently fall back to a newly authored report. A content-complete report with noncanonical HTML/CSS is a failed report build.
+
+===========================================================
 12. REPORT STORAGE / EMAIL BOUNDARY
 ===========================================================
 Normal Portfolio runs do NOT write generated reports or grade exports into Drive folders 03-05.
@@ -662,7 +682,9 @@ CROSS-DEVICE ARCHIVE - HARD:
 - After building and QA'ing the ZIP, save an immutable dated copy under `02 Portfolio Data / Results Archives/`.
 - Create or replace `02 Portfolio Data / Results Archives/Latest Portfolio Results.zip` with the exact same bytes.
 - Verify Drive readback/hash for both the dated copy and Latest copy before PASS.
-- Return the exact same ZIP to the teacher in chat.
+- If either archive write/readback cannot be completed, the run is `INCOMPLETE` with `PORTFOLIO_DRIVE_PERSISTENCE_FAILED`; do not say the Portfolio run completed or PASSed. You may still return the locally built ZIP as an explicitly unpersisted recovery artifact, but it is not the authoritative Latest result.
+- Evidence/state writes in 01/02 are also commit-critical. If the updated ledger/current-state files cannot be persisted and verified, do not claim the new evidence was committed to the longitudinal Portfolio.
+- Return the exact same persisted ZIP to the teacher in chat when PASS is allowed.
 
 
 
@@ -723,9 +745,9 @@ Before PASS verify:
 30 results_manifest.json maps every active student to one individual HTML report;
 31 the global support-contact routing source, when present, uses the exact seven-column course-agnostic schema and only active rows with valid staff emails are eligible for email routing;
 32 every individual report passed stable-key + roster-name + visible-report identity verification;
-33 no student/support data was written to GitHub.
-
-
+33 canonical report template/CSS provenance is recorded and `verify_portfolio_output.py` returns PASS;
+34 no report-producing run is labeled PASS/Completed when required Drive state or Results Archives persistence/readback failed;
+35 no student/support data was written to GitHub.
 
 
 END

@@ -135,6 +135,25 @@
     "powerschool_path": "powerschool/",
     "self_contained_html_rule": "Individual student HTML must contain the essential print CSS/markup needed for reliable offline browser and email-prep PDF conversion.",
     "drive_archive_rule": "Persist a dated copy and byte-identical Latest Portfolio Results.zip under 02 Portfolio Data / Results Archives whenever reports are refreshed.",
-    "identity_rule": "For every student entry, student_key + student_name + individual report path must identify the same student. QA must verify the visible report identity before archive PASS. A filename/key mismatch with visible student identity is a hard failure."
+    "identity_rule": "For every student entry, student_key + student_name + individual report path must identify the same student. QA must verify the visible report identity before archive PASS. A filename/key mismatch with visible student identity is a hard failure.",
+    "template_provenance_required": true,
+    "template_validator": "Tools/templates/portfolio/verify_portfolio_output.py",
+    "persistence_pass_rule": "A refreshed report run cannot be labeled PASS/Completed unless dated and Latest ZIP copies are persisted and readback/hash verified in 02 Portfolio Data / Results Archives."
+  },
+  "fidelity_enforcement": {
+    "status": "HARD",
+    "canonical_sources": {
+      "student_template": "Tools/templates/portfolio/student_packet_template.html",
+      "teacher_template": "Tools/templates/portfolio/teacher_summary_template.html",
+      "css": "Tools/templates/portfolio/portfolio.css",
+      "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json"
+    },
+    "renderer_rule": "Read the exact canonical sources from the pinned SYSTEM commit and instantiate tokens/loops only. Do not author substitute report HTML, course-specific card anatomy, colors, typography, spacing, or a new stylesheet.",
+    "self_contained_rule": "Replace the external portfolio.css link with one <style id=\"canonical-portfolio-css\"> block containing the exact canonical portfolio.css bytes. Preserve fixed template inline print styles. No second visual stylesheet is allowed.",
+    "physics_fit_rule": "Physics Units with more I Cans use the same canonical report and the allowed Mastery Goal distribution/fit adjustments; they do not receive a condensed or separately styled report.",
+    "provenance_rule": "Every report-producing run records the pinned SYSTEM commit plus SHA-256 values for the student template, teacher template, CSS, and contract in results_manifest.json. Individual/teacher HTML includes corresponding template/CSS provenance meta tags.",
+    "validator": "Tools/templates/portfolio/verify_portfolio_output.py",
+    "failure_code": "PORTFOLIO_TEMPLATE_DRIFT",
+    "pass_rule": "Template validator PASS is required before Portfolio report QA may PASS."
   }
 }

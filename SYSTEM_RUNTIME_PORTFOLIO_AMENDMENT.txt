@@ -2,7 +2,7 @@ SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY / DRIVE ROUTING
 ============================================================
 STATUS: CURRENT
 SCOPE: Portfolio workflow only.
-REVISION: 2026-09-22 - PRIVATE RESULTS ARCHIVE + COURSE-AGNOSTIC SUPPORT ROUTING
+REVISION: 2026-09-23 - TEMPLATE FIDELITY + VERIFIED PRIVATE PERSISTENCE
 
 
 
@@ -94,7 +94,11 @@ The locked teacher report uses exactly:
 Priority Day has at most 2 groups and at most 15 students per group. Rank eligible students by current I-grade count, then Practice + check soon gap count, then evidence severity. Summarize the best common 20-minute Crewtime intervention for each selected group. Pull In is one landscape page of students with 1-2 Practice + check soon gaps.
 
 
+LOCKED REPORT RENDERER / TEMPLATE FIDELITY - HARD
+--------------------------------------------------
+Recurring Portfolio HTML must be instantiated from the exact registered `student_packet_template.html`, `teacher_summary_template.html`, and `portfolio.css` at the pinned SYSTEM commit. Do not author a course-specific replacement shell or stylesheet. Physics with 19 I Cans uses the same canonical design and only the contract-approved fit/distribution adjustments.
 
+For self-contained HTML, embed the exact canonical `portfolio.css` bytes in a `<style id="canonical-portfolio-css">` block in place of the stylesheet link. Preserve the template's fixed inline print style and do not add a second visual stylesheet. Record source SHA-256 provenance in `results_manifest.json` and in report meta tags. Run `Tools/templates/portfolio/verify_portfolio_output.py` before PASS. Any mismatch is `PORTFOLIO_TEMPLATE_DRIFT` and blocks PASS.
 
 RESULTS ZIP / CROSS-DEVICE ARCHIVE - HARD
 ------------------------------------------
@@ -118,9 +122,7 @@ After QA, persist the exact ZIP bytes twice under 02 Portfolio Data / Results Ar
 2. Latest Portfolio Results.zip, replacing the prior current copy.
 
 
-
-
-Verify readback/hash. Return the exact same ZIP to the teacher in chat. This private archive solves cross-device availability without placing student data in GitHub.
+Verify readback/hash. If either archive copy or required 01/02 state write cannot be persisted and verified, final status is `INCOMPLETE` / `PORTFOLIO_DRIVE_PERSISTENCE_FAILED`; do not claim Completed/PASS. A local ZIP may be returned only as an explicitly unpersisted recovery artifact. When PASS is allowed, return the exact same persisted ZIP to the teacher in chat. This private archive solves cross-device availability without placing student data in GitHub.
 
 
 

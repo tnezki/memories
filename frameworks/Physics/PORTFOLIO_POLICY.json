@@ -93,7 +93,12 @@
   "report_fidelity": {
     "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
     "human_learning_label_rule": "Always show code + full exact I Can statement.",
-    "teacher_report_rule": "Normal teacher report is Class Overview; Whole Class when active; one Priority Day Groups page; one Pull In Students page. No normal detailed-evidence appendix."
+    "teacher_report_rule": "Normal teacher report is Class Overview; Whole Class when active; one Priority Day Groups page; one Pull In Students page. No normal detailed-evidence appendix.",
+    "renderer_rule": "Use the exact canonical student_packet_template.html, teacher_summary_template.html, and portfolio.css from the pinned SYSTEM commit. Populate data only; do not write a Physics-specific replacement report shell or stylesheet.",
+    "unit1_19_i_can_fit_rule": "Keep the same canonical Algebra-approved visual system. Use only contract-approved Mastery Goal distribution/fit adjustments for 19 I Cans; never solve fit by shrinking into a separately designed Physics report.",
+    "self_contained_css_rule": "Embed exact canonical portfolio.css bytes in the required canonical-portfolio-css style block; no run-specific visual stylesheet.",
+    "qa_validator": "Tools/templates/portfolio/verify_portfolio_output.py",
+    "drift_failure": "PORTFOLIO_TEMPLATE_DRIFT"
   },
   "student_next_action": {
     "states": [
@@ -141,7 +146,8 @@
     "folder": "02 Portfolio Data/Results Archives",
     "dated_copy": true,
     "latest_copy": "Latest Portfolio Results.zip",
-    "rule": "Every report refresh persists the exact returned results ZIP as a dated archive and as the current Latest copy."
+    "rule": "Every report refresh persists the exact returned results ZIP as a dated archive and as the current Latest copy.",
+    "pass_rule": "Report refresh cannot PASS/Completed until both dated and Latest ZIP copies are persisted and readback/hash verified. Failure -> PORTFOLIO_DRIVE_PERSISTENCE_FAILED / INCOMPLETE."
   },
   "student_support_contacts": {
     "file": "00 Contact Directory/student_support_contacts_current.csv",
