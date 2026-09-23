@@ -22,7 +22,7 @@
     ],
     "unit_grade_rule": "Do not display an overall Unit letter grade or large Unit-grade box.",
     "snapshot_lead_pattern": "{MG_DEMONSTRATED_COUNT} of {MG_TOTAL} Unit Mastery Goals demonstrated.",
-    "grading_explanation": "Mastery Goal grades are current evidence, not averages, and can improve with new evidence.",
+    "grading_explanation": "Mastery Goal grades are current evidence, not averages, and can improve with new evidence. An I means In Progress and is not permanent.",
     "mastery_goal_grade_display": {
       "assessed": "Display `Grade {GRADE_CODE}` plus the course-policy label where space allows.",
       "not_assessed": "Display exactly `Not assessed`; family-facing meaning: this Mastery Goal has not been checked yet. Do not describe an unsuccessful attempt as Not assessed.",
@@ -134,6 +134,7 @@
     "teacher_path": "teacher_report/teacher_summary.html",
     "powerschool_path": "powerschool/",
     "self_contained_html_rule": "Individual student HTML must contain the essential print CSS/markup needed for reliable offline browser and email-prep PDF conversion.",
-    "drive_archive_rule": "Persist a dated copy and byte-identical Latest Portfolio Results.zip under 02 Portfolio Data / Results Archives whenever reports are refreshed."
+    "drive_archive_rule": "Persist a dated copy and byte-identical Latest Portfolio Results.zip under 02 Portfolio Data / Results Archives whenever reports are refreshed.",
+    "identity_rule": "For every student entry, student_key + student_name + individual report path must identify the same student. QA must verify the visible report identity before archive PASS. A filename/key mismatch with visible student identity is a hard failure."
   }
 }

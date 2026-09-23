@@ -38,7 +38,8 @@
     "not_assessed_rule": "No usable evidence anywhere in the goal -> Not assessed. Family meaning: this Mastery Goal has not been checked yet. PowerSchool Score is blank.",
     "general_scale_rule": "Let n be exact I Can count and t=ceil(n/2). If assessed: I for secure<t; C for secure=t; B for t<secure<n; A for secure=n; A+ for secure=n plus meaningful transfer evidence in the goal.",
     "unit_grade_rule": "No overall Unit letter grade is reported or exported.",
-    "family_not_assessed_meaning": "This Mastery Goal has not been checked yet; this is distinct from an attempted check that produced limited or unsuccessful evidence."
+    "family_not_assessed_meaning": "This Mastery Goal has not been checked yet; this is distinct from an attempted check that produced limited or unsuccessful evidence.",
+    "in_progress_family_meaning": "I means In Progress. It is a current evidence grade, not a permanent label or an averaged penalty; it can change when new or stronger evidence is added."
   },
   "powerschool": {
     "output_rule": "Produce one CSV per Mastery Goal per period; no Unit-grade CSV.",
@@ -100,5 +101,8 @@
   },
   "course_repo": "tnezki/apcalc",
   "teacher_dashboard": "teacher_dashboard______zptdf.html",
-  "portfolio_control_panel": "portfolio___p9rtf2/portfolio_control_panel.html"
+  "portfolio_control_panel": "portfolio___p9rtf2/portfolio_control_panel.html",
+  "email_report_identity": {
+    "rule": "Email/report delivery must verify stable student identity against the current roster and visible report identity. Filename/key alone is insufficient; any mismatch blocks sending."
+  }
 }

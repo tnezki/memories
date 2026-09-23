@@ -46,7 +46,8 @@
     "not_assessed_rule": "No usable evidence anywhere in the goal -> Not assessed and blank PowerSchool Score.",
     "general_scale_rule": "Let n be exact I Can count and t=ceil(n/2). If assessed: I for secure<t; C for secure=t; B for t<secure<n; A for secure=n; A+ for secure=n plus meaningful transfer evidence in the goal.",
     "unit_grade_rule": "No overall Unit letter grade is reported or exported. Unit Mastery Goals demonstrated remains a progress count only.",
-    "family_not_assessed_meaning": "This Mastery Goal has not been checked yet; this is distinct from an attempted check that produced limited or unsuccessful evidence."
+    "family_not_assessed_meaning": "This Mastery Goal has not been checked yet; this is distinct from an attempted check that produced limited or unsuccessful evidence.",
+    "in_progress_family_meaning": "I means In Progress. It is a current evidence grade, not a permanent label or an averaged penalty; it can change when new or stronger evidence is added."
   },
   "powerschool": {
     "output_rule": "Produce one CSV per Mastery Goal per period; no Unit-grade CSV.",
@@ -158,5 +159,8 @@
     "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",
     "email_rule": "Only active rows with a valid supplied staff_email are eligible recipients. Never infer an address from staff name.",
     "privacy_rule": "Keep routing separate from accommodations and do not store disability/diagnosis narrative in the routing file."
+  },
+  "email_report_identity": {
+    "rule": "Email/report delivery must verify stable student identity against the current roster and visible report identity. Filename/key alone is insufficient; any mismatch blocks sending."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-email-delivery-contract/2.1",
+  "schema": "portfolio-email-delivery-contract/2.2",
   "status": "CURRENT",
   "purpose": "Teacher-authorized student-specific Portfolio report delivery using the private Drive archive; no grading or evidence decisions occur here.",
   "source": {
@@ -22,7 +22,10 @@
     "custom_note_field": "empty optional field per student; saved privately only when entered",
     "weekly_note": "optional class-wide note; never hardcode dates/events",
     "support_staff_default": "include active support staff with valid email addresses when available; display exact staff name, role, support class when present, and email in preflight",
-    "blocked_rows": "may be excluded by teacher checkbox; excluded rows do not block the rest of the send"
+    "blocked_rows": "may be excluded by teacher checkbox; excluded rows do not block the rest of the send",
+    "left_checkbox": "Send checkbox appears left of student name; uncheck to omit this send only.",
+    "class_action": "Remove from class explicitly marks student_registry.csv active=no while preserving evidence/history.",
+    "custom_note_polish": "Teacher-entered note fragments are cleaned deterministically and use the student first name instead of guessing gendered pronouns. Teacher reviews polished text before sending."
   },
   "recipients": {
     "to": "student email",
@@ -37,7 +40,8 @@
     "not_assessed": "We have not checked this Mastery Goal yet.",
     "needs_first_check": "We have not checked this skill yet.",
     "powerschool": "PowerSchool shows one current grade for each Mastery Goal once that goal has been assessed. Individual evidence sources are not separate grades averaged together.",
-    "weekly_note_rule": "Only include teacher-entered weekly note text."
+    "weekly_note_rule": "Only include teacher-entered weekly note text.",
+    "in_progress": "An I means In Progress. It is not permanent. It reflects current evidence and can change as new or stronger evidence is added; earlier checks are not averaged in as permanent penalties."
   },
   "safety": {
     "teacher_account_only": true,
@@ -63,5 +67,11 @@
     "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",
     "active_rule": "Only truthy active rows with a valid staff_email are eligible recipients.",
     "privacy_rule": "Do not store disability, diagnosis, accommodation narrative, or other IEP details in this routing file."
+  },
+  "identity_safety": {
+    "hard_rule": "Never send an attachment unless the prepared manifest explicitly records identity_verified=true for that student and the manifest student_name exactly matches the current recipient roster row.",
+    "html_prepare": "Before HTML-to-PDF conversion, verify the individual HTML visibly contains the exact manifest student name.",
+    "pdf_prepare": "A PDF path is accepted only when the results manifest explicitly marks identity_verified=true from a prior exact identity check.",
+    "stale_manifest": "Legacy manifests without identity_verified are blocked and require Prepare / Refresh Email Reports."
   }
 }
