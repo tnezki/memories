@@ -1,13 +1,13 @@
 {
-  "schema": "portfolio-email-delivery-contract/2.0",
+  "schema": "portfolio-email-delivery-contract/2.1",
   "status": "CURRENT",
   "purpose": "Teacher-authorized student-specific Portfolio report delivery using the private Drive archive; no grading or evidence decisions occur here.",
   "source": {
     "results_zip": "02 Portfolio Data/Results Archives/Latest Portfolio Results.zip",
     "results_manifest": "results_manifest.json",
     "recipient_file": "02 Portfolio Data/email_recipients_current.csv",
-    "support_contacts": "02 Portfolio Data/Student Support/student_support_contacts_current.csv",
-    "staff_directory": "00 Contact Directory/staff_directory.csv (optional exact-name email resolution only)"
+    "support_contacts": "00 Contact Directory/student_support_contacts_current.csv",
+    "staff_directory": "not required when support_contacts contains staff_email; never infer missing addresses"
   },
   "prepare_email_reports": {
     "explicit_action": true,
@@ -21,7 +21,7 @@
     "report_column": false,
     "custom_note_field": "empty optional field per student; saved privately only when entered",
     "weekly_note": "optional class-wide note; never hardcode dates/events",
-    "support_staff_default": "include verified support staff when available; display exact staff names/roles/emails in preflight",
+    "support_staff_default": "include active support staff with valid email addresses when available; display exact staff name, role, support class when present, and email in preflight",
     "blocked_rows": "may be excluded by teacher checkbox; excluded rows do not block the rest of the send"
   },
   "recipients": {
@@ -31,12 +31,7 @@
       "verified support-staff emails when includeSupportStaff=true"
     ],
     "privacy": "Use BCC for non-student recipients. Deduplicate all addresses. Never share a Drive report folder as a substitute for student-specific delivery.",
-    "support_roles": [
-      "CASE_MANAGER",
-      "SPECIAL_ED_TEACHER",
-      "MATH_STUDY_SKILLS_TEACHER",
-      "SUPPORT_TEACHER"
-    ]
+    "support_roles": "course-agnostic free text; do not restrict routing to a fixed role allowlist"
   },
   "family_language": {
     "not_assessed": "We have not checked this Mastery Goal yet.",
@@ -51,5 +46,22 @@
     "send_log_required": true,
     "already_sent_hash_guard": true,
     "inactive_students_excluded": true
+  },
+  "support_contact_schema": {
+    "columns": [
+      "student_id",
+      "student_name",
+      "staff_name",
+      "staff_email",
+      "role",
+      "support_class",
+      "active"
+    ],
+    "key": "student_id",
+    "multiple_rows_per_student": true,
+    "role_rule": "Free text, course-agnostic. Common examples: Case Manager, Special Education Teacher, Study Skills Teacher, Academic Support Teacher, Resource Room Teacher.",
+    "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",
+    "active_rule": "Only truthy active rows with a valid staff_email are eligible recipients.",
+    "privacy_rule": "Do not store disability, diagnosis, accommodation narrative, or other IEP details in this routing file."
   }
 }

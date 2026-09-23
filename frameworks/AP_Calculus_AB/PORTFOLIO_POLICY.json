@@ -37,7 +37,8 @@
     "status": "CURRENT_OFFICIAL",
     "not_assessed_rule": "No usable evidence anywhere in the goal -> Not assessed. Family meaning: this Mastery Goal has not been checked yet. PowerSchool Score is blank.",
     "general_scale_rule": "Let n be exact I Can count and t=ceil(n/2). If assessed: I for secure<t; C for secure=t; B for t<secure<n; A for secure=n; A+ for secure=n plus meaningful transfer evidence in the goal.",
-    "unit_grade_rule": "No overall Unit letter grade is reported or exported."
+    "unit_grade_rule": "No overall Unit letter grade is reported or exported.",
+    "family_not_assessed_meaning": "This Mastery Goal has not been checked yet; this is distinct from an attempted check that produced limited or unsuccessful evidence."
   },
   "powerschool": {
     "output_rule": "Produce one CSV per Mastery Goal per period; no Unit-grade CSV.",
@@ -69,14 +70,21 @@
     "latest_copy": "Latest Portfolio Results.zip"
   },
   "student_support_contacts": {
-    "file": "02 Portfolio Data/Student Support/student_support_contacts_current.csv",
-    "roles": [
-      "CASE_MANAGER",
-      "SPECIAL_ED_TEACHER",
-      "MATH_STUDY_SKILLS_TEACHER",
-      "SUPPORT_TEACHER"
+    "file": "00 Contact Directory/student_support_contacts_current.csv",
+    "schema_columns": [
+      "student_id",
+      "student_name",
+      "staff_name",
+      "staff_email",
+      "role",
+      "support_class",
+      "active"
     ],
-    "rule": "Store explicit relationships only; do not infer email addresses."
+    "matching_rule": "Match course roster to support routing by durable student_id. Allow multiple active staff rows per student.",
+    "role_rule": "Course-agnostic free text. Common examples: Case Manager, Special Education Teacher, Study Skills Teacher, Academic Support Teacher, Resource Room Teacher.",
+    "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",
+    "email_rule": "Only active rows with a valid supplied staff_email are eligible recipients. Never infer an address from staff name.",
+    "privacy_rule": "Keep routing separate from accommodations and do not store disability/diagnosis narrative in the routing file."
   },
   "report_fidelity": {
     "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json"

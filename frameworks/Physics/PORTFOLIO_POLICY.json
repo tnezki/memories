@@ -45,7 +45,8 @@
     "status": "CURRENT_OFFICIAL",
     "not_assessed_rule": "No usable evidence anywhere in the goal -> Not assessed and blank PowerSchool Score.",
     "general_scale_rule": "Let n be exact I Can count and t=ceil(n/2). If assessed: I for secure<t; C for secure=t; B for t<secure<n; A for secure=n; A+ for secure=n plus meaningful transfer evidence in the goal.",
-    "unit_grade_rule": "No overall Unit letter grade is reported or exported. Unit Mastery Goals demonstrated remains a progress count only."
+    "unit_grade_rule": "No overall Unit letter grade is reported or exported. Unit Mastery Goals demonstrated remains a progress count only.",
+    "family_not_assessed_meaning": "This Mastery Goal has not been checked yet; this is distinct from an attempted check that produced limited or unsuccessful evidence."
   },
   "powerschool": {
     "output_rule": "Produce one CSV per Mastery Goal per period; no Unit-grade CSV.",
@@ -97,7 +98,8 @@
     "states": [
       {
         "code": "NEEDS_FIRST_CHECK",
-        "label": "Needs first check"
+        "label": "Needs first check",
+        "rule": "This I Can has not been checked yet; do not use this label for an attempted check with limited or unsuccessful evidence."
       },
       {
         "code": "PRACTICE_AND_CHECK",
@@ -141,13 +143,20 @@
     "rule": "Every report refresh persists the exact returned results ZIP as a dated archive and as the current Latest copy."
   },
   "student_support_contacts": {
-    "file": "02 Portfolio Data/Student Support/student_support_contacts_current.csv",
-    "roles": [
-      "CASE_MANAGER",
-      "SPECIAL_ED_TEACHER",
-      "MATH_STUDY_SKILLS_TEACHER",
-      "SUPPORT_TEACHER"
+    "file": "00 Contact Directory/student_support_contacts_current.csv",
+    "schema_columns": [
+      "student_id",
+      "student_name",
+      "staff_name",
+      "staff_email",
+      "role",
+      "support_class",
+      "active"
     ],
-    "rule": "Store only explicit student-to-support-staff relationships from teacher-authorized support sources. Keep staff routing separate from accommodations. Do not infer email addresses."
+    "matching_rule": "Match course roster to support routing by durable student_id. Allow multiple active staff rows per student.",
+    "role_rule": "Course-agnostic free text. Common examples: Case Manager, Special Education Teacher, Study Skills Teacher, Academic Support Teacher, Resource Room Teacher.",
+    "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",
+    "email_rule": "Only active rows with a valid supplied staff_email are eligible recipients. Never infer an address from staff name.",
+    "privacy_rule": "Keep routing separate from accommodations and do not store disability/diagnosis narrative in the routing file."
   }
 }

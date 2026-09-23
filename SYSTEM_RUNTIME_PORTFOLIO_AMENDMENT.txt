@@ -2,15 +2,18 @@ SYSTEM RUNTIME AMENDMENT - PORTFOLIO DELIVERY / DRIVE ROUTING
 ============================================================
 STATUS: CURRENT
 SCOPE: Portfolio workflow only.
-REVISION: 2026-09-22 - PRIVATE RESULTS ARCHIVE + EMAIL HANDOFF
+REVISION: 2026-09-22 - PRIVATE RESULTS ARCHIVE + COURSE-AGNOSTIC SUPPORT ROUTING
+
 
 Portfolio is a private state-and-report workflow, not a repository artifact build. Student evidence, rosters, IEP/504/support files, Portfolio state, report outputs, CSVs, contacts, and names must never be written to GitHub.
+
 
 CANONICAL PORTFOLIO DRIVE ROOT - HARD
 -------------------------------------
 Use exactly:
   title: ____Portfolio_Data
   folder_id: 1xFGmkwiHXxJIwsJEx36nSy4C6OLr3Y3o
+
 
 Resolve the exact <Course>/unit N below that root. Standard Unit structure is:
   01 Evidence Inbox/
@@ -20,7 +23,9 @@ Resolve the exact <Course>/unit N below that root. Standard Unit structure is:
   05 PowerSchool Exports/
   06 Checkpoints/ when the course uses Checkpoints
 
+
 Automated Portfolio state writes are limited to 01 and 02. Folders 03-05 remain manual teacher-facing destinations. Preserve 06 and other course-authorized siblings.
+
 
 02 Portfolio Data may contain:
   Results Archives/
@@ -29,28 +34,41 @@ Automated Portfolio state writes are limited to 01 and 02. Folders 03-05 remain 
   Student Support/
     Source Files/
     student_support_current.csv
-    student_support_contacts_current.csv
     student_support_review.csv
     student_support_import_history.csv
+
+Global private contact routing lives once at:
+  00 Contact Directory/student_support_contacts_current.csv
+with exact columns:
+  student_id,student_name,staff_name,staff_email,role,support_class,active
+
+The file is course-agnostic. A student may have multiple active staff rows. `support_class` may name any support/resource/study-skills class and may be blank for a case-manager-only relationship. `role` is not restricted to math-specific roles.
+
 
 ROSTER / SUPPORT
 ----------------
 The stored student_registry.csv is reused on ordinary runs. A new roster is required only for first run/reset or explicit roster_update_requested=true. Durable Student Num reconnects history. Departed students become inactive rather than deleted.
 
-Student-support documents are private setup/support sources, never evidence. Preserve raw sources under Student Support/Source Files. Normalize accommodations/modifications into student_support_current.csv. Normalize explicit support-staff relationships separately into student_support_contacts_current.csv. A case manager, special education teacher, math study skills teacher, or other authorized support teacher may be recorded when explicitly present. Do not infer an email address from a name; exact verified staff-directory resolution is allowed.
+
+Student-support documents are private setup/support sources, never evidence. Preserve raw sources under Student Support/Source Files. Normalize accommodations/modifications into student_support_current.csv. Keep actionable accommodations/modifications in the Unit Student Support files. Keep student-to-support-staff routing in the separate global `00 Contact Directory/student_support_contacts_current.csv`. That routing table may include case managers, special education teachers, study-skills teachers, academic support teachers, resource-room teachers, or future support roles/classes. Do not infer an email address from a name.
+
 
 Support-only runs do not change evidence or grades. Report refresh after support maintenance is allowed only when explicitly requested.
+
 
 REPORT / GRADE OUTPUT
 ---------------------
 Official grading export is one current CSV per Mastery Goal per period; no overall Unit-grade CSV. Not assessed means the Mastery Goal has not been checked yet and therefore has blank PowerSchool Score. Needs first check means the individual I Can has not been checked yet.
+
 
 The locked teacher report uses exactly:
 - Whole Class
 - Priority Day Groups
 - Pull In Students
 
+
 Priority Day has at most 2 groups and at most 15 students per group. Rank eligible students by current I-grade count, then Practice + check soon gap count, then evidence severity. Summarize the best common 20-minute Crewtime intervention for each selected group. Pull In is one landscape page of students with 1-2 Practice + check soon gaps.
+
 
 RESULTS ZIP / CROSS-DEVICE ARCHIVE - HARD
 ------------------------------------------
@@ -61,18 +79,24 @@ A report-producing run builds one results ZIP with:
   teacher_report/teacher_summary.html
   powerschool/<period>_MGxx.csv
 
+
 Do not generate PDFs during the normal Portfolio run. Individual student HTML must be self-contained enough for reliable offline printing and email-prep PDF conversion.
+
 
 After QA, persist the exact ZIP bytes twice under 02 Portfolio Data / Results Archives:
 1. an immutable dated filename;
 2. Latest Portfolio Results.zip, replacing the prior current copy.
 
+
 Verify readback/hash. Return the exact same ZIP to the teacher in chat. This private archive solves cross-device availability without placing student data in GitHub.
+
 
 EMAIL BOUNDARY
 --------------
 Normal Portfolio runs do not generate Email Delivery PDFs and do not refresh email_delivery_manifest.csv. Email preparation is a separate explicit action in the email tool. That tool may read Latest Portfolio Results.zip, create verified email-ready PDFs in 03 Student Packets/Email Delivery, and refresh email_delivery_manifest.csv.
 
-The email tool may also send the student's report to verified support staff linked in student_support_contacts_current.csv. Do not share an entire report folder as a substitute for student-specific delivery.
+
+The email tool may also send the student's report to active support staff linked by student_id in `00 Contact Directory/student_support_contacts_current.csv`. Do not share an entire report folder as a substitute for student-specific delivery.
+
 
 All other SYSTEM_RUNTIME_CONTRACT rules remain in force.
