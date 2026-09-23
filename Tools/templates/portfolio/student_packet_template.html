@@ -2,63 +2,65 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{COURSE}} Unit {{UNIT_NUMBER}} Portfolio</title>
 <link rel="stylesheet" href="portfolio.css">
-<style>@page{size:Letter portrait;margin:0}</style>
 </head>
 <body>
-<!-- CANONICAL LOCKED TWO-PAGE STUDENT SHELL. Replace tokens/loops only. -->
-<section class="student-page student-front">
+<!-- CANONICAL RESPONSIVE STUDENT REPORT. Replace tokens/loops only. -->
+<article class="student-report">
   <div class="top-rule"></div>
-  <div class="eyebrow">{{COURSE}} - Unit {{UNIT_NUMBER}} Portfolio</div>
-  <h1>Current Progress Report</h1>
-  <p class="subtitle">{{UNIT_TITLE}}</p>
-  <div class="meta"><strong>{{STUDENT_NAME}}</strong><br>{{PERIOD}} - Report {{REPORT_NUMBER}}<br>{{REPORT_DATE}}</div>
+
+  <header class="student-report-head">
+    <div>
+      <div class="eyebrow">{{COURSE}} - Unit {{UNIT_NUMBER}} Portfolio</div>
+      <h1>Current Progress Report</h1>
+      <p class="subtitle">{{UNIT_TITLE}}</p>
+    </div>
+    <div class="meta"><strong>{{STUDENT_NAME}}</strong><br>{{PERIOD}} - Report {{REPORT_NUMBER}}<br>{{REPORT_DATE}}</div>
+  </header>
 
   <div class="standard"><strong>Essential Standard:</strong> {{ESSENTIAL_STANDARD}}</div>
 
-  <div class="picture picture-full">
-    <h2>Your current picture</h2>
-    <div class="lead">{{MG_DEMONSTRATED_COUNT}} of {{MG_TOTAL}} Unit Mastery Goals demonstrated.</div>
-    <p>{{APPROVED_CURRENT_PICTURE_TEXT}}</p>
-    <div class="mg-strip">{{MG_CHIPS_HTML}}</div>
-  </div>
-
-  <div class="evidence-heading">
-    <div><h2>Unit Evidence Picture</h2><p>All {{MG_TOTAL}} Mastery Goals and all {{ICAN_TOTAL}} I Cans</p></div>
-    <div class="legend"><b>Status:</b><span class="legend-item"><span class="status-dot"></span>No Evidence</span><span class="legend-item"><span class="status-dot developing"></span>Developing</span><span class="legend-item"><span class="status-dot mastered"></span>Mastered</span><span class="legend-item"><span class="status-star">★</span>Transfer</span></div>
-  </div>
-  <div class="next-key"><b>Next:</b> each I Can shows what it needs now - first check, practice + check soon, another independent check, secure, or extension.</div>
-  <div class="unit-grid">{{PAGE_1_MASTERY_GOAL_CARDS_HTML}}</div>
-
-  <div class="footer"><span>Keep this report for intervention, tutoring, home, or future reassessment planning.</span><span>{{LATEST_EVIDENCE_LABEL}} · {{LATEST_EVIDENCE_DATE}}</span></div>
-</section>
-
-<section class="student-page student-back">
-  <div class="top-rule"></div>
-  <div class="eyebrow">{{COURSE}} - Unit {{UNIT_NUMBER}} Portfolio</div>
-  <h1>Unit Evidence Picture</h1>
-  <p class="subtitle">All {{MG_TOTAL}} Mastery Goals and all {{ICAN_TOTAL}} I Cans · continued</p>
-  <div class="meta"><strong>{{STUDENT_NAME}}</strong><br>{{PERIOD}} - Report {{REPORT_NUMBER}}<br>{{REPORT_DATE}}</div>
-
-  <div class="unit-grid back-grid">{{PAGE_2_MASTERY_GOAL_CARDS_HTML}}</div>
-
-  <div class="recent">
-    <h2>Recent evidence - {{LATEST_EVIDENCE_LABEL}}</h2>
-    <table><thead><tr><th>I Can</th><th>Target</th><th>Evidence</th><th>What this showed</th></tr></thead><tbody>{{RECENT_EVIDENCE_ROWS_HTML}}</tbody></table>
-  </div>
-
-  <div class="practice-box">
-    <div class="practice-copy">
-      <h2>Your Practice</h2>
-      <p>Scan or click to open the Practice Builder and select the following I Can statements for more practice:</p>
-      <ul class="practice-focus-list">{{PRACTICE_FOCUS_ICANS_HTML}}</ul>
-      {{PRACTICE_BUILDER_LINK_HTML}}
+  <section class="student-summary-grid">
+    <div class="picture picture-full">
+      <h2>Your current picture</h2>
+      <div class="lead">{{MG_DEMONSTRATED_COUNT}} of {{MG_TOTAL}} Unit Mastery Goals demonstrated.</div>
+      <p>{{APPROVED_CURRENT_PICTURE_TEXT}}</p>
     </div>
-    <div class="qrbox">{{PRACTICE_BUILDER_QR_HTML}}</div>
-  </div>
+    <div class="goal-snapshot">
+      <h2>Mastery Goal snapshot</h2>
+      <div class="mg-strip">{{MG_CHIPS_HTML}}</div>
+    </div>
+  </section>
 
-  <div class="footer"><span>This page continues the detailed Unit {{UNIT_NUMBER}} tracker.</span><span>Report {{REPORT_NUMBER}}</span></div>
-</section>
+  <section class="evidence-section">
+    <div class="evidence-heading">
+      <div><h2>Unit Evidence Picture</h2><p>All {{MG_TOTAL}} Mastery Goals and all {{ICAN_TOTAL}} I Cans</p></div>
+      <div class="legend"><b>Status:</b><span class="legend-item"><span class="status-dot"></span>No Evidence</span><span class="legend-item"><span class="status-dot developing"></span>Developing</span><span class="legend-item"><span class="status-dot mastered"></span>Mastered</span><span class="legend-item"><span class="status-star">★</span>Transfer</span></div>
+    </div>
+    <div class="next-key"><b>Next:</b> each I Can shows what it needs now - first check, practice + check soon, another independent check, secure, or extension.</div>
+    <div class="mastery-grid">{{PAGE_1_MASTERY_GOAL_CARDS_HTML}}{{PAGE_2_MASTERY_GOAL_CARDS_HTML}}</div>
+  </section>
+
+  <section class="student-lower-grid">
+    <div class="recent">
+      <h2>Recent evidence - {{LATEST_EVIDENCE_LABEL}}</h2>
+      <table><thead><tr><th>I Can</th><th>Target</th><th>Evidence</th><th>What this showed</th></tr></thead><tbody>{{RECENT_EVIDENCE_ROWS_HTML}}</tbody></table>
+    </div>
+
+    <div class="practice-box">
+      <div class="practice-copy">
+        <h2>Your Practice</h2>
+        <p>Scan or click to open the Practice Builder and select the following I Can statements for more practice:</p>
+        <ul class="practice-focus-list">{{PRACTICE_FOCUS_ICANS_HTML}}</ul>
+        {{PRACTICE_BUILDER_LINK_HTML}}
+      </div>
+      <div class="qrbox">{{PRACTICE_BUILDER_QR_HTML}}</div>
+    </div>
+  </section>
+
+  <footer class="student-report-footer"><span>Use this report for intervention, tutoring, home, or future reassessment planning.</span><span>{{LATEST_EVIDENCE_LABEL}} · {{LATEST_EVIDENCE_DATE}}</span></footer>
+</article>
 </body>
 </html>

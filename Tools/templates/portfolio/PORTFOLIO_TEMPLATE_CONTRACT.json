@@ -1,22 +1,20 @@
 {
-  "schema": "portfolio-template-contract/2.2",
+  "schema": "portfolio-template-contract/2.3",
   "status": "CURRENT",
-  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student report remains locked to the approved two-page Mastery Goal grade design. Teacher report is locked to the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design.",
-  "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, page purposes, card anatomy, lane names, grading explanation, Priority Day capacity/ranking, and the one-page Pull In design. Data changes; recurring structure does not drift.",
+  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student reports are responsive digital HTML with no fixed print-page budget. Teacher reports retain the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design.",
+  "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, section purposes, card anatomy, lane names, grading explanation, Priority Day capacity/ranking, and responsive digital student-report structure. Data changes; recurring structure does not drift.",
   "student_packet": {
     "template": "Tools/templates/portfolio/student_packet_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
-    "page_size": "US Letter portrait",
-    "pages_per_student": 2,
-    "duplex_rule": "Every active student consumes exactly two content pages.",
-    "page_1_title": "Current Progress Report",
-    "page_1_fixed_sections": [
+    "delivery_mode": "responsive_html",
+    "print_page_count_rule": "NONE",
+    "layout_rule": "Use one continuous responsive student report. Never shrink, clip, or hide required I Cans to meet a print-page target.",
+    "fixed_sections": [
+      "Current Progress Report",
       "Essential Standard",
       "Your current picture",
-      "Unit Evidence Picture"
-    ],
-    "page_2_title": "Unit Evidence Picture",
-    "page_2_fixed_sections": [
+      "Mastery Goal snapshot",
+      "Unit Evidence Picture",
       "Recent evidence - {LATEST_EVIDENCE_LABEL}",
       "Your Practice"
     ],
@@ -28,13 +26,10 @@
       "not_assessed": "Display exactly `Not assessed`; family-facing meaning: this Mastery Goal has not been checked yet. Do not describe an unsuccessful attempt as Not assessed.",
       "card_rule": "Every MG card shows exact MG title/description, current grade display, secure-I-Can count, and every I Can row."
     },
-    "mastery_goal_distribution": {
-      "default": "2 + 2 for a four-MG Unit",
-      "allowed_fit_adjustments": [
-        "1 + 3",
-        "3 + 1"
-      ],
-      "rule": "Every MG appears exactly once. Rendered readability controls the split."
+    "mastery_goal_layout": {
+      "desktop": "Balanced two-column responsive flow using the canonical mastery-grid; cards never split and may have unequal heights.",
+      "narrow_screen": "One column.",
+      "rule": "Every MG appears exactly once. Do not paginate by Mastery Goal or force a 2+2 print split."
     },
     "practice_box": {
       "title": "Your Practice",
@@ -43,12 +38,13 @@
       "focus_list": "List every selected current practice-focus I Can as exact code + full statement.",
       "privacy_rule": "No student identity, evidence, grade, or status in the URL/QR.",
       "missing_builder_rule": "When the current course has no approved Practice Builder route, show the focus list without fabricating a link."
-    }
+    },
+    "combined_packet_rule": "class_student_packet.html contains one complete student-report article per active student in roster order. It is a convenient browser collection, not a duplex-print artifact."
   },
   "teacher_summary": {
     "template": "Tools/templates/portfolio/teacher_summary_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
-    "page_size": "US Letter landscape",
+    "page_size": "US Letter landscape when printed",
     "normal_page_budget": "3 pages when no Whole Class intervention is active; 4 pages when Whole Class is active.",
     "fixed_page_order": [
       "Class Overview",
@@ -66,11 +62,7 @@
     "class_overview": {
       "title": "Class Overview",
       "rule": "Fast-to-scan action page. Show compact current-grade/evidence stats, Major strengths, Highest-leverage pattern, and the three lane summaries. Do not include roster-upload or PowerSchool workflow instructions.",
-      "lanes": [
-        "Whole Class",
-        "Priority Day Groups",
-        "Pull In Students"
-      ]
+      "lanes": ["Whole Class", "Priority Day Groups", "Pull In Students"]
     },
     "whole_class": {
       "page_title": "Whole Class",
@@ -108,22 +100,11 @@
     "detailed_evidence_rule": "Do not include a normal detailed I Can appendix in the recurring teacher report. Detailed longitudinal evidence remains in private Portfolio Data CSV/JSON state and may be produced separately only when the teacher explicitly requests it."
   },
   "student_action_states": {
-    "NEEDS_FIRST_CHECK": {
-      "label": "Needs first check",
-      "family_meaning": "We have not checked this skill yet."
-    },
-    "PRACTICE_AND_CHECK": {
-      "label": "Practice + check soon"
-    },
-    "NEEDS_ANOTHER_DEMONSTRATION": {
-      "label": "Needs another independent check"
-    },
-    "SECURE": {
-      "label": "Secure"
-    },
-    "EXTENSION": {
-      "label": "Extension"
-    }
+    "NEEDS_FIRST_CHECK": {"label": "Needs first check", "family_meaning": "We have not checked this skill yet."},
+    "PRACTICE_AND_CHECK": {"label": "Practice + check soon"},
+    "NEEDS_ANOTHER_DEMONSTRATION": {"label": "Needs another independent check"},
+    "SECURE": {"label": "Secure"},
+    "EXTENSION": {"label": "Extension"}
   },
   "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in human-facing output.",
   "results_zip": {
@@ -133,12 +114,10 @@
     "class_packet_path": "student_reports/class_student_packet.html",
     "teacher_path": "teacher_report/teacher_summary.html",
     "powerschool_path": "powerschool/",
-    "self_contained_html_rule": "Individual student HTML must contain the essential print CSS/markup needed for reliable offline browser and email-prep PDF conversion.",
-    "drive_archive_rule": "Persist a dated copy and byte-identical Latest Portfolio Results.zip under 02 Portfolio Data / Results Archives whenever reports are refreshed.",
+    "self_contained_html_rule": "Individual student HTML must contain the essential CSS/markup needed for reliable offline browser viewing and optional later PDF conversion.",
     "identity_rule": "For every student entry, student_key + student_name + individual report path must identify the same student. QA must verify the visible report identity before archive PASS. A filename/key mismatch with visible student identity is a hard failure.",
     "template_provenance_required": true,
-    "template_validator": "Tools/templates/portfolio/verify_portfolio_output.py",
-    "persistence_pass_rule": "A refreshed report run cannot be labeled PASS/Completed unless dated and Latest ZIP copies are persisted and readback/hash verified in 02 Portfolio Data / Results Archives."
+    "template_validator": "Tools/templates/portfolio/verify_portfolio_output.py"
   },
   "fidelity_enforcement": {
     "status": "HARD",
@@ -149,8 +128,8 @@
       "contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json"
     },
     "renderer_rule": "Read the exact canonical sources from the pinned SYSTEM commit and instantiate tokens/loops only. Do not author substitute report HTML, course-specific card anatomy, colors, typography, spacing, or a new stylesheet.",
-    "self_contained_rule": "Replace the external portfolio.css link with one <style id=\"canonical-portfolio-css\"> block containing the exact canonical portfolio.css bytes. Preserve fixed template inline print styles. No second visual stylesheet is allowed.",
-    "physics_fit_rule": "Physics Units with more I Cans use the same canonical report and the allowed Mastery Goal distribution/fit adjustments; they do not receive a condensed or separately styled report.",
+    "self_contained_rule": "Replace the external portfolio.css link with one <style id=\"canonical-portfolio-css\"> block containing the exact canonical portfolio.css bytes. No second visual stylesheet is allowed.",
+    "student_fit_rule": "Student HTML is responsive and content-height driven. Required content may extend vertically; clipping, hidden overflow, artificial font shrinking, and print-page-count fitting are forbidden.",
     "provenance_rule": "Every report-producing run records the pinned SYSTEM commit plus SHA-256 values for the student template, teacher template, CSS, and contract in results_manifest.json. Individual/teacher HTML includes corresponding template/CSS provenance meta tags.",
     "validator": "Tools/templates/portfolio/verify_portfolio_output.py",
     "failure_code": "PORTFOLIO_TEMPLATE_DRIFT",

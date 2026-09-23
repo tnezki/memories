@@ -15,7 +15,7 @@ import re
 import sys
 from pathlib import Path
 
-VERSION = "portfolio-template-fidelity/1.0"
+VERSION = "portfolio-template-fidelity/1.1"
 STUDENT_TEMPLATE = "student_packet_template.html"
 TEACHER_TEMPLATE = "teacher_summary_template.html"
 CSS_FILE = "portfolio.css"
@@ -35,9 +35,10 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def classes_of_sections(doc: str, required_class: str) -> list[str]:
+def classes_of_elements(doc: str, required_class: str) -> list[str]:
     out: list[str] = []
-    for m in re.finditer(r"<section\b[^>]*\bclass=[\"']([^\"']+)[\"'][^>]*>", doc, re.I):
+    pattern = r"<(?:section|article)\b[^>]*\bclass=[\"']([^\"']+)[\"'][^>]*>"
+    for m in re.finditer(pattern, doc, re.I):
         classes = m.group(1).split()
         if required_class in classes:
             out.append(m.group(1))
@@ -74,7 +75,7 @@ def validate_styles(doc: str, css_sha: str, label: str, errors: list[str]) -> No
     blocks = style_blocks(doc)
     canonical = canonical_css_block(doc)
     if canonical is None:
-        errors.append(f"{label}: missing <style id=\"canonical-portfolio-css\"> block")
+        errors.append(f'{label}: missing <style id="canonical-portfolio-css"> block')
         return
     actual = sha256_bytes(canonical.encode("utf-8"))
     if actual != css_sha:
@@ -83,7 +84,7 @@ def validate_styles(doc: str, css_sha: str, label: str, errors: list[str]) -> No
         if re.search(r"\bid=[\"']canonical-portfolio-css[\"']", attrs, re.I):
             continue
         compact = re.sub(r"\s+", "", body)
-        if not compact.startswith("@page{") or len(compact) > 240:
+        if compact and (not compact.startswith("@page{") or len(compact) > 240):
             errors.append(f"{label}: noncanonical extra visual <style> block detected")
 
 
@@ -96,21 +97,34 @@ def validate_report_meta(doc: str, expected_template_sha: str, css_sha: str, lab
         errors.append(f"{label}: portfolio-css-sha256 missing/mismatch")
 
 
+def validate_no_unresolved_tokens(doc: str, label: str, errors: list[str]) -> None:
+    if re.search(r"\{\{[A-Z0-9_]+\}\}", doc):
+        errors.append(f"{label}: unresolved canonical template token remains")
+
+
 def validate_individual(path: Path, student_sha: str, css_sha: str, errors: list[str]) -> None:
     doc = read_text(path)
     label = path.as_posix()
     validate_styles(doc, css_sha, label, errors)
     validate_report_meta(doc, student_sha, css_sha, label, errors)
-    sections = classes_of_sections(doc, "student-page")
-    if len(sections) != 2:
-        errors.append(f"{label}: expected exactly 2 student-page sections, found {len(sections)}")
-    if sum("student-front" in c.split() for c in sections) != 1:
-        errors.append(f"{label}: expected one student-front page")
-    if sum("student-back" in c.split() for c in sections) != 1:
-        errors.append(f"{label}: expected one student-back page")
-    for required in ["Current Progress Report", "Your current picture", "Unit Evidence Picture", "Recent evidence", "Your Practice"]:
-        if required not in doc:
-            errors.append(f"{label}: missing canonical fixed section text: {required}")
+    validate_no_unresolved_tokens(doc, label, errors)
+    reports = classes_of_elements(doc, "student-report")
+    if len(reports) != 1:
+        errors.append(f"{label}: expected exactly 1 student-report article, found {len(reports)}")
+    required = [
+        "Current Progress Report",
+        "Essential Standard:",
+        "Your current picture",
+        "Mastery Goal snapshot",
+        "Unit Evidence Picture",
+        "Recent evidence",
+        "Your Practice",
+    ]
+    for text in required:
+        if text not in doc:
+            errors.append(f"{label}: missing canonical fixed section text: {text}")
+    if "student-page" in doc or "student-front" in doc or "student-back" in doc:
+        errors.append(f"{label}: legacy fixed-page student shell detected")
 
 
 def validate_class_packet(path: Path, student_sha: str, css_sha: str, student_count: int, errors: list[str]) -> None:
@@ -118,10 +132,10 @@ def validate_class_packet(path: Path, student_sha: str, css_sha: str, student_co
     label = path.as_posix()
     validate_styles(doc, css_sha, label, errors)
     validate_report_meta(doc, student_sha, css_sha, label, errors)
-    pages = classes_of_sections(doc, "student-page")
-    expected = 2 * student_count
-    if len(pages) != expected:
-        errors.append(f"{label}: expected {expected} student-page sections for {student_count} students, found {len(pages)}")
+    validate_no_unresolved_tokens(doc, label, errors)
+    reports = classes_of_elements(doc, "student-report")
+    if len(reports) != student_count:
+        errors.append(f"{label}: expected {student_count} student-report articles, found {len(reports)}")
 
 
 def validate_teacher(path: Path, teacher_sha: str, css_sha: str, errors: list[str]) -> None:
@@ -129,6 +143,7 @@ def validate_teacher(path: Path, teacher_sha: str, css_sha: str, errors: list[st
     label = path.as_posix()
     validate_styles(doc, css_sha, label, errors)
     validate_report_meta(doc, teacher_sha, css_sha, label, errors)
+    validate_no_unresolved_tokens(doc, label, errors)
     required = ["Class Overview", "Priority Day Groups", "Pull In Students"]
     positions = []
     for heading in required:
@@ -141,12 +156,11 @@ def validate_teacher(path: Path, teacher_sha: str, css_sha: str, errors: list[st
     whole = doc.find("Whole Class")
     if whole >= 0 and positions[0] >= 0 and positions[1] >= 0 and not (positions[0] < whole < positions[1]):
         errors.append(f"{label}: Whole Class appears outside canonical location")
-    sections = classes_of_sections(doc, "teacher-page")
+    sections = classes_of_elements(doc, "teacher-page")
     rendered = [c for c in sections if "omit-page" not in c.split()]
     if len(rendered) not in (3, 4):
         errors.append(f"{label}: expected 3 or 4 rendered teacher pages, found {len(rendered)}")
-    forbidden = ["Detailed Evidence Appendix", "Brief guided practice"]
-    for phrase in forbidden:
+    for phrase in ["Detailed Evidence Appendix", "Brief guided practice"]:
         if phrase in doc:
             errors.append(f"{label}: forbidden recurring teacher-report section/label present: {phrase}")
 
@@ -172,10 +186,7 @@ def main() -> int:
         if not path.is_file():
             errors.append(f"canonical source missing: {label} -> {path}")
 
-    if errors:
-        hashes = {}
-    else:
-        hashes = {label: sha256_file(path) for label, path in required_sources.items()}
+    hashes = {} if errors else {label: sha256_file(path) for label, path in required_sources.items()}
 
     manifest_path = results / "results_manifest.json"
     manifest: dict = {}
