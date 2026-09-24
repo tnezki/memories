@@ -367,7 +367,11 @@ class Handler(BaseHTTPRequestHandler):
         if missing:
             raise ValueError("Unknown I Can: " + ", ".join(missing))
         heads = ''.join(f'<th><b>{html.escape(iid)}</b><span>{html.escape(lookup[iid]["statement"])}</span></th>' for iid in ids)
-        rows = ''.join('<tr><td class="name">'+html.escape(s["student_name"])+f'</td>{"".join("<td class=\"check\"></td>" for _ in ids)}</tr>' for s in students)
+        check_cells = ''.join('<td class="check"></td>' for _ in ids)
+        rows = ''.join(
+            '<tr><td class="name">' + html.escape(s["student_name"]) + '</td>' + check_cells + '</tr>'
+            for s in students
+        )
         body = f'''<div class="check-head"><div><h1>{html.escape(course)} Unit {unit} Walk-Around Checklist</h1><p>{html.escape(period)}</p></div><div class="fields">Date: __________________ &nbsp;&nbsp; Activity/Source: ______________________________</div></div><p class="directions">Check a box only when you directly observe the student demonstrate that I Can. A blank box means not observed, not incorrect.</p><table class="checklist"><thead><tr><th class="name">Student</th>{heads}</tr></thead><tbody>{rows}</tbody></table><p class="footer">After class, you can enter observations directly in the Portfolio control panel or upload a scan/photo of this completed checklist to build an observation grading request.</p><script>window.addEventListener('load',()=>setTimeout(()=>window.print(),250))</script>'''
         return checklist_page_shell(body)
 
