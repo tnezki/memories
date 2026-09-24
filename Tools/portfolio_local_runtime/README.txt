@@ -1,43 +1,73 @@
-PORTFOLIO LOCAL RUNTIME v2
+PORTFOLIO LOCAL RUNTIME v3
 ==========================
 
 PURPOSE
 -------
-Keep ChatGPT focused on evidence interpretation while the teacher's Mac owns deterministic Portfolio history, grades, reports, PowerSchool exports, roster maintenance, and email PDF preparation.
+Keep ChatGPT focused on evidence interpretation while the teacher's Mac owns deterministic Portfolio history, grades, reports, PowerSchool exports, roster maintenance, teacher-observation evidence, and selected-student email PDF preparation.
 
-START ONCE PER COMPUTER SESSION
--------------------------------
+START ONCE PER COMPUTER
+-----------------------
 Double-click:
   Tools/portfolio_local_runtime/Start Portfolio Local Companion.command
 
-Keep that Terminal window open while using a course Portfolio Control Panel. The companion binds only to 127.0.0.1 on this Mac.
+The launcher installs/refreshes a private macOS login helper bound only to 127.0.0.1:8765, starts it, and opens the local companion page. After it reports Ready, the Terminal window may be closed. The helper restarts automatically for that user on future logins.
 
 COURSE CONTROL PANELS
 ---------------------
 Each course Portfolio panel is intentionally simple:
 - fixed course name;
 - Unit dropdown;
-- top links: View Reports / Email Reports;
+- top buttons: View Reports / Email Reports;
 - Grade Evidence tab;
+- Teacher Observations tab;
 - Update Roster tab.
 
 There is no normal current-state picker, Drive migration control, transfer control, or report-refresh checkbox. The local runtime already knows the authoritative path:
   _portfolio_data/<Course>/unit N/02 Portfolio Data/Portfolio_State_CURRENT.zip
 
+If the local companion is offline, the top report/email buttons do not open a dead localhost page. The panel instead shows the Start Portfolio Local Companion.command instruction.
+
 NORMAL EVIDENCE WORKFLOW
 ------------------------
-1. Start Portfolio Local Companion.command once.
-2. Open the course Portfolio Control Panel.
-3. Choose Unit and Grade Evidence.
-4. Add only the new student evidence. Evidence label/date/note are optional.
-5. Click Build Grading Request.
-6. The local companion adds the exact current roster, learning map, prior I Can context, and state identity, creates portfolio_grading_request_*.zip in Downloads, and reveals it in Finder.
-7. Upload that ZIP to ChatGPT.
-8. ChatGPT returns ONE file: Portfolio_Grading_Result.json.
-9. Download it to Downloads.
-10. Double-click Apply Portfolio Grading Result.command.
-11. Local Python validates the exact parent state; updates evidence history, I Can/MG status, intervention routing, state/version chain; builds canonical HTML reports and PowerSchool MG CSVs; runs identity/template QA; archives results/state; and refreshes folders 03-05.
-12. Google Drive is not used.
+1. Open the course Portfolio Control Panel.
+2. Choose Unit and Grade Evidence.
+3. Add only the new student evidence. Evidence label/date/note are optional.
+4. Click Build Grading Request.
+5. The local companion adds exact current roster, learning map, prior I Can context, and state identity; creates portfolio_grading_request_*.zip in Downloads; and reveals it in Finder.
+6. Upload that ZIP to ChatGPT.
+7. ChatGPT returns ONE file: Portfolio_Grading_Result.json.
+8. Download it to Downloads.
+9. Double-click Apply Portfolio Grading Result.command.
+10. Local Python validates the exact parent state; updates evidence history, I Can/MG status, intervention routing, state/version chain; builds canonical HTML reports and PowerSchool MG CSVs; runs identity/template QA; archives results/state; and refreshes folders 03-05.
+11. Google Drive is not used.
+
+TEACHER OBSERVATIONS
+--------------------
+The Teacher Observations tab supports three paths.
+
+A. DIRECT ENTRY
+- Choose Hour/period.
+- Choose student.
+- Select one or more exact current I Can statements.
+- Evidence strength defaults to CONVINCING = observed them do it; Partial/Limited/Unusable are available when needed.
+- Optional date/note.
+- Record Observation Locally.
+- The observation is appended as one teacher-observation opportunity for each selected student/I Can and the local state/reports/PowerSchool exports refresh transactionally.
+
+B. PRINTABLE WALK-AROUND CHECKLIST
+- Choose Hour/period and up to 8 I Can columns.
+- Open Printable Checklist.
+- The local companion builds landscape HTML with students down the left and selected I Cans across the top.
+- Check a cell only when that student directly demonstrates that I Can. Blank means not observed, not incorrect.
+
+C. UPLOAD COMPLETED CHECKLIST
+- Scan/photo/PDF the completed paper checklist.
+- Upload it in the same Teacher Observations tab.
+- Build Observation Request.
+- The generated grading request tells ChatGPT that checked cells are teacher-observed evidence and blank cells are NOT_OBSERVED.
+- Apply the returned Portfolio_Grading_Result.json with the normal local applier.
+
+Observation independence rule: one classroom observation session is one opportunity per student/I Can. Repeated checks from the same moment/session do not become extra independent opportunities.
 
 UPDATE ROSTER
 -------------
@@ -52,21 +82,24 @@ Use the Update Roster tab in the course control panel.
 
 REPORTS
 -------
-The View Reports link opens the local companion report browser for the selected course/Unit. It exposes the current private local files only from:
-- 03 Student Packets
-- 04 Class & Intervention Summaries
-- 05 PowerSchool Exports
+The View Reports button opens the local report hub for the selected course/Unit. It includes:
+- Student Reports: 03 Student Packets
+- Teacher Report: 04 Class & Intervention Summaries
+- PowerSchool Exports: 05 PowerSchool Exports
 
 EMAIL PREPARATION
 -----------------
-The Email Reports link opens the local email control panel.
-- Click Prepare Email PDFs.
-- Current individual HTML reports are converted locally to PDFs with Chrome/Edge/Chromium.
+The Email Reports button opens the local email control panel.
+- Current active students are shown with checkboxes by hour/period.
+- Select All and Deselect All are provided.
+- Leave checked only the students whose current reports you want prepared (for example, students who just made up work).
+- Click Prepare Selected PDFs.
+- Only selected students' current individual HTML reports are converted locally to PDFs with Chrome/Edge/Chromium.
 - Stable student identity is checked before a PDF is considered sendable.
 - Stored student/guardian/support recipients are matched by durable student ID.
 - Output goes to 06 Email Delivery/Current with PDFs + email_delivery_manifest.csv.
 - Existing Current is archived under 06 Email Delivery/Prepared Archives.
-- NO email is sent by this step.
+- NO email is sent by this preparation step.
 
 FALLBACK COMMANDS
 -----------------

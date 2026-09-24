@@ -108,3 +108,14 @@ END
 LOCAL CONTROL PANEL / COMPANION NOTE - CURRENT
 ----------------------------------------------
 Normal teacher-facing course control panels do not attach or expose Portfolio_State_CURRENT.zip. The localhost Portfolio companion builds the final grading request by combining the selected new evidence with the exact current local state identity/context. `teacher_note`, when present in REQUEST.json, is an optional special instruction for the evidence-judgment run and may not override current I Can/evidence policy.
+
+TEACHER OBSERVATION / WALK-AROUND CHECKLIST INPUT - CURRENT
+----------------------------------------------------------
+A grading request may use source label `Teacher Walk-Around Checklist` and teacher_note explaining the printed checklist convention. For this source type:
+- a clearly checked student/I Can cell is teacher-observed evidence;
+- blank means NOT_OBSERVED, not incorrect and not UNUSABLE;
+- use CONVINCING for a clear teacher checkmark unless the teacher explicitly marked a different evidence strength;
+- preserve exact printed student identity and exact I Can column;
+- one completed checklist session is one independent opportunity per student/I Can, even if the same target appears more than once on the sheet.
+
+Direct browser-entered teacher observations do not require ChatGPT. The local runtime may append those teacher judgments directly because the teacher has already supplied the evidence judgment.

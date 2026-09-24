@@ -457,7 +457,7 @@ def update_run_manifest(state_dir: Path, result: dict, active_count: int, event_
         "submission_count": len({j.get("student_key") for j in flatten_judgments(result) if str(j.get("strength","")).upper() != "NOT_OBSERVED"}),
         "no_submission_count": len(result.get("no_submission_student_keys", [])),
         "delivery": "local_state_html_reports",
-        "refresh_reason": "Local ChatGPT grading-result JSON applied by deterministic Portfolio runtime.",
+        "refresh_reason": "Direct local teacher observation applied by deterministic Portfolio runtime." if result.get("source", {}).get("type") == "Teacher Observation" else "Local ChatGPT grading-result JSON applied by deterministic Portfolio runtime.",
         "local_runtime": {
             "schema": "portfolio-local-runtime/1.0",
             "graded_result_schema": result.get("schema"),
@@ -500,16 +500,12 @@ def build_new_state_manifest(work_root: Path, old_manifest: dict, current_sha: s
         "generated_at": utc_now(),
         "parent_state_sha256": current_sha,
         "run_id": result.get("run_id"),
-        "source_mode": "local_grading_result",
+        "source_mode": "local_teacher_observation" if result.get("source", {}).get("type") == "Teacher Observation" else "local_grading_result",
         "files": files,
     }
 
 
-def main() -> int:
-    result_path = find_result()
-    if not result_path:
-        print("No Portfolio_Grading_Result.json selected. Nothing changed.")
-        return 0
+def apply_result_path(result_path: Path, archive_input: bool = True) -> dict:
     result = read_json(result_path)
     if result.get("schema") != SCHEMA_RESULT:
         raise ValueError(f"Wrong grading-result schema: {result.get('schema')}")
@@ -594,10 +590,12 @@ def main() -> int:
         archive_and_install_results(results_zip, target)
         install_results_to_local_folders(results_dir, target)
 
-    applied_dir = target / "02 Portfolio Data" / "Applied Grading Results"
-    applied_dir.mkdir(parents=True, exist_ok=True)
-    archived_result = applied_dir / f"{timestamp()}_{result_path.name}"
-    shutil.copy2(result_path, archived_result)
+    archived_result = None
+    if archive_input:
+        applied_dir = target / "02 Portfolio Data" / "Applied Grading Results"
+        applied_dir.mkdir(parents=True, exist_ok=True)
+        archived_result = applied_dir / f"{timestamp()}_{result_path.name}"
+        shutil.copy2(result_path, archived_result)
     print(f"Applied {added} new source-level evidence judgment(s).")
     print(f"Installed {course} Unit {unit} state v{new_manifest['state_version']}.")
     print("Refreshed 03 Student Packets, 04 Class & Intervention Summaries, and 05 PowerSchool Exports.")
@@ -605,8 +603,26 @@ def main() -> int:
     print("Google Drive was not used.")
     print()
     print(f"Current state: {current}")
-    return 0
+    return {
+        "status": "PASS",
+        "course": course,
+        "unit": unit,
+        "state_version": int(new_manifest["state_version"]),
+        "state_id": new_manifest["state_id"],
+        "evidence_events_added": added,
+        "current_state": str(current),
+        "results_manifest": results_manifest,
+        "archived_result": str(archived_result) if archived_result else "",
+    }
 
+
+def main() -> int:
+    result_path = find_result()
+    if not result_path:
+        print("No Portfolio_Grading_Result.json selected. Nothing changed.")
+        return 0
+    apply_result_path(result_path, archive_input=True)
+    return 0
 
 def determine_report_number_from_zip(_path: Path) -> int:
     return 0

@@ -92,7 +92,7 @@ def print_pdf(chrome: Path, html_file: Path, pdf_file: Path) -> tuple[bool, str]
     return ok, proc.stdout[-1000:]
 
 
-def prepare(course: str, unit: int, open_folder: bool = True) -> dict:
+def prepare(course: str, unit: int, open_folder: bool = True, selected_student_keys: list[str] | None = None) -> dict:
     github_root = github_root_from_runtime()
     root = portfolio_root(github_root)
     state_zip = root / course / f"unit {unit}" / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
@@ -112,6 +112,15 @@ def prepare(course: str, unit: int, open_folder: bool = True) -> dict:
         state_dir = td / "state"
         _fields, roster, _by = roster_rows(state_dir)
         active = [r for r in roster if r["active"] == "yes"]
+        if selected_student_keys is not None:
+            wanted = {str(x).strip() for x in selected_student_keys if str(x).strip()}
+            if not wanted:
+                raise ValueError("Select at least one student for email preparation.")
+            known = {r["student_key"] for r in active}
+            unknown = sorted(wanted - known)
+            if unknown:
+                raise ValueError("Unknown/inactive student selection: " + ", ".join(unknown))
+            active = [r for r in active if r["student_key"] in wanted]
         recipients, support = load_contacts(state_dir, root)
 
         email_root = unit_dir / "06 Email Delivery"
@@ -197,7 +206,7 @@ def prepare(course: str, unit: int, open_folder: bool = True) -> dict:
         )
         if open_folder:
             subprocess.run(["/usr/bin/open", str(current)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return {"status":"PASS","course":course,"unit":unit,"prepared_pdfs":pdf_count,"ready_rows":ready_count,"email_folder":str(current),"email_sent":False}
+        return {"status":"PASS","course":course,"unit":unit,"selected_students":len(active),"prepared_pdfs":pdf_count,"ready_rows":ready_count,"email_folder":str(current),"email_sent":False}
 
 
 def main() -> int:
