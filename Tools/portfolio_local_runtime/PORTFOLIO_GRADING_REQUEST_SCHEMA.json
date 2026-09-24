@@ -1,0 +1,25 @@
+{
+  "schema": "portfolio-grading-request-schema/1.0",
+  "request_schema": "portfolio-grading-request/1.0",
+  "purpose": "Small private grading request. ChatGPT interprets new evidence and returns source-level judgments only; local Python owns state/history/status/grades/reports/exports.",
+  "required": [
+    "schema",
+    "course",
+    "unit",
+    "parent_state",
+    "source",
+    "output",
+    "rules"
+  ],
+  "parent_state_required": [
+    "sha256",
+    "state_version",
+    "state_id"
+  ],
+  "context_file": "grading_context.json",
+  "evidence_folder": "evidence/",
+  "supporting_folder": "supporting/",
+  "privacy": "Private student context. Never write request contents to GitHub.",
+  "authority_folder": "authority/",
+  "authority_rule": "Request includes exact local copies of the grading PM, base Portfolio PM, current course policy, and grading-result schema so ChatGPT does not depend on a just-transferred file already being pushed."
+}

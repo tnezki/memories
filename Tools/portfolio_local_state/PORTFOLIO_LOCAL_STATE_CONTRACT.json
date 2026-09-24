@@ -1,9 +1,21 @@
 {
-  "schema": "portfolio-local-state-contract/1.0",
+  "schema": "portfolio-local-state-contract/1.1",
   "status": "CURRENT",
   "root_name": "_portfolio_data",
   "transport": "manual_usb_copy",
   "normal_google_drive_dependency": false,
+  "normal_grading_architecture": {
+    "chatgpt_role": "new-evidence interpretation and source-level structured judgments only",
+    "chatgpt_output": "Portfolio_Grading_Result.json",
+    "local_python_role": "longitudinal state, status/grades, intervention routing, HTML reports, PowerSchool exports, archives, email PDF preparation",
+    "request_builder": "Tools/portfolio_local_runtime/Build Portfolio Grading Request.command",
+    "result_applier": "Tools/portfolio_local_runtime/Apply Portfolio Grading Result.command",
+    "email_preparer": "Tools/portfolio_local_runtime/Prepare Portfolio Emails.command",
+    "grading_pm": "pms_build/portfolio_grading_local.txt",
+    "request_schema": "portfolio-grading-request/1.0",
+    "result_schema": "portfolio-grading-result/1.0",
+    "state_guard": "Local apply requires exact parent state SHA-256 + state_version + state_id match before any state/report installation."
+  },
   "current_state_filename": "Portfolio_State_CURRENT.zip",
   "updated_state_filename": "Portfolio_State_UPDATED.zip",
   "results_filename": "Portfolio_Results.zip",
@@ -11,19 +23,7 @@
     "schema": "portfolio-portable-state/1",
     "manifest": "STATE_MANIFEST.json",
     "state_prefix": "state/",
-    "required_manifest_fields": [
-      "schema",
-      "status",
-      "course",
-      "unit",
-      "state_version",
-      "state_id",
-      "generated_at",
-      "parent_state_sha256",
-      "run_id",
-      "source_mode",
-      "files"
-    ],
+    "required_manifest_fields": ["schema", "status", "course", "unit", "state_version", "state_id", "generated_at", "parent_state_sha256", "run_id", "source_mode", "files"],
     "required_core_files": [
       "state/student_registry.csv",
       "state/evidence_ledger.csv",
@@ -36,16 +36,16 @@
       "state/run_history.csv",
       "state/run_manifest.json"
     ],
-    "integrity": "Every files[] entry records path + sha256. The request records SHA-256 of the entire uploaded current-state ZIP. Output parent_state_sha256 equals that request hash on a normal run.",
-    "raw_evidence": "Historical raw evidence bytes are not carried in every state ZIP; durable source hashes/names/labels and judgments remain in evidence_ledger.csv."
+    "integrity": "Every files[] entry records path + sha256. Local grading-result application increments state_version by exactly one and records parent_state_sha256 as the exact previously installed current-state ZIP hash.",
+    "raw_evidence": "Historical raw evidence bytes are not carried in every state ZIP; durable source hashes/names/labels/mapping/judgments remain in the evidence ledger."
   },
   "results_zip": {
     "manifest": "results_manifest.json",
     "state_manifest_forbidden": true,
     "course_unit_match_required": true,
-    "installer_rule": "The installer supports updated-state + results, state-only, and results-only installs. Any selected results ZIP must contain results_manifest.json, must not be a portable-state ZIP, and must target the same course/unit as the selected state or the existing local current state.",
-    "repair_rule": "At installer startup, any ZIP already under a Results Archives folder that is positively identified as a portfolio-portable-state/1 ZIP and does not contain results_manifest.json is removed as a misfiled state artifact. Other unknown ZIPs are preserved.",
-    "report_refresh_only": "A valid current portable state may be used to refresh reports with no evidence, roster, or support changes. That run returns Portfolio_Results.zip and does not create or increment Portfolio_State_UPDATED.zip unless longitudinal state actually changes."
+    "installer_rule": "Installer first asks Updated state only / Results only / State + results, then shows only the needed chooser(s). Any installed results package also refreshes local folders 03-05 from student_reports/, teacher_report/, and powerschool/.",
+    "local_runtime_rule": "Normal new-evidence runs are built locally from Portfolio_Grading_Result.json and install state/results transactionally after validator/identity QA passes.",
+    "report_refresh_only": "Legacy/maintenance report-only requests may still install Portfolio_Results.zip without changing state."
   },
   "local_layout": {
     "course_unit": "_portfolio_data/<Course>/unit N",
@@ -53,26 +53,32 @@
     "portfolio_data": "02 Portfolio Data",
     "state_archives": "02 Portfolio Data/State Archives",
     "results_archives": "02 Portfolio Data/Results Archives",
+    "applied_grading_results": "02 Portfolio Data/Applied Grading Results",
     "latest_results": "02 Portfolio Data/Results Archives/Latest Portfolio Results.zip",
-    "manual_student_packets": "03 Student Packets",
-    "manual_teacher_reports": "04 Class & Intervention Summaries",
-    "manual_powerschool": "05 PowerSchool Exports"
+    "student_packets": "03 Student Packets",
+    "teacher_reports": "04 Class & Intervention Summaries",
+    "powerschool": "05 PowerSchool Exports",
+    "email_delivery": "06 Email Delivery",
+    "email_current": "06 Email Delivery/Current",
+    "email_prepared_archives": "06 Email Delivery/Prepared Archives"
+  },
+  "email": {
+    "normal_pdf_generation": "Local only, on demand, from the current individual HTML reports using installed Chrome/Edge/Chromium.",
+    "normal_grading_pdf_generation": false,
+    "identity_gate": "student ID in state + visible student identity in HTML must match; recipient matching uses durable student ID.",
+    "send_rule": "Prepare Portfolio Emails.command creates PDFs and a delivery manifest only. It does not send email.",
+    "recipient_sources": ["state/email_recipients_current.csv", "state/student_support_contacts_current.csv", "_portfolio_data/00 Contact Directory/student_support_contacts_current.csv"]
   },
   "migration": {
     "mode": "one_time_drive_migration",
     "normal_runs_after_migration": "Drive reads/writes are forbidden unless explicitly requested for backup/recovery.",
     "first_portable_state_version": 1
   },
-  "stale_state_protection": {
-    "course_unit_match_required": true,
-    "state_version_increment": 1,
-    "parent_zip_sha256_chain": true,
-    "installer_refuses_non_newer_state_by_default": true
-  },
   "privacy": {
     "student_data_private": true,
     "never_git": true,
     "never_github_transfer": true,
-    "usb_copy_allowed": true
+    "usb_copy_allowed": true,
+    "grading_request_and_result_are_private": true
   }
 }

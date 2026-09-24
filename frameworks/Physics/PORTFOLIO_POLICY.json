@@ -1,30 +1,14 @@
 {
-  "schema": "physics-portfolio-policy/2.1",
+  "schema": "physics-portfolio-policy/2.2",
   "status": "CURRENT",
   "course": "Physics",
   "portfolio_drive_course_folder": "Physics",
   "purpose": "Own Physics Portfolio status, Mastery Goal grades, PowerSchool MG exports, intervention routing, evidence interpretation, practice routing, and recurring report fidelity while exact Unit Assessment Plans own learning content.",
   "i_can_statuses": [
-    {
-      "code": "NO_EVIDENCE",
-      "symbol": "open_circle",
-      "label": "No Evidence"
-    },
-    {
-      "code": "DEVELOPING",
-      "symbol": "half_circle",
-      "label": "Developing"
-    },
-    {
-      "code": "MASTERED",
-      "symbol": "filled_circle",
-      "label": "Mastered"
-    },
-    {
-      "code": "TRANSFER",
-      "symbol": "star",
-      "label": "Transfer"
-    }
+    {"code": "NO_EVIDENCE", "symbol": "open_circle", "label": "No Evidence"},
+    {"code": "DEVELOPING", "symbol": "half_circle", "label": "Developing"},
+    {"code": "MASTERED", "symbol": "filled_circle", "label": "Mastered"},
+    {"code": "TRANSFER", "symbol": "star", "label": "Transfer"}
   ],
   "mastered_default_rule": {
     "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities.",
@@ -34,12 +18,7 @@
   "mastery_goal_rule": {
     "general_rule": "A Mastery Goal is demonstrated when at least half of its exact I Cans, rounded up, are Mastered or Transfer.",
     "formula": "required_secure = ceil(i_can_count_in_goal / 2)",
-    "unit1_thresholds": {
-      "U1-MG01": 2,
-      "U1-MG02": 2,
-      "U1-MG03": 4,
-      "U1-MG04": 2
-    }
+    "unit1_thresholds": {"U1-MG01": 2, "U1-MG02": 2, "U1-MG03": 4, "U1-MG04": 2}
   },
   "mastery_goal_grade_model": {
     "status": "CURRENT_OFFICIAL",
@@ -63,14 +42,13 @@
     "practice_builder_url_pattern": "https://tnezki.github.io/physics/practice_builder___p7r4x/student_practice_builder.html?unit={unit}",
     "portfolio_qr_rule": "Open Unit only with nothing preselected.",
     "focus_list_rule": "List every current practice-focus I Can as exact code + full statement.",
-    "privacy_rule": "No student identity/evidence in URL/QR."
+    "privacy_rule": "No student identity/evidence in URL/QR.",
+    "visual_parity_rule": "Render the exact same canonical Your Practice block used by Algebra 1: bordered practice box, clickable link box, and QR code together. Do not replace the QR with plain text and do not omit the clickable link box when the approved Physics Practice Builder route exists.",
+    "link_label_pattern": "Open Practice Builder - Unit {unit}",
+    "qr_label_pattern": "Practice Builder / Unit {unit}"
   },
   "intervention_routing": {
-    "lanes": [
-      "Whole Class",
-      "Priority Day Groups",
-      "Pull In Students"
-    ],
+    "lanes": ["Whole Class", "Priority Day Groups", "Pull In Students"],
     "whole_class": {
       "max_targets": 1,
       "rule": "Only the highest-leverage genuinely broad shared instructional need supported by current evidence. Show target, affected Practice + check count, recurring evidence pattern, and concise teacher move."
@@ -95,34 +73,21 @@
     "human_learning_label_rule": "Always show code + full exact I Can statement.",
     "teacher_report_rule": "Normal teacher report is Class Overview; Whole Class when active; one Priority Day Groups page; one Pull In Students page. No normal detailed-evidence appendix.",
     "renderer_rule": "Use the exact canonical student_packet_template.html, teacher_summary_template.html, and portfolio.css from the pinned SYSTEM commit. Populate data only; do not write a Physics-specific replacement report shell or stylesheet.",
-    "unit1_19_i_can_fit_rule": "Keep the same canonical Algebra-approved visual system. Use only contract-approved Mastery Goal distribution/fit adjustments for 19 I Cans; never solve fit by shrinking into a separately designed Physics report.",
+    "algebra_visual_parity_rule": "Physics student reports must use the same canonical Algebra-approved visual system and DOM structure: same header hierarchy, Essential Standard box, current-picture treatment, Mastery Goal snapshot/chips, Unit Evidence Picture cards, Recent evidence block, Your Practice block, spacing, borders, typography, colors, and responsive behavior. Only course/unit/student/evidence data may differ.",
+    "mastery_goal_snapshot_rule": "Use the same Mastery Goal grade display as Algebra 1. Assessed goals show Grade I/C/B/A/A+ as appropriate; completely unassessed goals show Not assessed. Do not use the legacy Physics-only Building labels or legacy status ribbon in student reports.",
+    "practice_box_parity_rule": "When a Physics Practice Builder route exists, the student report must include both the canonical bordered clickable Practice Builder link box and the canonical QR code in the same Your Practice block used by Algebra 1. The URL/QR is Unit-only, contains no student identity, and does not preselect an I Can.",
+    "unit1_19_i_can_fit_rule": "Keep the same canonical Algebra-approved visual system. Physics Unit 1 may grow vertically to accommodate all 19 I Cans; never solve fit by shrinking into a separately designed Physics report.",
     "self_contained_css_rule": "Embed exact canonical portfolio.css bytes in the required canonical-portfolio-css style block; no run-specific visual stylesheet.",
     "qa_validator": "Tools/templates/portfolio/verify_portfolio_output.py",
     "drift_failure": "PORTFOLIO_TEMPLATE_DRIFT"
   },
   "student_next_action": {
     "states": [
-      {
-        "code": "NEEDS_FIRST_CHECK",
-        "label": "Needs first check",
-        "rule": "This I Can has not been checked yet; do not use this label for an attempted check with limited or unsuccessful evidence."
-      },
-      {
-        "code": "PRACTICE_AND_CHECK",
-        "label": "Practice + check soon"
-      },
-      {
-        "code": "NEEDS_ANOTHER_DEMONSTRATION",
-        "label": "Needs another independent check"
-      },
-      {
-        "code": "SECURE",
-        "label": "Secure"
-      },
-      {
-        "code": "EXTENSION",
-        "label": "Extension"
-      }
+      {"code": "NEEDS_FIRST_CHECK", "label": "Needs first check", "rule": "This I Can has not been checked yet; do not use this label for an attempted check with limited or unsuccessful evidence."},
+      {"code": "PRACTICE_AND_CHECK", "label": "Practice + check soon"},
+      {"code": "NEEDS_ANOTHER_DEMONSTRATION", "label": "Needs another independent check"},
+      {"code": "SECURE", "label": "Secure"},
+      {"code": "EXTENSION", "label": "Extension"}
     ]
   },
   "unit_readiness": {
@@ -151,15 +116,7 @@
   },
   "student_support_contacts": {
     "file": "00 Contact Directory/student_support_contacts_current.csv",
-    "schema_columns": [
-      "student_id",
-      "student_name",
-      "staff_name",
-      "staff_email",
-      "role",
-      "support_class",
-      "active"
-    ],
+    "schema_columns": ["student_id", "student_name", "staff_name", "staff_email", "role", "support_class", "active"],
     "matching_rule": "Match course roster to support routing by durable student_id. Allow multiple active staff rows per student.",
     "role_rule": "Course-agnostic free text. Common examples: Case Manager, Special Education Teacher, Study Skills Teacher, Academic Support Teacher, Resource Room Teacher.",
     "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",

@@ -1,0 +1,106 @@
+PORTFOLIO FAST LOCAL GRADING - CHATGPT JUDGMENT ONLY
+====================================================
+STATUS: CURRENT
+JOB: portfolio_grading_local
+REVISION: 2026-09-23 v1.0
+
+PURPOSE
+-------
+Handle a `portfolio-grading-request/1.0` package. ChatGPT performs only the judgment work that benefits from model reasoning. The teacher's local Python runtime owns longitudinal state, status/grade calculation, intervention sorting, HTML report generation, PowerSchool exports, PDF email preparation, archival, and local installation.
+
+AUTHORITY
+---------
+1. Prefer the exact request-attached authority copies under `authority/`: portfolio_grading_local.txt, portfolio.txt, the current course policy JSON, and PORTFOLIO_GRADING_RESULT_SCHEMA.json. These copies are included so a newly transferred local runtime can be tested before its Git commit is pushed.
+2. If an attached authority is missing, use the request's pinned GitHub path/commit for that authority.
+3. Use `grading_context.json` as the sole prior Portfolio context for this grading request. Do not search Google Drive and do not request/construct the full portable state.
+4. New evidence bytes are under `evidence/`; teacher references are under `supporting/`.
+5. No public web.
+
+HARD ARCHITECTURE SPLIT
+-----------------------
+CHATGPT OWNS:
+- identify the submitted student using only defensible evidence/context;
+- map the clean task before judging the response;
+- map each defensible source-level evidence job to exact current I Can ID(s);
+- assign source-level evidence strength;
+- write concise specific feedback/diagnostic note;
+- identify independence/opportunity relationships;
+- flag unresolved identity/mapping/contradiction issues;
+- optionally provide concise class-level evidence patterns/teacher-move language.
+
+LOCAL PYTHON OWNS:
+- evidence-ledger append/deduplication;
+- longitudinal I Can status;
+- Mastery Goal grades;
+- intervention routing;
+- report number/date state;
+- student/teacher HTML reports;
+- QR/link rendering;
+- PowerSchool CSVs;
+- current-state/version chain;
+- state/results archives;
+- folders 03-05;
+- email PDFs/manifests.
+
+DO NOT build or return:
+- Portfolio_State_UPDATED.zip;
+- Portfolio_Results.zip;
+- PDFs;
+- PowerSchool CSVs;
+- GitHub Transfer ZIPs.
+
+OUTPUT - HARD
+-------------
+Return exactly one downloadable artifact:
+  Portfolio_Grading_Result.json
+
+It must conform to:
+  Tools/portfolio_local_runtime/PORTFOLIO_GRADING_RESULT_SCHEMA.json
+
+Copy `course`, `unit`, and the complete `parent_state` object exactly from REQUEST.json.
+Copy each source filename/SHA-256 exactly from REQUEST.json when referenced by a judgment.
+Use a stable nonempty `run_id`.
+Set status READY only when the result is safe for local application.
+
+EVIDENCE STRENGTH VOCABULARY
+----------------------------
+Use only:
+- CONVINCING
+- PARTIAL
+- LIMITED
+- UNUSABLE
+- NOT_OBSERVED
+
+Interpretation:
+- CONVINCING: defensible evidence that demonstrates the intended skill/idea on this source.
+- PARTIAL: meaningful correct evidence, but incomplete/inconsistent for a convincing demonstration.
+- LIMITED: attempted evidence with a major gap/misconception; weaker than Partial but still informative.
+- UNUSABLE: an attempt/material is present but no defensible judgment can be made for the target.
+- NOT_OBSERVED: the target was not actually observed on this student's source. Local runtime does not append this as an evidence event.
+
+A completely missing student submission belongs in `no_submission_student_keys`, not as an UNUSABLE or NOT_OBSERVED evidence row.
+
+INDEPENDENCE
+------------
+Repeated prompts for one I Can on one source are not automatically independent opportunities. Use the source map/teacher supporting file/current course policy. When several prompts are one evidence family, synthesize to one source-level judgment and one opportunity_id.
+
+IDENTITY / FAIL CLOSED
+----------------------
+Use only student keys/names from grading_context.json.
+Do not guess identity. Put ambiguous packets/pages in `unresolved` with issue_code/details/page_ref.
+Do not invent an I Can. Use exact current IDs from the supplied learning map/context.
+If evidence cannot be mapped defensibly, put it in unresolved rather than forcing a judgment.
+
+FEEDBACK
+--------
+`note` should be brief, student-usable, and evidence-specific. State what the work showed and the main correction/next idea when needed. Do not calculate a longitudinal grade in the note.
+
+CLASS INSIGHTS - OPTIONAL
+-------------------------
+`class_insights` may include concise evidence-grounded wording for the local teacher report. It must not rank students politically/socially or include unsupported speculation. Use it only for instructional patterns visible in the graded evidence.
+
+PRIVACY
+-------
+This is private student grading material. Do not write student data to GitHub. Do not browse public web. Do not use Google Drive.
+
+END

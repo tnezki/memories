@@ -1,0 +1,67 @@
+{
+  "schema": "portfolio-grading-result-schema/1.0",
+  "result_schema": "portfolio-grading-result/1.0",
+  "purpose": "ChatGPT output consumed by the local deterministic Portfolio runtime.",
+  "hard_rules": [
+    "Return one JSON file named Portfolio_Grading_Result.json.",
+    "Do not build Portfolio state, reports, PDFs, PowerSchool CSVs, or a GitHub transfer for a grading request.",
+    "parent_state sha256/state_version/state_id must be copied exactly from REQUEST.json.",
+    "Every judgment must use a student_key from grading_context.json and an exact current i_can_id.",
+    "Map the clean task before judging the response.",
+    "Repeated prompts for the same I Can on the same source are not automatically independent opportunities.",
+    "NOT_OBSERVED means the target was not defensibly observed and is not appended as an evidence event. UNUSABLE means the student attempted/provided material but it is not defensible evidence.",
+    "NO_SUBMISSION belongs in no_submission_student_keys rather than as an evidence judgment."
+  ],
+  "top_level_example": {
+    "schema": "portfolio-grading-result/1.0",
+    "status": "READY",
+    "course": "Physics",
+    "unit": 1,
+    "run_id": "PHYS-U1-20260924-QUICKCHECK12",
+    "graded_at": "2026-09-24T12:00:00Z",
+    "report_date": "2026-09-24",
+    "parent_state": {
+      "sha256": "COPY_FROM_REQUEST",
+      "state_version": 1,
+      "state_id": "COPY_FROM_REQUEST"
+    },
+    "source": {
+      "label": "Quick Check 1.2",
+      "date": "2026-09-24",
+      "type": "Quick Check",
+      "evidence_files": [{"name": "scan.pdf", "sha256": "COPY_FROM_REQUEST"}]
+    },
+    "judgments": [
+      {
+        "student_key": "280690",
+        "student_name": "Oliver Alderete",
+        "period": "Physics A",
+        "source_file_name": "scan.pdf",
+        "source_file_sha256": "COPY_FROM_REQUEST",
+        "page_ref": "page 1",
+        "task_id": "Q1",
+        "question_lineage": "Q1",
+        "mastery_goal_id": "U1-MG01",
+        "i_can_id": "U1-MG01-IC01",
+        "strength": "CONVINCING",
+        "note": "Separates the direct observation from the inference accurately.",
+        "opportunity_id": "PHYS-U1-QC12",
+        "independent_opportunity": true,
+        "review_flag": "",
+        "transfer": false
+      }
+    ],
+    "no_submission_student_keys": [],
+    "unresolved": [],
+    "class_insights": {
+      "highest_leverage_pattern": "Optional concise class-level pattern grounded in the graded evidence.",
+      "whole_class": {
+        "evidence_pattern": "Optional pattern statement.",
+        "teacher_move": "Optional concise teacher move.",
+        "why": "Optional reason for Whole Class routing.",
+        "short_response": "Optional student response expectation."
+      }
+    }
+  },
+  "strength_values": ["CONVINCING", "PARTIAL", "LIMITED", "UNUSABLE", "NOT_OBSERVED"]
+}

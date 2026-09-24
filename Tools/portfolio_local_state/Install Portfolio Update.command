@@ -5,6 +5,19 @@ GITHUB_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 ROOT="$GITHUB_ROOT/_portfolio_data"
 mkdir -p "$ROOT"
 
+choose_mode() {
+  /usr/bin/osascript <<'OSA' 2>/dev/null || true
+try
+  set choices to {"Updated state only", "Results only", "State + results"}
+  set picked to choose from list choices with prompt "What are you installing?" with title "Portfolio Local Update"
+  if picked is false then return ""
+  return item 1 of picked
+on error number -128
+  return ""
+end try
+OSA
+}
+
 choose_file() {
   local prompt="$1"
   /usr/bin/osascript <<OSA 2>/dev/null || true
@@ -17,202 +30,129 @@ end try
 OSA
 }
 
-repair_misfiled_state_results() {
-  local repaired=0
-  while IFS= read -r -d '' archive; do
-    if /usr/bin/python3 - "$archive" <<'PYCODE' >/dev/null 2>&1
-import json,sys,zipfile
-p=sys.argv[1]
-try:
-    with zipfile.ZipFile(p) as z:
-        names=set(z.namelist())
-        if 'STATE_MANIFEST.json' not in names:
-            raise SystemExit(1)
-        m=json.loads(z.read('STATE_MANIFEST.json'))
-        if m.get('schema')!='portfolio-portable-state/1':
-            raise SystemExit(1)
-        if 'results_manifest.json' in names:
-            raise SystemExit(1)
-except Exception:
-    raise SystemExit(1)
-PYCODE
-    then
-      echo "Repairing invalid Results Archive entry: $archive"
-      rm -f "$archive"
-      repaired=$((repaired + 1))
-    fi
-  done < <(find "$ROOT" -type f -path '*/02 Portfolio Data/Results Archives/*.zip' -print0 2>/dev/null || true)
-  if [ "$repaired" -gt 0 ]; then
-    echo "Removed $repaired portable-state ZIP(s) that had been mistakenly archived as results."
-    echo
-  fi
-}
-
 read_state_meta() {
-  /usr/bin/python3 - "$1" <<'PYCODE'
+  /usr/bin/python3 - "$1" <<'PY'
 import json,sys,zipfile
 p=sys.argv[1]
 try:
-    with zipfile.ZipFile(p) as z:
-        m=json.loads(z.read('STATE_MANIFEST.json'))
-except Exception as e:
-    raise SystemExit('Invalid state ZIP: '+str(e))
-if m.get('schema')!='portfolio-portable-state/1' or m.get('status')!='CURRENT':
-    raise SystemExit('Invalid portable-state manifest schema/status')
-course=str(m.get('course','')).strip(); unit=m.get('unit'); ver=m.get('state_version'); sid=str(m.get('state_id','')).strip()
-if course not in {'Algebra 1','Physics','AP Calculus AB','STEM I'}:
-    raise SystemExit('Unsupported course: '+course)
-try:
-    unit=int(unit); ver=int(ver)
-except Exception:
-    raise SystemExit('Invalid unit/state_version')
-if unit < 1 or ver < 1 or not sid:
-    raise SystemExit('Invalid unit/state_version/state_id')
+    with zipfile.ZipFile(p) as z:m=json.loads(z.read('STATE_MANIFEST.json'))
+except Exception as e: raise SystemExit('Invalid state ZIP: '+str(e))
+if m.get('schema')!='portfolio-portable-state/1' or m.get('status')!='CURRENT': raise SystemExit('Invalid portable-state manifest schema/status')
+course=str(m.get('course','')).strip(); unit=int(m.get('unit',0)); ver=int(m.get('state_version',0)); sid=str(m.get('state_id','')).strip()
+if course not in {'Algebra 1','Physics','AP Calculus AB','STEM I'} or unit<1 or ver<1 or not sid: raise SystemExit('Invalid course/unit/state metadata')
 print(f'{course}\t{unit}\t{ver}\t{sid}')
-PYCODE
+PY
 }
 
 read_results_meta() {
-  /usr/bin/python3 - "$1" <<'PYCODE'
+  /usr/bin/python3 - "$1" <<'PY'
 import json,sys,zipfile
 p=sys.argv[1]
 try:
     with zipfile.ZipFile(p) as z:
         names=set(z.namelist())
-        if 'STATE_MANIFEST.json' in names:
-            raise SystemExit('REFUSED: selected results ZIP is a portable state ZIP, not Portfolio_Results.zip.')
-        if 'results_manifest.json' not in names:
-            raise SystemExit('REFUSED: selected results ZIP has no results_manifest.json.')
+        if 'STATE_MANIFEST.json' in names: raise SystemExit('REFUSED: selected results ZIP is a portable state ZIP.')
+        if 'results_manifest.json' not in names: raise SystemExit('REFUSED: selected results ZIP has no results_manifest.json.')
         m=json.loads(z.read('results_manifest.json'))
-except zipfile.BadZipFile:
-    raise SystemExit('REFUSED: selected results file is not a valid ZIP.')
-except json.JSONDecodeError:
-    raise SystemExit('REFUSED: results_manifest.json is not valid JSON.')
-course=str(m.get('course','')).strip()
-try:
-    unit=int(m.get('unit'))
-except Exception:
-    raise SystemExit('REFUSED: results manifest has invalid unit.')
-if course not in {'Algebra 1','Physics','AP Calculus AB','STEM I'} or unit < 1:
-    raise SystemExit('REFUSED: results manifest has unsupported course/unit.')
+except zipfile.BadZipFile: raise SystemExit('REFUSED: selected results file is not a valid ZIP.')
+course=str(m.get('course','')).strip(); unit=int(m.get('unit',0))
+if course not in {'Algebra 1','Physics','AP Calculus AB','STEM I'} or unit<1: raise SystemExit('REFUSED: results manifest has unsupported course/unit.')
 print(f'{course}\t{unit}')
-PYCODE
+PY
 }
 
-repair_misfiled_state_results
+unpack_results() {
+  /usr/bin/python3 - "$1" "$2" <<'PY'
+import shutil,sys,tempfile,zipfile
+from pathlib import Path
+zip_path=Path(sys.argv[1]); unit_root=Path(sys.argv[2])
+with tempfile.TemporaryDirectory(prefix='portfolio_results_install_') as td:
+    td=Path(td)
+    with zipfile.ZipFile(zip_path) as z:z.extractall(td/'results')
+    mappings=[
+      (td/'results'/'student_reports', unit_root/'03 Student Packets'),
+      (td/'results'/'teacher_report', unit_root/'04 Class & Intervention Summaries'),
+      (td/'results'/'powerschool', unit_root/'05 PowerSchool Exports'),
+    ]
+    staged=[]; backups=[]
+    try:
+      for src,dst in mappings:
+        new=dst.with_name(dst.name+'.new')
+        if new.exists(): shutil.rmtree(new)
+        new.mkdir(parents=True,exist_ok=True)
+        if src.is_dir():
+          for p in src.rglob('*'):
+            if p.is_file():
+              q=new/p.relative_to(src);q.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,q)
+        staged.append((new,dst))
+      for new,dst in staged:
+        old=dst.with_name(dst.name+'.previous')
+        if old.exists(): shutil.rmtree(old)
+        if dst.exists(): dst.rename(old);backups.append((old,dst))
+        new.rename(dst)
+      for old,_ in backups:
+        if old.exists(): shutil.rmtree(old)
+    except Exception:
+      for new,dst in staged:
+        if new.exists(): shutil.rmtree(new,ignore_errors=True)
+      for old,dst in reversed(backups):
+        if dst.exists(): shutil.rmtree(dst,ignore_errors=True)
+        if old.exists(): old.rename(dst)
+      raise
+PY
+}
 
-echo "Portfolio local update installer"
-echo "You may install an updated state, results only, or both."
-echo
-
-STATE_ZIP="$(choose_file 'Choose Portfolio_State_UPDATED.zip, or Cancel for a results-only install')"
-STATE_COURSE=""
-STATE_UNIT=""
-VERSION=""
-STATE_ID=""
-if [ -n "$STATE_ZIP" ]; then
-  META="$(read_state_meta "$STATE_ZIP")"
-  IFS=$'\t' read -r STATE_COURSE STATE_UNIT VERSION STATE_ID <<< "$META"
-fi
-
-RESULTS_ZIP="$(choose_file 'Choose Portfolio_Results.zip, or Cancel if there are no results to install')"
-RESULTS_COURSE=""
-RESULTS_UNIT=""
-if [ -n "$RESULTS_ZIP" ]; then
-  RMETA="$(read_results_meta "$RESULTS_ZIP")"
-  IFS=$'\t' read -r RESULTS_COURSE RESULTS_UNIT <<< "$RMETA"
-fi
-
-if [ -z "$STATE_ZIP" ] && [ -z "$RESULTS_ZIP" ]; then
-  echo "No state or results ZIP selected. Nothing else changed."
+printf '\nPortfolio local update installer\n\n'
+MODE="$(choose_mode)"
+if [ -z "$MODE" ]; then
+  echo "Canceled. Nothing changed."
   exit 0
 fi
 
+STATE_ZIP=""; RESULTS_ZIP=""; STATE_COURSE=""; STATE_UNIT=""; VERSION=""; STATE_ID=""; RESULTS_COURSE=""; RESULTS_UNIT=""
+if [ "$MODE" = "Updated state only" ] || [ "$MODE" = "State + results" ]; then
+  STATE_ZIP="$(choose_file 'Choose Portfolio_State_UPDATED.zip')"
+  if [ -z "$STATE_ZIP" ]; then echo "Canceled before state selection. Nothing changed."; exit 0; fi
+  META="$(read_state_meta "$STATE_ZIP")"; IFS=$'\t' read -r STATE_COURSE STATE_UNIT VERSION STATE_ID <<< "$META"
+fi
+if [ "$MODE" = "Results only" ] || [ "$MODE" = "State + results" ]; then
+  RESULTS_ZIP="$(choose_file 'Choose Portfolio_Results.zip')"
+  if [ -z "$RESULTS_ZIP" ]; then echo "Canceled before results selection. Nothing changed."; exit 0; fi
+  RMETA="$(read_results_meta "$RESULTS_ZIP")"; IFS=$'\t' read -r RESULTS_COURSE RESULTS_UNIT <<< "$RMETA"
+fi
 if [ -n "$STATE_ZIP" ] && [ -n "$RESULTS_ZIP" ]; then
   if [ "$STATE_COURSE" != "$RESULTS_COURSE" ] || [ "$STATE_UNIT" != "$RESULTS_UNIT" ]; then
-    echo "REFUSED: state and results are for different course/unit targets."
-    echo "State: $STATE_COURSE Unit $STATE_UNIT"
-    echo "Results: $RESULTS_COURSE Unit $RESULTS_UNIT"
-    exit 1
+    echo "REFUSED: state and results target different course/Unit."; exit 1
   fi
 fi
-
-if [ -n "$STATE_ZIP" ]; then
-  COURSE="$STATE_COURSE"
-  UNIT="$STATE_UNIT"
-else
-  COURSE="$RESULTS_COURSE"
-  UNIT="$RESULTS_UNIT"
-fi
-
-TARGET="$ROOT/$COURSE/unit $UNIT"
-DATA="$TARGET/02 Portfolio Data"
-STATE_ARCH="$DATA/State Archives"
-RESULT_ARCH="$DATA/Results Archives"
-mkdir -p "$TARGET/01 Evidence Inbox" "$STATE_ARCH" "$RESULT_ARCH" "$TARGET/03 Student Packets" "$TARGET/04 Class & Intervention Summaries" "$TARGET/05 PowerSchool Exports"
-CURRENT="$DATA/Portfolio_State_CURRENT.zip"
-STAMP="$(date '+%Y-%m-%d_%H%M%S')"
+if [ -n "$STATE_ZIP" ]; then COURSE="$STATE_COURSE"; UNIT="$STATE_UNIT"; else COURSE="$RESULTS_COURSE"; UNIT="$RESULTS_UNIT"; fi
+TARGET="$ROOT/$COURSE/unit $UNIT"; DATA="$TARGET/02 Portfolio Data"; STATE_ARCH="$DATA/State Archives"; RESULT_ARCH="$DATA/Results Archives"
+mkdir -p "$TARGET/01 Evidence Inbox" "$STATE_ARCH" "$RESULT_ARCH" "$TARGET/03 Student Packets" "$TARGET/04 Class & Intervention Summaries" "$TARGET/05 PowerSchool Exports" "$TARGET/06 Email Delivery"
+CURRENT="$DATA/Portfolio_State_CURRENT.zip"; STAMP="$(date '+%Y-%m-%d_%H%M%S')"
 
 if [ -n "$STATE_ZIP" ]; then
   if [ -f "$CURRENT" ]; then
-    CURRENT_VERSION="$(/usr/bin/python3 - "$CURRENT" <<'PYCODE'
+    CURRENT_VERSION="$(/usr/bin/python3 - "$CURRENT" <<'PY'
 import json,sys,zipfile
 try:
-  with zipfile.ZipFile(sys.argv[1]) as z:
-    print(int(json.loads(z.read('STATE_MANIFEST.json')).get('state_version',0)))
-except Exception:
-  print(0)
-PYCODE
+ with zipfile.ZipFile(sys.argv[1]) as z: print(int(json.loads(z.read('STATE_MANIFEST.json')).get('state_version',0)))
+except Exception: print(0)
+PY
 )"
-    if [ "$CURRENT_VERSION" -ge "$VERSION" ]; then
-      echo "REFUSED: installed state version $CURRENT_VERSION is not older than incoming version $VERSION."
-      echo "Nothing was changed by this install."
-      exit 1
-    fi
+    if [ "$CURRENT_VERSION" -ge "$VERSION" ]; then echo "REFUSED: installed state v$CURRENT_VERSION is not older than incoming v$VERSION."; exit 1; fi
     cp -p "$CURRENT" "$STATE_ARCH/${STAMP}_PREVIOUS_State.zip"
   fi
-
-  cp -p "$STATE_ZIP" "$CURRENT"
-  cp -p "$STATE_ZIP" "$STATE_ARCH/${STAMP}_State_v${VERSION}.zip"
-  SRC_HASH="$(shasum -a 256 "$STATE_ZIP" | awk '{print $1}')"
-  DST_HASH="$(shasum -a 256 "$CURRENT" | awk '{print $1}')"
-  if [ "$SRC_HASH" != "$DST_HASH" ]; then
-    echo "FAILED: state copy hash mismatch."
-    exit 1
-  fi
+  cp -p "$STATE_ZIP" "$CURRENT"; cp -p "$STATE_ZIP" "$STATE_ARCH/${STAMP}_State_v${VERSION}.zip"
+  [ "$(shasum -a 256 "$STATE_ZIP" | awk '{print $1}')" = "$(shasum -a 256 "$CURRENT" | awk '{print $1}')" ] || { echo "FAILED: state hash mismatch."; exit 1; }
   echo "Installed $COURSE Unit $UNIT state v$VERSION"
-  echo "Current state: $CURRENT"
 fi
 
 if [ -n "$RESULTS_ZIP" ]; then
-  if [ ! -f "$CURRENT" ]; then
-    echo "REFUSED: results-only installation requires an existing Portfolio_State_CURRENT.zip for $COURSE Unit $UNIT."
-    exit 1
-  fi
-  /usr/bin/python3 - "$CURRENT" "$COURSE" "$UNIT" <<'PYCODE'
-import json,sys,zipfile
-p,expected_course,expected_unit=sys.argv[1],sys.argv[2],int(sys.argv[3])
-try:
-    with zipfile.ZipFile(p) as z:
-        m=json.loads(z.read('STATE_MANIFEST.json'))
-except Exception as e:
-    raise SystemExit('REFUSED: existing current state is invalid: '+str(e))
-if m.get('schema')!='portfolio-portable-state/1' or m.get('status')!='CURRENT':
-    raise SystemExit('REFUSED: existing current state has invalid schema/status.')
-if str(m.get('course','')).strip()!=expected_course or int(m.get('unit'))!=expected_unit:
-    raise SystemExit('REFUSED: existing current state course/unit does not match results target.')
-PYCODE
-  R_HASH="$(shasum -a 256 "$RESULTS_ZIP" | awk '{print $1}')"
-  cp -p "$RESULTS_ZIP" "$RESULT_ARCH/${STAMP}_Portfolio_Results.zip"
-  cp -p "$RESULTS_ZIP" "$RESULT_ARCH/Latest Portfolio Results.zip"
-  L_HASH="$(shasum -a 256 "$RESULT_ARCH/Latest Portfolio Results.zip" | awk '{print $1}')"
-  if [ "$R_HASH" != "$L_HASH" ]; then
-    echo "FAILED: results copy hash mismatch."
-    exit 1
-  fi
-  echo "Results archived and Latest Portfolio Results.zip updated for $COURSE Unit $UNIT."
-elif [ -n "$STATE_ZIP" ]; then
-  echo "No Portfolio results ZIP selected; results archive was not changed."
+  [ -f "$CURRENT" ] || { echo "REFUSED: results installation requires existing Portfolio_State_CURRENT.zip."; exit 1; }
+  cp -p "$RESULTS_ZIP" "$RESULT_ARCH/${STAMP}_Portfolio_Results.zip"; cp -p "$RESULTS_ZIP" "$RESULT_ARCH/Latest Portfolio Results.zip"
+  [ "$(shasum -a 256 "$RESULTS_ZIP" | awk '{print $1}')" = "$(shasum -a 256 "$RESULT_ARCH/Latest Portfolio Results.zip" | awk '{print $1}')" ] || { echo "FAILED: results hash mismatch."; exit 1; }
+  unpack_results "$RESULTS_ZIP" "$TARGET"
+  echo "Installed latest results for $COURSE Unit $UNIT and refreshed folders 03-05."
 fi
 
 echo
