@@ -4,6 +4,7 @@ from __future__ import annotations
 import html
 import json
 import mimetypes
+import re
 import subprocess
 import tempfile
 import threading
@@ -22,11 +23,12 @@ from portfolio_runtime import (
     install_results_to_local_folders,
     load_learning_map,
     portfolio_root,
+    read_csv,
     roster_rows,
     sha256_file,
     validate_state_zip,
 )
-from prepare_portfolio_emails import prepare as prepare_email
+from prepare_portfolio_emails import load_contacts, prepare as prepare_email
 from teacher_observations import apply_teacher_observation
 from update_roster import update_roster
 
@@ -69,12 +71,17 @@ def state_status(course: str, unit: int) -> dict:
     return out
 
 
-def ensure_current_html_reports(course: str, unit: int) -> bool:
-    """Rebuild current local HTML reports from state only when canonical HTML is missing."""
+def ensure_current_html_reports(course: str, unit: int, force: bool = False) -> bool:
+    """Rebuild canonical local HTML reports from the installed state.
+
+    With force=False, rebuild only when canonical HTML is missing. With force=True,
+    regenerate student HTML, teacher HTML, and PowerSchool exports without changing
+    evidence, grades, state identity, or state version.
+    """
     u = unit_dir(course, unit)
     individual = u / "03 Student Packets" / "individual"
     teacher_html = u / "04 Class & Intervention Summaries" / "teacher_summary.html"
-    if individual.is_dir() and any(individual.glob("*.html")) and teacher_html.is_file():
+    if not force and individual.is_dir() and any(individual.glob("*.html")) and teacher_html.is_file():
         return False
 
     state = u / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
@@ -121,6 +128,71 @@ def ensure_current_html_reports(course: str, unit: int) -> bool:
         )
         install_results_to_local_folders(results_dir, u)
     return True
+
+
+
+def email_review_data(course: str, unit: int) -> dict:
+    """Build the local, read-only review table used by the email-prep page."""
+    ensure_current_html_reports(course, unit)
+    u = unit_dir(course, unit)
+    state = u / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
+    validate_state_zip(state, course, unit)
+    with tempfile.TemporaryDirectory(prefix="portfolio_email_review_") as td:
+        td = Path(td)
+        extract_state(state, td)
+        state_dir = td / "state"
+        _rf, roster, _by = roster_rows(state_dir)
+        active = [r for r in roster if r["active"] == "yes"]
+        recipients, support = load_contacts(state_dir, local_root())
+        mg_path = state_dir / "mastery_goal_status_current.csv"
+        mg_rows = read_csv(mg_path)[1] if mg_path.is_file() else []
+
+    mg_ids = []
+    grades_by = {}
+    for row in mg_rows:
+        mid = (row.get("mastery_goal_id") or row.get("mg_code") or "").strip()
+        sk = (row.get("student_key") or "").strip()
+        if mid and mid not in mg_ids:
+            mg_ids.append(mid)
+        if sk and mid:
+            code = (row.get("grade_code") or "").strip()
+            label = (row.get("grade_label") or "").strip()
+            grades_by.setdefault(sk, {})[mid] = {"code": code, "label": label, "display": code or "—"}
+    mg_ids = sorted(mg_ids)[:4]
+
+    rows = []
+    reports_dir = u / "03 Student Packets" / "individual"
+    for student in active:
+        sk = student["student_key"]
+        rec = recipients.get(sk, {})
+        student_email = (rec.get("student_email") or "").strip()
+        guardians = (rec.get("guardian_emails") or "").strip()
+        support_emails = sorted(support.get(student["student_id"], set()))
+        html_ready = (reports_dir / f"{sk}.html").is_file()
+        has_recipient = bool(student_email or guardians or support_emails)
+        issues = []
+        if not html_ready:
+            issues.append("HTML report missing")
+        if not has_recipient:
+            issues.append("No stored recipient")
+        rows.append({
+            "student_key": sk,
+            "student_name": student["display_name"],
+            "period": student["period"],
+            "mg_grades": [grades_by.get(sk, {}).get(mid, {"display": "—", "code": "", "label": ""}) for mid in mg_ids],
+            "student_email": student_email,
+            "guardian_emails": guardians,
+            "support_staff_emails": support_emails,
+            "html_ready": html_ready,
+            "has_recipient": has_recipient,
+            "status": "READY" if html_ready and has_recipient else "CHECK",
+            "issues": issues,
+        })
+    periods = []
+    for row in rows:
+        if row["period"] and row["period"] not in periods:
+            periods.append(row["period"])
+    return {"course": course, "unit": unit, "periods": periods, "mg_ids": mg_ids, "rows": rows}
 
 
 def observation_data(course: str, unit: int) -> dict:
@@ -198,7 +270,7 @@ def one(fields: dict[str, list[str]], key: str, default_value: str = "") -> str:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PortfolioLocalCompanion/1.3"
+    server_version = "PortfolioLocalCompanion/1.4"
 
     def log_message(self, fmt: str, *args) -> None:
         print(f"[Portfolio Companion] {self.address_string()} - {fmt % args}")
@@ -356,6 +428,17 @@ class Handler(BaseHTTPRequestHandler):
                     result = update_roster(course, unit, paths, note)
                 self.send_json(result)
                 return
+            if parsed.path == "/api/refresh-reports":
+                course = one(fields, "course")
+                unit = int(one(fields, "unit", "1"))
+                ensure_current_html_reports(course, unit, force=True)
+                status = state_status(course, unit)
+                self.send_json({
+                    "status": "PASS",
+                    "message": "Reports refreshed from current state. No evidence, grades, or state version changed.",
+                    "state_version": status.get("state_version"),
+                })
+                return
             if parsed.path == "/api/prepare-email":
                 course = one(fields, "course")
                 unit = int(one(fields, "unit", "1"))
@@ -379,7 +462,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def reports_page(self, course: str, unit: int) -> str:
         rebuilt = ensure_current_html_reports(course, unit)
-        s = state_status(course, unit)
+        st = state_status(course, unit)
         u = unit_dir(course, unit)
         groups = [
             ("Student Reports", u / "03 Student Packets"),
@@ -388,8 +471,10 @@ class Handler(BaseHTTPRequestHandler):
         ]
         dashboard = teacher_dashboard_url(course)
         body = [
-            f'<div class="row"><a class="buttonlink secondary" href="{html.escape(dashboard)}" target="_blank">Back to {html.escape(course)} Teacher Dashboard</a></div>',
-            f'<p class="lead"><b>{html.escape(course)} - Unit {unit}</b> &nbsp; State v{s.get("state_version") if s.get("state_ready") else "not initialized"}</p>',
+            f'<div class="row"><a class="buttonlink secondary" href="{html.escape(dashboard)}" target="_blank">Back to {html.escape(course)} Teacher Dashboard</a>'
+            f'<button id="refreshReports" type="button">Refresh Reports from Current State</button></div>',
+            f'<p class="lead"><b>{html.escape(course)} - Unit {unit}</b> &nbsp; State v{st.get("state_version") if st.get("state_ready") else "not initialized"}</p>',
+            '<div id="refreshStatus" class="notice muted">Refresh is report-only: it rebuilds student HTML, teacher HTML, and PowerSchool CSVs from the current state.</div>',
         ]
         if rebuilt:
             body.append('<div class="notice good">Current HTML reports were rebuilt from the installed local Portfolio state. No evidence, grades, or state version changed.</div>')
@@ -410,35 +495,61 @@ class Handler(BaseHTTPRequestHandler):
                         items.append(f'<li><a href="/file?course={urllib.parse.quote(course)}&unit={unit}&path={urllib.parse.quote(rel)}" target="_blank">{html.escape(p.name)}</a><span class="path">{html.escape(rel)}</span></li>')
             body.append('<ul class="files">' + ''.join(items) + '</ul>' if items else '<p class="muted">No current files in this folder.</p>')
             body.append('</div>')
-        return page(f"{course} Unit {unit} Reports", ''.join(body))
+        script = f'''<script>
+        document.getElementById('refreshReports').addEventListener('click',async()=>{{
+          const b=document.getElementById('refreshReports'),st=document.getElementById('refreshStatus');
+          b.disabled=true;st.className='notice';st.textContent='Rebuilding current reports from state...';
+          const fd=new FormData();fd.append('course',{json.dumps(course)});fd.append('unit',{json.dumps(str(unit))});
+          try{{const r=await fetch('/api/refresh-reports',{{method:'POST',body:fd}});const d=await r.json();if(!r.ok||d.status!=='PASS')throw new Error(d.message||'Refresh failed');st.className='notice good';st.textContent=d.message;setTimeout(()=>location.reload(),700)}}
+          catch(e){{st.className='notice bad';st.textContent=e.message;b.disabled=false}}
+        }});
+        </script>'''
+        return page(f"{course} Unit {unit} Reports", ''.join(body) + script)
 
     def email_page(self, course: str, unit: int) -> str:
-        rebuilt = ensure_current_html_reports(course, unit)
-        data = observation_data(course, unit)
+        data = email_review_data(course, unit)
         u = unit_dir(course, unit)
-        current = u / "06 Email Delivery" / "Current"
-        current_files = []
-        if current.is_dir():
-            for p in sorted(current.rglob("*")):
-                if p.is_file():
-                    rel = p.relative_to(u).as_posix()
-                    current_files.append(f'<li><a href="/file?course={urllib.parse.quote(course)}&unit={unit}&path={urllib.parse.quote(rel)}" target="_blank">{html.escape(p.name)}</a></li>')
-        by_period: dict[str, list[dict]] = {}
-        for s in data["students"]:
-            by_period.setdefault(s["period"], []).append(s)
-        groups = []
-        for period, students in by_period.items():
-            checks = ''.join(
-                f'<label class="student"><input type="checkbox" name="student_key" value="{html.escape(s["student_key"])}" checked> {html.escape(s["student_name"])}</label>'
-                for s in students
-            )
-            groups.append(f'<div class="period"><h3>{html.escape(period)}</h3><div class="students">{checks}</div></div>')
-        rebuilt_note = '<div class="notice good">Current individual HTML reports were rebuilt from the installed local state so email preparation can use them. No evidence or grades changed.</div>' if rebuilt else ''
         dashboard = teacher_dashboard_url(course)
-        form = f'''<div class="row"><a class="buttonlink secondary" href="{html.escape(dashboard)}" target="_blank">Back to {html.escape(course)} Teacher Dashboard</a></div>{rebuilt_note}<div class="card"><h2>Prepare selected reports for email</h2><p>Select only the students whose current reports you want prepared. PDFs are generated locally; nothing is sent.</p><div class="row"><button type="button" class="secondary" onclick="setAll(true)">Select All</button><button type="button" class="secondary" onclick="setAll(false)">Deselect All</button></div><form id="emailForm"><input type="hidden" name="course" value="{html.escape(course)}"><input type="hidden" name="unit" value="{unit}">{''.join(groups)}<button type="submit">Prepare Selected PDFs</button></form><div id="emailStatus" class="notice muted"></div></div>'''
-        current_html = '<div class="card"><h2>Current email package</h2>' + ('<ul>'+''.join(current_files)+'</ul>' if current_files else '<p class="muted">No email package prepared yet.</p>') + '</div>'
-        script = '''<script>function setAll(v){document.querySelectorAll('input[name="student_key"]').forEach(x=>x.checked=v)}document.getElementById('emailForm').addEventListener('submit',async(e)=>{e.preventDefault();const st=document.getElementById('emailStatus');st.textContent='Preparing selected PDFs locally...';const fd=new FormData(e.target);try{const r=await fetch('/api/prepare-email',{method:'POST',body:fd});const d=await r.json();if(!r.ok||d.status!=='PASS')throw new Error(d.message||'Email preparation failed');st.className='notice good';st.textContent=d.message+' Ready rows: '+d.ready_rows+'.';setTimeout(()=>location.reload(),900)}catch(err){st.className='notice bad';st.textContent=err.message}})</script>'''
-        return page(f"{course} Unit {unit} Email Reports", form + current_html + script)
+        current = u / "06 Email Delivery" / "Current"
+        package_ready = current.is_dir() and any(current.iterdir())
+        period_options = ['<option value="__ALL__">All periods</option>'] + [f'<option value="{html.escape(p)}">{html.escape(p)}</option>' for p in data["periods"]]
+        headers = ''.join(f'<th class="mgcol">{html.escape(mid.replace("U{}-".format(unit), ""))}</th>' for mid in data["mg_ids"])
+        rows = []
+        for r in data["rows"]:
+            mg_cells = ''.join(
+                f'<td class="mgcol" title="{html.escape((m.get("code") or "") + (" - " + m.get("label", "") if m.get("label") else ""))}"><span class="mggrade">{html.escape(m.get("display", "—"))}</span></td>'
+                for m in r["mg_grades"]
+            )
+            guardians = ''.join(f'<span class="pill">{html.escape(x.strip())}</span>' for x in re.split(r'[|;,]', r["guardian_emails"]) if x.strip()) or '<span class="muted">none</span>'
+            support = ''.join(f'<span class="pill">{html.escape(x)}</span>' for x in r["support_staff_emails"]) or '<span class="muted">none</span>'
+            student_email = html.escape(r["student_email"]) if r["student_email"] else '<span class="muted">none</span>'
+            issue_html = ''.join(f'<div class="err">{html.escape(x)}</div>' for x in r["issues"])
+            rows.append(
+                f'<tr data-period="{html.escape(r["period"])}"><td class="sendcol"><input type="checkbox" name="student_key" value="{html.escape(r["student_key"])}" checked></td>'
+                f'<td class="student"><b>{html.escape(r["student_name"])}</b></td><td>{html.escape(r["period"])}</td>{mg_cells}'
+                f'<td>{student_email}</td><td>{guardians}</td><td>{support}</td><td>{html.escape(r["status"])}{issue_html}</td></tr>'
+            )
+        current_text = 'A prepared package is available in the local email folder.' if package_ready else 'No email package has been prepared yet.'
+        body = f'''<main>
+<div class="card"><div class="actions"><div><h1>Portfolio Report Email Delivery <span class="version">local</span></h1><div class="muted">Use the familiar review layout. Choose who you want, prepare only those PDFs, and review the local package. Nothing is sent from this page.</div></div><a class="buttonlink right" href="{html.escape(dashboard)}" target="_blank">Back to {html.escape(course)} Teacher Dashboard</a></div></div>
+<div class="card"><div class="grid"><div><b>Course</b><div class="staticfield">{html.escape(course)}</div></div><div><b>Unit</b><div class="staticfield">Unit {unit}</div></div><div><b>Period</b><select id="period">{''.join(period_options)}</select></div><div><b>Reports</b><button id="refresh" class="primary">Refresh Reports &amp; Reload Class</button></div></div><div id="status" class="status ok">Current HTML reports loaded from local state. Review the class below.</div></div>
+<div class="card"><div class="tablewrap"><table><thead><tr><th class="sendcol">Prepare</th><th class="student">Student</th><th>Period</th>{headers}<th>Student email</th><th>Guardians</th><th>Support staff</th><th>Status</th></tr></thead><tbody id="rows">{''.join(rows)}</tbody></table></div></div>
+<div class="card reviewbar"><div id="summary" class="status"></div><div class="actions" style="margin-top:12px"><button type="button" id="selectAll">Select All</button><button type="button" id="deselectAll">Deselect All</button><button type="button" id="selectVisible">Select Visible</button><button type="button" id="deselectVisible">Deselect Visible</button><span class="right"></span><button id="prepare" class="primary">Prepare Selected PDFs</button></div><div class="live-warning"><b>LOCAL PREPARATION ONLY:</b> this creates PDFs and an email manifest in <code>06 Email Delivery/Current</code>. No email is sent.</div></div>
+<div class="card"><h2>Current email package</h2><p>{html.escape(current_text)} <a href="/open-folder?course={urllib.parse.quote(course)}&unit={unit}&kind=email" target="_blank">Reveal email folder in Finder</a>.</p></div>
+</main>'''
+        script = f'''<script>
+const period=document.getElementById('period'),rows=[...document.querySelectorAll('#rows tr')],summary=document.getElementById('summary'),status=document.getElementById('status');
+function visibleRows(){{return rows.filter(r=>r.style.display!=='none')}}
+function applyFilter(){{const p=period.value;rows.forEach(r=>r.style.display=(p==='__ALL__'||r.dataset.period===p)?'':'none');updateSummary()}}
+function setAll(v,visibleOnly=false){{(visibleOnly?visibleRows():rows).forEach(r=>{{const x=r.querySelector('input[name="student_key"]');if(x)x.checked=v}});updateSummary()}}
+function updateSummary(){{const checked=rows.filter(r=>r.querySelector('input[name="student_key"]')?.checked).length;const vis=visibleRows().length;summary.className='status '+(checked?'ok':'dirty');summary.textContent=`${{checked}} student report(s) selected · ${{vis}} row(s) visible`;document.getElementById('prepare').disabled=checked===0}}
+period.addEventListener('change',applyFilter);rows.forEach(r=>r.querySelector('input[name="student_key"]')?.addEventListener('change',updateSummary));
+document.getElementById('selectAll').onclick=()=>setAll(true,false);document.getElementById('deselectAll').onclick=()=>setAll(false,false);document.getElementById('selectVisible').onclick=()=>setAll(true,true);document.getElementById('deselectVisible').onclick=()=>setAll(false,true);
+document.getElementById('refresh').onclick=async()=>{{const b=document.getElementById('refresh');b.disabled=true;status.className='status';status.innerHTML='<span class="spinner"></span><span>Rebuilding reports from current state...</span>';const fd=new FormData();fd.append('course',{json.dumps(course)});fd.append('unit',{json.dumps(str(unit))});try{{const rr=await fetch('/api/refresh-reports',{{method:'POST',body:fd}});const d=await rr.json();if(!rr.ok||d.status!=='PASS')throw new Error(d.message||'Refresh failed');status.className='status ok';status.textContent=d.message;setTimeout(()=>location.reload(),650)}}catch(e){{status.className='status bad';status.textContent=e.message;b.disabled=false}}}};
+document.getElementById('prepare').onclick=async()=>{{const chosen=rows.map(r=>r.querySelector('input[name="student_key"]')).filter(x=>x&&x.checked);if(!chosen.length)return;const b=document.getElementById('prepare');b.disabled=true;status.className='status';status.innerHTML='<span class="spinner"></span><span>Preparing selected PDFs locally...</span>';const fd=new FormData();fd.append('course',{json.dumps(course)});fd.append('unit',{json.dumps(str(unit))});chosen.forEach(x=>fd.append('student_key',x.value));try{{const rr=await fetch('/api/prepare-email',{{method:'POST',body:fd}});const d=await rr.json();if(!rr.ok||d.status!=='PASS')throw new Error(d.message||'Email preparation failed');status.className='status ok';status.textContent=d.message+' Ready rows: '+d.ready_rows+'. No email was sent.';setTimeout(()=>location.reload(),900)}}catch(e){{status.className='status bad';status.textContent=e.message;b.disabled=false;updateSummary()}}}};
+applyFilter();updateSummary();
+</script>'''
+        return email_page_shell(body + script)
 
     def checklist_page(self, course: str, unit: int, period: str, ids: list[str]) -> str:
         if not period:
@@ -502,6 +613,13 @@ class Handler(BaseHTTPRequestHandler):
 
 def page(title: str, body: str) -> str:
     return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(title)}</title><style>body{{font-family:Arial,Helvetica,sans-serif;background:#eef2f6;color:#182230;margin:0}}main{{max-width:1080px;margin:30px auto;padding:0 18px}}h1{{color:#173f73}}h2{{color:#173f73}}h3{{margin:12px 0 8px;color:#173f73}}.lead{{font-size:16px;line-height:1.5}}.card{{background:#fff;border:1px solid #d5dce5;border-radius:14px;padding:18px;margin:14px 0}}a{{color:#173f73;font-weight:700}}button,.buttonlink{{background:#245b87;color:#fff;border:1px solid #245b87;border-radius:9px;padding:11px 15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}}button.secondary,.buttonlink.secondary{{background:#fff;color:#173f73;border-color:#aebdcb}}.row{{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}}.muted{{color:#667085}}.error,.notice.bad{{border-color:#efb8b3;background:#fff4f2;color:#8c2018}}.notice.good{{border:1px solid #b8e4ca;background:#eefbf4;color:#125f3e}}.notice{{padding:9px 11px;border-radius:8px;margin-top:10px}}code{{background:#f3f5f7;border-radius:5px;padding:2px 5px}}li{{margin:7px 0}}.files .path{{display:block;color:#667085;font-size:11px;font-weight:400}}.period{{border-top:1px solid #e0e6ee;padding-top:4px;margin-top:10px}}.students{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 12px;margin-bottom:12px}}.student{{font-size:13px}}@media(max-width:760px){{.students{{grid-template-columns:1fr 1fr}}}}</style></head><body><main><h1>{html.escape(title)}</h1>{body}</main></body></html>'''
+
+
+
+def email_page_shell(body: str) -> str:
+    return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portfolio Report Email Delivery</title><style>
+body{{font-family:Arial,sans-serif;background:#f3f5f8;color:#17202a;margin:0}}main{{max-width:1280px;margin:20px auto;padding:0 16px}}.card{{background:#fff;border:1px solid #d9e0e8;border-radius:14px;padding:16px;margin-bottom:14px}}h1{{margin:0 0 4px;color:#173f73}}h2{{color:#173f73}}.muted{{color:#667085;font-size:12px}}.version{{display:inline-block;margin-left:8px;padding:2px 7px;border-radius:999px;background:#e9f1fb;color:#244d78;font-size:11px}}.grid{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}}@media(max-width:850px){{.grid{{grid-template-columns:1fr 1fr}}}}select,.staticfield{{width:100%;padding:9px;border:1px solid #bcc8d5;border-radius:8px;font:inherit;background:#fff}}button,.buttonlink{{padding:10px 13px;border-radius:8px;border:1px solid #aab8c7;background:#fff;font-weight:700;cursor:pointer;text-decoration:none;color:#244d78;display:inline-block}}button.primary{{background:#245b87;color:#fff;border-color:#245b87}}button:disabled{{opacity:.42;cursor:not-allowed}}.status{{padding:11px;border-radius:8px;background:#f6f8fb;border:1px solid #d9e0e8;margin-top:10px;display:flex;gap:9px;align-items:center}}.ok{{background:#eefaf3;border-color:#b7dfc7}}.bad{{background:#fff1f0;border-color:#efbbb6}}.dirty{{background:#fff8e8;border-color:#e5c56d}}.spinner{{width:16px;height:16px;border:3px solid #c9d8e7;border-top-color:#245b87;border-radius:50%;animation:spin .85s linear infinite;flex:0 0 auto}}@keyframes spin{{to{{transform:rotate(360deg)}}}}.tablewrap{{overflow:auto}}table{{width:100%;min-width:1080px;border-collapse:collapse;font-size:12px}}th,td{{border-bottom:1px solid #e4e9ef;padding:8px;vertical-align:top;text-align:left}}th{{background:#f8fafc;position:sticky;top:0}}.pill{{display:inline-block;padding:2px 6px;border-radius:999px;background:#eef2f6;margin:1px 2px 1px 0;font-size:11px}}.err{{color:#a42418}}.actions{{display:flex;gap:8px;flex-wrap:wrap;align-items:center}}.right{{margin-left:auto}}.sendcol{{width:58px;text-align:center}}.student{{min-width:150px}}.mgcol{{width:58px;text-align:center;white-space:nowrap}}.mggrade{{display:inline-block;min-width:24px;padding:3px 6px;border-radius:999px;background:#eef2f6;font-weight:700;text-align:center}}.reviewbar{{position:sticky;bottom:0;z-index:5;box-shadow:0 -6px 18px rgba(23,32,42,.08)}}.live-warning{{border:1px solid #b7c9dc;background:#eef5fb;color:#244d78;padding:10px 12px;border-radius:8px;font-weight:700;margin-top:10px}}code{{background:#f3f5f7;border-radius:5px;padding:2px 5px}}
+</style></head><body>{body}</body></html>'''
 
 
 def checklist_page_shell(body: str) -> str:

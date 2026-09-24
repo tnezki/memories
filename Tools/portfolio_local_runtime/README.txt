@@ -1,4 +1,4 @@
-PORTFOLIO LOCAL RUNTIME v3.2
+PORTFOLIO LOCAL RUNTIME v3.3
 ============================
 
 PURPOSE
@@ -96,6 +96,8 @@ Use the Update Roster tab in the course control panel.
 
 REPORTS
 -------
+Teacher observations and roster updates already rebuild current reports automatically. View Reports also includes a manual Refresh Reports from Current State button. This is a report-only rebuild and never adds evidence, changes grades, or increments the state version.
+
 The View Reports button opens the private local report hub for the selected course/Unit. It includes:
 - Student Reports: 03 Student Packets
 - Teacher Report: 04 Class & Intervention Summaries
@@ -112,8 +114,8 @@ and provides a Reveal PowerSchool folder in Finder link. There is no need to dow
 EMAIL PREPARATION
 -----------------
 The Email Reports button opens the local email control panel.
-- Current active students are shown with checkboxes by hour/period.
-- Select All and Deselect All are provided.
+- Email Reports reuses the established Portfolio email-review layout: course/unit/period controls, student rows, MG snapshot, stored recipient columns, readiness, and a sticky review bar.
+- Current active students are shown with Prepare checkboxes. Period filtering plus Select All / Deselect All / Select Visible / Deselect Visible are provided.
 - Leave checked only the students whose current reports you want prepared, including individual make-up-work follow-up.
 - If current individual HTML reports are missing, they are rebuilt from the installed local state first without changing evidence or grades.
 - Click Prepare Selected PDFs.
@@ -147,3 +149,7 @@ CURRENT UNIT SUPPORT
 - AP Calculus AB Unit 1: roster initialization can create its first local state; no Practice Builder QR/link is fabricated until an approved route exists.
 
 END
+
+CONTROL STABILITY
+-----------------
+The course control panels use a lightweight 15-second companion heartbeat that updates only connection/state status. It does not redraw hour/student/I Can controls. Roster/I Can lists load initially, on Unit change, or after a true roster/state-structure change. Direct observations preserve hour/student/date/note and clear only the I Can checks that were submitted.
