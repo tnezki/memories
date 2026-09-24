@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import csv
 import re
 import shutil
@@ -27,7 +28,7 @@ def osa(script: str) -> str:
 
 
 def choose_target(options):
-    labels = [f"{c} · Unit {u}" for c, u, _ in options]
+    labels = [f"{c} - Unit {u}" for c, u, _ in options]
     escaped = ",".join('"' + x.replace('"', '\\"') + '"' for x in labels)
     script = f'''set choices to {{{escaped}}}\ntry\nset picked to choose from list choices with prompt "Choose the Portfolio course and Unit to prepare for email" with title "Portfolio Email Prep"\nif picked is false then return ""\nreturn item 1 of picked\non error number -128\nreturn ""\nend try'''
     picked = osa(script)
@@ -91,18 +92,10 @@ def print_pdf(chrome: Path, html_file: Path, pdf_file: Path) -> tuple[bool, str]
     return ok, proc.stdout[-1000:]
 
 
-def main() -> int:
+def prepare(course: str, unit: int, open_folder: bool = True) -> dict:
     github_root = github_root_from_runtime()
     root = portfolio_root(github_root)
-    options = scan_states(root)
-    if not options:
-        print("No local Portfolio state was found.")
-        return 1
-    target = choose_target(options)
-    if not target:
-        print("Canceled. No email package was prepared.")
-        return 0
-    course, unit, state_zip = target
+    state_zip = root / course / f"unit {unit}" / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
     validate_state_zip(state_zip, course, unit)
     unit_dir = root / course / f"unit {unit}"
     reports_dir = unit_dir / "03 Student Packets" / "individual"
@@ -193,19 +186,35 @@ def main() -> int:
             w = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
             w.writeheader(); w.writerows(manifest_rows)
         ready_count = sum(r["ready_to_send"] == "TRUE" for r in manifest_rows)
+        pdf_count = sum(bool(r["pdf_file"]) for r in manifest_rows)
         (current / "README.txt").write_text(
-            f"Portfolio email preparation\nCourse: {course}\nUnit: {unit}\nPrepared PDFs: {sum(bool(r['pdf_file']) for r in manifest_rows)}\nReady recipient rows: {ready_count}\n\nThis folder is preparation only. No email was sent.\n",
+            f"Portfolio email preparation\nCourse: {course}\nUnit: {unit}\nPrepared PDFs: {pdf_count}\nReady recipient rows: {ready_count}\n\nThis folder is preparation only. No email was sent.\n",
             encoding="utf-8",
         )
         (current / "email_message_template.txt").write_text(
             f"Subject: {course} Unit {unit} Portfolio Progress Report\n\nAttached is the current {course} Unit {unit} Portfolio progress report. The report shows current Mastery Goal evidence, I Can status, and next practice/check steps.\n",
             encoding="utf-8",
         )
-        print(f"Prepared {sum(bool(r['pdf_file']) for r in manifest_rows)} local PDF report(s).")
-        print(f"{ready_count} row(s) have a PDF, verified identity, and at least one stored recipient.")
-        print("No email was sent.")
-        print(f"Email package: {current}")
-        subprocess.run(["/usr/bin/open", str(current)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if open_folder:
+            subprocess.run(["/usr/bin/open", str(current)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return {"status":"PASS","course":course,"unit":unit,"prepared_pdfs":pdf_count,"ready_rows":ready_count,"email_folder":str(current),"email_sent":False}
+
+
+def main() -> int:
+    ap=argparse.ArgumentParser(); ap.add_argument("--course"); ap.add_argument("--unit",type=int); ap.add_argument("--no-open",action="store_true"); args=ap.parse_args()
+    if args.course and args.unit:
+        result=prepare(args.course,args.unit,open_folder=not args.no_open); print(result); return 0
+    root=portfolio_root(github_root_from_runtime()); options=scan_states(root)
+    if not options:
+        print("No local Portfolio state was found."); return 1
+    target=choose_target(options)
+    if not target:
+        print("Canceled. No email package was prepared."); return 0
+    course,unit,_=target; result=prepare(course,unit,open_folder=True)
+    print(f"Prepared {result['prepared_pdfs']} local PDF report(s).")
+    print(f"{result['ready_rows']} row(s) have a PDF, verified identity, and at least one stored recipient.")
+    print("No email was sent.")
+    print(f"Email package: {result['email_folder']}")
     return 0
 
 

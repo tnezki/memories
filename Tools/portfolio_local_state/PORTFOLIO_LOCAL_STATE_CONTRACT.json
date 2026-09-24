@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-local-state-contract/1.1",
+  "schema": "portfolio-local-state-contract/1.2",
   "status": "CURRENT",
   "root_name": "_portfolio_data",
   "transport": "manual_usb_copy",
@@ -14,7 +14,11 @@
     "grading_pm": "pms_build/portfolio_grading_local.txt",
     "request_schema": "portfolio-grading-request/1.0",
     "result_schema": "portfolio-grading-result/1.0",
-    "state_guard": "Local apply requires exact parent state SHA-256 + state_version + state_id match before any state/report installation."
+    "state_guard": "Local apply requires exact parent state SHA-256 + state_version + state_id match before any state/report installation.",
+    "local_companion": "Tools/portfolio_local_runtime/Start Portfolio Local Companion.command",
+    "course_control_panel_rule": "Normal course panels do not ask the teacher to select current state. They use the localhost companion for state-aware grading-request creation, local roster maintenance, report viewing, and email preparation.",
+    "roster_update": "PowerSchool roster/template CSV file(s) + optional note are applied locally. Missing students become inactive; added students receive current Unit No Evidence / Not assessed rows; current reports/PowerSchool exports refresh.",
+    "first_state_rule": "If no state exists and the selected course Unit has a registered learning map, local roster maintenance may initialize state_version 1 without exposing a normal first/reset control."
   },
   "current_state_filename": "Portfolio_State_CURRENT.zip",
   "updated_state_filename": "Portfolio_State_UPDATED.zip",
@@ -23,7 +27,19 @@
     "schema": "portfolio-portable-state/1",
     "manifest": "STATE_MANIFEST.json",
     "state_prefix": "state/",
-    "required_manifest_fields": ["schema", "status", "course", "unit", "state_version", "state_id", "generated_at", "parent_state_sha256", "run_id", "source_mode", "files"],
+    "required_manifest_fields": [
+      "schema",
+      "status",
+      "course",
+      "unit",
+      "state_version",
+      "state_id",
+      "generated_at",
+      "parent_state_sha256",
+      "run_id",
+      "source_mode",
+      "files"
+    ],
     "required_core_files": [
       "state/student_registry.csv",
       "state/evidence_ledger.csv",
@@ -67,7 +83,11 @@
     "normal_grading_pdf_generation": false,
     "identity_gate": "student ID in state + visible student identity in HTML must match; recipient matching uses durable student ID.",
     "send_rule": "Prepare Portfolio Emails.command creates PDFs and a delivery manifest only. It does not send email.",
-    "recipient_sources": ["state/email_recipients_current.csv", "state/student_support_contacts_current.csv", "_portfolio_data/00 Contact Directory/student_support_contacts_current.csv"]
+    "recipient_sources": [
+      "state/email_recipients_current.csv",
+      "state/student_support_contacts_current.csv",
+      "_portfolio_data/00 Contact Directory/student_support_contacts_current.csv"
+    ]
   },
   "migration": {
     "mode": "one_time_drive_migration",
@@ -80,5 +100,17 @@
     "never_github_transfer": true,
     "usb_copy_allowed": true,
     "grading_request_and_result_are_private": true
+  },
+  "local_companion": {
+    "bind": "127.0.0.1:8765",
+    "network_scope": "localhost_only",
+    "launcher": "Tools/portfolio_local_runtime/Start Portfolio Local Companion.command",
+    "control_panel_actions": [
+      "build grading request",
+      "update roster",
+      "view reports",
+      "prepare email PDFs"
+    ],
+    "privacy": "Never serves outside localhost; report file serving is restricted to the selected local Portfolio Unit directory."
   }
 }

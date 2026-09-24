@@ -21,5 +21,9 @@
   "supporting_folder": "supporting/",
   "privacy": "Private student context. Never write request contents to GitHub.",
   "authority_folder": "authority/",
-  "authority_rule": "Request includes exact local copies of the grading PM, base Portfolio PM, current course policy, and grading-result schema so ChatGPT does not depend on a just-transferred file already being pushed."
+  "authority_rule": "Request includes exact local copies of the grading PM, base Portfolio PM, current course policy, and grading-result schema so ChatGPT does not depend on a just-transferred file already being pushed.",
+  "optional_fields": [
+    "teacher_note"
+  ],
+  "control_panel_rule": "The localhost companion builds this request from the selected new evidence plus the exact current local state context; the teacher does not select or upload Portfolio_State_CURRENT.zip."
 }

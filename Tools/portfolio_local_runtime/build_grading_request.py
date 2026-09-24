@@ -2,10 +2,7 @@
 from __future__ import annotations
 
 import json
-import os
-import shutil
 import subprocess
-import sys
 import tempfile
 import zipfile
 from pathlib import Path
@@ -18,14 +15,11 @@ from portfolio_runtime import (
     local_git_head,
     portfolio_root,
     read_csv,
-    read_json,
     roster_rows,
     scan_states,
     sha256_file,
-    state_path,
     validate_state_zip,
     utc_now,
-    write_json,
 )
 
 
@@ -35,7 +29,7 @@ def osa(script: str) -> str:
 
 
 def choose_target(options: list[tuple[str, int, Path]]) -> tuple[str, int, Path] | None:
-    labels = [f"{c} · Unit {u}" for c, u, _ in options]
+    labels = [f"{c} - Unit {u}" for c, u, _ in options]
     escaped = ",".join('"' + x.replace('"', '\\"') + '"' for x in labels)
     script = f'''set choices to {{{escaped}}}\ntry\nset picked to choose from list choices with prompt "Choose the Portfolio course and Unit for this grading request" with title "Portfolio Local Grader"\nif picked is false then return ""\nreturn item 1 of picked\non error number -128\nreturn ""\nend try'''
     picked = osa(script)
@@ -62,30 +56,41 @@ def ask_yes_no(prompt: str) -> bool:
     return osa(script) == "Yes"
 
 
-def main() -> int:
+def _unique_download_path(downloads: Path, stem: str) -> Path:
+    out = downloads / f"{stem}.zip"
+    n = 2
+    while out.exists():
+        out = downloads / f"{stem}_{n}.zip"
+        n += 1
+    return out
+
+
+def build_request(
+    course: str,
+    unit: int,
+    evidence_files: list[Path],
+    support_files: list[Path] | None = None,
+    label: str = "New Evidence",
+    date: str = "",
+    note: str = "",
+    downloads: Path | None = None,
+    reveal: bool = False,
+) -> Path:
+    if course not in COURSE_CONFIG:
+        raise ValueError(f"Unsupported Portfolio course: {course}")
+    unit = int(unit)
+    support_files = list(support_files or [])
+    evidence_files = [Path(p) for p in evidence_files]
+    if not evidence_files:
+        raise ValueError("At least one new evidence file is required.")
+    for p in evidence_files + support_files:
+        if not p.is_file():
+            raise ValueError(f"Selected file does not exist: {p}")
+
     github_root = github_root_from_runtime()
     root = portfolio_root(github_root)
-    states = scan_states(root)
-    if not states:
-        print("No local Portfolio_State_CURRENT.zip files were found under _portfolio_data.")
-        return 1
-    target = choose_target(states)
-    if not target:
-        print("Canceled. No grading request was created.")
-        return 0
-    course, unit, current_state = target
+    current_state = root / course / f"unit {unit}" / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
     manifest = validate_state_zip(current_state, course, unit)
-
-    evidence_files = choose_files("Choose the NEW student evidence file(s) for this grading run")
-    if not evidence_files:
-        print("Canceled. No evidence was selected.")
-        return 0
-    support_files: list[Path] = []
-    if ask_yes_no("Do you need to attach an answer key, source map, rubric, or other teacher supporting file?"):
-        support_files = choose_files("Choose supporting file(s). These are references, not student evidence.")
-
-    label = ask_text("Evidence label", "New Evidence") or "New Evidence"
-    date = ask_text("Evidence date (YYYY-MM-DD)", "")
 
     with tempfile.TemporaryDirectory(prefix="portfolio_grading_request_") as td:
         work = Path(td)
@@ -129,6 +134,7 @@ def main() -> int:
             "created_at": utc_now(),
             "course": course,
             "unit": unit,
+            "teacher_note": note.strip(),
             "pm_entrypoint": "pms_build/portfolio_grading_local.txt",
             "system_repo": "tnezki/memories",
             "system_commit": local_git_head(github_root / "memories"),
@@ -142,8 +148,8 @@ def main() -> int:
                 "state_id": manifest.get("state_id"),
             },
             "source": {
-                "label": label,
-                "date": date,
+                "label": (label or "New Evidence").strip() or "New Evidence",
+                "date": date.strip(),
                 "type": "teacher_supplied_evidence",
                 "evidence_files": [{"name": p.name, "sha256": sha256_file(p)} for p in evidence_files],
                 "supporting_files": [{"name": p.name, "sha256": sha256_file(p)} for p in support_files],
@@ -174,26 +180,49 @@ def main() -> int:
             "privacy": "Private student context for this grading request only. Never write to GitHub.",
         }
 
-        downloads = Path.home() / "Downloads"
+        downloads = downloads or (Path.home() / "Downloads")
         downloads.mkdir(parents=True, exist_ok=True)
-        out = downloads / f"portfolio_grading_request_{course.lower().replace(' ','_')}_u{unit}_{utc_now()[:10].replace('-','')}.zip"
-        # avoid overwriting another request from the same day
-        n = 2
-        while out.exists():
-            out = downloads / f"portfolio_grading_request_{course.lower().replace(' ','_')}_u{unit}_{utc_now()[:10].replace('-','')}_{n}.zip"
-            n += 1
+        day = utc_now()[:10].replace("-", "")
+        out = _unique_download_path(downloads, f"portfolio_grading_request_{course.lower().replace(' ','_')}_u{unit}_{day}")
         with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
             z.writestr("REQUEST.json", json.dumps(request, indent=2, ensure_ascii=False) + "\n")
             z.writestr("grading_context.json", json.dumps(context, indent=2, ensure_ascii=False) + "\n")
-            for label_name, authority_path in attached_authorities.items():
+            for authority_path in attached_authorities.values():
                 z.write(authority_path, f"authority/{authority_path.name}")
             for p in evidence_files:
                 z.write(p, f"evidence/{p.name}")
             for p in support_files:
                 z.write(p, f"supporting/{p.name}")
-        print(f"Portfolio grading request created:\n{out}\n")
-        print("Upload that ZIP to ChatGPT. The expected response is one Portfolio_Grading_Result.json file.")
+    if reveal:
         subprocess.run(["/usr/bin/open", "-R", str(out)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return out
+
+
+def main() -> int:
+    github_root = github_root_from_runtime()
+    root = portfolio_root(github_root)
+    states = scan_states(root)
+    if not states:
+        print("No local Portfolio_State_CURRENT.zip files were found under _portfolio_data.")
+        return 1
+    target = choose_target(states)
+    if not target:
+        print("Canceled. No grading request was created.")
+        return 0
+    course, unit, _current_state = target
+    evidence_files = choose_files("Choose the NEW student evidence file(s) for this grading run")
+    if not evidence_files:
+        print("Canceled. No evidence was selected.")
+        return 0
+    support_files: list[Path] = []
+    if ask_yes_no("Do you need to attach an answer key, source map, rubric, or other teacher supporting file?"):
+        support_files = choose_files("Choose supporting file(s). These are references, not student evidence.")
+    label = ask_text("Evidence label", "New Evidence") or "New Evidence"
+    date = ask_text("Evidence date (YYYY-MM-DD)", "")
+    note = ask_text("Optional teacher note", "")
+    out = build_request(course, unit, evidence_files, support_files, label, date, note, reveal=True)
+    print(f"Portfolio grading request created:\n{out}\n")
+    print("Upload that ZIP to ChatGPT. The expected response is one Portfolio_Grading_Result.json file.")
     return 0
 
 
