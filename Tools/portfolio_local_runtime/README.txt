@@ -1,16 +1,26 @@
-PORTFOLIO LOCAL RUNTIME v3
-==========================
+PORTFOLIO LOCAL RUNTIME v3.1
+============================
 
 PURPOSE
 -------
 Keep ChatGPT focused on evidence interpretation while the teacher's Mac owns deterministic Portfolio history, grades, reports, PowerSchool exports, roster maintenance, teacher-observation evidence, and selected-student email PDF preparation.
 
-START ONCE PER COMPUTER
+START EACH WORK SESSION
 -----------------------
 Double-click:
   Tools/portfolio_local_runtime/Start Portfolio Local Companion.command
 
-The launcher installs/refreshes a private macOS login helper bound only to 127.0.0.1:8765, starts it, and opens the local companion page. After it reports Ready, the Terminal window may be closed. The helper restarts automatically for that user on future logins.
+The companion listens only on 127.0.0.1:8765 and runs in the interactive Terminal session.
+
+IMPORTANT MACOS PRIVACY RULE
+----------------------------
+Do NOT install the companion as a LaunchAgent/login helper while the GitHub and _portfolio_data folders live under ~/Documents. macOS privacy controls can deny background launchd/Python processes access to Documents even when the same files work normally from Terminal.
+
+The launcher removes the retired login-helper plist if present, stops stale companion processes, and starts the companion directly from Terminal. Keep that Terminal window open while using Portfolio; it may be minimized. Press Control-C in that Terminal window when finished.
+
+If macOS blocks the interactive process, enable Terminal access under:
+  System Settings > Privacy & Security > Files and Folders > Terminal > Documents Folder
+then start the companion again.
 
 COURSE CONTROL PANELS
 ---------------------
@@ -25,21 +35,22 @@ Each course Portfolio panel is intentionally simple:
 There is no normal current-state picker, Drive migration control, transfer control, or report-refresh checkbox. The local runtime already knows the authoritative path:
   _portfolio_data/<Course>/unit N/02 Portfolio Data/Portfolio_State_CURRENT.zip
 
-If the local companion is offline, the top report/email buttons do not open a dead localhost page. The panel instead shows the Start Portfolio Local Companion.command instruction.
+If the local companion is offline, start Start Portfolio Local Companion.command and keep its Terminal window open while working.
 
 NORMAL EVIDENCE WORKFLOW
 ------------------------
-1. Open the course Portfolio Control Panel.
-2. Choose Unit and Grade Evidence.
-3. Add only the new student evidence. Evidence label/date/note are optional.
-4. Click Build Grading Request.
-5. The local companion adds exact current roster, learning map, prior I Can context, and state identity; creates portfolio_grading_request_*.zip in Downloads; and reveals it in Finder.
-6. Upload that ZIP to ChatGPT.
-7. ChatGPT returns ONE file: Portfolio_Grading_Result.json.
-8. Download it to Downloads.
-9. Double-click Apply Portfolio Grading Result.command.
-10. Local Python validates the exact parent state; updates evidence history, I Can/MG status, intervention routing, state/version chain; builds canonical HTML reports and PowerSchool MG CSVs; runs identity/template QA; archives results/state; and refreshes folders 03-05.
-11. Google Drive is not used.
+1. Start the local companion for the work session.
+2. Open the course Portfolio Control Panel.
+3. Choose Unit and Grade Evidence.
+4. Add only the new student evidence. Evidence label/date/note are optional.
+5. Click Build Grading Request.
+6. The local companion adds exact current roster, learning map, prior I Can context, and state identity; creates portfolio_grading_request_*.zip in Downloads; and reveals it in Finder.
+7. Upload that ZIP to ChatGPT.
+8. ChatGPT returns ONE file: Portfolio_Grading_Result.json.
+9. Download it to Downloads.
+10. Double-click Apply Portfolio Grading Result.command.
+11. Local Python validates the exact parent state; updates evidence history, I Can/MG status, intervention routing, state/version chain; builds canonical HTML reports and PowerSchool MG CSVs; runs identity/template QA; archives results/state; and refreshes folders 03-05.
+12. Google Drive is not used.
 
 TEACHER OBSERVATIONS
 --------------------
@@ -57,8 +68,9 @@ A. DIRECT ENTRY
 B. PRINTABLE WALK-AROUND CHECKLIST
 - Choose Hour/period and up to 8 I Can columns.
 - Open Printable Checklist.
-- The local companion builds landscape HTML with students down the left and selected I Cans across the top.
-- Check a cell only when that student directly demonstrates that I Can. Blank means not observed, not incorrect.
+- Students appear down the left; selected I Cans appear across the top.
+- Check a cell only when that student directly demonstrates that I Can.
+- Blank means not observed, not incorrect.
 
 C. UPLOAD COMPLETED CHECKLIST
 - Scan/photo/PDF the completed paper checklist.
@@ -92,7 +104,7 @@ EMAIL PREPARATION
 The Email Reports button opens the local email control panel.
 - Current active students are shown with checkboxes by hour/period.
 - Select All and Deselect All are provided.
-- Leave checked only the students whose current reports you want prepared (for example, students who just made up work).
+- Leave checked only the students whose current reports you want prepared, including individual make-up-work follow-up.
 - Click Prepare Selected PDFs.
 - Only selected students' current individual HTML reports are converted locally to PDFs with Chrome/Edge/Chromium.
 - Stable student identity is checked before a PDF is considered sendable.

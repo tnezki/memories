@@ -4,61 +4,52 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 GITHUB_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 PORTFOLIO_ROOT="$GITHUB_ROOT/_portfolio_data"
 LOG_DIR="$PORTFOLIO_ROOT/_logs"
-PLIST_DIR="$HOME/Library/LaunchAgents"
-PLIST="$PLIST_DIR/com.tnezki.portfolio-local-companion.plist"
-PYTHON="/usr/bin/python3"
-SERVER="$SCRIPT_DIR/portfolio_companion.py"
+PLIST="$HOME/Library/LaunchAgents/com.tnezki.portfolio-local-companion.plist"
 LABEL="com.tnezki.portfolio-local-companion"
+SERVER="$SCRIPT_DIR/portfolio_companion.py"
 UID_NOW="$(id -u)"
-mkdir -p "$LOG_DIR" "$PLIST_DIR"
+mkdir -p "$LOG_DIR"
 
-cat > "$PLIST" <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key><string>$LABEL</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>$PYTHON</string>
-    <string>$SERVER</string>
-    <string>--no-open</string>
-  </array>
-  <key>WorkingDirectory</key><string>$SCRIPT_DIR</string>
-  <key>RunAtLoad</key><true/>
-  <key>KeepAlive</key><true/>
-  <key>StandardOutPath</key><string>$LOG_DIR/portfolio_local_companion.log</string>
-  <key>StandardErrorPath</key><string>$LOG_DIR/portfolio_local_companion_error.log</string>
-</dict>
-</plist>
-EOF
-
+# v3.1: do not run the companion as a LaunchAgent. macOS privacy controls can
+# block background launchd/Python processes from reading ~/Documents/GitHub.
+# Running from Terminal inherits the teacher's interactive Documents access.
 /bin/launchctl bootout "gui/$UID_NOW/$LABEL" >/dev/null 2>&1 || true
 /usr/bin/pkill -f "$SERVER" >/dev/null 2>&1 || true
-/bin/launchctl bootstrap "gui/$UID_NOW" "$PLIST"
-/bin/launchctl kickstart -k "gui/$UID_NOW/$LABEL" >/dev/null 2>&1 || true
+rm -f "$PLIST"
 
-READY=0
-for _ in 1 2 3 4 5 6 7 8 9 10; do
-  if /usr/bin/curl -fsS "http://127.0.0.1:8765/" >/dev/null 2>&1; then
-    READY=1
-    break
-  fi
-  sleep 0.35
-done
+if [ ! -f "$SERVER" ]; then
+  echo "Portfolio Local Companion could not be found:"
+  echo "$SERVER"
+  exit 1
+fi
 
-echo
-echo "Portfolio Local Companion"
-if [ "$READY" -eq 1 ]; then
-  echo "Ready at http://127.0.0.1:8765/"
-  echo "It is now installed as a private login helper and will restart automatically on this Mac."
-  /usr/bin/open "http://127.0.0.1:8765/"
-else
-  echo "The login helper was installed, but the local page did not answer yet."
-  echo "Check: $LOG_DIR/portfolio_local_companion_error.log"
+# Verify the interactive Python process can read the runtime file before
+# starting the server. This gives a useful message if macOS privacy is blocking it.
+if ! /usr/bin/python3 - "$SERVER" <<'PYCODE' >/dev/null 2>&1
+import pathlib,sys
+p=pathlib.Path(sys.argv[1])
+p.read_bytes()
+PYCODE
+then
+  echo
+  echo "Portfolio Local Companion could not read its runtime files."
+  echo "macOS is blocking Terminal/Python from the Documents folder."
+  echo
+  echo "Open System Settings > Privacy & Security > Files and Folders,"
+  echo "allow Terminal access to Documents Folder, then run this command again."
+  echo
+  read -r -p "Press Return to close..." _
   exit 1
 fi
 
 echo
-echo "You can close this Terminal window."
-read -r -p "Press Return to close..." _
+echo "Portfolio Local Companion"
+echo
+echo "Starting at http://127.0.0.1:8765/"
+echo "Keep this Terminal window open while using Portfolio."
+echo "You may minimize it. Press Control-C here when you are finished."
+echo
+
+# Run in the interactive Terminal session so macOS allows access to the
+# teacher's private _portfolio_data and GitHub folders under Documents.
+exec /usr/bin/python3 "$SERVER"
