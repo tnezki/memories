@@ -1,0 +1,52 @@
+PORTFOLIO LOCAL COMPANION - HOME/SCHOOL SETUP NOTE
+==================================================
+
+WHAT THIS FIX DOES
+------------------
+- The GitHub transfer helper already restores executable permission on every .command file it installs.
+  You should NOT need to run chmod +x manually after applying a normal GitHub Transfer ZIP.
+- Start Portfolio Local Companion.command now launches the final Portfolio UI plus the email-note fields.
+- Expected Terminal line after startup:
+    Runtime: email-notes-1.6
+- The local server stays on:
+    http://127.0.0.1:8765/
+  and is reachable only from that Mac.
+
+NORMAL HOME OR SCHOOL STARTUP
+-----------------------------
+1. Pull the latest GitHub changes on that computer.
+2. Make sure the current _portfolio_data folder is present there (copy/sync from USB as usual).
+3. Double-click:
+     memories/Tools/portfolio_local_runtime/Start Portfolio Local Companion.command
+4. Leave that Terminal window open while using Portfolio. It may be minimized.
+5. Press Control-C in that Terminal window when you are finished.
+
+WHY IT IS NOT A SILENT LOGIN HELPER RIGHT NOW
+---------------------------------------------
+We originally tried an automatic LaunchAgent/login helper. macOS blocked background Python from
+reading ~/Documents/GitHub even though the same files were readable from an interactive Terminal.
+That produced "Operation not permitted" errors.
+
+So the current safe design intentionally starts from Terminal. Do NOT re-enable the old LaunchAgent
+while GitHub and _portfolio_data live under ~/Documents.
+
+CAN IT AUTO-START LATER?
+------------------------
+Yes, but not with the old silent LaunchAgent setup while these folders remain under Documents.
+Two practical future options are:
+
+A. Keep the folders where they are and add an interactive Login Item that opens Terminal and runs
+   Start Portfolio Local Companion.command automatically. The Terminal window would still exist and
+   could be minimized.
+
+B. Move the GitHub/_portfolio_data working folders to a location that a background helper can read,
+   then restore a true background LaunchAgent.
+
+For now, the reliable rule is: start the .command once per work session on each Mac.
+
+SCHOOL-MAC FIRST USE
+--------------------
+After pulling the current repositories and copying _portfolio_data from USB, run the same .command.
+No separate chmod command should be necessary when the transfer helper installed the launcher.
+
+END
