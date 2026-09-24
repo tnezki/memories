@@ -16,11 +16,14 @@ from pathlib import Path
 from build_grading_request import build_request
 from portfolio_runtime import (
     COURSE_CONFIG,
+    build_results,
     extract_state,
     github_root_from_runtime,
+    install_results_to_local_folders,
     load_learning_map,
     portfolio_root,
     roster_rows,
+    sha256_file,
     validate_state_zip,
 )
 from prepare_portfolio_emails import prepare as prepare_email
@@ -41,6 +44,13 @@ def unit_dir(course: str, unit: int) -> Path:
     return local_root() / course / f"unit {int(unit)}"
 
 
+def teacher_dashboard_url(course: str) -> str:
+    if course not in COURSE_CONFIG:
+        raise ValueError(f"Unsupported course: {course}")
+    repo_folder = COURSE_CONFIG[course]["repo_folder"]
+    return f"https://tnezki.github.io/{repo_folder}/teacher_dashboard______zptdf.html"
+
+
 def state_status(course: str, unit: int) -> dict:
     u = unit_dir(course, unit)
     state = u / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
@@ -57,6 +67,60 @@ def state_status(course: str, unit: int) -> dict:
         m = validate_state_zip(state, course, int(unit))
         out.update({"state_ready": True, "state_version": int(m.get("state_version", 0)), "state_id": m.get("state_id")})
     return out
+
+
+def ensure_current_html_reports(course: str, unit: int) -> bool:
+    """Rebuild current local HTML reports from state only when canonical HTML is missing."""
+    u = unit_dir(course, unit)
+    individual = u / "03 Student Packets" / "individual"
+    teacher_html = u / "04 Class & Intervention Summaries" / "teacher_summary.html"
+    if individual.is_dir() and any(individual.glob("*.html")) and teacher_html.is_file():
+        return False
+
+    state = u / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
+    manifest = validate_state_zip(state, course, unit)
+    with tempfile.TemporaryDirectory(prefix="portfolio_companion_report_refresh_") as td:
+        td = Path(td)
+        state_work = td / "state_work"
+        extract_state(state, state_work)
+        state_dir = state_work / "state"
+        run_manifest = {}
+        run_path = state_dir / "run_manifest.json"
+        if run_path.is_file():
+            try:
+                run_manifest = json.loads(run_path.read_text(encoding="utf-8"))
+            except Exception:
+                run_manifest = {}
+        try:
+            report_number = int(run_manifest.get("report_number") or 1)
+        except Exception:
+            report_number = 1
+        report_date = str(
+            run_manifest.get("report_date")
+            or str(manifest.get("generated_at") or "")[:10]
+            or ""
+        )
+        latest_label = str(run_manifest.get("source_label") or "Current Portfolio State")
+        latest_date = str(run_manifest.get("source_date") or report_date)
+        results_dir = td / "results"
+        results_dir.mkdir(parents=True, exist_ok=True)
+        build_results(
+            github_root=github_root_from_runtime(),
+            runtime_dir=Path(__file__).resolve().parent,
+            state_dir=state_dir,
+            state_manifest=manifest,
+            input_state_sha=sha256_file(state),
+            course=course,
+            unit=unit,
+            report_number=report_number,
+            report_date=report_date,
+            latest_label=latest_label,
+            latest_date=latest_date,
+            class_insights=None,
+            out_dir=results_dir,
+        )
+        install_results_to_local_folders(results_dir, u)
+    return True
 
 
 def observation_data(course: str, unit: int) -> dict:
@@ -134,7 +198,7 @@ def one(fields: dict[str, list[str]], key: str, default_value: str = "") -> str:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PortfolioLocalCompanion/1.2"
+    server_version = "PortfolioLocalCompanion/1.3"
 
     def log_message(self, fmt: str, *args) -> None:
         print(f"[Portfolio Companion] {self.address_string()} - {fmt % args}")
@@ -200,6 +264,12 @@ class Handler(BaseHTTPRequestHandler):
                 period = (q.get("period") or [""])[0]
                 ids = [x for x in q.get("i_can", []) if x]
                 self.send_html(self.checklist_page(course, unit, period, ids))
+                return
+            if path == "/open-folder":
+                course = (q.get("course") or [""])[0]
+                unit = int((q.get("unit") or ["1"])[0])
+                kind = (q.get("kind") or [""])[0]
+                self.open_local_folder(course, unit, kind)
                 return
             if path == "/file":
                 course = (q.get("course") or [""])[0]
@@ -289,6 +359,7 @@ class Handler(BaseHTTPRequestHandler):
             if parsed.path == "/api/prepare-email":
                 course = one(fields, "course")
                 unit = int(one(fields, "unit", "1"))
+                ensure_current_html_reports(course, unit)
                 selected = [x for x in fields.get("student_key", []) if x]
                 result = prepare_email(course, unit, open_folder=True, selected_student_keys=selected)
                 result["message"] = f"Prepared {result.get('prepared_pdfs', 0)} selected student PDF(s). No email was sent."
@@ -302,10 +373,12 @@ class Handler(BaseHTTPRequestHandler):
         cards = []
         for course in COURSE_CONFIG:
             q = urllib.parse.quote(course)
-            cards.append(f'<div class="card"><h2>{html.escape(course)}</h2><p><a href="/reports?course={q}&unit=1">View Unit 1 reports</a></p><p><a href="/email?course={q}&unit=1">Email control panel</a></p></div>')
+            dash = teacher_dashboard_url(course)
+            cards.append(f'<div class="card"><h2>{html.escape(course)}</h2><p><a href="/reports?course={q}&unit=1">View Unit 1 reports</a></p><p><a href="/email?course={q}&unit=1">Email control panel</a></p><p><a href="{html.escape(dash)}" target="_blank">Open Teacher Dashboard</a></p></div>')
         return page("Portfolio Local Companion", '<p class="lead">Local bridge for Portfolio reports, teacher observations, grading requests, roster maintenance, and selected-student email PDF preparation.</p>' + ''.join(cards))
 
     def reports_page(self, course: str, unit: int) -> str:
+        rebuilt = ensure_current_html_reports(course, unit)
         s = state_status(course, unit)
         u = unit_dir(course, unit)
         groups = [
@@ -313,9 +386,22 @@ class Handler(BaseHTTPRequestHandler):
             ("Teacher Report", u / "04 Class & Intervention Summaries"),
             ("PowerSchool Exports", u / "05 PowerSchool Exports"),
         ]
-        body = [f'<p class="lead"><b>{html.escape(course)} - Unit {unit}</b> &nbsp; State v{s.get("state_version") if s.get("state_ready") else "not initialized"}</p>']
+        dashboard = teacher_dashboard_url(course)
+        body = [
+            f'<div class="row"><a class="buttonlink secondary" href="{html.escape(dashboard)}" target="_blank">Back to {html.escape(course)} Teacher Dashboard</a></div>',
+            f'<p class="lead"><b>{html.escape(course)} - Unit {unit}</b> &nbsp; State v{s.get("state_version") if s.get("state_ready") else "not initialized"}</p>',
+        ]
+        if rebuilt:
+            body.append('<div class="notice good">Current HTML reports were rebuilt from the installed local Portfolio state. No evidence, grades, or state version changed.</div>')
         for title, folder in groups:
             body.append(f'<div class="card"><h2>{html.escape(title)}</h2>')
+            if title == "PowerSchool Exports":
+                rel_folder = f'_portfolio_data/{course}/unit {unit}/05 PowerSchool Exports'
+                reveal = f'/open-folder?course={urllib.parse.quote(course)}&unit={unit}&kind=powerschool'
+                body.append(
+                    f'<p><b>Already local.</b> When importing grades into PowerSchool, use the CSVs in <code>{html.escape(rel_folder)}</code>. '
+                    f'<a href="{reveal}" target="_blank">Reveal PowerSchool folder in Finder</a>.</p>'
+                )
             items = []
             if folder.is_dir():
                 for p in sorted(folder.rglob("*")):
@@ -327,6 +413,7 @@ class Handler(BaseHTTPRequestHandler):
         return page(f"{course} Unit {unit} Reports", ''.join(body))
 
     def email_page(self, course: str, unit: int) -> str:
+        rebuilt = ensure_current_html_reports(course, unit)
         data = observation_data(course, unit)
         u = unit_dir(course, unit)
         current = u / "06 Email Delivery" / "Current"
@@ -346,7 +433,9 @@ class Handler(BaseHTTPRequestHandler):
                 for s in students
             )
             groups.append(f'<div class="period"><h3>{html.escape(period)}</h3><div class="students">{checks}</div></div>')
-        form = f'''<div class="card"><h2>Prepare selected reports for email</h2><p>Select only the students whose current reports you want prepared. PDFs are generated locally; nothing is sent.</p><div class="row"><button type="button" class="secondary" onclick="setAll(true)">Select All</button><button type="button" class="secondary" onclick="setAll(false)">Deselect All</button></div><form id="emailForm"><input type="hidden" name="course" value="{html.escape(course)}"><input type="hidden" name="unit" value="{unit}">{''.join(groups)}<button type="submit">Prepare Selected PDFs</button></form><div id="emailStatus" class="notice muted"></div></div>'''
+        rebuilt_note = '<div class="notice good">Current individual HTML reports were rebuilt from the installed local state so email preparation can use them. No evidence or grades changed.</div>' if rebuilt else ''
+        dashboard = teacher_dashboard_url(course)
+        form = f'''<div class="row"><a class="buttonlink secondary" href="{html.escape(dashboard)}" target="_blank">Back to {html.escape(course)} Teacher Dashboard</a></div>{rebuilt_note}<div class="card"><h2>Prepare selected reports for email</h2><p>Select only the students whose current reports you want prepared. PDFs are generated locally; nothing is sent.</p><div class="row"><button type="button" class="secondary" onclick="setAll(true)">Select All</button><button type="button" class="secondary" onclick="setAll(false)">Deselect All</button></div><form id="emailForm"><input type="hidden" name="course" value="{html.escape(course)}"><input type="hidden" name="unit" value="{unit}">{''.join(groups)}<button type="submit">Prepare Selected PDFs</button></form><div id="emailStatus" class="notice muted"></div></div>'''
         current_html = '<div class="card"><h2>Current email package</h2>' + ('<ul>'+''.join(current_files)+'</ul>' if current_files else '<p class="muted">No email package prepared yet.</p>') + '</div>'
         script = '''<script>function setAll(v){document.querySelectorAll('input[name="student_key"]').forEach(x=>x.checked=v)}document.getElementById('emailForm').addEventListener('submit',async(e)=>{e.preventDefault();const st=document.getElementById('emailStatus');st.textContent='Preparing selected PDFs locally...';const fd=new FormData(e.target);try{const r=await fetch('/api/prepare-email',{method:'POST',body:fd});const d=await r.json();if(!r.ok||d.status!=='PASS')throw new Error(d.message||'Email preparation failed');st.className='notice good';st.textContent=d.message+' Ready rows: '+d.ready_rows+'.';setTimeout(()=>location.reload(),900)}catch(err){st.className='notice bad';st.textContent=err.message}})</script>'''
         return page(f"{course} Unit {unit} Email Reports", form + current_html + script)
@@ -375,6 +464,22 @@ class Handler(BaseHTTPRequestHandler):
         body = f'''<div class="check-head"><div><h1>{html.escape(course)} Unit {unit} Walk-Around Checklist</h1><p>{html.escape(period)}</p></div><div class="fields">Date: __________________ &nbsp;&nbsp; Activity/Source: ______________________________</div></div><p class="directions">Check a box only when you directly observe the student demonstrate that I Can. A blank box means not observed, not incorrect.</p><table class="checklist"><thead><tr><th class="name">Student</th>{heads}</tr></thead><tbody>{rows}</tbody></table><p class="footer">After class, you can enter observations directly in the Portfolio control panel or upload a scan/photo of this completed checklist to build an observation grading request.</p><script>window.addEventListener('load',()=>setTimeout(()=>window.print(),250))</script>'''
         return checklist_page_shell(body)
 
+    def open_local_folder(self, course: str, unit: int, kind: str) -> None:
+        u = unit_dir(course, unit)
+        folders = {
+            "student": u / "03 Student Packets",
+            "teacher": u / "04 Class & Intervention Summaries",
+            "powerschool": u / "05 PowerSchool Exports",
+            "email": u / "06 Email Delivery" / "Current",
+        }
+        folder = folders.get(kind)
+        if folder is None:
+            raise ValueError("Unknown local Portfolio folder request.")
+        folder.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["/usr/bin/open", str(folder)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        back = f'/reports?course={urllib.parse.quote(course)}&unit={unit}'
+        self.send_html(page("Portfolio folder opened", f'<div class="card"><h2>Opened in Finder</h2><p>{html.escape(str(folder))}</p><p><a href="{back}">Return to reports</a></p></div>'))
+
     def serve_local_file(self, course: str, unit: int, rel: str) -> None:
         u = unit_dir(course, unit).resolve()
         p = (u / rel).resolve()
@@ -396,7 +501,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def page(title: str, body: str) -> str:
-    return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(title)}</title><style>body{{font-family:Arial,Helvetica,sans-serif;background:#eef2f6;color:#182230;margin:0}}main{{max-width:1080px;margin:30px auto;padding:0 18px}}h1{{color:#173f73}}h2{{color:#173f73}}h3{{margin:12px 0 8px;color:#173f73}}.lead{{font-size:16px;line-height:1.5}}.card{{background:#fff;border:1px solid #d5dce5;border-radius:14px;padding:18px;margin:14px 0}}a{{color:#173f73;font-weight:700}}button{{background:#245b87;color:#fff;border:1px solid #245b87;border-radius:9px;padding:11px 15px;font-weight:800;cursor:pointer}}button.secondary{{background:#fff;color:#173f73;border-color:#aebdcb}}.row{{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}}.muted{{color:#667085}}.error,.notice.bad{{border-color:#efb8b3;background:#fff4f2;color:#8c2018}}.notice.good{{border-color:#b8e4ca;background:#eefbf4;color:#125f3e}}.notice{{padding:9px 11px;border-radius:8px;margin-top:10px}}li{{margin:7px 0}}.files .path{{display:block;color:#667085;font-size:11px;font-weight:400}}.period{{border-top:1px solid #e0e6ee;padding-top:4px;margin-top:10px}}.students{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 12px;margin-bottom:12px}}.student{{font-size:13px}}@media(max-width:760px){{.students{{grid-template-columns:1fr 1fr}}}}</style></head><body><main><h1>{html.escape(title)}</h1>{body}</main></body></html>'''
+    return f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(title)}</title><style>body{{font-family:Arial,Helvetica,sans-serif;background:#eef2f6;color:#182230;margin:0}}main{{max-width:1080px;margin:30px auto;padding:0 18px}}h1{{color:#173f73}}h2{{color:#173f73}}h3{{margin:12px 0 8px;color:#173f73}}.lead{{font-size:16px;line-height:1.5}}.card{{background:#fff;border:1px solid #d5dce5;border-radius:14px;padding:18px;margin:14px 0}}a{{color:#173f73;font-weight:700}}button,.buttonlink{{background:#245b87;color:#fff;border:1px solid #245b87;border-radius:9px;padding:11px 15px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}}button.secondary,.buttonlink.secondary{{background:#fff;color:#173f73;border-color:#aebdcb}}.row{{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}}.muted{{color:#667085}}.error,.notice.bad{{border-color:#efb8b3;background:#fff4f2;color:#8c2018}}.notice.good{{border:1px solid #b8e4ca;background:#eefbf4;color:#125f3e}}.notice{{padding:9px 11px;border-radius:8px;margin-top:10px}}code{{background:#f3f5f7;border-radius:5px;padding:2px 5px}}li{{margin:7px 0}}.files .path{{display:block;color:#667085;font-size:11px;font-weight:400}}.period{{border-top:1px solid #e0e6ee;padding-top:4px;margin-top:10px}}.students{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 12px;margin-bottom:12px}}.student{{font-size:13px}}@media(max-width:760px){{.students{{grid-template-columns:1fr 1fr}}}}</style></head><body><main><h1>{html.escape(title)}</h1>{body}</main></body></html>'''
 
 
 def checklist_page_shell(body: str) -> str:

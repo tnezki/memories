@@ -1,4 +1,4 @@
-PORTFOLIO LOCAL RUNTIME v3.1
+PORTFOLIO LOCAL RUNTIME v3.2
 ============================
 
 PURPOSE
@@ -36,6 +36,8 @@ There is no normal current-state picker, Drive migration control, transfer contr
   _portfolio_data/<Course>/unit N/02 Portfolio Data/Portfolio_State_CURRENT.zip
 
 If the local companion is offline, start Start Portfolio Local Companion.command and keep its Terminal window open while working.
+
+The local Portfolio pages do NOT replace the existing course Teacher Dashboard. The Teacher Dashboard remains the normal navigation shell. Local Portfolio report/email pages handle private local student data and include a link back to the course Teacher Dashboard.
 
 NORMAL EVIDENCE WORKFLOW
 ------------------------
@@ -94,10 +96,18 @@ Use the Update Roster tab in the course control panel.
 
 REPORTS
 -------
-The View Reports button opens the local report hub for the selected course/Unit. It includes:
+The View Reports button opens the private local report hub for the selected course/Unit. It includes:
 - Student Reports: 03 Student Packets
 - Teacher Report: 04 Class & Intervention Summaries
 - PowerSchool Exports: 05 PowerSchool Exports
+
+Canonical student and teacher reports are HTML. A PDF visible immediately after migration is a legacy seeded artifact from the old Drive-era results, not the normal new report format.
+
+If canonical HTML reports are missing but a valid current local Portfolio state exists, the companion rebuilds the current HTML reports from that state automatically. This is a report-only refresh: it does not add evidence, change grades, or increment the state version. This also lets email preparation work without requiring a fake grading run just to create HTML.
+
+PowerSchool CSVs are already local. The report hub reminds the teacher to import from:
+  _portfolio_data/<Course>/unit N/05 PowerSchool Exports
+and provides a Reveal PowerSchool folder in Finder link. There is no need to download the CSVs from the local web page first.
 
 EMAIL PREPARATION
 -----------------
@@ -105,6 +115,7 @@ The Email Reports button opens the local email control panel.
 - Current active students are shown with checkboxes by hour/period.
 - Select All and Deselect All are provided.
 - Leave checked only the students whose current reports you want prepared, including individual make-up-work follow-up.
+- If current individual HTML reports are missing, they are rebuilt from the installed local state first without changing evidence or grades.
 - Click Prepare Selected PDFs.
 - Only selected students' current individual HTML reports are converted locally to PDFs with Chrome/Edge/Chromium.
 - Stable student identity is checked before a PDF is considered sendable.
