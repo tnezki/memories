@@ -44,7 +44,8 @@ STRENGTHS = {"CONVINCING", "PARTIAL", "LIMITED", "UNUSABLE", "NOT_OBSERVED"}
 
 
 def osa_choose_file(prompt: str) -> Path | None:
-    script = f'''try\nset f to choose file with prompt "{prompt.replace('"','\\"')}"\nreturn POSIX path of f\non error number -128\nreturn ""\nend try'''
+    safe_prompt = prompt.replace('"', '\\"')
+    script = f'''try\nset f to choose file with prompt "{safe_prompt}"\nreturn POSIX path of f\non error number -128\nreturn ""\nend try'''
     proc = subprocess.run(["/usr/bin/osascript", "-e", script], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
     p = proc.stdout.strip() if proc.returncode == 0 else ""
     return Path(p) if p else None

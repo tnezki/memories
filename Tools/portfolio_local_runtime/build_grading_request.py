@@ -41,18 +41,22 @@ def choose_target(options: list[tuple[str, int, Path]]) -> tuple[str, int, Path]
 
 def choose_files(prompt: str, multiple: bool = True) -> list[Path]:
     multi = " with multiple selections allowed" if multiple else ""
-    script = f'''try\nset fs to choose file with prompt "{prompt.replace('"','\\"')}"{multi}\nif class of fs is list then\nset out to ""\nrepeat with f in fs\nset out to out & POSIX path of f & linefeed\nend repeat\nreturn out\nelse\nreturn POSIX path of fs\nend if\non error number -128\nreturn ""\nend try'''
+    safe_prompt = prompt.replace('"', '\\"')
+    script = f'''try\nset fs to choose file with prompt "{safe_prompt}"{multi}\nif class of fs is list then\nset out to ""\nrepeat with f in fs\nset out to out & POSIX path of f & linefeed\nend repeat\nreturn out\nelse\nreturn POSIX path of fs\nend if\non error number -128\nreturn ""\nend try'''
     out = osa(script)
     return [Path(x) for x in out.splitlines() if x.strip()]
 
 
 def ask_text(prompt: str, default: str = "") -> str:
-    script = f'''try\ndisplay dialog "{prompt.replace('"','\\"')}" default answer "{default.replace('"','\\"')}" with title "Portfolio Local Grader"\nreturn text returned of result\non error number -128\nreturn ""\nend try'''
+    safe_prompt = prompt.replace('"', '\\"')
+    safe_default = default.replace('"', '\\"')
+    script = f'''try\ndisplay dialog "{safe_prompt}" default answer "{safe_default}" with title "Portfolio Local Grader"\nreturn text returned of result\non error number -128\nreturn ""\nend try'''
     return osa(script)
 
 
 def ask_yes_no(prompt: str) -> bool:
-    script = f'''try\ndisplay dialog "{prompt.replace('"','\\"')}" with title "Portfolio Local Grader" buttons {{"No","Yes"}} default button "No"\nreturn button returned of result\non error number -128\nreturn "No"\nend try'''
+    safe_prompt = prompt.replace('"', '\\"')
+    script = f'''try\ndisplay dialog "{safe_prompt}" with title "Portfolio Local Grader" buttons {{"No","Yes"}} default button "No"\nreturn button returned of result\non error number -128\nreturn "No"\nend try'''
     return osa(script) == "Yes"
 
 
