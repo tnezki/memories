@@ -11,7 +11,9 @@
     "personalized": true,
     "visible_i_can_label": true,
     "student_label_rule": "Show exact I Can code + full exact I Can statement with every question.",
-    "normal_use_timing": "Generate only when the teacher is ready to use it so the newest Portfolio state can guide targeting."
+    "normal_use_timing": "Generate only when the teacher is ready to use it so the newest Portfolio state can guide targeting.",
+    "builder_location": "owner_local",
+    "builder_path": "_algebra_teacher_tools/tools/checkpoint/checkpoint_builder.html"
   },
   "source_of_truth": {
     "portfolio_root_title": "____Portfolio_Data",
@@ -42,7 +44,11 @@
     "students needing evidence for a specific I Can",
     "students needing another independent demonstration for a specific I Can"
   ],
-  "period_scope": ["3rd", "6th", "both"],
+  "period_scope": [
+    "3rd",
+    "6th",
+    "both"
+  ],
   "targeting": {
     "principle": "Portfolio decides what evidence is useful now; the Bank supplies how that evidence is elicited.",
     "priority_order_when_request_does_not_force_one_target": [
@@ -64,11 +70,19 @@
   },
   "offline_generation": {
     "preferred": true,
-    "source_map_fields": ["family_id", "seed_or_parameters", "exact_prompt", "answer_or_key"],
+    "source_map_fields": [
+      "family_id",
+      "seed_or_parameters",
+      "exact_prompt",
+      "answer_or_key"
+    ],
     "reproducibility_rule": "When deterministic generation is used, the saved source map must contain enough seed/parameter data to reproduce the printed question."
   },
   "output": {
-    "print_order": ["3rd Hour alphabetical", "6th Hour alphabetical"],
+    "print_order": [
+      "3rd Hour alphabetical",
+      "6th Hour alphabetical"
+    ],
     "student_name_prefilled": true,
     "student_pages_per_checkpoint": 2,
     "pdf_bookmarks_by_student": true,
@@ -83,18 +97,42 @@
     ],
     "private_drive_folder": "06 Checkpoints",
     "run_folder_rule": "Create a unique dated/run-specific child folder. Never overwrite an older Checkpoint run.",
-    "private_files": ["checkpoint.html", "checkpoint.pdf", "checkpoint_source_map.json", "run_manifest.json"],
-    "returned_files": ["checkpoint.html", "checkpoint.pdf"]
+    "private_files": [
+      "checkpoint.html",
+      "checkpoint.pdf",
+      "checkpoint_source_map.json",
+      "run_manifest.json"
+    ],
+    "returned_files": [
+      "checkpoint.html",
+      "checkpoint.pdf"
+    ]
   },
   "source_map": {
-    "minimum_student_fields": ["student_key", "display_name", "period"],
-    "minimum_question_fields": ["printed_number", "i_can_id", "i_can_exact_text", "family_id", "family_name", "evidence_job", "prompt", "values_or_parameters", "answer_or_key", "opportunity_id"],
+    "minimum_student_fields": [
+      "student_key",
+      "display_name",
+      "period"
+    ],
+    "minimum_question_fields": [
+      "printed_number",
+      "i_can_id",
+      "i_can_exact_text",
+      "family_id",
+      "family_name",
+      "evidence_job",
+      "prompt",
+      "values_or_parameters",
+      "answer_or_key",
+      "opportunity_id"
+    ],
     "portfolio_ingestion_rule": "When later Checkpoint evidence is ingested, the private source map saved with that run is the primary lineage authority. Map the clean printed task before judging handwriting."
   },
   "privacy": {
     "public_builder_contains_private_student_data": false,
     "github_student_data_allowed": false,
-    "drive_resolution_rule": "Resolve live roster, statuses, intervention groups, and evidence from the canonical private Drive only when the request executes."
+    "drive_resolution_rule": "Resolve live roster, statuses, intervention groups, and evidence from the canonical private Drive only when the request executes.",
+    "builder_surface_rule": "Checkpoint Builder is owner-local under _algebra_teacher_tools and is not linked from the shared/public Algebra Teacher Dashboard."
   },
   "failure_modes": {
     "drive_unavailable": "CHECKPOINT_DRIVE_STATE_UNAVAILABLE",

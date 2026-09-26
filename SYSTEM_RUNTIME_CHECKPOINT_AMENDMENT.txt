@@ -7,7 +7,14 @@ This amendment specializes SYSTEM_RUNTIME_CONTRACT.txt for the live personalized
 
 PURPOSE
 -------
-A Checkpoint run is a private state-informed assessment generation workflow, not a public repository artifact build. The public course repository owns the Checkpoint Builder and curriculum authorities; the actual selected students, personalized question plans, source map, and generated run outputs remain private.
+A Checkpoint run is a private state-informed assessment generation workflow, not a public repository artifact build. The owner-local `_algebra_teacher_tools` surface owns the Checkpoint Builder entry page; the public Algebra repository owns shareable curriculum authorities/artifacts. The actual selected students, personalized question plans, source map, and generated run outputs remain private.
+
+OWNER-LOCAL BUILDER - HARD
+--------------------------
+Normal builder path:
+  _algebra_teacher_tools/tools/checkpoint/checkpoint_builder.html
+
+The shared Algebra Teacher Dashboard must not link the Checkpoint Builder. A Mode A tool-build request creates/repairs the declared local owner-tool path through the local transfer helper; it must not recreate the retired public repository builder path.
 
 CANONICAL PRIVATE DRIVE ROOT - HARD
 -----------------------------------
@@ -54,6 +61,6 @@ Successful actual Checkpoint run:
 - do not package student Checkpoint outputs in a GitHub Transfer ZIP;
 - do not write student data or the personalized source map to GitHub.
 
-A separate Mode A request that creates/repairs the public Checkpoint Builder IS a repository artifact build and follows the normal github_transfer / 2 contract.
+A separate Mode A request that creates/repairs the owner-local Checkpoint Builder uses the local transfer helper to `_algebra_teacher_tools` and does not create a public repository control page.
 
 All other SYSTEM_RUNTIME_CONTRACT rules remain in force.

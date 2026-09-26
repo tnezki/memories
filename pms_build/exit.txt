@@ -4,10 +4,16 @@ STATUS: CURRENT
 STEP: 7
 JOB: exit
 CURRENT STUDENT ARTIFACT NAME: Quick Check
-REVISION: 2026-09-26 v2.0
+REVISION: 2026-09-26 v2.1
 
 ROLE
 Own the Algebra Quick Check build workflow. The internal PM job key remains `exit` for registry compatibility only; do not revive retired Exit Ticket terminology/mechanics.
+
+
+OWNER TOOL SURFACE - HARD
+The teacher selector/builder is owner-local, not a public/shared repository control page. Normal path:
+  _algebra_teacher_tools/tools/quick_check/quick_N.html
+Build/repair of that selector may be delivered through the local transfer helper to the declared owner-tools root. Approved Quick Check artifacts still deploy to the Algebra repository and may be linked from the shared Teacher Dashboard. Do not recreate quick_check____htq5855/quickN/quick_N.html as the active selector after migration.
 
 ARCHITECTURE
 There is ONE four-question Quick Check per section = 20 source questions per five-section Unit.
