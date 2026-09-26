@@ -13,35 +13,44 @@ Legacy scans may retain older names as aliases only.
 Use:
   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/contracts/portfolio_quick_check_policy.json
 That policy owns current I Can statuses, Mastery Goal grades, intervention routing, report fidelity, next-action vocabulary, private results/archive behavior, and support-staff delivery safety.
-Do not duplicate or reinterpret those rules here.
 
 3. QUICK CHECK WORKFLOW - HARD
-There is ONE Quick Check per section. Normal owner entry is the LOCAL non-repository tool:
+There is one common four-question Quick Check per section evidence event. Normal owner entry is the LOCAL non-repository tool:
   _algebra_teacher_tools/tools/quick_check/quick_N.html
-The shared Algebra Teacher Dashboard may link approved Quick Check outputs, but it must not expose the builder/selector.
+The shared Algebra Teacher Dashboard links finished Quick Check products through:
+  quick_check____htq5855/library.html?unit=N
+and must not expose the builder/selector.
+
 The teacher approves four source question architectures/anchors and may add a fine-tuning note. Portfolio need may guide reassessment recommendations; teacher selection is final.
 
-Approved section output lives under:
-  quick_check____htq5855/quickN/approved/quick_N_S/
-with one HTML print source, one 8-page student PDF, and one JSON lineage/source map.
+APPROVED QUICK CHECK HISTORY - HARD
+Approved Quick Checks are append-only history, not one replaceable file per section.
+- Preserve the existing approved files already present in a section root.
+- Every new makeup/alternate/corrected/later build receives a unique run folder under:
+    quick_check____htq5855/quickN/approved/quick_N_S/runs/<run_id>/
+- Each run owns its HTML, 8-page PDF, and JSON lineage/source map.
+- Append the run to quick_check____htq5855/library.json.
+- Never overwrite or delete an earlier approved run merely to create a new version for the same section.
 
-Four versions A-D use the same four approved source architectures. Normal version differences are safe family-authorized number/value/data swaps, deterministic question-order scrambling, and answer-choice scrambling when applicable. Do not redesign the evidence architecture merely to create anti-copy versions.
+Four versions A-D inside one run use the same four approved source architectures. Normal version differences are safe family-authorized number/value/data swaps, deterministic question-order scrambling, and answer-choice scrambling when applicable.
 
 Every printed question visibly shows:
   <exact I Can code> — <full exact I Can statement>
 
-For newly generated Quick Checks, the sibling approved JSON is the primary exact lineage/source map. curriculum/quick_check_source_maps is reserved for legacy/special aggregation, multi-target overrides, compatibility, or missing approved JSON.
-
 4. PERSONALIZED CHECKPOINT WORKFLOW - HARD
 Checkpoint is a COURSE-LEVEL OWNER tool at:
   _algebra_teacher_tools/tools/checkpoint/checkpoint_builder.html
-It selects one Unit and a student scope. The local builder stores no roster/Portfolio data and is not part of the shared/public Algebra dashboard. Actual runs resolve current private Portfolio state just in time.
+It selects one Unit and a student scope. Actual personalized runs resolve current private Portfolio state just in time and remain private.
 
-Default Checkpoint length is six questions/student. Portfolio decides what evidence is useful now; the reviewed selected Unit Bank supplies approved question-family architecture. Select any approved family whose evidence job fits the need; family letters are stable IDs only and do not encode universal A/B/C roles.
+The shared Teacher Dashboard may show a green Checkpoints product-library button:
+  checkpoints___trmn78/library.html?unit=N
+but that shared library may contain only intentionally published non-student-specific finished Checkpoint products. Student names, Portfolio status, personalized plans, and private source maps never enter the shared library.
+
+Default personalized Checkpoint length is six questions/student. Portfolio decides what evidence is useful now; the reviewed selected Unit Bank supplies approved question-family architecture. Family letters are stable IDs only and do not encode universal A/B/C roles.
 
 When a family supports safe deterministic/seeded generation, prefer that route and record the seed/parameters. Otherwise author a fresh reviewed instance from the approved family contract. Do not invent a new architecture when a suitable approved family exists.
 
-Every question visibly shows exact I Can code + full exact statement. Every run saves a private checkpoint_source_map.json mapping each student/question to exact I Can, family, evidence job, prompt, parameters/values, verified answer/key, and source-level opportunity ID.
+Every question visibly shows exact I Can code + full exact statement. Every private run saves checkpoint_source_map.json with exact I Can/family/evidence/prompt/parameters/verified answer/opportunity lineage.
 
 5. EVIDENCE-SOURCE MAPPING - HARD
 Map the clean task before judging handwriting. Printed question number is not authority when versions shuffle or personalized Checkpoints differ by student. Repeated questions for one I Can on one Quick Check/Checkpoint may strengthen one source judgment but do not automatically become multiple independent opportunities.
@@ -60,9 +69,10 @@ Retired for current Algebra execution:
 - Ticket A/B naming as current source architecture;
 - fixed three-family A/B/C Bank semantics;
 - prebuilt/frozen personalized Checkpoints that ignore current Portfolio need;
-- ad hoc recurring Portfolio report redesign.
+- ad hoc recurring Portfolio report redesign;
+- replacing an earlier approved Quick Check when a new makeup/alternate run is created.
 
 9. SHARED OUTPUT / OWNER CONTROL BOUNDARY - HARD
-Approved Quick Check HTML/PDF and other finished shareable curriculum products may remain in the Algebra repository for both Algebra teachers. Portfolio, email/report controls, personalized Checkpoint Builder, and Quick Check Builder remain owner-local only.
+Approved Quick Check products and other finished shareable curriculum products may remain in the Algebra repository for both Algebra teachers. Portfolio, email/report controls, personalized Checkpoint Builder, and Quick Check Builder remain owner-local only.
 
 END - ALGEBRA 1 FRAMEWORK AMENDMENT

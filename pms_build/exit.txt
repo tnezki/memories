@@ -4,36 +4,56 @@ STATUS: CURRENT
 STEP: 7
 JOB: exit
 CURRENT STUDENT ARTIFACT NAME: Quick Check
-REVISION: 2026-09-26 v2.1
+REVISION: 2026-09-26 v2.2
 
 ROLE
 Own the Algebra Quick Check build workflow. The internal PM job key remains `exit` for registry compatibility only; do not revive retired Exit Ticket terminology/mechanics.
 
-
 OWNER TOOL SURFACE - HARD
 The teacher selector/builder is owner-local, not a public/shared repository control page. Normal path:
   _algebra_teacher_tools/tools/quick_check/quick_N.html
-Build/repair of that selector may be delivered through the local transfer helper to the declared owner-tools root. Approved Quick Check artifacts still deploy to the Algebra repository and may be linked from the shared Teacher Dashboard. Do not recreate quick_check____htq5855/quickN/quick_N.html as the active selector after migration.
+Approved Quick Check products still deploy to the Algebra repository and may be linked from the shared Teacher Dashboard through the Quick Check library.
 
 ARCHITECTURE
-There is ONE four-question Quick Check per section = 20 source questions per five-section Unit.
-Use curriculum/quick_check_slot_map.json and current Portfolio policy. Teacher approves the four exact source question architectures/anchors for each section; Portfolio may guide reassessment recommendations, teacher selection is final.
+There is one common four-question Quick Check per section evidence event. Use curriculum/quick_check_slot_map.json and current Portfolio policy. Teacher approves four exact source question architectures/anchors; Portfolio may guide reassessment recommendations; teacher selection is final.
 
 A-D VERSIONS
-Create four comparable print versions from the SAME four approved source architectures. Normal differences are only family-authorized number/value/data swaps, deterministic question-order scrambling, and answer-choice scrambling when applicable. Do not invent materially different parallel architectures simply to create versions.
-
-Thus 20 Unit source questions may render 80 A-D question instances, but there are only 20 source architecture decisions.
+Create four comparable print versions from the same four approved source architectures. Normal differences are only family-authorized number/value/data swaps, deterministic question-order scrambling, and answer-choice scrambling when applicable. Do not invent materially different parallel architectures simply to create versions.
 
 Every problem visibly prints:
   <I CAN CODE> — <FULL EXACT I CAN STATEMENT>
 
 BANK / OFFLINE
-For Bank-backed anchors use approved family architecture. Prefer deterministic seeded sibling generation when safe and record exact values/seed/source family in the sibling source map. Custom teacher-approved anchors remain allowed when current builder/policy authorizes them.
+For Bank-backed anchors use approved family architecture. Prefer deterministic seeded sibling generation when safe and record exact values/seed/source family in the source map. Custom teacher-approved anchors remain allowed when current builder/policy authorizes them.
 
-OUTPUT / SOURCE MAP
-Follow the registered Quick Check template contract. Newly approved section output includes one HTML, one 8-page student PDF, and one sibling JSON lineage/source map in the approved section folder.
+APPEND-ONLY APPROVED RUNS - HARD
+Never overwrite a prior approved Quick Check merely because a teacher creates a makeup, alternate, corrected, or later version for the same section.
+
+Existing legacy/current files already at:
+  quick_check____htq5855/quickN/approved/quick_N_S/quick_N_S.{html,pdf,json}
+remain valid historical/current entries and must be preserved.
+
+Every NEW approved build creates a unique run folder under the section root, for example:
+  quick_check____htq5855/quickN/approved/quick_N_S/runs/<run_id>/
+with a unique stable run_id such as:
+  YYYYMMDD-HHMM-<purpose-slug>
+When a teacher supplies a purpose label such as makeup, alternate, reteach, or corrected, include a safe slug in the run_id/registry label. Do not reuse an existing run_id.
+
+Each new run contains its own:
+- HTML print source;
+- 8-page student PDF;
+- JSON lineage/source map.
+
+QUICK CHECK LIBRARY - HARD
+Update:
+  quick_check____htq5855/library.json
+by APPENDING the new run entry while preserving every earlier entry. The human-facing page:
+  quick_check____htq5855/library.html?unit=N
+is the shared teacher entry point.
+
+A build cannot PASS if it deletes/replaces an earlier registered approved run or rewrites library.json without preserving previous entries.
 
 QA / DELIVERY
-Verify four source anchors, target/evidence fidelity, A-D comparability, answers/graphs, exact labels, page geometry, source map, and finalization. Return ONE github_transfer / 2 ZIP. No Git operations.
+Verify four source anchors, target/evidence fidelity, A-D comparability, answers/graphs, exact labels, page geometry, source map, unique run path, preserved prior library entries, and finalization. Return ONE github_transfer / 2 ZIP. No Git operations.
 
 END - ALGEBRA QUICK CHECK

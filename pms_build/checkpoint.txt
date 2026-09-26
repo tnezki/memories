@@ -2,14 +2,14 @@ BUILD / RUN PERSONALIZED CHECKPOINTS - ALGEBRA 1
 ================================================
 STATUS: CURRENT PILOT
 JOB: checkpoint
-REVISION: 2026-09-26 v1.2
+REVISION: 2026-09-26 v1.3
 
 ROLE
 Checkpoint is a larger personalized six-question evidence event generated just in time from current private Portfolio state and the reviewed selected Unit Bank. It is not the common section Quick Check. The builder is owner-local and must not be linked from the shared Algebra Teacher Dashboard.
 
 TWO ENTRY MODES
 A. TOOL BUILD: build/repair the owner-local page _algebra_teacher_tools/tools/checkpoint/checkpoint_builder.html and return ONE github_transfer / 2 package targeting that local owner-tools path. Do not recreate the public repository builder after migration.
-B. ACTUAL RUN: resolve current private Portfolio Drive state, create the personalized Checkpoint, save the private run/source map, and return printable HTML/PDF individually. Never put student data in GitHub.
+B. ACTUAL RUN: resolve current private Portfolio state, create the personalized Checkpoint, save the private run/source map, and return printable HTML/PDF individually. Never put student data in GitHub.
 
 AUTHORITY
 Use pinned Philosophy/Runtime, current Algebra Framework + Portfolio/Checkpoint policies, exact selected Unit learning content, selected COMPLETE/QA-PASS Unit Bank, registered Checkpoint template contract, current private Portfolio state, and current teacher selection.
@@ -18,25 +18,28 @@ TARGETING
 Portfolio decides what evidence is useful now; the Bank supplies how to ask for it. Normally prioritize another-independent-demonstration, practice+check, first-check, meaningful review flags, then secure/extension only when useful. Normally spread six questions across about 2-3 I Cans unless the teacher intentionally focuses one.
 
 FAMILY SELECTION / GENERATION
-Choose any approved family whose evidence job fits the target. Family letters are stable IDs only; do not impose universal A/B/C roles.
-Preserve exact family invariant, representation/reasoning demand, and usable difficulty.
-Prefer deterministic/seeded fresh generation when the family contract supports it safely; otherwise author a fresh reviewed instance. Do not invent a new architecture when an approved family fits.
+Choose any approved family whose evidence job fits the target. Family letters are stable IDs only; do not impose universal A/B/C roles. Preserve exact family invariant, representation/reasoning demand, and usable difficulty. Prefer deterministic/seeded fresh generation when the family contract supports it safely; otherwise author a fresh reviewed instance.
 
 Every printed question visibly shows:
   <I CAN CODE> — <FULL EXACT I CAN STATEMENT>
 
 INDEPENDENCE
-One Checkpoint is one source event. Multiple questions on one I Can can strengthen one source-level judgment but do not automatically become multiple independent opportunities.
+One Checkpoint is one source event. Multiple questions for one I Can within the same Checkpoint may provide richer evidence but do not automatically create multiple independent opportunities.
 
 PRIVATE SOURCE MAP / PERSISTENCE
-For every student/question save exact I Can, family, evidence job, final prompt, seed/parameters/values, verified answer/key, and opportunity ID in checkpoint_source_map.json. Save unique run folders under:
-  ____Portfolio_Data / Algebra 1 / unit N / 06 Checkpoints /
-with checkpoint.html, checkpoint.pdf, checkpoint_source_map.json, and run_manifest.json.
+For every student/question save exact I Can, family, evidence job, final prompt, seed/parameters/values, verified answer/key, and opportunity ID in checkpoint_source_map.json. Save each run in the current authorized private Checkpoint location with its HTML/PDF/source map/run manifest. Never overwrite an older private run.
+
+SHARED FINISHED-PRODUCT LIBRARY
+The shared Teacher Dashboard may link:
+  checkpoints___trmn78/library.html?unit=N
+This is a PRODUCT library, not the builder. Only intentionally teacher-approved, non-student-specific Checkpoint products may be registered in:
+  checkpoints___trmn78/shared_library.json
+Personalized runs, names, Portfolio state, and private source maps are forbidden from that shared registry/repository.
 
 PRIVACY
-Resolve students only from current authorized private Portfolio data. Never write rosters, student identities, statuses, personalized plans, answers, or source maps to public GitHub.
+Resolve students only from current authorized private Portfolio data. Never write rosters, student identities, statuses, personalized plans, answers, or private source maps to public GitHub.
 
 QA
-Require COMPLETE/ready/QA-PASS Bank, unambiguous student resolution, exactly six questions/student unless current teacher instruction changes it, exact I Can/family lineage, correct answers, two student pages/person under current pilot template, complete private source map, verified Drive persistence, and no student data in GitHub output.
+Require ready/QA-PASS Bank, unambiguous student resolution, exactly six questions/student unless teacher instruction changes it, exact I Can/family lineage, correct answers, required page geometry, complete private source map, verified private persistence, and no student data in GitHub output.
 
 END - PERSONALIZED CHECKPOINTS
