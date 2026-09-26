@@ -1,149 +1,33 @@
-BUILD QUICK CHECKS - ALGEBRA 1 / TEACHER SELECTOR + APPROVED PRINT
-=================================================================
+BUILD QUICK CHECK - FOUR SOURCE ANCHORS / A-D SIBLINGS
+======================================================
 STATUS: CURRENT
 STEP: 7
 JOB: exit
-DISPLAY NAME: Build Quick Checks
-REVISION: 2026-09-18 v5.4
+CURRENT STUDENT ARTIFACT NAME: Quick Check
+REVISION: 2026-09-26 v2.0
 
 ROLE
-----
-Own the Algebra 1 Quick Check build workflow. There is ONE Quick Check per section. Do not revive the retired Ticket A/Ticket B chain.
+Own the Algebra Quick Check build workflow. The internal PM job key remains `exit` for registry compatibility only; do not revive retired Exit Ticket terminology/mechanics.
 
-TWO ENTRY MODES
----------------
-A. CURRICULUM CONTROL PANEL STEP 7
-If the request does NOT contain teacher_approved_question_architectures, build or repair the unit-specific selector/control page at:
-  quick_check____htq5855/quickN/quick_N.html
-The selector is the normal teacher entry point for section Quick Checks.
+ARCHITECTURE
+There is ONE four-question Quick Check per section = 20 source questions per five-section Unit.
+Use curriculum/quick_check_slot_map.json and current Portfolio policy. Teacher approves the four exact source question architectures/anchors for each section; Portfolio may guide reassessment recommendations, teacher selection is final.
 
-B. UNIT QUICK CHECK SELECTOR REQUEST
-If the request schema is algebra-quick-check-build-request/1.2 and contains four teacher-approved question architectures, build exactly ONE approved section Quick Check from those selections. Legacy 1.1 requests remain readable for compatibility. Do not reopen selection unless the request is invalid.
+A-D VERSIONS
+Create four comparable print versions from the SAME four approved source architectures. Normal differences are only family-authorized number/value/data swaps, deterministic question-order scrambling, and answer-choice scrambling when applicable. Do not invent materially different parallel architectures simply to create versions.
 
-SOURCE BOUNDARY
----------------
-Use the current request and exact pinned project sources. No public web, prior chat/memory, or File Library recovery. Private Portfolio state may guide reassessment only when explicitly supplied/authorized; the public selector must never require private student data.
+Thus 20 Unit source questions may render 80 A-D question instances, but there are only 20 source architecture decisions.
 
-READ ORDER
-----------
-1. SYSTEM_MANIFEST + Philosophy/amendments + runtime/local-transfer contract
-2. current Algebra Framework manifest/front door/amendment
-3. exact Unit Assessment Plan for learning content
-4. contracts/authority.json
-5. contracts/portfolio_quick_check_policy.json
-6. Tools/templates/algebra/quick_check/QUICK_CHECK_TEMPLATE_CONTRACT.json
-7. Tools/templates/algebra/quick_check/quick_check_gold_standard_example.html for general structure/behavior only; if its controls lag the template contract, the template contract wins
-8. curriculum/quick_check_slot_map.json
-9. current Unit Bank manifest/index/delivery map/families
-10. this PM
+Every problem visibly prints:
+  <I CAN CODE> — <FULL EXACT I CAN STATEMENT>
 
-CORE RULE
----------
-The curriculum predicts the evidence slots; live Portfolio need may guide reassessment; the selector exposes eligible choices; the teacher approves the actual four question architectures. Teacher approval in the selector request is final. A teacher may approve either a Bank family architecture or a Custom teacher-described architecture for a slot.
+BANK / OFFLINE
+For Bank-backed anchors use approved family architecture. Prefer deterministic seeded sibling generation when safe and record exact values/seed/source family in the sibling source map. Custom teacher-approved anchors remain allowed when current builder/policy authorizes them.
 
-SLOT PATTERNS
--------------
-- Unit 1 Section 1: 2 current I Cans, 2 questions each = 4 questions.
-- Unit 1 Sections 2-5: 2 new/current + 2 current-unit reassessment.
-- Unit 2+ Section 1: 2 new/current + 2 older-unit reassessment.
-- Unit 2+ Sections 2-5: 2 new/current + 1 current-unit reassessment + 1 older-unit reassessment.
-Use exact quick_check_slot_map.json if it differs.
+OUTPUT / SOURCE MAP
+Follow the registered Quick Check template contract. Newly approved section output includes one HTML, one 8-page student PDF, and one sibling JSON lineage/source map in the approved section folder.
 
-UNIT SELECTOR / CONTROL PAGE - HARD
------------------------------------
-- one section tab/button per section;
-- four question slots;
-- each slot shows exact I Can code + exact statement and three Bank-derived family possibilities;
-- each slot also shows a FOURTH choice labeled Custom / Describe my own question type;
-- selecting Custom reveals a teacher text box inside that slot;
-- a Custom selection is not valid until the teacher enters a nonblank description;
-- Custom remains bound to the selected I Can and slot role; it does not authorize changing the target I Can;
-- selecting one option deselects the other choices for that slot;
-- the request records selection_mode = bank_family or custom. Custom also records custom_question_description;
-- an optional build-note textarea sits beside/near the request action and is packaged into the request;
-- active section shows direct Approved HTML and Approved PDF links beside the section buttons when those files exist;
-- request pins current system/course commits and explicitly names this PM, the Quick Check template contract, and LOCAL_REPO_TRANSFER_CONTRACT;
-- request delivery MUST spell out github_transfer / 2 root structure. Never fall back to github_transfer/1.
+QA / DELIVERY
+Verify four source anchors, target/evidence fidelity, A-D comparability, answers/graphs, exact labels, page geometry, source map, and finalization. Return ONE github_transfer / 2 ZIP. No Git operations.
 
-QUESTION AUTHORING
-------------------
-BANK FAMILY SELECTION
-Use the teacher-selected Bank family as the evidence architecture. Author a fresh instance. Preserve the selected I Can, family/evidence job, representation/reasoning demand, and difficulty.
-
-CUSTOM SELECTION
-When selection_mode is custom, the teacher's custom_question_description is the architecture authority for that slot. Author a fresh question matching that description while preserving the selected I Can and slot role. Do not silently replace the Custom request with a Bank family merely because a similar family exists. If the Custom description conflicts with the selected I Can, fail closed and explain the conflict instead of guessing.
-
-A teacher build note may fine-tune surface/layout/value choices but may not silently change the selected I Can or approved question architecture.
-
-VERSIONS - HARD
----------------
-Create four versions A-D from the same four approved source questions. This applies equally to Bank-family and Custom source questions. Normal variation is only:
-- simple number/value swaps;
-- deterministic question-order scramble;
-- answer-choice scramble when applicable.
-Do not invent materially different parallel questions merely to control copying. No identical-common-item requirement exists unless the teacher explicitly asks for one.
-
-GOLD-STANDARD PRINT / HTML - HARD
----------------------------------
-Follow QUICK_CHECK_TEMPLATE_CONTRACT.json literally. In particular:
-- one HTML contains all A-D versions and screen-only layout controls;
-- one PDF contains exactly 8 STUDENT pages, 2 pages/version;
-- every problem visibly prints exact I Can code + statement;
-- Name is at the very top of page 1; page 2 has no repeated title/header/name;
-- MathJax for math;
-- no shaded problem cards;
-- no ruled workspace lines; use plain white workspace;
-- simple divider rules only;
-- full-size Cartesian graph print standard: grid 0.6 pt in #aaaaaa; axes and axis arrows 1.8 pt in #222222; plotted relation 2.0 pt; major ticks 1.2 pt;
-- preserve those approved print weights; do NOT darken/thicken them with Quick Check CSS or ad hoc SVG overrides. Resize finished graphs through layout geometry only; compact multi-panel graph-tool types may retain their built-in proportional weights;
-- controls: problems-on-page-1 selector (1-3), per-source-problem height slider + exact numeric box, per-source graph-size control when a graph exists, per-source workspace-height control, Reset, A1-D2 free/overflow indicators, Print A-D (8 pages);
-- graph size and workspace are independently adjustable from each other and from overall problem height; incompatible combinations must surface through fit/overflow feedback rather than silent clipping;
-- on normal desktop widths, place the teacher controls in a fixed/sticky LEFT sidebar so the page preview starts near the top rather than being pushed downward; narrow screens may stack controls above;
-- show a small visible layout-version label in the control panel and the same version in HTML metadata;
-- controls disappear in print;
-- default geometry must fit all eight pages and avoid large dead space.
-
-APPROVED ARTIFACT SET
----------------------
-Store exactly these together under:
-  quick_check____htq5855/quickN/approved/quick_N_S/
-
-1. quick_N_S.html - canonical adjustable/reprint source
-2. quick_N_S.pdf  - single 8-page student PDF generated from a fit default layout
-3. quick_N_S.json - exact lineage/source map: version, printed position, source slot, I Can code + exact text, selection_mode, family when applicable, custom_question_description when applicable, evidence job, values, answer, and any deliberate aggregation/multi-target behavior
-
-SOURCE MAP RULE
----------------
-For newly generated approved Quick Checks, the sibling approved JSON is the primary exact map. Use framework curriculum/quick_check_source_maps only for legacy/special aggregation, multi-target overrides, compatibility, or when approved JSON is unavailable. Do not duplicate routine maps without need.
-
-TRANSFER DELIVERY - HARD
-------------------------
-Return ONE local repository transfer ZIP following Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt exactly:
-  TRANSFER_MANIFEST.json
-  payload/
-    algebra/
-      <canonical approved files...>
-
-TRANSFER_MANIFEST.json must use schema_version: 2 and package_type: "github_transfer". Use CREATE for missing files and REPLACE for existing approved files. github_transfer/1, manifest.json, github_transfer_manifest.json, or repo_files/ wrappers are invalid. Perform NO Git operations.
-
-QA
---
-- selector offers Bank Family A, B, C, plus a fourth Custom choice in every slot;
-- Custom reveals a description field and cannot package until its description is nonblank;
-- request records selection_mode and custom_question_description correctly;
-- Custom stays bound to the selected I Can and slot role;
-- exact teacher-selected four architectures;
-- same I Can/evidence jobs or teacher-approved Custom architecture across versions;
-- only allowed simple version changes;
-- exact visible I Can code + statement;
-- MathJax; no shaded cards; no ruled workspace; no repeated page-2 header;
-- graph print weights match the template contract exactly; no Quick Check CSS/ad hoc line-weight override;
-- layout controls work and do not print; graph size, workspace, and overall problem height adjust independently;
-- desktop control panel is left-sided and visibly version-labeled;
-- all A1-D2 pages default-fit with tolerance;
-- exactly 1 HTML + 1 eight-page student PDF + 1 JSON;
-- no teacher-key pages in student PDF;
-- source map deterministic after scramble;
-- exact github_transfer / 2 wrapper passes transfer helper recognition;
-- finalization PASS.
-Then stop.
+END - ALGEBRA QUICK CHECK

@@ -1,44 +1,30 @@
 {
   "name": "Algebra 1 Activities Course Profile",
   "course": "Algebra 1",
-  "profile_version": "v3.2-two-parallel-sets-plus-dashboard-quickviews",
-  "framework_version": "v7.4",
-  "role": "Activities owns exactly two 24-question fresh parallel sets per section. Set 1 parallels Practice 1; Set 2 parallels Extra Practice. Stations, Find Someone Who, and dashboard Practice 2/3 pages are reuse-only renders of those same 48 questions.",
-  "question_structure_rule": "Use current universal Question Structure for newly authored Set 1 and Set 2 questions.",
+  "profile_version": "v4.0-paired-target-plans",
+  "framework_version": "v8.1",
+  "role": "Activities change participation around the two approved Practice target plans. Activity Set 1 is a fresh sibling of Practice 1 target plan A; Activity Set 2 is a fresh sibling of Extra Practice target plan B.",
+  "question_structure_rule": "Use current universal Question Structure and approved Bank family contracts for newly instantiated Activity Set questions.",
+  "student_label_rule": "Every targeted question shows exact I Can code + full exact I Can statement near the top-left.",
   "source_boundary": {
-    "allowed_remote_sources": [
-      "tnezki/memories pinned commit",
-      "tnezki/algebra pinned commit"
-    ],
-    "public_web_allowed": false,
-    "file_library_allowed": false,
-    "prior_chat_as_curriculum_source_allowed": false
+    "recurrence_map": "curriculum/mastery_recurrence_map.json",
+    "practice_profile": "profiles/practice_course_profile.json",
+    "bank": "approved canonical Bank families for selected I Cans"
   },
-  "gold_standard_main_page": "algebra/activities/u2_1_act1/u2_1_act1.html",
-  "main_page_rule": "Preserve the U2.1 gold-standard Activity Options page structure and visual behavior, including Teacher & Student Moves, Structure, Setup, Directions, Goal, Looks Like Success, Doesn't Look Like, Rally Coach II, Desmos placeholder, Stations, Find Someone Who, and Tarsia routing.",
   "question_sets": {
-    "new_question_instances_per_section": 48,
     "set1": {
-      "count": 24,
-      "source_parallel": "Practice 1",
-      "stage_counts": {
-        "Intro": 8,
-        "Review": 8,
-        "Mastery": 8
-      },
-      "filename": "u{unit}_{section}_set1_questions_solutions.html"
+      "count_rule": "12-16, normally 12",
+      "target_plan": "A",
+      "paired_with": "Practice 1",
+      "rule": "Same selected I Can/count plan as Practice 1; fresh family instances/values/representations as permitted."
     },
     "set2": {
-      "count": 24,
-      "source_parallel": "Extra Practice",
-      "stage_counts": {
-        "Intro": 8,
-        "Review": 8,
-        "Mastery": 8
-      },
-      "filename": "u{unit}_{section}_set2_questions_solutions.html"
+      "count_rule": "12-16, normally 12",
+      "target_plan": "B",
+      "paired_with": "Extra Practice",
+      "rule": "Same selected I Can/count plan as Extra Practice; fresh family instances/values/representations as permitted."
     },
-    "intentional_parallel_rule": "Fresh number/data/context swaps are allowed and expected. Exact duplicate finished questions are forbidden."
+    "expected_new_instances_per_section": "24-32 depending on teacher-approved set size"
   },
   "approved_projection_structures": [
     "Whiteboard Indy",
@@ -56,94 +42,29 @@
     "Stations",
     "Find Someone Who"
   ],
-  "stations": {
-    "reuse_only": true,
-    "new_questions_authored": 0,
-    "station_count_per_set": 6,
-    "questions_per_station": 4,
-    "mapping": {
-      "Station 1": "questions 1-4 Intro",
-      "Station 2": "questions 5-8 Intro",
-      "Station 3": "questions 9-12 Review",
-      "Station 4": "questions 13-16 Review",
-      "Station 5": "questions 17-20 Mastery",
-      "Station 6": "questions 21-24 Mastery"
-    },
-    "set1_filename": "u{unit}_{section}_set1_stations.html",
-    "set2_filename": "u{unit}_{section}_set2_stations.html"
+  "reuse_rule": "Stations, Find Someone Who, projected/team structures, and other renders reuse the owning Activity Set questions. Do not author a hidden additional question inventory for each structure.",
+  "offline_generation": {
+    "preferred": true,
+    "rule": "When the paired target plan and selected family generator metadata are complete, local scripts should assemble the Activity Set deterministically and record family_id + seed/parameters."
   },
-  "find_someone_who": {
-    "reuse_only": true,
-    "new_questions_authored": 0,
-    "set1_filename": "u{unit}_{section}_set1_find_someone_who.html",
-    "set2_filename": "u{unit}_{section}_set2_find_someone_who.html",
-    "layout": "compact practical printable handout; not one page per problem"
-  },
-  "dashboard_quick_views": {
-    "reuse_only": true,
-    "new_questions_authored": 0,
-    "purpose": "Quick dashboard-accessible question view with no student workspaces.",
-    "practice2": {
-      "mirrors": "Activity Set 1",
-      "path": "practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_2.html"
-    },
-    "practice3": {
-      "mirrors": "Activity Set 2",
-      "path": "practice_sets/practice_sets_{unit}_{section}/practice_set_{unit}_{section}_3.html"
-    },
-    "render_rules": [
-      "questions only",
-      "no workspaces",
-      "no solutions",
-      "preserve tables/graphs/representations",
-      "use existing Practice shell/CSS"
-    ]
-  },
-  "practice_owned_optional_links": {
-    "tarsia": "practice_sets/practice_sets_{unit}_{section}/tarsia_{unit}_{section}.txt"
-  },
+  "retired_requirements": [
+    "24 questions per Activity Set",
+    "8 Intro + 8 Review + 8 Mastery fixed blocks",
+    "48 new Activity questions per section",
+    "Practice 2 / Practice 3 dashboard quick-view mirrors as curriculum requirements"
+  ],
   "freshness": {
     "contract": "Tools/QUESTION_FRESHNESS_CONTRACT.txt",
-    "required_terminal_signal": "QUESTION_FRESHNESS: PASS",
-    "activities_override": "Set 1 may intentionally parallel Practice 1 and Set 2 may intentionally parallel Extra Practice using fresh values/data/context. Exact duplicates still fail.",
-    "count_only_new_authored_instances": true,
-    "expected_new_instances_per_section": 48,
-    "intentional_reuse_renders": [
-      "Set 1 Stations",
-      "Set 2 Stations",
-      "Set 1 Find Someone Who",
-      "Set 2 Find Someone Who",
-      "Practice 2 dashboard quick-view",
-      "Practice 3 dashboard quick-view"
-    ]
+    "paired_parallel_rule": "Activity Set 1 intentionally parallels Practice 1 target plan A; Activity Set 2 intentionally parallels Extra Practice target plan B. Exact duplicate finished questions still fail."
   },
   "outputs": {
     "activity_root_pattern": "activities/u{unit}_{section}_act1/",
-    "practice_root_pattern": "practice_sets/practice_sets_{unit}_{section}/",
     "activity_options": "u{unit}_{section}_act1.html",
     "set1_questions_solutions": "u{unit}_{section}_set1_questions_solutions.html",
     "set2_questions_solutions": "u{unit}_{section}_set2_questions_solutions.html",
     "set1_stations": "u{unit}_{section}_set1_stations.html",
     "set2_stations": "u{unit}_{section}_set2_stations.html",
     "set1_find_someone_who": "u{unit}_{section}_set1_find_someone_who.html",
-    "set2_find_someone_who": "u{unit}_{section}_set2_find_someone_who.html",
-    "practice2_quick_view": "practice_set_{unit}_{section}_2.html",
-    "practice3_quick_view": "practice_set_{unit}_{section}_3.html"
-  },
-  "retire_when_safe": [
-    "u{unit}_{section}_activity_questions_solutions.html",
-    "u{unit}_{section}_activity_stations.html",
-    "u{unit}_{section}_activity_find_someone_who.html"
-  ],
-  "visual": {
-    "activity_stylesheets": [
-      "../../css/base.css",
-      "../../css/activities.css"
-    ],
-    "quick_view_stylesheets": [
-      "../../css/base.css",
-      "../../css/practice_set.css"
-    ],
-    "reuse_u2_1_gold_standard_shell": true
+    "set2_find_someone_who": "u{unit}_{section}_set2_find_someone_who.html"
   }
 }

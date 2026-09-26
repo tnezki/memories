@@ -1,29 +1,13 @@
 {
-  "schema": "algebra-portfolio-policy/2.1",
+  "schema": "algebra-portfolio-policy/2.2",
   "status": "CURRENT",
   "course": "Algebra 1",
-  "purpose": "Own Algebra 1 Portfolio status, Mastery Goal grades, PowerSchool MG exports, intervention routing, practice-link behavior, and recurring report fidelity while Unit Assessment Plans own exact learning content.",
+  "purpose": "Own Algebra 1 Portfolio status, Mastery Goal grades, PowerSchool MG exports, intervention routing, practice-link behavior, recurring report fidelity, and current Quick Check behavior while Unit Assessment Plans own exact learning content.",
   "i_can_statuses": [
-    {
-      "code": "NO_EVIDENCE",
-      "symbol": "open_circle",
-      "label": "No Evidence"
-    },
-    {
-      "code": "DEVELOPING",
-      "symbol": "half_circle",
-      "label": "Developing"
-    },
-    {
-      "code": "MASTERED",
-      "symbol": "filled_circle",
-      "label": "Mastered"
-    },
-    {
-      "code": "TRANSFER",
-      "symbol": "star",
-      "label": "Transfer"
-    }
+    {"code":"NO_EVIDENCE","symbol":"open_circle","label":"No Evidence"},
+    {"code":"DEVELOPING","symbol":"half_circle","label":"Developing"},
+    {"code":"MASTERED","symbol":"filled_circle","label":"Mastered"},
+    {"code":"TRANSFER","symbol":"star","label":"Transfer"}
   ],
   "mastered_default_rule": {
     "normal_requirement": "At least two independent convincing demonstrations, normally from different opportunities, with at least one reasonably current demonstration.",
@@ -39,36 +23,16 @@
     "status": "CURRENT_OFFICIAL",
     "not_assessed_rule": "If no usable evidence exists on any I Can in the Mastery Goal, assessed=false and family-facing display is `Not assessed`; PowerSchool Score remains blank.",
     "scale": [
-      {
-        "code": "I",
-        "label": "In Progress",
-        "rule": "Goal is assessed and 0 or 1 of 4 I Cans are Mastered or Transfer"
-      },
-      {
-        "code": "C",
-        "label": "Meeting",
-        "rule": "2 of 4 I Cans are Mastered or Transfer"
-      },
-      {
-        "code": "B",
-        "label": "Advancing",
-        "rule": "3 of 4 I Cans are Mastered or Transfer"
-      },
-      {
-        "code": "A",
-        "label": "Mastery",
-        "rule": "All 4 I Cans are Mastered or Transfer"
-      },
-      {
-        "code": "A+",
-        "label": "Mastery + Transfer",
-        "rule": "All 4 are Mastered or Transfer plus meaningful transfer/extension evidence in this goal"
-      }
+      {"code":"I","label":"In Progress","rule":"Goal is assessed and 0 or 1 of 4 I Cans are Mastered or Transfer"},
+      {"code":"C","label":"Meeting","rule":"2 of 4 I Cans Mastered or Transfer"},
+      {"code":"B","label":"Advancing","rule":"3 of 4 I Cans Mastered or Transfer"},
+      {"code":"A","label":"Mastery","rule":"All 4 I Cans Mastered or Transfer"},
+      {"code":"A+","label":"Mastery + Transfer","rule":"All 4 are Mastered or Transfer plus meaningful transfer/extension evidence in this goal"}
     ],
     "calculation_rule": "Use current longitudinal I Can status; never average attempts or assignment percentages.",
     "unit_grade_rule": "No overall Unit letter grade is reported or exported. Unit Mastery Goals demonstrated remains a progress count only.",
     "family_not_assessed_meaning": "This Mastery Goal has not been checked yet; this is distinct from an attempted check that produced limited or unsuccessful evidence.",
-    "in_progress_family_meaning": "I means In Progress. It is a current evidence grade, not a permanent label or an averaged penalty; it can change when new or stronger evidence is added."
+    "in_progress_family_meaning": "I means In Progress. It is a current evidence grade, not a permanent label or averaged penalty; it can change when new or stronger evidence is added."
   },
   "powerschool": {
     "output_rule": "Produce one CSV per Mastery Goal per period on every successful evidence run; no Unit-grade CSV.",
@@ -85,16 +49,12 @@
     "privacy_rule": "No student identity or evidence in URL/QR.",
     "student_bank_viewer": "banks/unitN/student.html",
     "student_bank_url_pattern": "https://tnezki.github.io/algebra/banks/unit{unit}/student.html#{family_id}",
-    "student_bank_role": "Legacy/reference viewer; not the Portfolio report QR destination.",
+    "student_bank_role": "Reference/deep-link viewer; not the Portfolio report QR destination.",
     "family_anchor": "canonical family_id",
-    "family_selection": "Bank families remain curriculum/evidence architecture. The student Practice Builder does not expose Family A/B/C controls."
+    "family_selection": "Bank families remain curriculum/evidence architecture. The student Practice Builder normally selects across approved families rather than exposing family-letter controls."
   },
   "intervention_routing": {
-    "lanes": [
-      "Whole Class",
-      "Priority Day Groups",
-      "Pull In Students"
-    ],
+    "lanes": ["Whole Class","Priority Day Groups","Pull In Students"],
     "whole_class": {
       "max_targets": 1,
       "rule": "Recommend only the highest-leverage genuinely broad shared instructional need supported by current evidence. Show exact target, affected Practice + check count, recurring evidence pattern, and concise teacher move."
@@ -103,7 +63,7 @@
       "max_groups": 2,
       "max_students_per_group": 15,
       "eligible_student_rule": "Active student has at least one current assessed Mastery Goal grade I and at least one current PRACTICE_AND_CHECK I Can.",
-      "ranking_rule": "Sort by number of current assessed MG grades I descending, then PRACTICE_AND_CHECK I Can count descending, then evidence severity (UNUSABLE before LIMITED before PARTIAL), then stable student_key.",
+      "ranking_rule": "Sort by number of current assessed MG grades I descending, then PRACTICE_AND_CHECK I Can count descending, then evidence severity, then stable student_key.",
       "assignment_rule": "Group 1 = ranks 1-15; Group 2 = ranks 16-30; never create Group 3.",
       "plan_rule": "Exact I Can bundle matching is not required. Summarize dominant overlapping needs and recurring evidence patterns, then propose the best common 20-minute Crewtime intervention plus a short alternate practice strip only when needed for a few outlier targets."
     },
@@ -125,61 +85,43 @@
   "student_next_action": {
     "principle": "I Can proficiency status and student next action are separate.",
     "states": [
-      {
-        "code": "NEEDS_FIRST_CHECK",
-        "label": "Needs first check",
-        "rule": "This I Can has not been checked yet; do not use this label for an attempted check with limited or unsuccessful evidence."
-      },
-      {
-        "code": "PRACTICE_AND_CHECK",
-        "label": "Practice + check soon",
-        "rule": "Developing without one convincing independent demonstration, or a clear current gap should be repaired before another independent check."
-      },
-      {
-        "code": "NEEDS_ANOTHER_DEMONSTRATION",
-        "label": "Needs another independent check",
-        "rule": "Developing with one convincing independent demonstration but not yet enough independent convincing evidence for Mastered."
-      },
-      {
-        "code": "SECURE",
-        "label": "Secure",
-        "rule": "Current I Can status is Mastered."
-      },
-      {
-        "code": "EXTENSION",
-        "label": "Extension",
-        "rule": "Current I Can status is Transfer, or routine nearby targets are secure and a legitimate transfer/extension move is selected."
-      }
+      {"code":"NEEDS_FIRST_CHECK","label":"Needs first check","rule":"This I Can has not been checked yet; do not use this label for an attempted check with limited or unsuccessful evidence."},
+      {"code":"PRACTICE_AND_CHECK","label":"Practice + check soon","rule":"Developing without one convincing independent demonstration, or a clear current gap should be repaired before another independent check."},
+      {"code":"NEEDS_ANOTHER_DEMONSTRATION","label":"Needs another independent check","rule":"Developing with one convincing independent demonstration but not yet enough independent convincing evidence for Mastered."},
+      {"code":"SECURE","label":"Secure","rule":"Current I Can status is Mastered."},
+      {"code":"EXTENSION","label":"Extension","rule":"Current I Can status is Transfer, or routine nearby targets are secure and a legitimate transfer/extension move is selected."}
     ],
     "page_2_rule": "Every I Can row shows one compact Next label from the five states."
   },
   "quick_check": {
     "student_artifact_name": "Quick Check",
     "replaces_old_name": "Exit Ticket",
-    "normal_length": "about 4 questions",
+    "questions_per_section": 4,
+    "source_questions_per_unit": 20,
     "common_to_class": true,
-    "live_selection_rule": "Curriculum predicts evidence slots. Portfolio selects current reassessment I Cans from live need. Teacher approves/edits actual questions.",
+    "visible_i_can_label": true,
+    "label_rule": "Every question prints exact I Can code + full exact I Can statement.",
+    "live_selection_rule": "Curriculum predicts evidence slots. Portfolio may guide current reassessment I Cans from live need. Teacher approves/edits the actual four source architectures.",
     "mapping_rule": "Map the clean task before judging handwriting. A task may provide separately judgeable evidence for more than one I Can when the task genuinely contains both evidence jobs; those judgments still share the same source opportunity unless independence is explicitly supported.",
-    "same_source_rule": "Repeated prompts for one I Can on the same Quick Check are not automatically independent opportunities. Source maps may require a single synthesized source-level judgment.",
+    "same_source_rule": "Repeated prompts for one I Can on the same Quick Check are not automatically independent opportunities.",
     "source_maps_root": "curriculum/quick_check_source_maps",
     "one_per_section": true,
     "unit_builder_pattern": "quick_check____htq5855/quick{unit}/quick_{unit}.html",
     "approved_folder_pattern": "quick_check____htq5855/quick{unit}/approved/quick_{unit}_{section}/",
-    "approved_artifact_set": [
-      "one HTML print source",
-      "one 8-page student PDF",
-      "one JSON lineage/source map"
-    ],
-    "teacher_selector_rule": "The unit builder shows four slots with exact I Can choices and Bank-derived family possibilities. Live Portfolio need may guide reassessment recommendations when available; otherwise the eligible pool is shown. Teacher selection is final.",
-    "teacher_note_rule": "The unit builder includes an optional fine-tuning note beside the request action. It may tune surface/layout/value choices but may not silently change selected I Can, family evidence job, or difficulty.",
-    "version_rule": "Four versions A-D use the same four teacher-approved evidence architectures. Normal differences are simple number/value swaps, deterministic question-order scrambling, and answer-choice scrambling when applicable. Do not redesign questions merely to create versions.",
+    "approved_artifact_set": ["one HTML print source","one 8-page student PDF","one JSON lineage/source map"],
+    "teacher_selector_rule": "The unit builder shows four slots with exact I Can choices and strong Bank-derived family possibilities. Live Portfolio need may guide reassessment recommendations when available; teacher selection is final.",
+    "teacher_note_rule": "The builder includes an optional fine-tuning note. It may tune surface/layout/value choices but may not silently change selected I Can, family evidence job, or difficulty.",
+    "version_count": 4,
+    "version_labels": ["A","B","C","D"],
+    "version_rule": "Four A-D versions use the same four teacher-approved source architectures. Normal differences are safe number/value/data swaps, deterministic question-order scrambling, and answer-choice scrambling when applicable. Do not redesign questions merely to create versions.",
+    "source_vs_rendered_rule": "A Unit has 20 teacher-approved source questions. A-D versions render 80 question instances but are not 80 separate source architecture decisions.",
+    "offline_generation_rule": "Prefer deterministic/seeded sibling generation when the selected family contracts safely support it; store exact parameters/seed in the sibling approved JSON source map.",
     "template_contract": "Tools/templates/algebra/quick_check/QUICK_CHECK_TEMPLATE_CONTRACT.json",
     "gold_standard_example": "Tools/templates/algebra/quick_check/quick_check_gold_standard_example.html",
     "source_map_rule": "For newly generated approved Quick Checks, the sibling approved quick_N_S.json is the primary exact lineage/source map. curriculum/quick_check_source_maps is reserved for legacy/special aggregation, multi-target overrides, compatibility, or missing approved JSON."
   },
   "checkpoint": {
     "student_artifact_name": "Checkpoint",
-    "replaces_old_name": "Quick Check",
     "default_question_count": 6,
     "personalized": true,
     "visible_i_can_label": true
@@ -187,14 +129,15 @@
   "teacher_summary": {
     "normal_pages": "Class Overview; Whole Class when active; one Priority Day Groups page; one Pull In Students page.",
     "whole_class": "At most one highest-leverage target with evidence-pattern summary and Teacher move.",
-    "priority_day_groups": "Maximum two groups of fifteen. Rank by number of current I grades first, then practice-gap count and evidence severity. Exact shared I Can bundles are not required. Each group gets one evidence-backed 20-minute Crewtime plan.",
-    "pull_in_students": "Exactly 1-2 PRACTICE_AND_CHECK gaps, student-centered, all current Pull In students on one page, global Practice + check soon banner, no repeated PLAN line.",
+    "priority_day_groups": "Maximum two groups of fifteen. Rank by number of current I grades first, then practice-gap count and evidence severity. Exact shared I Can bundles are not required.",
+    "pull_in_students": "Exactly 1-2 PRACTICE_AND_CHECK gaps, student-centered, all current Pull In students on one page, global Practice + check soon banner.",
     "appendix": "No normal detailed evidence appendix; detailed longitudinal evidence remains in private Portfolio data."
   },
   "legacy_retirements": [
     "Not Yet / Approaching / Meeting / Exceeding as current Algebra Portfolio status labels",
-    "fixed previous-section Exit Ticket reassessment chain",
+    "fixed previous-section Exit Ticket chain",
     "curriculum/exit_evidence_map.json as active evidence-routing authority",
+    "Ticket A/B as current source naming",
     "Student Bank as the printed Portfolio report QR destination",
     "overall Unit letter grade as the official PowerSchool Portfolio grade",
     "exact shared I Can bundle as the Priority Day grouping requirement",
@@ -208,18 +151,8 @@
   },
   "student_support_contacts": {
     "file": "00 Contact Directory/student_support_contacts_current.csv",
-    "schema_columns": [
-      "student_id",
-      "student_name",
-      "staff_name",
-      "staff_email",
-      "role",
-      "support_class",
-      "active"
-    ],
+    "schema_columns": ["student_id","student_name","staff_name","staff_email","role","support_class","active"],
     "matching_rule": "Match course roster to support routing by durable student_id. Allow multiple active staff rows per student.",
-    "role_rule": "Course-agnostic free text. Common examples: Case Manager, Special Education Teacher, Study Skills Teacher, Academic Support Teacher, Resource Room Teacher.",
-    "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",
     "email_rule": "Only active rows with a valid supplied staff_email are eligible recipients. Never infer an address from staff name.",
     "privacy_rule": "Keep routing separate from accommodations and do not store disability/diagnosis narrative in the routing file."
   },

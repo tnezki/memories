@@ -2,30 +2,22 @@
   "name": "Algebra 1 Course Bank Profile",
   "course": "Algebra 1",
   "course_family": "spiral_math",
-  "profile_version": "v3.0",
-  "framework_version": "v7.4",
-  "role": "Course-specific authority for the canonical Mastery Goal -> I Can -> Question Family Bank architecture. The Bank PM owns execution.",
+  "profile_version": "v4.0-quality-family-pool-offline-ready",
+  "framework_version": "v8.1",
+  "role": "Course-specific authority for the canonical Mastery Goal -> exact I Can -> high-quality Question Family Bank architecture. The Bank is a reusable family/generator source, not a finished-question warehouse.",
   "question_structure": {
-    "rule": "Use current universal Question Structure for every authored Bank family exemplar. Warm-Ups are outside Bank.",
-    "semantic_fit_rule": "A structure ID cannot PASS by name alone. Evidence job, student action, reasoning architecture, required representation, response mode, representation mode, and executable route must agree.",
-    "direct_read_rule": "When the evidence job is only to read, identify, name, or extract a feature from a supplied representation, keep the task direct rather than adding artificial critique or construction."
-  },
-  "canonical_maps": {
-    "exit_evidence": "curriculum/exit_evidence_map.json",
-    "warmup_progression": "curriculum/warmup_progression_map.json",
-    "mastery_goals": "assessment_plans/indexes/assessment_plan_index.json"
+    "rule": "Use current universal Question Structure for every authored Bank family exemplar unless the task is a direct read/execute job that should stay direct.",
+    "semantic_fit_rule": "Evidence job, student action, structure, response mode, representation mode, and executable route must agree.",
+    "direct_read_rule": "When the evidence job is only to read, identify, name, estimate, or extract a feature from a supplied representation, keep the task direct rather than adding artificial critique or construction."
   },
   "mastery_goal_source_rule": "The exact Unit Assessment Plan is primary authority. assessment_plans/indexes/assessment_plan_index.json is the coursewide retrieval aid.",
   "bank_architecture": {
-    "organizing_unit": "Mastery Goal -> I Can -> Question Family",
-    "families_per_i_can": 3,
-    "family_labels": ["A", "B", "C"],
-    "family_A_intent": "Core/direct evidence",
-    "family_B_intent": "Alternate representation/application",
-    "family_C_intent": "Reasoning/misconception/transfer; do not force error analysis when another third route is more natural",
+    "organizing_unit": "Mastery Goal -> exact I Can -> Question Family",
+    "family_count_policy": "No fixed A/B/C count. Aim for about 8-10 materially different high-quality families per I Can; about 6 may be sufficient for narrow I Cans; exceed 10 only when another family genuinely adds a worthwhile student job.",
+    "family_label_rule": "Existing stable letter labels remain valid IDs. A/B/C/D... do not imply Intro/Review/Mastery or difficulty and do not carry a universal semantic role.",
+    "material_difference_rule": "A new family must change how students demonstrate the I Can. Number/name/noun/context swaps alone do not create a new family.",
     "exemplars_per_family": 1,
-    "material_difference_rule": "The three families must differ in how students demonstrate the skill. Number/name/context swaps alone do not create a new family.",
-    "fresh_instance_rule": "Downstream assessment/practice products select an approved family and author a fresh instance by changing meaningful variation axes while preserving the family invariant and exact I Can.",
+    "fresh_instance_rule": "Downstream products select an approved family and instantiate a fresh question by changing only allowed variation axes while preserving the family invariant, evidence job, representation demand, and usable difficulty.",
     "canonical_output": "banks/unitN/",
     "canonical_files": [
       "BANK_MANIFEST.json",
@@ -34,87 +26,79 @@
       "BUILD_REPORT.txt",
       "PROVENANCE.json",
       "unitN.html",
+      "student.html",
       "mastery_goals/",
-      "figures/"
+      "figures/ when needed"
     ]
   },
+  "offline_generation": {
+    "direction": "Prefer deterministic/local instantiation when the family can support it safely.",
+    "family_generator_fields": [
+      "invariants",
+      "variation_axes",
+      "forbidden_variations",
+      "parameter_definitions",
+      "natural_parameter_ranges",
+      "constraints",
+      "answer_generation_rule",
+      "representation_generation_rule",
+      "allowed_inverse_or_direction_changes",
+      "misconception_or_distractor_rules when relevant",
+      "allowed_contexts_or_units when relevant",
+      "seed_rule",
+      "validated_test_seeds_or_instances"
+    ],
+    "levels": {
+      "STATIC": "Strong family architecture/exemplar; fresh instances may still require semantic authoring.",
+      "PARAMETERIZED": "Script safely varies declared values/data/context tokens while preserving architecture.",
+      "DETERMINISTIC": "Script can reproduce prompt/representation/answer/solution and permitted distractors from stored seed/parameters."
+    },
+    "quality_rule": "Do not force a rich family into full deterministic generation when that would reduce quality."
+  },
+  "student_label_rule": "When a Bank-derived question is shown in a targeted student artifact, display exact canonical I Can code + full exact I Can statement, e.g. U1-MG03-IC01 — Substitute a value for a variable.",
+  "primary_consumers": [
+    "Notes Example / You Try It",
+    "Practice 1 / Extra Practice",
+    "Activity Set 1 / Activity Set 2",
+    "Quick Check",
+    "Practice Builder",
+    "Checkpoint",
+    "Unit Review",
+    "Summative"
+  ],
   "not_permanent_bank_inventory": [
-    "finished Exit Ticket instances",
     "finished Practice sets",
-    "secure Summative forms",
-    "finished WTC sets",
-    "Extra Practice",
-    "CYU",
-    "Practice Set 2",
-    "Practice Set 3",
-    "fixed Notes Example/YTI pairs",
+    "finished Activity sets",
+    "finished Quick Check instances",
     "finished Warm-Up questions",
-    "legacy destination-slot inventories"
+    "finished Checkpoints",
+    "finished Unit Review practice",
+    "finished Notes Example/YTI pairs",
+    "CYU",
+    "Tarsia",
+    "Blooket/game exports",
+    "WTC"
   ],
   "delivery_rules": {
-    "exit": "Follow curriculum/exit_evidence_map.json for allocation, then select appropriate Bank families and author fresh instances. Reassessments must be fresh instances, not copied exemplars.",
-    "practice": "Practice builds select families appropriate to Intro/Review/Mastery purpose and instantiate fresh questions. Repetition may reuse a family with fresh instances; do not clone one prompt repeatedly.",
-    "summative": "Secure Summative builds select secure-appropriate families under the Unit evidence blueprint and author fresh secure instances/parallels. Family exemplars themselves are not secure forms.",
-    "wtc": "WTC is built downstream as a shared-stimulus multipart task. Family Bank records may inform evidence/representation choices but WTC is not permanent Bank inventory.",
-    "notes": "Notes may use family architecture, delivery map, Assessment Plan, and Question Structure to purpose-author Examples/YTIs. Bank exemplars are references, not mandatory copies.",
-    "recovery": "Recovery may favor diagnostic/alternate families while still preserving the exact I Can evidence target."
+    "notes": "Resolve the Bank owning the exact current Intro I Can and instantiate an instructional family parallel for Example/YTI.",
+    "practice": "Use mastery_recurrence_map.json and teacher-approved target plans; instantiate fresh questions from approved families.",
+    "activities": "Use the same selected target plan as the paired Practice surface but fresh families/instances.",
+    "quick_check": "Teacher approves four source architectures per section; generate fresh A-D siblings with safe deterministic variation.",
+    "practice_builder": "Generate/select unique approved instances for teacher/student-selected I Cans; prefer deterministic family generation when available.",
+    "checkpoint": "Portfolio decides what evidence is useful now; Bank supplies approved question-family architecture.",
+    "review": "Use approved nonsecure families and recurrence targets; do not create a second Bank.",
+    "summative": "Use secure-appropriate family/blueprint architecture and reviewed deterministic siblings when safe."
   },
   "viewer": {
     "template": "Tools/templates/algebra/bank/bank_viewer_template.html",
-    "primary_grouping": "Mastery Goal",
-    "desktop_columns": 4,
-    "family_rows": ["A", "B", "C"],
+    "primary_grouping": "Mastery Goal -> I Can -> family",
+    "family_stage_badges": false,
+    "family_anchor": "canonical family_id",
     "graph_max_width_px": 220
-  },
-  "approved_seed_candidates": {
-    "1": [
-      {
-        "seed_id": "U1-SEED-REP-FOUR-VIEWS",
-        "title": "Relationship in Four Views",
-        "preserve": "One coherent relationship represented consistently by table, graph, rule/equation, and context.",
-        "why_useful": "Reusable inspiration for alternate representation families and downstream tasks.",
-        "may_vary": "relationship values, context, which representation is given first, and which representation students create or compare"
-      },
-      {
-        "seed_id": "U1-SEED-GRAPH-SCALE-INTERCEPT",
-        "title": "Graph Scale + Intercept",
-        "preserve": "A coordinate graph where reading the scale matters and an intercept has mathematical or contextual meaning.",
-        "why_useful": "Supports graph-reading, scale, intercept, and fresh parallel instances.",
-        "may_vary": "scale, plotted relationship, intercept type/value, and natural context"
-      },
-      {
-        "seed_id": "U1-SEED-FUNCTION-MAPPING-MISCONCEPTION",
-        "title": "Function Mapping Misconception",
-        "preserve": "The distinction that one input with two outputs is not a function while repeated outputs are allowed.",
-        "why_useful": "Captures a durable misconception for diagnostic or alternate families.",
-        "may_vary": "representation type, values, and whether the relation is or is not a function"
-      },
-      {
-        "seed_id": "U1-SEED-FAMILY-GROWTH-COMPARISON",
-        "title": "Function-Family Growth Comparison",
-        "preserve": "A small set of values or representations that makes additive versus multiplicative or other family-change behavior visible.",
-        "why_useful": "Supports comparison/transfer family design using evidence instead of labels alone.",
-        "may_vary": "family pair, table/graph/context form, values, and strength of competing evidence"
-      },
-      {
-        "seed_id": "U1-SEED-EXPRESSION-ERROR-PATTERNS",
-        "title": "Expression Error Patterns",
-        "preserve": "High-value misconception patterns such as combining unlike terms, distributing to only one term, and sign/parentheses errors during substitution.",
-        "why_useful": "Supports diagnostic families and targeted recovery without fixing one permanent question.",
-        "may_vary": "expression, misconception selected, values, and whether the error is shown or anticipated"
-      },
-      {
-        "seed_id": "U1-SEED-EQUATION-MODEL-CONTEXT",
-        "title": "Equation-Model Context",
-        "preserve": "A situation with meaningful quantities, a clearly defined unknown, an equation that matches the situation, and a solution interpreted with units/meaning.",
-        "why_useful": "Reusable for application/transfer family design and downstream modeling tasks.",
-        "may_vary": "context, quantities, equation structure, and which quantity is unknown"
-      }
-    ]
   },
   "response_mode": {
     "canonical_instructional": "constructed/open response by default",
-    "summative": "constructed/open response",
-    "game_exception": "selected response only when a later explicit game route authorizes it"
+    "summative": "constructed/open response by default",
+    "game_exception": "selected response only when an explicit game/export route authorizes it"
   }
 }

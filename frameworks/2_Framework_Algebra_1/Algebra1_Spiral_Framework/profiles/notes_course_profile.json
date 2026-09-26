@@ -1,9 +1,9 @@
 {
   "name": "Algebra 1 Notes Course Profile",
   "course": "Algebra 1",
-  "framework_version": "v7.4",
-  "profile_version": "v2.0-family-bank-compatible",
-  "role": "Course-specific Notes constants. Framework/Assessment Plan own learning; Notes PM owns procedure; template owns shell/order; notes_alg.css owns visuals. Notes author instructional WTC and Example/YTI locally and do not depend on permanent Bank Exit/WTC inventories.",
+  "framework_version": "v8.1",
+  "profile_version": "v3.0-bank-derived-examples-no-wtc",
+  "role": "Course-specific Notes constants. Framework/Assessment Plan own exact learning; Notes PM owns procedure; template/CSS own shell; approved Bank families supply Example/You Try It question architecture.",
   "template_contract": {
     "path": "Tools/templates/algebra/notes/notes_alg_section_template.html",
     "status": "canonical_reusable_shell",
@@ -12,15 +12,15 @@
   "assessment_plan_contract": {
     "authority": "Framework-owned exact Unit Assessment Plan",
     "path_pattern": "frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html",
-    "section_learning_rule": "Notes use the exact section Learning Target and exact section I Can statements. Do not replace them with the current Unit mastery-goal I Cans.",
-    "alternate_course_repo_search_allowed": false
+    "section_learning_rule": "Notes use the exact section Learning Target and exact section Intro I Can statements."
   },
   "bank_relationship": {
-    "canonical_bank_architecture": "mastery_goal_i_can_question_family",
-    "normal_notes_bank_dependency": "none",
-    "reason": "Section Notes teach Intro learning. In the spiral architecture those I Cans may belong to a future mastery goal, so the current Unit Bank is not the instructional authority for Notes.",
+    "canonical_bank_architecture": "Mastery Goal -> exact I Can -> approved Question Family",
+    "example_yti_rule": "For every current Intro I Can, resolve the canonical Bank that owns that goal/I Can, including a future mastery Unit when necessary, select an approved instructionally appropriate family, and instantiate a fresh Example/YTI parallel.",
     "bank_exemplar_copy_allowed": false,
-    "teacher_supplied_bank_family_use": "architecture_reference_only; author a fresh instructional instance"
+    "same_family_parallel_default": true,
+    "missing_bank_rule": "In the completed course state, Example/YTI should not invent an unrelated architecture when the canonical owning Bank is expected. If a staged build intentionally precedes that Bank, fail/flag the dependency rather than silently treating a local question as permanent authority.",
+    "student_label_rule": "Show exact I Can code + full exact I Can statement with Example/YTI questions."
   },
   "visual_contract": {
     "base_stylesheet": "../../css/base.css",
@@ -29,13 +29,8 @@
       "../../css/base.css",
       "../../css/notes_alg.css"
     ],
-    "body_class": "notes-alg",
-    "page_root_class": "container notes-page",
     "page_surface": "white",
-    "page_level_style_allowed": false,
-    "inline_layout_or_color_style_allowed": false,
-    "legacy_notes_css_allowed": false,
-    "workspace": "compact lined Notes workspace; notes_alg.css must override shared base.css .workspace height and border"
+    "workspace": "compact Notes workspace appropriate for handwriting/Notability"
   },
   "standard_section_order": [
     "Full-width section banner",
@@ -43,7 +38,6 @@
     "Vocabulary / Key Notation Preview",
     "Section Preview: What I noticed / What I wonder",
     "Close Reading Directions",
-    "Fresh What's To Come",
     "I Can compartments in exact Assessment Plan order",
     "Vocabulary Reference",
     "Section Summary",
@@ -59,40 +53,6 @@
   ],
   "reading_paragraphs_default": "2-4 concise paragraphs",
   "stop_discuss_prompts_default": "2-3",
-  "math_notes": {
-    "status": "substantive_visual_reference",
-    "hard_rule": "Actual mathematics must be visible; styled labels alone do not satisfy Math Notes.",
-    "representation_contract_source": "Algebra 1 Framework §8 — inherit exactly; profile does not redefine it.",
-    "four_view_enforcement": "When four views are shown, use Equation/Rule, Table, Graph, Context/Situation exactly.",
-    "ordered_pairs_role": "Correspondence notation only; never an independent replacement for Graph in a four-view set.",
-    "required_graph_route": "Use the current registered Algebra graph tool directly."
-  },
-  "representation_fidelity": {
-    "hard_rule": "When a prompt names a representation, render that representation literally.",
-    "table": "Real semantic HTML table. Ordered-pair prose is not a table.",
-    "graph": "Actual graph stimulus or actual blank coordinate plane.",
-    "mapping": "Actual mapping diagram.",
-    "ordered_pairs": "Tuple/list notation only when ordered pairs are the intended representation/job.",
-    "context": "Actual situation/context.",
-    "missing_representation_fail_code": "NOTES_REQUIRED_REPRESENTATION_MISSING"
-  },
-  "wtc": {
-    "source": "authored locally during Notes from exact section Learning Target/I Cans + Framework WTC contract + current Question Structure",
-    "count_per_section": 1,
-    "shared_stimulus_required": true,
-    "part_count": 4,
-    "part_labels": [
-      "Part A",
-      "Part B",
-      "Part C",
-      "Part D"
-    ],
-    "student_answer_neutral": true,
-    "teacher_copy_support_allowed": true,
-    "local_repair_allowed": true,
-    "bank_wtc_dependency": false,
-    "layout_rule": "Shared setup first, then Parts A-D in reading order. No divider lines or hr elements between parts; spacing and labels provide separation."
-  },
   "example_yti": {
     "default_pairs_per_i_can": 1,
     "second_pair_only_when_earned": true,
@@ -100,50 +60,24 @@
     "student_example_solved": false,
     "student_yti_solved": false,
     "teacher_copy_worked_reasoning": true,
-    "exit_duplicate_check": false,
-    "exit_freshness_owner": "downstream Exit/Summative build",
-    "bank_exemplar_copy_allowed": false
+    "source": "approved Bank family for the exact Intro I Can",
+    "fresh_instance_rule": "Do not copy the Bank exemplar values verbatim by default; use approved variation axes."
   },
-  "build_efficiency": {
-    "mode": "checklist",
-    "repository_hunting_allowed": false,
-    "file_library_recovery_default": false,
-    "bank_read_default": false,
-    "source_map_read_default": false,
-    "item_index_read_default": false,
-    "practice1_read_default": false,
-    "summative_read_default": false,
-    "old_graph_script_inspection_default": false,
-    "render_strategy": "assemble full Unit, render once, fix local defects only",
-    "prior_chat_context_allowed": false,
-    "project_conversation_history_allowed": false,
-    "assistant_saved_memory_allowed": false,
-    "public_web_allowed": false
+  "wtc": {
+    "status": "RETIRED_FOR_CURRENT_ALGEBRA",
+    "rule": "Do not add a WTC section merely because older Notes/Profile versions contained one."
   },
-  "repair_policy": {
-    "build_may_fix": [
-      "generated Example/YTI defect",
-      "generated WTC defect",
-      "generated Notes representation missing",
-      "local HTML/path/image defect",
-      "local render clipping/overlap"
-    ],
-    "report_only": [
-      "Framework defect",
-      "Assessment Plan defect",
-      "template/CSS system defect",
-      "registered graph-tool defect"
-    ],
-    "final_statuses": [
-      "PASS",
-      "PASS_WITH_WARNINGS",
-      "FAIL_BLOCKING_DEPENDENCY"
-    ]
+  "representation_fidelity": {
+    "hard_rule": "When a prompt names a representation, render that representation literally.",
+    "table": "Real semantic HTML table.",
+    "graph": "Actual graph stimulus or actual blank coordinate plane using the registered graph route.",
+    "mapping": "Actual mapping diagram when mapping is the job.",
+    "ordered_pairs": "Tuple/list notation only when ordered pairs are the intended representation/job.",
+    "context": "Actual meaningful situation/context."
   },
   "output_contract": {
     "section_folder_pattern": "notes/u{unit}_{section}_notes/",
     "student_filename_pattern": "u{unit}_{section}_notes.html",
-    "teacher_filename_pattern": "u{unit}_{section}_notes_teacher.html",
-    "generic_student_teacher_filenames_allowed": false
+    "teacher_filename_pattern": "u{unit}_{section}_notes_teacher.html"
   }
 }

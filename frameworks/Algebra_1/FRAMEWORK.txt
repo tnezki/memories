@@ -1,5 +1,5 @@
-ALGEBRA 1 FRAMEWORK — PORTABLE MEMORY v7.4 — CURRENT MASTERY-SPIRAL / FLUENCY / EVIDENCE ARCHITECTURE
-=========================================================================================================
+ALGEBRA 1 FRAMEWORK — PORTABLE MEMORY v8.1 — CURRENT MASTERY / RECURRENCE / EVIDENCE ARCHITECTURE
+=====================================================================================================
 
 CANONICAL STORAGE / DISCOVERY
 -----------------------------
@@ -9,22 +9,20 @@ Git history owns version history. The stable filename does not change when revis
 
 AUTHORITY BY DOMAIN
 1. Current explicit teacher instruction for the specific job.
-2. Current Curriculum Philosophy.
+2. Current Curriculum Philosophy plus current declared amendments.
 3. Current universal Question Structure.
-4. THIS Algebra 1 Framework; exact embedded Unit Assessment Plan HTML is exact Unit learning/evidence authority.
+4. THIS Algebra 1 Framework + exact embedded Unit Assessment Plan + declared current maps/contracts/profiles.
 5. Current task PM for procedure.
 6. Tools/CSS/templates for implementation/rendering.
-
-The Framework owns Algebra-specific learning architecture, recurring routines, evidence behavior, representations, course content decisions, source intelligence, and exact Assessment Plans. PMs own execution procedure and packaging.
 
 READ ORDER
 1. Current Curriculum Philosophy
 2. Current universal Question Structure when questions/evidence are involved
 3. This Framework + contracts/authority.json
 4. Exact requested Unit Assessment Plan
-5. Current task PM
-6. Relevant course profile/contracts/indexes
-7. Curated references/tools only as needed
+5. Declared current operational maps/profiles/contracts needed by the task
+6. Current task PM
+7. Registered tools/templates only as needed
 
 ================================================================
 1. FROZEN COURSE STRUCTURE
@@ -38,288 +36,315 @@ READ ORDER
   Unit 7: Exponential Functions and Modeling
   Unit 8: Function Analysis, Modeling, and Synthesis
 
-Each Unit has five approved sections. Preserve the current section sequence unless the teacher explicitly reopens it. The exact section titles, Learning Targets, I Can statements, Intro/Review/Mastery placements, and Mastery Goals live in assessment_plans/original/ and the regenerated curriculum indexes.
+Each Unit has five approved sections. Preserve the current section sequence unless the teacher explicitly reopens it. Exact section titles, Learning Targets, I Can statements, formal Intro/Review/Mastery placements, and Mastery Goals live in the Unit Assessment Plans and assessment_plan_index.json.
 
 ================================================================
-2. EXACT MASTERY SPIRAL — HARD
+2. EXACT MASTERY SPIRAL + RECURRENCE — HARD
 ================================================================
 
+FORMAL STAGE PIPELINE
 Intro in Unit N -> Review in Unit N+1 -> Mastery in Unit N+2.
 Review in Unit N -> Mastery in Unit N+1.
 
-Unit 1 and Unit 2 include readiness/prior-course mastery windows so every Unit can still carry Intro + Review + Mastery simultaneously.
+Unit 1 and Unit 2 are opening-year exceptions because there is not yet enough Algebra history for the same amount of true spacing available later in the course.
 
-Section numbers do NOT have to match across Units. Place Review/Mastery where they fit the current section best while preserving the exact learning path.
-
-CANONICAL GOAL IDENTITY — HARD
-If a goal appears as Review and later Mastery, keep the exact goal ID/title/description. Do not rewrite the goal to make it sound easier/harder. Stage changes support and evidence demand:
+CANONICAL GOAL IDENTITY
+If a goal appears as Review and later Mastery, keep the exact goal ID/title/description. Stage changes support and evidence demand:
   Intro = first learn the idea with support.
   Review = same skill again with less support, a new representation, or a slightly harder context.
   Mastery = independent use; choose representation/method when needed and explain when the task requires it.
 
-Same-day Intro, Review, and Mastery are distinct strands. They do not need to share the same topic.
+FORMAL STAGE PLACEMENT IS NOT THE WHOLE SPIRAL
+The course also uses a planned recurrence layer so a goal/I Can can reappear between its formal Intro, Review, and Mastery sections.
 
-Future pipeline:
-  Unit 7 Intro -> Unit 8 Review -> Next Course Unit 1 Mastery.
-  Unit 8 Intro -> Next Course Unit 1 Review -> Next Course Unit 2 Mastery.
+Canonical recurrence map:
+  curriculum/mastery_recurrence_map.json
+Teacher/dashboard view:
+  curriculum/mastery_recurrence_map.html
 
-Use curriculum/mastery_spiral_mapping.html and assessment_plans/indexes/assessment_plan_index.json as coursewide retrieval aids. Exact Unit Assessment Plan HTML remains primary authority. Do not require the retired/missing curriculum/mastery_goal_map.json path.
+RECURRENCE TARGET
+- Unit 1 mastery goals: opening-course exception; approximately 3 meaningful section appearances is normal.
+- Unit 2 mastery goals: transition exception; approximately 6 meaningful section appearances is normal.
+- Unit 3+ mastery goals: aim for approximately 9 meaningful section appearances across the full Intro -> Review -> Mastery cycle.
+- 3 Intro-stage + 3 Review-stage + 3 Mastery-stage appearances is the clean default when the formal section timing allows it.
+- Late-introduced goals may use a nearby equivalent distribution such as 2+3+4 or 1+4+4 rather than pretending students practiced content before it was taught.
 
-CANONICAL OPERATIONAL MAPS — HARD
-- curriculum/exit_evidence_map.json + .html own the coursewide Exit evidence allocation and reassessment chain.
-- curriculum/warmup_progression_map.json + .html own the four-lane course-long Warm-Up progression, including section-by-section introduction/maintenance timing and Unit solve ceilings.
-These maps operationalize the Assessment Plans; they may not contradict them.
+An appearance can be small: one mixed-practice question can create a section appearance. The goal is spacing and return, not a large block every time.
 
-================================================================
-3. TWO DIFFERENT SPIRALS
-================================================================
-
-Algebra 1 has TWO intentionally different long-term systems:
-
-A. CONCEPTUAL / MASTERY SPIRAL
-Owned by the Assessment Plans: Intro -> Review -> Mastery.
-
-B. FLUENCY SPIRAL
-Owned primarily by Warm-Ups. It builds durable procedural/foundational capacity across the year and does not need to mirror today's Intro/Review/Mastery strands.
-
-Do not collapse these two systems.
+WARM-UPS ARE AN EXTRA LAYER
+Warm-Up Q3/Q4 retrievals are intentionally additional exposures and do NOT inflate the section-appearance count in mastery_recurrence_map.json.
 
 ================================================================
-4. ALGEBRA WARM-UP ARCHITECTURE — HARD
+3. ALGEBRA WARM-UP ARCHITECTURE — HARD
 ================================================================
 
-Every normal Algebra Warm-Up uses four stable jobs:
+Every Unit has exactly 20 numbered Warm-Up sets:
+  Warm-Up 1 ... Warm-Up 20
+They are NOT numbered or owned by section.
+
+Every Warm-Up has four stable jobs:
 
 Q1 · SOLVE / EQUATION FLUENCY
-A compact solving mini-set. Default = TWO equations.
-- Three equations are allowed when all are very short one-step retrieval.
-- One equation is allowed when the solve method is substantially longer.
-- Older solve types remain mixed after newer types appear.
-- Never introduce a solve type earlier than the current coursewide Warm-Up progression map permits.
-- Difficulty comes from fluent execution and method choice, not arbitrary coefficient inflation.
+A compact solving mini-set. Older solve types remain mixed after newer types appear. Difficulty comes from fluent execution and method choice, not arbitrary coefficient inflation.
 
-COURSE-LONG SOLVE CEILINGS — HARD
-Unit 1:
-  one-step fluency -> simple two-step near the end.
-  NO distribution-to-solve, one-sided multi-step simplify-first equations, or variables on both sides in the Solve lane.
-
-Unit 2:
-  strengthen two-step -> combine like terms -> distribution -> one-sided multi-step.
-  Only a very simple variables-on-both-sides preview late in Unit 2.
-
-Unit 3:
-  finish the full linear-equation progression:
-  variables on both sides -> distribution/like terms -> reasonable rational/fraction coefficients -> cumulative full linear mix.
-
-Units 4–5:
-  maintain full linear solving.
-  Do NOT keep making linear equations uglier merely because the course is later.
-
-Unit 6:
-  maintain linear retrieval and add quadratic solve methods only AFTER each method has been taught.
-
-Units 7–8:
-  cumulative linear/quadratic solving and method choice.
-  Do NOT introduce logarithmic/exponential-equation solving.
-
-The exact section timing inside those ceilings is owned by:
-  curriculum/warmup_progression_map.json
+COURSE-LONG SOLVE CEILINGS
+Unit 1: one-step fluency -> simple two-step near the end.
+Unit 2: two-step -> combine like terms -> distribution -> one-sided multi-step; very simple variables-on-both-sides preview late only.
+Unit 3: complete linear-equation progression, including variables on both sides and reasonable rational/fraction coefficients.
+Units 4-5: maintain full linear solving without uglier-for-its-own-sake arithmetic.
+Unit 6: maintain linear retrieval; add quadratic solve methods only after instruction.
+Units 7-8: cumulative linear/quadratic solving and method choice; no logarithmic/exponential-equation solving requirement.
 
 Q2 · DIAMOND / FACTORING PATTERN
 Number product-sum -> signed integer factor pairs -> trinomial structure -> special factoring patterns -> maintenance.
-Diamond is a family; blanks/known cells may vary when the mathematics warrants it.
-The numeric product-sum idea intentionally has a long runway before symbolic factoring.
 
-Q3 · SKILL REVIEW
-Rotate foundational skills and useful prerequisites intentionally:
-fractions, integer operations, order of operations, distribution, combining terms,
-substitution/evaluation, exponent laws, function notation, graph/coordinate fluency,
-and upcoming prerequisites.
-It may preteach a prerequisite but should not become a second lesson on unreached content.
-For fraction/integer fluency, encourage trying without a calculator first while clearly allowing calculator use if needed.
+Q3 · PLANNED I CAN RETRIEVAL
+Q4 · PLANNED I CAN RETRIEVAL
+Q3/Q4 use approved Bank family architecture when available and display the exact canonical learning label:
+  <I CAN CODE> — <FULL EXACT I CAN STATEMENT>
 
-Q4 · CHALLENGE
-Short reasoning/pattern/generalization/error-analysis/representation/nonroutine work.
-The challenge is not merely ugly arithmetic.
-Across the three Warm-Ups in a normal section, vary the thinking when useful:
-pattern, explain, compare, error analysis, representation, generalize, model, critique.
-Everyone can attempt it; full completion is not required for every student.
+RETRIEVAL PREFERENCE
+- Unit 1: readiness / foundational work plus already-taught Algebra only when useful; do not fake a prior Unit.
+- Unit 2: favor Unit 1 I Cans; readiness may still fill gaps.
+- Unit 3+: Q3 favors the previous Unit; Q4 favors two Units back plus deliberately chosen longer-range retrieval.
+- Same-current-Unit retrieval is the exception because Practice/Activities already handle most within-Unit recurrence.
 
-DEFAULT SECTION RHYTHM
-- 3 Warm-Ups per section unless the teacher/calendar changes it.
-- Every day keeps the same four jobs.
-- The three days are fresh instances, not copies with changed numbers.
-- New fluency enters gradually; earlier fluency remains alive.
-- Warm-Up questions are generated downstream from the map and are NOT canonical Bank inventory.
-- Algebra Warm-Ups remain explicitly exempt from universal Question Structure.
+The exact 20-set progression and deterministic retrieval rotation are owned by:
+  curriculum/warmup_progression_map.json
 
-Warm-Up routing is NOT 2 Current + 1 Review + 1 Mastery and is NOT an A/B/C stage sampler.
+Algebra Warm-Ups remain exempt from universal Question Structure when the stable fluency/retrieval job does not need it.
 
 ================================================================
-5. OFFICIAL EXIT TICKET ARCHITECTURE — HARD
+4. QUICK CHECK ARCHITECTURE — HARD
 ================================================================
 
-A normal Algebra section has ONE official four-question Exit Ticket.
+Current Algebra short evidence pulse is named QUICK CHECK. "Exit Ticket" is retired current terminology.
 
-Questions 1–2 = TWO NEW current-Mastery evidence opportunities.
-- Select from the current section Mastery Goal(s) and supporting I Can statements.
-- Use the coursewide Exit map to distribute I Can coverage intentionally across repeated goal appearances and later evidence routes.
-- Do not force every supporting I Can onto one four-question ticket.
+There is ONE four-question Quick Check per section = 20 source questions per Unit.
 
-Questions 3–4 = TWO FRESH PARALLEL REASSESSMENTS.
-- Reassess the two new evidence jobs from the PREVIOUS section's official Exit Ticket.
-- Preserve the evidence target and usable difficulty.
-- Vary values, representation, context, or structure when useful; do not merely copy exact wording by default.
+The teacher approves four source question architectures/anchors for each section through the Quick Check builder. Current Portfolio need may guide reassessment recommendations; teacher selection is final.
 
-The chain continues across Unit boundaries:
-  Unit N Section 1 normally reassesses Unit N-1 Section 5.
+FOUR PRINT VERSIONS A-D
+Each section prints four comparable versions from the same four approved source architectures.
+Normal variation is:
+- safe number/value/data swaps permitted by the family;
+- deterministic question-order scrambling;
+- answer-choice scrambling when applicable.
+Do NOT invent four materially different architectures merely to create anti-copy versions.
 
-UNIT 1 SECTION 1 OPENING EXCEPTION
-There is no previous Algebra Exit Ticket. Do NOT fake two repeats. U1.1 uses four new readiness/mastery evidence questions from U1-MG01. Q1-Q2 are the designated carryforward pair reassessed in U1.2; Q3-Q4 provide additional opening evidence.
+Therefore:
+  20 source questions per Unit
+  -> 80 rendered A-D question instances
+but only the 20 source questions/architectures count as distinct source design decisions.
 
-INTRO / REVIEW FORMATIVE CHECKING
-Intro and Review are checked through instruction, Warm-Ups when naturally relevant, Practice, CYU, discussion, whiteboards, activities, teacher observation, and other formative work. If the teacher wants a focused Intro/Review check after reteaching, generate a small targeted RETEACH / RECOVERY CHECK (normally 1–3 focused questions). It is not automatically an official Exit Ticket, Bank requirement, or portfolio event.
+Every Quick Check problem visibly prints exact I Can code + full exact I Can statement.
 
-Exit Ticket A/B/C as three canonical stage tickets is RETIRED for Algebra 1.
+Current slot authority:
+  curriculum/quick_check_slot_map.json
+Current source-map rules:
+  contracts/portfolio_quick_check_policy.json
 
-================================================================
-6. EVIDENCE / PORTFOLIO PHILOSOPHY
-================================================================
-
-Official Exit Tickets are short rolling mastery evidence, not the only evidence source.
-Quick Checks provide later deeper evidence.
-Performance Tasks provide richer transfer/modeling evidence where appropriate.
-Summatives provide broader secure evidence.
-Progress Trackers organize the body of evidence around current Mastery Goals and supporting I Can statements.
-
-Meeting is a professional judgment from sufficient independent evidence, not perfection and not simple averaging. Not Yet / Approaching / Meeting / Exceeding describe the body of evidence, not item-difficulty tiers.
+Retired active routing:
+  the former fixed exit_evidence_map chain.
+Do not recreate or consult that retired map for current Algebra execution.
 
 ================================================================
-7. BANK STRATEGY — LOCKED ROLE ARCHITECTURE
+5. EVIDENCE / PORTFOLIO / CHECKPOINT
 ================================================================
 
-The old giant Algebra Bank architecture is retired as a course requirement.
+Quick Checks are common short evidence. Personalized Checkpoints are larger just-in-time evidence events guided by live private Portfolio need.
 
-CURRENT PRINCIPLE
-Smaller authoritative Bank; stronger map; strongest evidence first.
+Portfolio status/grade/report mechanics are owned by the current Framework amendment and contracts/portfolio_quick_check_policy.json.
+Checkpoint mechanics are owned by contracts/checkpoint_policy.json.
 
-Author/lock the strongest Exit Ticket and Summative evidence before filling ordinary classroom inventory. Practice and instruction then prepare students for those mapped evidence demands.
-
-Canonical Bank roles:
-- Practice 1 = primary independent practice with EXACTLY 24 questions per section: 8 Intro + 8 Review + 8 Mastery. The three stage blocks should be visibly labeled Intro, Review, and Mastery. The 8 questions in a block do not have to be mechanically equal across I Cans; distribute them for useful practice and coverage.
-- WTC = canonical shared-stimulus multipart instructional preview/decomposition task; use the exact Algebra WTC contract below.
-- Exit evidence/questions = canonical official evidence.
-- Secure Summative forms V1-V6 = canonical. Use approximately TWO secure evidence opportunities per CURRENT Unit Mastery Goal, with the whole form designed for about a 40-minute class period. The Bank Map resolves exact item count from the number/complexity of Mastery Goals and time demand; do NOT hard-code eight items across all Units. Author V1 first from the Exit/mastery evidence plan; create parallel V2-V4; then create additional secure V5-V6 under the same evidence blueprint.
-- Useful reusable SEEDS = canonical when they earn a reusable role for later artifacts. Seeds have NO quota. Keep a seed only when it preserves a genuinely reusable context, representation, misconception, dataset, visual idea, source idea, or problem setup.
-
-ALGEBRA WTC — HARD (INCLUDING UNIT 1)
-One WTC per section begins with one meaningful shared context/stimulus, followed by exactly Part A, Part B, Part C, Part D in that order. All four parts belong to that same situation/stimulus. The structure resembles an AP-style multipart free-response problem: shared setup first, then four labeled parts; AP-level difficulty is not implied.
-Parts may be independent or naturally connected. Do not force “use Part A to solve Part B” or another carry-forward unless the mathematics genuinely requires that dependency.
-Authenticate each part against its natural evidence job/student action through current Question Structure while preserving the shared stimulus. Do not assign PROC-MULTISTEP-CHAIN-01 to the whole WTC merely because it has four parts; use a chain only for a real required dependency and record that dependency.
-Student-facing Notes show the shared setup before the four parts, with no divider lines between parts. The Bank profile owns executable WTC metadata; the Notes profile and canonical notes_alg.css implement the layout.
-
-Generated downstream, not canonical Bank inventory:
-- Extra Practice and CYU are generated with the Practice build from the map, Practice 1, seeds, misconceptions, and Question Structure.
-- Practice 2 and Practice 3 are retired as required canonical Bank files.
-- Warm-Up QUESTIONS are generated later from curriculum/warmup_progression_map.json.
-- Middle practice (stations, Find Someone Who, matching, sorting, task cards, partner sets, whiteboards, etc.) may be generated at artifact build time.
-- Notes do not require premade canonical Example/YTI inventory. Examples/YTIs are purpose-authored/refined during Notes from the Assessment Plan, Exit evidence map, representations, misconceptions, Question Structure, and useful canonical seeds.
-
-QUESTION STRUCTURE — HARD
-All authored questions in Bank and downstream resources use the current universal Question Structure authority unless a current course rule explicitly exempts them. Algebra Warm-Ups are the explicit exception.
-A mapped structure ID is not enough: evidence job, student action, structure reasoning architecture, response mode, representation, and tool/response-surface route must agree semantically and execute the actual student task.
+Mastered normally requires independent convincing evidence over time. Repeated questions on one Quick Check/Checkpoint can strengthen one source judgment but do not automatically become independent evidence opportunities.
 
 ================================================================
-8. REPRESENTATION SYSTEM
+6. BANK STRATEGY — QUALITY FAMILY POOL / OFFLINE-READY SOURCE
+================================================================
+
+Canonical Bank organization:
+  Mastery Goal -> exact I Can -> high-quality Question Families.
+
+NO FIXED THREE-FAMILY LIMIT
+The retired A/B/C-only requirement is no longer current Algebra policy.
+
+QUALITY TARGET
+- Healthy target: about 8-10 materially different high-quality families per I Can.
+- A narrower I Can may stop around 6 when additional families would be filler.
+- An I Can may exceed 10 when an additional family genuinely adds a worthwhile student action, representation, misconception route, inverse direction, context/application, or transfer job.
+- Quality is the gate; letters do not carry difficulty/stage meaning.
+
+Family IDs/labels remain stable once published. Existing A/B/C labels remain valid IDs; D, E, F... are normal additions. A letter is not an Intro/Review/Mastery badge and does not by itself imply core/alternate/reasoning.
+
+FAMILY DISTINCTNESS
+Number/name/context swaps alone do not create a new family. A new family must materially change how the I Can is demonstrated.
+
+OFFLINE / DETERMINISTIC FAMILY CAPACITY
+When mathematically safe, a family should carry enough executable metadata for local scripts to instantiate fresh reproducible questions:
+- invariant/evidence job;
+- parameter definitions and natural ranges;
+- constraints;
+- answer-generation rule;
+- representation/table/graph generation rule;
+- allowed inverse/direction changes;
+- misconception/distractor rules when relevant;
+- allowed contexts/units when relevant;
+- allowed and forbidden variation axes;
+- reproducible seed support;
+- a small set of validated test seeds/instances.
+
+Some rich families may remain static/AI-authored. Do not sacrifice quality to force full automation.
+
+PRIMARY BANK CONSUMERS
+- Notes Examples / You Try Its
+- Practice / Extra Practice
+- Activities
+- Quick Checks
+- Student/Teacher Practice Builder
+- Personalized Checkpoints
+- Unit Review
+- Secure Summative architecture/forms
+
+NOT REQUIRED IN THE INITIAL UNIT BUILD
+CYU, Tarsia, Blooket/game exports, and similar optional generators are standalone teacher tools. They may use approved Bank families later without driving Bank size or initial Unit-build question counts.
+
+WTC is retired from current Algebra architecture.
+
+================================================================
+7. NOTES — BANK-DERIVED EXAMPLE / YOU TRY IT
+================================================================
+
+Current Intro Learning Target/I Can statements are the instructional spine. Preserve the current Algebra reading/vocabulary/Math Notes/Reading Apprenticeship visual profile.
+
+For each Example / You Try It pair:
+- resolve the exact current Intro I Can;
+- resolve the canonical Bank that owns that goal/I Can, even when it is a future mastery Unit;
+- select an approved family appropriate for first-learning instruction;
+- Example and YTI use the same architecture with fresh parallel values/context/representation unless another pair is genuinely earned;
+- do not copy the Bank exemplar verbatim by default;
+- do not leak secure Quick Check or Summative instances.
+
+There is no current Algebra WTC section/routine requirement.
+
+================================================================
+8. PRACTICE + ACTIVITY TARGET PLANS — HARD
+================================================================
+
+Normal classroom question sets are shorter and more cumulative than the retired 24-question 8/8/8 model.
+
+DEFAULT SET SIZE
+12 questions is normal.
+Teacher/builder may use 12-16 when the section needs more room.
+
+Each set normally contains:
+- 4 CURRENT INTRO questions, using a useful variety of the four current Intro I Cans/families;
+- 8-12 RECURRENCE questions selected from multiple Review/Mastery goals/I Cans according to mastery_recurrence_map.json.
+
+The recurrence portion must NOT all come from one current Mastery Goal merely because that goal is formally assigned to the section. Current Mastery normally gets meaningful emphasis, but recent mastery, formal Review, and spaced prior goals can share the remaining slots.
+
+PAIR A — SAME TARGET MIX
+- Practice 1
+- Activity Set 1
+These use the same selected I Can/count plan but fresh families/instances.
+
+PAIR B — SECOND TARGET MIX WITH INTENTIONAL OVERLAP
+- Extra Practice
+- Activity Set 2
+These use a second selected I Can/count plan. High-priority recurrence targets should overlap with Pair A, while some counts/targets are rebalanced to broaden spacing.
+
+ACTIVITY STRUCTURES
+Stations, Find Someone Who, projection/team structures, and similar activity formats reuse the Activity Set questions for that set rather than authoring another hidden question inventory.
+
+SET BUILDER / TEACHER OVERRIDE
+The future/current teacher Set Builder should open with a strong recommended Target Plan A and Target Plan B derived from the recurrence map. The teacher may alter selected I Cans/counts/families before building. The system recommends first; the teacher edits rather than rebuilding the curriculum plan from scratch.
+
+This target-plan/map should be visible from the Teacher Dashboard when the dashboard is reorganized.
+
+================================================================
+9. REPRESENTATION SYSTEM
 ================================================================
 
 Graph · Equation/Rule · Table · Context/Situation are the four core Algebra forms of meaning.
 
-FOUR-VIEW CONTRACT — HARD
-When an Algebra artifact intentionally presents or compares FOUR views of one relationship, the four views are exactly:
+FOUR-VIEW CONTRACT
+When an Algebra artifact intentionally presents FOUR views of one relationship, the four views are exactly:
   1. Equation / Rule
   2. Table
   3. Graph
   4. Context / Situation
 
-Ordered pairs do NOT count as a fifth independent view and may NOT replace Graph, Table, Equation/Rule, or Context/Situation in a four-view set. An ordered pair is correspondence notation linking a table row to a graph point; it may be highlighted inside those views, but copying table values into ordered-pair notation does not create a distinct representation.
+Ordered pairs are correspondence notation, not a fifth independent representation and not a substitute for the Graph in a claimed four-view set.
 
-Use fewer than four views when the exact learning job only needs fewer. But when the artifact claims/teaches four views, use the exact four above; do not manufacture a fourth view by splitting Table and Ordered Pairs.
-
-REQUIRED GRAPH ROUTE — HARD
-When Graph is required by the learning job or by the four-view contract, render an actual graph using the current registered Algebra graph tool resolved through the Tools authority. Do not replace a required graph with ordered pairs, prose, a table duplicate, or a hand-built substitute. If the registered graph tool cannot produce the required graph, report the graph-tool/representation defect; do not mark the representation set complete.
-
-Use the applicable forms substantively and translate among them when the exact I Can supports it. Representation use is not an equal-percentage quota.
+REQUIRED GRAPH ROUTE
+When Graph is required by the learning job, render an actual graph using the current registered Algebra graph tool. Do not replace a required graph with ordered pairs, prose, or a duplicated table.
 
 Function language develops across the course:
   input/output -> function/not a function -> f(x) -> evaluation -> domain/range -> key features.
 
-Domain/range is woven where natural rather than isolated as a standalone section.
-Exponent laws are explicit in polynomial/exponential work and supported by Warm-Up Skill Review.
-Radicals/irrational values stay lean and appear naturally in quadratic solving.
-Statistics stays light and model-focused.
-Literal-equation rearranging and sequences do not require standalone sections under the current course map.
-
 ================================================================
-9. NOTES / PRACTICE / ACTIVITIES
+10. STUDENT QUESTION LABEL — HARD
 ================================================================
 
-NOTES
-Current Intro Learning Target/I Can statements are the instructional spine. Preserve the current Algebra reading/vocabulary/Math Notes/Reading Apprenticeship visual profile. Examples/YTIs may now be purpose-authored/refined at Notes build time rather than copied from a fixed six-pair Bank inventory. Never leak secure Exit reassessment or Summative items into ordinary Notes examples.
+When a Bank-derived question is shown in Notes Example/YTI, Practice, Activities, Quick Checks, Checkpoints, Review, or another student-facing targeted artifact, display a compact exact learning label near the top-left of the question:
 
-PRACTICE
-Practice 1 is the canonical Bank anchor: exactly 24 questions per section, organized as 8 Intro + 8 Review + 8 Mastery. Extra Practice and CYU are generated downstream during the Practice build. Middle-practice formats can be generated later from the mapped learning architecture; they do not need permanent Practice 2/3 Bank routes.
+  U1-MG03-IC01 — Substitute a value for a variable.
 
-ACTIVITIES
-Activities change participation around worthwhile mapped mathematics. They may adapt/select canonical Bank items or purpose-author aligned middle-practice questions. They do not need to consume two fixed 24-question Bank routes.
+Use exact canonical code + full exact I Can statement. Do not show code alone when the artifact is intended to help students learn/use the targeting system.
 
-================================================================
-10. QUESTION / LANGUAGE / VALUES
-================================================================
-
-Canonical instructional and Summative Algebra items are constructed/open response by default. Blooket or another explicitly authorized game export may use selected response.
-
-Use natural high-school language and simple concrete verbs. Prefer input/output and ordered-pair language where useful. Use f(x) naturally without making wording artificially formal.
-
-Choose pedagogically natural values. Difficulty should come from the Algebra, not arbitrary random inflation.
-
-Use the current universal Question Structure for reasoning, comparison, misconception diagnosis, modeling, transfer, representation connections, and coherent multipart work. Direct questions should stay direct when that is the right evidence job. Do not force a complex structure onto a simple I Can merely to attach a structure label.
+Warm-Up Q3/Q4 use the same label. Q1/Q2 fluency lanes do not need a forced MG/I Can label unless they naturally map to one.
 
 ================================================================
-11. RESOURCE-SPECIFIC PROFILES
+11. SUMMATIVE / REVIEW
 ================================================================
 
-Read the relevant current profile after this Framework:
+UNIT REVIEW
+Organize around current Unit Mastery Goals/supporting I Cans. Review may use approved nonsecure Bank families and Practice target plans. Do not create a second permanent Bank.
+
+SUMMATIVE
+Secure Algebra assessment uses six comparable forms V1-V6 under the accepted Unit evidence blueprint. Target approximately two secure evidence opportunities per current Unit Mastery Goal while keeping the complete form appropriate for about a 40-minute class period.
+
+Prefer deterministic/seeded sibling generation for parallel secure forms when the approved family contracts safely support it; otherwise use reviewed secure authored parallels. Security and comparability matter more than surface novelty.
+
+================================================================
+12. CURRENT MAPS / PROFILES / PROCEDURE
+================================================================
+
+Current course maps:
+- assessment_plans/indexes/assessment_plan_index.json — exact coursewide learning retrieval aid
+- curriculum/mastery_recurrence_map.json — planned section recurrence overlay
+- curriculum/mastery_recurrence_map.html — teacher/dashboard recurrence view
+- curriculum/warmup_progression_map.json — 20-Warm-Up fluency + I Can retrieval architecture
+- curriculum/warmup_progression_map.html — teacher-readable Warm-Up plan
+- curriculum/quick_check_slot_map.json — common Quick Check evidence slots
+- curriculum/quick_check_source_maps/ — legacy/special source-map overrides only
+
+Current profiles:
 - profiles/bank_course_profile.json
 - profiles/notes_course_profile.json
 - profiles/practice_course_profile.json
 - profiles/activities_course_profile.json
 - profiles/recurring_assessment_course_profile.json
-- profiles/assessment_evidence_philosophy.json
-- performance/demos/investigations profiles as applicable
 
-If a legacy lower profile contradicts this v7.4 architecture, this Framework wins and the stale profile should be reconciled at the smallest owning layer rather than treated as a competing rule.
+Current contracts:
+- contracts/authority.json
+- contracts/portfolio_quick_check_policy.json
+- contracts/checkpoint_policy.json
 
-================================================================
-12. CURRENT BUILD PROCEDURE
-================================================================
+Current registered PMs own execution. Legacy files not referenced by the current manifests are not authority.
 
-The role architecture and operational maps above are settled. Current procedure is owned by the registered PMs:
-- Step 3a `pms_build/bank_map.txt` maps only the current canonical Bank destinations and consumes the canonical Exit map rather than recreating it.
-- Step 3b `pms_build/bank_complete.txt` authors Exit first, then Summative V1-V6, Practice 1, WTC, and mapped Seeds.
-- Step 8 `pms_build/warmup.txt` consumes the already-approved coursewide Warm-Up progression map and authors ONLY the requested Unit. It must not redesign the course progression during a Unit build.
-- Other downstream Steps are profile-driven and must use this Framework/profile architecture instead of Physics-specific or retired Bank routes.
+BUILD / DELIVERY
+Repository-targeting BUILD and MAINTENANCE output returns through the current `github_transfer / 2` local transfer contract. Normal jobs do not commit/push GitHub.
 
-WARM-UP BUILD SEQUENCE
-1. Keep the coursewide progression map stable.
-2. For a requested Unit, read the five exact section rows.
-3. Author the requested number of daily Warm-Ups inside those row/Unit ceilings.
-4. Render and QA the Unit package.
-5. If classroom testing exposes a SYSTEMIC progression problem, revise the coursewide map/Framework deliberately before the next Unit. Do not silently drift one Unit away from the map.
+Do not revive:
+- active Exit Ticket/Ticket A-B routing;
+- exit_evidence_map;
+- fixed 3-families-per-I-Can A/B/C architecture;
+- 24-question 8 Intro + 8 Review + 8 Mastery practice requirement;
+- required CYU/Tarsia/Blooket initial-build outputs;
+- required WTC;
+- 3-Warm-Ups-per-section / 15-per-Unit architecture;
+- Practice 2/Practice 3 dashboard mirror naming as a current curriculum requirement;
+- fixed Notes Example/YTI inventory.
 
-Do not revive v6.41 139-per-section, Practice 2/3, fixed Notes-pair, Bank-CYU, or Bank-Warm-Up assumptions.
-
-LEGACY SUPPORTING manifest.json NOTE
-The supporting-root `manifest.json` is an old packaging/hash inventory from v6.41 and is NOT an authority or discovery front door. Current builds must use this stable Framework front door, exact Assessment Plans, current profiles/contracts, and current operational maps. Do not use stale manifest hashes to override current files.
-
-END — ALGEBRA 1 FRAMEWORK v7.4
+END — ALGEBRA 1 FRAMEWORK v8.1

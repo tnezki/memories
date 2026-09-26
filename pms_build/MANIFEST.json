@@ -1,6 +1,7 @@
 {
-  "schema": "curriculum-pm-registry/1.1",
+  "schema": "curriculum-pm-registry/1.2",
   "purpose": "canonical_initial_build_registry",
+  "registry_rule": "Only jobs listed here are current generic initial-build jobs. Other PM files may remain for operational, compatibility, or historical workflows but are not current Build-menu authority merely because the file exists.",
   "jobs": [
     {"step":"1","job":"assessment_plan","label":"Build Assessment Plan","path":"pms_build/assessment_plan.txt","entrypoint":"pms_build/assessment_plan.txt"},
     {"step":"2","job":"framework","label":"Build Framework","path":"pms_build/framework.txt","entrypoint":"pms_build/framework.txt"},
@@ -13,5 +14,14 @@
     {"step":"9","job":"review","label":"Build Review","path":"pms_build/review.txt","entrypoint":"pms_build/review.txt"},
     {"step":"10","job":"summative","label":"Build Summative","path":"pms_build/summative.txt","entrypoint":"pms_build/summative.txt"},
     {"step":"11","job":"unit_plan","label":"Build Unit Plan","path":"pms_build/unit_plan.txt","entrypoint":"pms_build/unit_plan.txt"}
+  ],
+  "not_generic_initial_build_jobs": [
+    "First 4 Days",
+    "Progress Tracker",
+    "Practice to Summative",
+    "Discourse",
+    "Portfolio / Assess New Evidence",
+    "generic Demos + Investigations",
+    "combined Performance Tasks + Checkpoints"
   ]
 }

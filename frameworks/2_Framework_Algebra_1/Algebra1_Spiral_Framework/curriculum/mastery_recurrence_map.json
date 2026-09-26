@@ -1,0 +1,762 @@
+{
+  "schema": "algebra-mastery-recurrence-map/1.0",
+  "status": "CURRENT",
+  "course": "Algebra 1",
+  "purpose": "Plan meaningful section-level recurrence between formal Intro, Review, and Mastery placements so goals return often enough for durable learning without forcing every section to be single-goal practice.",
+  "principles": [
+    "Formal Intro/Review/Mastery placement and recurrence frequency are different concepts.",
+    "Unit 1 is an opening-course exception; about 3 meaningful section appearances is normal.",
+    "Unit 2 is a transition exception; about 6 meaningful section appearances is normal.",
+    "Unit 3+ aims for about 9 meaningful section appearances across the full Intro-Review-Mastery cycle.",
+    "3+3+3 is the clean default when timing allows; nearby distributions such as 2+3+4 or 1+4+4 are valid for late-introduced goals.",
+    "An appearance can be only one or two mixed-practice questions; spacing matters more than raw count.",
+    "Warm-Up Q3/Q4 retrievals are extra exposure and are not counted in section_appearance_total.",
+    "Practice/Activity recurrence questions should be mixed across multiple Mastery Goals rather than all coming from one current formal Mastery Goal."
+  ],
+  "practice_target_plan": {
+    "normal_set_size": 12,
+    "allowed_set_size": [
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "current_intro_questions_default": 4,
+    "recurrence_questions_default": 8,
+    "pair_A": [
+      "Practice 1",
+      "Activity Set 1"
+    ],
+    "pair_B": [
+      "Extra Practice",
+      "Activity Set 2"
+    ],
+    "pair_rule": "Each pair shares the same selected I Can/count plan but uses fresh families/instances. Pair B intentionally overlaps high-priority recurrence targets from Pair A while rebalancing some slots."
+  },
+  "warmup_overlay": {
+    "warmups_per_unit": 20,
+    "ican_slots_per_warmup": [
+      "Q3",
+      "Q4"
+    ],
+    "rule": "Warm-Up retrieval is additional to this map. Unit 3+ favors previous-unit I Cans in Q3 and two-units-back/long-range I Cans in Q4."
+  },
+  "dashboard_integration": {
+    "status": "REQUIRED_FUTURE",
+    "rule": "When the Teacher Dashboard is reorganized, surface this recurrence map and the Set Builder recommendations so the teacher can inspect/edit the planned I Can mix before generating sets."
+  },
+  "mastery_goals": [
+    {
+      "mastery_goal_id": "U1-MG01",
+      "title": "Coordinate-Plane Graphs",
+      "first_mastery_assessment_section": "1.1",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [],
+        "Mastery": [
+          "1.1",
+          "1.3",
+          "1.4"
+        ]
+      },
+      "section_appearance_total": 3
+    },
+    {
+      "mastery_goal_id": "U1-MG02",
+      "title": "Slope in Four Views",
+      "first_mastery_assessment_section": "1.3",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [],
+        "Mastery": [
+          "1.3",
+          "1.4",
+          "1.5"
+        ]
+      },
+      "section_appearance_total": 3
+    },
+    {
+      "mastery_goal_id": "U1-MG03",
+      "title": "Evaluate Expressions",
+      "first_mastery_assessment_section": "1.2",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [],
+        "Mastery": [
+          "1.2",
+          "1.3",
+          "1.5"
+        ]
+      },
+      "section_appearance_total": 3
+    },
+    {
+      "mastery_goal_id": "U1-MG04",
+      "title": "Input / Output Rules",
+      "first_mastery_assessment_section": "1.5",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [],
+        "Mastery": [
+          "1.2",
+          "1.4",
+          "1.5"
+        ]
+      },
+      "section_appearance_total": 3
+    },
+    {
+      "mastery_goal_id": "U2-MG01",
+      "title": "Compare Relationships",
+      "first_mastery_assessment_section": "2.1",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [
+          "1.2",
+          "1.3",
+          "1.5"
+        ],
+        "Mastery": [
+          "2.1",
+          "2.3",
+          "2.5"
+        ]
+      },
+      "section_appearance_total": 6
+    },
+    {
+      "mastery_goal_id": "U2-MG02",
+      "title": "One-Step Inequalities",
+      "first_mastery_assessment_section": "2.4",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [
+          "1.2",
+          "1.4",
+          "1.5"
+        ],
+        "Mastery": [
+          "2.1",
+          "2.4",
+          "2.5"
+        ]
+      },
+      "section_appearance_total": 6
+    },
+    {
+      "mastery_goal_id": "U2-MG03",
+      "title": "Function or Not a Function",
+      "first_mastery_assessment_section": "2.2",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [
+          "1.1",
+          "1.2",
+          "1.4"
+        ],
+        "Mastery": [
+          "2.1",
+          "2.2",
+          "2.4"
+        ]
+      },
+      "section_appearance_total": 6
+    },
+    {
+      "mastery_goal_id": "U2-MG04",
+      "title": "Move Between Representations",
+      "first_mastery_assessment_section": "2.3",
+      "planned_section_appearances": {
+        "Intro": [],
+        "Review": [
+          "1.1",
+          "1.3",
+          "1.5"
+        ],
+        "Mastery": [
+          "2.1",
+          "2.3",
+          "2.5"
+        ]
+      },
+      "section_appearance_total": 6
+    },
+    {
+      "mastery_goal_id": "U3-MG01",
+      "title": "Connect Representations",
+      "first_mastery_assessment_section": "3.1",
+      "planned_section_appearances": {
+        "Intro": [
+          "1.1",
+          "1.3",
+          "1.5"
+        ],
+        "Review": [
+          "2.1",
+          "2.4",
+          "2.5"
+        ],
+        "Mastery": [
+          "3.1",
+          "3.3",
+          "3.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U3-MG02",
+      "title": "Understand Functions and Families",
+      "first_mastery_assessment_section": "3.4",
+      "planned_section_appearances": {
+        "Intro": [
+          "1.2",
+          "1.3",
+          "1.5"
+        ],
+        "Review": [
+          "2.1",
+          "2.2",
+          "2.4"
+        ],
+        "Mastery": [
+          "3.1",
+          "3.4",
+          "3.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U3-MG03",
+      "title": "Equivalent Expressions",
+      "first_mastery_assessment_section": "3.2",
+      "planned_section_appearances": {
+        "Intro": [
+          "1.4",
+          "1.5"
+        ],
+        "Review": [
+          "2.1",
+          "2.3",
+          "2.5"
+        ],
+        "Mastery": [
+          "3.1",
+          "3.2",
+          "3.4",
+          "3.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U3-MG04",
+      "title": "Equations in Context",
+      "first_mastery_assessment_section": "3.3",
+      "planned_section_appearances": {
+        "Intro": [
+          "1.5"
+        ],
+        "Review": [
+          "2.1",
+          "2.3",
+          "2.4",
+          "2.5"
+        ],
+        "Mastery": [
+          "3.1",
+          "3.3",
+          "3.4",
+          "3.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U4-MG01",
+      "title": "Slope and Rate of Change",
+      "first_mastery_assessment_section": "4.3",
+      "planned_section_appearances": {
+        "Intro": [
+          "2.1",
+          "2.3",
+          "2.5"
+        ],
+        "Review": [
+          "3.1",
+          "3.4",
+          "3.5"
+        ],
+        "Mastery": [
+          "4.1",
+          "4.3",
+          "4.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U4-MG02",
+      "title": "Graph and Write Linear Functions",
+      "first_mastery_assessment_section": "4.2",
+      "planned_section_appearances": {
+        "Intro": [
+          "2.2",
+          "2.3",
+          "2.5"
+        ],
+        "Review": [
+          "3.1",
+          "3.2",
+          "3.4"
+        ],
+        "Mastery": [
+          "4.2",
+          "4.4",
+          "4.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U4-MG03",
+      "title": "Compare Linear Relationships",
+      "first_mastery_assessment_section": "4.1",
+      "planned_section_appearances": {
+        "Intro": [
+          "2.4",
+          "2.5"
+        ],
+        "Review": [
+          "3.1",
+          "3.3",
+          "3.5"
+        ],
+        "Mastery": [
+          "4.1",
+          "4.2",
+          "4.4",
+          "4.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U4-MG04",
+      "title": "Linear Models",
+      "first_mastery_assessment_section": "4.5",
+      "planned_section_appearances": {
+        "Intro": [
+          "2.5"
+        ],
+        "Review": [
+          "3.1",
+          "3.3",
+          "3.4",
+          "3.5"
+        ],
+        "Mastery": [
+          "4.1",
+          "4.3",
+          "4.4",
+          "4.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U5-MG01",
+      "title": "Solve Systems",
+      "first_mastery_assessment_section": "5.1",
+      "planned_section_appearances": {
+        "Intro": [
+          "3.1",
+          "3.2",
+          "3.4"
+        ],
+        "Review": [
+          "4.1",
+          "4.3",
+          "4.4"
+        ],
+        "Mastery": [
+          "5.1",
+          "5.2",
+          "5.4"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U5-MG02",
+      "title": "Systems from Situations",
+      "first_mastery_assessment_section": "5.5",
+      "planned_section_appearances": {
+        "Intro": [
+          "3.3",
+          "3.4",
+          "3.5"
+        ],
+        "Review": [
+          "4.1",
+          "4.3",
+          "4.5"
+        ],
+        "Mastery": [
+          "5.1",
+          "5.3",
+          "5.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U5-MG03",
+      "title": "Graph Linear Inequalities",
+      "first_mastery_assessment_section": "5.3",
+      "planned_section_appearances": {
+        "Intro": [
+          "3.4",
+          "3.5"
+        ],
+        "Review": [
+          "4.1",
+          "4.2",
+          "4.4"
+        ],
+        "Mastery": [
+          "5.1",
+          "5.3",
+          "5.4",
+          "5.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U5-MG04",
+      "title": "Systems of Inequalities",
+      "first_mastery_assessment_section": "5.4",
+      "planned_section_appearances": {
+        "Intro": [
+          "3.5"
+        ],
+        "Review": [
+          "4.1",
+          "4.2",
+          "4.3",
+          "4.5"
+        ],
+        "Mastery": [
+          "5.1",
+          "5.3",
+          "5.4",
+          "5.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U6-MG01",
+      "title": "Recognize Function Families",
+      "first_mastery_assessment_section": "6.4",
+      "planned_section_appearances": {
+        "Intro": [
+          "4.1",
+          "4.3",
+          "4.5"
+        ],
+        "Review": [
+          "5.1",
+          "5.3",
+          "5.5"
+        ],
+        "Mastery": [
+          "6.1",
+          "6.4",
+          "6.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U6-MG02",
+      "title": "Transform Functions",
+      "first_mastery_assessment_section": "6.3",
+      "planned_section_appearances": {
+        "Intro": [
+          "4.2",
+          "4.3",
+          "4.5"
+        ],
+        "Review": [
+          "5.2",
+          "5.4",
+          "5.5"
+        ],
+        "Mastery": [
+          "6.1",
+          "6.3",
+          "6.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U6-MG03",
+      "title": "Polynomial Operations and Exponents",
+      "first_mastery_assessment_section": "6.1",
+      "planned_section_appearances": {
+        "Intro": [
+          "4.4",
+          "4.5"
+        ],
+        "Review": [
+          "5.1",
+          "5.3",
+          "5.5"
+        ],
+        "Mastery": [
+          "6.1",
+          "6.2",
+          "6.4",
+          "6.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U6-MG04",
+      "title": "Quadratic Structure and Graphs",
+      "first_mastery_assessment_section": "6.2",
+      "planned_section_appearances": {
+        "Intro": [
+          "4.5"
+        ],
+        "Review": [
+          "5.1",
+          "5.2",
+          "5.4",
+          "5.5"
+        ],
+        "Mastery": [
+          "6.1",
+          "6.2",
+          "6.4",
+          "6.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U7-MG01",
+      "title": "Greatest Common Factor",
+      "first_mastery_assessment_section": "7.2",
+      "planned_section_appearances": {
+        "Intro": [
+          "5.1",
+          "5.3",
+          "5.5"
+        ],
+        "Review": [
+          "6.1",
+          "6.4",
+          "6.5"
+        ],
+        "Mastery": [
+          "7.1",
+          "7.2",
+          "7.4"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U7-MG02",
+      "title": "Factor Trinomials and Special Patterns",
+      "first_mastery_assessment_section": "7.1",
+      "planned_section_appearances": {
+        "Intro": [
+          "5.2",
+          "5.3",
+          "5.5"
+        ],
+        "Review": [
+          "6.1",
+          "6.2",
+          "6.4"
+        ],
+        "Mastery": [
+          "7.1",
+          "7.3",
+          "7.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U7-MG03",
+      "title": "Factors, Zeros, and Graphs",
+      "first_mastery_assessment_section": "7.3",
+      "planned_section_appearances": {
+        "Intro": [
+          "5.4",
+          "5.5"
+        ],
+        "Review": [
+          "6.1",
+          "6.3",
+          "6.5"
+        ],
+        "Mastery": [
+          "7.1",
+          "7.3",
+          "7.4",
+          "7.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U7-MG04",
+      "title": "Choose a Quadratic Form",
+      "first_mastery_assessment_section": "7.4",
+      "planned_section_appearances": {
+        "Intro": [
+          "5.5"
+        ],
+        "Review": [
+          "6.1",
+          "6.2",
+          "6.3",
+          "6.5"
+        ],
+        "Mastery": [
+          "7.1",
+          "7.3",
+          "7.4",
+          "7.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U8-MG01",
+      "title": "Solve by Factoring",
+      "first_mastery_assessment_section": "8.3",
+      "planned_section_appearances": {
+        "Intro": [
+          "6.1",
+          "6.3",
+          "6.5"
+        ],
+        "Review": [
+          "7.1",
+          "7.3",
+          "7.5"
+        ],
+        "Mastery": [
+          "8.1",
+          "8.3",
+          "8.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U8-MG02",
+      "title": "Complete the Square",
+      "first_mastery_assessment_section": "8.2",
+      "planned_section_appearances": {
+        "Intro": [
+          "6.2",
+          "6.4",
+          "6.5"
+        ],
+        "Review": [
+          "7.1",
+          "7.3",
+          "7.5"
+        ],
+        "Mastery": [
+          "8.1",
+          "8.2",
+          "8.4"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U8-MG03",
+      "title": "Quadratic Formula and Discriminant",
+      "first_mastery_assessment_section": "8.5",
+      "planned_section_appearances": {
+        "Intro": [
+          "6.3",
+          "6.4",
+          "6.5"
+        ],
+        "Review": [
+          "7.2",
+          "7.4",
+          "7.5"
+        ],
+        "Mastery": [
+          "8.1",
+          "8.3",
+          "8.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U8-MG04",
+      "title": "Choose a Solution Method",
+      "first_mastery_assessment_section": "8.1",
+      "planned_section_appearances": {
+        "Intro": [
+          "6.4",
+          "6.5"
+        ],
+        "Review": [
+          "7.1",
+          "7.4",
+          "7.5"
+        ],
+        "Mastery": [
+          "8.1",
+          "8.2",
+          "8.4",
+          "8.5"
+        ]
+      },
+      "section_appearance_total": 9
+    },
+    {
+      "mastery_goal_id": "U8-MG05",
+      "title": "Quadratic Models",
+      "first_mastery_assessment_section": "8.4",
+      "planned_section_appearances": {
+        "Intro": [
+          "6.5"
+        ],
+        "Review": [
+          "7.1",
+          "7.2",
+          "7.4",
+          "7.5"
+        ],
+        "Mastery": [
+          "8.1",
+          "8.2",
+          "8.4",
+          "8.5"
+        ]
+      },
+      "section_appearance_total": 9
+    }
+  ]
+}

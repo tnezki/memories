@@ -1,5 +1,5 @@
 {
-  "schema": "algebra-checkpoint-policy/1.0",
+  "schema": "algebra-checkpoint-policy/1.1",
   "status": "PILOT_CURRENT",
   "course": "Algebra 1",
   "purpose": "Own the just-in-time personalized Checkpoint workflow while the Unit Assessment Plan owns exact learning content, the Portfolio owns current evidence need, and the reviewed Unit Bank owns question-family architecture.",
@@ -10,6 +10,7 @@
     "default_question_count": 6,
     "personalized": true,
     "visible_i_can_label": true,
+    "student_label_rule": "Show exact I Can code + full exact I Can statement with every question.",
     "normal_use_timing": "Generate only when the teacher is ready to use it so the newest Portfolio state can guide targeting."
   },
   "source_of_truth": {
@@ -42,11 +43,6 @@
     "students needing another independent demonstration for a specific I Can"
   ],
   "period_scope": ["3rd", "6th", "both"],
-  "another_demonstration_rule": {
-    "action_code": "NEEDS_ANOTHER_DEMONSTRATION",
-    "label": "Needs another independent check",
-    "note": "This is intentionally included in the pilot and may be removed later by teacher decision."
-  },
   "targeting": {
     "principle": "Portfolio decides what evidence is useful now; the Bank supplies how that evidence is elicited.",
     "priority_order_when_request_does_not_force_one_target": [
@@ -57,15 +53,19 @@
       "SECURE only when needed for balanced confirmation or legitimate extension"
     ],
     "normal_i_can_span": "Usually 2-3 target I Cans across six questions, adjusted when the selected mode intentionally focuses on one I Can.",
-    "family_rule": "Use an approved Bank family whose evidence job fits the student's next need. Family A is the normal direct/core route; B or C may be better when current evidence calls for another representation, context route, or misconception diagnosis.",
-    "fresh_instance_rule": "Author a fresh instance from the approved family architecture. Do not merely copy the exemplar values, and do not create a new architecture when an approved family fits.",
-    "legacy_destination_compatibility": "Older Bank family allowed_destinations arrays may still say Exit Ticket and may not yet list Checkpoint. That legacy destination vocabulary is not a prohibition on Checkpoint use when the current checkpoint policy selects the family by evidence job.",
+    "family_rule": "Choose any approved Bank family whose evidence job fits the student's current need. Family letters do not carry a universal A/B/C role or stage meaning.",
+    "fresh_instance_rule": "Instantiate a fresh question from the approved family architecture. Prefer deterministic/seeded generation when the family contract supports it safely; otherwise author a fresh reviewed instance. Do not invent a new architecture when an approved family fits.",
     "teacher_note_rule": "A teacher note may tune surface choices, emphasis, or print practicality but may not silently override exact I Can learning content or create unsupported evidence claims."
   },
   "independence": {
     "checkpoint_is_one_source": true,
     "same_i_can_repeated_questions": "Multiple questions for one I Can within the same Checkpoint may provide richer evidence but normally count as one source opportunity for that I Can, not multiple independent opportunities.",
     "source_map_required": true
+  },
+  "offline_generation": {
+    "preferred": true,
+    "source_map_fields": ["family_id", "seed_or_parameters", "exact_prompt", "answer_or_key"],
+    "reproducibility_rule": "When deterministic generation is used, the saved source map must contain enough seed/parameter data to reproduce the printed question."
   },
   "output": {
     "print_order": ["3rd Hour alphabetical", "6th Hour alphabetical"],
@@ -88,14 +88,13 @@
   },
   "source_map": {
     "minimum_student_fields": ["student_key", "display_name", "period"],
-    "minimum_question_fields": ["printed_number", "i_can_id", "i_can_exact_text", "family_id", "family_name", "evidence_job", "prompt", "values", "answer_or_key", "opportunity_id"],
+    "minimum_question_fields": ["printed_number", "i_can_id", "i_can_exact_text", "family_id", "family_name", "evidence_job", "prompt", "values_or_parameters", "answer_or_key", "opportunity_id"],
     "portfolio_ingestion_rule": "When later Checkpoint evidence is ingested, the private source map saved with that run is the primary lineage authority. Map the clean printed task before judging handwriting."
   },
   "privacy": {
     "public_builder_contains_private_student_data": false,
     "github_student_data_allowed": false,
-    "drive_resolution_rule": "Resolve live roster, statuses, intervention groups, and evidence from the canonical private Drive only when the request executes.",
-    "manual_name_rule": "Typed names may exist in the teacher's downloaded request ZIP but are never committed to GitHub."
+    "drive_resolution_rule": "Resolve live roster, statuses, intervention groups, and evidence from the canonical private Drive only when the request executes."
   },
   "failure_modes": {
     "drive_unavailable": "CHECKPOINT_DRIVE_STATE_UNAVAILABLE",

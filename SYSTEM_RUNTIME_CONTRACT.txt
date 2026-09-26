@@ -1,125 +1,107 @@
 CURRICULUM SYSTEM RUNTIME CONTRACT
 =================================
+STATUS: CURRENT
+REVISION: 2026-09-26 - OFFLINE-FIRST + CURRENT TRANSFER ROUTING
 
-1. Canonical GitHub stores readable authorities and long-lived readable artifacts expanded. ZIP is a handoff/transport format only unless the resource is intrinsically an archive/binary bundle. A staged build checkpoint may remain a ZIP only when the PM explicitly treats the archive boundary/integrity as part of that temporary checkpoint contract.
+1. CANONICAL GITHUB / STORAGE - HARD
+Canonical GitHub stores readable authorities and long-lived readable artifacts expanded. ZIP is a handoff/transport format only unless a current artifact contract explicitly declares another archive boundary.
 
-2. Resolve and pin the memories commit and selected course commit once at job start. Never mix later commits into the run.
+Resolve and pin the memories commit and selected course commit once at job start. Never mix later commits into one run. Resolve authorities through SYSTEM_MANIFEST.json and the relevant current registry/manifest; do not guess versioned filenames.
 
-3. Resolve authorities through SYSTEM_MANIFEST.json and the relevant registry/manifest. Do not guess versioned filenames.
+2. DECLARED AUTHORITY DIRECT-FETCH RULE - HARD
+When a required authority/resource is declared by a manifest, Framework, artifact manifest, Bank index, or request snapshot, fetch that exact declared repo/path at the pinned commit. Do not use generic public-web search, repository archaeology, similarly named files, stale uploads, prior chats, or alternate copies to discover/verify/substitute it.
 
-4. DECLARED AUTHORITY DIRECT-FETCH RULE - HARD
-When a required curriculum authority or resource is declared by the system manifest, Framework manifest, course manifest, artifact manifest, Bank manifest/index, or request snapshot, fetch that exact declared resource at the pinned commit.
-Do not use generic public-web search, repository-wide search, similarly named files, lightweight/alternate views, archived copies, prior uploads, or chat copies to discover, verify, supplement, or substitute a canonical curriculum source.
-If an exact repo/path is declared, direct-fetch that repo/path. Do not search for it.
-
-5. CONTROL PANEL REQUEST SOURCE POLICY - HARD
-Curriculum Control Panel requests are CLOSED-PROJECT-SOURCE jobs by default.
-Use only:
-- the CURRENT request and current explicit teacher instruction for that job;
+3. CONTROL PANEL REQUEST SOURCE POLICY - HARD
+Curriculum Control Panel BUILD and MAINTENANCE jobs are closed-project-source jobs by default. Use only:
+- current request/current explicit teacher instruction;
 - request-provided files;
 - exact pinned project GitHub repositories and declared paths;
 - current manifests/Frameworks/PMs/tools resolved from those pinned repositories;
-- current canonical course artifacts.
+- current canonical course artifacts;
+- explicitly authorized private state when a current operational workflow (for example Portfolio/Checkpoint) declares it.
 
-CONVERSATION ISOLATION - HARD
-Prior chats, project conversation history, saved/personal memory, assistant/model memory, prior assistant outputs, and stale chat/upload copies are NOT permitted curriculum sources or ambiguity resolvers for a Control Panel job. Ignore them for job execution even if they are visible to the model. They may not be used to discover files, select between competing sources, supplement missing content, or justify curriculum decisions. A current explicit teacher correction in the active request/turn remains allowed.
+Prior chats, project conversation history, saved/personal memory, assistant/model memory, prior assistant outputs, and stale uploaded copies are not curriculum authority or ambiguity resolvers for Control Panel execution.
 
-File Library recovery is OFF by default. It may be used only when the CURRENT request explicitly sets `file_library_project_artifact_recovery_allowed = true`.
+File Library recovery is OFF by default. It may be used only when the CURRENT request explicitly authorizes project-artifact recovery, and never as a substitute for a missing declared canonical GitHub source.
 
-Public web is NOT an allowed default curriculum source.
+Public-web research/fetch is OFF by default for Curriculum Control Panel BUILD and MAINTENANCE jobs unless current teacher instruction explicitly authorizes outside research.
 
-6. TOOL ROUTING GATE - HARD
-A request/PM/profile may declare tool-policy fields such as:
-- `web_search_allowed = false`
-- `web_fetch_allowed = false`
-- `public_web_fetch_allowed = false`
-- `external_research_allowed = false`
-- `project_github_direct_fetch_allowed = true`
-- `prior_chat_context_allowed = false`
-- `project_conversation_history_allowed = false`
-- `assistant_saved_memory_allowed = false`
-- `file_library_project_artifact_recovery_allowed = false`
+4. TOOL ROUTING GATE - HARD
+Tool-policy fields declared by a request/PM/profile are executable constraints, not commentary. When web/external research is disabled, do not perform public search/fetch detours for discovery, validation, examples, supplementation, question writing, source comparison, layout ideas, or convenience.
 
-These declarations are EXECUTABLE CONSTRAINTS, not commentary.
+Direct reads from the exact pinned project GitHub repositories are allowed when current project policy permits them. A direct pinned project read is not permission for open public-web research.
 
-When `web_search_allowed = false`:
-- do not perform any action that would appear as `Searching the web` in the ChatGPT activity for the job;
-- do not invoke public web/search-engine/browser-search tools for discovery, validation, freshness checking, examples, supplementation, question writing, source comparison, CSS/layout ideas, or convenience;
-- do not use public-web search as a fallback after a failed project-source read;
-- do not narrate or attempt a web-search detour before using a permitted exact project source.
-
-When `public_web_fetch_allowed = false`:
-- do not open/fetch public websites as substitute curriculum sources;
-- do not use a public URL to bypass a declared project GitHub path.
-
-Direct reads from the exact pinned project GitHub repositories are ALLOWED when `project_github_direct_fetch_allowed = true`. Use GitHub/project-repository tools for those reads. A direct pinned project-repository read is not permission for public-web research.
-
-7. FILE LIBRARY RECOVERY - HARD
-File Library is not curriculum authority and is disabled by default for Control Panel jobs.
-Only when the CURRENT request explicitly sets `file_library_project_artifact_recovery_allowed = true` may it be used to recover a previously generated matching project artifact needed to resume/repair the current job. A PM/profile alone does not silently enable recovery when the request says false.
-- Prefer the exact expected artifact name/course/unit/job identity.
-- Verify fingerprint/record identity before use.
-- Do not browse File Library for alternate curriculum authorities or outside replacements.
-- Do not use File Library to substitute for a missing declared canonical GitHub source.
-
-8. FAIL-CLOSED RULE - HARD
-If a required declared project source cannot be fetched directly at the pinned commit:
-- FAIL CLOSED;
+5. FAIL-CLOSED RULE - HARD
+If a required declared project source cannot be read directly at the pinned commit:
+- fail closed;
 - name the exact missing repository + commit + path/resource;
-- do not search the public web;
 - do not search around the failure for similarly named files;
 - do not substitute old uploads/chat copies/alternate representations.
+Use the selected PM's declared missing-source failure code when one exists.
 
-Failure code for a required project dependency:
-`BANK_REQUIRED_PROJECT_SOURCE_MISSING` for Bank jobs, or the selected PM's equivalent missing-source code.
+6. READ BUDGET / AUTHORITY OWNERSHIP
+Read only files the selected PM requires. When a manifest declares a purpose-specific canonical file, use that file rather than opening broad trees.
 
-If public web research is used despite a no-web request, the affected curriculum build cannot PASS. Record `UNAUTHORIZED_PUBLIC_WEB_SOURCE`.
+Ownership:
+- Philosophy -> universal learning/system principles;
+- Question Structure -> shared task-design vocabulary;
+- Framework/course profiles/maps -> course behavior and exact recurring architecture;
+- PM -> procedure;
+- registered tools/templates -> deterministic mechanics/rendering;
+- Git history -> version history.
 
-9. DEFAULT NO-WEB SCOPE - HARD
-All Curriculum Control Panel BUILD and MAINTENANCE requests are NO-PUBLIC-WEB by default.
-GENERAL requests created by the Control Panel are also no-public-web unless a future explicit request-level opt-in says otherwise.
-This includes Bank Map, Bank Complete, Notes, Practice, Activities, Exit, Warm-Up, Progress, Review, Summative, Practice-to-Summative, Demos/Investigations, Performance/Quick Checks, Discourse, First 4 Days, Unit Plan, Portfolio, and maintenance jobs.
-A Framework/profile hint, source note, model judgment, or convenience does not override the request-level no-web policy.
-Only explicit current teacher authorization for outside research may change it.
+7. OFFLINE-FIRST DETERMINISTIC ASSEMBLY - HARD DIRECTION
+When approved maps, Bank families, templates, parameters, and validators define a classroom artifact sufficiently, prefer local/offline deterministic assembly over repeatedly asking AI to reinvent routine content.
 
-10. READ BUDGET
-Read only the files the selected PM requires. Heavy source/resource trees are on-demand resources, not default authority payloads. When a manifest declares a purpose-specific canonical file, use that file directly instead of opening a broader aggregate and searching inside it.
+Safe deterministic work includes, when explicitly authorized by the owning family/contract:
+- number/value/data substitution;
+- table generation from a rule;
+- graph/diagram generation through registered tools;
+- computed answers/solutions;
+- controlled misconception distractors;
+- seeded parallel instances;
+- question/answer-choice scrambling;
+- count/path/syntax/hash validation;
+- repeatable packaging and mechanical QA.
 
-11. OUTPUT / HANDOFF — LOCAL REPO TRANSFER
-For Curriculum Control Panel BUILD and MAINTENANCE jobs whose canonical repository destination is known, return ONE local repository transfer ZIP using the contract declared by `local_transfer_contract` in SYSTEM_MANIFEST.json.
+Every deterministic instance must preserve the exact learning target/I Can, evidence job, representation demand, response mode, usable difficulty, and family invariants. Store seed/parameters/provenance when the current schema supports them so an output can be reproduced.
 
-The transfer ZIP is an OUTER transport wrapper only. It does not change the selected PM's canonical artifact content, filename, directory shape, or deployable form. The canonical artifact files live under `payload/<repo-folder>/<canonical-relative-path>` and TRANSFER_MANIFEST.json tells the local helper exactly which files to create, replace, or intentionally delete.
+Offline-first does NOT mean AI-free. Semantic curriculum authoring, new family design, rich-context writing, pedagogical repair, and teacher-facing judgment remain appropriate AI/teacher work. Never force deterministic generation when it reduces quality or changes the student thinking job.
 
-For a one-file artifact with a known canonical repo path, wrap that file in the transfer package instead of returning a naked file.
-For a multi-file artifact, wrap the complete canonical replacement tree or exact approved changed-file set as required by the selected PM/maintenance scope.
-Do not require the teacher to unzip and manually place returned curriculum files.
+8. LOCAL REPOSITORY TRANSFER - HARD
+For Curriculum Control Panel BUILD/MAINTENANCE jobs whose canonical repository destination is known, return ONE local repository transfer ZIP using the contract declared by `local_transfer_contract` in SYSTEM_MANIFEST.json.
 
-If the current authorities do not declare enough information to resolve a safe repository destination, fail as `TRANSFER_DESTINATION_UNDECLARED` rather than guessing.
+The transfer ZIP is an OUTER transport wrapper only. Canonical files live under:
+  payload/<repo-folder>/<canonical-relative-path>
+with TRANSFER_MANIFEST.json declaring create/replace/delete actions.
 
-The local transfer helper performs no Git operations. After installation, changes remain uncommitted for teacher review in GitHub Desktop.
+For one-file or multi-file repository changes, use the transfer wrapper rather than naked repository files. Do not require the teacher to unzip and manually place curriculum files.
 
-12. AUTHORITY OWNERSHIP
-PMs own procedure; manifests own stable discovery; Framework/course profiles own course-specific behavior; Git history owns version history.
+If authorities do not declare enough information to resolve a safe repository destination, fail as:
+  TRANSFER_DESTINATION_UNDECLARED
+rather than guessing.
 
-13. AUTOMATIC OUTPUT FINALIZATION - HARD
-Every Curriculum Control Panel BUILD or MAINTENANCE job that produces or replaces files must run the current system finalization contract declared by SYSTEM_MANIFEST.json before returning the artifact.
+The local transfer helper performs no Git operations. After installation, changes remain uncommitted for teacher review in GitHub Desktop. Do not commit, push, pull, merge, branch, or create a PR unless a current explicit teacher request separately authorizes such Git work.
 
-Resolve:
-- `finalization_contract` from SYSTEM_MANIFEST.json;
-- all finalizer/validator tools only through Tools/MANIFEST.json.
+9. PRIVATE-STATE WORKFLOW EXCEPTIONS
+Current operational workflows may declare a delivery exception in SYSTEM_MANIFEST/runtime amendments. In particular, Portfolio and personalized Checkpoint runs may read/write authorized private state and return their declared runtime artifacts rather than a GitHub Transfer ZIP. Those exceptions do not broaden ordinary curriculum build source policy or authorize student data in GitHub.
+
+10. AUTOMATIC OUTPUT FINALIZATION - HARD
+Every Curriculum Control Panel BUILD or MAINTENANCE job that produces/replaces files must run the current finalization contract declared by SYSTEM_MANIFEST.json before packaging/return.
 
 Required order:
-1. complete the selected PM's normal build/repair and artifact-specific QA;
-2. run every artifact-specific registered validator/normalizer that the selected PM requires;
-3. run the registered universal `finalize_output` tool against the COMPLETE final staging tree;
-4. if finalization changes bytes that an artifact-specific validator covers, rerun that affected validator;
-5. package/return only after the required checks PASS.
+1. complete normal build/repair and artifact-specific QA;
+2. run artifact-specific registered validators/normalizers;
+3. run registered universal `finalize_output` against the complete final staging tree;
+4. if finalization changes bytes covered by another validator, rerun that affected validator;
+5. package/return only after required checks pass.
 
-The universal finalization layer may repair only deterministic/mechanical output defects. It may not change curriculum meaning, question content, evidence mappings, difficulty, security, Learning Targets/I Cans, or other upstream-owned instructional decisions.
+Universal finalization may repair only deterministic/mechanical output defects. It may not change curriculum meaning, question content, evidence mappings, difficulty, security, Learning Targets/I Cans, or other upstream instructional decisions.
 
-MathJax/TeX repair is part of universal finalization through the registered `fix_mathjax_output` tool. The fixer must preserve the artifact's existing delimiter family. Current Algebra Notes use `\\(...\\)` and `\\[...\\]`; the finalizer must not convert them to dollar delimiters merely because a legacy script did so.
+Required successful terminal signal:
+  FINALIZATION_QA: PASS
 
-A Control Panel artifact cannot report final PASS when required universal finalization returns nonzero. Repair allowed local/mechanical defects and rerun; otherwise report/fail according to the selected PM.
+11. HUMAN REVIEW / AUTHORITY PROMOTION
+Generated curriculum is a candidate until teacher review/testing and intentional sync to canonical GitHub. Runtime automation may install files locally through the transfer helper, but installation itself does not promote a curriculum decision beyond the teacher's review/sync step.
 
-The required successful terminal signal is:
-`FINALIZATION_QA: PASS`
+END - CURRICULUM SYSTEM RUNTIME CONTRACT

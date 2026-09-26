@@ -1,87 +1,46 @@
-BUILD UNIT FAMILY BANK — MASTERY GOAL / I CAN / A-B-C ARCHITECTURE
-=====================================================================
+BUILD UNIT FAMILY BANK - QUALITY FAMILY POOL / OFFLINE-READY
+============================================================
 STATUS: CURRENT
 STEP: 3
 JOB: bank
-REVISION: 2026-09-13 v3.0 — COURSE-AWARE FAMILY BANK
+REVISION: 2026-09-26 v4.0
 
 ROLE
-----
-Build the canonical Unit Bank as reusable question families organized:
-  Mastery Goal -> exact I Can -> Family A / B / C -> one complete exemplar.
+Build the canonical Unit Bank as reusable question-family/generator architecture organized:
+  Mastery Goal -> exact I Can -> approved Question Families.
+The Bank is not a warehouse of finished Practice/Quick Check/Summative questions.
 
-The Bank is a reusable architecture/source layer. It is NOT a permanent destination inventory for Practice, WTC, Notes examples, Warm-Ups, Quick Checks, or Summatives.
+0. AUTHORITY / SOURCE BOUNDARY - HARD
+Use current teacher instruction, pinned Philosophy/Runtime, current Algebra Framework + exact Unit Assessment Plan, current bank profile, Question Structure, registered tools, and local transfer contract. No public-web research or prior-chat curriculum sourcing.
 
-0. SOURCE BOUNDARY — HARD
--------------------------
-Use only current teacher instruction, request-provided files, and exact pinned project GitHub sources. No public web, File Library recovery, prior chats, stale request packages, or existing Bank question content. Existing Bank files may be inspected only for path migration. Pin the system and course repositories once at job start.
+1. ALL CURRENT I CANS - HARD
+Use every exact current Unit Mastery Goal/I Can. Preserve IDs/text exactly.
+Teacher/student displays use:
+  <CANONICAL CODE> — <FULL EXACT I CAN STATEMENT>
 
-1. AUTHORITY / RESOLUTION — HARD
--------------------------------
-Read: Curriculum_Philosophy.txt; SYSTEM_RUNTIME_CONTRACT.txt; current Course Framework manifest/front door; declared Unit Assessment Plan; declared per-Unit learning map when the Framework manifest provides one; declared current course family-bank profile/amendment; _question_structure/QUESTION_STRUCTURE_CORE.md; Tools/MANIFEST.json; Tools/LOCAL_REPO_TRANSFER_CONTRACT.txt.
+2. FAMILY COUNT - QUALITY GATE
+No fixed A/B/C count.
+- aim for about 8-10 materially different quality families per I Can;
+- about 6 may be enough for a narrow I Can;
+- exceed 10 only when another family genuinely adds a useful student job;
+- never create filler to hit a quota.
+Existing family letters remain stable IDs only; they do not encode stage, difficulty, or universal semantic roles.
 
-The Assessment Plan owns exact learning. A current per-Unit learning map is derivative routing aid. A course profile/amendment owns course-specific family behavior. Question Structure owns universal task design. This PM owns procedure.
+3. FAMILY RECORD - HARD
+Each family records stable identity, exact MG/I Can, family name/purpose, evidence job, student action, Question Structure when applicable, response/representation mode, invariants, variation axes, forbidden variations, fresh-instance rule, security/destination guidance, one complete exemplar, answer/solution/scoring guidance, and provenance.
 
-If the Course Framework manifest declares a migrated Unit override, that Unit override supersedes stale global indexes and legacy Bank profiles for the declared Unit only.
+4. OFFLINE GENERATOR METADATA
+Classify each family as STATIC, PARAMETERIZED, or DETERMINISTIC when useful. For parameterized/deterministic families include only defensible metadata such as parameter ranges, constraints, answer rule, graph/table generation, approved inversions, misconception/distractor rules, context/unit pools, seed behavior, and validated test seeds. Do not force deterministic generation where it harms quality.
 
-2. RESOLVE ALL CURRENT I CANS — HARD
-------------------------------------
-Use every exact current I Can in the Unit. There is NO fixed I Can count and no 4x4 assumption. Do not add, merge, split, or drop I Cans in Bank authoring. Preserve canonical MG IDs/titles and I Can IDs/text exactly.
+5. DISTINCTNESS / REPRESENTATION
+A new family must materially change how students demonstrate the I Can. Number/name/noun swaps alone are variations, not new families. Use registered graph/representation tools. Do not add decorative or answer-leaking representations.
 
-HUMAN LABEL RULE — HARD
-Whenever a teacher/student-facing artifact displays an I Can, display: <CANONICAL CODE> · <FULL EXACT I CAN STATEMENT>. Never use code-only ranges or code without the statement as the human learning label.
+6. OUTPUT
+Canonical course path:
+  banks/unitN/
+Include current manifest/index/delivery/provenance/viewers/mastery-goal records and figures only when needed. Do not create permanent WTC, CYU, Tarsia, Blooket, Practice-set, Quick-Check, or Summative finished-question inventories unless a later current secure contract explicitly owns them.
 
-3. EXACTLY THREE MATERIAL FAMILIES PER I CAN — HARD
-----------------------------------------------------
-Family A — CORE / DIRECT EVIDENCE: clean direct proof of the I Can.
-Family B — ALTERNATE REPRESENTATION / APPLICATION: same I Can through a meaningfully different representation, setup, context, or direction.
-Family C — REASONING / MISCONCEPTION / TRANSFER: a genuinely different reasoning route when natural. Do not force error analysis if another route is better.
+7. QA / DELIVERY
+Validate exact identities, family distinctness, exemplar completeness/correctness, generator constraints, representation fidelity, anchors/viewers, JSON/schema integrity, and registered finalization. Return ONE github_transfer / 2 ZIP. No Git operations.
 
-Changing only numbers, names, nouns, colors, or sentence order is not a different family. Expected family count = exact I Can count x 3.
-
-4. FAMILY RECORD — HARD
------------------------
-Each family records family_id, A/B/C label, MG identity, exact I Can code+text, family name/purpose, evidence job, student action, question_structure_id, response mode, representation mode, invariants, variation axes, forbidden variations, fresh-instance rule, destination guidance, security, one complete exemplar (prompt/student_html/answer/solution/scoring guidance), and provenance.
-
-5. AUTHORING / REPRESENTATION — HARD
-------------------------------------
-Use the current Question Structure chain: target -> evidence job -> student action -> structure -> response mode -> representation -> render route. A representation counts only when students actually use it. Selected response must show real choices. Tables must be semantic HTML tables. Coordinate/data graphs use the registered graph tool when applicable. Course-authorized simple diagrams/vectors/FBDs may use the course profile's deterministic route. No decorative or answer-leaking representations.
-
-Author ONE strong exemplar per family. Do not mass-author destination instances in this job. Independently solve/check each exemplar.
-
-6. CANONICAL OUTPUT — HARD
---------------------------
-Write to the course repository: banks/unitN/
-Required: BANK_MANIFEST.json, FAMILY_INDEX.json, delivery_map.json, BUILD_REPORT.txt, PROVENANCE.json, unitN.html, student.html, mastery_goals/<MG-ID>.json. Add figures/ only when actual external assets are required.
-
-Do not create permanent Exit/Practice/Summative/WTC/Notes-example question inventories in the canonical family Bank.
-
-7. VIEWERS / PUBLIC ANCHORS — HARD
-----------------------------------
-unitN.html = teacher technical family view. student.html = student practice view. Group MG -> I Can -> A/B/C. Keep all three families for one I Can together. Every MG, I Can, and family exposes its canonical ID as fragment anchor. Direct URLs must scroll/highlight after async data rendering. Student viewer must remain usable on narrow/mobile screens.
-
-8. PHYSICS SPECIALIZATION WHEN DECLARED
----------------------------------------
-For Conceptual Physics migrated Units, read the registered Physics family-bank profile/amendment. Conceptual before computational; equations are relationships; physical situations must be plausible; irrelevant values fail; diagrams/vectors/models must be real usable representations; simple answer-neutral inline SVG is permitted only where the Physics profile authorizes it.
-
-9. LIGHT QA — FIVE CHECKS
--------------------------
-1. Count/identity/anchors: all exact MGs/I Cans, exactly 3 families each, unique IDs, human code+statement labels.
-2. Family distinctness: A/B/C are materially different evidence routes.
-3. Exemplar completeness: real prompt, all data present, no placeholders.
-4. Physics/math/representation: answer and solution correct; visible representation agrees with prompt; no leakage.
-5. Finalization: run registered universal finalizer when available; otherwise fail closed if the current runtime requires it.
-
-10. REPLACEMENT / LEGACY BOUNDARY
----------------------------------
-A migrated Unit's new BANK_MANIFEST.json is the canonical front door. Legacy destination-driven files are not question authority. Prefer deleting obsolete legacy files through the local transfer contract when exact deletion guards are available. If a migration pass cannot safely delete them, the new manifest and Framework Unit override MUST explicitly mark those paths SUPERSEDED_NOT_AUTHORITY so no downstream job reads them.
-
-11. GOOD-ENOUGH STOP
---------------------
-When all current I Cans have 3 strong families, exemplars are complete/correct, viewers and anchors work, manifest says COMPLETE / ready_for_downstream / PASS, and the five QA checks pass: STOP. Do not mass-author practice or assessment items.
-
-12. DELIVERY
------------
-Return one GitHub Transfer v2 ZIP containing only changed canonical files. Do not write/commit/push GitHub.
-
-END — UNIT FAMILY BANK
+END - UNIT FAMILY BANK
