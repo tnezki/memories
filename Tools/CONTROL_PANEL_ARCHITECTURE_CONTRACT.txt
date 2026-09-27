@@ -1,15 +1,15 @@
 CURRICULUM CONTROL PANEL ARCHITECTURE CONTRACT
 ==============================================
 STATUS: CURRENT
-REVISION: 2026-09-26 v1.3
+REVISION: 2026-09-27 v1.4
 
 PURPOSE
-Keep the canonical Curriculum Control Panel small and stable while separating shared curriculum/resources from owner-only operational tools.
+Keep the canonical Curriculum Control Panel small and stable while separating released curriculum/resources from local teacher-only operating controls.
 
 CORE MODEL - HARD
 The canonical Curriculum Control Panel is the BUILD FACTORY.
-The course Teacher Dashboard is the SHARED TEACHER RESOURCE SURFACE.
-The local owner-tools root is the OWNER OPERATING SURFACE.
+The course Teacher Dashboard is a TEMPORARY SHARED TEACHER RESOURCE SURFACE during Planner migration.
+The local owner-tools root is the TEACHER OPERATING SURFACE.
 
 For Algebra 1 the owner-tools root is:
   _algebra_teacher_tools/
@@ -54,45 +54,57 @@ GENERAL MODE
 Purpose-specific general PMs are owned by pms_general/MANIFEST.json.
 
 SHARED TEACHER DASHBOARD - HARD
-The shared Algebra Teacher Dashboard may expose finished curriculum/resources that another Algebra teacher can use: Notes, Practice, Activities, Investigations, Warm-Ups, Reviews, approved Quick Check products, intentionally shared Checkpoint products, assessment plans, Banks/teacher views, Summatives, and approved shared teacher resources.
+During transition, the shared Algebra Teacher Dashboard may expose FINISHED curriculum/resources that another Algebra teacher can use: Notes, Practice, Activities, Investigations, Warm-Ups, Reviews, approved Quick Check products, intentionally shared Checkpoint products, assessment plans, Banks/teacher views, Summatives, Performance Tasks, saved teacher practice products, and approved shared teacher resources.
 
-It MUST NOT expose owner-only operational controls for:
+It MUST NOT expose teacher-only creation/management controls for:
 - Portfolio evidence processing;
 - Portfolio email/report delivery;
 - personalized Checkpoint Builder;
-- Quick Check Builder/selector.
+- Quick Check Builder/selector;
+- Teacher Practice Builder;
+- Performance Task control/builder;
+- future Set/Summative/Investigation builder controls.
 
 The dashboard distinguishes PRODUCTS from CONTROLS:
 - green Quick Checks / Checkpoints Unit buttons open finished-product libraries;
 - the corresponding builders stay in _algebra_teacher_tools.
 
-Hiding a public link is not the long-term security boundary. Owner-only builder/control pages belong under _algebra_teacher_tools and should not remain as active public repository control pages after migration.
+Hiding a public link is not the long-term security boundary. Teacher-only builder/control pages belong under _algebra_teacher_tools and should not remain as active public repository control pages after migration.
 
 STUDENT PRACTICE BUILDER
-The Student Practice Builder is a student/course resource, not a repeated Unit owner-control button. Shared/public dashboards should link the hosted course route:
+The Student Practice Builder is a student/course resource, not a repeated Unit teacher-control button. Shared/public Planner/dashboard surfaces should link the hosted course route:
   https://tnezki.github.io/algebra/practice_builder___p7r4x/student_practice_builder.html
-so a teacher opening a local dashboard does not trigger file:// fetch failures.
+so a teacher opening a local page does not trigger file:// fetch failures.
 
 ALGEBRA OWNER TOOLS - HARD
 Current owner-local entry points include:
 - _algebra_teacher_tools/index.html
 - _algebra_teacher_tools/tools/checkpoint/checkpoint_builder.html
 - _algebra_teacher_tools/tools/quick_check/quick_N.html
-- Portfolio/email launch links surfaced only from the local owner index.
+- _algebra_teacher_tools/tools/practice/teacher_practice_builder.html
+- _algebra_teacher_tools/tools/performance_task/performance_task_control_panel.html
+- Portfolio/email launch links surfaced only from the local owner index while Portfolio is consolidated into Teacher Tools.app.
 
-The owner index should group tools by job rather than give every control its own large card. At minimum it provides:
+The owner index groups tools by job rather than giving every control its own large card. At minimum it provides:
 - Shared Curriculum links;
 - Private Evidence links;
-- Builders (Quick Check, Checkpoint, Practice/Set, Summative, Investigation, Performance Task, etc.);
-- First Build buttons for the current Build factory sequence;
+- Builders;
+- First Build buttons;
 - Repair/Maintenance links;
 - current Control Panels;
 - finished evidence-library links.
 
 The owner-tools folder stores controls/software only, not student evidence state. Student/private state remains in its authorized private location. Relative links should assume the stable sibling layout rather than hard-coding one machine-specific absolute path.
 
+LOCAL SERVICE PORTS - HARD
+Until Teacher Tools.app consolidates service launch:
+- Portfolio Local Companion owns 127.0.0.1:8765.
+- Curriculum Builder Pilot owns 127.0.0.1:8766.
+Do not configure both services to the same port.
+A browser page must not pretend it can reliably execute a local .command file. The future Teacher Tools.app is the supported one-click service launcher.
+
 FINISHED PRODUCT LIBRARIES - HARD
-Shared finished assessment products use library/index surfaces so a teacher can find every intentionally retained version without receiving the builder.
+Shared finished assessment products use library/index surfaces so a teacher can find intentionally retained versions without receiving the builder.
 
 Quick Checks:
   algebra/quick_check____htq5855/library.html
@@ -105,20 +117,24 @@ Checkpoints:
 Only intentionally shared, non-student-specific Checkpoint products may appear there. Personalized Checkpoint runs remain private.
 
 DASHBOARD MAINTENANCE MODEL
-Shared artifact outputs remain course/unit/section organized. Owner-only creation/management controls live locally. A shared teacher should be able to open a produced Quick Check without receiving access to the selector that creates it.
+Shared artifact outputs remain course/unit/section organized. Teacher-only creation/management controls live locally. A shared teacher should be able to open a produced artifact without receiving the control that changes canonical curriculum.
 
 ALGEBRA RECURRENCE / SET BUILDER REQUIREMENT
-The Algebra Teacher Dashboard/owner hub must preserve access to the current mastery recurrence map:
+The Algebra owner hub and future Planner must preserve access to the current mastery recurrence map:
   frameworks/2_Framework_Algebra_1/Algebra1_Spiral_Framework/curriculum/mastery_recurrence_map.html
-and provide a clear route to the section Set Builder/control surface from local owner tools, while shared finished Sets remain available from the shared dashboard.
+and provide a clear route to the section Set Builder/control surface from local teacher tools, while released Sets remain available through normal course resources.
 
 The Set Builder should open with recommended Target Plan A and Target Plan B from the recurrence map/current course profile. The teacher edits the recommendation rather than building the I Can mix from scratch.
 
+PROVENANCE / ACTIVE REPOSITORY CLEANLINESS - HARD
+Top-level build-receipt folders such as _exit_provenance, _notes_provenance, and _warmup_provenance are not active runtime authority and should not be recreated in current course repositories. Git history, current manifests, Bank resolution/revision metadata, and per-product source maps own the history that still matters.
+Do not keep stale standalone provenance files when they duplicate current authority or reference retired routing/contracts.
+
 QUICK CHECK OWNER-TOOL RULE
-Algebra Build Quick Checks remains in initial Build because it creates/repairs the owner-local Unit selector. Routine section Quick Checks are built from that local selector. Approved products deploy to append-only run folders in the Algebra repository and are registered in the shared Quick Check library.
+Algebra Build Quick Checks remains in initial Build because it creates/repairs the owner-local Unit selector. Routine section Quick Checks are built from that local selector. Approved products deploy to append-only run folders and are registered in the shared Quick Check library.
 
 PORTFOLIO / PRIVATE EVIDENCE
-Portfolio/evidence processing is an owner-only private-data workflow, not an initial curriculum build job and not a shared-dashboard control.
+Portfolio/evidence processing is a teacher-only private-data workflow, not an initial curriculum build job and not a shared-dashboard control.
 
 TRANSFER / REVIEW
 Repository-targeting jobs return through the current local GitHub Transfer contract. Declared owner-local tool files under _algebra_teacher_tools may use the same transfer helper because destinations remain inside /Users/troynezki/Documents/GitHub; they are installed locally without Git operations and are never committed merely because they live beside repositories.

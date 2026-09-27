@@ -1,14 +1,27 @@
-BUILD / RUN STUDENT PRACTICE BUILDER - BANK FAMILY GENERATION
-==============================================================
+BUILD / RUN PRACTICE BUILDERS - BANK FAMILY GENERATION
+======================================================
 STATUS: CURRENT
 JOB: practice_builder
-REVISION: 2026-09-26 v2.0
+REVISION: 2026-09-27 v2.1
 
 ROLE
-Provide targeted Algebra practice from teacher/student-selected exact I Cans. The builder may request 1-10 questions per selected I Can.
+Provide targeted Algebra practice from selected exact I Cans using the current resolved approved Bank family pool.
+
+TWO SURFACES
+1. STUDENT PRACTICE BUILDER
+   Public/course resource:
+     algebra/practice_builder___p7r4x/student_practice_builder.html
+   Students select I Cans and receive practice from the approved student pool.
+
+2. TEACHER PRACTICE BUILDER
+   Teacher-only local control:
+     _algebra_teacher_tools/tools/practice/teacher_practice_builder.html
+   It must not remain as an active public control page in the Algebra repository.
+   Saved finished practices may remain shareable course products/library entries.
 
 SOURCE GATE
-Use the selected Unit's approved Bank/family index/pool. Do not invent unsupported I Cans or unrelated question architectures.
+Resolve the selected Unit Bank through BANK_RESOLUTION.json. Use base + extension + current revision overlay and only current APPROVED, nonsuperseded families. There is no three-family A/B/C limit; family letters are stable IDs only.
+Do not invent unsupported I Cans or unrelated question architectures.
 
 SELECTION / GENERATION
 For each selected I Can:
@@ -25,8 +38,9 @@ If there are not enough safe unique instances to satisfy the requested count, fa
 
 OUTPUT
 Preserve current student packet + teacher key behavior and source lineage. A New Version action should create another valid selection of sibling instances, not merely reshuffle identical finished questions when additional valid instances exist.
+Teacher-saved practice products append to their library and never overwrite normal section practice_sets.
 
 DELIVERY
-Tool-code changes use ONE github_transfer / 2 ZIP. Runtime student packet behavior follows the deployed tool's current local/browser contract. No Git operations.
+Tool-code changes use ONE github_transfer / 2 ZIP. Runtime student packet behavior follows the deployed tool's current browser/local contract. No Git operations.
 
-END - PRACTICE BUILDER
+END - PRACTICE BUILDERS
