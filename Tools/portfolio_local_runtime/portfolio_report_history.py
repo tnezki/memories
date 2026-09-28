@@ -45,7 +45,7 @@ def _evidence_signature(row: dict[str, str]) -> tuple[str, ...]:
     )
 
 
-def recent_evidence_by_student(state_dir: Path, limit: int = 8) -> dict[str, list[dict[str, str]]]:
+def recent_evidence_by_student(state_dir: Path, limit: int = 4) -> dict[str, list[dict[str, str]]]:
     path = state_dir / "evidence_ledger.csv"
     if not path.is_file():
         return {}
@@ -55,6 +55,7 @@ def recent_evidence_by_student(state_dir: Path, limit: int = 8) -> dict[str, lis
 
     # The Portfolio ledger is append-only. Reading it backward therefore gives
     # the true most-recent evidence order, including repeated checks on the same I Can.
+    # Family reports intentionally cap this history at four rows to preserve the locked two-page layout.
     for row in reversed(rows):
         sk = _clean(row.get("student_key"))
         iid = _clean(row.get("i_can_id"))
@@ -102,7 +103,7 @@ def _replace_recent_tbody(doc: str, rows_html: str) -> str:
 
 
 def _postprocess_student_reports(out_dir: Path, manifest: dict[str, Any], state_dir: Path) -> None:
-    recent = recent_evidence_by_student(state_dir, limit=8)
+    recent = recent_evidence_by_student(state_dir, limit=4)
     articles: list[str] = []
 
     for student in manifest.get("students", []):

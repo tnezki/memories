@@ -11,8 +11,13 @@ from pathlib import Path
 import portfolio_companion as core
 import portfolio_companion_notes as notes
 import portfolio_report_history as report_history
+import portfolio_email_message as email_message
+import portfolio_support_contacts as support_contacts
+import portfolio_grading_package as grading_package
 
 report_history.install_patch()
+email_message.install_patch()
+core.build_request = grading_package.build_request
 
 
 STATUS_LABELS = {
@@ -106,12 +111,23 @@ def _observation_status_map(course: str, unit: int) -> dict[str, dict[str, dict[
 class Handler(notes.Handler):
     """Portfolio UI with email notes, evidence history, and observation counts."""
 
-    server_version = "PortfolioLocalCompanion/1.8-evidence-history"
+    server_version = "PortfolioLocalCompanion/1.9-grading-package"
 
     def do_GET(self) -> None:
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path == "/api/runtime-version":
-            self.send_json({"status": "PASS", "version": "1.8-evidence-history"})
+            self.send_json({"status": "PASS", "version": "1.9-grading-package"})
+            return
+        if parsed.path == "/api/support-contacts":
+            try:
+                q = urllib.parse.parse_qs(parsed.query)
+                course = (q.get("course") or [""])[0]
+                unit = int((q.get("unit") or ["1"])[0])
+                # Validate that the selected Portfolio state exists before showing contacts.
+                core.observation_data(course, unit)
+                self.send_json(support_contacts.api_payload())
+            except Exception as exc:
+                self.send_json({"status": "FAIL", "message": str(exc)}, status=400)
             return
         if parsed.path != "/api/observation-data":
             super().do_GET()
@@ -126,6 +142,32 @@ class Handler(notes.Handler):
         except Exception as exc:
             self.send_json({"status": "FAIL", "message": str(exc)}, status=400)
 
+    def do_POST(self) -> None:
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path != "/api/support-contacts":
+            super().do_POST()
+            return
+        try:
+            fields, files = core.parse_form(self)
+            course = core.one(fields, "course")
+            unit = int(core.one(fields, "unit", "1"))
+            core.observation_data(course, unit)
+            pasted = core.one(fields, "pasted_text", "")
+            replace = core.one(fields, "replace", "").strip().lower() in {"1", "true", "yes", "on"}
+            result = support_contacts.update_from_sources(files.get("support_file", []), pasted, replace=replace)
+            result.update({
+                "status": "PASS",
+                "message": (
+                    f"Saved {result.get('imported_count', 0)} support assignment(s). "
+                    f"Contact directory now has {result.get('active_count', 0)} active row(s). "
+                    "Email Reports will use the updated support recipients on reload."
+                ),
+            })
+            self.send_json(result)
+        except Exception as exc:
+            self.send_json({"status": "FAIL", "message": str(exc)}, status=400)
+
+
 
 def main() -> int:
     import argparse
@@ -139,7 +181,7 @@ def main() -> int:
     url = f"http://{core.HOST}:{args.port}/"
     print("Portfolio Local Companion is running.")
     print(f"Local URL: {url}")
-    print("Runtime: evidence-history-1.8")
+    print("Runtime: evidence-history-1.9 + grading package + support contacts")
     print("The helper is local to this Mac and does not expose Portfolio data to the network.")
     print("Press Control-C to stop this foreground instance.\n")
     if not args.no_open:

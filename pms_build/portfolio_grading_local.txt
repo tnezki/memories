@@ -2,11 +2,11 @@ PORTFOLIO FAST LOCAL GRADING - CHATGPT JUDGMENT ONLY
 ====================================================
 STATUS: CURRENT
 JOB: portfolio_grading_local
-REVISION: 2026-09-23 v1.0
+REVISION: 2026-09-28 v1.1
 
 PURPOSE
 -------
-Handle a `portfolio-grading-request/1.0` package. ChatGPT performs only the judgment work that benefits from model reasoning. The teacher's local Python runtime owns longitudinal state, status/grade calculation, intervention sorting, HTML report generation, PowerSchool exports, PDF email preparation, archival, and local installation.
+Handle a `portfolio-grading-request/1.0` package. ChatGPT performs only the judgment work that benefits from model reasoning. The teacher's local Python runtime owns longitudinal state, status/grade calculation, intervention sorting, HTML report generation, PowerSchool exports, PDF email preparation, archival, evidence-file installation, and local installation.
 
 AUTHORITY
 ---------
@@ -26,7 +26,8 @@ CHATGPT OWNS:
 - write concise specific feedback/diagnostic note;
 - identify independence/opportunity relationships;
 - flag unresolved identity/mapping/contradiction issues;
-- optionally provide concise class-level evidence patterns/teacher-move language.
+- optionally provide concise class-level evidence patterns/teacher-move language;
+- package the result JSON together with byte-for-byte copies of the original evidence files and a next-step reminder.
 
 LOCAL PYTHON OWNS:
 - evidence-ledger append/deduplication;
@@ -40,22 +41,54 @@ LOCAL PYTHON OWNS:
 - current-state/version chain;
 - state/results archives;
 - folders 03-05;
-- email PDFs/manifests.
+- email PDFs/manifests;
+- installing the original evidence files into `01 Evidence Inbox/Applied` after a successful apply;
+- archiving the grading JSON and grading package under `02 Portfolio Data/Applied Grading Results`.
 
 DO NOT build or return:
 - Portfolio_State_UPDATED.zip;
 - Portfolio_Results.zip;
-- PDFs;
+- newly rendered or annotated PDFs;
 - PowerSchool CSVs;
 - GitHub Transfer ZIPs.
 
-OUTPUT - HARD
--------------
+OUTPUT PACKAGE - HARD
+---------------------
 Return exactly one downloadable artifact:
-  Portfolio_Grading_Result.json
+  Portfolio_Grading_Result_Package.zip
 
-It must conform to:
+The ZIP must contain exactly these required items plus the evidence files listed in REQUEST.json:
+  Portfolio_Grading_Result.json
+  PACKAGE_MANIFEST.json
+  NEXT_STEP.txt
+  evidence/<exact original evidence filename(s)>
+
+`Portfolio_Grading_Result.json` must conform to:
   Tools/portfolio_local_runtime/PORTFOLIO_GRADING_RESULT_SCHEMA.json
+
+The evidence files in the response package are archival copies, NOT regenerated grading products:
+- copy every file listed in REQUEST.json `source.evidence_files` byte-for-byte from the request package's `evidence/` folder;
+- preserve each exact filename and SHA-256;
+- if the source is a PDF, return the exact original PDF bytes rather than rendering a new PDF;
+- do not include teacher-only `supporting/` files in the evidence archive unless the teacher explicitly asks for them.
+
+`PACKAGE_MANIFEST.json` must use:
+  schema: portfolio-grading-result-package/1.0
+and include:
+  course
+  unit
+  run_id
+  result_file = Portfolio_Grading_Result.json
+  evidence_files = [{name, path, sha256}, ...]
+where each `path` is `evidence/<exact filename>`.
+
+`NEXT_STEP.txt` must be short and teacher-facing. It must say:
+  1. Download this ZIP to Downloads.
+  2. Double-click:
+     memories/Tools/portfolio_local_runtime/Apply Portfolio Grading Result.command
+  3. The local runtime will apply the JSON, archive the original evidence into 01 Evidence Inbox/Applied, refresh Portfolio reports/PowerSchool exports, and archive the grading result.
+
+Do not require the teacher to manually unzip, move, rename, or extract any file from the grading package.
 
 Copy `course`, `unit`, and the complete `parent_state` object exactly from REQUEST.json.
 Copy each source filename/SHA-256 exactly from REQUEST.json when referenced by a judgment.
@@ -101,7 +134,7 @@ CLASS INSIGHTS - OPTIONAL
 
 PRIVACY
 -------
-This is private student grading material. Do not write student data to GitHub. Do not browse public web. Do not use Google Drive.
+This is private student grading material. Do not write student data to GitHub. Do not browse public web. Do not use Google Drive. The response package is a private teacher handoff and may contain exact copies of the evidence files that were already supplied in the grading request.
 
 END
 
