@@ -40,7 +40,7 @@ COURSE_CONFIG = {
             1: {
                 "title": "Foundations of Functions and Algebra",
                 "essential_standard": "Use graphs, slope, rules, expressions, and equations as basic tools for Algebra 1.",
-                "practice_url": "https://tnezki.github.io/algebra/practice_builder___p7r4x/student_practice_builder.html?unit=1",
+                "practice_url": "https://tnezki.github.io/algebra/practice_builder/student_practice_builder.html?unit=1",
                 "qr_asset": "algebra_1_unit1.png",
                 "learning_map": None,
             }
@@ -540,7 +540,7 @@ def build_results(
                 f'<div class="ican-next"><b>Next:</b> {html_escape(r.get("student_action_label", ""))}</div></div></div>'
             )
         parts.append(
-            f'<div class="mg-foot"><span>{info["secure"]} of {info["count"]} I Cans secure · {info["threshold"]} needed to demonstrate</span><strong>{html_escape(display_grade(info))}</strong></div></div>'
+            f'<div class="mg-foot"><span>{info["secure"]} of {info["count"]} I Cans secure</span><strong>{html_escape(display_grade(info))}</strong></div></div>'
         )
         return "".join(parts)
 
@@ -558,20 +558,98 @@ def build_results(
             chips.append(f'<div class="mg-chip"><b>{html_escape(mid.replace(f"U{unit}-", ""))} · {html_escape(display_grade(info))}</b><span>{info.get("secure",0)}/{info.get("count",0)} secure</span></div>')
         cards = [card(sk, mid) for mid in mg_order]
         recent_rows: list[str] = []
-        evs = sorted(latest_events.get(sk, []), key=lambda r: (r.get("i_can_id", ""), r.get("event_id", "")))
-        if evs:
-            for e in evs:
+        raw_evs = list(reversed(latest_events.get(sk, [])))
+        recent_evs = []
+        seen_recent = set()
+        for e in raw_evs:
+            iid = str(e.get("i_can_id") or "").strip()
+            if not iid or iid in seen_recent:
+                continue
+            seen_recent.add(iid)
+            recent_evs.append(e)
+            if len(recent_evs) >= 8:
+                break
+        if recent_evs:
+            char_load = sum(
+                len(str(e.get("i_can_exact_text") or text_by_ican.get(e.get("i_can_id", ""), ""))) +
+                len(str(e.get("note") or e.get("concise_note") or ""))
+                for e in recent_evs
+            )
+            if len(recent_evs) > 6 and char_load > 950:
+                recent_evs = recent_evs[:6]
+            if len(recent_evs) > 4 and char_load > 1450:
+                recent_evs = recent_evs[:4]
+            for e in recent_evs:
                 note = e.get("note") or e.get("concise_note") or ""
                 target = e.get("i_can_exact_text") or text_by_ican.get(e.get("i_can_id", ""), "")
                 recent_rows.append(f'<tr><td><b>{html_escape(e.get("i_can_id", ""))}</b></td><td>{html_escape(target)}</td><td>{html_escape((e.get("strength") or "").title())}</td><td>{html_escape(note)}</td></tr>')
         else:
             recent_rows.append('<tr><td>—</td><td>No evidence added from this source</td><td>No submission</td><td>No usable submission was identified for this student in the latest source.</td></tr>')
-        pr = [r for r in by_student.get(sk, []) if r.get("student_action_code") == "PRACTICE_AND_CHECK"]
-        if pr:
-            focus = "".join(f'<li><b>{html_escape(r.get("i_can_id", ""))}</b> · {html_escape(ican_text(r))}</li>' for r in pr)
+
+        current_rows = sorted(by_student.get(sk, []), key=lambda r: r.get("i_can_id", ""))
+        secure_rows = [r for r in current_rows if r.get("status_code") in {"MASTERED", "TRANSFER"}][:4]
+        if secure_rows:
+            strength_focus = "".join(
+                f'<li><b>{html_escape(r.get("i_can_id", ""))}:</b> {html_escape(ican_text(r))}</li>'
+                for r in secure_rows
+            )
         else:
-            focus = '<li>No current Practice + check soon targets.</li>'
-        link_html = f'<a class="practice-link" href="{html_escape(practice_url)}">Open Unit {unit} Practice Builder</a>' if practice_url else ""
+            strength_focus = '<li>No I Can is secure yet.</li>'
+
+        improve_rows = [
+            r for r in current_rows
+            if r.get("student_action_code") in {"PRACTICE_AND_CHECK", "NEEDS_ANOTHER_DEMONSTRATION"}
+        ]
+        improve_rows.sort(key=lambda r: (0 if r.get("student_action_code") == "PRACTICE_AND_CHECK" else 1, r.get("i_can_id", "")))
+        improve_rows = improve_rows[:4]
+        if improve_rows:
+            focus = "".join(
+                f'<li><b>{html_escape(r.get("i_can_id", ""))}:</b> {html_escape(ican_text(r))}</li>'
+                for r in improve_rows
+            )
+        else:
+            focus = '<li>No current I Can needs targeted practice or another independent check.</li>'
+
+        demonstrated_mids = [mid for mid in mg_order if student_grades.get(mid, {}).get("demonstrated")]
+        short_demo = [mid.replace(f"U{unit}-", "") for mid in demonstrated_mids]
+        if len(short_demo) == 1:
+            picture_sentence = f"{short_demo[0]} is currently meeting the course expectation."
+        elif short_demo:
+            picture_sentence = f"{', '.join(short_demo[:-1])} and {short_demo[-1]} are currently meeting the course expectation."
+        else:
+            picture_sentence = "No Mastery Goal is currently marked as meeting the course expectation."
+
+        actions = {r.get("student_action_code") for r in improve_rows}
+        if "PRACTICE_AND_CHECK" in actions and "NEEDS_ANOTHER_DEMONSTRATION" in actions:
+            next_sentence = "The next useful evidence is targeted practice and/or another independent check on the I Cans listed above."
+        elif "PRACTICE_AND_CHECK" in actions:
+            next_sentence = "The next useful step is targeted practice followed by another check on the I Cans listed above."
+        elif "NEEDS_ANOTHER_DEMONSTRATION" in actions:
+            next_sentence = "The next useful evidence is another independent check on the I Cans listed above."
+        else:
+            next_sentence = "There is no current I Can flagged for targeted practice or another independent check."
+
+        unassessed = []
+        for mid in mg_order:
+            info = student_grades.get(mid, {})
+            if not info.get("assessed"):
+                unassessed.append(mid.replace(f"U{unit}-", ""))
+        if unassessed:
+            nums = []
+            for label in unassessed:
+                m = re.fullmatch(r"MG(\d+)", label)
+                nums.append(int(m.group(1)) if m else None)
+            if len(unassessed) > 1 and all(n is not None for n in nums) and nums == list(range(nums[0], nums[0] + len(nums))):
+                unassessed_label = f"MG{nums[0]:02d}-MG{nums[-1]:02d}"
+            else:
+                unassessed_label = ", ".join(unassessed)
+            verb = "has" if len(unassessed) == 1 else "have"
+            unassessed_sentence = f"{unassessed_label} {verb} not yet been assessed, so {'it is' if len(unassessed) == 1 else 'they are'} not listed as weaknesses."
+        else:
+            unassessed_sentence = ""
+        current_focus = " ".join(x for x in (picture_sentence, next_sentence, unassessed_sentence) if x)
+
+        link_html = f'<a class="practice-link" href="{html_escape(practice_url)}" target="_blank" rel="noopener">Open Unit {unit} Practice Builder</a>' if practice_url else ""
         tokens = {
             "COURSE": course,
             "UNIT_NUMBER": unit,
@@ -583,7 +661,7 @@ def build_results(
             "ESSENTIAL_STANDARD": essential,
             "MG_DEMONSTRATED_COUNT": demonstrated,
             "MG_TOTAL": len(mg_order),
-            "APPROVED_CURRENT_PICTURE_TEXT": "Mastery Goal grades are current evidence, not averages, and can improve with new evidence. An I means In Progress and is not permanent. Use the I Can rows below to see what needs a first check, practice + check soon, another independent check, secure, or extension.",
+            "APPROVED_CURRENT_PICTURE_TEXT": "Mastery Goal grades are based on current evidence, not averages, and can improve with new evidence. Use the I Can rows below to see what is secure and what needs another check.",
             "MG_CHIPS_HTML": "".join(chips),
             "ICAN_TOTAL": sum(len(mg_catalog.get(mid, {}).get("i_cans", [])) for mid in mg_order) or len({r.get("i_can_id") for r in icans}),
             "PAGE_1_MASTERY_GOAL_CARDS_HTML": "".join(cards),
@@ -591,7 +669,9 @@ def build_results(
             "LATEST_EVIDENCE_LABEL": latest_label,
             "LATEST_EVIDENCE_DATE": latest_date,
             "RECENT_EVIDENCE_ROWS_HTML": "".join(recent_rows),
+            "STRENGTH_ICANS_HTML": strength_focus,
             "PRACTICE_FOCUS_ICANS_HTML": focus,
+            "CURRENT_FOCUS_TEXT": html_escape(current_focus),
             "PRACTICE_BUILDER_LINK_HTML": link_html,
             "PRACTICE_BUILDER_QR_HTML": qr,
         }

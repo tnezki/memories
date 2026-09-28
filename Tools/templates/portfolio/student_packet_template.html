@@ -7,60 +7,94 @@
 <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
-<!-- CANONICAL RESPONSIVE STUDENT REPORT. Replace tokens/loops only. -->
+<!-- CANONICAL TWO-PAGE STUDENT REPORT. Replace tokens/loops only. -->
 <article class="student-report">
-  <div class="top-rule"></div>
+  <section class="report-page">
+    <div class="top-rule"></div>
+    <header class="report-head">
+      <div>
+        <div class="eyebrow">{{COURSE}} · Unit {{UNIT_NUMBER}} Portfolio</div>
+        <h1>Current Progress Report</h1>
+        <p class="subtitle">{{UNIT_TITLE}}</p>
+      </div>
+      <div class="meta"><strong>{{STUDENT_NAME}}</strong><br>{{PERIOD}} · Report {{REPORT_NUMBER}}<br>{{REPORT_DATE}}</div>
+    </header>
 
-  <header class="student-report-head">
-    <div>
-      <div class="eyebrow">{{COURSE}} - Unit {{UNIT_NUMBER}} Portfolio</div>
-      <h1>Current Progress Report</h1>
-      <p class="subtitle">{{UNIT_TITLE}}</p>
-    </div>
-    <div class="meta"><strong>{{STUDENT_NAME}}</strong><br>{{PERIOD}} - Report {{REPORT_NUMBER}}<br>{{REPORT_DATE}}</div>
-  </header>
+    <div class="standard"><strong>Essential Standard:</strong> {{ESSENTIAL_STANDARD}}</div>
 
-  <div class="standard"><strong>Essential Standard:</strong> {{ESSENTIAL_STANDARD}}</div>
+    <section class="summary-grid">
+      <div class="panel primary">
+        <h2>Your current picture</h2>
+        <div class="lead">{{MG_DEMONSTRATED_COUNT}} of {{MG_TOTAL}} Unit Mastery Goals demonstrated.</div>
+        <p>{{APPROVED_CURRENT_PICTURE_TEXT}}</p>
+      </div>
+      <div class="panel">
+        <h2>Mastery Goal snapshot</h2>
+        <div class="mg-strip">{{MG_CHIPS_HTML}}</div>
+      </div>
+    </section>
 
-  <section class="student-summary-grid">
-    <div class="picture picture-full">
-      <h2>Your current picture</h2>
-      <div class="lead">{{MG_DEMONSTRATED_COUNT}} of {{MG_TOTAL}} Unit Mastery Goals demonstrated.</div>
-      <p>{{APPROVED_CURRENT_PICTURE_TEXT}}</p>
+    <div class="section-head">
+      <h2>Unit Evidence Picture</h2>
+      <p>All {{MG_TOTAL}} Mastery Goals and all {{ICAN_TOTAL}} I Cans</p>
+      <div class="legend">
+        <span class="item"><span class="status-dot"></span>No Evidence</span>
+        <span class="item"><span class="status-dot developing"></span>Developing</span>
+        <span class="item"><span class="status-dot mastered"></span>Mastered</span>
+        <span class="item"><span class="status-star">★</span>Transfer</span>
+      </div>
     </div>
-    <div class="goal-snapshot">
-      <h2>Mastery Goal snapshot</h2>
-      <div class="mg-strip">{{MG_CHIPS_HTML}}</div>
-    </div>
+
+    <section class="mastery-grid">{{PAGE_1_MASTERY_GOAL_CARDS_HTML}}{{PAGE_2_MASTERY_GOAL_CARDS_HTML}}</section>
+
+    <footer class="footer"><span>Use this report for intervention, tutoring, home, or reassessment planning.</span><span>Page 1 of 2</span></footer>
   </section>
 
-  <section class="evidence-section">
-    <div class="evidence-heading">
-      <div><h2>Unit Evidence Picture</h2><p>All {{MG_TOTAL}} Mastery Goals and all {{ICAN_TOTAL}} I Cans</p></div>
-      <div class="legend"><b>Status:</b><span class="legend-item"><span class="status-dot"></span>No Evidence</span><span class="legend-item"><span class="status-dot developing"></span>Developing</span><span class="legend-item"><span class="status-dot mastered"></span>Mastered</span><span class="legend-item"><span class="status-star">★</span>Transfer</span></div>
-    </div>
-    <div class="next-key"><b>Next:</b> each I Can shows what it needs now - first check, practice + check soon, another independent check, secure, or extension.</div>
-    <div class="mastery-grid">{{PAGE_1_MASTERY_GOAL_CARDS_HTML}}{{PAGE_2_MASTERY_GOAL_CARDS_HTML}}</div>
-  </section>
+  <section class="report-page">
+    <div class="top-rule"></div>
+    <header class="page2-head">
+      <div>
+        <div class="eyebrow">{{COURSE}} · Unit {{UNIT_NUMBER}} Portfolio</div>
+        <h2>Recent Evidence &amp; Next Steps</h2>
+        <p>{{STUDENT_NAME}} · {{PERIOD}} · Report {{REPORT_NUMBER}}</p>
+      </div>
+      <div class="meta">{{REPORT_DATE}}</div>
+    </header>
 
-  <section class="student-lower-grid">
-    <div class="recent">
-      <h2>Recent evidence - {{LATEST_EVIDENCE_LABEL}}</h2>
-      <table><thead><tr><th>I Can</th><th>Target</th><th>Evidence</th><th>What this showed</th></tr></thead><tbody>{{RECENT_EVIDENCE_ROWS_HTML}}</tbody></table>
-    </div>
+    <section class="recent">
+      <h3>Recent evidence</h3>
+      <p class="sub">Most recent assessed I Cans shown here. Older evidence stays in the full Portfolio history.</p>
+      <table>
+        <thead><tr><th>I Can</th><th>Target</th><th>Evidence</th><th>What this showed</th></tr></thead>
+        <tbody>{{RECENT_EVIDENCE_ROWS_HTML}}</tbody>
+      </table>
+    </section>
 
-    <div class="practice-box">
-      <div class="practice-copy">
-        <h2>Your Practice</h2>
-        <p>Scan or click to open the Practice Builder and select the following I Can statements for more practice:</p>
-        <ul class="practice-focus-list">{{PRACTICE_FOCUS_ICANS_HTML}}</ul>
+    <section class="practice-box">
+      <h3>Your Practice</h3>
+      <p>Use this section to see what is already going well and what should be practiced next before another check.</p>
+
+      <div class="practice-grid">
+        <div class="practice-col strengths">
+          <h4>Strengths</h4>
+          <ul>{{STRENGTH_ICANS_HTML}}</ul>
+        </div>
+        <div class="practice-col improve">
+          <h4>I Cans to improve</h4>
+          <ul>{{PRACTICE_FOCUS_ICANS_HTML}}</ul>
+        </div>
+      </div>
+
+      <div class="practice-link-wrap">
+        <div class="practice-link-copy"><b>Practice Builder:</b> open Unit {{UNIT_NUMBER}} and choose the I Cans listed above for targeted practice.</div>
         {{PRACTICE_BUILDER_LINK_HTML}}
       </div>
-      <div class="qrbox">{{PRACTICE_BUILDER_QR_HTML}}</div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="student-report-footer"><span>Use this report for intervention, tutoring, home, or future reassessment planning.</span><span>{{LATEST_EVIDENCE_LABEL}} · {{LATEST_EVIDENCE_DATE}}</span></footer>
+    <div class="note-box"><strong>Current focus:</strong> {{CURRENT_FOCUS_TEXT}}</div>
+
+    <footer class="footer"><span>Use this report for intervention, tutoring, home, or reassessment planning.</span><span>Page 2 of 2</span></footer>
+  </section>
 </article>
 </body>
 </html>
