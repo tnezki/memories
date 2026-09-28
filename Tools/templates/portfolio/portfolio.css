@@ -26,7 +26,9 @@
 @media print{
   html,body{background:#fff}
   body{padding:0}
-  .report-page{page:student;width:auto;min-height:10.36in;margin:0;padding:.14in .16in;box-shadow:none;break-after:page;page-break-after:always}
+  body:has(.student-report){page:student}
+  body:has(.teacher-page){page:teacher}
+  .report-page{width:auto;min-height:10.36in;margin:0;padding:.14in .16in;box-shadow:none;break-after:page;page-break-after:always}
   .report-page:last-child{break-after:auto;page-break-after:auto}
   .student-report + .student-report{break-before:page;page-break-before:always}
   .report-page+.report-page{border-top:0}
@@ -35,7 +37,7 @@
   .mastery-grid{display:grid;grid-template-columns:1fr 1fr}
   .practice-grid{display:grid;grid-template-columns:1fr 1fr}.practice-grid .practice-col+.practice-col{margin-top:0}
   .practice-link-wrap{display:flex}.practice-link{margin-top:0;color:#fff!important}
-  .teacher-page{page:teacher;width:auto;min-height:0;height:7.86in;margin:0;padding:0;box-shadow:none;break-after:page;page-break-after:always}
+  .teacher-page{width:auto;min-height:0;height:7.86in;margin:0;padding:0;box-shadow:none;break-after:page;page-break-after:always}
   .teacher-page:last-of-type{break-after:auto;page-break-after:auto}.teacher-page.omit-page{display:none}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
