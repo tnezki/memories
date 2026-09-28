@@ -44,7 +44,7 @@ fi
 echo
 echo "Portfolio Local Companion"
 echo
-echo "Starting observation-status + email-notes runtime at http://127.0.0.1:8765/"
+echo "Starting evidence-history + observation-status + email-notes runtime at http://127.0.0.1:8765/"
 echo "Keep this Terminal window open while using Portfolio."
 echo "You may minimize it. Press Control-C here when you are finished."
 echo

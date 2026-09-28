@@ -10,6 +10,9 @@ from pathlib import Path
 
 import portfolio_companion as core
 import portfolio_companion_notes as notes
+import portfolio_report_history as report_history
+
+report_history.install_patch()
 
 
 STATUS_LABELS = {
@@ -49,13 +52,13 @@ def _observation_status_map(course: str, unit: int) -> dict[str, dict[str, dict[
         evidence_path = state_dir / "evidence_ledger.csv"
         evidence_rows = core.read_csv(evidence_path)[1] if evidence_path.is_file() else []
 
+    evidence_opportunities: dict[tuple[str, str], set[str]] = defaultdict(set)
     observation_opportunities: dict[tuple[str, str], set[str]] = defaultdict(set)
     for row in evidence_rows:
-        if not _is_teacher_observation(row):
-            continue
         student_key = (row.get("student_key") or "").strip()
         i_can_id = (row.get("i_can_id") or "").strip()
-        if not student_key or not i_can_id:
+        strength = (row.get("strength") or "").strip().upper()
+        if not student_key or not i_can_id or strength not in {"CONVINCING", "PARTIAL", "LIMITED", "UNUSABLE"}:
             continue
         opportunity_id = (row.get("opportunity_id") or "").strip()
         if not opportunity_id:
@@ -64,12 +67,15 @@ def _observation_status_map(course: str, unit: int) -> dict[str, dict[str, dict[
             opportunity_id = "|".join(
                 [
                     (row.get("source_date") or "").strip(),
-                    (row.get("source_label") or "Teacher Observation").strip(),
-                    (row.get("strength") or "").strip(),
+                    (row.get("source_label") or "Portfolio Evidence").strip(),
+                    strength,
                     (row.get("note") or row.get("concise_note") or "").strip(),
                 ]
             )
-        observation_opportunities[(student_key, i_can_id)].add(opportunity_id)
+        pair = (student_key, i_can_id)
+        evidence_opportunities[pair].add(opportunity_id)
+        if _is_teacher_observation(row):
+            observation_opportunities[pair].add(opportunity_id)
 
     out: dict[str, dict[str, dict[str, object]]] = {}
     for row in current_rows:
@@ -81,24 +87,31 @@ def _observation_status_map(course: str, unit: int) -> dict[str, dict[str, dict[
         label = STATUS_LABELS.get(code)
         if not label:
             label = (row.get("status_label") or code.replace("_", " ").title()).strip()
+        pair = (student_key, i_can_id)
+        try:
+            stored_evidence_count = int((row.get("source_opportunity_count") or "0").strip() or 0)
+        except ValueError:
+            stored_evidence_count = 0
+        evidence_count = max(stored_evidence_count, len(evidence_opportunities.get(pair, set())))
         out.setdefault(student_key, {})[i_can_id] = {
             "status_code": code,
             "status_label": label,
             "next_action": (row.get("student_action_label") or "").strip(),
-            "observation_count": len(observation_opportunities.get((student_key, i_can_id), set())),
+            "evidence_count": evidence_count,
+            "observation_count": len(observation_opportunities.get(pair, set())),
         }
     return out
 
 
 class Handler(notes.Handler):
-    """Portfolio UI with email notes plus current I Can status/observation counts."""
+    """Portfolio UI with email notes, evidence history, and observation counts."""
 
-    server_version = "PortfolioLocalCompanion/1.7-observation-status"
+    server_version = "PortfolioLocalCompanion/1.8-evidence-history"
 
     def do_GET(self) -> None:
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path == "/api/runtime-version":
-            self.send_json({"status": "PASS", "version": "1.7-observation-status"})
+            self.send_json({"status": "PASS", "version": "1.8-evidence-history"})
             return
         if parsed.path != "/api/observation-data":
             super().do_GET()
@@ -126,7 +139,7 @@ def main() -> int:
     url = f"http://{core.HOST}:{args.port}/"
     print("Portfolio Local Companion is running.")
     print(f"Local URL: {url}")
-    print("Runtime: observation-status-1.7")
+    print("Runtime: evidence-history-1.8")
     print("The helper is local to this Mac and does not expose Portfolio data to the network.")
     print("Press Control-C to stop this foreground instance.\n")
     if not args.no_open:
