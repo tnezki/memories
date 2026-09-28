@@ -677,7 +677,7 @@ def _wtc_html(ctx: ProjectContext, sid: str, teacher: bool, issue_warning: str |
     out.append(f'<div class="wtc-shared" data-shared-stimulus-id="{html.escape(str(wtc.get("shared_stimulus_id") or ""))}">{shared.get("student_html") or html.escape(str(shared.get("student_text") or ""))}</div>')
     for part in parts:
         label = str(part.get("part_label") or "Part")
-        out.append(f'<section class="wtc-part" data-item-id="{html.escape(str(part.get("item_id") or ""))}"><h3>{html.escape(label)}</h3>{part.get("student_html") or f"<p>{html.escape(str(part.get("student_text") or ""))}</p>"}<div class="workspace"></div>')
+        out.append(f'<section class="wtc-part" data-item-id="{html.escape(str(part.get("item_id") or ""))}"><h3>{html.escape(label)}</h3>{part.get("student_html") or "<p>" + html.escape(str(part.get("student_text") or "")) + "</p>"}<div class="workspace"></div>')
         if teacher:
             out.append('<div class="teacher-support">')
             if str(part.get("answer") or "").strip():
