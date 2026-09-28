@@ -1,7 +1,7 @@
 CURRICULUM CONTROL PANEL ARCHITECTURE CONTRACT
 ==============================================
 STATUS: CURRENT
-REVISION: 2026-09-27 v1.4
+REVISION: 2026-09-28 v1.5
 
 PURPOSE
 Keep the canonical Curriculum Control Panel small and stable while separating released curriculum/resources from local teacher-only operating controls.
@@ -13,7 +13,7 @@ The local owner-tools root is the TEACHER OPERATING SURFACE.
 
 For Algebra 1 the owner-tools root is:
   _algebra_teacher_tools/
-It is a sibling of algebra/, memories/, _portfolio_data/, and _github_transfers/ under the local GitHub root. It is intentionally NOT a Git repository.
+It is a sibling of algebra/, memories/, _portfolio_data/, and _curriculum_transfers/ under the local GitHub root. It is intentionally NOT a Git repository.
 
 The normal Algebra owner entry point is:
   _algebra_teacher_tools/index.html
@@ -23,7 +23,7 @@ PORTABLE TEACHER WORKSPACE - HARD DIRECTION
 After another teacher is trained, the supported portable workspace may be copied to that teacher's machine/thumb drive as sibling folders:
   _algebra_teacher_tools/
   _portfolio_data/
-  _github_transfers/
+  _curriculum_transfers/
   algebra/
   memories/
 The receiving teacher operates their own copies/state/repositories. Never use this portability model to expose one teacher's live private student evidence to another teacher.
@@ -83,7 +83,7 @@ Current owner-local entry points include:
 - _algebra_teacher_tools/tools/quick_check/quick_N.html
 - _algebra_teacher_tools/tools/practice/teacher_practice_builder.html
 - _algebra_teacher_tools/tools/performance_task/performance_task_control_panel.html
-- Portfolio/email launch links surfaced only from the local owner index while Portfolio is consolidated into Teacher Tools.app.
+- Portfolio/email launch links surfaced only from the local owner index while Portfolio is consolidated into Student Data Tools.app.
 
 The owner index groups tools by job rather than giving every control its own large card. At minimum it provides:
 - Shared Curriculum links;
@@ -97,11 +97,19 @@ The owner index groups tools by job rather than giving every control its own lar
 The owner-tools folder stores controls/software only, not student evidence state. Student/private state remains in its authorized private location. Relative links should assume the stable sibling layout rather than hard-coding one machine-specific absolute path.
 
 LOCAL SERVICE PORTS - HARD
-Until Teacher Tools.app consolidates service launch:
+Until Student Data Tools.app consolidates private service launch:
 - Portfolio Local Companion owns 127.0.0.1:8765.
 - Curriculum Builder Pilot owns 127.0.0.1:8766.
 Do not configure both services to the same port.
-A browser page must not pretend it can reliably execute a local .command file. The future Teacher Tools.app is the supported one-click service launcher.
+A browser page must not pretend it can reliably execute a local .command file. Local apps are the supported one-click launcher for tasks that genuinely need local execution.
+
+CURRICULUM TRANSFER - HARD
+Curriculum/system changes return through the current Curriculum Transfer contract. The canonical local runtime is:
+  _curriculum_transfers/
+and the normal Dock launcher is:
+  memories/Tools/curriculum_transfer/Curriculum Transfer.app
+
+Curriculum Transfer may install approved repository files and declared local owner-tool files but performs no Git operations. The teacher reviews repository changes in GitHub Desktop.
 
 FINISHED PRODUCT LIBRARIES - HARD
 Shared finished assessment products use library/index surfaces so a teacher can find intentionally retained versions without receiving the builder.
@@ -134,9 +142,9 @@ QUICK CHECK OWNER-TOOL RULE
 Algebra Build Quick Checks remains in initial Build because it creates/repairs the owner-local Unit selector. Routine section Quick Checks are built from that local selector. Approved products deploy to append-only run folders and are registered in the shared Quick Check library.
 
 PORTFOLIO / PRIVATE EVIDENCE
-Portfolio/evidence processing is a teacher-only private-data workflow, not an initial curriculum build job and not a shared-dashboard control.
+Portfolio/evidence processing is a teacher-only private-data workflow, not an initial curriculum build job and not a shared-dashboard control. It is being consolidated under Student Data Tools.app.
 
 TRANSFER / REVIEW
-Repository-targeting jobs return through the current local GitHub Transfer contract. Declared owner-local tool files under _algebra_teacher_tools may use the same transfer helper because destinations remain inside /Users/troynezki/Documents/GitHub; they are installed locally without Git operations and are never committed merely because they live beside repositories.
+Repository-targeting and declared local-tool jobs return through the current Curriculum Transfer contract. Declared owner-local tool files under _algebra_teacher_tools may use the same transfer helper because they are an approved local root; they are installed locally without Git operations and are never committed merely because they live beside repositories.
 
 END - CURRICULUM CONTROL PANEL ARCHITECTURE CONTRACT

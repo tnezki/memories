@@ -1,7 +1,7 @@
 CURRICULUM SYSTEM RUNTIME CONTRACT
 =================================
 STATUS: CURRENT
-REVISION: 2026-09-26 - OFFLINE-FIRST + CURRENT TRANSFER ROUTING
+REVISION: 2026-09-28 - OFFLINE-FIRST + CURRICULUM TRANSFER
 
 1. CANONICAL GITHUB / STORAGE - HARD
 Canonical GitHub stores readable authorities and long-lived readable artifacts expanded. ZIP is a handoff/transport format only unless a current artifact contract explicitly declares another archive boundary.
@@ -68,23 +68,34 @@ Every deterministic instance must preserve the exact learning target/I Can, evid
 
 Offline-first does NOT mean AI-free. Semantic curriculum authoring, new family design, rich-context writing, pedagogical repair, and teacher-facing judgment remain appropriate AI/teacher work. Never force deterministic generation when it reduces quality or changes the student thinking job.
 
-8. LOCAL REPOSITORY TRANSFER - HARD
-For Curriculum Control Panel BUILD/MAINTENANCE jobs whose canonical repository destination is known, return ONE local repository transfer ZIP using the contract declared by `local_transfer_contract` in SYSTEM_MANIFEST.json.
+8. CURRICULUM TRANSFER - HARD
+For Curriculum Control Panel BUILD/MAINTENANCE jobs and other Curriculum Build changes whose destination is known, return ONE Curriculum Transfer ZIP using the contract declared by `curriculum_transfer_contract` in SYSTEM_MANIFEST.json.
+
+The current schema is:
+  package_type: "curriculum_transfer"
+  schema_version: 3
 
 The transfer ZIP is an OUTER transport wrapper only. Canonical files live under:
-  payload/<repo-folder>/<canonical-relative-path>
-with TRANSFER_MANIFEST.json declaring create/replace/delete actions.
+  payload/<approved-root-alias>/<canonical-relative-path>
+with TRANSFER_MANIFEST.json declaring create/replace/delete actions through approved root aliases.
 
-For one-file or multi-file repository changes, use the transfer wrapper rather than naked repository files. Do not require the teacher to unzip and manually place curriculum files.
+For one-file or multi-file repository/system changes, use the Curriculum Transfer wrapper rather than naked repository files. Do not require the teacher to unzip and manually place curriculum files.
 
-If authorities do not declare enough information to resolve a safe repository destination, fail as:
+If authorities do not declare enough information to resolve a safe approved destination, fail as:
   TRANSFER_DESTINATION_UNDECLARED
 rather than guessing.
 
-The local transfer helper performs no Git operations. After installation, changes remain uncommitted for teacher review in GitHub Desktop. Do not commit, push, pull, merge, branch, or create a PR unless a current explicit teacher request separately authorizes such Git work.
+The local runtime root is:
+  _curriculum_transfers/
+and the normal teacher launcher is:
+  _curriculum_transfers/Curriculum Transfer.app
+
+The local helper performs no Git operations. After installation, repository changes remain uncommitted for teacher review in GitHub Desktop. Do not commit, push, pull, merge, branch, or create a PR unless a current explicit teacher request separately authorizes such Git work.
+
+The helper reads only `_curriculum_transfers/downloads/`. It does not scan `_github_transfers/downloads/`. A legacy github_transfer / 2 package may still be accepted only when deliberately placed in the current Curriculum Transfer inbox. New work uses curriculum_transfer / 3.
 
 9. PRIVATE-STATE WORKFLOW EXCEPTIONS
-Current operational workflows may declare a delivery exception in SYSTEM_MANIFEST/runtime amendments. In particular, Portfolio and personalized Checkpoint runs may read/write authorized private state and return their declared runtime artifacts rather than a GitHub Transfer ZIP. Those exceptions do not broaden ordinary curriculum build source policy or authorize student data in GitHub.
+Current operational workflows may declare a delivery exception in SYSTEM_MANIFEST/runtime amendments. In particular, Portfolio and personalized Checkpoint runs may read/write authorized private state and return their declared runtime artifacts rather than a Curriculum Transfer ZIP. Those exceptions do not broaden ordinary curriculum build source policy or authorize student data in GitHub or Curriculum Transfer payloads.
 
 10. AUTOMATIC OUTPUT FINALIZATION - HARD
 Every Curriculum Control Panel BUILD or MAINTENANCE job that produces/replaces files must run the current finalization contract declared by SYSTEM_MANIFEST.json before packaging/return.
@@ -102,6 +113,6 @@ Required successful terminal signal:
   FINALIZATION_QA: PASS
 
 11. HUMAN REVIEW / AUTHORITY PROMOTION
-Generated curriculum is a candidate until teacher review/testing and intentional sync to canonical GitHub. Runtime automation may install files locally through the transfer helper, but installation itself does not promote a curriculum decision beyond the teacher's review/sync step.
+Generated curriculum is a candidate until teacher review/testing and intentional sync to canonical GitHub. Runtime automation may install files locally through Curriculum Transfer, but installation itself does not promote a curriculum decision beyond the teacher's review/sync step.
 
 END - CURRICULUM SYSTEM RUNTIME CONTRACT

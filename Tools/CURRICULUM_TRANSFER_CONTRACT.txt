@@ -1,0 +1,137 @@
+CURRICULUM TRANSFER CONTRACT
+============================
+
+STATUS: CURRENT
+SCHEMA: curriculum_transfer / 3
+REVISION: 2026-09-28
+
+PURPOSE
+-------
+Provide one safe handoff/install system for Curriculum Build outputs, whether the destination is a Git repository or an approved local tools folder. Curriculum Transfer replaces the older "GitHub Transfer" name and keeps Git actions under teacher control.
+
+CORE MODEL
+----------
+- Canonical GitHub is the source of truth at job start for repository-backed curriculum/system files.
+- Generated changes remain local and uncommitted after transfer installation.
+- The teacher reviews repository changes in GitHub Desktop and alone decides whether to commit/push.
+- Curriculum Transfer MUST NOT commit, push, pull, branch, merge, create PRs, or otherwise modify GitHub remotely.
+- Student-specific/private Portfolio data is NOT Curriculum Transfer payload.
+
+LOCAL RUNTIME
+-------------
+Canonical writable runtime root:
+  _curriculum_transfers/
+
+Normal Dock launcher (canonical source):
+  memories/Tools/curriculum_transfer/Curriculum Transfer.app
+
+Manual fallback launcher:
+  memories/Tools/curriculum_transfer/Apply Curriculum Transfers.command
+
+The launcher creates/maintains the writable `_curriculum_transfers/` inbox, processed, failed, backup, and log folders. The approved-root seed is canonical beside the launcher and is copied into the writable runtime at launch.
+
+The app opens Terminal and runs the same transfer launcher so the teacher can watch the operation. A completed run ends with an all-caps repeated SUCCESS or FAILURE banner.
+
+OUTER WRAPPER RULE
+------------------
+Return ONE Curriculum Transfer ZIP with this root structure:
+
+  TRANSFER_MANIFEST.json
+  payload/
+    <approved-root-alias>/
+      <canonical relative paths...>
+
+The transfer wrapper is handoff/transport only. It does not change the artifact PM's canonical content, filename, folder shape, or deployable form.
+
+TRANSFER_MANIFEST.json - SCHEMA 3
+---------------------------------
+Required:
+  schema_version: 3
+  package_type: "curriculum_transfer"
+  package_id: stable descriptive string
+  files: non-empty array
+
+Each files[] entry uses an approved root alias plus a relative path.
+
+CREATE
+  {
+    "action": "create",
+    "root": "algebra",
+    "path": "path/file.ext",
+    "source": "payload/algebra/path/file.ext"
+  }
+
+REPLACE
+  {
+    "action": "replace",
+    "root": "memories",
+    "path": "Tools/example.py",
+    "source": "payload/memories/Tools/example.py",
+    "expected_existing_sha256": "<required exact SHA-256>"
+  }
+
+DELETE
+  {
+    "action": "delete",
+    "root": "teacher_shared",
+    "path": "path/obsolete.ext",
+    "expected_existing_sha256": "<required exact SHA-256>"
+  }
+
+APPROVED ROOTS - HARD
+---------------------
+Schema 3 never accepts arbitrary absolute destinations. The root alias must exist in the local:
+  _curriculum_transfers/approved_roots.json
+
+Initial approved aliases are:
+- algebra -> algebra/
+- physics -> physics/
+- memories -> memories/
+- teacher_shared -> teacher_shared/
+- algebra_teacher_tools -> _algebra_teacher_tools/
+- curriculum_transfers -> _curriculum_transfers/
+
+Additional roots may be added deliberately later by updating the approved-roots configuration through a reviewed system change. Do not guess an undeclared root.
+
+SAFETY - HARD
+-------------
+- All roots are relative to the local GitHub workspace root, regardless of the user's macOS account path.
+- Absolute paths and `..` traversal are forbidden.
+- CREATE may create missing parent directories inside the approved root and fails if the destination file already exists.
+- REPLACE requires the destination file to exist and requires the exact expected existing SHA-256.
+- DELETE requires the destination file to exist and requires the exact expected existing SHA-256.
+- Replaced/deleted files are backed up before changes.
+- A failed package rolls back touched files and removes newly created empty directories.
+- Ordinary ZIPs without TRANSFER_MANIFEST.json are ignored.
+- No Git command is allowed.
+
+EXECUTABLE COMMAND FILES - HARD
+-------------------------------
+After every successful CREATE or REPLACE whose destination filename ends in `.command`, the helper restores executable permission (`chmod +x`) before reporting success. This also supports the Dock app bundle because its executable intentionally ends in `.command`.
+
+LEGACY PACKAGE COMPATIBILITY
+----------------------------
+The helper may still accept legacy packages deliberately placed in the current Curriculum Transfer inbox:
+  package_type: "github_transfer"
+  schema_version: 2
+
+Legacy schema 2 packages retain their existing source/destination behavior so a deliberately carried-forward package can still be applied. New work MUST use curriculum_transfer / 3.
+
+INBOX BOUNDARY - HARD
+---------------------
+Curriculum Transfer reads only:
+  _curriculum_transfers/downloads/
+
+It MUST NOT scan `_github_transfers/downloads/` or invoke the legacy Builder AI-result installer. The older `_github_transfers` helper may remain temporarily as a separate fallback for any still-unconverted workflow, but the two inboxes are not merged.
+
+PRIVATE DATA EXCLUSION - HARD
+-----------------------------
+Curriculum Transfer may install software, templates, PMs, Frameworks, course artifacts, teacher tools, and other approved system files. It MUST NOT carry student names, evidence, grades, email addresses, accommodations, Portfolio state, or other student-specific private data.
+
+DESTINATION FAILURE
+-------------------
+If the current authorities do not declare a safe approved destination/root, fail as:
+  TRANSFER_DESTINATION_UNDECLARED
+rather than placing files arbitrarily.
+
+END - CURRICULUM TRANSFER CONTRACT
