@@ -172,227 +172,198 @@ def patch_hosted_links(raw: str) -> tuple[str, int]:
 
 
 
-SAFE_CONTROLS_MARKER = "local-tools-safe-planner-controls"
+PLANNER_CONTROLS_MARKER = "local-tools-planner-five-controls"
 
-SAFE_CONTROLS_HTML = """
-<style id="local-tools-safe-planner-controls-style">
-#local-tools-planner-controls {
-  margin: 0;
-  padding: 14px 24px 16px;
-  border-top: 1px solid #e7bc58;
-  border-bottom: 1px solid #e7bc58;
-  background: #fff8e8;
+PLANNER_CONTROLS_HTML = """
+<style id="local-tools-planner-five-controls-style">
+#local-tools-planner-five-controls {
+  background:#fff8e8;
+  border-top:1px solid #e7bc58;
+  border-bottom:1px solid #e7bc58;
+  padding:14px 12px 18px;
 }
-#local-tools-planner-controls .lt-title {
-  margin: 0 0 10px;
-  color: #725714;
-  font-weight: 900;
-  letter-spacing: .02em;
+#local-tools-planner-five-controls .lt-heading {
+  color:#725714;
+  font-weight:900;
+  letter-spacing:.02em;
+  margin:0 0 10px;
 }
-#local-tools-planner-controls .lt-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
+#local-tools-planner-five-controls .lt-row {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+#local-tools-planner-five-controls button {
+  border-radius:999px;
+  padding:10px 18px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+#local-tools-planner-five-controls .lt-outline {
+  background:#fff;
+  color:#173f73;
+  border:2px solid #173f73;
+}
+#local-tools-planner-five-controls .lt-primary {
+  background:#173f73;
+  color:#fff;
+  border:2px solid #173f73;
+}
+#local-tools-planner-five-controls .lt-apply {
+  background:#d7aa36;
+  color:#173f73;
+  border:2px solid #9b7718;
 }
 </style>
-<script id="local-tools-safe-planner-controls">
+<script id="local-tools-planner-five-controls">
 (function () {
-  function exactText(el, value) {
-    return (el && (el.textContent || "").replace(/\\s+/g, " ").trim() === value);
+  function txt(el) {
+    return (el && (el.textContent || "").replace(/\\s+/g, " ").trim()) || "";
   }
-
-  function findExact(value) {
-    var nodes = document.querySelectorAll("button,a,h1,h2,h3,h4,h5,h6,div,p,span");
+  function findExact(label) {
+    var nodes = document.querySelectorAll("button,a");
     for (var i = 0; i < nodes.length; i++) {
-      if (exactText(nodes[i], value)) return nodes[i];
+      if (txt(nodes[i]) === label && !nodes[i].closest("#local-tools-planner-five-controls")) return nodes[i];
     }
     return null;
   }
-
-  function makeSyncForm() {
-    var form = document.createElement("form");
-    form.className = "local-tools-top-sync";
-    form.method = "post";
-    form.action = "http://127.0.0.1:8770/";
-    form.target = "_blank";
-    form.style.display = "contents";
-
-    var pull = document.createElement("button");
-    pull.type = "submit";
-    pull.name = "action";
-    pull.value = "sync-pull";
-    pull.textContent = "Pull All Repos";
-    pull.style.cssText = "background:#fff;color:#173f73;border:2px solid #173f73;border-radius:14px;padding:12px 18px;font-weight:800;font-size:inherit;cursor:pointer";
-
-    var push = document.createElement("button");
-    push.type = "submit";
-    push.name = "action";
-    push.value = "sync-push";
-    push.textContent = "Commit + Push All Repos";
-    push.style.cssText = "background:#173f73;color:#fff;border:2px solid #173f73;border-radius:14px;padding:12px 18px;font-weight:800;font-size:inherit;cursor:pointer";
-    push.onclick = function () {
-      return confirm("Commit and push current changes in memories, algebra, physics, apcalc, and teacher_shared?");
-    };
-
-    form.appendChild(pull);
-    form.appendChild(push);
-    return form;
+  function findHeading(label) {
+    var nodes = document.querySelectorAll("h1,h2,h3,h4,h5,h6,div,p,span");
+    for (var i = 0; i < nodes.length; i++) {
+      if (txt(nodes[i]) === label) return nodes[i];
+    }
+    return null;
   }
-
+  function proxy(original, label, cls) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = cls;
+    b.textContent = label;
+    b.onclick = function () { original.click(); return false; };
+    return b;
+  }
+  function syncButton(label, action, cls) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = cls;
+    b.textContent = label;
+    b.onclick = function () {
+      if (action === "sync-push" && !confirm("Commit and push current changes in memories, algebra, physics, apcalc, and teacher_shared?")) return false;
+      var form = document.createElement("form");
+      form.method = "post";
+      form.action = "http://127.0.0.1:8770/";
+      form.target = "_blank";
+      form.style.display = "none";
+      var input = document.createElement("input");
+      input.name = "action";
+      input.value = action;
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+      setTimeout(function(){ form.remove(); }, 1000);
+      return false;
+    };
+    return b;
+  }
+  function hideLegacySync() {
+    var nodes = document.querySelectorAll("button,a");
+    for (var i = 0; i < nodes.length; i++) {
+      var t = txt(nodes[i]);
+      if (t === "Pull All Repos" || t === "Commit + Push All Repos") nodes[i].style.display = "none";
+    }
+    var headings = document.querySelectorAll("h1,h2,h3,h4,h5,h6,div,p,span");
+    for (var j = 0; j < headings.length; j++) {
+      if (txt(headings[j]) === "GITHUB") headings[j].style.display = "none";
+    }
+  }
   function run() {
-    if (document.getElementById("local-tools-planner-controls")) return;
-
+    if (document.getElementById("local-tools-planner-five-controls")) return;
     var apply = findExact("Apply Changes + Update Agendas");
     var undo = findExact("Undo Changes");
     var jump = findExact("Jump to Current Week");
-    var github = findExact("GITHUB");
-    if (!apply || !undo || !jump || !github) return;
+    var current = findHeading("Current State");
+    if (!apply || !undo || !jump || !current) return;
 
-    var oldActionParent = apply.parentElement;
+    var originalActionParent = apply.parentElement;
+    hideLegacySync();
 
     var section = document.createElement("section");
-    section.id = "local-tools-planner-controls";
-
-    var title = document.createElement("div");
-    title.className = "lt-title";
-    title.textContent = "PLANNER CONTROLS";
-
+    section.id = "local-tools-planner-five-controls";
+    var heading = document.createElement("div");
+    heading.className = "lt-heading";
+    heading.textContent = "GITHUB";
     var row = document.createElement("div");
     row.className = "lt-row";
 
-    row.appendChild(apply);
-    row.appendChild(undo);
-    row.appendChild(jump);
-    row.appendChild(makeSyncForm());
+    row.appendChild(syncButton("Pull All Repos", "sync-pull", "lt-outline"));
+    row.appendChild(syncButton("Commit + Push All Repos", "sync-push", "lt-outline"));
+    row.appendChild(proxy(apply, "Apply Changes + Update Agendas", "lt-apply"));
+    row.appendChild(proxy(undo, "Undo Changes", "lt-outline"));
+    row.appendChild(proxy(jump, "Jump to Current Week", "lt-outline"));
 
-    section.appendChild(title);
+    section.appendChild(heading);
     section.appendChild(row);
+    current.parentNode.insertBefore(section, current);
 
-    github.parentNode.insertBefore(section, github);
-
-    github.style.display = "none";
-    var nodes = document.querySelectorAll("button,a");
-    for (var i = 0; i < nodes.length; i++) {
-      if (nodes[i].closest && nodes[i].closest("#local-tools-planner-controls")) continue;
-      var t = (nodes[i].textContent || "").replace(/\\s+/g, " ").trim();
-      if (t === "Pull All Repos" || t === "Commit + Push All Repos") {
-        nodes[i].style.display = "none";
+    apply.style.display = "none";
+    undo.style.display = "none";
+    jump.style.display = "none";
+    if (originalActionParent) {
+      var remaining = txt(originalActionParent);
+      var visibleInteractive = 0;
+      var controls = originalActionParent.querySelectorAll("button,a,input,select");
+      for (var k = 0; k < controls.length; k++) {
+        if (controls[k].style.display !== "none") visibleInteractive++;
       }
-    }
-
-    if (oldActionParent) {
-      var remaining = (oldActionParent.textContent || "").replace(/\\s+/g, "").trim();
-      var interactive = oldActionParent.querySelectorAll("button,a,input,select").length;
-      if (!remaining && interactive === 0) oldActionParent.style.display = "none";
+      if (!remaining || visibleInteractive === 0) originalActionParent.style.display = "none";
     }
   }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", run);
-  } else {
-    run();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
 })();
 </script>
 """
 
 
-def _healthy_planner_source(text: str) -> bool:
-    return (
-        "Planner Editor" in text
-        and "Apply Changes + Update Agendas" in text
-        and "Current State" in text
-        and len(text) > 5000
-    )
-
-
-def _damaged_planner_source(text: str) -> bool:
-    if not text.strip():
-        return True
-    if "local-tools-back-to-top" in text and len(text) < 6000:
-        return True
-    return not _healthy_planner_source(text)
-
-
-def restore_latest_healthy_planner_backups(root: Path) -> int:
-    backup_base = root / "_curriculum_transfers" / "backups"
-    if not backup_base.is_dir():
-        return 0
-
-    backup_dirs = sorted(
-        [p for p in backup_base.glob("planner_owner_ui_*") if p.is_dir()],
-        key=lambda p: p.name,
-        reverse=True,
-    )
-    restored = 0
-    tool_names = {"_algebra_teacher_tools", "_physics_teacher_tools", "_apcalc_teacher_tools"}
-
-    for current in candidate_files(root):
-        if current.suffix.lower() not in {".html", ".htm"}:
-            continue
-        try:
-            rel = current.resolve().relative_to(root.resolve())
-        except ValueError:
-            continue
-        if not rel.parts or rel.parts[0] not in tool_names:
-            continue
-
-        try:
-            current_text_local = current.read_text(encoding="utf-8")
-        except Exception:
-            continue
-        if not _damaged_planner_source(current_text_local):
-            continue
-
-        for backup_dir in backup_dirs:
-            candidate = backup_dir / rel
-            if not candidate.is_file():
-                continue
-            try:
-                backup_text = candidate.read_text(encoding="utf-8")
-            except Exception:
-                continue
-            if _healthy_planner_source(backup_text):
-                shutil.copy2(candidate, current)
-                print(f"RESTORED healthy Planner backup: {current}")
-                restored += 1
-                break
-
-    return restored
-
-
 def patch_planner_html(raw: str) -> tuple[str, int]:
-    changed = 0
-    out = raw
+    # Only touch real owner Planner pages. Leave every other HTML file alone.
+    required = ("Planner Editor", "Apply Changes + Update Agendas", "Current State")
+    if not all(marker in raw for marker in required):
+        return raw, 0
 
-    # Remove only our own previously injected fragments.
+    out = raw
+    changed = 0
+
+    # Remove only our prior injected UI fragments by unique markers/classes.
     patterns = [
-        """<form\\b[^>]*class=["'][^"']*\\blocal-tools-top-sync\\b[^"']*["'][^>]*>.*?</form>""",
-        """<section\\b[^>]*id=["']local-tools-planner-controls["'][^>]*>.*?</section>""",
-        """<style\\b[^>]*id=["']local-tools-safe-planner-controls-style["'][^>]*>.*?</style>\\s*<script\\b[^>]*id=["']local-tools-safe-planner-controls["'][^>]*>.*?</script>""",
+        r'<form\\b[^>]*class=["\\\'][^"\\\']*\\blocal-tools-top-sync\\b[^"\\\']*["\\\'][^>]*>.*?</form>',
+        r'<section\\b[^>]*id=["\\\']local-tools-planner-controls["\\\'][^>]*>.*?</section>',
+        r'<style\\b[^>]*id=["\\\']local-tools-safe-planner-controls-style["\\\'][^>]*>.*?</style>\\s*<script\\b[^>]*id=["\\\']local-tools-safe-planner-controls["\\\'][^>]*>.*?</script>',
+        r'<style\\b[^>]*id=["\\\']local-tools-planner-five-controls-style["\\\'][^>]*>.*?</style>\\s*<script\\b[^>]*id=["\\\']local-tools-planner-five-controls["\\\'][^>]*>.*?</script>',
     ]
     for pattern in patterns:
-        out, count = re.subn(pattern, "", out, flags=re.IGNORECASE | re.DOTALL)
+        out, count = re.subn(pattern, '', out, flags=re.IGNORECASE | re.DOTALL)
         changed += count
 
-    # Retire only the exact Teacher Tools control.
+    # Keep Teacher Tools retired, as already approved.
     teacher_patterns = [
-        """<li\\b[^>]*>\\s*<a\\b[^>]*>\\s*Teacher Tools\\s*</a>\\s*</li>""",
-        """<a\\b[^>]*>\\s*Teacher Tools\\s*</a>""",
-        """<button\\b[^>]*>\\s*Teacher Tools\\s*</button>""",
+        r'<li\\b[^>]*>\\s*<a\\b[^>]*>\\s*Teacher Tools\\s*</a>\\s*</li>',
+        r'<a\\b[^>]*>\\s*Teacher Tools\\s*</a>',
+        r'<button\\b[^>]*>\\s*Teacher Tools\\s*</button>',
     ]
     for pattern in teacher_patterns:
-        out, count = re.subn(pattern, "", out, flags=re.IGNORECASE | re.DOTALL)
+        out, count = re.subn(pattern, '', out, flags=re.IGNORECASE | re.DOTALL)
         changed += count
 
-    if SAFE_CONTROLS_MARKER not in out and "</body>" in out.lower():
-        idx = out.lower().rfind("</body>")
-        out = out[:idx] + SAFE_CONTROLS_HTML + out[idx:]
+    if PLANNER_CONTROLS_MARKER not in out and '</body>' in out.lower():
+        idx = out.lower().rfind('</body>')
+        out = out[:idx] + PLANNER_CONTROLS_HTML + out[idx:]
         changed += 1
 
-    if BACK_TOP_MARKER not in out and "</body>" in out.lower():
-        idx = out.lower().rfind("</body>")
+    if BACK_TOP_MARKER not in out and '</body>' in out.lower():
+        idx = out.lower().rfind('</body>')
         out = out[:idx] + BACK_TOP_HTML + out[idx:]
         changed += 1
 
@@ -495,10 +466,6 @@ def main() -> int:
     root = detect_root()
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_root = root / "_curriculum_transfers" / "backups" / f"planner_owner_ui_{stamp}"
-
-    restored = restore_latest_healthy_planner_backups(root)
-    if restored:
-        print(f"Recovered {restored} damaged Planner source file(s) from healthy local backups.")
 
     changed_files: list[Path] = []
     total_changes = 0
