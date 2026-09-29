@@ -2,85 +2,87 @@ PLANNER SYNC CONTRACT
 =====================
 
 STATUS: CURRENT
-REVISION: 2026-09-29
+REVISION: 2026-09-29 - HOSTED SHARED AGENDA
 
 PURPOSE
 -------
-Provide a teacher-controlled Dock workflow for syncing the repositories used by the local Planners, plus a separate Dock shortcut for reopening the Planner pages.
-
-CANONICAL APPS
---------------
-Planner Sync:
-  memories/Tools/planner_sync/Planner Sync.app
-
-Planner Pages:
-  memories/Tools/planner_sync/Planner Pages.app
-
-Manual sync fallback:
-  memories/Tools/planner_sync/Run Planner Sync.command
+Provide explicit teacher-controlled repository sync for the local Planners and their published shared outputs.
 
 SYNC REPOSITORIES - HARD
 ------------------------
-Planner Sync operates only on these sibling repositories under the detected GitHub workspace root:
+Planner/Local Tools sync operates only on:
+- memories
 - algebra
 - physics
 - apcalc
 - teacher_shared
 
-It does not automatically commit or push memories, banks, stem, textbooks, or any other repository.
+PUBLISHED AGENDA OWNERSHIP - HARD
+---------------------------------
+Student-facing agendas remain in the course repositories.
 
-WORKSPACE ROOT
---------------
-The tool detects, in order:
-1. GITHUB_ROOT when explicitly supplied;
-2. $HOME/GitHub;
-3. $HOME/Documents/GitHub.
+Co-teacher agendas are generated from the local Planner but their canonical published files live only in teacher_shared:
+- teacher_shared/algebra/index.html
+- teacher_shared/physics/index.html
+- teacher_shared/calc/index.html
+
+The public/unlinked hosted destinations are:
+- https://tnezki.github.io/teacher_shared/algebra/
+- https://tnezki.github.io/teacher_shared/physics/
+- https://tnezki.github.io/teacher_shared/calc/
+
+Local Planner URLs under /shared/... are preview/troubleshooting surfaces only. They are never the link supplied to a co-teacher.
 
 PULL ALL REPOS
 --------------
-For each declared Planner repository:
+For each declared repository:
 - require a valid Git work tree;
 - require no merge or rebase already in progress;
 - require a clean working tree;
-- run `git pull --ff-only`;
+- run git pull --ff-only;
 - never stash, merge, rebase, commit, or push as part of Pull All.
-
-A dirty repository is BLOCKED, not silently modified.
 
 COMMIT + PUSH ALL REPOS
 -----------------------
-For each declared Planner repository:
+For each declared repository:
 - require a valid Git work tree;
 - require no merge or rebase already in progress;
-- `git add -A`;
+- git add -A;
 - create one timestamped commit only when staged changes exist;
-- run `git pull --rebase`;
-- if the rebase fails, abort that rebase and mark the repository FAILED;
-- run `git push`;
+- git pull --rebase;
+- abort a failed rebase;
+- git push;
 - never force-push.
 
-The operation reports each repository separately and ends with a repeated all-caps SUCCESS or FAILURE banner.
+SCHOOL NETWORK AUTH
+-------------------
+For tnezki-owned repositories, the sync helper may normalize:
+  https://github.com/tnezki/<repo>.git
+to:
+  git@github.com:tnezki/<repo>.git
 
-PLANNER PAGES
--------------
-The local Planner services are:
-- Algebra 1: http://127.0.0.1:8767/
-- Physics: http://127.0.0.1:8768/
-- AP Calculus AB: http://127.0.0.1:8769/
-
-Planner Pages.app offers a simple chooser for those three pages or all three.
-
-If the Planner services are not already reachable, Planner Pages.app starts:
-  _algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command
-
-in the background, waits briefly for the local services, then opens the selected Planner page(s).
+before sync. This avoids the school HTTPS proxy/credential prompt while preserving the same GitHub remote.
 
 BOUNDARIES
 ----------
-- Planner Sync is an explicit Git-action tool. It is separate from Curriculum Transfer.
+- Curriculum Transfer remains a separate Dock app.
+- Planner Sync is an explicit Git-action tool.
 - Curriculum Transfer itself remains Git-free.
-- Planner Sync must never force-push.
-- Planner Sync must never resolve conflicts automatically.
-- Student-specific Portfolio data is outside this tool.
+- Student-specific Portfolio data is outside Planner Sync.
+- No conflicts are resolved automatically.
 
 END
+
+
+OWNER-PAGE LINK RULE - HARD
+---------------------------
+Every local Planner owner page must link Co-Teacher Agenda directly to the hosted
+teacher_shared destination, never to localhost /shared/...:
+- Algebra 1 -> https://tnezki.github.io/teacher_shared/algebra/
+- Physics -> https://tnezki.github.io/teacher_shared/physics/
+- AP Calculus AB -> https://tnezki.github.io/teacher_shared/calc/
+
+SYSTEM REPOSITORY SYNC
+----------------------
+Local Tools Sync includes memories so canonical local-tool/runtime changes are
+available on both teacher computers.

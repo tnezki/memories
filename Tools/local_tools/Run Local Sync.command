@@ -24,10 +24,10 @@ detect_root() {
 }
 
 ROOT="$(detect_root || true)"
-REPOS=("algebra" "physics" "apcalc" "teacher_shared")
+REPOS=("memories" "algebra" "physics" "apcalc" "teacher_shared")
 FAILURES=0
 STAMP="$(date '+%Y-%m-%d %H:%M')"
-COMMIT_MESSAGE="Planner sync ${STAMP}"
+COMMIT_MESSAGE="Local Tools sync ${STAMP}"
 
 fail_banner() {
   echo
@@ -47,6 +47,33 @@ success_banner() {
   fi
   echo "SUCCESS SUCCESS SUCCESS"
   echo
+}
+
+normalize_tnezki_origin_to_ssh() {
+  local repo="$1"
+  local remote="$2"
+  case "$remote" in
+    https://github.com/tnezki/*.git)
+      local suffix="${remote#https://github.com/tnezki/}"
+      local ssh="git@github.com:tnezki/${suffix}"
+      if git -C "$repo" remote set-url origin "$ssh"; then
+        echo "Normalized origin to SSH: $ssh"
+        printf '%s\n' "$ssh"
+        return 0
+      fi
+      ;;
+    https://github.com/tnezki/*)
+      local suffix="${remote#https://github.com/tnezki/}"
+      local ssh="git@github.com:tnezki/${suffix}.git"
+      if git -C "$repo" remote set-url origin "$ssh"; then
+        echo "Normalized origin to SSH: $ssh"
+        printf '%s\n' "$ssh"
+        return 0
+      fi
+      ;;
+  esac
+  printf '%s\n' "$remote"
+  return 0
 }
 
 if [[ -z "$ROOT" ]]; then
@@ -100,6 +127,11 @@ for name in "${REPOS[@]}"; do
   remote="$(git -C "$repo" remote get-url origin 2>/dev/null || true)"
   echo "Branch: ${branch:-unknown}"
   echo "Origin: ${remote:-missing}"
+
+  if [[ -n "$remote" ]]; then
+    normalized="$(normalize_tnezki_origin_to_ssh "$repo" "$remote")"
+    remote="$(printf '%s\n' "$normalized" | tail -n 1)"
+  fi
 
   if [[ "$ACTION" == "pull" ]]; then
     if [[ -n "$(git -C "$repo" status --porcelain 2>/dev/null)" ]]; then

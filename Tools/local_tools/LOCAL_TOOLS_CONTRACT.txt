@@ -1,32 +1,23 @@
 LOCAL TOOLS CONTRACT
 ====================
 
-STATUS: PILOT / CURRENT FRONT DOOR
-REVISION: 2026-09-29
+STATUS: CURRENT FRONT DOOR
+REVISION: 2026-09-29 - HOSTED CO-TEACHER AGENDA FIX
 
 PURPOSE
 -------
-Local Tools is the single teacher-facing Dock entry point for local curriculum utilities.
-
-It does NOT replace the underlying tools on disk. It provides one front door to:
+Local Tools is the single teacher-facing Dock entry point for:
 - Student Data Tools
-- Planner pages
+- local Planner editing pages
 - Planner repository sync
-- Curriculum Transfer
+- hosted co-teacher agendas
 
-The individual underlying tools remain independently runnable and repairable.
+Curriculum Transfer remains a separate Dock app.
 
 LOCAL WEB UI
 ------------
 Local Tools runs only on localhost:
   http://127.0.0.1:8770/
-
-The Local Tools app:
-1. stops only a stale Local Tools server process;
-2. starts a fresh Local Tools server in the background;
-3. opens the Local Tools home page.
-
-No persistent Terminal window is required for the Local Tools home page.
 
 STUDENT DATA
 ------------
@@ -34,21 +25,39 @@ Open Student Data Tools:
 - if Portfolio is already reachable on port 8765, open it;
 - otherwise launch the existing Student Data Tools.app.
 
-PLANNERS
---------
-Planner buttons:
+LOCAL PLANNERS
+--------------
+Planner buttons are teacher editing surfaces:
 - Algebra 1 -> http://127.0.0.1:8767/
 - Physics -> http://127.0.0.1:8768/
 - AP Calculus AB -> http://127.0.0.1:8769/
-- Open All -> open all three.
 
 If a requested Planner is not reachable, Local Tools starts:
   _algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command
-in the background and waits briefly for the Planner ports.
+
+CO-TEACHER AGENDAS - HARD
+-------------------------
+The co-teacher agenda is NOT a localhost destination.
+
+Canonical published files live in:
+- teacher_shared/algebra/index.html
+- teacher_shared/physics/index.html
+- teacher_shared/calc/index.html
+
+Canonical hosted links are:
+- https://tnezki.github.io/teacher_shared/algebra/
+- https://tnezki.github.io/teacher_shared/physics/
+- https://tnezki.github.io/teacher_shared/calc/
+
+Any local Planner route such as:
+  http://127.0.0.1:8767/shared/algebra/index.html
+
+is preview/troubleshooting only and must not be presented as the co-teacher destination.
 
 SYNC
 ----
 The explicit sync actions operate only on:
+- memories
 - algebra
 - physics
 - apcalc
@@ -67,14 +76,11 @@ Commit + Push All:
 - never force-push;
 - aborts a failed rebase and reports failure.
 
-Sync opens Terminal intentionally so repository-by-repository output and the final SUCCESS/FAILURE banner remain visible.
+For the teacher's own tnezki GitHub repositories, an old HTTPS origin may be normalized to the equivalent SSH origin before syncing. This prevents school-network HTTPS credential prompts.
 
-CURRICULUM TRANSFER
--------------------
-Apply Curriculum Transfers opens the existing canonical:
-  memories/Tools/curriculum_transfer/Apply Curriculum Transfers.command
-
-Curriculum Transfer itself remains Git-free.
+CURRICULUM TRANSFER - HARD BOUNDARY
+-----------------------------------
+Curriculum Transfer is not part of the Local Tools web page. It remains its own Dock app.
 
 BOUNDARIES
 ----------
@@ -85,3 +91,24 @@ BOUNDARIES
 - Existing standalone apps remain valid during migration.
 
 END
+
+
+OWNER-PAGE CO-TEACHER LINKS - HARD
+----------------------------------
+The Co-Teacher Agenda button on each local Planner owner page must open the hosted
+teacher_shared page directly:
+- Algebra 1 -> https://tnezki.github.io/teacher_shared/algebra/
+- Physics -> https://tnezki.github.io/teacher_shared/physics/
+- AP Calculus AB -> https://tnezki.github.io/teacher_shared/calc/
+
+The localhost /shared/... pages are preview/troubleshooting only.
+
+Local Tools carries an idempotent repair helper that updates older local Planner
+source files to these hosted destinations and restarts ports 8767-8769 only when
+a repair was actually required.
+
+SYNC OF SYSTEM TOOLS
+--------------------
+The memories repository is included in Local Tools Sync so Local Tools, Student
+Data Tools, Portfolio contracts/runtime, and other canonical system-tool updates
+can move between the teacher's school and home computers.
