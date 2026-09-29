@@ -1,7 +1,7 @@
 {
-  "schema": "portfolio-template-contract/2.5",
+  "schema": "portfolio-template-contract/2.6",
   "status": "CURRENT",
-  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student reports use the locked two-page family-facing HTML/PDF layout with the current progress continuum; teacher reports retain the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design.",
+  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student reports use the locked two-page family-facing HTML/PDF layout with the current progress continuum; teacher reports use the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design with current MG, I Can, and routing breakdowns.",
   "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, section purposes, card anatomy, lane names, grading explanation, Priority Day capacity/ranking, and responsive digital student-report structure. Data changes; recurring structure does not drift.",
   "progress_model_contract": "Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json",
   "student_packet": {
@@ -95,7 +95,9 @@
     ],
     "class_overview": {
       "title": "Class Overview",
-      "rule": "Fast-to-scan action page. Show compact current-grade/evidence stats, Major strengths, Highest-leverage pattern, and the three lane summaries. Do not include roster-upload or PowerSchool workflow instructions."
+      "rule": "Fast-to-scan instructional dashboard. Show active-student, Priority Day eligible, Pull In, and F-condition counts; one compact card per current Mastery Goal with A+/A/B/C/Falling Behind/F/Building-or-Not-Yet-Assessed distribution and actionable I Can placement count; a six-row top-actionable-I-Can status table; intervention counts for no-current-concern, Falling Behind with growth, F condition, 1 gap, 2 gaps, and 3+ gaps; the three lane summaries; and the compact latest-evidence picture.",
+      "top_actionable_i_can_rule": "Rank current I Cans by count of STARTED + DEVELOPING placements, then stable MG/I Can order. Show up to six rows with Not Yet Assessed, Started, Developing, Progressing, Mastered+, and Practice + check counts.",
+      "mg_breakdown_rule": "Use the actual current MG set and exact current I Can membership. Never assume four I Cans in an MG. Each MG card reports current family-facing grade/status distribution plus actionable Practice + check placements."
     },
     "whole_class": {
       "page_title": "Whole Class",
@@ -122,7 +124,7 @@
     "pull_in_students": {
       "page_title": "Pull In Students",
       "page_count": 1,
-      "eligible_student_rule": "Active students with exactly 1-2 current PRACTICE_AND_CHECK I Can gaps.",
+      "eligible_student_rule": "Active students with exactly 1-2 current PRACTICE_AND_CHECK I Can gaps. A Falling Behind/F Mastery Goal is NOT required.",
       "rule": "Student-centered compact grid. Show student name, period, and exact one or two I Can code + full statement targets. Never organize under shared I Can headings.",
       "banner_pattern": "ALL {PULL_IN_COUNT} STUDENTS: PRACTICE + CHECK SOON",
       "banner_rule": "State the action once in the banner; do not repeat a PLAN label on every student card.",
@@ -134,11 +136,21 @@
   },
   "student_action_states": {
     "visibility_rule": "These states remain internal for intervention/practice routing and are not printed as a separate Next line under every student I Can.",
-    "NEEDS_FIRST_CHECK": {"label": "Needs first check"},
-    "PRACTICE_AND_CHECK": {"label": "Practice + check soon"},
-    "NEEDS_ANOTHER_DEMONSTRATION": {"label": "Needs another independent check"},
-    "SECURE": {"label": "Secure"},
-    "EXTENSION": {"label": "Extension"}
+    "NEEDS_FIRST_CHECK": {
+      "label": "Needs first check"
+    },
+    "PRACTICE_AND_CHECK": {
+      "label": "Practice + check soon"
+    },
+    "NEEDS_ANOTHER_DEMONSTRATION": {
+      "label": "Needs another independent check"
+    },
+    "SECURE": {
+      "label": "Secure"
+    },
+    "EXTENSION": {
+      "label": "Extension"
+    }
   },
   "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in human-facing output.",
   "results_zip": {

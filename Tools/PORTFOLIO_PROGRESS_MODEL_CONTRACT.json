@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-progress-model/1.0",
+  "schema": "portfolio-progress-model/1.1",
   "status": "CURRENT",
   "effective_date": "2026-09-29",
   "purpose": "Shared longitudinal Portfolio progress, Mastery Goal reporting, PowerSchool, and family-report behavior for courses using the canonical Portfolio runtime.",
@@ -46,7 +46,13 @@
     "principle": "Evidence should accumulate according to demonstrated understanding, not only completely correct performances.",
     "core_vs_secondary_detail": "A response may show the core concept even when a secondary representation/detail is wrong. Repeated meaningful partial understanding can advance progress without being treated as zero understanding.",
     "example": "Repeatedly identifying x-intercept 3 while omitting the ordered-pair form (3, 0) is meaningful evidence of intercept identification; the representation detail remains a gap but the conceptual evidence still counts.",
-    "source_strengths": ["CONVINCING", "PARTIAL", "LIMITED", "UNUSABLE", "NOT_OBSERVED"]
+    "source_strengths": [
+      "CONVINCING",
+      "PARTIAL",
+      "LIMITED",
+      "UNUSABLE",
+      "NOT_OBSERVED"
+    ]
   },
   "class_opportunities": {
     "i_can_rule": "Count distinct non-observation class assessment sources that produced a mapped judgment for this I Can for any student. A student absence does not erase the class opportunity.",
@@ -70,7 +76,12 @@
     "before_two_opportunities_below_c": "blank",
     "falling_behind_with_growth": "blank",
     "no_growth_after_two_opportunities": "F",
-    "meeting_or_better": ["C", "B", "A", "A+"],
+    "meeting_or_better": [
+      "C",
+      "B",
+      "A",
+      "A+"
+    ],
     "unit_grade": "No overall Unit letter grade is exported."
   },
   "student_report": {
@@ -94,6 +105,10 @@
   },
   "intervention": {
     "priority_signal": "Use Falling Behind/F Mastery Goals plus actionable PRACTICE_AND_CHECK I Cans instead of a visible/current I grade.",
-    "falling_behind_not_failure": "Students may be Falling Behind while still showing meaningful growth and therefore have a blank PowerSchool score."
+    "falling_behind_not_failure": "Students may be Falling Behind while still showing meaningful growth and therefore have a blank PowerSchool score.",
+    "teacher_overview": "Class Overview shows per-MG grade/status distribution, top actionable I Can status counts, and student-level routing counts so raw placement totals are interpretable.",
+    "pull_in_rule": "Pull In is based only on exactly 1-2 current PRACTICE_AND_CHECK I Can gaps; Falling Behind/F is not required.",
+    "priority_day_rule": "Priority Day eligibility remains active student + at least one current Falling Behind/F MG + at least one PRACTICE_AND_CHECK I Can, ranked with F condition first, then Falling Behind/F goal count, actionable-gap count, evidence severity, and stable student key.",
+    "routing_transparency": "Teacher reports show no-current-concern, Falling Behind with growth, F condition, 1-gap, 2-gap, and 3+-gap counts."
   }
 }

@@ -12,7 +12,7 @@ import html
 import math
 import re
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -434,33 +434,476 @@ def _state_dir_from_call(args: tuple[Any, ...], kwargs: dict[str, Any]) -> Path 
 
 
 
-def _postprocess_student_markup(out_dir: Path) -> None:
+def _legacy_next_pattern() -> re.Pattern[str]:
+    return re.compile(
+        r'<div\b[^>]*class=(?:"[^"]*\bican-next\b[^"]*"|\'[^\']*\bican-next\b[^\']*\')[^>]*>.*?</div>',
+        re.I | re.S,
+    )
+
+
+def _recent_four_events(state_dir: Path) -> dict[str, list[dict[str, str]]]:
+    ledger = state_dir / "evidence_ledger.csv"
+    if not ledger.is_file():
+        return {}
+    _fields, rows = runtime.read_csv(ledger)
+    by_student: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        strength = _clean(row.get("strength")).upper()
+        if strength not in _ALLOWED_EVIDENCE:
+            continue
+        sk = _clean(row.get("student_key"))
+        iid = _clean(row.get("i_can_id"))
+        if sk and iid:
+            by_student[sk].append(row)
+    return {sk: list(reversed(events[-4:])) for sk, events in by_student.items()}
+
+
+def _recent_rows_html(events: list[dict[str, str]], text_by_ican: dict[str, str]) -> str:
+    if not events:
+        return '<tr><td>—</td><td>No assessed evidence yet</td><td>—</td><td>No assessed evidence is currently recorded for this student.</td></tr>'
+    rows: list[str] = []
+    for event in events[:4]:
+        iid = _clean(event.get("i_can_id"))
+        target = _clean(event.get("i_can_exact_text")) or text_by_ican.get(iid, "")
+        evidence = _clean(event.get("strength")).title()
+        note = _clean(event.get("note") or event.get("concise_note"))
+        rows.append(
+            f'<tr><td><b>{html.escape(iid)}</b></td><td>{html.escape(target)}</td>'
+            f'<td>{html.escape(evidence)}</td><td>{html.escape(note)}</td></tr>'
+        )
+    return "".join(rows)
+
+
+def _replace_recent_tbody(doc: str, rows_html: str) -> str:
+    pattern = re.compile(
+        r'(<section\b[^>]*class=["\'][^"\']*\brecent\b[^"\']*["\'][^>]*>.*?<tbody>)(.*?)(</tbody>)',
+        re.I | re.S,
+    )
+    return pattern.sub(lambda m: m.group(1) + rows_html + m.group(3), doc, count=1)
+
+
+def _postprocess_student_markup(out_dir: Path, state_dir: Path | None = None) -> None:
     student_root = out_dir / "student_reports"
     if not student_root.is_dir():
         return
-    pattern = re.compile(r'<div class="ican-next">.*?</div>', re.S)
-    for path in student_root.rglob("*.html"):
-        doc = path.read_text(encoding="utf-8")
-        doc = pattern.sub("", doc)
-        path.write_text(doc, encoding="utf-8")
 
-def _postprocess_teacher_copy(out_dir: Path) -> None:
+    next_pattern = _legacy_next_pattern()
+    recent_by_student = _recent_four_events(state_dir) if state_dir is not None else {}
+    text_by_ican: dict[str, str] = {}
+    if state_dir is not None and (state_dir / "i_can_status_current.csv").is_file():
+        _fields, current = runtime.read_csv(state_dir / "i_can_status_current.csv")
+        for row in current:
+            iid = _clean(row.get("i_can_id"))
+            if iid:
+                text_by_ican[iid] = _clean(row.get("i_can_text") or row.get("i_can_exact_text"))
+
+    individual = student_root / "individual"
+    if individual.is_dir():
+        for path in sorted(individual.glob("*.html")):
+            doc = path.read_text(encoding="utf-8")
+            doc = next_pattern.sub("", doc)
+            sk = path.stem
+            doc = _replace_recent_tbody(doc, _recent_rows_html(recent_by_student.get(sk, []), text_by_ican))
+            if next_pattern.search(doc) or "<b>Next:</b>" in doc:
+                raise ValueError(f"Portfolio cleanup failed: retired per-I-Can Next line remains in {path.name}")
+            path.write_text(doc, encoding="utf-8")
+
+    # Rebuild the combined class packet from the cleaned individual reports so it
+    # cannot retain stale Next markup or a different Recent Evidence table.
+    combined = student_root / "class_student_packet.html"
+    manifest_path = out_dir / "results_manifest.json"
+    if combined.is_file() and manifest_path.is_file():
+        manifest = runtime.read_json(manifest_path)
+        articles: list[str] = []
+        for row in manifest.get("students", []):
+            rel = _clean(row.get("report"))
+            report = out_dir / rel if rel else None
+            if report is None or not report.is_file():
+                continue
+            doc = report.read_text(encoding="utf-8")
+            m = re.search(r'(<article class="student-report">.*?</article>)', doc, re.S)
+            if m:
+                articles.append(m.group(1))
+        if articles:
+            doc = combined.read_text(encoding="utf-8")
+            doc = re.sub(r'(?s)(<body[^>]*>).*?(</body>)', lambda m: m.group(1) + "\n" + "\n".join(articles) + "\n" + m.group(2), doc, count=1)
+            if next_pattern.search(doc) or "<b>Next:</b>" in doc:
+                raise ValueError("Portfolio cleanup failed: retired per-I-Can Next line remains in combined report")
+            combined.write_text(doc, encoding="utf-8")
+
+
+def _teacher_breakdown_data(state_dir: Path, out_dir: Path) -> dict[str, Any]:
+    """Build current teacher-facing breakdown and routing from local Portfolio state."""
+    _fields, current_rows = recalculate_state_dir(Path(state_dir))
+    registry_path = Path(state_dir) / "student_registry.csv"
+    _rf, registry = runtime.read_csv(registry_path) if registry_path.is_file() else ([], [])
+    active = [r for r in registry if _clean(r.get("active")).lower() in {"yes", "true", "1", "y"}]
+    if not active:
+        keys = sorted({_clean(r.get("student_key")) for r in current_rows if _clean(r.get("student_key"))})
+        active = [{"student_key": k, "display_name": k, "student_name": k, "period": ""} for k in keys]
+    active_by = {_clean(r.get("student_key")): r for r in active}
+    active_keys = set(active_by)
+    rows = [r for r in current_rows if _clean(r.get("student_key")) in active_keys]
+
+    def mg_sort(mid: str):
+        m = re.search(r"(?:MG)?0*(\d+)$", _clean(mid), re.I)
+        return (int(m.group(1)) if m else 9999, _clean(mid))
+
+    def ican_sort(iid: str):
+        m = re.search(r"IC0*(\d+)$", _clean(iid), re.I)
+        return (int(m.group(1)) if m else 9999, _clean(iid))
+
+    mg_titles: dict[str, str] = {}
+    mg_state = Path(state_dir) / "mastery_goal_status_current.csv"
+    if mg_state.is_file():
+        _mf, mrows = runtime.read_csv(mg_state)
+        for row in mrows:
+            mid = runtime.mg_id(row)
+            title = _clean(row.get("mastery_goal_title"))
+            if mid and title and mid not in mg_titles:
+                mg_titles[mid] = title
+
+    text_by_ican: dict[str, str] = {}
+    mg_by_ican: dict[str, str] = {}
+    for row in rows:
+        iid = _clean(row.get("i_can_id"))
+        mid = runtime.mg_id(row)
+        if iid:
+            text_by_ican.setdefault(iid, _clean(row.get("i_can_text") or row.get("i_can_exact_text")))
+            if mid:
+                mg_by_ican[iid] = mid
+
+    by_student_mg: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    by_student_rows: dict[str, list[dict[str, str]]] = defaultdict(list)
+    by_ican: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        sk = _clean(row.get("student_key"))
+        mid = runtime.mg_id(row)
+        iid = _clean(row.get("i_can_id"))
+        if sk:
+            by_student_rows[sk].append(row)
+        if sk and mid:
+            by_student_mg[(sk, mid)].append(row)
+        if iid:
+            by_ican[iid].append(row)
+
+    mg_order = sorted({mid for (_sk, mid) in by_student_mg}, key=mg_sort)
+    grades: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    for (sk, mid), rr in by_student_mg.items():
+        grades[sk][mid] = mg_grade(rr)
+
+    practice_by_student: dict[str, list[dict[str, str]]] = {}
+    fb_goal_count: dict[str, int] = {}
+    f_goal_count: dict[str, int] = {}
+    for sk in active_keys:
+        practice = [r for r in by_student_rows.get(sk, []) if _clean(r.get("student_action_code")) == "PRACTICE_AND_CHECK"]
+        practice_by_student[sk] = practice
+        infos = list(grades.get(sk, {}).values())
+        fb_goal_count[sk] = sum(1 for x in infos if _clean(x.get("report_display")) in {"Falling Behind", "F"})
+        f_goal_count[sk] = sum(1 for x in infos if _clean(x.get("report_display")) == "F")
+
+    def student_name(sk: str) -> str:
+        row = active_by.get(sk, {})
+        return _clean(row.get("display_name") or row.get("student_name")) or sk
+
+    def student_period(sk: str) -> str:
+        return _clean(active_by.get(sk, {}).get("period"))
+
+    gap_count = {sk: len(practice_by_student.get(sk, [])) for sk in active_keys}
+    pull_keys = sorted([sk for sk, n in gap_count.items() if 1 <= n <= 2], key=lambda sk: (student_period(sk), student_name(sk), sk))
+
+    priority: list[dict[str, Any]] = []
+    for sk in active_keys:
+        practice = practice_by_student.get(sk, [])
+        if not practice or fb_goal_count.get(sk, 0) < 1:
+            continue
+        sev = Counter(_clean(r.get("latest_strength")).upper() for r in practice)
+        priority.append({
+            "student_key": sk,
+            "practice": practice,
+            "fb": fb_goal_count.get(sk, 0),
+            "f": f_goal_count.get(sk, 0),
+            "severity": (sev.get("UNUSABLE", 0), sev.get("LIMITED", 0), sev.get("PARTIAL", 0)),
+        })
+    priority.sort(key=lambda x: (-x["f"], -x["fb"], -len(x["practice"]), -x["severity"][0], -x["severity"][1], -x["severity"][2], x["student_key"]))
+    g1, g2, wait = priority[:15], priority[15:30], priority[30:]
+
+    practice_counts = Counter(_clean(r.get("i_can_id")) for rr in practice_by_student.values() for r in rr if _clean(r.get("i_can_id")))
+    whole_ic, whole_count = practice_counts.most_common(1)[0] if practice_counts else ("", 0)
+    whole_active = bool(whole_ic and whole_count >= max(5, round(len(active) * 0.6)))
+
+    one_gap = sum(1 for n in gap_count.values() if n == 1)
+    two_gap = sum(1 for n in gap_count.values() if n == 2)
+    three_plus = sum(1 for n in gap_count.values() if n >= 3)
+    fb_growth = sum(1 for sk in active_keys if any(_clean(x.get("report_display")) == "Falling Behind" for x in grades.get(sk, {}).values()))
+    f_students = sum(1 for sk in active_keys if f_goal_count.get(sk, 0) > 0)
+    no_concern = sum(1 for sk in active_keys if gap_count.get(sk, 0) == 0 and fb_goal_count.get(sk, 0) == 0)
+    practice_total = sum(gap_count.values())
+
+    manifest_path = out_dir / "results_manifest.json"
+    manifest = runtime.read_json(manifest_path) if manifest_path.is_file() else {}
+    course = _clean(manifest.get("course"))
+    unit = manifest.get("unit", "")
+    latest = manifest.get("latest_evidence") if isinstance(manifest.get("latest_evidence"), dict) else {}
+    latest_label = _clean(latest.get("label")) or "Current state"
+    latest_date = _clean(latest.get("date"))
+
+    mg_cards: list[str] = []
+    for mid in mg_order:
+        dist = Counter()
+        for sk in active_keys:
+            info = grades.get(sk, {}).get(mid)
+            display = _clean(info.get("report_display")) if info else "Not Yet Assessed"
+            if display == "—" or not display:
+                display = "Building"
+            dist[display] += 1
+        actionable = sum(1 for r in rows if runtime.mg_id(r) == mid and _clean(r.get("student_action_code")) == "PRACTICE_AND_CHECK")
+        title = mg_titles.get(mid, "")
+        short = mid.replace(f"U{unit}-", "") if unit != "" else mid
+        heading = html.escape(short) + (f" · {html.escape(title)}" if title else "")
+        mg_cards.append(
+            '<div class="teacher-mg-card">'
+            f'<div class="teacher-mg-title">{heading}</div>'
+            '<div class="teacher-grade-line">'
+            f'<span><b>A+</b> {dist.get("A+",0)}</span><span><b>A</b> {dist.get("A",0)}</span><span><b>B</b> {dist.get("B",0)}</span><span><b>C</b> {dist.get("C",0)}</span>'
+            '</div>'
+            '<div class="teacher-grade-line">'
+            f'<span><b>Falling Behind</b> {dist.get("Falling Behind",0)}</span><span><b>F</b> {dist.get("F",0)}</span><span><b>Building/NYA</b> {dist.get("Building",0)+dist.get("Not Yet Assessed",0)}</span>'
+            '</div>'
+            f'<div class="teacher-actionable"><b>{actionable}</b> Practice + check I Can placement(s)</div>'
+            '</div>'
+        )
+
+    ican_rows_html: list[str] = []
+    ranked_iids = sorted(
+        by_ican,
+        key=lambda iid: (
+            -sum(_canonical_status(r.get("status_code")) in {"STARTED", "DEVELOPING"} for r in by_ican[iid]),
+            mg_sort(mg_by_ican.get(iid, "")),
+            ican_sort(iid),
+        ),
+    )[:6]
+    for iid in ranked_iids:
+        counts = Counter(_canonical_status(r.get("status_code")) for r in by_ican[iid])
+        practice_n = counts.get("STARTED", 0) + counts.get("DEVELOPING", 0)
+        mastered_plus = counts.get("MASTERED", 0) + counts.get("EXTENDED", 0)
+        ican_rows_html.append(
+            '<tr>'
+            f'<td><b>{html.escape(iid)}</b><div class="teacher-ican-text">{html.escape(text_by_ican.get(iid,""))}</div></td>'
+            f'<td>{counts.get("NOT_YET_ASSESSED",0)}</td><td>{counts.get("STARTED",0)}</td><td>{counts.get("DEVELOPING",0)}</td><td>{counts.get("PROGRESSING",0)}</td><td>{mastered_plus}</td><td><b>{practice_n}</b></td>'
+            '</tr>'
+        )
+    if not ican_rows_html:
+        ican_rows_html.append('<tr><td colspan="7">No current I Can status rows are available.</td></tr>')
+
+    latest_lines: list[str] = []
+    ledger_path = Path(state_dir) / "evidence_ledger.csv"
+    if ledger_path.is_file():
+        _lf, ledger = runtime.read_csv(ledger_path)
+        latest_by_ic: dict[str, list[dict[str, str]]] = defaultdict(list)
+        for row in ledger:
+            if _clean(row.get("source_label")) == latest_label and (not latest_date or _clean(row.get("source_date")) == latest_date):
+                iid = _clean(row.get("i_can_id"))
+                if iid:
+                    latest_by_ic[iid].append(row)
+        for iid in sorted(latest_by_ic, key=lambda x: (-len(latest_by_ic[x]), x))[:3]:
+            c = Counter(_clean(x.get("strength")).upper() for x in latest_by_ic[iid])
+            latest_lines.append(
+                f'<li><b>{html.escape(iid)} · {html.escape(text_by_ican.get(iid,""))}</b> — {c.get("CONVINCING",0)} convincing, {c.get("PARTIAL",0)} partial, {c.get("LIMITED",0)} limited, {c.get("UNUSABLE",0)} unusable across {len(latest_by_ic[iid])} source-level judgment(s).</li>'
+            )
+    latest_html = '<ul>' + ''.join(latest_lines) + '</ul>' if latest_lines else '<p>No source-level evidence judgments were added in the latest run.</p>'
+
+    whole_text = (
+        f'{html.escape(whole_ic)} · {whole_count} students need Practice + check soon.'
+        if whole_active else 'No broad shared target is currently supported.'
+    )
+    whole_detail = (
+        f'Whole Class is active for {html.escape(whole_ic)} ({whole_count} students).'
+        if whole_active else 'No single Practice + check target currently reaches the Whole Class threshold.'
+    )
+
+    overview_html = f'''
+  <div class="report-head">
+    <div><div class="eyebrow">{html.escape(course)} - Unit {html.escape(str(unit))} Portfolio</div><h1>Class Overview</h1></div>
+    <div class="meta"><b>Latest evidence:</b> {html.escape(latest_label)}<br>{html.escape(latest_date)}<br><b>Active students:</b> {len(active)}</div>
+  </div>
+
+  <div class="grid4">
+    <div class="stat"><strong>{len(active)}</strong><span>Active students</span></div>
+    <div class="stat"><strong>{len(priority)}</strong><span>Priority Day eligible now</span></div>
+    <div class="stat"><strong>{len(pull_keys)}</strong><span>Pull In students with 1-2 actionable gaps</span></div>
+    <div class="stat"><strong>{f_students}</strong><span>Students currently meeting an F condition</span></div>
+  </div>
+
+  <div class="section teacher-mg-breakdown">
+    <h2>Mastery Goal breakdown</h2>
+    <div class="teacher-mg-grid">{''.join(mg_cards)}</div>
+  </div>
+
+  <div class="grid2 teacher-breakdown-grid">
+    <div class="section">
+      <h2>Top actionable I Cans</h2>
+      <table class="teacher-ican-table"><thead><tr><th>I Can</th><th>NYA</th><th>Started</th><th>Developing</th><th>Progressing</th><th>Mastered+</th><th>Practice</th></tr></thead><tbody>{''.join(ican_rows_html)}</tbody></table>
+    </div>
+    <div class="section">
+      <h2>Intervention breakdown</h2>
+      <div class="teacher-route-grid">
+        <div><b>{no_concern}</b><span>No current concern</span></div>
+        <div><b>{fb_growth}</b><span>Falling Behind but showing growth</span></div>
+        <div><b>{f_students}</b><span>F condition</span></div>
+        <div><b>{one_gap}</b><span>1 actionable I Can</span></div>
+        <div><b>{two_gap}</b><span>2 actionable I Cans</span></div>
+        <div><b>{three_plus}</b><span>3+ actionable I Cans</span></div>
+      </div>
+      <p class="teacher-route-note"><b>{practice_total}</b> total Practice + check placements. {whole_detail}</p>
+    </div>
+  </div>
+
+  <div class="grid3 teacher-lane-grid">
+    <div class="lane"><div class="num">{'1 target' if whole_active else '0'}</div><div class="label">Whole Class</div><p>{whole_text}</p></div>
+    <div class="lane"><div class="num">{len(priority)}</div><div class="label">Priority Day eligible</div><p>Falling Behind/F plus at least one Practice + check target. The first 30 fill the two weekly groups.</p></div>
+    <div class="lane"><div class="num">{len(pull_keys)}</div><div class="label">Pull In Students</div><p>Exactly 1-2 actionable Practice + check gaps. This lane does not require a Falling Behind/F goal.</p></div>
+  </div>
+
+  <div class="section soft latest-picture">
+    <h2>Latest evidence picture — {html.escape(latest_label)}</h2>
+    {latest_html}
+  </div>
+'''
+
+    def target_chips(group: list[dict[str, Any]]) -> str:
+        c = Counter(_clean(r.get("i_can_id")) for x in group for r in x["practice"] if _clean(r.get("i_can_id")))
+        return ''.join(f'<span class="chip{" hot" if i==0 else ""}">{html.escape(iid)} × {n}</span>' for i, (iid, n) in enumerate(c.most_common(7)))
+
+    def student_rows(group: list[dict[str, Any]]) -> str:
+        return ''.join(
+            f'<div class="student-row"><b>{html.escape(student_name(x["student_key"]))}</b><div class="codes">{html.escape(", ".join(_clean(r.get("i_can_id")) for r in x["practice"] if _clean(r.get("i_can_id"))))}</div></div>'
+            for x in group
+        )
+
+    def group_summary(group: list[dict[str, Any]]) -> str:
+        c = Counter(_clean(r.get("i_can_id")) for x in group for r in x["practice"] if _clean(r.get("i_can_id")))
+        tops = c.most_common(3)
+        if not tops:
+            return "No eligible students are currently assigned to this group."
+        desc = ", ".join(f"{iid} ({n})" for iid, n in tops)
+        return f"The dominant overlapping Practice + check targets are {desc}. Use one common model-practice-check routine, then give a short alternate strip to students with outlier targets."
+
+    timeline = '<b>0-4 min</b><span>Model one clean example and name the decision point.</span><b>4-10 min</b><span>Guided practice on the dominant shared target.</span><b>10-16 min</b><span>Independent parallel item; short alternate strip for outlier targets.</span><b>16-20 min</b><span>Quick feedback and route each student to practice or another independent demonstration.</span>'
+
+    def group_card(group: list[dict[str, Any]], number: int, cls: str) -> str:
+        if not group:
+            return f'<div class="group-card {cls}"><div class="group-title"><div><div class="eyebrow">Priority</div><div class="rank">Group {number}</div></div><div class="count"><b>0 students</b></div></div><p>No eligible students currently fill this group.</p></div>'
+        start_rank = 1 if number == 1 else 16
+        end_rank = start_rank + len(group) - 1
+        return f'<div class="group-card {cls}"><div class="group-title"><div><div class="eyebrow">{"First priority" if number==1 else "Second priority"}</div><div class="rank">Group {number}</div></div><div class="count"><b>{len(group)} students</b><br>Ranks {start_rank}-{end_rank}</div></div><div class="mix">{target_chips(group)}</div><div class="student-list">{student_rows(group)}</div><div class="crew-plan"><h3>Best use of the 20-minute Crewtime</h3><p>{html.escape(group_summary(group))}</p><div class="timeline">{timeline}</div></div></div>'
+
+    priority_html = f'''
+  <div class="report-head">
+    <div><div class="eyebrow">{html.escape(course)} - Unit {html.escape(str(unit))} Portfolio</div><h1>Priority Day Groups</h1></div>
+    <div class="meta"><b>Eligible now:</b> {len(priority)}<br><b>Rule:</b> Falling Behind/F + Practice + check<br><b>Capacity:</b> 2 groups · 15 students each</div>
+  </div>
+  <div class="priority-note">Ranked by current F condition first, then total Falling Behind/F goals, actionable-gap count, evidence severity, and stable student key.</div>
+  <div class="grid2 priority-grid">{group_card(g1,1,'first')}{group_card(g2,2,'second')}</div>
+  {'' if not wait else f'<div class="priority-waitlist">{len(wait)} additional eligible student(s) remain after Group 2 capacity.</div>'}
+'''
+
+    pull_cards: list[str] = []
+    pull_mix = Counter()
+    for sk in pull_keys:
+        needs = []
+        for r in practice_by_student.get(sk, []):
+            iid = _clean(r.get("i_can_id"))
+            if not iid:
+                continue
+            pull_mix[iid] += 1
+            needs.append(f'<div class="need"><b>{html.escape(iid)}</b> · {html.escape(text_by_ican.get(iid,""))}</div>')
+        pull_cards.append(f'<div class="pull-card"><div class="name">{html.escape(student_name(sk))}</div><div class="period">{html.escape(student_period(sk))}</div>{"".join(needs)}</div>')
+    if not pull_cards:
+        pull_cards.append('<div class="pull-empty">No students currently have exactly 1-2 Practice + check gaps.</div>')
+    pull_html = f'''
+  <div class="report-head">
+    <div><div class="eyebrow">{html.escape(course)} - Unit {html.escape(str(unit))} Portfolio</div><h1>Pull In Students</h1></div>
+    <div class="meta"><b>Lane:</b> exactly 1-2 Practice + check gaps<br><b>Latest evidence:</b> {html.escape(latest_label)} - {html.escape(latest_date)}</div>
+  </div>
+  <div class="pull-banner"><div class="big">ALL {len(pull_keys)} STUDENTS: PRACTICE + CHECK SOON</div><div class="sub">This lane is based on actionable gap count.<br>Falling Behind/F is not required.</div></div>
+  <div class="pull-grid {'cols4' if len(pull_keys)>9 else ''}">{''.join(pull_cards)}</div>
+  <div class="footer-note"><span>Students who only need another independent demonstration are intentionally kept out of this lane.</span><span>{html.escape(' · '.join(f'{k} × {v}' for k,v in pull_mix.most_common()))}</span></div>
+'''
+
+    return {"overview_html": overview_html, "priority_html": priority_html, "pull_html": pull_html}
+
+
+def _postprocess_teacher_copy(out_dir: Path, state_dir: Path | None) -> None:
     path = out_dir / "teacher_report" / "teacher_summary.html"
     if not path.is_file():
         return
     doc = path.read_text(encoding="utf-8")
     replacements = {
-        "Current Mastery Goal grades of I": "Mastery Goals Falling Behind",
+        "Current Mastery Goal grades of I": "Mastery Goals needing intervention",
         "at least one current assessed Mastery Goal grade I": "at least one current Falling Behind/F Mastery Goal",
         "current assessed MG grades I": "current Falling Behind/F Mastery Goals",
         "assessed MG grades I": "Falling Behind/F Mastery Goals",
         "Ranked by I-grade count": "Ranked by Falling Behind/F goal count",
         "I-grade count": "Falling Behind/F goal count",
-        "I-grade intervention need": "Falling Behind intervention need",
+        "I-grade intervention need": "Falling Behind/F intervention need",
     }
     for old, new in replacements.items():
         doc = doc.replace(old, new)
+
+    if state_dir is not None:
+        data = _teacher_breakdown_data(Path(state_dir), out_dir)
+        if "{{PROGRESS_MODEL_CLASS_OVERVIEW_HTML}}" in doc:
+            doc = doc.replace("{{PROGRESS_MODEL_CLASS_OVERVIEW_HTML}}", data["overview_html"])
+        else:
+            doc = re.sub(r'(?s)(<section class="teacher-page">).*?(</section>)', lambda m: m.group(1) + data["overview_html"] + m.group(2), doc, count=1)
+        if "{{PROGRESS_MODEL_PRIORITY_DAY_HTML}}" in doc:
+            doc = doc.replace("{{PROGRESS_MODEL_PRIORITY_DAY_HTML}}", data["priority_html"])
+        else:
+            doc = re.sub(r'(?s)(<section class="teacher-page priority-page">).*?(</section>)', lambda m: m.group(1) + data["priority_html"] + m.group(2), doc, count=1)
+        if "{{PROGRESS_MODEL_PULL_IN_HTML}}" in doc:
+            doc = doc.replace("{{PROGRESS_MODEL_PULL_IN_HTML}}", data["pull_html"])
+        else:
+            doc = re.sub(r'(?s)(<section class="teacher-page pull-page">).*?(</section>)', lambda m: m.group(1) + data["pull_html"] + m.group(2), doc, count=1)
+
     path.write_text(doc, encoding="utf-8")
+
+class _DeferredValidatorSubprocess:
+    """Let the legacy renderer finish, then validate the final cleaned output."""
+
+    def __init__(self, real: Any):
+        self._real = real
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._real, name)
+
+    def run(self, cmd: Any, *args: Any, **kwargs: Any):
+        try:
+            parts = [str(x) for x in cmd]
+        except TypeError:
+            parts = [str(cmd)]
+        if any(Path(x).name == "verify_portfolio_output.py" for x in parts):
+            return self._real.CompletedProcess(cmd, 0, stdout="Deferred until final Portfolio cleanup.\n")
+        return self._real.run(cmd, *args, **kwargs)
+
+
+def _run_final_validator(out_dir: Path) -> None:
+    templates = Path(runtime.__file__).resolve().parent.parent / "templates" / "portfolio"
+    validator = templates / "verify_portfolio_output.py"
+    qa_json = out_dir / "qa" / "template_validation.json"
+    cmd = [
+        "/usr/bin/python3",
+        str(validator),
+        "--results",
+        str(out_dir),
+        "--templates",
+        str(templates),
+        "--write-json",
+        str(qa_json),
+    ]
+    proc = runtime.subprocess.run(cmd, stdout=runtime.subprocess.PIPE, stderr=runtime.subprocess.STDOUT, text=True)
+    if proc.returncode != 0:
+        raise ValueError("Canonical Portfolio template validator failed after final cleanup:\n" + proc.stdout)
 
 
 def _patched_build_results(*args: Any, **kwargs: Any):
@@ -478,14 +921,32 @@ def _patched_build_results(*args: Any, **kwargs: Any):
                 changed = True
         if changed:
             runtime.write_csv(state_dir / "i_can_status_current.csv", fields, rows)
-    manifest = _ORIGINAL_BUILD_RESULTS(*args, **kwargs)
+
+    # The legacy builder runs template QA before this overlay can remove its
+    # retired per-I-Can Next markup. Defer only that validator invocation, then
+    # run the canonical validator on the actual final report bytes below.
+    real_subprocess = runtime.subprocess
+    runtime.subprocess = _DeferredValidatorSubprocess(real_subprocess)
+    try:
+        manifest = _ORIGINAL_BUILD_RESULTS(*args, **kwargs)
+    finally:
+        runtime.subprocess = real_subprocess
+
     out = kwargs.get("out_dir")
     if out is None and len(args) >= 13:
         out = args[12]
     if out is not None:
         out_path = Path(out)
-        _postprocess_student_markup(out_path)
-        _postprocess_teacher_copy(out_path)
+        _postprocess_student_markup(out_path, state_dir)
+        _postprocess_teacher_copy(out_path, state_dir)
+        _run_final_validator(out_path)
+        manifest_path = out_path / "results_manifest.json"
+        if manifest_path.is_file():
+            manifest = runtime.read_json(manifest_path)
+            manifest.setdefault("qa", {})["template_fidelity_status"] = "PASS"
+            manifest["qa"]["identity_status"] = "PASS"
+            manifest["status"] = "PASS"
+            runtime.write_json(manifest_path, manifest)
     return manifest
 
 

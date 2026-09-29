@@ -163,9 +163,23 @@ EOF2
 /usr/bin/osascript <<'APPLESCRIPT' >/dev/null 2>&1 || true
 tell application "Terminal"
   repeat with w in windows
+    set isRuntime to false
     try
-      if (name of w as text) contains "Student Data Tools Runtime" then set miniaturized of w to true
+      if (name of w as text) contains "Student Data Tools Runtime" then set isRuntime to true
+      if (name of w as text) contains "Start Portfolio Local Companion.command" then set isRuntime to true
     end try
+    if isRuntime is false then
+      try
+        set tabText to (contents of selected tab of w as text)
+        if tabText contains "Portfolio Local Companion is running." then set isRuntime to true
+        if tabText contains "Runtime: progress-model-" then set isRuntime to true
+      end try
+    end if
+    if isRuntime then
+      try
+        set miniaturized of w to true
+      end try
+    end if
   end repeat
 end tell
 APPLESCRIPT

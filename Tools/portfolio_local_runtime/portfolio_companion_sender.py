@@ -70,12 +70,12 @@ notes.write_notes = _write_notes_build_package_then_clear_students
 
 
 class Handler(base.Handler):
-    server_version = "PortfolioLocalCompanion/2.1-progress-model"
+    server_version = "PortfolioLocalCompanion/2.2-progress-model"
 
     def do_GET(self) -> None:
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path == "/api/runtime-version":
-            self.send_json({"status": "PASS", "version": "2.1-progress-model"})
+            self.send_json({"status": "PASS", "version": "2.2-progress-model"})
             return
         super().do_GET()
 
@@ -92,7 +92,7 @@ def main() -> int:
     url = f"http://{core.HOST}:{args.port}/"
     print("Portfolio Local Companion is running.")
     print(f"Local URL: {url}")
-    print("Runtime: progress-model-2.1 + local sender package")
+    print("Runtime: progress-model-2.2 + local sender package")
     print("Prepared email data comes only from local _portfolio_data.")
     print("The helper is local to this Mac and does not expose Portfolio data to the network.")
     print("Press Control-C to stop this foreground instance.\n")

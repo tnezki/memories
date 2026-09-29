@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--
-CANONICAL LOCKED TEACHER REPORT v2.2
+CANONICAL LOCKED TEACHER REPORT v2.3
 Normal report order:
 1. Class Overview
 2. Whole Class - only when active
@@ -19,36 +19,7 @@ No normal detailed-evidence appendix.
 -->
 
 <section class="teacher-page">
-  <div class="report-head">
-    <div><div class="eyebrow">{{COURSE}} - Unit {{UNIT_NUMBER}} Portfolio</div><h1>Class Overview</h1></div>
-    <div class="meta"><b>Latest evidence:</b> {{LATEST_EVIDENCE_LABEL}}<br>{{LATEST_EVIDENCE_DATE}}<br><b>Active students:</b> {{ACTIVE_STUDENT_COUNT}}</div>
-  </div>
-
-  <div class="grid4">{{OVERVIEW_STATS_HTML}}</div>
-
-  <div class="grid2 teacher-overview-grid">
-    <div class="section">
-      <h2>Major strengths</h2>
-      {{MAJOR_STRENGTHS_HTML}}
-    </div>
-    <div class="section">
-      <h2>Highest-leverage pattern</h2>
-      {{HIGHEST_LEVERAGE_PATTERN_HTML}}
-    </div>
-  </div>
-
-  <div class="notice"><strong>Teacher-facing report goal:</strong> organize action, not paperwork. Use the three lanes below to decide what to teach to everyone, who gets the weekly Priority Day seat first, and who can be handled through short Pull In practice.</div>
-
-  <div class="grid3 teacher-lane-grid">
-    <div class="lane"><div class="num">{{WHOLE_CLASS_LANE_COUNT}}</div><div class="label">Whole Class</div><p>{{WHOLE_CLASS_LANE_SUMMARY}}</p></div>
-    <div class="lane"><div class="num">2 max</div><div class="label">Priority Day Groups</div><p>Maximum 15 students per group. Highest current Falling Behind intervention need first.</p></div>
-    <div class="lane"><div class="num">{{PULL_IN_COUNT}}</div><div class="label">Pull In Students</div><p>One or two small actionable gaps. Everyone listed needs Practice + check soon.</p></div>
-  </div>
-
-  <div class="section soft latest-picture">
-    <h2>{{LATEST_EVIDENCE_PICTURE_TITLE}}</h2>
-    {{LATEST_EVIDENCE_PICTURE_HTML}}
-  </div>
+  {{PROGRESS_MODEL_CLASS_OVERVIEW_HTML}}
 </section>
 
 <!-- OPTIONAL WHOLE CLASS PAGE: omit this entire section when WHOLE_CLASS_ACTIVE=false. -->
@@ -72,58 +43,19 @@ No normal detailed-evidence appendix.
 </section>
 
 <section class="teacher-page priority-page">
-  <div class="report-head">
-    <div><div class="eyebrow">{{COURSE}} - Unit {{UNIT_NUMBER}} Portfolio</div><h1>Priority Day Groups</h1></div>
-    <div class="meta"><b>Rule:</b> 2 groups maximum<br><b>Size:</b> 15 students maximum each<br><b>Purpose:</b> 20-minute Crewtime intervention</div>
-  </div>
-
-  <div class="priority-note">{{PRIORITY_SORT_EXPLANATION_HTML}}</div>
-
-  <div class="grid2 priority-grid">
-    <div class="group-card first">
-      <div class="group-title"><div><div class="eyebrow">First priority</div><div class="rank">Group 1</div></div><div class="count"><b>{{PRIORITY_GROUP_1_COUNT}} students</b><br>{{PRIORITY_GROUP_1_COUNT_SUMMARY_HTML}}</div></div>
-      <div class="mix">{{PRIORITY_GROUP_1_TARGET_CHIPS_HTML}}</div>
-      <div class="student-list">{{PRIORITY_GROUP_1_STUDENTS_HTML}}</div>
-      <div class="crew-plan">
-        <h3>Best use of the 20-minute Crewtime</h3>
-        <p>{{PRIORITY_GROUP_1_SUMMARY}}</p>
-        <div class="timeline">{{PRIORITY_GROUP_1_TIMELINE_HTML}}</div>
-      </div>
-    </div>
-
-    {{PRIORITY_GROUP_2_CARD_HTML}}
-  </div>
-
-  {{PRIORITY_WAITLIST_HTML}}
+  {{PROGRESS_MODEL_PRIORITY_DAY_HTML}}
 </section>
 
 <section class="teacher-page pull-page">
-  <div class="report-head">
-    <div><div class="eyebrow">{{COURSE}} - Unit {{UNIT_NUMBER}} Portfolio</div><h1>Pull In Students</h1></div>
-    <div class="meta"><b>Lane:</b> 1-2 small/actionable gaps<br><b>Latest evidence:</b> {{LATEST_EVIDENCE_LABEL}} - {{LATEST_EVIDENCE_DATE}}</div>
-  </div>
-
-  <div class="pull-banner"><div class="big">ALL {{PULL_IN_COUNT}} STUDENTS: PRACTICE + CHECK SOON</div><div class="sub">Use short personalized practice while you circulate.<br>No separate PLAN line is needed on every student card.</div></div>
-
-  <div class="pull-grid {{PULL_IN_GRID_CLASS}}">{{PULL_IN_STUDENT_CARDS_HTML}}</div>
-
-  <div class="footer-note"><span>Students who only need another independent demonstration are intentionally kept out of this lane.</span><span>{{PULL_IN_TARGET_MIX_HTML}}</span></div>
+  {{PROGRESS_MODEL_PULL_IN_HTML}}
 </section>
 
 <!--
-PRIORITY DAY LOCK:
-- eligible = active + at least one current Falling Behind/F Mastery Goal + at least one PRACTICE_AND_CHECK target;
-- rank by current count of Falling Behind/F Mastery Goals, then PRACTICE_AND_CHECK count, then evidence severity, then stable student_key;
-- Group 1 = ranks 1-15; Group 2 = ranks 16-30; never create Group 3;
-- exact shared I Can bundle is NOT required;
-- summarize dominant overlapping targets and produce one evidence-backed 20-minute intervention plan per group;
-- students whose only next step is first check / another independent demonstration do not consume a Priority Day seat.
-
-PULL IN LOCK:
-- exactly 1-2 PRACTICE_AND_CHECK gaps;
-- student-centered, one landscape page;
-- banner states Practice + check soon once; do not repeat PLAN under each student;
-- Priority Day and Pull In may overlap.
+CURRENT TEACHER REPORT LOCK:
+- Class Overview is populated by the shared Portfolio progress model and includes summary counts, a per-MG grade breakdown, top actionable I Can breakdown, intervention routing, and latest-evidence picture.
+- Priority Day: active + at least one current Falling Behind/F MG + at least one PRACTICE_AND_CHECK target; maximum two groups of 15.
+- Pull In: every active student with exactly 1-2 PRACTICE_AND_CHECK gaps, whether or not the student is also Falling Behind; Priority Day and Pull In may overlap.
+- No visible I / I-grade language.
 -->
 </body>
 </html>
