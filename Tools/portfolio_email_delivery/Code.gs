@@ -1,5 +1,5 @@
 const STUDENT_DATA_EMAIL = Object.freeze({
-  APP_VERSION: '3.0',
+  APP_VERSION: '3.4',
   PACKAGE_SCHEMA: 'portfolio-email-sender-package/1.0',
   APP_FOLDER: '_Student Data Tools Email Sender',
   CURRENT_FOLDER: 'Current Package',
@@ -30,12 +30,84 @@ function verifySetup(){
 
 function getBootstrap(){return verifySetup();}
 
-function loadLocalSenderPackage(formObject){
+function beginPackageUpload(fileName,totalBytes,totalChunks){
   assertAuthorized_();
-  formObject=formObject||{};
-  const blob=formObject.packageZip;
-  if(!blob||typeof blob.getBytes!=='function')throw new Error('Choose the Portfolio_Email_Sender_Package.zip created by Student Data Tools.');
-  const entries=Utilities.unzip(blob),byName={};
+  fileName=String(fileName||'').trim();
+  totalBytes=Number(totalBytes||0);
+  totalChunks=Number(totalChunks||0);
+  if(fileName!=='Portfolio_Email_Sender_Package.zip')throw new Error('Choose Portfolio_Email_Sender_Package.zip created by Student Data Tools.');
+  if(!Number.isFinite(totalBytes)||totalBytes<=0)throw new Error('The selected sender package is empty.');
+  if(totalBytes>35*1024*1024)throw new Error('This sender package is larger than 35 MB. Prepare a smaller student batch and try again.');
+  if(!Number.isInteger(totalChunks)||totalChunks<1||totalChunks>200)throw new Error('The sender package upload could not be started.');
+  const app=getAppFolder_();
+  const old=app.getFolders();
+  while(old.hasNext()){
+    const f=old.next();
+    if(/^Upload_/.test(f.getName()))f.setTrashed(true);
+  }
+  const uploadId=Utilities.getUuid(),folder=app.createFolder('Upload_'+uploadId);
+  folder.createFile('upload_meta.json',JSON.stringify({fileName:fileName,totalBytes:totalBytes,totalChunks:totalChunks,createdAt:new Date().toISOString()},null,2),'application/json');
+  return{uploadId:folder.getId(),totalChunks:totalChunks};
+}
+
+function uploadPackageChunk(uploadId,index,totalChunks,base64Chunk){
+  assertAuthorized_();
+  const folder=getUploadFolder_(uploadId),meta=readUploadMeta_(folder);
+  index=Number(index);totalChunks=Number(totalChunks);
+  if(totalChunks!==Number(meta.totalChunks))throw new Error('Upload chunk count changed. Start the upload again.');
+  if(!Number.isInteger(index)||index<0||index>=totalChunks)throw new Error('Invalid upload chunk number.');
+  base64Chunk=String(base64Chunk||'');
+  if(!base64Chunk)throw new Error('An upload chunk was empty. Start the upload again.');
+  const name=chunkName_(index),existing=folder.getFilesByName(name);
+  if(existing.hasNext())throw new Error('An upload chunk was duplicated. Start the upload again.');
+  folder.createFile(name,base64Chunk,'text/plain');
+  return{ok:true,index:index};
+}
+
+function finishPackageUpload(uploadId){
+  assertAuthorized_();
+  const folder=getUploadFolder_(uploadId),meta=readUploadMeta_(folder);
+  try{
+    const bytes=[];
+    for(let i=0;i<Number(meta.totalChunks);i++){
+      const f=getOptionalSingleFile_(folder,chunkName_(i));
+      if(!f)throw new Error('Upload is incomplete. Missing chunk '+(i+1)+' of '+meta.totalChunks+'.');
+      const part=Utilities.base64Decode(f.getBlob().getDataAsString('UTF-8').trim());
+      for(let j=0;j<part.length;j++)bytes.push(part[j]);
+    }
+    if(bytes.length!==Number(meta.totalBytes))throw new Error('Uploaded package size does not match the selected file. Start the upload again.');
+    const blob=Utilities.newBlob(bytes,'application/zip',String(meta.fileName||'Portfolio_Email_Sender_Package.zip'));
+    return loadLocalSenderBlob_(blob);
+  }finally{
+    folder.setTrashed(true);
+  }
+}
+
+function getUploadFolder_(uploadId){
+  uploadId=String(uploadId||'').trim();
+  if(!uploadId)throw new Error('Upload session is missing.');
+  let folder;
+  try{folder=DriveApp.getFolderById(uploadId);}catch(e){throw new Error('Upload session expired. Choose the package again.');}
+  const app=getAppFolder_();let ok=false,parents=folder.getParents();
+  while(parents.hasNext())if(parents.next().getId()===app.getId()){ok=true;break;}
+  if(!ok||!/^Upload_/.test(folder.getName()))throw new Error('Invalid upload session.');
+  return folder;
+}
+
+function readUploadMeta_(folder){
+  const f=getOptionalSingleFile_(folder,'upload_meta.json');
+  if(!f)throw new Error('Upload metadata is missing. Start the upload again.');
+  return JSON.parse(f.getBlob().getDataAsString('UTF-8'));
+}
+
+function chunkName_(index){return 'chunk_'+('00000'+Number(index)).slice(-5)+'.txt';}
+
+function loadLocalSenderBlob_(blob){
+  assertAuthorized_();
+  if(!blob)throw new Error('Choose the Portfolio_Email_Sender_Package.zip created by Student Data Tools.');
+  let entries;
+  try{entries=Utilities.unzip(blob);}catch(e){throw new Error('Could not read the selected Portfolio_Email_Sender_Package.zip. Build a new sender package from Student Data Tools and try again. '+safeError_(e));}
+  const byName={};
   entries.forEach(b=>byName[b.getName()]=b);
   const manifestBlob=byName['sender_manifest.json'];
   if(!manifestBlob)throw new Error('The ZIP is missing sender_manifest.json. Build a new sender package from the local Portfolio email page.');
@@ -54,11 +126,11 @@ function loadLocalSenderPackage(formObject){
     row.driveFileId='';
     if(row.readyToSend){
       if(!row.identityVerified)throw new Error('Identity verification is missing for '+row.studentName+'.');
-      if(!row.pdfPath||!row.pdfSha256)throw new Error('Prepared PDF metadata is missing for '+row.studentName+'.');
+      if(!row.pdfPath||!row.reportSha256)throw new Error('Prepared PDF metadata is missing for '+row.studentName+'.');
       const pdfBlob=byName[row.pdfPath];
       if(!pdfBlob)throw new Error('Prepared PDF is missing from the ZIP for '+row.studentName+'.');
       const actual=sha256Bytes_(pdfBlob.getBytes());
-      if(actual!==row.pdfSha256)throw new Error('Prepared PDF hash mismatch for '+row.studentName+'.');
+      if(actual!==row.reportSha256)throw new Error('Prepared PDF hash mismatch for '+row.studentName+'.');
       const file=current.createFile(pdfBlob.copyBlob().setName(baseName_(row.pdfPath)).setContentType(MimeType.PDF));
       row.driveFileId=file.getId();
     }

@@ -1,4 +1,4 @@
-# Portfolio Email Delivery - Google Apps Script v3.0
+# Portfolio Email Delivery - Google Apps Script v3.2
 
 This web app is the **transport-only** sender for Student Data Tools. It no longer reads Portfolio rosters, Mastery Goal grades, recipients, notes, or reports from the old Google Drive Portfolio archive.
 
@@ -16,7 +16,7 @@ Use the existing standalone Google Apps Script project and existing deployment U
 4. Open **Deploy -> Manage deployments**.
 5. Edit the current Web app deployment.
 6. Choose **New version** and deploy it.
-7. Refresh the web app and confirm the visible badge says **v3.0**.
+7. Refresh the web app and confirm the visible badge says **v3.2**.
 
 The existing sender URL can remain unchanged, so Student Data Tools does not need a new URL.
 
@@ -27,7 +27,7 @@ Required:
 - `TEACHER_EMAIL` = the teacher's school Google account
 - `TEACHER_DISPLAY_NAME` = the name/signature placed at the bottom of messages
 
-`PORTFOLIO_ROOT_FOLDER_ID` is no longer required by v3.0. It may remain as an unused old property until you choose to remove it.
+`PORTFOLIO_ROOT_FOLDER_ID` is no longer required by v3.2. It may remain as an unused old property until you choose to remove it.
 
 Run `verifySetup()` once after the update if you want to verify account authorization and MailApp quota. It performs no email send.
 
@@ -73,4 +73,14 @@ Loading a new local package replaces the prior `Current Package` staging folder.
 
 ## Message wording
 
-The v3.0 body is intentionally shorter and lower-reading-level. It tells the student that the attached report shows current Mastery Goal progress and next steps, explains that PowerSchool uses one current grade per Mastery Goal after enough evidence, and explains that `I` means In Progress and can change with more evidence. Only teacher-reviewed package notes are appended.
+The v3.2 body is intentionally shorter and lower-reading-level. It tells the student that the attached report shows current Mastery Goal progress and next steps, explains that PowerSchool uses one current grade per Mastery Goal after enough evidence, and explains that `I` means In Progress and can change with more evidence. Only teacher-reviewed package notes are appended.
+
+
+## v3.2 upload repair
+
+The package upload now follows the Google Apps Script HTML-service form-upload pattern directly: the HTML form is the sole parameter to the exposed `uploadPackage(formObject)` server function. The ZIP-processing implementation remains private in `loadLocalSenderPackage_()`. This avoids the v3.0 client error `loadLocalSenderPackage is not a function` while preserving the same package validation and send safeguards.
+
+## v3.2 local ZIP upload repair
+
+The sender now uses the exact Apps Script HTML-service form-submit pattern for file inputs: the HTML `form` element is passed directly as the sole `google.script.run` parameter, so the selected ZIP arrives server-side as an Apps Script Blob. The server validates the ZIP by attempting `Utilities.unzip()` directly instead of rejecting valid native Blob objects with a JavaScript method-type check.
+
