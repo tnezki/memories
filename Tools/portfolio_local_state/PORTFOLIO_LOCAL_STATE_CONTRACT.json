@@ -1,5 +1,5 @@
 {
-  "schema": "portfolio-local-state-contract/1.3",
+  "schema": "portfolio-local-state-contract/1.4",
   "status": "CURRENT",
   "root_name": "_portfolio_data",
   "transport": "manual_usb_copy",
@@ -15,13 +15,15 @@
     "request_schema": "portfolio-grading-request/1.0",
     "result_schema": "portfolio-grading-result/1.0",
     "state_guard": "Local apply requires exact parent state SHA-256 + state_version + state_id match before any state/report installation.",
+    "student_data_tools": "Tools/student_data_tools/Student Data Tools.app",
     "local_companion": "Tools/portfolio_local_runtime/Start Portfolio Local Companion.command",
     "course_control_panel_rule": "Normal course panels do not ask the teacher to select current state. They use the localhost companion for state-aware grading-request creation, local roster maintenance, report viewing, and email preparation.",
     "roster_update": "PowerSchool roster/template CSV file(s) + optional note are applied locally. Missing students become inactive; added students receive current Unit No Evidence / Not assessed rows; current reports/PowerSchool exports refresh.",
     "first_state_rule": "If no state exists and the selected course Unit has a registered learning map, local roster maintenance may initialize state_version 1 without exposing a normal first/reset control.",
     "teacher_observations": "Direct teacher observations are applied locally as longitudinal evidence; paper walk-around checklists may be uploaded as a small grading request and return the normal Portfolio_Grading_Result.json.",
     "observation_independence": "One classroom observation session counts as one opportunity per student/I Can; repeated marks from the same moment/session do not create extra independent opportunities.",
-    "report_hub": "View Reports exposes Student Reports, Teacher Report, and PowerSchool Exports for the selected local course/Unit."
+    "report_hub": "View Reports exposes Student Reports, Teacher Report, and PowerSchool Exports for the selected local course/Unit.",
+    "email_sender_package_builder": "Tools/portfolio_local_runtime/portfolio_sender_package.py"
   },
   "current_state_filename": "Portfolio_State_CURRENT.zip",
   "updated_state_filename": "Portfolio_State_UPDATED.zip",
@@ -79,29 +81,37 @@
     "powerschool": "05 PowerSchool Exports",
     "email_delivery": "06 Email Delivery",
     "email_current": "06 Email Delivery/Current",
-    "email_prepared_archives": "06 Email Delivery/Prepared Archives"
+    "email_prepared_archives": "06 Email Delivery/Prepared Archives",
+    "student_data_tools_config": "_portfolio_data/_student_data_tools"
   },
   "email": {
     "normal_pdf_generation": "Local only, on demand, from the current individual HTML reports using installed Chrome/Edge/Chromium.",
     "normal_grading_pdf_generation": false,
     "identity_gate": "student ID in state + visible student identity in HTML must match; recipient matching uses durable student ID.",
-    "send_rule": "Prepare Portfolio Emails.command creates PDFs and a delivery manifest only. It does not send email.",
+    "prepare_rule": "Prepare Portfolio Emails.command creates PDFs and a delivery manifest only. It does not send email.",
+    "live_sender": "Teacher-authorized Portfolio Email Delivery Google Apps Script web app; Student Data Tools stores only its URL locally and never sends automatically.",
+    "transitional_drive_sender_bridge": "The current deployed sender may temporarily use its existing private Drive delivery mirror. This is delivery-only and is not canonical Portfolio state.",
     "recipient_sources": [
       "state/email_recipients_current.csv",
       "state/student_support_contacts_current.csv",
       "_portfolio_data/00 Contact Directory/student_support_contacts_current.csv"
     ],
-    "selection_rule": "Email preparation is student-selectable. Active roster checkboxes default selected; Select All/Deselect All are provided; PDFs/manifests are generated only for currently selected students."
+    "selection_rule": "Email preparation is student-selectable. Active roster checkboxes default selected; Select All/Deselect All are provided; PDFs/manifests are generated only for currently selected students.",
+    "send_rule": "Local Portfolio preparation creates identity-verified PDFs, a local delivery manifest, and Portfolio_Email_Sender_Package.zip. It does not send email.",
+    "sender_package": "06 Email Delivery/Current/Portfolio_Email_Sender_Package.zip",
+    "sender_package_source_rule": "The package is built only from current local _portfolio_data state, local recipient/contact files, the selected local PDFs, MG status, and the teacher-reviewed local notes. It is the only Portfolio data source accepted by the live sender.",
+    "live_sender_rule": "The Google Apps Script sender is transport-only: the teacher manually uploads the current local sender package, reviews preflight, may send a teacher-only test, and explicitly confirms LIVE SEND. It must not read old Portfolio roster/grade/recipient state from Drive.",
+    "drive_rule": "Google Drive may hold only the sender's private transient staged package and persistent send log. It is not Portfolio state and may not resolve or overwrite local Portfolio data."
   },
   "migration": {
     "mode": "one_time_drive_migration",
-    "normal_runs_after_migration": "Drive reads/writes are forbidden unless explicitly requested for backup/recovery.",
+    "normal_runs_after_migration": "Drive reads/writes are forbidden for normal grading/state/report work. A separately declared temporary email-sender delivery bridge may persist until sender migration is complete.",
     "first_portable_state_version": 1
   },
   "privacy": {
     "student_data_private": true,
     "never_git": true,
-    "never_github_transfer": true,
+    "never_curriculum_transfer": true,
     "usb_copy_allowed": true,
     "grading_request_and_result_are_private": true
   },
@@ -109,6 +119,8 @@
     "bind": "127.0.0.1:8765",
     "network_scope": "localhost_only",
     "launcher": "Tools/portfolio_local_runtime/Start Portfolio Local Companion.command",
+    "normal_launcher": "Tools/student_data_tools/Student Data Tools.app",
+    "health_endpoint": "/api/runtime-version",
     "control_panel_actions": [
       "build grading request",
       "record teacher observations",
@@ -116,9 +128,10 @@
       "build observation grading request from completed checklist",
       "update roster",
       "view student/teacher/PowerSchool reports",
-      "prepare selected-student email PDFs"
+      "prepare selected-student email PDFs",
+      "build local Portfolio email sender package from selected current reports"
     ],
     "privacy": "Never serves outside localhost; report file serving is restricted to the selected local Portfolio Unit directory.",
-    "launcher_behavior": "Start Portfolio Local Companion.command installs/refreshes a per-user macOS LaunchAgent, starts the localhost service, and opens its page. The service restarts automatically on login; no Terminal window must remain open."
+    "launcher_behavior": "Start Portfolio Local Companion.command stops stale local companion processes and starts the current foreground runtime in Terminal. Student Data Tools passes --no-open behavior so the raw localhost home page does not open automatically; the Terminal may be minimized but must remain running."
   }
 }

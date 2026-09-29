@@ -1,0 +1,96 @@
+STUDENT DATA TOOLS CONTRACT
+===========================
+STATUS: CURRENT
+REVISION: 2026-09-28 v1.1
+
+PURPOSE
+-------
+Provide one teacher-local launcher for private Portfolio work and teacher-authorized report delivery without moving canonical student data into GitHub or back into the retired Drive-era Portfolio store.
+
+CANONICAL APP
+-------------
+Normal launcher:
+  Tools/student_data_tools/Student Data Tools.app
+
+Manual runtime fallback:
+  Tools/student_data_tools/Start Student Data Tools.command
+
+The app is software only. Student names, rosters, evidence, grades, reports, contacts, email notes, and delivery data remain private under `_portfolio_data` or inside the teacher-authorized sender's private transient staging/log area.
+
+LOCAL PORTFOLIO RUNTIME
+-----------------------
+Student Data Tools starts the canonical Portfolio Local Companion on:
+  http://127.0.0.1:8765/
+
+The launch path intentionally uses Terminal because macOS privacy controls can deny detached/background Python processes access to Documents while the GitHub workspace lives under ~/Documents. A fresh launch stops stale Portfolio companion processes before starting the current server.
+
+A successful launch MUST verify:
+  GET http://127.0.0.1:8765/api/runtime-version
+returns PASS before the app reports Portfolio as READY.
+
+When Student Data Tools launches the runtime, the raw localhost home page MUST NOT open automatically. Student Data Tools owns the browser landing page. The teacher can open Portfolio explicitly from that landing page.
+
+LOCAL EMAIL PACKAGE - HARD
+--------------------------
+The live sender must use current local Portfolio data, not Drive-era Portfolio state.
+
+After the teacher selects students and prepares email PDFs in the local Portfolio email page, the local runtime creates:
+  _portfolio_data/<Course>/unit N/06 Email Delivery/Current/Portfolio_Email_Sender_Package.zip
+
+That package contains only the selected current send batch:
+- sender_manifest.json;
+- identity-verified selected PDFs;
+- current local student/guardian/support recipient routing;
+- current MG1-MG4 display values;
+- teacher-reviewed weekly/student notes.
+
+The package is private transport. It is never a Curriculum Transfer payload and must never be committed to GitHub.
+
+Student-specific notes are current-send-only. Once the sender package has been built, local student-note fields are cleared while the class/weekly note may remain for the next batch.
+
+EMAIL SENDER - TRANSPORT ONLY
+-----------------------------
+The deployed teacher-authorized Portfolio Email Delivery Google Apps Script web app is a transport surface only.
+
+The sender MUST:
+- require the teacher to manually load the current local sender package;
+- validate package schema, attachment identity/hash, current recipients, and teacher authorization;
+- provide a teacher-only Send Test to Me action;
+- require a fresh preflight digest after any send-selection/support-routing change;
+- require a clearly labeled LIVE SEND confirmation showing message/recipient counts;
+- persist a private send log and block duplicate live sends of the same student_key + report hash.
+
+The sender MUST NOT read old Portfolio rosters, MG grades, recipients, notes, or reports from the retired Drive Portfolio archive.
+
+Google Drive may be used only by the Apps Script sender for its own private transient staged package and persistent send log. Those files are not canonical Portfolio state and may not overwrite or resolve conflicts against `_portfolio_data`.
+
+EMAIL SENDER URL
+----------------
+Student Data Tools stores only the deployed sender URL in:
+  _portfolio_data/_student_data_tools/email_sender_url.txt
+
+The app may test whether the configured URL is reachable and provide a launch link. Reachability is not equivalent to send readiness; the sender's own authorization/preflight remains authoritative.
+
+DASHBOARD
+---------
+Each successful app launch regenerates a tiny private local landing page under:
+  _portfolio_data/_student_data_tools/index.html
+
+The page contains no student records. It provides:
+- Portfolio Runtime status/link;
+- Portfolio Email Sender status/link when configured;
+- clear privacy and explicit-send language.
+
+FAIL-CLOSED BEHAVIOR
+--------------------
+- If the Portfolio runtime does not pass health check, show failure and do not claim READY.
+- If the email sender URL is absent, do not fabricate one.
+- If a configured sender is unreachable, keep Portfolio available but mark email unreachable.
+- If sender-package validation fails, do not stage or send any report.
+- Never fall back to old Drive Portfolio state because local data is missing or stale.
+
+GIT / TRANSFER
+--------------
+Student Data Tools source files live in the memories repository and may be installed/updated with Curriculum Transfer. Runtime private files under `_portfolio_data` and sender staging/log files are excluded from Curriculum Transfer and Git.
+
+END - STUDENT DATA TOOLS CONTRACT

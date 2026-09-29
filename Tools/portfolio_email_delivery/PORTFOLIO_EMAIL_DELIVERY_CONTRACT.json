@@ -1,48 +1,48 @@
 {
-  "schema": "portfolio-email-delivery-contract/2.3",
+  "schema": "portfolio-email-delivery-contract/3.0",
   "status": "CURRENT",
-  "purpose": "Teacher-authorized student-specific Portfolio report delivery using the private Drive archive; no grading or evidence decisions occur here.",
+  "purpose": "Teacher-authorized student-specific Portfolio report delivery from a current local sender package. The sender is transport-only and does not own Portfolio state, grading, rosters, MG calculations, or recipient source data.",
   "source": {
-    "results_zip": "02 Portfolio Data/Results Archives/Latest Portfolio Results.zip",
-    "results_manifest": "results_manifest.json",
-    "recipient_file": "02 Portfolio Data/email_recipients_current.csv",
-    "support_contacts": "00 Contact Directory/student_support_contacts_current.csv",
-    "staff_directory": "not required when support_contacts contains staff_email; never infer missing addresses"
+    "canonical_portfolio_root": "_portfolio_data",
+    "sender_package": "_portfolio_data/<Course>/unit N/06 Email Delivery/Current/Portfolio_Email_Sender_Package.zip",
+    "package_schema": "portfolio-email-sender-package/1.0",
+    "package_rule": "The live sender accepts only the current private package explicitly uploaded by the teacher. It must not read old Drive-era Portfolio roster/grade/recipient/report state."
   },
-  "prepare_email_reports": {
-    "explicit_action": true,
-    "rule": "Read Latest Portfolio Results.zip, validate results_manifest.json, convert each active individual self-contained HTML report to PDF, write/replace current PDFs in 03 Student Packets/Email Delivery, and rebuild email_delivery_manifest.csv. Do not regrade, reread evidence, or modify Portfolio grades.",
-    "key": "student_key",
-    "pdf_name_pattern": "<course>_Unit<unit>_<student_key>_Report<report_number>.pdf"
+  "package_contents": {
+    "manifest": "sender_manifest.json",
+    "pdfs": "selected identity-verified PDFs under PDFs/",
+    "rows": "selected/current local student identity, recipient routing, MG1-MG4 display values, teacher-reviewed notes, PDF path/hash, and ready state",
+    "privacy": "The package is private transport. It is never committed to GitHub and is never wrapped in Curriculum Transfer."
+  },
+  "sender_staging": {
+    "rule": "Google Apps Script may use the teacher's private Drive only for its own transient current-package staging and persistent email send log.",
+    "not_canonical": true,
+    "must_not_resolve_conflicts_against_local_portfolio": true,
+    "current_folder": "_Student Data Tools Email Sender/Current Package",
+    "send_log": "_Student Data Tools Email Sender/email_send_log.csv"
   },
   "preflight": {
     "required": true,
     "student_include_checkbox": true,
-    "report_column": false,
-    "custom_note_field": "Visible blank optional field per student on every successful `Refresh Reports & Load Class`. A note is temporary current-review state only; it is cleaned/saved by `Save Changes & Recheck` so the exact reviewed note can be tested or sent.",
-    "weekly_note": "optional class-wide note; never hardcode dates/events",
-    "support_staff_default": "include active support staff with valid email addresses when available; display exact staff name, role, support class when present, and email in preflight",
-    "blocked_rows": "may be excluded by teacher checkbox; excluded rows do not block the rest of the send",
-    "left_checkbox": "Send checkbox appears left of student name; uncheck to omit this send only.",
-    "custom_note_polish": "Teacher-entered note fragments are cleaned deterministically and use the student first name instead of guessing gendered pronouns. A new successful `Refresh Reports & Load Class` clears all student custom-note rows so every student field starts blank.",
-    "roster_action": "The email tool does not remove students from the class. Use the Portfolio roster-update workflow for roster changes; uncheck Send for a temporary omission.",
-    "mastery_goal_grade_columns": "Show four compact read-only columns MG1-MG4 from 02 Portfolio Data/mastery_goal_status_current.csv. Assessed goals show grade_code; unassessed goals show `NA` in this email-review table only; missing state shows an em dash and is never invented."
+    "support_staff_toggle": true,
+    "change_requires_recheck": true,
+    "mastery_goal_grade_columns": "Show four compact read-only MG1-MG4 values supplied by the current local package. The sender never calculates grades.",
+    "blocked_rows": "An included row with a missing/invalid student email, unverified identity, missing attachment, or attachment hash mismatch blocks live send until omitted or repaired in a new local package.",
+    "missing_guardian": "A missing guardian address is a visible warning but may allow student-only delivery after teacher review."
   },
   "recipients": {
-    "to": "student email",
+    "to": "student email from the current local sender package",
     "bcc": [
-      "guardian emails",
-      "verified support-staff emails when includeSupportStaff=true"
+      "guardian emails from the current local sender package",
+      "support-staff emails from the current local sender package when includeSupportStaff=true"
     ],
-    "privacy": "Use BCC for non-student recipients. Deduplicate all addresses. Never share a Drive report folder as a substitute for student-specific delivery.",
-    "support_roles": "course-agnostic free text; do not restrict routing to a fixed role allowlist"
+    "privacy": "Use BCC for non-student recipients. Deduplicate all addresses. Never combine multiple students in one message."
   },
   "family_language": {
-    "not_assessed": "We have not checked this Mastery Goal yet.",
-    "needs_first_check": "We have not checked this skill yet.",
-    "powerschool": "PowerSchool shows one current grade for each Mastery Goal once that goal has been assessed. Individual evidence sources are not separate grades averaged together.",
-    "weekly_note_rule": "Only include teacher-entered weekly note text.",
-    "in_progress": "An I means In Progress. It is not permanent. It reflects current evidence and can change as new or stronger evidence is added; earlier checks are not averaged in as permanent penalties."
+    "body_rule": "Use short, plain-language wording. The attached report carries the detailed evidence and next-step information.",
+    "powerschool": "PowerSchool shows one current grade for each Mastery Goal after enough evidence exists.",
+    "in_progress": "I means In Progress and can change as the student shows more evidence.",
+    "notes": "Include only the weekly/student notes carried in the reviewed local package."
   },
   "safety": {
     "teacher_account_only": true,
@@ -50,45 +50,22 @@
     "test_to_teacher_only": true,
     "send_log_required": true,
     "already_sent_hash_guard": true,
-    "inactive_students_excluded": true,
     "live_send_explicit_label": true,
     "live_send_count_confirmation": true,
-    "student_note_after_live_send": "Delete the successfully sent student custom-note row entirely. A new successful class refresh also clears all student custom-note rows so fields start blank."
-  },
-  "support_contact_schema": {
-    "columns": [
-      "student_id",
-      "student_name",
-      "staff_name",
-      "staff_email",
-      "role",
-      "support_class",
-      "active"
-    ],
-    "key": "student_id",
-    "multiple_rows_per_student": true,
-    "role_rule": "Free text, course-agnostic. Common examples: Case Manager, Special Education Teacher, Study Skills Teacher, Academic Support Teacher, Resource Room Teacher.",
-    "support_class_rule": "Optional free text for any support/resource/study-skills class; blank for relationships not tied to a class.",
-    "active_rule": "Only truthy active rows with a valid staff_email are eligible recipients.",
-    "privacy_rule": "Do not store disability, diagnosis, accommodation narrative, or other IEP details in this routing file."
+    "no_automatic_send": true,
+    "no_drive_portfolio_fallback": true
   },
   "identity_safety": {
-    "hard_rule": "Never send an attachment unless the prepared manifest explicitly records identity_verified=true for that student and the manifest student_name exactly matches the current recipient roster row.",
-    "html_prepare": "Before HTML-to-PDF conversion, verify the individual HTML visibly contains the exact manifest student name.",
-    "pdf_prepare": "A PDF path is accepted only when the results manifest explicitly marks identity_verified=true from a prior exact identity check.",
-    "stale_manifest": "Legacy manifests without identity_verified are blocked and require `Refresh Reports & Load Class`."
+    "hard_rule": "Never send an attachment unless the loaded package marks identity_verified=true and the sender re-verifies the staged PDF hash against pdf_sha256.",
+    "duplicate_student_key": "Duplicate student_key rows fail package load.",
+    "stale_package": "The sender displays package generated/loaded metadata. The teacher is responsible for loading the current local package before send."
   },
   "ui_workflow": {
-    "primary_refresh": "One button, `Refresh Reports & Load Class`, prepares identity-verified reports, loads notes, and runs preflight in one visible busy sequence.",
-    "edit_review": "Teacher edits include checkboxes, weekly note, and student custom notes, then clicks `Save Changes & Recheck`; notes are cleaned/saved and preflight reruns.",
-    "busy_feedback": "Every multi-step action shows a visible spinner/progress message, states that a full refresh/live send may take a few minutes, asks the teacher to leave the tab open, and temporarily disables conflicting controls.",
-    "test": "`Send Test to Me` sends only the selected student message/attachment to the teacher.",
-    "live_send_label": "The live button must dynamically say `LIVE SEND \u2014 EMAIL <student_count> STUDENTS NOW` when ready; never use an ambiguous label such as `Send Included Reports`.",
-    "live_send_warning": "Immediately above/below the live button, state that it sends real emails to every checked READY student and BCCs listed guardians/support staff.",
-    "live_confirmation": "Before live send, show student-email count and total-recipient count and explicitly state `This is not a test.`",
-    "dirty_state": "Any Send checkbox, weekly note, student custom note, or support-staff change immediately disables both test and live-send controls until `Save Changes & Recheck` succeeds.",
-    "roster_removal": "No Remove from class control appears in the email interface. Roster maintenance belongs to the Portfolio roster workflow.",
-    "mastery_goal_scan": "Preflight table shows four compact read-only Mastery Goal grade columns (MG1-MG4). Use `NA` for unassessed goals in this compact email-review table.",
-    "custom_note_position": "Keep the Custom note field visible immediately after Student so it remains easy to find even when the review table scrolls horizontally."
+    "load": "Choose Portfolio_Email_Sender_Package.zip and click Load Local Package.",
+    "review": "Review every row, MG1-MG4, exact recipients, notes, warnings, and blocked state.",
+    "recheck": "Any Send checkbox or support-staff toggle change marks the view dirty and disables test/live send until Recheck succeeds.",
+    "test": "Send Test to Me sends only the selected student's exact message/attachment to the teacher.",
+    "live_send_label": "The live button dynamically says LIVE SEND — EMAIL <student_count> STUDENTS NOW when ready.",
+    "live_confirmation": "Before live send, show student-email count and total-recipient count and explicitly state This is not a test."
   }
 }
