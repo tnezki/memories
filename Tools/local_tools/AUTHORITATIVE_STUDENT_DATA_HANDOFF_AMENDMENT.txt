@@ -1,0 +1,19 @@
+LOCAL TOOLS - AUTHORITATIVE STUDENT DATA HANDOFF
+=================================================
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+Local Tools must not treat an occupied Portfolio port or a generic PASS response
+as proof that Student Data Tools is current.
+
+When Open Student Data Tools is clicked, Local Tools always runs:
+  memories/Tools/student_data_tools/Start Student Data Tools.command
+
+That launcher owns port 8765, terminates any stale listener, and starts the
+authoritative Portfolio runtime. Local Tools waits until:
+  /api/runtime-version = 2.5-authoritative
+before opening the Portfolio page.
+
+The Local Tools status badge reports old versions as STALE rather than READY.
+
+END

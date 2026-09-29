@@ -1,0 +1,16 @@
+STUDENT DATA TOOLS AUTHORITATIVE PORTFOLIO RUNTIME
+=================================================
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+Student Data Tools owns Portfolio port 8765. Before starting Portfolio it must
+terminate any existing listener on that port, regardless of legacy runtime
+filename/version. It then starts portfolio_companion_live.py directly.
+
+Expected health endpoint after launch:
+  http://127.0.0.1:8765/api/runtime-version
+  version = 2.5-authoritative
+
+This prevents a stale legacy runtime from satisfying a generic PASS health check.
+
+END

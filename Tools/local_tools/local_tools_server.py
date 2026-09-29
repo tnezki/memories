@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import html
+import json
 import os
 from pathlib import Path
 import socket
@@ -9,6 +10,7 @@ import subprocess
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs
+from urllib.request import urlopen
 
 HOST = "127.0.0.1"
 PORT = 8770
@@ -37,6 +39,27 @@ def detect_root() -> Path | None:
     return None
 
 ROOT = detect_root()
+
+EXPECTED_PORTFOLIO_VERSION = "2.5-authoritative"
+PORTFOLIO_VERSION_URL = "http://127.0.0.1:8765/api/runtime-version"
+
+def portfolio_runtime_version() -> str:
+    try:
+        with urlopen(PORTFOLIO_VERSION_URL, timeout=0.75) as response:
+            payload = json.loads(response.read().decode("utf-8", "replace"))
+        if payload.get("status") == "PASS":
+            return str(payload.get("version", "")).strip()
+    except Exception:
+        pass
+    return ""
+
+def portfolio_status_badge() -> str:
+    version = portfolio_runtime_version()
+    if version == EXPECTED_PORTFOLIO_VERSION:
+        return '<span class="badge ready">READY 2.5</span>'
+    if version:
+        return f'<span class="badge stopped">STALE {html.escape(version)}</span>'
+    return '<span class="badge stopped">STOPPED</span>'
 
 EMAIL_URL_FILE = (ROOT / "_portfolio_data" / "_student_data_tools" / "email_sender_url.txt") if ROOT else None
 
@@ -121,20 +144,31 @@ def wait_for_port(port: int, seconds: int = 25) -> bool:
     return False
 
 def launch_student_data() -> str:
-    if port_ready(8765):
-        open_url("http://127.0.0.1:8765/")
-        return "Opened Student Data Tools."
     if ROOT is None:
         return "GitHub workspace root not found."
-    app = ROOT / "memories" / "Tools" / "student_data_tools" / "Student Data Tools.app"
+
     command = ROOT / "memories" / "Tools" / "student_data_tools" / "Start Student Data Tools.command"
-    if app.exists():
-        subprocess.Popen(["/usr/bin/open", str(app)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return "Starting Student Data Tools."
-    if command.exists():
-        run_background(["/bin/bash", str(command)])
-        return "Starting Student Data Tools."
-    return "Student Data Tools launcher was not found."
+    if not command.exists():
+        return "Student Data Tools launcher was not found."
+
+    # HARD RULE: never trust a generic PASS or an occupied port 8765.
+    # Student Data Tools owns the port and its launcher kills any stale listener
+    # before starting the authoritative Portfolio runtime.
+    log = ROOT / "_portfolio_data" / "_logs" / "local_tools_student_data_launcher.log"
+    run_background(["/bin/zsh", str(command)], log)
+
+    deadline = time.time() + 20
+    while time.time() < deadline:
+        version = portfolio_runtime_version()
+        if version == EXPECTED_PORTFOLIO_VERSION:
+            open_url("http://127.0.0.1:8765/")
+            return "Opened Student Data Tools (2.5-authoritative)."
+        time.sleep(0.25)
+
+    version = portfolio_runtime_version()
+    if version:
+        return f"Student Data Tools did not replace stale Portfolio runtime {version}. Check _portfolio_data/_logs/local_tools_student_data_launcher.log."
+    return "Student Data Tools did not start. Check _portfolio_data/_logs/local_tools_student_data_launcher.log."
 
 def launch_email_sender() -> str:
     url = configured_sender_url()
@@ -199,7 +233,7 @@ def status_badge(ready: bool) -> str:
 def page(message: str = "") -> str:
     root_text = str(ROOT) if ROOT else "Not found"
     msg = f'<div class="message">{html.escape(message)}</div>' if message else ""
-    portfolio = status_badge(port_ready(8765))
+    portfolio = portfolio_status_badge()
     planner_a = status_badge(port_ready(8767))
     planner_p = status_badge(port_ready(8768))
     planner_c = status_badge(port_ready(8769))
@@ -247,7 +281,7 @@ button.hosted{{background:var(--navy)}}
   <section class="card">
     <h2>Student Data</h2>
     <div class="status-row">Portfolio {portfolio}</div>
-    <p>Open Portfolio reports, evidence tools, grading workflows, or jump directly to the configured Google Portfolio Email Sender.</p>
+    <p>Open Portfolio reports, evidence tools, grading workflows, or jump directly to the configured Google Portfolio Email Sender. Local Tools always restarts Student Data with the authoritative runtime before opening it.</p>
     <form method="post" class="actions">
       <button name="action" value="student-data">Open Student Data Tools</button>
       <button class="secondary" name="action" value="email-sender">Open Email Sender</button>

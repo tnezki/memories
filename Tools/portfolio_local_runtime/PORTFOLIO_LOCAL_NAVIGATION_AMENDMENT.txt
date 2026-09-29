@@ -1,0 +1,33 @@
+PORTFOLIO LOCAL NAVIGATION AMENDMENT
+====================================
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+PURPOSE
+-------
+The local Portfolio Companion is the teacher-facing Portfolio control surface.
+
+CURRENT NAVIGATION
+------------------
+Per-course Portfolio cards expose:
+- New Evidence
+- Teacher Observations
+- View / Print Reports
+- Prepare Email Reports
+- Open Email Sender
+
+The legacy public Teacher Dashboard is being retired and is not a required
+Portfolio navigation destination.
+
+EMAIL SENDER
+------------
+"Open Email Sender" must read the private deployed Google Apps Script web-app
+URL already stored under:
+  _portfolio_data/_student_data_tools/email_sender_url.txt
+
+The deployed sender URL must not be hard-coded into repository files.
+
+Reports and email-preparation pages return to Portfolio Home and may also expose
+Open Email Sender directly.
+
+END
