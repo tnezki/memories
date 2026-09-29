@@ -1,0 +1,40 @@
+PORTFOLIO PORTABLE LOCAL UI AMENDMENT
+======================================
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+WORKSPACE MODEL
+---------------
+Treat the folder containing `memories`, `_portfolio_data`, and the course repos as
+one movable workspace root. Normal Portfolio code derives that root from the
+installed runtime location rather than from a fixed macOS username or Documents
+path.
+
+This supports the long-term possibility of moving the complete workspace folder
+to another location or removable drive while preserving the same internal folder
+relationships. macOS permissions, executable permissions, and Git credentials
+still belong to the Mac and may require one-time setup.
+
+PRIVATE DATA
+------------
+`_portfolio_data` remains local/private and must never be committed to GitHub.
+
+LOCAL CONTROL SURFACE
+---------------------
+New Evidence, Teacher Observations, roster maintenance, report viewing, and email
+preparation are local Portfolio functions. They are available from the local
+Portfolio Companion rather than depending on public course-repository control
+pages.
+
+REPORT RENDER ORDER
+-------------------
+The legacy teacher renderer is allowed to carry exactly these three deferred
+placeholders into the progress-model post-processing phase:
+- PROGRESS_MODEL_CLASS_OVERVIEW_HTML
+- PROGRESS_MODEL_PRIORITY_DAY_HTML
+- PROGRESS_MODEL_PULL_IN_HTML
+
+All other unresolved canonical report tokens remain fatal. The progress overlay
+must replace those three slots before final canonical validation.
+
+END

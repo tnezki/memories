@@ -6,7 +6,7 @@ PORTFOLIO_ROOT="$GITHUB_ROOT/_portfolio_data"
 LOG_DIR="$PORTFOLIO_ROOT/_logs"
 PLIST="$HOME/Library/LaunchAgents/com.tnezki.portfolio-local-companion.plist"
 LABEL="com.tnezki.portfolio-local-companion"
-SERVER="$SCRIPT_DIR/portfolio_companion_sender.py"
+SERVER="$SCRIPT_DIR/portfolio_companion_current.py"
 UID_NOW="$(id -u)"
 mkdir -p "$LOG_DIR"
 
@@ -19,6 +19,7 @@ mkdir -p "$LOG_DIR"
 /usr/bin/pkill -f "$SCRIPT_DIR/portfolio_companion_notes.py" >/dev/null 2>&1 || true
 /usr/bin/pkill -f "$SCRIPT_DIR/portfolio_companion_observation_status.py" >/dev/null 2>&1 || true
 /usr/bin/pkill -f "$SCRIPT_DIR/portfolio_companion_sender.py" >/dev/null 2>&1 || true
+/usr/bin/pkill -f "$SCRIPT_DIR/portfolio_companion_current.py" >/dev/null 2>&1 || true
 rm -f "$PLIST"
 
 if [ ! -f "$SERVER" ]; then

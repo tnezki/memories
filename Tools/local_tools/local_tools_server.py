@@ -38,6 +38,20 @@ def detect_root() -> Path | None:
 
 ROOT = detect_root()
 
+EMAIL_URL_FILE = (ROOT / "_portfolio_data" / "_student_data_tools" / "email_sender_url.txt") if ROOT else None
+
+def configured_sender_url() -> str:
+    if EMAIL_URL_FILE is None or not EMAIL_URL_FILE.is_file():
+        return ""
+    try:
+        lines = EMAIL_URL_FILE.read_text(encoding="utf-8").splitlines()
+        value = lines[0].strip() if lines else ""
+    except Exception:
+        return ""
+    if value.startswith("https://script.google.com/") or value.startswith("https://script.googleusercontent.com/"):
+        return value
+    return ""
+
 FIX_PLANNER_LINKS = TOOL_DIR / "fix_planner_coteacher_links.py"
 
 def repair_planner_owner_links() -> None:
@@ -49,7 +63,6 @@ def repair_planner_owner_links() -> None:
         stderr=subprocess.DEVNULL,
         check=False,
     )
-
 
 def port_ready(port: int) -> bool:
     try:
@@ -122,6 +135,13 @@ def launch_student_data() -> str:
         run_background(["/bin/bash", str(command)])
         return "Starting Student Data Tools."
     return "Student Data Tools launcher was not found."
+
+def launch_email_sender() -> str:
+    url = configured_sender_url()
+    if not url:
+        return "Portfolio Email Sender URL is not configured. Open Student Data Tools and set it once."
+    open_url(url)
+    return "Opened Portfolio Email Sender."
 
 def launch_planner(port: int, label: str) -> str:
     repair_planner_owner_links()
@@ -227,8 +247,11 @@ button.hosted{{background:var(--navy)}}
   <section class="card">
     <h2>Student Data</h2>
     <div class="status-row">Portfolio {portfolio}</div>
-    <p>Open Portfolio reports, evidence tools, grading workflows, and the teacher-authorized email workflow.</p>
-    <form method="post"><button name="action" value="student-data">Open Student Data Tools</button></form>
+    <p>Open Portfolio reports, evidence tools, grading workflows, or jump directly to the configured Google Portfolio Email Sender.</p>
+    <form method="post" class="actions">
+      <button name="action" value="student-data">Open Student Data Tools</button>
+      <button class="secondary" name="action" value="email-sender">Open Email Sender</button>
+    </form>
   </section>
 
   <section class="card">
@@ -248,7 +271,7 @@ button.hosted{{background:var(--navy)}}
     <p>Sync memories, algebra, physics, apcalc, and teacher_shared. Terminal stays visible so you can inspect every repository.</p>
     <form method="post" class="actions">
       <button class="secondary" name="action" value="sync-pull">Pull All Repos</button>
-      <button name="action" value="sync-push" onclick="return confirm('Commit and push current changes in algebra, physics, apcalc, and teacher_shared?');">Commit + Push All Repos</button>
+      <button name="action" value="sync-push" onclick="return confirm('Commit and push current changes in memories, algebra, physics, apcalc, and teacher_shared?');">Commit + Push All Repos</button>
     </form>
   </section>
 
@@ -299,6 +322,8 @@ class Handler(BaseHTTPRequestHandler):
         action = parse_qs(body).get("action", [""])[0]
         if action == "student-data":
             message = launch_student_data()
+        elif action == "email-sender":
+            message = launch_email_sender()
         elif action == "planner-algebra":
             message = launch_planner(8767, "Algebra 1")
         elif action == "planner-physics":

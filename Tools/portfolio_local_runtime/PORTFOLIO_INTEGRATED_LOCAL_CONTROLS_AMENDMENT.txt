@@ -1,0 +1,36 @@
+PORTFOLIO INTEGRATED LOCAL CONTROLS AMENDMENT
+=============================================
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+CURRENT LOCAL FRONT DOOR
+------------------------
+The Portfolio runtime launched on 127.0.0.1:8765 must expose, per course:
+- New Evidence
+- Teacher Observations
+- View / Print Reports
+- Prepare Email Reports
+- Teacher Dashboard
+
+New Evidence and Teacher Observations are local-only controls. They must not
+depend on a public course-repository control page.
+
+REPORT BUILD ORDER
+------------------
+Exactly these three teacher-summary placeholders may survive the legacy render
+step and must then be filled by the progress-model overlay before final QA:
+- PROGRESS_MODEL_CLASS_OVERVIEW_HTML
+- PROGRESS_MODEL_PRIORITY_DAY_HTML
+- PROGRESS_MODEL_PULL_IN_HTML
+
+Other unresolved canonical report tokens remain fatal.
+
+MOVABLE WORKSPACE
+-----------------
+The folder containing `memories`, `_portfolio_data`, and the course repositories
+is treated as one movable workspace root. Runtime paths derive from installed
+file relationships, not from a fixed macOS username or fixed Documents path.
+
+`_portfolio_data` remains private/local and must not be committed.
+
+END

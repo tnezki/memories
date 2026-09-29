@@ -2,7 +2,7 @@ LOCAL TOOLS CONTRACT
 ====================
 
 STATUS: CURRENT FRONT DOOR
-REVISION: 2026-09-29 - HOSTED CO-TEACHER AGENDA FIX
+REVISION: 2026-09-29 - DIRECT EMAIL SENDER LINK
 
 PURPOSE
 -------
@@ -21,9 +21,14 @@ Local Tools runs only on localhost:
 
 STUDENT DATA
 ------------
-Open Student Data Tools:
-- if Portfolio is already reachable on port 8765, open it;
-- otherwise launch the existing Student Data Tools.app.
+The first page exposes:
+- Open Student Data Tools
+- Open Email Sender
+
+Open Email Sender reads the private saved Google Apps Script web-app URL from:
+  _portfolio_data/_student_data_tools/email_sender_url.txt
+
+The URL is never hard-coded into the repository.
 
 LOCAL PLANNERS
 --------------
@@ -32,83 +37,24 @@ Planner buttons are teacher editing surfaces:
 - Physics -> http://127.0.0.1:8768/
 - AP Calculus AB -> http://127.0.0.1:8769/
 
-If a requested Planner is not reachable, Local Tools starts:
-  _algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command
-
-CO-TEACHER AGENDAS - HARD
--------------------------
-The co-teacher agenda is NOT a localhost destination.
-
-Canonical published files live in:
-- teacher_shared/algebra/index.html
-- teacher_shared/physics/index.html
-- teacher_shared/calc/index.html
-
-Canonical hosted links are:
+CO-TEACHER AGENDAS
+------------------
+Hosted destinations:
 - https://tnezki.github.io/teacher_shared/algebra/
 - https://tnezki.github.io/teacher_shared/physics/
 - https://tnezki.github.io/teacher_shared/calc/
 
-Any local Planner route such as:
-  http://127.0.0.1:8767/shared/algebra/index.html
-
-is preview/troubleshooting only and must not be presented as the co-teacher destination.
+Local /shared/... routes are preview only.
 
 SYNC
 ----
-The explicit sync actions operate only on:
+Local Tools syncs:
 - memories
 - algebra
 - physics
 - apcalc
 - teacher_shared
 
-Pull All:
-- requires each repository to be clean;
-- uses git pull --ff-only;
-- never stashes, merges, rebases, commits, or pushes.
-
-Commit + Push All:
-- git add -A;
-- timestamped commit when staged changes exist;
-- git pull --rebase;
-- git push;
-- never force-push;
-- aborts a failed rebase and reports failure.
-
-For the teacher's own tnezki GitHub repositories, an old HTTPS origin may be normalized to the equivalent SSH origin before syncing. This prevents school-network HTTPS credential prompts.
-
-CURRICULUM TRANSFER - HARD BOUNDARY
------------------------------------
-Curriculum Transfer is not part of the Local Tools web page. It remains its own Dock app.
-
-BOUNDARIES
-----------
-- Student-specific Portfolio state remains private/local under _portfolio_data.
-- Local Tools binds only to 127.0.0.1.
-- Local Tools never sends email automatically.
-- Local Tools never performs hidden Git writes.
-- Existing standalone apps remain valid during migration.
+Curriculum Transfer remains a separate Dock app.
 
 END
-
-
-OWNER-PAGE CO-TEACHER LINKS - HARD
-----------------------------------
-The Co-Teacher Agenda button on each local Planner owner page must open the hosted
-teacher_shared page directly:
-- Algebra 1 -> https://tnezki.github.io/teacher_shared/algebra/
-- Physics -> https://tnezki.github.io/teacher_shared/physics/
-- AP Calculus AB -> https://tnezki.github.io/teacher_shared/calc/
-
-The localhost /shared/... pages are preview/troubleshooting only.
-
-Local Tools carries an idempotent repair helper that updates older local Planner
-source files to these hosted destinations and restarts ports 8767-8769 only when
-a repair was actually required.
-
-SYNC OF SYSTEM TOOLS
---------------------
-The memories repository is included in Local Tools Sync so Local Tools, Student
-Data Tools, Portfolio contracts/runtime, and other canonical system-tool updates
-can move between the teacher's school and home computers.
