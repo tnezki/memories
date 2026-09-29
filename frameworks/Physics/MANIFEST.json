@@ -1,10 +1,10 @@
 {
-  "schema": "curriculum-framework-manifest/1.3",
+  "schema": "curriculum-framework-manifest/1.4",
   "course": "Physics",
   "entrypoint": "frameworks/Physics/FRAMEWORK.txt",
   "resource_root": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework",
   "storage": "expanded",
-  "note": "FRAMEWORK.txt is the stable authority front door. Unit-specific registered amendments/policies may supersede legacy course rules only for their declared scope.",
+  "note": "FRAMEWORK.txt is the stable authority front door. Unit-specific registered amendments/policies may supersede legacy course rules only for their declared scope. The shared Portfolio Progress Model is current for Portfolio status/grade/report/PowerSchool behavior.",
   "assessment_plan_pattern": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/assessment_plans/original/unitN_assessment_plan/unitN_assessment_plan.html",
   "assessment_plan_runtime": {
     "authority_rule": "The original Unit Assessment Plan HTML is exact authority for Unit Learning Targets, I Cans, Mastery Goals, and evidence scope.",
@@ -47,6 +47,8 @@
     "status": "CURRENT_FOR_MIGRATED_UNITS",
     "pm": "pms_build/portfolio.txt",
     "policy": "frameworks/Physics/PORTFOLIO_POLICY.json",
+    "progress_model": "Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json",
+    "progress_model_precedence": "Shared progress model supersedes conflicting legacy Physics Portfolio status/grade/report/PowerSchool clauses; exact Physics learning content remains course-owned.",
     "template_contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
     "private_drive_course_folder": "Physics",
     "unit_overrides": {
@@ -62,6 +64,7 @@
     "fail_closed_rule": "A Physics Unit without a CURRENT portfolio_runtime unit override and downstream-ready Family Bank is not eligible for a Portfolio run."
   },
   "current_portfolio_policy": "frameworks/Physics/PORTFOLIO_POLICY.json",
+  "current_portfolio_progress_model": "Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json",
   "portfolio_template_contract": "Tools/templates/portfolio/PORTFOLIO_TEMPLATE_CONTRACT.json",
   "bank_profiles": {
     "legacy_bank_v2": "frameworks/2_Framework_Physics/Conceptual_Physics_Framework/profiles/bank_v2_course_profile.json",

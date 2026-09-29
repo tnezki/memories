@@ -1,0 +1,72 @@
+PORTFOLIO PROGRESS MODEL - OPERATIONAL OVERLAY
+==============================================
+STATUS: CURRENT
+JOB: Portfolio deterministic progress/grade/report overlay
+REVISION: 2026-09-29 v1.0
+
+READ ORDER
+----------
+Read this after the current Portfolio PM, local Portfolio PM, current Course Framework/policy, and:
+  Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json
+
+This overlay supersedes conflicting legacy Portfolio status/grade/report clauses only.
+
+CHATGPT EVIDENCE JUDGMENT
+-------------------------
+Continue to return source-level judgments using only:
+  CONVINCING | PARTIAL | LIMITED | UNUSABLE | NOT_OBSERVED
+
+Judge the core evidence actually demonstrated. Do not require every secondary formatting/detail element to be correct before recognizing conceptual understanding. A concise note may identify the secondary gap.
+
+Do not calculate longitudinal I Can status, Mastery Goal grade, Falling Behind/F, or PowerSchool score in the grading response. Local Python owns those deterministic calculations.
+
+I CAN PROGRESS - LOCAL RUNTIME
+------------------------------
+Current family-facing states:
+1. Not Yet Assessed - class has not had an assessment opportunity for the I Can yet and no stronger student evidence exists.
+2. Started - class has had at least one opportunity, but the student has not yet shown meaningful progress; absence/missed checks/unsuccessful evidence may land here.
+3. Developing - meaningful partial understanding is visible.
+4. Progressing - one independent CONVINCING demonstration OR the deterministic repeated-partial threshold (three independent PARTIAL opportunities).
+5. Mastered - two independent CONVINCING demonstrations.
+6. Extended - Mastered plus meaningful transfer/extension evidence.
+
+Legacy state codes are migration inputs only; regenerate current display/status from the ledger.
+
+MASTERY GOAL MODEL
+------------------
+Let n = exact I Can count in the current goal.
+- C: at least ceil(.75*n) I Cans are Progressing or better.
+- B: C coverage is met AND at least ceil(.50*n) I Cans are Mastered/Extended.
+- A: all n are Mastered/Extended.
+- A+: A plus at least one Extended I Can.
+
+Below C:
+- 0 class opportunities -> Not Yet Assessed; PowerSchool blank.
+- 1 class opportunity -> report grade box dash/blank; PowerSchool blank.
+- 2+ class opportunities + meaningful growth -> Falling Behind; PowerSchool blank.
+- 2+ class opportunities + no meaningful growth -> F; PowerSchool F.
+
+Meaningful growth means at least one I Can in that goal is Developing or better.
+
+Never expose/export I / In Progress as the current MG grade.
+
+REPORT - HARD
+-------------
+Preserve the registered student-report structure. Apply only the approved minimal changes:
+- replace Mastery Goal snapshot with text-only Status guide;
+- every I Can shows five-segment bar + short status label;
+- remove legacy circle/star and visible Next line;
+- one equal-size MG status/grade box appears at the upper right of each MG card;
+- render the exact number of I Cans declared by current learning authority;
+- Recent evidence shows the four most recent assessed evidence events in true ledger order (repeated I Can allowed);
+- keep the existing page-2 practice/link/current-focus structure.
+
+INTERVENTION
+------------
+Use Falling Behind/F goals plus actionable PRACTICE_AND_CHECK I Cans for Priority Day ranking instead of visible I grades. Falling Behind with growth remains eligible for support even while PowerSchool is blank.
+
+POWERSCHOOL
+-----------
+One MG CSV per period remains canonical. Score is only F/C/B/A/A+ or blank. No I. No overall Unit-grade CSV.
+
+END

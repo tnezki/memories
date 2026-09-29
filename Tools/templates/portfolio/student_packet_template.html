@@ -28,21 +28,22 @@
         <div class="lead">{{MG_DEMONSTRATED_COUNT}} of {{MG_TOTAL}} Unit Mastery Goals demonstrated.</div>
         <p>{{APPROVED_CURRENT_PICTURE_TEXT}}</p>
       </div>
-      <div class="panel">
-        <h2>Mastery Goal snapshot</h2>
-        <div class="mg-strip">{{MG_CHIPS_HTML}}</div>
+      <div class="panel status-guide-panel">
+        <h2>Status guide</h2>
+        <div class="status-guide">
+          <div><b>Not Yet Assessed:</b> the class has not had an assessment opportunity for this I Can yet.</div>
+          <div><b>Started:</b> the class has had at least one opportunity, but this student does not yet have enough evidence to show progress. This could mean absent, missed the check, or unsuccessful evidence.</div>
+          <div><b>Developing:</b> repeated partial understanding is visible, but not yet enough for one solid demonstration.</div>
+          <div><b>Progressing:</b> one solid demonstration or sufficiently consistent partial evidence clearly shows the core understanding, even if a secondary detail remains wrong.</div>
+          <div><b>Mastered:</b> two independent convincing demonstrations.</div>
+          <div><b>Extended:</b> mastery plus evidence beyond the target.</div>
+        </div>
       </div>
     </section>
 
     <div class="section-head">
       <h2>Unit Evidence Picture</h2>
       <p>All {{MG_TOTAL}} Mastery Goals and all {{ICAN_TOTAL}} I Cans</p>
-      <div class="legend">
-        <span class="item"><span class="status-dot"></span>No Evidence</span>
-        <span class="item"><span class="status-dot developing"></span>Developing</span>
-        <span class="item"><span class="status-dot mastered"></span>Mastered</span>
-        <span class="item"><span class="status-star">★</span>Transfer</span>
-      </div>
     </div>
 
     <section class="mastery-grid">{{PAGE_1_MASTERY_GOAL_CARDS_HTML}}{{PAGE_2_MASTERY_GOAL_CARDS_HTML}}</section>
@@ -63,7 +64,7 @@
 
     <section class="recent">
       <h3>Recent evidence</h3>
-      <p class="sub">Most recent assessed I Cans shown here. Older evidence stays in the full Portfolio history.</p>
+      <p class="sub">Four most recent pieces of assessed evidence are shown here. Older evidence stays in the full Portfolio history.</p>
       <table>
         <thead><tr><th>I Can</th><th>Target</th><th>Evidence</th><th>What this showed</th></tr></thead>
         <tbody>{{RECENT_EVIDENCE_ROWS_HTML}}</tbody>

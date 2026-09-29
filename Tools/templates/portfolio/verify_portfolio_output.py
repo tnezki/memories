@@ -15,7 +15,7 @@ import re
 import sys
 from pathlib import Path
 
-VERSION = "portfolio-template-fidelity/1.1"
+VERSION = "portfolio-template-fidelity/1.2"
 STUDENT_TEMPLATE = "student_packet_template.html"
 TEACHER_TEMPLATE = "teacher_summary_template.html"
 CSS_FILE = "portfolio.css"
@@ -115,14 +115,19 @@ def validate_individual(path: Path, student_sha: str, css_sha: str, errors: list
         "Current Progress Report",
         "Essential Standard:",
         "Your current picture",
-        "Mastery Goal snapshot",
+        "Status guide",
         "Unit Evidence Picture",
         "Recent evidence",
+        "Four most recent pieces of assessed evidence",
         "Your Practice",
     ]
     for text in required:
         if text not in doc:
             errors.append(f"{label}: missing canonical fixed section text: {text}")
+    if "Mastery Goal snapshot" in doc:
+        errors.append(f"{label}: retired Mastery Goal snapshot panel detected")
+    if "ican-next" in doc or "<b>Next:</b>" in doc:
+        errors.append(f"{label}: retired visible per-I-Can Next line detected")
     if "student-page" in doc or "student-front" in doc or "student-back" in doc:
         errors.append(f"{label}: legacy fixed-page student shell detected")
 
@@ -160,7 +165,7 @@ def validate_teacher(path: Path, teacher_sha: str, css_sha: str, errors: list[st
     rendered = [c for c in sections if "omit-page" not in c.split()]
     if len(rendered) not in (3, 4):
         errors.append(f"{label}: expected 3 or 4 rendered teacher pages, found {len(rendered)}")
-    for phrase in ["Detailed Evidence Appendix", "Brief guided practice"]:
+    for phrase in ["Detailed Evidence Appendix", "Brief guided practice", "I-grade intervention need"]:
         if phrase in doc:
             errors.append(f"{label}: forbidden recurring teacher-report section/label present: {phrase}")
 

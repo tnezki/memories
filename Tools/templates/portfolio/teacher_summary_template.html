@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--
-CANONICAL LOCKED TEACHER REPORT v2.1
+CANONICAL LOCKED TEACHER REPORT v2.2
 Normal report order:
 1. Class Overview
 2. Whole Class - only when active
@@ -41,7 +41,7 @@ No normal detailed-evidence appendix.
 
   <div class="grid3 teacher-lane-grid">
     <div class="lane"><div class="num">{{WHOLE_CLASS_LANE_COUNT}}</div><div class="label">Whole Class</div><p>{{WHOLE_CLASS_LANE_SUMMARY}}</p></div>
-    <div class="lane"><div class="num">2 max</div><div class="label">Priority Day Groups</div><p>Maximum 15 students per group. Highest current I-grade intervention need first.</p></div>
+    <div class="lane"><div class="num">2 max</div><div class="label">Priority Day Groups</div><p>Maximum 15 students per group. Highest current Falling Behind intervention need first.</p></div>
     <div class="lane"><div class="num">{{PULL_IN_COUNT}}</div><div class="label">Pull In Students</div><p>One or two small actionable gaps. Everyone listed needs Practice + check soon.</p></div>
   </div>
 
@@ -112,8 +112,8 @@ No normal detailed-evidence appendix.
 
 <!--
 PRIORITY DAY LOCK:
-- eligible = active + at least one current assessed MG grade I + at least one PRACTICE_AND_CHECK target;
-- rank by current count of assessed MG grades I, then PRACTICE_AND_CHECK count, then evidence severity, then stable student_key;
+- eligible = active + at least one current Falling Behind/F Mastery Goal + at least one PRACTICE_AND_CHECK target;
+- rank by current count of Falling Behind/F Mastery Goals, then PRACTICE_AND_CHECK count, then evidence severity, then stable student_key;
 - Group 1 = ranks 1-15; Group 2 = ranks 16-30; never create Group 3;
 - exact shared I Can bundle is NOT required;
 - summarize dominant overlapping targets and produce one evidence-backed 20-minute intervention plan per group;

@@ -1,5 +1,5 @@
 const STUDENT_DATA_EMAIL = Object.freeze({
-  APP_VERSION: '3.4',
+  APP_VERSION: '3.6',
   PACKAGE_SCHEMA: 'portfolio-email-sender-package/1.0',
   APP_FOLDER: '_Student Data Tools Email Sender',
   CURRENT_FOLDER: 'Current Package',
@@ -301,9 +301,9 @@ function replaceCurrentFolder_(app){
 function getVerifiedReportFile_(row){
   const pkg=readCurrentPackage_(),app=getAppFolder_(),it=app.getFoldersByName(STUDENT_DATA_EMAIL.CURRENT_FOLDER);
   if(!it.hasNext())throw new Error('Current sender package folder is missing.');
-  const folder=it.next(),f=DriveApp.getFileById(row.reportFileId);
+  const folder=it.next(),fileId=String(row.reportFileId||row.driveFileId||'').trim();if(!fileId)throw new Error('Prepared report file id is missing');const f=DriveApp.getFileById(fileId);
   if(f.getMimeType()!=='application/pdf')throw new Error('Report attachment is not a PDF');
-  if(f.getName()!==row.reportFileName)throw new Error('Report filename no longer matches the loaded package');
+  const expectedName=String(row.reportFileName||baseName_(row.pdfPath||''));if(f.getName()!==expectedName)throw new Error('Report filename no longer matches the loaded package');
   let ok=false,ps=f.getParents();while(ps.hasNext())if(ps.next().getId()===folder.getId()){ok=true;break;}
   if(!ok)throw new Error('Report file is not inside the current sender package');
   if(sha256Bytes_(f.getBlob().getBytes())!==String(row.reportSha256||'').toLowerCase())throw new Error('Report SHA-256 does not match the loaded package');

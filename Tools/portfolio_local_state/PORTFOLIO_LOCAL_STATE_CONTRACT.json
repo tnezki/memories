@@ -1,27 +1,30 @@
 {
-  "schema": "portfolio-local-state-contract/1.4",
+  "schema": "portfolio-local-state-contract/1.5",
   "status": "CURRENT",
   "root_name": "_portfolio_data",
   "transport": "manual_usb_copy",
   "normal_google_drive_dependency": false,
+  "progress_model_contract": "Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json",
   "normal_grading_architecture": {
     "chatgpt_role": "new-evidence interpretation and source-level structured judgments only",
     "chatgpt_output": "Portfolio_Grading_Result.json",
-    "local_python_role": "longitudinal state, status/grades, intervention routing, HTML reports, PowerSchool exports, archives, email PDF preparation",
+    "local_python_role": "longitudinal state, class-opportunity counts, I Can progress, Mastery Goal status/grades, intervention routing, HTML reports, PowerSchool exports, archives, email PDF preparation",
     "request_builder": "Tools/portfolio_local_runtime/Build Portfolio Grading Request.command",
     "result_applier": "Tools/portfolio_local_runtime/Apply Portfolio Grading Result.command",
     "email_preparer": "Tools/portfolio_local_runtime/Prepare Portfolio Emails.command",
     "grading_pm": "pms_build/portfolio_grading_local.txt",
+    "progress_overlay_pm": "pms_build/portfolio_progress_model.txt",
     "request_schema": "portfolio-grading-request/1.0",
     "result_schema": "portfolio-grading-result/1.0",
     "state_guard": "Local apply requires exact parent state SHA-256 + state_version + state_id match before any state/report installation.",
     "student_data_tools": "Tools/student_data_tools/Student Data Tools.app",
     "local_companion": "Tools/portfolio_local_runtime/Start Portfolio Local Companion.command",
     "course_control_panel_rule": "Normal course panels do not ask the teacher to select current state. They use the localhost companion for state-aware grading-request creation, local roster maintenance, report viewing, and email preparation.",
-    "roster_update": "PowerSchool roster/template CSV file(s) + optional note are applied locally. Missing students become inactive; added students receive current Unit No Evidence / Not assessed rows; current reports/PowerSchool exports refresh.",
+    "roster_update": "PowerSchool roster/template CSV file(s) + optional note are applied locally. Missing students become inactive; added students receive rows that are deterministically recalculated from current class opportunities; current reports/PowerSchool exports refresh.",
     "first_state_rule": "If no state exists and the selected course Unit has a registered learning map, local roster maintenance may initialize state_version 1 without exposing a normal first/reset control.",
     "teacher_observations": "Direct teacher observations are applied locally as longitudinal evidence; paper walk-around checklists may be uploaded as a small grading request and return the normal Portfolio_Grading_Result.json.",
-    "observation_independence": "One classroom observation session counts as one opportunity per student/I Can; repeated marks from the same moment/session do not create extra independent opportunities.",
+    "observation_independence": "One classroom observation session counts as one opportunity per student/I Can; repeated marks from the same moment/session do not create extra independent opportunities. Direct observations do not advance the formal class-opportunity clock used for absence/F timing.",
+    "class_opportunity_rule": "Distinct non-observation class assessment sources are counted across the class by I Can and Mastery Goal. A student absence does not erase the class opportunity.",
     "report_hub": "View Reports exposes Student Reports, Teacher Report, and PowerSchool Exports for the selected local course/Unit.",
     "email_sender_package_builder": "Tools/portfolio_local_runtime/portfolio_sender_package.py"
   },
@@ -57,6 +60,8 @@
       "state/run_history.csv",
       "state/run_manifest.json"
     ],
+    "progress_fields": "Runtime may add class_opportunity_count, mg_class_opportunity_count, independent_partial_count, progressing_i_can_count, mastered_i_can_count, report_display, powerschool_score, and routing_code without invalidating portable-state schema 1.",
+    "legacy_status_migration": "NO_EVIDENCE / DEVELOPING / MASTERED / TRANSFER rows are accepted as migration inputs and recalculated from the evidence ledger into the current six-state progress model.",
     "integrity": "Every files[] entry records path + sha256. Local grading-result application increments state_version by exactly one and records parent_state_sha256 as the exact previously installed current-state ZIP hash.",
     "raw_evidence": "Historical raw evidence bytes are not carried in every state ZIP; durable source hashes/names/labels/mapping/judgments remain in the evidence ledger."
   },
@@ -99,7 +104,8 @@
     "selection_rule": "Email preparation is student-selectable. Active roster checkboxes default selected; Select All/Deselect All are provided; PDFs/manifests are generated only for currently selected students.",
     "send_rule": "Local Portfolio preparation creates identity-verified PDFs, a local delivery manifest, and Portfolio_Email_Sender_Package.zip. It does not send email.",
     "sender_package": "06 Email Delivery/Current/Portfolio_Email_Sender_Package.zip",
-    "sender_package_source_rule": "The package is built only from current local _portfolio_data state, local recipient/contact files, the selected local PDFs, MG status, and the teacher-reviewed local notes. It is the only Portfolio data source accepted by the live sender.",
+    "sender_package_source_rule": "The package is built only from current local _portfolio_data state, local recipient/contact files, the selected local PDFs, current MG report displays/PowerSchool scores, and the teacher-reviewed local notes. It is the only Portfolio data source accepted by the live sender.",
+    "sender_handoff": "After Student Data Tools prepares a sender package successfully, Finder reveals/highlights the exact ZIP and the configured sender page opens. Browser file-selection remains an explicit teacher action.",
     "live_sender_rule": "The Google Apps Script sender is transport-only: the teacher manually uploads the current local sender package, reviews preflight, may send a teacher-only test, and explicitly confirms LIVE SEND. It must not read old Portfolio roster/grade/recipient state from Drive.",
     "drive_rule": "Google Drive may hold only the sender's private transient staged package and persistent send log. It is not Portfolio state and may not resolve or overwrite local Portfolio data."
   },
@@ -132,6 +138,6 @@
       "build local Portfolio email sender package from selected current reports"
     ],
     "privacy": "Never serves outside localhost; report file serving is restricted to the selected local Portfolio Unit directory.",
-    "launcher_behavior": "Start Portfolio Local Companion.command stops stale local companion processes and starts the current foreground runtime in Terminal. Student Data Tools passes --no-open behavior so the raw localhost home page does not open automatically; the Terminal may be minimized but must remain running."
+    "launcher_behavior": "Student Data Tools stops stale local companion processes, closes only stale Portfolio/Student Data Tools Terminal windows, then starts one current foreground runtime in Terminal. The raw localhost home page does not open automatically; the fresh uniquely titled runtime Terminal is minimized after health check and must remain running."
   }
 }

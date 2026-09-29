@@ -1,0 +1,99 @@
+{
+  "schema": "portfolio-progress-model/1.0",
+  "status": "CURRENT",
+  "effective_date": "2026-09-29",
+  "purpose": "Shared longitudinal Portfolio progress, Mastery Goal reporting, PowerSchool, and family-report behavior for courses using the canonical Portfolio runtime.",
+  "precedence": "For Portfolio I Can progress, Mastery Goal grade/status, PowerSchool score, student-report progress display, and class-opportunity timing, this contract supersedes conflicting legacy course-policy clauses. Exact course learning content and I Can membership remain owned by the current Course Framework and Unit Assessment Plan.",
+  "i_can_progress": [
+    {
+      "code": "NOT_YET_ASSESSED",
+      "label": "Not Yet Assessed",
+      "bar_segments": 0,
+      "rule": "The class has not had an assessment opportunity for this I Can yet and no stronger student-specific evidence exists."
+    },
+    {
+      "code": "STARTED",
+      "label": "Started",
+      "bar_segments": 1,
+      "rule": "The class has had at least one assessment opportunity, but this student does not yet have enough evidence to show progress. This may include absence, a missed check, or unsuccessful evidence."
+    },
+    {
+      "code": "DEVELOPING",
+      "label": "Developing",
+      "bar_segments": 2,
+      "rule": "Meaningful partial understanding is visible, but not yet enough for one solid demonstration."
+    },
+    {
+      "code": "PROGRESSING",
+      "label": "Progressing",
+      "bar_segments": 3,
+      "rule": "At least one independent convincing demonstration exists, or sufficiently consistent independent partial evidence clearly shows the core understanding even when a secondary detail remains wrong. The deterministic repeated-partial default is three independent PARTIAL opportunities."
+    },
+    {
+      "code": "MASTERED",
+      "label": "Mastered",
+      "bar_segments": 4,
+      "rule": "At least two independent convincing demonstrations support the target."
+    },
+    {
+      "code": "EXTENDED",
+      "label": "Extended",
+      "bar_segments": 5,
+      "rule": "Mastery is established and meaningful transfer/extension evidence goes beyond the target."
+    }
+  ],
+  "evidence_interpretation": {
+    "principle": "Evidence should accumulate according to demonstrated understanding, not only completely correct performances.",
+    "core_vs_secondary_detail": "A response may show the core concept even when a secondary representation/detail is wrong. Repeated meaningful partial understanding can advance progress without being treated as zero understanding.",
+    "example": "Repeatedly identifying x-intercept 3 while omitting the ordered-pair form (3, 0) is meaningful evidence of intercept identification; the representation detail remains a gap but the conceptual evidence still counts.",
+    "source_strengths": ["CONVINCING", "PARTIAL", "LIMITED", "UNUSABLE", "NOT_OBSERVED"]
+  },
+  "class_opportunities": {
+    "i_can_rule": "Count distinct non-observation class assessment sources that produced a mapped judgment for this I Can for any student. A student absence does not erase the class opportunity.",
+    "mastery_goal_rule": "Count distinct non-observation class assessment sources that produced a mapped judgment for any I Can in the Mastery Goal for any student.",
+    "teacher_observation_rule": "Direct teacher observations and walk-around observations may contribute student evidence but do not advance the class-opportunity clock used for absence/F timing.",
+    "same_source_rule": "Multiple prompts or multiple students from the same source do not create extra class opportunities."
+  },
+  "mastery_goal_model": {
+    "dynamic_i_can_count": true,
+    "c_rule": "C when at least ceil(75% of the goal's exact I Cans) are Progressing or better.",
+    "b_rule": "B when the C coverage threshold is met and at least ceil(50% of the exact I Cans) are Mastered or Extended.",
+    "a_rule": "A when every exact I Can is Mastered or Extended.",
+    "a_plus_rule": "A+ when every exact I Can is Mastered or Extended and at least one I Can is Extended.",
+    "below_c_before_two_opportunities": "Do not report I. If the class has had no assessment opportunity for the goal, report Not Yet Assessed. After one class opportunity, use a blank/dash grade box while evidence is still building.",
+    "falling_behind_rule": "After at least two class assessment opportunities, a goal below C reports Falling Behind when meaningful growth is visible. Falling Behind is an intervention/support signal, not automatically an F.",
+    "f_rule": "After at least two class assessment opportunities, use F only when the student has no meaningful growth in the goal: no I Can has reached Developing or better. This includes repeated missing/no-usable-evidence situations.",
+    "meaningful_growth": "At least one exact I Can in the goal is Developing or better."
+  },
+  "powerschool": {
+    "never_export_i": true,
+    "before_two_opportunities_below_c": "blank",
+    "falling_behind_with_growth": "blank",
+    "no_growth_after_two_opportunities": "F",
+    "meeting_or_better": ["C", "B", "A", "A+"],
+    "unit_grade": "No overall Unit letter grade is exported."
+  },
+  "student_report": {
+    "design_rule": "Preserve the approved recurring report. This is a minimal-change update, not a redesign.",
+    "summary_right_panel": "Replace Mastery Goal snapshot with a compact text-only Status guide using the six exact progress definitions. Do not put progress bars in the guide.",
+    "i_can_rows": "Replace the legacy circle/star and visible Next line with a five-segment progress bar followed by the short progress label.",
+    "mg_cards": "Each Mastery Goal card shows one equal-size status/grade box at the upper right. The exact number of I Cans comes from current learning authority; never assume four universally. Do not duplicate the MG status at the bottom.",
+    "recent_evidence": "Show the four most recent assessed evidence events in true ledger order. Repeated evidence for the same I Can may appear when it is among the four most recent events. If fewer than four assessed events exist, show all available events.",
+    "page_2": "Keep the existing Recent Evidence & Next Steps, Your Practice, Strengths, I Cans to improve, Practice Builder link, Current focus, and footer structure."
+  },
+  "student_actions": {
+    "visibility": "Next-action codes remain internal for intervention/practice routing and are not printed as a separate Next line in each student I Can row.",
+    "mapping": {
+      "NOT_YET_ASSESSED": "NEEDS_FIRST_CHECK",
+      "STARTED": "PRACTICE_AND_CHECK",
+      "DEVELOPING": "PRACTICE_AND_CHECK",
+      "PROGRESSING": "NEEDS_ANOTHER_DEMONSTRATION",
+      "MASTERED": "SECURE",
+      "EXTENDED": "EXTENSION"
+    }
+  },
+  "intervention": {
+    "priority_signal": "Use Falling Behind/F Mastery Goals plus actionable PRACTICE_AND_CHECK I Cans instead of a visible/current I grade.",
+    "falling_behind_not_failure": "Students may be Falling Behind while still showing meaningful growth and therefore have a blank PowerSchool score."
+  }
+}

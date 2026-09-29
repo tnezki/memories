@@ -1,0 +1,51 @@
+SYSTEM RUNTIME AMENDMENT - PORTFOLIO PROGRESS MODEL
+===================================================
+STATUS: CURRENT
+SCOPE: shared local Portfolio status/grade calculation, report rendering, PowerSchool output, and class-opportunity tracking.
+REVISION: 2026-09-29
+
+AUTHORITY
+---------
+For Portfolio progress/grading behavior, read and apply:
+  Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json
+  pms_build/portfolio_progress_model.txt
+
+after the existing Portfolio runtime/local-state authorities. These rules supersede conflicting legacy I / No Evidence / circle-status / secure-count grading clauses while preserving exact course learning content and private-state boundaries.
+
+LOCAL PYTHON OWNS THE DETERMINISTIC MODEL
+-----------------------------------------
+ChatGPT continues to judge source-level evidence strength only. Local Python deterministically owns:
+- class opportunity counts;
+- longitudinal I Can progress status;
+- Mastery Goal report status/grade;
+- PowerSchool score;
+- intervention routing inputs;
+- student report progress bars/status labels.
+
+CLASS OPPORTUNITIES
+-------------------
+Derive class assessment opportunities from distinct non-observation evidence sources represented in the longitudinal ledger across the class. A student does not need an individual evidence row for the class opportunity to count for that student.
+
+Direct teacher observations / walk-around observations do not advance the class-opportunity clock used for absence/F timing.
+
+STATE COMPATIBILITY
+-------------------
+Existing local states using NO_EVIDENCE / DEVELOPING / MASTERED / TRANSFER are valid inputs. The runtime migrates/recalculates current rows from the longitudinal ledger and current class-opportunity context. Do not require the teacher to rebuild historical evidence.
+
+POWERSCHOOL
+-----------
+Never export I. Below-C scores remain blank before two class opportunities and remain blank for Falling Behind when meaningful growth exists. Export F only after at least two class opportunities with no meaningful growth. C/B/A/A+ export normally. No overall Unit grade is exported.
+
+REPORTS
+-------
+The registered canonical student report remains the approved two-page structure. Only the current template-contract changes are applied: text-only Status guide, I Can progress bars/labels, equal MG status boxes, no visible Next line, and four most recent evidence events.
+
+STUDENT DATA TOOLS
+------------------
+Student Data Tools is the normal private launcher. A new launch must terminate stale Portfolio runtime processes and close only stale Portfolio runtime Terminal windows before opening the new runtime Terminal. It must not close unrelated Terminal work.
+
+Email preparation may reveal/highlight the exact current Portfolio_Email_Sender_Package.zip and open the configured sender page after the package is successfully built. This remains preparation only; no email is sent automatically.
+
+All privacy, identity, local-state, sender preflight, and fail-closed rules in the existing Portfolio runtime amendments remain HARD.
+
+END - PORTFOLIO PROGRESS MODEL RUNTIME AMENDMENT

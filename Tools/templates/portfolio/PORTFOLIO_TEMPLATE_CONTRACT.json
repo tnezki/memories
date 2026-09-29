@@ -1,19 +1,20 @@
 {
-  "schema": "portfolio-template-contract/2.4",
+  "schema": "portfolio-template-contract/2.5",
   "status": "CURRENT",
-  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student reports use the locked two-page family-facing HTML/PDF layout; teacher reports retain the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design.",
+  "purpose": "Teacher-approved recurring Portfolio visual and wording contract. Student reports use the locked two-page family-facing HTML/PDF layout with the current progress continuum; teacher reports retain the approved intervention-first Class Overview / Whole Class / Priority Day Groups / Pull In Students design.",
   "fidelity_rule": "The HTML templates are canonical shells. Preserve fixed headings, section purposes, card anatomy, lane names, grading explanation, Priority Day capacity/ranking, and responsive digital student-report structure. Data changes; recurring structure does not drift.",
+  "progress_model_contract": "Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json",
   "student_packet": {
     "template": "Tools/templates/portfolio/student_packet_template.html",
     "css": "Tools/templates/portfolio/portfolio.css",
     "delivery_mode": "two_page_html_pdf",
     "print_page_count_rule": "Exactly 2 portrait pages per student for normal recurring reports.",
-    "layout_rule": "Page 1 shows current progress, Mastery Goal snapshot, and the complete Unit Evidence Picture. Page 2 shows recent evidence, Strengths, I Cans to improve, the Practice Builder link, and Current focus.",
+    "layout_rule": "Page 1 shows current progress, a compact text-only Status guide, and the complete Unit Evidence Picture. Page 2 shows exactly the four most recent assessed evidence events when available, Strengths, I Cans to improve, the Practice Builder link, and Current focus.",
     "fixed_sections": [
       "Current Progress Report",
       "Essential Standard",
       "Your current picture",
-      "Mastery Goal snapshot",
+      "Status guide",
       "Unit Evidence Picture",
       "Recent Evidence & Next Steps",
       "Recent evidence",
@@ -24,22 +25,49 @@
     ],
     "unit_grade_rule": "Do not display an overall Unit letter grade or large Unit-grade box.",
     "snapshot_lead_pattern": "{MG_DEMONSTRATED_COUNT} of {MG_TOTAL} Unit Mastery Goals demonstrated.",
-    "grading_explanation": "Mastery Goal grades are based on current evidence, not averages, and can improve with new evidence. Use the I Can rows below to see what is secure and what needs another check.",
+    "grading_explanation": "Mastery Goal grades are based on current evidence, not averages, and can improve with new evidence. Partial understanding can advance an I Can even when a secondary detail remains wrong.",
+    "status_guide": {
+      "visual_rule": "Text definitions only. Do not put progress bars in the Status guide.",
+      "Not Yet Assessed": "The class has not had an assessment opportunity for this I Can yet.",
+      "Started": "The class has had at least one opportunity, but this student does not yet have enough evidence to show progress. This could mean absent, missed the check, or unsuccessful evidence.",
+      "Developing": "Repeated partial understanding is visible, but not yet enough for one solid demonstration.",
+      "Progressing": "One solid demonstration or sufficiently consistent partial evidence clearly shows the core understanding, even if a secondary detail remains wrong.",
+      "Mastered": "Two independent convincing demonstrations.",
+      "Extended": "Mastery plus evidence beyond the target."
+    },
+    "i_can_progress_display": {
+      "rule": "Every I Can row shows one five-segment progress bar followed by exactly one short progress label. Remove the legacy circle/star and visible per-I-Can Next line.",
+      "segments": {
+        "Not Yet Assessed": 0,
+        "Started": 1,
+        "Developing": 2,
+        "Progressing": 3,
+        "Mastered": 4,
+        "Extended": 5
+      }
+    },
     "mastery_goal_grade_display": {
-      "assessed": "Display `Grade {GRADE_CODE}` plus the course-policy label where space allows.",
-      "not_assessed": "Display exactly `Not assessed`; family-facing meaning: this Mastery Goal has not been checked yet. Do not describe an unsuccessful attempt as Not assessed.",
-      "card_rule": "Every MG card shows exact MG title/description, current grade display, secure-I-Can count, and every I Can row."
+      "assessed": "Show C/B/A/A+ or F as the current grade when applicable. Falling Behind is a report support status and may have a blank PowerSchool score.",
+      "not_assessed": "Display exactly `Not Yet Assessed` when the class has not had an assessment opportunity for the goal and no stronger student-specific evidence exists.",
+      "building": "Before two class opportunities, a below-C goal uses a dash/blank grade box rather than I.",
+      "card_rule": "Every MG card shows exact MG title/description, one equal-size status/grade box at the upper right, and every exact I Can row. Do not duplicate the MG status at the bottom of the card.",
+      "never_assume_four_i_cans": true
     },
     "mastery_goal_layout": {
       "desktop": "Two-column 2 x 2 Mastery Goal grid on page 1 when the unit has four Mastery Goals.",
       "narrow_screen": "One column on narrow screens; print restores the approved two-column layout.",
-      "rule": "Every Mastery Goal and every I Can appears exactly once on page 1. Cards never split when printed."
+      "rule": "Every Mastery Goal and every exact I Can appears exactly once on page 1. The number of I Cans comes from current learning authority; cards never split when printed."
+    },
+    "recent_evidence": {
+      "count": 4,
+      "rule": "Show the four most recent assessed evidence events in true longitudinal ledger order. Repeated checks of the same I Can may appear when they are among the four most recent events. If fewer than four assessed events exist, show all available events.",
+      "older_history": "Older evidence remains in private Portfolio history."
     },
     "practice_box": {
       "title": "Your Practice",
       "instruction": "Use this section to see what is already going well and what should be practiced next before another check.",
-      "strengths": "List up to four current secure/transfer I Cans as exact code + full statement.",
-      "improve": "List up to four assessed I Cans that currently need targeted practice or another independent check. Do not list unassessed Mastery Goals as weaknesses.",
+      "strengths": "List up to four current Mastered/Extended I Cans as exact code + full statement.",
+      "improve": "List up to four assessed I Cans that currently need targeted practice or another independent check. Do not list Not Yet Assessed Mastery Goals as weaknesses.",
       "builder_instruction": "Practice Builder: open Unit {UNIT_NUMBER} and choose the I Cans listed above for targeted practice.",
       "preselection": "Do not preselect an I Can. The Practice Builder URL contains Unit only.",
       "qr_rule": "Do not include a QR code in the recurring report.",
@@ -67,12 +95,7 @@
     ],
     "class_overview": {
       "title": "Class Overview",
-      "rule": "Fast-to-scan action page. Show compact current-grade/evidence stats, Major strengths, Highest-leverage pattern, and the three lane summaries. Do not include roster-upload or PowerSchool workflow instructions.",
-      "lanes": [
-        "Whole Class",
-        "Priority Day Groups",
-        "Pull In Students"
-      ]
+      "rule": "Fast-to-scan action page. Show compact current-grade/evidence stats, Major strengths, Highest-leverage pattern, and the three lane summaries. Do not include roster-upload or PowerSchool workflow instructions."
     },
     "whole_class": {
       "page_title": "Whole Class",
@@ -84,9 +107,9 @@
       "max_groups": 2,
       "max_students_per_group": 15,
       "purpose": "One weekly 20-minute Crewtime teacher-led intervention opportunity.",
-      "eligible_student_rule": "Active student has at least one current assessed Mastery Goal grade of I AND at least one current PRACTICE_AND_CHECK I Can. Students whose only next step is NEEDS_ANOTHER_DEMONSTRATION or NEEDS_FIRST_CHECK are not assigned a Priority Day seat.",
+      "eligible_student_rule": "Active student has at least one current Falling Behind/F Mastery Goal AND at least one current PRACTICE_AND_CHECK I Can. Students whose only next step is NEEDS_ANOTHER_DEMONSTRATION or NEEDS_FIRST_CHECK are not assigned a Priority Day seat.",
       "ranking_rule": [
-        "Sort by count of current assessed Mastery Goal grades equal to I, descending.",
+        "Sort by count of current Falling Behind/F Mastery Goals, descending.",
         "Tie-break by count of current PRACTICE_AND_CHECK I Cans, descending.",
         "Tie-break by current evidence severity across those practice targets, prioritizing UNUSABLE before LIMITED before PARTIAL.",
         "Use stable student_key order only as the final deterministic tie-break."
@@ -110,22 +133,12 @@
     "detailed_evidence_rule": "Do not include a normal detailed I Can appendix in the recurring teacher report. Detailed longitudinal evidence remains in private Portfolio Data CSV/JSON state and may be produced separately only when the teacher explicitly requests it."
   },
   "student_action_states": {
-    "NEEDS_FIRST_CHECK": {
-      "label": "Needs first check",
-      "family_meaning": "We have not checked this skill yet."
-    },
-    "PRACTICE_AND_CHECK": {
-      "label": "Practice + check soon"
-    },
-    "NEEDS_ANOTHER_DEMONSTRATION": {
-      "label": "Needs another independent check"
-    },
-    "SECURE": {
-      "label": "Secure"
-    },
-    "EXTENSION": {
-      "label": "Extension"
-    }
+    "visibility_rule": "These states remain internal for intervention/practice routing and are not printed as a separate Next line under every student I Can.",
+    "NEEDS_FIRST_CHECK": {"label": "Needs first check"},
+    "PRACTICE_AND_CHECK": {"label": "Practice + check soon"},
+    "NEEDS_ANOTHER_DEMONSTRATION": {"label": "Needs another independent check"},
+    "SECURE": {"label": "Secure"},
+    "EXTENSION": {"label": "Extension"}
   },
   "human_learning_label_rule": "Always display canonical code and full exact I Can statement together in human-facing output.",
   "results_zip": {
@@ -150,7 +163,7 @@
     },
     "renderer_rule": "Read the exact canonical sources from the pinned SYSTEM commit and instantiate tokens/loops only. Do not author substitute report HTML, course-specific card anatomy, colors, typography, spacing, or a new stylesheet.",
     "self_contained_rule": "Replace the external portfolio.css link with one <style id=\"canonical-portfolio-css\"> block containing the exact canonical portfolio.css bytes. No second visual stylesheet is allowed.",
-    "student_fit_rule": "Normal student reports must preserve the locked two-page portrait layout. Recent evidence is capped at 4-8 distinct assessed I Cans as space permits; do not shrink away required Mastery Goal/I Can content.",
+    "student_fit_rule": "Normal student reports preserve the locked two-page portrait layout. Recent evidence is exactly the four most recent assessed evidence events when at least four exist; do not shrink away required Mastery Goal/I Can content.",
     "provenance_rule": "Every report-producing run records the pinned SYSTEM commit plus SHA-256 values for the student template, teacher template, CSS, and contract in results_manifest.json. Individual/teacher HTML includes corresponding template/CSS provenance meta tags.",
     "validator": "Tools/templates/portfolio/verify_portfolio_output.py",
     "failure_code": "PORTFOLIO_TEMPLATE_DRIFT",

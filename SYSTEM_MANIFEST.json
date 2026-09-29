@@ -1,8 +1,9 @@
 {
-  "schema": "curriculum-system-manifest/1.7",
+  "schema": "curriculum-system-manifest/1.8",
   "philosophy": "Curriculum_Philosophy.txt",
   "philosophy_amendments": [
-    "Curriculum_Philosophy_Portfolio_Amendment.txt"
+    "Curriculum_Philosophy_Portfolio_Amendment.txt",
+    "Curriculum_Philosophy_Portfolio_Progress_Amendment.txt"
   ],
   "question_structure": {
     "path": "_question_structure",
@@ -35,11 +36,14 @@
   },
   "portfolio_delivery_exception": "Portfolio normal grading/state/report work is local under _portfolio_data and uses Student Data Tools.app to launch the localhost runtime. Google Drive is not canonical Portfolio state after migration. Live email delivery uses a current private Portfolio_Email_Sender_Package.zip built from local _portfolio_data; the Google Apps Script sender is transport-only and may use Drive only for transient package staging plus its private send log.",
   "portfolio_local_grading_pm": "pms_build/portfolio_grading_local.txt",
+  "portfolio_progress_model_pm": "pms_build/portfolio_progress_model.txt",
+  "portfolio_progress_model_contract": "Tools/PORTFOLIO_PROGRESS_MODEL_CONTRACT.json",
   "portfolio_local_state_contract": "Tools/portfolio_local_state/PORTFOLIO_LOCAL_STATE_CONTRACT.json",
   "portfolio_local_runtime": "Tools/portfolio_local_runtime/README.txt",
   "checkpoint_delivery_exception": "Algebra personalized Checkpoint runs remain private state-informed workflows. The Checkpoint Builder is an owner-local non-repository tool under _algebra_teacher_tools; personalized student outputs/source maps must not be published to the shared course repository.",
   "runtime_amendments": [
     "SYSTEM_RUNTIME_PORTFOLIO_AMENDMENT.txt",
+    "SYSTEM_RUNTIME_PORTFOLIO_PROGRESS_AMENDMENT.txt",
     "SYSTEM_RUNTIME_CHECKPOINT_AMENDMENT.txt"
   ],
   "local_transfer_amendments": [

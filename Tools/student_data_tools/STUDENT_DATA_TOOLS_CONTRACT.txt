@@ -1,7 +1,7 @@
 STUDENT DATA TOOLS CONTRACT
 ===========================
 STATUS: CURRENT
-REVISION: 2026-09-28 v1.1
+REVISION: 2026-09-29 v1.2 - CLEAN RELAUNCH + NUMBERED WORKFLOW
 
 PURPOSE
 -------
@@ -22,13 +22,46 @@ LOCAL PORTFOLIO RUNTIME
 Student Data Tools starts the canonical Portfolio Local Companion on:
   http://127.0.0.1:8765/
 
-The launch path intentionally uses Terminal because macOS privacy controls can deny detached/background Python processes access to Documents while the GitHub workspace lives under ~/Documents. A fresh launch stops stale Portfolio companion processes before starting the current server.
+The launch path intentionally uses Terminal because macOS privacy controls can deny detached/background Python processes access to Documents while the GitHub workspace lives under ~/Documents.
+
+CLEAN RELAUNCH - HARD
+---------------------
+A fresh Student Data Tools launch MUST:
+1. stop stale Portfolio companion Python processes;
+2. close stale Terminal windows/tabs that belong to Student Data Tools / Portfolio Local Companion;
+3. leave unrelated Terminal windows alone;
+4. start exactly one fresh visible Portfolio runtime Terminal session;
+5. minimize that fresh runtime window after health check succeeds.
+
+The runtime Terminal uses the unique title marker:
+  Student Data Tools Runtime
 
 A successful launch MUST verify:
   GET http://127.0.0.1:8765/api/runtime-version
 returns PASS before the app reports Portfolio as READY.
 
-When Student Data Tools launches the runtime, the raw localhost home page MUST NOT open automatically. Student Data Tools owns the browser landing page. The teacher can open Portfolio explicitly from that landing page.
+When Student Data Tools launches the runtime, the raw localhost home page MUST NOT open automatically. Student Data Tools owns the browser landing page.
+
+DASHBOARD WORKFLOW - HARD
+-------------------------
+The landing page is a numbered workflow, not two parallel tools:
+
+1. New Evidence
+   Open Portfolio Tools to add/grade new evidence, teacher observations, or roster updates.
+
+2. Just Print / View Reports
+   Open current Portfolio reports without adding evidence or changing grades.
+
+3. Prepare Email Reports
+   In Portfolio, choose students, review notes, and prepare the current sender package.
+   After a successful preparation, the runtime reveals/highlights the exact
+     Portfolio_Email_Sender_Package.zip
+   in Finder and opens the configured Portfolio Email Sender page.
+
+4. Send Reports
+   In the sender, choose the highlighted ZIP, load it, review rows/recipients, optionally send one teacher-only test, then explicitly use LIVE SEND.
+
+The landing page contains no student records.
 
 LOCAL EMAIL PACKAGE - HARD
 --------------------------
@@ -41,7 +74,7 @@ That package contains only the selected current send batch:
 - sender_manifest.json;
 - identity-verified selected PDFs;
 - current local student/guardian/support recipient routing;
-- current MG1-MG4 display values;
+- current Mastery Goal display values;
 - teacher-reviewed weekly/student notes.
 
 The package is private transport. It is never a Curriculum Transfer payload and must never be committed to GitHub.
@@ -71,15 +104,9 @@ Student Data Tools stores only the deployed sender URL in:
 
 The app may test whether the configured URL is reachable and provide a launch link. Reachability is not equivalent to send readiness; the sender's own authorization/preflight remains authoritative.
 
-DASHBOARD
----------
-Each successful app launch regenerates a tiny private local landing page under:
-  _portfolio_data/_student_data_tools/index.html
-
-The page contains no student records. It provides:
-- Portfolio Runtime status/link;
-- Portfolio Email Sender status/link when configured;
-- clear privacy and explicit-send language.
+BROWSER FILE-PICKER BOUNDARY
+----------------------------
+A web page cannot force Chrome's Choose File dialog to open at an arbitrary local folder. Therefore Student Data Tools uses Finder reveal/highlight of the exact sender ZIP as the handoff. The teacher chooses that highlighted file in the sender.
 
 FAIL-CLOSED BEHAVIOR
 --------------------

@@ -1,5 +1,5 @@
 {
-  "schema": "curriculum-pm-registry/1.2",
+  "schema": "curriculum-pm-registry/1.3",
   "purpose": "canonical_initial_build_registry",
   "registry_rule": "Only jobs listed here are current generic initial-build jobs. Other PM files may remain for operational, compatibility, or historical workflows but are not current Build-menu authority merely because the file exists.",
   "jobs": [
@@ -15,6 +15,9 @@
     {"step":"10","job":"summative","label":"Build Summative","path":"pms_build/summative.txt","entrypoint":"pms_build/summative.txt"},
     {"step":"11","job":"unit_plan","label":"Build Unit Plan","path":"pms_build/unit_plan.txt","entrypoint":"pms_build/unit_plan.txt"}
   ],
+  "operational_overlays": {
+    "portfolio_progress_model": "pms_build/portfolio_progress_model.txt"
+  },
   "not_generic_initial_build_jobs": [
     "First 4 Days",
     "Progress Tracker",

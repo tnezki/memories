@@ -5,6 +5,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 MEMORIES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 PORTFOLIO_RUNNER="$MEMORIES_ROOT/Tools/portfolio_local_runtime/Start Portfolio Local Companion.command"
 
+# Unique Terminal title lets the Dock app close only its stale runtime window.
+printf '\033]0;Student Data Tools Runtime\007'
 printf '\nStudent Data Tools\n'
 printf '==================\n\n'
 printf 'Starting private Portfolio runtime...\n'
