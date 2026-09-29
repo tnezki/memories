@@ -1,5 +1,5 @@
 {
-  "schema": "curriculum-system-manifest/1.8",
+  "schema": "curriculum-system-manifest/1.9",
   "philosophy": "Curriculum_Philosophy.txt",
   "philosophy_amendments": [
     "Curriculum_Philosophy_Portfolio_Amendment.txt",
@@ -26,13 +26,25 @@
   "local_transfer_contract": "Tools/CURRICULUM_TRANSFER_CONTRACT.txt",
   "curriculum_transfer_root": "_curriculum_transfers",
   "curriculum_transfer_app": "memories/Tools/curriculum_transfer/Curriculum Transfer.app",
+  "planner_sync_contract": "Tools/planner_sync/PLANNER_SYNC_CONTRACT.txt",
+  "planner_sync_app": "Tools/planner_sync/Planner Sync.app",
+  "planner_pages_app": "Tools/planner_sync/Planner Pages.app",
+  "planner_sync_repositories": [
+    "algebra",
+    "physics",
+    "apcalc",
+    "teacher_shared"
+  ],
   "student_data_tools_contract": "Tools/student_data_tools/STUDENT_DATA_TOOLS_CONTRACT.txt",
   "student_data_tools_app": "Tools/student_data_tools/Student Data Tools.app",
   "local_owner_tools_root": "_algebra_teacher_tools",
   "local_owner_tools_rule": "Algebra teacher-only controls such as Quick Check Builder, Checkpoint Builder, Teacher Practice Builder, Performance Task control/builder, Portfolio/email entry links, and future Set/Summative/Investigation builder controls live in the non-repository sibling _algebra_teacher_tools. Finished shareable curriculum products remain in course repositories.",
   "local_service_ports": {
     "portfolio_companion": 8765,
-    "curriculum_builder_pilot": 8766
+    "curriculum_builder_pilot": 8766,
+    "algebra_planner": 8767,
+    "physics_planner": 8768,
+    "apcalc_planner": 8769
   },
   "portfolio_delivery_exception": "Portfolio normal grading/state/report work is local under _portfolio_data and uses Student Data Tools.app to launch the localhost runtime. Google Drive is not canonical Portfolio state after migration. Live email delivery uses a current private Portfolio_Email_Sender_Package.zip built from local _portfolio_data; the Google Apps Script sender is transport-only and may use Drive only for transient package staging plus its private send log.",
   "portfolio_local_grading_pm": "pms_build/portfolio_grading_local.txt",

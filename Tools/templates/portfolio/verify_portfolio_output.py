@@ -13,9 +13,11 @@ import html as html_lib
 import json
 import re
 import sys
+import tempfile
+import zipfile
 from pathlib import Path
 
-VERSION = "portfolio-template-fidelity/1.2"
+VERSION = "portfolio-template-fidelity/1.3"
 STUDENT_TEMPLATE = "student_packet_template.html"
 TEACHER_TEMPLATE = "teacher_summary_template.html"
 CSS_FILE = "portfolio.css"
@@ -170,6 +172,79 @@ def validate_teacher(path: Path, teacher_sha: str, css_sha: str, errors: list[st
             errors.append(f"{label}: forbidden recurring teacher-report section/label present: {phrase}")
 
 
+
+
+def finalize_current_progress_model(results: Path, templates: Path, manifest: dict, errors: list[str]) -> None:
+    """Finish reports with the current on-disk progress model before validation.
+
+    Report refreshes can outlive a Curriculum Transfer that replaces the shared
+    progress-model module/template. The localhost process may therefore still
+    hold the previous imported module in memory. The validator runs in a fresh
+    Python process, so it is the safe finalization boundary: if current progress
+    tokens remain, load the current module from disk, apply its deterministic
+    student/teacher postprocessors against a temporary copy of the authoritative
+    current state, then validate the final bytes.
+    """
+    teacher_rel = manifest.get("teacher_report", "teacher_report/teacher_summary.html") if isinstance(manifest, dict) else "teacher_report/teacher_summary.html"
+    teacher = results / str(teacher_rel)
+    if not teacher.is_file():
+        return
+    doc = read_text(teacher)
+    if "{{PROGRESS_MODEL_" not in doc and 'class="ican-next"' not in doc and "<b>Next:</b>" not in doc:
+        return
+
+    course = str(manifest.get("course") or "").strip()
+    try:
+        unit = int(manifest.get("unit"))
+    except Exception:
+        errors.append("progress-model finalizer: results_manifest course/unit missing or invalid")
+        return
+    if not course:
+        errors.append("progress-model finalizer: results_manifest course missing")
+        return
+
+    # templates = <GitHub>/memories/Tools/templates/portfolio
+    try:
+        github_root = templates.parents[3]
+    except IndexError:
+        errors.append(f"progress-model finalizer: could not resolve GitHub root from {templates}")
+        return
+    runtime_dir = github_root / "memories" / "Tools" / "portfolio_local_runtime"
+    model_path = runtime_dir / "portfolio_progress_model.py"
+    state_zip = github_root / "_portfolio_data" / course / f"unit {unit}" / "02 Portfolio Data" / "Portfolio_State_CURRENT.zip"
+    if not model_path.is_file():
+        errors.append(f"progress-model finalizer: current model missing: {model_path}")
+        return
+    if not state_zip.is_file():
+        errors.append(f"progress-model finalizer: current state missing: {state_zip}")
+        return
+
+    try:
+        if str(runtime_dir) not in sys.path:
+            sys.path.insert(0, str(runtime_dir))
+        # This validator is a fresh process. Importing by normal module name means
+        # the installed on-disk module is authoritative for this validation run.
+        import portfolio_progress_model as progress  # type: ignore
+
+        with tempfile.TemporaryDirectory(prefix="portfolio_validator_progress_") as td:
+            work = Path(td)
+            with zipfile.ZipFile(state_zip) as z:
+                z.extractall(work)
+            state_dir = work / "state"
+            if not state_dir.is_dir():
+                errors.append("progress-model finalizer: state/ directory missing after extracting current state")
+                return
+            # Use the same deterministic postprocessors as a fresh runtime.
+            if hasattr(progress, "_postprocess_student_markup"):
+                progress._postprocess_student_markup(results)
+            if not hasattr(progress, "_postprocess_teacher_copy"):
+                errors.append("progress-model finalizer: current model lacks teacher postprocessor")
+                return
+            progress._postprocess_teacher_copy(results, state_dir)
+    except Exception as exc:
+        errors.append(f"progress-model finalizer failed: {exc}")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", required=True, help="Unpacked Portfolio results directory")
@@ -202,6 +277,9 @@ def main() -> int:
             manifest = json.loads(read_text(manifest_path))
         except Exception as exc:
             errors.append(f"results_manifest.json invalid JSON: {exc}")
+
+    if manifest:
+        finalize_current_progress_model(results, templates, manifest, errors)
 
     if hashes and manifest:
         prov = manifest.get("template_provenance")

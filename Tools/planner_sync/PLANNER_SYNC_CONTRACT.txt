@@ -1,0 +1,86 @@
+PLANNER SYNC CONTRACT
+=====================
+
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+PURPOSE
+-------
+Provide a teacher-controlled Dock workflow for syncing the repositories used by the local Planners, plus a separate Dock shortcut for reopening the Planner pages.
+
+CANONICAL APPS
+--------------
+Planner Sync:
+  memories/Tools/planner_sync/Planner Sync.app
+
+Planner Pages:
+  memories/Tools/planner_sync/Planner Pages.app
+
+Manual sync fallback:
+  memories/Tools/planner_sync/Run Planner Sync.command
+
+SYNC REPOSITORIES - HARD
+------------------------
+Planner Sync operates only on these sibling repositories under the detected GitHub workspace root:
+- algebra
+- physics
+- apcalc
+- teacher_shared
+
+It does not automatically commit or push memories, banks, stem, textbooks, or any other repository.
+
+WORKSPACE ROOT
+--------------
+The tool detects, in order:
+1. GITHUB_ROOT when explicitly supplied;
+2. $HOME/GitHub;
+3. $HOME/Documents/GitHub.
+
+PULL ALL REPOS
+--------------
+For each declared Planner repository:
+- require a valid Git work tree;
+- require no merge or rebase already in progress;
+- require a clean working tree;
+- run `git pull --ff-only`;
+- never stash, merge, rebase, commit, or push as part of Pull All.
+
+A dirty repository is BLOCKED, not silently modified.
+
+COMMIT + PUSH ALL REPOS
+-----------------------
+For each declared Planner repository:
+- require a valid Git work tree;
+- require no merge or rebase already in progress;
+- `git add -A`;
+- create one timestamped commit only when staged changes exist;
+- run `git pull --rebase`;
+- if the rebase fails, abort that rebase and mark the repository FAILED;
+- run `git push`;
+- never force-push.
+
+The operation reports each repository separately and ends with a repeated all-caps SUCCESS or FAILURE banner.
+
+PLANNER PAGES
+-------------
+The local Planner services are:
+- Algebra 1: http://127.0.0.1:8767/
+- Physics: http://127.0.0.1:8768/
+- AP Calculus AB: http://127.0.0.1:8769/
+
+Planner Pages.app offers a simple chooser for those three pages or all three.
+
+If the Planner services are not already reachable, Planner Pages.app starts:
+  _algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command
+
+in the background, waits briefly for the local services, then opens the selected Planner page(s).
+
+BOUNDARIES
+----------
+- Planner Sync is an explicit Git-action tool. It is separate from Curriculum Transfer.
+- Curriculum Transfer itself remains Git-free.
+- Planner Sync must never force-push.
+- Planner Sync must never resolve conflicts automatically.
+- Student-specific Portfolio data is outside this tool.
+
+END
