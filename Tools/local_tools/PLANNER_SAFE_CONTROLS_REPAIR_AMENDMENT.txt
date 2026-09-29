@@ -1,0 +1,22 @@
+PLANNER SAFE CONTROLS REPAIR AMENDMENT
+======================================
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+If an owner Planner HTML source is damaged by a prior local UI patch, Local Tools
+recovers the newest healthy copy from:
+  _curriculum_transfers/backups/planner_owner_ui_*
+
+Healthy sources contain Planner Editor, Apply Changes + Update Agendas, and
+Current State.
+
+Control placement is non-destructive:
+- move the existing Apply / Undo / Jump controls in the browser DOM
+- insert Pull / Commit+Push controls
+- place all five at the former GitHub area
+- hide only the exact old GITHUB label and old Pull/Push controls
+- do not delete broad parent containers
+
+The floating Top button remains.
+
+END

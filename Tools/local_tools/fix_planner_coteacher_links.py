@@ -170,115 +170,233 @@ def patch_hosted_links(raw: str) -> tuple[str, int]:
     return anchor_re.sub(anchor_sub, updated), replacements
 
 
-def _container_spans(raw: str) -> list[tuple[int, int, str]]:
-    token_re = re.compile(r'</?(div|section|nav)\b[^>]*>', re.IGNORECASE)
-    stack: list[tuple[str, int]] = []
-    spans: list[tuple[int, int, str]] = []
-    for match in token_re.finditer(raw):
-        tag = match.group(1).lower()
-        is_close = match.group(0).lstrip().startswith("</")
-        if not is_close:
-            stack.append((tag, match.start()))
+
+
+SAFE_CONTROLS_MARKER = "local-tools-safe-planner-controls"
+
+SAFE_CONTROLS_HTML = """
+<style id="local-tools-safe-planner-controls-style">
+#local-tools-planner-controls {
+  margin: 0;
+  padding: 14px 24px 16px;
+  border-top: 1px solid #e7bc58;
+  border-bottom: 1px solid #e7bc58;
+  background: #fff8e8;
+}
+#local-tools-planner-controls .lt-title {
+  margin: 0 0 10px;
+  color: #725714;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+#local-tools-planner-controls .lt-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+</style>
+<script id="local-tools-safe-planner-controls">
+(function () {
+  function exactText(el, value) {
+    return (el && (el.textContent || "").replace(/\\s+/g, " ").trim() === value);
+  }
+
+  function findExact(value) {
+    var nodes = document.querySelectorAll("button,a,h1,h2,h3,h4,h5,h6,div,p,span");
+    for (var i = 0; i < nodes.length; i++) {
+      if (exactText(nodes[i], value)) return nodes[i];
+    }
+    return null;
+  }
+
+  function makeSyncForm() {
+    var form = document.createElement("form");
+    form.className = "local-tools-top-sync";
+    form.method = "post";
+    form.action = "http://127.0.0.1:8770/";
+    form.target = "_blank";
+    form.style.display = "contents";
+
+    var pull = document.createElement("button");
+    pull.type = "submit";
+    pull.name = "action";
+    pull.value = "sync-pull";
+    pull.textContent = "Pull All Repos";
+    pull.style.cssText = "background:#fff;color:#173f73;border:2px solid #173f73;border-radius:14px;padding:12px 18px;font-weight:800;font-size:inherit;cursor:pointer";
+
+    var push = document.createElement("button");
+    push.type = "submit";
+    push.name = "action";
+    push.value = "sync-push";
+    push.textContent = "Commit + Push All Repos";
+    push.style.cssText = "background:#173f73;color:#fff;border:2px solid #173f73;border-radius:14px;padding:12px 18px;font-weight:800;font-size:inherit;cursor:pointer";
+    push.onclick = function () {
+      return confirm("Commit and push current changes in memories, algebra, physics, apcalc, and teacher_shared?");
+    };
+
+    form.appendChild(pull);
+    form.appendChild(push);
+    return form;
+  }
+
+  function run() {
+    if (document.getElementById("local-tools-planner-controls")) return;
+
+    var apply = findExact("Apply Changes + Update Agendas");
+    var undo = findExact("Undo Changes");
+    var jump = findExact("Jump to Current Week");
+    var github = findExact("GITHUB");
+    if (!apply || !undo || !jump || !github) return;
+
+    var oldActionParent = apply.parentElement;
+
+    var section = document.createElement("section");
+    section.id = "local-tools-planner-controls";
+
+    var title = document.createElement("div");
+    title.className = "lt-title";
+    title.textContent = "PLANNER CONTROLS";
+
+    var row = document.createElement("div");
+    row.className = "lt-row";
+
+    row.appendChild(apply);
+    row.appendChild(undo);
+    row.appendChild(jump);
+    row.appendChild(makeSyncForm());
+
+    section.appendChild(title);
+    section.appendChild(row);
+
+    github.parentNode.insertBefore(section, github);
+
+    github.style.display = "none";
+    var nodes = document.querySelectorAll("button,a");
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].closest && nodes[i].closest("#local-tools-planner-controls")) continue;
+      var t = (nodes[i].textContent || "").replace(/\\s+/g, " ").trim();
+      if (t === "Pull All Repos" || t === "Commit + Push All Repos") {
+        nodes[i].style.display = "none";
+      }
+    }
+
+    if (oldActionParent) {
+      var remaining = (oldActionParent.textContent || "").replace(/\\s+/g, "").trim();
+      var interactive = oldActionParent.querySelectorAll("button,a,input,select").length;
+      if (!remaining && interactive === 0) oldActionParent.style.display = "none";
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+})();
+</script>
+"""
+
+
+def _healthy_planner_source(text: str) -> bool:
+    return (
+        "Planner Editor" in text
+        and "Apply Changes + Update Agendas" in text
+        and "Current State" in text
+        and len(text) > 5000
+    )
+
+
+def _damaged_planner_source(text: str) -> bool:
+    if not text.strip():
+        return True
+    if "local-tools-back-to-top" in text and len(text) < 6000:
+        return True
+    return not _healthy_planner_source(text)
+
+
+def restore_latest_healthy_planner_backups(root: Path) -> int:
+    backup_base = root / "_curriculum_transfers" / "backups"
+    if not backup_base.is_dir():
+        return 0
+
+    backup_dirs = sorted(
+        [p for p in backup_base.glob("planner_owner_ui_*") if p.is_dir()],
+        key=lambda p: p.name,
+        reverse=True,
+    )
+    restored = 0
+    tool_names = {"_algebra_teacher_tools", "_physics_teacher_tools", "_apcalc_teacher_tools"}
+
+    for current in candidate_files(root):
+        if current.suffix.lower() not in {".html", ".htm"}:
             continue
-        for idx in range(len(stack) - 1, -1, -1):
-            open_tag, start = stack[idx]
-            if open_tag == tag:
-                del stack[idx:]
-                spans.append((start, match.end(), tag))
+        try:
+            rel = current.resolve().relative_to(root.resolve())
+        except ValueError:
+            continue
+        if not rel.parts or rel.parts[0] not in tool_names:
+            continue
+
+        try:
+            current_text_local = current.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        if not _damaged_planner_source(current_text_local):
+            continue
+
+        for backup_dir in backup_dirs:
+            candidate = backup_dir / rel
+            if not candidate.is_file():
+                continue
+            try:
+                backup_text = candidate.read_text(encoding="utf-8")
+            except Exception:
+                continue
+            if _healthy_planner_source(backup_text):
+                shutil.copy2(candidate, current)
+                print(f"RESTORED healthy Planner backup: {current}")
+                restored += 1
                 break
-    return spans
 
-
-def strip_legacy_sync_section(raw: str) -> tuple[str, int]:
-    """Keep repository sync only in the Planner's top action row."""
-    out = raw
-    changed = 0
-
-    # Remove our previously inserted top sync form first so all sync controls can
-    # be normalized and then reinserted exactly once beside Jump to Current Week.
-    out, count = re.subn(
-        r'<form\b[^>]*class=["\'][^"\']*\blocal-tools-top-sync\b[^"\']*["\'][^>]*>.*?</form>',
-        '',
-        out,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    changed += count
-
-    low = out.lower()
-    github_pos = low.find(">github<")
-    if github_pos < 0:
-        github_pos = low.find("github")
-    pull_pos = low.find("pull all repos", max(github_pos, 0))
-    push_pos = low.find("commit + push all repos", max(github_pos, 0))
-
-    # Prefer removing the small legacy GitHub/Sync resource block as a whole.
-    if github_pos >= 0 and pull_pos >= 0 and push_pos >= 0:
-        candidates = []
-        for start, end, tag in _container_spans(out):
-            if start <= github_pos < end and start <= pull_pos < end and start <= push_pos < end:
-                frag = out[start:end]
-                action_count = len(re.findall(r'<(?:a|button)\b', frag, flags=re.IGNORECASE))
-                if len(frag) <= 6000 and action_count <= 4:
-                    candidates.append((end - start, start, end))
-        if candidates:
-            _, start, end = min(candidates)
-            out = out[:start] + out[end:]
-            changed += 1
-            return out, changed
-
-    # Safe fallback: remove only the legacy heading and duplicate controls.
-    out, count = re.subn(
-        r'<(?:h[1-6]|div|p|span)\b[^>]*>\s*GITHUB\s*</(?:h[1-6]|div|p|span)>',
-        '',
-        out,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    changed += count
-    for label in ("Pull All Repos", r"Commit\s*\+\s*Push All Repos"):
-        out, count = re.subn(
-            rf'<(?:a|button)\b[^>]*>\s*{label}\s*</(?:a|button)>',
-            '',
-            out,
-            flags=re.IGNORECASE | re.DOTALL,
-        )
-        changed += count
-
-    return out, changed
+    return restored
 
 
 def patch_planner_html(raw: str) -> tuple[str, int]:
-    # Small idempotent owner-Planner UI polish for static HTML sources.
     changed = 0
-    out, sync_changes = strip_legacy_sync_section(raw)
-    changed += sync_changes
+    out = raw
 
-    # Retire the redundant Teacher Tools chip/button from Teacher Resources.
+    # Remove only our own previously injected fragments.
     patterns = [
-        r'<li\b[^>]*>\s*<a\b[^>]*>\s*Teacher Tools\s*</a>\s*</li>',
-        r'<a\b[^>]*>\s*Teacher Tools\s*</a>',
-        r'<button\b[^>]*>\s*Teacher Tools\s*</button>',
+        """<form\\b[^>]*class=["'][^"']*\\blocal-tools-top-sync\\b[^"']*["'][^>]*>.*?</form>""",
+        """<section\\b[^>]*id=["']local-tools-planner-controls["'][^>]*>.*?</section>""",
+        """<style\\b[^>]*id=["']local-tools-safe-planner-controls-style["'][^>]*>.*?</style>\\s*<script\\b[^>]*id=["']local-tools-safe-planner-controls["'][^>]*>.*?</script>""",
     ]
     for pattern in patterns:
-        out, count = re.subn(pattern, '', out, flags=re.IGNORECASE | re.DOTALL)
+        out, count = re.subn(pattern, "", out, flags=re.IGNORECASE | re.DOTALL)
         changed += count
 
-    # Put repo sync controls beside the main Planner edit controls.
-    if TOP_SYNC_MARKER not in out and "Jump to Current Week" in out and "Apply Changes + Update Agendas" in out:
-        jump = re.compile(
-            r'(<(?:a|button)\b[^>]*>\s*Jump to Current Week\s*</(?:a|button)>)',
-            re.IGNORECASE | re.DOTALL,
-        )
-        out, count = jump.subn(r'\1' + TOP_SYNC_HTML, out, count=1)
+    # Retire only the exact Teacher Tools control.
+    teacher_patterns = [
+        """<li\\b[^>]*>\\s*<a\\b[^>]*>\\s*Teacher Tools\\s*</a>\\s*</li>""",
+        """<a\\b[^>]*>\\s*Teacher Tools\\s*</a>""",
+        """<button\\b[^>]*>\\s*Teacher Tools\\s*</button>""",
+    ]
+    for pattern in teacher_patterns:
+        out, count = re.subn(pattern, "", out, flags=re.IGNORECASE | re.DOTALL)
         changed += count
 
-    # Always offer a floating return-to-top control on long Planner pages.
-    if BACK_TOP_MARKER not in out and "</body>" in out.lower() and ("Planner Editor" in out or "Apply Changes + Update Agendas" in out):
+    if SAFE_CONTROLS_MARKER not in out and "</body>" in out.lower():
+        idx = out.lower().rfind("</body>")
+        out = out[:idx] + SAFE_CONTROLS_HTML + out[idx:]
+        changed += 1
+
+    if BACK_TOP_MARKER not in out and "</body>" in out.lower():
         idx = out.lower().rfind("</body>")
         out = out[:idx] + BACK_TOP_HTML + out[idx:]
         changed += 1
 
     return out, changed
-
 
 def rewrite_file(path: Path) -> tuple[str | None, int]:
     try:
@@ -377,6 +495,10 @@ def main() -> int:
     root = detect_root()
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_root = root / "_curriculum_transfers" / "backups" / f"planner_owner_ui_{stamp}"
+
+    restored = restore_latest_healthy_planner_backups(root)
+    if restored:
+        print(f"Recovered {restored} damaged Planner source file(s) from healthy local backups.")
 
     changed_files: list[Path] = []
     total_changes = 0
