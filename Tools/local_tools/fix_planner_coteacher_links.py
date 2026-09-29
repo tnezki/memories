@@ -20,52 +20,48 @@ HOSTED = {
 }
 
 LOCAL_TARGETS = {
-    "algebra": [
+    "algebra": {
         "http://127.0.0.1:8767/shared/algebra/index.html",
         "http://127.0.0.1:8767/shared/algebra/",
         "/shared/algebra/index.html",
         "/shared/algebra/",
         "shared/algebra/index.html",
-    ],
-    "physics": [
+        "shared/algebra/",
+    },
+    "physics": {
         "http://127.0.0.1:8768/shared/physics/index.html",
         "http://127.0.0.1:8768/shared/physics/",
         "/shared/physics/index.html",
         "/shared/physics/",
         "shared/physics/index.html",
-    ],
-    "calc": [
+        "shared/physics/",
+    },
+    "calc": {
         "http://127.0.0.1:8769/shared/calc/index.html",
         "http://127.0.0.1:8769/shared/calc/",
         "/shared/calc/index.html",
         "/shared/calc/",
         "shared/calc/index.html",
+        "shared/calc/",
         "http://127.0.0.1:8769/shared/apcalc/index.html",
         "http://127.0.0.1:8769/shared/apcalc/",
         "/shared/apcalc/index.html",
         "/shared/apcalc/",
         "shared/apcalc/index.html",
-    ],
+        "shared/apcalc/",
+    },
 }
 
-TEXT_EXTS = {
-    ".py", ".html", ".htm", ".js", ".json", ".txt", ".command", ".sh",
-    ".css", ".md", ".yaml", ".yml", ".toml",
-}
 SKIP_DIRS = {
     ".git", "__pycache__", "logs", "_logs", "backups", "_backups",
     "migration_backups", "node_modules", ".venv", "venv",
 }
 
-TOP_SYNC_MARKER = "local-tools-top-sync"
-BACK_TOP_MARKER = "local-tools-back-to-top"
-
-TOP_SYNC_HTML = '''<form class="local-tools-top-sync" method="post" action="http://127.0.0.1:8770/" target="_blank" style="display:contents">
-<button type="submit" name="action" value="sync-pull" style="background:#fff;color:#173f73;border:2px solid #173f73;border-radius:14px;padding:12px 18px;font-weight:800;font-size:inherit;cursor:pointer">Pull All Repos</button>
-<button type="submit" name="action" value="sync-push" onclick="return confirm('Commit and push current changes in memories, algebra, physics, apcalc, and teacher_shared?');" style="background:#173f73;color:#fff;border:2px solid #173f73;border-radius:14px;padding:12px 18px;font-weight:800;font-size:inherit;cursor:pointer">Commit + Push All Repos</button>
-</form>'''
-
-BACK_TOP_HTML = '''<a id="local-tools-back-to-top" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="Back to top" style="position:fixed;right:22px;bottom:22px;z-index:9999;background:#173f73;color:#fff;text-decoration:none;font-weight:900;border-radius:999px;padding:12px 16px;box-shadow:0 6px 18px rgba(0,0,0,.22)">↑ Top</a>'''
+ANCHOR_RE = re.compile(
+    r'(<a\b[^>]*?\bhref\s*=\s*)(["\'])([^"\']*)(\2)([^>]*>.*?</a>)',
+    re.IGNORECASE | re.DOTALL,
+)
+TAG_RE = re.compile(r"<[^>]+>")
 
 
 def detect_root() -> Path:
@@ -81,317 +77,51 @@ def detect_root() -> Path:
 
 
 def candidate_files(root: Path):
-    tool_roots = [
+    for tool_root in (
         root / "_algebra_teacher_tools",
         root / "_physics_teacher_tools",
         root / "_apcalc_teacher_tools",
-    ]
-    seen = set()
-    for tool_root in tool_roots:
+    ):
         if not tool_root.is_dir():
             continue
         for path in tool_root.rglob("*"):
-            if not path.is_file():
+            if not path.is_file() or path.suffix.lower() not in {".html", ".htm"}:
                 continue
             if any(part in SKIP_DIRS for part in path.parts):
-                continue
-            if path.suffix.lower() not in TEXT_EXTS:
                 continue
             try:
                 if path.stat().st_size > 2_000_000:
                     continue
             except OSError:
                 continue
-            key = str(path.resolve())
-            if key not in seen:
-                seen.add(key)
-                yield path
+            yield path
 
 
-def co_teacher_context_lines(lines: list[str]) -> set[int]:
-    anchors = []
-    for i, line in enumerate(lines):
-        low = line.lower()
-        if "co-teacher agenda" in low or "coteacher agenda" in low or "co teacher agenda" in low:
-            anchors.append(i)
-    indexes = set()
-    for i in anchors:
-        a = max(0, i - 30)
-        b = min(len(lines), i + 31)
-        indexes.update(range(a, b))
-    return indexes
-
-
-def replace_targets(line: str) -> tuple[str, int]:
-    changed = 0
-    out = line
-    for course, targets in LOCAL_TARGETS.items():
-        hosted = HOSTED[course]
-        for old in sorted(targets, key=len, reverse=True):
-            if old in out:
-                out = out.replace(old, hosted)
-                changed += 1
-    return out, changed
+def _anchor_text(fragment: str) -> str:
+    return " ".join(TAG_RE.sub(" ", fragment).split()).lower()
 
 
 def patch_hosted_links(raw: str) -> tuple[str, int]:
-    low = raw.lower()
-    if not ("co-teacher agenda" in low or "coteacher agenda" in low or "co teacher agenda" in low):
-        return raw, 0
+    changes = 0
 
-    lines = raw.splitlines(keepends=True)
-    context = co_teacher_context_lines(lines)
-    replacements = 0
-    for i in sorted(context):
-        new_line, count = replace_targets(lines[i])
-        if count:
-            lines[i] = new_line
-            replacements += count
-    updated = "".join(lines)
+    def sub(match: re.Match) -> str:
+        nonlocal changes
+        text = _anchor_text(match.group(5))
+        if not any(label in text for label in ("co-teacher agenda", "coteacher agenda", "co teacher agenda")):
+            return match.group(0)
 
-    anchor_re = re.compile(
-        r'(<a\b[^>]*?\bhref\s*=\s*)(["\'])([^"\']*(?:shared/(?:algebra|physics|calc|apcalc))[^"\']*)(\2)([^>]*>.*?co[- ]teacher\s+agenda.*?</a>)',
-        re.IGNORECASE | re.DOTALL,
-    )
-
-    def anchor_sub(match: re.Match) -> str:
-        nonlocal replacements
-        href = match.group(3)
-        new_href = href
+        href = match.group(3).strip()
         for course, targets in LOCAL_TARGETS.items():
-            for old in sorted(targets, key=len, reverse=True):
-                if old in new_href:
-                    new_href = new_href.replace(old, HOSTED[course])
-        if new_href != href:
-            replacements += 1
-            return match.group(1) + match.group(2) + new_href + match.group(4) + match.group(5)
+            if href in targets:
+                changes += 1
+                return match.group(1) + match.group(2) + HOSTED[course] + match.group(4) + match.group(5)
         return match.group(0)
 
-    return anchor_re.sub(anchor_sub, updated), replacements
-
-
-
-
-PLANNER_CONTROLS_MARKER = "local-tools-planner-five-controls"
-
-PLANNER_CONTROLS_HTML = """
-<style id="local-tools-planner-five-controls-style">
-#local-tools-planner-five-controls {
-  background:#fff8e8;
-  border-top:1px solid #e7bc58;
-  border-bottom:1px solid #e7bc58;
-  padding:14px 12px 18px;
-}
-#local-tools-planner-five-controls .lt-heading {
-  color:#725714;
-  font-weight:900;
-  letter-spacing:.02em;
-  margin:0 0 10px;
-}
-#local-tools-planner-five-controls .lt-row {
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-#local-tools-planner-five-controls button {
-  border-radius:999px;
-  padding:10px 18px;
-  font:inherit;
-  font-weight:700;
-  cursor:pointer;
-}
-#local-tools-planner-five-controls .lt-outline {
-  background:#fff;
-  color:#173f73;
-  border:2px solid #173f73;
-}
-#local-tools-planner-five-controls .lt-primary {
-  background:#173f73;
-  color:#fff;
-  border:2px solid #173f73;
-}
-#local-tools-planner-five-controls .lt-apply {
-  background:#d7aa36;
-  color:#173f73;
-  border:2px solid #9b7718;
-}
-</style>
-<script id="local-tools-planner-five-controls">
-// planner-five-controls-runtime-fix-20260929
-(function () {
-  function txt(el) {
-    return (el && (el.textContent || "").replace(/\\s+/g, " ").trim()) || "";
-  }
-  function findExact(label) {
-    var nodes = document.querySelectorAll("button,a");
-    for (var i = 0; i < nodes.length; i++) {
-      if (txt(nodes[i]) === label && !nodes[i].closest("#local-tools-planner-five-controls")) return nodes[i];
-    }
-    return null;
-  }
-  function findHeading(label) {
-    var nodes = document.querySelectorAll("h1,h2,h3,h4,h5,h6,div,p,span");
-    for (var i = 0; i < nodes.length; i++) {
-      if (txt(nodes[i]) === label) return nodes[i];
-    }
-    return null;
-  }
-  function proxy(original, label, cls) {
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = cls;
-    b.textContent = label;
-    b.onclick = function () { original.click(); return false; };
-    return b;
-  }
-  function syncButton(label, action, cls) {
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = cls;
-    b.textContent = label;
-    b.onclick = function () {
-      if (action === "sync-push" && !confirm("Commit and push current changes in memories, algebra, physics, apcalc, and teacher_shared?")) return false;
-      var form = document.createElement("form");
-      form.method = "post";
-      form.action = "http://127.0.0.1:8770/";
-      form.target = "_blank";
-      form.style.display = "none";
-      var input = document.createElement("input");
-      input.name = "action";
-      input.value = action;
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
-      setTimeout(function(){ form.remove(); }, 1000);
-      return false;
-    };
-    return b;
-  }
-  function hideLegacySync() {
-    var nodes = document.querySelectorAll("button,a");
-    for (var i = 0; i < nodes.length; i++) {
-      var t = txt(nodes[i]);
-      if (t === "Pull All Repos" || t === "Commit + Push All Repos") nodes[i].style.display = "none";
-    }
-    var headings = document.querySelectorAll("h1,h2,h3,h4,h5,h6,div,p,span");
-    for (var j = 0; j < headings.length; j++) {
-      if (txt(headings[j]) === "GITHUB") headings[j].style.display = "none";
-    }
-  }
-  function run() {
-    if (document.getElementById("local-tools-planner-five-controls")) return;
-    var apply = findExact("Apply Changes + Update Agendas");
-    var undo = findExact("Undo Changes");
-    var jump = findExact("Jump to Current Week");
-    var current = findHeading("Current State");
-    if (!apply || !undo || !jump || !current) return;
-
-    var originalActionParent = apply.parentElement;
-    hideLegacySync();
-
-    var section = document.createElement("section");
-    section.id = "local-tools-planner-five-controls";
-    var heading = document.createElement("div");
-    heading.className = "lt-heading";
-    heading.textContent = "GITHUB";
-    var row = document.createElement("div");
-    row.className = "lt-row";
-
-    row.appendChild(syncButton("Pull All Repos", "sync-pull", "lt-outline"));
-    row.appendChild(syncButton("Commit + Push All Repos", "sync-push", "lt-outline"));
-    row.appendChild(proxy(apply, "Apply Changes + Update Agendas", "lt-apply"));
-    row.appendChild(proxy(undo, "Undo Changes", "lt-outline"));
-    row.appendChild(proxy(jump, "Jump to Current Week", "lt-outline"));
-
-    section.appendChild(heading);
-    section.appendChild(row);
-    current.parentNode.insertBefore(section, current);
-
-    apply.style.display = "none";
-    undo.style.display = "none";
-    jump.style.display = "none";
-    if (originalActionParent) {
-      var remaining = txt(originalActionParent);
-      var visibleInteractive = 0;
-      var controls = originalActionParent.querySelectorAll("button,a,input,select");
-      for (var k = 0; k < controls.length; k++) {
-        if (controls[k].style.display !== "none") visibleInteractive++;
-      }
-      if (!remaining || visibleInteractive === 0) originalActionParent.style.display = "none";
-    }
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
-  else run();
-})();
-</script>
-"""
-
-
-def patch_planner_html(raw: str) -> tuple[str, int]:
-    # Only touch real owner Planner pages. Leave every other HTML file alone.
-    required = ("Planner Editor", "Apply Changes + Update Agendas", "Current State")
-    if not all(marker in raw for marker in required):
-        return raw, 0
-
-    out = raw
-    changed = 0
-
-    # Remove only our prior injected UI fragments by unique markers/classes.
-    patterns = [
-        r'<form\\b[^>]*class=["\\\'][^"\\\']*\\blocal-tools-top-sync\\b[^"\\\']*["\\\'][^>]*>.*?</form>',
-        r'<section\\b[^>]*id=["\\\']local-tools-planner-controls["\\\'][^>]*>.*?</section>',
-        r'<style\\b[^>]*id=["\\\']local-tools-safe-planner-controls-style["\\\'][^>]*>.*?</style>\\s*<script\\b[^>]*id=["\\\']local-tools-safe-planner-controls["\\\'][^>]*>.*?</script>',
-        r'<style\\b[^>]*id=["\\\']local-tools-planner-five-controls-style["\\\'][^>]*>.*?</style>\\s*<script\\b[^>]*id=["\\\']local-tools-planner-five-controls["\\\'][^>]*>.*?</script>',
-    ]
-    for pattern in patterns:
-        out, count = re.subn(pattern, '', out, flags=re.IGNORECASE | re.DOTALL)
-        changed += count
-
-    # Keep Teacher Tools retired, as already approved.
-    teacher_patterns = [
-        r'<li\\b[^>]*>\\s*<a\\b[^>]*>\\s*Teacher Tools\\s*</a>\\s*</li>',
-        r'<a\\b[^>]*>\\s*Teacher Tools\\s*</a>',
-        r'<button\\b[^>]*>\\s*Teacher Tools\\s*</button>',
-    ]
-    for pattern in teacher_patterns:
-        out, count = re.subn(pattern, '', out, flags=re.IGNORECASE | re.DOTALL)
-        changed += count
-
-    if PLANNER_CONTROLS_MARKER not in out and '</body>' in out.lower():
-        idx = out.lower().rfind('</body>')
-        out = out[:idx] + PLANNER_CONTROLS_HTML + out[idx:]
-        changed += 1
-
-    if BACK_TOP_MARKER not in out and '</body>' in out.lower():
-        idx = out.lower().rfind('</body>')
-        out = out[:idx] + BACK_TOP_HTML + out[idx:]
-        changed += 1
-
-    return out, changed
-
-def rewrite_file(path: Path) -> tuple[str | None, int]:
-    try:
-        raw = path.read_text(encoding="utf-8")
-    except (UnicodeDecodeError, OSError):
-        return None, 0
-
-    updated, link_changes = patch_hosted_links(raw)
-    ui_changes = 0
-    if path.suffix.lower() in {".html", ".htm"}:
-        updated, ui_changes = patch_planner_html(updated)
-
-    total = link_changes + ui_changes
-    if updated == raw:
-        return None, 0
-    return updated, total
+    return ANCHOR_RE.sub(sub, raw), changes
 
 
 def backup_and_write(root: Path, path: Path, updated: str, backup_root: Path) -> None:
-    try:
-        rel = path.resolve().relative_to(root.resolve())
-    except ValueError:
-        rel = Path(path.name)
+    rel = path.resolve().relative_to(root.resolve())
     backup = backup_root / rel
     backup.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(path, backup)
@@ -443,7 +173,7 @@ def start_planners(root: Path) -> bool:
         return False
     log_dir = root / "_algebra_teacher_tools" / "runtime" / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
-    log = log_dir / "planner_owner_ui_restart.log"
+    log = log_dir / "planner_owner_link_restart.log"
     with log.open("ab") as handle:
         subprocess.Popen(
             ["/bin/bash", str(runtime)],
@@ -460,39 +190,47 @@ def start_planners(root: Path) -> bool:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Safely update only Co-Teacher Agenda href targets. This script never edits Planner UI/layout."
+    )
     parser.add_argument("--restart-if-changed", action="store_true")
     args = parser.parse_args()
 
     root = detect_root()
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_root = root / "_curriculum_transfers" / "backups" / f"planner_owner_ui_{stamp}"
+    backup_root = root / "_curriculum_transfers" / "backups" / f"planner_coteacher_links_{stamp}"
 
-    changed_files: list[Path] = []
-    total_changes = 0
+    staged: list[tuple[Path, str, int]] = []
     for path in candidate_files(root):
-        updated, changes = rewrite_file(path)
-        if updated is None:
+        try:
+            raw = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
             continue
-        backup_and_write(root, path, updated, backup_root)
-        changed_files.append(path)
-        total_changes += changes
+        updated, count = patch_hosted_links(raw)
+        if count and updated != raw:
+            staged.append((path, updated, count))
 
-    if changed_files:
-        print(f"Updated {len(changed_files)} Planner source file(s); {total_changes} owner-page/link change(s).")
-        for path in changed_files:
-            print(f"  UPDATED: {path}")
-        print(f"Backups: {backup_root}")
-        if args.restart_if_changed:
-            print("Restarting Planner services on ports 8767-8769...")
-            stop_planners()
-            if start_planners(root):
-                print("Planner runtime restarted successfully.")
-            else:
-                print("WARNING: Planner runtime did not fully return. Check the runtime log.")
-                return 2
-    else:
-        print("Planner hosted links and owner-page polish already current, or no matching source was found.")
+    if not staged:
+        print("Planner hosted Co-Teacher Agenda links already current. No files changed.")
+        return 0
+
+    total = 0
+    for path, updated, count in staged:
+        backup_and_write(root, path, updated, backup_root)
+        total += count
+        print(f"UPDATED: {path}")
+
+    print(f"Updated {len(staged)} file(s); {total} Co-Teacher Agenda link change(s).")
+    print(f"Backups: {backup_root}")
+
+    if args.restart_if_changed:
+        print("Restarting Planner services on ports 8767-8769...")
+        stop_planners()
+        if not start_planners(root):
+            print("WARNING: Planner runtime did not fully return. Check the runtime log.")
+            return 2
+        print("Planner runtime restarted successfully.")
+
     return 0
 
 
