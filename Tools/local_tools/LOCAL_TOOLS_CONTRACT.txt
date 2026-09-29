@@ -1,0 +1,87 @@
+LOCAL TOOLS CONTRACT
+====================
+
+STATUS: PILOT / CURRENT FRONT DOOR
+REVISION: 2026-09-29
+
+PURPOSE
+-------
+Local Tools is the single teacher-facing Dock entry point for local curriculum utilities.
+
+It does NOT replace the underlying tools on disk. It provides one front door to:
+- Student Data Tools
+- Planner pages
+- Planner repository sync
+- Curriculum Transfer
+
+The individual underlying tools remain independently runnable and repairable.
+
+LOCAL WEB UI
+------------
+Local Tools runs only on localhost:
+  http://127.0.0.1:8770/
+
+The Local Tools app:
+1. stops only a stale Local Tools server process;
+2. starts a fresh Local Tools server in the background;
+3. opens the Local Tools home page.
+
+No persistent Terminal window is required for the Local Tools home page.
+
+STUDENT DATA
+------------
+Open Student Data Tools:
+- if Portfolio is already reachable on port 8765, open it;
+- otherwise launch the existing Student Data Tools.app.
+
+PLANNERS
+--------
+Planner buttons:
+- Algebra 1 -> http://127.0.0.1:8767/
+- Physics -> http://127.0.0.1:8768/
+- AP Calculus AB -> http://127.0.0.1:8769/
+- Open All -> open all three.
+
+If a requested Planner is not reachable, Local Tools starts:
+  _algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command
+in the background and waits briefly for the Planner ports.
+
+SYNC
+----
+The explicit sync actions operate only on:
+- algebra
+- physics
+- apcalc
+- teacher_shared
+
+Pull All:
+- requires each repository to be clean;
+- uses git pull --ff-only;
+- never stashes, merges, rebases, commits, or pushes.
+
+Commit + Push All:
+- git add -A;
+- timestamped commit when staged changes exist;
+- git pull --rebase;
+- git push;
+- never force-push;
+- aborts a failed rebase and reports failure.
+
+Sync opens Terminal intentionally so repository-by-repository output and the final SUCCESS/FAILURE banner remain visible.
+
+CURRICULUM TRANSFER
+-------------------
+Apply Curriculum Transfers opens the existing canonical:
+  memories/Tools/curriculum_transfer/Apply Curriculum Transfers.command
+
+Curriculum Transfer itself remains Git-free.
+
+BOUNDARIES
+----------
+- Student-specific Portfolio state remains private/local under _portfolio_data.
+- Local Tools binds only to 127.0.0.1.
+- Local Tools never sends email automatically.
+- Local Tools never performs hidden Git writes.
+- Existing standalone apps remain valid during migration.
+
+END
