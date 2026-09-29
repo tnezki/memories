@@ -218,6 +218,7 @@ PLANNER_CONTROLS_HTML = """
 }
 </style>
 <script id="local-tools-planner-five-controls">
+// planner-five-controls-runtime-fix-20260929
 (function () {
   function txt(el) {
     return (el && (el.textContent || "").replace(/\\s+/g, " ").trim()) || "";

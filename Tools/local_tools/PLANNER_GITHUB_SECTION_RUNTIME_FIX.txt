@@ -1,0 +1,26 @@
+PLANNER GITHUB SECTION RUNTIME FIX
+=================================
+STATUS: CURRENT
+REVISION: 2026-09-29
+
+CAUSE
+-----
+The injected Planner control script was waiting for an existing visible GITHUB
+heading before it would run. Earlier Planner cleanup had already removed that
+heading from the source, so the script exited and the page appeared unchanged.
+
+CURRENT RULE
+------------
+The Planner control script no longer depends on a pre-existing GITHUB section.
+It rebuilds the GITHUB control section directly before Current State and places
+exactly these five controls there:
+- Pull All Repos
+- Commit + Push All Repos
+- Apply Changes + Update Agendas
+- Undo Changes
+- Jump to Current Week
+
+The original Apply / Undo / Jump controls are then hidden from the Planner Editor
+area. The rest of the Planner remains unchanged. Floating Top remains.
+
+END
