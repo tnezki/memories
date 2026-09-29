@@ -3,7 +3,7 @@ set -u
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 MEMORIES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-RUNTIME="$MEMORIES_ROOT/Tools/portfolio_local_runtime/portfolio_companion_live.py"
+RUNTIME="$MEMORIES_ROOT/Tools/portfolio_local_runtime/portfolio_companion_home_plus.py"
 PORT=8765
 
 printf '\033]0;Student Data Tools Runtime\007'
