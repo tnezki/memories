@@ -64,7 +64,7 @@ else
   final_status=1
 fi
 
-printf '\nNo Git actions were run.\n'
+printf '\nSee transfer result above for Git publish status.\n'
 printf 'Press Return to close...'
 read -r
 exit "$final_status"

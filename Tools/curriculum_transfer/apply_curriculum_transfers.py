@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Apply Curriculum Transfer packages safely to approved local roots.
 
-This tool never runs Git commands. It supports the current
-curriculum_transfer/3 schema and can still validate legacy github_transfer/2
-packages when they are deliberately placed in the Curriculum Transfer inbox.
+Default behavior is transactional publishing for Git-backed destinations:
+validate -> verify clean/synced repos -> apply -> verify -> commit exact transfer
+paths -> push. Use --local-only to preserve the older apply-without-Git behavior.
+
+The tool supports curriculum_transfer/3 and legacy github_transfer/2 packages.
 """
 
 from __future__ import annotations
@@ -14,6 +16,7 @@ import json
 import os
 import shutil
 import stat
+import subprocess
 import sys
 import tempfile
 import time
@@ -34,6 +37,12 @@ class TransferError(RuntimeError):
     pass
 
 
+class PushError(TransferError):
+    def __init__(self, message: str, pending_repos: List[str]):
+        super().__init__(message)
+        self.pending_repos = pending_repos
+
+
 @dataclass
 class PlannedAction:
     action: str
@@ -42,6 +51,17 @@ class PlannedAction:
     destination_rel: str
     expected_sha256: Optional[str]
     original_mode: Optional[int]
+
+
+@dataclass
+class RepoPlan:
+    root: Path
+    paths: List[str]
+    before_sha: str
+    branch: str
+    upstream: str
+    commit_sha: Optional[str] = None
+    pushed: bool = False
 
 
 def sha256_file(path: Path) -> str:
@@ -361,9 +381,262 @@ def apply_package(
         raise
 
 
+def verify_applied(zf: zipfile.ZipFile, planned: List[PlannedAction]) -> None:
+    for item in planned:
+        if item.action == "delete":
+            if item.destination.exists():
+                raise TransferError(f"Post-apply verification failed; file still exists: {item.destination_rel}")
+            continue
+        if not item.destination.is_file():
+            raise TransferError(f"Post-apply verification failed; file missing: {item.destination_rel}")
+        expected = hashlib.sha256(zf.read(item.source or "")).hexdigest()
+        actual = sha256_file(item.destination)
+        if actual != expected:
+            raise TransferError(
+                f"Post-apply SHA-256 mismatch for {item.destination_rel}: expected {expected}, found {actual}"
+            )
+
+
+def run_git(repo: Path, args: List[str], check: bool = True) -> subprocess.CompletedProcess[str]:
+    proc = subprocess.run(
+        ["git", "-C", str(repo), *args],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+    )
+    if check and proc.returncode != 0:
+        detail = (proc.stderr or proc.stdout).strip()
+        raise TransferError(f"git {' '.join(args)} failed in {repo}: {detail}")
+    return proc
+
+
+def existing_ancestor(path: Path, stop: Path) -> Path:
+    cursor = path if path.is_dir() else path.parent
+    while not cursor.exists() and cursor != stop:
+        cursor = cursor.parent
+    return cursor
+
+
+def discover_repo(path: Path, github_root: Path) -> Optional[Path]:
+    anchor = existing_ancestor(path, github_root)
+    proc = subprocess.run(
+        ["git", "-C", str(anchor), "rev-parse", "--show-toplevel"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+        check=False,
+    )
+    if proc.returncode != 0:
+        return None
+    repo = Path(proc.stdout.strip()).resolve()
+    ensure_within(repo, github_root, "Git repository")
+    return repo
+
+
+def repo_relative(repo: Path, destination: Path) -> str:
+    return destination.resolve(strict=False).relative_to(repo.resolve()).as_posix()
+
+
+def build_repo_plans(planned: List[PlannedAction], github_root: Path) -> Tuple[List[RepoPlan], List[str]]:
+    grouped: Dict[Path, Set[str]] = {}
+    local_only: List[str] = []
+    for item in planned:
+        repo = discover_repo(item.destination, github_root)
+        if repo is None:
+            local_only.append(item.destination_rel)
+            continue
+        grouped.setdefault(repo, set()).add(repo_relative(repo, item.destination))
+
+    plans: List[RepoPlan] = []
+    for repo in sorted(grouped, key=lambda p: str(p).lower()):
+        before_sha = run_git(repo, ["rev-parse", "HEAD"]).stdout.strip()
+        branch = run_git(repo, ["symbolic-ref", "--short", "HEAD"]).stdout.strip()
+        upstream_proc = run_git(repo, ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"], check=False)
+        if upstream_proc.returncode != 0 or not upstream_proc.stdout.strip():
+            raise TransferError(f"Git preflight failed for {repo.name}: current branch has no upstream")
+        upstream = upstream_proc.stdout.strip()
+        plans.append(
+            RepoPlan(
+                root=repo,
+                paths=sorted(grouped[repo]),
+                before_sha=before_sha,
+                branch=branch,
+                upstream=upstream,
+            )
+        )
+    return plans, local_only
+
+
+def preflight_git(repo_plans: List[RepoPlan]) -> None:
+    for plan in repo_plans:
+        unstaged = set(run_git(plan.root, ["diff", "--name-only"]).stdout.splitlines())
+        staged = set(run_git(plan.root, ["diff", "--cached", "--name-only"]).stdout.splitlines())
+        untracked = set(
+            run_git(plan.root, ["ls-files", "--others", "--exclude-standard"]).stdout.splitlines()
+        )
+        changed = {p for p in (unstaged | staged | untracked) if p}
+        unexpected = sorted(changed - set(plan.paths))
+        if unexpected:
+            preview = ", ".join(unexpected[:8])
+            if len(unexpected) > 8:
+                preview += f", ... (+{len(unexpected) - 8} more)"
+            raise TransferError(
+                f"Git preflight failed for {plan.root.name}: unrelated local changes are present: {preview}. "
+                "Commit, stash, or discard them before applying this transfer, or use the Local Only launcher."
+            )
+
+        name = run_git(plan.root, ["config", "--get", "user.name"], check=False).stdout.strip()
+        email = run_git(plan.root, ["config", "--get", "user.email"], check=False).stdout.strip()
+        if not name or not email:
+            raise TransferError(f"Git preflight failed for {plan.root.name}: git user.name/user.email are not configured")
+
+        counts = run_git(plan.root, ["rev-list", "--left-right", "--count", f"HEAD...{plan.upstream}"]).stdout.strip().split()
+        if len(counts) != 2:
+            raise TransferError(f"Git preflight failed for {plan.root.name}: could not compare HEAD to {plan.upstream}")
+        ahead, behind = int(counts[0]), int(counts[1])
+        if ahead or behind:
+            raise TransferError(
+                f"Git preflight failed for {plan.root.name}: local branch and {plan.upstream} are not synchronized "
+                f"(ahead {ahead}, behind {behind}). Sync first, then apply the transfer."
+            )
+
+        dry = run_git(plan.root, ["push", "--dry-run"], check=False)
+        if dry.returncode != 0:
+            detail = (dry.stderr or dry.stdout).strip()
+            raise TransferError(f"Git preflight failed for {plan.root.name}: push check failed: {detail}")
+
+
+def commit_transfer(repo_plans: List[RepoPlan], package_id: str) -> List[str]:
+    messages: List[str] = []
+    for plan in repo_plans:
+        run_git(plan.root, ["add", "-A", "--", *plan.paths])
+
+        staged_all = run_git(plan.root, ["diff", "--cached", "--name-only"]).stdout.splitlines()
+        unexpected = sorted(set(staged_all) - set(plan.paths))
+        if unexpected:
+            raise TransferError(
+                f"Refusing to commit unexpected staged paths in {plan.root.name}: {', '.join(unexpected)}"
+            )
+
+        staged = [p for p in staged_all if p in plan.paths]
+        if not staged:
+            messages.append(f"NO GIT CHANGE: {plan.root.name} (payload already matched repository content)")
+            continue
+
+        message = f"Curriculum transfer: {package_id}"
+        run_git(plan.root, ["commit", "-m", message, "--", *plan.paths])
+        plan.commit_sha = run_git(plan.root, ["rev-parse", "HEAD"]).stdout.strip()
+        messages.append(f"COMMITTED: {plan.root.name} {plan.commit_sha[:12]}")
+    return messages
+
+
+def push_transfer(repo_plans: List[RepoPlan]) -> List[str]:
+    messages: List[str] = []
+    failures: List[str] = []
+    for plan in repo_plans:
+        if not plan.commit_sha:
+            continue
+        proc = run_git(plan.root, ["push"], check=False)
+        if proc.returncode == 0:
+            plan.pushed = True
+            messages.append(f"PUSHED: {plan.root.name}/{plan.branch}")
+        else:
+            detail = (proc.stderr or proc.stdout).strip()
+            failures.append(f"{plan.root.name}: {detail}")
+    if failures:
+        pending = [p.root.name for p in repo_plans if p.commit_sha and not p.pushed]
+        raise PushError("One or more Git pushes failed: " + " | ".join(failures), pending)
+    return messages
+
+
+def rollback_unpublished(
+    planned: List[PlannedAction],
+    repo_plans: List[RepoPlan],
+    backup_root: Path,
+    github_root: Path,
+) -> None:
+    repo_by_path: Dict[Path, RepoPlan] = {}
+    for plan in repo_plans:
+        for item in planned:
+            try:
+                item.destination.resolve(strict=False).relative_to(plan.root.resolve())
+                repo_by_path[item.destination] = plan
+            except ValueError:
+                pass
+
+    errors: List[str] = []
+    for plan in repo_plans:
+        try:
+            run_git(plan.root, ["reset", "--hard", plan.before_sha])
+            created = [repo_relative(plan.root, i.destination) for i in planned if i.action == "create" and repo_by_path.get(i.destination) == plan]
+            if created:
+                run_git(plan.root, ["clean", "-fd", "--", *created])
+        except Exception as exc:
+            errors.append(f"reset {plan.root}: {exc}")
+
+    for item in reversed(planned):
+        if item.destination in repo_by_path:
+            continue
+        try:
+            if item.action == "create":
+                item.destination.unlink(missing_ok=True)
+                remove_empty_parents(item.destination.parent, github_root)
+            else:
+                bpath = backup_path(backup_root, item.destination_rel)
+                item.destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(bpath, item.destination)
+        except Exception as exc:
+            errors.append(f"restore {item.destination_rel}: {exc}")
+
+    if errors:
+        raise TransferError("Automatic rollback had errors: " + "; ".join(errors))
+
+
 def log_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
+
+
+def write_transaction(
+    transfer_root: Path,
+    package_id: str,
+    package_name: str,
+    backup_root: Path,
+    repo_plans: List[RepoPlan],
+    local_only_paths: List[str],
+    status: str,
+    note: Optional[str] = None,
+) -> Path:
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    safe_id = "".join(c if c.isalnum() or c in "-_." else "_" for c in package_id)[:120]
+    record = {
+        "schema_version": 1,
+        "package_id": package_id,
+        "package_name": package_name,
+        "status": status,
+        "finished_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "backup_root": str(backup_root),
+        "local_only_paths": local_only_paths,
+        "repositories": [
+            {
+                "repo": str(p.root),
+                "branch": p.branch,
+                "upstream": p.upstream,
+                "before_sha": p.before_sha,
+                "commit_sha": p.commit_sha,
+                "pushed": p.pushed,
+                "paths": p.paths,
+            }
+            for p in repo_plans
+        ],
+    }
+    if note:
+        record["note"] = note
+    out = transfer_root / "_transactions" / f"{stamp}_{safe_id}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+    return out
 
 
 def process_package(
@@ -371,8 +644,15 @@ def process_package(
     transfer_root: Path,
     github_root: Path,
     approved_roots: Dict[str, Path],
+    local_only_mode: bool,
 ) -> Tuple[str, str]:
     lines: List[str] = [f"Package: {package}", f"Started: {time.strftime('%Y-%m-%d %H:%M:%S')}"]
+    backup_root: Optional[Path] = None
+    repo_plans: List[RepoPlan] = []
+    local_only_paths: List[str] = []
+    package_id = package.stem
+    planned: List[PlannedAction] = []
+
     try:
         with zipfile.ZipFile(package, "r") as zf:
             bad = zf.testzip()
@@ -384,21 +664,97 @@ def process_package(
             package_id, planned = plan_package(package, zf, manifest, github_root, approved_roots)
             lines.append(f"Package id: {package_id}")
             lines.append(f"Validated actions: {len(planned)}")
+
+            if not local_only_mode:
+                repo_plans, local_only_paths = build_repo_plans(planned, github_root)
+                preflight_git(repo_plans)
+                for plan in repo_plans:
+                    lines.append(f"Git preflight OK: {plan.root.name} ({plan.branch} -> {plan.upstream})")
+                for path in local_only_paths:
+                    lines.append(f"Local-only destination: {path}")
+
             messages, backup_root = apply_package(package, zf, package_id, planned, transfer_root, github_root)
             lines.extend(messages)
             lines.append(f"Backup root: {backup_root}")
-            lines.append("No Git actions were run.")
+            verify_applied(zf, planned)
+            lines.append("Post-apply verification: PASS")
+
+            if local_only_mode:
+                lines.append("Git mode: LOCAL ONLY. No Git actions were run.")
+            else:
+                commit_messages = commit_transfer(repo_plans, package_id)
+                lines.extend(commit_messages)
+                push_messages = push_transfer(repo_plans)
+                lines.extend(push_messages)
+                if repo_plans:
+                    lines.append("Git publish: SUCCESS")
+                else:
+                    lines.append("Git publish: not applicable; no Git-backed destinations were changed.")
 
         dest = unique_destination(transfer_root / "_processed", package.name)
         shutil.move(str(package), str(dest))
         lines.append(f"Moved package to: {dest}")
         lines.append(f"Finished: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+        if backup_root is not None:
+            tx = write_transaction(
+                transfer_root,
+                package_id,
+                package.name,
+                backup_root,
+                repo_plans,
+                local_only_paths,
+                "local_only" if local_only_mode else "published",
+            )
+            lines.append(f"Transaction record: {tx}")
         log_name = f"{time.strftime('%Y%m%d-%H%M%S')}_{package.stem}.log"
         log_text(transfer_root / "_logs" / log_name, "\n".join(lines) + "\n")
-        return "success", "\n".join(messages)
+        return "success", "\n".join(lines[3:])
+
+    except PushError as exc:
+        lines.append(f"ERROR: {exc}")
+        lines.append("Files were applied and committed locally, but one or more pushes did not finish.")
+        lines.append("Do not re-apply this transfer. Retry the pending push from GitHub Desktop or the repository command line.")
+        if backup_root is not None:
+            tx = write_transaction(
+                transfer_root,
+                package_id,
+                package.name,
+                backup_root,
+                repo_plans,
+                local_only_paths,
+                "push_failed",
+                note=str(exc),
+            )
+            lines.append(f"Transaction record: {tx}")
+        try:
+            dest = unique_destination(transfer_root / "_processed", package.name)
+            shutil.move(str(package), str(dest))
+            lines.append(f"Moved package to: {dest}")
+        except Exception as move_exc:
+            lines.append(f"Could not move package after push failure: {move_exc}")
+        log_name = f"{time.strftime('%Y%m%d-%H%M%S')}_{package.stem}_PUSH_FAILED.log"
+        log_text(transfer_root / "_logs" / log_name, "\n".join(lines) + "\n")
+        return "failure", "\n".join(lines[2:])
+
     except Exception as exc:
         lines.append(f"ERROR: {exc}")
-        lines.append("No Git actions were run.")
+        # If files were already applied but nothing was pushed, restore the exact pre-transfer state.
+        if backup_root is not None and not any(p.pushed for p in repo_plans):
+            try:
+                if local_only_mode:
+                    # Local-only mode already has apply-time rollback; post-apply failures are verification-only.
+                    for item in reversed(planned):
+                        if item.action == "create":
+                            item.destination.unlink(missing_ok=True)
+                        else:
+                            bpath = backup_path(backup_root, item.destination_rel)
+                            item.destination.parent.mkdir(parents=True, exist_ok=True)
+                            shutil.copy2(bpath, item.destination)
+                else:
+                    rollback_unpublished(planned, repo_plans, backup_root, github_root)
+                lines.append("Automatic rollback: SUCCESS")
+            except Exception as rollback_exc:
+                lines.append(f"Automatic rollback: FAILED: {rollback_exc}")
         lines.append(traceback.format_exc())
         try:
             dest = unique_destination(transfer_root / "_failed", package.name)
@@ -415,12 +771,17 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--transfer-root", type=Path, required=True)
     parser.add_argument("--github-root", type=Path, required=True)
+    parser.add_argument(
+        "--local-only",
+        action="store_true",
+        help="Apply transfers without Git commit/push. Intended for deliberate local testing or offline work.",
+    )
     args = parser.parse_args()
 
     transfer_root = args.transfer_root.expanduser().resolve()
     github_root = args.github_root.expanduser().resolve()
 
-    for name in ("downloads", "_processed", "_failed", "_backups", "_logs"):
+    for name in ("downloads", "_processed", "_failed", "_backups", "_logs", "_transactions"):
         (transfer_root / name).mkdir(parents=True, exist_ok=True)
 
     approved_roots = load_roots(transfer_root / "approved_roots.json", github_root)
@@ -439,15 +800,18 @@ def main() -> int:
                 if MANIFEST_NAME not in zf.namelist():
                     continue
         except zipfile.BadZipFile:
-            # A broken ZIP in the transfer inbox is actionable and should fail visibly.
-            status, detail = process_package(package, transfer_root, github_root, approved_roots)
+            status, detail = process_package(
+                package, transfer_root, github_root, approved_roots, args.local_only
+            )
             recognized += 1
             failed += int(status == "failure")
             print(f"\nFAILED: {package.name}\n{detail}")
             continue
 
         recognized += 1
-        status, detail = process_package(package, transfer_root, github_root, approved_roots)
+        status, detail = process_package(
+            package, transfer_root, github_root, approved_roots, args.local_only
+        )
         if status == "success":
             succeeded += 1
             print(f"\nAPPLIED: {package.name}")
