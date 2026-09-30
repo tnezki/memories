@@ -44,6 +44,24 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
 fi
 trap 'rmdir "$LOCK_DIR" 2>/dev/null || true' EXIT
 
+# Convenience: valid Curriculum Transfer ZIPs may be left in the normal macOS
+# Downloads folder. Import them into the transfer inbox before processing so
+# the teacher no longer has to remember the private _curriculum_transfers path.
+imported=0
+for candidate in "$HOME"/Downloads/*.zip(N); do
+  if /usr/bin/unzip -l "$candidate" TRANSFER_MANIFEST.json >/dev/null 2>&1; then
+    dest="$TRANSFER_ROOT/downloads/${candidate:t}"
+    if [[ ! -e "$dest" ]]; then
+      /bin/mv "$candidate" "$dest"
+      printf 'Imported from Downloads: %s\n' "${candidate:t}"
+      imported=$((imported + 1))
+    fi
+  fi
+done
+if [[ "$imported" -gt 0 ]]; then
+  printf 'Imported %d Curriculum Transfer ZIP(s) from ~/Downloads.\n' "$imported"
+fi
+
 transfer_status=0
 
 printf '\n=== Curriculum Transfers ===\n'
