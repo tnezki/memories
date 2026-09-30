@@ -9,7 +9,7 @@ PYTHON_BIN="/usr/bin/python3"
 LOCK_DIR="$TRANSFER_ROOT/.run_lock"
 ROOTS_SEED="$SCRIPT_DIR/approved_roots.json"
 
-mkdir -p "$TRANSFER_ROOT/downloads" "$TRANSFER_ROOT/_processed" "$TRANSFER_ROOT/_failed" "$TRANSFER_ROOT/_backups" "$TRANSFER_ROOT/_logs"
+mkdir -p "$TRANSFER_ROOT/downloads" "$TRANSFER_ROOT/requests" "$TRANSFER_ROOT/_processed" "$TRANSFER_ROOT/_failed" "$TRANSFER_ROOT/_backups" "$TRANSFER_ROOT/_logs"
 
 # The canonical approved-root list lives with this tool in memories. Keep the
 # local runtime copy current every time the launcher starts.
@@ -32,6 +32,7 @@ printf '%s\n' 'Curriculum Transfer'
 printf '%s\n' '=================='
 printf '\nWorkspace root: %s\n' "$GITHUB_ROOT"
 printf 'Incoming transfer ZIPs: %s\n' "$TRANSFER_ROOT/downloads"
+printf 'AI request ZIPs: %s\n' "$TRANSFER_ROOT/requests"
 
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   printf '\nFAILURE FAILURE FAILURE\n'
@@ -44,23 +45,9 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
 fi
 trap 'rmdir "$LOCK_DIR" 2>/dev/null || true' EXIT
 
-# Convenience: valid Curriculum Transfer ZIPs may be left in the normal macOS
-# Downloads folder. Import them into the transfer inbox before processing so
-# the teacher no longer has to remember the private _curriculum_transfers path.
-imported=0
-for candidate in "$HOME"/Downloads/*.zip(N); do
-  if /usr/bin/unzip -l "$candidate" TRANSFER_MANIFEST.json >/dev/null 2>&1; then
-    dest="$TRANSFER_ROOT/downloads/${candidate:t}"
-    if [[ ! -e "$dest" ]]; then
-      /bin/mv "$candidate" "$dest"
-      printf 'Imported from Downloads: %s\n' "${candidate:t}"
-      imported=$((imported + 1))
-    fi
-  fi
-done
-if [[ "$imported" -gt 0 ]]; then
-  printf 'Imported %d Curriculum Transfer ZIP(s) from ~/Downloads.\n' "$imported"
-fi
+# Returned Curriculum Transfers are intentionally processed only from the
+# dedicated inbox. This keeps the teacher's manual Save step visible and
+# prevents unrelated ZIPs in ~/Downloads from being silently imported.
 
 transfer_status=0
 
