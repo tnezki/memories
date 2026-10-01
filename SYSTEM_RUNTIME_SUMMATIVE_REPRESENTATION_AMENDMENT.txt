@@ -1,0 +1,49 @@
+CURRICULUM SYSTEM RUNTIME - SUMMATIVE REPRESENTATION AMENDMENT
+==============================================================
+STATUS: CURRENT
+REVISION: 2026-10-01
+
+PURPOSE
+Make the Algebra Assessment Builder's temporary Summative-family path enforce the same representation/tool authority as the canonical Bank and graph standards.
+
+1. SOURCE-FAMILY PROVENANCE - HARD
+For every temporary Summative conversion, record:
+- selected source family ID/name;
+- exact I Can;
+- current Summative-eligible source-family pool IDs/count;
+- source evidence/representation metadata supplied to the authoring request.
+
+A temporary family may convert response mode, but it may not invent a new evidence family outside the approved source-family pool.
+
+2. GRAPH AUTHORITY PACKAGE - HARD
+Every new Summative AI family request, graph-bearing makeup request, and graph-bearing replacement request must carry the current local project graph authority:
+- memories/Tools/MANIFEST.json;
+- the file resolved by tools.graph_tool;
+- district_tools/_shared/DISTRICT_GRAPH_RENDERING_STANDARD.md.
+
+Do not rely on public-web graph examples or remembered graph styles.
+
+3. GRAPH RESULT CONTRACT - HARD
+When a requested base/makeup/extension exemplar requires a mathematical graph supported by the registered graph tool:
+- generate a fresh asset with the registered graph tool;
+- store it under the plan's local summative_families/<plan_id>/figures/ folder;
+- reference it from student_html with an <img> path;
+- record representation_data.asset and generator=Tools/graph_tool.py;
+- never inline a hand-built Cartesian SVG/canvas/CSS graph.
+
+4. VALIDATION / FAIL CLOSED - HARD
+New-contract Summative plans must fail family validation when a required supported graph:
+- is inline/improvised SVG/canvas;
+- lacks a figures/ asset reference;
+- lacks registered-tool provenance;
+- references a missing installed asset.
+
+Legacy plans created before this contract remain readable so an existing assessment is not destroyed by the migration. New plans and new graph-bearing replacement/makeup work use the strict contract.
+
+5. OUTPUT ASSET RESOLUTION
+Summative output rendering must resolve temporary plan assets before falling back to canonical Bank assets. This allows secure fresh graph-tool output without publishing temporary secure graphics into the permanent Bank.
+
+6. NO DUPLICATE GRAPH ENGINE
+The Assessment Builder does not own a separate graph renderer. It consumes graph-tool output; it must not implement its own mathematical graph style.
+
+END - SUMMATIVE REPRESENTATION AMENDMENT
