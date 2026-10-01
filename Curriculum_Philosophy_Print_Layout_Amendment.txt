@@ -1,0 +1,62 @@
+CURRICULUM PHILOSOPHY — SHARED PRINT/LAYOUT AMENDMENT
+=====================================================
+
+STATUS: CURRENT / AUTHORITATIVE AMENDMENT
+REVISION: 2026-09-30
+SCOPE: Print-first curriculum artifacts and owner-local assessment builders
+
+PURPOSE
+-------
+Printable curriculum artifacts use one shared layout model so teachers do not relearn controls and so layout behavior does not drift between products.
+
+CANONICAL PRINT/LAYOUT MODEL — HARD
+-----------------------------------
+The canonical question render contract is:
+
+  question
+    content
+    optional figure
+    workspace
+
+The shared Print/Layout Controller owns figure size, workspace size, question order, page-fit measurement, repagination, and preview zoom behavior. Artifact renderers supply content and page-specific fixed elements only.
+
+Artifact-specific implementations MUST NOT create competing figure-sizing, workspace-sizing, overflow-measurement, or question-packing algorithms when the shared controller can own the behavior.
+
+USER-FACING STANDARD — HARD
+---------------------------
+1. Work View preserves the normal readable working size.
+2. 2-Page View shows actual printed page geometry side-by-side when practical.
+3. Workspace controls appear before Figure controls at every scope.
+4. Workspace changes the actual blank writing space inside the question card/wrapper.
+5. Figure controls use a 0–300% scale and may enlarge only up to the printable container width.
+6. Individual questions can be moved up/down.
+7. Pagination happens automatically after a committed layout change.
+8. Student-specific packets consume an even number of physical pages so duplex printing never starts the next student on the back of the prior student's sheet.
+9. Reusable/common MC forms may use as many content pages as necessary, then add a blank back only when needed to make that form's physical page count even.
+10. Questions use a single-column vertical flow unless a specific artifact intentionally declares another layout.
+
+PAGINATION OWNERSHIP — HARD
+---------------------------
+There is one page-fit rule and one packing engine. Checkpoint, Summative MC, Summative personalized FRQ/answer sheets, and later print-first tools must call that shared engine rather than maintain separate fits(), pageFits(), scrollHeight checks, or equivalent local algorithms.
+
+For fixed two-page student sheets, the shared engine distributes question cards across the existing two pages and reports overflow if the second page cannot contain the result.
+
+For naturally paginated products such as reusable MC forms, the shared engine creates additional pages as needed, then enforces the declared duplex/even-page rule.
+
+PATCH-DRIFT RULE — HARD
+-----------------------
+Repeated local patches are not the default response to a systemic layout problem. When two related fixes fail to resolve the same behavior, or evidence shows multiple code owners competing for one behavior, stop patching symptoms. Identify and repair the smallest true owner layer or replace the conflicting implementation with the canonical shared owner.
+
+LOCAL-STATE-FIRST DIAGNOSTIC RULE — HARD
+----------------------------------------
+When a workflow is owner-local, dynamically generated, or has received multiple local transfers during an active debugging session, the live local source may differ from GitHub and from earlier transfer packages.
+
+If observed behavior conflicts with the source currently available to the assistant, the assistant must explicitly ask the teacher for a current snapshot of the live local owner folder (or the smallest relevant live source folder) BEFORE continuing structural fixes. Do not reconstruct the running application from a chain of transfer ZIP deltas when a live snapshot can resolve the uncertainty.
+
+Current screenshots and current live local source outrank older transfer packages, older generated HTML, and assumptions based on repository state.
+
+IMPLEMENTATION PRINCIPLE
+------------------------
+A new printable tool should be a mad-lib over the shared renderer: provide fixed page/header content plus canonical question objects; do not copy the controller JavaScript/CSS and do not invent a new paginator.
+
+END — SHARED PRINT/LAYOUT AMENDMENT
