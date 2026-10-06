@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Assessment Builder - CC3 Tools V3</title>
+  <link rel="stylesheet" href="/reader/assets/reader.css">
+  <style>
+    :root{--navy:#12365c;--blue:#205f8b;--line:#d5dfe7;--muted:#647383;--bg:#eef3f7;--soft:#f7f9fb;--gold:#8b6500;--green:#226947;--red:#9b3030}
+    *{box-sizing:border-box}body{background:var(--bg);color:#1e2a39}.page2{max-width:1440px;margin:22px auto;padding:0 20px 70px}
+    .hero2{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px 23px;display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.hero2 h1{margin:0;color:var(--navy);font-size:30px}.hero2 p{margin:6px 0 0;color:var(--muted);max-width:850px;line-height:1.45}.bank-note{background:#eef8f3;border:1px solid #c7e4d4;color:#285b43;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:900;white-space:nowrap}
+    .step{background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:15px;overflow:hidden}.step-head{display:flex;align-items:flex-start;gap:12px;padding:16px 18px 10px}.step-num{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-weight:900;flex:0 0 auto}.step-head h2{margin:1px 0 2px;color:var(--navy);font-size:19px}.step-head p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+    .controls{padding:4px 18px 17px;display:grid;grid-template-columns:1.05fr .75fr .9fr 1.3fr;gap:10px}.field label,.field-label{display:block;color:#506170;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.065em;margin-bottom:5px}.field select,.field input[type="text"],.field input[type="search"]{width:100%;border:1px solid #bdcad6;border-radius:9px;background:#fff;padding:10px 11px;color:#163c61;font-weight:800;font-size:14px;min-height:42px}
+    .ican-wrap{border-top:1px solid #e7edf1;padding:13px 18px 17px}.ican-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:9px}.ican-toolbar strong{color:var(--navy)}.mini-actions{display:flex;gap:7px;flex-wrap:wrap}.tiny-btn{border:1px solid #bdcad6;border-radius:8px;background:#fff;color:var(--navy);padding:6px 9px;font-size:11px;font-weight:900;cursor:pointer}.tiny-btn:hover{border-color:#7898b1}.ican-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ican-check{display:flex;gap:9px;align-items:flex-start;border:1px solid #d8e1e8;border-radius:10px;padding:10px 11px;background:#fbfcfd;cursor:pointer}.ican-check input{margin-top:2px}.ican-id{font-size:10px;color:#5f7182;font-weight:900;margin-bottom:2px}.ican-text{font-size:12px;line-height:1.35;font-weight:700;color:#263b50}
+    .question-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:14px;padding:4px 18px 18px}.bank-side{min-width:0}.bank-toolbar{display:grid;grid-template-columns:minmax(220px,1fr) 190px auto auto;gap:8px;align-items:end;margin-bottom:10px}.bank-toolbar .field input{font-weight:600}.count-note{font-size:11px;color:var(--muted);font-weight:800;align-self:center;white-space:nowrap}.question-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.question-grid.matrix-mode{display:block;overflow-x:auto;padding:2px 1px 7px}.ican-family-matrix{--matrix-cols:1;min-width:max(100%,calc(var(--matrix-cols) * 270px))}.matrix-head,.matrix-row{display:grid;grid-template-columns:repeat(var(--matrix-cols),minmax(0,1fr));gap:10px}.matrix-head{margin-bottom:7px}.matrix-ican-head{border:1px solid #d8e1e8;border-radius:10px;background:#f3f6f9;padding:10px 11px;min-height:66px}.matrix-ican-head .ican-id{font-size:10px;color:#4f6476;font-weight:900;margin-bottom:3px}.matrix-ican-head .ican-text{font-size:12px;line-height:1.3;font-weight:800;color:#233b51}.matrix-row-label{padding:10px 2px 5px;font-size:10px;font-weight:900;color:#5d6d7a;text-transform:uppercase;letter-spacing:.055em}.matrix-cell-empty{border:1px dashed #dce4ea;border-radius:12px;background:#fafcfd;min-height:70px}.ican-family-matrix .question-card{min-height:0}.ican-family-matrix .exemplar img{max-height:220px}.question-card{border:1px solid #d5dfe7;border-radius:12px;background:#fff;overflow:hidden;display:flex;flex-direction:column;min-height:230px}.question-card.selected{border-color:#4e88b1;box-shadow:0 0 0 2px #d8eaf6}.q-head{display:flex;align-items:flex-start;gap:8px;padding:11px 12px 7px}.qid{display:inline-flex;background:#123f6d;color:#fff;border-radius:999px;padding:4px 8px;font-weight:900;font-size:11px;white-space:nowrap}.q-title{font-size:14px;font-weight:900;color:#20364b;line-height:1.25}.q-sub{font-size:10px;color:#667786;margin-top:2px;line-height:1.3}.q-mode{margin-left:auto;font-size:9px;font-weight:900;color:#5b6d7d;background:#f0f4f7;border-radius:999px;padding:4px 6px;white-space:nowrap}.exemplar{padding:8px 13px 10px;border-top:1px solid #eef2f5;font-size:14px;line-height:1.45;overflow:hidden}.exemplar p{margin:7px 0}.exemplar img{display:block;max-width:100%;width:auto;max-height:245px;object-fit:contain;margin:7px auto}.exemplar table{border-collapse:collapse;margin:7px 0;max-width:100%}.exemplar td,.exemplar th{border:1px solid #9eacb8;padding:5px 8px}.exemplar .choices{margin:7px 0 4px;padding-left:22px}.q-actions{margin-top:auto;border-top:1px solid #eef2f5;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;gap:8px}.family-id{font-size:9px;color:#81909c}.add-btn{border:1px solid #1a557f;background:#fff;color:#174c72;border-radius:8px;padding:7px 9px;font-size:11px;font-weight:900;cursor:pointer}.add-btn.added{background:#1a557f;color:#fff}
+    .empty{border:1px dashed #b7c5d0;border-radius:10px;padding:28px 20px;text-align:center;color:#677786;background:#fafcfd}.selection{border:1px solid #cbd8e1;border-radius:12px;background:#f9fbfc;position:sticky;top:12px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;overflow:hidden}.selection-head{padding:12px 13px;border-bottom:1px solid #dbe4ea;display:flex;justify-content:space-between;gap:10px;align-items:center}.selection-head h3{margin:0;color:var(--navy);font-size:15px}.selection-count{font-size:10px;background:#e8f0f6;color:#174c72;border-radius:999px;padding:5px 7px;font-weight:900}.selection-list{padding:8px;display:grid;gap:6px;overflow:auto}.selected-row{background:#fff;border:1px solid #d8e1e8;border-radius:9px;padding:8px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;align-items:center}.selected-row strong{font-size:11px;color:#21415d}.selected-row span{display:block;font-size:10px;color:#6d7c88;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row-actions{display:flex;gap:3px}.icon-btn{width:27px;height:27px;border:1px solid #c5d0d9;background:#fff;border-radius:7px;color:#36576f;font-weight:900;cursor:pointer}.icon-btn.remove{color:#8b3333}.selection-empty{font-size:12px;color:#6e7d89;padding:14px;text-align:center}.selection-foot{padding:9px 11px;border-top:1px solid #dbe4ea;font-size:10px;color:#72818c}
+    .assemble-grid{padding:4px 18px 18px;display:grid;grid-template-columns:minmax(280px,1.3fr) auto auto;gap:11px;align-items:end}.version-field{grid-column:1/-1;border:1px solid #d5dfe7;border-radius:10px;background:#f8fafc;padding:11px 12px}.version-command-row{display:flex;gap:7px;flex-wrap:wrap}.version-command{min-width:94px;border:1px solid #b9c9d5;border-radius:8px;background:#fff;color:#214d70;padding:8px 11px;font-size:12px;font-weight:900;cursor:pointer}.version-command.active{background:#12365c;border-color:#12365c;color:#fff}.version-hint{margin-top:7px;color:#687986;font-size:10px;line-height:1.35}.title-field input{width:100%;border:1px solid #bdcad6;border-radius:9px;background:#fff;padding:10px 11px;color:#163c61;font-weight:800;font-size:14px;min-height:42px}.toggle{display:flex;align-items:center;gap:8px;min-height:42px;padding:9px 11px;border:1px solid #c9d5de;border-radius:9px;background:#fff;color:#344f65;font-size:12px;font-weight:800;white-space:nowrap}.primary{border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:9px;padding:11px 15px;min-height:42px;font-weight:900;cursor:pointer;white-space:nowrap}.primary:disabled{opacity:.45;cursor:not-allowed}.handoff-note{padding:0 18px 16px;color:#6b7a86;font-size:11px}.status-line{padding:0 18px 15px;font-size:11px;font-weight:800;color:var(--green);min-height:13px}.status-line.error{color:var(--red)}
+    .summative-design{padding:4px 18px 18px;display:grid;gap:14px}.summative-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.count-card{border:1px solid #d5dfe7;border-radius:11px;background:#f9fbfc;padding:12px}.count-card h3{margin:0 0 4px;color:var(--navy);font-size:14px}.count-card p{margin:0 0 9px;color:#687986;font-size:10px;line-height:1.35}.count-control{display:grid;grid-template-columns:38px minmax(70px,1fr) 38px;gap:6px;align-items:center}.count-control button{height:38px;border:1px solid #b9c9d5;border-radius:8px;background:#fff;color:var(--navy);font-size:19px;font-weight:900;cursor:pointer}.count-control input{width:100%;height:38px;border:1px solid #b9c9d5;border-radius:8px;text-align:center;color:var(--navy);font-size:16px;font-weight:900}.summative-ican-columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.summative-ican-panel{border:1px solid #d5dfe7;border-radius:11px;background:#fff;overflow:hidden}.summative-ican-panel-head{padding:11px 12px;border-bottom:1px solid #e4eaef;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.summative-ican-panel-head h3{margin:0;color:var(--navy);font-size:15px}.summative-ican-panel-head p{margin:3px 0 0;color:#6c7c89;font-size:10px}.summative-ican-list{padding:9px;display:grid;gap:7px}.summative-ican-check{display:flex;gap:8px;align-items:flex-start;border:1px solid #dce4ea;border-radius:9px;padding:9px;background:#fbfcfd;cursor:pointer}.summative-ican-check input{margin-top:2px}.summative-ican-check small{display:block;color:#768693;font-size:9px;margin-top:3px}.summative-summary{border:1px solid #c7d8e3;border-radius:10px;background:#f4f8fb;padding:10px 12px;color:#315069;font-size:11px;font-weight:800}.summative-request-box,.summative-result-box{padding:4px 18px 18px;display:grid;gap:11px}.summative-request-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.secondary{border:1px solid #aebfcd;background:#fff;color:var(--navy);border-radius:9px;padding:10px 13px;min-height:42px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}.request-record{border:1px solid #c9d9e4;border-radius:10px;background:#f7fafc;padding:10px 12px;font-size:11px;color:#536777;line-height:1.45}.request-record strong{color:var(--navy)}.upload-row{display:grid;grid-template-columns:minmax(250px,1fr) auto;gap:9px;align-items:end}.upload-row input[type=file]{width:100%;border:1px solid #bdcad6;border-radius:9px;background:#fff;padding:8px;color:#344f65;min-height:42px}.result-ready{border:1px solid #b7d9c8;border-radius:10px;background:#eef8f3;padding:10px 12px;color:#285b43;font-size:11px;font-weight:800;line-height:1.45}.summative-final-grid{display:grid;grid-template-columns:minmax(280px,1fr) auto auto;gap:10px;align-items:end}.summative-final-grid input[type=text]{width:100%;border:1px solid #bdcad6;border-radius:9px;background:#fff;padding:10px 11px;color:#163c61;font-weight:800;font-size:14px;min-height:42px}
+    @media(max-width:1100px){.summative-counts{grid-template-columns:1fr 1fr}.summative-ican-columns{grid-template-columns:1fr}.summative-final-grid{grid-template-columns:1fr 1fr}.summative-final-grid .title-field{grid-column:1/-1}.question-layout{grid-template-columns:1fr}.selection{position:static;max-height:none}.selection-list{max-height:310px}.controls{grid-template-columns:1fr 1fr}.question-grid{grid-template-columns:1fr 1fr}.bank-toolbar{grid-template-columns:1fr 170px auto}.count-note{grid-column:1/-1}.assemble-grid{grid-template-columns:1fr 1fr}.assemble-grid .title-field{grid-column:1/-1}}
+    @media(max-width:720px){.summative-counts,.summative-final-grid,.upload-row{grid-template-columns:1fr}.hero2{display:block}.bank-note{display:inline-flex;margin-top:10px}.controls,.ican-list,.question-grid,.assemble-grid{grid-template-columns:1fr}.bank-toolbar{grid-template-columns:1fr}.question-layout{padding-left:12px;padding-right:12px}.step-head,.controls,.ican-wrap,.assemble-grid,.handoff-note,.status-line{padding-left:12px;padding-right:12px}}
+  </style>
+  <script>
+    window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="topbar"><a class="brand" href="/reader/index.html">CC3 Tools V3</a><span>Assessment Builder</span><div class="spacer"></div><a href="/banks/index.html">Banks</a></div>
+  <main class="page2">
+    <section class="hero2">
+      <div><h1>Assessment Builder</h1><p>Choose what you are teaching, pick approved bank families by their real exemplar questions, then send the set into the same page-control assembler used everywhere else.</p></div>
+      <div class="bank-note">Chapters 1-2 bank-ready</div>
+    </section>
+
+    <section class="step">
+      <div class="step-head"><div class="step-num">1</div><div><h2>What are you teaching?</h2><p>Choose the assessment type and the Section or Mastery Goal view. The builder only shows families eligible for that product.</p></div></div>
+      <div class="controls">
+        <div class="field"><label for="typeSelect">Assessment type</label><select id="typeSelect">
+          <option>Practice</option><option>Quick Check</option><option>Checkpoint</option><option>Quiz</option><option>Test</option><option>MC Test</option><option>Mixed Test</option>
+        </select></div>
+        <div class="field"><label for="chapterSelect">Chapter</label><select id="chapterSelect"></select></div>
+        <div class="field"><label for="viewSelect">Bank view</label><select id="viewSelect"><option value="section">Section I Cans</option><option value="mg">Mastery Goal I Cans</option></select></div>
+        <div class="field"><label for="scopeSelect">Section / Mastery Goal</label><select id="scopeSelect"></select></div>
+      </div>
+      <div id="directIcanWrap" class="ican-wrap">
+        <div class="ican-toolbar"><strong>I Cans in this scope</strong><div class="mini-actions"><button id="selectAllIcans" class="tiny-btn" type="button">Select all</button><button id="clearIcans" class="tiny-btn" type="button">Clear I Cans</button></div></div>
+        <div id="icanList" class="ican-list"></div>
+      </div>
+    </section>
+
+    <section id="directQuestionStep" class="step">
+      <div class="step-head"><div class="step-num">2</div><div><h2>What questions do you want?</h2><p>These are the actual bank exemplars. Graph, table, Diamond, and tile families keep their real representation.</p></div></div>
+      <div class="question-layout">
+        <div class="bank-side">
+          <div class="bank-toolbar">
+            <div class="field"><label for="searchInput">Find a family</label><input id="searchInput" type="search" placeholder="Q275, family name, prompt..." autocomplete="off"></div>
+            <div class="field"><label for="modeSelect">Response mode</label><select id="modeSelect"><option value="all">All response modes</option></select></div>
+            <button id="addOneEach" class="tiny-btn" type="button">+ 1 per I Can</button>
+            <button id="addVisible" class="tiny-btn" type="button">+ All visible</button>
+            <div id="resultCount" class="count-note"></div>
+          </div>
+          <div id="questionGrid" class="question-grid"></div>
+        </div>
+        <aside class="selection">
+          <div class="selection-head"><h3>Selected questions</h3><span id="selectionCount" class="selection-count">0</span></div>
+          <div id="selectionList" class="selection-list"></div>
+          <div class="selection-foot">Selection stays with you while you move between sections or Mastery Goals in this chapter.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="directAssembleStep" class="step">
+      <div class="step-head"><div class="step-num">3</div><div><h2>Assemble it.</h2><p>Your questions become editable assessment cards in the common assembler. Reorder, resize figures/workspace, add directions, save a set, print, or save as PDF there.</p></div></div>
+      <div class="assemble-grid">
+        <div class="title-field"><label class="field-label" for="docTitle">Document title</label><input id="docTitle" type="text"></div>
+        <label class="toggle"><input id="includeKey" type="checkbox"> Include answer key</label>
+        <button id="assembleBtn" class="primary" type="button" disabled>Assemble 1 version -></button>
+        <div class="version-field">
+          <div class="field-label">Versions</div>
+          <div class="version-command-row" role="group" aria-label="Number of assessment versions">
+            <button class="version-command active" type="button" data-version-count="1">1 Version</button>
+            <button class="version-command" type="button" data-version-count="2">2 Versions</button>
+            <button class="version-command" type="button" data-version-count="3">3 Versions</button>
+            <button class="version-command" type="button" data-version-count="4">4 Versions</button>
+          </div>
+          <div class="version-hint">Version A uses the questions you selected. Every version keeps the exact same selected families and generates a new instance from each family. You can add more versions or regenerate one question from the assembly page.</div>
+        </div>
+      </div>
+      <div class="handoff-note">Assembling starts a fresh unsaved document in the common assembler. Save any document already open there before starting a new assessment.</div>
+      <div id="statusLine" class="status-line"></div>
+    </section>
+
+    <section id="summativeDesignStep" class="step" hidden>
+      <div class="step-head"><div class="step-num">2</div><div><h2>Design the Summative.</h2><p>Choose how many multiple-choice and free-response questions you want, then choose the I Cans each part may assess.</p></div></div>
+      <div class="summative-design">
+        <div class="summative-counts">
+          <div class="count-card"><h3>Multiple choice</h3><p>Number of MC questions in each version.</p><div class="count-control"><button type="button" data-sum-count="mc" data-delta="-1">−</button><input id="summativeMcCount" type="number" min="0" max="40" value="8"><button type="button" data-sum-count="mc" data-delta="1">+</button></div></div>
+          <div class="count-card"><h3>Free response</h3><p>Number of FRQ questions in each version.</p><div class="count-control"><button type="button" data-sum-count="frq" data-delta="-1">−</button><input id="summativeFrqCount" type="number" min="0" max="40" value="4"><button type="button" data-sum-count="frq" data-delta="1">+</button></div></div>
+          <div class="count-card"><h3>Versions</h3><p>AI returns parallel A-D versions in the result package.</p><div class="version-command-row" role="group" aria-label="Summative versions"><button class="version-command summative-version-command active" type="button" data-summative-version-count="1">1</button><button class="version-command summative-version-command" type="button" data-summative-version-count="2">2</button><button class="version-command summative-version-command" type="button" data-summative-version-count="3">3</button><button class="version-command summative-version-command" type="button" data-summative-version-count="4">4</button></div></div>
+        </div>
+        <div class="summative-ican-columns">
+          <section class="summative-ican-panel"><div class="summative-ican-panel-head"><div><h3>MC I Cans</h3><p>AI may use only these I Cans for multiple-choice slots.</p></div><div class="mini-actions"><button id="selectAllMcIcans" class="tiny-btn" type="button">Select all</button><button id="clearMcIcans" class="tiny-btn" type="button">Clear</button></div></div><div id="summativeMcIcans" class="summative-ican-list"></div></section>
+          <section class="summative-ican-panel"><div class="summative-ican-panel-head"><div><h3>FRQ I Cans</h3><p>AI may use only these I Cans for free-response slots.</p></div><div class="mini-actions"><button id="selectAllFrqIcans" class="tiny-btn" type="button">Select all</button><button id="clearFrqIcans" class="tiny-btn" type="button">Clear</button></div></div><div id="summativeFrqIcans" class="summative-ican-list"></div></section>
+        </div>
+        <div id="summativeDesignSummary" class="summative-summary"></div>
+      </div>
+    </section>
+
+    <section id="summativeRequestStep" class="step" hidden>
+      <div class="step-head"><div class="step-num">3</div><div><h2>Make the request.</h2><p>CC3 Tools saves a request ZIP locally with your counts, selected I Cans, approved family records, and the exact result contract.</p></div></div>
+      <div class="summative-request-box">
+        <div class="summative-request-actions"><button id="createSummativeRequestBtn" class="primary" type="button">Create + download request ZIP</button></div>
+        <div id="summativeRequestRecord" class="request-record">No Summative request has been created yet.</div>
+        <div id="summativeRequestStatus" class="status-line" style="padding:0"></div>
+      </div>
+    </section>
+
+    <section id="summativeResultStep" class="step" hidden>
+      <div class="step-head"><div class="step-num">4</div><div><h2>Upload the returned result, then assemble.</h2><p>Upload the ZIP or JSON returned from ChatGPT. CC3 Tools checks the request ID, MC/FRQ counts, version count, and I Can assignments before it will assemble.</p></div></div>
+      <div class="summative-result-box">
+        <div class="upload-row"><div class="field"><label for="summativeResultFile">Returned result</label><input id="summativeResultFile" type="file" accept=".zip,.json,application/zip,application/json"></div><button id="uploadSummativeResultBtn" class="primary" type="button" disabled>Upload result</button></div>
+        <div id="summativeResultStatus" class="request-record">Create a request first, then upload its returned result here.</div>
+        <div id="summativeResultReady" class="result-ready" hidden></div>
+        <div class="summative-final-grid">
+          <div class="title-field"><label class="field-label" for="summativeDocTitle">Document title</label><input id="summativeDocTitle" type="text"></div>
+          <label class="toggle"><input id="summativeIncludeKey" type="checkbox" checked> Include answer key</label>
+          <button id="assembleSummativeResultBtn" class="primary" type="button" disabled>Assemble returned Summative -></button>
+        </div>
+      </div>
+    </section>
+  </main>
+<script src="/builder/assets/assessment_variants.js?v=20261005-same-family-v2"></script>
+<script>
+(() => {
+  const MANIFEST='/library/textbooks/cc3e3/banks/BANK_MANIFEST.json';
+  const BANK_BASE='/library/textbooks/cc3e3/banks/';
+  const STORAGE_KEY='cc3_assessment_builder_v1';
+  const HANDOFF_KEY='cc3e3_assessment_handoff_v1';
+  const ASSESSMENT_BUNDLE_SCHEMA='teacher_tools_assessment_versions/1';
+  const MAX_VERSION_POOL=8;
+  const DOCUMENT_SCHEMA='teacher_tools_document/1';
+  const PRODUCT={
+    'Practice':{eligibility:'student_practice'},
+    'Quick Check':{eligibility:'quick_check'},
+    'Checkpoint':{eligibility:'checkpoint'},
+    'Quiz':{eligibility:'checkpoint'},
+    'Test':{eligibility:'summative'},
+    'MC Test':{eligibility:'summative',mode:'selected_response'},
+    'Mixed Test':{eligibility:'summative'}
+  };
+  const SUMMATIVE_TYPES=new Set(['Test','MC Test','Mixed Test']);
+  const $=id=>document.getElementById(id);
+  const els={type:$('typeSelect'),chapter:$('chapterSelect'),view:$('viewSelect'),scope:$('scopeSelect'),icans:$('icanList'),search:$('searchInput'),mode:$('modeSelect'),grid:$('questionGrid'),resultCount:$('resultCount'),selected:$('selectionList'),selectionCount:$('selectionCount'),title:$('docTitle'),key:$('includeKey'),assemble:$('assembleBtn'),status:$('statusLine'),directIcanWrap:$('directIcanWrap'),directQuestionStep:$('directQuestionStep'),directAssembleStep:$('directAssembleStep'),summativeDesignStep:$('summativeDesignStep'),summativeRequestStep:$('summativeRequestStep'),summativeResultStep:$('summativeResultStep'),sumMcCount:$('summativeMcCount'),sumFrqCount:$('summativeFrqCount'),sumMcIcans:$('summativeMcIcans'),sumFrqIcans:$('summativeFrqIcans'),sumSummary:$('summativeDesignSummary'),sumCreate:$('createSummativeRequestBtn'),sumRequestRecord:$('summativeRequestRecord'),sumRequestStatus:$('summativeRequestStatus'),sumResultFile:$('summativeResultFile'),sumUpload:$('uploadSummativeResultBtn'),sumResultStatus:$('summativeResultStatus'),sumResultReady:$('summativeResultReady'),sumTitle:$('summativeDocTitle'),sumKey:$('summativeIncludeKey'),sumAssemble:$('assembleSummativeResultBtn')};
+  const versionButtons=[...document.querySelectorAll('[data-version-count]')];
+  const summativeVersionButtons=[...document.querySelectorAll('[data-summative-version-count]')];
+  let manifest=null,bank=null,familyMap=new Map(),selected=[],checkedIcans=new Set(),titleTouched=false,typesetTimer=null,versionCount=1;
+  let summativeMcIcans=new Set(),summativeFrqIcans=new Set(),summativeMcCount=8,summativeFrqCount=4,summativeVersionCount=1,summativeRequestMeta=null,summativeResult=null,summativeTitleTouched=false;
+
+  const escapeHtml=s=>String(s??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+  const natural=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:'base'});
+  const cleanMode=s=>String(s||'response').replace(/_/g,' ');
+  function normalizeBankHtml(html=''){
+    return String(html).replace(/(src=["'])assets\//gi,'$1/banks/assets/').replace(/(href=["'])assets\//gi,'$1/banks/assets/');
+  }
+  function state(){return {type:els.type.value,chapter:els.chapter.value,view:els.view.value,scope:els.scope.value,selected:[...selected],checkedIcans:[...checkedIcans],title:els.title.value,includeKey:els.key.checked,titleTouched,versionCount,summativeMcIcans:[...summativeMcIcans],summativeFrqIcans:[...summativeFrqIcans],summativeMcCount,summativeFrqCount,summativeVersionCount,summativeRequestMeta,summativeTitle:els.sumTitle?.value||'',summativeIncludeKey:els.sumKey?.checked!==false,summativeTitleTouched};}
+  function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state()));}catch{}}
+  function readState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')||{};}catch{return {};}}
+  function flash(message,error=false){els.status.textContent=message||'';els.status.classList.toggle('error',!!error);if(message)setTimeout(()=>{if(els.status.textContent===message)els.status.textContent='';},3500);}
+  function isSummativeWorkflow(){return SUMMATIVE_TYPES.has(els.type.value);}
+  function aggregateScopeIcans(){
+    const groups=els.view.value==='mg'?(bank?.mastery_goals||[]):(bank?.sections||[]),seen=new Set(),out=[];
+    groups.forEach(group=>(group.i_cans||[]).forEach(ic=>{if(ic?.id&&!seen.has(ic.id)){seen.add(ic.id);out.push(ic);}}));
+    return out;
+  }
+  function currentScopeObj(){
+    if(isSummativeWorkflow()&&els.scope.value==='__chapter__')return {id:'__chapter__',section:'',title:`Chapter ${els.chapter.value} - Whole Chapter`,i_cans:aggregateScopeIcans()};
+    return els.view.value==='mg' ? (bank?.mastery_goals||[]).find(x=>x.id===els.scope.value) : (bank?.sections||[]).find(x=>x.section===els.scope.value);
+  }
+  function currentIcans(){return currentScopeObj()?.i_cans||[];}
+  function familyIcanIds(f){return els.view.value==='mg' ? (f.mg_i_can_ids||[]) : (f.section_i_can_ids||[]);}
+  function isEligible(f){
+    const p=PRODUCT[els.type.value]||PRODUCT.Practice;
+    if(!(f.product_eligibility||[]).includes(p.eligibility)) return false;
+    if(p.mode && f.response_mode!==p.mode) return false;
+    return true;
+  }
+  function activeIcanIds(){return [...checkedIcans].filter(id=>currentIcans().some(ic=>ic.id===id));}
+  function questionMatchesFilters(f){
+    if(!isEligible(f))return false;
+    const q=els.search.value.trim().toLowerCase();
+    const mode=els.mode.value;
+    if(mode!=='all' && f.response_mode!==mode)return false;
+    if(q){
+      const hay=[f.teacher_question_id,f.family_id,f.family_name,f.family_purpose,f.student_action,f.exemplar?.student_html].join(' ').toLowerCase();
+      if(!hay.includes(q))return false;
+    }
+    return true;
+  }
+  function visibleFamilies(){
+    if(!bank)return [];
+    const ids=new Set(activeIcanIds());
+    if(!ids.size)return [];
+    return (bank.families||[]).filter(f=>questionMatchesFilters(f)&&familyIcanIds(f).some(id=>ids.has(id))).sort((a,b)=>natural(a.teacher_question_id,b.teacher_question_id));
+  }
+  function orderedFamilyIdsForIcan(ic){
+    const declared=Array.isArray(ic?.family_ids)?ic.family_ids.filter(Boolean):[];
+    const seen=new Set(declared);
+    const extras=(bank?.families||[]).filter(f=>familyIcanIds(f).includes(ic.id)&&!seen.has(f.family_id)).sort((a,b)=>natural(a.teacher_question_id,b.teacher_question_id)).map(f=>f.family_id);
+    return [...declared,...extras];
+  }
+  function defaultTitle(){
+    const obj=currentScopeObj();
+    if(isSummativeWorkflow()&&els.scope.value==='__chapter__')return `${els.type.value} Chapter ${els.chapter.value}`;
+    const scope=els.view.value==='mg' ? (obj?.id||`Chapter ${els.chapter.value}`) : (obj?.section||`Chapter ${els.chapter.value}`);
+    return `${els.type.value} ${scope}`;
+  }
+  function defaultSummativeTitle(){return defaultTitle();}
+  function maybeUpdateTitle(){if(!titleTouched)els.title.value=defaultTitle();if(isSummativeWorkflow()&&!summativeTitleTouched&&els.sumTitle)els.sumTitle.value=defaultSummativeTitle();}
+  function renderScopes(preferred=null){
+    const list=els.view.value==='mg'?(bank?.mastery_goals||[]):(bank?.sections||[]);
+    const chapterOption=isSummativeWorkflow()?`<option value="__chapter__">Whole Chapter - all ${els.view.value==='mg'?'Mastery Goal':'Section'} I Cans</option>`:'';
+    els.scope.innerHTML=chapterOption+list.map(x=>{
+      const value=els.view.value==='mg'?x.id:x.section;
+      const title=els.view.value==='mg'?`${x.id} - ${x.title}`:`${x.section} - ${x.title}`;
+      return `<option value="${escapeHtml(value)}">${escapeHtml(title)}</option>`;
+    }).join('');
+    const validPreferred=preferred==='__chapter__'&&isSummativeWorkflow() || list.some(x=>(els.view.value==='mg'?x.id:x.section)===preferred);
+    if(preferred&&validPreferred)els.scope.value=preferred;else if(isSummativeWorkflow())els.scope.value='__chapter__';
+    renderIcans(true);maybeUpdateTitle();renderQuestions();renderSummativeIcans();syncWorkflow();
+  }
+  function renderIcans(reset=false){
+    const list=currentIcans();
+    if(reset){checkedIcans=new Set(list.map(x=>x.id));}
+    else checkedIcans=new Set([...checkedIcans].filter(id=>list.some(x=>x.id===id)));
+    els.icans.innerHTML=list.map(ic=>`<label class="ican-check"><input type="checkbox" data-ican="${escapeHtml(ic.id)}" ${checkedIcans.has(ic.id)?'checked':''}><span><div class="ican-id">${escapeHtml(ic.id)}</div><div class="ican-text">${escapeHtml(ic.text)}</div></span></label>`).join('') || '<div class="empty">No I Cans found for this scope.</div>';
+    els.icans.querySelectorAll('[data-ican]').forEach(cb=>cb.addEventListener('change',()=>{cb.checked?checkedIcans.add(cb.dataset.ican):checkedIcans.delete(cb.dataset.ican);renderQuestions();saveState();}));
+  }
+  function renderModeOptions(){
+    const current=els.mode.value||'all';
+    const modes=[...new Set((bank?.families||[]).filter(isEligible).map(f=>f.response_mode).filter(x=>typeof x==='string'&&x.length<40))].sort(natural);
+    els.mode.innerHTML='<option value="all">All response modes</option>'+modes.map(m=>`<option value="${escapeHtml(m)}">${escapeHtml(cleanMode(m))}</option>`).join('');
+    els.mode.value=modes.includes(current)?current:'all';
+  }
+  function typeset(root=els.grid){
+    clearTimeout(typesetTimer);typesetTimer=setTimeout(()=>{
+      if(!window.MathJax?.typesetPromise)return;
+      window.MathJax.typesetClear?.([root]);window.MathJax.typesetPromise([root]).catch(()=>{});
+    },40);
+  }
+  function toggleFamily(id){selected.includes(id)?selected=selected.filter(x=>x!==id):selected.push(id);renderQuestions();renderSelection();saveState();}
+  function questionCardForIcan(f,ic){
+    const on=selected.includes(f.family_id);
+    return `<article class="question-card ${on?'selected':''}" data-family="${escapeHtml(f.family_id)}"><div class="q-head"><span class="qid">${escapeHtml(f.teacher_question_id)}</span><div><div class="q-title">${escapeHtml(f.family_name)}</div><div class="q-sub">${escapeHtml(ic.id)} · ${escapeHtml(ic.text)}</div></div><span class="q-mode">${escapeHtml(cleanMode(f.response_mode))}</span></div><div class="exemplar">${normalizeBankHtml(f.exemplar?.student_html||'')}</div><div class="q-actions"><span class="family-id">${escapeHtml(f.family_id)}</span><button class="add-btn ${on?'added':''}" type="button" data-toggle="${escapeHtml(f.family_id)}">${on?'Selected ✓':'+ Add'}</button></div></article>`;
+  }
+  function renderQuestions(){
+    renderModeOptions();
+    const active=currentIcans().filter(ic=>checkedIcans.has(ic.id));
+    const list=visibleFamilies();
+    const noun=list.length===1?'family':'families';
+    if(!active.length){
+      els.resultCount.textContent='0 eligible families';
+      els.grid.classList.remove('matrix-mode');
+      els.grid.innerHTML='<div class="empty">Select at least one I Can to see question families.</div>';
+      return;
+    }
+    if(!list.length){
+      els.resultCount.textContent='0 eligible families';
+      els.grid.classList.remove('matrix-mode');
+      els.grid.innerHTML=`<div class="empty">No ${escapeHtml(els.type.value)} families match this scope and filter. Try another I Can or response mode.</div>`;
+      return;
+    }
+    const columns=active.map(ic=>({ic,ids:orderedFamilyIdsForIcan(ic)}));
+    const maxRows=Math.max(0,...columns.map(c=>c.ids.length));
+    let placements=0,rows='';
+    for(let i=0;i<maxRows;i++){
+      const cells=columns.map(({ic,ids})=>{
+        const f=familyMap.get(ids[i]);
+        if(!f||!familyIcanIds(f).includes(ic.id)||!questionMatchesFilters(f))return '<div class="matrix-cell-empty" aria-hidden="true"></div>';
+        placements++;
+        return questionCardForIcan(f,ic);
+      });
+      if(cells.every(cell=>cell.includes('matrix-cell-empty')))continue;
+      rows+=`<div class="matrix-row-label">Family ${i+1}</div><div class="matrix-row">${cells.join('')}</div>`;
+    }
+    els.resultCount.textContent=`${list.length} eligible ${noun} · ${placements} placement${placements===1?'':'s'} across ${active.length} I Can${active.length===1?'':'s'}`;
+    els.grid.classList.add('matrix-mode');
+    els.grid.innerHTML=`<div class="ican-family-matrix" style="--matrix-cols:${Math.max(1,active.length)}"><div class="matrix-head">${active.map(ic=>`<div class="matrix-ican-head"><div class="ican-id">${escapeHtml(ic.id)}</div><div class="ican-text">${escapeHtml(ic.text)}</div></div>`).join('')}</div>${rows}</div>`;
+    els.grid.querySelectorAll('[data-toggle]').forEach(b=>b.addEventListener('click',()=>toggleFamily(b.dataset.toggle)));
+    typeset(els.grid);
+  }
+  function renderSelection(){
+    selected=selected.filter(id=>familyMap.has(id));
+    els.selectionCount.textContent=String(selected.length);
+    els.assemble.disabled=!selected.length;
+    if(!selected.length){els.selected.innerHTML='<div class="selection-empty">No questions selected yet.</div>';return;}
+    els.selected.innerHTML=selected.map((id,i)=>{const f=familyMap.get(id);return `<div class="selected-row"><div><strong>${i+1}. ${escapeHtml(f.teacher_question_id)} - ${escapeHtml(f.family_name)}</strong><span>${escapeHtml(f.section||'')} · ${escapeHtml(cleanMode(f.response_mode))}</span></div><div class="row-actions"><button class="icon-btn" type="button" data-up="${i}" title="Move up">↑</button><button class="icon-btn" type="button" data-down="${i}" title="Move down">↓</button><button class="icon-btn remove" type="button" data-remove="${i}" title="Remove">×</button></div></div>`;}).join('');
+    els.selected.querySelectorAll('[data-up]').forEach(b=>b.addEventListener('click',()=>moveSelected(Number(b.dataset.up),-1)));
+    els.selected.querySelectorAll('[data-down]').forEach(b=>b.addEventListener('click',()=>moveSelected(Number(b.dataset.down),1)));
+    els.selected.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{selected.splice(Number(b.dataset.remove),1);renderSelection();renderQuestions();saveState();}));
+  }
+  function moveSelected(i,delta){const j=i+delta;if(j<0||j>=selected.length)return;[selected[i],selected[j]]=[selected[j],selected[i]];renderSelection();saveState();}
+  function pruneForTypeOrChapter(){
+    const before=selected.length;selected=selected.filter(id=>{const f=familyMap.get(id);return f&&String(f.chapter)===String(bank.chapter)&&isEligible(f);});
+    if(before!==selected.length)flash(`Removed ${before-selected.length} selected question${before-selected.length===1?'':'s'} that no longer match this assessment type.`);
+  }
+  function addOnePerIcan(){
+    let added=0;
+    currentIcans().filter(ic=>checkedIcans.has(ic.id)).forEach(ic=>{
+      const f=orderedFamilyIdsForIcan(ic).map(id=>familyMap.get(id)).find(x=>x&&familyIcanIds(x).includes(ic.id)&&questionMatchesFilters(x)&&!selected.includes(x.family_id));
+      if(f){selected.push(f.family_id);added++;}
+    });
+    renderSelection();renderQuestions();saveState();flash(added?`Added ${added} question${added===1?'':'s'}.`:'No new eligible family was available for the selected I Cans.');
+  }
+  function addVisible(){let added=0;visibleFamilies().forEach(f=>{if(!selected.includes(f.family_id)){selected.push(f.family_id);added++;}});renderSelection();renderQuestions();saveState();flash(added?`Added ${added} visible question${added===1?'':'s'}.`:'All visible questions are already selected.');}
+  function summativeFamiliesForIcan(id,{frqOnly=false}={}){
+    return (bank?.families||[]).filter(f=>(f.product_eligibility||[]).includes('summative')&&familyIcanIds(f).includes(id)&&(!frqOnly||f.response_mode!=='selected_response'));
+  }
+  function summativeIcanMeta(ic,kind){
+    const all=summativeFamiliesForIcan(ic.id),mc=all.filter(f=>f.response_mode==='selected_response').length,frq=all.filter(f=>f.response_mode!=='selected_response').length;
+    return kind==='mc'?`${mc} MC-ready · ${all.length} source famil${all.length===1?'y':'ies'}`:`${frq} FRQ-ready famil${frq===1?'y':'ies'}`;
+  }
+  function pruneSummativeIcanSets(){
+    const valid=new Set(currentIcans().map(ic=>ic.id));
+    summativeMcIcans=new Set([...summativeMcIcans].filter(id=>valid.has(id)));
+    summativeFrqIcans=new Set([...summativeFrqIcans].filter(id=>valid.has(id)));
+  }
+  function invalidateSummativeRequest(message='Design changed. Create a new request before uploading a result.'){
+    summativeRequestMeta=null;summativeResult=null;if(els.sumResultReady)els.sumResultReady.hidden=true;if(els.sumAssemble)els.sumAssemble.disabled=true;if(els.sumResultFile)els.sumResultFile.value='';if(els.sumResultStatus)els.sumResultStatus.textContent=message;renderSummativeRequestMeta();
+  }
+  function renderSummativeIcans(){
+    if(!els.sumMcIcans||!bank)return;
+    pruneSummativeIcanSets();
+    const list=currentIcans();
+    const render=(kind,set)=>list.map(ic=>`<label class="summative-ican-check"><input type="checkbox" data-sum-${kind}-ican="${escapeHtml(ic.id)}" ${set.has(ic.id)?'checked':''}><span><div class="ican-id">${escapeHtml(ic.id)}</div><div class="ican-text">${escapeHtml(ic.text)}</div><small>${escapeHtml(summativeIcanMeta(ic,kind))}</small></span></label>`).join('')||'<div class="empty">No I Cans found for this scope.</div>';
+    els.sumMcIcans.innerHTML=render('mc',summativeMcIcans);els.sumFrqIcans.innerHTML=render('frq',summativeFrqIcans);
+    els.sumMcIcans.querySelectorAll('[data-sum-mc-ican]').forEach(cb=>cb.addEventListener('change',()=>{cb.checked?summativeMcIcans.add(cb.dataset.sumMcIcan):summativeMcIcans.delete(cb.dataset.sumMcIcan);invalidateSummativeRequest();updateSummativeDesignSummary();saveState();}));
+    els.sumFrqIcans.querySelectorAll('[data-sum-frq-ican]').forEach(cb=>cb.addEventListener('change',()=>{cb.checked?summativeFrqIcans.add(cb.dataset.sumFrqIcan):summativeFrqIcans.delete(cb.dataset.sumFrqIcan);invalidateSummativeRequest();updateSummativeDesignSummary();saveState();}));
+    updateSummativeDesignSummary();
+  }
+  function clampCount(value){return Math.max(0,Math.min(40,Math.round(Number(value)||0)));}
+  function setSummativeCounts(mc,frq){summativeMcCount=clampCount(mc);summativeFrqCount=clampCount(frq);els.sumMcCount.value=summativeMcCount;els.sumFrqCount.value=summativeFrqCount;invalidateSummativeRequest();updateSummativeDesignSummary();saveState();}
+  function setSummativeVersionCount(value,invalidate=true){summativeVersionCount=Math.max(1,Math.min(4,Number(value)||1));summativeVersionButtons.forEach(btn=>btn.classList.toggle('active',Number(btn.dataset.summativeVersionCount)===summativeVersionCount));if(invalidate)invalidateSummativeRequest();updateSummativeDesignSummary();saveState();}
+  function updateSummativeDesignSummary(){
+    if(!els.sumSummary)return;
+    const total=summativeMcCount+summativeFrqCount,problems=[];
+    if(total<1)problems.push('Choose at least one question.');
+    if(summativeMcCount>0&&!summativeMcIcans.size)problems.push('Select at least one MC I Can.');
+    if(summativeFrqCount>0&&!summativeFrqIcans.size)problems.push('Select at least one FRQ I Can.');
+    els.sumSummary.textContent=`${summativeMcCount} MC + ${summativeFrqCount} FRQ = ${total} questions per version · ${summativeVersionCount} version${summativeVersionCount===1?'':'s'} · ${summativeMcIcans.size} MC I Can${summativeMcIcans.size===1?'':'s'} · ${summativeFrqIcans.size} FRQ I Can${summativeFrqIcans.size===1?'':'s'}${problems.length?' · '+problems.join(' '):''}`;
+    els.sumCreate.disabled=problems.length>0;
+  }
+  function summativeSourceFamilies(ids,{frqOnly=false}={}){
+    const wanted=new Set(ids),seen=new Set(),out=[];
+    (bank?.families||[]).forEach(f=>{if(!(f.product_eligibility||[]).includes('summative'))return;if(frqOnly&&f.response_mode==='selected_response')return;const matched=familyIcanIds(f).filter(id=>wanted.has(id));if(!matched.length||seen.has(f.family_id))return;seen.add(f.family_id);const copy=JSON.parse(JSON.stringify(f));copy.request_selected_i_can_ids=matched;out.push(copy);});
+    return out;
+  }
+  function selectedIcanRecords(ids){const wanted=new Set(ids);return currentIcans().filter(ic=>wanted.has(ic.id)).map(ic=>({id:ic.id,text:ic.text}));}
+  function buildSummativeRequestDraft(){
+    const scope=currentScopeObj()||{};
+    return {schema:'cc3_summative_request_draft/1',assessment_type:els.type.value,document_title:els.sumTitle.value.trim()||defaultSummativeTitle(),chapter:Number(els.chapter.value),bank_view:els.view.value,scope_id:els.scope.value,scope_title:scope.title||'',mc_count:summativeMcCount,frq_count:summativeFrqCount,version_count:summativeVersionCount,include_answer_key:!!els.sumKey.checked,mc_i_cans:selectedIcanRecords(summativeMcIcans),frq_i_cans:selectedIcanRecords(summativeFrqIcans),mc_source_families:summativeSourceFamilies(summativeMcIcans),frq_source_families:summativeSourceFamilies(summativeFrqIcans,{frqOnly:true}),authoring_contract:{wording_profile:'direct_concise',bank_is_authoritative:true,preserve_family_invariants:true,real_representation_required:true,mc_choices:4,mc_single_correct:true,parallel_versions_keep_ican_and_family_architecture:true}};
+  }
+  function renderSummativeRequestMeta(){
+    if(!summativeRequestMeta){els.sumRequestRecord.innerHTML='No Summative request has been created yet.';els.sumUpload.disabled=true;return;}
+    els.sumRequestRecord.innerHTML=`<strong>${escapeHtml(summativeRequestMeta.name||'Summative request')}</strong><br>Saved locally in <code>${escapeHtml(summativeRequestMeta.relative_path||'library/assessment_requests')}</code><br>The same request ZIP was downloaded for ChatGPT. When ChatGPT returns CC3_Summative_Result.zip or JSON, upload it in Step 4.`;
+    els.sumUpload.disabled=!els.sumResultFile.files?.length;
+  }
+  function downloadSummativeRequest(meta){
+    if(!meta?.download_url)return;
+    const a=document.createElement('a');
+    a.href=meta.download_url;
+    a.download=meta.name||'CC3_Summative_Request.zip';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  async function createSummativeRequest(){
+    updateSummativeDesignSummary();if(els.sumCreate.disabled)return;
+    els.sumCreate.disabled=true;els.sumRequestStatus.className='status-line';els.sumRequestStatus.style.padding='0';els.sumRequestStatus.textContent='Building and saving the Summative request ZIP…';
+    try{const r=await fetch('/api/summative-request/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(buildSummativeRequestDraft())}),data=await r.json().catch(()=>({}));if(!r.ok||!data.ok)throw new Error(data.error||`Request creation failed (${r.status}).`);summativeRequestMeta={request_id:data.request_id,name:data.name,stored_name:data.stored_name,download_url:data.download_url,relative_path:data.relative_path};summativeResult=null;els.sumResultReady.hidden=true;els.sumAssemble.disabled=true;renderSummativeRequestMeta();saveState();downloadSummativeRequest(summativeRequestMeta);els.sumRequestStatus.textContent='Request saved locally and downloaded. Upload that ZIP to ChatGPT.';}
+    catch(err){els.sumRequestStatus.className='status-line error';els.sumRequestStatus.style.padding='0';els.sumRequestStatus.textContent=`Could not create request: ${err.message}`;}
+    finally{updateSummativeDesignSummary();}
+  }
+  async function uploadSummativeResult(){
+    const file=els.sumResultFile.files?.[0];if(!summativeRequestMeta?.request_id||!file)return;els.sumUpload.disabled=true;els.sumResultStatus.textContent='Checking returned Summative result…';
+    try{const r=await fetch(`/api/summative-request/${encodeURIComponent(summativeRequestMeta.request_id)}/result`,{method:'POST',headers:{'Content-Type':file.type||'application/octet-stream','X-Filename':encodeURIComponent(file.name)},body:file}),data=await r.json().catch(()=>({}));if(!r.ok||!data.ok)throw new Error(data.error||`Upload failed (${r.status}).`);summativeResult=data.result;const sum=data.summary||{};els.sumResultStatus.innerHTML=`<strong>${escapeHtml(file.name)}</strong><br>Saved locally in <code>${escapeHtml(data.relative_path||'library/assessment_results')}</code>`;els.sumResultReady.hidden=false;els.sumResultReady.textContent=`Validated: ${Number(sum.version_count||0)} version${Number(sum.version_count||0)===1?'':'s'} · ${Number(sum.mc_count||0)} MC + ${Number(sum.frq_count||0)} FRQ per version. Ready to assemble.`;if(!summativeTitleTouched&&summativeResult.assessment_title)els.sumTitle.value=summativeResult.assessment_title;els.sumAssemble.disabled=false;saveState();}
+    catch(err){summativeResult=null;els.sumResultReady.hidden=true;els.sumAssemble.disabled=true;els.sumResultStatus.innerHTML=`<span style="color:#9b3030;font-weight:800">Result rejected: ${escapeHtml(err.message)}</span>`;}
+    finally{els.sumUpload.disabled=!els.sumResultFile.files?.length||!summativeRequestMeta?.request_id;}
+  }
+  function summativeFamilySnapshot(q){return q.family_snapshot||familyMap.get(q.family_id)||{family_id:q.family_id,family_name:q.family_name||q.family_id,question_structure_id:q.question_structure_id||'',response_mode:q.response_mode||'',representation_mode:q.representation_mode||'',product_eligibility:['summative'],locked_template:{prompt_template:q.student_html||''}};}
+  function mcBubbleSheetHtml(count){
+    const n=Math.max(0,Number(count)||0);
+    if(!n)return '';
+    const rows=Array.from({length:n},(_,i)=>`<div class="mc-bubble-item"><span class="mc-bubble-number">${i+1}.</span><span class="mc-bubble-choice">A</span><span class="mc-bubble-choice">B</span><span class="mc-bubble-choice">C</span><span class="mc-bubble-choice">D</span></div>`).join('');
+    return `<div class="mc-bubble-sheet"><div class="mc-bubble-title">Multiple Choice Answer Sheet</div><div class="mc-bubble-grid">${rows}</div></div>`;
+  }
+  function buildReturnedSummativeRecipe(version,versionIndex){
+    const label=version.label||versionLabel(versionIndex),custom={},order=[],options={},breaks=[];let number=0;const questions=version.questions||[];
+    const mc=questions.filter(q=>q.kind==='mc'),frq=questions.filter(q=>q.kind==='frq'),orderedQuestions=[...mc,...frq];
+    const addHeading=(slug,title,html)=>{const id=`custom-summative-v${label.toLowerCase()}-${slug}`;order.push(id);custom[id]={schema_version:1,card_id:id,textbook_id:'teacher',chapter:Number(els.chapter.value),lesson:'Summative',section:'Assessment',card_type:'custom_heading',editor_type:'heading',label:title,html};};
+    if(mc.length){
+      addHeading('mc-heading','Multiple Choice','<h2>Multiple Choice</h2><p>Choose the best answer. Record each answer on the answer sheet.</p>');
+      const bubbleId=`custom-summative-v${label.toLowerCase()}-mc-bubble-sheet`;
+      order.push(bubbleId);
+      custom[bubbleId]={schema_version:1,card_id:bubbleId,textbook_id:'teacher',chapter:Number(els.chapter.value),lesson:'Summative',section:'Assessment',card_type:'custom_text',editor_type:'text',label:'Multiple Choice Answer Sheet',html:mcBubbleSheetHtml(mc.length),assessment_request_id:summativeRequestMeta?.request_id||''};
+    }
+    orderedQuestions.forEach((q,idx)=>{
+      if(idx===mc.length&&frq.length)addHeading('frq-heading','Free Response','<h2>Free Response</h2><p>Show your work and reasoning.</p>');
+      number++;const id=`custom-summative-v${label.toLowerCase()}-q${String(number).padStart(2,'0')}`;order.push(id);const snapshot=JSON.parse(JSON.stringify(summativeFamilySnapshot(q)));custom[id]={schema_version:1,card_id:id,textbook_id:'teacher',chapter:Number(els.chapter.value),lesson:'Summative',section:'Assessment',card_type:'custom_problem',editor_type:'problem',problem_label:`${number}.`,html:normalizeBankHtml(q.student_html||''),assessment_family_id:q.family_id,assessment_family_snapshot:snapshot,teacher_question_id:q.teacher_question_id||'',question_structure_id:q.question_structure_id||'',response_mode:q.response_mode||'',representation_mode:q.representation_mode||'',assessment_version:label,assessment_variant_index:versionIndex,assessment_variant_signature:`request:${summativeRequestMeta?.request_id||''}:${label}:${number}`,assessment_variant_answer:q.answer||'',assessment_variant_solution:q.solution||'',assessment_question_kind:q.kind,assessment_i_can_id:q.i_can_id,assessment_request_id:summativeRequestMeta?.request_id||''};options[id]={workspace:workspaceFor(q.response_mode),figures:{},visuals:[]};
+    });
+    if(els.sumKey.checked&&questions.length){const heading=`custom-summative-v${label.toLowerCase()}-answer-key-heading`;order.push(heading);breaks.push(heading);custom[heading]={schema_version:1,card_id:heading,textbook_id:'teacher',chapter:Number(els.chapter.value),lesson:'Answer Key',section:'Assessment',card_type:'custom_heading',editor_type:'heading',label:'Answer Key',html:'<h2>Answer Key</h2>'};orderedQuestions.forEach((q,i)=>{const id=`custom-summative-v${label.toLowerCase()}-key-${String(i+1).padStart(2,'0')}`;order.push(id);custom[id]={schema_version:1,card_id:id,textbook_id:'teacher',chapter:Number(els.chapter.value),lesson:'Answer Key',section:'Assessment',card_type:'custom_text',editor_type:'text',label:`${i+1}. ${q.kind.toUpperCase()}`,html:`<p><strong>${i+1}.</strong> ${escapeHtml(q.answer||'')}</p>${q.solution?`<p>${escapeHtml(q.solution)}</p>`:''}`,assessment_family_id:q.family_id,assessment_request_id:summativeRequestMeta?.request_id||''};});}
+    const baseTitle=els.sumTitle.value.trim()||summativeResult?.assessment_title||defaultSummativeTitle(),title=`${baseTitle} - Version ${label}`;
+    return {schema:DOCUMENT_SCHEMA,core_version:'teacher-tools-core/0.2-cc3-pilot',content_package:'cc3e3',title,order,breaks,settings:{spacing:'normal',margin:'normal',figure:'normal',workspace:'medium',title,showTitle:true},card_options:options,custom_cards:custom,source_overrides:{},section_headings:{}};
+  }
+  function buildReturnedSummativeBundle(){
+    const recipes=(summativeResult?.versions||[]).map(buildReturnedSummativeRecipe),scope=currentScopeObj()||{};return {schema:ASSESSMENT_BUNDLE_SCHEMA,version_count:recipes.length,active_index:0,max_versions:recipes.length,recipes,origin:{assessment_type:els.type.value,chapter:Number(els.chapter.value),bank_view:els.view.value,scope_id:els.scope.value,scope_title:scope.title||'',course_label:'Core Connections Course 3',base_title:els.sumTitle.value.trim()||summativeResult?.assessment_title||defaultSummativeTitle(),include_key:!!els.sumKey.checked,request_id:summativeRequestMeta?.request_id||'',mc_count:summativeMcCount,frq_count:summativeFrqCount,selected_mc_i_can_ids:[...summativeMcIcans],selected_frq_i_can_ids:[...summativeFrqIcans],families:[]}};
+  }
+  function assembleReturnedSummative(){if(!summativeResult)return;try{localStorage.setItem(HANDOFF_KEY,JSON.stringify(buildReturnedSummativeBundle()));saveState();location.href='/builder/assemble.html?handoff=assessment';}catch(err){els.sumResultStatus.innerHTML=`<span style="color:#9b3030;font-weight:800">Could not prepare Summative: ${escapeHtml(err.message)}</span>`;}}
+  function syncWorkflow(){
+    const sum=isSummativeWorkflow();if(els.directIcanWrap)els.directIcanWrap.hidden=sum;if(els.directQuestionStep)els.directQuestionStep.hidden=sum;if(els.directAssembleStep)els.directAssembleStep.hidden=sum;if(els.summativeDesignStep)els.summativeDesignStep.hidden=!sum;if(els.summativeRequestStep)els.summativeRequestStep.hidden=!sum;if(els.summativeResultStep)els.summativeResultStep.hidden=!sum;
+    if(sum){renderSummativeIcans();updateSummativeDesignSummary();renderSummativeRequestMeta();maybeUpdateTitle();}else{renderQuestions();renderSelection();}
+  }
+  function workspaceFor(mode){return mode==='selected_response'?0.15:mode==='short_response'?0.65:mode==='table_response'?0.8:mode==='graph_response'?1.35:mode==='equation_response'?1.0:1.1;}
+  function versionLabel(index){return String.fromCharCode(65+index);}
+  function variantEngine(){
+    if(!window.CC3AssessmentVariants?.build) throw new Error('Same-family question generator did not load.');
+    return window.CC3AssessmentVariants;
+  }
+  function buildRecipe(versionIndex,usedByFamily=new Map()){
+    const custom={},order=[],options={},breaks=[];
+    const label=versionLabel(versionIndex);
+    const engine=variantEngine();
+    selected.forEach((familyId,i)=>{
+      const f=familyMap.get(familyId);if(!f)return;
+      const used=usedByFamily.get(f.family_id)||[];
+      const instance=engine.buildUnique?engine.buildUnique(f,versionIndex,i,used):engine.build(f,versionIndex,i);
+      const sig=instance.signature||(engine.signature?engine.signature(instance):`${instance.student_html||''}\n${instance.answer||''}`);
+      usedByFamily.set(f.family_id,[...used,sig]);
+      const id=`custom-assessment-v${label.toLowerCase()}-${f.teacher_question_id.toLowerCase()}-${String(i+1).padStart(2,'0')}`;
+      const keyId=els.key.checked?`custom-assessment-v${label.toLowerCase()}-key-${f.teacher_question_id.toLowerCase()}-${String(i+1).padStart(2,'0')}`:null;
+      order.push(id);
+      custom[id]={schema_version:1,card_id:id,textbook_id:'teacher',chapter:f.chapter,lesson:f.section||'Assessment',section:'Assessment',card_type:'custom_problem',editor_type:'problem',problem_label:`${i+1}.`,html:normalizeBankHtml(instance.student_html||''),assessment_family_id:f.family_id,assessment_family_snapshot:JSON.parse(JSON.stringify(f)),teacher_question_id:f.teacher_question_id,question_structure_id:f.question_structure_id,response_mode:f.response_mode,representation_mode:f.representation_mode,assessment_version:label,assessment_variant_index:instance.variant_index??versionIndex,assessment_variant_signature:sig,assessment_variant_answer:instance.answer||'',assessment_variant_solution:instance.solution||'',assessment_key_card_id:keyId};
+      options[id]={workspace:workspaceFor(f.response_mode),figures:{},visuals:[]};
+    });
+    if(els.key.checked && selected.length){
+      const heading=`custom-assessment-v${label.toLowerCase()}-answer-key-heading`;order.push(heading);breaks.push(heading);custom[heading]={schema_version:1,card_id:heading,textbook_id:'teacher',chapter:Number(els.chapter.value),lesson:'Answer Key',section:'Assessment',card_type:'custom_heading',editor_type:'heading',label:'Answer Key',html:'<h2>Answer Key</h2>'};
+      selected.forEach((familyId,i)=>{
+        const f=familyMap.get(familyId);if(!f)return;
+        const qid=`custom-assessment-v${label.toLowerCase()}-${f.teacher_question_id.toLowerCase()}-${String(i+1).padStart(2,'0')}`;
+        const question=custom[qid];
+        const id=question.assessment_key_card_id;
+        const answer=escapeHtml(question.assessment_variant_answer||'');
+        const solution=escapeHtml(question.assessment_variant_solution||'');
+        order.push(id);
+        custom[id]={schema_version:1,card_id:id,textbook_id:'teacher',chapter:f.chapter,lesson:'Answer Key',section:'Assessment',card_type:'custom_text',editor_type:'text',label:`${i+1}. ${f.teacher_question_id}`,html:`<p><strong>${i+1}.</strong> ${answer}</p>${solution?`<p>${solution}</p>`:''}`,assessment_question_card_id:qid,assessment_family_id:f.family_id,assessment_variant_index:question.assessment_variant_index};
+      });
+    }
+    const baseTitle=els.title.value.trim()||defaultTitle();
+    const title=`${baseTitle} - Version ${label}`;
+    return {schema:DOCUMENT_SCHEMA,core_version:'teacher-tools-core/0.2-cc3-pilot',content_package:'cc3e3',title,order,breaks,settings:{spacing:'normal',margin:'normal',figure:'normal',workspace:'medium',title,showTitle:true},card_options:options,custom_cards:custom,source_overrides:{},section_headings:{}};
+  }
+  function buildAssessmentBundle(){
+    const recipes=[],usedByFamily=new Map();
+    for(let i=0;i<versionCount;i++)recipes.push(buildRecipe(i,usedByFamily));
+    const families=selected.map(id=>familyMap.get(id)).filter(Boolean).map(f=>JSON.parse(JSON.stringify(f)));
+    const scope=currentScopeObj()||{};
+    return {schema:ASSESSMENT_BUNDLE_SCHEMA,version_count:recipes.length,active_index:0,max_versions:window.CC3AssessmentVariants?.MAX_VARIANTS||8,recipes,origin:{assessment_type:els.type.value,chapter:Number(els.chapter.value),bank_view:els.view.value,scope_id:els.view.value==='mg'?(scope.id||els.scope.value):(scope.section||els.scope.value),scope_title:scope.title||'',course_label:'Core Connections Course 3',base_title:els.title.value.trim()||defaultTitle(),include_key:!!els.key.checked,selected_family_ids:[...selected],families}};
+  }
+  function setVersionCount(value){
+    versionCount=Math.max(1,Math.min(4,Number(value)||1));
+    versionButtons.forEach(btn=>btn.classList.toggle('active',Number(btn.dataset.versionCount)===versionCount));
+    els.assemble.textContent=`Assemble ${versionCount} version${versionCount===1?'':'s'} ->`;
+    saveState();
+  }
+  function assemble(){
+    if(!selected.length)return;
+    try{localStorage.setItem(HANDOFF_KEY,JSON.stringify(buildAssessmentBundle()));saveState();location.href='/builder/assemble.html?handoff=assessment';}
+    catch(err){flash(`Could not prepare the assessment: ${err.message}`,true);}
+  }
+  async function loadChapter(ch,preferredScope=null,restoreIcans=null){
+    const entry=(manifest?.chapters||[]).find(x=>String(x.chapter)===String(ch)&&x.data);if(!entry)throw new Error(`Chapter ${ch} does not have a bank data file yet.`);
+    const r=await fetch(BANK_BASE+entry.data,{cache:'no-store'});if(!r.ok)throw new Error(`Could not load Chapter ${ch} bank (${r.status}).`);bank=await r.json();familyMap=new Map((bank.families||[]).map(f=>[f.family_id,f]));
+    els.view.value=els.view.value==='mg'?'mg':'section';renderScopes(preferredScope);
+    if(Array.isArray(restoreIcans)){checkedIcans=new Set(restoreIcans.filter(id=>currentIcans().some(ic=>ic.id===id)));renderIcans(false);renderQuestions();}
+    pruneForTypeOrChapter();renderSelection();maybeUpdateTitle();saveState();
+  }
+  async function init(){
+    const saved=readState();
+    try{
+      const r=await fetch(MANIFEST,{cache:'no-store'});if(!r.ok)throw new Error(`Could not load bank manifest (${r.status}).`);manifest=await r.json();
+      const ready=(manifest.chapters||[]).filter(x=>x.data).sort((a,b)=>Number(a.chapter)-Number(b.chapter));if(!ready.length)throw new Error('No bank-ready chapters were found.');
+      els.chapter.innerHTML=ready.map(x=>`<option value="${x.chapter}">Chapter ${x.chapter}</option>`).join('');
+      if(ready.some(x=>String(x.chapter)===String(saved.chapter)))els.chapter.value=String(saved.chapter);
+      if(PRODUCT[saved.type])els.type.value=saved.type;
+      if(saved.view==='mg'||saved.view==='section')els.view.value=saved.view;
+      selected=Array.isArray(saved.selected)?saved.selected:[];titleTouched=!!saved.titleTouched;els.key.checked=!!saved.includeKey;versionCount=Math.max(1,Math.min(4,Number(saved.versionCount)||1));
+      summativeMcIcans=new Set(Array.isArray(saved.summativeMcIcans)?saved.summativeMcIcans:[]);summativeFrqIcans=new Set(Array.isArray(saved.summativeFrqIcans)?saved.summativeFrqIcans:[]);summativeMcCount=clampCount(saved.summativeMcCount??8);summativeFrqCount=clampCount(saved.summativeFrqCount??4);summativeVersionCount=Math.max(1,Math.min(4,Number(saved.summativeVersionCount)||1));summativeRequestMeta=saved.summativeRequestMeta&&saved.summativeRequestMeta.request_id?saved.summativeRequestMeta:null;summativeTitleTouched=!!saved.summativeTitleTouched;
+      if(saved.title)els.title.value=saved.title;if(saved.summativeTitle)els.sumTitle.value=saved.summativeTitle;els.sumKey.checked=saved.summativeIncludeKey!==false;els.sumMcCount.value=summativeMcCount;els.sumFrqCount.value=summativeFrqCount;
+      setVersionCount(versionCount);setSummativeVersionCount(summativeVersionCount,false);
+      await loadChapter(els.chapter.value,saved.scope,saved.checkedIcans);
+      if(!els.title.value||!els.sumTitle.value)maybeUpdateTitle();renderSummativeRequestMeta();syncWorkflow();
+      window.addEventListener('load',()=>typeset(els.grid),{once:true});
+    }catch(err){els.grid.innerHTML=`<div class="empty">${escapeHtml(err.message)}</div>`;flash(err.message,true);}
+  }
+  els.type.addEventListener('change',()=>{titleTouched=false;summativeTitleTouched=false;summativeResult=null;if(isSummativeWorkflow()){els.view.value='mg';summativeMcIcans.clear();summativeFrqIcans.clear();const defaults=els.type.value==='MC Test'?[10,0]:els.type.value==='Test'?[0,6]:[8,4];setSummativeCounts(defaults[0],defaults[1]);renderScopes('__chapter__');}else{renderScopes();pruneForTypeOrChapter();renderModeOptions();renderQuestions();renderSelection();}maybeUpdateTitle();syncWorkflow();saveState();});
+  els.chapter.addEventListener('change',async()=>{try{titleTouched=false;summativeTitleTouched=false;summativeMcIcans.clear();summativeFrqIcans.clear();summativeRequestMeta=null;summativeResult=null;await loadChapter(els.chapter.value,isSummativeWorkflow()?'__chapter__':null); }catch(err){flash(err.message,true);}});
+  els.view.addEventListener('change',()=>{titleTouched=false;summativeTitleTouched=false;summativeMcIcans.clear();summativeFrqIcans.clear();summativeRequestMeta=null;summativeResult=null;renderScopes(isSummativeWorkflow()?'__chapter__':null);saveState();});
+  els.scope.addEventListener('change',()=>{titleTouched=false;summativeTitleTouched=false;if(isSummativeWorkflow()){summativeMcIcans.clear();summativeFrqIcans.clear();summativeRequestMeta=null;summativeResult=null;renderIcans(true);renderSummativeIcans();syncWorkflow();}else{renderIcans(true);maybeUpdateTitle();renderQuestions();}maybeUpdateTitle();saveState();});
+  els.search.addEventListener('input',renderQuestions);els.mode.addEventListener('change',()=>{renderQuestions();saveState();});
+  $('selectAllIcans').addEventListener('click',()=>{checkedIcans=new Set(currentIcans().map(x=>x.id));renderIcans(false);renderQuestions();saveState();});
+  $('clearIcans').addEventListener('click',()=>{checkedIcans.clear();renderIcans(false);renderQuestions();saveState();});
+  $('addOneEach').addEventListener('click',addOnePerIcan);$('addVisible').addEventListener('click',addVisible);
+  els.title.addEventListener('input',()=>{titleTouched=true;saveState();});els.key.addEventListener('change',saveState);versionButtons.forEach(btn=>btn.addEventListener('click',()=>setVersionCount(btn.dataset.versionCount)));els.assemble.addEventListener('click',assemble);
+  els.sumMcCount.addEventListener('change',()=>setSummativeCounts(els.sumMcCount.value,summativeFrqCount));els.sumFrqCount.addEventListener('change',()=>setSummativeCounts(summativeMcCount,els.sumFrqCount.value));document.querySelectorAll('[data-sum-count]').forEach(btn=>btn.addEventListener('click',()=>{const which=btn.dataset.sumCount,delta=Number(btn.dataset.delta)||0;which==='mc'?setSummativeCounts(summativeMcCount+delta,summativeFrqCount):setSummativeCounts(summativeMcCount,summativeFrqCount+delta);}));summativeVersionButtons.forEach(btn=>btn.addEventListener('click',()=>setSummativeVersionCount(btn.dataset.summativeVersionCount)));
+  $('selectAllMcIcans').addEventListener('click',()=>{summativeMcIcans=new Set(currentIcans().map(ic=>ic.id));invalidateSummativeRequest();renderSummativeIcans();saveState();});$('clearMcIcans').addEventListener('click',()=>{summativeMcIcans.clear();invalidateSummativeRequest();renderSummativeIcans();saveState();});$('selectAllFrqIcans').addEventListener('click',()=>{summativeFrqIcans=new Set(currentIcans().map(ic=>ic.id));invalidateSummativeRequest();renderSummativeIcans();saveState();});$('clearFrqIcans').addEventListener('click',()=>{summativeFrqIcans.clear();invalidateSummativeRequest();renderSummativeIcans();saveState();});
+  els.sumCreate.addEventListener('click',createSummativeRequest);els.sumResultFile.addEventListener('change',()=>{els.sumUpload.disabled=!summativeRequestMeta?.request_id||!els.sumResultFile.files?.length;});els.sumUpload.addEventListener('click',uploadSummativeResult);els.sumTitle.addEventListener('input',()=>{summativeTitleTouched=true;invalidateSummativeRequest();saveState();});els.sumKey.addEventListener('change',()=>{invalidateSummativeRequest();saveState();});els.sumAssemble.addEventListener('click',assembleReturnedSummative);
+  init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lesson Builder - CC3 Tools V3</title>
+  <link rel="stylesheet" href="/builder/assets/builder.css">
+</head>
+<body class="picker-body">
+  <header class="appbar">
+    <a class="appbrand" href="/reader/index.html">CC3 Tools V3</a>
+    <span class="appsection">Lesson Builder</span>
+    <div class="appbar-spacer"></div>
+  </header>
+
+  <main class="picker-shell">
+    <aside class="picker-sidebar">
+      <div class="panel-heading">
+        <div>
+          <div class="eyebrow">CC3 STUDENT SOURCE LIBRARY</div>
+          <h1>Pick content</h1>
+        </div>
+        <div id="selectedCount" class="count-pill">0 selected</div>
+      </div>
+
+      <label class="field-label" for="searchInput">Search cards</label>
+      <input id="searchInput" class="text-input" type="search" placeholder="Problem number, title, words...">
+
+      <label class="field-label" for="chapterFilter">Chapter</label>
+      <select id="chapterFilter" class="select-input"></select>
+
+      <label class="field-label" for="lessonFilter">Lesson</label>
+      <select id="lessonFilter" class="select-input"></select>
+      <div id="sourceStatus" class="source-status"></div>
+
+      <div class="field-label">Card type</div>
+      <div id="typeFilters" class="filter-chips" aria-label="Card type filters"></div>
+
+      <div class="field-label">Quick select</div>
+      <div class="quick-grid">
+        <button class="secondary-btn" data-quick="visible">Select visible</button>
+        <button class="secondary-btn" data-quick="questions">Questions</button>
+        <button class="secondary-btn" data-quick="lesson">Whole lesson</button>
+        <button class="secondary-btn danger-lite" data-quick="clear">Clear all</button>
+      </div>
+
+      <div class="selection-summary">
+        <strong>Assembly order</strong>
+        <p>Cards start in textbook order. Learning Focus is available as its own card. Your selections can span chapters; reorder, edit, add visuals, and control page breaks on the next screen.</p>
+      </div>
+
+      <button id="assembleBtn" class="primary-btn wide" disabled>Assemble selected cards →</button>
+      <button id="clearSavedBtn" class="ghost-btn wide">Clear saved selection</button>
+    </aside>
+
+    <section class="picker-content">
+      <div class="content-toolbar">
+        <div>
+          <h2>Available cards</h2>
+          <p id="resultSummary">Loading textbook cards...</p>
+        </div>
+        <div class="view-note">Compact previews are for choosing content, not final print formatting.</div>
+      </div>
+      <div id="cardGrid" class="card-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/builder/assets/picker.js"></script>
+</body>
+</html>

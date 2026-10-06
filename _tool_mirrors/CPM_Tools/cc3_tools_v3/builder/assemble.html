@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Assemble - CC3 Tools V3</title>
+  <link rel="stylesheet" href="/builder/assets/builder.css?v=20261005-summative-split-v1">
+  <script>
+    window.MathJax = {
+      tex: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+      svg: {fontCache: 'local'},
+      options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code'], ignoreHtmlClass: 'rich-editor'}
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="/builder/assets/assessment_variants.js?v=20261005-same-family-v2"></script>
+  <script defer src="/builder/assets/assemble.js?v=20261005-summative-split-v1"></script>
+</head>
+<body class="assemble-body">
+  <header class="appbar">
+    <a class="appbrand" href="/reader/index.html">CC3 Tools V3</a>
+    <span class="appsection">Assemble Document</span>
+    <div class="appbar-spacer"></div>
+    <a class="appbar-link" href="/builder/index.html">← Back to picker</a>
+  </header>
+
+  <main class="assembly-shell">
+    <aside class="assembly-controls">
+      <div class="control-scroll">
+        <div class="panel-heading compact-heading">
+          <div>
+            <div class="eyebrow">PAGE CONTROL PROTOTYPE</div>
+            <h1>Document</h1>
+          </div>
+          <span id="assemblyCount" class="count-pill">0 cards</span>
+        </div>
+
+        <label class="field-label" for="docTitle">Document title</label>
+        <input id="docTitle" class="text-input" value="Chapter 1 Practice">
+
+        <div id="assessmentVersionPanel" class="assessment-version-panel" hidden>
+          <div class="assessment-version-heading">
+            <span class="field-label">Assessment versions</span>
+            <span id="assessmentVersionSummary" class="assessment-version-summary"></span>
+          </div>
+          <div class="assessment-version-row">
+            <div id="assessmentVersionTabs" class="assessment-version-tabs" aria-label="Assessment version tabs"></div>
+            <button id="newAssessmentVersion" class="secondary-btn assessment-new-version" type="button">+ New Version</button>
+          </div>
+          <div id="summativePacketPanel" class="summative-packet-panel" hidden>
+            <div class="summative-packet-head">
+              <span class="field-label">Student print files</span>
+              <span>Print/save as PDF by version or all versions.</span>
+            </div>
+            <div id="frqPacketRow" class="summative-packet-row">
+              <strong id="frqPacketLabel">Bubble + FRQ</strong>
+              <div id="frqPacketVersions" class="summative-packet-version-buttons" aria-label="Bubble and FRQ packet versions"></div>
+              <button id="frqPacketAll" class="packet-all-btn" type="button">All</button>
+            </div>
+            <div id="mcPacketRow" class="summative-packet-row">
+              <strong>MC questions</strong>
+              <div id="mcPacketVersions" class="summative-packet-version-buttons" aria-label="MC question file versions"></div>
+              <button id="mcPacketAll" class="packet-all-btn" type="button">All</button>
+            </div>
+            <div class="summative-packet-note">Bubble + FRQ is a separate student file. MC questions print as a second file. The FRQ packet stays single-column and is automatically tightened toward a two-page target.</div>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="field-label">Spacing</div>
+          <div class="segmented" data-setting="spacing">
+            <button data-value="compact">Compact</button>
+            <button class="active" data-value="normal">Normal</button>
+            <button data-value="roomy">Roomy</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="field-label">Page margins</div>
+          <div class="segmented" data-setting="margin">
+            <button data-value="narrow">Narrow</button>
+            <button class="active" data-value="normal">Normal</button>
+            <button data-value="wide">Wide</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="field-label">Whole document figure width</div>
+          <div id="globalFigureControl" class="global-range-control">
+            <input id="globalFigureSlider" class="layout-slider" type="range" min="0" max="704" step="10" value="390" aria-label="Whole document figure width">
+            <output id="globalFigureOutput">390 px</output>
+            <div class="range-nudges" aria-label="Whole document figure width fine adjustment">
+              <button class="range-nudge" type="button" data-delta="-1" title="Decrease">−</button>
+              <button class="range-nudge" type="button" data-delta="1" title="Increase">+</button>
+              <select class="range-step" aria-label="Figure adjustment step"><option value="1">1</option><option value="5">5</option><option value="10" selected>10</option><option value="25">25</option></select>
+            </div>
+          </div>
+          <div class="control-hint">Sets the figure width across the document. Individual figures can still be adjusted below.</div>
+        </div>
+
+        <div class="control-group">
+          <div class="field-label">Whole document question workspace</div>
+          <div id="globalWorkspaceControl" class="global-range-control">
+            <input id="globalWorkspaceSlider" class="layout-slider" type="range" min="0" max="5" step="0.25" value="1" aria-label="Whole document question workspace">
+            <output id="globalWorkspaceOutput">1 in</output>
+            <div class="range-nudges" aria-label="Whole document workspace fine adjustment">
+              <button class="range-nudge" type="button" data-delta="-1" title="Decrease">−</button>
+              <button class="range-nudge" type="button" data-delta="1" title="Increase">+</button>
+              <select class="range-step" aria-label="Workspace adjustment step"><option value="0.25" selected>.25</option><option value="0.5">.5</option><option value="1">1</option></select>
+            </div>
+          </div>
+          <div class="control-hint">Sets the answer workspace across the document. Individual questions can still be adjusted from 0–5 in.</div>
+        </div>
+
+        <label class="toggle-row"><input id="showTitle" type="checkbox" checked> <span>Show document title</span></label>
+
+        <div class="prototype-callout">
+          <strong>Prototype:</strong> textbook questions keep their original CPM problem numbers. Teacher-created content is stored with this local assembly, not in the extracted textbook library.
+        </div>
+
+        <div class="add-content-wrap">
+          <button id="addContentBtn" class="add-content-btn" type="button">+ Add content</button>
+          <div id="addContentMenu" class="add-content-menu" hidden>
+            <button type="button" data-add-type="problem"><strong>Custom problem</strong><span>Problem label, rich text, math, figures, workspace.</span></button>
+            <button type="button" data-add-type="text"><strong>Directions / text</strong><span>Teacher directions, explanations, or other rich text.</span></button>
+            <button type="button" data-add-type="heading"><strong>Heading</strong><span>Add a section heading inside the assembled document.</span></button>
+          </div>
+        </div>
+
+        <div class="list-heading">
+          <span>Selected cards</span>
+          <button id="clearAssembly" class="text-button">Clear</button>
+        </div>
+        <div id="assemblyList" class="assembly-list"></div>
+      </div>
+      <div class="control-footer">
+        <div id="saveStatus" class="save-status">Not saved to library</div>
+        <div class="save-action-row">
+          <button id="saveSet" class="secondary-btn">Save</button>
+          <button id="saveSetAs" class="secondary-btn">Save As</button>
+        </div>
+        <button id="backPicker" class="secondary-btn wide">← Change selection</button>
+        <button id="printAllVersions" class="secondary-btn wide" type="button" hidden>Print all versions</button>
+        <button id="demoPrint" class="primary-btn wide">Print demo (not final PDF)</button>
+      </div>
+    </aside>
+
+    <section class="preview-area">
+      <div class="preview-toolbar">
+        <div>
+          <strong>Letter page preview</strong>
+          <span id="pageSummary">0 pages</span>
+        </div>
+        <div class="preview-legend"><span class="legend-dot break-dot"></span> manual page break</div>
+      </div>
+      <div id="pages" class="pages"></div>
+      <div id="assessmentPrintAll" class="assessment-print-all" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <div id="customEditorModal" class="editor-modal" hidden>
+    <div class="editor-backdrop" data-close-editor></div>
+    <section class="editor-dialog" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+      <header class="editor-dialog-header">
+        <div>
+          <div id="editorEyebrow" class="eyebrow">TEACHER-CREATED CARD</div>
+          <h2 id="editorTitle">Custom problem</h2>
+        </div>
+        <button class="editor-close" type="button" data-close-editor aria-label="Close editor">×</button>
+      </header>
+
+      <div class="editor-dialog-body">
+        <div id="customLabelWrap">
+          <label class="field-label" id="customLabelCaption" for="customLabel">Problem number / label</label>
+          <input id="customLabel" class="text-input" value="Custom 1">
+        </div>
+
+        <div id="sectionHeadingWrap" class="source-section-heading" hidden>
+          <label class="field-label" for="sectionHeadingInput">Section heading</label>
+          <input id="sectionHeadingInput" class="text-input" value="">
+          <div class="control-hint">This heading is shared by the selected cards from this lesson section in this document only.</div>
+        </div>
+
+        <div id="editorSourceNote" class="source-override-note" hidden>
+          You are editing this card only for the current assembly. The extracted textbook source remains unchanged.
+        </div>
+
+        <div id="placementPanel" class="placement-panel">
+          <div class="field-label">Place in document</div>
+          <div class="placement-row">
+            <select id="placementMode" class="select-input compact-select" aria-label="Place before or after">
+              <option value="after">After</option>
+              <option value="before">Before</option>
+              <option value="keep">Keep current position</option>
+            </select>
+            <select id="placementReference" class="select-input" aria-label="Reference card"></select>
+          </div>
+          <div id="placementHint" class="placement-hint">Choose where this teacher-created card should appear in the assembled document.</div>
+        </div>
+
+        <div class="rich-toolbar" role="toolbar" aria-label="Rich text editor">
+          <select id="editorBlockStyle" title="Paragraph style" aria-label="Paragraph style">
+            <option value="p">Paragraph</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+          </select>
+          <button type="button" data-cmd="bold" title="Bold"><strong>B</strong></button>
+          <button type="button" data-cmd="italic" title="Italic"><em>I</em></button>
+          <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+          <button type="button" data-cmd="insertUnorderedList" title="Bulleted list">• List</button>
+          <button type="button" data-cmd="insertOrderedList" title="Numbered list">1. List</button>
+          <button type="button" data-cmd="justifyLeft" title="Align left">⇤</button>
+          <button type="button" data-cmd="justifyCenter" title="Center">↔</button>
+          <button type="button" data-cmd="justifyRight" title="Align right">⇥</button>
+          <button id="editorLinkBtn" type="button" title="Insert link">Link</button>
+          <button id="editorImageBtn" type="button" title="Upload an image from this computer">Upload image</button>
+          <button id="editorImageUrlBtn" type="button" title="Insert image by URL">Image URL</button>
+          <input id="editorImageFile" type="file" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+          <button id="editorTableBtn" type="button" title="Insert a 2 by 2 table">Table</button>
+          <button id="editorMathBtn" class="math-toolbar-btn" type="button" title="Insert math formula">Math</button>
+          <button id="editorVisualBtn" class="visual-toolbar-btn" type="button" title="Insert a graph, model, or printable at the cursor">Visual</button>
+          <button id="editorEditVisualBtn" class="visual-toolbar-btn" type="button" title="Edit the selected inserted visual" hidden>Edit visual</button>
+          <button type="button" data-cmd="removeFormat" title="Clear formatting">Clear</button>
+        </div>
+
+        <div id="richEditor" class="rich-editor" contenteditable="true" spellcheck="true" aria-label="Custom card content"></div>
+
+        <div id="mathPanel" class="math-panel" hidden>
+          <div class="math-builder-head">
+            <div>
+              <div class="field-label">Visual math builder</div>
+              <div class="math-builder-sub">Click a template or symbol, then refine it in the formula box. The preview updates live.</div>
+            </div>
+            <div class="math-builder-selects">
+              <select id="mathTemplateSelect" class="select-input compact-select" aria-label="Math templates">
+                <option value="">Templates</option>
+                <option value="\frac{|}{}">Fraction</option>
+                <option value="^{|}">Exponent</option>
+                <option value="_{|}">Subscript</option>
+                <option value="\sqrt{|}">Square root</option>
+                <option value="\sqrt[|]{}">Nth root</option>
+                <option value="\left| | \right|">Absolute value</option>
+                <option value="\sum_{i=1}^{|n}">Summation</option>
+                <option value="\int_{|a}^{b} \, dx">Definite integral</option>
+                <option value="\begin{bmatrix}|a & b \\ c & d\end{bmatrix}">2x2 matrix</option>
+                <option value="\begin{cases}|expression & condition \\ expression & condition\end{cases}">Piecewise</option>
+              </select>
+              <select id="mathExampleSelect" class="select-input compact-select" aria-label="Math examples">
+                <option value="">Examples</option>
+                <option value="y=mx+b">Slope-intercept form</option>
+                <option value="m=\frac{y_2-y_1}{x_2-x_1}">Slope formula</option>
+                <option value="x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}">Quadratic formula</option>
+                <option value="a^2+b^2=c^2">Pythagorean theorem</option>
+                <option value="d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}">Distance formula</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="math-palette" role="toolbar" aria-label="Math symbol palette">
+            <button type="button" data-math-snippet="\frac{|}{}" title="Fraction">a⁄b</button>
+            <button type="button" data-math-snippet="^{|}" title="Exponent">xⁿ</button>
+            <button type="button" data-math-snippet="_{|}" title="Subscript">xₙ</button>
+            <button type="button" data-math-snippet="\sqrt{|}" title="Square root">√</button>
+            <button type="button" data-math-snippet="\pm" title="Plus or minus">±</button>
+            <button type="button" data-math-snippet="\pi" title="Pi">π</button>
+            <button type="button" data-math-snippet="\theta" title="Theta">θ</button>
+            <button type="button" data-math-snippet="\le" title="Less than or equal">≤</button>
+            <button type="button" data-math-snippet="\ge" title="Greater than or equal">≥</button>
+            <button type="button" data-math-snippet="\ne" title="Not equal">≠</button>
+            <button type="button" data-math-snippet="\approx" title="Approximately equal">≈</button>
+            <button type="button" data-math-snippet="\infty" title="Infinity">∞</button>
+            <button type="button" data-math-snippet="\sum_{i=1}^{|n}" title="Summation">Σ</button>
+            <button type="button" data-math-snippet="\int_{|a}^{b}" title="Integral">∫</button>
+            <button type="button" data-math-snippet="\rightarrow" title="Right arrow">→</button>
+            <button type="button" data-math-snippet="\leftrightarrow" title="Two-way arrow">↔</button>
+            <button type="button" data-math-snippet="\in" title="Element of">∈</button>
+            <button type="button" data-math-snippet="\cup" title="Union">∪</button>
+            <button type="button" data-math-snippet="\cap" title="Intersection">∩</button>
+            <button type="button" data-math-snippet="\left(|\right)" title="Parentheses">( )</button>
+            <button type="button" data-math-snippet="\left[|\right]" title="Brackets">[ ]</button>
+          </div>
+
+          <div class="math-panel-grid">
+            <div>
+              <label class="field-label" for="mathInput">Formula source</label>
+              <textarea id="mathInput" rows="4" placeholder="Build with the buttons above or type LaTeX directly."></textarea>
+              <label class="toggle-row compact-toggle"><input id="mathDisplay" type="checkbox"> <span>Display on its own line</span></label>
+            </div>
+            <div>
+              <div class="field-label">Live preview</div>
+              <div id="mathPreview" class="math-preview">Choose a template, symbol, or example.</div>
+            </div>
+          </div>
+          <div class="math-actions">
+            <button id="cancelMathBtn" class="secondary-btn" type="button">Cancel math</button>
+            <button id="insertMathBtn" class="primary-btn" type="button">Insert formula</button>
+          </div>
+        </div>
+
+        <div class="editor-note">Math stays editable as LaTeX. Visuals generated here are inserted at the cursor and remain part of this assembly only.</div>
+      </div>
+
+      <footer class="editor-dialog-footer">
+        <button class="secondary-btn" type="button" data-close-editor>Cancel</button>
+        <button id="saveCustomCard" class="primary-btn" type="button">Add to document</button>
+      </footer>
+    </section>
+  </div>
+  <div id="visualModal" class="editor-modal" hidden>
+    <div class="editor-backdrop" data-close-visual></div>
+    <section class="editor-dialog visual-dialog" role="dialog" aria-modal="true" aria-labelledby="visualModalTitle">
+      <header class="editor-dialog-header">
+        <div><div class="eyebrow">INSERT VISUAL / PRINTABLE</div><h2 id="visualModalTitle">Add a visual</h2></div>
+        <button class="editor-close" type="button" data-close-visual aria-label="Close visual builder">×</button>
+      </header>
+      <div class="editor-dialog-body">
+        <div class="visual-editor-grid">
+          <div>
+            <label class="field-label" for="visualType">Visual type</label>
+            <select id="visualType" class="select-input">
+              <option value="blank_graph">Blank coordinate plane</option>
+              <option value="number_line">Blank number line</option>
+              <option value="function_graph">Function grapher</option>
+              <option value="graph_paper">Graph paper</option>
+              <option value="diamond">Diamond problem</option>
+              <option value="input_output_table">Input-output table</option>
+              <option value="area_model">Area model</option>
+              <option value="fraction_bar">Fraction bar</option>
+              <option value="hundred_grid">Hundred grid</option>
+              <option value="unit_circle">Unit circle</option>
+            </select>
+            <div id="visualControls" class="visual-controls"></div>
+            <div class="visual-action-row">
+              <button id="randomizeVisualBtn" class="secondary-btn" type="button">Randomize</button>
+              <button id="generateVisualBtn" class="secondary-btn" type="button">Generate preview</button>
+            </div>
+            <div id="visualStatus" class="visual-status"></div>
+          </div>
+          <div>
+            <div class="field-label">Preview</div>
+            <div id="visualPreview" class="visual-preview"><span>Choose settings and generate a preview.</span></div>
+            <div class="control-hint">The generated asset is stored locally and the saved document keeps its visual type and settings.</div>
+          </div>
+        </div>
+      </div>
+      <footer class="editor-dialog-footer">
+        <button class="secondary-btn" type="button" data-close-visual>Cancel</button>
+        <button id="insertVisualBtn" class="primary-btn" type="button" disabled>Insert visual</button>
+      </footer>
+    </section>
+  </div>
+
+  <div id="saveModal" class="editor-modal" hidden>
+    <div class="editor-backdrop" data-close-save></div>
+    <section class="editor-dialog save-dialog" role="dialog" aria-modal="true" aria-labelledby="saveModalTitle">
+      <header class="editor-dialog-header">
+        <div><div class="eyebrow">LIBRARY</div><h2 id="saveModalTitle">Save document</h2></div>
+        <button class="editor-close" type="button" data-close-save aria-label="Close save dialog">×</button>
+      </header>
+      <div class="editor-dialog-body">
+        <label class="field-label" for="saveSetName">Library item name</label>
+        <input id="saveSetName" class="text-input" placeholder="Chapter 1 Practice">
+        <div class="control-hint">This saves the editable recipe: source cards, teacher edits, custom cards, visuals, workspace, page breaks, and layout settings.</div>
+      </div>
+      <footer class="editor-dialog-footer">
+        <button class="secondary-btn" type="button" data-close-save>Cancel</button>
+        <button id="confirmSaveSet" class="primary-btn" type="button">Save to library</button>
+      </footer>
+    </section>
+  </div>
+
+</body>
+</html>

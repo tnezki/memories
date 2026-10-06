@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Create - CC3 Tools V3</title>
+  <link rel="stylesheet" href="/reader/assets/reader.css">
+  <style>
+    :root{--navy:#12365c;--line:#d3dee8;--muted:#647587;--bg:#eef3f7;--soft:#f7fafc;--blue:#0867c7;--green:#206a49}
+    body{background:var(--bg)}.pagex{max-width:1280px;margin:24px auto 64px;padding:0 22px}.hero2{background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px 24px}.hero2 h1{margin:0;color:var(--navy);font-size:30px}.hero2 p{margin:7px 0 0;color:var(--muted);font-size:14px}.step{background:#fff;border:1px solid var(--line);border-radius:17px;margin-top:16px;padding:20px 22px}.step-head{display:flex;gap:13px;align-items:flex-start;margin-bottom:15px}.num{width:34px;height:34px;border-radius:999px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;flex:0 0 auto}.step-head h2{margin:1px 0 2px;color:var(--navy);font-size:22px}.step-head p{margin:0;color:var(--muted);font-size:13px}.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mode{border:1px solid #b9c8d6;background:#fff;border-radius:12px;padding:15px;text-align:left;cursor:pointer;color:var(--navy);min-height:104px}.mode strong{font-size:16px;display:block}.mode span{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:5px}.mode.active{border:2px solid var(--blue);background:#f5faff;padding:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field label,.mini-label{display:block;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:#586a7a;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;box-sizing:border-box;border:1px solid #b8c8d6;border-radius:9px;background:#fff;padding:10px 11px;color:#173956;font:inherit}.field textarea{min-height:92px;resize:vertical}.wide{grid-column:1/-1}.source-box{border:1px dashed #aebfce;border-radius:11px;padding:14px;background:var(--soft)}.source-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}.file-name{font-size:12px;color:var(--muted);margin-top:7px}.btn{border:1px solid #b8c8d6;background:#fff;color:var(--navy);border-radius:9px;padding:10px 13px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}.btn.blue{background:#075fae;border-color:#075fae;color:#fff}.btn:disabled{opacity:.5;cursor:not-allowed}.target-controls{display:grid;grid-template-columns:180px 180px minmax(260px,1fr) auto auto;gap:9px;align-items:end}.target-list{margin-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.target{border:1px solid #d7e1e8;border-radius:10px;padding:10px 11px;display:flex;gap:9px;align-items:flex-start;background:#fff}.target input{margin-top:3px}.target b{display:block;color:#31536f;font-size:11px;margin-bottom:3px}.target span{font-size:13px;line-height:1.35}.count{font-size:12px;color:var(--muted);margin-top:9px}.request-actions,.result-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.status{margin-top:10px;border-radius:9px;padding:10px 12px;font-size:12px;display:none}.status.show{display:block}.status.ok{background:#eef8f3;border:1px solid #c4e0d1;color:var(--green)}.status.error{background:#fff2f2;border:1px solid #e7c6c6;color:#9b3131}.status.info{background:#f1f7fd;border:1px solid #c9dced;color:#315b7d}.upload-result{margin-top:13px;padding-top:13px;border-top:1px solid #e3e9ee}.muted-note{font-size:11px;color:var(--muted);margin-top:7px}.hidden{display:none!important}.library-callout{background:#f8fbfd;border:1px solid #d8e2e9;border-radius:11px;padding:12px 14px;color:#496173;font-size:12px;margin-top:10px}
+    @media(max-width:850px){.mode-grid,.grid,.target-list{grid-template-columns:1fr}.target-controls{grid-template-columns:1fr 1fr}.target-controls .scope-field{grid-column:1/-1}.wide{grid-column:auto}}@media(max-width:560px){.target-controls{grid-template-columns:1fr}.target-controls .scope-field{grid-column:auto}.source-line{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><a class="brand" href="/reader/index.html">CC3 Tools V3</a><span id="barTitle">Create</span><div class="spacer"></div><a href="/saved/index.html" style="color:white;text-decoration:none;font-weight:800">Library</a></div>
+  <main class="pagex">
+    <section class="hero2"><h1 id="pageTitle">Performance Tasks</h1><p id="pageIntro"></p></section>
+
+    <section class="step">
+      <div class="step-head"><div class="num">1</div><div><h2>How do you want to start?</h2><p>Choose one path. More controls appear only when you need them.</p></div></div>
+      <div class="mode-grid">
+        <button class="mode active" data-mode="existing"><strong>Existing item</strong><span>Upload a PDF, DOCX, image, or other source — or add a URL — and save it to the Library.</span></button>
+        <button class="mode" data-mode="i_cans"><strong>I Cans</strong><span>Choose the learning targets, make a request for ChatGPT, then upload the finished result.</span></button>
+        <button class="mode" data-mode="combine"><strong>Combine</strong><span>Give ChatGPT an existing source plus selected I Cans and ask for a stronger aligned version.</span></button>
+      </div>
+    </section>
+
+    <section class="step">
+      <div class="step-head"><div class="num">2</div><div><h2>Set the basics.</h2><p>Keep this short. The request contract handles the quality expectations.</p></div></div>
+      <div class="grid">
+        <div class="field"><label for="titleInput">Title</label><input id="titleInput" type="text" placeholder="Chapter 3 Performance Task"></div>
+        <div class="field"><label for="chapterSelect">Chapter</label><select id="chapterSelect"></select></div>
+        <div class="field request-only"><label for="durationSelect">Approximate time</label><select id="durationSelect"></select></div>
+        <div class="field request-only"><label for="productSelect">Student product</label><select id="productSelect"></select></div>
+        <div class="field wide"><label for="notesInput">Teacher notes (optional)</label><textarea id="notesInput" placeholder="Anything ChatGPT or your future self should know..."></textarea></div>
+      </div>
+    </section>
+
+    <section id="sourceStep" class="step">
+      <div class="step-head"><div id="sourceNum" class="num">3</div><div><h2>Add source material.</h2><p>Use a file, a URL, or both. Files stay inside this local CC3 Tools folder.</p></div></div>
+      <div class="grid">
+        <div class="source-box">
+          <div class="mini-label">Upload source</div>
+          <div class="source-line"><input id="sourceFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.md,.html,.htm,.png,.jpg,.jpeg,.webp"><button id="clearFile" class="btn" type="button">Clear</button></div>
+          <div id="fileName" class="file-name">No file selected.</div>
+        </div>
+        <div class="field"><label for="sourceUrl">Source URL (optional)</label><input id="sourceUrl" type="url" placeholder="https://..."><div class="muted-note">The URL is stored in the request/library item; CC3 Tools does not copy the website.</div></div>
+      </div>
+    </section>
+
+    <section id="targetStep" class="step hidden">
+      <div class="step-head"><div id="targetNum" class="num">3</div><div><h2>Choose the I Cans.</h2><p>Pick only the targets you want students to show evidence for.</p></div></div>
+      <div class="target-controls">
+        <div class="field"><label for="targetView">View</label><select id="targetView"><option value="section">Lesson I Cans</option><option value="mg">Mastery Goal I Cans</option></select></div>
+        <div class="field"><label for="targetChapter">Chapter</label><select id="targetChapter"></select></div>
+        <div class="field scope-field"><label for="targetScope">Scope</label><select id="targetScope"></select></div>
+        <button id="selectAll" class="btn" type="button">Select all</button><button id="clearTargets" class="btn" type="button">Clear</button>
+      </div>
+      <div id="targetList" class="target-list"></div><div id="targetCount" class="count">0 selected</div>
+    </section>
+
+    <section id="finishStep" class="step">
+      <div class="step-head"><div id="finishNum" class="num">4</div><div><h2 id="finishTitle">Save to the Library.</h2><p id="finishText"></p></div></div>
+      <div id="existingActions" class="request-actions"><button id="saveExisting" class="btn primary" type="button">Save existing item to Library</button></div>
+      <div id="requestActions" class="hidden">
+        <div class="request-actions"><button id="makeRequest" class="btn primary" type="button">Create + download request ZIP</button><a class="btn" href="/saved/index.html">Open Library</a></div>
+        <div id="requestStatus" class="status"></div>
+        <div id="resultUpload" class="upload-result hidden">
+          <div class="mini-label">Upload ChatGPT result</div>
+          <div class="source-line"><input id="resultFile" type="file" accept=".zip,.json"><button id="uploadResult" class="btn blue" type="button">Upload result + add to Library</button></div>
+          <div class="muted-note">Expected: CC3_Creation_Result.zip or the matching JSON result.</div>
+        </div>
+      </div>
+      <div id="finalStatus" class="status"></div>
+      <div id="finalActions" class="result-actions hidden"></div>
+      <div class="library-callout">The Library is the common home for saved lessons, assessments, performance tasks, projects, printables, and imported source items.</div>
+    </section>
+  </main>
+<script>
+(() => {
+  const $=id=>document.getElementById(id); const params=new URLSearchParams(location.search);
+  const kind=params.get('type')==='project'?'project':'performance_task'; const label=kind==='project'?'Projects':'Performance Tasks';
+  $('pageTitle').textContent=label; $('barTitle').textContent=label; document.title=`${label} - CC3 Tools V3`;
+  $('pageIntro').textContent=kind==='project'?'Start with an existing project, build one from I Cans, or combine a source with I Cans. Request-driven projects require milestones, a final product, aligned evidence, a rubric, and teacher guidance.':'Start with an existing task, build one from I Cans, or combine a source with I Cans. Request-driven performance tasks require authentic application, visible evidence for each selected I Can, a rubric, and teacher guidance.';
+  const durations=kind==='project'?['2 class periods','3–5 class periods','1 week','2 weeks','Teacher / ChatGPT decides']:['20–30 minutes','45–60 minutes','1 class period','2 class periods','Teacher / ChatGPT decides'];
+  const products=kind==='project'?['Teacher / ChatGPT decides','Presentation','Written report','Poster / display','Model / prototype','Digital product','Student choice']:['Teacher / ChatGPT decides','Written response','Poster / one-pager','Short presentation','Model / data display','Student choice'];
+  $('durationSelect').innerHTML=durations.map(x=>`<option>${x}</option>`).join(''); $('productSelect').innerHTML=products.map(x=>`<option>${x}</option>`).join('');
+  $('chapterSelect').innerHTML=Array.from({length:10},(_,i)=>`<option value="${i+1}">Chapter ${i+1}</option>`).join('');
+  $('targetChapter').innerHTML=$('chapterSelect').innerHTML;
+  let mode='existing', plan=null, selected=new Map(), uploadedSource=null, currentRequest=null, sourceSignature='';
+  const modes=[...document.querySelectorAll('.mode')];
+  function showStatus(el,msg,type='info'){el.textContent=msg;el.className=`status show ${type}`}
+  function clearStatus(el){el.textContent='';el.className='status'}
+  function invalidateRequest(){currentRequest=null;$('resultUpload').classList.add('hidden');clearStatus($('requestStatus'));}
+  function setMode(next){mode=next;modes.forEach(b=>b.classList.toggle('active',b.dataset.mode===mode)); const usesSource=mode!=='i_cans', usesTargets=mode!=='existing'; $('sourceStep').classList.toggle('hidden',!usesSource); $('targetStep').classList.toggle('hidden',!usesTargets); document.querySelectorAll('.request-only').forEach(x=>x.classList.toggle('hidden',!usesTargets)); $('existingActions').classList.toggle('hidden',usesTargets);$('requestActions').classList.toggle('hidden',!usesTargets);$('finishTitle').textContent=usesTargets?'Make the request.':'Save to the Library.';$('finishText').textContent=usesTargets?'CC3 Tools saves the request locally and downloads the same ZIP for ChatGPT. Upload the returned result here and it becomes an editable Library item.':'Keep the original file or URL with a simple editable Library record.';if(mode==='combine'){$('sourceNum').textContent='3';$('targetNum').textContent='4';$('finishNum').textContent='5'}else{$('sourceNum').textContent='3';$('targetNum').textContent='3';$('finishNum').textContent='4'}invalidateRequest();}
+  modes.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+  ['titleInput','chapterSelect','durationSelect','productSelect','notesInput','sourceUrl'].forEach(id=>$(id).addEventListener('input',invalidateRequest));
+  $('chapterSelect').addEventListener('change',()=>{ selected.clear(); $('targetChapter').value=$('chapterSelect').value; renderScopes(); invalidateRequest(); });
+  $('targetChapter').addEventListener('change',()=>{$('chapterSelect').value=$('targetChapter').value;renderScopes();invalidateRequest();}); $('targetView').addEventListener('change',()=>{selected.clear();renderScopes();invalidateRequest()}); $('targetScope').addEventListener('change',()=>{renderTargets();invalidateRequest()});
+  $('sourceFile').addEventListener('change',()=>{uploadedSource=null;sourceSignature='';$('fileName').textContent=$('sourceFile').files[0]?.name||'No file selected.';invalidateRequest()}); $('clearFile').onclick=()=>{$('sourceFile').value='';uploadedSource=null;sourceSignature='';$('fileName').textContent='No file selected.';invalidateRequest()};
+  async function ensureSourceUploaded(){const f=$('sourceFile').files[0];if(!f)return null;const sig=`${f.name}|${f.size}|${f.lastModified}`;if(uploadedSource&&sourceSignature===sig)return uploadedSource;const r=await fetch('/api/creation-source',{method:'POST',headers:{'Content-Type':'application/octet-stream','X-Filename':encodeURIComponent(f.name)},body:f});const out=await r.json();if(!r.ok)throw new Error(out.error||'Could not upload source file.');uploadedSource={name:out.name,stored_name:out.stored_name,url:out.url,size:out.size};sourceSignature=sig;return uploadedSource;}
+  function chapterData(){return plan?.chapters?.find(c=>String(c.chapter)===$('targetChapter').value)}
+  function mgTargets(mg){return (mg.i_cans||[]).map((text,i)=>({id:`${mg.id}-IC${String(i+1).padStart(2,'0')}`,text,scope:`${mg.id} · ${mg.title}`}))}
+  function renderScopes(){if(!plan)return;const ch=chapterData();if(!ch)return;const view=$('targetView').value;const options=[`<option value="all">All ${view==='section'?'lesson':'Mastery Goal'} I Cans in Chapter ${ch.chapter}</option>`];if(view==='section')(ch.sections||[]).forEach(s=>options.push(`<option value="${s.section}">${s.section} — ${s.title}</option>`));else (ch.mastery_goals||[]).forEach(m=>options.push(`<option value="${m.id}">${m.id} — ${m.title}</option>`));$('targetScope').innerHTML=options.join('');renderTargets()}
+  function visibleTargets(){const ch=chapterData();if(!ch)return[];const view=$('targetView').value,scope=$('targetScope').value;let arr=[];if(view==='section'){(ch.sections||[]).forEach(s=>{if(scope==='all'||scope===s.section)(s.i_cans||[]).forEach(ic=>arr.push({id:ic.id,text:ic.text,scope:`${s.section} · ${s.title}`}))})}else{(ch.mastery_goals||[]).forEach(m=>{if(scope==='all'||scope===m.id)arr.push(...mgTargets(m))})}return arr}
+  function renderTargets(){const arr=visibleTargets();$('targetList').innerHTML=arr.map(t=>`<label class="target"><input type="checkbox" data-id="${t.id}" ${selected.has(t.id)?'checked':''}><span><b>${t.id} · ${t.scope}</b>${t.text}</span></label>`).join('');$('targetList').querySelectorAll('input').forEach(cb=>cb.addEventListener('change',()=>{const t=arr.find(x=>x.id===cb.dataset.id);if(cb.checked)selected.set(t.id,t);else selected.delete(t.id);updateCount();invalidateRequest()}));updateCount()}
+  function updateCount(){$('targetCount').textContent=`${selected.size} selected`}
+  $('selectAll').onclick=()=>{visibleTargets().forEach(t=>selected.set(t.id,t));renderTargets();invalidateRequest()};$('clearTargets').onclick=()=>{selected.clear();renderTargets();invalidateRequest()};
+  async function payloadBase(){const source=await ensureSourceUploaded();return{kind,mode,title:$('titleInput').value.trim(),chapter:Number($('chapterSelect').value),duration:$('durationSelect').value,product_type:$('productSelect').value,teacher_notes:$('notesInput').value.trim(),source_url:$('sourceUrl').value.trim(),source_files:source?[source]:[]}}
+  $('saveExisting').onclick=async()=>{clearStatus($('finalStatus'));try{const payload=await payloadBase();const r=await fetch('/api/creation-existing',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),out=await r.json();if(!r.ok)throw new Error(out.error||'Could not save item.');showStatus($('finalStatus'),'Saved to the Library.','ok');$('finalActions').classList.remove('hidden');$('finalActions').innerHTML=`<a class="btn primary" href="${out.open_url}">Open / edit item</a><a class="btn" href="${out.library_url}">Open Library</a>`}catch(e){showStatus($('finalStatus'),e.message,'error')}};
+  $('makeRequest').onclick=async()=>{clearStatus($('finalStatus'));try{if(!selected.size)throw new Error('Select at least one I Can.');const payload=await payloadBase();payload.selected_i_cans=[...selected.values()];payload.scope_id=$('targetScope').value==='all'?'':$('targetScope').value;payload.scope_title=$('targetScope').selectedOptions[0]?.textContent||'';const r=await fetch('/api/creation-request/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),out=await r.json();if(!r.ok)throw new Error(out.error||'Could not create request.');currentRequest=out;showStatus($('requestStatus'),`${out.name} saved locally at ${out.saved_path}. Download starting now. Upload the ChatGPT result below when it is ready.`,'ok');$('resultUpload').classList.remove('hidden');const a=document.createElement('a');a.href=out.download_url;a.download=out.name;document.body.appendChild(a);a.click();a.remove()}catch(e){showStatus($('requestStatus'),e.message,'error')}};
+  $('uploadResult').onclick=async()=>{clearStatus($('finalStatus'));try{if(!currentRequest)throw new Error('Create the request first.');const f=$('resultFile').files[0];if(!f)throw new Error('Choose the returned ZIP or JSON file.');const r=await fetch(`/api/creation-request/${encodeURIComponent(currentRequest.request_id)}/result`,{method:'POST',headers:{'Content-Type':'application/octet-stream','X-Filename':encodeURIComponent(f.name)},body:f}),out=await r.json();if(!r.ok)throw new Error(out.error||'Could not import result.');showStatus($('finalStatus'),'Result validated and added to the Library as an editable student item plus a separate Teacher Guide.','ok');$('finalActions').classList.remove('hidden');$('finalActions').innerHTML=`<a class="btn primary" href="${out.student_open_url}">Open student item</a><a class="btn" href="${out.teacher_guide_open_url}">Open Teacher Guide</a><a class="btn" href="${out.library_url}">Open Library</a>`}catch(e){showStatus($('finalStatus'),e.message,'error')}};
+  fetch('/library/textbooks/cc3e3/assessment_plan.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{plan=data;$('targetChapter').value=$('chapterSelect').value;renderScopes()}).catch(e=>showStatus($('finalStatus'),`Could not load I Cans: ${e.message}`,'error'));
+  setMode('existing');
+})();
+</script>
+</body></html>

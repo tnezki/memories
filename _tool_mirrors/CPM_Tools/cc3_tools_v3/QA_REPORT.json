@@ -1,0 +1,91 @@
+{
+  "schema": "cc3_tools_v3_qa/2",
+  "build": "full_course_student_source_20261005",
+  "card_count": 1476,
+  "chapter_cards": {
+    "1": 121,
+    "2": 125,
+    "3": 198,
+    "4": 116,
+    "5": 118,
+    "6": 180,
+    "7": 116,
+    "8": 223,
+    "9": 168,
+    "10": 111
+  },
+  "resource_pdf_count": 10,
+  "known_source_gaps": [
+    {
+      "lesson": "7.2.2",
+      "status": "incomplete_blank_capture",
+      "chapter": 7,
+      "source_file": "722.html",
+      "title": "How does y change with respect to 𝒙 ?"
+    },
+    {
+      "lesson": "7.2.3",
+      "status": "incomplete_blank_capture",
+      "chapter": 7,
+      "source_file": "723.html",
+      "title": "How can I determine the slope ratio?"
+    },
+    {
+      "lesson": "7.2.4",
+      "status": "incomplete_blank_capture",
+      "chapter": 7,
+      "source_file": "724.html",
+      "title": "What else can slope tell you?"
+    },
+    {
+      "lesson": "7.3.2",
+      "status": "incomplete_blank_capture",
+      "chapter": 7,
+      "source_file": "732.html",
+      "title": "How can I describe the association?"
+    },
+    {
+      "lesson": "9.1.1",
+      "status": "missing_source_file",
+      "chapter": 9,
+      "source_file": null,
+      "title": "How are the angles related?"
+    },
+    {
+      "lesson": "9.1.3",
+      "status": "incomplete_blank_capture",
+      "chapter": 9,
+      "source_file": "913.html",
+      "title": "What if the angle is on the outside?"
+    },
+    {
+      "lesson": "9.2.7",
+      "status": "incomplete_blank_capture",
+      "chapter": 9,
+      "source_file": "927.html",
+      "title": "Does it always work?"
+    },
+    {
+      "lesson": "10.1.2",
+      "status": "incomplete_blank_capture",
+      "chapter": 10,
+      "source_file": "1012.html",
+      "title": "What if the base is not a polygon?"
+    },
+    {
+      "lesson": "10.1.5",
+      "status": "missing_source_file",
+      "chapter": 10,
+      "source_file": null,
+      "title": "How many can be inflated?"
+    }
+  ],
+  "checks": [
+    "cards index IDs are unique",
+    "all indexed cards exist in their chapter pack",
+    "all rewritten local card asset references resolve",
+    "Chapter 1-10 resource PDFs resolve",
+    "local server returned HTTP 200 for home, picker, assembler assets, card index, chapter pack, content-scope API, and visuals page",
+    "picker.js and assemble.js passed node --check"
+  ]
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Assessment Plans - CC3 Tools V3</title>
+  <link rel="stylesheet" href="/reader/assets/reader.css">
+  <style>
+    :root{--navy:#12365c;--deep:#08075b;--blue:#0755a0;--line:#d5dfe7;--muted:#637382;--bg:#eef3f7;--paper:#fff;--soft:#f8fafc}
+    body{background:var(--bg)}
+    .plan-page{max-width:1260px;margin:24px auto;padding:0 22px 72px}
+    .head{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px 24px}
+    .head-row{display:flex;gap:18px;align-items:end;justify-content:space-between;flex-wrap:wrap}
+    .head h1{margin:0;color:var(--navy);font-size:30px}.head p{margin:6px 0 0;color:var(--muted);line-height:1.45}
+    .field{min-width:240px}.field label{display:block;color:#506170;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}.field select{width:100%;border:1px solid #bdcad6;border-radius:8px;background:#fff;padding:10px 11px;color:#163c61;font-weight:800;font-size:14px}
+    .chapter{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:24px 28px}
+    .chapter h2{margin:0;color:var(--deep);font-size:29px}.essential{font-size:17px;line-height:1.5;margin:12px 0 4px;color:#222}.essential strong{font-weight:900}
+    .section-card{border-top:1px solid #dbe3e9;padding:26px 4px 24px;margin-top:18px}.section-card:first-of-type{margin-top:24px}
+    .section-title{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}.section-title h3{margin:0;color:var(--deep);font-size:25px}.lesson-title{font-size:21px;font-weight:850;color:#1f2933}
+    .target{font-size:17px;line-height:1.5;margin:14px 0 16px;color:#252525}.target strong{font-weight:900}
+    .ican-heading{font-size:21px;font-weight:900;color:var(--blue);margin:0 0 8px}.ican-list{margin:0;padding-left:32px}.ican-list li{font-size:17px;line-height:1.48;margin:7px 0;color:#242424}
+    .mg-area{margin-top:32px;border-top:3px solid var(--deep);padding-top:24px}.mg-area>h2{margin:0 0 6px;color:var(--deep);font-size:28px}.mg-area>p{margin:0 0 16px;color:var(--muted);font-size:13px}
+    .mg{border-left:7px solid var(--deep);border-top:1px solid #aebdca;border-bottom:1px solid #d7e0e7;border-right:1px solid #d7e0e7;background:#fff;padding:20px 24px;margin:14px 0}.mg h3{margin:0;color:var(--deep);font-size:24px}.mg-goal{font-size:17px;line-height:1.5;margin:13px 0}.mg-goal strong{font-weight:900}.mg .ican-heading{margin-top:14px}.mg .ican-list li{font-size:16px}
+    @media(max-width:700px){.plan-page{padding:0 10px 50px}.chapter{padding:18px}.chapter h2{font-size:24px}.section-title h3{font-size:21px}.lesson-title{font-size:18px}.target,.ican-list li{font-size:15px}.mg h3{font-size:20px}.field{min-width:0;width:100%}}
+    @media print{body{background:#fff}.topbar,.head{display:none}.plan-page{max-width:none;margin:0;padding:0}.chapter{border:0;border-radius:0;padding:0}.section-card{break-inside:avoid}.mg{break-inside:avoid}.mg-area{break-before:auto}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><a class="brand" href="/reader/index.html">CC3 Tools V3</a><span>Assessment Plans</span><div class="spacer"></div></div>
+  <main class="plan-page">
+    <section class="head"><div class="head-row"><div><h1>Assessment Plans</h1><p>Chapter essential standard → lesson-level sections → I Can statements → Mastery Goals.</p></div><div class="field"><label for="chapterSelect">Chapter</label><select id="chapterSelect"></select></div></div></section>
+    <div id="chapterHost"></div>
+  </main>
+<script>
+(() => {
+ const DATA='/library/textbooks/cc3e3/assessment_plan.json';
+ const select=document.getElementById('chapterSelect'), host=document.getElementById('chapterHost');
+ let data=null;
+ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ function render(){
+   if(!data)return; const ch=data.chapters.find(x=>String(x.chapter)===select.value); if(!ch)return;
+   const sections=ch.sections.map(s=>`<section class="section-card"><div class="section-title"><h3>Section ${esc(s.section)}:</h3><div class="lesson-title">${esc(s.title)}</div></div><p class="target"><strong>Learning Target:</strong> ${esc(s.learning_target)}</p><h4 class="ican-heading">I Can Statements</h4><ul class="ican-list">${s.i_cans.map(ic=>`<li>${esc(ic.text.replace(/^I can\s+/i,''))}</li>`).join('')}</ul></section>`).join('');
+   const mgs=ch.mastery_goals.map(m=>`<article class="mg"><h3>${esc(m.id)} · ${esc(m.title)}</h3><p class="mg-goal"><strong>Mastery Goal:</strong> ${esc(m.mastery_goal)}</p><h4 class="ican-heading">I Can Statements</h4><ul class="ican-list">${m.i_cans.map(x=>`<li>${esc(x.replace(/^I can\s+/i,''))}</li>`).join('')}</ul></article>`).join('');
+   host.innerHTML=`<section class="chapter"><h2>Chapter ${esc(ch.chapter)} Essential Standard</h2><p class="essential"><strong>Essential Standard:</strong> ${esc(ch.essential_standard)}</p>${sections}<section class="mg-area"><h2>Chapter ${esc(ch.chapter)} Mastery Goals</h2><p>These are the stable reporting goals built only from skills appropriate to assess for mastery at this point in the course.</p>${mgs}</section></section>`;
+ }
+ fetch(DATA,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Could not load assessment plan (${r.status}).`);return r.json()}).then(d=>{data=d;select.innerHTML=d.chapters.map(ch=>`<option value="${ch.chapter}">Chapter ${ch.chapter}</option>`).join('');render()}).catch(e=>{host.innerHTML=`<section class="chapter">${esc(e.message)}</section>`});
+ select.addEventListener('change',render);
+})();
+</script>
+</body></html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Library - CC3 Tools V3</title>
+  <link rel="stylesheet" href="/reader/assets/reader.css">
+  <style>
+    :root{--navy:#12365c;--line:#d5dfe7;--muted:#657483;--bg:#eef3f7;--gold:#8b6500;--soft:#f7fafc}
+    body{background:var(--bg)}.page2{max-width:1180px;margin:24px auto;padding:0 22px 60px}.head{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px 23px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.head h1{margin:0;color:var(--navy);font-size:29px}.head p{margin:5px 0 0;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #bdcad6;background:#fff;color:var(--navy);font-weight:800;border-radius:8px;padding:9px 11px;text-decoration:none;cursor:pointer}.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}.status{margin:13px 2px 0;font-size:12px;color:var(--muted)}
+    .library{margin-top:14px;display:grid;gap:15px}.chapter{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.chapter-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 17px;background:#f8fbfd;border-bottom:1px solid var(--line)}.chapter-head h2{margin:0;color:var(--navy);font-size:20px}.chapter-count{font-size:11px;color:var(--muted);font-weight:800}.sections{padding:13px;display:grid;gap:12px}.section-block{border:1px solid #dbe4eb;border-radius:11px;overflow:hidden;background:#fff}.section-head{padding:10px 13px;background:var(--soft);display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #e3eaf0}.section-head h3{margin:0;color:#31536f;font-size:14px}.section-head span{font-size:10px;color:var(--muted);font-weight:800}.sets{display:grid}.set{padding:13px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border-top:1px solid #edf1f4}.set:first-child{border-top:0}.set h4{font-size:15px;margin:0;color:#183d60}.meta{font-size:11px;color:var(--muted);margin-top:5px;display:flex;gap:12px;flex-wrap:wrap}.scope{color:var(--gold);font-weight:800}.set-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.small{border:1px solid #c3ced7;background:#fff;color:#244c6c;border-radius:7px;padding:7px 9px;font-size:11px;font-weight:800;text-decoration:none;cursor:pointer}.small.open{background:var(--navy);border-color:var(--navy);color:#fff}.small.delete{color:#9d2f2f}.empty{background:#fff;border:1px dashed #b7c5d0;border-radius:12px;padding:45px;text-align:center;color:var(--muted)}
+    @media(max-width:650px){.head,.set{grid-template-columns:1fr;display:grid}.set-actions{justify-content:flex-start}.chapter-head,.section-head{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><a class="brand" href="/reader/index.html">CC3 Tools V3</a><span>Library</span><div class="spacer"></div></div>
+  <main class="page2">
+    <section class="head"><div><h1>Library</h1><p>Lessons, assessments, performance tasks, projects, teacher guides, printables, and imported source items saved locally in CC3 Tools.</p></div></section>
+    <div id="status" class="status">Loading Library...</div><section id="library" class="library"></section>
+  </main>
+<script>
+(() => {
+ const library=document.getElementById('library'), status=document.getElementById('status');
+ const esc=s=>String(s??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+ const fmt=t=>t?new Date(Number(t)*1000).toLocaleString():'Unknown';
+ const natural=(a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true,sensitivity:'base'});
+ function chapterLabel(item){
+   if(item.chapter) return `Chapter ${item.chapter}`;
+   if((item.chapters||[]).length>1) return 'Multiple Chapters';
+   return item.document_kind==='printable' ? 'General' : 'General / Unassigned';
+ }
+ function sectionLabel(item){
+   if(item.section) return `Section ${item.section}`;
+   if(item.document_kind==='assessment') return 'Assessments';
+   if(item.chapter && (item.sections||[]).length>1) return 'Multiple Sections';
+   if((item.chapters||[]).length>1) return 'Cross-Chapter Sets';
+   if(item.document_kind==='printable') return item.chapter ? 'Whole Chapter' : 'Printables';
+   return 'General / Unassigned';
+ }
+ function groupItems(items){
+   const chapters=new Map();
+   items.forEach(item=>{
+     const ch=chapterLabel(item), sec=sectionLabel(item);
+     if(!chapters.has(ch)) chapters.set(ch,new Map());
+     const sections=chapters.get(ch);
+     if(!sections.has(sec)) sections.set(sec,[]);
+     sections.get(sec).push(item);
+   });
+   return chapters;
+ }
+ async function duplicate(item){
+   try{
+     const rr0=await fetch(`/api/saved-sets/${encodeURIComponent(item.id)}`,{cache:'no-store'}), src=await rr0.json();
+     if(!rr0.ok) throw new Error(src.error||'Could not open saved set.');
+     const payload={name:`${item.name} Copy`,recipe:src.recipe};
+     if(src.assessment_bundle) payload.assessment_bundle=src.assessment_bundle;
+     const rr=await fetch('/api/saved-sets',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+     const out=await rr.json(); if(!rr.ok) throw new Error(out.error||'Duplicate failed'); refresh();
+   }catch(e){alert(e.message)}
+ }
+ async function remove(item){
+   if(!confirm(`Delete saved set “${item.name}”?`))return;
+   try{const rr=await fetch(`/api/saved-sets/${encodeURIComponent(item.id)}`,{method:'DELETE'});const out=await rr.json();if(!rr.ok)throw new Error(out.error||'Delete failed');refresh()}catch(e){alert(e.message)}
+ }
+ function kindLabel(item){
+   const kind=String(item.document_kind||'assembly');
+   const labels={assembly:'Lesson / Document',assessment:'Assessment',printable:'Printable',performance_task:'Performance Task',project:'Project',performance_task_teacher_guide:'Performance Task · Teacher Guide',project_teacher_guide:'Project · Teacher Guide'};
+   return labels[kind]||kind.replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
+ }
+ function render(items){
+   library.innerHTML='';
+   if(!items.length){library.innerHTML='<div class="empty"><strong>Your Library is empty.</strong><br><br>Build a lesson or assessment, import an existing item, or create a Performance Task / Project.</div>';return;}
+   const chapters=groupItems(items);
+   [...chapters.entries()].sort((a,b)=>natural(a[0],b[0])).forEach(([chapterName,sections])=>{
+     const chapter=document.createElement('section'); chapter.className='chapter';
+     const chapterCount=[...sections.values()].reduce((n,arr)=>n+arr.length,0);
+     chapter.innerHTML=`<div class="chapter-head"><h2>${esc(chapterName)}</h2><span class="chapter-count">${chapterCount} saved set${chapterCount===1?'':'s'}</span></div><div class="sections"></div>`;
+     const sectionWrap=chapter.querySelector('.sections');
+     [...sections.entries()].sort((a,b)=>natural(a[0],b[0])).forEach(([sectionName,sectionItems])=>{
+       const block=document.createElement('section'); block.className='section-block';
+       block.innerHTML=`<div class="section-head"><h3>${esc(sectionName)}</h3><span>${sectionItems.length} set${sectionItems.length===1?'':'s'}</span></div><div class="sets"></div>`;
+       const sets=block.querySelector('.sets');
+       sectionItems.sort((a,b)=>(b.updated_at||0)-(a.updated_at||0)).forEach(item=>{
+         const el=document.createElement('article'); el.className='set';
+         const scope=item.scope_label?`<span class="scope">${esc(item.scope_label)}</span>`:'';
+         const isPrintable=item.document_kind==='printable';
+         const isAssessment=item.document_kind==='assessment';
+         const versionCount=Number(item.version_count)||1;
+         const assessmentLabel=item.assessment_type||'Assessment';
+         const kindMeta=isPrintable?'<span>Printable</span>':(isAssessment?`<span>${esc(assessmentLabel)} · ${versionCount} version${versionCount===1?'':'s'}</span>`:`<span>${esc(kindLabel(item))} · ${item.card_count||0} card${Number(item.card_count)===1?'':'s'}</span>`);
+         const openHref=isPrintable?`/visuals/index.html?set=${encodeURIComponent(item.id)}`:`/builder/assemble.html?set=${encodeURIComponent(item.id)}`;
+         el.innerHTML=`<div><h4>${esc(item.name)}</h4><div class="meta">${scope}${kindMeta}<span>Updated ${esc(fmt(item.updated_at))}</span>${item.document_title?`<span>${isPrintable?'Title':(isAssessment?'Assessment':'Document')}: ${esc(item.document_title)}</span>`:''}</div></div><div class="set-actions"><a class="small open" href="${openHref}">Open / Edit</a><button class="small duplicate">Duplicate</button><button class="small delete">Delete</button></div>`;
+         el.querySelector('.duplicate').onclick=()=>duplicate(item); el.querySelector('.delete').onclick=()=>remove(item); sets.appendChild(el);
+       });
+       sectionWrap.appendChild(block);
+     });
+     library.appendChild(chapter);
+   });
+ }
+ async function refresh(){
+   status.textContent='Loading Library...'; library.innerHTML='';
+   try{
+     const r=await fetch('/api/saved-sets',{cache:'no-store'}), data=await r.json(); if(!r.ok) throw new Error(data.error||'Could not load saved sets.');
+     const items=data.items||[]; status.textContent=`${items.length} item${items.length===1?'':'s'} in the local Library.`; render(items);
+   }catch(e){status.textContent='';library.innerHTML=`<div class="empty">Could not load the saved library: ${esc(e.message)}</div>`;}
+ }
+ refresh();
+})();
+</script>
+</body></html>
