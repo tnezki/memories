@@ -78,6 +78,26 @@ if [[ "$transfer_status" -eq 0 ]]; then
   refresh_prompting_mirror 'Physics Tools' "$GITHUB_ROOT/_physics_teacher_tools/Refresh Physics GitHub Mirror.command"
   refresh_prompting_mirror 'AP Calculus Tools' "$GITHUB_ROOT/_apcalc_teacher_tools/Refresh AP Calc GitHub Mirror.command"
 
+  algebra_refresh="$MEMORIES_ROOT/Tools/tool_mirrors/Refresh Algebra 1 Tools Mirror.command"
+  if [[ -f "$algebra_refresh" ]]; then
+    if /bin/bash "$algebra_refresh" --no-prompt; then
+      printf 'MIRROR REFRESHED: Algebra 1 Tools\n'
+    else
+      printf 'MIRROR WARNING: Algebra 1 Tools did not refresh. The transfer itself succeeded.\n'
+      mirror_warning=1
+    fi
+  fi
+
+  algebra_legacy_assessment_refresh="$MEMORIES_ROOT/Tools/tool_mirrors/Refresh Algebra Legacy Assessment Builder Mirror.command"
+  if [[ -f "$algebra_legacy_assessment_refresh" ]]; then
+    if /bin/bash "$algebra_legacy_assessment_refresh" --no-prompt; then
+      printf 'MIRROR REFRESHED: Algebra legacy Assessment Builder source\n'
+    else
+      printf 'MIRROR WARNING: Algebra legacy Assessment Builder source did not refresh. The transfer itself succeeded.\n'
+      mirror_warning=1
+    fi
+  fi
+
   cpm_refresh="$MEMORIES_ROOT/Tools/tool_mirrors/Refresh CPM Tools Mirror.command"
   if [[ -f "$cpm_refresh" ]]; then
     if /bin/bash "$cpm_refresh" --no-prompt; then
