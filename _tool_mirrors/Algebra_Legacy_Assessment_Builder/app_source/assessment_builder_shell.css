@@ -1,0 +1,127 @@
+/* Algebra 1 Tools shared shell convergence - 2026-10-06
+   Visual-only layer. Existing Assessment Builder ids, engines, Portfolio logic,
+   generation, save paths, and print controller remain unchanged. */
+:root{
+  --shell-navy:#153f68;
+  --shell-navy-2:#10375e;
+  --shell-bg:#eef3f7;
+  --shell-line:#d4dee7;
+  --shell-muted:#647383;
+  --shell-soft:#f7f9fb;
+  --shell-green:#226947;
+}
+body{background:var(--shell-bg);color:#1e2a39}
+.course-topbar{
+  min-height:60px;padding:0 22px;display:flex;align-items:center;gap:18px;
+  background:var(--shell-navy);color:#fff;border-bottom:1px solid #0d3155;
+  box-shadow:0 1px 3px rgba(18,54,92,.18);position:sticky;top:0;z-index:30
+}
+.course-brand{font-size:20px;font-weight:900;letter-spacing:-.01em}
+.course-tool-name{font-size:15px;font-weight:800;opacity:.95}
+.course-topbar-spacer{flex:1}
+.course-topbar-note{font-size:14px;font-weight:800;opacity:.92}
+.app-shell{max-width:1540px;margin:0 auto;padding:22px 16px 68px}
+.builder-hero{
+  background:#fff;border:1px solid var(--shell-line);border-radius:16px;padding:22px 26px;
+  display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:16px
+}
+.builder-hero h1{margin:0;color:var(--shell-navy);font-size:31px;letter-spacing:-.02em}
+.builder-hero p{margin:7px 0 0;color:var(--shell-muted);max-width:920px;line-height:1.45;font-size:15px}
+.hero-badge{
+  flex:0 0 auto;background:#eef8f3;border:1px solid #c7e4d4;color:#285b43;
+  border-radius:999px;padding:8px 12px;font-size:11px;font-weight:900;white-space:nowrap
+}
+.selection-layout{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.selection-sidebar{
+  position:static;max-height:none;overflow:visible;background:#fff;border:1px solid var(--shell-line);
+  border-radius:15px;padding:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px 12px
+}
+.step-intro{display:flex;align-items:flex-start;gap:12px;padding:16px 20px 10px}
+.selection-sidebar>.step-intro{grid-column:1/-1}
+.step-num{
+  width:31px;height:31px;flex:0 0 31px;border-radius:50%;display:grid;place-items:center;
+  background:var(--shell-navy);color:#fff;font-weight:900;font-size:15px
+}
+.step-intro h2{margin:1px 0 3px;color:var(--shell-navy);font-size:20px;letter-spacing:-.01em}
+.step-intro p{margin:0;color:var(--shell-muted);font-size:12px;line-height:1.4}
+#bankStatus{grid-column:1/-1;margin:0 20px 2px;width:max-content}
+.selection-sidebar>.sidebar-block:not(.filters-block){
+  grid-column:1/-1;display:grid;grid-template-columns:1.05fr .65fr .72fr 1.2fr 1.2fr;
+  gap:10px;margin:0;padding:4px 20px 10px
+}
+.selection-sidebar label{font-size:10px;font-weight:900;color:#506170;text-transform:uppercase;letter-spacing:.055em}
+.selection-sidebar select,.selection-sidebar input{
+  min-height:42px;margin-top:5px;padding:10px 11px;border:1px solid #bdcad6;border-radius:9px;
+  color:#163c61;font-size:14px;font-weight:800;background:#fff
+}
+.destination-card,.selection-summary,.filename-card{
+  margin:0;background:#f8fafc;border:1px solid #d5dfe7;border-radius:10px;padding:10px 12px;min-height:74px
+}
+.destination-card{grid-column:1/5;margin-left:20px}
+.selection-summary{grid-column:5/9;display:flex;justify-content:center;flex-direction:column}
+.filename-card{grid-column:9/13;margin-right:20px}
+.destination-card span,.filename-card span{font-size:9px;color:#6a7a88;font-weight:900;letter-spacing:.055em}
+.destination-card strong,.filename-card strong{margin-top:4px;display:block;color:#214d70;font-size:12px;line-height:1.35}
+.selection-summary strong{color:#214d70;font-size:12px}.selection-summary span{font-size:11px}
+.filters-block{
+  grid-column:1/9;display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important;
+  margin:0!important;padding:2px 0 16px 20px
+}
+#nextBtn{grid-column:9/11;align-self:end;margin:0 0 16px!important;min-height:42px}
+#clearAllBtn{grid-column:11/13;align-self:end;margin:0 20px 16px 0!important;min-height:42px}
+.draft-tools{grid-column:1/-1;margin:0 20px 16px!important}
+.primary,.secondary{border-radius:9px;min-height:38px}
+.primary{background:var(--shell-navy);border-color:var(--shell-navy)}
+.secondary{color:var(--shell-navy)}
+.bank-pane{
+  background:#fff;border:1px solid var(--shell-line);border-radius:15px;overflow:hidden;padding-bottom:18px
+}
+.bank-step-intro{padding:16px 20px 10px;border-bottom:1px solid #e6edf2}
+.bank-header{border:0;border-radius:0;margin:0;padding:10px 20px 14px;background:#fff}
+.bank-header h2{color:var(--shell-navy);font-size:18px}.bank-header p{color:var(--shell-muted)}
+.notice{background:#f3f7fb;border-color:#cedde9;color:#315069;font-size:11px;line-height:1.4}
+.goal{margin:0 20px;border-color:#d5dfe7;border-radius:12px}
+.ican-heads{background:#f7f9fb;border-bottom:1px solid #e4eaef}
+.ican-head{background:#f3f6f9;border-color:#d8e1e8;color:#233b51;min-height:66px}
+.row-label{padding-top:12px;font-size:10px;color:#5d6d7a}
+.family{background:#fff;border-color:#d5dfe7;border-radius:12px;min-height:220px}
+.family.selected{outline:2px solid #4e88b1;background:#f7fbfe;box-shadow:0 0 0 2px #d8eaf6}
+.qid{background:var(--shell-navy)}
+.family-name{color:#20364b}.ican-mini,.meta{color:#667786}.question{border-left:0;border-top:1px solid #eef2f5;background:#fff}
+.checkpoint-panel{margin:0 20px;border-color:#d5dfe7;border-radius:12px}
+.checkpoint-hero h2,.checkpoint-scope-head h3,.checkpoint-family-review-head h3,.checkpoint-assembly-head h3{color:var(--shell-navy)}
+.checkpoint-scope-card,.checkpoint-family-review,.checkpoint-assembly{background:#f8fafc;border-color:#d5dfe7}
+.workspace-top{
+  background:#fff;border:1px solid var(--shell-line);border-radius:15px;margin:0 0 15px;padding:16px 18px;
+  align-items:center
+}
+.workspace-title-group{display:flex;align-items:flex-start;gap:12px}
+.workspace-title-group h1{margin:4px 0 2px;color:var(--shell-navy)}
+.workspace-title-group p{margin:4px 0 0;color:var(--shell-muted)}
+.workspace-title-group #backBtn{margin-bottom:8px}
+.workspace-grid{grid-template-columns:360px minmax(620px,1fr);gap:15px}
+.controls-panel{border-color:var(--shell-line);border-radius:14px;box-shadow:none}
+.controls-panel h2{color:var(--shell-navy)}
+.preview-stage{background:#e5ebf0;border-color:#cdd8e1}
+.version-tab.active{background:var(--shell-navy);border-color:var(--shell-navy)}
+.generation-card{background:#f3f7fb;border-color:#cbdce9}
+.status-pill.live{background:#eef8f3;border-color:#c7e4d4;color:#285b43}
+@media(max-width:1150px){
+  .selection-sidebar>.sidebar-block:not(.filters-block){grid-template-columns:1fr 1fr 1fr}
+  .selection-sidebar>.sidebar-block:not(.filters-block) label:nth-child(4),
+  .selection-sidebar>.sidebar-block:not(.filters-block) label:nth-child(5){grid-column:span 1}
+  .destination-card{grid-column:1/7}.selection-summary{grid-column:7/13;margin-right:20px}.filename-card{grid-column:1/7;margin-left:20px;margin-right:0}
+  .filters-block{grid-column:7/13;padding-right:20px;padding-left:0}
+  #nextBtn{grid-column:1/7;margin-left:20px!important}#clearAllBtn{grid-column:7/13}
+}
+@media(max-width:800px){
+  .course-topbar{padding:0 13px;gap:10px}.course-brand{font-size:17px}.course-topbar-note{display:none}
+  .app-shell{padding:12px 8px 48px}.builder-hero{display:block;padding:18px}.hero-badge{display:inline-flex;margin-top:10px}
+  .selection-sidebar{display:block}.selection-sidebar>*{margin-left:12px!important;margin-right:12px!important}.selection-sidebar>.step-intro{margin:0!important;padding-left:12px;padding-right:12px}
+  .selection-sidebar>.sidebar-block:not(.filters-block),.filters-block{display:grid!important;grid-template-columns:1fr!important;padding:4px 12px 10px!important;margin:0!important}
+  #bankStatus{margin:0 12px 6px!important}.destination-card,.selection-summary,.filename-card,#nextBtn,#clearAllBtn,.draft-tools{margin:0 12px 10px!important}
+  .bank-step-intro,.bank-header{padding-left:12px;padding-right:12px}.goal,.checkpoint-panel{margin-left:12px;margin-right:12px}
+  .workspace-title-group{align-items:flex-start}.workspace-top{align-items:flex-start}.workspace-grid{grid-template-columns:1fr}
+}
+@media print{.course-topbar,.builder-hero{display:none!important}}
+.workspace-step-kicker{margin:0 0 7px;color:var(--shell-navy);font-size:18px;font-weight:900;letter-spacing:-.01em}
