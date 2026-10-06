@@ -98,11 +98,19 @@ def infer_pages_base()->str:
     user,repo=m.group(1),m.group(2)
     return f'https://{user}.github.io/{repo}/'
 
+def legacy_assessment_app() -> Path | None:
+    if not GITHUB_ROOT:
+        return None
+    app=GITHUB_ROOT/'_algebra_teacher_tools/assessment_builder/Algebra Assessment Builder.app'
+    return app if app.is_dir() else None
+
 def tool_status()->dict:
     root=str(GITHUB_ROOT) if GITHUB_ROOT else ''
     return {
         'github_workspace': bool(GITHUB_ROOT),
         'github_root': root,
+        'assessment_builder_available': bool(legacy_assessment_app()),
+        'assessment_builder_running': port_ready(8782),
         'planner_available': bool(GITHUB_ROOT and (GITHUB_ROOT/'_algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command').is_file()),
         'planner_running': port_ready(8767),
         'github_sync_available': bool(MEMORIES_REPO and (MEMORIES_REPO/'Tools/github_sync/Start GitHub Sync.command').is_file()),
@@ -113,6 +121,14 @@ def tool_status()->dict:
     }
 
 def launch_tool(name:str)->str:
+    if name=='assessment-builder':
+        if port_ready(8782):
+            open_url('http://127.0.0.1:8782/'); return 'Opened current Algebra Assessment Builder.'
+        app=legacy_assessment_app()
+        if app is None:
+            raise RuntimeError('The current Algebra Assessment Builder is not installed on this computer yet.')
+        subprocess.run(['/usr/bin/open',str(app)],check=False)
+        return 'Opened the current Algebra Assessment Builder while its engine migrates into Algebra 1 Tools.'
     if name=='planner':
         if port_ready(8767):
             open_url('http://127.0.0.1:8767/'); return 'Opened Algebra 1 Planner.'
