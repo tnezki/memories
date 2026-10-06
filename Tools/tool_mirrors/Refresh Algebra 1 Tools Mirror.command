@@ -7,7 +7,7 @@ SOURCE="$GITHUB_ROOT/_algebra_teacher_tools/algebra_1_tools"
 DEST="$MEMORIES_ROOT/_tool_mirrors/Algebra_1_Tools"
 if [ ! -d "$SOURCE" ]; then echo "ERROR: Algebra 1 Tools folder not found: $SOURCE"; exit 1; fi
 rm -rf "$DEST"; mkdir -p "$DEST"
-SAFE_PATHS=("index.html" "README.txt" "COURSE_TOOL_CONTRACT.txt" "Open Algebra 1 Tools.command" "app" "assets" "shared" "library/index.html" "library/items.json" "Algebra 1 Tools.app")
+SAFE_PATHS=("index.html" "README.txt" "COURSE_TOOL_CONTRACT.txt" "Open Algebra 1 Tools.command" "app" "assets" "shared" "assessments" "library/index.html" "library/items.json" "Algebra 1 Tools.app")
 for rel in "${SAFE_PATHS[@]}"; do
   src="$SOURCE/$rel"; [ -e "$src" ] || continue
   mkdir -p "$DEST/$(dirname "$rel")"
