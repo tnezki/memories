@@ -15,6 +15,9 @@ fi
 mkdir -p "$DEST"
 SAFE_PATHS=(
   "index.html" "README.txt" "QA_REPORT.json" "Open CC3 Tools V3.command"
+  "CC3 Tools V3.app/Contents/Info.plist"
+  "CC3 Tools V3.app/Contents/PkgInfo"
+  "CC3 Tools V3.app/Contents/MacOS"
   "app" "builder" "creation" "assessments" "assessment-plans" "visuals" "banks"
   "saved/index.html" "reader/index.html" "reader/assets"
 )
@@ -38,7 +41,7 @@ done
 cat > "$(dirname "$DEST")/README.md" <<'README'
 # CPM Tools Source Mirror
 
-Code-only reference mirror of local `CPM_Tools/cc3_tools_v3`. Runtime/library/student or teacher-generated data is intentionally excluded.
+Code-only reference mirror of local `CPM_Tools/cc3_tools_v3`. Runtime/library/student or teacher-generated data is intentionally excluded. The V3 app wrapper metadata and launcher script are included so launcher problems can be diagnosed from the mirror without copying the full app bundle or icon resources.
 README
 
 python3 - "$(dirname "$DEST")" <<'PY'
