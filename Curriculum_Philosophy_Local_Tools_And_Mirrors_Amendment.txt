@@ -1,0 +1,46 @@
+CURRICULUM PHILOSOPHY — LOCAL TOOLS, LOCKED PATTERNS, AND SAFE MIRRORS AMENDMENT
+================================================================================
+
+STATUS: CURRENT / AUTHORITATIVE AMENDMENT
+REVISION: 2026-10-05
+SCOPE: Owner-local teacher tools, reusable builder interfaces, diagnostic GitHub mirrors
+
+PURPOSE
+-------
+Teacher tools should become simpler and more reliable as the system matures. Once a builder/control pattern has been tested, refined, and accepted as the working standard, later course tools should reuse that established product rather than reinventing a parallel interface.
+
+LOCKED PRODUCT REUSE — HARD
+---------------------------
+When an existing teacher tool is already a near-complete, teacher-approved solution for the same job, it is the default design authority for later implementations.
+
+A new course implementation should adapt the locked pattern to the new content/data model while preserving the established interaction model, control placement, print-preview behavior, and teacher workflow.
+
+Do not create a simplified or alternate editor merely because the destination course is different. Course identity changes content and routing; it does not justify relearning controls that have already been solved.
+
+A materially different replacement for an accepted builder pattern requires an explicit teacher decision.
+
+LOCAL-FIRST, VISIBLE-DEVELOPMENT MODEL — HARD
+----------------------------------------------
+Teacher tools may run locally for speed, privacy, filesystem access, and offline reliability. Local execution must not make the current source invisible to maintenance and debugging.
+
+Each important local-only tool should have a safe GitHub diagnostic mirror containing the source code, non-private configuration, schemas, templates, and sanitized fixtures needed to understand and reproduce the interface.
+
+The live local folder remains the runtime source of truth. The mirror is a readable maintenance reference, not a second writable owner.
+
+PRIVATE DATA BOUNDARY — HARD
+----------------------------
+Real student-specific data never enters a diagnostic mirror. This includes names, grades, email addresses, accommodations, evidence, submissions, private reports, student identifiers, and other personally identifying or educational-record data.
+
+When a local tool requires student-shaped data for development, use clearly fictional fixture records that match the real schema closely enough to exercise the interface and workflow. Fake fixtures are preferred over removing the data layer entirely because they preserve testability without exposing students.
+
+DEBUGGING PRINCIPLE — HARD
+--------------------------
+When a current mirror exists and has been refreshed after the latest local change, use that mirror as the normal maintenance reference. Do not ask the teacher to repeatedly upload the same local tool folder.
+
+When screenshots conflict with the current mirror, or the mirror is known to be stale, refresh the mirror before structural debugging. Do not infer the live runtime from a chain of old transfer packages.
+
+SYSTEM LEARNING
+---------------
+A solved control pattern is curriculum-system knowledge. Preserve it in Philosophy and contracts so future tools inherit the solution instead of rediscovering it.
+
+END — LOCAL TOOLS, LOCKED PATTERNS, AND SAFE MIRRORS AMENDMENT

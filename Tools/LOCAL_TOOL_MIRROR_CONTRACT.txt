@@ -1,0 +1,72 @@
+LOCAL TOOL MIRROR CONTRACT
+==========================
+
+STATUS: CURRENT
+REVISION: 2026-10-05
+
+PURPOSE
+-------
+Make owner-local teacher tools visible for reliable maintenance without moving execution or private student state to GitHub.
+
+CORE MODEL — HARD
+-----------------
+LOCAL OWNER FOLDER = executable source of truth.
+GITHUB MIRROR = read-only diagnostic/reference copy.
+
+The mirror is never the writable runtime and must not become an alternate owner.
+
+DECLARED MIRRORS
+----------------
+Current patterns include:
+- `_apcalc_teacher_tools/` -> `apcalc/_teacher_tools_mirror/`
+- `CPM_Tools/cc3_tools_v3/` -> `memories/_tool_mirrors/CPM_Tools/cc3_tools_v3/`
+
+Future course/tool mirrors should follow the same model in the repository that logically owns the tool or in `memories/_tool_mirrors/` for cross-course/global references.
+
+MIRROR MANIFEST — REQUIRED
+--------------------------
+Each mirror root must include `MIRROR_MANIFEST.json` with at least:
+- schema_version;
+- source identifier/path;
+- destination repository/path;
+- file_count;
+- for every mirrored file: relative path, byte count, SHA-256.
+
+SAFE CONTENT — HARD
+-------------------
+Allowed:
+- source code;
+- HTML/CSS/JS;
+- templates;
+- non-private configuration;
+- schemas;
+- control definitions;
+- non-student manifests;
+- fictional fixture data.
+
+Forbidden:
+- real student names or identifiers;
+- grades/scores tied to students;
+- student emails or guardian emails;
+- accommodations/IEP/504/private support information;
+- student evidence/submissions/work;
+- real report PDFs;
+- credentials/tokens/secrets;
+- private connected-app data;
+- logs/caches/PIDs/temp files/backups unless explicitly reviewed and declared safe.
+
+FAKE FIXTURES
+-------------
+Fixtures may reproduce the structure and edge cases of real data, but every person/record must be fictional from origin. Do not create fixtures by renaming or hashing real students.
+
+REFRESH / DEBUG FLOW — HARD
+---------------------------
+When a mirror exists:
+1. refresh it after meaningful local-tool changes;
+2. teacher Git-syncs when ready;
+3. maintenance/debugging reads the mirror before asking for another upload;
+4. if screenshots disagree with the mirror, treat the mirror as stale and refresh it before another structural fix.
+
+Mirrors are intended to eliminate repeated guessing about owner-local runtime state.
+
+END — LOCAL TOOL MIRROR CONTRACT

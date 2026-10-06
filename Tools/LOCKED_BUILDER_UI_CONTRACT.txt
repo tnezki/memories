@@ -1,0 +1,56 @@
+LOCKED BUILDER UI CONTRACT
+==========================
+
+STATUS: CURRENT
+REVISION: 2026-10-05
+REFERENCE PRODUCT: CPM Tools V3 builder/assembler controls
+
+PURPOSE
+-------
+Prevent teacher-tool UI drift. The established CPM Tools builder pattern is the default interaction model for printable curriculum builders unless the teacher explicitly approves a different design.
+
+CORE LAYOUT — HARD
+------------------
+Teacher builders use:
+- a persistent left control panel;
+- a live student/print preview on the right;
+- document-level controls above item-level controls;
+- selected item/question cards in the left panel;
+- Save Draft / Publish Student Page / Open Student Page actions at a stable location;
+- clean student output with no teacher editing controls.
+
+CONTROL PATTERN — HARD
+----------------------
+When applicable, preserve the CPM control language and behavior:
+- Compact / Normal / Roomy spacing;
+- Narrow / Normal / Wide margins;
+- whole-document controls with slider plus +/- nudges and selectable nudge step;
+- per-item controls that override document defaults;
+- move up/down;
+- use/hide;
+- edit control instead of permanently exposing large raw text areas;
+- alternate instances through an instance selector and add/duplicate action;
+- manual page break control where the artifact uses printable pages;
+- live preview updates without publishing;
+- publishing writes the clean student-facing artifact to its stable URL.
+
+ADAPTATION RULE
+---------------
+A course may omit a control that has no meaning for that artifact, but it should not replace the established pattern with a new form-heavy editor.
+
+Examples:
+- Warmups do not need figure-width controls when no warmup figure model exists.
+- Warmups still use the same left-controls/right-preview model, edit buttons, alternate-instance selector, document-level workspace control, and stable publish actions.
+
+SOURCE OF REFERENCE
+-------------------
+The readable reference mirror is:
+  `memories/_tool_mirrors/CPM_Tools/`
+
+The running CPM Tools local source remains authoritative for the current accepted product behavior.
+
+CHANGE CONTROL — HARD
+---------------------
+Do not invent a parallel builder interface for a new course when this contract applies. A materially different builder interaction model requires explicit teacher approval and should update this contract if accepted as the new system standard.
+
+END — LOCKED BUILDER UI CONTRACT

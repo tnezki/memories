@@ -1,0 +1,48 @@
+SYSTEM RUNTIME — LOCAL TOOLS AND SAFE MIRRORS AMENDMENT
+======================================================
+
+STATUS: CURRENT / AUTHORITATIVE RUNTIME AMENDMENT
+REVISION: 2026-10-05
+SCOPE: Local teacher-tool runtimes and their GitHub diagnostic mirrors
+
+RUNTIME OWNER — HARD
+--------------------
+The owner-local tool folder is the executable source of truth. Its GitHub mirror is read-only diagnostic/reference state and must not be treated as an independently editable runtime.
+
+MIRROR REQUIREMENT
+------------------
+Important owner-local tools should provide a deterministic mirror command or equivalent local action that copies safe source/configuration into a declared repository path and writes a SHA-256 manifest.
+
+A mirror should include enough material to debug the running software:
+- application/server source;
+- HTML/CSS/JS and templates;
+- non-private schemas and configuration;
+- builder/renderer definitions;
+- safe manifests;
+- fictional fixtures when the interface depends on student-shaped data.
+
+A mirror must exclude:
+- real student data or evidence;
+- grades, emails, accommodations, identifiers, and submissions;
+- credentials, tokens, keys, cookies, or secrets;
+- logs, PID files, caches, temporary files, backups, result/request ZIPs, and machine-specific runtime state unless explicitly declared safe.
+
+AUTHORITATIVE MAINTENANCE FLOW — HARD
+-------------------------------------
+1. Teacher uses the local runtime.
+2. Local changes are installed through Curriculum Transfer or normal local editing workflow.
+3. Refresh the declared diagnostic mirror.
+4. Teacher chooses when to Git sync/commit/push.
+5. Future maintenance reads the refreshed mirror before modifying the local owner files.
+
+When the mirror manifest matches the current local state, use its SHA-256 values as the replacement baseline for Curriculum Transfer owner-local REPLACE actions.
+
+LOCKED BUILDER RULE
+-------------------
+If a current contract declares a locked builder/control pattern, local implementations must use or adapt that pattern rather than create another control system for the same job.
+
+FAKE FIXTURE RULE
+-----------------
+A tool that needs student-shaped development data may mirror fictional fixtures only. Fixtures must be obviously fake and must not be derived by pseudonymizing real students. Preserve schema and representative edge cases, not identities.
+
+END — LOCAL TOOLS AND SAFE MIRRORS RUNTIME AMENDMENT
