@@ -1,0 +1,59 @@
+COURSE TOOL SHARED INTERFACE CONTRACT
+====================================
+STATUS: CURRENT / PHASE 2 FOUNDATION
+REVISION: 2026-10-06
+
+PURPOSE
+-------
+Course tools should feel like one product. Course content and data differ; teacher controls do not.
+
+SHARED INTERACTION MODEL - HARD
+-------------------------------
+Use the shared course-tool controls for equivalent jobs across Algebra 1, CC3, Physics, AP Calculus, and future course tools.
+Do not create a course-specific replacement when the shared control already represents the job.
+
+Canonical shared patterns include:
+- I Can / Mastery Goal selection;
+- family matrix selection;
+- search and filter controls;
+- range slider + numeric readout + minus/plus + explicit step selector;
+- figure sizing and workspace sizing;
+- edit, duplicate, delete, move up, and move down;
+- page-break controls;
+- assessment version tabs and New Version;
+- New Question / same-family regeneration where a family model supports it;
+- request create/download + result upload;
+- save, Save As, reopen, and Library metadata;
+- print-preview and student/teacher output controls;
+- local-only vs local + hosted delivery.
+
+PRECISION CONTROL - HARD
+------------------------
+Any adjustable numeric visual control should expose the same precision pattern when practical:
+1. visible value;
+2. range slider;
+3. minus and plus buttons;
+4. selectable step size.
+A course may constrain valid values, but it should not invent another interaction model.
+
+ASSEMBLY CONTROLS - HARD
+------------------------
+Editable cards/questions use a consistent action vocabulary and order:
+Edit | Duplicate | Move Up | Move Down | Delete
+Specialized actions such as New Question or Page Break may be added without replacing the common actions.
+
+I CAN PICKER - HARD
+-------------------
+When families are selected by I Can, use a matrix-style view whenever the data supports it:
+- I Cans are columns;
+- family positions are rows;
+- the same canonical family may appear under more than one I Can;
+- selecting the same canonical family through two placements must not duplicate it unintentionally.
+
+PORTABILITY
+-----------
+The canonical shared source may live in memories/Tools/course_tool_shared for maintenance, but each portable course application must bundle the shared files it needs. A teacher copy must not require the memories repository to render or operate its UI.
+
+CHANGE RULE
+-----------
+A solved shared interaction should be changed at the shared-source level first, then propagated into course bundles. Course-specific forks require a genuine course-specific need.

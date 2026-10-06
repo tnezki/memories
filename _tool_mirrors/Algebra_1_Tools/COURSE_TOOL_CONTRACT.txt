@@ -1,10 +1,16 @@
 ALGEBRA 1 TOOLS - COURSE TOOL CONTRACT
 ======================================
-STATUS: PHASE 1 FOUNDATION
+STATUS: PHASE 2 SHARED-INTERFACE FOUNDATION
 
 PURPOSE
 -------
 Algebra 1 Tools is the teacher-facing course application that will replace the generic Local Tools destination for Algebra 1 as features migrate.
+
+SHARED COURSE-TOOL UI - HARD
+----------------------------
+Algebra 1 Tools uses the shared course-tool interaction model defined in shared/COURSE_TOOL_INTERFACE_CONTRACT.txt.
+Equivalent teacher jobs must use the same controls used by the other course tools: I Can/family pickers, edit/move/duplicate/delete, precision sliders with minus/plus/step, version controls, request/result flow, save/reopen, Library, and print-preview behavior.
+Course-specific content is not a reason to fork the teacher interface.
 
 DUAL DELIVERY - HARD
 --------------------
@@ -14,6 +20,7 @@ Every student-facing builder must support the same local-first save model.
 - When a GitHub workspace is configured, a teacher may choose Local Library + GitHub hosted delivery.
 - Without GitHub, teachers save locally and manually upload/export to Canvas or another LMS.
 - A builder must not require GitHub merely to create, edit, save, reopen, or print student materials.
+- The same finished item should be able to remain local-only or be published later without rebuilding it from scratch.
 
 OWNER VS PORTABLE INSTALL
 -------------------------
@@ -31,3 +38,4 @@ Portfolio/student-progress reporting is optional. The course tool exposes Report
 MIGRATION
 ---------
 Existing Algebra builders and Local Tools remain authoritative until individually migrated and tested. Do not remove or rewrite a working tool merely because the new shell exists.
+Local Tools is a migration source, not the long-term teacher-facing destination. Retire it only after its useful functions have working replacements inside the course tools.

@@ -1,7 +1,5 @@
-ALGEBRA 1 TOOLS - PHASE 1
-=========================
-
-This first phase creates the course-level shell and does not retire existing Algebra tools yet.
+ALGEBRA 1 TOOLS - PHASE 2 FOUNDATION
+=====================================
 
 Active now:
 - Algebra 1 Tools home shell
@@ -10,14 +8,21 @@ Active now:
 - organized Library view of existing algebra repository resources
 - local-only vs Local + GitHub delivery preference
 - optional Reporting / Portfolio launcher
+- bundled shared course-tool UI foundation
 
-Migration placeholders:
+Shared interface now locked for migration:
+- I Can / Mastery Goal and family-matrix pickers
+- slider + visible value + minus/plus + step precision controls
+- edit / duplicate / move / delete actions
+- version tabs and request/result workflow patterns
+- common Library and local-vs-hosted delivery behavior
+
+Migration next:
+- Assessment Builder onto the shared interface
 - Lesson Builder
-- Assessment Builder
-- Performance Tasks
-- Projects
-- Assessment Plans
-- Banks & Visuals
+- Performance Tasks / Projects
+- Assessment Plans and Banks/Visuals
+- Reporting integration and final Local Tools retirement
 
 Fallback launcher:
   Open Algebra 1 Tools.command
