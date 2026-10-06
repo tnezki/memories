@@ -1,0 +1,33 @@
+ALGEBRA 1 TOOLS - COURSE TOOL CONTRACT
+======================================
+STATUS: PHASE 1 FOUNDATION
+
+PURPOSE
+-------
+Algebra 1 Tools is the teacher-facing course application that will replace the generic Local Tools destination for Algebra 1 as features migrate.
+
+DUAL DELIVERY - HARD
+--------------------
+Every student-facing builder must support the same local-first save model.
+- Local Library is always available and remains the teacher's editable working copy.
+- GitHub publishing is optional and is never required for another teacher to use the course tool.
+- When a GitHub workspace is configured, a teacher may choose Local Library + GitHub hosted delivery.
+- Without GitHub, teachers save locally and manually upload/export to Canvas or another LMS.
+- A builder must not require GitHub merely to create, edit, save, reopen, or print student materials.
+
+OWNER VS PORTABLE INSTALL
+-------------------------
+Owner installation may detect the GitHub workspace and expose Planner, GitHub Sync, hosted student pages, and reporting runtimes.
+Portable teacher copies must remain usable when those owner services are absent. Unconfigured owner-only tools should appear as optional/setup-needed rather than break the app.
+
+LIBRARY
+-------
+Library is the common destination for lessons, assessments, practice, activities, performance tasks/projects, reviews, imports, and future slides. Items should retain enough metadata to reopen/edit and should distinguish local and hosted destinations.
+
+REPORTING
+---------
+Portfolio/student-progress reporting is optional. The course tool exposes Reporting even when a teacher has not configured student-data services yet.
+
+MIGRATION
+---------
+Existing Algebra builders and Local Tools remain authoritative until individually migrated and tested. Do not remove or rewrite a working tool merely because the new shell exists.
