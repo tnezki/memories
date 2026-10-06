@@ -58,6 +58,42 @@ printf '\n=== Curriculum Transfers ===\n'
 
 printf '\n'
 if [[ "$transfer_status" -eq 0 ]]; then
+  printf '=== Refreshing diagnostic tool mirrors ===\n'
+  mirror_warning=0
+
+  refresh_prompting_mirror() {
+    local label="$1"
+    local command_path="$2"
+    if [[ ! -f "$command_path" ]]; then
+      return 0
+    fi
+    if printf '\n' | /bin/bash "$command_path"; then
+      printf 'MIRROR REFRESHED: %s\n' "$label"
+    else
+      printf 'MIRROR WARNING: %s did not refresh. The transfer itself succeeded.\n' "$label"
+      mirror_warning=1
+    fi
+  }
+
+  refresh_prompting_mirror 'Physics Tools' "$GITHUB_ROOT/_physics_teacher_tools/Refresh Physics GitHub Mirror.command"
+  refresh_prompting_mirror 'AP Calculus Tools' "$GITHUB_ROOT/_apcalc_teacher_tools/Refresh AP Calc GitHub Mirror.command"
+
+  cpm_refresh="$MEMORIES_ROOT/Tools/tool_mirrors/Refresh CPM Tools Mirror.command"
+  if [[ -f "$cpm_refresh" ]]; then
+    if /bin/bash "$cpm_refresh" --no-prompt; then
+      printf 'MIRROR REFRESHED: CPM Tools\n'
+    else
+      printf 'MIRROR WARNING: CPM Tools did not refresh. The transfer itself succeeded.\n'
+      mirror_warning=1
+    fi
+  fi
+
+  if [[ "$mirror_warning" -eq 0 ]]; then
+    printf 'Tool mirrors are current locally. GitHub Sync publishes those mirror changes when you are ready.\n\n'
+  else
+    printf 'One or more mirrors need attention, but installed transfer files were not rolled back.\n\n'
+  fi
+
   printf 'SUCCESS SUCCESS SUCCESS\n'
   printf 'CURRICULUM TRANSFER SUCCESS\n'
   printf 'SUCCESS SUCCESS SUCCESS\n'

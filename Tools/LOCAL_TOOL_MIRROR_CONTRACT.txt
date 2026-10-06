@@ -2,7 +2,7 @@ LOCAL TOOL MIRROR CONTRACT
 ==========================
 
 STATUS: CURRENT
-REVISION: 2026-10-05
+REVISION: 2026-10-06
 
 PURPOSE
 -------
@@ -19,6 +19,7 @@ DECLARED MIRRORS
 ----------------
 Current patterns include:
 - `_apcalc_teacher_tools/` -> `apcalc/_teacher_tools_mirror/`
+- `_physics_teacher_tools/` -> `physics/_teacher_tools_mirror/`
 - `CPM_Tools/cc3_tools_v3/` -> `memories/_tool_mirrors/CPM_Tools/cc3_tools_v3/`
 
 Future course/tool mirrors should follow the same model in the repository that logically owns the tool or in `memories/_tool_mirrors/` for cross-course/global references.
@@ -61,11 +62,15 @@ Fixtures may reproduce the structure and edge cases of real data, but every pers
 
 REFRESH / DEBUG FLOW — HARD
 ---------------------------
-When a mirror exists:
-1. refresh it after meaningful local-tool changes;
-2. teacher Git-syncs when ready;
-3. maintenance/debugging reads the mirror before asking for another upload;
-4. if screenshots disagree with the mirror, treat the mirror as stale and refresh it before another structural fix.
+When a declared mirror exists:
+1. a successful Curriculum Transfer run refreshes the known safe tool mirrors automatically when their local source folders are present;
+2. mirror refresh is a local file-copy/manifest operation only — it does not Git commit or push the mirror;
+3. teacher Git-syncs when ready;
+4. the manual `Refresh ... GitHub Mirror.command` remains available as a recovery/resync tool, not a normal required step after every transfer;
+5. maintenance/debugging reads the mirror before asking for another upload;
+6. if screenshots disagree with the mirror, treat the mirror as stale and refresh it before another structural fix.
+
+Course apps may also refresh their own safe mirror on startup so a just-installed local-tool change becomes inspectable without another manual mirror command.
 
 Mirrors are intended to eliminate repeated guessing about owner-local runtime state.
 
