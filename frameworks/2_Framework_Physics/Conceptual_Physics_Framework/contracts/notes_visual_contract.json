@@ -1,6 +1,6 @@
 {
   "contract_name": "Conceptual Physics Notes Visual Contract",
-  "contract_version": "v2.2",
+  "contract_version": "v2.3",
   "framework_version": "v6.8",
   "hard_rules": [
     "NEVER SHOW THE ANSWER IN THE STUDENT IMAGE; apply the shared student-figure answer-neutrality contract to every student-facing visual.",
@@ -12,7 +12,10 @@
     "Teacher copy is browser-only: release fixed student workspace heights, allow natural vertical expansion, do not optimize for printed page breaks, and never allow overlap.",
     "Teacher-only Notes support follows the established Algebra teacher-guide treatment: red, bold teacher text using ordinary paragraph/list elements inside a teacher-only wrapper; student-facing content keeps normal colors.",
     "Every WTC, every Stop and Discuss, every Example, and every YTI has teacher-side Answer / Acceptable Reasoning plus Teacher Moves and Student Moves; add Listen For / Likely Misconception when useful.",
-    "Stop and Discuss teacher answers preserve the numbering of the 2–4 student prompts and appear after the student white-space workspace."
+    "Stop and Discuss teacher answers preserve the numbering of the 2–4 student prompts and appear after the student white-space workspace.",
+    "Every required student-facing instructional image must resolve through a repository-local, GitHub-Pages-publishable path. Do not use raw.githubusercontent.com, memories-repository URLs, or another remote host for required course figures.",
+    "Required published assets must not live under any underscore-prefixed path segment unless the deployment contract explicitly whitelists that segment. GitHub Pages/Jekyll may omit underscore-prefixed paths even when the file exists in Git.",
+    "Before handoff, fail closed if any student-facing <img src> cannot resolve to the intended Physics repository asset, if the resolved path is not publishable on GitHub Pages, or if a Physics Notes Image Toolkit figure is copied to a Notes asset folder instead of referenced in place."
   ],
   "established_shells": {
     "title": {
@@ -110,6 +113,16 @@
       "workspace_rule": "Workspace is a sibling after notes-task-content, not nested inside it."
     }
   },
-  "source_image_rule": "Reference course-owned Physics Notes Image Toolkit assets in place from resources/Physics_Notes_Image_Toolkit/<toolkit_path> as declared by the Framework. Do not copy toolkit images into individual Notes section folders. Generated Notes-specific representations may use local section figures only when canonically required and no source/Bank/toolkit representation satisfies the instructional need.",
+  "source_image_rule": "Reference course-owned Physics Notes Image Toolkit assets in place from resources/Physics_Notes_Image_Toolkit/<toolkit_path> as declared by the Framework. Student Notes HTML must point directly to the corresponding repository-local toolkit path (using the correct relative path from the Notes page). Do not copy toolkit images into individual Notes section folders, shared Notes asset folders, or temporary deployment folders. Generated Notes-specific representations may use local section figures only when canonically required and no source/Bank/toolkit representation satisfies the instructional need; any such local figure must still use a GitHub-Pages-publishable repository path.",
+  "deployment_asset_qa": {
+    "shared_contract": "Tools/PUBLISHED_WEB_ASSET_CONTRACT.txt",
+    "fail_closed_checks": [
+      "Inspect every student-facing img[src] in the final HTML, not only the source plan or map.",
+      "Resolve each relative image path from the final HTML file location and verify that the intended repository file exists.",
+      "Reject required instructional image URLs hosted on raw.githubusercontent.com, the memories repository, or another external host when the course-owned asset is available locally.",
+      "Reject any required published asset path containing an underscore-prefixed directory segment unless the deployment contract explicitly allows it.",
+      "For Physics Notes Image Toolkit assets, require the canonical resources/Physics_Notes_Image_Toolkit/... path rather than a copied Notes-local duplicate."
+    ]
+  },
   "student_figure_answer_neutrality_contract": "contracts/student_figure_answer_neutrality_contract.json"
 }

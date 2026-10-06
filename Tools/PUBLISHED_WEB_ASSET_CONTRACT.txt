@@ -1,0 +1,56 @@
+PUBLISHED WEB ASSET CONTRACT
+============================
+STATUS: CURRENT
+REVISION: 2026-10-06
+SCOPE: Student/teacher-facing curriculum HTML published through GitHub Pages or an equivalent static host.
+
+PURPOSE
+-------
+Required instructional assets must survive the full chain: repository -> published webpage -> browser print/PDF -> downstream import such as Notability. A file merely existing in Git is not enough; its final published URL must resolve.
+
+1. REPOSITORY-LOCAL REQUIRED ASSETS — HARD
+-------------------------------------------
+Required instructional images and other required course assets must use repository-local published paths whenever the course owns the asset.
+
+Do not make required course figures depend on:
+- raw.githubusercontent.com;
+- another repository such as memories;
+- temporary transfer/staging locations;
+- a remote source URL when a canonical course-owned copy exists.
+
+External service/CDN references that are intentionally part of runtime infrastructure (for example a declared MathJax CDN) are outside this rule unless the artifact-specific contract says otherwise.
+
+2. PUBLISHED PATH, NOT JUST FILE EXISTENCE — HARD
+-------------------------------------------------
+QA must validate the path that the deployed page will request, not merely confirm that a similarly named file exists somewhere in the repository.
+
+For relative HTML references, resolve the path from the final HTML file's repository location and verify the target is the intended file.
+
+3. UNDERSCORE-PREFIXED DEPLOYMENT PATHS — HARD
+----------------------------------------------
+Required published assets must not live under a directory segment whose name begins with `_` unless the deployment contract explicitly whitelists that segment.
+
+Static-site engines such as GitHub Pages/Jekyll may treat underscore-prefixed directories specially or omit them from publication. Therefore a successful Git commit is not evidence that such an asset is web-accessible.
+
+4. REFERENCE-IN-PLACE AUTHORITY — HARD
+--------------------------------------
+When a Framework or manifest declares an asset `reference_in_place`, downstream pages must reference that canonical repository asset directly. Do not copy it into a page-local, unit-local, or temporary shared asset folder merely to make the path convenient.
+
+A copied duplicate creates drift and can hide deployment errors. Generated artifact-specific figures are permitted only when their owning contract explicitly authorizes them.
+
+5. FINAL HTML ASSET QA — HARD
+-----------------------------
+Before handoff of a web-facing curriculum artifact, inspect the final generated HTML and fail closed when a required asset reference:
+- resolves outside the intended course repository without explicit authority;
+- points to raw.githubusercontent.com, memories, or another remote host instead of an available course-owned asset;
+- resolves through an underscore-prefixed directory that is not explicitly whitelisted;
+- points to a missing repository file;
+- substitutes a copied duplicate for a declared reference-in-place asset.
+
+For image-driven artifacts, this check applies to every final `<img src>` rather than only to planning data, source maps, or provenance records.
+
+6. DOWNSTREAM EXPORT COMPATIBILITY
+----------------------------------
+The preferred representation for required images is a normal same-repository published file reference that a browser can fully load before printing or PDF export. This minimizes failures in browser-to-PDF and note-app import workflows.
+
+END — PUBLISHED WEB ASSET CONTRACT
