@@ -1,0 +1,12 @@
+ALGEBRA 1 TOOLS - ASSESSMENT BUILDER MIGRATION CONTRACT
+========================================================
+STATUS: TRANSITION / PHASE 3
+REVISION: 2026-10-06
+
+- Algebra 1 Tools is now the teacher-facing owner of Assessment Builder source.
+- On the first Assessment Builder launch in this phase, the last working legacy source is copied into Algebra 1 Tools/assessments/assessment_builder and becomes the launched copy.
+- The copy preserves Practice, Quick Check, Checkpoint, Summative, generation, and print-layout behavior before deeper refactoring.
+- The CC3-style course shell is layered over the copied source without changing the assessment engines.
+- Existing owner state for Checkpoint/Summative and current output destinations remain bridged during this phase so working data is not broken.
+- Do not retire the legacy Assessment Builder until the bundled copy is tested for all four products and the remaining state/storage migration is complete.
+- Portable distribution is the target. A portable teacher copy must eventually include the bundled Assessment Builder directly and must not require the legacy app or GitHub for ordinary local use.

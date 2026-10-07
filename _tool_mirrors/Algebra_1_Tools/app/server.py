@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import json, os, re, socket, subprocess, time, webbrowser
+import json, os, re, shutil, socket, subprocess, sys, time, webbrowser
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse, unquote
@@ -11,6 +11,9 @@ HOST = '127.0.0.1'
 RUNTIME_DIR = APP_ROOT / '.runtime'
 SETTINGS_PATH = APP_ROOT / 'library' / 'settings.json'
 LOCAL_ITEMS_PATH = APP_ROOT / 'library' / 'items.json'
+ASSESSMENT_ROOT = APP_ROOT / 'assessments' / 'assessment_builder'
+ASSESSMENT_SHELL_ROOT = APP_ROOT / 'assessments' / 'shell'
+ASSESSMENT_STATE_PATH = RUNTIME_DIR / 'assessment_builder.json'
 
 CATEGORIES = [
     ('lessons','Lessons',['notes']),
@@ -55,13 +58,14 @@ def open_url(url:str)->None:
     try: subprocess.Popen(['/usr/bin/open',url],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
     except Exception: webbrowser.open(url)
 
-def run_background(command:list[str], log:Path|None=None)->None:
+def run_background(command:list[str], log:Path|None=None)->int:
     out=subprocess.DEVNULL; handle=None
     if log:
         log.parent.mkdir(parents=True,exist_ok=True)
         handle=log.open('ab',buffering=0); out=handle
     try:
-        subprocess.Popen(command,stdout=out,stderr=out,start_new_session=True)
+        proc=subprocess.Popen(command,stdout=out,stderr=out,start_new_session=True)
+        return int(proc.pid)
     finally:
         if handle: handle.close()
 
@@ -98,19 +102,114 @@ def infer_pages_base()->str:
     user,repo=m.group(1),m.group(2)
     return f'https://{user}.github.io/{repo}/'
 
-def legacy_assessment_app() -> Path | None:
+def legacy_assessment_source() -> Path | None:
     if not GITHUB_ROOT:
         return None
-    app=GITHUB_ROOT/'_algebra_teacher_tools/assessment_builder/Algebra Assessment Builder.app'
-    return app if app.is_dir() else None
+    source=GITHUB_ROOT/'_algebra_teacher_tools/assessment_builder/Algebra Assessment Builder.app/Contents/Resources/app'
+    return source if (source/'server.py').is_file() and (source/'index.html').is_file() else None
+
+def bundled_assessment_ready() -> bool:
+    return (ASSESSMENT_ROOT/'server.py').is_file() and (ASSESSMENT_ROOT/'index.html').is_file()
+
+def _patch_assessment_shell() -> None:
+    if not ASSESSMENT_SHELL_ROOT.is_dir() or not ASSESSMENT_ROOT.is_dir():
+        return
+    for name in ('course_shell.css','course_shell.js'):
+        src=ASSESSMENT_SHELL_ROOT/name
+        if src.is_file():
+            shutil.copy2(src,ASSESSMENT_ROOT/name)
+    index=ASSESSMENT_ROOT/'index.html'
+    if not index.is_file():
+        return
+    raw=index.read_text(encoding='utf-8')
+    if 'course_shell.css' not in raw:
+        raw=raw.replace('</head>','  <link rel="stylesheet" href="course_shell.css?v=1">\n</head>')
+    if 'course_shell.js' not in raw:
+        raw=raw.replace('</body>','  <script src="course_shell.js?v=1"></script>\n</body>')
+    index.write_text(raw,encoding='utf-8')
+
+def _refresh_algebra_mirror() -> None:
+    if not MEMORIES_REPO:
+        return
+    cmd=MEMORIES_REPO/'Tools/tool_mirrors/Refresh Algebra 1 Tools Mirror.command'
+    if not cmd.is_file():
+        return
+    try:
+        subprocess.run(['/bin/bash',str(cmd),'--no-prompt'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=45,check=False)
+    except Exception:
+        pass
+
+def ensure_bundled_assessment() -> bool:
+    if bundled_assessment_ready():
+        _patch_assessment_shell()
+        return True
+    source=legacy_assessment_source()
+    if source is None:
+        return False
+    ASSESSMENT_ROOT.parent.mkdir(parents=True,exist_ok=True)
+    if ASSESSMENT_ROOT.exists():
+        shutil.rmtree(ASSESSMENT_ROOT)
+    shutil.copytree(source,ASSESSMENT_ROOT,ignore=shutil.ignore_patterns('__pycache__','*.pyc','.DS_Store'))
+    (ASSESSMENT_ROOT/'MIGRATION_NOTE.txt').write_text(
+        'This Assessment Builder source was copied from the last working legacy Algebra Assessment Builder during migration into Algebra 1 Tools.\n'
+        'Algebra 1 Tools now launches this bundled copy. Existing Checkpoint/Summative state remains bridged to the current Algebra owner-data locations until the state migration phase.\n',
+        encoding='utf-8')
+    _patch_assessment_shell()
+    _refresh_algebra_mirror()
+    return bundled_assessment_ready()
+
+def _assessment_runtime() -> dict:
+    if not ASSESSMENT_STATE_PATH.is_file():
+        return {}
+    try:
+        data=json.loads(ASSESSMENT_STATE_PATH.read_text(encoding='utf-8'))
+        port=int(data.get('port') or 0)
+        if port>0 and port_ready(port):
+            return data
+    except Exception:
+        pass
+    return {}
+
+def _free_port() -> int:
+    with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as sock:
+        sock.bind((HOST,0))
+        return int(sock.getsockname()[1])
+
+def start_bundled_assessment() -> str:
+    if not GITHUB_ROOT:
+        raise RuntimeError('Assessment Builder owner setup is not configured on this computer yet.')
+    if not ensure_bundled_assessment():
+        raise RuntimeError('The working Algebra Assessment Builder source was not found for the one-time migration into Algebra 1 Tools.')
+    running=_assessment_runtime()
+    if running:
+        url=f"http://{HOST}:{int(running['port'])}/"
+        open_url(url)
+        return 'Opened the Assessment Builder bundled inside Algebra 1 Tools.'
+    port=_free_port()
+    log=RUNTIME_DIR/'assessment_builder.log'
+    pid=run_background([
+        sys.executable,str(ASSESSMENT_ROOT/'server.py'),
+        '--port',str(port),'--app-root',str(ASSESSMENT_ROOT),'--github-root',str(GITHUB_ROOT)
+    ],log)
+    deadline=time.time()+25
+    while time.time()<deadline:
+        if port_ready(port):
+            ASSESSMENT_STATE_PATH.parent.mkdir(parents=True,exist_ok=True)
+            ASSESSMENT_STATE_PATH.write_text(json.dumps({'pid':pid,'port':port,'root':str(ASSESSMENT_ROOT)},indent=2)+'\n',encoding='utf-8')
+            open_url(f'http://{HOST}:{port}/')
+            return 'Opened the Assessment Builder bundled inside Algebra 1 Tools.'
+        time.sleep(.35)
+    raise RuntimeError('The bundled Assessment Builder did not become reachable. Check .runtime/assessment_builder.log.')
 
 def tool_status()->dict:
     root=str(GITHUB_ROOT) if GITHUB_ROOT else ''
+    assessment_running=bool(_assessment_runtime())
     return {
         'github_workspace': bool(GITHUB_ROOT),
         'github_root': root,
-        'assessment_builder_available': bool(legacy_assessment_app()),
-        'assessment_builder_running': port_ready(8782),
+        'assessment_builder_available': bool(bundled_assessment_ready() or legacy_assessment_source()),
+        'assessment_builder_running': assessment_running,
+        'assessment_builder_bundled': bundled_assessment_ready(),
         'planner_available': bool(GITHUB_ROOT and (GITHUB_ROOT/'_algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command').is_file()),
         'planner_running': port_ready(8767),
         'github_sync_available': bool(MEMORIES_REPO and (MEMORIES_REPO/'Tools/github_sync/Start GitHub Sync.command').is_file()),
@@ -122,16 +221,10 @@ def tool_status()->dict:
 
 def launch_tool(name:str)->str:
     if name=='assessment-builder':
-        if port_ready(8782):
-            open_url('http://127.0.0.1:8782/'); return 'Opened current Algebra Assessment Builder.'
-        app=legacy_assessment_app()
-        if app is None:
-            raise RuntimeError('The current Algebra Assessment Builder is not installed on this computer yet.')
-        subprocess.run(['/usr/bin/open',str(app)],check=False)
-        return 'Opened the current Algebra Assessment Builder while its engine migrates into Algebra 1 Tools.'
+        return start_bundled_assessment()
     if name=='planner':
         if port_ready(8767):
-            open_url('http://127.0.0.1:8767/'); return 'Opened Algebra 1 Planner.'
+            open_url('http://127.0.0.1:8767/planner/'); return 'Opened Algebra 1 Planner.'
         if not GITHUB_ROOT: raise RuntimeError('Planner owner setup is not installed on this computer.')
         cmd=GITHUB_ROOT/'_algebra_teacher_tools/runtime/Start Teacher Tools Runtime.command'
         if not cmd.is_file(): raise RuntimeError('Planner runtime launcher was not found.')
@@ -139,7 +232,7 @@ def launch_tool(name:str)->str:
         deadline=time.time()+25
         while time.time()<deadline:
             if port_ready(8767):
-                open_url('http://127.0.0.1:8767/'); return 'Opened Algebra 1 Planner.'
+                open_url('http://127.0.0.1:8767/planner/'); return 'Opened Algebra 1 Planner.'
             time.sleep(.4)
         raise RuntimeError('Planner did not become reachable. Check .runtime/planner_launcher.log.')
     if name=='github-sync':
@@ -154,7 +247,6 @@ def launch_tool(name:str)->str:
         if not MEMORIES_REPO: raise RuntimeError('Reporting owner setup is not installed on this computer.')
         cmd=MEMORIES_REPO/'Tools/portfolio_local_runtime/Start Portfolio Local Companion.command'
         if not cmd.is_file(): raise RuntimeError('Reporting launcher was not found.')
-        # Use Terminal because this runtime intentionally remains interactive for Documents-folder access.
         subprocess.run(['/usr/bin/open',str(cmd)],check=False)
         return 'Opened Reporting launcher in Terminal.'
     raise RuntimeError('Unknown tool.')

@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Algebra Assessment Builder</title>
+  <link rel="stylesheet" href="assessment_builder.css?v=19">
+  <link rel="stylesheet" href="assessment_builder_shell.css?v=1">
+  <link rel="stylesheet" href="print_layout_controller.css?v=44">
+  <script>
+    window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true}};
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="course_shell.css?v=1">
+</head>
+<body>
+  <header class="course-topbar">
+    <div class="course-brand">Algebra 1 Tools</div>
+    <div class="course-tool-name">Assessment Builder</div>
+    <div class="course-topbar-spacer"></div>
+    <div class="course-topbar-note">Approved Banks</div>
+  </header>
+  <main class="app-shell">
+    <section id="selectStep" class="step active">
+      <section class="builder-hero">
+        <div>
+          <h1>Assessment Builder</h1>
+          <p>Choose the assessment you are building, select approved Algebra bank families, then move into the shared page-control workspace. Checkpoints and Summatives keep their Portfolio-driven personalization.</p>
+        </div>
+        <div id="heroBankStatus" class="hero-badge">Algebra bank workflow</div>
+      </section>
+      <div class="selection-layout">
+        <aside class="selection-sidebar">
+          <div class="step-intro">
+            <div class="step-num">1</div>
+            <div><h2>What are you teaching?</h2><p>Choose the assessment type, unit, naming, destination, Mastery Goal, and I Can scope.</p></div>
+          </div>
+          <div id="bankStatus" class="status-pill loading">Checking approved bank…</div>
+
+          <div class="sidebar-block">
+            <label>Product
+              <select id="productType">
+                <option value="Practice">Practice</option>
+                <option value="Quick Check">Quick Check</option>
+                <option value="Checkpoint">Checkpoint — evidence autopilot</option>
+                <option value="Summative">Summative — individualized evidence</option>
+              </select>
+            </label>
+            <label>Unit
+              <select id="unitSelect"><option value="1">Unit 1</option></select>
+            </label>
+            <label>Item / section
+              <input id="itemLabel" value="1.1" spellcheck="false">
+            </label>
+            <label>Custom name <span class="optional">optional</span>
+              <input id="customName" value="" placeholder="e.g. Coordinate Plane Review" spellcheck="false">
+            </label>
+            <label id="saveTargetWrap">When finished
+              <select id="saveTarget">
+                <option value="both">Teacher Library + local copy</option>
+                <option value="library">Teacher Library only</option>
+                <option value="local">Local copy only</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="destinationCard" class="destination-card">
+            <span>Finish destination</span>
+            <strong id="destinationPreview">Teacher Library → Unit 1 → Practices → 1.1 Practice + local copy</strong>
+          </div>
+
+          <div class="selection-summary">
+            <strong id="selectedCount">Total: 0 questions</strong>
+            <div id="icanSummary" class="ican-summary"><span>No questions selected.</span></div>
+          </div>
+
+          <div class="filename-card">
+            <span>Output name</span>
+            <strong id="filenamePreview">Algebra_1_U1_1_1_Practice_V1</strong>
+          </div>
+
+          <div class="sidebar-block filters-block">
+            <label>Mastery Goal<select id="mgSelect"></select></label>
+            <label>I Can<select id="icanSelect"></select></label>
+          </div>
+
+          <button id="nextBtn" class="primary full" disabled>Next → Workspace</button>
+          <button id="clearAllBtn" class="secondary full clear-all-btn" type="button" title="Clear the current builder setup without deleting saved outputs">Clear All</button>
+          <details class="draft-tools">
+            <summary>Draft Backup</summary>
+            <div class="draft-tool-buttons">
+              <button id="saveDraftBtn" class="secondary">Download Draft</button>
+              <button id="loadDraftBtn" class="secondary">Load Draft</button>
+              <input id="draftFileInput" type="file" accept="application/json,.json" hidden>
+            </div>
+            <div id="draftStatus" class="draft-status">Draft auto-saves in this browser.</div>
+          </details>
+        </aside>
+
+        <section class="bank-pane">
+          <div class="step-intro bank-step-intro">
+            <div class="step-num">2</div>
+            <div><h2>What questions do you want?</h2><p>Choose approved families by their real exemplar questions. The same family logic and Portfolio rules stay in place.</p></div>
+          </div>
+          <header class="bank-header">
+            <h2 id="mgTitle">Loading…</h2>
+            <p id="mgSubtitle"></p>
+            <p id="mgCount" class="count"></p>
+            <div class="notice">Current bank families are selectable, including DRAFT_REVIEW families. Superseded families stay out. Product choice controls naming and owner storage.</div>
+          </header>
+          <section id="checkpointPanel" class="checkpoint-panel" hidden>
+            <div class="checkpoint-hero">
+              <div>
+                <div class="eyebrow">OWNER · CHECKPOINT AUTOPILOT</div>
+                <h2>Build from Portfolio evidence</h2>
+                <p>Choose the exact I Can statements that are fair game for this checkpoint, including I Cans from different units. Portfolio evidence decides reassessment needs only inside that teacher-selected scope.</p>
+              </div>
+              <label class="checkpoint-count">Questions per student
+                <input id="checkpointQuestionCount" type="number" min="1" max="6" step="1" value="6">
+              </label>
+            </div>
+            <section class="checkpoint-scope-card">
+              <div class="checkpoint-scope-head">
+                <div>
+                  <h3>Eligible I Can Statements</h3>
+                  <p>Choose the exact I Can statements that are fair game for this checkpoint. They are grouped by Unit and Mastery Goal, and you can mix selections from any units.</p>
+                </div>
+                <div class="checkpoint-scope-actions">
+                  <button id="selectAllCheckpointScopeBtn" class="secondary">Select All</button>
+                  <button id="clearCheckpointScopeBtn" class="secondary">Clear</button>
+                  <button id="reloadCheckpointScopeBtn" class="secondary">Reload</button>
+                </div>
+              </div>
+              <div id="checkpointScopeSummary" class="checkpoint-scope-summary">Loading Portfolio and bank scope…</div>
+              <div id="checkpointEligibility" class="checkpoint-eligibility"></div>
+            </section>
+            <div class="checkpoint-action-row">
+              <button id="analyzeCheckpointBtn" class="primary" disabled>Analyze Selected Evidence</button>
+              <button id="saveExtensionRequestBtn" class="secondary" hidden>Save AI Request</button>
+              <button id="refreshCheckpointBtn" class="secondary" disabled>Load Returned Families</button>
+            </div>
+            <div id="checkpointStatus" class="checkpoint-status">Select the eligible I Can statements, then analyze the current local Portfolio evidence.</div>
+            <div id="checkpointSummary" class="checkpoint-summary" hidden></div>
+            <section id="checkpointFamilyReview" class="checkpoint-family-review" hidden>
+              <div class="checkpoint-family-review-head">
+                <div>
+                  <div class="eyebrow">TEMPORARY FAMILY REVIEW</div>
+                  <h3>Returned Checkpoint Families</h3>
+                  <p>These families are local to this Checkpoint. Accept each one or mark it Replace before we assemble student forms.</p>
+                </div>
+                <div class="checkpoint-family-review-actions">
+                  <button id="acceptAllTemporaryFamiliesBtn" class="secondary">Accept All</button>
+                  <a id="downloadReplacementRequestBtn" class="secondary button-link" href="#" hidden>Download Replacement Request ZIP</a>
+                </div>
+              </div>
+              <div id="checkpointFamilyReviewSummary" class="checkpoint-family-review-summary"></div>
+              <div id="checkpointFamilyCards" class="checkpoint-family-cards"></div>
+            </section>
+            <section id="checkpointAssembly" class="checkpoint-assembly" hidden>
+              <div class="checkpoint-assembly-head">
+                <div>
+                  <div class="eyebrow">PHASE 3 · STUDENT FORMS</div>
+                  <h3>Assemble Student Checkpoints</h3>
+                  <p>Build one individualized two-page form per student from the locked evidence plan, fresh approved-family instances, and accepted temporary families. Extension questions are visibly labeled <strong>Extension</strong> on student forms. Open the class packet for left-side student controls and manual adjustments.</p>
+                </div>
+                <button id="assembleCheckpointBtn" class="primary">Assemble Student Checkpoints</button>
+              </div>
+              <div id="checkpointAssemblyStatus" class="checkpoint-status">Accept all returned temporary families to unlock assembly.</div>
+              <div id="checkpointAssemblySummary" class="checkpoint-assembly-summary" hidden></div>
+              <div id="checkpointOutputActions" class="checkpoint-output-actions" hidden>
+                <a id="openClassPacketBtn" class="secondary button-link" href="#" target="_blank" rel="noopener">Open Class Packet</a>
+                <a id="openTeacherKeyBtn" class="secondary button-link" href="#" target="_blank" rel="noopener">Open Teacher Key</a>
+                <a id="downloadCheckpointZipBtn" class="secondary button-link" href="#">Download Checkpoint ZIP</a>
+                <button id="openCheckpointOutputFolderBtn" class="secondary">Open Output Folder</button>
+              </div>
+              <div id="checkpointAssemblyStudents" class="checkpoint-assembly-students"></div>
+            </section>
+            <div id="checkpointStudents" class="checkpoint-students"></div>
+          </section>
+
+          <section id="summativePanel" class="checkpoint-panel" hidden>
+            <div class="checkpoint-hero">
+              <div>
+                <div class="eyebrow">OWNER · SUMMATIVE EVIDENCE ROUTING</div>
+                <h2>Build individualized multiple-choice evidence</h2>
+                <p>Choose the exact I Can statements that are fair game for this Summative. Portfolio evidence selects up to four I Cans each student still needs to demonstrate. Any remaining slots become extensions from already-mastered selected I Cans.</p>
+              </div>
+              <div class="checkpoint-count"><span>Questions per student</span><strong>4</strong></div>
+            </div>
+            <section class="checkpoint-scope-card">
+              <div class="checkpoint-scope-head">
+                <div>
+                  <h3>Eligible I Can Statements</h3>
+                  <p>Select the exact I Cans that may appear. The current Portfolio decides each student's four personalized evidence slots only inside this scope.</p>
+                </div>
+                <div class="checkpoint-scope-actions">
+                  <button id="selectAllSummativeScopeBtn" class="secondary">Select All</button>
+                  <button id="clearSummativeScopeBtn" class="secondary">Clear</button>
+                  <button id="reloadSummativeScopeBtn" class="secondary">Reload</button>
+                </div>
+              </div>
+              <div id="summativeScopeSummary" class="checkpoint-scope-summary">Loading Portfolio and bank scope…</div>
+              <div id="summativeEligibility" class="checkpoint-eligibility"></div>
+            </section>
+            <div class="checkpoint-action-row">
+              <button id="analyzeSummativeBtn" class="primary" disabled>Analyze Selected Evidence</button>
+              <button id="saveSummativeRequestBtn" class="secondary" hidden>Save AI Request</button>
+              <button id="refreshSummativeBtn" class="secondary" disabled>Load Returned Families</button>
+            </div>
+            <div id="summativeStatus" class="checkpoint-status">Select at least four eligible I Can statements, then analyze current Portfolio evidence.</div>
+            <div id="summativeSummary" class="checkpoint-summary" hidden></div>
+            <section id="summativeFamilyReview" class="checkpoint-family-review" hidden>
+              <div class="checkpoint-family-review-head">
+                <div>
+                  <div class="eyebrow">TEMPORARY SUMMATIVE FAMILY REVIEW</div>
+                  <h3>Returned Multiple-Choice Families</h3>
+                  <p>Review every temporary MC reassessment and extension family. Accept each one or mark it Replace before personalized Summative assembly.</p>
+                </div>
+                <div class="checkpoint-family-review-actions">
+                  <button id="acceptAllSummativeFamiliesBtn" class="secondary">Accept All</button>
+                  <a id="downloadSummativeReplacementBtn" class="secondary button-link" href="#" hidden>Download Replacement Request ZIP</a>
+                </div>
+              </div>
+              <div id="summativeFamilyReviewSummary" class="checkpoint-family-review-summary"></div>
+              <div id="summativeFamilyCards" class="checkpoint-family-cards"></div>
+            </section>
+            <section id="summativeNextPhase" class="checkpoint-assembly" hidden>
+              <div class="checkpoint-assembly-head">
+                <div>
+                  <div class="eyebrow">NEXT · PRINT + PERSONALIZED FRQ</div>
+                  <h3>Print + Personalize</h3>
+                  <p>Open what you want to work on. The first click builds the Summative automatically if needed, then opens the selected print/key page.</p>
+                </div>
+              </div>
+              <div id="summativeAssemblyStatus" class="checkpoint-status">Accept all returned MC families to unlock printing.</div>
+              <div id="summativeAssemblySummary" class="checkpoint-assembly-summary" hidden></div>
+              <div id="summativeOutputActions" class="checkpoint-output-actions" hidden>
+                <button id="openSummativeMcBookletBtn" class="secondary">Open MC Booklet · Forms 1–6</button>
+                <button id="openSummativeAnswerSheetsBtn" class="secondary">Open Answer + FRQ Sheets</button>
+                <button id="openSummativeMcKeyBtn" class="secondary">MC Key</button>
+                <button id="openSummativeFrqKeyBtn" class="secondary">FRQ Key</button>
+              </div>
+            </section>
+            <div id="summativeStudents" class="checkpoint-students"></div>
+          </section>
+
+          <section id="bankGoal" class="goal">
+            <div id="icanHeads" class="ican-heads"></div>
+            <div id="familyRows"></div>
+          </section>
+        </section>
+      </div>
+    </section>
+
+    <section id="workspaceStep" class="step">
+      <header class="workspace-top">
+        <div class="workspace-title-group">
+          <div class="step-num">3</div>
+          <div>
+            <div class="workspace-step-kicker">Assemble it.</div>
+            <button id="backBtn" class="secondary">← Back to Bank</button>
+            <div class="eyebrow">OWNER · BUILD WORKSPACE</div>
+            <h1 id="workspaceTitle">1.1 Practice</h1>
+            <p id="workspaceSub">Selected bank families become the build workspace.</p>
+          </div>
+        </div>
+        <div class="workspace-actions">
+          <button id="downloadPreviewBtn" class="secondary">Download Current HTML</button>
+          <button id="printBtn" class="secondary">Print Current Version</button>
+          <button id="printAllVersionsBtn" class="secondary" disabled>Print All Versions</button>
+          <button id="saveBtn" class="primary" disabled>Save Finished Build</button>
+          <button id="workspaceClearAllBtn" class="secondary" type="button">Clear All</button>
+          <div id="saveStatus" class="save-status">Build versions first, then save locally and/or to the Teacher Library.</div>
+        </div>
+      </header>
+
+      <div class="workspace-grid">
+        <aside class="controls-panel">
+          <h2>Question Controls</h2>
+          <p class="small muted">Reorder questions and control figure/work space without changing approved family wording.</p>
+
+          <section class="practice-shared-controls">
+            <div class="practice-preview-block">
+              <h3>Preview</h3>
+              <div id="practiceViewControls"></div>
+            </div>
+            <div id="practiceLayoutControls"></div>
+          </section>
+
+          <section class="page-control-card practice-build-options">
+            <label class="number-field">Number of versions
+              <input id="versionCountInput" type="number" min="1" max="12" step="1" value="1">
+            </label>
+            <label class="check-field"><input id="scrambleOrder" type="checkbox" checked> Scramble question order between versions</label>
+            <label class="check-field"><input id="scrambleChoices" type="checkbox" checked> Scramble multiple-choice choices</label>
+          </section>
+
+          <div class="generation-card">
+            <span>Version generation</span>
+            <strong id="generationPlan">1 version planned</strong>
+            <p>Finish the base item first. Build Versions will then create the requested parallel forms from the current bank family templates.</p>
+            <button id="buildVersionsBtn" class="primary full" disabled>Build Versions</button>
+            <div id="generationStatus" class="generation-status">Design the base item first, then build the requested parallel versions.</div>
+          </div>
+
+          <div id="selectedList"></div>
+
+          <div class="naming-card">
+            <span>Output naming preview</span>
+            <strong id="workspaceFilename"></strong>
+          </div>
+          <div class="library-card">
+            <span>Teacher Library behavior</span>
+            <strong>Keep every saved parallel version under the same item.</strong>
+          </div>
+          <div class="prototype-note">
+            <strong>Question instances before whole-item versions</strong>
+            <p>All Unit 1 mastery goals support previewing a new approved-family instance before you accept it. Back to Bank keeps the current build intact if you want a different family instead.</p>
+          </div>
+        </aside>
+
+        <section class="preview-stage" aria-label="Printable page preview">
+          <div id="versionTabs" class="version-tabs" hidden></div>
+          <div id="paperPages" class="paper-pages"></div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+  <script src="print_layout_controller.js?v=44"></script>
+  <script src="assessment_builder_generation.js?v=16"></script>
+  <script src="assessment_builder_generation_34.js?v=16"></script>
+  <script src="assessment_builder.js?v=45"></script>
+  <script src="course_shell.js?v=1"></script>
+</body>
+</html>
