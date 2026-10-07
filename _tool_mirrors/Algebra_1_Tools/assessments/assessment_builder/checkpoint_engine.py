@@ -1073,6 +1073,12 @@ def write_checkpoint_state(github_root: Path, plan: dict[str, Any]) -> Path:
     return out
 
 
+def request_path(github_root: Path, plan_id: str) -> Path:
+    """Return the deterministic path for a Checkpoint AI-family request ZIP."""
+    root = github_root / "_algebra_teacher_tools" / "assessment_builder" / "checkpoint_requests"
+    return root / f"{plan_id}_AI_FAMILY_REQUEST.zip"
+
+
 def create_extension_request_zip(github_root: Path, plan: dict[str, Any]) -> Path | None:
     if int(plan.get("temporary_family_request_count", plan.get("temporary_family_request_slot_count", 0))) <= 0:
         return None

@@ -46,21 +46,34 @@ def repair_checkpoint_request_path():
     return True
 
 
-def stop_old():
-    if not STATE.exists(): return
-    try: pid=int(json.loads(STATE.read_text()).get('pid',0))
+def stop_state_process(state_path, required_text):
+    if not state_path.exists(): return
+    try: pid=int(json.loads(state_path.read_text()).get('pid',0))
     except Exception: pid=0
-    if pid>1 and 'algebra_1_tools' in proc_cmd(pid) and 'server.py' in proc_cmd(pid):
-        try: os.kill(pid,signal.SIGTERM)
-        except ProcessLookupError: pass
-        time.sleep(.3)
-    try: STATE.unlink()
+    if pid>1:
+        cmd=proc_cmd(pid)
+        if required_text in cmd and 'server.py' in cmd:
+            try: os.kill(pid,signal.SIGTERM)
+            except ProcessLookupError: pass
+            for _ in range(20):
+                if not proc_cmd(pid): break
+                time.sleep(.1)
+    try: state_path.unlink()
     except FileNotFoundError: pass
 
 
+def stop_old():
+    # The Assessment Builder is a child server with its own random localhost port.
+    # It must be stopped too, otherwise Algebra 1 Tools reuses stale builder code.
+    assessment_state=ROOT/'.runtime'/'assessment_builder.json'
+    stop_state_process(assessment_state,'assessment_builder')
+    stop_state_process(STATE,'algebra_1_tools')
+
+
 def start():
+    stop_old()
     repair_checkpoint_request_path()
-    stop_old(); STATE.parent.mkdir(parents=True,exist_ok=True)
+    STATE.parent.mkdir(parents=True,exist_ok=True)
     with LOG.open('a') as log:
         subprocess.Popen([sys.executable,str(SERVER)],cwd=str(ROOT),stdout=log,stderr=log,start_new_session=True)
     for _ in range(100):
