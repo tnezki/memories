@@ -480,7 +480,7 @@ def create_request_zip(github_root: Path, plan: dict[str, Any]) -> Path:
         "The teacher-selected I Can scope and Portfolio routing are locked into this request.\n"
         "AI should convert the requested approved bank families into temporary MC families and author only the requested extensions.\n"
         "If a requested family needs a mathematical graph, the required current graph authority is included under GRAPH_AUTHORITY/.\n"
-        "Graph-bearing results must return graph-tool-generated figures/ assets with the family JSON; do not inline coordinate SVG.\nReturn one AI Result ZIP; do not return a Curriculum Transfer or GitHub Transfer. Import happens through Load Returned Families in Algebra 1 Tools.\n"
+        "Graph-bearing results must return graph-tool-generated figures/ assets with the family JSON; do not inline coordinate SVG.\nReturn one AI Result ZIP; do not return a Curriculum Transfer or GitHub Transfer. Import happens through Load Returned Families in Algebra 1 Tools.\nReturn one AI Result ZIP; do not return a Curriculum Transfer or GitHub Transfer. Import happens through Load Returned Families in Algebra 1 Tools.\n"
     )
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("SUMMATIVE_MC_REQUEST.json", json.dumps(request_payload(plan), indent=2) + "\n")
