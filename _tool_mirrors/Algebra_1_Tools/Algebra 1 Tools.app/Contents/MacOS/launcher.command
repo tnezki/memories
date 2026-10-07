@@ -4,6 +4,15 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$HERE/../../.." && pwd)"
 LOG="$ROOT/.runtime/app_launcher.log"
 mkdir -p "$ROOT/.runtime"
+
+# One-time icon cache refresh for the course-app bundle identity introduced in v0.4.
+ICON_STAMP="$ROOT/.runtime/icon_v4_refresh_done"
+if [ ! -f "$ICON_STAMP" ]; then
+  /usr/bin/touch "$ROOT/Algebra 1 Tools.app" 2>/dev/null || true
+  /usr/bin/killall Dock >/dev/null 2>&1 || true
+  /usr/bin/touch "$ICON_STAMP" 2>/dev/null || true
+fi
+
 {
   echo "=== $(date '+%Y-%m-%d %H:%M:%S') Algebra 1 Tools launcher ==="
   echo "ROOT=$ROOT"

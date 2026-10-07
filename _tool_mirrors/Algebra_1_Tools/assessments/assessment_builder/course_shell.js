@@ -1,52 +1,42 @@
 (() => {
-  if (document.querySelector('.course-topbar')) return;
-  const body=document.body;
-  const top=document.createElement('div');
-  top.className='course-topbar';
-  top.innerHTML='<div class="brand">Algebra 1 Tools</div><div class="crumb">Assessment Builder</div><div class="spacer"></div><span>Course Tools</span>';
-  body.insertBefore(top,body.firstChild);
-
-  const hero=document.createElement('div');
-  hero.className='course-hero';
-  hero.innerHTML='<section class="course-hero-inner"><div><h1>Assessment Builder</h1><p>Choose what you are teaching, select approved Algebra bank families by I Can, then assemble and print using the shared course-tool controls. Checkpoint and Summative keep their Portfolio-aware evidence routing.</p></div><div class="course-status-badge">Algebra banks + Portfolio ready</div></section>';
-  const shell=document.querySelector('.app-shell');
-  body.insertBefore(hero,shell);
-
-  const sidebar=document.querySelector('.selection-sidebar');
-  if(sidebar){
-    const head=document.createElement('div');
-    head.className='course-step-head';
-    head.innerHTML='<div class="course-step-num">1</div><div><h2>What are you teaching?</h2><p>Choose the product, unit, item label, and delivery destination. Then narrow the bank by Mastery Goal and I Can.</p></div>';
-    sidebar.insertBefore(head,sidebar.firstChild);
-
-    const destination=document.getElementById('destinationCard');
-    const summary=document.querySelector('.selection-summary');
-    const filename=document.querySelector('.filename-card');
-    if(destination&&summary&&filename){
-      const grid=document.createElement('div');grid.className='course-summary-grid';
-      destination.parentNode.insertBefore(grid,destination);
-      grid.append(destination,summary,filename);
-    }
-
-    const next=document.getElementById('nextBtn'), clear=document.getElementById('clearAllBtn'), draft=document.querySelector('.draft-tools');
-    if(next&&clear){
-      const row=document.createElement('div');row.className='course-action-row';
-      next.parentNode.insertBefore(row,next);row.append(next,clear);if(draft)row.append(draft);
-    }
+  function download(url){
+    const a=document.createElement('a');
+    a.href=url;
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   }
-
-  const bankHeader=document.querySelector('.bank-header');
-  if(bankHeader){
-    const title=bankHeader.querySelector('h2');
-    if(title) title.style.marginTop='2px';
+  function checkpointPlanId(){
+    try{return state.checkpointPlanId||state.checkpointPlan?.plan_id||''}catch(_){return ''}
   }
-
-  const workspaceTop=document.querySelector('.workspace-top');
-  if(workspaceTop){
-    const first=workspaceTop.firstElementChild;
-    if(first){
-      const p=first.querySelector('#workspaceSub');
-      if(p) p.textContent='Selected bank families become editable assessment cards with the shared print/layout controls.';
-    }
+  function summativePlanId(){
+    try{return state.summativePlanId||state.summativePlan?.plan_id||''}catch(_){return ''}
   }
+  function replaceClick(id,handler){
+    const old=document.getElementById(id); if(!old)return;
+    const fresh=old.cloneNode(true); old.replaceWith(fresh); fresh.addEventListener('click',handler);
+  }
+  function bindDirectRequestDownloads(){
+    replaceClick('saveExtensionRequestBtn',()=>{
+      const plan=checkpointPlanId();
+      if(!plan){ if(typeof setCheckpointStatus==='function')setCheckpointStatus('Analyze selected evidence first.','warn'); return; }
+      download(`/api/checkpoint/request.zip?plan_id=${encodeURIComponent(plan)}`);
+      if(typeof setCheckpointStatus==='function')setCheckpointStatus('AI request downloaded. Upload that ZIP to Curriculum Build, then use Load Returned Families after the result is applied.','good');
+    });
+    replaceClick('saveSummativeRequestBtn',()=>{
+      const plan=summativePlanId();
+      if(!plan){ if(typeof setSummativeStatus==='function')setSummativeStatus('Analyze selected evidence first.','warn'); return; }
+      download(`/api/summative/request.zip?plan_id=${encodeURIComponent(plan)}`);
+      if(typeof setSummativeStatus==='function')setSummativeStatus('Summative AI request downloaded. Upload that ZIP to Curriculum Build, then use Load Returned Families after the result is applied.','good');
+    });
+  }
+  function simplifyLabels(){
+    const note=document.querySelector('.course-topbar-note'); if(note)note.textContent='Banks';
+    const hero=document.getElementById('heroBankStatus'); if(hero)hero.textContent='Algebra banks + Portfolio';
+    const checkpoint=document.querySelector('#checkpointPanel .eyebrow'); if(checkpoint)checkpoint.textContent='CHECKPOINT · PORTFOLIO-AWARE';
+    const summative=document.querySelector('#summativePanel .eyebrow'); if(summative)summative.textContent='SUMMATIVE · PORTFOLIO-AWARE';
+  }
+  function init(){ bindDirectRequestDownloads(); simplifyLabels(); }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
 })();
