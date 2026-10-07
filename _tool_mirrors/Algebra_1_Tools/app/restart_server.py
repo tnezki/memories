@@ -10,13 +10,13 @@ def proc_cmd(pid):
     except Exception: return ''
 
 
-def repair_checkpoint_request_path():
-    """One-time migration repair for the native Algebra Assessment Builder.
+def _write_atomic(path, text):
+    tmp=path.with_name(path.name+'.tmp')
+    tmp.write_text(text,encoding='utf-8')
+    os.replace(tmp,path)
 
-    The Checkpoint server already calls checkpoint_engine.request_path(), but the
-    copied legacy engine never defined that helper. Add the deterministic helper
-    beside the existing ZIP creator so direct CC3-style request downloads work.
-    """
+
+def repair_checkpoint_request_path():
     engine=ROOT/'assessments'/'assessment_builder'/'checkpoint_engine.py'
     if not engine.is_file(): return False
     try: raw=engine.read_text(encoding='utf-8')
@@ -30,20 +30,134 @@ def repair_checkpoint_request_path():
         '    root = github_root / "_algebra_teacher_tools" / "assessment_builder" / "checkpoint_requests"\n'
         '    return root / f"{plan_id}_AI_FAMILY_REQUEST.zip"\n\n\n'
     )
-    updated=raw.replace(marker,helper+marker,1)
-    tmp=engine.with_name(engine.name+'.tmp')
-    tmp.write_text(updated,encoding='utf-8')
-    os.replace(tmp,engine)
-    # Keep the safe diagnostic mirror truthful after this one-time local repair.
+    _write_atomic(engine,raw.replace(marker,helper+marker,1))
+    return True
+
+
+def install_ai_result_import():
+    changed=False
+    builder=ROOT/'assessments'/'assessment_builder'
+    server=builder/'server.py'
+    index=builder/'index.html'
+    checkpoint=builder/'checkpoint_engine.py'
+    summative=builder/'summative_engine.py'
+    ui=builder/'assessment_builder.js'
+
+    if server.is_file():
+        raw=server.read_text(encoding='utf-8')
+        if 'import result_import\n' not in raw:
+            marker='import summative_output\n'
+            if marker in raw:
+                raw=raw.replace(marker,marker+'import result_import\n',1)
+                changed=True
+
+        if '/api/checkpoint/import-result' not in raw:
+            marker="    def do_POST(self) -> None:\n        path = self.path.split(\"?\", 1)[0]\n"
+            replacement="""    def do_POST(self) -> None:
+        parsed_post = urlparse(self.path)
+        path = parsed_post.path
+        if path in {"/api/checkpoint/import-result", "/api/summative/import-result"}:
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if length <= 0 or length > MAX_BODY:
+                    raise ValueError("Result file is empty or too large.")
+                plan_id = (parse_qs(parsed_post.query).get("plan_id") or [""])[0]
+                if not re.fullmatch(r"[A-Za-z0-9_.-]+", plan_id or ""):
+                    raise ValueError("Invalid plan_id.")
+                filename = self.headers.get("X-Result-Filename", "")
+                try:
+                    from urllib.parse import unquote
+                    filename = unquote(filename)
+                except Exception:
+                    pass
+                body = self.rfile.read(length)
+                if path == "/api/checkpoint/import-result":
+                    result = result_import.import_checkpoint_result(self.server.github_root, plan_id, body, filename)  # type: ignore[attr-defined]
+                else:
+                    result = result_import.import_summative_result(self.server.github_root, plan_id, body, filename)  # type: ignore[attr-defined]
+                self.json_response(200, {"ok": True, **result})
+            except ValueError as exc:
+                self.json_response(400, {"ok": False, "error": str(exc)})
+            except Exception as exc:
+                self.json_response(500, {"ok": False, "error": str(exc)})
+            return
+"""
+            if marker in raw:
+                raw=raw.replace(marker,replacement,1)
+                changed=True
+        _write_atomic(server,raw)
+
+    if index.is_file():
+        raw=index.read_text(encoding='utf-8')
+        if 'result_import.js' not in raw:
+            marker='  <script src="course_shell.js?v=1"></script>\n'
+            if marker in raw:
+                raw=raw.replace(marker,marker+'  <script src="result_import.js?v=1"></script>\n',1)
+                _write_atomic(index,raw)
+                changed=True
+
+    if checkpoint.is_file():
+        raw=checkpoint.read_text(encoding='utf-8')
+        replacements={
+            'The returned Curriculum Transfer should install temporary families for this plan.':
+                'Return one AI Result ZIP containing extension_families.json at the ZIP root. Do not return a Curriculum Transfer or GitHub Transfer.',
+            'Return a Curriculum Transfer that installs one complete extension_families.json under _algebra_teacher_tools/assessment_builder/checkpoint_extensions/<plan_id>/.':
+                'Return one AI Result ZIP containing one complete extension_families.json at the ZIP root. Do not return a Curriculum Transfer or GitHub Transfer. The teacher imports this ZIP with Load Returned Families in Algebra 1 Tools.',
+            'Return a Curriculum Transfer that replaces _algebra_teacher_tools/assessment_builder/checkpoint_extensions/<plan_id>/extension_families.json.':
+                'Return one AI Result ZIP containing the complete replacement extension_families.json at the ZIP root. The teacher imports it with Load Returned Families; do not return a Curriculum Transfer.'
+        }
+        new=raw
+        for old,val in replacements.items(): new=new.replace(old,val)
+        if new!=raw:
+            _write_atomic(checkpoint,new); changed=True
+
+    if summative.is_file():
+        raw=summative.read_text(encoding='utf-8')
+        replacements={
+            'Return a Curriculum Transfer that installs one complete summative_families.json under _algebra_teacher_tools/assessment_builder/summative_families/<plan_id>/.':
+                'Return one AI Result ZIP containing one complete summative_families.json at the ZIP root plus any required figures/ assets. Do not return a Curriculum Transfer or GitHub Transfer. The teacher imports this ZIP with Load Returned Families in Algebra 1 Tools.',
+            'Return one COMPLETE summative_families.json containing accepted families plus replacements.':
+                'Return one AI Result ZIP containing one COMPLETE summative_families.json with accepted families plus replacements, plus any required figures/ assets. The teacher imports it with Load Returned Families.',
+            'Return one COMPLETE summative_families.json for this same plan_id containing every existing family unchanged except for the added makeup_exemplars arrays, plus any required figures/ assets in the same plan folder.':
+                'Return one AI Result ZIP containing one COMPLETE summative_families.json for this same plan_id, with every existing family unchanged except for the added makeup_exemplars arrays, plus any required figures/ assets.'
+        }
+        new=raw
+        for old,val in replacements.items(): new=new.replace(old,val)
+        old='Graph-bearing results must return graph-tool-generated figures/ assets with the family JSON; do not inline coordinate SVG.\\n'
+        add=old+'Return one AI Result ZIP; do not return a Curriculum Transfer or GitHub Transfer. Import happens through Load Returned Families in Algebra 1 Tools.\\n'
+        new=new.replace(old,add)
+        if new!=raw:
+            _write_atomic(summative,new); changed=True
+
+    if ui.is_file():
+        raw=ui.read_text(encoding='utf-8')
+        replacements={
+            'apply the returned transfer, then click Load Returned Families.':
+                'return to Algebra 1 Tools, click Load Returned Families, and choose the AI Result ZIP.',
+            'Still waiting for the returned temporary-family transfer. Apply it, then click Load Returned Families.':
+                'Choose the returned AI Result ZIP with Load Returned Families.',
+            'Still waiting for the returned Summative-family transfer. Apply it, then click Load Returned Families.':
+                'Choose the returned AI Result ZIP with Load Returned Families.',
+            'Save the Makeup Parallel Request, apply the returned transfer, then Load Returned Families.':
+                'Save the Makeup Parallel Request, upload it to Curriculum Build, then import the returned AI Result ZIP with Load Returned Families.'
+        }
+        new=raw
+        for old,val in replacements.items(): new=new.replace(old,val)
+        if new!=raw:
+            _write_atomic(ui,new); changed=True
+
+    return changed
+
+
+def refresh_mirror():
     memories=None
     for candidate in (ROOT.parents[1]/'memories', Path.home()/'GitHub'/'memories', Path.home()/'Documents'/'GitHub'/'memories'):
         if candidate.is_dir(): memories=candidate; break
-    if memories:
-        refresh=memories/'Tools'/'tool_mirrors'/'Refresh Algebra 1 Tools Mirror.command'
-        if refresh.is_file():
-            try: subprocess.run(['/bin/bash',str(refresh),'--no-prompt'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=45,check=False)
-            except Exception: pass
-    return True
+    if not memories: return
+    refresh=memories/'Tools'/'tool_mirrors'/'Refresh Algebra 1 Tools Mirror.command'
+    if refresh.is_file():
+        try: subprocess.run(['/bin/bash',str(refresh),'--no-prompt'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=45,check=False)
+        except Exception: pass
 
 
 def stop_state_process(state_path, required_text):
@@ -63,8 +177,6 @@ def stop_state_process(state_path, required_text):
 
 
 def stop_old():
-    # The Assessment Builder is a child server with its own random localhost port.
-    # It must be stopped too, otherwise Algebra 1 Tools reuses stale builder code.
     assessment_state=ROOT/'.runtime'/'assessment_builder.json'
     stop_state_process(assessment_state,'assessment_builder')
     stop_state_process(STATE,'algebra_1_tools')
@@ -72,7 +184,9 @@ def stop_old():
 
 def start():
     stop_old()
-    repair_checkpoint_request_path()
+    changed=repair_checkpoint_request_path()
+    changed=install_ai_result_import() or changed
+    if changed: refresh_mirror()
     STATE.parent.mkdir(parents=True,exist_ok=True)
     with LOG.open('a') as log:
         subprocess.Popen([sys.executable,str(SERVER)],cwd=str(ROOT),stdout=log,stderr=log,start_new_session=True)

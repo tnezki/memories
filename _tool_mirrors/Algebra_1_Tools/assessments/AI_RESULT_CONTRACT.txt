@@ -1,0 +1,49 @@
+ALGEBRA 1 TOOLS - AI REQUEST / RESULT CONTRACT
+Revision: 2026-10-07
+
+PURPOSE
+-------
+AI authoring results are local course-tool data. They are NOT Curriculum Transfers
+and are NOT GitHub Transfers.
+
+NORMAL WORKFLOW
+---------------
+1. Algebra 1 Tools creates an anonymized AI Request ZIP.
+2. Teacher uploads that request ZIP to Curriculum Build / ChatGPT.
+3. AI returns ONE AI Result ZIP.
+4. Teacher clicks Load Returned Families in Algebra 1 Tools and chooses that ZIP.
+5. Algebra 1 Tools validates the plan_id and family contract before installing it.
+6. Teacher reviews returned families with Accept / Replace.
+
+CHECKPOINT RESULT ZIP
+---------------------
+Required result object:
+  extension_families.json
+
+The JSON must match the plan_id in the request and contain the complete
+extension_families response requested by CHECKPOINT_EXTENSION_REQUEST.json.
+
+SUMMATIVE RESULT ZIP
+--------------------
+Required result object:
+  summative_families.json
+
+Optional graph/image assets:
+  figures/...
+
+The JSON must match the plan_id in the request. Every asset referenced by the
+family JSON must be included in the result ZIP.
+
+REPLACEMENT / MAKEUP RESULTS
+----------------------------
+Use the same result filenames above and return the COMPLETE current family set,
+including accepted families plus the requested replacements/additions. The
+teacher imports the returned ZIP with Load Returned Families again.
+
+HARD RULES
+----------
+- Do not put TRANSFER_MANIFEST.json in an AI Result ZIP.
+- Do not require Apply Curriculum Transfers.command for AI results.
+- Do not commit or publish AI result data to GitHub as part of this workflow.
+- Student names stay local; request packages use anonymous student keys.
+- Result imports fail closed when plan_id or family validation does not match.
