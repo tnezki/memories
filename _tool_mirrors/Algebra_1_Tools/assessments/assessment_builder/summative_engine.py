@@ -298,7 +298,7 @@ def request_payload(plan: dict[str, Any]) -> dict[str, Any]:
             "Every extension MC family must also include frq_exemplar: an open-response extension version of the same evidence target for the personalized FRQ sheet. It must not contain multiple-choice options.",
             "Extensions must extend or transfer demonstrated learning; do not merely make the original direct item numerically harder.",
             "Returned families are temporary/local to this Summative. They do not enter the permanent bank unless the teacher later promotes them deliberately.",
-            "Return a Curriculum Transfer that installs one complete summative_families.json under _algebra_teacher_tools/assessment_builder/summative_families/<plan_id>/.",
+            "Return one AI Result ZIP containing one complete summative_families.json at the ZIP root plus any required figures/ assets. Do not return a Curriculum Transfer or GitHub Transfer. The teacher imports this ZIP with Load Returned Families in Algebra 1 Tools.",
             "The Builder will require teacher Accept/Replace review before personalized Summative assembly.",
         ],
         "expected_response": {
@@ -480,7 +480,7 @@ def create_request_zip(github_root: Path, plan: dict[str, Any]) -> Path:
         "The teacher-selected I Can scope and Portfolio routing are locked into this request.\n"
         "AI should convert the requested approved bank families into temporary MC families and author only the requested extensions.\n"
         "If a requested family needs a mathematical graph, the required current graph authority is included under GRAPH_AUTHORITY/.\n"
-        "Graph-bearing results must return graph-tool-generated figures/ assets with the family JSON; do not inline coordinate SVG.\n"
+        "Graph-bearing results must return graph-tool-generated figures/ assets with the family JSON; do not inline coordinate SVG.\nReturn one AI Result ZIP; do not return a Curriculum Transfer or GitHub Transfer. Import happens through Load Returned Families in Algebra 1 Tools.\n"
     )
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("SUMMATIVE_MC_REQUEST.json", json.dumps(request_payload(plan), indent=2) + "\n")
@@ -667,7 +667,7 @@ def create_makeup_request_zip(github_root: Path, plan_id: str) -> Path:
             "Each makeup exemplar must be a parallel NUMBER-SWAP version of the accepted base exemplar: same context, representation, evidence job, and reasoning structure; only legal numeric/graph values change.",
             "Each makeup exemplar must have exactly four choices, one defensible correct answer, misconception-based distractors, and answer/solution/scoring fields.",
             "If the accepted family requires a graph, use the packaged registered graph tool, generate a fresh figures/ asset, reference it with <img>, declare representation_data.generator as Tools/graph_tool.py, and never inline a coordinate SVG/canvas.",
-            "Return one COMPLETE summative_families.json for this same plan_id containing every existing family unchanged except for the added makeup_exemplars arrays, plus any required figures/ assets in the same plan folder.",
+            "Return one AI Result ZIP containing one COMPLETE summative_families.json for this same plan_id, with every existing family unchanged except for the added makeup_exemplars arrays, plus any required figures/ assets.",
         ],
     }
     path = working_makeup_request_path(github_root, plan_id)
@@ -711,7 +711,7 @@ def create_replacement_request_zip(github_root: Path, plan: dict[str, Any], resp
         "instructions": [
             "Replace only the families listed in replace_family_ids.",
             "Preserve every accepted family exactly as supplied in current_response.",
-            "Return one COMPLETE summative_families.json containing accepted families plus replacements.",
+            "Return one AI Result ZIP containing one COMPLETE summative_families.json with accepted families plus replacements, plus any required figures/ assets. The teacher imports it with Load Returned Families.",
             "Every family must still pass the four-choice multiple-choice contract.",
             "For graph-bearing replacements, use the packaged registered graph tool and install fresh figures/ assets; never return inline coordinate SVG/CSS/canvas graphs.",
         ],

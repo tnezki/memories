@@ -23,6 +23,7 @@ from urllib.parse import parse_qs, urlparse
 import checkpoint_engine
 import summative_engine
 import summative_output
+import result_import
 
 MAX_BODY = 30 * 1024 * 1024
 
@@ -564,7 +565,33 @@ class BuilderHandler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self) -> None:
-        path = self.path.split("?", 1)[0]
+        parsed_post = urlparse(self.path)
+        path = parsed_post.path
+        if path in {"/api/checkpoint/import-result", "/api/summative/import-result"}:
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if length <= 0 or length > MAX_BODY:
+                    raise ValueError("Result file is empty or too large.")
+                plan_id = (parse_qs(parsed_post.query).get("plan_id") or [""])[0]
+                if not re.fullmatch(r"[A-Za-z0-9_.-]+", plan_id or ""):
+                    raise ValueError("Invalid plan_id.")
+                filename = self.headers.get("X-Result-Filename", "")
+                try:
+                    from urllib.parse import unquote
+                    filename = unquote(filename)
+                except Exception:
+                    pass
+                body = self.rfile.read(length)
+                if path == "/api/checkpoint/import-result":
+                    result = result_import.import_checkpoint_result(self.server.github_root, plan_id, body, filename)  # type: ignore[attr-defined]
+                else:
+                    result = result_import.import_summative_result(self.server.github_root, plan_id, body, filename)  # type: ignore[attr-defined]
+                self.json_response(200, {"ok": True, **result})
+            except ValueError as exc:
+                self.json_response(400, {"ok": False, "error": str(exc)})
+            except Exception as exc:
+                self.json_response(500, {"ok": False, "error": str(exc)})
+            return
         if path not in {"/api/save", "/api/checkpoint/analyze", "/api/checkpoint/family-review", "/api/checkpoint/assemble", "/api/checkpoint/manual-adjust", "/api/checkpoint/approve", "/api/checkpoint/unapprove", "/api/summative/analyze", "/api/summative/family-review", "/api/summative/assemble", "/api/summative/manual-adjust", "/api/summative/approve-mc-set"}:
             self.json_response(404, {"ok": False, "error": "Unknown endpoint."})
             return

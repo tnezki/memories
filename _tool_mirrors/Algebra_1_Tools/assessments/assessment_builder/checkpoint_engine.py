@@ -1028,7 +1028,7 @@ def request_payload(plan: dict[str, Any]) -> dict[str, Any]:
             "Extension families should extend/transfer the selected learning, not merely repeat a direct bank question with cosmetic number changes.",
             "Use the supplied bank_family_examples as the style/structure reference. Preserve the bank's evidence-first family architecture and concise student-facing wording.",
             "Temporary families remain local to this checkpoint and must not be added to the permanent Algebra bank unless the teacher later promotes them deliberately.",
-            "Return a Curriculum Transfer that installs one complete extension_families.json under _algebra_teacher_tools/assessment_builder/checkpoint_extensions/<plan_id>/.",
+            "Return one AI Result ZIP containing one complete extension_families.json at the ZIP root. Do not return a Curriculum Transfer or GitHub Transfer. The teacher imports this ZIP with Load Returned Families in Algebra 1 Tools.",
             "The teacher will review every returned family in the Builder and mark Accept or Replace before checkpoint assembly.",
         ],
         "expected_response": {
@@ -1092,7 +1092,7 @@ def create_extension_request_zip(github_root: Path, plan: dict[str, Any]) -> Pat
         "Upload this ZIP to the Curriculum Build chat.\n"
         "The request is anonymized: student names remain only in the local plan on this Mac.\n"
         "The teacher-selected eligible I Can scope is locked into this request.\n"
-        "The returned Curriculum Transfer should install temporary families for this plan.\n"
+        "Return one AI Result ZIP containing extension_families.json at the ZIP root. Do not return a Curriculum Transfer or GitHub Transfer.\n"
     )
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("CHECKPOINT_EXTENSION_REQUEST.json", json.dumps(payload, indent=2) + "\n")
@@ -1244,7 +1244,7 @@ def create_replacement_request_zip(github_root: Path, plan: dict[str, Any], resp
             "Preserve every accepted family exactly as supplied in current_response.",
             "Return one COMPLETE extension_families.json for this plan, containing the preserved accepted families plus the replacements.",
             "Keep the same extension_family_id, slot_kind, extension_index, target_i_can_ids, and assigned_student_keys for each replaced family unless the request itself requires a correction.",
-            "Return a Curriculum Transfer that replaces _algebra_teacher_tools/assessment_builder/checkpoint_extensions/<plan_id>/extension_families.json.",
+            "Return one AI Result ZIP containing the complete replacement extension_families.json at the ZIP root. The teacher imports it with Load Returned Families; do not return a Curriculum Transfer.",
         ],
     }
     readme = (
