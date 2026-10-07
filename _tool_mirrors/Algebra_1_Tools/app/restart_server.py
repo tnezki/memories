@@ -4,9 +4,47 @@ import json, os, signal, subprocess, sys, time, webbrowser
 ROOT=Path(__file__).resolve().parents[1]
 STATE=ROOT/'.runtime'/'server.json'; LOG=ROOT/'.runtime'/'server.log'; SERVER=ROOT/'app'/'server.py'
 
+
 def proc_cmd(pid):
     try: return subprocess.run(['ps','-p',str(pid),'-o','command='],capture_output=True,text=True,timeout=2).stdout.strip()
     except Exception: return ''
+
+
+def repair_checkpoint_request_path():
+    """One-time migration repair for the native Algebra Assessment Builder.
+
+    The Checkpoint server already calls checkpoint_engine.request_path(), but the
+    copied legacy engine never defined that helper. Add the deterministic helper
+    beside the existing ZIP creator so direct CC3-style request downloads work.
+    """
+    engine=ROOT/'assessments'/'assessment_builder'/'checkpoint_engine.py'
+    if not engine.is_file(): return False
+    try: raw=engine.read_text(encoding='utf-8')
+    except Exception: return False
+    if 'def request_path(github_root: Path, plan_id: str) -> Path:' in raw: return False
+    marker='def create_extension_request_zip(github_root: Path, plan: dict[str, Any]) -> Path | None:\n'
+    if marker not in raw: return False
+    helper=(
+        'def request_path(github_root: Path, plan_id: str) -> Path:\n'
+        '    """Return the deterministic path for a Checkpoint AI-family request ZIP."""\n'
+        '    root = github_root / "_algebra_teacher_tools" / "assessment_builder" / "checkpoint_requests"\n'
+        '    return root / f"{plan_id}_AI_FAMILY_REQUEST.zip"\n\n\n'
+    )
+    updated=raw.replace(marker,helper+marker,1)
+    tmp=engine.with_name(engine.name+'.tmp')
+    tmp.write_text(updated,encoding='utf-8')
+    os.replace(tmp,engine)
+    # Keep the safe diagnostic mirror truthful after this one-time local repair.
+    memories=None
+    for candidate in (ROOT.parents[1]/'memories', Path.home()/'GitHub'/'memories', Path.home()/'Documents'/'GitHub'/'memories'):
+        if candidate.is_dir(): memories=candidate; break
+    if memories:
+        refresh=memories/'Tools'/'tool_mirrors'/'Refresh Algebra 1 Tools Mirror.command'
+        if refresh.is_file():
+            try: subprocess.run(['/bin/bash',str(refresh),'--no-prompt'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=45,check=False)
+            except Exception: pass
+    return True
+
 
 def stop_old():
     if not STATE.exists(): return
@@ -19,7 +57,9 @@ def stop_old():
     try: STATE.unlink()
     except FileNotFoundError: pass
 
+
 def start():
+    repair_checkpoint_request_path()
     stop_old(); STATE.parent.mkdir(parents=True,exist_ok=True)
     with LOG.open('a') as log:
         subprocess.Popen([sys.executable,str(SERVER)],cwd=str(ROOT),stdout=log,stderr=log,start_new_session=True)
