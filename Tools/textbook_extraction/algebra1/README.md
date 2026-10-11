@@ -25,7 +25,7 @@ Core Connections Algebra has **112 numbered lessons** across Chapters 1–11 and
 ## Questions and keys
 
 - Student questions retain `card_type=problem`, `visibility=student_candidate`.
-- Source blocks beginning `Solution` are preserved as separate `teacher_only` solution cards and linked to the matching question where unambiguous.
+- In Closure pages, source blocks beginning `Solution` or `More Solution` are preserved as separate `teacher_only` solution cards and linked to the matching question where unambiguous.
 - Teacher Notes openings are `teacher_only`. The future builder must enforce that boundary; it must **never** mix solution cards into student output by default.
 - Cards for mathematical explanations, examples, reflection, and checkpoint material have machine-suggested labels and need teacher review before final classroom use.
 
@@ -40,3 +40,7 @@ The extractor tests for local reference integrity, not visual fidelity of every 
 `--replace-output` may remove an old generated output **only** if the output folder contains `ALGEBRA1_GENERATED_OUTPUT.marker`.
 
 Tests: `python3 -m unittest -v test_algebra1_extract.py`. A full synthetic inventory dry run was also checked before packaging.
+
+## Version 1.1 classification corrections
+
+The actual Algebra 1 audit exposed three source conventions: Appendix A uses canonical `A-1` through `A-97` problem numbers; its Closure uses `CL A-98` and subsequent problem IDs; and one legitimate question, 9-47, is titled "Solutions to a Linear Inequality." Version 1.1 accepts those source IDs, keeps 9-47 as a student question, and pairs Closure blocks beginning "More Solution" with their corresponding problem as teacher-only answer cards. Rerun the launcher to refresh the generated private library.

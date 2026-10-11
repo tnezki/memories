@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Private, offline Core Connections Algebra 1 source-to-cards extractor. Standard library only.
 
-Run with the local CC1 HTML captures (not a public repo).
+Run with the local CC Algebra HTML captures (not a public repo).
 This preserves the original textbook files untouched.
 """
 import argparse
@@ -17,7 +17,7 @@ import shutil
 import sys
 from collections import Counter, defaultdict
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 COURSE = "algebra1"
 # Canonical CC Algebra TOC as directly verified against the saved Table of Contents.
 # Chapter 12 is Appendix A. Chapter 2's 2.4.1 extension is saved as extraactivity.html.
@@ -38,7 +38,7 @@ LESSONS = {
 EXPECTED_CHECKPOINTS = ("1","2","3","4","5a","5b","6a","6b","7a","7b","8","9a","10a","10b","11")
 EXPECTED_LESSON_TOTAL = 112
 
-EXPECTED_PROBLEMS_RE = re.compile(r"^(?:\d+-[\dA-Za-z]+|CL\s*\d+-[\dA-Za-z]+)$",re.I)
+EXPECTED_PROBLEMS_RE = re.compile(r"^(?:\d+-[\dA-Za-z]+|A-\d+|CL\s*(?:\d+|A)-[\dA-Za-z]+)$",re.I)
 LESSON_FILENAME_RE = re.compile(r"Lesson (\d+(?:\.\d+){0,2}|\d+\.(?:opening|closure))\.html$", re.I)
 SKIP_TAGS = {"script", "style", "noscript"}
 VOID_TAGS = {"area","base","br","col","embed","hr","img","input","link","meta","param","source","track","wbr"}
@@ -240,7 +240,12 @@ def extract_page(source_path, source_root, output, copied, report):
         # card and isolate solutions from student-selectable material.
         problem_body = find_first(nodes[0], lambda n:n.has_class("contentContainerReference-body")) if kind=="problem" else None
         body_text = cleantext(plain(problem_body)) if problem_body else ""
-        is_solution = bool(kind=="problem" and re.match(r"^solutions?\b(?:\s|[:.])",body_text,re.I))
+        # Only Closure pages contain paired source problem/teacher solution blocks.
+        # A lesson can legitimately start with the heading "SOLUTIONS TO ..."
+        # (Algebra 9-47), which is a student question, not a teacher key.
+        # Appendix A's CL A-98 solution begins "More Solution" in the source.
+        is_solution = bool(kind=="problem" and role=="closure" and
+                           re.match(r"^(?:More\s+)?Solutions?\b(?:\s|[:.]|$)",body_text,re.I))
         base_problem_id=(f"{COURSE}:{page_key}:problem_{safe_slug(problem_id)}" if kind=="problem" and problem_id else f"{COURSE}:{page_key}:{kind}_{seq_count:03d}")
         card_id=base_problem_id+(":solution" if is_solution else "")
         if card_id in seen_ids:
