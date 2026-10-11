@@ -17,7 +17,7 @@ import shutil
 import sys
 from urllib.parse import unquote, urlsplit
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 COURSE = "cc2"
 SCHEMA = "cc2_canonical_extraction/1"
 LESSONS = {
@@ -153,7 +153,7 @@ def source_role(path):
             return ("closure", s.split(".")[0])
         return ("lesson", s)
     if parent == "pip":
-        if name.lower() == "pip.html":
+        if name.lower() == "pip.html" or name.lower().endswith(" pip.html"):
             return ("pip_intro", "intro")
         if re.fullmatch(r"\d+\.html", name):
             return ("pip", str(int(path.stem)))
@@ -181,6 +181,34 @@ def meaningful(node):
         return False
     return bool(clean(plain(node)) or first(node, lambda n: n.tag in MEDIA))
 
+def unpack_nested_problems(node):
+    """Expose problem containers buried inside saved-HTML wrapper/list nodes.
+
+    CPM occasionally wraps multiple Closure answer blocks in a single <li>.
+    Keep each original problem node intact, including TeX and images; do not
+    reproduce the wrapper as an extra exposition card containing those keys.
+    """
+    if not isinstance(node, Node) or problem(node):
+        yield node
+    elif any(problem(child) for child in node.walk() if child is not node):
+        for child in node.children:
+            yield from unpack_nested_problems(child)
+    else:
+        yield node
+
+
+def content_nodes(content, role):
+    """Retain normal lesson boundaries; only unwrap Closure answer containers."""
+    in_closure_answers = False
+    for node in content.children:
+        if role == "closure" and "answers and support for closure problems" in clean(plain(node)).lower()[:250]:
+            in_closure_answers = True
+        if role == "closure" and in_closure_answers:
+            yield from unpack_nested_problems(node)
+        else:
+            yield node
+
+
 def split_content(content, role):
     """Partition in DOM order. Numbered questions are atomic; section headings start new cards.
 
@@ -196,7 +224,7 @@ def split_content(content, role):
         if pending:
             out.append(("exposition", pending, None, in_review, in_answers))
             pending = []
-    for node in content.children:
+    for node in content_nodes(content, role):
         if not meaningful(node):
             continue
         if isinstance(node, Node) and node.tag == "header" and node.has_class("lessonTitle"):
@@ -334,6 +362,11 @@ def extract_page(page, root, dest, copied, sha_cache, qa):
         body_text = clean(plain(body)) if body else ""
         is_solution = bool(kind == "problem" and role == "closure" and
                            (in_answers or re.match(r"^(?:more\s+)?solutions?\b(?:\s|:|\.|$)", body_text, re.I)))
+        # The final problem in each original Closure asks students to rate
+        # their own understanding. There is deliberately no objective key.
+        is_self_assessment = bool(kind == "problem" and role == "closure" and not is_solution
+                                  and "for each of the problems above" in text.lower()
+                                  and "draw a bar or number line" in text.lower())
         sequence = len(cards) + 1
         cid = f"{COURSE}:{prefix}:" + ("problem_" + slug(pid) if kind == "problem" and pid else f"{kind}_{sequence:03d}")
         if is_solution:
@@ -346,6 +379,8 @@ def extract_page(page, root, dest, copied, sha_cache, qa):
         purpose = ("review_preview" if review else "lesson_problem") if kind == "problem" else ("lesson_exposition" if role == "lesson" else role)
         if is_solution:
             purpose = "teacher_key"
+        elif is_self_assessment:
+            purpose = "closure_self_assessment"
         if role == "pip":
             purpose = "puzzle_investigator"
         if role == "checkpoint":
@@ -385,7 +420,8 @@ def extract_page(page, root, dest, copied, sha_cache, qa):
         else:
             qa["warnings"].append({"file": relative, "warning": "unmatched_or_ambiguous_teacher_key", "id": k, "questions": len(probs), "solutions": len(sols)})
     for k, probs in questions.items():
-        if role == "closure" and k not in keys:
+        if (role == "closure" and k not in keys
+                and not all(p["suggested_instructional_role"] == "closure_self_assessment" for p in probs)):
             qa["warnings"].append({"file": relative, "warning": "closure_question_without_key", "id": k, "questions": len(probs)})
     if not cards:
         qa["errors"].append({"file": relative, "error": "no_extracted_cards"})
@@ -424,7 +460,9 @@ def inventory(source):
         issues.append("ch05/midcourse_reflection_5.4")
     pip = {p.stem.lower() for p in (source / "pip").glob("*.html")}
     missing_pip = [str(i) for i in range(1, 15) if str(i) not in pip]
-    if "pip" not in pip:
+    # Captured index is normally named "CPM eBooks - CC Course 2 PIP.html".
+    # Accept both that original saved name and the short PIP.html variant.
+    if not any(name == "pip" or name.endswith(" pip") for name in pip):
         issues.append("pip/PIP.html")
     ck = {p.stem.lower() for p in (source / "checkpoints").glob("*.html")}
     missing_checkpoints = [x for x in EXPECTED_CHECKPOINTS if x not in ck]
@@ -472,7 +510,8 @@ def report_markdown(run):
     if not qa["errors"] and not qa["warnings"]:
         lines.append("- No extraction warnings observed.")
     lines += ["", "## Boundaries and limitations", "",
-        "- Closure answer blocks are teacher-only; their paired question ID is recorded when unambiguous.",
+        "- Closure answer blocks, including nested list-wrapped keys, are teacher-only; paired questions are linked by source ID.",
+        "- Closure self-assessment/reflection questions do not require answer keys and retain their original IDs.",
         "- Teacher Notes are teacher-only, including chapter closures. Do not silently add them to student handouts.",
         "- PIP, checkpoint, and reflection content is retained in source order; classification is provisional.",
         "- This verifies the presence of local media files and source TeX; it does not certify browser rendering or interactive eTools.",

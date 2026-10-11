@@ -44,3 +44,11 @@ python3 -m unittest -v test_cc2_extract.py
 ```
 
 `--replace-output` operates only on a previously generated folder containing `CC2_GENERATED_OUTPUT.marker`. The original source directory is read-only. Choose a different output location if you made manual changes to generated cards; future teacher choices belong in a separate store rather than editing canonical source cards.
+
+## CC2 1.1 source-boundary correction (October 11, 2026)
+
+- Recognizes either `PIP.html` or the original saved filename `CPM eBooks - CC Course 2 PIP.html` as the PIP index. It is not a missing page.
+- Separates Closure solution containers that are nested in HTML lists and pairs them with their student questions. The real source uses this layout in Chapter 4 (eight solutions) and Chapter 7 (one solution).
+- Keeps the final Closure self-rating problem in each chapter as a student card (`closure_self_assessment`) with its original problem number, without falsely demanding an answer key.
+- This is a generator update, not a source-content or Lesson Builder change. **Run the extractor launcher again** after applying the transfer; its marker-protected private output will be regenerated. Preserve teacher edits separately before running.
+- Remaining long exposition blocks are source-fidelity review notices, not inventory errors. Review them before student use.

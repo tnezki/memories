@@ -49,6 +49,7 @@ class CC2Tests(unittest.TestCase):
         self.assertEqual(mod.source_role(Path("ch05/CPM eBooks - CC Course 2 Lesson 5.4.html")), ("reflection", "5.4"))
         self.assertEqual(mod.source_role(Path("ch01/CPM eBooks - CC Course 2 Teacher Notes 1.closure.html")), ("teacher_closure", "1"))
         self.assertEqual(mod.source_role(Path("pip/1.html")), ("pip", "1"))
+        self.assertEqual(mod.source_role(Path("pip/CPM eBooks - CC Course 2 PIP.html")), ("pip_intro", "intro"))
         self.assertEqual(mod.source_role(Path("checkpoints/7a.html")), ("checkpoint", "7a"))
         self.assertTrue(mod.PROBLEM_ID_RE.fullmatch("CL 1-142"))
         self.assertTrue(mod.PROBLEM_ID_RE.fullmatch("5-ML"))
@@ -69,6 +70,43 @@ class CC2Tests(unittest.TestCase):
         self.assertEqual(q["source_problem_id"], "CL 1-142")
         self.assertNotEqual(q["card_id"], a["card_id"])
         self.assertFalse(any(x.get("warning") == "unusual_problem_id" for x in self.qa["warnings"]))
+
+    def test_wrapped_closure_answer_keys_are_split_and_paired(self):
+        closure = (question("CL 4-122", "Find the answer.")
+                   + question("CL 4-123", "Solve the second question.")
+                   + question("CL 4-130", "For each of the problems above, draw a bar or number line "
+                              "to show your understanding."))
+        answers = ('<h2>Answers and Support for Closure Problems</h2>'
+                   + '<ul class="plain"><li><hr>'
+                   + question("CL 4-122", "Solution 12") + '<hr>'
+                   + question("CL 4-123", "Solution 9") + '</li></ul>')
+        p = self.source("ch04", "CPM eBooks - CC Course 2 Lesson 4.closure.html",
+                        page(closure + answers))
+        cards = self.extract(p)
+        questions = [c for c in cards if c["card_type"] == "problem"]
+        keys = [c for c in cards if c["card_type"] == "solution"]
+        self.assertEqual(len(questions), 3)
+        self.assertEqual(len(keys), 2)
+        self.assertEqual({c["source_problem_id"] for c in keys}, {"CL 4-122", "CL 4-123"})
+        self.assertTrue(all(k["visibility"] == "teacher_only" for k in keys))
+        for q in questions[:2]:
+            self.assertIn(q["paired_teacher_key_card_id"], {k["card_id"] for k in keys})
+        self.assertEqual(questions[-1]["suggested_instructional_role"], "closure_self_assessment")
+        self.assertIsNone(questions[-1]["paired_teacher_key_card_id"])
+        self.assertFalse(any(x.get("warning") == "closure_question_without_key" for x in self.qa["warnings"]))
+
+    def test_single_nested_closure_key_is_not_lost(self):
+        p = self.source("ch07", "CPM eBooks - CC Course 2 Lesson 7.closure.html", page(
+            question("CL 7-118", "A unit rate problem")
+            + '<h2>Answers and Support for Closure Problems</h2>'
+            + '<div class="wrapper"><ul><li>'
+            + question("CL 7-118", "Solution 3/20")
+            + '</li></ul></div>'))
+        cards = self.extract(p)
+        self.assertEqual(sum(c["card_type"] == "solution" for c in cards), 1)
+        self.assertEqual(sum(c["card_type"] == "problem" for c in cards), 1)
+        self.assertEqual(next(c for c in cards if c["card_type"] == "solution")["visibility"], "teacher_only")
+        self.assertTrue(next(c for c in cards if c["card_type"] == "problem")["paired_teacher_key_card_id"])
 
     def test_pip_original_identifier_and_checkpoint_source_reference(self):
         pip_page = self.source("pip", "1.html", page('<ul><li>PI-01. LONG DISTANCE</li><li>How far?</li></ul>'))
@@ -143,7 +181,7 @@ class CC2Tests(unittest.TestCase):
         self.source("ch05", "CPM eBooks - CC Course 2 Lesson 5.4.html", page("<p>Reflection.</p>"))
         for n in range(1, 15):
             self.source("pip", f"{n}.html", page("<p>PI question.</p>"))
-        self.source("pip", "PIP.html", page("<p>PIP intro.</p>"))
+        self.source("pip", "CPM eBooks - CC Course 2 PIP.html", page("<p>PIP intro.</p>"))
         for checkpoint in mod.EXPECTED_CHECKPOINTS:
             self.source("checkpoints", checkpoint + ".html", page("<p>Checkpoint.</p>"))
         self.source("checkpoints", "CPM eBooks - CC Course 2 Checkpoints.html", page("<p>Checkpoints intro.</p>"))
