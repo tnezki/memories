@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import tempfile
 import zipfile
 from pathlib import Path
@@ -9,10 +10,29 @@ from pathlib import Path
 import build_grading_request as legacy
 
 PACKAGE_SCHEMA = "portfolio-grading-result-package/1.0"
-PACKAGE_FILENAME = "Portfolio_Grading_Result_Package.zip"
+PACKAGE_FILENAME = "Portfolio_Grading_Result_Package.zip"  # Legacy fallback
 RESULT_FILENAME = "Portfolio_Grading_Result.json"
+RESULT_INBOX = "~/Downloads/Portfolio Grading/Incoming"
 
 _original_build_request = legacy.build_request
+
+
+def _safe_label(value: str, default: str, max_length: int = 35) -> str:
+    value = re.sub(r"[^A-Za-z0-9]+", "_", str(value or "")).strip("_")
+    return value[:max_length].rstrip("_") or default
+
+
+def _result_filename(request: dict) -> str:
+    course = re.sub(r"[^A-Za-z0-9]", "", str(request.get("course") or "")) or "Course"
+    unit = int(request.get("unit") or 0)
+    source = request.get("source") or {}
+    label = _safe_label(source.get("label"), "Evidence")
+    # Date of request creation makes the expected filename deterministic.
+    created_day = str(request.get("created_at") or "")[:10]
+    date = re.sub(r"[^0-9]", "", created_day)
+    if len(date) != 8:
+        date = "Undated"
+    return f"{course}_U{unit}_{label}_Graded_{date}.zip"
 
 
 def _rewrite_request_contract(path: Path) -> Path:
@@ -26,12 +46,13 @@ def _rewrite_request_contract(path: Path) -> Path:
                 if name == "REQUEST.json":
                     request = json.loads(data.decode("utf-8"))
                     request["output"] = {
-                        "filename": PACKAGE_FILENAME,
+                        "filename": _result_filename(request),
                         "schema": PACKAGE_SCHEMA,
                         "result_json": RESULT_FILENAME,
                         "include_original_evidence": True,
                         "include_next_step_reminder": True,
                         "state_or_reports_from_chatgpt": False,
+                        "save_result_to": RESULT_INBOX,
                     }
                     rules = dict(request.get("rules") or {})
                     rules.update({
@@ -55,9 +76,6 @@ def build_request(*args, **kwargs) -> Path:
 
 
 def main() -> int:
-    # The legacy interactive CLI calls its module-level build_request. Point it
-    # at this wrapper so fallback command-line use gets the same package contract
-    # as the browser control panel.
     legacy.build_request = build_request
     return legacy.main()
 

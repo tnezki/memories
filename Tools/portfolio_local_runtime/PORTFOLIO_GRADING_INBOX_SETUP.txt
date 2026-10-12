@@ -1,0 +1,42 @@
+PORTFOLIO GRADING - DEDICATED RESULT INBOX
+========================================
+
+These folders are created automatically the next time the result installer runs:
+
+    ~/Downloads/Portfolio Grading/Incoming/
+    ~/Downloads/Portfolio Grading/Applied/
+
+WORKFLOW
+--------
+1. Build a grading request in the Portfolio Control Panel as before. The
+   request ZIP is still created in your ordinary Downloads folder.
+2. Upload the request to ChatGPT and receive a private grading-result ZIP.
+   The request now declares a descriptive result filename such as:
+
+       Algebra1_U1_Summative_Graded_20261012.zip
+
+   The date in the file name is the grading-request creation date.
+3. Move the downloaded graded result ZIP into:
+
+       ~/Downloads/Portfolio Grading/Incoming/
+
+   (Finder > Go > Go to Folder lets you paste this path.)
+4. Double-click the usual Apply Portfolio Grading Result.command.
+5. The importer selects the newest valid grading package in Incoming,
+   verifies and applies it using the existing Portfolio grading logic,
+   archives the original evidence/state/results, and moves the incoming ZIP
+   to the Applied folder ONLY after successful application.
+
+COMPATIBILITY AND SAFETY
+------------------------
+- Descriptive ZIP filenames and the old fixed filename both work INSIDE the
+  new Incoming folder. The ZIP must contain the existing result and package
+  manifest; grading schemas and internal filenames are unchanged.
+- Existing unit states, prior grading results, and _portfolio_data are not
+  modified by installing this software update. Existing state validation
+  remains in place for every grading application.
+- Old grading-result ZIPs in the root Downloads folder are deliberately NOT
+  auto-selected; this prevents accidentally reapplying an already-processed
+  package. For an unapplied old result, move it into Incoming first.
+- The result ZIP remains private; never place student evidence in public GitHub.
+- This change affects only results; AI grading REQUEST ZIPs remain in Downloads.
