@@ -1,0 +1,80 @@
+SYSTEM RUNTIME - SHARED RESOURCES AND SAFE MIRROR DISTRIBUTION
+================================================================
+STATUS: AGREED ARCHITECTURE / IMPLEMENTATION NOT YET INSTALLED
+REVISION: 2026-10-16
+SCOPE: Unified CPM Tools shared resource distribution and private mirrors
+
+ONE SOURCE CONFIGURATION
+------------------------
+CPM Tools shall use one declared shared-resource source locator/configuration,
+not hard-coded teacher Drive paths scattered through builders. During a future
+district migration the configured source can change without changing individual
+resource references in every builder. Migration may still require permission
+rechecks and a one-time managed setting update; do not promise invisibility.
+
+TEACHER EXPERIENCE
+------------------
+The teacher opens CPM Tools and uses local resources. They should not need to
+browse Shared with me, create shortcuts, or visit Drive for routine updates.
+The developer/maintainer updates approved shared resources centrally.
+
+APPROVED UPDATE DELIVERY - DIRECT GOOGLE DRIVE DOWNLOAD
+------------------------------------------------------
+The agreed target is that CPM Tools uses a Python-managed Google Drive client
+(or equivalent authenticated app component) to fetch approved resources from
+one restricted shared/district curriculum folder. It must NOT require each
+teacher to install Google Drive for desktop, navigate Shared with me, or create
+local Drive shortcuts as part of ordinary use.
+
+Because the source is restricted, each teacher must complete a one-time
+Google authorization with appropriate Viewer access, UNLESS the district later
+provides a vetted centrally managed authentication/deployment method. Never
+assume a shared folder URL alone grants private access, and never embed a
+maintainer's tokens or credentials in a distributed app or published code.
+
+Keep a single configurable shared-source locator. A district migration may
+require updating that locator and authorizations; it must not require changing
+individual bank/builders' resource references. Teachers use the last verified
+local resource version offline. This downloader is a future implementation,
+NOT a currently installed feature. Do not disrupt the existing local or GitHub
+paths until the download and update flow has been tested.
+
+A locally synced shared folder may be supported as an optional diagnostic
+fallback for developers, but is NOT the intended teacher setup workflow.
+
+RESOURCE UPDATE CONTRACT (FUTURE IMPLEMENTATION)
+------------------------------------------------
+- Fetch/read a declared manifest with version and SHA-256 for resource files.
+- Download/copy only changed files to staging; verify integrity and required
+  HTML/CSS/JS/data dependencies; activate atomically or retain last good copy.
+- Keep a verified local cache available for offline lessons and print exports.
+- Never overwrite a teacher's saved assemblies, edits, preferences, or private
+  Portfolio data as part of a shared-resource update.
+- Pin each build to one coherent resource revision. Log update failures without
+  breaking the existing local classroom workflow.
+- A double-clicked synced HTML file may load locally in a browser, but browsers
+  can restrict fetch(), modules, and other file:// operations. Use the CPM
+  local server when those features require an HTTP context.
+
+PUBLIC ONLINE PRACTICE
+----------------------
+Personalized practice is printed locally by default. Teacher-optional online
+practice can be published through GitHub using Git/Python; GitHub Desktop is
+not a hard requirement. No student records or private Portfolio data may be
+included in public publishing payloads. Preserve the existing de-identified
+online practice approach; do not redesign it in this amendment.
+
+SAFE TROUBLESHOOTING MIRRORS
+----------------------------
+Read the current safe, versioned Google Drive mirror when available; public
+GitHub diagnostic mirrors are optional, not mandatory. A mirror must exclude
+student records, logs, credentials, runtime caches, private scan files, and
+real student-shaped fixtures. Live local tool folders remain authoritative.
+
+MIGRATION
+---------
+This contract documents intended behavior; it does NOT install the updater,
+change Drive permissions, rewire existing builders, retire GitHub mirrors,
+or edit any working resource paths. Change those only in separate tested steps.
+
+END
