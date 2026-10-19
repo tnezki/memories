@@ -6,6 +6,7 @@ import json
 import subprocess
 import threading
 import urllib.parse
+from pathlib import Path
 
 import portfolio_companion as core
 import portfolio_companion_live as live
@@ -96,12 +97,30 @@ class Handler(live.Handler):
     server_version = "PortfolioLocalCompanion/2.5-authoritative"
 
     def home_page(self) -> str:
-        cards = ''.join(live.course_card(course) for course in live.base.core.COURSE_CONFIG)
-        intro = '<p class="lead">Private local Portfolio work. New Evidence, Teacher Observations, reports, and email preparation all live here.</p>'
-        return live.base.core.page("Portfolio Local Companion", intro + maintenance_card() + cards)
+        # UI-only shell. Keep all existing form/report/email handler methods live.
+        path = Path(__file__).resolve().parent / "portfolio_shell" / "index.html"
+        source = path.read_text(encoding="utf-8")
+        options = "".join(
+            f'<option value="{html.escape(course, quote=True)}">{html.escape(course)}</option>'
+            for course in core.COURSE_CONFIG
+        )
+        return source.replace("__COURSE_OPTIONS__", options)
 
     def do_GET(self) -> None:
         parsed = urllib.parse.urlparse(self.path)
+        # Serve only these exact UI assets; never expose private data roots.
+        if parsed.path in ('/portfolio-shell.css', '/portfolio-shell.js'):
+            filename = {'/portfolio-shell.css':'portfolio-shell.css', '/portfolio-shell.js':'portfolio-shell.js'}[parsed.path]
+            body = (Path(__file__).resolve().parent / 'portfolio_shell' / filename).read_bytes()
+            self.send_response(200)
+            self.cors()
+            self.send_header('Content-Type', 'text/css; charset=utf-8' if filename.endswith('.css') else 'application/javascript; charset=utf-8')
+            self.send_header('Content-Length', str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        if parsed.path in ('/course-setup', '/index.html'):
+            self.send_html(self.home_page()); return
         if parsed.path == '/contacts-support':
             self.send_html(contacts_page()); return
         if parsed.path == '/update-roster':

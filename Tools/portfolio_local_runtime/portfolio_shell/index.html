@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio | CPM Tools</title>
+  <link rel="stylesheet" href="/portfolio-shell.css">
+  <script src="/portfolio-shell.js" defer></script>
+</head>
+<body>
+  <header class="appbar">
+    <div class="brand">CPM Tools <span class="separator">/</span> <strong>Portfolio</strong></div>
+    <nav class="primary-nav" aria-label="Portfolio workspace">
+      <button type="button" data-section="evidence">Add Evidence</button>
+      <button type="button" data-section="reporting">Reporting</button>
+      <button type="button" data-section="setup">Course Setup</button>
+    </nav>
+  </header>
+  <main class="shell">
+    <aside class="sidebar" aria-label="Portfolio navigation">
+      <div class="side-top">
+        <div class="eyebrow">COURSE PORTFOLIO</div>
+        <h1 id="sidebarTitle">Add Evidence</h1>
+        <div class="pickers">
+          <label for="course">Course</label>
+          <select id="course">__COURSE_OPTIONS__</select>
+          <label for="unit">Unit</label>
+          <select id="unit">
+            <option value="1">Unit 1</option><option value="2">Unit 2</option>
+            <option value="3">Unit 3</option><option value="4">Unit 4</option>
+            <option value="5">Unit 5</option><option value="6">Unit 6</option>
+            <option value="7">Unit 7</option><option value="8">Unit 8</option>
+          </select>
+        </div>
+      </div>
+      <section class="nav-group" data-group="evidence" aria-label="Add evidence options">
+        <h2>Paper &amp; scanned evidence</h2>
+        <button type="button" class="nav-item" data-tool="scan-grade"><span class="symbol">&#9635;</span><span><b>Scan &amp; Grade</b><small>Existing grading request</small></span></button>
+        <button type="button" class="nav-item" data-tool="teacher-graded"><span class="symbol">&#10003;</span><span><b>Teacher-Graded Scans</b><small>Summarize your marks &middot; next step</small></span></button>
+        <h2>Additional evidence</h2>
+        <button type="button" class="nav-item" data-tool="observations"><span class="symbol">&#9745;</span><span><b>Observations &amp; Checklists</b><small>Record, print, or upload checklists</small></span></button>
+        <button type="button" class="nav-item" data-tool="nwea"><span class="symbol">&#8679;</span><span><b>NWEA CSV</b><small>Import mapping &middot; next step</small></span></button>
+      </section>
+      <section class="nav-group" data-group="reporting" aria-label="Reporting options" hidden>
+        <h2>Review &amp; distribute</h2>
+        <button type="button" class="nav-item" data-tool="reports"><span class="symbol">&#9638;</span><span><b>Student &amp; Class Reports</b><small>Existing local reports</small></span></button>
+        <button type="button" class="nav-item" data-tool="data-protocol"><span class="symbol">&#9776;</span><span><b>MAPS Data Protocol</b><small>Exact template &middot; next step</small></span></button>
+        <button type="button" class="nav-item" data-tool="email"><span class="symbol">&#9993;</span><span><b>Email Reports</b><small>Existing review &amp; prepare process</small></span></button>
+        <button type="button" class="nav-item" data-tool="student-only"><span class="symbol">&#10148;</span><span><b>Student-Only Email</b><small>Recipient choice &middot; next step</small></span></button>
+        <button type="button" class="nav-item" data-tool="powerschool"><span class="symbol">&#8646;</span><span><b>PowerSchool Exports</b><small>Current report/export folder</small></span></button>
+      </section>
+      <section class="nav-group" data-group="setup" aria-label="Course Setup options" hidden>
+        <h2>Shared course setup</h2>
+        <button type="button" class="nav-item" data-tool="contacts"><span class="symbol">&#9993;</span><span><b>Contacts &amp; Support</b><small>Existing recipient/support directory</small></span></button>
+        <button type="button" class="nav-item" data-tool="roster"><span class="symbol">&#9783;</span><span><b>Update Roster</b><small>Existing roster import</small></span></button>
+      </section>
+      <div class="sidebar-footer"><span id="shellStatus" role="status" aria-live="polite">Existing local Portfolio workflows stay in place.</span></div>
+    </aside>
+    <section class="workspace" aria-label="Selected Portfolio tool">
+      <div class="workspace-heading">
+        <div><span class="eyebrow" id="toolGroup">ADD EVIDENCE</span><h2 id="toolTitle">Scan &amp; Grade</h2><p id="toolSummary">Use the existing local grading request.</p></div>
+        <a id="openSeparate" class="secondary-link" href="#" target="_blank" rel="noopener">Open separately &#8599;</a>
+      </div>
+      <p class="context-note" id="contextNote" hidden></p>
+      <div class="placeholder" id="placeholder" hidden aria-live="polite"></div>
+      <iframe id="workFrame" title="Current Portfolio tool" referrerpolicy="no-referrer"></iframe>
+    </section>
+  </main>
+</body>
+</html>
