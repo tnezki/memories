@@ -101,16 +101,73 @@ def normalize_hash(value: Any, required: bool, label: str) -> Optional[str]:
     return value
 
 
-def load_roots(config_path: Path, github_root: Path) -> Dict[str, Path]:
+# Explicit, fixed local Google Drive sync destination. Only this folder is permitted
+# outside the GitHub workspace, and only while --local-only is active.
+PHYSICS_DRIVE_ROOT_ALIAS = "physics_lessons_drive"
+PHYSICS_DRIVE_RELATIVE = "~Curriculum/__Physics/lessons_google_drive"
+
+
+def resolve_physics_drive_root() -> Path:
+    """Locate the already-existing Google Drive for desktop synchronized folder.
+
+    No folder is created and no Google Drive API is used. Multiple matches fail
+    closed to avoid silently writing into a different account's Drive.
+    """
+    home = Path.home()
+    suffix = Path("~Curriculum") / "__Physics" / "lessons_google_drive"
+    bases: List[Path] = []
+    cloudstorage = home / "Library" / "CloudStorage"
+    if cloudstorage.is_dir():
+        for provider in sorted(cloudstorage.glob("GoogleDrive-*")):
+            bases.extend((provider / "My Drive", provider / "MyDrive"))
+    bases.extend((
+        home / "Google Drive" / "My Drive",
+        home / "Google Drive" / "MyDrive",
+        Path("/Volumes/GoogleDrive") / "My Drive",
+        Path("/Volumes/GoogleDrive") / "MyDrive",
+    ))
+    volumes = Path("/Volumes")
+    if volumes.is_dir():
+        for provider in sorted(volumes.glob("GoogleDrive-*")):
+            bases.extend((provider / "My Drive", provider / "MyDrive"))
+
+    matches: Dict[str, Path] = {}
+    for base in bases:
+        candidate = base / suffix
+        if candidate.is_dir():
+            resolved = candidate.resolve(strict=True)
+            matches[str(resolved)] = resolved
+    if not matches:
+        raise TransferError(
+            "PHYSICS_DRIVE_SYNC_NOT_FOUND: Google Drive for desktop folder is "
+            "not currently mounted at My Drive/~Curriculum/__Physics/lessons_google_drive. "
+            "Open Google Drive for desktop and verify the folder in Finder before retrying. "
+            "No destination folder was created."
+        )
+    if len(matches) != 1:
+        raise TransferError(
+            "PHYSICS_DRIVE_SYNC_AMBIGUOUS: found multiple matching Google Drive "
+            "synced Physics lesson folders: " + "; ".join(sorted(matches))
+        )
+    return next(iter(matches.values()))
+
+
+def load_roots(config_path: Path, github_root: Path) -> Dict[str, Optional[Path]]:
     if not config_path.is_file():
         raise TransferError(f"Approved roots file not found: {config_path}")
     data = json.loads(config_path.read_text(encoding="utf-8"))
     if data.get("schema_version") != 1 or not isinstance(data.get("roots"), dict):
         raise TransferError("approved_roots.json has an unsupported schema")
-    roots: Dict[str, Path] = {}
+    roots: Dict[str, Optional[Path]] = {}
     for alias, record in data["roots"].items():
         if not isinstance(alias, str) or not alias.strip() or not isinstance(record, dict):
             raise TransferError("Invalid approved root entry")
+        if record.get("kind") == "google_drive_sync":
+            if alias != PHYSICS_DRIVE_ROOT_ALIAS or record.get("path") != PHYSICS_DRIVE_RELATIVE:
+                raise TransferError("TRANSFER_DESTINATION_UNDECLARED: unrecognized external sync root")
+            # Defer folder resolution so unrelated transfer packages work offline.
+            roots[alias] = None
+            continue
         rel = safe_rel(record.get("path", ""), f"approved root {alias}")
         dest = github_root.joinpath(*rel.parts)
         ensure_within(dest, github_root, f"approved root {alias}")
@@ -166,7 +223,8 @@ def plan_package(
     zf: zipfile.ZipFile,
     manifest: Dict[str, Any],
     github_root: Path,
-    approved_roots: Dict[str, Path],
+    approved_roots: Dict[str, Optional[Path]],
+    local_only_mode: bool,
 ) -> Tuple[str, List[PlannedAction]]:
     schema_version = manifest.get("schema_version")
     package_type = manifest.get("package_type")
@@ -203,9 +261,21 @@ def plan_package(
             if root_alias not in approved_roots:
                 raise TransferError(f"{label} uses unapproved root: {root_alias!r}")
             rel = safe_rel(entry.get("path", ""), f"{label}.path")
-            destination = approved_roots[root_alias].joinpath(*rel.parts)
-            ensure_within(destination, approved_roots[root_alias], label)
-            destination_rel = destination.resolve().relative_to(github_root.resolve()).as_posix()
+            if root_alias == PHYSICS_DRIVE_ROOT_ALIAS:
+                if not local_only_mode:
+                    raise TransferError("Google Drive sync destinations require --local-only")
+                synced_root = resolve_physics_drive_root()
+                destination = synced_root.joinpath(*rel.parts)
+                ensure_within(destination, synced_root, label)
+                # Stable logical name for transactional backups and logs.
+                destination_rel = f"_synced_drive/{root_alias}/{rel.as_posix()}"
+            else:
+                workspace_root = approved_roots[root_alias]
+                if workspace_root is None:
+                    raise TransferError(f"{label} has unresolved approved root {root_alias!r}")
+                destination = workspace_root.joinpath(*rel.parts)
+                ensure_within(destination, workspace_root, label)
+                destination_rel = destination.resolve().relative_to(github_root.resolve()).as_posix()
             if action != "delete":
                 source = entry.get("source")
                 expected_source = f"payload/{root_alias}/{rel.as_posix()}"
@@ -303,7 +373,13 @@ def backup_path(backup_root: Path, destination_rel: str) -> Path:
 
 def remove_empty_parents(path: Path, stop: Path) -> None:
     current = path
+    stop = stop.resolve()
     while current != stop and current.exists():
+        try:
+            current.relative_to(stop)
+        except ValueError:
+            # Never remove ancestor folders or another mounted filesystem.
+            break
         try:
             current.rmdir()
         except OSError:
@@ -323,7 +399,7 @@ def apply_package(
     safe_id = "".join(c if c.isalnum() or c in "-_." else "_" for c in package_id)[:120]
     backup_root = transfer_root / "_backups" / f"{stamp}_{safe_id}"
     created_files: List[Path] = []
-    created_dirs: List[Path] = []
+    created_dirs: List[Tuple[Path, Path]] = []
     backed_up: Dict[Path, Path] = {}
     messages: List[str] = []
 
@@ -346,7 +422,8 @@ def apply_package(
             if item.action == "create":
                 write_payload_atomic(zf, item.source or "", item.destination, mode=None)
                 created_files.append(item.destination)
-                created_dirs.extend(before_parents)
+                safe_stop = resolve_physics_drive_root() if item.destination_rel.startswith("_synced_drive/physics_lessons_drive/") else github_root
+                created_dirs.extend((p, safe_stop) for p in before_parents)
                 messages.append(f"CREATED: {item.destination_rel}")
             elif item.action == "replace":
                 write_payload_atomic(zf, item.source or "", item.destination, mode=item.original_mode)
@@ -371,9 +448,9 @@ def apply_package(
                 path.unlink(missing_ok=True)
             except Exception as exc:
                 rollback_errors.append(f"remove {path}: {exc}")
-        for directory in sorted(set(created_dirs), key=lambda p: len(p.parts), reverse=True):
+        for directory, safe_stop in sorted(set(created_dirs), key=lambda p: len(p[0].parts), reverse=True):
             try:
-                remove_empty_parents(directory, github_root)
+                remove_empty_parents(directory, safe_stop)
             except Exception as exc:
                 rollback_errors.append(f"remove dir {directory}: {exc}")
         if rollback_errors:
@@ -643,7 +720,7 @@ def process_package(
     package: Path,
     transfer_root: Path,
     github_root: Path,
-    approved_roots: Dict[str, Path],
+    approved_roots: Dict[str, Optional[Path]],
     local_only_mode: bool,
 ) -> Tuple[str, str]:
     lines: List[str] = [f"Package: {package}", f"Started: {time.strftime('%Y-%m-%d %H:%M:%S')}"]
@@ -653,6 +730,9 @@ def process_package(
     package_id = package.stem
     planned: List[PlannedAction] = []
 
+    if not local_only_mode:
+        return "failure", "Automatic Git commit/push is disabled. Run Local Only."
+
     try:
         with zipfile.ZipFile(package, "r") as zf:
             bad = zf.testzip()
@@ -661,7 +741,7 @@ def process_package(
             manifest = read_manifest(zf)
             if manifest is None:
                 return "ignored", "No TRANSFER_MANIFEST.json"
-            package_id, planned = plan_package(package, zf, manifest, github_root, approved_roots)
+            package_id, planned = plan_package(package, zf, manifest, github_root, approved_roots, local_only_mode)
             lines.append(f"Package id: {package_id}")
             lines.append(f"Validated actions: {len(planned)}")
 
@@ -746,6 +826,8 @@ def process_package(
                     for item in reversed(planned):
                         if item.action == "create":
                             item.destination.unlink(missing_ok=True)
+                            safe_stop = resolve_physics_drive_root() if item.destination_rel.startswith("_synced_drive/physics_lessons_drive/") else github_root
+                            remove_empty_parents(item.destination.parent, safe_stop)
                         else:
                             bpath = backup_path(backup_root, item.destination_rel)
                             item.destination.parent.mkdir(parents=True, exist_ok=True)
@@ -777,6 +859,10 @@ def main() -> int:
         help="Apply transfers without Git commit/push. Intended for deliberate local testing or offline work.",
     )
     args = parser.parse_args()
+    # User policy: Curriculum Transfers NEVER perform Git operations. The
+    # historical full-publish path remains unused only for old log formats;
+    # all invocations are hard-forced into local-only mode here.
+    args.local_only = True
 
     transfer_root = args.transfer_root.expanduser().resolve()
     github_root = args.github_root.expanduser().resolve()

@@ -15,7 +15,7 @@ mkdir -p "$TRANSFER_ROOT/downloads" "$TRANSFER_ROOT/requests" "$TRANSFER_ROOT/_p
 # local runtime copy current every time the launcher starts.
 if [[ ! -f "$ROOTS_SEED" ]]; then
   clear
-  printf '%s\n' 'Curriculum Transfer'
+  printf '%s\n' 'Curriculum Transfer - Local Only'
   printf '%s\n' '=================='
   printf '\nFAILURE FAILURE FAILURE\n'
   printf 'CURRICULUM TRANSFER FAILURE\n'
@@ -28,7 +28,7 @@ fi
 /bin/cp -f "$ROOTS_SEED" "$TRANSFER_ROOT/approved_roots.json"
 
 clear
-printf '%s\n' 'Curriculum Transfer'
+printf '%s\n' 'Curriculum Transfer - Local Only'
 printf '%s\n' '=================='
 printf '\nWorkspace root: %s\n' "$GITHUB_ROOT"
 printf 'Incoming transfer ZIPs: %s\n' "$TRANSFER_ROOT/downloads"
@@ -54,7 +54,8 @@ transfer_status=0
 printf '\n=== Curriculum Transfers ===\n'
 "$PYTHON_BIN" "$SCRIPT_DIR/apply_curriculum_transfers.py" \
   --transfer-root "$TRANSFER_ROOT" \
-  --github-root "$GITHUB_ROOT" || transfer_status=$?
+  --github-root "$GITHUB_ROOT" \
+  --local-only || transfer_status=$?
 
 printf '\n'
 if [[ "$transfer_status" -eq 0 ]]; then

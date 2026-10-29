@@ -134,4 +134,28 @@ If the current authorities do not declare a safe approved destination/root, fail
   TRANSFER_DESTINATION_UNDECLARED
 rather than placing files arbitrarily.
 
+
+PHYSICS LESSONS: EXPLICIT LOCAL GOOGLE DRIVE SYNC ROOT (2026-10-29)
+---------------------------------------------------------------
+Approved exception to the earlier all-roots-under-GitHub model:
+  physics_lessons_drive ->
+  Google Drive for desktop / My Drive / ~Curriculum / __Physics / lessons_google_drive
+This is a LOCAL synced folder on the teacher's Mac, not a Google Drive API upload.
+It is recognized only when the folder is already mounted and only in Local Only
+mode. An absent/ambiguous folder is a hard failure; no outside folder is created.
+
+Content routing:
+- root physics / lessons/ -> publicly sharable ORIGINAL interactives and assets.
+- root physics_lessons_drive / chapter_NN/lesson_X_Y_Z/ -> student and teacher
+  PDFs/HTML, printable sections, restricted purchased materials, and offline
+  copies of original interactives. Teacher materials are NOT public GitHub content.
+- root physics_lessons_drive / chapter_NN/assessments/ -> private assessments.
+
+ALL CURRICULUM TRANSFERS ARE NOW LOCAL ONLY. The transfer helper enforces this
+even if a legacy runner omits --local-only; it never commits/pushes to Git.
+Use GitHub Desktop for manual review, commit, and push. A Drive-for-desktop sync
+continues mirroring the local Google Drive root and GitHub workspace for teacher
+distribution and diagnostic inspection. Do not expose teacher keys in student
+share links.
+
 END - CURRICULUM TRANSFER CONTRACT
