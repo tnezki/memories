@@ -101,20 +101,21 @@ def normalize_hash(value: Any, required: bool, label: str) -> Optional[str]:
     return value
 
 
-# Explicit, fixed local Google Drive sync destination. Only this folder is permitted
-# outside the GitHub workspace, and only while --local-only is active.
-PHYSICS_DRIVE_ROOT_ALIAS = "physics_lessons_drive"
-PHYSICS_DRIVE_RELATIVE = "~Curriculum/__Physics/lessons_google_drive"
+# Explicit, fixed local Google Drive sync destinations. The whitelist is
+# deliberately code-owned: a transfer manifest or roots JSON cannot authorize
+# an arbitrary mounted folder. Only --local-only may write to these locations.
+ALLOWED_SYNC_DRIVE_ROOTS = {
+    "physics_lessons_drive": "~Curriculum/__Physics/lessons_google_drive",
+    "algebra1_lessons_drive": "~Curriculum/__Algebra 1/lessons_google_drive",
+}
 
 
-def resolve_physics_drive_root() -> Path:
-    """Locate the already-existing Google Drive for desktop synchronized folder.
-
-    No folder is created and no Google Drive API is used. Multiple matches fail
-    closed to avoid silently writing into a different account's Drive.
-    """
+def resolve_sync_drive_root(alias: str) -> Path:
+    """Locate one existing Google Drive Desktop folder from the fixed whitelist."""
+    if alias not in ALLOWED_SYNC_DRIVE_ROOTS:
+        raise TransferError("TRANSFER_DESTINATION_UNDECLARED: unknown Drive root")
+    suffix = Path(ALLOWED_SYNC_DRIVE_ROOTS[alias])
     home = Path.home()
-    suffix = Path("~Curriculum") / "__Physics" / "lessons_google_drive"
     bases: List[Path] = []
     cloudstorage = home / "Library" / "CloudStorage"
     if cloudstorage.is_dir():
@@ -139,17 +140,27 @@ def resolve_physics_drive_root() -> Path:
             matches[str(resolved)] = resolved
     if not matches:
         raise TransferError(
-            "PHYSICS_DRIVE_SYNC_NOT_FOUND: Google Drive for desktop folder is "
-            "not currently mounted at My Drive/~Curriculum/__Physics/lessons_google_drive. "
-            "Open Google Drive for desktop and verify the folder in Finder before retrying. "
+            f"{alias.upper()}_SYNC_NOT_FOUND: Google Drive for Desktop folder "
+            f"My Drive/{suffix.as_posix()} is not currently mounted. "
+            "Open Google Drive in Finder and verify the folder before retrying. "
             "No destination folder was created."
         )
     if len(matches) != 1:
         raise TransferError(
-            "PHYSICS_DRIVE_SYNC_AMBIGUOUS: found multiple matching Google Drive "
-            "synced Physics lesson folders: " + "; ".join(sorted(matches))
+            f"{alias.upper()}_SYNC_AMBIGUOUS: multiple matching Drive locations: "
+            + "; ".join(sorted(matches))
         )
     return next(iter(matches.values()))
+
+
+def safe_apply_stop(destination_rel: str, github_root: Path) -> Path:
+    """Return the trusted cleanup boundary for local or whitelisted Drive paths."""
+    if not destination_rel.startswith("_synced_drive/"):
+        return github_root
+    parts = Path(destination_rel).parts
+    if len(parts) < 3 or parts[1] not in ALLOWED_SYNC_DRIVE_ROOTS:
+        raise TransferError("Unsafe Drive rollback destination")
+    return resolve_sync_drive_root(parts[1])
 
 
 def load_roots(config_path: Path, github_root: Path) -> Dict[str, Optional[Path]]:
@@ -163,7 +174,7 @@ def load_roots(config_path: Path, github_root: Path) -> Dict[str, Optional[Path]
         if not isinstance(alias, str) or not alias.strip() or not isinstance(record, dict):
             raise TransferError("Invalid approved root entry")
         if record.get("kind") == "google_drive_sync":
-            if alias != PHYSICS_DRIVE_ROOT_ALIAS or record.get("path") != PHYSICS_DRIVE_RELATIVE:
+            if alias not in ALLOWED_SYNC_DRIVE_ROOTS or record.get("path") != ALLOWED_SYNC_DRIVE_ROOTS[alias]:
                 raise TransferError("TRANSFER_DESTINATION_UNDECLARED: unrecognized external sync root")
             # Defer folder resolution so unrelated transfer packages work offline.
             roots[alias] = None
@@ -261,10 +272,10 @@ def plan_package(
             if root_alias not in approved_roots:
                 raise TransferError(f"{label} uses unapproved root: {root_alias!r}")
             rel = safe_rel(entry.get("path", ""), f"{label}.path")
-            if root_alias == PHYSICS_DRIVE_ROOT_ALIAS:
+            if root_alias in ALLOWED_SYNC_DRIVE_ROOTS:
                 if not local_only_mode:
                     raise TransferError("Google Drive sync destinations require --local-only")
-                synced_root = resolve_physics_drive_root()
+                synced_root = resolve_sync_drive_root(root_alias)
                 destination = synced_root.joinpath(*rel.parts)
                 ensure_within(destination, synced_root, label)
                 # Stable logical name for transactional backups and logs.
@@ -422,7 +433,7 @@ def apply_package(
             if item.action == "create":
                 write_payload_atomic(zf, item.source or "", item.destination, mode=None)
                 created_files.append(item.destination)
-                safe_stop = resolve_physics_drive_root() if item.destination_rel.startswith("_synced_drive/physics_lessons_drive/") else github_root
+                safe_stop = safe_apply_stop(item.destination_rel, github_root)
                 created_dirs.extend((p, safe_stop) for p in before_parents)
                 messages.append(f"CREATED: {item.destination_rel}")
             elif item.action == "replace":
@@ -826,7 +837,7 @@ def process_package(
                     for item in reversed(planned):
                         if item.action == "create":
                             item.destination.unlink(missing_ok=True)
-                            safe_stop = resolve_physics_drive_root() if item.destination_rel.startswith("_synced_drive/physics_lessons_drive/") else github_root
+                            safe_stop = safe_apply_stop(item.destination_rel, github_root)
                             remove_empty_parents(item.destination.parent, safe_stop)
                         else:
                             bpath = backup_path(backup_root, item.destination_rel)
