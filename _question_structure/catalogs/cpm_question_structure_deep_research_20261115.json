@@ -1,0 +1,4292 @@
+{
+  "schema": "cpm_reference_question_deep_pass/1.0",
+  "created": "2026-11-15",
+  "status": "RESEARCH_ONLY_NOT_APPROVED_FOR_BANK_IMPORT",
+  "relationship_to_prior_catalog": {
+    "prior_file": "catalogs/cpm_reference_question_ideas_20261115.json",
+    "prior_count": 42,
+    "relationship": "supplemental; previous source catalog is not replaced and all original ideas remain intact"
+  },
+  "canonical_authority": "_question_structure/version_manifest.json (v2.8) plus math_family_library_manifest.json; no local duplicate canonical family definitions",
+  "scope": [
+    "CC1",
+    "CC2",
+    "CC3",
+    "Algebra 1",
+    "Geometry",
+    "Algebra 2",
+    "Precalculus"
+  ],
+  "passes_completed": [
+    {
+      "pass": 1,
+      "name": "Real source inspection",
+      "activity": "Drive folder inventory, text inspection of Kuta and Exeter worksheets, DeltaMath native topic hierarchies, and visually inspected sample pages from earlier DeltaMath uploads",
+      "limitation": "Not every page of every textbook or full DeltaMath set inspected; inventoried materials must not be called page-verified"
+    },
+    {
+      "pass": 2,
+      "name": "Task morphology extraction",
+      "activity": "Identify distinct mathematical evidence, unknown direction, representations, procedural families, error targets, context and multi-step dependencies instead of only numeric swaps",
+      "limitation": "Candidate family designs are not actual student-ready problems"
+    },
+    {
+      "pass": 3,
+      "name": "Canonical crosswalk and QA screen",
+      "activity": "Reconcile candidate family IDs with current 165 base, 95 Algebra 1, 25 Geometry and 62 advanced family names (full library also includes 43 Calculus families); mark exact lesson alignment pending",
+      "limitation": "No edits to canonical contracts, no assessment bank imports, no page-level curriculum crosswalk completed"
+    }
+  ],
+  "source_registry": {
+    "DM4": {
+      "name": "DeltaMath fourth-grade parallel answer key",
+      "source_kind": "prior_conversation_pdf",
+      "source_id": "file_00000000086c81f5bb427e7ec04616a4",
+      "location": "Earlier project upload",
+      "directly_observed_structures": "Decimal-place-value interpretations, equivalent standard/expanded forms, and open-number-line jump reasoning",
+      "evidence_confidence": "visually_inspected",
+      "course_fit": "CC1 prerequisite/review",
+      "sample_locator": "4th-3 V4 KEY pp.1-2",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "DM6R": {
+      "name": "DeltaMath sixth-grade ratio set",
+      "source_kind": "prior_conversation_pdf",
+      "source_id": "file_000000007b6881f582242f08e37f8b6c",
+      "location": "Earlier project upload",
+      "directly_observed_structures": "Visual part-to-part and part-to-whole ratios; proportional recipe scaling",
+      "evidence_confidence": "visually_inspected",
+      "course_fit": "CC1 and CC2",
+      "sample_locator": "6th-1 KEY p.1",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "DM6V": {
+      "name": "DeltaMath sixth-grade equation/table set",
+      "source_kind": "prior_conversation_pdf",
+      "source_id": "file_000000005b4881f5846d22d65298b6ee",
+      "location": "Earlier project upload",
+      "directly_observed_structures": "Balance-scale equal groups, inequality graph matching, input-output tables, comparative patterns and symbolic rules",
+      "evidence_confidence": "visually_inspected",
+      "course_fit": "CC1, CC2, Algebra 1",
+      "sample_locator": "6th-3 KEY pp.1,5-6",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "DM7": {
+      "name": "DeltaMath seventh-grade scale and ratio set",
+      "source_kind": "prior_conversation_pdf",
+      "source_id": "file_00000000e65c81f59e07119fa68c43af",
+      "location": "Earlier project upload",
+      "directly_observed_structures": "Scaled figures and corresponding sides, partially completed dilations, multi-stage scale distance, double number lines, ratio tables, multi-part recipe grids",
+      "evidence_confidence": "visually_inspected",
+      "course_fit": "CC1, CC2, Geometry",
+      "sample_locator": "7th Grade V3 pp.1-6",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "DM8": {
+      "name": "DeltaMath eighth-grade functions and linear-model set",
+      "source_kind": "prior_conversation_pdf",
+      "source_id": "file_00000000290881f59ea0fa330e8e1592",
+      "location": "Earlier project upload",
+      "directly_observed_structures": "Proportional graph/rate comparison, story-to-piecewise-graph, table-to-equation, slope comparison across representations, contextual variable meanings and linear expression models",
+      "evidence_confidence": "visually_inspected",
+      "course_fit": "CC3, Algebra 1, Algebra 2",
+      "sample_locator": "8th-3 KEY pp.1-2,4-5,12-13",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KEXP": {
+      "name": "Kuta properties of exponents",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1tBagdWR06r0nfg3J2flvtP-YWbUMznzT",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Product, quotient and power-of-power procedures progress into negative/zero exponent combinations",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC3, Algebra 1, Algebra 2",
+      "sample_locator": "Kuta Basic Skills: Properties of Exponents, early and later pages",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPOLY": {
+      "name": "Kuta polynomial operations",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1sfAW66v9EdNH47aQNct8tePmh1PwEFEf",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Signed polynomial addition/subtraction, monomial distribution, binomial products and higher-degree products",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 1, Algebra 2",
+      "sample_locator": "Kuta Basic Skills: Polynomial Operations",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KWORD": {
+      "name": "Kuta word problems",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1nf4LtT7ir0zLTeHDgno04OuKnpUqj7g8",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Translation between symbolic and verbal expressions with deliberate reversal of direction",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC1, Algebra 1",
+      "sample_locator": "Kuta Basic Skills: Word Problems",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KLIN": {
+      "name": "Kuta solve linear equations",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1Fn54wRjDKyffADaztI2tYknO2H4zJDnz",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "One/two-step forms, distribution and variable-on-both-sides equations, proportion problems, contextual cases",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC3, Algebra 1",
+      "sample_locator": "Kuta Basic Skills: Solve Linear Equations",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KINEQ": {
+      "name": "Kuta solve and graph inequalities",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1nUOW_g6aJpZsy9hmmkB9J3D-vAByqWpm",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Inequality to number-line graph, reverse graph to inequality, solve-and-graph with reversed direction from negative scaling",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC2, CC3, Algebra 1",
+      "sample_locator": "Kuta Basic Skills: Solve and Graph Inequalities",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KSYS": {
+      "name": "Kuta systems of equations",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1z315gDiZ4fVEjjp_5_AgAOOLH9D5mKZw",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Slope-intercept vs standard-form systems, common/nonparallel slopes, contextual systems",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC3, Algebra 1, Algebra 2",
+      "sample_locator": "Kuta Basic Skills: Solve System of Equations",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KGRAPH": {
+      "name": "Kuta slope and linear graphs",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1kBk3Gw7IttAiQ3YftRkrHDvxRxV6P2w7",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Slope from graph, two points, equation and graph line; horizontal/vertical cases",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC3, Algebra 1",
+      "sample_locator": "Kuta Basic Skills: Slope and Graph y-int and Standard Form",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KDISTR": {
+      "name": "Kuta distributive property",
+      "source_kind": "google_drive_pdf",
+      "source_id": "10PbQjW6zZcygfejJAaea4kAUaxaXMeQr",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Unlike-term collection, signed distribution, monomial factors, nested expression combinations",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC1, CC3, Algebra 1",
+      "sample_locator": "Kuta Basic Skills: Distributive Property",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KEVAL": {
+      "name": "Kuta evaluate expressions and equations",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1q2A3bZwaa8nVrULYoEma_gwl1PsiHi2x",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Substitute signed values into expressions with parentheses, repeated variables and powers",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC1, CC3, Algebra 1",
+      "sample_locator": "Kuta Basic Skills: Evaluate Expression and Solve Linear Equations",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPRIME": {
+      "name": "Kuta prime factorization",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1jc9tE5_hDDlakgaMBHcvWCVwoEbcRYY2",
+      "location": "Resources/kuta/",
+      "directly_observed_structures": "Prime-power factorization then GCF for numbers and monomials",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC1, CC2, Algebra 1",
+      "sample_locator": "Kuta Basic Skills: Prime Factorization",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCGRAPH": {
+      "name": "Kuta Precalculus graphing functions",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1GcHkb3iPAFQ1_pRRttnw0wT6d9U7T3qQ",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Combine domain, range, intercepts, asymptotes, end behavior and increasing/decreasing with graph sketch; equation-to-graph",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Kuta Precalculus: Graphing Functions",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCPIECE": {
+      "name": "Kuta piecewise graphing",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1qYymrJU8Xa5B0nJ0gspVJxkmOaGBMMWr",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Piecewise intervals with open/closed endpoints and isolated singleton values",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Kuta Precalculus: Graph Piecewise Functions",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCPOLY": {
+      "name": "Kuta factor and solve polynomials",
+      "source_kind": "google_drive_pdf",
+      "source_id": "10J77H_x5SnLFZJAx2R8J4_0hJH-Jkasz",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Factor a higher-degree polynomial when a factor is supplied and determine real/nonreal zeros",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Kuta Precalculus: Factor and Solve Polynomials",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCTRIG": {
+      "name": "Kuta trigonometry",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1dYSYv6Z6JtThuhofBPvP6ZeIHQA5OCSb",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Exact trigonometric ratios for signed/coterminal degree and radian angles; trig equations over specified intervals",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Precalculus",
+      "sample_locator": "Kuta Precalculus: Evaluate and Solve Trig Functions",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCEXP": {
+      "name": "Kuta exponential/log equations",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1JqPrUwohLzsiFli8dWbjuPE-tBbqAmEz",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "No-calculator exact solutions and parameter changes across exponent/log forms",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Kuta Precalculus: Solve Exponential and Log Equations",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCRAT": {
+      "name": "Kuta rational equations/inequalities",
+      "source_kind": "google_drive_pdf",
+      "source_id": "11ogd7IWtTsKYvAh7TGS3nZ7xoPChPk_K",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Rational equations with domain restrictions, extraneous-solution checking, and rational inequalities",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Kuta Precalculus: Solve Rational Equations and Inequalities",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCLOG": {
+      "name": "Kuta logarithm transformations",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1FRc_Ou54zYKxQJsUN0FZyLZ1PRPh4TYr",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Condense multiple logarithm terms to a single logarithm and expand in the reverse direction",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Kuta Precalculus: Expand and Condense Log Expressions",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCDER": {
+      "name": "Kuta derivative definition",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1ORvXRQExBXDl8RGP5gzHxmBnqIFPvpbE",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Difference quotient and derivative from definition for linear, quadratic, rational functions",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Precalculus (calculus bridge)",
+      "sample_locator": "Kuta Precalculus: Using Definition of Derivative",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "KPCLIMIT": {
+      "name": "Kuta calculus/limits mix",
+      "source_kind": "google_drive_pdf",
+      "source_id": "1huB_AXaPe_u2y4l0QQyDqJJ4Jgq9xne8",
+      "location": "Resources/kuta/PreCalculus/",
+      "directly_observed_structures": "Average vs instantaneous change, tangent line equation, symbolic limits",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Precalculus (bridge)",
+      "sample_locator": "Kuta Precalculus: Mix of Basic Calculus and Limits",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "EX1": {
+      "name": "Exeter Mathematics 1",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAeEs5OWp4blVGYUU",
+      "location": "Resources/exeter/",
+      "directly_observed_structures": "Backward reasoning; sequences with position rules; linked context/equation; percent changes affecting area versus perimeter",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "CC3, Algebra 1",
+      "sample_locator": "Mathematics 1, numbered problems and continuation tasks",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "EX2": {
+      "name": "Exeter Mathematics 2",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAS3BiZDNhNnB0amc",
+      "location": "Resources/exeter/",
+      "directly_observed_structures": "Geometric construction, proof constraints, route optimization, coordinate motion, same-equation/different representation",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Geometry, CC2",
+      "sample_locator": "Mathematics 2, numbered problems and continuation tasks",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "EX3": {
+      "name": "Exeter Mathematics 3",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAMERMTEVMNEFXNE0",
+      "location": "Resources/exeter/",
+      "directly_observed_structures": "Repeated transforms, parametric circular graphs, inverse trig, conic features, similar curves",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus, Geometry",
+      "sample_locator": "Mathematics 3, numbered problems and continuation tasks",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "EX4": {
+      "name": "Exeter Mathematics 4",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAQ2hDX0kwRnBaRms",
+      "location": "Resources/exeter/",
+      "directly_observed_structures": "Nonstandard transformation questions, rate-of-change geometry, limits, justification and comparison",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Precalculus (bridge), Algebra 2",
+      "sample_locator": "Mathematics 4, numbered problems and continuation tasks",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "EX5": {
+      "name": "Exeter Mathematics 5",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAbDI2T0ZXdHQ2djQ",
+      "location": "Resources/exeter/",
+      "directly_observed_structures": "Multivariable vector/calculus questions; generally beyond current seven CPM course banks",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Future higher calculus only",
+      "sample_locator": "Mathematics 5, numbered problems",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "EXD": {
+      "name": "Exeter Discrete Mathematics",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHASUV2WGpIS0d5dUk",
+      "location": "Resources/exeter/",
+      "directly_observed_structures": "Graph/network optimization and probability arguments, generally extension-only and only if aligned",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Conditional extension across upper courses",
+      "sample_locator": "Discrete Mathematics, graph/network problems",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "DM_TOPIC": {
+      "name": "DeltaMath complete curriculum",
+      "source_kind": "google_drive_docx",
+      "source_id": "1GzniFaEmpNXQJXCvDCMIkhY2iZD5x3WI",
+      "location": "My Drive root",
+      "directly_observed_structures": "Large elementary-to-calculus question TYPE inventory; not individual rendered items",
+      "evidence_confidence": "topic_inventory_text_checked",
+      "course_fit": "All courses",
+      "sample_locator": "DeltaMath_Complete_Curriculum.docx",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "DM_PC": {
+      "name": "DeltaMath precalculus topics",
+      "source_kind": "google_drive_docx",
+      "source_id": "14IhDsDRnlBRuLxK7ya3ajG-tcUQx53z5",
+      "location": "My Drive root",
+      "directly_observed_structures": "Detailed advanced topic/type list for precalculus, conics, trig, rational, exponential, inverse, sequences",
+      "evidence_confidence": "topic_inventory_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "DeltaMath_Topics_Formatted.docx",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "DM_CALC": {
+      "name": "DeltaMath course/chapter document",
+      "source_kind": "google_doc",
+      "source_id": "1cLmAGKQm0lfSABT7qgQdOo_-HYDGIbElKd7NtcIxjaM",
+      "location": "AP Calculus Drive",
+      "directly_observed_structures": "Course/chapter topic list including derivatives, limits, rates, integrals; not individual question examples",
+      "evidence_confidence": "topic_inventory_text_checked",
+      "course_fit": "Precalculus bridge only",
+      "sample_locator": "Deltamath Topics and Chapter Topics seperated",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "CAR3": {
+      "name": "Carnegie Algebra II Chapter 3 skills practice",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAS1oybVcyam8xQjQ",
+      "location": "Resources/algebra 2 Textbooks/Carnegie/",
+      "directly_observed_structures": "Cubic function table/model, relative extrema, multiplication of factors checked against graph, and even/odd function evidence",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2",
+      "sample_locator": "Chapter 3 Skills Practice, Lessons 3.1-3.3",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "CAR4": {
+      "name": "Carnegie Algebra II Chapter 4 skills practice",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAMXFwQUQybTEzV3c",
+      "location": "Resources/algebra 2 Textbooks/Carnegie/",
+      "directly_observed_structures": "Interpret polynomial graphs in context and question whether modeled behavior is realistic; average rate of change across intervals",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Chapter 4 Skills Practice, Lessons 4.1-4.2",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "CAR7": {
+      "name": "Carnegie Algebra II Chapter 7 skills practice",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAOGVkbkNPZlZMeEE",
+      "location": "Resources/algebra 2 Textbooks/Carnegie/",
+      "directly_observed_structures": "Classify rational functions, describe domain/asymptotes and construct more than one function satisfying the same features",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Chapter 7 Skills Practice, Lessons 7.1-7.2",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "CAR10": {
+      "name": "Carnegie Algebra II Chapter 10 skills practice",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHAWk1RQ1ByNl9LMVU",
+      "location": "Resources/algebra 2 Textbooks/Carnegie/",
+      "directly_observed_structures": "Geometric sequences, exponential functions, half-life interpretation and models with specific characteristics",
+      "evidence_confidence": "pdf_text_checked",
+      "course_fit": "Algebra 2, Precalculus",
+      "sample_locator": "Chapter 10 Skills Practice, Lessons 10.1-10.2",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "CARNEGIE": {
+      "name": "Carnegie Algebra II Student Skills Practice",
+      "source_kind": "google_drive_folder",
+      "source_id": "0B6fznOHK0RHAazhvelRmSTctaXc",
+      "location": "Resources/algebra 2 Textbooks/Carnegie/",
+      "directly_observed_structures": "Chapter 2-12 student skills PDFs; content not deeply inspected",
+      "evidence_confidence": "folder_inventory_only",
+      "course_fit": "Algebra 2",
+      "sample_locator": "folders and chapter PDF titles",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "OTHER2": {
+      "name": "Multiple Algebra 2 textbook collections",
+      "source_kind": "google_drive_folder",
+      "source_id": "0B6fznOHK0RHARFBMVDVtUWN4a2M",
+      "location": "Resources/algebra 2 Textbooks/",
+      "directly_observed_structures": "Big Ideas, Carnegie, Pearson, Holt-Larson, Glencoe, AMSCO and others; only inventory established",
+      "evidence_confidence": "folder_inventory_only",
+      "course_fit": "Algebra 2",
+      "sample_locator": "folder names",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "GLENCOE3": {
+      "name": "Glencoe Mathematics Course 3 cover",
+      "source_kind": "google_drive_pdf",
+      "source_id": "0B6fznOHK0RHANy1tN3M5bjh0OFU",
+      "location": "Resources/Course 3 Textbook/",
+      "directly_observed_structures": "Only cover/index metadata extracted; no unit content established",
+      "evidence_confidence": "cover_only",
+      "course_fit": "CC3",
+      "sample_locator": "Math Textbook.pdf, cover",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "COMMON_CORE": {
+      "name": "Common Core learning targets folder",
+      "source_kind": "google_drive_folder",
+      "source_id": "0B6fznOHK0RHAQXVmY3VfYk1TclE",
+      "location": "Resources/common core stuff/Learning Targets",
+      "directly_observed_structures": "Legacy unit target and standards materials; exact lesson mapping not checked",
+      "evidence_confidence": "folder_inventory_only",
+      "course_fit": "All courses",
+      "sample_locator": "24 items listed",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    },
+    "K_MULTI": {
+      "name": "Kuta multi-version compilations",
+      "source_kind": "google_drive_pdf_collection",
+      "source_id": "1C9ZRvsHLuLpxy0Of4WhWWCHVib28xfON",
+      "location": "Resources/kuta (1)/",
+      "directly_observed_structures": "Multiple-version slope/equation/system/quadratic files; question contents not individually inspected",
+      "evidence_confidence": "folder_inventory_only",
+      "course_fit": "CC3, Algebra 1",
+      "sample_locator": "four multiversion PDF names",
+      "use_rights_rule": "STRUCTURAL_REFERENCE_ONLY; original prompts, numbers, diagrams, choices and solutions must not be transferred to generator content"
+    }
+  },
+  "candidates": [
+    {
+      "idea_id": "DEEP-001",
+      "course": "CC1",
+      "skill_area": "Separate part-to-part from part-to-whole ratios",
+      "student_evidence_job": "Choose numerator/denominator according to named sets and use total only when required.",
+      "representation_modes": [
+        "shape count diagram",
+        "ratio table"
+      ],
+      "primary_variation_axes": [
+        "target set",
+        "direction",
+        "part-versus-whole"
+      ],
+      "level_progression": {
+        "level_1": "two-part visible",
+        "level_2": "multi-group with distractor totals",
+        "level_3": "context requires distinguishing two possible ratios"
+      },
+      "source_ids": [
+        "DM6R",
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_VISUAL_COUNTS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-001"
+      ],
+      "priority": "high",
+      "qa_watch": "Part-to-whole differs from part-to-part; do not replace a diagram with unbalanced labels.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-002",
+      "course": "CC1",
+      "skill_area": "Infer an unseen group from a known ratio",
+      "student_evidence_job": "Find an unknown group count when one part and the ratio are supplied.",
+      "representation_modes": [
+        "bars",
+        "double number line",
+        "text"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "whole-number multiplier",
+        "level_2": "reduce then enlarge",
+        "level_3": "infer total after a non-unit ratio"
+      },
+      "source_ids": [
+        "DM6R",
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [],
+      "canonical_status": "FAMILY_CROSSWALK_REQUIRED",
+      "previous_catalog_idea_ids": [
+        "CPMREF-002"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-003",
+      "course": "CC1",
+      "skill_area": "Recover an original batch from a changed serving count",
+      "student_evidence_job": "Solve recipe scaling backwards rather than only multiplying to a larger serving count.",
+      "representation_modes": [
+        "ratio table",
+        "ingredient list"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "integer serving ratio",
+        "level_2": "shrink with fraction",
+        "level_3": "reverse two-stage scale"
+      },
+      "source_ids": [
+        "DM6R",
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "FRAC_RECIPE_SCALE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-002"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-004",
+      "course": "CC1",
+      "skill_area": "Locate the missing anchor on a double number line",
+      "student_evidence_job": "Determine original unit or scale where neither axis has consecutive marked multiples.",
+      "representation_modes": [
+        "double number line"
+      ],
+      "primary_variation_axes": [
+        "missing anchor",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "consecutive anchors",
+        "level_2": "nonadjacent multipliers",
+        "level_3": "reverse missing zero or unit anchor"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_DOUBLE_NUMBER_LINE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-004"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-005",
+      "course": "CC1",
+      "skill_area": "Detect a broken proportional table",
+      "student_evidence_job": "Identify one inconsistent entry and replace it to preserve a fixed multiplicative rule.",
+      "representation_modes": [
+        "table",
+        "multiple choice"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one missing row",
+        "level_2": "one wrong row",
+        "level_3": "choose among two close plausible ratios"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_TABLE_COMPLETE",
+        "RATIO_ERROR_ANALYSIS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-003"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-006",
+      "course": "CC1",
+      "skill_area": "Compare two mixtures using equalized quantities",
+      "student_evidence_job": "Decide which mixture is stronger by comparing common volumes and units, not raw component size.",
+      "representation_modes": [
+        "ratio table",
+        "mixture icon",
+        "contextual table"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "integer whole-unit compare",
+        "level_2": "compare without same totals",
+        "level_3": "explain what denominator means"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_MIX_COMPARE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-002"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-007",
+      "course": "CC1",
+      "skill_area": "Distinguish a balance model from its equation",
+      "student_evidence_job": "Read group/constant counts, write equation, then solve without the equation being supplied.",
+      "representation_modes": [
+        "balance model",
+        "symbolic equation"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "equal groups one side",
+        "level_2": "groups on both sides",
+        "level_3": "one unknown group with offset"
+      },
+      "source_ids": [
+        "DM6V"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_BALANCE_MODEL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-005"
+      ],
+      "priority": "high",
+      "qa_watch": "Draw an accurate scale model; item must not give the equation in the prompt.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-008",
+      "course": "CC1",
+      "skill_area": "Backtrack a two-step strip diagram",
+      "student_evidence_job": "Use inverse operations to find the initial unknown quantity from an endpoint.",
+      "representation_modes": [
+        "strip diagram",
+        "flowchart"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "one operation",
+        "level_2": "two sequential operations",
+        "level_3": "operation order ambiguity resolved from diagram"
+      },
+      "source_ids": [
+        "KWORD",
+        "DM6V"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_STRIP_DIAGRAM",
+        "EQ_TWO_STEP"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-009",
+      "course": "CC1",
+      "skill_area": "Interpret what a variable measures",
+      "student_evidence_job": "Match or distinguish independent/dependent quantity, unit, and equation input.",
+      "representation_modes": [
+        "context table",
+        "rule",
+        "selected response"
+      ],
+      "primary_variation_axes": [
+        "response_mode",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "context with one variable",
+        "level_2": "two variables and units",
+        "level_3": "distinguish which quantity is controlled"
+      },
+      "source_ids": [
+        "DM6V"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_CONTEXT_MODEL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-006"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-010",
+      "course": "CC1",
+      "skill_area": "Trace distributive area-model factors",
+      "student_evidence_job": "Complete factor, cell and total representations without writing the completed products in the empty work cells.",
+      "representation_modes": [
+        "generic rectangle",
+        "expression"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "one row factor",
+        "level_2": "missing product cell",
+        "level_3": "reverse from total and partial cells"
+      },
+      "source_ids": [
+        "KDISTR"
+      ],
+      "canonical_family_id_candidates": [
+        "EXPR_EQUIVALENT_DISTRIB"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Cells must be 50% taller than stock display if used on printed sheets; no underlined cell answers.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-011",
+      "course": "CC1",
+      "skill_area": "Compare decimal operations by number-line jumps",
+      "student_evidence_job": "Use a consistent origin and labeled jump lengths to show addition or subtraction with a selected decomposition.",
+      "representation_modes": [
+        "open number line"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "single jump",
+        "level_2": "tens and units",
+        "level_3": "decimal regroup with visible open-end mark"
+      },
+      "source_ids": [
+        "DM4"
+      ],
+      "canonical_family_id_candidates": [
+        "DEC_OPEN_NL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Never draw Cartesian axes for an open number line.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-012",
+      "course": "CC1",
+      "skill_area": "Explain decimal digit contribution from expanded form",
+      "student_evidence_job": "Connect a digit place to its fractional magnitude rather than just name the place.",
+      "representation_modes": [
+        "expanded notation",
+        "place-value table"
+      ],
+      "primary_variation_axes": [
+        "response_mode",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one digit",
+        "level_2": "zero placeholder",
+        "level_3": "very small digit with equivalent fractions"
+      },
+      "source_ids": [
+        "DM4"
+      ],
+      "canonical_family_id_candidates": [
+        "DEC_PLACE_VALUE",
+        "NUM_PLACE_VALUE_DIGIT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-013",
+      "course": "CC1",
+      "skill_area": "Determine fraction of a fraction with area partitions",
+      "student_evidence_job": "Use two-direction shading and explain numerator/denominator of the final fraction.",
+      "representation_modes": [
+        "unit square area"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "unit fractions",
+        "level_2": "unlike unit splits",
+        "level_3": "determine missing shaded quantity"
+      },
+      "source_ids": [
+        "DM_TOPIC"
+      ],
+      "canonical_family_id_candidates": [
+        "FRAC_MULT_AREA_MODEL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Fraction-area model must preserve equal partition geometry.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-014",
+      "course": "CC1",
+      "skill_area": "Read an arithmetic rule with a missing input and output",
+      "student_evidence_job": "Complete a table where at least one missing input is reverse solved.",
+      "representation_modes": [
+        "function table"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "forward input",
+        "level_2": "reverse output",
+        "level_3": "mixed input/output gaps"
+      },
+      "source_ids": [
+        "DM6V"
+      ],
+      "canonical_family_id_candidates": [
+        "PATTERN_INPUT_OUTPUT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-015",
+      "course": "CC1",
+      "skill_area": "Write a rate story from a table with units",
+      "student_evidence_job": "Infer the action that a repeated numerical ratio represents in a plausible context.",
+      "representation_modes": [
+        "table",
+        "word matching"
+      ],
+      "primary_variation_axes": [
+        "context_evidence",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "one quantity per unit",
+        "level_2": "mixed unit rates",
+        "level_3": "compare two possible contexts"
+      },
+      "source_ids": [
+        "DM6V",
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_LANGUAGE_TABLE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-016",
+      "course": "CC1",
+      "skill_area": "Distinguish sequential from independent percent changes",
+      "student_evidence_job": "Find final quantity under two dependent percent changes and compare with summed percents.",
+      "representation_modes": [
+        "percent bar",
+        "table"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "one change",
+        "level_2": "increase then decrease",
+        "level_3": "explain why additive shortcut fails"
+      },
+      "source_ids": [
+        "EX1"
+      ],
+      "canonical_family_id_candidates": [
+        "PERCENT_MULTI_STEP"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Only place in lessons with explicit percent-change prerequisites.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-017",
+      "course": "CC2",
+      "skill_area": "Scale factor despite rotation or reflection",
+      "student_evidence_job": "Match correct corresponding sides and recover transformation scale.",
+      "representation_modes": [
+        "coordinate grid",
+        "paired shapes"
+      ],
+      "primary_variation_axes": [
+        "representation_values",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "aligned",
+        "level_2": "translated",
+        "level_3": "rotated or reflected"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "SCALE_FACTOR_FIGURES",
+        "CORRESPONDING_PARTS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-007",
+        "CPMREF-008"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-018",
+      "course": "CC2",
+      "skill_area": "Recover a preimage dimension",
+      "student_evidence_job": "Given enlarged output and factor, determine original side or perimeter.",
+      "representation_modes": [
+        "paired shapes",
+        "labelled dimension"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "unit factor",
+        "level_2": "fractional factor",
+        "level_3": "reverse with a missing original dimension"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "SCALE_CORRESPONDING_SIDE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-012"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-019",
+      "course": "CC2",
+      "skill_area": "Distinguish length factor from area factor",
+      "student_evidence_job": "Find area ratio of similar rectangles/triangles after linear scale is known.",
+      "representation_modes": [
+        "shape diagram",
+        "table"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "integer factor",
+        "level_2": "fractional factor",
+        "level_3": "infer factor from area ratio"
+      },
+      "source_ids": [
+        "DM7",
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "SCALE_DRAWING_DISTANCE_AREA"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-020",
+      "course": "CC2",
+      "skill_area": "Complete a partly plotted dilation",
+      "student_evidence_job": "Complete image from one or two anchored vertices, with accurate gridded construction space.",
+      "representation_modes": [
+        "coordinate grid"
+      ],
+      "primary_variation_axes": [
+        "givens_evidence_set",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "axis aligned",
+        "level_2": "figure translated on grid",
+        "level_3": "rotated shape and fractional factor"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "DILATION_GRID"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-009"
+      ],
+      "priority": "high",
+      "qa_watch": "Use registered Graph Tool for Cartesian grids; starting plotted points must not reveal remaining image.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-021",
+      "course": "CC2",
+      "skill_area": "Check whether a figure can be a scaled copy",
+      "student_evidence_job": "Use corresponding ratios to find conflicting evidence, not just yes/no by eye.",
+      "representation_modes": [
+        "two shapes",
+        "side labels"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "matching factors",
+        "level_2": "one inconsistent side",
+        "level_3": "mixed orientation with one ratio conflict"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "SCALE_FACTOR_FIGURES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-022",
+      "course": "CC2",
+      "skill_area": "Use map scale then travel rate",
+      "student_evidence_job": "Find travel time requiring the scaled distance first and a speed second.",
+      "representation_modes": [
+        "scale bar",
+        "map",
+        "unit table"
+      ],
+      "primary_variation_axes": [
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "single distance",
+        "level_2": "fractional map length",
+        "level_3": "map distance then minutes-hours conversion"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "SCALE_DRAWING_DISTANCE_AREA"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Genuine two-step dependency; use contextually appropriate units.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-023",
+      "course": "CC2",
+      "skill_area": "Compare unequal batches via a common unit",
+      "student_evidence_job": "Choose stronger concentration by re-expressing both as per-unit ratios.",
+      "representation_modes": [
+        "ratio table",
+        "matching"
+      ],
+      "primary_variation_axes": [
+        "givens_evidence_set",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "integer unit",
+        "level_2": "different whole sizes",
+        "level_3": "compare near-identical rates with units"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_MIX_COMPARE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-024",
+      "course": "CC2",
+      "skill_area": "Complete and challenge a double-number-line ratio",
+      "student_evidence_job": "Find different missing anchors then determine whether the display is proportional.",
+      "representation_modes": [
+        "double number line"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "two anchors",
+        "level_2": "distant fractional marker",
+        "level_3": "identify inconsistent anchor"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_DOUBLE_NUMBER_LINE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-025",
+      "course": "CC2",
+      "skill_area": "Select the one ratio table that preserves a rule",
+      "student_evidence_job": "Compare multiple tables containing one constant, one additive, and one inconsistent pattern.",
+      "representation_modes": [
+        "four small tables",
+        "multiple choice"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one true table",
+        "level_2": "two close distractors",
+        "level_3": "justified selection from changing row gaps"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_TABLE_COMPLETE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-026",
+      "course": "CC2",
+      "skill_area": "Interpret rate as quantity-per-quantity",
+      "student_evidence_job": "Explain the direction and units of a graph proportionality constant.",
+      "representation_modes": [
+        "coordinate graph",
+        "labelled axes"
+      ],
+      "primary_variation_axes": [
+        "response_mode",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "unit rate from labelled point",
+        "level_2": "decimal coordinate",
+        "level_3": "inverse units and reverse axis"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "PROP_GRAPH_CONSTANT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-027",
+      "course": "CC2",
+      "skill_area": "Use ratios with three ingredients",
+      "student_evidence_job": "Convert part-to-part-to-part into part-to-whole without changing referent.",
+      "representation_modes": [
+        "ingredient table",
+        "ratio bar"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "three visible counts",
+        "level_2": "scaled total",
+        "level_3": "infer one component from total and ratios"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIO_THREE_PART"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-028",
+      "course": "CC2",
+      "skill_area": "Distinguish scale factor in images from scale factor in quantities",
+      "student_evidence_job": "Match a geometry diagram, numerical ratio and verbal scaling story.",
+      "representation_modes": [
+        "figure",
+        "table",
+        "matching"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "same direct scale",
+        "level_2": "reverse scale",
+        "level_3": "deliberately mismatched units"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "SCALE_FACTOR_FIGURES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-029",
+      "course": "CC2",
+      "skill_area": "Locate inverse and direct operations when solving proportions",
+      "student_evidence_job": "Evaluate which unknown arrangement makes proportional reasoning necessary rather than cross-multiplication ritual.",
+      "representation_modes": [
+        "ratio table",
+        "verbal context"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "missing term",
+        "level_2": "missing multiplier",
+        "level_3": "compound change with intermediate unit rate"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "PROP_SOLVE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-030",
+      "course": "CC2",
+      "skill_area": "Detect a mistaken number-line inequality endpoint",
+      "student_evidence_job": "Identify correct endpoint openness and ray orientation from symbolic inequality.",
+      "representation_modes": [
+        "number line",
+        "matching"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "strict versus inclusive",
+        "level_2": "reversed statement",
+        "level_3": "negative divisor during solving"
+      },
+      "source_ids": [
+        "KINEQ"
+      ],
+      "canonical_family_id_candidates": [
+        "INEQ_GRAPH_MATCH"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-031",
+      "course": "CC3",
+      "skill_area": "Derive a linear rule from nonconsecutive table points",
+      "student_evidence_job": "Determine both change and initial value without x=0 being listed.",
+      "representation_modes": [
+        "input-output table"
+      ],
+      "primary_variation_axes": [
+        "givens_evidence_set",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "unit x steps",
+        "level_2": "nonconsecutive x",
+        "level_3": "negative and mixed-sign samples"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "LINE_EQ_FROM_REP",
+        "FUNC_LINEAR_TABLE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-032",
+      "course": "CC3",
+      "skill_area": "Explain meaning of a graph point using axes",
+      "student_evidence_job": "Match a point to a full context statement including both quantities and units.",
+      "representation_modes": [
+        "labelled coordinate graph",
+        "MC"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "context_evidence"
+      ],
+      "level_progression": {
+        "level_1": "positive intercept",
+        "level_2": "off-origin point",
+        "level_3": "negative slope and shifted time origin"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_GRAPH_STORY"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-033",
+      "course": "CC3",
+      "skill_area": "Compare rates across graph and table",
+      "student_evidence_job": "Select smallest/largest signed change using consistent units across representations.",
+      "representation_modes": [
+        "coordinate graph",
+        "table",
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "two increasing",
+        "level_2": "increasing vs decreasing",
+        "level_3": "fractions and unlike input intervals"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "SLOPE_FROM_GRAPH",
+        "SLOPE_FROM_TWO_POINTS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-034",
+      "course": "CC3",
+      "skill_area": "Build a changing-rate graph from timed stages",
+      "student_evidence_job": "Plot cumulative totals from initial amount and sequential rates; do not restart at zero after each interval.",
+      "representation_modes": [
+        "graph grid",
+        "time story"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "two stages",
+        "level_2": "stage with rest",
+        "level_3": "3-4 stages plus negative rate"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_PIECEWISE_CONTEXT_GRAPH"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-015"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-035",
+      "course": "CC3",
+      "skill_area": "Read flat and changing intervals from a graph",
+      "student_evidence_job": "Interpret periods of steady output, increasing rate, and decreasing output using actual changes.",
+      "representation_modes": [
+        "time graph",
+        "short answers"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "one flat interval",
+        "level_2": "two slope changes",
+        "level_3": "specify interval endpoints and net change"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_GRAPH_STORY"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-016"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-036",
+      "course": "CC3",
+      "skill_area": "Decide proportionality by intercept versus ratio",
+      "student_evidence_job": "Distinguish y=kx from y=mx+b with nonzero b across multiple displays.",
+      "representation_modes": [
+        "table",
+        "graph",
+        "equations"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "equations",
+        "level_2": "table with x=0 missing",
+        "level_3": "compare two competing graphs"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_PROP_GRAPH_K",
+        "LINE_DIRECT_VARIATION"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-037",
+      "course": "CC3",
+      "skill_area": "Create two linear expressions for the same context",
+      "student_evidence_job": "Write and evaluate expressions for two different plans; do not provide equations.",
+      "representation_modes": [
+        "two context cards",
+        "expression"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "same unit rate",
+        "level_2": "different starting and variable costs",
+        "level_3": "solve break-even time"
+      },
+      "source_ids": [
+        "DM8",
+        "EX1"
+      ],
+      "canonical_family_id_candidates": [
+        "LINE_CONTEXT_INTERPRET",
+        "EQ_CONTEXT_WRITE_SOLVE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-038",
+      "course": "CC3",
+      "skill_area": "Work in both directions with graph and equation",
+      "student_evidence_job": "Given graph find rule, then given rule identify a graph feature not already marked.",
+      "representation_modes": [
+        "coordinate graph",
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "response_mode",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "integer slope",
+        "level_2": "negative slope",
+        "level_3": "slope and y-intercept not both visible"
+      },
+      "source_ids": [
+        "KGRAPH",
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "LINE_EQ_FROM_REP"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-039",
+      "course": "CC3",
+      "skill_area": "Distinguish finite difference from a multiplicative change",
+      "student_evidence_job": "Compare a linear sequence and multiplicative sequence using an uneven-spaced table.",
+      "representation_modes": [
+        "table",
+        "rule matching"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "constant additive",
+        "level_2": "constant multiplicative",
+        "level_3": "infer model from nonconsecutive values"
+      },
+      "source_ids": [
+        "EX1",
+        "DM_TOPIC"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_LINEAR_NONLINEAR"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-040",
+      "course": "CC3",
+      "skill_area": "Read and write two variable inequality constraints",
+      "student_evidence_job": "Translate graph shading and boundary inclusion into a feasible inequality.",
+      "representation_modes": [
+        "coordinate graph",
+        "contextual constraint"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "axis-parallel",
+        "level_2": "slanted",
+        "level_3": "choice of inequality direction plus dashed line"
+      },
+      "source_ids": [
+        "KINEQ"
+      ],
+      "canonical_family_id_candidates": [
+        "INEQ_TWO_VAR_GRAPH"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Only if inequalities in two variables are in the actual lesson goals.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-041",
+      "course": "CC3",
+      "skill_area": "Find a system solution from changing representations",
+      "student_evidence_job": "Identify where two lines meet when one relationship is a table and one is a graph.",
+      "representation_modes": [
+        "table",
+        "graph"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "two graph lines",
+        "level_2": "graph+table",
+        "level_3": "two context rates and fixed charges"
+      },
+      "source_ids": [
+        "KSYS"
+      ],
+      "canonical_family_id_candidates": [
+        "SYSTEM_GRAPH_SOLUTION"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-042",
+      "course": "CC3",
+      "skill_area": "Classify two lines by their slopes and intercepts",
+      "student_evidence_job": "Determine zero, one or infinitely many intersection points from two line equations.",
+      "representation_modes": [
+        "equations",
+        "graphs"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "nonparallel",
+        "level_2": "parallel different intercepts",
+        "level_3": "same line in different forms"
+      },
+      "source_ids": [
+        "KSYS"
+      ],
+      "canonical_family_id_candidates": [
+        "SYSTEM_NUM_SOLUTIONS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Do NOT place classification in a lesson teaching only ordinary equation solving.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-043",
+      "course": "CC3",
+      "skill_area": "Model a missing input from table output",
+      "student_evidence_job": "Reverse a linear input-output relationship; do not simply evaluate forward.",
+      "representation_modes": [
+        "table",
+        "symbolic rule"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "integer reverse",
+        "level_2": "signed reverse",
+        "level_3": "non-unit rate with rational input"
+      },
+      "source_ids": [
+        "DM6V",
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_FIND_INPUT_FOR_OUTPUT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-044",
+      "course": "CC3",
+      "skill_area": "Detect an inconsistent straight-line rule",
+      "student_evidence_job": "Given four coordinate pairs, identify and correct one entry inconsistent with a linear pattern.",
+      "representation_modes": [
+        "table",
+        "scatter graph"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "constant step",
+        "level_2": "uneven input steps",
+        "level_3": "reverse detect entry vs equation"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_LINEAR_TABLE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-045",
+      "course": "Algebra 1",
+      "skill_area": "Classify exponent law only after actual simplification",
+      "student_evidence_job": "Simplify expression, then select property used; property list includes upcoming laws as distractors without using them in computation.",
+      "representation_modes": [
+        "symbolic expression",
+        "MC"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "same base one factor",
+        "level_2": "coefficients and two bases",
+        "level_3": "combined law application"
+      },
+      "source_ids": [
+        "KEXP"
+      ],
+      "canonical_family_id_candidates": [
+        "EXP_RULES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-020"
+      ],
+      "priority": "high",
+      "qa_watch": "Do not create explain/justify-only family; still simplify first.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-046",
+      "course": "Algebra 1",
+      "skill_area": "Reverse an exponent product",
+      "student_evidence_job": "Given simplified monomial, construct two nontrivial factors whose product matches it.",
+      "representation_modes": [
+        "symbolic expression",
+        "fill blank"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "single base",
+        "level_2": "two bases",
+        "level_3": "signed coefficients with valid exponent choices"
+      },
+      "source_ids": [
+        "KEXP"
+      ],
+      "canonical_family_id_candidates": [
+        "EXP_RULES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-047",
+      "course": "Algebra 1",
+      "skill_area": "Differentiate product, quotient and power of power",
+      "student_evidence_job": "Choose/perform only the law matching given expression, including parentheses placement.",
+      "representation_modes": [
+        "expression matching",
+        "selected response"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "one operation",
+        "level_2": "two nested operations",
+        "level_3": "detect wrong exponent arithmetic"
+      },
+      "source_ids": [
+        "KEXP"
+      ],
+      "canonical_family_id_candidates": [
+        "EXP_RULES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-019"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-048",
+      "course": "Algebra 1",
+      "skill_area": "Represent zero and negative exponent as reciprocal",
+      "student_evidence_job": "Rewrite exponential expressions with correct restrictions and positive exponents only.",
+      "representation_modes": [
+        "expression",
+        "fraction bar"
+      ],
+      "primary_variation_axes": [
+        "response_mode",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "single negative exponent",
+        "level_2": "coefficient and multiple powers",
+        "level_3": "nested rational product"
+      },
+      "source_ids": [
+        "KEXP"
+      ],
+      "canonical_family_id_candidates": [
+        "EXP_ZERO_NEGATIVE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-049",
+      "course": "Algebra 1",
+      "skill_area": "Complete a genuine generic rectangle product",
+      "student_evidence_job": "Connect factor labels, blank cells, and total; make workspace sized for handwritten answers.",
+      "representation_modes": [
+        "generic rectangle",
+        "expression"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "monomial times binomial",
+        "level_2": "binomial times binomial",
+        "level_3": "find missing factor from partial cells"
+      },
+      "source_ids": [
+        "KPOLY",
+        "KDISTR"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_MULT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-024"
+      ],
+      "priority": "high",
+      "qa_watch": "No answer lines inside cells, no algebra-tile substitution unless required by original textbook.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-050",
+      "course": "Algebra 1",
+      "skill_area": "Undo signed distribution with like terms",
+      "student_evidence_job": "Solve equations that actually display unexpanded factors and require meaningful collecting.",
+      "representation_modes": [
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "representation_values",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "single distribution",
+        "level_2": "both sides with like terms",
+        "level_3": "negative distribution and rational answer"
+      },
+      "source_ids": [
+        "KLIN",
+        "KDISTR"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_MULTI_STEP"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-022"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-051",
+      "course": "Algebra 1",
+      "skill_area": "Model and solve a two-cost story",
+      "student_evidence_job": "Construct fixed+variable equation from context, identify unknown from wording, solve then interpret unit.",
+      "representation_modes": [
+        "context card",
+        "equation work area"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "context_evidence"
+      ],
+      "level_progression": {
+        "level_1": "single plan",
+        "level_2": "two stages",
+        "level_3": "two-plan threshold requiring comparison"
+      },
+      "source_ids": [
+        "DM8",
+        "KWORD"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_CONTEXT_WRITE_SOLVE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-021"
+      ],
+      "priority": "high",
+      "qa_watch": "Do not supply constructed equation in student prompt; unknown wording must be unambiguous.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-052",
+      "course": "Algebra 1",
+      "skill_area": "Rearrange one formula for differing unknowns",
+      "student_evidence_job": "Given relation, solve for a specified variable without collapsing every version to A=kh.",
+      "representation_modes": [
+        "formula",
+        "annotated schematic"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "product formula",
+        "level_2": "terms on both sides",
+        "level_3": "variable in a denominator with nonzero condition"
+      },
+      "source_ids": [
+        "EX1"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_LITERAL_SOLVE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-053",
+      "course": "Algebra 1",
+      "skill_area": "Compare numerical value and input from function notation",
+      "student_evidence_job": "Evaluate f(a) and determine x from f(x)=b as different evidence jobs, retaining notation.",
+      "representation_modes": [
+        "function rule",
+        "table",
+        "selected response"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "evaluate forward",
+        "level_2": "reverse input",
+        "level_3": "compare two function values"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "FUNC_EVALUATE_FORMULA",
+        "FUNC_FIND_INPUT_FOR_OUTPUT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-023"
+      ],
+      "priority": "high",
+      "qa_watch": "Keep f and g function notation in every parallel form.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-054",
+      "course": "Algebra 1",
+      "skill_area": "Diagnose a distributive solution step",
+      "student_evidence_job": "Show a specific mathematical error, identify first incorrect step, and correct it.",
+      "representation_modes": [
+        "worked steps",
+        "MC or short answer"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "sign on one term",
+        "level_2": "negative outer sign",
+        "level_3": "error in both distributive and collection step"
+      },
+      "source_ids": [
+        "KDISTR"
+      ],
+      "canonical_family_id_candidates": [
+        "EXPR_EQUIVALENT_DISTRIB"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Only use explain when error analysis has substantive wrong work.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-055",
+      "course": "Algebra 1",
+      "skill_area": "Distinguish one, no, infinitely many equation solutions",
+      "student_evidence_job": "Compare algebraically equivalent forms and classify only when lesson explicitly teaches these cases.",
+      "representation_modes": [
+        "equations",
+        "matching"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one solution",
+        "level_2": "0=c",
+        "level_3": "0=0 with differently written coefficients"
+      },
+      "source_ids": [
+        "KLIN"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_NUMBER_SOLUTIONS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Course/lesson appropriateness must be checked; earlier Chapter 3 misplacement noted.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-056",
+      "course": "Algebra 1",
+      "skill_area": "Select equivalent algebra expressions by actual distribution",
+      "student_evidence_job": "Choose which expanded/factored expression is equivalent and verify with an algebraic transformation.",
+      "representation_modes": [
+        "expression",
+        "matching"
+      ],
+      "primary_variation_axes": [
+        "response_mode",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "positive factor",
+        "level_2": "signed factor",
+        "level_3": "rational coefficients with sign error distractors"
+      },
+      "source_ids": [
+        "KDISTR"
+      ],
+      "canonical_family_id_candidates": [
+        "EXPR_EQUIVALENT_DISTRIB"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-057",
+      "course": "Algebra 1",
+      "skill_area": "Use valid constraints when solving absolute-value equation",
+      "student_evidence_job": "Solve both branches and rule out impossible cases without a rote two-answer guarantee.",
+      "representation_modes": [
+        "equation",
+        "number line"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "absolute simple",
+        "level_2": "shifted inside",
+        "level_3": "RHS sign and no-solution case"
+      },
+      "source_ids": [
+        "EX1"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_ABS_VALUE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-058",
+      "course": "Algebra 1",
+      "skill_area": "Select proper equation morphology at fixed complexity",
+      "student_evidence_job": "Rotate equivalent evidence tasks across ax+b=c, b-ax=c, rational coefficient, variable-both-sides without fake difficulty.",
+      "representation_modes": [
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "representation_values",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "one inverse stage",
+        "level_2": "two linked inverse stages",
+        "level_3": "two-sided distribution"
+      },
+      "source_ids": [
+        "KLIN"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_TWO_STEP",
+        "EQ_VARIABLE_BOTH_SIDES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-059",
+      "course": "Algebra 1",
+      "skill_area": "Compare the rate and start in two line models",
+      "student_evidence_job": "Write and interpret a line equation for plans and state when one overtakes the other.",
+      "representation_modes": [
+        "context",
+        "table",
+        "coordinate graph"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "context_evidence"
+      ],
+      "level_progression": {
+        "level_1": "read one rate",
+        "level_2": "compare fixed and variable",
+        "level_3": "solve crossover point"
+      },
+      "source_ids": [
+        "DM8"
+      ],
+      "canonical_family_id_candidates": [
+        "LINE_CONTEXT_INTERPRET"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-060",
+      "course": "Geometry",
+      "skill_area": "Map corresponding parts under rotation",
+      "student_evidence_job": "Identify correspondence before computing missing sides; do not assume similar placement means same index.",
+      "representation_modes": [
+        "accurate figure",
+        "matching"
+      ],
+      "primary_variation_axes": [
+        "representation_values",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "aligned",
+        "level_2": "rotated",
+        "level_3": "reflected/unequal orientation"
+      },
+      "source_ids": [
+        "DM7",
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_SIMILAR_PROPORTIONS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-025"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-061",
+      "course": "Geometry",
+      "skill_area": "Reject invalid congruence marking claims",
+      "student_evidence_job": "Decide whether marked diagram justifies congruence and name exactly missing condition.",
+      "representation_modes": [
+        "teacher-style marked triangles"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "SSS/SAS markers",
+        "level_2": "ambiguous ASA/AAS",
+        "level_3": "insufficient SSA example"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_CONGRUENCE_CRITERIA",
+        "GEO_DIAGRAM_MARKINGS"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-027"
+      ],
+      "priority": "high",
+      "qa_watch": "Diagram markings must be mathematically consistent; never infer from picture appearance.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-062",
+      "course": "Geometry",
+      "skill_area": "Give a counterexample to an angle claim",
+      "student_evidence_job": "Construct or choose a second configuration satisfying givens but not the disputed conclusion.",
+      "representation_modes": [
+        "geometry figures",
+        "multiple choice"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "one diagram",
+        "level_2": "two valid configurations",
+        "level_3": "explain why an assumed theorem is not guaranteed"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_PROOF_TRIANGLE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-063",
+      "course": "Geometry",
+      "skill_area": "Compare two construction routes",
+      "student_evidence_job": "Construct a figure with straightedge/compass constraints or identify invalid intermediate construction.",
+      "representation_modes": [
+        "construction figure",
+        "steps"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "bisector",
+        "level_2": "perpendicular through point",
+        "level_3": "combined construction"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_CONSTRUCTION_BASIC"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-064",
+      "course": "Geometry",
+      "skill_area": "Prove a coordinate quadrilateral type",
+      "student_evidence_job": "Use distances and slopes to justify rectangle/parallelogram rather than label by sight.",
+      "representation_modes": [
+        "coordinate graph",
+        "vertex coordinates"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "axis aligned",
+        "level_2": "tilted rectangle",
+        "level_3": "nontrivial congruent slopes/distances"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_COORD_PROOF"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Use Graph Tool to generate the plane; demonstrate required properties.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-065",
+      "course": "Geometry",
+      "skill_area": "Compute length and area change under similarity",
+      "student_evidence_job": "Distinguish linear ratio and squared area ratio in a diagram including reverse inference.",
+      "representation_modes": [
+        "similar figures",
+        "labelled regions"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "direct scale",
+        "level_2": "area factor",
+        "level_3": "recover length factor from area ratio"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_SIMILARITY"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-066",
+      "course": "Geometry",
+      "skill_area": "Reason backward from an angle sum",
+      "student_evidence_job": "Determine a missing angle after using exterior/parallel angle relationships in dependent order.",
+      "representation_modes": [
+        "marked diagram"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "triangle sum",
+        "level_2": "transversal relation",
+        "level_3": "two-stage polygon relation"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_ANGLE_RELATIONSHIPS",
+        "GEO_TRANSVERSAL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-067",
+      "course": "Geometry",
+      "skill_area": "Find alternative rigid-motion sequences",
+      "student_evidence_job": "Describe more than one valid mapping and distinguish changes in orientation.",
+      "representation_modes": [
+        "coordinate grid",
+        "two shapes"
+      ],
+      "primary_variation_axes": [
+        "representation_values",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "translate",
+        "level_2": "reflect then translate",
+        "level_3": "rotate with center stated"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_TRANSFORM_CONSTRUCT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-068",
+      "course": "Geometry",
+      "skill_area": "Compare geometry with equal perimeters but differing areas",
+      "student_evidence_job": "Create two geometric figures meeting a perimeter constraint and explain why their areas differ.",
+      "representation_modes": [
+        "grid rectangles",
+        "expression"
+      ],
+      "primary_variation_axes": [
+        "givens_evidence_set",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "integer rectangle pairs",
+        "level_2": "variable expressions",
+        "level_3": "optimize in bounded family"
+      },
+      "source_ids": [
+        "EX1",
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_RECT_AREA_PERIM"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-069",
+      "course": "Geometry",
+      "skill_area": "Use circle chord and arc relations",
+      "student_evidence_job": "Find unknown angle or arc from the correct theorem and an accurately marked circle.",
+      "representation_modes": [
+        "circle diagram"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "central angle",
+        "level_2": "inscribed angle",
+        "level_3": "two related arcs with overlapping chords"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_CIRCLE_ARCS_ANGLES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-070",
+      "course": "Geometry",
+      "skill_area": "Interpret an oblique cut through a solid",
+      "student_evidence_job": "Select or sketch the cross-section determined by a cutting plane, not a memorized face.",
+      "representation_modes": [
+        "3d solids",
+        "cut-plane diagram"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "parallel face",
+        "level_2": "oblique plane",
+        "level_3": "compare two possible sections"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_CROSS_SECTION"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-071",
+      "course": "Geometry",
+      "skill_area": "Compare surface-area and volume scale laws",
+      "student_evidence_job": "Determine which scale effect is quadratic/cubic and justify with dimensions.",
+      "representation_modes": [
+        "solid diagrams",
+        "table"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "integer length scale",
+        "level_2": "reverse volume scale",
+        "level_3": "mixed area/volume information"
+      },
+      "source_ids": [
+        "DM7"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_SCALE_SOLID"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-072",
+      "course": "Geometry",
+      "skill_area": "Use length constraints to optimize a shape",
+      "student_evidence_job": "Build possible dimensions from fixed perimeter then compare area with a counterexample.",
+      "representation_modes": [
+        "table",
+        "graph",
+        "sketch"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "context_evidence"
+      ],
+      "level_progression": {
+        "level_1": "integer grid rectangles",
+        "level_2": "nonintegral side choices",
+        "level_3": "constrained optimization reasoning"
+      },
+      "source_ids": [
+        "EX2"
+      ],
+      "canonical_family_id_candidates": [
+        "GEO_RECT_AREA_PERIM"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Extension only if the lesson supports optimization reasoning.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-073",
+      "course": "Algebra 2",
+      "skill_area": "Identify term structure before combining polynomials",
+      "student_evidence_job": "Vary missing-degree terms and subtraction of parentheses rather than changing coefficients only.",
+      "representation_modes": [
+        "symbolic polynomials",
+        "table"
+      ],
+      "primary_variation_axes": [
+        "representation_values",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "add with missing terms",
+        "level_2": "signed subtract",
+        "level_3": "three polynomials with cancellation"
+      },
+      "source_ids": [
+        "KPOLY"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_ADD_SUB"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-031"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-074",
+      "course": "Algebra 2",
+      "skill_area": "Multiply expressions across degree patterns",
+      "student_evidence_job": "Compare monomial/binomial/trinomial combinations and use appropriate factor-by-area work.",
+      "representation_modes": [
+        "expression",
+        "generic rectangle"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "monomial product",
+        "level_2": "binomial product",
+        "level_3": "binomial times trinomial"
+      },
+      "source_ids": [
+        "KPOLY"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_MULT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-032"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-075",
+      "course": "Algebra 2",
+      "skill_area": "Find polynomial zeros given a known factor",
+      "student_evidence_job": "Use supplied factor as a step in a longer factorization and interpret multiplicity.",
+      "representation_modes": [
+        "polynomial formula",
+        "factor box"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "quadratic with factor",
+        "level_2": "cubic with known root",
+        "level_3": "quartic with irreducible quadratic factor"
+      },
+      "source_ids": [
+        "KPCPOLY"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_REMAINDER_FACTOR_ADV",
+        "POLY_ROOTS_GRAPH_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-076",
+      "course": "Algebra 2",
+      "skill_area": "Recover a missing polynomial from remainder data",
+      "student_evidence_job": "Construct or select a polynomial meeting factored-root and specified remainder constraints.",
+      "representation_modes": [
+        "expression",
+        "multiple choice"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one factor theorem condition",
+        "level_2": "two evaluations",
+        "level_3": "match graph and remainder"
+      },
+      "source_ids": [
+        "KPCPOLY"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_REMAINDER_FACTOR_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-077",
+      "course": "Algebra 2",
+      "skill_area": "Distinguish removable hole and asymptote",
+      "student_evidence_job": "Factor and cancel expressions while maintaining original domain restrictions.",
+      "representation_modes": [
+        "rational formula",
+        "graph"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "common linear factor",
+        "level_2": "repeated factor",
+        "level_3": "hole and remaining pole together"
+      },
+      "source_ids": [
+        "KPCRAT"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIONAL_ASYMPTOTES_ADV",
+        "RATIONAL_RESTRICT_VALUES"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-035"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-078",
+      "course": "Algebra 2",
+      "skill_area": "Validate rational equation solutions",
+      "student_evidence_job": "Solve rational equation and explicitly check excluded values and extraneous candidates.",
+      "representation_modes": [
+        "rational expression",
+        "solution table"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "one denominator",
+        "level_2": "two denominators",
+        "level_3": "candidate excluded by original domain"
+      },
+      "source_ids": [
+        "KPCRAT"
+      ],
+      "canonical_family_id_candidates": [
+        "EQ_RATIONAL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-079",
+      "course": "Algebra 2",
+      "skill_area": "Distinguish inverse function input restrictions",
+      "student_evidence_job": "Construct restricted inverse and explain why a full-domain quadratic has no function inverse.",
+      "representation_modes": [
+        "graph",
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "linear inverse",
+        "level_2": "quadratic with restriction",
+        "level_3": "compare two restriction choices"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_INVERSE_GENERAL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-034"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-080",
+      "course": "Algebra 2",
+      "skill_area": "Reverse exponential model from two points",
+      "student_evidence_job": "Determine base and initial factor from nonzero-index outputs then evaluate a new time.",
+      "representation_modes": [
+        "table",
+        "coordinate graph",
+        "model"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "x=0 known",
+        "level_2": "nonzero indices",
+        "level_3": "integer-spacing not unit steps"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "EXP_GRAPH_TABLE_DR_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-081",
+      "course": "Algebra 2",
+      "skill_area": "Compare logarithmic and exponential forms",
+      "student_evidence_job": "Rewrite in both directions before solving, maintaining valid bases and arguments.",
+      "representation_modes": [
+        "matching",
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "numeric convert",
+        "level_2": "variable form",
+        "level_3": "solve with domain restriction"
+      },
+      "source_ids": [
+        "KPCEXP"
+      ],
+      "canonical_family_id_candidates": [
+        "EXP_LOG_CONVERT_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-040"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-082",
+      "course": "Algebra 2",
+      "skill_area": "Distinguish log properties from false distribution",
+      "student_evidence_job": "Diagnose product/quotient/power log rule misuse with an actual alternative worked step.",
+      "representation_modes": [
+        "worked solution",
+        "selected response"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "response_mode"
+      ],
+      "level_progression": {
+        "level_1": "single property",
+        "level_2": "mixed product/power",
+        "level_3": "domain issue after rewriting"
+      },
+      "source_ids": [
+        "KPCLOG"
+      ],
+      "canonical_family_id_candidates": [
+        "LOG_EXPAND_CONDENSE_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-083",
+      "course": "Algebra 2",
+      "skill_area": "Interpret polynomial multiplicity from graph behavior",
+      "student_evidence_job": "Infer possible factor multiplicities and sign behavior from crossing/touching graphs.",
+      "representation_modes": [
+        "polynomial graph",
+        "factored form"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "simple cross",
+        "level_2": "bounce",
+        "level_3": "odd multiplicity flat crossing"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_MULTIPLICITY_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-084",
+      "course": "Algebra 2",
+      "skill_area": "Compare recursive and explicit sequences",
+      "student_evidence_job": "Determine corresponding values and distinguish index from term value.",
+      "representation_modes": [
+        "sequence list",
+        "table",
+        "recurrence"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "arithmetic explicit",
+        "level_2": "geometric recursive",
+        "level_3": "reverse missing index with consistent initialization"
+      },
+      "source_ids": [
+        "DM_PC",
+        "EX3"
+      ],
+      "canonical_family_id_candidates": [
+        "SEQ_EXPLICIT_ADV",
+        "SEQ_RECURSIVE_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-085",
+      "course": "Algebra 2",
+      "skill_area": "Use residual rather than correlation as a fit check",
+      "student_evidence_job": "Given model and observations, compute signed residual then judge systematic fit.",
+      "representation_modes": [
+        "scatterplot",
+        "residual table"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one residual",
+        "level_2": "compare two models",
+        "level_3": "residual pattern sign changes"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "DATA_RESIDUAL",
+        "DATA_RESIDUAL_PLOT_FIT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-086",
+      "course": "Algebra 2",
+      "skill_area": "Solve a line-quadratic intersection two ways",
+      "student_evidence_job": "Compare graphical intersections with substitution and validate all points.",
+      "representation_modes": [
+        "graph",
+        "two equations"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "one tangent point",
+        "level_2": "two intersections",
+        "level_3": "no real intersection"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "SYSTEM_QUAD_LINE_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-087",
+      "course": "Algebra 2",
+      "skill_area": "Connect complex conjugate factors to real polynomial",
+      "student_evidence_job": "Given one nonreal root and real coefficients, infer another and form smallest-degree polynomial.",
+      "representation_modes": [
+        "complex plane",
+        "polynomial"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "single conjugate",
+        "level_2": "build quadratic",
+        "level_3": "incorporate additional real root"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "COMPLEX_ARITH_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-088",
+      "course": "Algebra 2",
+      "skill_area": "Model rational asymptotes and holes jointly",
+      "student_evidence_job": "Choose domain, zero, vertical asymptote, and horizontal/slant behavior from one rational function.",
+      "representation_modes": [
+        "rational equation",
+        "graph"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "one pole",
+        "level_2": "pole plus hole",
+        "level_3": "degree comparison with end behavior"
+      },
+      "source_ids": [
+        "KPCGRAPH",
+        "KPCRAT"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIONAL_GRAPH_FEATURES_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-041"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-089",
+      "course": "Algebra 2",
+      "skill_area": "Use polynomial end behavior to vet a context model",
+      "student_evidence_job": "Identify mathematical graph behavior and decide which portion of an applied model is physically credible.",
+      "representation_modes": [
+        "graph",
+        "context statement"
+      ],
+      "primary_variation_axes": [
+        "context_evidence",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "interpret zeros",
+        "level_2": "interval of validity",
+        "level_3": "compare theoretical behavior with physical constraints"
+      },
+      "source_ids": [
+        "CAR4"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_END_BEHAVIOR_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "The question must distinguish algebraic graph from realistic domain; never assume all outputs are physically meaningful.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-090",
+      "course": "Algebra 2",
+      "skill_area": "Compare algebraic and graphical even-odd evidence",
+      "student_evidence_job": "Decide even, odd or neither from both f(-x) and graph symmetry, not appearance only.",
+      "representation_modes": [
+        "graph",
+        "formula"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "obvious symmetry",
+        "level_2": "canceling terms",
+        "level_3": "identify discrepancy in a misleading graph"
+      },
+      "source_ids": [
+        "CAR3"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_EVEN_ODD"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-091",
+      "course": "Algebra 2",
+      "skill_area": "Construct two rational functions from shared features",
+      "student_evidence_job": "Find two distinct formulas meeting the same hole, asymptote, intercept or range constraints.",
+      "representation_modes": [
+        "rational formula",
+        "feature table"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one asymptote",
+        "level_2": "two features",
+        "level_3": "multiple valid examples with separate checks"
+      },
+      "source_ids": [
+        "CAR7"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIONAL_GRAPH_FEATURES_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "A genuine extension: nonunique constructed solutions and verification of every stated feature.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-092",
+      "course": "Algebra 2",
+      "skill_area": "Connect geometric sequence and half-life graph",
+      "student_evidence_job": "Link explicit sequence, continuous-time exponential model and repeated halving in a context.",
+      "representation_modes": [
+        "sequence",
+        "table",
+        "graph"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "given first term",
+        "level_2": "missing multiplier",
+        "level_3": "infer half-life from nonconsecutive data"
+      },
+      "source_ids": [
+        "CAR10"
+      ],
+      "canonical_family_id_candidates": [
+        "SEQ_EXPLICIT_ADV",
+        "EXP_GRAPH_TABLE_DR_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-093",
+      "course": "Precalculus",
+      "skill_area": "Draw endpoint-sensitive piecewise functions",
+      "student_evidence_job": "Graph each piece with exact open/closed endpoint and isolated value conventions.",
+      "representation_modes": [
+        "piecewise rule",
+        "coordinate grid"
+      ],
+      "primary_variation_axes": [
+        "representation_values",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "two pieces",
+        "level_2": "endpoint exception",
+        "level_3": "three rules including isolated point"
+      },
+      "source_ids": [
+        "KPCPIECE"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_TRANSFORM_DOMAIN_RANGE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-038"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-094",
+      "course": "Precalculus",
+      "skill_area": "Construct rule from an incomplete function graph",
+      "student_evidence_job": "Recover feasible formulas and specify which features determine unique vs nonunique rule.",
+      "representation_modes": [
+        "graph",
+        "symbolic answer"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "one linear segment",
+        "level_2": "two segments",
+        "level_3": "constrained rational or absolute-value graph"
+      },
+      "source_ids": [
+        "KPCGRAPH"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_TRANSFORM_DOMAIN_RANGE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-042"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-095",
+      "course": "Precalculus",
+      "skill_area": "Match transformed graph to a parent function",
+      "student_evidence_job": "Distinguish translations, reflection, stretch/compression using selected graph features.",
+      "representation_modes": [
+        "graph comparisons",
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "vertical shift",
+        "level_2": "horizontal shift",
+        "level_3": "combined reflection and scaling"
+      },
+      "source_ids": [
+        "DM_PC",
+        "KPCGRAPH"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_TRANSFORM_DOMAIN_RANGE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-037"
+      ],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-096",
+      "course": "Precalculus",
+      "skill_area": "Find domain from nested transformations",
+      "student_evidence_job": "Determine domain after composition including radical denominator and interval restrictions.",
+      "representation_modes": [
+        "formula",
+        "domain number line"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "square root",
+        "level_2": "rational input",
+        "level_3": "nested composition with conditional domain"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_DOMAIN_ALG"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-097",
+      "course": "Precalculus",
+      "skill_area": "Represent function composition across two modes",
+      "student_evidence_job": "Find output for a graph-defined inner function and formula-defined outer function.",
+      "representation_modes": [
+        "function graph",
+        "table",
+        "formula"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "formula+formula",
+        "level_2": "graph+formula",
+        "level_3": "table+graph with domain trap"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_COMPOSE"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-098",
+      "course": "Precalculus",
+      "skill_area": "Restrict a function to admit inverse",
+      "student_evidence_job": "Choose a valid monotonic interval and test inverse pairs.",
+      "representation_modes": [
+        "graph",
+        "interval notation"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "simple quadratic",
+        "level_2": "shifted quadratic",
+        "level_3": "function with two possible valid restrictions"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_FUNC_INVERSE_GENERAL"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-099",
+      "course": "Precalculus",
+      "skill_area": "Translate exact unit-circle ratios among angle types",
+      "student_evidence_job": "Use signed coterminal degrees and radians with quadrant reasoning; no calculator.",
+      "representation_modes": [
+        "unit circle",
+        "trig expression"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "reference angle",
+        "level_2": "negative angle",
+        "level_3": "reciprocal undefined case"
+      },
+      "source_ids": [
+        "KPCTRIG"
+      ],
+      "canonical_family_id_candidates": [
+        "TRIG_UNIT_CIRCLE_EXACT_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [
+        "CPMREF-039"
+      ],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-100",
+      "course": "Precalculus",
+      "skill_area": "Solve a trig equation on bounded interval",
+      "student_evidence_job": "Find all solutions and distinguish reference angle from full angle set.",
+      "representation_modes": [
+        "unit circle",
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "sin/cos basic",
+        "level_2": "shifted interval",
+        "level_3": "multiple-period interval with all solutions"
+      },
+      "source_ids": [
+        "KPCTRIG"
+      ],
+      "canonical_family_id_candidates": [
+        "TRIG_SOLVE_EQ_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-101",
+      "course": "Precalculus",
+      "skill_area": "Write periodic model from graph landmarks",
+      "student_evidence_job": "Use midline, amplitude, period and phase rather than guessing a formula from one point.",
+      "representation_modes": [
+        "periodic graph",
+        "feature table"
+      ],
+      "primary_variation_axes": [
+        "givens_evidence_set",
+        "dependency_path"
+      ],
+      "level_progression": {
+        "level_1": "given midline",
+        "level_2": "unknown amplitude or period",
+        "level_3": "infer full model with phase shift"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "TRIG_WRITE_SINUSOID_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-102",
+      "course": "Precalculus",
+      "skill_area": "Convert logarithmic expression both directions",
+      "student_evidence_job": "Expand/condense ensuring product, quotient and powers are valid for domain.",
+      "representation_modes": [
+        "log formula",
+        "matching"
+      ],
+      "primary_variation_axes": [
+        "response_mode",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "one log property",
+        "level_2": "two properties",
+        "level_3": "domain-sensitive arguments"
+      },
+      "source_ids": [
+        "KPCLOG"
+      ],
+      "canonical_family_id_candidates": [
+        "LOG_EXPAND_CONDENSE_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-103",
+      "course": "Precalculus",
+      "skill_area": "Find rational holes and asymptotes from factorization",
+      "student_evidence_job": "Separate canceled denominator factor from remaining pole and distinguish hole coordinate from x value.",
+      "representation_modes": [
+        "rational formula",
+        "coordinate graph"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "one hole",
+        "level_2": "pole and hole",
+        "level_3": "horizontal asymptote with intercept conditions"
+      },
+      "source_ids": [
+        "KPCRAT",
+        "KPCGRAPH"
+      ],
+      "canonical_family_id_candidates": [
+        "RATIONAL_GRAPH_FEATURES_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "high",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-104",
+      "course": "Precalculus",
+      "skill_area": "Use root multiplicity to predict graph crossing",
+      "student_evidence_job": "Use factored form and leading coefficient to sketch sign near multiple roots.",
+      "representation_modes": [
+        "factored polynomial",
+        "graph"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "representation_values"
+      ],
+      "level_progression": {
+        "level_1": "simple roots",
+        "level_2": "even multiplicity",
+        "level_3": "mixed odd/even multiplicities"
+      },
+      "source_ids": [
+        "KPCPOLY"
+      ],
+      "canonical_family_id_candidates": [
+        "POLY_MULTIPLICITY_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-105",
+      "course": "Precalculus",
+      "skill_area": "Match conic equation and geometric features",
+      "student_evidence_job": "Identify conic type, center/vertices/foci, or parameter from actual equation.",
+      "representation_modes": [
+        "coordinate graph",
+        "equation"
+      ],
+      "primary_variation_axes": [
+        "unknown_quantity",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "circle/ellipse",
+        "level_2": "translated ellipse",
+        "level_3": "hyperbola asymptote and orientation"
+      },
+      "source_ids": [
+        "EX3"
+      ],
+      "canonical_family_id_candidates": [
+        "CONIC_FEATURES_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-106",
+      "course": "Precalculus",
+      "skill_area": "Compare polar and Cartesian coordinates",
+      "student_evidence_job": "Convert signed radius and coterminal angles and verify same point.",
+      "representation_modes": [
+        "polar grid",
+        "ordered pairs"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "misconception_target"
+      ],
+      "level_progression": {
+        "level_1": "positive radius",
+        "level_2": "negative radius",
+        "level_3": "multiple representations same point"
+      },
+      "source_ids": [
+        "EX3"
+      ],
+      "canonical_family_id_candidates": [
+        "POLAR_COORD_CONVERT_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-107",
+      "course": "Precalculus",
+      "skill_area": "Use recursive sequence and closed form on same data",
+      "student_evidence_job": "Test consistency of two proposed rules including initial index.",
+      "representation_modes": [
+        "sequence table",
+        "recurrence"
+      ],
+      "primary_variation_axes": [
+        "misconception_target",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "explicit arithmetic",
+        "level_2": "geometric recursive",
+        "level_3": "find first term from later term and ratio"
+      },
+      "source_ids": [
+        "DM_PC"
+      ],
+      "canonical_family_id_candidates": [
+        "SEQ_EXPLICIT_ADV",
+        "SEQ_RECURSIVE_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-108",
+      "course": "Precalculus",
+      "skill_area": "Interpret vectors from direction and magnitude",
+      "student_evidence_job": "Reconstruct component vector from bearing and compare to geometric resultant.",
+      "representation_modes": [
+        "vector diagram",
+        "graph"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "first quadrant",
+        "level_2": "second/third quadrant",
+        "level_3": "resultant of two non-axis vectors"
+      },
+      "source_ids": [
+        "EX3"
+      ],
+      "canonical_family_id_candidates": [
+        "VECTOR_COMPONENTS_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-109",
+      "course": "Precalculus",
+      "skill_area": "Compare average and instantaneous rate in a preview",
+      "student_evidence_job": "Use secants then tangent reasoning; distinguish physical interpretations before applying derivative definition.",
+      "representation_modes": [
+        "graph",
+        "table",
+        "function"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "representation_type"
+      ],
+      "level_progression": {
+        "level_1": "secant from two points",
+        "level_2": "nearby intervals",
+        "level_3": "reason toward tangent as limit"
+      },
+      "source_ids": [
+        "KPCLIMIT",
+        "KPCDER"
+      ],
+      "canonical_family_id_candidates": [
+        "ADV_AROC_SECANT",
+        "ADV_DIFFERENCE_QUOTIENT"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Use only when approved precalculus pacing includes calculus bridge.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-110",
+      "course": "Precalculus",
+      "skill_area": "Select exact features to sketch an exponential graph",
+      "student_evidence_job": "Use asymptote, two points, domain and range to confirm a graph.",
+      "representation_modes": [
+        "formula",
+        "coordinate graph"
+      ],
+      "primary_variation_axes": [
+        "representation_type",
+        "givens_evidence_set"
+      ],
+      "level_progression": {
+        "level_1": "basic exponential",
+        "level_2": "shifted/reflected",
+        "level_3": "non-unit base and fractional step"
+      },
+      "source_ids": [
+        "KPCGRAPH"
+      ],
+      "canonical_family_id_candidates": [
+        "EXP_GRAPH_TABLE_DR_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Ensure one evidence job, all diagrams and answers independently checked; no cosmetic-only variations.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    },
+    {
+      "idea_id": "DEEP-111",
+      "course": "Precalculus",
+      "skill_area": "Find a bounded optimization using a dependent relation",
+      "student_evidence_job": "Derive a one-variable objective from geometric constraint before optimizing; avoid unrelated subquestions.",
+      "representation_modes": [
+        "geometric sketch",
+        "algebra model"
+      ],
+      "primary_variation_axes": [
+        "dependency_path",
+        "unknown_quantity"
+      ],
+      "level_progression": {
+        "level_1": "table exploration",
+        "level_2": "quadratic objective",
+        "level_3": "compare boundary and interior candidate"
+      },
+      "source_ids": [
+        "EX4"
+      ],
+      "canonical_family_id_candidates": [
+        "OPTIMIZATION_PRECALC_ADV"
+      ],
+      "canonical_status": "EXISTING_FAMILY_ENRICHMENT",
+      "previous_catalog_idea_ids": [],
+      "priority": "normal",
+      "qa_watch": "Only if lesson explicitly includes optimization; do not invent an extension from a longer arithmetic exercise.",
+      "textbook_alignment": "NOT_YET_MAPPED_TO_EXACT_CPM_LESSON",
+      "approval": "RESEARCH_CANDIDATE_NOT_BANK_READY",
+      "student_material": "MUST_BE_NEWLY_AUTHORED_NOT_COPIED"
+    }
+  ],
+  "course_summary": {
+    "CC1": {
+      "research_candidates": 16,
+      "high_priority": 6,
+      "existing_canonical_enrichment": 15,
+      "crosswalk_required": 1
+    },
+    "CC2": {
+      "research_candidates": 14,
+      "high_priority": 4,
+      "existing_canonical_enrichment": 14,
+      "crosswalk_required": 0
+    },
+    "CC3": {
+      "research_candidates": 14,
+      "high_priority": 6,
+      "existing_canonical_enrichment": 14,
+      "crosswalk_required": 0
+    },
+    "Algebra 1": {
+      "research_candidates": 15,
+      "high_priority": 9,
+      "existing_canonical_enrichment": 15,
+      "crosswalk_required": 0
+    },
+    "Geometry": {
+      "research_candidates": 13,
+      "high_priority": 4,
+      "existing_canonical_enrichment": 13,
+      "crosswalk_required": 0
+    },
+    "Algebra 2": {
+      "research_candidates": 20,
+      "high_priority": 4,
+      "existing_canonical_enrichment": 20,
+      "crosswalk_required": 0
+    },
+    "Precalculus": {
+      "research_candidates": 19,
+      "high_priority": 3,
+      "existing_canonical_enrichment": 19,
+      "crosswalk_required": 0
+    }
+  },
+  "source_audit": {
+    "sources_indexed": 42,
+    "sources_with_candidate_uses": 32,
+    "sources_only_investigated_or_lower_priority": [
+      "KEVAL",
+      "KPRIME",
+      "EX5",
+      "EXD",
+      "DM_CALC",
+      "CARNEGIE",
+      "OTHER2",
+      "GLENCOE3",
+      "COMMON_CORE",
+      "K_MULTI"
+    ],
+    "source_research_counts": {
+      "DM4": 2,
+      "DM6R": 3,
+      "DM6V": 6,
+      "DM7": 22,
+      "DM8": 14,
+      "KEXP": 4,
+      "KPOLY": 3,
+      "KWORD": 2,
+      "KLIN": 3,
+      "KINEQ": 2,
+      "KSYS": 2,
+      "KGRAPH": 1,
+      "KDISTR": 5,
+      "KEVAL": 0,
+      "KPRIME": 0,
+      "KPCGRAPH": 5,
+      "KPCPIECE": 1,
+      "KPCPOLY": 3,
+      "KPCTRIG": 2,
+      "KPCEXP": 1,
+      "KPCRAT": 4,
+      "KPCLOG": 2,
+      "KPCDER": 1,
+      "KPCLIMIT": 1,
+      "EX1": 6,
+      "EX2": 12,
+      "EX3": 4,
+      "EX4": 1,
+      "EX5": 0,
+      "EXD": 0,
+      "DM_TOPIC": 2,
+      "DM_PC": 13,
+      "DM_CALC": 0,
+      "CAR3": 1,
+      "CAR4": 1,
+      "CAR7": 1,
+      "CAR10": 1,
+      "CARNEGIE": 0,
+      "OTHER2": 0,
+      "GLENCOE3": 0,
+      "COMMON_CORE": 0,
+      "K_MULTI": 0
+    },
+    "confidence_definitions": {
+      "visually_inspected": "Actual example pages viewed (not full corpus verified)",
+      "pdf_text_checked": "Source text sampled; visual diagrams require further original-image verification",
+      "topic_inventory_text_checked": "Topic taxonomy read, not question examples",
+      "folder_inventory_only": "Source file names and paths verified but question text not examined",
+      "cover_only": "Only cover metadata read"
+    }
+  },
+  "release_criteria": [
+    "Use exact CPM course/chapter/lesson and Assessment Plan learning goal before drafting any student item.",
+    "Review canonical family contracts before creating new family IDs; add evidence modes / constraints rather than labels-only variants.",
+    "Build difficulty by dependency and knowledge, not coefficient size or arbitrary denominators.",
+    "New Question varies mathematical evidence axes; changing names, ordering, font or numbers alone is not evidence diversification.",
+    "Keep original textbook Review & Preview separately sourced; never substitute an outside problem and present it as an original CPM R/P.",
+    "Do not transfer copyrighted source problem sentences, numerical data, diagrams, choices or answer keys into generators.",
+    "All generated answers independently checked with symbolic/numeric validators and visual models checked against source specifications.",
+    "Use canonical graph tool for Cartesian graphs; blank student graph should not reveal solution.",
+    "No mandatory mixed numbers if course bank current display standard is improper fractions; no coefficient 1 or exponent 1 where unnecessary.",
+    "Keep Good/Needs Work/Bad review controls, preserve legacy feedback backup, never autoapprove draft families.",
+    "Question family has genuine semantic evidence; count is based on coverage, never quotas or 12 fixed variants.",
+    "Extensions require transfer, generalization, alternative strategy or proof, not simply larger numbers."
+  ],
+  "metrics": {
+    "new_candidates": 111,
+    "source_references": 42,
+    "prior_candidates_unchanged": 42,
+    "potential_reference_ideas_combined": 153,
+    "families_with_existing_candidate_id": 110,
+    "ideas_needing_id_crosswalk": 1
+  }
+}
