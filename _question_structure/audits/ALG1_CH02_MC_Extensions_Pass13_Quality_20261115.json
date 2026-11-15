@@ -1,0 +1,80 @@
+{
+  "schema": "cpm-question-audit/v1",
+  "release": "CH02 MC and Extensions Pass 13",
+  "base_transfer": "Pass 12 installed 2026-11-15 14:14:54 local",
+  "scope": "Chapter 2 Summative MC and Extensions; 9 lesson columns",
+  "category_counts": {
+    "multiple_choice": 27,
+    "extensions": 27,
+    "versions_per_family": 7,
+    "variants_checked": 378
+  },
+  "findings_and_repairs": {
+    "systematic_mc_answer_letter_sequence": {
+      "finding": "All 27 MC families used exactly the same correct-answer position pattern on new variants 2-7.",
+      "repaired_variants": 162,
+      "before": {
+        "B": 62,
+        "A": 61,
+        "D": 29,
+        "C": 37
+      },
+      "after": {
+        "B": 47,
+        "D": 48,
+        "C": 47,
+        "A": 47
+      },
+      "distinct_six_variant_letter_sequences_after": 27
+    },
+    "unwrapped_prompt_math": {
+      "repaired_versions": 39,
+      "expressions_wrapped": 41
+    },
+    "redundancy": {
+      "finding": "The MC slope-from-two-points family in Lesson 2.3.2 was almost identical to one in Lesson 2.1.2.",
+      "resolution": "Replaced seven presentations with reverse-action point-pair selection while retaining original family ID, SK01 and 3-family-per-lesson limit.",
+      "reworked_variants": 7,
+      "family_id": "ALG1-AP2-LG04-MC2-01"
+    }
+  },
+  "preserved": {
+    "Direct_Skills": "object-identical",
+    "Review_and_Preview": "object-identical",
+    "Chapter_1_embedded": "byte-identical",
+    "Chapter_3_embedded": "byte-identical",
+    "skill_ids": "same",
+    "candidate_ids": "same",
+    "family_count": "same",
+    "assessment_eligibility": "unchanged"
+  },
+  "independent_MC_verification": "189/189 math-valid before choice reordering; each correct option preserved with a new letter",
+  "checks": {
+    "MC_four_distinct_options": "189/189",
+    "MC_keys_match_displayed_choices": "189/189",
+    "MC_prompt_uniqueness_within_family": "189/189",
+    "MathJax_parse": "PASS: 505 distinct TeX expressions, zero errors",
+    "visual_browser_smoke": "PASS: 54 of 54 New Question buttons; zero page errors",
+    "MC_slope_point_pair_uniqueness": "7 of 7 checked with independent slopes",
+    "independent_mc_math_and_unique_correct_answer": "189 / 189 verified",
+    "mathjax_parsed": "505 distinct expressions, 1015 total TeX occurrences; zero errors",
+    "mathjax_browser_render": "Chromium MathJax typeset 32 expressions in 4 sample families; zero errors",
+    "MC_choice_balance": "A=47, B=47, C=47, D=48",
+    "browser_ui": "54 / 54 family New Question buttons passed and MC answer readback passed; no difficulty controls",
+    "original_CH02_precondition": "cedbfcef17d98642d99e361e6c7ae82c210967788bb77376fd3982f9fe0ee473",
+    "original_section_precondition": "ee79c931d526f758a9538e6f394653fccb68b0052f0d2c1054b93f8045273303",
+    "embedded_snapshot": "CH02 data hash matches embedded bank data; Chapter 1/3 script text unchanged",
+    "full_mac_app": "Not tested; installer preflight and isolated browser checked",
+    "transfer_manifest": "source SHA-256 validated against Pass 12 installation and payload paths verified"
+  },
+  "notes": [
+    "No difficulty levels added.",
+    "All material remains draft pending teacher review; assessment use blocked."
+  ],
+  "quality_findings": {
+    "exact_duplicate_visible_MC_or_extension_questions": 0,
+    "similarity_findings": "Eight semantically different near-matches flagged. The duplicate slope-from-pairs task was redesigned; the remaining similarity pairs involve different mathematical student actions or lesson progression.",
+    "all_54_family_count_preserved": true,
+    "all_15_supporting_skills_untouched": true
+  }
+}

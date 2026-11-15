@@ -1,0 +1,1570 @@
+{
+  "schema": "cpm_question_variation_quality_pass4/1.0",
+  "created": "2026-11-15",
+  "status": "RESEARCH_ONLY_NOT_APPROVED_FOR_BANK_IMPORT",
+  "purpose": "Fourth pass: source-grounded mathematical morphology and generator acceptance checks, rather than padding the catalog with new family IDs.",
+  "authority": "_question_structure/QUESTION_STRUCTURE_CORE.md; catalogs/math_question_family_registry.json and specialist family files; variations governed by guides/parallel_family_rules.md and guides/math_family_quality.md.",
+  "prior_research": [
+    "catalogs/cpm_reference_question_ideas_20261115.json (42 candidate ideas)",
+    "catalogs/cpm_question_structure_deep_research_20261115.json (111 deeper candidates)"
+  ],
+  "source_use_rule": "Structure and mathematical skill study only. Do NOT copy non-CPM source prompts, numbers, copyrighted pictures, answer choices, keys or exact problems into generated items. CPM R&P originals have their own explicit source-fidelity requirement.",
+  "method": {
+    "pass": "4",
+    "focus": [
+      "reviewed question examples with representation demands",
+      "semantic variation recipes",
+      "difficulty invariants",
+      "set-level anti-duplication",
+      "bank-release failure tests"
+    ],
+    "limitations": [
+      "Recipes are our original extrapolations from source structures, not claims that those exact three morphologies appear in source",
+      "Not a page-by-page audit of the whole source collection",
+      "Exact CPM lesson and I-can alignment is pending, not presumed",
+      "No student-ready problem or key is produced",
+      "Source text extraction may lose mathematical superscripts; avoid reproducing directly",
+      "Some source examples inspected visually from previous conversation files, others by bounded text extraction"
+    ]
+  },
+  "sources": {
+    "DM4_DEC": {
+      "name": "DeltaMath grade 4 parallel answer key, decimal forms and open number line",
+      "kind": "conversation_pdf_visual",
+      "file_ref": "file_00000000086c81f5bb427e7ec04616a4",
+      "locator": "4th-3 - V4 - KEY.pdf, pp.1-2",
+      "review": "visually_inspected",
+      "note": "Decimal representation, strategy via open-number-line jumps. Answer key reveals result; student models must not."
+    },
+    "DM6_RATIO": {
+      "name": "DeltaMath grade 6 ratio and scaling answer key",
+      "kind": "conversation_pdf_visual",
+      "file_ref": "file_000000007b6881f582242f08e37f8b6c",
+      "locator": "6th-1 - KEY.pdf, p.1",
+      "review": "visually_inspected",
+      "note": "Visual part:part/part:whole; recipe scaling, including unit logic."
+    },
+    "DM6_EQ": {
+      "name": "DeltaMath grade 6 visual balance and variables answer key",
+      "kind": "conversation_pdf_visual",
+      "file_ref": "file_000000005b4881f5846d22d65298b6ee",
+      "locator": "6th-3 - KEY.pdf, pp.1,5-6",
+      "review": "visually_inspected",
+      "note": "Balance model, input-output tables, independent/dependent variable meaning."
+    },
+    "DM7_SCALE": {
+      "name": "DeltaMath grade 7 parallel scale and proportionality tasks",
+      "kind": "conversation_pdf_visual",
+      "file_ref": "file_00000000e65c81f59e07119fa68c43af",
+      "locator": "7th Grade - V3.pdf, pp.1-4",
+      "review": "visually_inspected",
+      "note": "Similar figures, correspondence even after orientation change, partial dilations, double lines, table selection, map scale."
+    },
+    "DM7_RATIO": {
+      "name": "DeltaMath grade 7 ratio contexts",
+      "kind": "conversation_pdf_visual",
+      "file_ref": "file_00000000e65c81f59e07119fa68c43af",
+      "locator": "7th Grade - V3.pdf, pp.5-6",
+      "review": "visually_inspected",
+      "note": "Three-part ratios, part-to-whole, recipe ingredient tables and missing serving columns."
+    },
+    "DM8_GRAPH": {
+      "name": "DeltaMath grade 8 proportional and linear representation set",
+      "kind": "conversation_pdf_visual",
+      "file_ref": "file_00000000290881f59ea0fa330e8e1592",
+      "locator": "8th-3 - KEY.pdf, pp.1-2,4-5,12-13",
+      "review": "visually_inspected",
+      "note": "Rate from graph, table to rule, context to graph, meaning of points/slopes and mixture of graph/table equations."
+    },
+    "KUTA_SLOPE50": {
+      "name": "Kuta Finding Slope - 25 questions, 50 versions",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAY2U3bExmWm4tS0k",
+      "locator": "ID:1 opening worksheet, items 1-25 and later version IDs",
+      "review": "text_inspected",
+      "note": "Repeated fixed item blueprint across 50 numbered versions; stable structure is not evidence of broader task variety."
+    },
+    "KUTA_EQ53": {
+      "name": "Kuta Evaluate, Solve, Graph - 53 questions, 30 versions",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAOXA5Um02a1RnNnc",
+      "locator": "ID:1 opening worksheet, 3 sections",
+      "review": "text_inspected",
+      "note": "Evaluation, inequality solving, inequality graphing and graphing lines are separate actions in one sheet."
+    },
+    "KUTA_SYS50": {
+      "name": "Kuta Systems - 42 questions, 50 versions",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAZXJIZTB1T0tqRFE",
+      "locator": "ID:1 opening worksheet, items 1-42",
+      "review": "text_inspected",
+      "note": "Combination of standard-form elimination and slope-intercept system representations with many numeric parallels."
+    },
+    "KUTA_QUAD40": {
+      "name": "Kuta Quadratics - 50 questions, 40 versions",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAV01DUnA3ZEdDWFk",
+      "locator": "ID:1 opening worksheet, items 1-50",
+      "review": "text_inspected",
+      "note": "Distinct student jobs: multiply polynomials, factor, solve by factoring, solve by formula; numerically parallel versions."
+    },
+    "KUTA_EXP": {
+      "name": "Kuta Properties of Exponents",
+      "kind": "drive_pdf_text",
+      "drive_id": "1tBagdWR06r0nfg3J2flvtP-YWbUMznzT",
+      "locator": "Basic Skills / ID:1, early product/quotient/power items",
+      "review": "text_inspected",
+      "note": "Procedural exponent variants, including combined properties. Use only the structural classification."
+    },
+    "KUTA_WORD": {
+      "name": "Kuta Word Problems",
+      "kind": "drive_pdf_text",
+      "drive_id": "1nf4LtT7ir0zLTeHDgno04OuKnpUqj7g8",
+      "locator": "Basic Skills / ID:1, opening expression/equation translations",
+      "review": "text_inspected",
+      "note": "Expression vs equation vs inequality translation are separate evidence directions."
+    },
+    "KUTA_INEQ": {
+      "name": "Kuta Solve and Graph Inequalities",
+      "kind": "drive_pdf_text",
+      "drive_id": "1nUOW_g6aJpZsy9hmmkB9J3D-vAByqWpm",
+      "locator": "Basic Skills / ID:1 opening groups",
+      "review": "text_inspected",
+      "note": "Symbol to graph, graph to symbol and solve-then-graph task directions."
+    },
+    "KUTA_POLY": {
+      "name": "Kuta Polynomial Operations",
+      "kind": "drive_pdf_text",
+      "drive_id": "1sfAW66v9EdNH47aQNct8tePmh1PwEFEf",
+      "locator": "Basic Skills / ID:1, add-subtract and multiply sections",
+      "review": "text_inspected",
+      "note": "Progression from binomial and trinomial structures to product of polynomial factors."
+    },
+    "KUTA_PC_PIECE": {
+      "name": "Kuta Precalculus Graph Piecewise Functions",
+      "kind": "drive_pdf_text",
+      "drive_id": "1qYymrJU8Xa5B0nJ0gspVJxkmOaGBMMWr",
+      "locator": "Precalculus / ID:1 opening sections",
+      "review": "text_inspected",
+      "note": "Piecewise rules with equals-only point, strict and non-strict endpoints; graph output is answer object."
+    },
+    "KUTA_PC_GRAPH": {
+      "name": "Kuta Precalculus Graphing Functions",
+      "kind": "drive_pdf_text",
+      "drive_id": "1GcHkb3iPAFQ1_pRRttnw0wT6d9U7T3qQ",
+      "locator": "Precalculus / ID:1 opening feature sets",
+      "review": "text_inspected",
+      "note": "Full graph feature analysis; substantial action load must be decomposed when a target is narrow."
+    },
+    "KUTA_PC_TRIG": {
+      "name": "Kuta Evaluate and Solve Trig Functions",
+      "kind": "drive_pdf_text",
+      "drive_id": "1dYSYv6Z6JtThuhofBPvP6ZeIHQA5OCSb",
+      "locator": "Precalculus / ID:1, exact-value section and solve section",
+      "review": "text_inspected",
+      "note": "Degree/radian, signed angle and reciprocal functions; avoid accidental domain/answer multiplicity drift."
+    },
+    "KUTA_PC_LOG": {
+      "name": "Kuta Expand and Condense Log Expressions",
+      "kind": "drive_pdf_text",
+      "drive_id": "1FRc_Ou54zYKxQJsUN0FZyLZ1PRPh4TYr",
+      "locator": "Precalculus / ID:1, condense section",
+      "review": "text_inspected",
+      "note": "Multifactor log-rule structures; numeric parameters alone should not define complexity."
+    },
+    "KUTA_PC_POLY": {
+      "name": "Kuta Factor and Solve Polynomials",
+      "kind": "drive_pdf_text",
+      "drive_id": "10J77H_x5SnLFZJAx2R8J4_0hJH-Jkasz",
+      "locator": "Precalculus / ID:1, provided-factor section",
+      "review": "text_inspected",
+      "note": "One known factor given, find remaining factors and zeros."
+    },
+    "EXETER_M1": {
+      "name": "Phillips Exeter Mathematics 1",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAeEs5OWp4blVGYUU",
+      "locator": "sequence problem 45; exponent/repeated factor tasks near 525; contextual equation examples",
+      "review": "text_inspected",
+      "note": "Dependencies and generalization instead of repeated isolated arithmetic."
+    },
+    "EXETER_M2": {
+      "name": "Phillips Exeter Mathematics 2",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAS3BiZDNhNnB0amc",
+      "locator": "opening problems 7-10, geometry proof/feasibility",
+      "review": "text_inspected",
+      "note": "Feasibility, impossibility and geometry arguments with constraints."
+    },
+    "EXETER_M3": {
+      "name": "Phillips Exeter Mathematics 3",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAMERMTEVMNEFXNE0",
+      "locator": "opening transformation iteration; similarity and ellipse problem examples",
+      "review": "text_inspected",
+      "note": "Transformation sequences and geometric invariant reasoning."
+    },
+    "CARNEGIE_CH3": {
+      "name": "Carnegie Algebra II Student Skills Practice Chapter 3",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAS1oybVcyam8xQjQ",
+      "locator": "Lesson 3.1 pages 207-208 (cubic box volume)",
+      "review": "text_inspected",
+      "note": "Geometric dimensions to volume expression, table and extrema."
+    },
+    "CARNEGIE_CH7": {
+      "name": "Carnegie Algebra II Student Skills Practice Chapter 7",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAOGVkbkNPZlZMeEE",
+      "locator": "Lesson 7.1 rational graph features",
+      "review": "text_inspected",
+      "note": "Rational or non-rational classification and write multiple functions from graph features."
+    },
+    "CARNEGIE_CH10": {
+      "name": "Carnegie Algebra II Student Skills Practice Chapter 10",
+      "kind": "drive_pdf_text",
+      "drive_id": "0B6fznOHK0RHAWk1RQ1ByNl9LMVU",
+      "locator": "Lesson 10.1 geometric sequence and exponential modeling",
+      "review": "text_inspected",
+      "note": "Sequence list to exponential formula and selected term, half-life contexts."
+    },
+    "CPM_CH3": {
+      "name": "Installed Algebra 1 Chapter 3 original CPM R&P and current bank",
+      "kind": "local_mirror_exact",
+      "file_path": "CPM eBooks - CC Algebra Lesson 3.3.1.html and CH03.json (local staged copies)",
+      "locator": "R&P 3-86, 3-99 and original diagrams reviewed in prior Chapter 3 QA",
+      "review": "direct_file_available",
+      "note": "Original CPM Review & Preview requires faithful original stimulus and valid legal swaps; not a source for arbitrary teacher-direct questions."
+    }
+  },
+  "recipes": [
+    {
+      "recipe_id": "P4-001",
+      "course": "CC1",
+      "canonical_family_id": "DEC_OPEN_NL",
+      "focus": "Open-number-line decimal strategy",
+      "source_ids": [
+        "DM4_DEC"
+      ],
+      "related_prior_candidate": "DEEP-011",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Construct a jump strategy and compute a decimal result",
+      "task_morphologies": [
+        "draw unknown forward jumps for addition",
+        "draw backtracking jumps for subtraction",
+        "compare two valid jump decompositions"
+      ],
+      "semantic_invariants": [
+        "accurate start/end quantities",
+        "student must supply strategy not receive completed arcs"
+      ],
+      "meaningful_variation_axes": [
+        "operation direction",
+        "jump partition",
+        "benchmark choice"
+      ],
+      "level_progression": {
+        "1": "one place-value jump",
+        "2": "two jump sizes with renaming",
+        "3": "select efficient strategy and defend equivalence"
+      },
+      "answer_and_visual_verification": "Verify arcs sum to the actual signed change, labels match and no model pre-reveals a student-produced answer.",
+      "explicit_failure_to_avoid": "Copy a completed answer-key number line into the student prompt.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-002",
+      "course": "CC1",
+      "canonical_family_id": "RATIO_DOUBLE_NUMBER_LINE",
+      "focus": "Bidirectional double-number-line ratio",
+      "source_ids": [
+        "DM7_SCALE",
+        "DM7_RATIO"
+      ],
+      "related_prior_candidate": "DEEP-004",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Recover a missing proportional quantity from two synchronized scales",
+      "task_morphologies": [
+        "missing upper label",
+        "missing lower label",
+        "recover the original unit rate from a non-unit pair"
+      ],
+      "semantic_invariants": [
+        "paired ticks mean simultaneous equivalent quantities",
+        "linear scale is consistent"
+      ],
+      "meaningful_variation_axes": [
+        "hidden side",
+        "given anchor",
+        "inverse direction"
+      ],
+      "level_progression": {
+        "1": "integer scale from unit tick",
+        "2": "non-unit paired anchor",
+        "3": "reason backward from an unfamiliar total"
+      },
+      "answer_and_visual_verification": "Check every paired tick and conversion ratio; incomplete student line never includes the desired label.",
+      "explicit_failure_to_avoid": "Change only a person or enlarge the two given numbers without changing reasoning.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-003",
+      "course": "CC1",
+      "canonical_family_id": "EQ_BALANCE_MODEL",
+      "focus": "Balance model to equation and back",
+      "source_ids": [
+        "DM6_EQ"
+      ],
+      "related_prior_candidate": "DEEP-007",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Infer unknown mass/quantity from an actually balanced model",
+      "task_morphologies": [
+        "write an equation from signed/unsigned blocks",
+        "identify removable equal quantities",
+        "construct a balance diagram from a provided equation"
+      ],
+      "semantic_invariants": [
+        "same unit representation per object",
+        "equality is physically correct"
+      ],
+      "meaningful_variation_axes": [
+        "given side",
+        "unknown object count",
+        "representational direction"
+      ],
+      "level_progression": {
+        "1": "one unknown object type",
+        "2": "multiple identical unknown objects and known blocks",
+        "3": "balanced after valid symmetric removal"
+      },
+      "answer_and_visual_verification": "Calculate mass left/right; verify every model renders identical scale per unit and hides unknown count.",
+      "explicit_failure_to_avoid": "Describe a fake balance without rendering its actual diagram.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-004",
+      "course": "CC1",
+      "canonical_family_id": "PATTERN_INPUT_OUTPUT",
+      "focus": "Compare two rules with a constant offset",
+      "source_ids": [
+        "DM6_EQ",
+        "EXETER_M1"
+      ],
+      "related_prior_candidate": "DEEP-014",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Complete two function tables and characterize their relation",
+      "task_morphologies": [
+        "complete missing outputs",
+        "recover an input from output",
+        "compare two parallel additive patterns"
+      ],
+      "semantic_invariants": [
+        "same input must lead to consistent outputs",
+        "one rule per table"
+      ],
+      "meaningful_variation_axes": [
+        "input missingness",
+        "rule offset",
+        "compare-versus-compute"
+      ],
+      "level_progression": {
+        "1": "explicit rule supplied",
+        "2": "rule inferred from two non-adjacent rows",
+        "3": "compare why two patterns differ by constant despite different starting point"
+      },
+      "answer_and_visual_verification": "Independently evaluate all table rows and solve reverse input, using variables naturally.",
+      "explicit_failure_to_avoid": "Call repeated arithmetic with no dependent conclusion an extension.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-005",
+      "course": "CC2",
+      "canonical_family_id": "SCALE_FACTOR_FIGURES",
+      "focus": "Scale factor despite changes of orientation",
+      "source_ids": [
+        "DM7_SCALE"
+      ],
+      "related_prior_candidate": "DEEP-017",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Identify corresponding sides and find directional scale factor",
+      "task_morphologies": [
+        "aligned figures",
+        "rotated same-shape figures",
+        "reversed original/image identification"
+      ],
+      "semantic_invariants": [
+        "all corresponding side ratios equal",
+        "labels track correct vertices"
+      ],
+      "meaningful_variation_axes": [
+        "orientation",
+        "which figure is original",
+        "which side length is given"
+      ],
+      "level_progression": {
+        "1": "aligned simple polygon",
+        "2": "rotated polygon with labeled vertices",
+        "3": "reverse scale and check all sides"
+      },
+      "answer_and_visual_verification": "Verify figure geometry/side ratios programmatically; all corresponding vertex labels accurate.",
+      "explicit_failure_to_avoid": "Use wrong side correspondence or let drawing proportions contradict labels.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-006",
+      "course": "CC2",
+      "canonical_family_id": "DILATION_GRID",
+      "focus": "Complete—not inspect—a partial dilation",
+      "source_ids": [
+        "DM7_SCALE"
+      ],
+      "related_prior_candidate": "DEEP-020",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Construct the missing vertices of a scaled copy",
+      "task_morphologies": [
+        "given one transformed edge",
+        "given one mapped vertex",
+        "given a center plus one original vertex"
+      ],
+      "semantic_invariants": [
+        "consistent center and factor",
+        "answer image absent from student surface"
+      ],
+      "meaningful_variation_axes": [
+        "scale orientation",
+        "preimage location",
+        "fractional versus integer factor"
+      ],
+      "level_progression": {
+        "1": "integer scale about origin",
+        "2": "non-unit factor about origin",
+        "3": "fractional scale about given center"
+      },
+      "answer_and_visual_verification": "Compute mapped points, use registered graph tool, keep student image unplotted except stated givens.",
+      "explicit_failure_to_avoid": "Display the complete solution figure on the student graph.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-007",
+      "course": "CC2",
+      "canonical_family_id": "RATIO_TABLE_COMPLETE",
+      "focus": "One or more ratio tables: decide what is valid",
+      "source_ids": [
+        "DM7_SCALE",
+        "DM7_RATIO"
+      ],
+      "related_prior_candidate": "DEEP-025",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Identify whether every row preserves the unit ratio",
+      "task_morphologies": [
+        "complete missing proportional cells",
+        "select consistent table",
+        "correct the one inconsistent row"
+      ],
+      "semantic_invariants": [
+        "one stated rate",
+        "all valid rows same rate"
+      ],
+      "meaningful_variation_axes": [
+        "what is missing",
+        "misconception row",
+        "representation type"
+      ],
+      "level_progression": {
+        "1": "one small integer row",
+        "2": "nonconsecutive rows and non-unit rates",
+        "3": "choose between two nearly plausible table patterns"
+      },
+      "answer_and_visual_verification": "Recompute all cross products and ensure exactly intended tables/rows qualify.",
+      "explicit_failure_to_avoid": "Let two answer choices both satisfy the ratio accidentally.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-008",
+      "course": "CC2",
+      "canonical_family_id": "SCALE_DRAWING_DISTANCE_AREA",
+      "focus": "Scale drawing to a secondary consequence",
+      "source_ids": [
+        "DM7_SCALE"
+      ],
+      "related_prior_candidate": "DEEP-022",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Find a real-world distance or time using the printed drawing and rate",
+      "task_morphologies": [
+        "drawing length to actual distance",
+        "real distance to drawing length",
+        "drawing distance then time at given speed"
+      ],
+      "semantic_invariants": [
+        "units specified and compatible",
+        "drawable length matches stated measure"
+      ],
+      "meaningful_variation_axes": [
+        "unknown quantity",
+        "unit conversion when explicitly targeted",
+        "dependency path"
+      ],
+      "level_progression": {
+        "1": "simple integer distance",
+        "2": "fractional scale reading",
+        "3": "two-step route with a needed travel-rate conversion"
+      },
+      "answer_and_visual_verification": "Verify ruler/drawing proportions, round only when instructed, and keep the second stage dependent on first.",
+      "explicit_failure_to_avoid": "Ask travel time while leaving the travel rate or distance ambiguous.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-009",
+      "course": "CC3",
+      "canonical_family_id": "FUNC_PIECEWISE_CONTEXT_GRAPH",
+      "focus": "Graph a change-of-rate story, not just a line",
+      "source_ids": [
+        "DM8_GRAPH"
+      ],
+      "related_prior_candidate": "DEEP-034",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Construct a piecewise linear graph from successive intervals",
+      "task_morphologies": [
+        "rest-and-motion story",
+        "temperature-rise/hold/drop story",
+        "interpret an incomplete graph and finish last interval"
+      ],
+      "semantic_invariants": [
+        "end of stage i equals start of stage i+1",
+        "rate units consistent"
+      ],
+      "meaningful_variation_axes": [
+        "which interval changes",
+        "initial level",
+        "which graph portions supplied"
+      ],
+      "level_progression": {
+        "1": "two positive stages",
+        "2": "increasing, flat and decreasing intervals",
+        "3": "infer missing interval rate from final total then graph"
+      },
+      "answer_and_visual_verification": "Build coordinate vertex list independently and check stage times/levels; use graph tool and answer-neutral blank axes.",
+      "explicit_failure_to_avoid": "Supply the completed plot or inconsistent time intervals.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-010",
+      "course": "CC3",
+      "canonical_family_id": "LINE_EQ_FROM_REP",
+      "focus": "Reverse direction from linear table to rule",
+      "source_ids": [
+        "DM8_GRAPH"
+      ],
+      "related_prior_candidate": "DEEP-031",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Write a function equation using a table with nonconsecutive inputs",
+      "task_morphologies": [
+        "table to slope-intercept",
+        "table to point-slope",
+        "rule to partial table for matching"
+      ],
+      "semantic_invariants": [
+        "the same ordered pairs define one linear function"
+      ],
+      "meaningful_variation_axes": [
+        "input spacing",
+        "y-intercept visible or hidden",
+        "form requested"
+      ],
+      "level_progression": {
+        "1": "unit input steps including 0",
+        "2": "nonconsecutive positive/negative inputs",
+        "3": "infer slope and intercept when neither is directly shown"
+      },
+      "answer_and_visual_verification": "Compute m from independent pairs and verify each table cell; avoid showing completed equation in prompt.",
+      "explicit_failure_to_avoid": "Change only x,y labels while leaving the evidence identical.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-011",
+      "course": "CC3",
+      "canonical_family_id": "SLOPE_FROM_GRAPH",
+      "focus": "Interpret slope across two representation types",
+      "source_ids": [
+        "DM8_GRAPH",
+        "KUTA_SLOPE50"
+      ],
+      "related_prior_candidate": "DEEP-033",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Compare a line slope with a rate encoded in a table",
+      "task_morphologies": [
+        "read slope of plotted line",
+        "derive slope from two distant points",
+        "compare slope magnitudes between graph and table"
+      ],
+      "semantic_invariants": [
+        "every representation gives same units",
+        "sign convention agrees with axes"
+      ],
+      "meaningful_variation_axes": [
+        "line orientation",
+        "zero/undefined case",
+        "relative versus absolute comparison"
+      ],
+      "level_progression": {
+        "1": "positive integer slope",
+        "2": "negative and fractional slopes",
+        "3": "compare rates including horizontal/vertical exception"
+      },
+      "answer_and_visual_verification": "Use graph tool; slope equals rise/run; vertical slopes produce undefined, not numeric zero.",
+      "explicit_failure_to_avoid": "Treat undefined slope as zero or accept graph text with no actual plot.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-012",
+      "course": "CC3",
+      "canonical_family_id": "LINE_CONTEXT_INTERPRET",
+      "focus": "Make model interpretation distinct from arithmetic",
+      "source_ids": [
+        "DM8_GRAPH"
+      ],
+      "related_prior_candidate": "DEEP-037",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Interpret a model point or coefficient using quantities and units",
+      "task_morphologies": [
+        "interpret graph point in a story",
+        "interpret model slope with units",
+        "create a suitable story for fixed slope/intercept"
+      ],
+      "semantic_invariants": [
+        "ordered pair uses axis quantity/time",
+        "units preserved"
+      ],
+      "meaningful_variation_axes": [
+        "which quantity interpreted",
+        "given as graph versus formula",
+        "same-rate changed starting level"
+      ],
+      "level_progression": {
+        "1": "point meaning from labeled graph",
+        "2": "rate and initial amount in context",
+        "3": "compare two models differing only in initial amount or rate"
+      },
+      "answer_and_visual_verification": "Check dimensional units and context plausibility; response must distinguish amount from rate.",
+      "explicit_failure_to_avoid": "Ask for an unsupported interpretation or use a decorative narrative that changes nothing.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-013",
+      "course": "Algebra 1",
+      "canonical_family_id": "EXP_RULES",
+      "focus": "Simplify before choosing an exponent property",
+      "source_ids": [
+        "KUTA_EXP",
+        "EXETER_M1"
+      ],
+      "related_prior_candidate": "DEEP-045",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Simplify expression and identify applicable exponent property",
+      "task_morphologies": [
+        "separate factors with multiplication dot",
+        "factors shown in parentheses",
+        "evaluate property choice after one simplification"
+      ],
+      "semantic_invariants": [
+        "actual product/quotient/power law aligns with expression",
+        "same difficulty band for refresh"
+      ],
+      "meaningful_variation_axes": [
+        "exponent signs",
+        "number of bases",
+        "notation form",
+        "misconception distractor"
+      ],
+      "level_progression": {
+        "1": "one base one rule",
+        "2": "multiple bases one rule",
+        "3": "combine coefficient and two bases without added explanation burden"
+      },
+      "answer_and_visual_verification": "Symbolically simplify independently and audit five property options (one correct under intended simplification).",
+      "explicit_failure_to_avoid": "Make a new family just by appending explain or justify; show exponent 1 needlessly.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-014",
+      "course": "Algebra 1",
+      "canonical_family_id": "EQ_CONTEXT_WRITE_SOLVE",
+      "focus": "Withhold equation when the student must write it",
+      "source_ids": [
+        "KUTA_WORD",
+        "DM8_GRAPH"
+      ],
+      "related_prior_candidate": "DEEP-051",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Extract quantities from context, write equation and solve unknown",
+      "task_morphologies": [
+        "fixed fee plus per-unit fee",
+        "two contributions to shared target",
+        "compare two pricing models when demanded by target"
+      ],
+      "semantic_invariants": [
+        "unknown not stated as known",
+        "story supplies enough data and units"
+      ],
+      "meaningful_variation_axes": [
+        "unknown type",
+        "given total vs quantity",
+        "dependency length"
+      ],
+      "level_progression": {
+        "1": "single variable and two charges",
+        "2": "find unit count from total",
+        "3": "compare thresholds using two linear models"
+      },
+      "answer_and_visual_verification": "Check that question is uniquely answerable and computed unit count is meaningful, nonnegative and integral when count.",
+      "explicit_failure_to_avoid": "Prompt says write an equation but prints the equation or reveals purchased quantity.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-015",
+      "course": "Algebra 1",
+      "canonical_family_id": "POLY_MULT",
+      "focus": "Actual generic rectangle as area evidence",
+      "source_ids": [
+        "KUTA_POLY",
+        "CARNEGIE_CH3"
+      ],
+      "related_prior_candidate": "DEEP-049",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Fill missing partial products then determine whole area",
+      "task_morphologies": [
+        "one-row monomial times binomial",
+        "two-by-two binomial times binomial",
+        "factor a partly completed rectangle"
+      ],
+      "semantic_invariants": [
+        "row/column labels represent factors",
+        "each interior area equals row times column"
+      ],
+      "meaningful_variation_axes": [
+        "which cell hidden",
+        "coefficient signs",
+        "factored versus expanded direction"
+      ],
+      "level_progression": {
+        "1": "positive monomial and two columns",
+        "2": "mixed signs and full four cells",
+        "3": "given some product cells infer missing factor"
+      },
+      "answer_and_visual_verification": "Recompute every cell and area sum; student cells are tall, blank and not answer-lined.",
+      "explicit_failure_to_avoid": "Render decorative rectangle with incorrect products or blank lines inside tight cells.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-016",
+      "course": "Algebra 1",
+      "canonical_family_id": "FUNC_EVALUATE_FORMULA",
+      "focus": "Preserve function notation through every parallel",
+      "source_ids": [
+        "DM8_GRAPH",
+        "CPM_CH3"
+      ],
+      "related_prior_candidate": "DEEP-053",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Evaluate named functions at provided inputs without losing f/g names",
+      "task_morphologies": [
+        "two named functions with multiple inputs",
+        "one function at two inputs",
+        "evaluate then compare f(a),g(a)"
+      ],
+      "semantic_invariants": [
+        "input substituted in same function definition",
+        "original student action remains evaluation"
+      ],
+      "meaningful_variation_axes": [
+        "evaluation inputs",
+        "function types only when same lesson permits",
+        "number of requested evaluations"
+      ],
+      "level_progression": {
+        "1": "integer input linear rule",
+        "2": "signed input and absolute value",
+        "3": "two functions and linked comparison"
+      },
+      "answer_and_visual_verification": "Check every subpart and ensure notation survives; do not change source-original CPM R&P text except lawful numeric drafts.",
+      "explicit_failure_to_avoid": "Turn f(-3) into anonymous expression evaluation and claim it is the same evidence job.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-017",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_SIMILARITY",
+      "focus": "Orientation-invariant similarity evidence",
+      "source_ids": [
+        "DM7_SCALE",
+        "EXETER_M3"
+      ],
+      "related_prior_candidate": "DEEP-060",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Determine whether two differently oriented figures are similar",
+      "task_morphologies": [
+        "identify corresponding vertices",
+        "infer common factor from two sides",
+        "explain why a proposed factor fails"
+      ],
+      "semantic_invariants": [
+        "shared angles and proportional corresponding sides",
+        "labeled vertices consistent"
+      ],
+      "meaningful_variation_axes": [
+        "orientation",
+        "which correspondence supplied",
+        "number of dimensions tested"
+      ],
+      "level_progression": {
+        "1": "obvious aligned side lengths",
+        "2": "rotated triangle with matchable marks",
+        "3": "test competing correspondences and reject false pairings"
+      },
+      "answer_and_visual_verification": "Verify all side ratios, angles and any geometric labels; never infer shape from distorted drawing.",
+      "explicit_failure_to_avoid": "Use numerically similar sides on a picture with inconsistent angles.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-018",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_TRANSFORM_CONSTRUCT",
+      "focus": "Student construction versus recognition",
+      "source_ids": [
+        "DM7_SCALE",
+        "EXETER_M3"
+      ],
+      "related_prior_candidate": "DEEP-067",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Construct image under specified transformations",
+      "task_morphologies": [
+        "translate labeled vertices",
+        "reflect over axis and connect",
+        "rotate then dilate with center"
+      ],
+      "semantic_invariants": [
+        "each step applies to preceding image",
+        "answer image hidden"
+      ],
+      "meaningful_variation_axes": [
+        "composition order",
+        "center",
+        "reflection axis"
+      ],
+      "level_progression": {
+        "1": "single translation",
+        "2": "reflection then translation",
+        "3": "rotation plus non-unit dilation with traced vertices"
+      },
+      "answer_and_visual_verification": "Independently compute each transformed coordinate, graph tool render of answer-neutral student grid.",
+      "explicit_failure_to_avoid": "Give complete transformed polygon on student graph or swap order of operations in key.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-019",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_PROOF_TRIANGLE",
+      "focus": "Feasibility and counterexample—not only compute",
+      "source_ids": [
+        "EXETER_M2"
+      ],
+      "related_prior_candidate": "DEEP-062",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Decide whether a claimed triangle arrangement is possible and justify",
+      "task_morphologies": [
+        "construct counterexample to a universal claim",
+        "prove a stated configuration impossible",
+        "analyze insufficient congruence markings"
+      ],
+      "semantic_invariants": [
+        "specified triangle inequalities/angle relations used",
+        "drawing does not falsely imply a relationship"
+      ],
+      "meaningful_variation_axes": [
+        "claim type",
+        "given lengths/angles",
+        "is construction or critique required"
+      ],
+      "level_progression": {
+        "1": "check obvious inequality",
+        "2": "one hidden constraint",
+        "3": "show why a tempting configuration violates invariant"
+      },
+      "answer_and_visual_verification": "Use algebraic/geometry constraints to verify counterexample and all diagram markings.",
+      "explicit_failure_to_avoid": "Treat a longer calculation as proof, or invent nonstandard angle markers.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-020",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_SIMILAR_PROPORTIONS",
+      "focus": "Length vs area after scaling",
+      "source_ids": [
+        "DM7_SCALE",
+        "EXETER_M1"
+      ],
+      "related_prior_candidate": "DEEP-065",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Relate scale factor to changes in lengths and areas",
+      "task_morphologies": [
+        "predict new perimeter",
+        "predict new area",
+        "recover length factor from given area ratio"
+      ],
+      "semantic_invariants": [
+        "length scales k, area scales k^2",
+        "shape remains similar"
+      ],
+      "meaningful_variation_axes": [
+        "inverse factor",
+        "observable quantity",
+        "given original vs scaled measure"
+      ],
+      "level_progression": {
+        "1": "integer k direct",
+        "2": "fractional k in reverse",
+        "3": "area-to-length inference then area/perimeter comparison"
+      },
+      "answer_and_visual_verification": "Check proportional sides and dimensions; explicitly separate linear from square units.",
+      "explicit_failure_to_avoid": "Apply factor k to both side and area or conflate visual shape with area ratio.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-021",
+      "course": "Algebra 2",
+      "canonical_family_id": "ADV_FUNC_EXTREMA_CONCAVITY",
+      "focus": "Model constrained cubic volume from dimensions",
+      "source_ids": [
+        "CARNEGIE_CH3"
+      ],
+      "related_prior_candidate": "DEEP-089",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Construct volume function from dimensions then locate meaningful extrema",
+      "task_morphologies": [
+        "given dimensions -> volume formula",
+        "complete h-versus-volume table",
+        "choose allowable h maximizing volume"
+      ],
+      "semantic_invariants": [
+        "physical dimensions nonnegative",
+        "domain makes geometric sense"
+      ],
+      "meaningful_variation_axes": [
+        "which dimension variable",
+        "box geometry",
+        "representation for optimizing"
+      ],
+      "level_progression": {
+        "1": "direct volume table",
+        "2": "derive restricted-domain function",
+        "3": "compare viable maxima with nonphysical algebraic roots excluded"
+      },
+      "answer_and_visual_verification": "Substitute candidate h values, verify cubic algebra and feasible domain; separate numerical estimate from exact result.",
+      "explicit_failure_to_avoid": "Offer a mathematically critical point as acceptable when box has negative width.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-022",
+      "course": "Algebra 2",
+      "canonical_family_id": "RATIONAL_GRAPH_FEATURES_ADV",
+      "focus": "Construct different rational functions with same key features",
+      "source_ids": [
+        "CARNEGIE_CH7"
+      ],
+      "related_prior_candidate": "DEEP-091",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Write rational functions satisfying constraints; compare uniqueness",
+      "task_morphologies": [
+        "identify hole vs asymptote",
+        "supply function from graph features",
+        "construct two functions meeting same asymptotes but different holes"
+      ],
+      "semantic_invariants": [
+        "cancellation rules and domain restrictions",
+        "all stated features compatible"
+      ],
+      "meaningful_variation_axes": [
+        "which feature fixed",
+        "hole location",
+        "degree balance"
+      ],
+      "level_progression": {
+        "1": "single factor denominator",
+        "2": "hole and vertical asymptote present",
+        "3": "construct distinct valid functions with shared external behavior"
+      },
+      "answer_and_visual_verification": "Factor numerators/denominators; independently check holes, asymptotes and excluded domain values.",
+      "explicit_failure_to_avoid": "Cancel a factor and forget its excluded input, or generate impossible feature combinations.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-023",
+      "course": "Algebra 2",
+      "canonical_family_id": "SEQ_EXPLICIT_ADV",
+      "focus": "Geometric sequence to exponential function and back",
+      "source_ids": [
+        "CARNEGIE_CH10"
+      ],
+      "related_prior_candidate": "DEEP-092",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Find common ratio and explicit formula or reverse from a term",
+      "task_morphologies": [
+        "terms to explicit equation",
+        "explicit equation to skipped term",
+        "given distant term infer initial amount"
+      ],
+      "semantic_invariants": [
+        "same common ratio",
+        "index convention stated (n=0 or n=1)"
+      ],
+      "meaningful_variation_axes": [
+        "ratio type",
+        "initial index",
+        "direction"
+      ],
+      "level_progression": {
+        "1": "integer growing ratio",
+        "2": "fractional decaying ratio",
+        "3": "infer ratio from nonconsecutive terms and estimate later value"
+      },
+      "answer_and_visual_verification": "Check all displayed terms from generated formula, and compare n index consistently.",
+      "explicit_failure_to_avoid": "Quietly change n=0 to n=1 and leave exponent rule or key unchanged.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-024",
+      "course": "Algebra 2",
+      "canonical_family_id": "POLY_REMAINDER_FACTOR_ADV",
+      "focus": "Known factor as information, not an answer",
+      "source_ids": [
+        "KUTA_PC_POLY"
+      ],
+      "related_prior_candidate": "DEEP-075",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Use a supplied polynomial factor to determine remaining factors/zeros",
+      "task_morphologies": [
+        "synthetic division from given factor",
+        "find quotient then zeros",
+        "check a claimed factor via remainder"
+      ],
+      "semantic_invariants": [
+        "given factor truly divides target in valid versions",
+        "degree reduction correct"
+      ],
+      "meaningful_variation_axes": [
+        "provided factor",
+        "degree remaining",
+        "complex roots permitted only when intended"
+      ],
+      "level_progression": {
+        "1": "cubic with integer zeros",
+        "2": "quartic with irreducible quadratic",
+        "3": "compare claimed factors and identify one false claim"
+      },
+      "answer_and_visual_verification": "Recompose factors and compare all coefficients exactly; check zero count with multiplicity.",
+      "explicit_failure_to_avoid": "Supply a non-factor in a prompt that presumes exact divisibility.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-025",
+      "course": "Precalculus",
+      "canonical_family_id": "ADV_FUNC_TRANSFORM_DOMAIN_RANGE",
+      "focus": "Endpoint-sensitive piecewise construction",
+      "source_ids": [
+        "KUTA_PC_PIECE"
+      ],
+      "related_prior_candidate": "DEEP-093",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Graph piecewise function with correct inclusivity and discontinuity",
+      "task_morphologies": [
+        "one exceptional point",
+        "two interval rules split at boundary",
+        "complete graph from a partially plotted branch"
+      ],
+      "semantic_invariants": [
+        "disjoint/complete interval definition",
+        "open/closed endpoint correctness"
+      ],
+      "meaningful_variation_axes": [
+        "endpoint inclusivity",
+        "number of branches",
+        "piece rule type"
+      ],
+      "level_progression": {
+        "1": "two linear pieces",
+        "2": "jump with a single-point exception",
+        "3": "mixed linear/quadratic with boundary membership"
+      },
+      "answer_and_visual_verification": "Evaluate each boundary from correct branch, and use graph tool with no completed answer curve in student view.",
+      "explicit_failure_to_avoid": "Draw open circle as filled or have two rules claim the same exclusive input.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-026",
+      "course": "Precalculus",
+      "canonical_family_id": "RATIONAL_GRAPH_FEATURES_ADV",
+      "focus": "Function-feature dossier rather than compute everything",
+      "source_ids": [
+        "KUTA_PC_GRAPH"
+      ],
+      "related_prior_candidate": "DEEP-103",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Determine selected rational features from equation or sketch",
+      "task_morphologies": [
+        "find hole or asymptote",
+        "reverse-write a function with specified features",
+        "match two different expressions to same graph"
+      ],
+      "semantic_invariants": [
+        "real excluded inputs retained",
+        "only one clear requested evidence job unless a linked chain"
+      ],
+      "meaningful_variation_axes": [
+        "which feature requested",
+        "given form",
+        "cancellation situation"
+      ],
+      "level_progression": {
+        "1": "single vertical asymptote",
+        "2": "hole plus asymptote",
+        "3": "recover numerator from two graph constraints"
+      },
+      "answer_and_visual_verification": "Factor/limit check of every feature and graph-tool rendering; ensure hole marker visible when given.",
+      "explicit_failure_to_avoid": "Copy a mega-prompt asking seven unrelated features for a one-target quick check.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-027",
+      "course": "Precalculus",
+      "canonical_family_id": "TRIG_UNIT_CIRCLE_EXACT_ADV",
+      "focus": "Exact-value and inverse angle directions",
+      "source_ids": [
+        "KUTA_PC_TRIG"
+      ],
+      "related_prior_candidate": "DEEP-099",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Compute an exact trig value or identify an angle consistent with it",
+      "task_morphologies": [
+        "angle -> exact signed ratio",
+        "ratio and quadrant -> angles",
+        "single graph point -> unit-circle ratio"
+      ],
+      "semantic_invariants": [
+        "unit conventions and interval stated",
+        "undefined cases deliberately targeted"
+      ],
+      "meaningful_variation_axes": [
+        "reference angle",
+        "quadrant",
+        "reciprocal function"
+      ],
+      "level_progression": {
+        "1": "quadrantal and special-angle values",
+        "2": "negative and coterminal angles",
+        "3": "inverse candidates on specified interval"
+      },
+      "answer_and_visual_verification": "Evaluate against exact unit circle, confirm all permitted solutions in interval.",
+      "explicit_failure_to_avoid": "Return one solution for sin(theta)=value when two valid angles exist.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    },
+    {
+      "recipe_id": "P4-028",
+      "course": "Precalculus",
+      "canonical_family_id": "LOG_EXPAND_CONDENSE_ADV",
+      "focus": "Log rules as transformation with a reversible check",
+      "source_ids": [
+        "KUTA_PC_LOG"
+      ],
+      "related_prior_candidate": "DEEP-102",
+      "source_coverage": "AUTHOR_DERIVED_RECIPE_FROM_INSPECTED_SOURCE_PATTERN",
+      "bank_category_fit": "direct_skills",
+      "student_action": "Transform a multi-term logarithm with valid domain constraints",
+      "task_morphologies": [
+        "condense two logs",
+        "expand product/power log",
+        "identify a false log splitting rule"
+      ],
+      "semantic_invariants": [
+        "all log inputs positive",
+        "base restrictions enforced"
+      ],
+      "meaningful_variation_axes": [
+        "direction",
+        "number of operations",
+        "error target"
+      ],
+      "level_progression": {
+        "1": "one sum/product identity",
+        "2": "combine quotient and power",
+        "3": "diagnose false log-of-sum using a counterexample"
+      },
+      "answer_and_visual_verification": "Symbolically compare expanded/condensed expression on positive domain test points.",
+      "explicit_failure_to_avoid": "Invent log(A+B)=log A+log B as a valid distractor without single correct answer.",
+      "priority": "high",
+      "lesson_alignment": "PENDING_CPM_LESSON_AND_I_CAN_CHECK",
+      "approval": "RESEARCH_ONLY"
+    }
+  ],
+  "qa_gates": [
+    {
+      "id": "Q01",
+      "severity": "hard",
+      "gate": "Canonical family resolves",
+      "automated": true,
+      "condition": "Every family ID is in the canonical registry collection; every instance matches allowed student action, modes and invariants.",
+      "fail_example": "Family label says compare but prompt only computes a value."
+    },
+    {
+      "id": "Q02",
+      "severity": "hard",
+      "gate": "Real mathematical stimulus",
+      "automated": false,
+      "condition": "Required graph/table/model/diagram is physically rendered, not described vaguely in prose.",
+      "fail_example": "Question mentions a graph but no axes or points are shown."
+    },
+    {
+      "id": "Q03",
+      "severity": "hard",
+      "gate": "No answer leakage",
+      "automated": "hybrid",
+      "condition": "Student view contains only givens; response surface does not supply requested equation, result, line or transformed image.",
+      "fail_example": "Write an equation when equation is printed."
+    },
+    {
+      "id": "Q04",
+      "severity": "hard",
+      "gate": "Independent solver and key",
+      "automated": "hybrid",
+      "condition": "Solve every instantiated variant afresh, then compare to official answer and worked steps.",
+      "fail_example": "Two-sided linear coefficients cancel unexpectedly but key lists one solution."
+    },
+    {
+      "id": "Q05",
+      "severity": "hard",
+      "gate": "Diagram semantic verification",
+      "automated": "hybrid",
+      "condition": "Known mathematical invariants of diagram match labels and givens; canonical graph tool used for Cartesian plots.",
+      "fail_example": "Shape is visually plausible but tick marks or side lengths disagree."
+    },
+    {
+      "id": "Q06",
+      "severity": "hard",
+      "gate": "Student action preserved under refresh",
+      "automated": true,
+      "condition": "Same-level New Question keeps the same evidence job, response role, comparable operations and level.",
+      "fail_example": "New Question converts function notation evaluation to anonymous arithmetic."
+    },
+    {
+      "id": "Q07",
+      "severity": "hard",
+      "gate": "Unambiguous solution",
+      "automated": "hybrid",
+      "condition": "Unknown and units specified; model gives intended number of solutions, not accidentally 0/infinitely many; choices have one justified answer when MC.",
+      "fail_example": "A story asks how many items were purchased but number is already stated."
+    },
+    {
+      "id": "Q08",
+      "severity": "hard",
+      "gate": "Original CPM R&P fidelity",
+      "automated": "hybrid",
+      "condition": "R&P original has same multipart structure, function names, worked examples and source imagery; draft swaps stay within exact original task.",
+      "fail_example": "Original six-part f/g task becomes evaluate anonymous expression."
+    },
+    {
+      "id": "Q09",
+      "severity": "hard",
+      "gate": "Printed workspace quality",
+      "automated": "hybrid",
+      "condition": "Area-model cells are blank and tall; grids/diagrams answer-neutral; content fits narrow columns and print without clipping.",
+      "fail_example": "Answer blanks are printed as underlines inside small area cells."
+    },
+    {
+      "id": "Q10",
+      "severity": "hard",
+      "gate": "Legal/source use",
+      "automated": false,
+      "condition": "Third-party question resources used to study structures only; no source wording, exact problems, numerical instances, copyrighted diagrams or options copied into newly generated banks.",
+      "fail_example": "Import a DeltaMath worksheet page as a CPM Direct Skills item."
+    },
+    {
+      "id": "Q11",
+      "severity": "quality",
+      "gate": "Meaningful variation coverage",
+      "automated": "hybrid",
+      "condition": "Track semantic dimensions—unknown, givens, representation, operation structure and misconception—independently of numeric count; a numerical-only set is appropriate only for explicit procedural fluency.",
+      "fail_example": "12 variants are merely 2x, 3x, 4x..."
+    },
+    {
+      "id": "Q12",
+      "severity": "quality",
+      "gate": "Difficulty from cognitive load",
+      "automated": "hybrid",
+      "condition": "Three levels distinguish mathematical structure/necessary operations; awkward fractions or larger coefficients alone do not establish Level 3.",
+      "fail_example": "A single one-step equation with a large denominator labeled advanced."
+    },
+    {
+      "id": "Q13",
+      "severity": "quality",
+      "gate": "Concise clean notation",
+      "automated": "hybrid",
+      "condition": "Avoid 1x, x^1, gratuitous mixed numbers, unnatural coefficients and filler justify/explain unless reasoning is actually assessed.",
+      "fail_example": "Adding justify creates a new family with otherwise identical evidence."
+    },
+    {
+      "id": "Q14",
+      "severity": "quality",
+      "gate": "Multiparts have real purpose",
+      "automated": false,
+      "condition": "Subparts share one meaningful stimulus or form a true dependency; do not add parts only to meet a count.",
+      "fail_example": "Three unrelated problems labeled (a),(b),(c) and called multi-step."
+    },
+    {
+      "id": "Q15",
+      "severity": "quality",
+      "gate": "Extensions actually transfer",
+      "automated": false,
+      "condition": "Extension needs a non-routine inference, construction, constraint, transfer or counterexample; never simply lengthen arithmetic.",
+      "fail_example": "Extension is a more tedious copy of Level 3."
+    },
+    {
+      "id": "Q16",
+      "severity": "quality",
+      "gate": "Teacher provenance and approval",
+      "automated": true,
+      "condition": "Research ideas stay pending; original CPM, new original authored item, draft number-swap and approved generator specimen are labeled separately.",
+      "fail_example": "Treat every researched source pattern as approved bank content."
+    }
+  ],
+  "cross_source_conclusions": [
+    {
+      "finding": "50 versions is not 50 question structures",
+      "evidence": [
+        "KUTA_SLOPE50",
+        "KUTA_SYS50",
+        "KUTA_QUAD40"
+      ],
+      "application": "Preserve a stable task contract for fluency variants; track how many semantic structures exist separately from how many numerical instances exist."
+    },
+    {
+      "finding": "Representation direction is part of mathematical evidence",
+      "evidence": [
+        "DM7_SCALE",
+        "DM8_GRAPH",
+        "KUTA_INEQ"
+      ],
+      "application": "Graph-to-equation, equation-to-graph and graph-to-verbal may be separate task morphologies only when student action and target support them."
+    },
+    {
+      "finding": "Multi-part is not the same as multi-step",
+      "evidence": [
+        "CARNEGIE_CH3",
+        "EXETER_M1",
+        "DM7_RATIO"
+      ],
+      "application": "Require shared meaningful stimulus or dependent inference, not arbitrary parts."
+    },
+    {
+      "finding": "Visual correctness takes precedence over polish",
+      "evidence": [
+        "DM7_SCALE",
+        "DM6_EQ",
+        "KUTA_PC_PIECE"
+      ],
+      "application": "Use deterministic registered renderer and independently check mathematical geometry, endpoints, shading and answer neutrality."
+    },
+    {
+      "finding": "Reverse-direction tasks give useful variety",
+      "evidence": [
+        "DM7_SCALE",
+        "KUTA_WORD",
+        "CARNEGIE_CH7"
+      ],
+      "application": "Alternate unknown quantity or givens while preserving legal mathematical target and difficulty."
+    },
+    {
+      "finding": "Multi-version batch construction needs set-level diversity checks",
+      "evidence": [
+        "KUTA_SLOPE50",
+        "KUTA_EQ53",
+        "KUTA_SYS50"
+      ],
+      "application": "Calculate distribution of structural types and reject near-duplicate runs before teacher sees them."
+    },
+    {
+      "finding": "A context earns its place only when its data changes reasoning",
+      "evidence": [
+        "DM8_GRAPH",
+        "EXETER_M1",
+        "CARNEGIE_CH3"
+      ],
+      "application": "Use quantities/units/models meaningfully; otherwise prefer concise question."
+    }
+  ],
+  "chapter3_pilot_acceptance_cases": [
+    {
+      "case": "Exponent Rule Family",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q01",
+        "Q11",
+        "Q13"
+      ],
+      "check": "Check same skill across dot/parentheses/two expressions, varied exponents and correct property choice after actual simplification."
+    },
+    {
+      "case": "3-58 original tiled rectangles",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q02",
+        "Q05",
+        "Q08"
+      ],
+      "check": "Original tile patterns intact, figures readable and any newly drawn rectangles mathematically equivalent."
+    },
+    {
+      "case": "3-86 original f/g evaluation",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q06",
+        "Q08"
+      ],
+      "check": "All number-swapped versions preserve named function notation, each requested evaluation, and source multi-part structure."
+    },
+    {
+      "case": "3-99 absolute-value example",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q08",
+        "Q14"
+      ],
+      "check": "Original explanatory example remains with the resulting solve task and algebra is correct for every revision."
+    },
+    {
+      "case": "Generic rectangle student workspace",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q05",
+        "Q09"
+      ],
+      "check": "Rows and columns match products, unfilled cells are truly blank with increased height; no underline clutter."
+    },
+    {
+      "case": "Writing equation from fee story",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q03",
+        "Q07"
+      ],
+      "check": "Unknown is not stated, equation is not shown, counts make sense, instructions specify what quantity to find."
+    },
+    {
+      "case": "Multi-step equations with distribution",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q04",
+        "Q12"
+      ],
+      "check": "Students must distribute/collect; level changes are mathematical; avoid coefficient cancellation unless classification target."
+    },
+    {
+      "case": "True extension",
+      "status": "future_QA_case_not_bank_edit",
+      "gate_ids": [
+        "Q12",
+        "Q15"
+      ],
+      "check": "Non-routine transfer or counterexample, not merely a higher power/larger coefficient."
+    }
+  ],
+  "deliverable_policy": "CATALOG_ONLY; no CPM bank modifications, no assessment plan modifications, no teacher review reset.",
+  "metrics": {
+    "deep_variation_recipes": 28,
+    "courses": 7,
+    "source_references": 26,
+    "reusable_qa_gates": 16,
+    "chapter3_future_check_cases": 8,
+    "added_canonical_families": 0,
+    "student_ready_questions": 0
+  }
+}

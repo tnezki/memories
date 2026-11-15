@@ -1,0 +1,1142 @@
+{
+  "schema": "cpm_diagnostic_evidence_research/1",
+  "created": "2026-11-15",
+  "status": "RESEARCH_ONLY",
+  "title": "Fifth Pass: Diagnostic Evidence, Misconceptions, Feedback, and Reassessment",
+  "intent": "Diagnose instructional next steps without using wrong-answer patterns as definitive evidence of a student misconception.",
+  "extends": [
+    "catalogs/cpm_reference_question_ideas_20261115.json",
+    "catalogs/cpm_question_structure_deep_research_20261115.json",
+    "catalogs/cpm_question_variation_quality_pass4_20261115.json"
+  ],
+  "authoritative_contracts": [
+    "QUESTION_STRUCTURE_CORE.md",
+    "catalogs/math_question_family_registry.json",
+    "catalogs/math_question_families_algebra1.json",
+    "catalogs/math_question_families_geometry.json",
+    "catalogs/math_question_families_advanced.json",
+    "catalogs/math_question_families_calculus.json",
+    "guides/parallel_family_rules.md",
+    "guides/math_family_quality.md"
+  ],
+  "source_use": "The user-owned resources inspired task structure only. All probes are newly authored examples, not copied/source-faithful excerpts. Do not auto-import as CPM textbook R/P.",
+  "interpretation_limit": "A wrong answer is a hypothesis about an error mechanism, not a diagnosis. Do not generate intervention or mastery change automatically without corroborating work or follow-up.",
+  "evidence_capture_contract": {
+    "record_each_instance": [
+      "canonical_family_id",
+      "lesson_target_id_if_verified",
+      "difficulty_band",
+      "question_variant_id",
+      "student_action",
+      "response_mode",
+      "representation",
+      "given_parameters",
+      "student_response",
+      "solution_key",
+      "work_observed_flag",
+      "teacher_evidence_judgment",
+      "likely_error_code_if_supported",
+      "confirmation_probe_id_if_used",
+      "confirmed_or_unresolved",
+      "recommended_next_family_if_verified"
+    ],
+    "teacher_evidence_judgments": [
+      "Convincing",
+      "Limited",
+      "Incorrect",
+      "Not observed"
+    ],
+    "question_editor_review_judgments": [
+      "Good",
+      "Needs Work",
+      "Bad"
+    ],
+    "separate_concepts": [
+      "family structure",
+      "difficulty",
+      "mastery/grade",
+      "teacher review quality",
+      "student response evidence"
+    ],
+    "prohibited": [
+      "diagnose from MC choice alone",
+      "infer misconception from unanswered item",
+      "raise/lower student grade from research catalog",
+      "convert source workbook pages into student assessments automatically",
+      "clear existing review comments",
+      "expose student data in transfer"
+    ],
+    "feedback_sequence": [
+      "Describe what student actually did",
+      "Give one precise correction tied to evidence",
+      "Offer one short targeted practice task",
+      "Ask for an independent reattempt",
+      "Escalate only if repeat evidence supports the same issue"
+    ],
+    "counterevidence_rule": "A correct follow-up at comparable demand weakens the proposed misconception; mark as unresolved and investigate slips, reading or setup instead.",
+    "privacy": "No student identities, grades, submissions or private Portfolio state in this research transfer."
+  },
+  "diagnostic_decision_rules": [
+    {
+      "when": "Correct response with valid method",
+      "record": "evidence_for_target",
+      "next": "sample another representation or independent application only when necessary"
+    },
+    {
+      "when": "Incorrect response with visible work matching known error",
+      "record": "candidate_error",
+      "next": "give contrasting follow-up at equivalent difficulty"
+    },
+    {
+      "when": "Incorrect MC choice without visible work",
+      "record": "uncertain_error",
+      "next": "ask student to construct/solve a short contrasting question"
+    },
+    {
+      "when": "Blank/missing response",
+      "record": "not_observed",
+      "next": "provide access to task, do not infer inability"
+    },
+    {
+      "when": "Correct after prompting",
+      "record": "limited_independent_evidence",
+      "next": "give a fresh unsupported item"
+    },
+    {
+      "when": "Second response disagrees with initial hypothesis",
+      "record": "unresolved_or_slip",
+      "next": "do not label misconception; inspect item wording and arithmetic"
+    },
+    {
+      "when": "Same misconception appears across two distinct probes",
+      "record": "supported_working_hypothesis",
+      "next": "provide focused feedback and practice, then reassess independently"
+    }
+  ],
+  "answer_leakage_and_difficulty_quality_gates": [
+    "A correct answer and full worked solution exist independently for each variant.",
+    "Wrong-answer alternatives are algebraically plausible and misconception-specific, not random distractors.",
+    "A distractor does not become a misconception label without evidence of reasoning.",
+    "For a construction task, student view presents givens and blank drawing surface only.",
+    "Graphs use the registered Graph Tool; geometry markings and models express the actual givens.",
+    "Prompt wording asks the intended student action and never supplies the equation/model being requested.",
+    "Follow-up probes must isolate one possible error instead of introducing new prerequisites.",
+    "Within-level alternatives retain equivalent cognitive demand; no quota of 12 variations.",
+    "Difficulty progression increases structural load, not merely coefficient size.",
+    "Function notation, context, units, and original CPM R/P source stay intact where mandatory.",
+    "Model feedback states observed evidence rather than asserting a fixed trait about a student.",
+    "Correct and incorrect cases are balanced; confirm no accidental multiple/no solutions.",
+    "Record uncertainty and teacher override; no automatic mastery change from one selected response.",
+    "Keep question editing Good/Needs Work/Bad distinct from Convincing/Limited/Incorrect/Not observed on student evidence."
+  ],
+  "source_ledger": {
+    "actual_delta_math_uploaded_pdfs": [
+      {
+        "file": "6th-1 - KEY.pdf",
+        "pages_inspected": "1",
+        "observed": "ratio diagrams and recipe proportional reasoning"
+      },
+      {
+        "file": "6th-3 - KEY.pdf",
+        "pages_inspected": "1, 5-6",
+        "observed": "inequality number-line matching, balance model and table-to-rule"
+      },
+      {
+        "file": "7th Grade - V3.pdf",
+        "pages_inspected": "1-6",
+        "observed": "scale correspondences, rotations, scale drawing, double number lines and proportional tables"
+      },
+      {
+        "file": "8th-3 - KEY.pdf",
+        "pages_inspected": "1-2, 4-5, 12-13",
+        "observed": "graphs from changing-rate contexts, linear table-to-rule and interpretations of quantities"
+      }
+    ],
+    "google_drive_pdf_sources_readable_text": [
+      {
+        "file": "Kuta Properties of Exponents .pdf",
+        "id": "1tBagdWR06r0nfg3J2flvtP-YWbUMznzT",
+        "observed": "product/quotient/power expression progression"
+      },
+      {
+        "file": "Kuta Solve and Graph Inequalities.pdf",
+        "id": "1nUOW_g6aJpZsy9hmmkB9J3D-vAByqWpm",
+        "observed": "inequality symbol-to-graph, graph-to-symbol and solve-and-graph"
+      },
+      {
+        "file": "Math1All.pdf (Exeter)",
+        "id": "0B6fznOHK0RHAeEs5OWp4blVGYUU",
+        "observed": "Mathematics 1 problem 69 tests a concrete claim about negative expressions; problem 45 connects sequence patterns to formulas"
+      },
+      {
+        "file": "Math2All.pdf (Exeter)",
+        "id": "0B6fznOHK0RHAS3BiZDNhNnB0amc",
+        "observed": "Mathematics 2 early problems include shape-feasibility reasoning and a geometric minimization chain"
+      },
+      {
+        "file": "Carnegie Algebra II Student Skills Practice Chapter 3.pdf",
+        "id": "0B6fznOHK0RHAS1oybVcyam8xQjQ",
+        "observed": "p207-216 volume-function tables and graph/algebra even-odd comparisons"
+      },
+      {
+        "file": "Carnegie Algebra II Student Skills Practice Chapter 7.pdf",
+        "id": "0B6fznOHK0RHAOGVkbkNPZlZMeEE",
+        "observed": "p395-409 rational-function identification and constructing multiple rules from one feature set"
+      }
+    ],
+    "family_guide_crosswalk": "All 28 diagnostic cards extend existing Pass 4 recipes and use canonical family IDs from the 390-family registries. No new canonical family is created."
+  },
+  "profiles": [
+    {
+      "diagnostic_id": "P5-001",
+      "course": "CC1",
+      "canonical_family_id": "DEC_OPEN_NL",
+      "paired_variation_recipe_id": "P4-001",
+      "core_evidence_job": "Construct a jump strategy and compute a decimal result",
+      "observed_response_pattern_to_investigate": "A student adds decimal amounts correctly but subtracts by moving right on the number line.",
+      "alternate_possible_explanation": "Could be a computation error rather than confusion about direction.",
+      "disambiguating_probe": {
+        "student_task": "Calculate 4.6 - 1.8; show the direction and total size of your jumps.",
+        "correct_response": "2.8; net movement left 1.8 from 4.6 to 2.8"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Calculate 3.2 - 0.7; show the jumps.",
+        "correct_response": "2.5; left 0.7"
+      },
+      "interpretation_if_pattern_repeats": "Both jumps go right or both answers add instead of subtract: possible direction misconception.",
+      "targeted_feedback_if_confirmed": "For subtraction, the signed net jump must match the change from the starting value to the result.",
+      "next_original_practice": "Use a blank number line for two subtractions, then one addition, marking direction each time.",
+      "representation_and_answer_neutrality_check": "Student number line has no completed solution arcs; use the approved number-line renderer.",
+      "difficulty_progression_reference": {
+        "1": "one place-value jump",
+        "2": "two jump sizes with renaming",
+        "3": "select efficient strategy and defend equivalence"
+      },
+      "source_reference_ids": [
+        "DM4_DEC"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-002",
+      "course": "CC1",
+      "canonical_family_id": "RATIO_DOUBLE_NUMBER_LINE",
+      "paired_variation_recipe_id": "P4-002",
+      "core_evidence_job": "Recover a missing proportional quantity from two synchronized scales",
+      "observed_response_pattern_to_investigate": "Student scales one row of a double number line additively, not multiplicatively.",
+      "alternate_possible_explanation": "May be arithmetic, misaligned scales, or confusing which quantities correspond.",
+      "disambiguating_probe": {
+        "student_task": "Three notebooks cost $12. Complete the double number line at 6 and 9 notebooks.",
+        "correct_response": "$24 and $36"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Five pens cost $15. What does 10 pens cost? Show matching points.",
+        "correct_response": "$30"
+      },
+      "interpretation_if_pattern_repeats": "Repeated add-the-same-number errors rather than scale-by-factor errors suggest additive reasoning.",
+      "targeted_feedback_if_confirmed": "Each corresponding pair must keep the same dollars-per-item ratio.",
+      "next_original_practice": "Practice 2-point and 3-point double number lines, then reverse from total cost to count.",
+      "representation_and_answer_neutrality_check": "Both scales must align vertically at equivalent quantities; leave student entries blank.",
+      "difficulty_progression_reference": {
+        "1": "integer scale from unit tick",
+        "2": "non-unit paired anchor",
+        "3": "reason backward from an unfamiliar total"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE",
+        "DM7_RATIO"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-003",
+      "course": "CC1",
+      "canonical_family_id": "EQ_BALANCE_MODEL",
+      "paired_variation_recipe_id": "P4-003",
+      "core_evidence_job": "Infer unknown mass/quantity from an actually balanced model",
+      "observed_response_pattern_to_investigate": "Student removes a quantity from only one side of a balance equation.",
+      "alternate_possible_explanation": "May miscount the bags/blocks instead of misunderstanding equality.",
+      "disambiguating_probe": {
+        "student_task": "A balanced model has two identical bags and three blocks on the left and eleven blocks on the right. How many blocks are in one bag?",
+        "correct_response": "4 blocks"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Three identical bags and two blocks balance fourteen blocks. Find one bag.",
+        "correct_response": "4 blocks"
+      },
+      "interpretation_if_pattern_repeats": "Incorrect removal of three or two from only one side twice suggests unequal-operation reasoning.",
+      "targeted_feedback_if_confirmed": "Keeping a balance means doing the same operation to both sides.",
+      "next_original_practice": "Complete balance-to-equation and equation-to-balance tasks with different counts.",
+      "representation_and_answer_neutrality_check": "Render identical bag symbols and exact block counts; solution view only shows canceled amounts.",
+      "difficulty_progression_reference": {
+        "1": "one unknown object type",
+        "2": "multiple identical unknown objects and known blocks",
+        "3": "balanced after valid symmetric removal"
+      },
+      "source_reference_ids": [
+        "DM6_EQ"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-004",
+      "course": "CC1",
+      "canonical_family_id": "PATTERN_INPUT_OUTPUT",
+      "paired_variation_recipe_id": "P4-004",
+      "core_evidence_job": "Complete two function tables and characterize their relation",
+      "observed_response_pattern_to_investigate": "Student recognizes a shared difference but assumes two growing patterns have different rates.",
+      "alternate_possible_explanation": "Could be confusion between term position and term value.",
+      "disambiguating_probe": {
+        "student_task": "Pattern A is 2, 6, 10, 14. Pattern B is 5, 9, 13, 17. How do the rates and same-position values compare?",
+        "correct_response": "Both increase by 4; B is 3 greater at every position."
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Given A(n)=4n-2 and B(n)=4n+1, find B(n)-A(n).",
+        "correct_response": "3 for every n"
+      },
+      "interpretation_if_pattern_repeats": "The student predicts a growing gap despite identical steps: possible rate-versus-offset confusion.",
+      "targeted_feedback_if_confirmed": "A constant vertical offset changes values but not the common difference.",
+      "next_original_practice": "Match two tables to equations, then build a counterexample with different rates.",
+      "representation_and_answer_neutrality_check": "Table columns and n positions must align; avoid giving away the difference in the blank cells.",
+      "difficulty_progression_reference": {
+        "1": "explicit rule supplied",
+        "2": "rule inferred from two non-adjacent rows",
+        "3": "compare why two patterns differ by constant despite different starting point"
+      },
+      "source_reference_ids": [
+        "DM6_EQ",
+        "EXETER_M1"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-005",
+      "course": "CC2",
+      "canonical_family_id": "SCALE_FACTOR_FIGURES",
+      "paired_variation_recipe_id": "P4-005",
+      "core_evidence_job": "Identify corresponding sides and find directional scale factor",
+      "observed_response_pattern_to_investigate": "Student reports the reciprocal scale factor even when the source and image are labeled.",
+      "alternate_possible_explanation": "May have swapped corresponding sides rather than misunderstood factor direction.",
+      "disambiguating_probe": {
+        "student_task": "A side of length 6 on Figure A corresponds to length 9 on Figure B. Find the factor from A to B.",
+        "correct_response": "3/2"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A side of length 4 on Shape P corresponds to 10 on Shape Q. Find the factor from Q to P.",
+        "correct_response": "2/5"
+      },
+      "interpretation_if_pattern_repeats": "Consistent reciprocal answers after direction is stated indicate source-to-image reversal.",
+      "targeted_feedback_if_confirmed": "Scale factor is image length divided by original length, in the named direction.",
+      "next_original_practice": "Practice both directions from paired figures, including enlarged and reduced shapes.",
+      "representation_and_answer_neutrality_check": "Labels and corresponding sides must be visible; shape orientation must not change actual ratios.",
+      "difficulty_progression_reference": {
+        "1": "aligned simple polygon",
+        "2": "rotated polygon with labeled vertices",
+        "3": "reverse scale and check all sides"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-006",
+      "course": "CC2",
+      "canonical_family_id": "DILATION_GRID",
+      "paired_variation_recipe_id": "P4-006",
+      "core_evidence_job": "Construct the missing vertices of a scaled copy",
+      "observed_response_pattern_to_investigate": "Student translates a figure when asked to dilate from the origin.",
+      "alternate_possible_explanation": "Might confuse coordinate rule with a visual sketching or reading error.",
+      "disambiguating_probe": {
+        "student_task": "Dilate A(2,1) by scale factor 2 about the origin. Give A'.",
+        "correct_response": "(4,2)"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Dilate B(-3,2) by scale factor 1/2 about the origin. Give B'.",
+        "correct_response": "(-3/2,1)"
+      },
+      "interpretation_if_pattern_repeats": "Adding a fixed amount to coordinates twice suggests translation instead of scaling.",
+      "targeted_feedback_if_confirmed": "For an origin dilation, multiply both coordinate components by the scale factor.",
+      "next_original_practice": "Plot two image points on blank registered graph-tool grids, then draw the image polygon.",
+      "representation_and_answer_neutrality_check": "For actual construction questions, student plot must be blank except for given original points and axes.",
+      "difficulty_progression_reference": {
+        "1": "integer scale about origin",
+        "2": "non-unit factor about origin",
+        "3": "fractional scale about given center"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-007",
+      "course": "CC2",
+      "canonical_family_id": "RATIO_TABLE_COMPLETE",
+      "paired_variation_recipe_id": "P4-007",
+      "core_evidence_job": "Identify whether every row preserves the unit ratio",
+      "observed_response_pattern_to_investigate": "Student extends a ratio table by adding a constant rather than multiplying both quantities.",
+      "alternate_possible_explanation": "May have copied one row incorrectly.",
+      "disambiguating_probe": {
+        "student_task": "For the relationship 2 cups concentrate to 5 cups water, which row is invalid: (4,10), (6,15), or (8,18)?",
+        "correct_response": "(8,18) is invalid; at 8 cups concentrate water should be 20."
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Complete a row proportional to (3,7) if the first quantity is 12.",
+        "correct_response": "Second quantity 28"
+      },
+      "interpretation_if_pattern_repeats": "If the next row adds 6 to both columns, suspect additive rather than proportional reasoning.",
+      "targeted_feedback_if_confirmed": "Equivalent ratios scale both quantities by the same multiplicative factor.",
+      "next_original_practice": "Use ratio tables with some gaps, then identify an inconsistent row and repair it.",
+      "representation_and_answer_neutrality_check": "In a diagnosis item, show original table values but no completed repair.",
+      "difficulty_progression_reference": {
+        "1": "one small integer row",
+        "2": "nonconsecutive rows and non-unit rates",
+        "3": "choose between two nearly plausible table patterns"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE",
+        "DM7_RATIO"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-008",
+      "course": "CC2",
+      "canonical_family_id": "SCALE_DRAWING_DISTANCE_AREA",
+      "paired_variation_recipe_id": "P4-008",
+      "core_evidence_job": "Find a real-world distance or time using the printed drawing and rate",
+      "observed_response_pattern_to_investigate": "Student multiplies area by the length scale factor, not its square.",
+      "alternate_possible_explanation": "May not distinguish lengths and areas or may compute area incorrectly.",
+      "disambiguating_probe": {
+        "student_task": "A rectangle is enlarged by factor 3 in each direction. Its original area is 6 square units. Find its new area.",
+        "correct_response": "54 square units"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A square's side doubles from 4 to 8. Compare its old and new areas.",
+        "correct_response": "16 to 64 square units; factor 4"
+      },
+      "interpretation_if_pattern_repeats": "A new area of 18 in the first item suggests using a linear rather than square scale factor.",
+      "targeted_feedback_if_confirmed": "Length changes by k; area changes by k squared.",
+      "next_original_practice": "Compare perimeter and area under the same scale factor.",
+      "representation_and_answer_neutrality_check": "Draw corresponding rectangles with dimensions and area units consistent; never pre-shade the answer.",
+      "difficulty_progression_reference": {
+        "1": "simple integer distance",
+        "2": "fractional scale reading",
+        "3": "two-step route with a needed travel-rate conversion"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-009",
+      "course": "CC3",
+      "canonical_family_id": "FUNC_PIECEWISE_CONTEXT_GRAPH",
+      "paired_variation_recipe_id": "P4-009",
+      "core_evidence_job": "Construct a piecewise linear graph from successive intervals",
+      "observed_response_pattern_to_investigate": "Student treats a constant interval in a change-of-rate story as a drop to zero.",
+      "alternate_possible_explanation": "Could have mixed up rate (slope) and quantity (height).",
+      "disambiguating_probe": {
+        "student_task": "A tank starts with 4 L, gains 2 L/hour for 3 hours, then stays unchanged for 2 hours. Give its volume at t=3 and t=5.",
+        "correct_response": "10 L at both t=3 and t=5"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A cart begins 7 m from a sensor, moves away at 1 m/s for 2 s, then stops for 3 s. Give distance at t=5.",
+        "correct_response": "9 m"
+      },
+      "interpretation_if_pattern_repeats": "A plateau drawn at zero after the rate becomes zero suggests confusing rate with state.",
+      "targeted_feedback_if_confirmed": "Zero rate means horizontal graph, not necessarily zero quantity.",
+      "next_original_practice": "Graph from a three-phase context and explain the meaning of each segment.",
+      "representation_and_answer_neutrality_check": "Student Cartesian graph uses the registered graph tool with givens only and no completed solution polyline.",
+      "difficulty_progression_reference": {
+        "1": "two positive stages",
+        "2": "increasing, flat and decreasing intervals",
+        "3": "infer missing interval rate from final total then graph"
+      },
+      "source_reference_ids": [
+        "DM8_GRAPH"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-010",
+      "course": "CC3",
+      "canonical_family_id": "LINE_EQ_FROM_REP",
+      "paired_variation_recipe_id": "P4-010",
+      "core_evidence_job": "Write a function equation using a table with nonconsecutive inputs",
+      "observed_response_pattern_to_investigate": "Student uses change in y as slope but omits a nonzero intercept.",
+      "alternate_possible_explanation": "May have misread which row has x=0.",
+      "disambiguating_probe": {
+        "student_task": "For x=0,1,2 the table gives y=2,5,8. Write y as a function of x.",
+        "correct_response": "y=3x+2"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A table has (x,y)=(1,5),(2,7),(3,9). Write its rule.",
+        "correct_response": "y=2x+3"
+      },
+      "interpretation_if_pattern_repeats": "An answer y=3x for the first task suggests ignoring the initial value.",
+      "targeted_feedback_if_confirmed": "A table defines both the repeated change and the value at x=0.",
+      "next_original_practice": "Alternate table-to-rule with rule-to-table and compare two equations with the same slope.",
+      "representation_and_answer_neutrality_check": "Keep table headings and exact pairs legible; do not display the answer rule as a table caption.",
+      "difficulty_progression_reference": {
+        "1": "unit input steps including 0",
+        "2": "nonconsecutive positive/negative inputs",
+        "3": "infer slope and intercept when neither is directly shown"
+      },
+      "source_reference_ids": [
+        "DM8_GRAPH"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-011",
+      "course": "CC3",
+      "canonical_family_id": "SLOPE_FROM_GRAPH",
+      "paired_variation_recipe_id": "P4-011",
+      "core_evidence_job": "Compare a line slope with a rate encoded in a table",
+      "observed_response_pattern_to_investigate": "Student computes y/x from one point instead of rise/run between two points.",
+      "alternate_possible_explanation": "May have arithmetic error or inadvertently used a line through the origin.",
+      "disambiguating_probe": {
+        "student_task": "A line passes through (1,3) and (4,9). Find its slope.",
+        "correct_response": "(9-3)/(4-1)=2"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A line passes through (2,1) and (6,9). Find its slope.",
+        "correct_response": "(9-1)/(6-2)=2"
+      },
+      "interpretation_if_pattern_repeats": "Using 9/4 from the second point in the first item gives the wrong slope; a rise-over-run check distinguishes this from a coincidence.",
+      "targeted_feedback_if_confirmed": "Slope compares changes between two points, not the y/x ratio at an arbitrary point.",
+      "next_original_practice": "Use a plotted graph with two marked points, then an unlabeled pair of coordinates.",
+      "representation_and_answer_neutrality_check": "Registered graph tool; mark only supplied points, not a pre-drawn rise-run solution triangle.",
+      "difficulty_progression_reference": {
+        "1": "positive integer slope",
+        "2": "negative and fractional slopes",
+        "3": "compare rates including horizontal/vertical exception"
+      },
+      "source_reference_ids": [
+        "DM8_GRAPH",
+        "KUTA_SLOPE50"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-012",
+      "course": "CC3",
+      "canonical_family_id": "LINE_CONTEXT_INTERPRET",
+      "paired_variation_recipe_id": "P4-012",
+      "core_evidence_job": "Interpret a model point or coefficient using quantities and units",
+      "observed_response_pattern_to_investigate": "Student swaps initial value and rate when interpreting a contextual linear function.",
+      "alternate_possible_explanation": "May misunderstand units rather than algebra.",
+      "disambiguating_probe": {
+        "student_task": "A tank has h(t)=18-3t liters after t hours. State the initial amount and rate of change.",
+        "correct_response": "Initial 18 L; change -3 L/hour"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A supply is modeled by s(t)=120-5t. Interpret the 120 and -5 with units.",
+        "correct_response": "120 items initially; decreases by 5 items per unit t"
+      },
+      "interpretation_if_pattern_repeats": "Calling 18 an hourly rate or -3 an initial volume suggests intercept/slope confusion.",
+      "targeted_feedback_if_confirmed": "The constant term describes the starting quantity; coefficient is the signed change per input unit.",
+      "next_original_practice": "Practice identifying quantities from equations, graphs and tables, then choose units.",
+      "representation_and_answer_neutrality_check": "Graph axes and units must match context; do not conflate rate with signed quantity.",
+      "difficulty_progression_reference": {
+        "1": "point meaning from labeled graph",
+        "2": "rate and initial amount in context",
+        "3": "compare two models differing only in initial amount or rate"
+      },
+      "source_reference_ids": [
+        "DM8_GRAPH"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-013",
+      "course": "Algebra 1",
+      "canonical_family_id": "EXP_RULES",
+      "paired_variation_recipe_id": "P4-013",
+      "core_evidence_job": "Simplify expression and identify applicable exponent property",
+      "observed_response_pattern_to_investigate": "Student multiplies exponents for a product of like bases.",
+      "alternate_possible_explanation": "May have confused product of powers with power of a power.",
+      "disambiguating_probe": {
+        "student_task": "Simplify x^2 * x^5 and select the property used.",
+        "correct_response": "x^7, product of powers"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Simplify (a^3)^4 and select the property used.",
+        "correct_response": "a^12, power of a power"
+      },
+      "interpretation_if_pattern_repeats": "x^10 on the first and a^7 on the second suggests the rules are reversed.",
+      "targeted_feedback_if_confirmed": "For the same base multiplied, add exponents; for a power raised to a power, multiply them.",
+      "next_original_practice": "Interleave product, quotient and power-of-power tasks with MC property identification after simplifying.",
+      "representation_and_answer_neutrality_check": "Preserve exponent notation and genuine simplification; do not create an explain-only family.",
+      "difficulty_progression_reference": {
+        "1": "one base one rule",
+        "2": "multiple bases one rule",
+        "3": "combine coefficient and two bases without added explanation burden"
+      },
+      "source_reference_ids": [
+        "KUTA_EXP",
+        "EXETER_M1"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-014",
+      "course": "Algebra 1",
+      "canonical_family_id": "EQ_CONTEXT_WRITE_SOLVE",
+      "paired_variation_recipe_id": "P4-014",
+      "core_evidence_job": "Extract quantities from context, write equation and solve unknown",
+      "observed_response_pattern_to_investigate": "Student divides total cost by the per-item price without removing the fixed fee.",
+      "alternate_possible_explanation": "May not understand what the one-time fee means, or may have arithmetic trouble.",
+      "disambiguating_probe": {
+        "student_task": "A club charges $7 to join plus $4 per class. A member spent $31. Write an equation and find how many classes the member attended.",
+        "correct_response": "7+4c=31; c=6 classes"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A gym charges $10 registration plus $5 per visit. Total paid is $25. Write and solve an equation for visits.",
+        "correct_response": "10+5v=25; v=3 visits"
+      },
+      "interpretation_if_pattern_repeats": "Dividing total by the variable charge repeatedly suggests failure to account for the fixed amount.",
+      "targeted_feedback_if_confirmed": "Remove the one-time charge before dividing by the per-visit rate.",
+      "next_original_practice": "Write a model from context, then compare it with a fee-free model.",
+      "representation_and_answer_neutrality_check": "The equation must not be supplied or answer-revealed in the student question.",
+      "difficulty_progression_reference": {
+        "1": "single variable and two charges",
+        "2": "find unit count from total",
+        "3": "compare thresholds using two linear models"
+      },
+      "source_reference_ids": [
+        "KUTA_WORD",
+        "DM8_GRAPH"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-015",
+      "course": "Algebra 1",
+      "canonical_family_id": "POLY_MULT",
+      "paired_variation_recipe_id": "P4-015",
+      "core_evidence_job": "Fill missing partial products then determine whole area",
+      "observed_response_pattern_to_investigate": "Student multiplies only the first and last terms of a binomial product.",
+      "alternate_possible_explanation": "Could be inability to combine like terms rather than missing cross products.",
+      "disambiguating_probe": {
+        "student_task": "Use a blank area model to multiply (x+2)(x+5). Write the four partial products and the total.",
+        "correct_response": "x^2,5x,2x,10; total x^2+7x+10"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Multiply (x+3)(x+4) using a generic rectangle.",
+        "correct_response": "x^2+7x+12"
+      },
+      "interpretation_if_pattern_repeats": "An expression x^2+10 suggests omitting both cross products; an incorrect x coefficient may be combination error.",
+      "targeted_feedback_if_confirmed": "Every row factor multiplies every column factor before combining like terms.",
+      "next_original_practice": "Practice 2-by-2 partial-product models with blank taller cells; advance to three-term factors only if appropriate.",
+      "representation_and_answer_neutrality_check": "Cells blank, approximately 50% taller; no printed answer lines; row and column labels correctly placed.",
+      "difficulty_progression_reference": {
+        "1": "positive monomial and two columns",
+        "2": "mixed signs and full four cells",
+        "3": "given some product cells infer missing factor"
+      },
+      "source_reference_ids": [
+        "KUTA_POLY",
+        "CARNEGIE_CH3"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-016",
+      "course": "Algebra 1",
+      "canonical_family_id": "FUNC_EVALUATE_FORMULA",
+      "paired_variation_recipe_id": "P4-016",
+      "core_evidence_job": "Evaluate named functions at provided inputs without losing f/g names",
+      "observed_response_pattern_to_investigate": "Student evaluates an expression but drops function notation or substitutes only in one occurrence.",
+      "alternate_possible_explanation": "May be notation familiarity rather than evaluation accuracy.",
+      "disambiguating_probe": {
+        "student_task": "For f(x)=2x+3, find f(-2).",
+        "correct_response": "-1"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "For g(x)=x^2-4x, find g(-1).",
+        "correct_response": "5"
+      },
+      "interpretation_if_pattern_repeats": "Correct arithmetic but response without named function may need a notation check; wrong value may be substitution/sign error.",
+      "targeted_feedback_if_confirmed": "f(-2) means substitute -2 for every x in the rule for f.",
+      "next_original_practice": "Require at least two parallel function-notation tasks with signed inputs and a notation-reading item.",
+      "representation_and_answer_neutrality_check": "Student prompt, variants and answer retain f or g notation and show argument, not just bare expressions.",
+      "difficulty_progression_reference": {
+        "1": "integer input linear rule",
+        "2": "signed input and absolute value",
+        "3": "two functions and linked comparison"
+      },
+      "source_reference_ids": [
+        "DM8_GRAPH",
+        "CPM_CH3"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-017",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_SIMILARITY",
+      "paired_variation_recipe_id": "P4-017",
+      "core_evidence_job": "Determine whether two differently oriented figures are similar",
+      "observed_response_pattern_to_investigate": "Student decides triangles are not similar because one is rotated.",
+      "alternate_possible_explanation": "Could instead be an incorrect side correspondence.",
+      "disambiguating_probe": {
+        "student_task": "Triangles have corresponding side lengths (3,4,5) and (6,8,10) in rotated diagrams. Are they similar? State the factor.",
+        "correct_response": "Yes, SSS similarity; factor 2 from first to second."
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Sides (4,6,8) correspond to (6,9,12). Are the triangles similar?",
+        "correct_response": "Yes; factor 3/2"
+      },
+      "interpretation_if_pattern_repeats": "A rotation-only mismatch across two consistent side sets suggests orientation is being used as evidence.",
+      "targeted_feedback_if_confirmed": "Similarity depends on corresponding angle/side relationships, not how the figure is oriented.",
+      "next_original_practice": "Mark the correspondence and compare ratios in one rotated and one unrotated pair.",
+      "representation_and_answer_neutrality_check": "Draw genuine triangles with ordered corresponding sides; verify side lengths can form triangles.",
+      "difficulty_progression_reference": {
+        "1": "obvious aligned side lengths",
+        "2": "rotated triangle with matchable marks",
+        "3": "test competing correspondences and reject false pairings"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE",
+        "EXETER_M3"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-018",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_TRANSFORM_CONSTRUCT",
+      "paired_variation_recipe_id": "P4-018",
+      "core_evidence_job": "Construct image under specified transformations",
+      "observed_response_pattern_to_investigate": "Student recognizes a reflection but cannot construct transformed vertices.",
+      "alternate_possible_explanation": "A selected-response answer alone cannot establish construction skill.",
+      "disambiguating_probe": {
+        "student_task": "Reflect triangle vertices A(1,1), B(3,1), C(1,2) across the y-axis. Give the image coordinates.",
+        "correct_response": "A'(-1,1), B'(-3,1), C'(-1,2)"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Reflect P(-2,3) across the x-axis.",
+        "correct_response": "P'(-2,-3)"
+      },
+      "interpretation_if_pattern_repeats": "Changing both signs instead of one indicates confusion between reflection axes and origin reflection.",
+      "targeted_feedback_if_confirmed": "Across the y-axis negate x; across the x-axis negate y.",
+      "next_original_practice": "Plot image vertices on a blank coordinate grid after an earlier recognition item.",
+      "representation_and_answer_neutrality_check": "Construction student view must show source geometry, not the completed image; registered graph tool for axes.",
+      "difficulty_progression_reference": {
+        "1": "single translation",
+        "2": "reflection then translation",
+        "3": "rotation plus non-unit dilation with traced vertices"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE",
+        "EXETER_M3"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-019",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_PROOF_TRIANGLE",
+      "paired_variation_recipe_id": "P4-019",
+      "core_evidence_job": "Decide whether a claimed triangle arrangement is possible and justify",
+      "observed_response_pattern_to_investigate": "Student assumes any three positive side lengths form a triangle.",
+      "alternate_possible_explanation": "May have a single arithmetic slip on a sum.",
+      "disambiguating_probe": {
+        "student_task": "Can three segments of lengths 3, 4, and 8 form a triangle? State a specific reason.",
+        "correct_response": "No; 3+4=7<8"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Can 5, 7, and 11 form a triangle? What about 5, 7, and 13?",
+        "correct_response": "First yes (12>11); second no (12<13)"
+      },
+      "interpretation_if_pattern_repeats": "Accepting both follow-up sets suggests triangle-inequality misconception.",
+      "targeted_feedback_if_confirmed": "The two shorter lengths must have a sum strictly greater than the longest.",
+      "next_original_practice": "Mix possible, impossible, and boundary-equality cases with diagrams when useful.",
+      "representation_and_answer_neutrality_check": "Do not draw a closed nondegenerate triangle for impossible lengths.",
+      "difficulty_progression_reference": {
+        "1": "check obvious inequality",
+        "2": "one hidden constraint",
+        "3": "show why a tempting configuration violates invariant"
+      },
+      "source_reference_ids": [
+        "EXETER_M2"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-020",
+      "course": "Geometry",
+      "canonical_family_id": "GEO_SIMILAR_PROPORTIONS",
+      "paired_variation_recipe_id": "P4-020",
+      "core_evidence_job": "Relate scale factor to changes in lengths and areas",
+      "observed_response_pattern_to_investigate": "Student scales side length and area by the same factor.",
+      "alternate_possible_explanation": "Could have forgotten how to compute area or chosen noncorresponding regions.",
+      "disambiguating_probe": {
+        "student_task": "Two similar figures have length scale factor 2. If original area is 9 square units, what is new area?",
+        "correct_response": "36 square units"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A shape has area 4 square units and is enlarged by length factor 3. What is new area?",
+        "correct_response": "36 square units"
+      },
+      "interpretation_if_pattern_repeats": "Answer 18 on first and 12 on second suggests linear treatment of area.",
+      "targeted_feedback_if_confirmed": "Areas scale by the square of the length factor.",
+      "next_original_practice": "Compare scale effects on length, perimeter, area and then volume (only when in scope).",
+      "representation_and_answer_neutrality_check": "Figures must preserve similarity; do not infer an area ratio from unrelated shapes.",
+      "difficulty_progression_reference": {
+        "1": "integer k direct",
+        "2": "fractional k in reverse",
+        "3": "area-to-length inference then area/perimeter comparison"
+      },
+      "source_reference_ids": [
+        "DM7_SCALE",
+        "EXETER_M1"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-021",
+      "course": "Algebra 2",
+      "canonical_family_id": "ADV_FUNC_EXTREMA_CONCAVITY",
+      "paired_variation_recipe_id": "P4-021",
+      "core_evidence_job": "Construct volume function from dimensions then locate meaningful extrema",
+      "observed_response_pattern_to_investigate": "Student maximizes the cut size rather than the resulting box volume.",
+      "alternate_possible_explanation": "May mis-model the height/remaining base or ignore feasible-domain restrictions.",
+      "disambiguating_probe": {
+        "student_task": "From a 6-by-6 sheet, equal corner squares of side x are removed to fold an open box. Write V(x) and compare V(1) and V(2).",
+        "correct_response": "V=x(6-2x)^2; V(1)=16, V(2)=8 cubic units"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "For the same box, determine the feasible interval for x and where the maximum volume occurs.",
+        "correct_response": "0<x<3; maximum V=16 at x=1"
+      },
+      "interpretation_if_pattern_repeats": "If x=3 is chosen as maximum solely because the cut is largest, suspect failure to model the remaining base.",
+      "targeted_feedback_if_confirmed": "Volume is height times remaining base area; consider the valid dimensions before maximizing.",
+      "next_original_practice": "Work from dimensions to table to graph and locate valid extrema.",
+      "representation_and_answer_neutrality_check": "Constrained box diagram must label 6-2x correctly and exclude physically impossible negative dimensions.",
+      "difficulty_progression_reference": {
+        "1": "direct volume table",
+        "2": "derive restricted-domain function",
+        "3": "compare viable maxima with nonphysical algebraic roots excluded"
+      },
+      "source_reference_ids": [
+        "CARNEGIE_CH3"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-022",
+      "course": "Algebra 2",
+      "canonical_family_id": "RATIONAL_GRAPH_FEATURES_ADV",
+      "paired_variation_recipe_id": "P4-022",
+      "core_evidence_job": "Write rational functions satisfying constraints; compare uniqueness",
+      "observed_response_pattern_to_investigate": "Student thinks sharing asymptotes means two rational functions must be identical.",
+      "alternate_possible_explanation": "May conflate graph features with an equation's scale.",
+      "disambiguating_probe": {
+        "student_task": "Give two distinct rational functions with vertical asymptote x=2 and horizontal asymptote y=0.",
+        "correct_response": "Example: 1/(x-2) and 3/(x-2)"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Can 5/(x-2) and -2/(x-2) have the same asymptotes?",
+        "correct_response": "Yes; both VA x=2 and HA y=0"
+      },
+      "interpretation_if_pattern_repeats": "If the student rejects all distinct expressions, suspect failure to distinguish features from a unique equation.",
+      "targeted_feedback_if_confirmed": "Several functions can share asymptotes without having the same values.",
+      "next_original_practice": "Construct two nonidentical examples with prescribed graph features, and compare their graphs.",
+      "representation_and_answer_neutrality_check": "Graph-tool assets must display actual vertical/horizontal asymptotes consistently with formulas.",
+      "difficulty_progression_reference": {
+        "1": "single factor denominator",
+        "2": "hole and vertical asymptote present",
+        "3": "construct distinct valid functions with shared external behavior"
+      },
+      "source_reference_ids": [
+        "CARNEGIE_CH7"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-023",
+      "course": "Algebra 2",
+      "canonical_family_id": "SEQ_EXPLICIT_ADV",
+      "paired_variation_recipe_id": "P4-023",
+      "core_evidence_job": "Find common ratio and explicit formula or reverse from a term",
+      "observed_response_pattern_to_investigate": "Student uses a_n=a_1*r^n and shifts every geometric term by one position.",
+      "alternate_possible_explanation": "Could be exponent arithmetic rather than index convention.",
+      "disambiguating_probe": {
+        "student_task": "A geometric sequence starts with a_1=3 and common ratio 2. Write a_n and find a_4.",
+        "correct_response": "a_n=3*2^(n-1); a_4=24"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "A sequence has a_1=5 and ratio 3. Find a_3.",
+        "correct_response": "45"
+      },
+      "interpretation_if_pattern_repeats": "A value twice the correct fourth term suggests using n instead of n-1 for a sequence indexed at 1.",
+      "targeted_feedback_if_confirmed": "The first term occurs at n=1, so the ratio has been applied zero times then.",
+      "next_original_practice": "Contrast a table indexed at 0 versus a sequence indexed at 1.",
+      "representation_and_answer_neutrality_check": "Specify the starting index and show sufficient terms without giving the explicit formula.",
+      "difficulty_progression_reference": {
+        "1": "integer growing ratio",
+        "2": "fractional decaying ratio",
+        "3": "infer ratio from nonconsecutive terms and estimate later value"
+      },
+      "source_reference_ids": [
+        "CARNEGIE_CH10"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-024",
+      "course": "Algebra 2",
+      "canonical_family_id": "POLY_REMAINDER_FACTOR_ADV",
+      "paired_variation_recipe_id": "P4-024",
+      "core_evidence_job": "Use a supplied polynomial factor to determine remaining factors/zeros",
+      "observed_response_pattern_to_investigate": "Student mixes up the sign in a linear factor and its corresponding root.",
+      "alternate_possible_explanation": "May have expanded incorrectly or confused factor theorem with quotient calculation.",
+      "disambiguating_probe": {
+        "student_task": "Given f(x)=x^2-5x+6 and that x-2 is a factor, give another factor and all zeros.",
+        "correct_response": "(x-3); zeros 2 and 3"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "For x^2-7x+12, use the given factor x-3 to determine the other factor.",
+        "correct_response": "x-4"
+      },
+      "interpretation_if_pattern_repeats": "Choosing x+2 instead of x-2 suggests sign confusion; inspect division or substitution to confirm.",
+      "targeted_feedback_if_confirmed": "A factor x-a corresponds to root a, and substitution f(a)=0 checks it.",
+      "next_original_practice": "Switch between known factor, known root, and evaluating a polynomial at the root.",
+      "representation_and_answer_neutrality_check": "Do not print the full factorization when the student must find it.",
+      "difficulty_progression_reference": {
+        "1": "cubic with integer zeros",
+        "2": "quartic with irreducible quadratic",
+        "3": "compare claimed factors and identify one false claim"
+      },
+      "source_reference_ids": [
+        "KUTA_PC_POLY"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-025",
+      "course": "Precalculus",
+      "canonical_family_id": "ADV_FUNC_TRANSFORM_DOMAIN_RANGE",
+      "paired_variation_recipe_id": "P4-025",
+      "core_evidence_job": "Graph piecewise function with correct inclusivity and discontinuity",
+      "observed_response_pattern_to_investigate": "Student reverses the direction of a horizontal shift of a square-root function.",
+      "alternate_possible_explanation": "May have a separate interval-notation misunderstanding.",
+      "disambiguating_probe": {
+        "student_task": "Find domain and range of f(x)=sqrt(x-4)+2.",
+        "correct_response": "Domain [4,infinity); range [2,infinity)"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Find domain and range of g(x)=sqrt(x+3)-1.",
+        "correct_response": "Domain [-3,infinity); range [-1,infinity)"
+      },
+      "interpretation_if_pattern_repeats": "Domain x>=-4 for the first or x>=3 for the second suggests wrong horizontal-shift sign.",
+      "targeted_feedback_if_confirmed": "Set the radicand >=0 before writing the domain; read the vertical translation from the outer constant.",
+      "next_original_practice": "Match function rules to graph endpoints and interval notation, then reverse from endpoint to rule.",
+      "representation_and_answer_neutrality_check": "Only graph supported domains, respecting closed endpoints and avoiding answer-revealing endpoint overlays.",
+      "difficulty_progression_reference": {
+        "1": "two linear pieces",
+        "2": "jump with a single-point exception",
+        "3": "mixed linear/quadratic with boundary membership"
+      },
+      "source_reference_ids": [
+        "KUTA_PC_PIECE"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-026",
+      "course": "Precalculus",
+      "canonical_family_id": "RATIONAL_GRAPH_FEATURES_ADV",
+      "paired_variation_recipe_id": "P4-026",
+      "core_evidence_job": "Determine selected rational features from equation or sketch",
+      "observed_response_pattern_to_investigate": "Student treats every denominator zero as a vertical asymptote, ignoring removable factors.",
+      "alternate_possible_explanation": "May have canceled factors mechanically without preserving domain exclusions.",
+      "disambiguating_probe": {
+        "student_task": "For f(x)=(x-1)/((x-1)(x+1)), classify the behavior at x=1 and x=-1.",
+        "correct_response": "Hole at x=1 with y=1/2; vertical asymptote at x=-1"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "For g(x)=(x+2)/((x+2)(x-3)), locate hole and vertical asymptote.",
+        "correct_response": "Hole at x=-2 (y=-1/5); VA x=3"
+      },
+      "interpretation_if_pattern_repeats": "Calling x=1 a vertical asymptote despite cancellation twice suggests hole/VA distinction needs work.",
+      "targeted_feedback_if_confirmed": "Cancel common factors for the simplified rule, but preserve their excluded input values.",
+      "next_original_practice": "Classify a hole versus a vertical asymptote before producing a full rational graph.",
+      "representation_and_answer_neutrality_check": "Original function's domain exclusions and hole coordinates must match rendered graph.",
+      "difficulty_progression_reference": {
+        "1": "single vertical asymptote",
+        "2": "hole plus asymptote",
+        "3": "recover numerator from two graph constraints"
+      },
+      "source_reference_ids": [
+        "KUTA_PC_GRAPH"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-027",
+      "course": "Precalculus",
+      "canonical_family_id": "TRIG_UNIT_CIRCLE_EXACT_ADV",
+      "paired_variation_recipe_id": "P4-027",
+      "core_evidence_job": "Compute an exact trig value or identify an angle consistent with it",
+      "observed_response_pattern_to_investigate": "Student uses a reference-angle value but assigns the wrong sign by quadrant.",
+      "alternate_possible_explanation": "Could be unit-circle location misunderstanding or sine/cosine swap.",
+      "disambiguating_probe": {
+        "student_task": "Find sin(5*pi/6) and cos(5*pi/6) exactly.",
+        "correct_response": "sin=1/2, cos=-sqrt(3)/2"
+      },
+      "independent_confirmation_probe": {
+        "student_task": "Find sin(7*pi/6) and cos(7*pi/6) exactly.",
+        "correct_response": "sin=-1/2, cos=-sqrt(3)/2"
+      },
+      "interpretation_if_pattern_repeats": "Incorrect signs in quadrant II and III despite correct magnitudes indicate quadrant-sign reasoning to probe.",
+      "targeted_feedback_if_confirmed": "Use reference angles for magnitude and quadrant coordinates for signs.",
+      "next_original_practice": "Compare angles with the same reference angle in different quadrants, then solve an inverse-angle task.",
+      "representation_and_answer_neutrality_check": "Unit-circle diagram must label directions/origin and keep student answer positions blank.",
+      "difficulty_progression_reference": {
+        "1": "quadrantal and special-angle values",
+        "2": "negative and coterminal angles",
+        "3": "inverse candidates on specified interval"
+      },
+      "source_reference_ids": [
+        "KUTA_PC_TRIG"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    },
+    {
+      "diagnostic_id": "P5-028",
+      "course": "Precalculus",
+      "canonical_family_id": "LOG_EXPAND_CONDENSE_ADV",
+      "paired_variation_recipe_id": "P4-028",
+      "core_evidence_job": "Transform a multi-term logarithm with valid domain constraints",
+      "observed_response_pattern_to_investigate": "Student incorrectly expands log(a+b) as log(a)+log(b).",
+      "alternate_possible_explanation": "Could instead be a domain mistake or confusion between log product and sum.",
+      "disambiguating_probe": {
+        "student_task": "For positive x,y, expand ln(xy) and say whether ln(x+y)=ln(x)+ln(y).",
+        "correct_response": "ln(x)+ln(y); the second identity is not generally true."
+      },
+      "independent_confirmation_probe": {
+        "student_task": "For x>0, condense ln(x)+ln(5) and expand ln(3x).",
+        "correct_response": "ln(5x); ln(3)+ln(x)"
+      },
+      "interpretation_if_pattern_repeats": "Repeated use of log-of-sum rule indicates applying product rule to addition.",
+      "targeted_feedback_if_confirmed": "The log product rule applies to multiplication, not to a sum of arguments.",
+      "next_original_practice": "Interleave expand/condense with one false-rule counterexample, preserving positive arguments.",
+      "representation_and_answer_neutrality_check": "Do not substitute illegal log arguments; never assume ln(x+y)=ln x+ln y.",
+      "difficulty_progression_reference": {
+        "1": "one sum/product identity",
+        "2": "combine quotient and power",
+        "3": "diagnose false log-of-sum using a counterexample"
+      },
+      "source_reference_ids": [
+        "KUTA_PC_LOG"
+      ],
+      "evidence_status": "AUTHOR_DESIGNED_DIAGNOSTIC_HYPOTHESIS_NOT_VALIDATED_WITH_STUDENTS",
+      "lesson_alignment": "PENDING_EXACT_CPM_LESSON_AND_I_CAN_VERIFICATION",
+      "implementation": "RESEARCH_ONLY_NOT_FOR_AUTOMATIC_STUDENT_PROFILING",
+      "misconception_inference_rule": "Do not label student understanding based on one error or one MC selection; inspect work and use independent confirmatory evidence."
+    }
+  ],
+  "pilot_priority": [
+    "P5-013",
+    "P5-014",
+    "P5-015",
+    "P5-016",
+    "P5-009",
+    "P5-011",
+    "P5-026"
+  ],
+  "metrics": {
+    "diagnostic_cards": 28,
+    "courses": 7,
+    "new_family_ids_created": 0,
+    "active_banks_changed": 0,
+    "teacher_review_entries_changed": 0
+  }
+}

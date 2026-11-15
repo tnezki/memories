@@ -1,0 +1,45 @@
+{
+  "schema": "cpm-review-preview-source-preserving-recipe/v1",
+  "chapter": "Algebra 1 Chapter 2",
+  "category": "Review & Preview",
+  "reference_standard": "Teacher-accepted Chapter 3 authentic CPM originals",
+  "sequence": [
+    "Find the complete original CPM lesson pages including Review & Preview homework and image assets.",
+    "Extract every source-numbered problem verbatim, including subparts, mathematical symbols, tables, and diagrams.",
+    "Preserve the source original as variation 1, with source number, lesson, and source file/hash.",
+    "For numerical variations, replace only source numerical inputs with linked mathematically valid values. Do not rewrite question wording or figure structure.",
+    "Recalculate every corresponding answer independently, testing degeneracies and whether diagrams need regeneration.",
+    "Do not change a fixed diagram number unless a matching regenerated graphical stimulus exists; keep source-only otherwise.",
+    "Check source provenance, visual rendering, MathJax, graph/image fidelity, variation duplication, and teacher-review status.",
+    "Recheck unchanged Direct Skills, MC, Extensions, Chapter 1 and Chapter 3, and verify installer source hashes against the current mirror.",
+    "Package one GitHub Transfer ZIP, no Git writes. Further passes target only remaining R&P defects and source-dependent swaps.",
+    "For existing CPM spiral families with mathematically swappable values, add the new versions to the same family and expose New Question only when multiple verified candidates exist.",
+    "For Diamond Problems use canonical Tools/graph_tool.py make_diamond; regenerate all four diamond diagrams with changed values, preserve omissions, and recompute product/sum.",
+    "Check every new question mathematically, validate MathJax, check tool-output images and preview each representative format at narrow lesson-column width."
+  ],
+  "same_question_policy": "Preserve exact source words for originals and variants; change only explicit numeric givens; never paraphrase original CPM.",
+  "difficulty_policy": "Review & Preview has NO difficulty levels or 1/2/3 selector; display original CPM item first, followed by mathematically verified same-task number swaps, all in one pool.",
+  "source_copy_policy": "Remove only browser/site controls, retain original student-facing text, subparts, and original diagrams; TeX from source is restored from saved math scripts.",
+  "approval_policy": "Teacher-review draft only, not assessment-eligible until accepted.",
+  "numeric_variation_policy": "Generate where all mathematical givens and answers can be synchronized; otherwise source-only with no fabricated solution.",
+  "image_display_policy": "Every source diagram must resolve in both file:// and local server modes. Prefer self-contained exact original PNG bytes in display questions; audit every rendered img rather than counting bundled assets.",
+  "visual_quality_gate": "Render all Review & Preview originals; verify each image loads (naturalWidth>0), correct aspect, and no alt-text-only fallback. Check original-only 1/1 handling and same-task refresh. Do not show difficulty levels.",
+  "tile_pattern_diagram_policy": {
+    "originals": "Preserve verbatim original CPM student text. When the source has an occupied-cell tile diagram, redraw exactly those occupied squares as deterministic vector unit tiles; keep original transcription in provenance.",
+    "text_only_patterns": "For text-only number-based tile patterns, add a labeled teacher-created possible arrangement while retaining exact CPM wording. Draw only mathematically determined figures; avoid giving a worked rule in the student diagram.",
+    "number_swaps": "When varying tile counts or rates, regenerate all diagram squares from the same parameter values and independently verify image counts at every figure and the resulting rule.",
+    "student_constructed": "Do not show a completed answer pattern when CPM asks the student to invent or draw one.",
+    "verification": "Count SVG tiles in every rendered variation; confirm slopes, intercepts, source original figure counts, and table/diagram fidelity. No Review & Preview difficulty selector."
+  },
+  "stage9_result": "Original source exact diagrams for 2-22, 2-59, 2-67 and source-consistent diagrams for 2-6. Added 22 computed same-task number-swapped variants to 2-22 and 2-59.",
+  "stage10_result": {
+    "added_variants": 132,
+    "expanded_original_only_families": 12,
+    "canonical_diamond_rendered_images": 88,
+    "review_preview_total_versions": 391,
+    "preserve_originals": 50,
+    "difficulty_levels": false,
+    "generated_status": "PENDING_TEACHER_REVIEW"
+  },
+  "stage10_scope": "Only Review & Preview question variants; do not change Direct Skills, Summative MC, Extensions or chapter 1/3."
+}
