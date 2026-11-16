@@ -24,7 +24,7 @@ detect_root() {
 }
 
 ROOT="$(detect_root || true)"
-REPOS=("memories" "algebra" "physics" "apcalc" "teacher_shared")
+REPOS=("memories" "algebra" "physics" "apcalc")
 FAILURES=0
 STAMP="$(date '+%Y-%m-%d %H:%M')"
 COMMIT_MESSAGE="GitHub Sync ${STAMP}"

@@ -12,7 +12,7 @@ from urllib.parse import parse_qs
 HOST = "127.0.0.1"
 PORT = 8771
 TOOL_DIR = Path(__file__).resolve().parent
-REPOS = ["memories", "algebra", "physics", "apcalc", "teacher_shared"]
+REPOS = ["memories", "algebra", "physics", "apcalc"]
 
 
 def detect_root() -> Path | None:
@@ -180,7 +180,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            data = b"GITHUB_SYNC_OK"
+            data = b"GITHUB_SYNC_OK_V2"
             self.send_response(200)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("Content-Length", str(len(data)))

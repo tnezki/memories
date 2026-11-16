@@ -107,6 +107,7 @@ def normalize_hash(value: Any, required: bool, label: str) -> Optional[str]:
 ALLOWED_SYNC_DRIVE_ROOTS = {
     "physics_lessons_drive": "~Curriculum/__Physics/lessons_google_drive",
     "algebra1_lessons_drive": "~Curriculum/__Algebra 1/lessons_google_drive",
+    "apcalc_lessons_drive": "~Curriculum/__AP Calculus/lessons_google_drive",
 }
 
 
