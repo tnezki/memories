@@ -15,6 +15,10 @@ All private student data, rosters, grades, guardian contacts, Portfolio evidence
 
 Portable memory is not ChatGPT's built-in saved memory. Reading it in a new chat requires a usable connected Drive or an explicitly supplied file, and a user instruction such as **"check memory"**.
 
+## Bank-build trigger — teacher confirmed 2026-11-15
+
+When the teacher says **"read bank memory and start alg 1 chapter 4"** (or **"read bank memory"** with a named course/chapter), read `memories/_question_structure/README_FIRST.md`, then **`memories/_question_structure/recipes/ALG1_CHAPTER_BANK_BUILD_RECIPE.md`**. This is a *work instruction*: load current CPM Tools sources and start the requested chapter's first unfinished pass, building and delivering one Local Only transfer, not merely describing a plan. Chapter 4 starts at **Pass 1** with three distinct Direct families, exact existing CPM Review & Preview, three MC and three Extensions per CPM lesson column; later passes add Direct levels, then New Question variants, then math/visual/quality QA and classroom readiness. Current teacher approval of Chapter 4 covers learning goals/skills only; bank/assessment approval is separate.
+
 ## CPM Tools repair-first instruction (teacher confirmed 2026-11-07)
 
 The teacher explicitly prioritizes **fixing broken shared system functionality over protecting teacher-created experimental lessons, drafts, PDFs, and other disposable test work**. It is acceptable to discard/rebuild that temporary material when needed for an actual repair. Do not request repeated manual workarounds, backup tests, or multi-course spot checks that substitute for a source-level fix. Diagnose the root cause and run a complete save → Library → reopen → edit → print/export acceptance test.

@@ -38,3 +38,11 @@ The universal/stem libraries remain reference menus for unusual destinations and
 
 ## Scope levels
 artifact → section → I-can → family → item. Variety is not a quota; use the family that actually fits the evidence job.
+
+## Reusable chapter-bank recipe — teacher-confirmed 2026-11-15
+
+For prompts such as **"read bank memory and start alg 1 chapter 4"**, first read:
+
+`recipes/ALG1_CHAPTER_BANK_BUILD_RECIPE.md`
+
+Follow the five-pass protocol. The first action is to inspect current CPM Tools bank/source and verified assessment plans, then **build** Chapter 4 Pass 1 for all eight lesson columns (three distinct Direct Skills, source-preserved Review & Preview, three MC and three Extensions, with quality-based shortfalls explained); return one Local Only GitHub Transfer ZIP. Pass 2 = Direct difficulty, Pass 3 = New Question, Pass 4 = math/quality audit, Pass 5 = classroom acceptance. Chapter learning-goal approval never auto-approves question-bank/student assessment use.
