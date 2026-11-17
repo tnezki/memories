@@ -12,7 +12,7 @@ from urllib.parse import parse_qs
 HOST = "127.0.0.1"
 PORT = 8771
 TOOL_DIR = Path(__file__).resolve().parent
-REPOS = ["memories", "algebra", "physics", "apcalc"]
+REPOS = ["memories", "algebra", "physics", "apcalc", "maps_memories"]
 
 
 def detect_root() -> Path | None:
@@ -148,6 +148,7 @@ h1{{margin:0;color:var(--navy);font-size:42px;line-height:1}} .subtitle{{margin-
 .repo strong{{display:block;font-size:16px}} .repo span{{color:var(--muted);font-size:12px;margin-left:8px}}
 .badge{{font-size:12px;border-radius:999px;padding:6px 9px}} .clean{{background:#e8f5ed;color:var(--green)}} .changes{{background:#fff3d7;color:#7b5d00}} .ahead{{background:#e8f0ff;color:#3157a8}} .behind{{background:#fbe9e9;color:var(--red)}} .missing{{background:#eee;color:#666}}
 .utilities{{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}} .utility{{border:1px solid var(--navy);background:#fff;color:var(--navy);font-weight:800;border-radius:10px;padding:10px 13px;cursor:pointer}}
+.public-note{{font-size:13px;line-height:1.4;color:var(--muted);margin:13px 0 0}}
 .footer{{margin-top:15px;color:var(--muted);font-size:12px}}
 @media(max-width:800px){{.actions{{grid-template-columns:1fr 1fr}}}} @media(max-width:500px){{.actions{{grid-template-columns:1fr}}h1{{font-size:34px}}}}
 </style></head><body><div class="wrap">
@@ -160,6 +161,7 @@ h1{{margin:0;color:var(--navy);font-size:42px;line-height:1}} .subtitle{{margin-
 <button class="action combo" name="action" value="commit-push"><span class="icon">⇅</span><strong>Commit + Push</strong><small>Safe one-click normal workflow with GitHub authentication checked first.</small></button>
 </form>
 <section class="panel"><h2>Repository Status</h2>{''.join(rows)}
+<p class="public-note"><strong>maps_memories</strong> is the public district repository. The four actions above include it; review changes before committing or pushing.</p>
 <form method="post" class="utilities"><button class="utility" name="action" value="refresh">↻ Refresh Status</button><button class="utility" name="action" value="desktop">Open GitHub Desktop</button></form>
 </section><div class="footer">Workspace: {root_text} · GitHub Sync: 127.0.0.1:{PORT}</div>
 </div></body></html>'''
@@ -180,7 +182,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            data = b"GITHUB_SYNC_OK_V2"
+            data = b"GITHUB_SYNC_OK_V3"
             self.send_response(200)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("Content-Length", str(len(data)))

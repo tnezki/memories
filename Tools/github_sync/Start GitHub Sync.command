@@ -4,7 +4,7 @@ BASE="$(cd "$(dirname "$0")" && pwd)"
 SERVER="$BASE/github_sync_server.py"
 LOG="$BASE/github_sync_server.log"
 URL="http://127.0.0.1:8771/health"
-EXPECTED="GITHUB_SYNC_OK_V2"
+EXPECTED="GITHUB_SYNC_OK_V3"
 health="$(/usr/bin/curl -fsS --max-time 1 "$URL" 2>/dev/null || true)"
 
 if [[ -n "$health" && "$health" != "$EXPECTED" ]]; then

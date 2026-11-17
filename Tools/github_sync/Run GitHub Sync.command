@@ -24,7 +24,7 @@ detect_root() {
 }
 
 ROOT="$(detect_root || true)"
-REPOS=("memories" "algebra" "physics" "apcalc")
+REPOS=("memories" "algebra" "physics" "apcalc" "maps_memories")
 FAILURES=0
 STAMP="$(date '+%Y-%m-%d %H:%M')"
 COMMIT_MESSAGE="GitHub Sync ${STAMP}"
@@ -59,6 +59,23 @@ if [[ "$ACTION" == "pull" || "$ACTION" == "push" || "$ACTION" == "commit-push" ]
     echo "No repositories were changed."
     echo
     echo "Try: ssh -T git@github.com"
+    banner_fail
+    read -r -p "Press Return to close..."
+    exit 1
+  fi
+fi
+
+if [[ "$ACTION" == "pull" || "$ACTION" == "push" || "$ACTION" == "commit-push" ]]; then
+  if [[ ! -d "$ROOT/maps_memories/.git" ]]; then
+    echo "MAPS Memories is missing from $ROOT/maps_memories."
+    echo "No repositories were changed."
+    banner_fail
+    read -r -p "Press Return to close..."
+    exit 1
+  fi
+  if ! git -C "$ROOT/maps_memories" ls-remote origin HEAD >/dev/null 2>&1; then
+    echo "MAPS Memories remote check failed (HTTPS/GitHub authentication or network)."
+    echo "No repositories were changed. Open maps_memories in GitHub Desktop to check the remote and sign-in."
     banner_fail
     read -r -p "Press Return to close..."
     exit 1
