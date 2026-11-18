@@ -77,6 +77,7 @@ if [[ "$transfer_status" -eq 0 ]]; then
   }
 
   refresh_prompting_mirror 'Physics Tools' "$GITHUB_ROOT/_physics_teacher_tools/Refresh Physics GitHub Mirror.command"
+  refresh_prompting_mirror 'Science Tools' "$MEMORIES_ROOT/Tools/tool_mirrors/Refresh Science Tools Mirror.command"
   refresh_prompting_mirror 'AP Calculus Tools' "$GITHUB_ROOT/_apcalc_teacher_tools/Refresh AP Calc GitHub Mirror.command"
 
   algebra_refresh="$MEMORIES_ROOT/Tools/tool_mirrors/Refresh Algebra 1 Tools Mirror.command"

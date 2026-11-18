@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Science Tools · MAPS</title>
+<link rel="stylesheet" href="/assets/course-tool.css"><link rel="stylesheet" href="/app.css">
+<script defer src="/assets/course-tool.js"></script><script defer src="/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="topbar appbar">
+  <div class="mark" aria-hidden="true">S</div>
+  <div class="identity"><span class="brand">Science Tools</span><span class="brand-sub">MAPS · Teacher workspace</span></div>
+  <div class="header-course"><label for="coursePicker">Course</label><select id="coursePicker" aria-label="Selected course"><option value="physics">Physics</option></select></div>
+  <div class="connection"><span class="connection-dot" aria-hidden="true"></span><span>Local / Offline</span></div>
+</header>
+<div class="app-layout">
+ <nav class="side" aria-label="Main navigation">
+   <div class="side-heading">Workspace</div>
+   <a href="#dashboard" data-route="dashboard"><span aria-hidden="true">▦</span> Dashboard</a>
+   <a href="#courses" data-route="courses"><span aria-hidden="true">◫</span> Courses</a>
+   <a href="#curriculum" data-route="curriculum"><span aria-hidden="true">▤</span> Curriculum Library</a>
+   <a href="#lessons" data-route="lessons"><span aria-hidden="true">▧</span> Lesson Builder</a>
+   <a href="#assessments" data-route="assessments"><span aria-hidden="true">▣</span> Assessments</a>
+   <a href="#portfolio" data-route="portfolio"><span aria-hidden="true">◎</span> Portfolio</a>
+   <a href="#distribution" data-route="distribution"><span aria-hidden="true">⇪</span> Distribution</a>
+   <div class="side-heading settings-label">System</div>
+   <a href="#settings" data-route="settings"><span aria-hidden="true">⚙</span> Settings &amp; Diagnostics</a>
+   <div class="side-footer">Foundation build <strong>1.0</strong><br>Local Only · No student data</div>
+ </nav>
+ <main class="workspace" id="main" tabindex="-1">
+   <div id="notice" role="status" aria-live="polite"></div>
+   <div id="view" aria-live="polite"><h1>Science Tools</h1><p>Loading local workspace…</p></div>
+ </main>
+</div>
+</body>
+</html>

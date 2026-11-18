@@ -105,7 +105,7 @@ def normalize_hash(value: Any, required: bool, label: str) -> Optional[str]:
 # deliberately code-owned: a transfer manifest or roots JSON cannot authorize
 # an arbitrary mounted folder. Only --local-only may write to these locations.
 ALLOWED_SYNC_DRIVE_ROOTS = {
-    "physics_lessons_drive": "~Curriculum/__Physics/lessons_google_drive",
+    "physics_lessons_drive": "~Curriculum/__MAPS_Courses/Physics/lessons_google_drive",
     "algebra1_lessons_drive": "~Curriculum/__Algebra 1/lessons_google_drive",
     "apcalc_lessons_drive": "~Curriculum/__AP Calculus/lessons_google_drive",
 }
