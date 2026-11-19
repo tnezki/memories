@@ -14,6 +14,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import stat
 import subprocess
@@ -105,10 +106,29 @@ def normalize_hash(value: Any, required: bool, label: str) -> Optional[str]:
 # deliberately code-owned: a transfer manifest or roots JSON cannot authorize
 # an arbitrary mounted folder. Only --local-only may write to these locations.
 ALLOWED_SYNC_DRIVE_ROOTS = {
-    "physics_lessons_drive": "~Curriculum/__MAPS_Courses/Physics/lessons_google_drive",
-    "algebra1_lessons_drive": "~Curriculum/__Algebra 1/lessons_google_drive",
-    "apcalc_lessons_drive": "~Curriculum/__AP Calculus/lessons_google_drive",
+    "physics_lessons_drive": "~Curriculum/__MAPS_Courses/Physics",
+    "algebra1_lessons_drive": "~Curriculum/__MAPS_Courses/Algebra 1",
+    "apcalc_lessons_drive": "~Curriculum/__MAPS_Courses/AP Calculus",
 }
+
+
+def validate_course_lesson_destination(alias: str, rel: PurePosixPath) -> None:
+    """Keep new course lessons in __MAPS_Courses/Course/ch_NN/lesson_... .
+
+    This is intentionally a strict guard for Google-Drive lesson aliases, not
+    for unrelated repository payloads. Do not recreate former wrapper folders.
+    """
+    if alias not in ALLOWED_SYNC_DRIVE_ROOTS:
+        return
+    parts = rel.parts
+    if any(part == "lessons_google_drive" or re.fullmatch(r"ch[0-9]{1,2}_lessons", part, re.I) for part in parts):
+        raise TransferError("LEGACY_LESSON_LAYOUT_REJECTED: write directly under ch_NN/lesson_..., without lessons_google_drive or chXX_lessons")
+    if len(parts) == 1 and re.fullmatch(r"00_START_HERE_[A-Za-z0-9_ -]+\.(html|md|pdf)", parts[0], re.I):
+        return
+    if len(parts) < 3 or not re.fullmatch(r"ch_[0-9]{2}", parts[0]):
+        raise TransferError("COURSE_LESSON_LAYOUT_REQUIRED: use ch_NN/lesson_id/filename in __MAPS_Courses/<Course>")
+    if parts[1].startswith("lesson_") and len(parts) < 3:
+        raise TransferError("COURSE_LESSON_LAYOUT_REQUIRED: lesson requires file within lesson folder")
 
 
 def resolve_sync_drive_root(alias: str) -> Path:
@@ -274,6 +294,7 @@ def plan_package(
                 raise TransferError(f"{label} uses unapproved root: {root_alias!r}")
             rel = safe_rel(entry.get("path", ""), f"{label}.path")
             if root_alias in ALLOWED_SYNC_DRIVE_ROOTS:
+                validate_course_lesson_destination(root_alias, rel)
                 if not local_only_mode:
                     raise TransferError("Google Drive sync destinations require --local-only")
                 synced_root = resolve_sync_drive_root(root_alias)
