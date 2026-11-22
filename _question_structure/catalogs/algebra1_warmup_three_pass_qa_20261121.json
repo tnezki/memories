@@ -1,0 +1,70 @@
+{
+  "schema": "algebra1-warmup-three-pass-quality-report/1",
+  "date": "2026-11-21",
+  "based_on_installed_bank_sha256": "488ce2495f73a61e3ef12385ea3371c1a0d359cccfa999ddd917576028124b11",
+  "result_bank_sha256": "e596eb13940244d7b18010990cb6c379dcc9f7396faa084248447622b5a665da",
+  "pass_1_mathematical_instructional": {
+    "math_content_numeric": {
+      "numeric_relations_checked": 4322,
+      "confirmed_arithmetic_equalities": 4253,
+      "intentional_contradictions": 48,
+      "floating_point_false_alarms": 21,
+      "unexplained_mismatches": [],
+      "MathJax_full_compile_errors": 0
+    },
+    "families_revised": 98,
+    "instances_revised": 728,
+    "spiral_prompts_repaired": 30,
+    "source_solution_markup_fixes": 8,
+    "note": "Spot-checked all family goals; automated scans cover every version. Individual original constructed text problems were not all independently re-solved manually."
+  },
+  "pass_2_duplicated_variety": {
+    "exact_duplicate_extensions": 0,
+    "unique_normalized_family_stems": 430,
+    "same_lesson_same_role_similar_templates_to_review": 98,
+    "note": "Near-duplicates are flagged for further teacher review rather than automatically deleted; some are intentional curricular spirals."
+  },
+  "pass_3_mathjax_browser": {
+    "math_spans": 23325,
+    "distinct_math_expressions": 17243,
+    "mathjax_compile_errors": 0,
+    "browser_full_engine_test": {
+      "passes": true,
+      "extension_choices": 8,
+      "source_families": 2,
+      "mathjax_svg_nodes": 306,
+      "sample_lesson": "3.2.4",
+      "notes_persist": true,
+      "review_export": true,
+      "number_swap": true,
+      "cross_chapter": true,
+      "pageerrors": []
+    },
+    "note": "Browser tested live MathJax with representative chapters and interactive controls, not screenshots of all 8,160 versions."
+  },
+  "structure": {
+    "passed": true,
+    "counts": {
+      "lessons": 102,
+      "spiral_families": 204,
+      "spiral_variants": 1632,
+      "extension_families": 816,
+      "extension_variants": 6528,
+      "total_variants": 8160,
+      "original_spiral_prompts_repaired": 30,
+      "source_solutions_changed": 8,
+      "revised_extension_versions": 728,
+      "revised_extension_families": 98,
+      "changed_extension_answers_or_solutions": 696,
+      "source_exact_repeats": 0,
+      "extension_exact_repeats": 0
+    },
+    "errors": [],
+    "warnings": [],
+    "source_family_ids_preserved": true,
+    "extension_family_ids_preserved": true,
+    "teacher_history_key_unchanged": true
+  },
+  "review_boundary": "All revised questions remain teacher-review drafts. Existing review storage key remains unchanged. No automatic publishing or assembler selection map is included.",
+  "selection_boundary": "Source lesson stores two spiral families and four extension choices per family. Q3/Q5 take the previous completed lesson; Q4/Q6 may take another already-completed lesson; static prebuild selection is future assembler work."
+}
