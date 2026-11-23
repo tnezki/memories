@@ -131,6 +131,41 @@ def validate_course_lesson_destination(alias: str, rel: PurePosixPath) -> None:
         raise TransferError("COURSE_LESSON_LAYOUT_REQUIRED: lesson requires file within lesson folder")
 
 
+def validate_course_lesson_artifact_name(alias: str, rel: PurePosixPath, action: str) -> None:
+    """Reject ambiguous new lesson files before applying any transfer actions.
+
+    Scope is limited to the three approved course Drive aliases. Existing files
+    are not scanned or renamed; deletion/cleanup is allowed to target legacy names.
+    Course assets and index.html entrypoints are not standalone Notability files.
+    """
+    if alias not in ALLOWED_SYNC_DRIVE_ROOTS or action not in ("create", "replace"):
+        return
+    if len(rel.parts) < 3 or any(part in ("assets", "data") for part in rel.parts[2:-1]):
+        return
+    filename = rel.name
+    extension = rel.suffix.lower()
+    if filename.lower() == "index.html" or extension not in (".pdf", ".html"):
+        return
+    # PDFs are always named course lesson deliverables. HTML landing pages
+    # other than generic student/teacher/lesson files can remain as utilities.
+    if extension == ".html" and filename.lower() not in (
+            "student.html", "teacher.html", "lesson.html", "worksheet.html"):
+        return
+    prefix = {"algebra1_lessons_drive": "Alg1",
+              "apcalc_lessons_drive": "APCalc",
+              "physics_lessons_drive": "Phy"}[alias]
+    pattern = (re.escape(prefix) +
+               r"_[A-Za-z0-9][A-Za-z0-9.-]*(?:_[A-Za-z0-9][A-Za-z0-9.-]*)+"
+               r"_(?:Student|Teacher)\.(?:pdf|html)")
+    if not re.fullmatch(pattern, filename):
+        raise TransferError(
+            "LESSON_ARTIFACT_NAMING_REQUIRED: " + rel.as_posix() +
+            "; use " + prefix + "_<lesson-or-date>_<resource>_Student.pdf "
+            "or the matching _Teacher.pdf name (and matching HTML names). "
+            "Generic student.pdf, teacher.pdf, student.html, and teacher.html "
+            "are not permitted in new course lesson transfers.")
+
+
 def resolve_sync_drive_root(alias: str) -> Path:
     """Locate one existing Google Drive Desktop folder from the fixed whitelist."""
     if alias not in ALLOWED_SYNC_DRIVE_ROOTS:
@@ -295,6 +330,7 @@ def plan_package(
             rel = safe_rel(entry.get("path", ""), f"{label}.path")
             if root_alias in ALLOWED_SYNC_DRIVE_ROOTS:
                 validate_course_lesson_destination(root_alias, rel)
+                validate_course_lesson_artifact_name(root_alias, rel, action)
                 if not local_only_mode:
                     raise TransferError("Google Drive sync destinations require --local-only")
                 synced_root = resolve_sync_drive_root(root_alias)
